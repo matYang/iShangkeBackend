@@ -1,0 +1,8 @@
+.classpath
+*.pref
+*.prefs
+dump.rdb
+*.jar
+*/target
+pom.properties
+.DS_Store
