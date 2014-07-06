@@ -4,5 +4,11 @@
 dump.rdb
 *.jar
 */target
+*/target*
+**/log4j
+*/.classpath
+*/.classpath*
 pom.properties
 .DS_Store
+*.class
+*.jar
