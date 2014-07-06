@@ -1,4 +1,5 @@
 .classpath
+.project
 *.pref
 *.prefs
 dump.rdb
@@ -6,6 +7,8 @@ dump.rdb
 */target
 */target*
 **/log4j
+*/.project
+*/.project*
 */.classpath
 */.classpath*
 pom.properties
