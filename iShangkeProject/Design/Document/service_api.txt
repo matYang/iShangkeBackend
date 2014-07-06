@@ -1,0 +1,678 @@
+UserService
+    /**
+     *  本方法为普通用户提供注册的功能。<br>
+     *  用户可以通过此方法进行注册。
+     *
+     *  @param  userBo        用户注册信息
+     *
+     *  @return 用户实体 UserBo
+     *
+     */
+    Response register(UserBo)
+
+    /**
+     *  本方法为所有用户提供登录的功能。<br>
+     *  所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
+     *
+     *  @param  loginBo       用户登录信息
+     *
+     *  @return 用户实体 UserBo
+     *
+     */
+    Response login(LoginBo)
+
+    /**
+     *  本方法为ishangke管理员创建新用户<br>
+     *  ishangke管理员可以创建合作商管理员，普通用户
+     *
+     *  @param  targetUser    需要被创建的用户信息
+     *  @param  partnerBo     合作商信息
+     *  @param  currentUser   调用方法的用户的信息
+     *
+     *  @return 用户实体 UserBo 
+     *
+     */
+    Response create(UserBo targetUser, PartnerBo, UserBo currentUser)
+
+    /**
+     *  本方法为ishangke管理员删除用户<br>
+     *  ishangke管理员可以删除合作商管理员，普通用户
+     *
+     *  @param  targetUser    需要被删除的用户信息
+     *  @param  currentUser   调用方法的用户的信息
+     *
+     *  @return 删除结果 
+     *
+     */
+    Response delete(UserBo targetUser, UserBo currentUser)
+
+    /**
+     *  本方法为修改用户信息的功能<br>
+     *  ishangke管理员可以修改合作商管理员，普通用户的信息。任意用户可以修改自身的用户信息
+     *
+     *  @param  targetUser    需要被修改的用户信息
+     *  @param  currentUser   调用方法的用户的信息
+     *
+     *  @return 用户实体 UserBo 
+     *
+     */
+    Response update(UserBo targetUser, UserBo currentUser)
+
+    /**
+     *  本方法为查看用户信息的功能<br>
+     *  ishangke管理员可以查看合作商管理员，普通用户的信息。任意用户可以查看自身的用户信息
+     *
+     *  @param  queryUser     需要被查询的用户信息
+     *  @param  currentUser   调用方法的用户的信息
+     *
+     *  @return 用户实体 UserBo 
+     *
+     */
+    Response query(UserBo queryUser, UserBo currentUser)
+
+    /**
+     *  本方法为查询用户信息的功能<br>
+     *  ishangke管理员可以按条件搜索合作商管理员、普通用户的信息。
+     *
+     *  @param  queryUser     需要检索和过滤的用户信息
+     *  @param  partnerBo     合作商的用户的信息
+     *  @param  currentUser   调用方法的用户的信息
+     *  @param  paginationBo  分页信息
+     *
+     *  @return 用户实体 UserBo 列表
+     *
+     */
+    Response query(UserBo queryUser, PartnerBo, UserBo currentUser, PagnationBo)
+
+    /**
+     *  本方法为查询用户session信息的功能<br>
+     *
+     *  @param  userBo        需要被查询session的用户信息
+     *
+     *  @return 用户session相关信息
+     *
+     */
+    Response querySession(UserBo)
+
+    /**
+     *  本方法为销毁用户session信息的功能<br>
+     *
+     *  @param  userBo        需要被销毁session的用户信息
+     *
+     *  @return 
+     *
+     */
+    Response disposeSession(UserBo)
+    
+CategoryService
+    /**
+     *  本方法为查询category信息的功能<br>
+     *  任意用户可以通过此方法查询所有Category
+     *
+     *  @param  queryUser     需要检索和过滤的CategoryBo信息
+     *  @param  paginationBo  分页信息
+     *
+     *  @return Category实体 CategoryBo 列表
+     *
+     */
+    Response query(CategoryBo, PagnationBo)
+
+LocationService
+    /**
+     *  本方法为查询location信息的功能<br>
+     *  任意用户可以通过此方法查询所有location
+     *
+     *  @param  queryUser     需要检索和过滤的LocationBo信息
+     *  @param  paginationBo  分页信息
+     *
+     *  @return Category实体 LocationBo 列表
+     *
+     */
+    Response query(LocationBo, PagnationBo)
+
+CourseFilterService
+    /**
+     *  本方法为查询课程过滤信息的功能<br>
+     *  任意用户可以通过此方法查询所有课程过滤信息
+     *
+     *  @param  courseFilterBo    需要检索和过滤的课程过滤信息
+     *
+     *  @return 课程过滤实体 CourseFilterBo
+     *
+     */
+    Response filter(CourseFilterBo)
+
+CourseTemplateService
+    /**
+     *  本方法为创建新课程模版<br>
+     *  合作商管理员可以通过此方法创建新课程模版
+     *
+     *  @param  courseTemplateBo    需要被创建的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  UserBo              调用方法的用户的信息
+     *
+     *  @return 课程模版实体 CourseTemplateBo 
+     *
+     */
+    Response create(CourseTemplateBo, PartnerBo, UserBo)
+
+    /**
+     *  本方法为提交课程模版<br>
+     *  合作商管理员可以通过此方法提交课程模版
+     *
+     *  @param  courseTemplateBo    需要被创建的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  UserBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response submit(CourseTemplateBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为审核通过课程模版<br>
+     *  ishangke管理员可以通过此方法审核通过课程模版
+     *
+     *  @param  courseTemplateBo          需要被审核的课程模版信息
+     *  @param  partnerBo                 合作商信息
+     *  @param  commentTemplateApproveBo  审核通过课程模版评论信息
+     *  @param  userBo                    调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response approve(CourseTemplateBo, PartnerBo, CommentTemplateApproveBo, UserBo) 
+
+    /**
+     *  本方法为审核不通过课程模版<br>
+     *  ishangke管理员可以通过此方法审核不通过课程模版
+     *
+     *  @param  courseTemplateBo          需要被审核的课程模版信息
+     *  @param  partnerBo                 合作商信息
+     *  @param  commentTemplateApproveBo  审核不通过课程模版评论信息
+     *  @param  userBo                    调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response reject(CourseTemplateBo, CommentTemplateRejectBo, PartnerBo, UserBo)
+
+    /**
+     *  本方法为下架课程模版<br>
+     *  合作商管理员可以通过此方法下架课程模版
+     *
+     *  @param  courseTemplateBo    需要被下架的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response cancel(CourseTemplateBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为重新上架课程模版<br>
+     *  合作商管理员可以通过此方法重新上架课程模版
+     *
+     *  @param  courseTemplateBo    需要被重新上架的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response resubmit(CourseTemplateBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为删除课程模版<br>
+     *  合作商管理员可以通过此方法删除已经下架的课程模版
+     *
+     *  @param  courseTemplateBo    需要被删除的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response delete(CourseTemplateBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为修改课程模版<br>
+     *  合作商管理员可以通过此方法修改课程模版
+     *
+     *  @param  courseTemplateBo    需要被修改的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response update(CourseTemplateBo, PartnerBo, UserBo)
+
+    /**
+     *  本方法为搜索课程模版<br>
+     *  合作商管理员可以通过此方法查询课程模版
+     *
+     *  @param  courseTemplateBo    需要检索和过滤的课程模版信息
+     *  @param  partnerBo           合作商信息
+     *  @param  UserBo              调用方法的用户的信息
+     *  @param  paginationBo        分页信息
+     *
+     *  @return  
+     *
+     */
+    Response query(CourseTemplateBo, UserBo, PartnerBo, PagnationBo)
+    
+    
+CourseService
+    /**
+     *  本方法为创建新课程<br>
+     *  合作商管理员可以通过此方法创建新课程
+     *
+     *  @param  courseTemplateBo    课程模版信息
+     *  @param  courseBo            需要被创建的课程信息
+     *  @param  list<TeacherBo>     教师信息列表
+     *  @param  locationBo          地理位置信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return 课程实体 CourseBo 
+     *
+     */
+    Response create(CourseTemplateBo, CourseBo, List<TeacherBo>, LocationBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为提交课程<br>
+     *  合作商管理员可以通过此方法提交课程
+     *
+     *  @param  courseBo        需要被创建的课程信息
+     *  @param  partnerBo       合作商信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response submit(CourseBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为审核通过课程<br>
+     *  ishangke管理员可以通过此方法审核通过课程
+     *
+     *  @param  courseBo                  需要被审核的课程信息
+     *  @param  partnerBo                 合作商信息
+     *  @param  commentCourseApproveBo    审核通过课程评论信息
+     *  @param  userBo                    调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response approve(CourseBo, PartnerBo, CommentCourseApproveBo, UserBo) 
+
+    /**
+     *  本方法为审核不通过课程<br>
+     *  ishangke管理员可以通过此方法审核不通过课程
+     *
+     *  @param  courseBo          需要被审核的课程信息
+     *  @param  partnerBo                 合作商信息
+     *  @param  commentCourseApproveBo  审核不通过课程评论信息
+     *  @param  userBo                    调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response reject(CourseBo, PartnerBo, CommentCourseRejectBo, UserBo)
+
+    /**
+     *  本方法为下架课程<br>
+     *  合作商管理员可以通过此方法下架课程
+     *
+     *  @param  courseBo    需要被下架的课程信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response cancel(CourseBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为重新上架课程<br>
+     *  合作商管理员可以通过此方法重新上架课程
+     *
+     *  @param  courseBo    需要被重新上架的课程信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response resubmit(CourseBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为删除课程<br>
+     *  合作商管理员可以通过此方法删除已经下架的课程
+     *
+     *  @param  courseTemplateBo    需要被删除的课程信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response delete(CourseBo, PartnerBo, UserBo) 
+
+    /**
+     *  本方法为修改课程<br>
+     *  合作商管理员可以通过此方法修改课程
+     *
+     *  @param  courseBo            需要被修改的课程信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    Response update(CourseBo, PartnerBo, UserBo)
+
+    /**
+     *  本方法为给课程评论<br>
+     *  用户可以通过此方法给课程进行评论
+     *
+     *  @param  courseBo            需要被评论的课程信息
+     *  @param  commentCourseBo     课程评论信息
+     *  @param  partnerBo           合作商信息
+     *  @param  userBo              调用方法的用户的信息
+     *
+     *  @return  课程评论实体 CommentCourseBo
+     *
+     */
+    Response comment(CourseBo, CommentCourseBo, PartnerBo, UserBo)
+
+    /**
+     *  本方法为根据关键字查找课程<br>
+     *  通过此方法可以直接过滤搜索出按Category查找的课程
+     *
+     *  @param  String            CategoryBo关键字
+     *
+     *  @return  课程实体 CourseBo 列表
+     *
+     */
+    Response query(String)
+
+    /**
+     *  本方法为合作商提供查询课程的功能。<br>
+     *  合作商可以查询本机构已经提交过的课程，包括新建、正在审批、已上架、已下架的所有课程。
+     *
+     *  @param  courseBo      需要检索和过滤的课程信息
+     *  @param  partnerBo     合作商信息
+     *  @param  userBo        调用方法的用户的信息
+     *  @param  paginationBo  分页信息
+     *
+     *  @return 课程实体 CourseBo 列表
+     *
+     */
+    Response query(CourseBo, PartnerBo, UserBo PagnationBo)
+
+    /**
+     *  本方法为用户查询课程的功能。<br>
+     *  用户可以按照category，location，courseFilter查询所有课程
+     *
+     *  @param  categoryBo      category过滤信息
+     *  @param  locationBo      location过滤信息
+     *  @param  courseFilterBo  courseFilter过滤信息
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 课程实体 CourseBo 列表
+     *
+     */
+    Response query(CategoryBo, LocationBo, CourseFilterBo, PagnationBo)
+
+    /**
+     *  本方法为用户查询课程的功能。<br>
+     *  用户可以按照category，location，courseFilter查询所有课程
+     *
+     *  @param  categoryBo      category过滤信息
+     *  @param  locationBo      location过滤信息
+     *  @param  courseFilterBo  courseFilter过滤信息
+     *  @param  courseBo        需要检索和过滤的课程信息
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 课程实体 CourseBo 列表
+     *
+     */    
+    Response query(CategoryBo, LocationBo, CourseFilterBo, CourseBo, PagnationBo)
+
+    /**
+     *  本方法为用户查询课程的功能。<br>
+     *  用户可以按照category，location，courseFilter查询所有课程
+     *
+     *  @param  categoryBo      category过滤信息
+     *  @param  locationBo      location过滤信息
+     *  @param  courseFilterBo  courseFilter过滤信息
+     *  @param  list<CourseBo>  需要检索和过滤的课程信息列表
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 课程实体 CourseBo 列表
+     *
+     */ 
+    Response query(CategoryBo, LocationBo, CourseFilterBo, List<CourseBo>, PagnationBo)
+    
+BookingService
+    /**
+     *  本方法为用户预定课程的功能。<br>
+     *  用户可以预定一个课程
+     *
+     *  @param  courseBo        被预定的课程信息
+     *  @param  bookingBo       预定单信息
+     *  @param  userBo          调用方法的用户的信息
+     *  @param  couponBo        优惠券信息
+     *
+     *  @return 预定单实体 BookingBo
+     *
+     */ 
+    Response apply(CourseBo, BookingBo, UserBo, CouponBo)
+
+    /**
+     *  本方法为合作商受理一个预定单功能。<br>
+     *  合作商可以受理一个用户预定请求
+     *
+     *  @param  bookingBo       预定单信息
+     *  @param  commentBo       受理预定单留言信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response acceptByPartner(BookingBo, CommentBo, UserBo)
+
+    /**
+     *  本方法为合作商受理成功一个预定单功能。<br>
+     *  合作商可以将正在受理的预定单标注为受理成功
+     *
+     *  @param  bookingBo       预定单信息
+     *  @param  commentBo       受理成功预定单留言信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response acceptSucceed(BookingBo, CommentBo, UserBo)
+
+    /**
+     *  本方法为合作商受理失败一个预定单功能。<br>
+     *  合作商可以将正在受理的预定单标注为受理失败
+     *
+     *  @param  bookingBo       预定单信息
+     *  @param  commentBo       受理失败预定单留言信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response acceptFailed(BookingBo, CommentBo, UserBo)
+
+    /**
+     *  本方法为用户取消一个预定单功能。<br>
+     *  合作商将一个受理成功的预定单标注为已付款
+     *
+     *  @param  bookingBo       预定单信息
+     *  @param  commentBo       接收已付款预定单留言信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response validate(BookingBo, CommentBo, UserBo)
+
+    /**
+     *  本方法为合作商取消一个预定单功能。<br>
+     *  合作商、用户可以取消一个相关预定单
+     *
+     *  @param  bookingBo       预定单信息
+     *  @param  commentBo       取消预定单留言信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response cancel(BookingBo, CommentBo, UserBo)
+
+
+    /**
+     *  本方法为查询预定单预定单功能。<br>
+     *  合作商可以按条件查询自己的所有预定单，ishangke管理员可以按条件查找所有合作商的预定单
+     *
+     *  @param  bookingBo       需要检索和过滤的预定单信息
+     *  @param  partnerBo       合作商信息
+     *  @param  userBo          调用方法的用户的信息
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 预定单实体 BookingBo 列表
+     *
+     */ 
+    Response query(BookingBo, PartnerBo, UserBo, PagnationBo)
+
+
+    订单变为“订单成功”状态是自动的，开课日期一定时间之后会自动变为“订单成功”状态
+
+
+CouponService
+    /**
+     *  本方法为创建优惠券功能。<br>
+     *  系统根据相关条件，创建优惠券
+     *
+     *  @param  couponBo       优惠券信息
+     *  @param  userBo         调用方法的用户的信息
+     *
+     *  @return 优惠券实体 CouponBo 
+     */
+    Response generate(CouponBo, UserBo)
+
+    /**
+     *  本方法为查询优惠券功能。<br>
+     *  用户可以查询自己拥有的优惠券，系统可以查看所有优惠券
+     *
+     *  @param  couponBo        需要检索和过滤的优惠券
+     *  @param  userBo          调用方法的用户的信息
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 优惠券实体 CouponBo 列表
+     *
+     */ 
+    Response query(CouponBo, UserBo, PagnationBo)
+
+CreditService
+    /**
+     *  本方法为换取优惠券。<br>
+     *  用户可以将自己的积分换取优惠券
+     *
+     *  @param  creditBo        积分信息
+     *  @param  couponBo        优惠券信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response exchangeCoupon(CreditBo, CouponBo, UserBo)
+
+    /**
+     *  本方法为换取现金。<br>
+     *  用户可以将自己的积分换取现金
+     *
+     *  @param  creditBo        积分信息
+     *  @param  accountBo       账户信息信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response exchangeAccount(CreditBo, AccountBo, UserBo)
+
+    /**
+     *  本方法为查询积分功能。<br>
+     *  用户可以查询自己拥有的积分，系统可以查看所有积分
+     *
+     *  @param  creditBo        需要检索和过滤的积分信息
+     *  @param  userBo          调用方法的用户的信息
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 积分实体 CreditBo 列表
+     *
+     */ 
+    Response query(CreditBo, UserBo, PagnationBo)
+
+AccountService
+    /**
+     *  本方法为查询账户功能。<br>
+     *  用户可以查询自己拥有的账户，系统可以查看所有账户
+     *
+     *  @param  accountBo       需要检索和过滤的账户信息
+     *  @param  userBo          调用方法的用户的信息
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 积分实体 CreditBo 列表
+     *
+     */ 
+    Response query(AccountBo, UserBo, PagnationBo)
+
+    /**
+     *  本方法为账户提现功能。<br>
+     *  用户可以将自己账户中的现金提现
+     *
+     *  @param  accountBo       需要提现的账户信息
+     *  @param  userBo          调用方法的用户的信息
+     *
+     *  @return 
+     *
+     */ 
+    Response exchangeCash(AccountBo, UserBo)
+
+PartnerService
+    Response query(ParnterBo, LocationBo, CategoryBo, PagnationBo) 
+    Response comment(ParnterBo, CommentParnterBo, UserBo)
+    Response update(PartnerBo, UserBo)
+    Response create(PartnerBo, UserBo)
+
+SpreadService
+    Response generateCode(UserBo, ParterBo, CourseBo, IShangKeBo)
+    Response query(SpreadBo, UserBo, PagnationBo)
+    Response create(SpreadBo, ParterBo, CourseBo, IShangKeBo, UserBo)
+    Response approve(SpreadBo, UserBo)
+    Response reject(SpreadBo, UserBo)
+    Response cancel(SpreadBo, UserBo)
+    Response delete(SpreadBo, UserBo)
+
+TeacherService
+    Response create(TeacherBo, UserBo)
+    Response delete(TeacherBo, UserBo)
+    Response query(String, PartnerBo, UserBo)
+    Response query(TeacherBo, PartnerBo, UserBo, PagnationBo)
+
+ActivityService
+    Response create(ActivityBo, CourseBo, PartnerBo, UserBo)
+    Response submit(ActivityBo, PartnerBo, UserBo)
+    Response approve(ActivityBo, PartnerBo, CommentActivityApproveBo, UserBo)
+    Response reject(ActivityBo, PartnerBo, CommentActivityRejectBo, UserBo)
+    Response cancel(ActivityBo, PartnerBo, UserBo)
+    Response delete(ActivityBo, PartnerBo, UserBo)
+    Response query(ActivityBo, PartnerBo, UserBo, PagnationBo)
