@@ -15,4 +15,4 @@ pom.properties
 .DS_Store
 *.class
 *.jar
-/.settings
+*/.settings
