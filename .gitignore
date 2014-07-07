@@ -6,8 +6,7 @@ dump.rdb
 */target
 */target*
 */log4j
-*/.project
-*/.project*
+.project
 */.classpath
 */.classpath*
 pom.properties
