@@ -48,7 +48,7 @@
 						</goals>
 						<configuration>
 							<autocommit>true</autocommit>
-							<sqlCommand>USE vipchat;</sqlCommand>
+							<sqlCommand>USE edunav;</sqlCommand>
 							<srcFiles>
 								<srcFile>../Design/Database/DB_BasicData.sql</srcFile>
 							</srcFiles>
