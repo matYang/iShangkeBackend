@@ -8,6 +8,9 @@
 	</parent>
 	<artifactId>iShangkeProject-AdminWeb</artifactId>
 	<packaging>war</packaging>
+	<properties>
+		<main.basedir>${project.basedir}/../</main.basedir>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.ishangke</groupId>

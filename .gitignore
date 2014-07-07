@@ -2,7 +2,6 @@
 *.pref
 *.prefs
 dump.rdb
-*.jar
 */target
 */target*
 */log4j
@@ -12,6 +11,5 @@ dump.rdb
 pom.properties
 */.DS_Store
 *.class
-*.jar
 */.settings
 */.settings/*
