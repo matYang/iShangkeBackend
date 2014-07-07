@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Properties -->
+	<bean id="propertyMananger" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:startup_properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.password}" />
+		<property name="poolName" value="SQLPool" />
+		<property name="maxLifetime" value="1800000l" />
+		<property name="autoCommit" value="true" />
+		<property name="maximumPoolSize" value="100" />
+		<property name="connectionTimeout" value="100000l" />
+		<property name="dataSourceProperty">
+			<props>
+				<prop key="useUnicode">true</prop>
+				<prop key="characterEncoding">utf8</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg index="0" ref="dataSourceConfig" />
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:com/ishangke/edunav/dataaccess/xml/**/*.xml" />
+		<property name="configLocation" value="classpath:mybatisDBConfig.xml"></property>
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.ishangk.edunav.dataaccess.mapper" />
+		<property name="sqlSessionTemplateBeanName" value="sqlSession" />
+	</bean>
+</beans>
