@@ -19,18 +19,18 @@
 		</jdbcConnection>
 
 		<javaModelGenerator targetPackage="com.ishangke.edunav.dataaccess.model.gen"
-			targetProject="./iShangke-Dataaccess/src/main/java">
+			targetProject="./iShangkeProject-Dataaccess/src/main/java">
 			<property name="trimStrings" value="true" />
 			<property name="enableSubPackages" value="true" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="com.ishangke.edunav.dataaccess.xml.gen"
-			targetProject="./iShangke-Dataaccess/src/main/resources">
+			targetProject="./iShangkeProject-Dataaccess/src/main/resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.ishangke.edunav.dataaccess.mapper.gen" targetProject="./iShangke-Dataaccess/src/main/java">
+			targetPackage="com.ishangke.edunav.dataaccess.mapper.gen" targetProject="./iShangkeProject-Dataaccess/src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
