@@ -37,6 +37,102 @@
 		<table tableName="USERS" domainObjectName="UserEntity">
 			<generatedKey column="ID" sqlStatement="MySql" />
 		</table>
+		<table tableName="ROLES" domainObjectName="RoleEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="GROUPS" domainObjectName="GroupEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="USER_GROUP" domainObjectName="UserGroupEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="PERMISSIONS" domainObjectName="PermissionEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="ROLE_PERMISSION" domainObjectName="RolePermissionEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="CATEGORY" domainObjectName="CategoryEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="LOCATION" domainObjectName="LocationEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="PARTNER" domainObjectName="PartnerEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="CIRCLE" domainObjectName="CircleEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSE_TEMPLATE" domainObjectName="CourseTemplateEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSE" domainObjectName="CourseEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSE_COMMENT" domainObjectName="CourseCommentEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="APPROVE_HISTORY" domainObjectName="ApproveHistoryEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="BOOKING" domainObjectName="BookingEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COUPON" domainObjectName="CouponEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COUPON_HISTORY" domainObjectName="CouponHistoryEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="CREDIT" domainObjectName="CreditEntity">
+            <!-- <generatedKey column="ID" sqlStatement="MySql" /> -->
+        </table>
+        <table tableName="CREDIT_HISTORY" domainObjectName="CreditHistoryEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="ACCOUNT" domainObjectName="AccountEntity">
+            <!-- <generatedKey column="ID" sqlStatement="MySql" /> -->
+        </table>
+        <table tableName="ACCOUNT_HISTORY" domainObjectName="AccountHistoryEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="SPREAD" domainObjectName="SpreadEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="TEACHER" domainObjectName="TeacherEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSE_TEACHER" domainObjectName="CourseTeacherEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="ACTIVITY" domainObjectName="ActivityEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="MESSAGE" domainObjectName="MessageEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="PARTNER_CIRCLE" domainObjectName="PartnerEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="WIDTHDRAW" domainObjectName="WidthdrawEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSETEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="CLASSPHOTO" domainObjectName="ClassphotoEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSE_CLASSPHOTO" domainObjectName="CourseClassphotoEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="COURSETEMPLATE_CLASSPHOTO" domainObjectName="CoursetemplateClassphotoEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+        <table tableName="USER_LOCATION" domainObjectName="UserLocationEntity">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
 	</context>
 
 </generatorConfiguration>
