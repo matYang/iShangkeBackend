@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper">
+  <resultMap id="CouponExtMap" type="CouponEntityExt">
+    <id column="COUPON_ID" property="id" jdbcType="INTEGER" />
+    <result column="COUPON_CODE" property="code" jdbcType="VARCHAR" />
+    <result column="COUPON_TOTAL" property="total" jdbcType="VARCHAR" />
+    <result column="COUPON_BALANCE" property="balance" jdbcType="VARCHAR" />
+    <result column="COUPON_EXPIRYTIME" property="expiryTime" jdbcType="TIMESTAMP" />
+    <result column="COUPON_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="COUPON_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="COUPON_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="COUPON_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COUPON_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="COUPON_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Coupon_Base_Column_List">
+    COUPON.ID COUPON_ID,
+    COUPON.CODE COUPON_CODE,
+    COUPON.TOTAL COUPON_TOTAL,
+    COUPON.BALANCE
+    COUPON_BALANCE,
+    COUPON.EXPIRY_TIME COUPON_EXPIRYTIME,
+    COUPON.REMARK COUPON_REMARK,
+    COUPON.USER_ID
+    COUPON_USERID,
+    COUPON.LAST_MODIFY_TIME COUPON_LASTMODIFYTIME,
+    COUPON.CREATE_TIME
+    COUPON_CREATETIME,
+    COUPON.ENABLED COUPON_ENABLED,
+    COUPON.DELETED COUPON_DELETED
+  </sql>

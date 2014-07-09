@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper">
+  <resultMap id="UserExtMap" type="UserEntityExt">
+    <id column="USER_ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="USER_PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="USER_WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="USER_EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="USER_INVITATIONCODE" property="invitationCode" jdbcType="VARCHAR" />
+    <result column="USER_APPLIEDINVITATIONCODE" property="appliedInvitationCode" jdbcType="VARCHAR" />
+    <result column="USER_REFERENCE" property="reference" jdbcType="VARCHAR" />
+    <result column="USER_LASTLOGINTIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="USER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="USER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="USER_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="USER_DELETED" property="deleted" jdbcType="INTEGER" />
+    <result column="USER_GENDER" property="gender" jdbcType="INTEGER" />
+    <result column="USER_BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="USER_SCHOOL" property="school" jdbcType="VARCHAR" />
+    <result column="USER_MAJOR" property="major" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="_Base_Column_List">
+    USER.ID USER_ID,
+    USER.NAME USER_NAME,
+    USER.PASSWORD USER_PASSWORD,
+    USER.PHONE USER_PHONE,
+    USER.WECHAT
+    USER_WECHAT,
+    USER.EMAIL USER_EMAIL,
+    USER.INVITATION_CODE USER_INVITATIONCODE,
+    USER.APPLIED_INVITATION_CODE USER_APPLIEDINVITATIONCODE,
+    USER.REFERENCE USER_REFERENCE,
+    USER.LAST_LOGIN_TIME USER_LASTLOGINTIME,
+    USER.LAST_MODIFY_TIME USER_LASTMODIFYTIME,
+    USER.CREATE_TIME USER_CREATETIME,
+    USER.ENABLED USER_ENABLED,
+    USER.DELETED USER_DELETED,
+    USER.GENDER USER_GENDER,
+    USER.BIRTHDAY USER_BIRTHDAY,
+    USER.SCHOOL USER_SCHOOL,
+    USER.MAJOR
+    USER_MAJOR
+  </sql>

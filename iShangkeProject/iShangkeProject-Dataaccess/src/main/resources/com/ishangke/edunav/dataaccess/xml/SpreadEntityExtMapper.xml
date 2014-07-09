@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.SpreadEntityExtMapper">
+  <resultMap id="SpreadExtMap" type="SpreadEntityExt">
+    <id column="SPREAD_ID" property="id" jdbcType="INTEGER" />
+    <result column="SPREAD_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="SPREAD_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+    <result column="SPREAD_COURSEID" property="courseId" jdbcType="INTEGER" />
+    <result column="SPREAD_URL" property="url" jdbcType="VARCHAR" />
+    <result column="SPREAD_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="SPREAD_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="SPREAD_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="SPREAD_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="SPREAD_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="SPREAD_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="_Base_Column_List">
+    SPREAD.ID SPREAD_ID,
+    SPREAD.USER_ID SPREAD_USERID,
+    SPREAD.PARTNER_ID SPREAD_PARTNERID,
+    SPREAD.COURSE_ID SPREAD_COURSEID,
+    SPREAD.URL SPREAD_URL,
+    SPREAD.REMARK SPREAD_REMARK,
+    SPREAD.STATUS SPREAD_STATUS,
+    SPREAD.LAST_MODIFY_TIME SPREAD_LASTMODIFYTIME,
+    SPREAD.CREATE_TIME
+    SPREAD_CREATETIME,
+    SPREAD.ENABLED SPREAD_ENABLED,
+    SPREAD.DELETED SPREAD_DELETED
+  </sql>

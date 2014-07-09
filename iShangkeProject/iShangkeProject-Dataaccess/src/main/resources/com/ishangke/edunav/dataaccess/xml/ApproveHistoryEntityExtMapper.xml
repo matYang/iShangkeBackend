@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.ApproveHistoryEntityExtMapper">
+  <resultMap id="ApproveHistoryExtMap" type="ApproveHistoryEntityExt">
+    <id column="APPROVEHISTORY_ID" property="id" jdbcType="INTEGER" />
+    <result column="APPROVEHISTORY_TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_ATTACHEDID" property="attachedId" jdbcType="INTEGER" />
+    <result column="APPROVEHISTORY_SUBMITUSERID" property="submitUserId" jdbcType="INTEGER" />
+    <result column="APPROVEHISTORY_APPROVEUSERID" property="approveUserId" jdbcType="INTEGER" />
+    <result column="APPROVEHISTORY_PREVIOUSSTATUS" property="previousStatus" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_NEXTSTATUS" property="nextStatus" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_COMMENT" property="comment" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVEHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="ApproveHistory_Base_Column_List">
+    APPROVEHISTORY.ID APPROVEHISTORY_ID,
+    APPROVEHISTORY.TYPE APPROVEHISTORY_TYPE,
+    APPROVEHISTORY.ATTACHED_ID APPROVEHISTORY_ATTACHEDID,
+    APPROVEHISTORY.SUBMIT_USER_ID APPROVEHISTORY_SUBMITUSERID,
+    APPROVEHISTORY.APPROVE_USER_ID APPROVEHISTORY_APPROVEUSERID,
+    APPROVEHISTORY.PREVIOUS_STATUS APPROVEHISTORY_PREVIOUSSTATUS,
+    APPROVEHISTORY.NEXT_STATUS APPROVEHISTORY_NEXTSTATUS,
+    APPROVEHISTORY.COMMENT APPROVEHISTORY_COMMENT,
+    APPROVEHISTORY.CREATE_TIME APPROVEHISTORY_CREATETIME,
+    APPROVEHISTORY.DELETED APPROVEHISTORY_DELETED
+  </sql>

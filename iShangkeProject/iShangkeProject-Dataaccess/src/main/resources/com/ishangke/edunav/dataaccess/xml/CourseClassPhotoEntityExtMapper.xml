@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseClassPhotoEntityExtMapper">
+  <resultMap id="CourseClassPhotoExt" type="CourseClassPhotoEntityExt">
+    <id column="COURSECLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
+    <result column="COURSECLASSPHOTO_COURSEID" property="courseId" jdbcType="INTEGER" />
+    <result column="COURSECLASSPHOTO_CLASSPHOTOID" property="classphotoId" jdbcType="INTEGER" />
+    <result column="COURSECLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="CourseClassPhoto_Base_Column_List">
+    COURSECLASSPHOTO.ID COURSECLASSPHOTO_ID,
+    COURSECLASSPHOTO.COURSE_ID COURSECLASSPHOTO_COURSEID,
+    COURSECLASSPHOTO.CLASSPHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID,
+    COURSECLASSPHOTO.CREATE_TIME COURSECLASSPHOTO_CREATETIME,
+    COURSECLASSPHOTO.DELETED COURSECLASSPHOTO_DELETED
+  </sql>

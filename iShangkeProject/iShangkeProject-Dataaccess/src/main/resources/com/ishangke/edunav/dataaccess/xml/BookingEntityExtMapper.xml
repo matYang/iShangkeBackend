@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper">
+  <resultMap id="BookingExtMap" type="BookingEntityExt">
+    <id column="BOOKING_ID" property="id" jdbcType="INTEGER" />
+    <result column="BOOKING_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="BOOKING_COURSEID" property="courseId" jdbcType="INTEGER" />
+    <result column="BOOKING_CONTACTNAME" property="contactName" jdbcType="VARCHAR" />
+    <result column="BOOKING_CONTACTPHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="BOOKING_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="BOOKING_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="BOOKING_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Booking_Base_Column_List">
+    BOOKING.ID BOOKING_ID,
+    BOOKING.USER_ID BOOKING_USERID,
+    BOOKING.COURSE_ID
+    BOOKING_COURSEID,
+    BOOKING.CONTACT_NAME BOOKING_CONTACTNAME,
+    BOOKING.CONTACT_PHONE
+    BOOKING_CONTACTPHONE,
+    BOOKING.STATUS BOOKING_STATUS,
+    BOOKING.REMARK BOOKING_REMARK,
+    BOOKING.LAST_MODIFY_TIME BOOKING_LASTMODIFYTIME,
+    BOOKING.CREATE_TIME BOOKING_CREATETIME,
+    BOOKING.ENABLED BOOKING_ENABLED,
+    BOOKING.DELETED BOOKING_DELETED
+  </sql>

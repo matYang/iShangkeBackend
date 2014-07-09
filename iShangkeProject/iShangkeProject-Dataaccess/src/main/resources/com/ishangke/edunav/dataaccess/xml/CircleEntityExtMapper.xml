@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.CircleEntityExtMapper">
+  <resultMap id="CircleExttMap" type="CircleEntityExt">
+    <id column="CIRCLE_ID" property="id" jdbcType="INTEGER" />
+    <result column="CIRCLE_VALUE" property="value" jdbcType="VARCHAR" />
+    <result column="CIRCLE_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CIRCLE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="CIRCLE_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CIRCLE_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="CIRCLE_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Circle_Base_Column_List">
+    CIRCLE.ID CIRCLE_ID,
+    CIRCLE.VALUE CIRCLE_VALUE,
+    CIRCLE.NAME CIRCLE_NAME,
+    CIRCLE.LAST_MODIFY_TIME CIRCLE_LASTMODIFYTIME,
+    CIRCLE.CREATE_TIME CIRCLE_CREATETIME,
+    CIRCLE.ENABLED CIRCLE_ENABLED,
+    CIRCLE.DELETED CIRCLE_DELETED
+  </sql>

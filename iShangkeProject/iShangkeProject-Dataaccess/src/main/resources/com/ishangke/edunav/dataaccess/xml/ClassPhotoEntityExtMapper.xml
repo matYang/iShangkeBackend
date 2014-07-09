@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper">
+  <resultMap id="ClassPhotoExtMap" type="ClassphotoEntityExt">
+    <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
+    <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+    <result column="CLASSPHOTO_IMGURL" property="imgurl" jdbcType="VARCHAR" />
+    <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="CLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="ClassPhoto_Base_Column_List">
+    CLASSPHOTO.ID CLASSPHOTO_ID,
+    CLASSPHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
+    CLASSPHOTO.IMGURL CLASSPHOTO_IMGURL,
+    CLASSPHOTO.TITLE CLASSPHOTO_TITLE,
+    CLASSPHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
+    CLASSPHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASSPHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
+    CLASSPHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASSPHOTO.DELETED CLASSPHOTO_DELETED
+  </sql>

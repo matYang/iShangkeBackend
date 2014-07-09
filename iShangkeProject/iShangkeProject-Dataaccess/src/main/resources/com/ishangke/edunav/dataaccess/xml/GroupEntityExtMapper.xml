@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper">
+  <resultMap id="GroupExtMap" type="GroupEntityExt">
+    <id column="GROUP_ID" property="id" jdbcType="INTEGER" />
+    <result column="GROUP_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="GROUP_ROLEID" property="roleId" jdbcType="INTEGER" />
+    <result column="GROUP_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="GROUP_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="GROUP_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="GROUP_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Group_Base_Column_List">
+    GROUP.ID GROUP_ID,
+    GROUP.NAME GROUP_NAME,
+    GROUP.ROLE_ID GROUP_ROLEID,
+    GROUP.LAST_MODIFY_TIME
+    GROUP_LASTMODIFYTIME,
+    GROUP.CREATE_TIME GROUP_CREATETIME,
+    GROUP.ENABLED GROUP_ENABLED,
+    GROUP.DELETED GROUP_DELETED
+  </sql>

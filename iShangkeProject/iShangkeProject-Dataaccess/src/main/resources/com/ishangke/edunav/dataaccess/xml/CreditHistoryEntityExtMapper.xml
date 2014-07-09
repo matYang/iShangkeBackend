@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.CreditHistoryEntityExtMapper">
+  <resultMap id="CreditHistoryExtMap" type="CreditHistoryEntityExt">
+    <id column="CREDITHISTORY_ID" property="id" jdbcType="INTEGER" />
+    <result column="CREDITHISTORY_CHARGE" property="charge" jdbcType="VARCHAR" />
+    <result column="CREDITHISTORY_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="CREDITHISTORY_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="CREDITHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREDITHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="CreditHistory_Base_Column_List">
+    CREDITHISTORY.ID CREDITHISTORY_ID,
+    CREDITHISTORY.CHARGE CREDITHISTORY_CHARGE,
+    CREDITHISTORY.USER_ID CREDITHISTORY_USERID,
+    CREDITHISTORY.LAST_MODIFY_TIME CREDITHISTORY_LASTMODIFYTIME,
+    CREDITHISTORY.CREATE_TIME CREDITHISTORY_CREATETIME,
+    CREDITHISTORY.DELETED CREDITHISTORY_DELETED
+  </sql>

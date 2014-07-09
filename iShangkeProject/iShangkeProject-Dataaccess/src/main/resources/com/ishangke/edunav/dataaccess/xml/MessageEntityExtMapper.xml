@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.MessageEntityExtMapper">
+  <resultMap id="MessageExtMap" type="MessageEntityExt">
+    <id column="MESSAGE_ID" property="id" jdbcType="INTEGER" />
+    <result column="MESSAGE_MESSAGETEX" property="messagetex" jdbcType="VARCHAR" />
+    <result column="MESSAGE_USERFROMID" property="userFromId" jdbcType="INTEGER" />
+    <result column="MESSAGE_USERTOID" property="userToId" jdbcType="INTEGER" />
+    <result column="MESSAGE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MESSAGE_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Message_Base_Column_List">
+    MESSAGE.ID MESSAGE_ID,
+    MESSAGE.MESSAGETEX MESSAGE_MESSAGETEX,
+    MESSAGE.USER_FROM_ID
+    MESSAGE_USERFROMID,
+    MESSAGE.USER_TO_ID MESSAGE_USERTOID,
+    MESSAGE.CREATE_TIME MESSAGE_CREATETIME,
+    MESSAGE.DELETED
+    MESSAGE_DELETED
+  </sql>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper">
+  <resultMap id="PartnerExtMap" type="PartnerEntityExt">
+    <id column="PARTNER_ID" jdbcType="INTEGER" property="id" />
+    <result column="PARTNER_PARTNERID" jdbcType="INTEGER" property="partnerId" />
+    <result column="PARTNER_CIRCLEID" jdbcType="INTEGER" property="circleId" />
+    <result column="PARTNER_LASTMODIFYTIME" jdbcType="TIMESTAMP" property="lastModifyTime" />
+  </resultMap>
+  <sql id="Partner_Base_Column_List">
+    PARTNER.ID PARTNER_ID,
+    PARTNER.PARTNER_ID PARTNER_PARTNERID,
+    PARTNER.CIRCLE_ID PARTNER_CIRCLEID,
+    PARTNER.LAST_MODIFY_TIME PARTNER_LASTMODIFYTIME
+  </sql>

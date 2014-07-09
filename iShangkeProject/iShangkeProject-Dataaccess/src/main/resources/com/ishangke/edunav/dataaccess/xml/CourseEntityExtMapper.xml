@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper">
+  <resultMap id="CourseExtMap" type="CourseEntityExt">
+    <id column="COURSE_ID" property="id" jdbcType="INTEGER" />
+    <result column="COURSE_COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
+    <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
+    <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+    <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+    <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+    <result column="COURSE_PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="COURSE_ORIGINALPRICE" property="originalprice" jdbcType="VARCHAR" />
+    <result column="COURSE_CASHBACK" property="cashback" jdbcType="VARCHAR" />
+    <result column="COURSE_COMMISSION" property="commission" jdbcType="VARCHAR" />
+    <result column="COURSE_SERVICECHARGE" property="servicecharge" jdbcType="VARCHAR" />
+    <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
+    <result column="COURSE_LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="COURSE_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
+    <result column="COURSE_COURSEHOURLENGTH" property="coursehourlength" jdbcType="INTEGER" />
+    <result column="COURSE_TEACHINGMETHOD" property="teachingmethod" jdbcType="VARCHAR" />
+    <result column="COURSE_TEACHINGMATERIALFEE" property="teachingmaterialfee" jdbcType="VARCHAR" />
+    <result column="COURSE_DOWNLOADMATERIALS" property="downloadmaterials" jdbcType="VARCHAR" />
+    <result column="COURSE_BONUSSERVICE" property="bonusservice" jdbcType="VARCHAR" />
+    <result column="COURSE_MARKING" property="marking" jdbcType="VARCHAR" />
+    <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
+    <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" />
+    <result column="COURSE_QUESTIONSESSION" property="questionsession" jdbcType="VARCHAR" />
+    <result column="COURSE_TEACHINGANDEXERCISE" property="teachingandexercise" jdbcType="VARCHAR" />
+    <result column="COURSE_CLASSTEACHER" property="classteacher" jdbcType="VARCHAR" />
+    <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" />
+    <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" />
+    <result column="COURSE_REGPHONE" property="regphone" jdbcType="VARCHAR" />
+    <result column="COURSE_CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
+    <result column="COURSE_PASSAGREEMENT" property="passagreement" jdbcType="VARCHAR" />
+    <result column="COURSE_QUALITYASSURANCE" property="qualityassurance" jdbcType="VARCHAR" />
+    <result column="COURSE_QUESTIONBANK" property="questionbank" jdbcType="VARCHAR" />
+    <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingmaterialintro" jdbcType="VARCHAR" />
+    <result column="COURSE_STUDYDAYNOTE" property="studydaynote" jdbcType="VARCHAR" />
+    <result column="COURSE_HIGHSCOREREWARD" property="highscorereward" jdbcType="VARCHAR" />
+    <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
+    <result column="COURSE_SUITABLESTUDENT" property="suitablestudent" jdbcType="VARCHAR" />
+    <result column="COURSE_OPENCOURSEREQUIREMENT" property="opencourserequirement" jdbcType="VARCHAR" />
+    <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
+    <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
+    <result column="COURSE_COURSEINTRO" property="courseintro" jdbcType="VARCHAR" />
+    <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
+    <result column="COURSE_REGLOCATION" property="reglocation" jdbcType="VARCHAR" />
+    <result column="COURSE_LOCATION" property="location" jdbcType="VARCHAR" />
+    <result column="COURSE_FINISHITIME2" property="finishitime2" jdbcType="INTEGER" />
+    <result column="COURSE_STARTTIME2" property="starttime2" jdbcType="INTEGER" />
+    <result column="COURSE_FINISHITIME1" property="finishitime1" jdbcType="INTEGER" />
+    <result column="COURSE_STARTTIME1" property="starttime1" jdbcType="INTEGER" />
+    <result column="COURSE_STARTUPONARRIVAL" property="startuponarrival" jdbcType="INTEGER" />
+    <result column="COURSE_BOOKINGTYPE" property="bookingtype" jdbcType="INTEGER" />
+    <result column="COURSE_CASHBACKDATE" property="cashbackdate" jdbcType="TIMESTAMP" />
+    <result column="COURSE_NOREFUNDDATE" property="norefunddate" jdbcType="TIMESTAMP" />
+    <result column="COURSE_CUTOFFDATE" property="cutoffdate" jdbcType="TIMESTAMP" />
+    <result column="COURSE_FINISHDATE" property="finishdate" jdbcType="TIMESTAMP" />
+    <result column="COURSE_STARTDATE" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
+    <result column="COURSE_CLASSSIZE" property="classsize" jdbcType="INTEGER" />
+    <result column="COURSE_COURSEHOURNUM" property="coursehournum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Course_Base_Column_List">
+    COURSE.ID COURSE_ID,
+    COURSE.COURSENAME COURSE_COURSENAME,
+    COURSE.COURSE_TEMPLATE_ID
+    COURSE_COURSETEMPLATEID,
+    COURSE.CATEGORY_ID COURSE_CATEGORYID,
+    COURSE.LOCATION_ID
+    COURSE_LOCATIONID,
+    COURSE.CIRCLE_ID COURSE_CIRCLEID,
+    COURSE.PARTNER_ID COURSE_PARTNERID,
+    COURSE.PRICE COURSE_PRICE,
+    COURSE.ORIGINALPRICE COURSE_ORIGINALPRICE,
+    COURSE.CASHBACK
+    COURSE_CASHBACK,
+    COURSE.COMMISSION COURSE_COMMISSION,
+    COURSE.SERVICECHARGE COURSE_SERVICECHARGE,
+    COURSE.STATUS COURSE_STATUS,
+    COURSE.LAST_MODIFY_TIME COURSE_LASTMODIFYTIME,
+    COURSE.CREATE_TIME
+    COURSE_CREATETIME,
+    COURSE.ENABLED COURSE_ENABLED,
+    COURSE.DELETED COURSE_DELETED,
+    COURSE.COURSEHOURLENGTH COURSE_COURSEHOURLENGTH,
+    COURSE.TEACHINGMETHOD COURSE_TEACHINGMETHOD,
+    COURSE.TEACHINGMATERIALFEE COURSE_TEACHINGMATERIALFEE,
+    COURSE.DOWNLOADMATERIALS
+    COURSE_DOWNLOADMATERIALS,
+    COURSE.BONUSSERVICE COURSE_BONUSSERVICE,
+    COURSE.MARKING COURSE_MARKING,
+    COURSE.ASSIGNMENTS COURSE_ASSIGNMENTS,
+    COURSE.TRAIL COURSE_TRAIL,
+    COURSE.QUESTIONSESSION
+    COURSE_QUESTIONSESSION,
+    COURSE.TEACHINGANDEXERCISE COURSE_TEACHINGANDEXERCISE,
+    COURSE.CLASSTEACHER COURSE_CLASSTEACHER,
+    COURSE.GOAL COURSE_GOAL,
+    COURSE.OUTLINE COURSE_OUTLINE,
+    COURSE.REGPHONE COURSE_REGPHONE,
+    COURSE.CONTACT COURSE_CONTACT,
+    COURSE.EXTRACURRICULAR
+    COURSE_EXTRACURRICULAR,
+    COURSE.PASSAGREEMENT COURSE_PASSAGREEMENT,
+    COURSE.QUALITYASSURANCE
+    COURSE_QUALITYASSURANCE,
+    COURSE.QUESTIONBANK COURSE_QUESTIONBANK,
+    COURSE.TEACHINGMATERIALINTRO
+    COURSE_TEACHINGMATERIALINTRO,
+    COURSE.STUDYDAYNOTE COURSE_STUDYDAYNOTE,
+    COURSE.HIGHSCOREREWARD
+    COURSE_HIGHSCOREREWARD,
+    COURSE.PREREQUEST COURSE_PREREQUEST,
+    COURSE.SUITABLESTUDENT
+    COURSE_SUITABLESTUDENT,
+    COURSE.OPENCOURSEREQUIREMENT COURSE_OPENCOURSEREQUIREMENT,
+    COURSE.CERTIFICATION COURSE_CERTIFICATION,
+    COURSE.QUIZ COURSE_QUIZ,
+    COURSE.COURSEINTRO
+    COURSE_COURSEINTRO,
+    COURSE.REFERENCE COURSE_REFERENCE,
+    COURSE.REGLOCATION COURSE_REGLOCATION,
+    COURSE.LOCATION COURSE_LOCATION,
+    COURSE.FINISHITIME2 COURSE_FINISHITIME2,
+    COURSE.STARTTIME2
+    COURSE_STARTTIME2,
+    COURSE.FINISHITIME1 COURSE_FINISHITIME1,
+    COURSE.STARTTIME1 COURSE_STARTTIME1,
+    COURSE.STARTUPONARRIVAL COURSE_STARTUPONARRIVAL,
+    COURSE.BOOKINGTYPE COURSE_BOOKINGTYPE,
+    COURSE.CASHBACKDATE COURSE_CASHBACKDATE,
+    COURSE.NOREFUNDDATE COURSE_NOREFUNDDATE,
+    COURSE.CUTOFFDATE COURSE_CUTOFFDATE,
+    COURSE.FINISHDATE COURSE_FINISHDATE,
+    COURSE.STARTDATE
+    COURSE_STARTDATE,
+    COURSE.POPULARITY COURSE_POPULARITY,
+    COURSE.CLASSSIZE COURSE_CLASSSIZE,
+    COURSE.COURSEHOURNUM COURSE_COURSEHOURNUM
+  </sql>

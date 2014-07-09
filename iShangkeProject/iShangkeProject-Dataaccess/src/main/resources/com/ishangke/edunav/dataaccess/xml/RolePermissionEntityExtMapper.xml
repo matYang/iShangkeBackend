@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.RolePermissionEntityExtMapper">
+  <resultMap id="RolePermissionExtMap" type="RolePermissionEntityExt">
+    <id column="ROLEPERMISSION_ID" property="id" jdbcType="INTEGER" />
+    <result column="ROLEPERMISSION_ROLEID" property="roleId" jdbcType="INTEGER" />
+    <result column="ROLEPERMISSION_PERMISSIONID" property="permissionId" jdbcType="INTEGER" />
+    <result column="ROLEPERMISSION_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="RolePermission_Base_Column_List">
+    ROLEPERMISSION.ID ROLEPERMISSION_ID,
+    ROLEPERMISSION.ROLE_ID ROLEPERMISSION_ROLEID,
+    ROLEPERMISSION.PERMISSION_ID ROLEPERMISSION_PERMISSIONID,
+    ROLEPERMISSION.LAST_MODIFY_TIME ROLEPERMISSION_LASTMODIFYTIME
+  </sql>

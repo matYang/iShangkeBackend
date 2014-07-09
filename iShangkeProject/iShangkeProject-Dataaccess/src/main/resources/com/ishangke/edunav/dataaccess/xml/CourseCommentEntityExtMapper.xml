@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseCommentEntityExtMapper">
+  <resultMap id="CourseCommentExtMap" type="CourseCommentEntityExt">
+    <id column="COURSECOMMENT_ID" property="id" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_COURSE_TEMPLATE_ID" property="courseTemplateId" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="COURSECOMMENT_CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="COURSECOMMENT_LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECOMMENT_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_DELTED" property="delted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="CourseComment_Base_Column_List">
+    COURSECOMMENT.ID COURSECOMMENT_ID,
+    COURSECOMMENT.USER_ID COURSECOMMENT_USERID,
+    COURSECOMMENT.COURSE_TEMPLATE_ID COURSECOMMENT_COURSETEMPLATEID,
+    COURSECOMMENT.TITLE COURSECOMMENT_TITLE,
+    COURSECOMMENT.CONTENT COURSECOMMENT_CONTENT,
+    COURSECOMMENT.LAST_MODIFY_TIME COURSECOMMENT_LASTMODIFYTIME,
+    COURSECOMMENT.CREATE_TIME COURSECOMMENT_CREATETIME,
+    COURSECOMMENT.ENABLED COURSECOMMENT_ENABLED,
+    COURSECOMMENT.DELTED COURSECOMMENT_DELTED
+  </sql>
