@@ -1,10 +1,11 @@
 # eclipse
 .project
+**/.project
 .classpath
 */.classpath
-*/.classpath*
+**/.classpath
 */.settings
-*/.settings/*
+**/.settings/
 
 # maven
 */target
@@ -25,7 +26,7 @@
 */log4j
 
 # other
-*/.DS_Store
+**/.DS_Store
 *.pref
 *.prefs
 dump.rdb

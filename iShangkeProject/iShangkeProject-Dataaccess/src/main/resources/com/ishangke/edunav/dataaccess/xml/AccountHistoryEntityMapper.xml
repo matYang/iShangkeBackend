@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.AccountHistoryEntityExtMapper">
+  <resultMap id="AccountHistoryExtMap" type="AccountHistoryEntityExt">
+    <id column="ACCOUNTHISTORY_ID" property="id" jdbcType="INTEGER" />
+    <result column="ACCOUNTHISTORY_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="ACCOUNTHISTORY_CHARGE" property="charge" jdbcType="VARCHAR" />
+    <result column="ACCOUNTHISTORY_TYPE" property="type" jdbcType="INTEGER" />
+    <result column="ACCOUNTHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ACCOUNTHISTORY_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ACCOUNTHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="AccountHistory_Base_Column_List">
+    ACCOUNTHISTORY.ID ACCOUNTHISTORY_ID,
+    ACCOUNTHISTORY.USER_ID ACCOUNTHISTORY_USERID,
+    ACCOUNTHISTORY.CHARGE ACCOUNTHISTORY_CHARGE,
+    ACCOUNTHISTORY.TYPE ACCOUNTHISTORY_TYPE,
+    ACCOUNTHISTORY.CREATE_TIME ACCOUNTHISTORY_CREATETIME,
+    ACCOUNTHISTORY.REMARK
+    ACCOUNTHISTORY_REMARK,
+    ACCOUNTHISTORY.DELETED ACCOUNTHISTORY_DELETED
+  </sql>
