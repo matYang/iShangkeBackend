@@ -1,3 +1,2 @@
-/defaultfilter.properties
-/src
-/target
+/target/
+/.gitignore
