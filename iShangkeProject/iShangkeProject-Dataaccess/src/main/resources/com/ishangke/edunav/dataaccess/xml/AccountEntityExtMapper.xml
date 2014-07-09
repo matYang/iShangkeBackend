@@ -65,7 +65,7 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT
       LAST_INSERT_ID()
     </selectKey>
