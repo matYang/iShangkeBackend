@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.ActivityEntityMapper" >
+  <resultMap id="ActivityExtMap" type="ActivityEntityExt" >
+    <id column="ACTIVITY_ID" property="id" jdbcType="INTEGER" />
+    <result column="ACTIVITY_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ACTIVITY_PARTNER_ID" property="partnerId" jdbcType="INTEGER" />
+    <result column="ACTIVITY_COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="ACTIVITY_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ACTIVITY_START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVITY_END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVITY_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="ACTIVITY_LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVITY_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVITY_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="ACTIVITY_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Activity_Base_Column_List">
+  
+
+  </sql>
