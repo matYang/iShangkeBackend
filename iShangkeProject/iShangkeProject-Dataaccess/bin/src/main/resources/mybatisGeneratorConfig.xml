@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<properties url="file:${main.basedir}ENV_${ENV}.properties" />
+	<classPathEntry location="${main.basedir}${db.connector}" />
+
+	<context id="dbContext" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${db.driver}"
+			connectionURL="${db.url}" userId="${db.user}" password="${db.password}">
+		</jdbcConnection>
+
+		<javaModelGenerator targetPackage="com.ishangke.edunav.dataaccess.model.gen"
+			targetProject="./iShangke-Dataaccess/src/main/java">
+			<property name="trimStrings" value="true" />
+			<property name="enableSubPackages" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.ishangke.edunav.dataaccess.xml.gen"
+			targetProject="./iShangke-Dataaccess/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.ishangke.edunav.dataaccess.mapper.gen" targetProject="./iShangke-Dataaccess/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="USERS" domainObjectName="UserEntity">
+			<generatedKey column="ID" sqlStatement="MySql" />
+		</table>
+	</context>
+
+</generatorConfiguration>
