@@ -30,3 +30,4 @@
 *.pref
 *.prefs
 dump.rdb
+.DS_Store

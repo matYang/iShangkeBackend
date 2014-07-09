@@ -118,16 +118,16 @@
         <table tableName="WIDTHDRAW" domainObjectName="WidthdrawEntity">
             <generatedKey column="ID" sqlStatement="MySql" />
         </table>
-        <table tableName="COURSETEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
+        <table tableName="COURSE_TEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
             <generatedKey column="ID" sqlStatement="MySql" />
         </table>
-        <table tableName="CLASSPHOTO" domainObjectName="ClassphotoEntity">
+        <table tableName="CLASS_PHOTO" domainObjectName="ClassPhotoEntity">
             <generatedKey column="ID" sqlStatement="MySql" />
         </table>
-        <table tableName="COURSE_CLASSPHOTO" domainObjectName="CourseClassphotoEntity">
+        <table tableName="COURSE_CLASS_PHOTO" domainObjectName="CourseClassPhotoEntity">
             <generatedKey column="ID" sqlStatement="MySql" />
         </table>
-        <table tableName="COURSETEMPLATE_CLASSPHOTO" domainObjectName="CoursetemplateClassphotoEntity">
+        <table tableName="COURSE_TEMPLATE_CLASS_PHOTO" domainObjectName="CourseTemplateClassPhotoEntity">
             <generatedKey column="ID" sqlStatement="MySql" />
         </table>
         <table tableName="USER_LOCATION" domainObjectName="UserLocationEntity">

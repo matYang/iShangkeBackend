@@ -129,18 +129,18 @@
 			alias="CourseTemplateTeacherEntityExt" />
 	</typeAliases>
 	<typeAliases>
-		<typeAlias type="com.ishangke.edunav.dataaccess.model.ClassphotoEntityExt"
-			alias="ClassphotoEntityExt" />
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt"
+			alias="ClassPhotoEntityExt" />
 	</typeAliases>
 	<typeAliases>
 		<typeAlias
-			type="com.ishangke.edunav.dataaccess.model.CourseClassphotoEntityExt"
-			alias="CourseClassphotoEntityExt" />
+			type="com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt"
+			alias="CourseClassPhotoEntityExt" />
 	</typeAliases>
 	<typeAliases>
 		<typeAlias
-			type="com.ishangke.edunav.dataaccess.model.CoursetemplateClassphotoEntityExt"
-			alias="CoursetemplateClassphotoEntityExt" />
+			type="com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt"
+			alias="CourseTemplateClassPhotoEntityExt" />
 	</typeAliases>
 	<typeAliases>
 		<typeAlias
