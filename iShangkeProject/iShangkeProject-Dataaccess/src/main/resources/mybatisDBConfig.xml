@@ -3,8 +3,148 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <typeAliases>
-<!--         <typeAlias type="com.ishangke.edunav.dataaccess.model.UserEntityExt" alias="UserEntityExt"/> -->
-    </typeAliases>
-
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.UserEntityExt"
+			alias="UserEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.RoleEntityExt"
+			alias="RoleEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.GroupEntityExt"
+			alias="GroupEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.UserGroupEntityExt"
+			alias="UserGroupEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.PermissionEntityExt"
+			alias="PermissionEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt"
+			alias="RolePermissionEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.CategoryEntityExt"
+			alias="CategoryEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.LocationEntityExt"
+			alias="LocationEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.PartnerEntityExt"
+			alias="PartnerEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.CircleEntityExt"
+			alias="CircleEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt"
+			alias="CourseTemplateEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.CourseEntityExt"
+			alias="CourseEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt"
+			alias="CourseCommentEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt"
+			alias="ApproveHistoryEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.BookingEntityExt"
+			alias="BookingEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.CouponEntityExt"
+			alias="CouponEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt"
+			alias="CouponHistoryEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.CreditEntityExt"
+			alias="CreditEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt"
+			alias="CreditHistoryEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.AccountEntityExt"
+			alias="AccountEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt"
+			alias="AccountHistoryEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.SpreadEntityExt"
+			alias="SpreadEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.TeacherEntityExt"
+			alias="TeacherEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CourseTeacherEntityExt"
+			alias="CourseTeacherEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.ActivityEntityExt"
+			alias="ActivityEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.MessageEntityExt"
+			alias="MessageEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.PartnerEntityExt"
+			alias="PartnerEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.WidthdrawEntityExt"
+			alias="WidthdrawEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt"
+			alias="CourseTemplateTeacherEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias type="com.ishangke.edunav.dataaccess.model.ClassphotoEntityExt"
+			alias="ClassphotoEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CourseClassphotoEntityExt"
+			alias="CourseClassphotoEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.CoursetemplateClassphotoEntityExt"
+			alias="CoursetemplateClassphotoEntityExt" />
+	</typeAliases>
+	<typeAliases>
+		<typeAlias
+			type="com.ishangke.edunav.dataaccess.model.UserLocationEntityExt"
+			alias="UserLocationEntityExt" />
+	</typeAliases>
 </configuration>
