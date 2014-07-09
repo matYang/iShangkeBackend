@@ -14,11 +14,78 @@
   <sql id="Account_Base_Column_List">
     ACCOUNT.ID ACCOUNT_ID,
     ACCOUNT.BALANCE ACCOUNT_BALANCE,
-    ACCOUNT.REAL_NAME ACCOUNT_REALNAME,
+    ACCOUNT.REAL_NAME
+    ACCOUNT_REALNAME,
     ACCOUNT.LAST_MODIFY_TIME ACCOUNT_LASTMODIFYTIME,
-    ACCOUNT.CREATE_TIME ACCOUNT_CREATETIME,
+    ACCOUNT.CREATE_TIME
+    ACCOUNT_CREATETIME,
     ACCOUNT.ENABLED ACCOUNT_ENABLED,
     ACCOUNT.DELETED ACCOUNT_DELETED
   </sql>
 
+  <insert id="add" parameterType="AccountEntityExt">
+    insert into ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="balance != null">
+        BALANCE,
+      </if>
+      <if test="realName != null">
+        REAL_NAME,
+      </if>
+      <if test="lastModifyTime != null">
+        LAST_MODIFY_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ACCOUNT
+    where ID =
+    #{id,jdbcType=INTEGER}
+  </delete>
+
+  <update id="update" parameterType="AccountEntityExt">
+    update ACCOUNT
+    set
+    BALANCE = #{balance,jdbcType=DOUBLE},
+    REAL_NAME = #{realName,jdbcType=VARCHAR},
+    LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+    CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+    ENABLED = #{enabled,jdbcType=INTEGER},
+    DELETED = #{deleted,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
