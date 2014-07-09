@@ -102,4 +102,66 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getById" parameterType="AccoutEntityExt" resultMap="AccountExtMap">
+    select <include refid="Account_Base_Column_List"></include>
+    from ACCOUNT
+    WHERE ACCOUNT.DELETED = 1
+    <if test="realName != null and realName != ''">
+      AND ACCOUNT.REAL_NAME LIKE "%"#{realName,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="id != null and id != 0">
+      AND ACCOUNT.ID = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="id == null or id == 0">
+      <if test="idStart != null and idStart != 0">
+        <![CDATA[AND ACCOUNT.ID >= #{id,jdbcType=INTEGER}]]>
+      </if>
+      <if test="idEnd != null and idEnd != 0">
+        <![CDATA[AND ACCOUNT.ID <= #{id,jdbcType=INTEGER}]]>
+      </if>
+      <if test="idSet.size > 0">
+        AND ACCOUNT.ID IN 
+          <foreach collection="idSet.value" item="listItem" open="(" close=")" separator="," >
+            #{listItem}
+          </foreach>
+      </if>
+    </if>
+    <if test="balance != null and balance != 0">
+      AND ACCOUNT.BALANCE = #{balance,jdbcType=DOUBLE}
+    </if>
+    <if test="balance == null or balance == 0">
+      <if test="balanceStart != null and balanceStart != 0">
+        <![CDATA[AND ACCOUNT.BALANCE >= #{balance,jdbcType=DOUBLE}]]>
+      </if>
+      <if test="balanceEnd != null and balanceEnd != 0">
+        <![CDATA[AND ACCOUNT.BALANCE <= #{balance,jdbcType=DOUBLE}]]>
+      </if>
+    </if>
+    <if test="lastModifyTime != 0 and lastModifyTime != null">
+      AND ACCOUNT.LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="lastModifyTime == null or lastModifyTime == 0">
+      <if test="lastModifyTimeStart != null and lastModifyTimeStart != 0">
+        <![CDATA[AND ACCOUNT.LAST_MODIFY_TIME >= #{lastModifyTime,jdbcType=TIMESTAMP}]]>
+      </if>
+      <if test="lastModifyTimeEnd != null and lastModifyTimeEnd != 0">
+        <![CDATA[AND ACCOUNT.LAST_MODIFY_TIME <= #{lastModifyTime,jdbcType=TIMESTAMP}]]>
+      </if>
+    </if>
+    <if test="createTime != 0 and createTime != null">
+      AND ACCOUNT.CREATE_TIME = #{id,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createTime == null or createTime == 0">
+      <if test="createTimeStart != null and createTimeStart != 0">
+        <![CDATA[AND ACCOUNT.CREATE_TIME >= #{id,jdbcType=TIMESTAMP}]]>
+      </if>
+      <if test="createTimeEnd != null and createTimeEnd != 0">
+        <![CDATA[AND ACCOUNT.CREATE_TIME <= #{id,jdbcType=TIMESTAMP}]]>
+      </if>
+    </if>
+    <if test="enabled != null">
+      AND ACCOUNT.ENABLED = #{enabled,jdbcType=INTEGER}
+    </if>
+  </select>
 </mapper>
