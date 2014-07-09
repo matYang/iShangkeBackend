@@ -85,7 +85,7 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.PartnerEntityExt" alias="PartnerEntityExt" />
   </typeAliases>
   <typeAliases>
-    <typeAlias type="com.ishangke.edunav.dataaccess.model.WidthdrawEntityExt" alias="WidthdrawEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.WithdrawEntityExt" alias="WithdrawEntityExt" />
   </typeAliases>
   <typeAliases>
     <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt"
@@ -104,5 +104,11 @@
   </typeAliases>
   <typeAliases>
     <typeAlias type="com.ishangke.edunav.dataaccess.model.UserLocationEntityExt" alias="UserLocationEntityExt" />
+  </typeAliases>
+  <typeAliases>
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.AddressEntityExt" alias="AddressEntityExt" />
+  </typeAliases>
+  <typeAliases>
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt" alias="BookingHistoryEntityExt" />
   </typeAliases>
 </configuration>

@@ -115,7 +115,7 @@
     <table tableName="PARTNER_CIRCLE" domainObjectName="PartnerEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
     </table>
-    <table tableName="WIDTHDRAW" domainObjectName="WidthdrawEntity">
+    <table tableName="WITHDRAW" domainObjectName="WithdrawEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
     </table>
     <table tableName="COURSE_TEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
@@ -131,6 +131,12 @@
       <generatedKey column="ID" sqlStatement="MySql" />
     </table>
     <table tableName="USER_LOCATION" domainObjectName="UserLocationEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+    </table>
+    <table tableName="ADDRESS" domainObjectName="AddressEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+    </table>
+    <table tableName="BOOKING_HISTORY" domainObjectName="BookingHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
     </table>
   </context>
