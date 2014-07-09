@@ -1,16 +1,31 @@
+# eclipse
+.project
 .classpath
+*/.classpath
+*/.classpath*
+*/.settings
+*/.settings/*
+
+# maven
+*/target
+*/target*
+
+# binary
+*.class
+*.jar
+!**/mysql-connector-java/mysql-connector-java-*.jar
+
+# mybatis
+**/gen/*
+
+# spring
+**/resources/applicationContext-*.xml
+
+# log
+*/log4j
+
+# other
+*/.DS_Store
 *.pref
 *.prefs
 dump.rdb
-*/target
-*/target*
-*/log4j
-.project
-*/.classpath
-*/.classpath*
-pom.properties
-*/.DS_Store
-*.class
-*/.settings
-*/.settings/*
-.DS_Store

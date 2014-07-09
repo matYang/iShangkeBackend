@@ -5,7 +5,7 @@
 	<bean id="propertyMananger" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>file:D:DocumentsiShangkeBackendiShangkeProjectiShangkeProject-Dataaccess/../ENV_Local.properties</value>
+				<value>file:startup_properties</value>
 			</list>
 		</property>
 	</bean>
