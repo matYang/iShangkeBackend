@@ -1,5 +1,10 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-public interface CoursetemplateClassphotoEntityExtMapper {
+import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 
+public interface CourseTemplateClassPhotoEntityExtMapper {
+
+    public int add(CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt);
+    public void deleteById(int id);
+    public void update(CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt);
 }
