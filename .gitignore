@@ -16,8 +16,9 @@
 *.jar
 !**/mysql-connector-java/mysql-connector-java-*.jar
 
-# mybatis
+# generated code
 **/gen/*
+**/thriftgen/*
 
 # spring
 **/resources/applicationContext-*.xml
