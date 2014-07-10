@@ -134,3 +134,4 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+</mapper>

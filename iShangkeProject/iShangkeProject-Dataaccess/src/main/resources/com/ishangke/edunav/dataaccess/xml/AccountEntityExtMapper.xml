@@ -26,8 +26,8 @@
   <insert id="add" parameterType="AccountEntityExt">
     insert into ACCOUNT
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="record.id != null">
-        ID = #{record.id,jdbcType=INTEGER},
+      <if test="id != null">
+        ID,
       </if>
       <if test="balance != null">
         BALANCE,
@@ -71,9 +71,9 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-      <!-- ACCOUNT has no id // todo -->
-    </selectKey>
+    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      ACCOUNT has no id // todo
+    </selectKey> -->
   </insert>
 
   <update id="deleteById" parameterType="java.lang.Integer">
@@ -85,30 +85,34 @@
   <update id="update" parameterType="AccountEntityExt">
     update ACCOUNT
     <set>
-      <if test="record.balance != null">
-        BALANCE = #{record.balance,jdbcType=DOUBLE},
+      <if test="balance != null">
+        BALANCE = #{balance,jdbcType=DOUBLE},
       </if>
-      <if test="record.realName != null">
-        REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      <if test="realName != null">
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastModifyTime != null">
+      <if test="lastModifyTime != null">
         LAST_MODIFY_TIME =
-        #{record.lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.enabled != null">
-        ENABLED = #{record.enabled,jdbcType=INTEGER},
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="record.deleted != null">
-        DELETED = #{record.deleted,jdbcType=INTEGER},
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getById" parameterType="AccoutEntityExt" resultMap="AccountExtMap">
+  <select id="getCount" resultType="int">
+    select count(ID) from ACCOUNT where DELETED = 0
+  </select>
+
+  <select id="getById" parameterType="AccountEntityExt" resultMap="AccountExtMap">
     select
     <include refid="Account_Base_Column_List"></include>
     from ACCOUNT

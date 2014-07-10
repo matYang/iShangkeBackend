@@ -9,6 +9,9 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="jdbcUrl" value="${db.url}" />
@@ -38,7 +41,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ishangk.edunav.dataaccess.mapper" />
+		<property name="basePackage" value="com.ishangke.edunav.dataaccess.mapper" />
 		<property name="sqlSessionTemplateBeanName" value="sqlSession" />
 	</bean>
 </beans>

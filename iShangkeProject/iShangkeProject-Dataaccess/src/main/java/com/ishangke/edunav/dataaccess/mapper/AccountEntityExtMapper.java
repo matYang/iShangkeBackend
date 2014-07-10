@@ -7,4 +7,5 @@ public interface AccountEntityExtMapper {
     public int add(AccountEntityExt accountEntityExt);    
     public void deleteById(int id);
     public void update(AccountEntityExt accountEntityExt);
+    public int getCount();
 }

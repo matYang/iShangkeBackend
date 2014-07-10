@@ -22,7 +22,7 @@
     insert into CREDIT
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="record.id != null">
-        ID = #{record.id,jdbcType=INTEGER},
+        ID,
       </if>
       <if test="credit != null">
         CREDIT,
