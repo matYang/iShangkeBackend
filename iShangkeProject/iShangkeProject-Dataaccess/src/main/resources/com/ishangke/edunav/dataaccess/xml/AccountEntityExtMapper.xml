@@ -112,11 +112,11 @@
     select count(ID) from ACCOUNT where DELETED = 0
   </select>
 
-  <select id="getById" parameterType="AccountEntityExt" resultMap="AccountExtMap">
+  <select id="list" parameterType="AccountEntityExt" resultMap="AccountExtMap">
     select
     <include refid="Account_Base_Column_List"></include>
     from ACCOUNT
-    WHERE ACCOUNT.DELETED = 1
+    WHERE ACCOUNT.DELETED = 0
     <if test="realName != null and realName != ''">
       AND ACCOUNT.REAL_NAME LIKE "%"#{realName,jdbcType=VARCHAR}"%"
     </if>

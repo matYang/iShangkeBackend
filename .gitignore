@@ -22,6 +22,7 @@
 
 # spring
 **/resources/applicationContext-*.xml
+**/resources/ENV_*.properties
 
 # log
 */log4j

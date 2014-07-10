@@ -64,7 +64,7 @@
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
     <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
-    <collection property="teacherList" javaType="java.util.ArrayList" ofType="CourseTeacherEntityExt">
+    <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
       <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
       <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
       <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
@@ -756,4 +756,59 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="list" parameterType="CourseEntityExt" resultMap="CourseExtMap">
+    select
+    <include refid="Course_Base_Column_List"></include>,
+    <include refid="Teacher_Base_Column_List"></include>
+    from COURSE COURSE
+    join COUSE_TEACHER COUSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
+    join TEACEHR TEACHER ON COURSE_TEACHER.TEACHER_ID = TEACHER.ID
+    WHERE COURSE.DELETED = 0
+    <if test="coursename != null and coursename != ''">
+      AND COURSE.COURSENAME LIKE "%"#{coursename,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="id != null and id != 0">
+      AND COURSE.ID = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="id == null or id == 0">
+      <if test="idStart != null and idStart != 0">
+        <![CDATA[AND COURSE.ID >= #{id,jdbcType=INTEGER}]]>
+      </if>
+      <if test="idEnd != null and idEnd != 0">
+        <![CDATA[AND COURSE.ID <= #{id,jdbcType=INTEGER}]]>
+      </if>
+      <if test="idSet.size > 0">
+        AND COURSE.ID IN
+        <foreach collection="idSet.value" item="listItem" open="(" close=")" separator=",">
+          #{listItem}
+        </foreach>
+      </if>
+    </if>
+    <if test="lastModifyTime != 0 and lastModifyTime != null">
+      AND COURSE.LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="lastModifyTime == null or lastModifyTime == 0">
+      <if test="lastModifyTimeStart != null and lastModifyTimeStart != 0">
+        <![CDATA[AND COURSE.LAST_MODIFY_TIME >= #{lastModifyTime,jdbcType=TIMESTAMP}]]>
+      </if>
+      <if test="lastModifyTimeEnd != null and lastModifyTimeEnd != 0">
+        <![CDATA[AND COURSE.LAST_MODIFY_TIME <= #{lastModifyTime,jdbcType=TIMESTAMP}]]>
+      </if>
+    </if>
+    <if test="createTime != 0 and createTime != null">
+      AND COURSE.CREATE_TIME = #{id,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createTime == null or createTime == 0">
+      <if test="createTimeStart != null and createTimeStart != 0">
+        <![CDATA[AND COURSE.CREATE_TIME >= #{id,jdbcType=TIMESTAMP}]]>
+      </if>
+      <if test="createTimeEnd != null and createTimeEnd != 0">
+        <![CDATA[AND COURSE.CREATE_TIME <= #{id,jdbcType=TIMESTAMP}]]>
+      </if>
+    </if>
+    <if test="enabled != null">
+      AND COURSE.ENABLED = #{enabled,jdbcType=INTEGER}
+    </if>
+  </select>
 </mapper>
