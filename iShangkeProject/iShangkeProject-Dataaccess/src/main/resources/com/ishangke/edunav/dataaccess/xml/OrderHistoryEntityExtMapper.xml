@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper">
+  <resultMap id="OrderHistoryExtMap" type="OrderHistoryEntityExt">
+    <id column="ORDERHISTORY_ID" property="id" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_ORDERID" property="orderId" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_OPTNAME" property="optName" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORDERHISTORY_PRESTATUS" property="preStatus" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_POSTSTATUS" property="postStatus" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_NORMAL" property="normal" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ORDERHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="ORDERHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Account_Base_Column_List">
+    ORDERHISTORY.ID ORDERHISTORY_ID,
+    ORDERHISTORY.ORDER_ID ORDERHISTORY_ORDERID,
+    ORDERHISTORY.USER_ID ORDERHISTORY_USERID,
+    ORDERHISTORY.OPT_NAME ORDERHISTORY_OPTNAME,
+    ORDERHISTORY.REMARK ORDERHISTORY_REMARK,
+    ORDERHISTORY.PRE_STATUS ORDERHISTORY_PRESTATUS,
+    ORDERHISTORY.POST_STATUS ORDERHISTORY_POSTSTATUS,
+    ORDERHISTORY.NORMAL ORDERHISTORY_NORMAL,
+    ORDERHISTORY.CREATE_TIME ORDERHISTORY_CREATETIME,
+    ORDERHISTORY.ENABLED ORDERHISTORY_ENABLED,
+    ORDERHISTORY.DELETED ORDERHISTORY_DELETED
+  </sql>
+  <insert id="add" parameterType="OrderHistoryEntityExt">
+
+    insert into ORDERHISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="optName != null">
+        OPT_NAME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="preStatus != null">
+        PRE_STATUS,
+      </if>
+      <if test="postStatus != null">
+        POST_STATUS,
+      </if>
+      <if test="normal != null">
+        NORMAL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="optName != null">
+        #{optName,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="preStatus != null">
+        #{preStatus,jdbcType=INTEGER},
+      </if>
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=INTEGER},
+      </if>
+      <if test="normal != null">
+        #{normal,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update ORDERHISTORY set DELETED = 1
+    where ID =
+    #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="OrderHistoryEntityExt">
+    update ORDERHISTORY
+    <set>
+
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.optName != null">
+        OPT_NAME = #{record.optName,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preStatus != null">
+        PRE_STATUS = #{record.preStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.postStatus != null">
+        POST_STATUS = #{record.postStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.normal != null">
+        NORMAL = #{record.normal,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enabled != null">
+        ENABLED = #{record.enabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null">
+        DELETED = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>
