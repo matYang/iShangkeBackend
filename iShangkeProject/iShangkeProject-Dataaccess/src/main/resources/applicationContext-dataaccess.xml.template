@@ -9,25 +9,25 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="${db.driver}" />
-		<property name="url" value="${db.url}" />
+		<property name="jdbcUrl" value="${db.url}" />
 		<property name="username" value="${db.user}" />
 		<property name="password" value="${db.password}" />
 		<property name="poolName" value="SQLPool" />
-		<property name="maxLifetime" value="1800000l" />
+		<property name="maxLifetime" value="1800000" />
 		<property name="autoCommit" value="true" />
 		<property name="maximumPoolSize" value="100" />
-		<property name="connectionTimeout" value="100000l" />
-		<property name="dataSourceProperty">
+		<property name="connectionTimeout" value="100000" />
+		<!-- <property name="dataSourceProperty">
 			<props>
 				<prop key="useUnicode">true</prop>
 				<prop key="characterEncoding">utf8</prop>
 			</props>
-		</property>
+		</property> -->
 	</bean>
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
-		<constructor-arg index="0" ref="dataSourceConfig" />
+		<constructor-arg index="0" ref="hikariConfig" />
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
