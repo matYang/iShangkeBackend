@@ -23,3 +23,100 @@
     WITHDRAW.ENABLED WITHDRAW_ENABLED,
     WITHDRAW.DELETED WITHDRAW_DELETED
   </sql>
+  <insert id="add" parameterType="WithdrawEntityExt">
+
+    insert into WITHDRAW
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="payeeId != null">
+        PAYEE_ID,
+      </if>
+      <if test="peyeeName != null">
+        PEYEE_NAME,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="lastModifyName != null">
+        LAST_MODIFY_NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="payeeId != null">
+        #{payeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="peyeeName != null">
+        #{peyeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="lastModifyName != null">
+        #{lastModifyName,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update WITHDRAW set DELETED = 1
+    where ID =
+    #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="WithdrawEntityExt">
+    update WITHDRAW
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="payeeId != null">
+        PAYEE_ID = #{payeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="peyeeName != null">
+        PEYEE_NAME = #{peyeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="lastModifyName != null">
+        LAST_MODIFY_NAME = #{lastModifyName,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>

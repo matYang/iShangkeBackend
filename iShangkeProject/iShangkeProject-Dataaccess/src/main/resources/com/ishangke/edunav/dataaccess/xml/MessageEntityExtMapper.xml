@@ -19,3 +19,74 @@
     MESSAGE.DELETED
     MESSAGE_DELETED
   </sql>
+  <insert id="add" parameterType="MessageEntityExt">
+
+    insert into MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="messagetex != null">
+        MESSAGETEX,
+      </if>
+      <if test="userFromId != null">
+        USER_FROM_ID,
+      </if>
+      <if test="userToId != null">
+        USER_TO_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="messagetex != null">
+        #{messagetex,jdbcType=VARCHAR},
+      </if>
+      <if test="userFromId != null">
+        #{userFromId,jdbcType=INTEGER},
+      </if>
+      <if test="userToId != null">
+        #{userToId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update MESSAGE set DELETED = 1
+    where ID =
+    #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="MessageEntityExt">
+    update MESSAGE
+    <set>
+      <if test="messagetex != null">
+        MESSAGETEX = #{messagetex,jdbcType=VARCHAR},
+      </if>
+      <if test="userFromId != null">
+        USER_FROM_ID = #{userFromId,jdbcType=INTEGER},
+      </if>
+      <if test="userToId != null">
+        USER_TO_ID = #{userToId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
