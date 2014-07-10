@@ -22,12 +22,6 @@
 		<property name="autoCommit" value="true" />
 		<property name="maximumPoolSize" value="100" />
 		<property name="connectionTimeout" value="100000" />
-		<!-- <property name="dataSourceProperty">
-			<props>
-				<prop key="useUnicode">true</prop>
-				<prop key="characterEncoding">utf8</prop>
-			</props>
-		</property> -->
 	</bean>
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg index="0" ref="hikariConfig" />
