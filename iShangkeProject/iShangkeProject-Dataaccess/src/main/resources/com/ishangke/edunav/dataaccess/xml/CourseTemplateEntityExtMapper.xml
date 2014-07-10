@@ -3,87 +3,89 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper">
   <resultMap id="CourseTemplateEntityExtMap" type="CourseTemplateEntityExt">
     <id column="COURSETEMPLATE_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_PRICE" property="price" jdbcType="DOUBLE" />
-    <result column="COURSETEMPLATE_ORIGINALPRICE" property="originalprice" jdbcType="DOUBLE" />
+    <result column="COURSETEMPLATE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_COMMISSION" property="commission" jdbcType="DOUBLE" />
-    <result column="COURSETEMPLATE_SERVICECHARGE" property="servicecharge" jdbcType="DOUBLE" />
+    <result column="COURSETEMPLATE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_STATUS" property="status" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="COURSETEMPLATE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSETEMPLATE_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_DELETED" property="deleted" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_COURSEHOURNUM" property="coursehournum" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_COURSEHOURLENGTH" property="coursehourlength" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_CLASSSIZE" property="classsize" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_POPULARITY" property="popularity" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_STARTDATE" property="startdate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_FINISHDATE" property="finishdate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_CUTOFFDATE" property="cutoffdate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_NOREFUNDDATE" property="norefunddate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_CASHBACKDATE" property="cashbackdate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_BOOKINGTYPE" property="bookingtype" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_STARTUPONARRIVAL" property="startuponarrival" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_STARTTIME1" property="starttime1" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_FINISHITIME1" property="finishitime1" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_STARTTIME2" property="starttime2" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_FINISHITIME2" property="finishitime2" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_REGLOCATION" property="reglocation" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_STARTDATE" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_FINISHDATE" property="finishDate" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_CUTOFFDATE" property="cutoffDate" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_NOREFUNDDATE" property="noRefundDate" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_CASHBACKDATE" property="cashbackDate" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_REGLOCATION" property="regLocation" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_REFERENCE" property="reference" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_COURSEINTRO" property="courseintro" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUIZ" property="quiz" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_OPENCOURSEREQUIREMENT" property="opencourserequirement"
+    <result column="COURSETEMPLATE_OPENCOURSEREQUIREMENT" property="openCourseRequirement"
       jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_SUITABLESTUDENT" property="suitablestudent" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_HIGHSCOREREWARD" property="highscorereward" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_STUDYDAYNOTE" property="studydaynote" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingmaterialintro"
+    <result column="COURSETEMPLATE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_STUDYDAYNOTE" property="studyDayNote" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro"
       jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_QUESTIONBANK" property="questionbank" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_QUALITYASSURANCE" property="qualityassurance" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_PASSAGREEMENT" property="passagreement" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CONTACT" property="contact" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_REGPHONE" property="regphone" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_REGPHONE" property="regPhone" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_OUTLINE" property="outline" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_GOAL" property="goal" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_CLASSTEACHER" property="classteacher" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGANDEXERCISE" property="teachingandexercise"
+    <result column="COURSETEMPLATE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGANDEXERCISE" property="teachingAndExercise"
       jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_QUESTIONSESSION" property="questionsession" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TRAIL" property="trail" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_MARKING" property="marking" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_BONUSSERVICE" property="bonusservice" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_DOWNLOADMATERIALS" property="downloadmaterials" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingmaterialfee"
+    <result column="COURSETEMPLATE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingMaterialFee"
       jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMETHOD" property="teachingmethod" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="CourseTemplate_Base_Column_List">
     COURSETEMPLATE.ID COURSETEMPLATE_ID,
-    COURSETEMPLATE.COURSENAME
+    COURSETEMPLATE.COURSE_NAME
     COURSETEMPLATE_COURSENAME,
     COURSETEMPLATE.CATEGORY_ID COURSETEMPLATE_CATEGORYID,
-    COURSETEMPLATE.LOCATION_ID COURSETEMPLATE_LOCATIONID,
+    COURSETEMPLATE.LOCATION_ID
+    COURSETEMPLATE_LOCATIONID,
     COURSETEMPLATE.CIRCLE_ID
     COURSETEMPLATE_CIRCLEID,
     COURSETEMPLATE.PARTNER_ID COURSETEMPLATE_PARTNERID,
-    COURSETEMPLATE.ADDRESS_ID COURSETEMPLATE_ADDRESSID,
+    COURSETEMPLATE.ADDRESS_ID
+    COURSETEMPLATE_ADDRESSID,
     COURSETEMPLATE.PRICE COURSETEMPLATE_PRICE,
-    COURSETEMPLATE.ORIGINALPRICE COURSETEMPLATE_ORIGINALPRICE,
+    COURSETEMPLATE.ORIGINAL_PRICE COURSETEMPLATE_ORIGINALPRICE,
     COURSETEMPLATE.CASHBACK
     COURSETEMPLATE_CASHBACK,
     COURSETEMPLATE.COMMISSION COURSETEMPLATE_COMMISSION,
-    COURSETEMPLATE.SERVICECHARGE COURSETEMPLATE_SERVICECHARGE,
+    COURSETEMPLATE.SERVICE_CHARGE COURSETEMPLATE_SERVICECHARGE,
     COURSETEMPLATE.STATUS
     COURSETEMPLATE_STATUS,
     COURSETEMPLATE.LAST_MODIFY_TIME COURSETEMPLATE_LASTMODIFYTIME,
@@ -91,73 +93,73 @@
     COURSETEMPLATE.ENABLED
     COURSETEMPLATE_ENABLED,
     COURSETEMPLATE.DELETED COURSETEMPLATE_DELETED,
-    COURSETEMPLATE.COURSEHOURNUM COURSETEMPLATE_COURSEHOURNUM,
-    COURSETEMPLATE.COURSEHOURLENGTH
+    COURSETEMPLATE.COURSE_HOUR_NUM COURSETEMPLATE_COURSEHOURNUM,
+    COURSETEMPLATE.COURSE_HOUR_LENGTH
     COURSETEMPLATE_COURSEHOURLENGTH,
-    COURSETEMPLATE.CLASSSIZE COURSETEMPLATE_CLASSSIZE,
+    COURSETEMPLATE.CLASS_SIZE COURSETEMPLATE_CLASSSIZE,
     COURSETEMPLATE.POPULARITY COURSETEMPLATE_POPULARITY,
-    COURSETEMPLATE.STARTDATE
+    COURSETEMPLATE.START_DATE
     COURSETEMPLATE_STARTDATE,
-    COURSETEMPLATE.FINISHDATE COURSETEMPLATE_FINISHDATE,
-    COURSETEMPLATE.CUTOFFDATE COURSETEMPLATE_CUTOFFDATE,
-    COURSETEMPLATE.NOREFUNDDATE
+    COURSETEMPLATE.FINISH_DATE COURSETEMPLATE_FINISHDATE,
+    COURSETEMPLATE.CUTOFF_DATE COURSETEMPLATE_CUTOFFDATE,
+    COURSETEMPLATE.NO_REFUND_DATE
     COURSETEMPLATE_NOREFUNDDATE,
-    COURSETEMPLATE.CASHBACKDATE COURSETEMPLATE_CASHBACKDATE,
-    COURSETEMPLATE.BOOKINGTYPE COURSETEMPLATE_BOOKINGTYPE,
-    COURSETEMPLATE.STARTUPONARRIVAL
+    COURSETEMPLATE.CASHBACK_DATE COURSETEMPLATE_CASHBACKDATE,
+    COURSETEMPLATE.BOOKING_TYPE COURSETEMPLATE_BOOKINGTYPE,
+    COURSETEMPLATE.START_UPON_ARRIVAL
     COURSETEMPLATE_STARTUPONARRIVAL,
-    COURSETEMPLATE.STARTTIME1 COURSETEMPLATE_STARTTIME1,
-    COURSETEMPLATE.FINISHITIME1 COURSETEMPLATE_FINISHITIME1,
-    COURSETEMPLATE.STARTTIME2
+    COURSETEMPLATE.START_TIME1 COURSETEMPLATE_STARTTIME1,
+    COURSETEMPLATE.FINISH_TIME1 COURSETEMPLATE_FINISHTIME1,
+    COURSETEMPLATE.START_TIME2
     COURSETEMPLATE_STARTTIME2,
-    COURSETEMPLATE.FINISHITIME2 COURSETEMPLATE_FINISHITIME2,
-    COURSETEMPLATE.REGLOCATION COURSETEMPLATE_REGLOCATION,
+    COURSETEMPLATE.FINISH_TIME2 COURSETEMPLATE_FINISHTIME2,
+    COURSETEMPLATE.REG_LOCATION COURSETEMPLATE_REGLOCATION,
     COURSETEMPLATE.REFERENCE
     COURSETEMPLATE_REFERENCE,
-    COURSETEMPLATE.COURSEINTRO COURSETEMPLATE_COURSEINTRO,
+    COURSETEMPLATE.COURSE_INTRO COURSETEMPLATE_COURSEINTRO,
     COURSETEMPLATE.QUIZ COURSETEMPLATE_QUIZ,
     COURSETEMPLATE.CERTIFICATION
     COURSETEMPLATE_CERTIFICATION,
-    COURSETEMPLATE.OPENCOURSEREQUIREMENT
+    COURSETEMPLATE.OPEN_COURSE_REQUIREMENT
     COURSETEMPLATE_OPENCOURSEREQUIREMENT,
-    COURSETEMPLATE.SUITABLESTUDENT
+    COURSETEMPLATE.SUITABLE_STUDENT
     COURSETEMPLATE_SUITABLESTUDENT,
     COURSETEMPLATE.PREREQUEST COURSETEMPLATE_PREREQUEST,
-    COURSETEMPLATE.HIGHSCOREREWARD COURSETEMPLATE_HIGHSCOREREWARD,
-    COURSETEMPLATE.STUDYDAYNOTE
+    COURSETEMPLATE.HIGH_SCORE_REWARD COURSETEMPLATE_HIGHSCOREREWARD,
+    COURSETEMPLATE.STUDY_DAY_NOTE
     COURSETEMPLATE_STUDYDAYNOTE,
-    COURSETEMPLATE.TEACHINGMATERIALINTRO
+    COURSETEMPLATE.TEACHING_MATERIAL_INTRO
     COURSETEMPLATE_TEACHINGMATERIALINTRO,
-    COURSETEMPLATE.QUESTIONBANK COURSETEMPLATE_QUESTIONBANK,
-    COURSETEMPLATE.QUALITYASSURANCE COURSETEMPLATE_QUALITYASSURANCE,
-    COURSETEMPLATE.PASSAGREEMENT
+    COURSETEMPLATE.QUESTION_BANK COURSETEMPLATE_QUESTIONBANK,
+    COURSETEMPLATE.QUALITY_ASSURANCE COURSETEMPLATE_QUALITYASSURANCE,
+    COURSETEMPLATE.PASS_AGREEMENT
     COURSETEMPLATE_PASSAGREEMENT,
     COURSETEMPLATE.EXTRACURRICULAR COURSETEMPLATE_EXTRACURRICULAR,
     COURSETEMPLATE.CONTACT COURSETEMPLATE_CONTACT,
-    COURSETEMPLATE.REGPHONE COURSETEMPLATE_REGPHONE,
+    COURSETEMPLATE.REG_PHONE COURSETEMPLATE_REGPHONE,
     COURSETEMPLATE.OUTLINE COURSETEMPLATE_OUTLINE,
     COURSETEMPLATE.GOAL COURSETEMPLATE_GOAL,
-    COURSETEMPLATE.CLASSTEACHER COURSETEMPLATE_CLASSTEACHER,
-    COURSETEMPLATE.TEACHINGANDEXERCISE
+    COURSETEMPLATE.CLASS_TEACHER COURSETEMPLATE_CLASSTEACHER,
+    COURSETEMPLATE.TEACHING_AND_EXERCISE
     COURSETEMPLATE_TEACHINGANDEXERCISE,
-    COURSETEMPLATE.QUESTIONSESSION
+    COURSETEMPLATE.QUESTION_SESSION
     COURSETEMPLATE_QUESTIONSESSION,
     COURSETEMPLATE.TRAIL COURSETEMPLATE_TRAIL,
     COURSETEMPLATE.ASSIGNMENTS COURSETEMPLATE_ASSIGNMENTS,
     COURSETEMPLATE.MARKING
     COURSETEMPLATE_MARKING,
-    COURSETEMPLATE.BONUSSERVICE COURSETEMPLATE_BONUSSERVICE,
-    COURSETEMPLATE.DOWNLOADMATERIALS COURSETEMPLATE_DOWNLOADMATERIALS,
-    COURSETEMPLATE.TEACHINGMATERIALFEE COURSETEMPLATE_TEACHINGMATERIALFEE,
-    COURSETEMPLATE.TEACHINGMETHOD COURSETEMPLATE_TEACHINGMETHOD
+    COURSETEMPLATE.BONUS_SERVICE COURSETEMPLATE_BONUSSERVICE,
+    COURSETEMPLATE.DOWNLOAD_MATERIALS COURSETEMPLATE_DOWNLOADMATERIALS,
+    COURSETEMPLATE.TEACHING_MATERIAL_FEE COURSETEMPLATE_TEACHINGMATERIALFEE,
+    COURSETEMPLATE.TEACHING_METHOD COURSETEMPLATE_TEACHINGMETHOD
   </sql>
   <insert id="add" parameterType="CourseTemplateEntityExt">
 
     insert into COURSETEMPLATE
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="coursename != null">
-        COURSENAME,
+      <if test="courseName != null">
+        COURSE_NAME,
       </if>
       <if test="categoryId != null">
         CATEGORY_ID,
@@ -177,8 +179,8 @@
       <if test="price != null">
         PRICE,
       </if>
-      <if test="originalprice != null">
-        ORIGINALPRICE,
+      <if test="originalPrice != null">
+        ORIGINAL_PRICE,
       </if>
       <if test="cashback != null">
         CASHBACK,
@@ -186,8 +188,8 @@
       <if test="commission != null">
         COMMISSION,
       </if>
-      <if test="servicecharge != null">
-        SERVICECHARGE,
+      <if test="serviceCharge != null">
+        SERVICE_CHARGE,
       </if>
       <if test="status != null">
         STATUS,
@@ -204,59 +206,59 @@
       <if test="deleted != null">
         DELETED,
       </if>
-      <if test="coursehournum != null">
-        COURSEHOURNUM,
+      <if test="courseHourNum != null">
+        COURSE_HOUR_NUM,
       </if>
-      <if test="coursehourlength != null">
-        COURSEHOURLENGTH,
+      <if test="courseHourLength != null">
+        COURSE_HOUR_LENGTH,
       </if>
-      <if test="classsize != null">
-        CLASSSIZE,
+      <if test="classSize != null">
+        CLASS_SIZE,
       </if>
       <if test="popularity != null">
         POPULARITY,
       </if>
-      <if test="startdate != null">
-        STARTDATE,
+      <if test="startDate != null">
+        START_DATE,
       </if>
-      <if test="finishdate != null">
-        FINISHDATE,
+      <if test="finishDate != null">
+        FINISH_DATE,
       </if>
-      <if test="cutoffdate != null">
-        CUTOFFDATE,
+      <if test="cutoffDate != null">
+        CUTOFF_DATE,
       </if>
-      <if test="norefunddate != null">
-        NOREFUNDDATE,
+      <if test="noRefundDate != null">
+        NO_REFUND_DATE,
       </if>
-      <if test="cashbackdate != null">
-        CASHBACKDATE,
+      <if test="cashbackDate != null">
+        CASHBACK_DATE,
       </if>
-      <if test="bookingtype != null">
-        BOOKINGTYPE,
+      <if test="bookingType != null">
+        BOOKING_TYPE,
       </if>
-      <if test="startuponarrival != null">
-        STARTUPONARRIVAL,
+      <if test="startUponArrival != null">
+        START_UPON_ARRIVAL,
       </if>
-      <if test="starttime1 != null">
-        STARTTIME1,
+      <if test="startTime1 != null">
+        START_TIME1,
       </if>
-      <if test="finishitime1 != null">
-        FINISHITIME1,
+      <if test="finishTime1 != null">
+        FINISH_TIME1,
       </if>
-      <if test="starttime2 != null">
-        STARTTIME2,
+      <if test="startTime2 != null">
+        START_TIME2,
       </if>
-      <if test="finishitime2 != null">
-        FINISHITIME2,
+      <if test="finishTime2 != null">
+        FINISH_TIME2,
       </if>
-      <if test="reglocation != null">
-        REGLOCATION,
+      <if test="regLocation != null">
+        REG_LOCATION,
       </if>
       <if test="reference != null">
         REFERENCE,
       </if>
-      <if test="courseintro != null">
-        COURSEINTRO,
+      <if test="courseIntro != null">
+        COURSE_INTRO,
       </if>
       <if test="quiz != null">
         QUIZ,
@@ -264,32 +266,32 @@
       <if test="certification != null">
         CERTIFICATION,
       </if>
-      <if test="opencourserequirement != null">
-        OPENCOURSEREQUIREMENT,
+      <if test="openCourseRequirement != null">
+        OPEN_COURSE_REQUIREMENT,
       </if>
-      <if test="suitablestudent != null">
-        SUITABLESTUDENT,
+      <if test="suitableStudent != null">
+        SUITABLE_STUDENT,
       </if>
       <if test="prerequest != null">
         PREREQUEST,
       </if>
-      <if test="highscorereward != null">
-        HIGHSCOREREWARD,
+      <if test="highScoreReward != null">
+        HIGH_SCORE_REWARD,
       </if>
-      <if test="studydaynote != null">
-        STUDYDAYNOTE,
+      <if test="studyDayNote != null">
+        STUDY_DAY_NOTE,
       </if>
-      <if test="teachingmaterialintro != null">
-        TEACHINGMATERIALINTRO,
+      <if test="teachingMaterialIntro != null">
+        TEACHING_MATERIAL_INTRO,
       </if>
-      <if test="questionbank != null">
-        QUESTIONBANK,
+      <if test="questionBank != null">
+        QUESTION_BANK,
       </if>
-      <if test="qualityassurance != null">
-        QUALITYASSURANCE,
+      <if test="qualityAssurance != null">
+        QUALITY_ASSURANCE,
       </if>
-      <if test="passagreement != null">
-        PASSAGREEMENT,
+      <if test="passAgreement != null">
+        PASS_AGREEMENT,
       </if>
       <if test="extracurricular != null">
         EXTRACURRICULAR,
@@ -297,8 +299,8 @@
       <if test="contact != null">
         CONTACT,
       </if>
-      <if test="regphone != null">
-        REGPHONE,
+      <if test="regPhone != null">
+        REG_PHONE,
       </if>
       <if test="outline != null">
         OUTLINE,
@@ -306,14 +308,14 @@
       <if test="goal != null">
         GOAL,
       </if>
-      <if test="classteacher != null">
-        CLASSTEACHER,
+      <if test="classTeacher != null">
+        CLASS_TEACHER,
       </if>
-      <if test="teachingandexercise != null">
-        TEACHINGANDEXERCISE,
+      <if test="teachingAndExercise != null">
+        TEACHING_AND_EXERCISE,
       </if>
-      <if test="questionsession != null">
-        QUESTIONSESSION,
+      <if test="questionSession != null">
+        QUESTION_SESSION,
       </if>
       <if test="trail != null">
         TRAIL,
@@ -324,23 +326,23 @@
       <if test="marking != null">
         MARKING,
       </if>
-      <if test="bonusservice != null">
-        BONUSSERVICE,
+      <if test="bonusService != null">
+        BONUS_SERVICE,
       </if>
-      <if test="downloadmaterials != null">
-        DOWNLOADMATERIALS,
+      <if test="downloadMaterials != null">
+        DOWNLOAD_MATERIALS,
       </if>
-      <if test="teachingmaterialfee != null">
-        TEACHINGMATERIALFEE,
+      <if test="teachingMaterialFee != null">
+        TEACHING_MATERIAL_FEE,
       </if>
-      <if test="teachingmethod != null">
-        TEACHINGMETHOD,
+      <if test="teachingMethod != null">
+        TEACHING_METHOD,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="coursename != null">
-        #{coursename,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
         #{categoryId,jdbcType=INTEGER},
@@ -360,8 +362,8 @@
       <if test="price != null">
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="originalprice != null">
-        #{originalprice,jdbcType=DOUBLE},
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         #{cashback,jdbcType=DOUBLE},
@@ -369,8 +371,8 @@
       <if test="commission != null">
         #{commission,jdbcType=DOUBLE},
       </if>
-      <if test="servicecharge != null">
-        #{servicecharge,jdbcType=DOUBLE},
+      <if test="serviceCharge != null">
+        #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -387,59 +389,59 @@
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
       </if>
-      <if test="coursehournum != null">
-        #{coursehournum,jdbcType=INTEGER},
+      <if test="courseHourNum != null">
+        #{courseHourNum,jdbcType=INTEGER},
       </if>
-      <if test="coursehourlength != null">
-        #{coursehourlength,jdbcType=INTEGER},
+      <if test="courseHourLength != null">
+        #{courseHourLength,jdbcType=INTEGER},
       </if>
-      <if test="classsize != null">
-        #{classsize,jdbcType=INTEGER},
+      <if test="classSize != null">
+        #{classSize,jdbcType=INTEGER},
       </if>
       <if test="popularity != null">
         #{popularity,jdbcType=INTEGER},
       </if>
-      <if test="startdate != null">
-        #{startdate,jdbcType=TIMESTAMP},
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="finishdate != null">
-        #{finishdate,jdbcType=TIMESTAMP},
+      <if test="finishDate != null">
+        #{finishDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cutoffdate != null">
-        #{cutoffdate,jdbcType=TIMESTAMP},
+      <if test="cutoffDate != null">
+        #{cutoffDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="norefunddate != null">
-        #{norefunddate,jdbcType=TIMESTAMP},
+      <if test="noRefundDate != null">
+        #{noRefundDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cashbackdate != null">
-        #{cashbackdate,jdbcType=TIMESTAMP},
+      <if test="cashbackDate != null">
+        #{cashbackDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="bookingtype != null">
-        #{bookingtype,jdbcType=INTEGER},
+      <if test="bookingType != null">
+        #{bookingType,jdbcType=INTEGER},
       </if>
-      <if test="startuponarrival != null">
-        #{startuponarrival,jdbcType=INTEGER},
+      <if test="startUponArrival != null">
+        #{startUponArrival,jdbcType=INTEGER},
       </if>
-      <if test="starttime1 != null">
-        #{starttime1,jdbcType=INTEGER},
+      <if test="startTime1 != null">
+        #{startTime1,jdbcType=INTEGER},
       </if>
-      <if test="finishitime1 != null">
-        #{finishitime1,jdbcType=INTEGER},
+      <if test="finishTime1 != null">
+        #{finishTime1,jdbcType=INTEGER},
       </if>
-      <if test="starttime2 != null">
-        #{starttime2,jdbcType=INTEGER},
+      <if test="startTime2 != null">
+        #{startTime2,jdbcType=INTEGER},
       </if>
-      <if test="finishitime2 != null">
-        #{finishitime2,jdbcType=INTEGER},
+      <if test="finishTime2 != null">
+        #{finishTime2,jdbcType=INTEGER},
       </if>
-      <if test="reglocation != null">
-        #{reglocation,jdbcType=VARCHAR},
+      <if test="regLocation != null">
+        #{regLocation,jdbcType=VARCHAR},
       </if>
       <if test="reference != null">
         #{reference,jdbcType=VARCHAR},
       </if>
-      <if test="courseintro != null">
-        #{courseintro,jdbcType=VARCHAR},
+      <if test="courseIntro != null">
+        #{courseIntro,jdbcType=VARCHAR},
       </if>
       <if test="quiz != null">
         #{quiz,jdbcType=VARCHAR},
@@ -447,32 +449,32 @@
       <if test="certification != null">
         #{certification,jdbcType=VARCHAR},
       </if>
-      <if test="opencourserequirement != null">
-        #{opencourserequirement,jdbcType=VARCHAR},
+      <if test="openCourseRequirement != null">
+        #{openCourseRequirement,jdbcType=VARCHAR},
       </if>
-      <if test="suitablestudent != null">
-        #{suitablestudent,jdbcType=VARCHAR},
+      <if test="suitableStudent != null">
+        #{suitableStudent,jdbcType=VARCHAR},
       </if>
       <if test="prerequest != null">
         #{prerequest,jdbcType=VARCHAR},
       </if>
-      <if test="highscorereward != null">
-        #{highscorereward,jdbcType=VARCHAR},
+      <if test="highScoreReward != null">
+        #{highScoreReward,jdbcType=VARCHAR},
       </if>
-      <if test="studydaynote != null">
-        #{studydaynote,jdbcType=VARCHAR},
+      <if test="studyDayNote != null">
+        #{studyDayNote,jdbcType=VARCHAR},
       </if>
-      <if test="teachingmaterialintro != null">
-        #{teachingmaterialintro,jdbcType=VARCHAR},
+      <if test="teachingMaterialIntro != null">
+        #{teachingMaterialIntro,jdbcType=VARCHAR},
       </if>
-      <if test="questionbank != null">
-        #{questionbank,jdbcType=VARCHAR},
+      <if test="questionBank != null">
+        #{questionBank,jdbcType=VARCHAR},
       </if>
-      <if test="qualityassurance != null">
-        #{qualityassurance,jdbcType=VARCHAR},
+      <if test="qualityAssurance != null">
+        #{qualityAssurance,jdbcType=VARCHAR},
       </if>
-      <if test="passagreement != null">
-        #{passagreement,jdbcType=VARCHAR},
+      <if test="passAgreement != null">
+        #{passAgreement,jdbcType=VARCHAR},
       </if>
       <if test="extracurricular != null">
         #{extracurricular,jdbcType=VARCHAR},
@@ -480,8 +482,8 @@
       <if test="contact != null">
         #{contact,jdbcType=VARCHAR},
       </if>
-      <if test="regphone != null">
-        #{regphone,jdbcType=VARCHAR},
+      <if test="regPhone != null">
+        #{regPhone,jdbcType=VARCHAR},
       </if>
       <if test="outline != null">
         #{outline,jdbcType=VARCHAR},
@@ -489,14 +491,14 @@
       <if test="goal != null">
         #{goal,jdbcType=VARCHAR},
       </if>
-      <if test="classteacher != null">
-        #{classteacher,jdbcType=VARCHAR},
+      <if test="classTeacher != null">
+        #{classTeacher,jdbcType=VARCHAR},
       </if>
-      <if test="teachingandexercise != null">
-        #{teachingandexercise,jdbcType=VARCHAR},
+      <if test="teachingAndExercise != null">
+        #{teachingAndExercise,jdbcType=VARCHAR},
       </if>
-      <if test="questionsession != null">
-        #{questionsession,jdbcType=VARCHAR},
+      <if test="questionSession != null">
+        #{questionSession,jdbcType=VARCHAR},
       </if>
       <if test="trail != null">
         #{trail,jdbcType=VARCHAR},
@@ -507,17 +509,17 @@
       <if test="marking != null">
         #{marking,jdbcType=VARCHAR},
       </if>
-      <if test="bonusservice != null">
-        #{bonusservice,jdbcType=VARCHAR},
+      <if test="bonusService != null">
+        #{bonusService,jdbcType=VARCHAR},
       </if>
-      <if test="downloadmaterials != null">
-        #{downloadmaterials,jdbcType=VARCHAR},
+      <if test="downloadMaterials != null">
+        #{downloadMaterials,jdbcType=VARCHAR},
       </if>
-      <if test="teachingmaterialfee != null">
-        #{teachingmaterialfee,jdbcType=VARCHAR},
+      <if test="teachingMaterialFee != null">
+        #{teachingMaterialFee,jdbcType=VARCHAR},
       </if>
-      <if test="teachingmethod != null">
-        #{teachingmethod,jdbcType=VARCHAR},
+      <if test="teachingMethod != null">
+        #{teachingMethod,jdbcType=VARCHAR},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -534,8 +536,8 @@
   <update id="update" parameterType="CourseTemplateEntityExt">
     update COURSETEMPLATE
     <set>
-      <if test="coursename != null">
-        COURSENAME = #{coursename,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        COURSE_NAME = #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
         CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
@@ -555,8 +557,8 @@
       <if test="price != null">
         PRICE = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="originalprice != null">
-        ORIGINALPRICE = #{originalprice,jdbcType=DOUBLE},
+      <if test="originalPrice != null">
+        ORIGINAL_PRICE = #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         CASHBACK = #{cashback,jdbcType=DOUBLE},
@@ -564,8 +566,8 @@
       <if test="commission != null">
         COMMISSION = #{commission,jdbcType=DOUBLE},
       </if>
-      <if test="servicecharge != null">
-        SERVICECHARGE = #{servicecharge,jdbcType=DOUBLE},
+      <if test="serviceCharge != null">
+        SERVICE_CHARGE = #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
@@ -582,61 +584,61 @@
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
       </if>
-      <if test="coursehournum != null">
-        COURSEHOURNUM = #{coursehournum,jdbcType=INTEGER},
+      <if test="courseHourNum != null">
+        COURSE_HOUR_NUM = #{courseHourNum,jdbcType=INTEGER},
       </if>
-      <if test="coursehourlength != null">
-        COURSEHOURLENGTH =
-        #{coursehourlength,jdbcType=INTEGER},
+      <if test="courseHourLength != null">
+        COURSE_HOUR_LENGTH =
+        #{courseHourLength,jdbcType=INTEGER},
       </if>
-      <if test="classsize != null">
-        CLASSSIZE = #{classsize,jdbcType=INTEGER},
+      <if test="classSize != null">
+        CLASS_SIZE = #{classSize,jdbcType=INTEGER},
       </if>
       <if test="popularity != null">
         POPULARITY = #{popularity,jdbcType=INTEGER},
       </if>
-      <if test="startdate != null">
-        STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+      <if test="startDate != null">
+        START_DATE = #{startDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="finishdate != null">
-        FINISHDATE = #{finishdate,jdbcType=TIMESTAMP},
+      <if test="finishDate != null">
+        FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cutoffdate != null">
-        CUTOFFDATE = #{cutoffdate,jdbcType=TIMESTAMP},
+      <if test="cutoffDate != null">
+        CUTOFF_DATE = #{cutoffDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="norefunddate != null">
-        NOREFUNDDATE = #{norefunddate,jdbcType=TIMESTAMP},
+      <if test="noRefundDate != null">
+        NO_REFUND_DATE = #{noRefundDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cashbackdate != null">
-        CASHBACKDATE = #{cashbackdate,jdbcType=TIMESTAMP},
+      <if test="cashbackDate != null">
+        CASHBACK_DATE = #{cashbackDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="bookingtype != null">
-        BOOKINGTYPE = #{bookingtype,jdbcType=INTEGER},
+      <if test="bookingType != null">
+        BOOKING_TYPE = #{bookingType,jdbcType=INTEGER},
       </if>
-      <if test="startuponarrival != null">
-        STARTUPONARRIVAL =
-        #{startuponarrival,jdbcType=INTEGER},
+      <if test="startUponArrival != null">
+        START_UPON_ARRIVAL =
+        #{startUponArrival,jdbcType=INTEGER},
       </if>
-      <if test="starttime1 != null">
-        STARTTIME1 = #{starttime1,jdbcType=INTEGER},
+      <if test="startTime1 != null">
+        START_TIME1 = #{startTime1,jdbcType=INTEGER},
       </if>
-      <if test="finishitime1 != null">
-        FINISHITIME1 = #{finishitime1,jdbcType=INTEGER},
+      <if test="finishTime1 != null">
+        FINISH_TIME1 = #{finishTime1,jdbcType=INTEGER},
       </if>
-      <if test="starttime2 != null">
-        STARTTIME2 = #{starttime2,jdbcType=INTEGER},
+      <if test="startTime2 != null">
+        START_TIME2 = #{startTime2,jdbcType=INTEGER},
       </if>
-      <if test="finishitime2 != null">
-        FINISHITIME2 = #{finishitime2,jdbcType=INTEGER},
+      <if test="finishTime2 != null">
+        FINISH_TIME2 = #{finishTime2,jdbcType=INTEGER},
       </if>
-      <if test="reglocation != null">
-        REGLOCATION = #{reglocation,jdbcType=VARCHAR},
+      <if test="regLocation != null">
+        REG_LOCATION = #{regLocation,jdbcType=VARCHAR},
       </if>
       <if test="reference != null">
         REFERENCE = #{reference,jdbcType=VARCHAR},
       </if>
-      <if test="courseintro != null">
-        COURSEINTRO = #{courseintro,jdbcType=VARCHAR},
+      <if test="courseIntro != null">
+        COURSE_INTRO = #{courseIntro,jdbcType=VARCHAR},
       </if>
       <if test="quiz != null">
         QUIZ = #{quiz,jdbcType=VARCHAR},
@@ -644,35 +646,35 @@
       <if test="certification != null">
         CERTIFICATION = #{certification,jdbcType=VARCHAR},
       </if>
-      <if test="opencourserequirement != null">
-        OPENCOURSEREQUIREMENT =
-        #{opencourserequirement,jdbcType=VARCHAR},
+      <if test="openCourseRequirement != null">
+        OPEN_COURSE_REQUIREMENT =
+        #{openCourseRequirement,jdbcType=VARCHAR},
       </if>
-      <if test="suitablestudent != null">
-        SUITABLESTUDENT = #{suitablestudent,jdbcType=VARCHAR},
+      <if test="suitableStudent != null">
+        SUITABLE_STUDENT = #{suitableStudent,jdbcType=VARCHAR},
       </if>
       <if test="prerequest != null">
         PREREQUEST = #{prerequest,jdbcType=VARCHAR},
       </if>
-      <if test="highscorereward != null">
-        HIGHSCOREREWARD = #{highscorereward,jdbcType=VARCHAR},
+      <if test="highScoreReward != null">
+        HIGH_SCORE_REWARD = #{highScoreReward,jdbcType=VARCHAR},
       </if>
-      <if test="studydaynote != null">
-        STUDYDAYNOTE = #{studydaynote,jdbcType=VARCHAR},
+      <if test="studyDayNote != null">
+        STUDY_DAY_NOTE = #{studyDayNote,jdbcType=VARCHAR},
       </if>
-      <if test="teachingmaterialintro != null">
-        TEACHINGMATERIALINTRO =
-        #{teachingmaterialintro,jdbcType=VARCHAR},
+      <if test="teachingMaterialIntro != null">
+        TEACHING_MATERIAL_INTRO =
+        #{teachingMaterialIntro,jdbcType=VARCHAR},
       </if>
-      <if test="questionbank != null">
-        QUESTIONBANK = #{questionbank,jdbcType=VARCHAR},
+      <if test="questionBank != null">
+        QUESTION_BANK = #{questionBank,jdbcType=VARCHAR},
       </if>
-      <if test="qualityassurance != null">
-        QUALITYASSURANCE =
-        #{qualityassurance,jdbcType=VARCHAR},
+      <if test="qualityAssurance != null">
+        QUALITY_ASSURANCE =
+        #{qualityAssurance,jdbcType=VARCHAR},
       </if>
-      <if test="passagreement != null">
-        PASSAGREEMENT = #{passagreement,jdbcType=VARCHAR},
+      <if test="passAgreement != null">
+        PASS_AGREEMENT = #{passAgreement,jdbcType=VARCHAR},
       </if>
       <if test="extracurricular != null">
         EXTRACURRICULAR = #{extracurricular,jdbcType=VARCHAR},
@@ -680,8 +682,8 @@
       <if test="contact != null">
         CONTACT = #{contact,jdbcType=VARCHAR},
       </if>
-      <if test="regphone != null">
-        REGPHONE = #{regphone,jdbcType=VARCHAR},
+      <if test="regPhone != null">
+        REG_PHONE = #{regPhone,jdbcType=VARCHAR},
       </if>
       <if test="outline != null">
         OUTLINE = #{outline,jdbcType=VARCHAR},
@@ -689,15 +691,15 @@
       <if test="goal != null">
         GOAL = #{goal,jdbcType=VARCHAR},
       </if>
-      <if test="classteacher != null">
-        CLASSTEACHER = #{classteacher,jdbcType=VARCHAR},
+      <if test="classTeacher != null">
+        CLASS_TEACHER = #{classTeacher,jdbcType=VARCHAR},
       </if>
-      <if test="teachingandexercise != null">
-        TEACHINGANDEXERCISE =
-        #{teachingandexercise,jdbcType=VARCHAR},
+      <if test="teachingAndExercise != null">
+        TEACHING_AND_EXERCISE =
+        #{teachingAndExercise,jdbcType=VARCHAR},
       </if>
-      <if test="questionsession != null">
-        QUESTIONSESSION = #{questionsession,jdbcType=VARCHAR},
+      <if test="questionSession != null">
+        QUESTION_SESSION = #{questionSession,jdbcType=VARCHAR},
       </if>
       <if test="trail != null">
         TRAIL = #{trail,jdbcType=VARCHAR},
@@ -708,19 +710,19 @@
       <if test="marking != null">
         MARKING = #{marking,jdbcType=VARCHAR},
       </if>
-      <if test="bonusservice != null">
-        BONUSSERVICE = #{bonusservice,jdbcType=VARCHAR},
+      <if test="bonusService != null">
+        BONUS_SERVICE = #{bonusService,jdbcType=VARCHAR},
       </if>
-      <if test="downloadmaterials != null">
-        DOWNLOADMATERIALS =
-        #{downloadmaterials,jdbcType=VARCHAR},
+      <if test="downloadMaterials != null">
+        DOWNLOAD_MATERIALS =
+        #{downloadMaterials,jdbcType=VARCHAR},
       </if>
-      <if test="teachingmaterialfee != null">
-        TEACHINGMATERIALFEE =
-        #{teachingmaterialfee,jdbcType=VARCHAR},
+      <if test="teachingMaterialFee != null">
+        TEACHING_MATERIAL_FEE =
+        #{teachingMaterialFee,jdbcType=VARCHAR},
       </if>
-      <if test="teachingmethod != null">
-        TEACHINGMETHOD = #{teachingmethod,jdbcType=VARCHAR},
+      <if test="teachingMethod != null">
+        TEACHING_METHOD = #{teachingMethod,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
