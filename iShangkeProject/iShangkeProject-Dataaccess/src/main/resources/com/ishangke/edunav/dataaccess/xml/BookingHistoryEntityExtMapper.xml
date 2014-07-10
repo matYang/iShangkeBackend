@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.BookingHistoryEntityExtMapper">
+  <resultMap id="BookingHistoryExtMap" type="BookingHistoryEntityExt">
+    <id column="BOOKINGHISTORY_ID" property="id" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_BOOKINGID" property="bookingId" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_OPTNAME" property="optname" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="BOOKINGHISTORY_PRESTATUS" property="prestatus" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_POSTSTATUS" property="poststatus" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_NORMAL" property="normal" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="BOOKINGHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="BookingHistory_Base_Column_List">
+    BOOKINGHISTORY.ID BOOKINGHISTORY_ID,
+    BOOKINGHISTORY.BOOKING_ID
+    BOOKINGHISTORY_BOOKINGID,
+    BOOKINGHISTORY.USER_ID BOOKINGHISTORY_USERID,
+    BOOKINGHISTORY.OPTNAME
+    BOOKINGHISTORY_OPTNAME,
+    BOOKINGHISTORY.REMARK BOOKINGHISTORY_REMARK,
+    BOOKINGHISTORY.PRESTATUS
+    BOOKINGHISTORY_PRESTATUS,
+    BOOKINGHISTORY.POSTSTATUS BOOKINGHISTORY_POSTSTATUS,
+    BOOKINGHISTORY.NORMAL BOOKINGHISTORY_NORMAL,
+    BOOKINGHISTORY.CREATE_TIME
+    BOOKINGHISTORY_CREATETIME,
+    BOOKINGHISTORY.ENABLED BOOKINGHISTORY_ENABLED,
+    BOOKINGHISTORY.DELETED
+    BOOKINGHISTORY_DELETED
+  </sql>
+  <insert id="add" parameterType="BookingHistoryEntityExt">
+
+    insert into BOOKINGHISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="bookingId != null">
+        BOOKING_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="optname != null">
+        OPTNAME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="prestatus != null">
+        PRESTATUS,
+      </if>
+      <if test="poststatus != null">
+        POSTSTATUS,
+      </if>
+      <if test="normal != null">
+        NORMAL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="bookingId != null">
+        #{bookingId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="optname != null">
+        #{optname,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="prestatus != null">
+        #{prestatus,jdbcType=INTEGER},
+      </if>
+      <if test="poststatus != null">
+        #{poststatus,jdbcType=INTEGER},
+      </if>
+      <if test="normal != null">
+        #{normal,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+<update id="deleteById" parameterType="java.lang.Integer">
+    update BOOKINGHISTORY set DELETED = 1
+    where ID =
+    #{id,jdbcType=INTEGER}
+  </update>
+   <update id="update" parameterType="BookingHistoryEntityExt" >
+    update BOOKINGHISTORY
+    <set >
+      <if test="bookingId != null" >
+        BOOKING_ID = #{bookingId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="optname != null" >
+        OPTNAME = #{optname,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="prestatus != null" >
+        PRESTATUS = #{prestatus,jdbcType=INTEGER},
+      </if>
+      <if test="poststatus != null" >
+        POSTSTATUS = #{poststatus,jdbcType=INTEGER},
+      </if>
+      <if test="normal != null" >
+        NORMAL = #{normal,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

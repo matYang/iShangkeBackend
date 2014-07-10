@@ -3,10 +3,10 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseTemplateClassPhotoEntityExtMapper">
   <resultMap id="CoursetemplateClassphotoExtMap" type="CourseTemplateClassPhotoEntityExt">
     <id column="COURSETEMPLATECLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATECLASSPHOTO_COURSETEMPLATE_ID" property="coursetemplateId"
+    <result column="COURSETEMPLATECLASSPHOTO_COURSETEMPLATEID" property="coursetemplateId"
       jdbcType="INTEGER" />
-    <result column="COURSETEMPLATECLASSPHOTO_CLASSPHOTO_ID" property="classphotoId" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATECLASSPHOTO_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATECLASSPHOTO_CLASSPHOTOID" property="classphotoId" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATECLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSETEMPLATECLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseTemplateClassPhoto_Base_Column_List">

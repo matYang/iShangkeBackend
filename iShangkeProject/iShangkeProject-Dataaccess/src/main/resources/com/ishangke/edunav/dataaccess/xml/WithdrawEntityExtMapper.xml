@@ -7,7 +7,7 @@
     <result column="WITHDRAW_PAYEEID" property="payeeId" jdbcType="VARCHAR" />
     <result column="WITHDRAW_PEYEENAME" property="peyeeName" jdbcType="VARCHAR" />
     <result column="WITHDRAW_TYPE" property="type" jdbcType="INTEGER" />
-    <result column="WITHDRAW_LASTMODIFY_AME" property="lastModifyName" jdbcType="TIMESTAMP" />
+    <result column="WITHDRAW_LASTMODIFYAME" property="lastModifyName" jdbcType="TIMESTAMP" />
     <result column="WITHDRAW_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="WITHDRAW_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="WITHDRAW_DELETED" property="deleted" jdbcType="INTEGER" />

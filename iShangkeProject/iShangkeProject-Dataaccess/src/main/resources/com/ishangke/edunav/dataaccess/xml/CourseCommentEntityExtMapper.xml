@@ -3,12 +3,12 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseCommentEntityExtMapper">
   <resultMap id="CourseCommentExtMap" type="CourseCommentEntityExt">
     <id column="COURSECOMMENT_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSECOMMENT_USER_ID" property="userId" jdbcType="INTEGER" />
-    <result column="COURSECOMMENT_COURSE_TEMPLATE_ID" property="courseTemplateId" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_USERID" property="userId" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_TITLE" property="title" jdbcType="VARCHAR" />
     <result column="COURSECOMMENT_CONTENT" property="content" jdbcType="VARCHAR" />
-    <result column="COURSECOMMENT_LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="COURSECOMMENT_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECOMMENT_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_DELTED" property="delted" jdbcType="INTEGER" />
   </resultMap>

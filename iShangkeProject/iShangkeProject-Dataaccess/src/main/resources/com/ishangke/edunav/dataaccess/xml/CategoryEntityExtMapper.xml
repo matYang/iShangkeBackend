@@ -5,17 +5,17 @@
     <id column="CATEGORY_ID" property="id" jdbcType="INTEGER" />
     <result column="CATEGORY_VALUE" property="value" jdbcType="VARCHAR" />
     <result column="CATEGORY_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="CATEGORY_LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="CATEGORY_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="CATEGORY_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="CATEGORY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CATEGORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Category_Base_Column_List">
-    CATEGORY.ID CATEGORY_ID,
-    CATEGORY.VALUE CATEGORY_VALUE,
-    CATEGORY.NAME CATEGORY_NAME,
-    CATEGORY.LAST_MODIFY_TIME CATEGORY_LASTMODIFYTIME,
-    CATEGORY.CREATE_TIME CATEGORY_CREATETIME,
-    CATEGORY.ENABLED CATEGORY_ENABLED,
-    CATEGORY.DELETED CATEGORY_DELETED
+    CATEGORY。ID CATEGORY_ID,
+    CATEGORY。VALUE CATEGORY_VALUE,
+    CATEGORY。NAME CATEGORY_NAME,
+    CATEGORY。LAST_MODIFY_TIME CATEGORY_LASTMODIFYTIME,
+    CATEGORY。CREATE_TIME CATEGORY_CREATETIME,
+    CATEGORY。ENABLED CATEGORY_ENABLED,
+    CATEGORY。DELETED CATEGORY_DELETED
   </sql>

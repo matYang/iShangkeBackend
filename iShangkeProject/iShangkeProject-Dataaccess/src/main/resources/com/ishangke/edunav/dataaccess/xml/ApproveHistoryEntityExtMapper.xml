@@ -3,12 +3,12 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.ApproveHistoryEntityExtMapper">
   <resultMap id="ApproveHistoryExtMap" type="ApproveHistoryEntityExt">
     <id column="APPROVEHISTORY_ID" property="id" jdbcType="INTEGER" />
-    <result column="APPROVEHISTORY_TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_TYPE" property="type" jdbcType="INTEGER" />
     <result column="APPROVEHISTORY_ATTACHEDID" property="attachedId" jdbcType="INTEGER" />
     <result column="APPROVEHISTORY_SUBMITUSERID" property="submitUserId" jdbcType="INTEGER" />
     <result column="APPROVEHISTORY_APPROVEUSERID" property="approveUserId" jdbcType="INTEGER" />
-    <result column="APPROVEHISTORY_PREVIOUSSTATUS" property="previousStatus" jdbcType="VARCHAR" />
-    <result column="APPROVEHISTORY_NEXTSTATUS" property="nextStatus" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_PRESTATUS" property="previousStatus" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_POSTSTATUS" property="nextStatus" jdbcType="VARCHAR" />
     <result column="APPROVEHISTORY_COMMENT" property="comment" jdbcType="VARCHAR" />
     <result column="APPROVEHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="APPROVEHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
@@ -17,11 +17,121 @@
     APPROVEHISTORY.ID APPROVEHISTORY_ID,
     APPROVEHISTORY.TYPE APPROVEHISTORY_TYPE,
     APPROVEHISTORY.ATTACHED_ID APPROVEHISTORY_ATTACHEDID,
-    APPROVEHISTORY.SUBMIT_USER_ID APPROVEHISTORY_SUBMITUSERID,
+    APPROVEHISTORY.SUBMIT_USER_ID
+    APPROVEHISTORY_SUBMITUSERID,
     APPROVEHISTORY.APPROVE_USER_ID APPROVEHISTORY_APPROVEUSERID,
-    APPROVEHISTORY.PREVIOUS_STATUS APPROVEHISTORY_PREVIOUSSTATUS,
-    APPROVEHISTORY.NEXT_STATUS APPROVEHISTORY_NEXTSTATUS,
+    APPROVEHISTORY.PRESTATUS APPROVEHISTORY_PRESTATUS,
+    APPROVEHISTORY.POSTSTATUS
+    APPROVEHISTORY_POSTSTATUS,
     APPROVEHISTORY.COMMENT APPROVEHISTORY_COMMENT,
     APPROVEHISTORY.CREATE_TIME APPROVEHISTORY_CREATETIME,
-    APPROVEHISTORY.DELETED APPROVEHISTORY_DELETED
+    APPROVEHISTORY.DELETED
+    APPROVEHISTORY_DELETED
   </sql>
+  <insert id="add" parameterType="ApproveHistoryEntityExt">
+
+    insert into APPROVEHISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="attachedId != null">
+        ATTACHED_ID,
+      </if>
+      <if test="submitUserId != null">
+        SUBMIT_USER_ID,
+      </if>
+      <if test="approveUserId != null">
+        APPROVE_USER_ID,
+      </if>
+      <if test="prestatus != null">
+        PRESTATUS,
+      </if>
+      <if test="poststatus != null">
+        POSTSTATUS,
+      </if>
+      <if test="comment != null">
+        COMMENT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="attachedId != null">
+        #{attachedId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserId != null">
+        #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approveUserId != null">
+        #{approveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="prestatus != null">
+        #{prestatus,jdbcType=INTEGER},
+      </if>
+      <if test="poststatus != null">
+        #{poststatus,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update APPROVEHISTORY set DELETED = 1
+    where ID =
+    #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="ApproveHistoryEntityExt">
+    update APPROVEHISTORY
+    <set>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="attachedId != null">
+        ATTACHED_ID = #{attachedId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserId != null">
+        SUBMIT_USER_ID = #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approveUserId != null">
+        APPROVE_USER_ID = #{approveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="prestatus != null">
+        PRESTATUS = #{prestatus,jdbcType=INTEGER},
+      </if>
+      <if test="poststatus != null">
+        POSTSTATUS = #{poststatus,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        COMMENT = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

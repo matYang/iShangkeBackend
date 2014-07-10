@@ -3,7 +3,7 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.AccountEntityExtMapper">
   <resultMap id="AccountExtMap" type="AccountEntityExt">
     <id column="ACCOUNT_ID" property="id" jdbcType="INTEGER" />
-    <result column="ACCOUNT_BALANCE" property="balance" jdbcType="INTEGER" />
+    <result column="ACCOUNT_BALANCE" property="balance" jdbcType="DOUBLE" />
     <result column="ACCOUNT_REALNAME" property="realName" jdbcType="VARCHAR" />
     <result column="ACCOUNT_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="ACCOUNT_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
@@ -20,5 +20,3 @@
     ACCOUNT.ENABLED ACCOUNT_ENABLED,
     ACCOUNT.DELETED ACCOUNT_DELETED
   </sql>
-
-</mapper>

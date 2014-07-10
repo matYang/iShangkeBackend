@@ -6,7 +6,7 @@
     <result column="CIRCLE_VALUE" property="value" jdbcType="VARCHAR" />
     <result column="CIRCLE_NAME" property="name" jdbcType="VARCHAR" />
     <result column="CIRCLE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="CIRCLE_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CIRCLE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="CIRCLE_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CIRCLE_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
