@@ -3,16 +3,16 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseTemplateClassPhotoEntityExtMapper">
   <resultMap id="CoursetemplateClassphotoExtMap" type="CourseTemplateClassPhotoEntityExt">
     <id column="COURSETEMPLATECLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATECLASSPHOTO_COURSETEMPLATEID" property="coursetemplateId"
+    <result column="COURSETEMPLATECLASSPHOTO_COURSETEMPLATEID" property="courseTemplateId"
       jdbcType="INTEGER" />
-    <result column="COURSETEMPLATECLASSPHOTO_CLASSPHOTOID" property="classphotoId" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATECLASSPHOTO_CLASSPHOTOID" property="classPhotoId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATECLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSETEMPLATECLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseTemplateClassPhoto_Base_Column_List">
     COURSETEMPLATECLASSPHOTO.ID COURSETEMPLATECLASSPHOTO_ID,
-    COURSETEMPLATECLASSPHOTO.COURSETEMPLATE_ID COURSETEMPLATECLASSPHOTO_COURSETEMPLATEID,
-    COURSETEMPLATECLASSPHOTO.CLASSPHOTO_ID COURSETEMPLATECLASSPHOTO_CLASSPHOTOID,
+    COURSETEMPLATECLASSPHOTO.COURSE_TEMPLATE_ID COURSETEMPLATECLASSPHOTO_COURSETEMPLATEID,
+    COURSETEMPLATECLASSPHOTO.CLASS_PHOTO_ID COURSETEMPLATECLASSPHOTO_CLASSPHOTOID,
     COURSETEMPLATECLASSPHOTO.CREATE_TIME COURSETEMPLATECLASSPHOTO_CREATETIME,
     COURSETEMPLATECLASSPHOTO.DELETED COURSETEMPLATECLASSPHOTO_DELETED
   </sql>
@@ -21,11 +21,11 @@
     insert into COURSETEMPLATECLASSPHOTO
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="coursetemplateId != null">
-        COURSETEMPLATE_ID,
+      <if test="courseTemplateId != null">
+        COURSE_TEMPLATE_ID,
       </if>
-      <if test="classphotoId != null">
-        CLASSPHOTO_ID,
+      <if test="classPhotoId != null">
+        CLASS_PHOTO_ID,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -36,11 +36,11 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="coursetemplateId != null">
-        #{coursetemplateId,jdbcType=INTEGER},
+      <if test="courseTemplateId != null">
+        #{courseTemplateId,jdbcType=INTEGER},
       </if>
-      <if test="classphotoId != null">
-        #{classphotoId,jdbcType=INTEGER},
+      <if test="classPhotoId != null">
+        #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -62,12 +62,12 @@
   <update id="update" parameterType="CourseTemplateClassPhotoEntityExt">
     update COURSETEMPLATECLASSPHOTO
     <set>
-      <if test="coursetemplateId != null">
-        COURSETEMPLATE_ID =
-        #{coursetemplateId,jdbcType=INTEGER},
+      <if test="courseTemplateId != null">
+        COURSE_TEMPLATE_ID =
+        #{courseTemplateId,jdbcType=INTEGER},
       </if>
-      <if test="classphotoId != null">
-        CLASSPHOTO_ID = #{classphotoId,jdbcType=INTEGER},
+      <if test="classPhotoId != null">
+        CLASS_PHOTO_ID = #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},

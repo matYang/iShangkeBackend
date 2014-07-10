@@ -3,7 +3,7 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseTemplateTeacherEntityExtMapper">
   <resultMap id="CourseTemplateTeacherExtMap" type="CourseTemplateTeacherEntityExt">
     <id column="COURSETEMPLATETEACHER_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATETEACHER_COURSETEMPLATEID" property="coursetemplateId"
+    <result column="COURSETEMPLATETEACHER_COURSETEMPLATEID" property="courseTemplateId"
       jdbcType="INTEGER" />
     <result column="COURSETEMPLATETEACHER_TEACHERID" property="teacherId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATETEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
@@ -11,7 +11,7 @@
   </resultMap>
   <sql id="CourseTemplateTeacher_Base_Column_List">
     COURSETEMPLATETEACHER.ID COURSETEMPLATETEACHER_ID,
-    COURSETEMPLATETEACHER.COURSETEMPLATE_ID COURSETEMPLATETEACHER_COURSETEMPLATEID,
+    COURSETEMPLATETEACHER.COURSE_TEMPLATE_ID COURSETEMPLATETEACHER_COURSETEMPLATEID,
     COURSETEMPLATETEACHER.TEACHER_ID COURSETEMPLATETEACHER_TEACHERID,
     COURSETEMPLATETEACHER.CREATE_TIME COURSETEMPLATETEACHER_CREATETIME,
     COURSETEMPLATETEACHER.DELETED COURSETEMPLATETEACHER_DELETED
@@ -21,8 +21,8 @@
     insert into COURSETEMPLATETEACHER
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="coursetemplateId != null">
-        COURSETEMPLATE_ID,
+      <if test="courseTemplateId != null">
+        COURSE_TEMPLATE_ID,
       </if>
       <if test="teacherId != null">
         TEACHER_ID,
@@ -36,8 +36,8 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="coursetemplateId != null">
-        #{coursetemplateId,jdbcType=INTEGER},
+      <if test="courseTemplateId != null">
+        #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="teacherId != null">
         #{teacherId,jdbcType=INTEGER},
@@ -62,8 +62,8 @@
   <update id="update" parameterType="CourseTemplateTeacherEntityExt">
     update COURSETEMPLATETEACHER
     <set>
-      <if test="coursetemplateId != null">
-        COURSETEMPLATE_ID =
+      <if test="courseTemplateId != null">
+        COURSE_TEMPLATE_ID =
         #{coursetemplateId,jdbcType=INTEGER},
       </if>
       <if test="teacherId != null">

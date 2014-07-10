@@ -10,12 +10,12 @@
     <result column="BOOKING_PHONE" property="phone" jdbcType="VARCHAR" />
     <result column="BOOKING_EMAIL" property="email" jdbcType="VARCHAR" />
     <result column="BOOKING_STATUS" property="status" jdbcType="INTEGER" />
-    <result column="BOOKING_SCHEDULEDTIME" property="scheduledtime" jdbcType="TIMESTAMP" />
-    <result column="BOOKING_NOREFUNDDATE" property="norefunddate" jdbcType="TIMESTAMP" />
-    <result column="BOOKING_CASHBACKDATE" property="cashbackdate" jdbcType="TIMESTAMP" />
+    <result column="BOOKING_SCHEDULEDTIME" property="scheduledTime" jdbcType="TIMESTAMP" />
+    <result column="BOOKING_NOREFUNDDATE" property="norefundDate" jdbcType="TIMESTAMP" />
+    <result column="BOOKING_CASHBACKDATE" property="cashbackDate" jdbcType="TIMESTAMP" />
     <result column="BOOKING_TYPE" property="type" jdbcType="INTEGER" />
     <result column="BOOKING_NOTE" property="note" jdbcType="VARCHAR" />
-    <result column="BOOKING_CASHBACKAMOUNT" property="cashbackamount" jdbcType="DOUBLE" />
+    <result column="BOOKING_CASHBACKAMOUNT" property="cashbackAmount" jdbcType="DOUBLE" />
     <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="BOOKING_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -34,20 +34,21 @@
     BOOKING.EMAIL
     BOOKING_EMAIL,
     BOOKING.STATUS BOOKING_STATUS,
-    BOOKING.SCHEDULEDTIME
+    BOOKING.SCHEDULED_TIME
     BOOKING_SCHEDULEDTIME,
-    BOOKING.NOREFUNDDATE BOOKING_NOREFUNDDATE,
-    BOOKING.CASHBACKDATE
+    BOOKING.NOREFUND_DATE BOOKING_NOREFUNDDATE,
+    BOOKING.CASHBACK_DATE
     BOOKING_CASHBACKDATE,
     BOOKING.TYPE BOOKING_TYPE,
     BOOKING.NOTE BOOKING_NOTE,
-    BOOKING.CASHBACKAMOUNT
+    BOOKING.CASHBACK_AMOUNT
     BOOKING_CASHBACKAMOUNT,
     BOOKING.LAST_MODIFY_TIME BOOKING_LASTMODIFYTIME,
     BOOKING.CREATE_TIME
     BOOKING_CREATETIME,
     BOOKING.ENABLED BOOKING_ENABLED,
-    BOOKING.DELETED BOOKING_DELETED
+    BOOKING.DELETED
+    BOOKING_DELETED
   </sql>
   <insert id="add" parameterType="BookingEntityExt">
 
@@ -75,14 +76,14 @@
       <if test="status != null">
         STATUS,
       </if>
-      <if test="scheduledtime != null">
-        SCHEDULEDTIME,
+      <if test="scheduledTime != null">
+        SCHEDULED_TIME,
       </if>
-      <if test="norefunddate != null">
-        NOREFUNDDATE,
+      <if test="norefundDate != null">
+        NOREFUND_DATE,
       </if>
-      <if test="cashbackdate != null">
-        CASHBACKDATE,
+      <if test="cashbackDate != null">
+        CASHBACK_DATE,
       </if>
       <if test="type != null">
         TYPE,
@@ -90,8 +91,8 @@
       <if test="note != null">
         NOTE,
       </if>
-      <if test="cashbackamount != null">
-        CASHBACKAMOUNT,
+      <if test="cashbackAmount != null">
+        CASHBACK_AMOUNT,
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
@@ -129,14 +130,14 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="scheduledtime != null">
-        #{scheduledtime,jdbcType=TIMESTAMP},
+      <if test="scheduledTime != null">
+        #{scheduledTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="norefunddate != null">
-        #{norefunddate,jdbcType=TIMESTAMP},
+      <if test="norefundDate != null">
+        #{norefundDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cashbackdate != null">
-        #{cashbackdate,jdbcType=TIMESTAMP},
+      <if test="cashbackDate != null">
+        #{cashbackDate,jdbcType=TIMESTAMP},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -144,8 +145,8 @@
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
       </if>
-      <if test="cashbackamount != null">
-        #{cashbackamount,jdbcType=DOUBLE},
+      <if test="cashbackAmount != null">
+        #{cashbackAmount,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,jdbcType=TIMESTAMP},
@@ -194,14 +195,14 @@
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
       </if>
-      <if test="scheduledtime != null">
-        SCHEDULEDTIME = #{scheduledtime,jdbcType=TIMESTAMP},
+      <if test="scheduledTime != null">
+        SCHEDULED_TIME = #{scheduledTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="norefunddate != null">
-        NOREFUNDDATE = #{norefunddate,jdbcType=TIMESTAMP},
+      <if test="norefundDate != null">
+        NOREFUND_DATE = #{norefundDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cashbackdate != null">
-        CASHBACKDATE = #{cashbackdate,jdbcType=TIMESTAMP},
+      <if test="cashbackDate != null">
+        CASHBACK_DATE = #{cashbackDate,jdbcType=TIMESTAMP},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
@@ -209,8 +210,8 @@
       <if test="note != null">
         NOTE = #{note,jdbcType=VARCHAR},
       </if>
-      <if test="cashbackamount != null">
-        CASHBACKAMOUNT = #{cashbackamount,jdbcType=DOUBLE},
+      <if test="cashbackAmount != null">
+        CASHBACK_AMOUNT = #{cashbackAmount,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},

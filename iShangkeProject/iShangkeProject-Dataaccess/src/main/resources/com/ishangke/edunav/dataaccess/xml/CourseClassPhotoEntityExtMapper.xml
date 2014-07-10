@@ -4,7 +4,7 @@
   <resultMap id="CourseClassPhotoExt" type="CourseClassPhotoEntityExt">
     <id column="COURSECLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
     <result column="COURSECLASSPHOTO_COURSEID" property="courseId" jdbcType="INTEGER" />
-    <result column="COURSECLASSPHOTO_CLASSPHOTOID" property="classphotoId" jdbcType="INTEGER" />
+    <result column="COURSECLASSPHOTO_CLASSPHOTOID" property="classPhotoId" jdbcType="INTEGER" />
     <result column="COURSECLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSECLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -12,7 +12,7 @@
     COURSECLASSPHOTO.ID COURSECLASSPHOTO_ID,
     COURSECLASSPHOTO.COURSE_ID
     COURSECLASSPHOTO_COURSEID,
-    COURSECLASSPHOTO.CLASSPHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID,
+    COURSECLASSPHOTO.CLASS_PHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID,
     COURSECLASSPHOTO.CREATE_TIME COURSECLASSPHOTO_CREATETIME,
     COURSECLASSPHOTO.DELETED
     COURSECLASSPHOTO_DELETED
@@ -25,8 +25,8 @@
       <if test="courseId != null">
         COURSE_ID,
       </if>
-      <if test="classphotoId != null">
-        CLASSPHOTO_ID,
+      <if test="classPhotoId != null">
+        CLASS_PHOTO_ID,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -40,8 +40,8 @@
       <if test="courseId != null">
         #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="classphotoId != null">
-        #{classphotoId,jdbcType=INTEGER},
+      <if test="classPhotoId != null">
+        #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -66,8 +66,8 @@
       <if test="courseId != null">
         COURSE_ID = #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="classphotoId != null">
-        CLASSPHOTO_ID = #{classphotoId,jdbcType=INTEGER},
+      <if test="classPhotoId != null">
+        CLASS_PHOTO_ID = #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
