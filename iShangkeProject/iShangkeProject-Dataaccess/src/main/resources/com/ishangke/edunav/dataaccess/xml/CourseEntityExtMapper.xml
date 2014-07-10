@@ -65,6 +65,18 @@
     <result column="COURSE_CLASSSIZE" property="classsize" jdbcType="INTEGER" />
     <result column="COURSE_COURSEHOURNUM" property="coursehournum" jdbcType="INTEGER" />
   </resultMap>
+  <collection property="teacherList" ofType="CourseTeacherEntityExt" javaType="java.util.ArrayList">
+    <id jdbcType="INTEGER" property="id" column="TEACHER_ID" />
+    <result jdbcType="INTEGER" property="partnerId" column="TEACHER_PARTNERID" />
+    <result jdbcType="VARCHAR" property="imgurl" column="TEACHER_IMGURL" />
+    <result jdbcType="VARCHAR" property="name" column="TEACHER_NAME" />
+    <result jdbcType="VARCHAR" property="intro" column="TEACHER_INTRO" />
+    <result jdbcType="INTEGER" property="populatiry" column="TEACHER_POPULATIRY" />
+    <result jdbcType="TIMESTAMP" property="lastModifyTime" column="TEACHER_LASTMODIFYTIME" />
+    <result jdbcType="TIMESTAMP" property="createTime" column="TEACHER_CREATETIME" />
+    <result jdbcType="INTEGER" property="enabled" column="TEACHER_ENABLED" />
+    <result jdbcType="INTEGER" property="deleted" column="TEACHER_DELETED" />
+  </collection>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
     COURSE.COURSENAME COURSE_COURSENAME,
@@ -151,6 +163,18 @@
     COURSE.POPULARITY COURSE_POPULARITY,
     COURSE.CLASSSIZE COURSE_CLASSSIZE,
     COURSE.COURSEHOURNUM COURSE_COURSEHOURNUM
+  </sql>
+  <sql id="Teacher_Base_Column_List">
+    TEACHER.ID TEACHER_ID,
+    TEACHER.PARTNER_ID TEACHER_PARTNERID,
+    TEACHER.IMGURL TEACHER_IMGURL,
+    TEACHER.NAME TEACHER_NAME,
+    TEACHER.INTRO TEACHER_INTRO,
+    TEACHER.POPULATIRY TEACHER_POPULATIRY,
+    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
+    TEACHER.CREATE_TIME TEACHER_CREATETIME,
+    TEACHER.ENABLED TEACHER_ENABLED,
+    TEACHER.DELETED TEACHER_DELETED
   </sql>
   <insert id="add" parameterType="CourseEntityExt">
     insert into COURSE
