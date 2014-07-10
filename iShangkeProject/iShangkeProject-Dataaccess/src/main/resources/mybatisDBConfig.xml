@@ -42,5 +42,7 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.UserLocationEntityExt" alias="UserLocationEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.AddressEntityExt" alias="AddressEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt" alias="BookingHistoryEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.OrderExt" alias="OrderEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt" alias="OrderHistoryEntityExt" />
   </typeAliases>
 </configuration>

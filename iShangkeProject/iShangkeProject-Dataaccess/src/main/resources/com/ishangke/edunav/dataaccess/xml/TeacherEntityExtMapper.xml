@@ -4,7 +4,7 @@
   <resultMap id="TeacherExtMap" type="TeacherEntityExt">
     <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
     <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-    <result column="TEACHER_IMGURL" property="imgurl" jdbcType="VARCHAR" />
+    <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
     <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
     <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
     <result column="TEACHER_POPULATIRY" property="populatiry" jdbcType="INTEGER" />
@@ -16,7 +16,7 @@
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
-    TEACHER.IMGURL
+    TEACHER.IMG_URL
     TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
@@ -36,7 +36,7 @@
       <if test="partnerId != null">
         PARTNER_ID,
       </if>
-      <if test="imgurl != null">
+      <if test="imgUrl != null">
         IMGURL,
       </if>
       <if test="name != null">
@@ -66,8 +66,8 @@
       <if test="partnerId != null">
         #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="imgurl != null">
-        #{imgurl,jdbcType=VARCHAR},
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -107,8 +107,8 @@
       <if test="partnerId != null">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="imgurl != null">
-        IMGURL = #{imgurl,jdbcType=VARCHAR},
+      <if test="imgUrl != null">
+        IMG_URL = #{imgUrl,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},

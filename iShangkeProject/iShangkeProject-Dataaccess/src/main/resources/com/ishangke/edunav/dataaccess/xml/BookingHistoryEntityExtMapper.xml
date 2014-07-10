@@ -5,10 +5,10 @@
     <id column="BOOKINGHISTORY_ID" property="id" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_BOOKINGID" property="bookingId" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_USERID" property="userId" jdbcType="INTEGER" />
-    <result column="BOOKINGHISTORY_OPTNAME" property="optname" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_OPTNAME" property="optName" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_REMARK" property="remark" jdbcType="VARCHAR" />
-    <result column="BOOKINGHISTORY_PRESTATUS" property="prestatus" jdbcType="INTEGER" />
-    <result column="BOOKINGHISTORY_POSTSTATUS" property="poststatus" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_PRESTATUS" property="preStatus" jdbcType="INTEGER" />
+    <result column="BOOKINGHISTORY_POSTSTATUS" property="postStatus" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_NORMAL" property="normal" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="BOOKINGHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -19,12 +19,12 @@
     BOOKINGHISTORY.BOOKING_ID
     BOOKINGHISTORY_BOOKINGID,
     BOOKINGHISTORY.USER_ID BOOKINGHISTORY_USERID,
-    BOOKINGHISTORY.OPTNAME
+    BOOKINGHISTORY.OPT_NAME
     BOOKINGHISTORY_OPTNAME,
     BOOKINGHISTORY.REMARK BOOKINGHISTORY_REMARK,
-    BOOKINGHISTORY.PRESTATUS
+    BOOKINGHISTORY.PRE_STATUS
     BOOKINGHISTORY_PRESTATUS,
-    BOOKINGHISTORY.POSTSTATUS BOOKINGHISTORY_POSTSTATUS,
+    BOOKINGHISTORY.POST_STATUS BOOKINGHISTORY_POSTSTATUS,
     BOOKINGHISTORY.NORMAL BOOKINGHISTORY_NORMAL,
     BOOKINGHISTORY.CREATE_TIME
     BOOKINGHISTORY_CREATETIME,
@@ -43,17 +43,17 @@
       <if test="userId != null">
         USER_ID,
       </if>
-      <if test="optname != null">
-        OPTNAME,
+      <if test="optName != null">
+        OPT_NAME,
       </if>
       <if test="remark != null">
         REMARK,
       </if>
-      <if test="prestatus != null">
-        PRESTATUS,
+      <if test="preStatus != null">
+        PRE_STATUS,
       </if>
-      <if test="poststatus != null">
-        POSTSTATUS,
+      <if test="postStatus != null">
+        POST_STATUS,
       </if>
       <if test="normal != null">
         NORMAL,
@@ -76,17 +76,17 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="optname != null">
-        #{optname,jdbcType=INTEGER},
+      <if test="optName != null">
+        #{optName,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="prestatus != null">
-        #{prestatus,jdbcType=INTEGER},
+      <if test="preStatus != null">
+        #{preStatus,jdbcType=INTEGER},
       </if>
-      <if test="poststatus != null">
-        #{poststatus,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=INTEGER},
       </if>
       <if test="normal != null">
         #{normal,jdbcType=INTEGER},
@@ -120,17 +120,17 @@
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="optname != null" >
-        OPTNAME = #{optname,jdbcType=INTEGER},
+      <if test="optName != null" >
+        OPT_NAME = #{optName,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="prestatus != null" >
-        PRESTATUS = #{prestatus,jdbcType=INTEGER},
+      <if test="preStatus != null" >
+        PRE_STATUS = #{preStatus,jdbcType=INTEGER},
       </if>
-      <if test="poststatus != null" >
-        POSTSTATUS = #{poststatus,jdbcType=INTEGER},
+      <if test="postStatus != null" >
+        POST_STATUS = #{postStatus,jdbcType=INTEGER},
       </if>
       <if test="normal != null" >
         NORMAL = #{normal,jdbcType=INTEGER},
