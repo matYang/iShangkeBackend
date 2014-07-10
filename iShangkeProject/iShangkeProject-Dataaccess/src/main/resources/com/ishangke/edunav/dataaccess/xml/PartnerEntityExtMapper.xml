@@ -3,44 +3,44 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper">
   <resultMap id="PartnerExtMap" type="PartnerEntityExt">
     <id column="PARTNER_ID" property="id" jdbcType="INTEGER" />
-    <result column="PARTNER_INSTNAME" property="instname" jdbcType="VARCHAR" />
-    <result column="PARTNER_LOGOURL" property="logourl" jdbcType="VARCHAR" />
+    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_CONTRACT" property="contract" jdbcType="VARCHAR" />
     <result column="PARTNER_LASTLOGINTIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="PARTNER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="PARTNER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="PARTNER_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="PARTNER_DELETED" property="deleted" jdbcType="INTEGER" />
-    <result column="PARTNER_WHOLENAME" property="wholename" jdbcType="VARCHAR" />
+    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
     <result column="PARTNER_LICENCE" property="licence" jdbcType="VARCHAR" />
     <result column="PARTNER_ORGANIZATIONNUM" property="organizationnum" jdbcType="VARCHAR" />
     <result column="PARTNER_REFERENCE" property="reference" jdbcType="VARCHAR" />
     <result column="PARTNER_PASSWORD" property="password" jdbcType="VARCHAR" />
-    <result column="PARTNER_PARTNERINTRO" property="partnerintro" jdbcType="VARCHAR" />
-    <result column="PARTNER_PARTNERDISTINCTION" property="partnerdistinction" jdbcType="VARCHAR" />
-    <result column="PARTNER_LICENCEIMGURL" property="licenceimgurl" jdbcType="VARCHAR" />
-    <result column="PARTNER_TAXREGIMGURL" property="taxregimgurl" jdbcType="VARCHAR" />
-    <result column="PARTNER_EDUQUALIFICATIONIMGURL" property="eduqualificationimgurl"
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+    <result column="PARTNER_LICENCEIMGURL" property="licenceImgUrl" jdbcType="VARCHAR" />
+    <result column="PARTNER_TAXREGIMGURL" property="taxRegImgUrl" jdbcType="VARCHAR" />
+    <result column="PARTNER_EDUQUALIFICATIONIMGURL" property="eduQualificationImgUrl"
       jdbcType="VARCHAR" />
-    <result column="PARTNER_HQLOCATION" property="hqlocation" jdbcType="VARCHAR" />
-    <result column="PARTNER_UNIREGLOCATION" property="unireglocation" jdbcType="INTEGER" />
-    <result column="PARTNER_HQCONTACT" property="hqcontact" jdbcType="VARCHAR" />
-    <result column="PARTNER_HQCONTACTPHONE" property="hqcontactphone" jdbcType="VARCHAR" />
-    <result column="PARTNER_HQCONTACTSECOPT" property="hqcontactsecopt" jdbcType="VARCHAR" />
-    <result column="PARTNER_COURSECONTACT" property="coursecontact" jdbcType="VARCHAR" />
-    <result column="PARTNER_COURSECONTACTPHONE" property="coursecontactphone" jdbcType="VARCHAR" />
-    <result column="PARTNER_STUDENTINQUERYPHONE" property="studentinqueryphone" jdbcType="VARCHAR" />
-    <result column="PARTNER_REGCONTACT" property="regcontact" jdbcType="VARCHAR" />
-    <result column="PARTNER_REGCONTACTPHONE" property="regcontactphone" jdbcType="VARCHAR" />
-    <result column="PARTNER_REGCONTACTFAX" property="regcontactfax" jdbcType="VARCHAR" />
-    <result column="PARTNER_CUTOFFDAY" property="cutoffday" jdbcType="INTEGER" />
-    <result column="PARTNER_CUTOFFTIME" property="cutofftime" jdbcType="INTEGER" />
-    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerqualification" jdbcType="INTEGER" />
+    <result column="PARTNER_HQLOCATION" property="hqLocation" jdbcType="VARCHAR" />
+    <result column="PARTNER_UNIREGLOCATION" property="uniRegLocation" jdbcType="INTEGER" />
+    <result column="PARTNER_HQCONTACT" property="hqContact" jdbcType="VARCHAR" />
+    <result column="PARTNER_HQCONTACTPHONE" property="hqContactPhone" jdbcType="VARCHAR" />
+    <result column="PARTNER_HQCONTACTSECOPT" property="hqContactSecopt" jdbcType="VARCHAR" />
+    <result column="PARTNER_COURSECONTACT" property="courseContact" jdbcType="VARCHAR" />
+    <result column="PARTNER_COURSECONTACTPHONE" property="courseContactPhone" jdbcType="VARCHAR" />
+    <result column="PARTNER_STUDENTINQUERYPHONE" property="studentInqueryPhone" jdbcType="VARCHAR" />
+    <result column="PARTNER_REGCONTACT" property="regContact" jdbcType="VARCHAR" />
+    <result column="PARTNER_REGCONTACTPHONE" property="regContactPhone" jdbcType="VARCHAR" />
+    <result column="PARTNER_REGCONTACTFAX" property="regContactFax" jdbcType="VARCHAR" />
+    <result column="PARTNER_CUTOFFDAY" property="cutoffDay" jdbcType="INTEGER" />
+    <result column="PARTNER_CUTOFFTIME" property="cutoffTime" jdbcType="INTEGER" />
+    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Partner_Base_Column_List">
     PARTNER.ID PARTNER_ID,
-    PARTNER.INSTNAME PARTNER_INSTNAME,
-    PARTNER.LOGOURL
+    PARTNER.INST_NAME PARTNER_INSTNAME,
+    PARTNER.LOGO_URL
     PARTNER_LOGOURL,
     PARTNER.CONTRACT
     PARTNER_CONTRACT,
@@ -50,7 +50,7 @@
     PARTNER.CREATE_TIME PARTNER_CREATETIME,
     PARTNER.ENABLED PARTNER_ENABLED,
     PARTNER.DELETED PARTNER_DELETED,
-    PARTNER.WHOLENAME
+    PARTNER.WHOLE_NAME
     PARTNER_WHOLENAME,
     PARTNER.LICENCE
     PARTNER_LICENCE,
@@ -59,45 +59,46 @@
     PARTNER.REFERENCE
     PARTNER_REFERENCE,
     PARTNER.PASSWORD PARTNER_PASSWORD,
-    PARTNER.PARTNERINTRO PARTNER_PARTNERINTRO,
-    PARTNER.PARTNERDISTINCTION PARTNER_PARTNERDISTINCTION,
-    PARTNER.LICENCEIMGURL
+    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION,
+    PARTNER.LICENCE_IMG_URL
     PARTNER_LICENCEIMGURL,
-    PARTNER.TAXREGIMGURL PARTNER_TAXREGIMGURL,
-    PARTNER.EDUQUALIFICATIONIMGURL
-    PARTNER_EDUQUALIFICATIONIMGURL,
-    PARTNER.HQLOCATION
+    PARTNER.TAX_REG_IMG_URL
+    PARTNER_TAXREGIMGURL,
+    PARTNER.EDU_QUALIFICATION_IMG_URL PARTNER_EDUQUALIFICATIONIMGURL,
+    PARTNER.HQ_LOCATION
     PARTNER_HQLOCATION,
-    PARTNER.UNIREGLOCATION
-    PARTNER_UNIREGLOCATION,
-    PARTNER.HQCONTACT
-    PARTNER_HQCONTACT,
-    PARTNER.HQCONTACTPHONE
-    PARTNER_HQCONTACTPHONE,
-    PARTNER.HQCONTACTSECOPT
+    PARTNER.UNI_REG_LOCATION PARTNER_UNIREGLOCATION,
+    PARTNER.HQ_CONTACT
+    PARTNERHQCONTACT,
+    PARTNER.HQ_CONTACT_PHONE PARTNER_HQCONTACTPHONE,
+    PARTNER.HQ_CONTACT_SECOPT
     PARTNER_HQCONTACTSECOPT,
-    PARTNER.COURSECONTACT
-    PARTNER_COURSECONTACT,
-    PARTNER.COURSECONTACTPHONE
-    PARTNER_COURSECONTACTPHONE,
-    PARTNER.STUDENTINQUERYPHONE PARTNER_STUDENTINQUERYPHONE,
-    PARTNER.REGCONTACT PARTNER_REGCONTACT,
-    PARTNER.REGCONTACTPHONE PARTNER_REGCONTACTPHONE,
-    PARTNER.REGCONTACTFAX PARTNER_REGCONTACTFAX,
-    PARTNER.CUTOFFDAY PARTNER_CUTOFFDAY,
-    PARTNER.CUTOFFTIME PARTNER_CUTOFFTIME,
-    PARTNER.PARTNERQUALIFICATION PARTNER_PARTNERQUALIFICATION
+    PARTNER.COURSE_CONTACT PARTNER_COURSECONTACT,
+    PARTNER.COURSE_CONTACT_PHONE PARTNER_COURSECONTACTPHONE,
+    PARTNER.STUDENT_INQUERY_PHONE
+    PARTNER_STUDENTINQUERYPHONE,
+    PARTNER.REG_CONTACT PARTNER_REGCONTACT,
+    PARTNER.REG_CONTACT_PHONE
+    PARTNER_REGCONTACTPHONE,
+    PARTNER.REG_CONTACT_FAX PARTNER_REGCONTACTFAX,
+    PARTNER.CUTOFF_DAY
+    PARTNER_CUTOFFDAY,
+    PARTNER.CUTOFF_TIME PARTNER_CUTOFFTIME,
+    PARTNER.PARTNER_QUALIFICATION
+    PARTNER_PARTNERQUALIFICATION,
   </sql>
   <insert id="add" parameterType="PartnerEntityExt">
 
-    insert into PARTNER
+    insert into partner
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="instname != null">
-        INSTNAME,
+      <if test="instName != null">
+        INST_NAME,
       </if>
-      <if test="logourl != null">
-        LOGOURL,
+      <if test="logoUrl != null">
+        LOGO_URL,
       </if>
       <if test="contract != null">
         CONTRACT,
@@ -117,8 +118,8 @@
       <if test="deleted != null">
         DELETED,
       </if>
-      <if test="wholename != null">
-        WHOLENAME,
+      <if test="wholeName != null">
+        WHOLE_NAME,
       </if>
       <if test="licence != null">
         LICENCE,
@@ -132,70 +133,71 @@
       <if test="password != null">
         PASSWORD,
       </if>
-      <if test="partnerintro != null">
-        PARTNERINTRO,
+      <if test="partnerIntro != null">
+        PARTNER_INTRO,
       </if>
-      <if test="partnerdistinction != null">
-        PARTNERDISTINCTION,
+      <if test="partnerDistinction != null">
+        PARTNER_DISTINCTION,
       </if>
-      <if test="licenceimgurl != null">
-        LICENCEIMGURL,
+      <if test="licenceImgUrl != null">
+        LICENCE_IMG_URL,
       </if>
-      <if test="taxregimgurl != null">
-        TAXREGIMGURL,
+      <if test="taxRegImgUrl != null">
+        TAX_REG_IMG_URL,
       </if>
-      <if test="eduqualificationimgurl != null">
-        EDUQUALIFICATIONIMGURL,
+      <if test="eduQualificationImgUrl != null">
+        EDU_QUALIFICATION_IMG_URL,
       </if>
-      <if test="hqlocation != null">
-        HQLOCATION,
+      <if test="hqLocation != null">
+        HQ_LOCATION,
       </if>
-      <if test="unireglocation != null">
-        UNIREGLOCATION,
+      <if test="uniRegLocation != null">
+        UNI_REG_LOCATION,
       </if>
-      <if test="hqcontact != null">
-        HQCONTACT,
+      <if test="hqContact != null">
+        HQ_CONTACT,
       </if>
-      <if test="hqcontactphone != null">
-        HQCONTACTPHONE,
+      <if test="hqContactPhone != null">
+        HQ_CONTACT_PHONE,
       </if>
-      <if test="hqcontactsecopt != null">
-        HQCONTACTSECOPT,
+      <if test="hqContactSecopt != null">
+        HQ_CONTACT_SECOPT,
       </if>
-      <if test="coursecontact != null">
-        COURSECONTACT,
+      <if test="courseContact != null">
+        COURSE_CONTACT,
       </if>
-      <if test="coursecontactphone != null">
-        COURSECONTACTPHONE,
+      <if test="courseContactPhone != null">
+        COURSE_CONTACT_PHONE,
       </if>
-      <if test="studentinqueryphone != null">
-        STUDENTINQUERYPHONE,
+      <if test="studentInqueryPhone != null">
+        STUDENT_INQUERY_PHONE,
       </if>
-      <if test="regcontact != null">
-        REGCONTACT,
+      <if test="regContact != null">
+        REG_CONTACT,
       </if>
-      <if test="regcontactphone != null">
-        REGCONTACTPHONE,
+      <if test="regContactPhone != null">
+        REG_CONTACT_PHONE,
       </if>
-      <if test="regcontactfax != null">
-        REGCONTACTFAX,
+      <if test="regContactFax != null">
+        REG_CONTACT_FAX,
       </if>
-      <if test="cutoffday != null">
-        CUTOFFDAY,
+      <if test="cutoffDay != null">
+        CUTOFF_DAY,
       </if>
-      <if test="cutofftime != null">
-        CUTOFFTIME,
+      <if test="cutoffTime != null">
+        CUTOFF_TIME,
       </if>
-      <if test="partnerqualification != null">
-        PARTNERQUALIFICATION,
+      <if test="partnerQualification != null">
+        PARTNER_QUALIFICATION,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="instname != null">
-        #{instname,jdbcType=VARCHAR},
+
+      <if test="instName != null">
+        #{instName,jdbcType=VARCHAR},
       </if>
-      <if test="logourl != null">
-        #{logourl,jdbcType=VARCHAR},
+      <if test="logoUrl != null">
+        #{logoUrl,jdbcType=VARCHAR},
       </if>
       <if test="contract != null">
         #{contract,jdbcType=VARCHAR},
@@ -215,8 +217,8 @@
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
       </if>
-      <if test="wholename != null">
-        #{wholename,jdbcType=VARCHAR},
+      <if test="wholeName != null">
+        #{wholeName,jdbcType=VARCHAR},
       </if>
       <if test="licence != null">
         #{licence,jdbcType=VARCHAR},
@@ -230,62 +232,62 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="partnerintro != null">
-        #{partnerintro,jdbcType=VARCHAR},
+      <if test="partnerIntro != null">
+        #{partnerIntro,jdbcType=VARCHAR},
       </if>
-      <if test="partnerdistinction != null">
-        #{partnerdistinction,jdbcType=VARCHAR},
+      <if test="partnerDistinction != null">
+        #{partnerDistinction,jdbcType=VARCHAR},
       </if>
-      <if test="licenceimgurl != null">
-        #{licenceimgurl,jdbcType=VARCHAR},
+      <if test="licenceImgUrl != null">
+        #{licenceImgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="taxregimgurl != null">
-        #{taxregimgurl,jdbcType=VARCHAR},
+      <if test="taxRegImgUrl != null">
+        #{taxRegImgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="eduqualificationimgurl != null">
-        #{eduqualificationimgurl,jdbcType=VARCHAR},
+      <if test="eduQualificationImgUrl != null">
+        #{eduQualificationImgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="hqlocation != null">
-        #{hqlocation,jdbcType=VARCHAR},
+      <if test="hqLocation != null">
+        #{hqLocation,jdbcType=VARCHAR},
       </if>
-      <if test="unireglocation != null">
-        #{unireglocation,jdbcType=INTEGER},
+      <if test="uniRegLocation != null">
+        #{uniRegLocation,jdbcType=INTEGER},
       </if>
-      <if test="hqcontact != null">
-        #{hqcontact,jdbcType=VARCHAR},
+      <if test="hqContact != null">
+        #{hqContact,jdbcType=VARCHAR},
       </if>
-      <if test="hqcontactphone != null">
-        #{hqcontactphone,jdbcType=VARCHAR},
+      <if test="hqContactPhone != null">
+        #{hqContactPhone,jdbcType=VARCHAR},
       </if>
-      <if test="hqcontactsecopt != null">
-        #{hqcontactsecopt,jdbcType=VARCHAR},
+      <if test="hqContactSecopt != null">
+        #{hqContactSecopt,jdbcType=VARCHAR},
       </if>
-      <if test="coursecontact != null">
-        #{coursecontact,jdbcType=VARCHAR},
+      <if test="courseContact != null">
+        #{courseContact,jdbcType=VARCHAR},
       </if>
-      <if test="coursecontactphone != null">
-        #{coursecontactphone,jdbcType=VARCHAR},
+      <if test="courseContactPhone != null">
+        #{courseContactPhone,jdbcType=VARCHAR},
       </if>
-      <if test="studentinqueryphone != null">
-        #{studentinqueryphone,jdbcType=VARCHAR},
+      <if test="studentInqueryPhone != null">
+        #{studentInqueryPhone,jdbcType=VARCHAR},
       </if>
-      <if test="regcontact != null">
-        #{regcontact,jdbcType=VARCHAR},
+      <if test="regContact != null">
+        #{regContact,jdbcType=VARCHAR},
       </if>
-      <if test="regcontactphone != null">
-        #{regcontactphone,jdbcType=VARCHAR},
+      <if test="regContactPhone != null">
+        #{regContactPhone,jdbcType=VARCHAR},
       </if>
-      <if test="regcontactfax != null">
-        #{regcontactfax,jdbcType=VARCHAR},
+      <if test="regContactFax != null">
+        #{regContactFax,jdbcType=VARCHAR},
       </if>
-      <if test="cutoffday != null">
-        #{cutoffday,jdbcType=INTEGER},
+      <if test="cutoffDay != null">
+        #{cutoffDay,jdbcType=INTEGER},
       </if>
-      <if test="cutofftime != null">
-        #{cutofftime,jdbcType=INTEGER},
+      <if test="cutoffTime != null">
+        #{cutoffTime,jdbcType=INTEGER},
       </if>
-      <if test="partnerqualification != null">
-        #{partnerqualification,jdbcType=INTEGER},
+      <if test="partnerQualification != null">
+        #{partnerQualification,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -301,11 +303,11 @@
   <update id="update" parameterType="PartnerEntityExt">
     update PARTNER
     <set>
-      <if test="instname != null">
-        INSTNAME = #{instname,jdbcType=VARCHAR},
+      <if test="instName != null">
+        INST_NAME = #{instName,jdbcType=VARCHAR},
       </if>
-      <if test="logourl != null">
-        LOGOURL = #{logourl,jdbcType=VARCHAR},
+      <if test="logoUrl != null">
+        LOGO_URL = #{logoUrl,jdbcType=VARCHAR},
       </if>
       <if test="contract != null">
         CONTRACT = #{contract,jdbcType=VARCHAR},
@@ -325,8 +327,8 @@
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
       </if>
-      <if test="wholename != null">
-        WHOLENAME = #{wholename,jdbcType=VARCHAR},
+      <if test="wholeName != null">
+        WHOLE_NAME = #{wholeName,jdbcType=VARCHAR},
       </if>
       <if test="licence != null">
         LICENCE = #{licence,jdbcType=VARCHAR},
@@ -340,67 +342,67 @@
       <if test="password != null">
         PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="partnerintro != null">
-        PARTNERINTRO = #{partnerintro,jdbcType=VARCHAR},
+      <if test="partnerIntro != null">
+        PARTNER_INTRO = #{partnerIntro,jdbcType=VARCHAR},
       </if>
-      <if test="partnerdistinction != null">
-        PARTNERDISTINCTION =
-        #{partnerdistinction,jdbcType=VARCHAR},
+      <if test="partnerDistinction != null">
+        PARTNER_DISTINCTION =
+        #{partnerDistinction,jdbcType=VARCHAR},
       </if>
-      <if test="licenceimgurl != null">
-        LICENCEIMGURL = #{licenceimgurl,jdbcType=VARCHAR},
+      <if test="licenceImgUrl != null">
+        LICENCE_IMG_URL = #{licenceImgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="taxregimgurl != null">
-        TAXREGIMGURL = #{taxregimgurl,jdbcType=VARCHAR},
+      <if test="taxRegImgUrl != null">
+        TAX_REG_IMG_URL = #{taxRegImgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="eduqualificationimgurl != null">
-        EDUQUALIFICATIONIMGURL =
-        #{eduqualificationimgurl,jdbcType=VARCHAR},
+      <if test="eduQualificationImgUrl != null">
+        EDU_QUALIFICATION_IMG_URL =
+        #{eduQualificationImgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="hqlocation != null">
-        HQLOCATION = #{hqlocation,jdbcType=VARCHAR},
+      <if test="hqLocation != null">
+        HQ_LOCATION = #{hqLocation,jdbcType=VARCHAR},
       </if>
-      <if test="unireglocation != null">
-        UNIREGLOCATION = #{unireglocation,jdbcType=INTEGER},
+      <if test="uniRegLocation != null">
+        UNI_REG_LOCATION = #{uniRegLocation,jdbcType=INTEGER},
       </if>
-      <if test="hqcontact != null">
-        HQCONTACT = #{hqcontact,jdbcType=VARCHAR},
+      <if test="hqContact != null">
+        HQ_CONTACT = #{hqContact,jdbcType=VARCHAR},
       </if>
-      <if test="hqcontactphone != null">
-        HQCONTACTPHONE = #{hqcontactphone,jdbcType=VARCHAR},
+      <if test="hqContactPhone != null">
+        HQ_CONTACT_PHONE = #{hqContactPhone,jdbcType=VARCHAR},
       </if>
-      <if test="hqcontactsecopt != null">
-        HQCONTACTSECOPT = #{hqcontactsecopt,jdbcType=VARCHAR},
+      <if test="hqContactSecopt != null">
+        HQ_CONTACT_SECOPT = #{hqContactSecopt,jdbcType=VARCHAR},
       </if>
-      <if test="coursecontact != null">
-        COURSECONTACT = #{coursecontact,jdbcType=VARCHAR},
+      <if test="courseContact != null">
+        COURSE_CONTACT = #{courseContact,jdbcType=VARCHAR},
       </if>
-      <if test="coursecontactphone != null">
-        COURSECONTACTPHONE =
-        #{coursecontactphone,jdbcType=VARCHAR},
+      <if test="courseContactPhone != null">
+        COURSE_CONTACT_PHONE =
+        #{courseContactPhone,jdbcType=VARCHAR},
       </if>
-      <if test="studentinqueryphone != null">
-        STUDENTINQUERYPHONE =
-        #{studentinqueryphone,jdbcType=VARCHAR},
+      <if test="studentInqueryPhone != null">
+        STUDENT_INQUERY_PHONE =
+        #{studentInqueryPhone,jdbcType=VARCHAR},
       </if>
-      <if test="regcontact != null">
-        REGCONTACT = #{regcontact,jdbcType=VARCHAR},
+      <if test="regContact != null">
+        REG_CONTACT = #{regContact,jdbcType=VARCHAR},
       </if>
-      <if test="regcontactphone != null">
-        REGCONTACTPHONE = #{regcontactphone,jdbcType=VARCHAR},
+      <if test="regContactPhone != null">
+        REG_CONTACT_PHONE = #{regContactPhone,jdbcType=VARCHAR},
       </if>
-      <if test="regcontactfax != null">
-        REGCONTACTFAX = #{regcontactfax,jdbcType=VARCHAR},
+      <if test="regContactFax != null">
+        REG_CONTACT_FAX = #{regContactFax,jdbcType=VARCHAR},
       </if>
-      <if test="cutoffday != null">
-        CUTOFFDAY = #{cutoffday,jdbcType=INTEGER},
+      <if test="cutoffDay != null">
+        CUTOFF_DAY = #{cutoffDay,jdbcType=INTEGER},
       </if>
-      <if test="cutofftime != null">
-        CUTOFFTIME = #{cutofftime,jdbcType=INTEGER},
+      <if test="cutoffTime != null">
+        CUTOFF_TIME = #{cutoffTime,jdbcType=INTEGER},
       </if>
-      <if test="partnerqualification != null">
-        PARTNERQUALIFICATION =
-        #{partnerqualification,jdbcType=INTEGER},
+      <if test="partnerQualification != null">
+        PARTNER_QUALIFICATION =
+        #{partnerQualification,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}

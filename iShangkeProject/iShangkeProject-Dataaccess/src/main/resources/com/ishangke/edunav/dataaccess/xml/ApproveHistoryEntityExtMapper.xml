@@ -7,8 +7,8 @@
     <result column="APPROVEHISTORY_ATTACHEDID" property="attachedId" jdbcType="INTEGER" />
     <result column="APPROVEHISTORY_SUBMITUSERID" property="submitUserId" jdbcType="INTEGER" />
     <result column="APPROVEHISTORY_APPROVEUSERID" property="approveUserId" jdbcType="INTEGER" />
-    <result column="APPROVEHISTORY_PRESTATUS" property="previousStatus" jdbcType="VARCHAR" />
-    <result column="APPROVEHISTORY_POSTSTATUS" property="nextStatus" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_PRESTATUS" property="preStatus" jdbcType="VARCHAR" />
+    <result column="APPROVEHISTORY_POSTSTATUS" property="postStatus" jdbcType="VARCHAR" />
     <result column="APPROVEHISTORY_COMMENT" property="comment" jdbcType="VARCHAR" />
     <result column="APPROVEHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="APPROVEHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
@@ -20,8 +20,8 @@
     APPROVEHISTORY.SUBMIT_USER_ID
     APPROVEHISTORY_SUBMITUSERID,
     APPROVEHISTORY.APPROVE_USER_ID APPROVEHISTORY_APPROVEUSERID,
-    APPROVEHISTORY.PRESTATUS APPROVEHISTORY_PRESTATUS,
-    APPROVEHISTORY.POSTSTATUS
+    APPROVEHISTORY.PRE_STATUS APPROVEHISTORY_PRESTATUS,
+    APPROVEHISTORY.POST_STATUS
     APPROVEHISTORY_POSTSTATUS,
     APPROVEHISTORY.COMMENT APPROVEHISTORY_COMMENT,
     APPROVEHISTORY.CREATE_TIME APPROVEHISTORY_CREATETIME,
@@ -45,11 +45,11 @@
       <if test="approveUserId != null">
         APPROVE_USER_ID,
       </if>
-      <if test="prestatus != null">
-        PRESTATUS,
+      <if test="preStatus != null">
+        PRE_STATUS,
       </if>
-      <if test="poststatus != null">
-        POSTSTATUS,
+      <if test="postStatus != null">
+        POSTS_TATUS,
       </if>
       <if test="comment != null">
         COMMENT,
@@ -75,11 +75,11 @@
       <if test="approveUserId != null">
         #{approveUserId,jdbcType=INTEGER},
       </if>
-      <if test="prestatus != null">
-        #{prestatus,jdbcType=INTEGER},
+      <if test="preStatus != null">
+        #{preStatus,jdbcType=INTEGER},
       </if>
-      <if test="poststatus != null">
-        #{poststatus,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=INTEGER},
       </if>
       <if test="comment != null">
         #{comment,jdbcType=VARCHAR},
@@ -116,11 +116,11 @@
       <if test="approveUserId != null">
         APPROVE_USER_ID = #{approveUserId,jdbcType=INTEGER},
       </if>
-      <if test="prestatus != null">
-        PRESTATUS = #{prestatus,jdbcType=INTEGER},
+      <if test="preStatus != null">
+        PRE_STATUS = #{prestatus,jdbcType=INTEGER},
       </if>
-      <if test="poststatus != null">
-        POSTSTATUS = #{poststatus,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        POST_STATUS = #{postStatus,jdbcType=INTEGER},
       </if>
       <if test="comment != null">
         COMMENT = #{comment,jdbcType=VARCHAR},
