@@ -16,3 +16,66 @@
     COURSETEMPLATETEACHER.CREATE_TIME COURSETEMPLATETEACHER_CREATETIME,
     COURSETEMPLATETEACHER.DELETED COURSETEMPLATETEACHER_DELETED
   </sql>
+  <insert id="add" parameterType="CourseTemplateTeacherEntityExt">
+
+    insert into COURSETEMPLATETEACHER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="coursetemplateId != null">
+        COURSETEMPLATE_ID,
+      </if>
+      <if test="teacherId != null">
+        TEACHER_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="coursetemplateId != null">
+        #{coursetemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update COURSETEMPLATETEACHER set DELETED = 1
+    where ID
+    = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="CourseTemplateTeacherEntityExt">
+    update COURSETEMPLATETEACHER
+    <set>
+      <if test="coursetemplateId != null">
+        COURSETEMPLATE_ID =
+        #{coursetemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        TEACHER_ID = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
