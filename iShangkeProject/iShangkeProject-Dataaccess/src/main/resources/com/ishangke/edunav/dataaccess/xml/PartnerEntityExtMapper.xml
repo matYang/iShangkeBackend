@@ -13,7 +13,7 @@
     <result column="PARTNER_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
     <result column="PARTNER_LICENCE" property="licence" jdbcType="VARCHAR" />
-    <result column="PARTNER_ORGANIZATIONNUM" property="organizationnum" jdbcType="VARCHAR" />
+    <result column="PARTNER_ORGANIZATIONNUM" property="organizationNum" jdbcType="VARCHAR" />
     <result column="PARTNER_REFERENCE" property="reference" jdbcType="VARCHAR" />
     <result column="PARTNER_PASSWORD" property="password" jdbcType="VARCHAR" />
     <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
@@ -54,7 +54,7 @@
     PARTNER_WHOLENAME,
     PARTNER.LICENCE
     PARTNER_LICENCE,
-    PARTNER.ORGANIZATIONNUM
+    PARTNER.ORGANIZATION_NUM
     PARTNER_ORGANIZATIONNUM,
     PARTNER.REFERENCE
     PARTNER_REFERENCE,
@@ -124,8 +124,8 @@
       <if test="licence != null">
         LICENCE,
       </if>
-      <if test="organizationnum != null">
-        ORGANIZATIONNUM,
+      <if test="organizationNum != null">
+        ORGANIZATION_NUM,
       </if>
       <if test="reference != null">
         REFERENCE,
@@ -223,8 +223,8 @@
       <if test="licence != null">
         #{licence,jdbcType=VARCHAR},
       </if>
-      <if test="organizationnum != null">
-        #{organizationnum,jdbcType=VARCHAR},
+      <if test="organizationNum != null">
+        #{organizationNum,jdbcType=VARCHAR},
       </if>
       <if test="reference != null">
         #{reference,jdbcType=VARCHAR},
@@ -333,8 +333,8 @@
       <if test="licence != null">
         LICENCE = #{licence,jdbcType=VARCHAR},
       </if>
-      <if test="organizationnum != null">
-        ORGANIZATIONNUM = #{organizationnum,jdbcType=VARCHAR},
+      <if test="organizationNum != null">
+        ORGANIZATION_NUM = #{organizationNum,jdbcType=VARCHAR},
       </if>
       <if test="reference != null">
         REFERENCE = #{reference,jdbcType=VARCHAR},
