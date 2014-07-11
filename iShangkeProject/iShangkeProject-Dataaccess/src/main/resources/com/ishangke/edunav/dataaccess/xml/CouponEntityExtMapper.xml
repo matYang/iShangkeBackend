@@ -149,7 +149,7 @@
     select count(ID) from COUPON where DELETED = 0
   </select>
   
-   <select id="list" parameterType="map" resultType="CouponEntityExt">
+   <select id="list" parameterType="map" resultMap="CouponExtMap">
     SELECT
     <include refid="Coupon_Base_Column_List"/>
     from COUPON where COUPON.DELETED = 0

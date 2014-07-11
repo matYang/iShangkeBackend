@@ -138,7 +138,7 @@
     select count(ID) from TEACHER where DELETED = 0
   </select>
   
-  <select id="list" parameterType="map" resultType="TeacherEntityExt">
+  <select id="list" parameterType="map" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List"/>
     from TEACHER where TEACHER.DELETED = 0

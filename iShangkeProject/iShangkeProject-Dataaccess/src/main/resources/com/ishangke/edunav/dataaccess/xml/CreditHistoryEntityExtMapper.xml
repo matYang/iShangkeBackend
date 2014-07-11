@@ -92,7 +92,7 @@
     select count(ID) from CREDIT_HISTORY where DELETED = 0
   </select>
   
-   <select id="list" parameterType="map" resultType="CreditHistoryEntityExt">
+   <select id="list" parameterType="map" resultMap="CreditHistoryExtMap">
     SELECT
     <include refid="CreditHistory_Base_Column_List"/>
     from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0

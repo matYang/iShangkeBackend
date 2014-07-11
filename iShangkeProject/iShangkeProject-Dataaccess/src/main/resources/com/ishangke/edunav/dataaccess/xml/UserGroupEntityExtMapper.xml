@@ -81,7 +81,7 @@
     select count(ID) from USER_GROUP where DELETED = 0
   </select>
   
-  <select id="list" parameterType="map" resultType="UserGroupEntityExt">
+  <select id="list" parameterType="map" resultMap="UserGroupExtMap">
     SELECT
     <include refid="UserGroup_Base_Column_List"/>
     from USER_GROUP where USER_GROUP.DELETED = 0

@@ -104,7 +104,7 @@
     select count(ID) from LOCATION where DELETED = 0
   </select>
   
-  <select id="list" parameterType="map" resultType="LocationEntityExt">
+  <select id="list" parameterType="map" resultMap="LocationExtMap">
     SELECT
     <include refid="Location_Base_Column_List"/>
     from LOCATION where LOCATION.DELETED = 0
