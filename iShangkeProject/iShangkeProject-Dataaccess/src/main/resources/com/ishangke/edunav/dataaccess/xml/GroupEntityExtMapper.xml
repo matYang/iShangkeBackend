@@ -115,7 +115,7 @@
     select count(ID) from GROUPS where DELETED = 0
   </select>
   
-   <select id="list" parameterType="map" resultType="GroupEntityExt">
+   <select id="list" parameterType="map" resultMap="GroupExtMap">
     SELECT
     <include refid="Group_Base_Column_List"/>
     from GROUPS where GROUPS.DELETED = 0

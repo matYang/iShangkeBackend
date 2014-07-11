@@ -113,7 +113,7 @@
     select count(ID) from CATEGORY where DELETED = 0
   </select>
   
-  <select id="list" parameterType="map" resultType="CategoryEntityExt">
+  <select id="list" parameterType="map" resultMap="CategoryExtMap">
     SELECT
     <include refid="Category_Base_Column_List"/>
     from CATEGORY where CATEGORY.DELETED = 0

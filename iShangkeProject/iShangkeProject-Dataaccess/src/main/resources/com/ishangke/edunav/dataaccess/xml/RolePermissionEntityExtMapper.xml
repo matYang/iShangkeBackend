@@ -81,7 +81,7 @@
     select count(ID) from ROLE_PERMISSION where DELETED = 0
   </select>
   
-  <select id="list" parameterType="map" resultType="RolePermissionEntityExt">
+  <select id="list" parameterType="map" resultMap="RolePermissionExtMap">
     SELECT
     <include refid="RolePermission_Base_Column_List"/>
     from ROLE_PERMISSION where ROLE_PERMISSION.DELETED = 0
