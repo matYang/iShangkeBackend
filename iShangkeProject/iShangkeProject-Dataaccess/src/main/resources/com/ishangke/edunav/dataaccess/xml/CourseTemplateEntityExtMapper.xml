@@ -39,14 +39,12 @@
     <result column="COURSETEMPLATE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUIZ" property="quiz" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_OPENCOURSEREQUIREMENT" property="openCourseRequirement"
-      jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_STUDYDAYNOTE" property="studyDayNote" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro"
-      jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
@@ -56,17 +54,53 @@
     <result column="COURSETEMPLATE_OUTLINE" property="outline" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_GOAL" property="goal" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGANDEXERCISE" property="teachingAndExercise"
-      jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TRAIL" property="trail" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_MARKING" property="marking" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingMaterialFee"
-      jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
+    
+    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR"/>
+    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR"/>
+    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER"/>
+    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR"/>
+    <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR"/>
+    <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR"/>
+    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR"/>
+    <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER"/>
+    <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR"/>
+    <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR"/>
+    <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR"/>
+    <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR"/>
+    <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
+      <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
+      <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+      <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
+      <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
+      <result column="TEACHER_POPULATIRY" property="populatiry" jdbcType="INTEGER" />
+      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+      <result column="TEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
+    </collection>
+    <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
+      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER"/>
+      <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+      <result column="CLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+    </collection>
   </resultMap>
   <sql id="CourseTemplate_Base_Column_List">
     COURSE_TEMPLATE.ID COURSETEMPLATE_ID,
@@ -153,6 +187,54 @@
     COURSE_TEMPLATE.TEACHING_MATERIAL_FEE COURSETEMPLATE_TEACHINGMATERIALFEE,
     COURSE_TEMPLATE.TEACHING_METHOD COURSETEMPLATE_TEACHINGMETHOD
   </sql>
+  <sql id="Teacher_Base_Column_List">
+    TEACHER.ID TEACHER_ID,
+    TEACHER.PARTNER_ID TEACHER_PARTNERID,
+    TEACHER.IMG_URL TEACHER_IMGURL,
+    TEACHER.NAME TEACHER_NAME,
+    TEACHER.INTRO TEACHER_INTRO,
+    TEACHER.POPULATIRY TEACHER_POPULATIRY,
+    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
+    TEACHER.CREATE_TIME TEACHER_CREATETIME,
+    TEACHER.ENABLED TEACHER_ENABLED,
+    TEACHER.DELETED TEACHER_DELETED
+  </sql>
+  <sql id="ClassPhoto_Base_Column_List">
+    CLASS_PHOTO.ID CLASSPHOTO_ID,
+    CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
+    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
+    CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
+    CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
+    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
+    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
+  </sql>
+  <sql id="Partner_Base_Column_List">
+    PARTNER.LOGO_URL PARTNER_LOGOURL,
+    PARTNER.WHOLE_NAME PARTNER_WHOLENAME,
+    PARTNER.INST_NAME PARTNER_INSTNAME,
+    PARTNER.PARTNER_INTRO PARTNER_INTRO,
+    PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
+    PARTNER.PARTNER_DISTINCTION PARTNER_PARTNERDISTINCTION
+  </sql>
+  <sql id="Address_Base_Column_List">
+    ADDRESS.DETAIL ADDRESS_DETAIL
+  </sql>
+  <sql id="Category_Base_Column_List">
+    CATEGORY.VALUE CATEGORY_VALUE,
+    CATEGORY.NAME CATEGORY_NAME,
+    CATEGORY.RANK CATEGORY_RANK
+  </sql>
+  <sql id="Location_Base_Column_List">
+    LOCATION.VALUE LOCATION_VALUE,
+    LOCATION.NAME LOCATION_NAME,
+  </sql>
+  <sql id="Circle_Base_Column_List">
+    CIRCLE.VALUE CIRCLE_VALUE,
+    CIRCLE.NAME CIRCLE_NAME,
+  </sql>
+  
   <insert id="add" parameterType="CourseTemplateEntityExt">
 
     insert into COURSE_TEMPLATE
@@ -730,4 +812,6 @@
    <select id="getCount" resultType="int">
     select count(ID) from COURSE_TEMPLATE where DELETED = 0
   </select>
+  
+   
 </mapper>
