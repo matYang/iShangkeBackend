@@ -7,7 +7,7 @@
     <result column="WITHDRAW_PAYEEID" property="payeeId" jdbcType="VARCHAR" />
     <result column="WITHDRAW_PEYEENAME" property="peyeeName" jdbcType="VARCHAR" />
     <result column="WITHDRAW_TYPE" property="type" jdbcType="INTEGER" />
-    <result column="WITHDRAW_LASTMODIFYAME" property="lastModifyName" jdbcType="TIMESTAMP" />
+    <result column="WITHDRAW_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="WITHDRAW_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="WITHDRAW_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="WITHDRAW_DELETED" property="deleted" jdbcType="INTEGER" />
@@ -19,7 +19,7 @@
     WITHDRAW_PAYEEID,
     WITHDRAW.PEYEE_NAME WITHDRAW_PEYEENAME,
     WITHDRAW.TYPE WITHDRAW_TYPE,
-    WITHDRAW.LAST_MODIFY_NAME WITHDRAW_LASTMODIFYNAME,
+    WITHDRAW.LAST_MODIFY_TIME WITHDRAW_LASTMODIFYTIME,
     WITHDRAW.ENABLED WITHDRAW_ENABLED,
     WITHDRAW.DELETED WITHDRAW_DELETED
   </sql>
@@ -40,8 +40,8 @@
       <if test="type != null">
         TYPE,
       </if>
-      <if test="lastModifyName != null">
-        LAST_MODIFY_NAME,
+      <if test="lastModifyTime != null">
+        LAST_MODIFY_TIME,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -67,8 +67,8 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="lastModifyName != null">
-        #{lastModifyName,jdbcType=TIMESTAMP},
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -105,8 +105,8 @@
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
       </if>
-      <if test="lastModifyName != null">
-        LAST_MODIFY_NAME = #{lastModifyName,jdbcType=TIMESTAMP},
+      <if test="lastModifyTime != null">
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
@@ -127,7 +127,7 @@
     select
     <include refid="Withdraw_Base_Column_List"></include>
     from WITHDRAW WITHDRAW
-    where WITHDRAW.DELETED = 0PEYEE_NAME
+    where WITHDRAW.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
         AND WITHDRAW.ID = #{entity.id,jdbcType=INTEGER}
@@ -184,4 +184,5 @@
       </if>
     </if>
   </select>
+</mapper>
 </mapper>
