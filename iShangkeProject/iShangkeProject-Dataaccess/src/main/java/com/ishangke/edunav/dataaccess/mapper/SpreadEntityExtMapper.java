@@ -10,12 +10,17 @@ import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
 public interface SpreadEntityExtMapper {
 
     public int add(SpreadEntityExt spreadEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(SpreadEntityExt spreadEntityExt);
-    
+
     public int getCount();
 
-    public List<SpreadEntityExt> list(@Param("entity") SpreadEntityExt spreadEntityExt, @Param("page") PaginationEntity page);
+    public List<SpreadEntityExt> list(
+            @Param("entity") SpreadEntityExt spreadEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(@Param("entity") SpreadEntityExt spreadEntityExt,
+            @Param("page") PaginationEntity page);
 }

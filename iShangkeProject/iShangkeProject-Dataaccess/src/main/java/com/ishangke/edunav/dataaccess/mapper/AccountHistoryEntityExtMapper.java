@@ -10,12 +10,18 @@ import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 public interface AccountHistoryEntityExtMapper {
 
     public int add(AccountHistoryEntityExt accountHistoryEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(AccountHistoryEntityExt accountHistoryEntityExt);
-    
+
     public int getCount();
 
-    public List<AccountHistoryEntityExt> list(@Param("entity")AccountHistoryEntityExt accountHistoryEntityExt, @Param("page") PaginationEntity page);
+    public List<AccountHistoryEntityExt> list(
+            @Param("entity") AccountHistoryEntityExt accountHistoryEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(
+            @Param("entity") AccountHistoryEntityExt accountHistoryEntityExt,
+            @Param("page") PaginationEntity page);
 }

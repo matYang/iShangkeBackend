@@ -10,12 +10,18 @@ import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 public interface UserGroupEntityExtMapper {
 
     public int add(UserGroupEntityExt userGroupEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(UserGroupEntityExt userGroupEntityExt);
-    
+
     public int getCount();
 
-    public List<UserGroupEntityExt> list(@Param("entity") UserGroupEntityExt userGroupEntityExt, @Param("page") PaginationEntity page);
+    public List<UserGroupEntityExt> list(
+            @Param("entity") UserGroupEntityExt userGroupEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(
+            @Param("entity") UserGroupEntityExt userGroupEntityExt,
+            @Param("page") PaginationEntity page);
 }

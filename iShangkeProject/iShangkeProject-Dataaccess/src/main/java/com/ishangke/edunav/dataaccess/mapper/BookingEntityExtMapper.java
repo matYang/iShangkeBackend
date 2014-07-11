@@ -10,12 +10,17 @@ import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 public interface BookingEntityExtMapper {
 
     public int add(BookingEntityExt bookingEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(BookingEntityExt bookingEntityExt);
-    
+
     public int getCount();
 
-    public List<BookingEntityExt> list(@Param("entity")BookingEntityExt bookingEntityExt, @Param("page") PaginationEntity page);
+    public List<BookingEntityExt> list(
+            @Param("entity") BookingEntityExt bookingEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(@Param("entity") BookingEntityExt bookingEntityExt,
+            @Param("page") PaginationEntity page);
 }

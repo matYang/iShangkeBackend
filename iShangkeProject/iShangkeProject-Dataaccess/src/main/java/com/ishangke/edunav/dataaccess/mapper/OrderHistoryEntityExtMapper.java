@@ -10,12 +10,18 @@ import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 public interface OrderHistoryEntityExtMapper {
 
     public int add(OrderHistoryEntityExt orderHistoryEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(OrderHistoryEntityExt orderHistoryEntityExt);
-    
+
     public int getCount();
 
-    public List<OrderHistoryEntityExt> list(@Param("entity") OrderHistoryEntityExt orderHistoryEntityExt, @Param("page") PaginationEntity page);
+    public List<OrderHistoryEntityExt> list(
+            @Param("entity") OrderHistoryEntityExt orderHistoryEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(
+            @Param("entity") OrderHistoryEntityExt orderHistoryEntityExt,
+            @Param("page") PaginationEntity page);
 }

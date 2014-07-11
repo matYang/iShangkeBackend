@@ -10,12 +10,17 @@ import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 public interface CouponEntityExtMapper {
 
     public int add(CouponEntityExt couponEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(CouponEntityExt couponEntityExt);
-    
+
     public int getCount();
 
-    public List<CouponEntityExt> list(@Param("entity")CouponEntityExt couponEntityExt, @Param("page") PaginationEntity page);
+    public List<CouponEntityExt> list(
+            @Param("entity") CouponEntityExt couponEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(@Param("entity") CouponEntityExt couponEntityExt,
+            @Param("page") PaginationEntity page);
 }
