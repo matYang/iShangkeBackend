@@ -10,17 +10,17 @@
     <result column="CREDITHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CreditHistory_Base_Column_List">
-    CREDITHISTORY.ID CREDITHISTORY_ID,
-    CREDITHISTORY.CHARGE CREDITHISTORY_CHARGE,
-    CREDITHISTORY.USER_ID CREDITHISTORY_USERID,
-    CREDITHISTORY.LAST_MODIFY_TIME
+    CREDIT_HISTORY.ID CREDITHISTORY_ID,
+    CREDIT_HISTORY.CHARGE CREDITHISTORY_CHARGE,
+    CREDIT_HISTORY.USER_ID CREDITHISTORY_USERID,
+    CREDIT_HISTORY.LAST_MODIFY_TIME
     CREDITHISTORY_LASTMODIFYTIME,
-    CREDITHISTORY.CREATE_TIME CREDITHISTORY_CREATETIME,
-    CREDITHISTORY.DELETED CREDITHISTORY_DELETED
+    CREDIT_HISTORY.CREATE_TIME CREDITHISTORY_CREATETIME,
+    CREDIT_HISTORY.DELETED CREDITHISTORY_DELETED
   </sql>
   <insert id="add" parameterType="CreditHistoryEntityExt">
 
-    insert into CREDITHISTORY
+    insert into CREDIT_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="charge != null">
@@ -63,12 +63,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update CREDITHISTORY set DELETED = 1
+    update CREDIT_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="CreditHistoryEntityExt">
-    update CREDITHISTORY
+    update CREDIT_HISTORY
     <set>
       <if test="charge != null">
         CHARGE = #{charge,jdbcType=DOUBLE},
@@ -89,6 +89,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
    <select id="getCount" resultType="int">
-    select count(ID) from CREDITHISTORY where DELETED = 0
+    select count(ID) from CREDIT_HISTORY where DELETED = 0
   </select>
 </mapper>

@@ -10,17 +10,17 @@
     <result column="COUPONHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CouponHistory_Base_Column_List">
-    COUPONHISTORY.ID COUPONHISTORY_ID,
-    COUPONHISTORY.COUPON_ID COUPONHISTORY_COUPONID,
-    COUPONHISTORY.CHARGE COUPONHISTORY_CHARGE,
-    COUPONHISTORY.LAST_MODIFY_TIME
+    COUPON_HISTORY.ID COUPONHISTORY_ID,
+    COUPON_HISTORY.COUPON_ID COUPONHISTORY_COUPONID,
+    COUPON_HISTORY.CHARGE COUPONHISTORY_CHARGE,
+    COUPON_HISTORY.LAST_MODIFY_TIME
     COUPONHISTORY_LASTMODIFYTIME,
-    COUPONHISTORY.CREATE_TIME COUPONHISTORY_CREATETIME,
-    COUPONHISTORY.DELETED COUPONHISTORY_DELETED
+    COUPON_HISTORY.CREATE_TIME COUPONHISTORY_CREATETIME,
+    COUPON_HISTORY.DELETED COUPONHISTORY_DELETED
   </sql>
   <insert id="add" parameterType="CouponHistoryEntityExt">
 
-    insert into COUPONHISTORY
+    insert into COUPON_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="couponId != null">
@@ -63,12 +63,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update COUPONHISTORY set DELETED = 1
+    update COUPON_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="CouponHistoryEntityExt">
-    update COUPONHISTORY
+    update COUPON_HISTORY
     <set>
       <if test="couponId != null">
         COUPON_ID = #{couponId,jdbcType=INTEGER},
@@ -89,6 +89,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="getCount" resultType="int">
-    select count(ID) from COUPONHISTORY where DELETED = 0
+    select count(ID) from COUPON_HISTORY where DELETED = 0
   </select>
 </mapper>

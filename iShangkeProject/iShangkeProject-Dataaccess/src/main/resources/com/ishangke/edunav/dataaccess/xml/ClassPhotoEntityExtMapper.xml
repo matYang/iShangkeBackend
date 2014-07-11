@@ -13,20 +13,20 @@
     <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="ClassPhoto_Base_Column_List">
-    CLASSPHOTO.ID CLASSPHOTO_ID,
-    CLASSPHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
-    CLASSPHOTO.IMG_URL CLASSPHOTO_IMGURL,
-    CLASSPHOTO.TITLE CLASSPHOTO_TITLE,
-    CLASSPHOTO.DESCRIPTION
+    CLASS_PHOTO.ID CLASSPHOTO_ID,
+    CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
+    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
+    CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
+    CLASS_PHOTO.DESCRIPTION
     CLASSPHOTO_DESCRIPTION,
-    CLASSPHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
-    CLASSPHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
-    CLASSPHOTO.ENABLED CLASSPHOTO_ENABLED,
-    CLASSPHOTO.DELETED CLASSPHOTO_DELETED
+    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
+    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
   <insert id="add" parameterType="ClassPhotoEntityExt">
 
-    insert into CLASSPHOTO
+    insert into CLASS_PHOTO
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="partnerId != null">
@@ -87,12 +87,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update CLASSPHOTO set DELETED = 1
+    update CLASS_PHOTO set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="ClassPhotoEntityExt">
-    update CLASSPHOTO
+    update CLASS_PHOTO
     <set>
       <if test="partnerId != null">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
@@ -122,6 +122,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="getCount" resultType="int">
-    select count(ID) from CLASSPHOTO where DELETED = 0
+    select count(ID) from CLASS_PHOTO where DELETED = 0
   </select>
 </mapper>

@@ -9,16 +9,16 @@
     <result column="USERLOCATION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="UserLocation_Base_Column_List">
-    USERLOCATION.ID USERLOCATION_ID,
-    USERLOCATION.USER_ID USERLOCATION_USERID,
-    USERLOCATION.LOCATION_ID USERLOCATION_LOCATIONID,
-    USERLOCATION.LAST_MODIFY_TIME
+    USER_LOCATION.ID USERLOCATION_ID,
+    USER_LOCATION.USER_ID USERLOCATION_USERID,
+    USER_LOCATION.LOCATION_ID USERLOCATION_LOCATIONID,
+    USER_LOCATION.LAST_MODIFY_TIME
     USERLOCATION_LASTMODIFYTIME,
-    USERLOCATION.DELETED USERLOCATION_DELETED
+    USER_LOCATION.DELETED USERLOCATION_DELETED
   </sql>
   <insert id="add" parameterType="UserLocationEntityExt">
 
-    insert into USERLOCATION
+    insert into USER_LOCATION
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="userId != null">
@@ -55,12 +55,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update USERLOCATION set DELETED = 1
+    update USER_LOCATION set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="UserLocationEntityExt">
-    update USERLOCATION
+    update USER_LOCATION
     <set>
       <if test="userId != null">
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -78,6 +78,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
     <select id="getCount" resultType="int">
-    select count(ID) from USERLOCATION where DELETED = 0
+    select count(ID) from USER_LOCATION where DELETED = 0
   </select>
 </mapper>
