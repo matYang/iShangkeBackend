@@ -14,7 +14,7 @@ import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
-@Transactional
+//@Transactional
 public class PermissionEntityExtTest {
     @Autowired
     private PermissionEntityExtMapper permissionEntityExtMapper;
@@ -26,7 +26,7 @@ public class PermissionEntityExtTest {
         permissionEntityExt.setLastModifyTime(new Date());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
-        permissionEntityExt.setName("ishangke李清");
+        permissionEntityExt.setName("ishangke");
         permissionEntityExt.setPath("ishangke");
         int oldcount = permissionEntityExtMapper.getCount();
         permissionEntityExtMapper.add(permissionEntityExt);
@@ -41,7 +41,7 @@ public class PermissionEntityExtTest {
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
         permissionEntityExt.setName("ishangke");
-        permissionEntityExt.setPath("ishangke李清");
+        permissionEntityExt.setPath("啊");
         permissionEntityExtMapper.add(permissionEntityExt);
         int oldcount = permissionEntityExtMapper.getCount();
         permissionEntityExtMapper.deleteById(permissionEntityExt.getId());
