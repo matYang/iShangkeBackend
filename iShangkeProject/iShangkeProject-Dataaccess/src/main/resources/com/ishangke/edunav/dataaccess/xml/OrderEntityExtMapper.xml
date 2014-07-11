@@ -124,5 +124,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
+<select id="getCount" resultType="int">
+    select count(ID) from ORDER where DELETED = 0
+  </select>
 </mapper>

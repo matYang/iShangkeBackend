@@ -2,29 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.PermissionEntityExtMapper">
   <resultMap id="PermissionExtMap" type="PermissionEntityExt">
-    <id column="PERMISSION_ID" property="id" jdbcType="INTEGER" />
-    <result column="PERMISSION_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="PERMISSION_PATH" property="path" jdbcType="VARCHAR" />
-    <result column="PERMISSION_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="PERMISSION_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="PERMISSION_ENABLED" property="enabled" jdbcType="INTEGER" />
-    <result column="PERMISSION_DELETED" property="deleted" jdbcType="INTEGER" />
+    <id column="PERMISSIONS_ID" property="id" jdbcType="INTEGER" />
+    <result column="PERMISSIONS_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PERMISSIONS_PATH" property="path" jdbcType="VARCHAR" />
+    <result column="PERMISSIONS_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="PERMISSIONS_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PERMISSIONS_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="PERMISSIONS_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Permission_Base_Column_List">
-    PERMISSION.ID PERMISSION_ID,
-    PERMISSION.NAME PERMISSION_NAME,
-    PERMISSION.PATH
-    PERMISSION_PATH,
-    PERMISSION.LAST_MODIFY_TIME PERMISSION_LASTMODIFYTIME,
-    PERMISSION.CREATE_TIME
-    PERMISSION_CREATETIME,
-    PERMISSION.ENABLED PERMISSION_ENABLED,
-    PERMISSION.DELETED
-    PERMISSION_DELETED
+    PERMISSIONS.ID PERMISSIONS_ID,
+    PERMISSIONS.NAME PERMISSIONS_NAME,
+    PERMISSIONS.PATH
+    PERMISSIONS_PATH,
+    PERMISSIONS.LAST_MODIFY_TIME PERMISSIONS_LASTMODIFYTIME,
+    PERMISSIONS.CREATE_TIME
+    PERMISSIONS_CREATETIME,
+    PERMISSIONS.ENABLED PERMISSIONS_ENABLED,
+    PERMISSIONS.DELETED
+    PERMISSIONS_DELETED
   </sql>
   <insert id="add" parameterType="PermissionEntityExt">
 
-    insert into PERMISSION
+    insert into PERMISSIONS
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="name != null">
@@ -73,12 +73,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update PERMISSION set DELETED = 1
+    update PERMISSIONS set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="PermissionEntityExt">
-    update PERMISSION
+    update PERMISSIONS
     <set>
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
@@ -101,4 +101,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getCount" resultType="int">
+    select count(ID) from PERMISSIONS where DELETED = 0
+  </select>
 </mapper>

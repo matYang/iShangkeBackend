@@ -7,4 +7,5 @@ public interface PermissionEntityExtMapper {
     public int add(PermissionEntityExt permissionEntityExt);
     public void deleteById(int id);
     public void update(PermissionEntityExt permissionEntityExt);
+    public int getCount();
 }
