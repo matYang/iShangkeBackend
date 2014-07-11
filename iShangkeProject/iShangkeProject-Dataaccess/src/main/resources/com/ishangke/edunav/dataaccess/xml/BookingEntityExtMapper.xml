@@ -54,7 +54,6 @@
 
     insert into BOOKING
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      ID,
       <if test="userId != null">
         USER_ID,
       </if>
@@ -108,7 +107,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>

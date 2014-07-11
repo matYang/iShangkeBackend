@@ -41,6 +41,8 @@ public class BookingEntityExtTest {
         bookingEntityExt.setLastModifyTime(new Date());
         bookingEntityExt.setEnabled(1);
         bookingEntityExt.setDeleted(0);
+        bookingEntityExt.setUserId(1);
+        bookingEntityExt.setCourseId(1);
         bookingEntityExtMapper.add(bookingEntityExt);
         int oldcount = bookingEntityExtMapper.getCount();
         bookingEntityExtMapper.deleteById(bookingEntityExt.getId());

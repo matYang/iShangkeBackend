@@ -43,6 +43,10 @@ public class AddressEntityExtTest {
         addressEntityExt.setLastModifyTime(new Date());
         addressEntityExt.setEnabled(1);
         addressEntityExt.setDeleted(0);
+        addressEntityExt.setCircleId(1);
+        addressEntityExt.setLocationId(1);
+        addressEntityExt.setPartnerId(1);
+        addressEntityExt.setDetail("ishangke李清01");
         addressEntityExtMapper.add(addressEntityExt);
         int oldcount = addressEntityExtMapper.getCount();
         addressEntityExtMapper.deleteById(addressEntityExt.getId());
