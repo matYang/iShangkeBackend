@@ -2,6 +2,9 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 
 public interface CircleEntityExtMapper {
@@ -14,5 +17,5 @@ public interface CircleEntityExtMapper {
     
     public int getCount();
 
-    public List<CircleEntityExt> list(CircleEntityExt circleEntityExt);
+    public List<CircleEntityExt> list(@Param("entity")CircleEntityExt circleEntityExt, @Param("page") PaginationEntity page);
 }

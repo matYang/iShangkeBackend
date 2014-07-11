@@ -2,6 +2,9 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 
 public interface CouponEntityExtMapper {
@@ -14,5 +17,5 @@ public interface CouponEntityExtMapper {
     
     public int getCount();
 
-    public List<CouponEntityExt> list(CouponEntityExt couponEntityExt);
+    public List<CouponEntityExt> list(@Param("entity")CouponEntityExt couponEntityExt, @Param("page") PaginationEntity page);
 }
