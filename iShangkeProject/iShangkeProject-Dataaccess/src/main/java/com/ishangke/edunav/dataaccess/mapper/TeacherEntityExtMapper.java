@@ -23,4 +23,6 @@ public interface TeacherEntityExtMapper {
 
     public int getListCount(@Param("entity") TeacherEntityExt teacherEntityEx,
             @Param("page") PaginationEntity page);
+    
+    public List<TeacherEntityExt> listTeacherByPartnerId(int partnerId);
 }

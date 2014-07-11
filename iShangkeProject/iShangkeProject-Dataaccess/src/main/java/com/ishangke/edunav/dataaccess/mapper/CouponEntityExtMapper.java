@@ -23,4 +23,6 @@ public interface CouponEntityExtMapper {
 
     public int getListCount(@Param("entity") CouponEntityExt couponEntityExt,
             @Param("page") PaginationEntity page);
+    
+    public List<CouponEntityExt>listCouponByUserId(int userId);
 }

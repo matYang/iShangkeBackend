@@ -230,4 +230,9 @@
       
     </if>
   </select>
+  <select id="listTeacherByPartnerId" parameterType="int" resultMap="TeacherExtMap">
+    SELECT 
+    <include refid="Teacher_Base_Column_List"/>    
+    FROM TEACHER WHERE PARTNER_ID = #{partnerId} and DELETED = 0
+  </select>
 </mapper>

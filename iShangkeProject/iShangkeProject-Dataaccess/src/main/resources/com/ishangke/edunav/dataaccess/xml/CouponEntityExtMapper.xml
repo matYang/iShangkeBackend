@@ -30,6 +30,7 @@
     COUPON.ENABLED COUPON_ENABLED,
     COUPON.DELETED COUPON_DELETED
   </sql>
+
   <insert id="add" parameterType="CouponEntityExt">
 
     insert into COUPON
@@ -262,5 +263,11 @@
       </if>
       
     </if>
+  </select>
+  <select id="listCouponByUserId" parameterType="int" resultMap="CouponExtMap">
+    SELECT 
+    <include refid="Coupon_Base_Column_List"/>   
+    FROM COUPON 
+    WHERE USER_ID = #{userId} and DELETED = 0
   </select>
 </mapper>

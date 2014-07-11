@@ -24,4 +24,10 @@ public interface ClassPhotoEntityExtMapper {
     public int getListCount(
             @Param("entity") ClassPhotoEntityExt classphotoEntityExt,
             @Param("page") PaginationEntity page);
+    
+    public List<ClassPhotoEntityExt> listClassPhotoByPartnerId(int partnerId);
+    
+    public List<ClassPhotoEntityExt> listClassPhotoByCourseId(int courseId);
+    
+    public List<ClassPhotoEntityExt> listClassPhotoByCourseTempleteId(int courseTemplateId);
 }
