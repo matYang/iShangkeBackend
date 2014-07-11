@@ -5,7 +5,7 @@
 	<bean id="propertyMananger" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>file:startup_properties</value>
+				<value>startup_properties</value>
 			</list>
 		</property>
 	</bean>
@@ -22,12 +22,6 @@
 		<property name="autoCommit" value="true" />
 		<property name="maximumPoolSize" value="100" />
 		<property name="connectionTimeout" value="100000" />
-		<!-- <property name="dataSourceProperty">
-			<props>
-				<prop key="useUnicode">true</prop>
-				<prop key="characterEncoding">utf8</prop>
-			</props>
-		</property> -->
 	</bean>
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg index="0" ref="hikariConfig" />

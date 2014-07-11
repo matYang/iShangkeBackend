@@ -142,6 +142,36 @@
               <goal>run</goal>
             </goals>
           </execution>
+          <execution>
+            <id>Copy ENV_properties to classpath</id>
+            <phase>initialize</phase>
+            <configuration>
+              <target name="copy file">
+                <copy
+                  file="${main.basedir}ENV_${ENV}.properties"
+                  tofile="${project.basedir}/src/main/resources/ENV_${ENV}.properties"
+                  overwrite="true" />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>Copy ENV_properties to classpath-UT</id>
+            <phase>initialize</phase>
+            <configuration>
+              <target name="copy file">
+                <copy
+                  file="${main.basedir}ENV_${ENV}.properties"
+                  tofile="${project.basedir}/src/test/resources/ENV_${ENV}.properties"
+                  overwrite="true" />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -160,7 +190,7 @@
               <replacements>
                 <replacement>
                   <token>startup_properties</token>
-                  <value>${main.basedir}ENV_${ENV}.properties</value>
+                  <value>${spring.startup_properties_prefix}ENV_${ENV}.properties</value>
                 </replacement>
               </replacements>
             </configuration>
@@ -176,7 +206,7 @@
               <replacements>
                 <replacement>
                   <token>startup_properties</token>
-                  <value>${main.basedir}ENV_${ENV}.properties</value>
+                  <value>${spring.startup_properties_prefix}ENV_${ENV}.properties</value>
                 </replacement>
               </replacements>
             </configuration>
@@ -347,37 +377,30 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>3.2.8.RELEASE</version>
     </dependency>
   </dependencies>
 </project>

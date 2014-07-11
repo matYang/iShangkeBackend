@@ -63,97 +63,99 @@
     <result column="COURSE_STARTDATE" property="startDate" jdbcType="TIMESTAMP" />
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
-    <result column="COURSE_COURSHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+    <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+    <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
+      <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
+      <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+      <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
+      <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
+      <result column="TEACHER_POPULATIRY" property="populatiry" jdbcType="INTEGER" />
+      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+      <result column="TEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
+    </collection>
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
     COURSE.COURSENAME COURSE_COURSENAME,
-    COURSE.COURSE_TEMPLATE_ID
-    COURSE_COURSETEMPLATEID,
+    COURSE_COURSE_TEMPLATE_ID
+    COURSE.COURSETEMPLATEID,
     COURSE.CATEGORY_ID COURSE_CATEGORYID,
-    COURSE.LOCATION_ID
-    COURSE_LOCATIONID,
-    COURSE.CIRCLE_ID
-    COURSE_CIRCLEID,
+    COURSE.LOCATION_ID COURSE_LOCATIONID,
+    COURSE.CIRCLE_ID COURSE_CIRCLEID,
     COURSE.PARTNER_ID COURSE_PARTNERID,
     COURSE.ADDRESS_ID COURSE_ADDRESSID,
-    COURSE.PRICE COURSE_PRICE,
-    COURSE.ORIGINALPRICE
-    COURSE_ORIGINALPRICE,
-    COURSE.CASHBACK
-    COURSE_CASHBACK,
+    COURSE.PRICE COURSE_PRICE, 
+    COURSE.ORIGINALPRICE COURSE_ORIGINALPRICE,
+    COURSE.CASHBACK COURSE_CASHBACK,
     COURSE.COMMISSION COURSE_COMMISSION,
     COURSE.SERVICECHARGE COURSE_SERVICECHARGE,
     COURSE.STATUS COURSE_STATUS,
-    COURSE.LAST_MODIFY_TIME
-    COURSE_LASTMODIFYTIME,
-    COURSE.CREATE_TIME
-    COURSE_CREATETIME,
+    COURSE.LAST_MODIFY_TIME COURSE_LASTMODIFYTIME,
+    COURSE.CREATE_TIME COURSE_CREATETIME,
     COURSE.ENABLED COURSE_ENABLED,
     COURSE.DELETED COURSE_DELETED,
-    COURSE.COURSE_HOUR_LENGTH COURSE_COURSE_HOURLENGTH,
+    COURSE.COURSE_HOUR_LENGTH COURSE_COURSEHOURLENGTH,
     COURSE.TEACHING_METHOD COURSE_TEACHINGMETHOD,
-    COURSE.TEACHING_MATERIAL_FEE
-    COURSE_TEACHINGMATERIALFEE,
-    COURSE.DOWNLOAD_MATERIALS
-    COURSE_DOWNLOAD_MATERIALS,
-    COURSE.BONUS_SERVICE COURSE_BONUS_SERVICE,
-    COURSE.MARKING
-    COURSE_MARKING,
-    COURSE.ASSIGNMENTS
-    COURSE_ASSIGNMENTS,
+    COURSE.TEACHING_MATERIAL_FEE COURSE_TEACHINGMATERIALFEE,
+    COURSE.DOWNLOAD_MATERIALS COURSE_DOWNLOADMATERIALS,
+    COURSE.BONUS_SERVICE COURSE_BONUSSERVICE,
+    COURSE.MARKING COURSE_MARKING,
+    COURSE.ASSIGNMENTS COURSE_ASSIGNMENTS,
     COURSE.TRAIL COURSE_TRAIL,
     COURSE.QUESTION_SESSION COURSE_QUESTIONSESSION,
-    COURSE.TEACHING_AND_EXERCISE
-    COURSE_TEACHINGANDEXERCISE,
+    COURSE.TEACHING_AND_EXERCISE COURSE_TEACHINGANDEXERCISE,
     COURSE.CLASS_TEACHER COURSE_CLASSTEACHER,
     COURSE.GOAL COURSE_GOAL,
     COURSE.OUTLINE COURSE_OUTLINE,
-    COURSE.REG_PHONE COURSE_REG_PHONE,
+    COURSE.REG_PHONE COURSE_REGPHONE,
     COURSE.CONTACT COURSE_CONTACT,
     COURSE.EXTRACURRICULAR COURSE_EXTRACURRICULAR,
     COURSE.PASS_AGREEMENT COURSE_PASSAGREEMENT,
     COURSE.QUALITY_ASSURANCE COURSE_QUALITYASSURANCE,
     COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
-    COURSE.TEACHING_MATERIAL_INTRO
-    COURSE_TEACHINGMATERIALINTRO,
-    COURSE.STUDY_DAY_NOTE
-    COURSE_STUDYDAYNOTE,
-    COURSE.HIGH_SCORE_REWARD
-    COURSE_HIGHSCOREREWARD,
-    COURSE.PREREQUEST
-    COURSE_PREREQUEST,
-    COURSE.SUITABLE_STUDENT
-    COURSE_SUITABLESTUDENT,
-    COURSE.OPEN_COURSE_REQUIREMENT
-    COURSE_OPEN_COURSEREQUIREMENT,
+    COURSE.TEACHING_MATERIAL_INTRO COURSE_TEACHINGMATERIALINTRO,
+    COURSE.STUDY_DAY_NOTE COURSE_STUDYDAYNOTE,
+    COURSE.HIGH_SCORE_REWARD COURSE_HIGHSCOREREWARD,
+    COURSE.PREREQUEST COURSE_PREREQUEST,
+    COURSE.SUITABLE_STUDENT COURSE_SUITABLESTUDENT,
+    COURSE.OPEN_COURSE_REQUIREMENT COURSE_OPENCOURSEREQUIREMENT,
     COURSE.CERTIFICATION COURSE_CERTIFICATION,
     COURSE.QUIZ COURSE_QUIZ,
-    COURSE.COURSE_INTRO
-    COURSE_COURSEINTRO,
+    COURSE.COURSE_INTRO COURSE_COURSEINTRO,
     COURSE.REFERENCE COURSE_REFERENCE,
-    COURSE.REG_LOCATION
-    COURSE_REGLOCATION,
+    COURSE.REG_LOCATION COURSE_REGLOCATION,
     COURSE.FINISH_TIME2 COURSE_FINISHTIME2,
     COURSE.START_TIME2 COURSE_STARTTIME2,
-    COURSE.FINISH_TIME1
-    COURSE_FINISHTIME1,
+    COURSE.FINISH_TIME1 COURSE_FINISHTIME1,
     COURSE.START_TIME1 COURSE_STARTTIME1,
-    COURSE.START_UPON_ARRIVAL
-    COURSE_STARTUPONARRIVAL,
+    COURSE.START_UPON_ARRIVAL COURSE_STARTUPONARRIVAL,
     COURSE.BOOKING_TYPE COURSE_BOOKINGTYPE,
-    COURSE.CASHBACK_DATE
-    COURSE_CASHBACKDATE,
+    COURSE.CASHBACK_DATE COURSE_CASHBACKDATE,
     COURSE.NO_REFUND_DATE COURSE_NOREFUNDDATE,
-    COURSE.CUTOFF_DATE
-    COURSE_CUTOFFDATE,
+    COURSE.CUTOFF_DATE COURSE_CUTOFFDATE,
     COURSE.FINISH_DATE COURSE_FINISHDATE,
-    COURSE.START_DATE
-    COURSE_STARTDATE,
+    COURSE.START_DATE COURSE_STARTDATE,
     COURSE.POPULARITY COURSE_POPULARITY,
     COURSE.CLASS_SIZE COURSE_CLASSSIZE,
-    COURSE.COURSE_HOUR_NUM
-    COURSE_COURS_HOURNUM
+    COURSE.COURSE_HOUR_NUM COURSE_COURSEHOURNUM
+  </sql>
+  <sql id="Teacher_Base_Column_List">
+    TEACHER.ID TEACHER_ID,
+    TEACHER.PARTNER_ID TEACHER_PARTNERID,
+    TEACHER.IMG_URL
+    TEACHER_IMGURL,
+    TEACHER.NAME TEACHER_NAME,
+    TEACHER.INTRO TEACHER_INTRO,
+    TEACHER.POPULATIRY
+    TEACHER_POPULATIRY,
+    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
+    TEACHER.CREATE_TIME
+    TEACHER_CREATETIME,
+    TEACHER.ENABLED TEACHER_ENABLED,
+    TEACHER.DELETED TEACHER_DELETED
   </sql>
   <insert id="add" parameterType="CourseEntityExt">
     insert into COURSE
@@ -738,7 +740,64 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getCount" resultType="int">
-    select count(ID) from COURSE where DELETED = 0
+
+  <select id="list" parameterType="map" resultMap="CourseExtMap">
+    select
+    <include refid="Course_Base_Column_List"></include>,
+    <include refid="Teacher_Base_Column_List"></include>
+    from COURSE COURSE
+    join COUSE_TEACHER COUSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
+    join TEACEHR TEACHER ON COURSE_TEACHER.TEACHER_ID = TEACHER.ID
+    WHERE COURSE.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.coursename != null and entity.coursename != ''">
+        AND COURSE.COURSENAME LIKE "%"#{entity.coursename,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.id != null and entity.id != 0">
+        AND COURSE.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND COURSE.ID >= #{entity.id,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND COURSE.ID <= #{entity.id,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size > 0">
+          AND COURSE.ID IN
+          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.lastModifyTime != 0 and entity.lastModifyTime != null">
+        AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null or entity.lastModifyTime == 0">
+        <if test="entity.lastModifyTimeStart != null and entity.lastModifyTimeStart != 0">
+          <![CDATA[AND COURSE.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null and entity.lastModifyTimeEnd != 0">
+          <![CDATA[AND COURSE.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != 0 and entity.createTime != null">
+        AND COURSE.CREATE_TIME = #{entity.id,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null or entity.createTime == 0">
+        <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
+          <![CDATA[AND COURSE.CREATE_TIME >= #{entity.id,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null and entity.createTimeEnd != 0">
+          <![CDATA[AND COURSE.CREATE_TIME <= #{entity.id,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null">
+        AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null">
+        LIMIT #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+      </if>
+    </if>
   </select>
 </mapper>

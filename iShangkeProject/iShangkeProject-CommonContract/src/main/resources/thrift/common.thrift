@@ -8,3 +8,10 @@ struct ResponseBo {
   2: string messageKey
 }
 
+/**
+ * PaginationBo
+ */
+struct PaginationBo {
+  1: i32 size
+  2: i32 offset
+}

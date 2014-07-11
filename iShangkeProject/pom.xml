@@ -23,12 +23,18 @@
 				<ENV>Local</ENV>
 			</properties>
 		</profile>
-		<profile>
-			<id>Production</id>
-			<properties>
-				<ENV>Prod</ENV>
-			</properties>
-		</profile>
+        <profile>
+            <id>Production</id>
+            <properties>
+                <ENV>Prod</ENV>
+            </properties>
+        </profile>
+        <profile>
+            <id>Win</id>
+            <properties>
+                <ENV>Win</ENV>
+            </properties>
+        </profile>
 	</profiles>
 	<build>
 		<plugins>
@@ -240,6 +246,11 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
