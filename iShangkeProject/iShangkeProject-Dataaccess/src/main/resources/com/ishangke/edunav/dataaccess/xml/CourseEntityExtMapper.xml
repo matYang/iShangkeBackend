@@ -64,6 +64,20 @@
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
     <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR"/>
+    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR"/>
+    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER"/>
+    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR"/>
+    <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR"/>
+    <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR"/>
+    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR"/>
+    <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER"/>
+    <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR"/>
+    <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR"/>
+    <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR"/>
+    <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR"/>
     <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
       <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
       <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
@@ -87,21 +101,6 @@
       <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
-    <result column="PARTNER_LOGOURL", property="logoUrl", jdbcType="VARCHAR"/>
-    <result column="PARTNER_WHOLENAME", property="wholeName", jdbcType="VARCHAR"/>
-    <result column="PARTNER_INSTNAME", property="instName"m jdbcType="VARCHAR"/>
-    <result column="PARTNER_PARTNERINTRO" property="partnerIntro", jdbcType="VARCHAR"/>
-    <result column="PARTNER_PARTNERQUALIFICATION", property="partnerQualification", jdbcType="INTEGER"/>
-    <result column="PARTNER_PARTNERDISTINCTION", property="partnerDistinction", jdbcType="VARCHAR"/>
-    <result column="ADDRESS_ADDRESS", property="address", jdbcType="VARCHAR"/>
-    <result column="CATEGORY_VALUE", property="categoryValue", jdbcType="VARCHAR"/>
-    <result column="CATEGORY_NAME", property="categoryName", jdbcType="VARCHAR"/>
-    <result column="CATEGORY_RANK", property="categoryRank", jdbcType="INTEGER"/>
-    <result column="LOCATION_VALUE", property="locationValue", jdbcType="VARCHAR"/>
-    <result column="LOCATION_NAME", property="locationName", jdbcType="VARCHAR"/>
-    <result column="CIRCLE_VALUE", property="circleValue", jdbcType="VARCHAR"/>
-    <result column="CIRCLE_NAME", property="circleName", jdbcType="VARCHAR"/>
-    
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
@@ -192,8 +191,30 @@
     CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
   <sql id="Partner_Base_Column_List">
-      
+    PARTNER.LOGO_URL PARTNER_LOGOURL,
+    PARTNER.WHOLE_NAME PARTNER_WHOLENAME,
+    PARTNER.INST_NAME PARTNER_INSTNAME,
+    PARTNER.PARTNER_INTRO PARTNER_INTRO,
+    PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
+    PARTNER.PARTNER_DISTINCTION PARTNER_PARTNERDISTINCTION
   </sql>
+  <sql id="Address_Base_Column_List">
+    ADDRESS.DETAIL ADDRESS_DETAIL
+  </sql>
+  <sql id="Category_Base_Column_List">
+    CATEGORY.VALUE CATEGORY_VALUE,
+    CATEGORY.NAME CATEGORY_NAME,
+    CATEGORY.RANK CATEGORY_RANK
+  </sql>
+  <sql id="Location_Base_Column_List">
+    LOCATION.VALUE LOCATION_VALUE,
+    LOCATION.NAME LOCATION_NAME,
+  </sql>
+  <sql id="Circle_Base_Column_List">
+    CIRCLE.VALUE CIRCLE_VALUE,
+    CIRCLE.NAME CIRCLE_NAME,
+  </sql>
+
   <insert id="add" parameterType="CourseEntityExt">
     insert into COURSE
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -781,12 +802,22 @@
     select
     <include refid="Course_Base_Column_List"></include>,
     <include refid="Teacher_Base_Column_List"></include>,
-    <include refid="ClassPhoto_Base_Column_List"/>
+    <include refid="ClassPhoto_Base_Column_List"></include>,
+    <include refid="Partner_Base_Column_List"></include>,
+    <include refid="Address_Base_Column_List"></include>,
+    <include refid="Category_Base_Column_List"></include>,
+    <include refid="Location_Base_Column_List"></include>,
+    <include refid="Circle_Base_Column_List"></include>,
     from COURSE COURSE
     join COURSE_TEACHER COURSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
     join TEACEHR TEACHER ON TEACHER.ID = COURSE_TEACHER.TEACHER_ID
     join COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
     join CLASS_PHOTO CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
+    join PARTNER PARTNER ON PARTNER.ID = COURSE.PARTNER_ID
+    join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID
+    join CATEGORY CATEGORY ON CATEGORY.ID = COURSE.CATEGORY_ID
+    join LOCATION LOCATION ON LOCATION.ID = COURSE.LOCATION_ID
+    join CIRCLE CIRCLE ON CIRCLE.ID = COURSE.CIRCLE_ID
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
