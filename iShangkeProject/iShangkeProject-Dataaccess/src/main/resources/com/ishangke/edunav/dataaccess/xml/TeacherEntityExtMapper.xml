@@ -7,7 +7,7 @@
     <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
     <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
     <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
-    <result column="TEACHER_POPULATIRY" property="populatiry" jdbcType="INTEGER" />
+    <result column="TEACHER_POPULARITY" property="POPULARITY" jdbcType="INTEGER" />
     <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="TEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -20,8 +20,8 @@
     TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULATIRY
-    TEACHER_POPULATIRY,
+    TEACHER.POPULARITY
+    TEACHER_POPULARITY,
     TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
     TEACHER.CREATE_TIME
     TEACHER_CREATETIME,
@@ -45,8 +45,8 @@
       <if test="intro != null">
         INTRO,
       </if>
-      <if test="populatiry != null">
-        POPULATIRY,
+      <if test="POPULARITY != null">
+        POPULARITY,
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
@@ -75,8 +75,8 @@
       <if test="intro != null">
         #{intro,jdbcType=VARCHAR},
       </if>
-      <if test="populatiry != null">
-        #{populatiry,jdbcType=INTEGER},
+      <if test="POPULARITY != null">
+        #{POPULARITY,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,jdbcType=TIMESTAMP},
@@ -116,8 +116,8 @@
       <if test="intro != null">
         INTRO = #{intro,jdbcType=VARCHAR},
       </if>
-      <if test="populatiry != null">
-        POPULATIRY = #{populatiry,jdbcType=INTEGER},
+      <if test="POPULARITY != null">
+        POPULARITY = #{POPULARITY,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
@@ -136,5 +136,98 @@
   </update>
     <select id="getCount" resultType="int">
     select count(ID) from TEACHER where DELETED = 0
+  </select>
+  
+  <select id="list" parameterType="map" resultType="TeacherEntityExt">
+    SELECT
+    <include refid="Teacher_Base_Column_List"/>
+    from TEACHER where TEACHER.DELETED = 0
+    <if test="entity != null">
+     
+      <if test="entity.id != null and entity.id != 0">
+        AND TEACHER.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND TEACHER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND TEACHER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND TEACHER.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND TEACHER.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND TEACHER.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.popularity != null and entity.popularity != 0">
+        AND TEACHER.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.popularity == null or entity.popularity == 0">
+        <if test="entity.popularityStart != null and entity.popularityStart != 0">
+          <![CDATA[AND TEACHER.POPULARITY >= #{entity.popularityStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
+          <![CDATA[AND TEACHER.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.name != null and entity.name !='' ">
+      AND TEACHER.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+    </if>
+    
+    <if test="entity.imgUrl != null and entity.imgUrl !='' ">
+      AND TEACHER.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
+    </if>
+    
+    <if test="entity.intro != null and entity.intro !='' ">
+      AND TEACHER.INTRO LIKE "%"#{entity.intro,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="entity.createTime != null">
+      AND TEACHER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+    </if>
+    
+    <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND TEACHER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND TEACHER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    
+    <if test="entity.lastModifyTime != null">
+        AND TEACHER.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND TEACHER.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND TEACHER.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+      <if test="entity.enabled != null">
+        AND TEACHER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+      
+    </if>
   </select>
 </mapper>

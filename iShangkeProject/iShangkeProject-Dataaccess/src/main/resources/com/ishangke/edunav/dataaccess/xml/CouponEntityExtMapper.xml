@@ -149,4 +149,118 @@
     select count(ID) from COUPON where DELETED = 0
   </select>
   
+   <select id="list" parameterType="map" resultType="CouponEntityExt">
+    SELECT
+    <include refid="Coupon_Base_Column_List"/>
+    from COUPON where COUPON.DELETED = 0
+    <if test="entity != null">
+     
+      <if test="entity.id != null and entity.id != 0">
+        AND COUPON.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND COUPON.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND COUPON.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.userId != null and entity.userId != 0">
+        AND COUPON.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdStart != null and entity.userIdStart != 0">
+          <![CDATA[AND COUPON.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
+          <![CDATA[AND COUPON.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.total != null and entity.total != 0">
+        AND COUPON.TOTAL = #{entity.total,jdbcType=DOUBLE}
+      </if>
+     
+      <if test="entity.total == null or entity.total == 0">
+        <if test="entity.totalStart != null and entity.totalStart != 0">
+          <![CDATA[AND COUPON.TOTAL >= #{entity.totalStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.totalEnd != null and entity.totalEnd != 0">
+          <![CDATA[AND COUPON.TOTAL <= #{entity.totalEnd,jdbcType=DOUBLE}]]>
+        </if>
+    </if>
+    
+    <if test="entity.balance != null and entity.balance != 0">
+        AND COUPON.BALANCE = #{entity.balance,jdbcType=DOUBLE}
+      </if>
+     
+      <if test="entity.balance == null or entity.balance == 0">
+        <if test="entity.balanceStart != null and entity.balanceStart != 0">
+          <![CDATA[AND COUPON.BALANCE >= #{entity.balanceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.balanceEnd != null and entity.balanceEnd != 0">
+          <![CDATA[AND COUPON.BALANCE <= #{entity.balanceEnd,jdbcType=DOUBLE}]]>
+        </if>
+    </if>
+    
+    <if test="entity.code != null and entity.code !='' ">
+      AND COUPON.CODE LIKE "%"#{entity.code,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="entity.remark != null and entity.remark !='' ">
+      AND COUPON.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+    </if>    
+    
+    <if test="entity.createTime != null">
+      AND COUPON.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+    </if>
+    
+    <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COUPON.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COUPON.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    
+    <if test="entity.expiryTime != null">
+      AND COUPON.EXPIRY_TIME = #{entity.expiryTime,jdbcType=TIMESTAMP}
+    </if>
+    
+    <if test="entity.expiryTime == null">
+        <if test="entity.expiryTimeStart != null">
+          <![CDATA[AND COUPON.EXPIRY_TIME >= #{entity.expiryTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.expiryTimeEnd != null">
+          <![CDATA[AND COUPON.EXPIRY_TIME <= #{entity.expiryTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+    <if test="entity.lastModifyTime != null">
+        AND COUPON.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND COUPON.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND COUPON.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+      <if test="entity.enabled != null">
+        AND COUPON.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+      
+    </if>
+  </select>
 </mapper>

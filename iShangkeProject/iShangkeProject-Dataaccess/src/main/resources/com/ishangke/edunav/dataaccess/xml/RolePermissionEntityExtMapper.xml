@@ -80,4 +80,70 @@
     <select id="getCount" resultType="int">
     select count(ID) from ROLE_PERMISSION where DELETED = 0
   </select>
+  
+  <select id="list" parameterType="map" resultType="RolePermissionEntityExt">
+    SELECT
+    <include refid="RolePermission_Base_Column_List"/>
+    from ROLE_PERMISSION where ROLE_PERMISSION.DELETED = 0
+    <if test="entity != null">
+     
+      <if test="entity.id != null and entity.id != 0">
+        AND ROLE_PERMISSION.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ROLE_PERMISSION.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ROLE_PERMISSION.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.roleId != null and entity.roleId != 0">
+        AND ROLE_PERMISSION.ROLE_ID = #{entity.roleId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.roleId == null or entity.roleId == 0">
+        <if test="entity.roleIdStart != null and entity.roleIdStart != 0">
+          <![CDATA[AND ROLE_PERMISSION.ROLE_ID >= #{entity.roleIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.roleIdEnd != null and entity.roleIdEnd != 0">
+          <![CDATA[AND ROLE_PERMISSION.ROLE_ID <= #{entity.roleIdEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.permissionId != null and entity.permissionId != 0">
+        AND ROLE_PERMISSION.PERMISSION_ID = #{entity.permissionId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.permissionId == null or entity.permissionId == 0">
+        <if test="entity.permissionIdStart != null and entity.permissionIdStart != 0">
+          <![CDATA[AND ROLE_PERMISSION.PERMISSION_ID >= #{entity.permissionIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.permissionIdEnd != null and entity.permissionIdEnd != 0">
+          <![CDATA[AND ROLE_PERMISSION.PERMISSION_ID <= #{entity.permissionIdEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>  
+    
+    <if test="entity.lastModifyTime != null">
+        AND ROLE_PERMISSION.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND ROLE_PERMISSION.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND ROLE_PERMISSION.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>    
+      
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+      
+    </if>
+  </select>
+  
 </mapper>
