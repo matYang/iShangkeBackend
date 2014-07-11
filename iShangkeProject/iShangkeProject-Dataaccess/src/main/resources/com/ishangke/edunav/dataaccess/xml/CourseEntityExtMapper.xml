@@ -3,7 +3,7 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper">
   <resultMap id="CourseExtMap" type="CourseEntityExt">
     <id column="COURSE_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSE_COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
     <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
     <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
@@ -11,10 +11,10 @@
     <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
     <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
-    <result column="COURSE_ORIGINALPRICE" property="originalprice" jdbcType="DOUBLE" />
+    <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
     <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
     <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
-    <result column="COURSE_SERVICECHARGE" property="servicecharge" jdbcType="DOUBLE" />
+    <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
     <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
     <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="COURSE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
@@ -76,10 +76,36 @@
       <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
+    <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
+      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER"/>
+      <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+      <result column="CLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+    </collection>
+    <result column="PARTNER_LOGOURL", property="logoUrl", jdbcType="VARCHAR"/>
+    <result column="PARTNER_WHOLENAME", property="wholeName", jdbcType="VARCHAR"/>
+    <result column="PARTNER_INSTNAME", property="instName"m jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro", jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERQUALIFICATION", property="partnerQualification", jdbcType="INTEGER"/>
+    <result column="PARTNER_PARTNERDISTINCTION", property="partnerDistinction", jdbcType="VARCHAR"/>
+    <result column="ADDRESS_ADDRESS", property="address", jdbcType="VARCHAR"/>
+    <result column="CATEGORY_VALUE", property="categoryValue", jdbcType="VARCHAR"/>
+    <result column="CATEGORY_NAME", property="categoryName", jdbcType="VARCHAR"/>
+    <result column="CATEGORY_RANK", property="categoryRank", jdbcType="INTEGER"/>
+    <result column="LOCATION_VALUE", property="locationValue", jdbcType="VARCHAR"/>
+    <result column="LOCATION_NAME", property="locationName", jdbcType="VARCHAR"/>
+    <result column="CIRCLE_VALUE", property="circleValue", jdbcType="VARCHAR"/>
+    <result column="CIRCLE_NAME", property="circleName", jdbcType="VARCHAR"/>
+    
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
-    COURSE.COURSENAME COURSE_COURSENAME,
+    COURSE.COURSE_NAME COURSE_COURSENAME,
     COURSE_COURSE_TEMPLATE_ID
     COURSE.COURSETEMPLATEID,
     COURSE.CATEGORY_ID COURSE_CATEGORYID,
@@ -88,10 +114,10 @@
     COURSE.PARTNER_ID COURSE_PARTNERID,
     COURSE.ADDRESS_ID COURSE_ADDRESSID,
     COURSE.PRICE COURSE_PRICE, 
-    COURSE.ORIGINALPRICE COURSE_ORIGINALPRICE,
+    COURSE.ORIGINAL_PRICE COURSE_ORIGINALPRICE,
     COURSE.CASHBACK COURSE_CASHBACK,
     COURSE.COMMISSION COURSE_COMMISSION,
-    COURSE.SERVICECHARGE COURSE_SERVICECHARGE,
+    COURSE.SERVICE_CHARGE COURSE_SERVICECHARGE,
     COURSE.STATUS COURSE_STATUS,
     COURSE.LAST_MODIFY_TIME COURSE_LASTMODIFYTIME,
     COURSE.CREATE_TIME COURSE_CREATETIME,
@@ -145,23 +171,34 @@
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
-    TEACHER.IMG_URL
-    TEACHER_IMGURL,
+    TEACHER.IMG_URL TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULATIRY
-    TEACHER_POPULATIRY,
+    TEACHER.POPULATIRY TEACHER_POPULATIRY,
     TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
-    TEACHER.CREATE_TIME
-    TEACHER_CREATETIME,
+    TEACHER.CREATE_TIME TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
     TEACHER.DELETED TEACHER_DELETED
+  </sql>
+  <sql id="ClassPhoto_Base_Column_List">
+    CLASS_PHOTO.ID CLASSPHOTO_ID,
+    CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
+    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
+    CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
+    CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
+    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
+    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
+  </sql>
+  <sql id="Partner_Base_Column_List">
+      
   </sql>
   <insert id="add" parameterType="CourseEntityExt">
     insert into COURSE
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="coursename != null">
+      <if test="courseName != null">
         COURSENAME,
       </if>
       <if test="courseTemplateId != null">
@@ -185,7 +222,7 @@
       <if test="price != null">
         PRICE,
       </if>
-      <if test="originalprice != null">
+      <if test="originalPrice != null">
         ORIGINALPRICE,
       </if>
       <if test="cashback != null">
@@ -194,7 +231,7 @@
       <if test="commission != null">
         COMMISSION,
       </if>
-      <if test="servicecharge != null">
+      <if test="serviceCharge != null">
         SERVICECHARGE,
       </if>
       <if test="status != null">
@@ -347,8 +384,8 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="coursename != null">
-        #{coursename,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseTemplateId != null">
         #{courseTemplateId,jdbcType=INTEGER},
@@ -371,8 +408,8 @@
       <if test="price != null">
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="originalprice != null">
-        #{originalprice,jdbcType=DOUBLE},
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         #{cashback,jdbcType=DOUBLE},
@@ -380,8 +417,8 @@
       <if test="commission != null">
         #{commission,jdbcType=DOUBLE},
       </if>
-      <if test="servicecharge != null">
-        #{servicecharge,jdbcType=DOUBLE},
+      <if test="serviceCharge != null">
+        #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -545,12 +582,11 @@
   <update id="update" parameterType="CourseEntityExt">
     update COURSE
     <set>
-      <if test="coursename != null">
-        COURSENAME = #{coursename,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        COURSENAME = #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseTemplateId != null">
-        COURSE_TEMPLATE_ID =
-        #{courseTemplateId,jdbcType=INTEGER},
+        COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="categoryId != null">
         CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
@@ -570,8 +606,8 @@
       <if test="price != null">
         PRICE = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="originalprice != null">
-        ORIGINALPRICE = #{originalprice,jdbcType=DOUBLE},
+      <if test="originalPrice != null">
+        ORIGINALPRICE = #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         CASHBACK = #{cashback,jdbcType=DOUBLE},
@@ -579,8 +615,8 @@
       <if test="commission != null">
         COMMISSION = #{commission,jdbcType=DOUBLE},
       </if>
-      <if test="servicecharge != null">
-        SERVICECHARGE = #{servicecharge,jdbcType=DOUBLE},
+      <if test="serviceCharge != null">
+        SERVICECHARGE = #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
@@ -744,14 +780,17 @@
   <select id="list" parameterType="map" resultMap="CourseExtMap">
     select
     <include refid="Course_Base_Column_List"></include>,
-    <include refid="Teacher_Base_Column_List"></include>
+    <include refid="Teacher_Base_Column_List"></include>,
+    <include refid="ClassPhoto_Base_Column_List"/>
     from COURSE COURSE
-    join COUSE_TEACHER COUSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
-    join TEACEHR TEACHER ON COURSE_TEACHER.TEACHER_ID = TEACHER.ID
+    join COURSE_TEACHER COURSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
+    join TEACEHR TEACHER ON TEACHER.ID = COURSE_TEACHER.TEACHER_ID
+    join COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
+    join CLASS_PHOTO CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
-      <if test="entity.coursename != null and entity.coursename != ''">
-        AND COURSE.COURSENAME LIKE "%"#{entity.coursename,jdbcType=VARCHAR}"%"
+      <if test="entity.courseName != null and entity.courseName != ''">
+        AND COURSE.COURSENAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.id != null and entity.id != 0">
         AND COURSE.ID = #{entity.id,jdbcType=INTEGER}
