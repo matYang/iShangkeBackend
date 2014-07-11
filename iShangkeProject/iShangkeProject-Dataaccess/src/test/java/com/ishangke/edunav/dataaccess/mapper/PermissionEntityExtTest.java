@@ -14,19 +14,19 @@ import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
-//@Transactional
+@Transactional
 public class PermissionEntityExtTest {
     @Autowired
     private PermissionEntityExtMapper permissionEntityExtMapper;
 
     @Test
-    public void test() {
+    public void testAdd() {
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
         permissionEntityExt.setCreateTime(new Date());
         permissionEntityExt.setLastModifyTime(new Date());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
-        permissionEntityExt.setName("ishangke");
+        permissionEntityExt.setName("ishangke李清");
         permissionEntityExt.setPath("ishangke");
         int oldcount = permissionEntityExtMapper.getCount();
         permissionEntityExtMapper.add(permissionEntityExt);
@@ -34,37 +34,20 @@ public class PermissionEntityExtTest {
     }
 
     @Test
-    public void test1() {
+    public void testDelete() {
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
         permissionEntityExt.setCreateTime(new Date());
         permissionEntityExt.setLastModifyTime(new Date());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
         permissionEntityExt.setName("ishangke");
-        permissionEntityExt.setPath("啊");
+        permissionEntityExt.setPath("ishangke李清");
         permissionEntityExtMapper.add(permissionEntityExt);
         int oldcount = permissionEntityExtMapper.getCount();
         permissionEntityExtMapper.deleteById(permissionEntityExt.getId());
         Assert.assertSame(permissionEntityExtMapper.getCount(), oldcount - 1);
     }
-    @Test
-    public void test2() {
-        
-        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setCreateTime(new Date());
-        permissionEntityExt.setLastModifyTime(new Date());
-        permissionEntityExt.setDeleted(0);
-        permissionEntityExt.setEnabled(1);
-        permissionEntityExt.setName("ishangke");
-        permissionEntityExt.setPath("ishangke");
-        int oldcount = permissionEntityExtMapper.getCount();
-        permissionEntityExtMapper.add(permissionEntityExt);
-        Assert.assertSame(permissionEntityExtMapper.getCount(), oldcount + 1);
-        permissionEntityExt.setDeleted(1);
-        permissionEntityExtMapper.update(permissionEntityExt);
-      
-        Assert.assertSame(permissionEntityExtMapper.getCount(), oldcount);
-    }
+   
     
 
 }

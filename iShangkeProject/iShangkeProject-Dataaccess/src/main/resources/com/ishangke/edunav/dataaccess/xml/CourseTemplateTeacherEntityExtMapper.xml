@@ -10,15 +10,15 @@
     <result column="COURSETEMPLATETEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseTemplateTeacher_Base_Column_List">
-    COURSETEMPLATETEACHER.ID COURSETEMPLATETEACHER_ID,
-    COURSETEMPLATETEACHER.COURSE_TEMPLATE_ID COURSETEMPLATETEACHER_COURSETEMPLATEID,
-    COURSETEMPLATETEACHER.TEACHER_ID COURSETEMPLATETEACHER_TEACHERID,
-    COURSETEMPLATETEACHER.CREATE_TIME COURSETEMPLATETEACHER_CREATETIME,
-    COURSETEMPLATETEACHER.DELETED COURSETEMPLATETEACHER_DELETED
+    COURSE_TEMPLATE_TEACHER.ID COURSETEMPLATETEACHER_ID,
+    COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID COURSETEMPLATETEACHER_COURSETEMPLATEID,
+    COURSE_TEMPLATE_TEACHER.TEACHER_ID COURSETEMPLATETEACHER_TEACHERID,
+    COURSE_TEMPLATE_TEACHER.CREATE_TIME COURSETEMPLATETEACHER_CREATETIME,
+    COURSE_TEMPLATE_TEACHER.DELETED COURSETEMPLATETEACHER_DELETED
   </sql>
   <insert id="add" parameterType="CourseTemplateTeacherEntityExt">
 
-    insert into COURSETEMPLATETEACHER
+    insert into COURSE_TEMPLATE_TEACHER
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="courseTemplateId != null">
@@ -55,12 +55,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update COURSETEMPLATETEACHER set DELETED = 1
+    update COURSE_TEMPLATE_TEACHER set DELETED = 1
     where ID
     = #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="CourseTemplateTeacherEntityExt">
-    update COURSETEMPLATETEACHER
+    update COURSE_TEMPLATE_TEACHER
     <set>
       <if test="courseTemplateId != null">
         COURSE_TEMPLATE_ID =
@@ -79,6 +79,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
    <select id="getCount" resultType="int">
-    select count(ID) from COURSETEMPLATETEACHER where DELETED = 0
+    select count(ID) from COURSE_TEMPLATE_TEACHER where DELETED = 0
   </select>
 </mapper>

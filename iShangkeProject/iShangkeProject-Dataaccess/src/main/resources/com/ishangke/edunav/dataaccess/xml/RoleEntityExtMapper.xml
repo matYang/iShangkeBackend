@@ -93,7 +93,7 @@
     select count(ID) from ROLES where DELETED = 0
   </select>
   
-  <select id="list" parameterType="map" resultType="RoleExtMap">
+  <select id="list" parameterType="map" resultType="RoleEntityExt">
     SELECT
     <include refid="Role_Base_Column_List"/>
     from ROLES where ROLES.DELETED = 0

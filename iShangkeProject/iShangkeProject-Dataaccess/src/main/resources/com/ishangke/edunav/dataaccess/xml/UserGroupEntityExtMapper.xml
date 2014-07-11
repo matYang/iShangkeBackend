@@ -9,16 +9,16 @@
     <result column="USERGROUP_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="UserGroup_Base_Column_List">
-    USERGROUP.ID USERGROUP_ID,
-    USERGROUP.USER_ID USERGROUP_USE_ID,
-    USERGROUP.GROUP_ID
+    USER_GROUP.ID USERGROUP_ID,
+    USER_GROUP.USER_ID USERGROUP_USE_ID,
+    USER_GROUP.GROUP_ID
     USERGROUP_GROUPID,
-    USERGROUP.LAST_MODIFY_TIME USERGROUP_LASTMODIFYTIME,
-    USERGROUP.DELETED USERGROUP_DELETED
+    USER_GROUP.LAST_MODIFY_TIME USERGROUP_LASTMODIFYTIME,
+    USER_GROUP.DELETED USERGROUP_DELETED
   </sql>
   <insert id="add" parameterType="UserGroupEntityExt">
 
-    insert into USERGROUP
+    insert into USER_GROUP
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="userId != null">
@@ -55,7 +55,7 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update USERGROUP set DELETED = 1
+    update USER_GROUP set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
@@ -78,6 +78,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
     <select id="getCount" resultType="int">
-    select count(ID) from USERGROUP where DELETED = 0
+    select count(ID) from USER_GROUP where DELETED = 0
   </select>
 </mapper>
