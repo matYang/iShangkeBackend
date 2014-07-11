@@ -80,4 +80,69 @@
     <select id="getCount" resultType="int">
     select count(ID) from USER_GROUP where DELETED = 0
   </select>
+  
+  <select id="list" parameterType="map" resultType="UserGroupEntityExt">
+    SELECT
+    <include refid="UserGroup_Base_Column_List"/>
+    from USER_GROUP where USER_GROUP.DELETED = 0
+    <if test="entity != null">
+     
+      <if test="entity.id != null and entity.id != 0">
+        AND USER_GROUP.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND USER_GROUP.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND USER_GROUP.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>  
+    
+    <if test="entity.userId != null and entity.userId != 0">
+        AND USER_GROUP.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdStart != null and entity.userIdStart != 0">
+          <![CDATA[AND USER_GROUP.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
+          <![CDATA[AND USER_GROUP.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>  
+    
+    <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND USER_GROUP.GROUP_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>  
+    
+    <if test="entity.lastModifyTime != null">
+        AND USER_GROUP.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+                  
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+      
+    </if>
+  </select>
 </mapper>
