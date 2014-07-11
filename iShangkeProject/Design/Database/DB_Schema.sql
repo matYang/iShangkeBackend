@@ -240,7 +240,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`ADDRESS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EduNav`.`ADDRESS` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `PARTNER_ID` INT NOT NULL,
   `LOCATION_ID` INT NOT NULL,
   `CIRCLE_ID` INT NOT NULL,
