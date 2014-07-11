@@ -120,7 +120,68 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from WITHDRAW where DELETED = 0
+  </select>
+  <select id="list" parameterType="map" resultMap="WithdrawExtMap">
+    select
+    <include refid="Withdraw_Base_Column_List"></include>
+    from WITHDRAW WITHDRAW
+    where WITHDRAW.DELETED = 0PEYEE_NAME
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND WITHDRAW.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND WITHDRAW.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND WITHDRAW.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size > 0">
+          AND WITHDRAW.ID IN
+          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.userId != null and entity.userId != 0">
+        AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.peyeeName != null and entity.peyeeName != ''">
+        AND WITHDRAW. LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.lastModifyTime != 0 and entity.lastModifyTime != null">
+        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null or entity.lastModifyTime == 0">
+        <if test="entity.lastModifyTimeStart != null and entity.lastModifyTimeStart != 0">
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null and entity.lastModifyTimeEnd != 0">
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != 0 and entity.createTime != null">
+        AND WITHDRAW.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null or entity.createTime == 0">
+        <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
+          <![CDATA[AND WITHDRAW.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null and entity.createTimeEnd != 0">
+          <![CDATA[AND WITHDRAW.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null">
+        AND WITHDRAW.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null">
+        LIMIT #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+      </if>
+    </if>
   </select>
 </mapper>
