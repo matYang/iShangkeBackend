@@ -76,6 +76,32 @@
       <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
+    <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
+      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER"/>
+      <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR"/>
+      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+      <result column="CLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+    </collection>
+    <result column="PARTNER_LOGOURL", property="logoUrl", jdbcType="VARCHAR"/>
+    <result column="PARTNER_WHOLENAME", property="wholeName", jdbcType="VARCHAR"/>
+    <result column="PARTNER_INSTNAME", property="instName"m jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro", jdbcType="VARCHAR"/>
+    <result column="PARTNER_PARTNERQUALIFICATION", property="partnerQualification", jdbcType="INTEGER"/>
+    <result column="PARTNER_PARTNERDISTINCTION", property="partnerDistinction", jdbcType="VARCHAR"/>
+    <result column="ADDRESS_ADDRESS", property="address", jdbcType="VARCHAR"/>
+    <result column="CATEGORY_VALUE", property="categoryValue", jdbcType="VARCHAR"/>
+    <result column="CATEGORY_NAME", property="categoryName", jdbcType="VARCHAR"/>
+    <result column="CATEGORY_RANK", property="categoryRank", jdbcType="INTEGER"/>
+    <result column="LOCATION_VALUE", property="locationValue", jdbcType="VARCHAR"/>
+    <result column="LOCATION_NAME", property="locationName", jdbcType="VARCHAR"/>
+    <result column="CIRCLE_VALUE", property="circleValue", jdbcType="VARCHAR"/>
+    <result column="CIRCLE_NAME", property="circleName", jdbcType="VARCHAR"/>
+    
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
@@ -145,17 +171,28 @@
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
-    TEACHER.IMG_URL
-    TEACHER_IMGURL,
+    TEACHER.IMG_URL TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULATIRY
-    TEACHER_POPULATIRY,
+    TEACHER.POPULATIRY TEACHER_POPULATIRY,
     TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
-    TEACHER.CREATE_TIME
-    TEACHER_CREATETIME,
+    TEACHER.CREATE_TIME TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
     TEACHER.DELETED TEACHER_DELETED
+  </sql>
+  <sql id="ClassPhoto_Base_Column_List">
+    CLASS_PHOTO.ID CLASSPHOTO_ID,
+    CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
+    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
+    CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
+    CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
+    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
+    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
+  </sql>
+  <sql id="Partner_Base_Column_List">
+      
   </sql>
   <insert id="add" parameterType="CourseEntityExt">
     insert into COURSE
@@ -744,10 +781,13 @@
   <select id="list" parameterType="map" resultMap="CourseExtMap">
     select
     <include refid="Course_Base_Column_List"></include>,
-    <include refid="Teacher_Base_Column_List"></include>
+    <include refid="Teacher_Base_Column_List"></include>,
+    <include refid="ClassPhoto_Base_Column_List"/>
     from COURSE COURSE
-    join COUSE_TEACHER COUSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
-    join TEACEHR TEACHER ON COURSE_TEACHER.TEACHER_ID = TEACHER.ID
+    join COURSE_TEACHER COURSE_TEACHER ON COURSE.ID = COURSE_TEACHER.COURSE_ID
+    join TEACEHR TEACHER ON TEACHER.ID = COURSE_TEACHER.TEACHER_ID
+    join COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
+    join CLASS_PHOTO CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
       <if test="entity.coursename != null and entity.coursename != ''">

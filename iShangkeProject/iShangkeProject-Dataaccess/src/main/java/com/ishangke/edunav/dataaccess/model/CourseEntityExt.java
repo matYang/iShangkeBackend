@@ -14,7 +14,28 @@ public class CourseEntityExt extends CourseEntity {
     private Date lastModifyTimeAfter;
     private Date createTimeBefore;
     private Date createTimeAfter;
+    
+    //concrete information
     private List<TeacherEntityExt> teacherList;
+    private List<ClassPhotoEntityExt> classPhotoList;
+    
+    //placing values identified by FK here, and this is really ugly
+    private String logoUrl;
+    private String wholeName;
+    private String instName;
+    private String partnerIntro;
+    private int partnerQualification;
+    private String partnerDistinction;
+    
+    private String address;
+    private String categoryValue;
+    private String categoryName;
+    private int categoryRank;
+    private String locationValue;
+    private String locationName;
+    private String circleValue;
+    private String circleName;
+    
 
     public Integer getIdStart() {
         return idStart;
@@ -79,4 +100,125 @@ public class CourseEntityExt extends CourseEntity {
     public void setTeacherList(List<TeacherEntityExt> teacherList) {
         this.teacherList = teacherList;
     }
+
+    public List<ClassPhotoEntityExt> getClassPhotoList() {
+        return classPhotoList;
+    }
+
+    public void setClassPhotoList(List<ClassPhotoEntityExt> classPhotoList) {
+        this.classPhotoList = classPhotoList;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public String getWholeName() {
+        return wholeName;
+    }
+
+    public void setWholeName(String wholeName) {
+        this.wholeName = wholeName;
+    }
+
+    public String getInstName() {
+        return instName;
+    }
+
+    public void setInstName(String instName) {
+        this.instName = instName;
+    }
+
+    public String getPartnerIntro() {
+        return partnerIntro;
+    }
+
+    public void setPartnerIntro(String partnerIntro) {
+        this.partnerIntro = partnerIntro;
+    }
+
+    public int getPartnerQualification() {
+        return partnerQualification;
+    }
+
+    public void setPartnerQualification(int partnerQualification) {
+        this.partnerQualification = partnerQualification;
+    }
+
+    public String getPartnerDistinction() {
+        return partnerDistinction;
+    }
+
+    public void setPartnerDistinction(String partnerDistinction) {
+        this.partnerDistinction = partnerDistinction;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCategoryValue() {
+        return categoryValue;
+    }
+
+    public void setCategoryValue(String categoryValue) {
+        this.categoryValue = categoryValue;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getCategoryRank() {
+        return categoryRank;
+    }
+
+    public void setCategoryRank(int categoryRank) {
+        this.categoryRank = categoryRank;
+    }
+
+    public String getLocationValue() {
+        return locationValue;
+    }
+
+    public void setLocationValue(String locationValue) {
+        this.locationValue = locationValue;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public String getCircleValue() {
+        return circleValue;
+    }
+
+    public void setCircleValue(String circleValue) {
+        this.circleValue = circleValue;
+    }
+
+    public String getCircleName() {
+        return circleName;
+    }
+
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
+    }
+    
 }
