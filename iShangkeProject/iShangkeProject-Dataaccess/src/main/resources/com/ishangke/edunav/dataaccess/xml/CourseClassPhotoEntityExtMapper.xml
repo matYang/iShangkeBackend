@@ -9,17 +9,17 @@
     <result column="COURSECLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseClassPhoto_Base_Column_List">
-    COURSECLASSPHOTO.ID COURSECLASSPHOTO_ID,
-    COURSECLASSPHOTO.COURSE_ID
+    COURSE_CLASS_PHOTO.ID COURSECLASSPHOTO_ID,
+    COURSE_CLASS_PHOTO.COURSE_ID
     COURSECLASSPHOTO_COURSEID,
-    COURSECLASSPHOTO.CLASS_PHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID,
-    COURSECLASSPHOTO.CREATE_TIME COURSECLASSPHOTO_CREATETIME,
-    COURSECLASSPHOTO.DELETED
+    COURSE_CLASS_PHOTO.CLASS_PHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID,
+    COURSE_CLASS_PHOTO.CREATE_TIME COURSECLASSPHOTO_CREATETIME,
+    COURSE_CLASS_PHOTO.DELETED
     COURSECLASSPHOTO_DELETED
   </sql>
   <insert id="add" parameterType="CourseClassPhotoEntityExt">
 
-    insert into COURSECLASSPHOTO
+    insert into COURSE_CLASS_PHOTO
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="courseId != null">
@@ -56,12 +56,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update COURSECLASSPHOTO set DELETED = 1
+    update COURSE_CLASS_PHOTO set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="CourseClassPhotoEntityExt">
-    update COURSECLASSPHOTO
+    update COURSE_CLASS_PHOTO
     <set>
       <if test="courseId != null">
         COURSE_ID = #{courseId,jdbcType=INTEGER},
@@ -79,6 +79,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
    <select id="getCount" resultType="int">
-    select count(ID) from COURSECLASSPHOTO where DELETED = 0
+    select count(ID) from COURSE_CLASS_PHOTO where DELETED = 0
   </select>
 </mapper>

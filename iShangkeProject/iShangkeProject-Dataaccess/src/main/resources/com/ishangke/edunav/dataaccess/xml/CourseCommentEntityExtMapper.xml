@@ -13,21 +13,21 @@
     <result column="COURSECOMMENT_DELTED" property="delted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseComment_Base_Column_List">
-    COURSECOMMENT.ID COURSECOMMENT_ID,
-    COURSECOMMENT.USER_ID COURSECOMMENT_USERID,
-    COURSECOMMENT.COURSE_TEMPLATE_ID COURSECOMMENT_COURSETEMPLATEID,
-    COURSECOMMENT.TITLE
+    COURSE_COMMENT.ID COURSECOMMENT_ID,
+    COURSE_COMMENT.USER_ID COURSECOMMENT_USERID,
+    COURSE_COMMENT.COURSE_TEMPLATE_ID COURSECOMMENT_COURSETEMPLATEID,
+    COURSE_COMMENT.TITLE
     COURSECOMMENT_TITLE,
-    COURSECOMMENT.CONTENT COURSECOMMENT_CONTENT,
-    COURSECOMMENT.LAST_MODIFY_TIME
+    COURSE_COMMENT.CONTENT COURSECOMMENT_CONTENT,
+    COURSE_COMMENT.LAST_MODIFY_TIME
     COURSECOMMENT_LASTMODIFYTIME,
-    COURSECOMMENT.CREATE_TIME COURSECOMMENT_CREATETIME,
-    COURSECOMMENT.ENABLED COURSECOMMENT_ENABLED,
-    COURSECOMMENT.DELTED COURSECOMMENT_DELTED
+    COURSE_COMMENT.CREATE_TIME COURSECOMMENT_CREATETIME,
+    COURSE_COMMENT.ENABLED COURSECOMMENT_ENABLED,
+    COURSE_COMMENT.DELTED COURSECOMMENT_DELTED
   </sql>
   <insert id="add" parameterType="CourseCommentEntityExt">
 
-    insert into COURSECOMMENT
+    insert into COURSE_COMMENT
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="userId != null">
@@ -88,12 +88,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update COURSECOMMENT set DELETED = 1
+    update COURSE_COMMENT set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="CourseCommentEntityExt">
-    update COURSECOMMENT
+    update COURSE_COMMENT
     <set>
       <if test="userId != null">
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -124,6 +124,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
    <select id="getCount" resultType="int">
-    select count(ID) from COURSECOMMENT where DELETED = 0
+    select count(ID) from COURSE_COMMENT where DELETED = 0
   </select>
 </mapper>

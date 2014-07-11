@@ -9,16 +9,16 @@
     <result column="ROLEPERMISSION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="RolePermission_Base_Column_List">
-    ROLEPERMISSION.ID ROLEPERMISSION_ID,
-    ROLEPERMISSION.ROLE_ID ROLEPERMISSION_ROLEID,
-    ROLEPERMISSION.PERMISSION_ID ROLEPERMISSION_PERMISSIONID,
-    ROLEPERMISSION.LAST_MODIFY_TIME
+    ROLE_PERMISSION.ID ROLEPERMISSION_ID,
+    ROLE_PERMISSION.ROLE_ID ROLEPERMISSION_ROLEID,
+    ROLE_PERMISSION.PERMISSION_ID ROLEPERMISSION_PERMISSIONID,
+    ROLE_PERMISSION.LAST_MODIFY_TIME
     ROLEPERMISSION_LASTMODIFYTIME,
-    ROLEPERMISSION.DELETED ROLEPERMISSION_DELETED
+    ROLE_PERMISSION.DELETED ROLEPERMISSION_DELETED
   </sql>
   <insert id="add" parameterType="RolePermissionEntityExt">
 
-    insert into ROLEPERMISSION
+    insert into ROLE_PERMISSION
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="roleId != null">
@@ -55,12 +55,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update ROLEPERMISSION set DELETED = 1
+    update ROLE_PERMISSION set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="RolePermissionEntityExt">
-    update ROLEPERMISSION
+    update ROLE_PERMISSION
     <set>
       <if test="roleId != null">
         ROLE_ID = #{roleId,jdbcType=INTEGER},
@@ -78,6 +78,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
     <select id="getCount" resultType="int">
-    select count(ID) from ROLEPERMISSION where DELETED = 0
+    select count(ID) from ROLE_PERMISSION where DELETED = 0
   </select>
 </mapper>
