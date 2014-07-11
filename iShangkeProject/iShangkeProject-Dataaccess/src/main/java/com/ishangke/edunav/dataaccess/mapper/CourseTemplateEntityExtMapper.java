@@ -10,12 +10,18 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 public interface CourseTemplateEntityExtMapper {
 
     public int add(CourseTemplateEntityExt courseTemplateEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(CourseTemplateEntityExt courseTemplateEntityExt);
-    
+
     public int getCount();
 
-    public List<CourseTemplateEntityExt> list(@Param("entity") CourseTemplateEntityExt courseTemplateEntityExt, @Param("page") PaginationEntity page);
+    public List<CourseTemplateEntityExt> list(
+            @Param("entity") CourseTemplateEntityExt courseTemplateEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(
+            @Param("entity") CourseTemplateEntityExt courseTemplateEntityExt,
+            @Param("page") PaginationEntity page);
 }

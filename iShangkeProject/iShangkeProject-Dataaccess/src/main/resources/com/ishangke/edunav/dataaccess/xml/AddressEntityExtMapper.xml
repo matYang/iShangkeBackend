@@ -25,7 +25,7 @@
     ADDRESS.DELETED ADDRESS_DELETED
   </sql>
   <insert id="add" parameterType="AddressEntityExt">
-    insert into ADRESS
+    insert into ADDRESS
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="partnerId != null">

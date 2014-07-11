@@ -9,8 +9,8 @@ public class WithdrawEntityExt extends WithdrawEntity {
     private int idStart;
     private int idEnd;
     private Set<Integer> idSet;
-    private Date lastModifyNameStart;
-    private Date lastModifyNameEnd;
+    private Date lastModifyTimeStart;
+    private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
     public int getIdStart() {
@@ -31,17 +31,17 @@ public class WithdrawEntityExt extends WithdrawEntity {
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
-    public Date getLastModifyNameStart() {
-        return lastModifyNameStart;
+    public Date getLastModifyTimeStart() {
+        return lastModifyTimeStart;
     }
-    public void setLastModifyNameStart(Date lastModifyNameStart) {
-        this.lastModifyNameStart = lastModifyNameStart;
+    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+        this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyNameEnd() {
-        return lastModifyNameEnd;
+    public Date getLastModifyTimeEnd() {
+        return lastModifyTimeEnd;
     }
-    public void setLastModifyNameEnd(Date lastModifyNameEnd) {
-        this.lastModifyNameEnd = lastModifyNameEnd;
+    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+        this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
     public Date getCreateTimeStart() {
         return createTimeStart;

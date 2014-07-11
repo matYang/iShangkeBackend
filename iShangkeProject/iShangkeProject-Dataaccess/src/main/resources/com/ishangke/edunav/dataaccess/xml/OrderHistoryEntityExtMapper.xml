@@ -14,22 +14,22 @@
     <result column="ORDERHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Account_Base_Column_List">
-    ORDERHISTORY.ID ORDERHISTORY_ID,
-    ORDERHISTORY.ORDER_ID ORDERHISTORY_ORDERID,
-    ORDERHISTORY.USER_ID ORDERHISTORY_USERID,
-    ORDERHISTORY.OPT_NAME ORDERHISTORY_OPTNAME,
-    ORDERHISTORY.REMARK ORDERHISTORY_REMARK,
-    ORDERHISTORY.PRE_STATUS ORDERHISTORY_PRESTATUS,
-    ORDERHISTORY.POST_STATUS ORDERHISTORY_POSTSTATUS,
-    ORDERHISTORY.NORMAL ORDERHISTORY_NORMAL,
-    ORDERHISTORY.CREATE_TIME ORDERHISTORY_CREATETIME,
-    ORDERHISTORY.ENABLED ORDERHISTORY_ENABLED,
-    ORDERHISTORY.DELETED ORDERHISTORY_DELETED
+  <sql id="OrderHistory_Base_Column_List">
+    ORDER_HISTORY.ID ORDERHISTORY_ID,
+    ORDER_HISTORY.ORDER_ID ORDERHISTORY_ORDERID,
+    ORDER_HISTORY.USER_ID ORDERHISTORY_USERID,
+    ORDER_HISTORY.OPT_NAME ORDERHISTORY_OPTNAME,
+    ORDER_HISTORY.REMARK ORDERHISTORY_REMARK,
+    ORDER_HISTORY.PRE_STATUS ORDERHISTORY_PRESTATUS,
+    ORDER_HISTORY.POST_STATUS ORDERHISTORY_POSTSTATUS,
+    ORDER_HISTORY.NORMAL ORDERHISTORY_NORMAL,
+    ORDER_HISTORY.CREATE_TIME ORDERHISTORY_CREATETIME,
+    ORDER_HISTORY.ENABLED ORDERHISTORY_ENABLED,
+    ORDER_HISTORY.DELETED ORDERHISTORY_DELETED
   </sql>
   <insert id="add" parameterType="OrderHistoryEntityExt">
 
-    insert into ORDERHISTORY
+    insert into ORDER_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="orderId != null">
@@ -102,14 +102,13 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update ORDERHISTORY set DELETED = 1
+    update ORDER_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="OrderHistoryEntityExt">
-    update ORDERHISTORY
+    update ORDER_HISTORY
     <set>
-
       <if test="record.orderId != null">
         ORDER_ID = #{record.orderId,jdbcType=INTEGER},
       </if>
@@ -143,7 +142,92 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-<select id="getCount" resultType="int">
-    select count(ID) from ORDERHISTORY where DELETED = 0
+  <select id="getCount" resultType="int">
+    select count(ID) from ORDER_HISTORY where DELETED = 0
+  </select>
+  <select id="list" parameterType="map" resultMap="OrderHistoryExtMap">
+    select
+    <include refid="OrderHistory_Base_Column_List"></include>
+    from ORDER_HISTORY 
+    where ORDER_HISTORY.DELETED = 0
+    <if test="entity != null">
+      <!-- id -->
+      <if test="entity.id != null and entity.id != 0">
+        AND ORDER_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ORDER_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ORDER_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size > 0">
+          AND ORDER_HISTORY.ID IN
+          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.orderId != null and entity.orderId != 0">
+        AND ORDER_HISTORY.ORDER_ID = #{entity.orderId,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.userId != null and entity.userId != 0">
+        AND ORDER_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.optName != null and entity.optName != 0">
+        AND ORDER_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
+      </if>
+      
+      <!-- String 属性 -->
+      <if test="entity.remark != null and entity.remark != ''">
+        AND ORDER_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      </if>
+
+      <!-- Integer 属性 -->
+      <if test="entity.preStatus != null and entity.preStatus != 0">
+        AND ORDER_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.postStatus != null and entity.postStatus != 0">
+        AND ORDER_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.normal != null and entity.normal != 0">
+        AND ORDER_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Date 属性 -->
+      <if test="entity.createTime != 0 and entity.createTime != null">
+        AND ORDER_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null or entity.createTime == 0">
+        <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
+          <![CDATA[AND ORDER_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null and entity.createTimeEnd != 0">
+          <![CDATA[AND ORDER_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.enabled != null">
+        AND ORDER_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      
+      <!-- 分页、必需 -->
+      <if test="page != null">
+        LIMIT #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+      </if>
+    </if>
   </select>
 </mapper>

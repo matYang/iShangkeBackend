@@ -10,12 +10,17 @@ import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 public interface CircleEntityExtMapper {
 
     public int add(CircleEntityExt circleEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(CircleEntityExt circleEntityExt);
-    
+
     public int getCount();
 
-    public List<CircleEntityExt> list(@Param("entity") CircleEntityExt circleEntityExt, @Param("page") PaginationEntity page);
+    public List<CircleEntityExt> list(
+            @Param("entity") CircleEntityExt circleEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(@Param("entity") CircleEntityExt circleEntityExt,
+            @Param("page") PaginationEntity page);
 }

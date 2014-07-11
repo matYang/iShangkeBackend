@@ -10,12 +10,18 @@ import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 public interface RolePermissionEntityExtMapper {
 
     public int add(RolePermissionEntityExt rolePermissionEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(RolePermissionEntityExt rolePermissionEntityExt);
-    
+
     public int getCount();
 
-    public List<RolePermissionEntityExt> list(@Param("entity") RolePermissionEntityExt rolePermissionEntityExt, @Param("page") PaginationEntity page);
+    public List<RolePermissionEntityExt> list(
+            @Param("entity") RolePermissionEntityExt rolePermissionEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(
+            @Param("entity") RolePermissionEntityExt rolePermissionEntityExt,
+            @Param("page") PaginationEntity page);
 }

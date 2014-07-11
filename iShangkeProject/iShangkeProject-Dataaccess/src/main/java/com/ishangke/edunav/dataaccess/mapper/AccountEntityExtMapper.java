@@ -17,5 +17,10 @@ public interface AccountEntityExtMapper {
 
     public int getCount();
 
-    public List<AccountEntityExt> list(@Param("entity")AccountEntityExt accountEntityExt, @Param("page") PaginationEntity page);
+    public List<AccountEntityExt> list(
+            @Param("entity") AccountEntityExt accountEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(@Param("entity") AccountEntityExt accountEntityExt,
+            @Param("page") PaginationEntity page);
 }

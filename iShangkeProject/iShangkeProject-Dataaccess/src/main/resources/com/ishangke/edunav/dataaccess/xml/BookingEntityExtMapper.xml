@@ -11,7 +11,7 @@
     <result column="BOOKING_EMAIL" property="email" jdbcType="VARCHAR" />
     <result column="BOOKING_STATUS" property="status" jdbcType="INTEGER" />
     <result column="BOOKING_SCHEDULEDTIME" property="scheduledTime" jdbcType="TIMESTAMP" />
-    <result column="BOOKING_NOREFUNDDATE" property="norefundDate" jdbcType="TIMESTAMP" />
+    <result column="BOOKING_NOREFUNDDATE" property="noRefundDate" jdbcType="TIMESTAMP" />
     <result column="BOOKING_CASHBACKDATE" property="cashbackDate" jdbcType="TIMESTAMP" />
     <result column="BOOKING_TYPE" property="type" jdbcType="INTEGER" />
     <result column="BOOKING_NOTE" property="note" jdbcType="VARCHAR" />
@@ -36,7 +36,7 @@
     BOOKING.STATUS BOOKING_STATUS,
     BOOKING.SCHEDULED_TIME
     BOOKING_SCHEDULEDTIME,
-    BOOKING.NOREFUND_DATE BOOKING_NOREFUNDDATE,
+    BOOKING.NO_REFUND_DATE BOOKING_NOREFUNDDATE,
     BOOKING.CASHBACK_DATE
     BOOKING_CASHBACKDATE,
     BOOKING.TYPE BOOKING_TYPE,
@@ -54,7 +54,6 @@
 
     insert into BOOKING
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      ID,
       <if test="userId != null">
         USER_ID,
       </if>
@@ -79,8 +78,8 @@
       <if test="scheduledTime != null">
         SCHEDULED_TIME,
       </if>
-      <if test="norefundDate != null">
-        NOREFUND_DATE,
+      <if test="noRefundDate != null">
+        NO_REFUND_DATE,
       </if>
       <if test="cashbackDate != null">
         CASHBACK_DATE,
@@ -108,7 +107,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
@@ -133,8 +131,8 @@
       <if test="scheduledTime != null">
         #{scheduledTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="norefundDate != null">
-        #{norefundDate,jdbcType=TIMESTAMP},
+      <if test="noRefundDate != null">
+        #{noRefundDate,jdbcType=TIMESTAMP},
       </if>
       <if test="cashbackDate != null">
         #{cashbackDate,jdbcType=TIMESTAMP},
@@ -198,8 +196,8 @@
       <if test="scheduledTime != null">
         SCHEDULED_TIME = #{scheduledTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="norefundDate != null">
-        NOREFUND_DATE = #{norefundDate,jdbcType=TIMESTAMP},
+      <if test="noRefundDate != null">
+        NO_REFUND_DATE = #{noRefundDate,jdbcType=TIMESTAMP},
       </if>
       <if test="cashbackDate != null">
         CASHBACK_DATE = #{cashbackDate,jdbcType=TIMESTAMP},

@@ -10,12 +10,18 @@ import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 public interface UserLocationEntityExtMapper {
 
     public int add(UserLocationEntityExt userLocationEntityExt);
-    
+
     public void deleteById(int id);
-    
+
     public void update(UserLocationEntityExt userLocationEntityExt);
-    
+
     public int getCount();
 
-    public List<UserLocationEntityExt> list(@Param("entity") UserLocationEntityExt userLocationEntityExt, @Param("page") PaginationEntity page);
+    public List<UserLocationEntityExt> list(
+            @Param("entity") UserLocationEntityExt userLocationEntityExt,
+            @Param("page") PaginationEntity page);
+
+    public int getListCount(
+            @Param("entity") UserLocationEntityExt userLocationEntityExt,
+            @Param("page") PaginationEntity page);
 }
