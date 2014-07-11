@@ -24,7 +24,7 @@ public class AccountEntityExtTest {
     private UserEntityExtMapper userEntityExtMapper;
     
     @Test
-    public void test() {
+    public void testAdd() {
         UserEntityExt userEntityExt = new UserEntityExt();
         userEntityExt.setLastLoginTime(new Date());
         userEntityExt.setLastModifyTime(new Date());
