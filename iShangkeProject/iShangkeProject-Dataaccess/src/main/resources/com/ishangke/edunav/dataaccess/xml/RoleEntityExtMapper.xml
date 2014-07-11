@@ -143,7 +143,7 @@
       </if>
       
       <if test="entity.enabled != null">
-        AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+        AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
       
       <if test="page != null">
