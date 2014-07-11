@@ -17,7 +17,8 @@
     ROLES.CREATE_TIME ROLES_CREATETIME,
     ROLES.ENABLED ROLES_ENABLED,
     ROLES.DELETED ROLES_DELETED
-  </sql>
+  </sql>  
+  
   <insert id="add" parameterType="RoleEntityExt">
 
     insert into ROLES
@@ -90,5 +91,65 @@
   </update>
     <select id="getCount" resultType="int">
     select count(ID) from ROLES where DELETED = 0
+  </select>
+  
+  <select id="list" parameterType="map" resultType="RoleEntityExt">
+    SELECT
+    <include refid="Role_Base_Column_List"/>
+    from ROLES where ROLES.DELETED = 0
+    <if test="entity != null">
+     
+      <if test="entity.id != null and entity.id != 0">
+        AND ROLES.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ROLES.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ROLES.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+    </if>
+    
+    <if test="entity.name != null and entity.name !='' ">
+      AND ROLES.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+    </if>
+    
+    <if test="entity.createTime != null">
+      AND ROLES.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+    </if>
+    
+    <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    
+    <if test="entity.lastModifyTime != null">
+        AND ROLES.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND ROLES.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+      <if test="entity.enabled != null">
+        AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+      
+    </if>
   </select>
 </mapper>

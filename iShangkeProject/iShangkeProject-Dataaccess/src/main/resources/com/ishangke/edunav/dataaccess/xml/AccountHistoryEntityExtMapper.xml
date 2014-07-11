@@ -12,22 +12,22 @@
     <result column="ACCOUNTHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="AccountHistory_Base_Column_List">
-    ACCOUNTHISTORY.ID ACCOUNTHISTORY_ID,
-    ACCOUNTHISTORY.USER_ID ACCOUNTHISTORY_USERID,
-    ACCOUNTHISTORY.WITHDRAW_ID ACCOUNTHISTORY_WITHDRAWID,
-    ACCOUNTHISTORY.CHARGE
+    ACCOUNT_HISTORY.ID ACCOUNTHISTORY_ID,
+    ACCOUNT_HISTORY.USER_ID ACCOUNTHISTORY_USERID,
+    ACCOUNT_HISTORY.WITHDRAW_ID ACCOUNTHISTORY_WITHDRAWID,
+    ACCOUNT_HISTORY.CHARGE
     ACCOUNTHISTORY_CHARGE,
-    ACCOUNTHISTORY.TYPE ACCOUNTHISTORY_TYPE,
-    ACCOUNTHISTORY.CREATE_TIME
+    ACCOUNT_HISTORY.TYPE ACCOUNTHISTORY_TYPE,
+    ACCOUNT_HISTORY.CREATE_TIME
     ACCOUNTHISTORY_CREATETIME,
-    ACCOUNTHISTORY.REMARK
+    ACCOUNT_HISTORY.REMARK
     ACCOUNTHISTORY_REMARK,
-    ACCOUNTHISTORY.DELETED
+    ACCOUNT_HISTORY.DELETED
     ACCOUNTHISTORY_DELETED
   </sql>
   <insert id="add" parameterType="AccountHistoryEntityExt">
 
-    insert into ACCOUNTHISTORY
+    insert into ACCOUNT_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="userId != null">
@@ -82,12 +82,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update ACCOUNTHISTORY set DELETED = 1
+    update ACCOUNT_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="AccountHistoryEntityExt">
-    update ACCOUNTHISTORY
+    update ACCOUNT_HISTORY
     <set>
       <if test="userId != null">
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -114,7 +114,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="getCount" resultType="int">
-    select count(ID) from ACCOUNTHISTORY where DELETED = 0
+    select count(ID) from ACCOUNT_HISTORY where DELETED = 0
   </select>
   
 </mapper>
