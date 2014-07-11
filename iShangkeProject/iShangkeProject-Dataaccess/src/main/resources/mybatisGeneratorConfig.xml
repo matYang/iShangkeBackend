@@ -37,6 +37,9 @@
     <table tableName="USERS" domainObjectName="UserEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
     </table>
+    <table tableName="CONTACT" domainObjectName="ContactEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+    </table>
     <table tableName="ROLES" domainObjectName="RoleEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
     </table>
