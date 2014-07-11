@@ -151,7 +151,7 @@
         AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.peyeeName != null and entity.peyeeName != ''">
-        AND WITHDRAW. LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
+        AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != 0 and entity.lastModifyTime != null">
