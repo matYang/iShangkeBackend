@@ -14,23 +14,23 @@
     <result column="APPROVEHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="ApproveHistory_Base_Column_List">
-    APPROVEHISTORY.ID APPROVEHISTORY_ID,
-    APPROVEHISTORY.TYPE APPROVEHISTORY_TYPE,
-    APPROVEHISTORY.ATTACHED_ID APPROVEHISTORY_ATTACHEDID,
-    APPROVEHISTORY.SUBMIT_USER_ID
+    APPROVE_HISTORY.ID APPROVEHISTORY_ID,
+    APPROVE_HISTORY.TYPE APPROVEHISTORY_TYPE,
+    APPROVE_HISTORY.ATTACHED_ID APPROVEHISTORY_ATTACHEDID,
+    APPROVE_HISTORY.SUBMIT_USER_ID
     APPROVEHISTORY_SUBMITUSERID,
-    APPROVEHISTORY.APPROVE_USER_ID APPROVEHISTORY_APPROVEUSERID,
-    APPROVEHISTORY.PRE_STATUS APPROVEHISTORY_PRESTATUS,
-    APPROVEHISTORY.POST_STATUS
+    APPROVE_HISTORY.APPROVE_USER_ID APPROVEHISTORY_APPROVEUSERID,
+    APPROVE_HISTORY.PRE_STATUS APPROVEHISTORY_PRESTATUS,
+    APPROVE_HISTORY.POST_STATUS
     APPROVEHISTORY_POSTSTATUS,
-    APPROVEHISTORY.COMMENT APPROVEHISTORY_COMMENT,
-    APPROVEHISTORY.CREATE_TIME APPROVEHISTORY_CREATETIME,
-    APPROVEHISTORY.DELETED
+    APPROVE_HISTORY.COMMENT APPROVEHISTORY_COMMENT,
+    APPROVE_HISTORY.CREATE_TIME APPROVEHISTORY_CREATETIME,
+    APPROVE_HISTORY.DELETED
     APPROVEHISTORY_DELETED
   </sql>
   <insert id="add" parameterType="ApproveHistoryEntityExt">
 
-    insert into APPROVEHISTORY
+    insert into APPROVE_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="type != null">
@@ -97,12 +97,12 @@
     </selectKey>
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
-    update APPROVEHISTORY set DELETED = 1
+    update APPROVE_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="ApproveHistoryEntityExt">
-    update APPROVEHISTORY
+    update APPROVE_HISTORY
     <set>
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
@@ -135,6 +135,6 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="getCount" resultType="int">
-    select count(ID) from APPROVEHISTORY where DELETED = 0
+    select count(ID) from APPROVE_HISTORY where DELETED = 0
   </select>
 </mapper>
