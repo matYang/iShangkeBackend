@@ -14,6 +14,8 @@ public interface CourseEntityExtMapper {
     public void deleteById(int id);
 
     public void update(CourseEntityExt courseEntityExt);
+    
+    public int getCount();
 
     public List<CourseEntityExt> list(@Param("entity") CourseEntityExt courseEntityExt,
             @Param("page") PaginationEntity page);

@@ -34,6 +34,7 @@ public class AccountEntityExtTest {
         userEntityExtMapper.add(userEntityExt);
         AccountEntityExt accountEntityExt = new AccountEntityExt();
         accountEntityExt.setId(userEntityExt.getId());
+        //TODO Chinese doesn't work 
         accountEntityExt.setRealName("中文测试");
         accountEntityExt.setBalance(12.12);
         accountEntityExt.setBalanceEnd(22.2);
