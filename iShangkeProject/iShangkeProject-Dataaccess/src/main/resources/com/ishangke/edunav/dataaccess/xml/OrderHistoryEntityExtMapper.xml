@@ -145,7 +145,7 @@
   <select id="getCount" resultType="int">
     select count(ID) from ORDER_HISTORY where DELETED = 0
   </select>
-  <select id="list" parameterType="map" resultMap="WithdrawExtMap">
+  <select id="list" parameterType="map" resultMap="OrderHistoryExtMap">
     select
     <include refid="OrderHistory_Base_Column_List"></include>
     from ORDER_HISTORY 
