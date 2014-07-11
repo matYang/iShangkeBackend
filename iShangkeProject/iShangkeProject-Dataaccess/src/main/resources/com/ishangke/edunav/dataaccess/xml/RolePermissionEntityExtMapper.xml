@@ -6,13 +6,15 @@
     <result column="ROLEPERMISSION_ROLEID" property="roleId" jdbcType="INTEGER" />
     <result column="ROLEPERMISSION_PERMISSIONID" property="permissionId" jdbcType="INTEGER" />
     <result column="ROLEPERMISSION_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="ROLEPERMISSION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="RolePermission_Base_Column_List">
     ROLEPERMISSION.ID ROLEPERMISSION_ID,
     ROLEPERMISSION.ROLE_ID ROLEPERMISSION_ROLEID,
     ROLEPERMISSION.PERMISSION_ID ROLEPERMISSION_PERMISSIONID,
     ROLEPERMISSION.LAST_MODIFY_TIME
-    ROLEPERMISSION_LASTMODIFYTIME
+    ROLEPERMISSION_LASTMODIFYTIME,
+    ROLEPERMISSION.DELETED ROLEPERMISSION_DELETED
   </sql>
   <insert id="add" parameterType="RolePermissionEntityExt">
 
@@ -28,6 +30,9 @@
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
       </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -39,6 +44,9 @@
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TIMESTAMP},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -62,6 +70,9 @@
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
