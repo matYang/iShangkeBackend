@@ -3,7 +3,7 @@
 <mapper namespace="com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper">
   <resultMap id="CourseExtMap" type="CourseEntityExt">
     <id column="COURSE_ID" property="id" jdbcType="INTEGER" />
-    <result column="COURSE_COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
     <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
     <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
@@ -11,10 +11,10 @@
     <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
     <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
-    <result column="COURSE_ORIGINALPRICE" property="originalprice" jdbcType="DOUBLE" />
+    <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
     <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
     <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
-    <result column="COURSE_SERVICECHARGE" property="servicecharge" jdbcType="DOUBLE" />
+    <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
     <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
     <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="COURSE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
@@ -105,7 +105,7 @@
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
-    COURSE.COURSENAME COURSE_COURSENAME,
+    COURSE.COURSE_NAME COURSE_COURSENAME,
     COURSE_COURSE_TEMPLATE_ID
     COURSE.COURSETEMPLATEID,
     COURSE.CATEGORY_ID COURSE_CATEGORYID,
@@ -114,10 +114,10 @@
     COURSE.PARTNER_ID COURSE_PARTNERID,
     COURSE.ADDRESS_ID COURSE_ADDRESSID,
     COURSE.PRICE COURSE_PRICE, 
-    COURSE.ORIGINALPRICE COURSE_ORIGINALPRICE,
+    COURSE.ORIGINAL_PRICE COURSE_ORIGINALPRICE,
     COURSE.CASHBACK COURSE_CASHBACK,
     COURSE.COMMISSION COURSE_COMMISSION,
-    COURSE.SERVICECHARGE COURSE_SERVICECHARGE,
+    COURSE.SERVICE_CHARGE COURSE_SERVICECHARGE,
     COURSE.STATUS COURSE_STATUS,
     COURSE.LAST_MODIFY_TIME COURSE_LASTMODIFYTIME,
     COURSE.CREATE_TIME COURSE_CREATETIME,
@@ -198,7 +198,7 @@
     insert into COURSE
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="coursename != null">
+      <if test="courseName != null">
         COURSENAME,
       </if>
       <if test="courseTemplateId != null">
@@ -222,7 +222,7 @@
       <if test="price != null">
         PRICE,
       </if>
-      <if test="originalprice != null">
+      <if test="originalPrice != null">
         ORIGINALPRICE,
       </if>
       <if test="cashback != null">
@@ -231,7 +231,7 @@
       <if test="commission != null">
         COMMISSION,
       </if>
-      <if test="servicecharge != null">
+      <if test="serviceCharge != null">
         SERVICECHARGE,
       </if>
       <if test="status != null">
@@ -384,8 +384,8 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="coursename != null">
-        #{coursename,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseTemplateId != null">
         #{courseTemplateId,jdbcType=INTEGER},
@@ -408,8 +408,8 @@
       <if test="price != null">
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="originalprice != null">
-        #{originalprice,jdbcType=DOUBLE},
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         #{cashback,jdbcType=DOUBLE},
@@ -417,8 +417,8 @@
       <if test="commission != null">
         #{commission,jdbcType=DOUBLE},
       </if>
-      <if test="servicecharge != null">
-        #{servicecharge,jdbcType=DOUBLE},
+      <if test="serviceCharge != null">
+        #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -582,12 +582,11 @@
   <update id="update" parameterType="CourseEntityExt">
     update COURSE
     <set>
-      <if test="coursename != null">
-        COURSENAME = #{coursename,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        COURSENAME = #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseTemplateId != null">
-        COURSE_TEMPLATE_ID =
-        #{courseTemplateId,jdbcType=INTEGER},
+        COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="categoryId != null">
         CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
@@ -607,8 +606,8 @@
       <if test="price != null">
         PRICE = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="originalprice != null">
-        ORIGINALPRICE = #{originalprice,jdbcType=DOUBLE},
+      <if test="originalPrice != null">
+        ORIGINALPRICE = #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         CASHBACK = #{cashback,jdbcType=DOUBLE},
@@ -616,8 +615,8 @@
       <if test="commission != null">
         COMMISSION = #{commission,jdbcType=DOUBLE},
       </if>
-      <if test="servicecharge != null">
-        SERVICECHARGE = #{servicecharge,jdbcType=DOUBLE},
+      <if test="serviceCharge != null">
+        SERVICECHARGE = #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
@@ -790,8 +789,8 @@
     join CLASS_PHOTO CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
-      <if test="entity.coursename != null and entity.coursename != ''">
-        AND COURSE.COURSENAME LIKE "%"#{entity.coursename,jdbcType=VARCHAR}"%"
+      <if test="entity.courseName != null and entity.courseName != ''">
+        AND COURSE.COURSENAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.id != null and entity.id != 0">
         AND COURSE.ID = #{entity.id,jdbcType=INTEGER}
