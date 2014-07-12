@@ -143,7 +143,148 @@
   <select id="getCount" resultType="int">
     select count(ID) from CLASS_PHOTO where DELETED = 0
   </select>
-  
+  <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
+  SELECT
+  <include refid="ClassPhoto_Base_Column_List"/>
+  from CLASS_PHOTO WHERE CLASS_PHOTO.DELETED = 0
+  <if test="entity != null">
+    <if test="entity.id != null and entity.id != 0">
+        AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
+    </if>
+    
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND CLASS_PHOTO.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND CLASS_PHOTO.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+       </if>
+       
+    <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND CLASS_PHOTO.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+    </if>
+    
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND CLASS_PHOTO.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND CLASS_PHOTO.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      
+      <if test="entity.imgUrl != null and entity.imgUrl != ''">
+        AND CLASS_PHOTO.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
+      </if>      
+       <if test="entity.title != null and entity.title != ''">
+        AND CLASS_PHOTO.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.description != null and entity.description != ''">
+        AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND CLASS_PHOTO.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != null">
+        AND CLASS_PHOTO.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null">
+        AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+  </if>
+  </select>
+  <select id="getListCount" parameterType="map" resultType="int">
+   SELECT COUNT(*) FROM (
+   select
+  <include refid="ClassPhoto_Base_Column_List"/>
+  from CLASS_PHOTO WHERE CLASS_PHOTO.DELETED = 0
+  <if test="entity != null">
+    <if test="entity.id != null and entity.id != 0">
+        AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
+    </if>
+    
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND CLASS_PHOTO.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND CLASS_PHOTO.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+       </if>
+       
+    <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND CLASS_PHOTO.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+    </if>
+    
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND CLASS_PHOTO.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND CLASS_PHOTO.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      
+      <if test="entity.imgUrl != null and entity.imgUrl != ''">
+        AND CLASS_PHOTO.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
+      </if>      
+       <if test="entity.title != null and entity.title != ''">
+        AND CLASS_PHOTO.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.description != null and entity.description != ''">
+        AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND CLASS_PHOTO.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != null">
+        AND CLASS_PHOTO.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null">
+        AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+  </if>
+  ) AS total
+  </select>
   <select id="listClassPhotoByPartnerId" parameterType="int" resultMap="ClassPhotoExtMap">
   SELECT
   <include refid="ClassPhoto_Base_Column_List"/>
