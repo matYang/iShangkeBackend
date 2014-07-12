@@ -5,6 +5,7 @@
 <configuration>
   <typeAliases>
     <typeAlias type="com.ishangke.edunav.dataaccess.model.UserEntityExt" alias="UserEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.ContactEntityExt" alias="ContactEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.RoleEntityExt" alias="RoleEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.GroupEntityExt" alias="GroupEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.UserGroupEntityExt" alias="UserGroupEntityExt" />
@@ -32,13 +33,10 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.MessageEntityExt" alias="MessageEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.PartnerEntityExt" alias="PartnerEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.WithdrawEntityExt" alias="WithdrawEntityExt" />
-    <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt"
-      alias="CourseTemplateTeacherEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt" alias="CourseTemplateTeacherEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt" alias="ClassPhotoEntityExt" />
-    <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt"
-      alias="CourseClassPhotoEntityExt" />
-    <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt"
-      alias="CourseTemplateClassPhotoEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt" alias="CourseClassPhotoEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt" alias="CourseTemplateClassPhotoEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.UserLocationEntityExt" alias="UserLocationEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.AddressEntityExt" alias="AddressEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt" alias="BookingHistoryEntityExt" />

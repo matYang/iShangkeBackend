@@ -154,28 +154,30 @@
         AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.lastModifyTime != 0 and entity.lastModifyTime != null">
+      <if test="entity.lastModifyTime != null">
         AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="entity.lastModifyTime == null or entity.lastModifyTime == 0">
-        <if test="entity.lastModifyTimeStart != null and entity.lastModifyTimeStart != 0">
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
         </if>
-        <if test="entity.lastModifyTimeEnd != null and entity.lastModifyTimeEnd != 0">
+        <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-      <if test="entity.createTime != 0 and entity.createTime != null">
+      
+      <if test="entity.createTime != null">
         AND WITHDRAW.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="entity.createTime == null or entity.createTime == 0">
-        <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
           <![CDATA[AND WITHDRAW.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
-        <if test="entity.createTimeEnd != null and entity.createTimeEnd != 0">
+        <if test="entity.createTimeEnd != null">
           <![CDATA[AND WITHDRAW.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
+      
       <if test="entity.enabled != null">
         AND WITHDRAW.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>

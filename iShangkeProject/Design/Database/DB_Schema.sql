@@ -1,5 +1,6 @@
 DROP database edunav;
 CREATE database edunav;
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -225,7 +226,7 @@ COMMENT = '<double-click to overwrite multiple objects>';
 -- Table `EduNav`.`CIRCLE`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`CIRCLE` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `VALUE` VARCHAR(45) NULL ,
   `NAME` VARCHAR(45) NULL ,
   `LAST_MODIFY_TIME` DATETIME NOT NULL ,
@@ -686,7 +687,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`WITHDRAW`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`WITHDRAW` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `USER_ID` INT NOT NULL ,
   `PAYEE_ID` VARCHAR(100) NULL ,
   `PEYEE_NAME` VARCHAR(45) NULL ,
@@ -881,7 +882,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`COURSE_TEMPLATE_TEACHER`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`COURSE_TEMPLATE_TEACHER` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `COURSE_TEMPLATE_ID` INT NOT NULL ,
   `TEACHER_ID` INT NOT NULL ,
   `CREATE_TIME` DATETIME NOT NULL ,
@@ -906,7 +907,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`CLASS_PHOTO`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`CLASS_PHOTO` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `PARTNER_ID` INT NOT NULL ,
   `IMG_URL` VARCHAR(100) NULL ,
   `TITLE` VARCHAR(45) NULL ,
@@ -929,7 +930,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`COURSE_CLASS_PHOTO`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`COURSE_CLASS_PHOTO` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `COURSE_ID` INT NOT NULL ,
   `CLASS_PHOTO_ID` INT NOT NULL ,
   `CREATE_TIME` DATETIME NOT NULL ,
@@ -954,7 +955,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`COURSE_TEMPLATE_CLASS_PHOTO`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`COURSE_TEMPLATE_CLASS_PHOTO` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `COURSE_TEMPLATE_ID` INT NOT NULL ,
   `CLASS_PHOTO_ID` INT NOT NULL ,
   `CREATE_TIME` DATETIME NOT NULL ,
@@ -979,7 +980,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`USER_LOCATION`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`USER_LOCATION` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `USER_ID` INT NOT NULL ,
   `LOCATION_ID` INT NOT NULL ,
   `LAST_MODIFY_TIME` DATETIME NOT NULL ,
@@ -1004,7 +1005,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`BOOKING_HISTORY`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`BOOKING_HISTORY` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `BOOKING_ID` INT NOT NULL ,
   `USER_ID` INT NOT NULL ,
   `OPT_NAME` INT NULL ,
@@ -1035,7 +1036,7 @@ ENGINE = InnoDB;
 -- Table `EduNav`.`ORDER`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`ORDER` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `BOOKING_ID` INT NULL ,
   `CREATE_TIME` DATETIME NULL ,
   `TYPE` VARCHAR(45) NULL ,
@@ -1084,10 +1085,32 @@ CREATE  TABLE IF NOT EXISTS `EduNav`.`ORDER_HISTORY` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `EduNav`.`CONTACT`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `EduNav`.`CONTACT` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `USER_ID` INT NOT NULL ,
+  `NAME` VARCHAR(45) NULL ,
+  `PHONE` VARCHAR(45) NULL ,
+  `EMAIL` VARCHAR(100) NULL ,
+  `LAST_MODIFY_TIME` DATETIME NOT NULL ,
+  `CREATE_TIME` DATETIME NOT NULL ,
+  `DELETED` INT NOT NULL ,
+  `ENABLED` INT NOT NULL ,
+  PRIMARY KEY (`ID`) ,
+  INDEX `FK_USERS_CONTACT_idx` (`USER_ID` ASC) ,
+  CONSTRAINT `FK_USERS_CONTACT`
+    FOREIGN KEY (`USER_ID` )
+    REFERENCES `EduNav`.`USERS` (`ID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `EduNav` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
