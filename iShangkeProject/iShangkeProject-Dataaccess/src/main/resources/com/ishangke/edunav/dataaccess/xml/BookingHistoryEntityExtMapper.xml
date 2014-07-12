@@ -15,26 +15,21 @@
     <result column="BOOKINGHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="BookingHistory_Base_Column_List">
-    BOOKINGHISTORY.ID BOOKINGHISTORY_ID,
-    BOOKINGHISTORY.BOOKING_ID
-    BOOKINGHISTORY_BOOKINGID,
-    BOOKINGHISTORY.USER_ID BOOKINGHISTORY_USERID,
-    BOOKINGHISTORY.OPT_NAME
-    BOOKINGHISTORY_OPTNAME,
-    BOOKINGHISTORY.REMARK BOOKINGHISTORY_REMARK,
-    BOOKINGHISTORY.PRE_STATUS
-    BOOKINGHISTORY_PRESTATUS,
-    BOOKINGHISTORY.POST_STATUS BOOKINGHISTORY_POSTSTATUS,
-    BOOKINGHISTORY.NORMAL BOOKINGHISTORY_NORMAL,
-    BOOKINGHISTORY.CREATE_TIME
-    BOOKINGHISTORY_CREATETIME,
-    BOOKINGHISTORY.ENABLED BOOKINGHISTORY_ENABLED,
-    BOOKINGHISTORY.DELETED
-    BOOKINGHISTORY_DELETED
+    BOOKING_HISTORY.ID BOOKINGHISTORY_ID,
+    BOOKING_HISTORY.BOOKING_ID BOOKINGHISTORY_BOOKINGID,
+    BOOKING_HISTORY.USER_ID BOOKINGHISTORY_USERID,
+    BOOKING_HISTORY.OPT_NAME BOOKINGHISTORY_OPTNAME,
+    BOOKING_HISTORY.REMARK BOOKINGHISTORY_REMARK,
+    BOOKING_HISTORY.PRE_STATUS BOOKINGHISTORY_PRESTATUS,
+    BOOKING_HISTORY.POST_STATUS BOOKINGHISTORY_POSTSTATUS,
+    BOOKING_HISTORY.NORMAL BOOKINGHISTORY_NORMAL,
+    BOOKING_HISTORY.CREATE_TIME BOOKINGHISTORY_CREATETIME,
+    BOOKING_HISTORY.ENABLED BOOKINGHISTORY_ENABLED,
+    BOOKING_HISTORY.DELETED BOOKINGHISTORY_DELETED
   </sql>
   <insert id="add" parameterType="BookingHistoryEntityExt">
 
-    insert into BOOKINGHISTORY
+    insert into BOOKING_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="bookingId != null">
@@ -107,12 +102,12 @@
     </selectKey>
   </insert>
 <update id="deleteById" parameterType="java.lang.Integer">
-    update BOOKINGHISTORY set DELETED = 1
+    update BOOKING_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
    <update id="update" parameterType="BookingHistoryEntityExt" >
-    update BOOKINGHISTORY
+    update BOOKING_HISTORY
     <set >
       <if test="bookingId != null" >
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
@@ -148,6 +143,191 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="getCount" resultType="int">
-    select count(ID) from BOOKINGHISTORY where DELETED = 0
+    select count(ID) from BOOKING_HISTORY where DELETED = 0
   </select>
+
+  <select id="list" parameterType="map" resultMap="BookingHistoryExtMap">
+    SELECT
+    <include refid="BookingHistory_Base_Column_List"/>
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
+    <if test="entity != null">
+
+      <if test="entity.id != null and entity.id != 0">
+        AND BOOKING_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND BOOKING_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND BOOKING_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
+        AND BOOKING_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdStart != null and entity.userIdStart != 0">
+          <![CDATA[AND BOOKING_HISTORY.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
+          <![CDATA[AND BOOKING_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.bookingId != null and entity.bookingId != 0">
+        AND BOOKING_HISTORY.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.bookingId == null or entity.bookingId == 0">
+        <if test="entity.bookingIdStart != null and entity.bookingIdStart != 0">
+          <![CDATA[AND BOOKING_HISTORY.BOOKING_ID >= #{entity.bookingIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.bookingIdEnd != null and entity.bookingIdEnd != 0">
+          <![CDATA[AND BOOKING_HISTORY.BOOKING_ID <= #{entity.bookingIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.remark != null and entity.remark !='' ">
+        AND BOOKING_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.optName != null">
+        AND BOOKING_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
+      </if>
+      <if test="entity.preStatus != null">
+        AND BOOKING_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
+      </if>
+      <if test="entity.postStatus != null">
+        AND BOOKING_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
+      </if>
+      <if test="entity.normal != null">
+        AND BOOKING_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
+      </if>
+
+
+      <if test="entity.createTime != null">
+        AND BOOKING_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND BOOKING_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND BOOKING_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    
+      <if test="entity.lastModifyTime != null">
+        AND BOOKING_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null">
+        AND BOOKING_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="BookingHistory_Base_Column_List"/>
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
+    <if test="entity != null">
+
+      <if test="entity.id != null and entity.id != 0">
+        AND BOOKING_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND BOOKING_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND BOOKING_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
+        AND BOOKING_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdStart != null and entity.userIdStart != 0">
+          <![CDATA[AND BOOKING_HISTORY.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
+          <![CDATA[AND BOOKING_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.bookingId != null and entity.bookingId != 0">
+        AND BOOKING_HISTORY.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.bookingId == null or entity.bookingId == 0">
+        <if test="entity.bookingIdStart != null and entity.bookingIdStart != 0">
+          <![CDATA[AND BOOKING_HISTORY.BOOKING_ID >= #{entity.bookingIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.bookingIdEnd != null and entity.bookingIdEnd != 0">
+          <![CDATA[AND BOOKING_HISTORY.BOOKING_ID <= #{entity.bookingIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.remark != null and entity.remark !='' ">
+        AND BOOKING_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.optName != null">
+        AND BOOKING_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
+      </if>
+      <if test="entity.preStatus != null">
+        AND BOOKING_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
+      </if>
+      <if test="entity.postStatus != null">
+        AND BOOKING_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
+      </if>
+      <if test="entity.normal != null">
+        AND BOOKING_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
+      </if>
+
+
+      <if test="entity.createTime != null">
+        AND BOOKING_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND BOOKING_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND BOOKING_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    
+      <if test="entity.lastModifyTime != null">
+        AND BOOKING_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null">
+        AND BOOKING_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+    ) AS total
+  </select>
+
 </mapper>
