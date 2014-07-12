@@ -834,7 +834,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND COURSE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size > 0">
+        <if test="entity.idSet.size() > 0">
           AND COURSE.ID IN
           <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -908,7 +908,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND COURSE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size > 0">
+        <if test="entity.idSet.size() > 0">
           AND COURSE.ID IN
           <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
             #{listItem}
