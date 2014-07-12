@@ -9,9 +9,18 @@ struct ResponseBo {
 }
 
 /**
+ * OrderByBo
+ */
+struct OrderByBo {
+  1: string columnKey
+  2: string order
+}
+
+/**
  * PaginationBo
  */
 struct PaginationBo {
   1: i32 size
   2: i32 offset
+  3: list<OrderByBo> orderByEntities
 }

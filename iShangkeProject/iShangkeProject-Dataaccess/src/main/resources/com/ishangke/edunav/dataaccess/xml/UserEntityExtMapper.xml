@@ -241,9 +241,9 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND USERS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND USERS.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
@@ -345,10 +345,17 @@
           <![CDATA[AND USERS.BIRTHDAY <= #{entity.birthday,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-      
-      <if test="page != null">
-        LIMIT #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
-      </if>
+    </if>
+
+    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        USERS.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
 </mapper>
