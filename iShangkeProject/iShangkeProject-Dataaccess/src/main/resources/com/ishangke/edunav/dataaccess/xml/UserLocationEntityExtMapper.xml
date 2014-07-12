@@ -96,7 +96,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND USER_LOCATION.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size > 0">
+        <if test="entity.idSet.size() > 0">
           AND USER_LOCATION.ID IN
           <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
             separator=",">
@@ -119,7 +119,7 @@
         AND USER_LOCATION.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
       <if test="page != null">
-        LIMIT #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
   </select>

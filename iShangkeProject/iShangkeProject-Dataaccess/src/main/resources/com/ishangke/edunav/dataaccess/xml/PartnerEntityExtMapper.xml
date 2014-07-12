@@ -426,7 +426,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND PARTNER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size > 0">
+        <if test="entity.idSet.size() > 0">
           AND PARTNER.ID IN
           <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
             separator=",">
@@ -611,7 +611,7 @@
       </if>
       
       <if test="page != null">
-        LIMIT #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
   </select>

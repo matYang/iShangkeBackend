@@ -72,6 +72,6 @@ public class UserEntityExtTest extends BaseTest {
         userQueryEntity.setName("_test_");
         List<UserEntityExt> result = userEntityExtMapper.list(userQueryEntity, page);
         Assert.assertEquals(3, result.size());
-        Assert.assertEquals("_test_user_", result.get(0).getName());
+        Assert.assertEquals("_test_user_2_", result.get(0).getName());
     }
 }

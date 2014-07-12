@@ -6,8 +6,8 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.PartnerEntity;
 
 public class PartnerEntityExt extends PartnerEntity {
-    private int idStart;
-    private int idEnd;
+    private Integer idStart;
+    private Integer idEnd;
     private Set<Integer> idSet;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
@@ -15,22 +15,22 @@ public class PartnerEntityExt extends PartnerEntity {
     private Date createTimeEnd;
     private Date lastLoginTimeStart;
     private Date lastLoginTimeEnd;
-    private int cutoffDayStart;
-    private int cutoffDayEnd;
-    private int cutoffTimeStart;
-    private int cutoffTimeEnd;
-    private int partnerQualificationStart;
-    private int partnerQualificationEnd;
-    public int getIdStart() {
+    private Integer cutoffDayStart;
+    private Integer cutoffDayEnd;
+    private Integer cutoffTimeStart;
+    private Integer cutoffTimeEnd;
+    private Integer partnerQualificationStart;
+    private Integer partnerQualificationEnd;
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
     public Set<Integer> getIdSet() {
@@ -75,40 +75,40 @@ public class PartnerEntityExt extends PartnerEntity {
     public void setLastLoginTimeEnd(Date lastLoginTimeEnd) {
         this.lastLoginTimeEnd = lastLoginTimeEnd;
     }
-    public int getCutoffDayStart() {
+    public Integer getCutoffDayStart() {
         return cutoffDayStart;
     }
-    public void setCutoffDayStart(int cutoffDayStart) {
+    public void setCutoffDayStart(Integer cutoffDayStart) {
         this.cutoffDayStart = cutoffDayStart;
     }
-    public int getCutoffDayEnd() {
+    public Integer getCutoffDayEnd() {
         return cutoffDayEnd;
     }
-    public void setCutoffDayEnd(int cutoffDayEnd) {
+    public void setCutoffDayEnd(Integer cutoffDayEnd) {
         this.cutoffDayEnd = cutoffDayEnd;
     }
-    public int getCutoffTimeStart() {
+    public Integer getCutoffTimeStart() {
         return cutoffTimeStart;
     }
-    public void setCutoffTimeStart(int cutoffTimeStart) {
+    public void setCutoffTimeStart(Integer cutoffTimeStart) {
         this.cutoffTimeStart = cutoffTimeStart;
     }
-    public int getCutoffTimeEnd() {
+    public Integer getCutoffTimeEnd() {
         return cutoffTimeEnd;
     }
-    public void setCutoffTimeEnd(int cutoffTimeEnd) {
+    public void setCutoffTimeEnd(Integer cutoffTimeEnd) {
         this.cutoffTimeEnd = cutoffTimeEnd;
     }
-    public int getPartnerQualificationStart() {
+    public Integer getPartnerQualificationStart() {
         return partnerQualificationStart;
     }
-    public void setPartnerQualificationStart(int partnerQualificationStart) {
+    public void setPartnerQualificationStart(Integer partnerQualificationStart) {
         this.partnerQualificationStart = partnerQualificationStart;
     }
-    public int getPartnerQualificationEnd() {
+    public Integer getPartnerQualificationEnd() {
         return partnerQualificationEnd;
     }
-    public void setPartnerQualificationEnd(int partnerQualificationEnd) {
+    public void setPartnerQualificationEnd(Integer partnerQualificationEnd) {
         this.partnerQualificationEnd = partnerQualificationEnd;
     }
 }
