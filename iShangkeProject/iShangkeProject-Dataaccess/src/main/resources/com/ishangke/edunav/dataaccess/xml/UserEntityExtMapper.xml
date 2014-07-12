@@ -21,7 +21,7 @@
     <result column="USERS_SCHOOL" property="school" jdbcType="VARCHAR" />
     <result column="USERS_MAJOR" property="major" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="_User_Column_List">
+  <sql id="User_Base_Column_List">
     USERS.ID USERS_ID,
     USERS.NAME USERS_NAME,
     USERS.PASSWORD USERS_PASSWORD,
