@@ -6,23 +6,23 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.WithdrawEntity;
 
 public class WithdrawEntityExt extends WithdrawEntity {
-    private int idStart;
-    private int idEnd;
+    private Integer idStart;
+    private Integer idEnd;
     private Set<Integer> idSet;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
     public Set<Integer> getIdSet() {
