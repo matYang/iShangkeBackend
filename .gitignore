@@ -34,3 +34,5 @@
 dump.rdb
 .DS_Store
 EduNav.mwb.bak
+applicationContext-dataaccess.xml
+applicationContext-dataaccessUT.xml
