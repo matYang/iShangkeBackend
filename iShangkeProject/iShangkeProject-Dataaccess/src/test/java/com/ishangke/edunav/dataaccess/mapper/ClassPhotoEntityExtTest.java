@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
@@ -23,7 +24,7 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class ClassPhotoEntityExtTest {
+public class ClassPhotoEntityExtTest extends BaseTest{
     @Autowired
     private ClassPhotoEntityExtMapper classPhotoEntityExtMapper;
     @Autowired
