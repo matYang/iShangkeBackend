@@ -7,8 +7,8 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.CourseEntity;
 
 public class CourseEntityExt extends CourseEntity {
-    private Integereger idStart;
-    private Integereger idEnd;
+    private Integer idStart;
+    private Integer idEnd;
     private Set<Integer> idSet;
     private Date lastModifyTimeBefore;
     private Date lastModifyTimeAfter;
@@ -78,27 +78,27 @@ public class CourseEntityExt extends CourseEntity {
     private String circleName;
     
 
-    public Integereger getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
 
-    public void setIdStart(Integereger idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
 
-    public Integereger getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
 
-    public void setIdEnd(Integereger idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
 
-    public Set<Integereger> getIdSet() {
+    public Set<Integer> getIdSet() {
         return idSet;
     }
 
-    public void setIdSet(Set<Integereger> idSet) {
+    public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
 

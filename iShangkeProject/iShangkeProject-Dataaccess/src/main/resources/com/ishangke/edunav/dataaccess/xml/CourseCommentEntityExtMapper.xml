@@ -10,7 +10,7 @@
     <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="COURSECOMMENT_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
-    <result column="COURSECOMMENT_DELTED" property="delted" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseComment_Base_Column_List">
     COURSE_COMMENT.ID COURSECOMMENT_ID,
@@ -23,7 +23,7 @@
     COURSECOMMENT_LASTMODIFYTIME,
     COURSE_COMMENT.CREATE_TIME COURSECOMMENT_CREATETIME,
     COURSE_COMMENT.ENABLED COURSECOMMENT_ENABLED,
-    COURSE_COMMENT.DELTED COURSECOMMENT_DELTED
+    COURSE_COMMENT.DELETED COURSECOMMENT_DELETED
   </sql>
   <insert id="add" parameterType="CourseCommentEntityExt">
 
@@ -51,8 +51,8 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="delted != null">
-        DELTED,
+      <if test="deleted != null">
+        DELETED,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -78,8 +78,8 @@
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="delted != null">
-        #{delted,jdbcType=INTEGER},
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -117,8 +117,8 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="delted != null">
-        DELTED = #{delted,jdbcType=INTEGER},
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
