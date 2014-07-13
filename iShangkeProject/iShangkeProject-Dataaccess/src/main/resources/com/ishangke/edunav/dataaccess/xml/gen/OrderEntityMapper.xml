@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order
+    from ORDER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,15 +90,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from order
+    from ORDER
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
+    delete from ORDER
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderEntityExample" >
-    delete from order
+    delete from ORDER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -107,7 +107,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order (ID, BOOKING_ID, CREATE_TIME, 
+    insert into ORDER (ID, BOOKING_ID, CREATE_TIME, 
       TYPE, PRICE, RUNING_NUMBER, 
       STATUS, ENABLED, DELEDED
       )
@@ -120,7 +120,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order
+    insert into ORDER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="bookingId != null" >
@@ -177,13 +177,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderEntityExample" resultType="java.lang.Integer" >
-    select count(*) from order
+    select count(*) from ORDER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update order
+    update ORDER
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -218,7 +218,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update order
+    update ORDER
     set ID = #{record.id,jdbcType=INTEGER},
       BOOKING_ID = #{record.bookingId,jdbcType=INTEGER},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
@@ -233,7 +233,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderEntity" >
-    update order
+    update ORDER
     <set >
       <if test="bookingId != null" >
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
@@ -263,7 +263,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderEntity" >
-    update order
+    update ORDER
     set BOOKING_ID = #{bookingId,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       TYPE = #{type,jdbcType=VARCHAR},

@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,12 +23,12 @@ public class CategoryEntityExtTest {
     @Test
     public void testAdd() {
         CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
-        
+
         categoryEntityExt.setCreateTime(new Date());
         categoryEntityExt.setLastModifyTime(new Date());
         categoryEntityExt.setEnabled(1);
         categoryEntityExt.setDeleted(0);
-       
+
         CategoryEntityExtMapper.add(categoryEntityExt);
         int oldcount = CategoryEntityExtMapper.getCount();
         CategoryEntityExtMapper.add(categoryEntityExt);
@@ -41,12 +42,53 @@ public class CategoryEntityExtTest {
         categoryEntityExt.setLastModifyTime(new Date());
         categoryEntityExt.setEnabled(1);
         categoryEntityExt.setDeleted(0);
-        
+
         CategoryEntityExtMapper.add(categoryEntityExt);
         int oldcount = CategoryEntityExtMapper.getCount();
         CategoryEntityExtMapper.deleteById(categoryEntityExt.getId());
         Assert.assertSame(CategoryEntityExtMapper.getCount(), oldcount - 1);
     }
 
+    @Test
+    public void testList(){        
+        CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
+        categoryEntityExt.setCreateTime(new Date());
+        categoryEntityExt.setLastModifyTime(new Date());
+        categoryEntityExt.setEnabled(1);
+        categoryEntityExt.setDeleted(0);
+        categoryEntityExt.setRank(1);        
+        CategoryEntityExtMapper.add(categoryEntityExt);     
 
+        categoryEntityExt.setCreateTimeStart(categoryEntityExt.getCreateTime());
+        categoryEntityExt.setLastModifyTimeStart(categoryEntityExt.getLastModifyTime());
+        List<CategoryEntityExt> list = CategoryEntityExtMapper.list(categoryEntityExt, null);
+        Assert.assertSame(list.size(),1);
+
+        int listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, null);
+        Assert.assertSame(listSize,1);
+
+    }
+
+    @Test
+    public void testUpdate(){
+        CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
+        categoryEntityExt.setCreateTime(new Date());
+        categoryEntityExt.setLastModifyTime(new Date());
+        categoryEntityExt.setEnabled(1);
+        categoryEntityExt.setDeleted(0);
+        categoryEntityExt.setRank(1);        
+        CategoryEntityExtMapper.add(categoryEntityExt);     
+        
+        categoryEntityExt.setCreateTimeStart(categoryEntityExt.getCreateTime());
+        categoryEntityExt.setLastModifyTimeStart(categoryEntityExt.getLastModifyTime());
+        List<CategoryEntityExt> list = CategoryEntityExtMapper.list(categoryEntityExt, null);
+        list.get(0).setName("李清");
+        CategoryEntityExtMapper.update(categoryEntityExt);
+
+        list = CategoryEntityExtMapper.list(categoryEntityExt, null);
+        Assert.assertSame(list.size(),1);
+
+        int listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, null);
+        Assert.assertSame(listSize,1);
+    }
 }

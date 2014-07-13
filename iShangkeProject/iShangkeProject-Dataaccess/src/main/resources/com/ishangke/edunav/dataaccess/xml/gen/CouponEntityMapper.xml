@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from coupon
+    from COUPON
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,15 +93,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from coupon
+    from COUPON
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from coupon
+    delete from COUPON
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponEntityExample" >
-    delete from coupon
+    delete from COUPON
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,7 +110,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into coupon (ID, CODE, TOTAL, 
+    insert into COUPON (ID, CODE, TOTAL, 
       BALANCE, EXPIRY_TIME, REMARK, 
       USER_ID, LAST_MODIFY_TIME, CREATE_TIME, 
       ENABLED, DELETED)
@@ -123,7 +123,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into coupon
+    insert into COUPON
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="code != null" >
@@ -192,13 +192,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponEntityExample" resultType="java.lang.Integer" >
-    select count(*) from coupon
+    select count(*) from COUPON
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update coupon
+    update COUPON
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -239,7 +239,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update coupon
+    update COUPON
     set ID = #{record.id,jdbcType=INTEGER},
       CODE = #{record.code,jdbcType=VARCHAR},
       TOTAL = #{record.total,jdbcType=DOUBLE},
@@ -256,7 +256,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponEntity" >
-    update coupon
+    update COUPON
     <set >
       <if test="code != null" >
         CODE = #{code,jdbcType=VARCHAR},
@@ -292,7 +292,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponEntity" >
-    update coupon
+    update COUPON
     set CODE = #{code,jdbcType=VARCHAR},
       TOTAL = #{total,jdbcType=DOUBLE},
       BALANCE = #{balance,jdbcType=DOUBLE},

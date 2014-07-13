@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role_permission
+    from ROLE_PERMISSION
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,15 +86,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from role_permission
+    from ROLE_PERMISSION
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from role_permission
+    delete from ROLE_PERMISSION
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.RolePermissionEntityExample" >
-    delete from role_permission
+    delete from ROLE_PERMISSION
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,7 +103,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into role_permission (ID, ROLE_ID, PERMISSION_ID, 
+    insert into ROLE_PERMISSION (ID, ROLE_ID, PERMISSION_ID, 
       LAST_MODIFY_TIME, DELETED)
     values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}, 
       #{lastModifyTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
@@ -112,7 +112,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into role_permission
+    insert into ROLE_PERMISSION
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="roleId != null" >
@@ -145,13 +145,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.RolePermissionEntityExample" resultType="java.lang.Integer" >
-    select count(*) from role_permission
+    select count(*) from ROLE_PERMISSION
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update role_permission
+    update ROLE_PERMISSION
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -174,7 +174,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update role_permission
+    update ROLE_PERMISSION
     set ID = #{record.id,jdbcType=INTEGER},
       ROLE_ID = #{record.roleId,jdbcType=INTEGER},
       PERMISSION_ID = #{record.permissionId,jdbcType=INTEGER},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.RolePermissionEntity" >
-    update role_permission
+    update ROLE_PERMISSION
     <set >
       <if test="roleId != null" >
         ROLE_ID = #{roleId,jdbcType=INTEGER},
@@ -203,7 +203,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.RolePermissionEntity" >
-    update role_permission
+    update ROLE_PERMISSION
     set ROLE_ID = #{roleId,jdbcType=INTEGER},
       PERMISSION_ID = #{permissionId,jdbcType=INTEGER},
       LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},

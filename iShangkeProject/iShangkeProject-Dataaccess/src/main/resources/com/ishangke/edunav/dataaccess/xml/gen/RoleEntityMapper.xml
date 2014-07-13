@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from roles
+    from ROLES
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,15 +87,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from roles
+    from ROLES
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from roles
+    delete from ROLES
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.RoleEntityExample" >
-    delete from roles
+    delete from ROLES
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -104,7 +104,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into roles (ID, NAME, LAST_MODIFY_TIME, 
+    insert into ROLES (ID, NAME, LAST_MODIFY_TIME, 
       CREATE_TIME, ENABLED, DELETED
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
@@ -115,7 +115,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into roles
+    insert into ROLES
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="name != null" >
@@ -154,13 +154,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.RoleEntityExample" resultType="java.lang.Integer" >
-    select count(*) from roles
+    select count(*) from ROLES
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update roles
+    update ROLES
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -186,7 +186,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update roles
+    update ROLES
     set ID = #{record.id,jdbcType=INTEGER},
       NAME = #{record.name,jdbcType=VARCHAR},
       LAST_MODIFY_TIME = #{record.lastModifyTime,jdbcType=TIMESTAMP},
@@ -198,7 +198,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.RoleEntity" >
-    update roles
+    update ROLES
     <set >
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.RoleEntity" >
-    update roles
+    update ROLES
     set NAME = #{name,jdbcType=VARCHAR},
       LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},

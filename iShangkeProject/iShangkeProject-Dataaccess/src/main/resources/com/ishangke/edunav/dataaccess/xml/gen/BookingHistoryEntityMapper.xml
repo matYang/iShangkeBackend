@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from booking_history
+    from BOOKING_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,15 +93,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from booking_history
+    from BOOKING_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from booking_history
+    delete from BOOKING_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntityExample" >
-    delete from booking_history
+    delete from BOOKING_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,7 +110,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into booking_history (ID, BOOKING_ID, USER_ID, 
+    insert into BOOKING_HISTORY (ID, BOOKING_ID, USER_ID, 
       OPT_NAME, REMARK, PRE_STATUS, 
       POST_STATUS, NORMAL, CREATE_TIME, 
       ENABLED, DELETED)
@@ -123,7 +123,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into booking_history
+    insert into BOOKING_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="bookingId != null" >
@@ -192,13 +192,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntityExample" resultType="java.lang.Integer" >
-    select count(*) from booking_history
+    select count(*) from BOOKING_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update booking_history
+    update BOOKING_HISTORY
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -239,7 +239,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update booking_history
+    update BOOKING_HISTORY
     set ID = #{record.id,jdbcType=INTEGER},
       BOOKING_ID = #{record.bookingId,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
@@ -256,7 +256,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntity" >
-    update booking_history
+    update BOOKING_HISTORY
     <set >
       <if test="bookingId != null" >
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
@@ -292,7 +292,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntity" >
-    update booking_history
+    update BOOKING_HISTORY
     set BOOKING_ID = #{bookingId,jdbcType=INTEGER},
       USER_ID = #{userId,jdbcType=INTEGER},
       OPT_NAME = #{optName,jdbcType=INTEGER},

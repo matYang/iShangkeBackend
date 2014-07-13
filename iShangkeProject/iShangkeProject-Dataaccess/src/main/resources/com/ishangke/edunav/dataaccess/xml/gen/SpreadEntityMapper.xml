@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from spread
+    from SPREAD
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,15 +93,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from spread
+    from SPREAD
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from spread
+    delete from SPREAD
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.SpreadEntityExample" >
-    delete from spread
+    delete from SPREAD
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,7 +110,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into spread (ID, USER_ID, PARTNER_ID, 
+    insert into SPREAD (ID, USER_ID, PARTNER_ID, 
       COURSE_ID, URL, REMARK, 
       STATUS, LAST_MODIFY_TIME, CREATE_TIME, 
       ENABLED, DELETED)
@@ -123,7 +123,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into spread
+    insert into SPREAD
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="userId != null" >
@@ -192,13 +192,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.SpreadEntityExample" resultType="java.lang.Integer" >
-    select count(*) from spread
+    select count(*) from SPREAD
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update spread
+    update SPREAD
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -239,7 +239,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update spread
+    update SPREAD
     set ID = #{record.id,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
       PARTNER_ID = #{record.partnerId,jdbcType=INTEGER},
@@ -256,7 +256,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.SpreadEntity" >
-    update spread
+    update SPREAD
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -292,7 +292,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.SpreadEntity" >
-    update spread
+    update SPREAD
     set USER_ID = #{userId,jdbcType=INTEGER},
       PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       COURSE_ID = #{courseId,jdbcType=INTEGER},
