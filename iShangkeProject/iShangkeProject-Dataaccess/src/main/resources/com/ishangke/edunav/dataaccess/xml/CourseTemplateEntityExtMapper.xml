@@ -852,7 +852,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND COURSE_TEMPLATE.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -870,7 +870,7 @@
         </if>
         <if test="entity.categoryIdSet.size() > 0">
           AND COURSE_TEMPLATE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -887,7 +887,7 @@
         </if>
         <if test="entity.locationIdSet.size() > 0">
           AND COURSE_TEMPLATE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -904,7 +904,7 @@
         </if>
         <if test="entity.circleIdSet.size() > 0">
           AND COURSE_TEMPLATE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1105,7 +1105,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND COURSE_TEMPLATE.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1123,7 +1123,7 @@
         </if>
         <if test="entity.categoryIdSet.size() > 0">
           AND COURSE_TEMPLATE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1140,7 +1140,7 @@
         </if>
         <if test="entity.locationIdSet.size() > 0">
           AND COURSE_TEMPLATE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1157,7 +1157,7 @@
         </if>
         <if test="entity.circleIdSet.size() > 0">
           AND COURSE_TEMPLATE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
