@@ -127,4 +127,71 @@
 <select id="getCount" resultType="int">
     select count(ID) from ORDER where DELETED = 0
   </select>
+  <select id="list" parameterType="map" resultMap="OrderExtMap">
+    select
+    <include refid="Order_Base_Column_List"></include>
+    from ORDER
+    where ORDER.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND ORDER.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ORDER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ORDER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND ORDER.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.bookingId != null and entity.bookingId != 0">
+        AND ORDER.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
+      </if>
+     
+      <if test="entity.createTime != null">
+        AND ORDER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND ORDER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ORDER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+       <if test="entity.type != null and entity.type != ''">
+        AND WITHDRAW.TYPE LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
+      </if>
+       <if test="entity.price != null and entity.price != 0">
+        AND ORDER.PRICE = #{entity.price,jdbcType=DOUBLE}
+      </if>
+         <if test="entity.runingNumber != null and entity.runingNumber != ''">
+        AND WITHDRAW.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
+      </if>
+         <if test="entity.status != null and entity.status != ''">
+        AND WITHDRAW.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND ORDER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        ORDER.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+
+  </select>
 </mapper>
