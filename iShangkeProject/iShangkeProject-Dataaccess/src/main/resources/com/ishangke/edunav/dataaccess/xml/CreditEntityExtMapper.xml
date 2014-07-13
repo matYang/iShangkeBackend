@@ -21,7 +21,7 @@
   <insert id="add" parameterType="CreditEntityExt">
     insert into CREDIT
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="record.id != null">
+      <if test="id != null">
         ID,
       </if>
       <if test="credit != null">
@@ -60,10 +60,10 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT
       LAST_INSERT_ID()
-    </selectKey>
+    </selectKey> -->
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
     update CREDIT set DELETED = 1
@@ -73,20 +73,20 @@
   <update id="update" parameterType="CreditEntityExt">
     update CREDIT
     <set>
-      <if test="record.credit != null">
+      <if test="credit != null">
         CREDIT = #{record.credit,jdbcType=DOUBLE},
       </if>
-      <if test="record.lastModifyTime != null">
+      <if test="lastModifyTime != null">
         LAST_MODIFY_TIME =
         #{record.lastModifyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.createTime != null">
+      <if test="createTime != null">
         CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.enabled != null">
+      <if test="enabled != null">
         ENABLED = #{record.enabled,jdbcType=INTEGER},
       </if>
-      <if test="record.deleted != null">
+      <if test="deleted != null">
         DELETED = #{record.deleted,jdbcType=INTEGER},
       </if>
     </set>

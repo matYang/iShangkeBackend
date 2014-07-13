@@ -798,6 +798,10 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="getCount" resultType="int">
+    select count(ID) from COURSE where DELETED = 0
+  </select>
+
   <select id="list" parameterType="map" resultMap="CourseExtMap">
     select
     <include refid="Course_Base_Column_List"></include>,
@@ -822,7 +826,7 @@
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
-        AND COURSE.COURSENAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
+        AND COURSE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.id != null and entity.id != 0">
         AND COURSE.ID = #{entity.id,jdbcType=INTEGER}
@@ -841,6 +845,227 @@
           </foreach>
         </if>
       </if>
+
+      <if test="entity.categoryId != null and entity.categoryId != 0">
+        AND COURSE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.categoryId == null or entity.categoryId == 0">
+        <if test="entity.categoryIdStart != null and entity.categoryIdStart != 0">
+          <![CDATA[AND COURSE.CATEGORY_ID >= #{entity.categoryIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.categoryIdEnd != null and entity.categoryIdEnd != 0">
+          <![CDATA[AND COURSE.CATEGORY_ID <= #{entity.categoryIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.categoryIdSet.size() > 0">
+          AND COURSE.CATEGORY_ID IN
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.locationId != null and entity.locationId != 0">
+        AND COURSE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.locationId == null or entity.locationId == 0">
+        <if test="entity.locationIdStart != null and entity.locationIdStart != 0">
+          <![CDATA[AND COURSE.LOCATION_ID >= #{entity.locationIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
+          <![CDATA[AND COURSE.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.locationIdSet.size() > 0">
+          AND COURSE.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.circleId != null and entity.circleId != 0">
+        AND COURSE.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.circleId == null or entity.circleId == 0">
+        <if test="entity.circleIdStart != null and entity.circleIdStart != 0">
+          <![CDATA[AND COURSE.CIRCLE_ID >= #{entity.circleIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
+          <![CDATA[AND COURSE.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.circleIdSet.size() > 0">
+          AND COURSE.CIRCLE_ID IN
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND COURSE.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND COURSE.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND COURSE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet.size() > 0">
+          AND COURSE.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.status != null and entity.status != 0">
+        AND COURSE.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND COURSE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND COURSE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusSet.size() > 0">
+          AND COURSE.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND COURSE.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
+        <if test="entity.courseTemplateIdStart != null and entity.courseTemplateIdStart != 0">
+          <![CDATA[AND COURSE.COURSE_TEMPLATE_ID >= #{entity.courseTemplateIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseTemplateIdEnd != null and entity.courseTemplateIdEnd != 0">
+          <![CDATA[AND COURSE.COURSE_TEMPLATE_ID <= #{entity.courseTemplateIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+
+      <if test="entity.price != null and entity.price != 0">
+        AND COURSE.PRICE = #{entity.price,jdbcType=INTEGER}
+      </if>
+      <if test="entity.price == null or entity.price == 0">
+        <if test="entity.priceStart != null and entity.priceStart != 0">
+          <![CDATA[AND COURSE.PRICE >= #{entity.priceStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.priceEnd != null and entity.priceEnd != 0">
+          <![CDATA[AND COURSE.PRICE <= #{entity.priceEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.originalPrice != null and entity.originalPrice != 0">
+        AND COURSE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=INTEGER}
+      </if>
+      <if test="entity.originalPrice == null or entity.originalPrice == 0">
+        <if test="entity.originalPriceStart != null and entity.originalPriceStart != 0">
+          <![CDATA[AND COURSE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.originalPriceEnd != null and entity.originalPriceEnd != 0">
+          <![CDATA[AND COURSE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.cashback != null and entity.cashback != 0">
+        AND COURSE.CASHBACK = #{entity.cashback,jdbcType=INTEGER}
+      </if>
+      <if test="entity.cashback == null or entity.cashback == 0">
+        <if test="entity.cashbackStart != null and entity.cashbackStart != 0">
+          <![CDATA[AND COURSE.CASHBACK >= #{entity.cashbackStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.cashbackEnd != null and entity.cashbackEnd != 0">
+          <![CDATA[AND COURSE.CASHBACK <= #{entity.cashbackEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.commission != null and entity.commission != 0">
+        AND COURSE.COMMISSION = #{entity.commission,jdbcType=INTEGER}
+      </if>
+      <if test="entity.commission == null or entity.commission == 0">
+        <if test="entity.commissionStart != null and entity.commissionStart != 0">
+          <![CDATA[AND COURSE.COMMISSION >= #{entity.commissionStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.commissionEnd != null and entity.commissionEnd != 0">
+          <![CDATA[AND COURSE.COMMISSION <= #{entity.commissionEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.serviceCharge != null and entity.serviceCharge != 0">
+        AND COURSE.SERVICE_CHARGE = #{entity.serviceCharge,jdbcType=INTEGER}
+      </if>
+      <if test="entity.serviceCharge == null or entity.serviceCharge == 0">
+        <if test="entity.serviceChargeStart != null and entity.serviceChargeStart != 0">
+          <![CDATA[AND COURSE.SERVICE_CHARGE >= #{entity.serviceChargeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.serviceChargeEnd != null and entity.serviceChargeEnd != 0">
+          <![CDATA[AND COURSE.SERVICE_CHARGE <= #{entity.serviceChargeEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.popularity != null and entity.popularity != 0">
+        AND COURSE.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
+      </if>
+      <if test="entity.popularity == null or entity.popularity == 0">
+        <if test="entity.popularityStart != null and entity.popularityStart != 0">
+          <![CDATA[AND COURSE.POPULARITY >= #{entity.popularityStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
+          <![CDATA[AND COURSE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.classSize != null and entity.classSize != 0">
+        AND COURSE.CLASS_SIZE = #{entity.classSize,jdbcType=INTEGER}
+      </if>
+      <if test="entity.classSize == null or entity.classSize == 0">
+        <if test="entity.classSizeStart != null and entity.classSizeStart != 0">
+          <![CDATA[AND COURSE.CLASS_SIZE >= #{entity.classSizeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.classSizeEnd != null and entity.classSizeEnd != 0">
+          <![CDATA[AND COURSE.CLASS_SIZE <= #{entity.classSizeEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.courseHourNum != null and entity.courseHourNum != 0">
+        AND COURSE.COURSE_HOUR_NUM = #{entity.courseHourNum,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseHourNum == null or entity.courseHourNum == 0">
+        <if test="entity.courseHourNumStart != null and entity.courseHourNumStart != 0">
+          <![CDATA[AND COURSE.COURSE_HOUR_NUM >= #{entity.courseHourNumStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseHourNumEnd != null and entity.courseHourNumEnd != 0">
+          <![CDATA[AND COURSE.COURSE_HOUR_NUM <= #{entity.courseHourNumEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.startDate != null">
+        AND COURSE.START_DATE = #{entity.startDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.startDate == null">
+        <if test="entity.startDateStart != null">
+          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.startDateEnd != null">
+          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.finishDate != null">
+        AND COURSE.FINISH_DATE = #{entity.finishDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.finishDate == null">
+        <if test="entity.finishDateStart != null">
+          <![CDATA[AND COURSE.FINISH_DATE >= #{entity.finishDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.finishDateEnd != null">
+          <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.cutoffDate != null">
+        AND COURSE.CUTOFF_DATE = #{entity.cutoffDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.cutoffDate == null">
+        <if test="entity.cutoffDateStart != null">
+          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.cutoffDateEnd != null">
+          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
       <if test="entity.lastModifyTime != null">
         AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
       </if>
@@ -871,9 +1096,14 @@
       </if>
     </if>
   </select>
+
+
+
+
+
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
-     select
+    select
     <include refid="Course_Base_Column_List"></include>,
     <include refid="Teacher_Base_Column_List"></include>,
     <include refid="ClassPhoto_Base_Column_List"></include>,
@@ -896,7 +1126,7 @@
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
-        AND COURSE.COURSENAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
+        AND COURSE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.id != null and entity.id != 0">
         AND COURSE.ID = #{entity.id,jdbcType=INTEGER}
@@ -915,6 +1145,225 @@
           </foreach>
         </if>
       </if>
+
+      <if test="entity.categoryId != null and entity.categoryId != 0">
+        AND COURSE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.categoryId == null or entity.categoryId == 0">
+        <if test="entity.categoryIdStart != null and entity.categoryIdStart != 0">
+          <![CDATA[AND COURSE.CATEGORY_ID >= #{entity.categoryIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.categoryIdEnd != null and entity.categoryIdEnd != 0">
+          <![CDATA[AND COURSE.CATEGORY_ID <= #{entity.categoryIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.categoryIdSet.size() > 0">
+          AND COURSE.CATEGORY_ID IN
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.locationId != null and entity.locationId != 0">
+        AND COURSE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.locationId == null or entity.locationId == 0">
+        <if test="entity.locationIdStart != null and entity.locationIdStart != 0">
+          <![CDATA[AND COURSE.LOCATION_ID >= #{entity.locationIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
+          <![CDATA[AND COURSE.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.locationIdSet.size() > 0">
+          AND COURSE.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.circleId != null and entity.circleId != 0">
+        AND COURSE.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.circleId == null or entity.circleId == 0">
+        <if test="entity.circleIdStart != null and entity.circleIdStart != 0">
+          <![CDATA[AND COURSE.CIRCLE_ID >= #{entity.circleIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
+          <![CDATA[AND COURSE.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.circleIdSet.size() > 0">
+          AND COURSE.CIRCLE_ID IN
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND COURSE.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND COURSE.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND COURSE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet.size() > 0">
+          AND COURSE.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.status != null and entity.status != 0">
+        AND COURSE.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND COURSE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND COURSE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusSet.size() > 0">
+          AND COURSE.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND COURSE.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
+        <if test="entity.courseTemplateIdStart != null and entity.courseTemplateIdStart != 0">
+          <![CDATA[AND COURSE.COURSE_TEMPLATE_ID >= #{entity.courseTemplateIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseTemplateIdEnd != null and entity.courseTemplateIdEnd != 0">
+          <![CDATA[AND COURSE.COURSE_TEMPLATE_ID <= #{entity.courseTemplateIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.price != null and entity.price != 0">
+        AND COURSE.PRICE = #{entity.price,jdbcType=INTEGER}
+      </if>
+      <if test="entity.price == null or entity.price == 0">
+        <if test="entity.priceStart != null and entity.priceStart != 0">
+          <![CDATA[AND COURSE.PRICE >= #{entity.priceStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.priceEnd != null and entity.priceEnd != 0">
+          <![CDATA[AND COURSE.PRICE <= #{entity.priceEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.originalPrice != null and entity.originalPrice != 0">
+        AND COURSE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=INTEGER}
+      </if>
+      <if test="entity.originalPrice == null or entity.originalPrice == 0">
+        <if test="entity.originalPriceStart != null and entity.originalPriceStart != 0">
+          <![CDATA[AND COURSE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.originalPriceEnd != null and entity.originalPriceEnd != 0">
+          <![CDATA[AND COURSE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.cashback != null and entity.cashback != 0">
+        AND COURSE.CASHBACK = #{entity.cashback,jdbcType=INTEGER}
+      </if>
+      <if test="entity.cashback == null or entity.cashback == 0">
+        <if test="entity.cashbackStart != null and entity.cashbackStart != 0">
+          <![CDATA[AND COURSE.CASHBACK >= #{entity.cashbackStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.cashbackEnd != null and entity.cashbackEnd != 0">
+          <![CDATA[AND COURSE.CASHBACK <= #{entity.cashbackEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.commission != null and entity.commission != 0">
+        AND COURSE.COMMISSION = #{entity.commission,jdbcType=INTEGER}
+      </if>
+      <if test="entity.commission == null or entity.commission == 0">
+        <if test="entity.commissionStart != null and entity.commissionStart != 0">
+          <![CDATA[AND COURSE.COMMISSION >= #{entity.commissionStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.commissionEnd != null and entity.commissionEnd != 0">
+          <![CDATA[AND COURSE.COMMISSION <= #{entity.commissionEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.serviceCharge != null and entity.serviceCharge != 0">
+        AND COURSE.SERVICE_CHARGE = #{entity.serviceCharge,jdbcType=INTEGER}
+      </if>
+      <if test="entity.serviceCharge == null or entity.serviceCharge == 0">
+        <if test="entity.serviceChargeStart != null and entity.serviceChargeStart != 0">
+          <![CDATA[AND COURSE.SERVICE_CHARGE >= #{entity.serviceChargeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.serviceChargeEnd != null and entity.serviceChargeEnd != 0">
+          <![CDATA[AND COURSE.SERVICE_CHARGE <= #{entity.serviceChargeEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.popularity != null and entity.popularity != 0">
+        AND COURSE.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
+      </if>
+      <if test="entity.popularity == null or entity.popularity == 0">
+        <if test="entity.popularityStart != null and entity.popularityStart != 0">
+          <![CDATA[AND COURSE.POPULARITY >= #{entity.popularityStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
+          <![CDATA[AND COURSE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.classSize != null and entity.classSize != 0">
+        AND COURSE.CLASS_SIZE = #{entity.classSize,jdbcType=INTEGER}
+      </if>
+      <if test="entity.classSize == null or entity.classSize == 0">
+        <if test="entity.classSizeStart != null and entity.classSizeStart != 0">
+          <![CDATA[AND COURSE.CLASS_SIZE >= #{entity.classSizeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.classSizeEnd != null and entity.classSizeEnd != 0">
+          <![CDATA[AND COURSE.CLASS_SIZE <= #{entity.classSizeEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.courseHourNum != null and entity.courseHourNum != 0">
+        AND COURSE.COURSE_HOUR_NUM = #{entity.courseHourNum,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseHourNum == null or entity.courseHourNum == 0">
+        <if test="entity.courseHourNumStart != null and entity.courseHourNumStart != 0">
+          <![CDATA[AND COURSE.COURSE_HOUR_NUM >= #{entity.courseHourNumStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseHourNumEnd != null and entity.courseHourNumEnd != 0">
+          <![CDATA[AND COURSE.COURSE_HOUR_NUM <= #{entity.courseHourNumEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.startDate != null">
+        AND COURSE.START_DATE = #{entity.startDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.startDate == null">
+        <if test="entity.startDateStart != null">
+          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.startDateEnd != null">
+          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.finishDate != null">
+        AND COURSE.FINISH_DATE = #{entity.finishDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.finishDate == null">
+        <if test="entity.finishDateStart != null">
+          <![CDATA[AND COURSE.FINISH_DATE >= #{entity.finishDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.finishDateEnd != null">
+          <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.cutoffDate != null">
+        AND COURSE.CUTOFF_DATE = #{entity.cutoffDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.cutoffDate == null">
+        <if test="entity.cutoffDateStart != null">
+          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.cutoffDateEnd != null">
+          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
       <if test="entity.lastModifyTime != null">
         AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
       </if>
@@ -946,4 +1395,5 @@
     </if>
     ) AS total
   </select>
+  
 </mapper>

@@ -7,7 +7,6 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.CourseTemplateEntity;
 
 public class CourseTemplateEntityExt extends CourseTemplateEntity {
-    
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
@@ -15,7 +14,46 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Date lastModifyTimeAfter;
     private Date createTimeBefore;
     private Date createTimeAfter;
-    
+
+    private Integer categoryIdStart;
+    private Integer categoryIdEnd;
+    private Set<Integer> categoryIdSet;
+    private Integer locationIdStart;
+    private Integer locationIdEnd;
+    private Set<Integer> locationIdSet;
+    private Integer circleIdStart;
+    private Integer circleIdEnd;
+    private Set<Integer> circleIdSet;
+    private Integer partnerIdStart;
+    private Integer partnerIdEnd;
+    private Set<Integer> partnerIdSet;
+    private Integer statusStart;
+    private Integer statusEnd;
+    private Set<Integer> statusIdSet;
+    private Double priceStart;
+    private Double priceEnd;
+    private Double originalPriceStart;
+    private Double originalPriceEnd;
+    private Double cashbackStart;
+    private Double cashbackEnd;
+    private Double commissionStart;
+    private Double commissionEnd;
+    private Double serviceChargeStart;
+    private Double serviceChargeEnd;
+    private Integer popularityStart;
+    private Integer popularityEnd;
+    private Integer classSizeStart;
+    private Integer classSizeEnd;
+    private Integer courseHourNumStart;
+    private Integer courseHourNumEnd;
+    private Date startDateStart;
+    private Date startDateEnd;
+    private Date finishDateStart;
+    private Date finishDateEnd;
+    private Date cutoffDateStart;
+    private Date cutoffDateEnd;
+
+
     //concrete information
     private List<TeacherEntityExt> teacherList;
     private List<ClassPhotoEntityExt> classPhotoList;
@@ -222,4 +260,300 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
         this.circleName = circleName;
     }
 
+    public Integer getCategoryIdStart() {
+        return categoryIdStart;
+    }
+
+    public void setCategoryIdStart(Integer categoryIdStart) {
+        this.categoryIdStart = categoryIdStart;
+    }
+
+    public Integer getCategoryIdEnd() {
+        return categoryIdEnd;
+    }
+
+    public void setCategoryIdEnd(Integer categoryIdEnd) {
+        this.categoryIdEnd = categoryIdEnd;
+    }
+
+    public Set<Integer> getCategoryIdSet() {
+        return categoryIdSet;
+    }
+
+    public void setCategoryIdSet(Set<Integer> categoryIdSet) {
+        this.categoryIdSet = categoryIdSet;
+    }
+
+    public Integer getLocationIdStart() {
+        return locationIdStart;
+    }
+
+    public void setLocationIdStart(Integer locationIdStart) {
+        this.locationIdStart = locationIdStart;
+    }
+
+    public Integer getLocationIdEnd() {
+        return locationIdEnd;
+    }
+
+    public void setLocationIdEnd(Integer locationIdEnd) {
+        this.locationIdEnd = locationIdEnd;
+    }
+
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
+    }
+
+    public Integer getCircleIdStart() {
+        return circleIdStart;
+    }
+
+    public void setCircleIdStart(Integer circleIdStart) {
+        this.circleIdStart = circleIdStart;
+    }
+
+    public Integer getCircleIdEnd() {
+        return circleIdEnd;
+    }
+
+    public void setCircleIdEnd(Integer circleIdEnd) {
+        this.circleIdEnd = circleIdEnd;
+    }
+
+    public Set<Integer> getCircleIdSet() {
+        return circleIdSet;
+    }
+
+    public void setCircleIdSet(Set<Integer> circleIdSet) {
+        this.circleIdSet = circleIdSet;
+    }
+
+    public Integer getPartnerIdStart() {
+        return partnerIdStart;
+    }
+
+    public void setPartnerIdStart(Integer partnerIdStart) {
+        this.partnerIdStart = partnerIdStart;
+    }
+
+    public Integer getPartnerIdEnd() {
+        return partnerIdEnd;
+    }
+
+    public void setPartnerIdEnd(Integer partnerIdEnd) {
+        this.partnerIdEnd = partnerIdEnd;
+    }
+
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
+
+    public Integer getStatusStart() {
+        return statusStart;
+    }
+
+    public void setStatusStart(Integer statusStart) {
+        this.statusStart = statusStart;
+    }
+
+    public Integer getStatusEnd() {
+        return statusEnd;
+    }
+
+    public void setStatusEnd(Integer statusEnd) {
+        this.statusEnd = statusEnd;
+    }
+
+    public Set<Integer> getStatusIdSet() {
+        return statusIdSet;
+    }
+
+    public void setStatusIdSet(Set<Integer> statusIdSet) {
+        this.statusIdSet = statusIdSet;
+    }
+
+    public Double getPriceStart() {
+        return priceStart;
+    }
+
+    public void setPriceStart(Double priceStart) {
+        this.priceStart = priceStart;
+    }
+
+    public Double getPriceEnd() {
+        return priceEnd;
+    }
+
+    public void setPriceEnd(Double priceEnd) {
+        this.priceEnd = priceEnd;
+    }
+
+    public Double getOriginalPriceStart() {
+        return originalPriceStart;
+    }
+
+    public void setOriginalPriceStart(Double originalPriceStart) {
+        this.originalPriceStart = originalPriceStart;
+    }
+
+    public Double getOriginalPriceEnd() {
+        return originalPriceEnd;
+    }
+
+    public void setOriginalPriceEnd(Double originalPriceEnd) {
+        this.originalPriceEnd = originalPriceEnd;
+    }
+
+    public Double getCashbackStart() {
+        return cashbackStart;
+    }
+
+    public void setCashbackStart(Double cashbackStart) {
+        this.cashbackStart = cashbackStart;
+    }
+
+    public Double getCashbackEnd() {
+        return cashbackEnd;
+    }
+
+    public void setCashbackEnd(Double cashbackEnd) {
+        this.cashbackEnd = cashbackEnd;
+    }
+
+    public Double getCommissionStart() {
+        return commissionStart;
+    }
+
+    public void setCommissionStart(Double commissionStart) {
+        this.commissionStart = commissionStart;
+    }
+
+    public Double getCommissionEnd() {
+        return commissionEnd;
+    }
+
+    public void setCommissionEnd(Double commissionEnd) {
+        this.commissionEnd = commissionEnd;
+    }
+
+    public Double getServiceChargeStart() {
+        return serviceChargeStart;
+    }
+
+    public void setServiceChargeStart(Double serviceChargeStart) {
+        this.serviceChargeStart = serviceChargeStart;
+    }
+
+    public Double getServiceChargeEnd() {
+        return serviceChargeEnd;
+    }
+
+    public void setServiceChargeEnd(Double serviceChargeEnd) {
+        this.serviceChargeEnd = serviceChargeEnd;
+    }
+
+    public Integer getPopularityStart() {
+        return popularityStart;
+    }
+
+    public void setPopularityStart(Integer popularityStart) {
+        this.popularityStart = popularityStart;
+    }
+
+    public Integer getPopularityEnd() {
+        return popularityEnd;
+    }
+
+    public void setPopularityEnd(Integer popularityEnd) {
+        this.popularityEnd = popularityEnd;
+    }
+
+    public Integer getClassSizeStart() {
+        return classSizeStart;
+    }
+
+    public void setClassSizeStart(Integer classSizeStart) {
+        this.classSizeStart = classSizeStart;
+    }
+
+    public Integer getClassSizeEnd() {
+        return classSizeEnd;
+    }
+
+    public void setClassSizeEnd(Integer classSizeEnd) {
+        this.classSizeEnd = classSizeEnd;
+    }
+
+    public Integer getCourseHourNumStart() {
+        return courseHourNumStart;
+    }
+
+    public void setCourseHourNumStart(Integer courseHourNumStart) {
+        this.courseHourNumStart = courseHourNumStart;
+    }
+
+    public Integer getCourseHourNumEnd() {
+        return courseHourNumEnd;
+    }
+
+    public void setCourseHourNumEnd(Integer courseHourNumEnd) {
+        this.courseHourNumEnd = courseHourNumEnd;
+    }
+
+    public Date getStartDateStart() {
+        return startDateStart;
+    }
+
+    public void setStartDateStart(Date startDateStart) {
+        this.startDateStart = startDateStart;
+    }
+
+    public Date getStartDateEnd() {
+        return startDateEnd;
+    }
+
+    public void setStartDateEnd(Date startDateEnd) {
+        this.startDateEnd = startDateEnd;
+    }
+
+    public Date getFinishDateStart() {
+        return finishDateStart;
+    }
+
+    public void setFinishDateStart(Date finishDateStart) {
+        this.finishDateStart = finishDateStart;
+    }
+
+    public Date getFinishDateEnd() {
+        return finishDateEnd;
+    }
+
+    public void setFinishDateEnd(Date finishDateEnd) {
+        this.finishDateEnd = finishDateEnd;
+    }
+
+    public Date getCutoffDateStart() {
+        return cutoffDateStart;
+    }
+
+    public void setCutoffDateStart(Date cutoffDateStart) {
+        this.cutoffDateStart = cutoffDateStart;
+    }
+
+    public Date getCutoffDateEnd() {
+        return cutoffDateEnd;
+    }
+
+    public void setCutoffDateEnd(Date cutoffDateEnd) {
+        this.cutoffDateEnd = cutoffDateEnd;
+    }
+    
 }

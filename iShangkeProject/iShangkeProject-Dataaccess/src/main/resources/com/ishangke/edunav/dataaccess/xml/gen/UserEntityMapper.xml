@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.gen.UserEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="INVITATION_CODE" property="invitationCode" jdbcType="VARCHAR" />
+    <result column="APPLIED_INVITATION_CODE" property="appliedInvitationCode" jdbcType="VARCHAR" />
+    <result column="REFERENCE" property="reference" jdbcType="VARCHAR" />
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="DELETED" property="deleted" jdbcType="INTEGER" />
+    <result column="GENDER" property="gender" jdbcType="INTEGER" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="SCHOOL" property="school" jdbcType="VARCHAR" />
+    <result column="MAJOR" property="major" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, PASSWORD, PHONE, WECHAT, EMAIL, INVITATION_CODE, APPLIED_INVITATION_CODE, 
+    REFERENCE, LAST_LOGIN_TIME, LAST_MODIFY_TIME, CREATE_TIME, ENABLED, DELETED, GENDER, 
+    BIRTHDAY, SCHOOL, MAJOR
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntityExample" >
+    delete from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into users (ID, NAME, PASSWORD, 
+      PHONE, WECHAT, EMAIL, 
+      INVITATION_CODE, APPLIED_INVITATION_CODE, 
+      REFERENCE, LAST_LOGIN_TIME, LAST_MODIFY_TIME, 
+      CREATE_TIME, ENABLED, DELETED, 
+      GENDER, BIRTHDAY, SCHOOL, 
+      MAJOR)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{invitationCode,jdbcType=VARCHAR}, #{appliedInvitationCode,jdbcType=VARCHAR}, 
+      #{reference,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=INTEGER}, #{deleted,jdbcType=INTEGER}, 
+      #{gender,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, #{school,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="wechat != null" >
+        WECHAT,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="invitationCode != null" >
+        INVITATION_CODE,
+      </if>
+      <if test="appliedInvitationCode != null" >
+        APPLIED_INVITATION_CODE,
+      </if>
+      <if test="reference != null" >
+        REFERENCE,
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME,
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="deleted != null" >
+        DELETED,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="school != null" >
+        SCHOOL,
+      </if>
+      <if test="major != null" >
+        MAJOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=INTEGER},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationCode != null" >
+        #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appliedInvitationCode != null" >
+        #{appliedInvitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reference != null" >
+        #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntityExample" resultType="java.lang.Integer" >
+    select count(*) from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update users
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechat != null" >
+        WECHAT = #{record.wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invitationCode != null" >
+        INVITATION_CODE = #{record.invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appliedInvitationCode != null" >
+        APPLIED_INVITATION_CODE = #{record.appliedInvitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reference != null" >
+        REFERENCE = #{record.reference,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enabled != null" >
+        ENABLED = #{record.enabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null" >
+        DELETED = #{record.deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.gender != null" >
+        GENDER = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthday != null" >
+        BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.school != null" >
+        SCHOOL = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.major != null" >
+        MAJOR = #{record.major,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update users
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      WECHAT = #{record.wechat,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      INVITATION_CODE = #{record.invitationCode,jdbcType=VARCHAR},
+      APPLIED_INVITATION_CODE = #{record.appliedInvitationCode,jdbcType=VARCHAR},
+      REFERENCE = #{record.reference,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_TIME = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      ENABLED = #{record.enabled,jdbcType=INTEGER},
+      DELETED = #{record.deleted,jdbcType=INTEGER},
+      GENDER = #{record.gender,jdbcType=INTEGER},
+      BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
+      SCHOOL = #{record.school,jdbcType=VARCHAR},
+      MAJOR = #{record.major,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
+    update users
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationCode != null" >
+        INVITATION_CODE = #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appliedInvitationCode != null" >
+        APPLIED_INVITATION_CODE = #{appliedInvitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reference != null" >
+        REFERENCE = #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="school != null" >
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        MAJOR = #{major,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
+    update users
+    set NAME = #{name,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      INVITATION_CODE = #{invitationCode,jdbcType=VARCHAR},
+      APPLIED_INVITATION_CODE = #{appliedInvitationCode,jdbcType=VARCHAR},
+      REFERENCE = #{reference,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ENABLED = #{enabled,jdbcType=INTEGER},
+      DELETED = #{deleted,jdbcType=INTEGER},
+      GENDER = #{gender,jdbcType=INTEGER},
+      BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      SCHOOL = #{school,jdbcType=VARCHAR},
+      MAJOR = #{major,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
