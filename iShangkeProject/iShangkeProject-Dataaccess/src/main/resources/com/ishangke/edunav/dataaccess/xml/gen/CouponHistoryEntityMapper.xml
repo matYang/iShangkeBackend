@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from coupon_history
+    from COUPON_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,15 +87,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from coupon_history
+    from COUPON_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from coupon_history
+    delete from COUPON_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponHistoryEntityExample" >
-    delete from coupon_history
+    delete from COUPON_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -104,7 +104,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into coupon_history (ID, COUPON_ID, CHARGE, 
+    insert into COUPON_HISTORY (ID, COUPON_ID, CHARGE, 
       LAST_MODIFY_TIME, CREATE_TIME, DELETED
       )
     values (#{id,jdbcType=INTEGER}, #{couponId,jdbcType=INTEGER}, #{charge,jdbcType=DOUBLE}, 
@@ -115,7 +115,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into coupon_history
+    insert into COUPON_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="couponId != null" >
@@ -154,13 +154,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponHistoryEntityExample" resultType="java.lang.Integer" >
-    select count(*) from coupon_history
+    select count(*) from COUPON_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update coupon_history
+    update COUPON_HISTORY
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -186,7 +186,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update coupon_history
+    update COUPON_HISTORY
     set ID = #{record.id,jdbcType=INTEGER},
       COUPON_ID = #{record.couponId,jdbcType=INTEGER},
       CHARGE = #{record.charge,jdbcType=DOUBLE},
@@ -198,7 +198,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponHistoryEntity" >
-    update coupon_history
+    update COUPON_HISTORY
     <set >
       <if test="couponId != null" >
         COUPON_ID = #{couponId,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CouponHistoryEntity" >
-    update coupon_history
+    update COUPON_HISTORY
     set COUPON_ID = #{couponId,jdbcType=INTEGER},
       CHARGE = #{charge,jdbcType=DOUBLE},
       LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},

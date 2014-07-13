@@ -126,33 +126,21 @@
     </if>
     <if test="entity.value != null and entity.value !='' ">
       AND CIRCLE.VALUE LIKE "%"#{entity.value,jdbcType=VARCHAR}"%"
-    </if>
-    
-    <if test="entity.createTime != null">
-      AND CIRCLE.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
+    </if>    
+      
         <if test="entity.createTimeStart != null">
           <![CDATA[AND CIRCLE.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND CIRCLE.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
-    
-    <if test="entity.lastModifyTime != null">
-        AND CIRCLE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+        </if>       
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CIRCLE.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CIRCLE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
+        </if> 
       
       <if test="entity.enabled != null">
         AND CIRCLE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
@@ -189,33 +177,23 @@
     </if>
     <if test="entity.value != null and entity.value !='' ">
       AND CIRCLE.VALUE LIKE "%"#{entity.value,jdbcType=VARCHAR}"%"
-    </if>
+    </if>  
     
-    <if test="entity.createTime != null">
-      AND CIRCLE.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
+   
         <if test="entity.createTimeStart != null">
           <![CDATA[AND CIRCLE.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND CIRCLE.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
-    
-    <if test="entity.lastModifyTime != null">
-        AND CIRCLE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+        </if>    
+           
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CIRCLE.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CIRCLE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+     
       
       <if test="entity.enabled != null">
         AND CIRCLE.ENABLED = #{entity.enabled,jdbcType=INTEGER}

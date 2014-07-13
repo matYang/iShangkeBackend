@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from credit_history
+    from CREDIT_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,15 +87,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from credit_history
+    from CREDIT_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from credit_history
+    delete from CREDIT_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntityExample" >
-    delete from credit_history
+    delete from CREDIT_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -104,7 +104,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into credit_history (ID, CHARGE, USER_ID, 
+    insert into CREDIT_HISTORY (ID, CHARGE, USER_ID, 
       LAST_MODIFY_TIME, CREATE_TIME, DELETED
       )
     values (#{id,jdbcType=INTEGER}, #{charge,jdbcType=DOUBLE}, #{userId,jdbcType=INTEGER}, 
@@ -115,7 +115,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into credit_history
+    insert into CREDIT_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="charge != null" >
@@ -154,13 +154,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntityExample" resultType="java.lang.Integer" >
-    select count(*) from credit_history
+    select count(*) from CREDIT_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update credit_history
+    update CREDIT_HISTORY
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -186,7 +186,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update credit_history
+    update CREDIT_HISTORY
     set ID = #{record.id,jdbcType=INTEGER},
       CHARGE = #{record.charge,jdbcType=DOUBLE},
       USER_ID = #{record.userId,jdbcType=INTEGER},
@@ -198,7 +198,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntity" >
-    update credit_history
+    update CREDIT_HISTORY
     <set >
       <if test="charge != null" >
         CHARGE = #{charge,jdbcType=DOUBLE},
@@ -219,7 +219,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntity" >
-    update credit_history
+    update CREDIT_HISTORY
     set CHARGE = #{charge,jdbcType=DOUBLE},
       USER_ID = #{userId,jdbcType=INTEGER},
       LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},

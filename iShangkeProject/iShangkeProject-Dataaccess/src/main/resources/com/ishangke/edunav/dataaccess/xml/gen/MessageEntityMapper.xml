@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from message
+    from MESSAGE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,15 +87,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from message
+    from MESSAGE
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from message
+    delete from MESSAGE
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.MessageEntityExample" >
-    delete from message
+    delete from MESSAGE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -104,7 +104,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into message (ID, MESSAGE_TEXT, USER_FROM_ID, 
+    insert into MESSAGE (ID, MESSAGE_TEXT, USER_FROM_ID, 
       USER_TO_ID, CREATE_TIME, DELETED
       )
     values (#{id,jdbcType=INTEGER}, #{messageText,jdbcType=VARCHAR}, #{userFromId,jdbcType=INTEGER}, 
@@ -115,7 +115,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into message
+    insert into MESSAGE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="messageText != null" >
@@ -154,13 +154,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.MessageEntityExample" resultType="java.lang.Integer" >
-    select count(*) from message
+    select count(*) from MESSAGE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update message
+    update MESSAGE
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -186,7 +186,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update message
+    update MESSAGE
     set ID = #{record.id,jdbcType=INTEGER},
       MESSAGE_TEXT = #{record.messageText,jdbcType=VARCHAR},
       USER_FROM_ID = #{record.userFromId,jdbcType=INTEGER},
@@ -198,7 +198,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.MessageEntity" >
-    update message
+    update MESSAGE
     <set >
       <if test="messageText != null" >
         MESSAGE_TEXT = #{messageText,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.MessageEntity" >
-    update message
+    update MESSAGE
     set MESSAGE_TEXT = #{messageText,jdbcType=VARCHAR},
       USER_FROM_ID = #{userFromId,jdbcType=INTEGER},
       USER_TO_ID = #{userToId,jdbcType=INTEGER},

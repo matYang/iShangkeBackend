@@ -90,7 +90,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from users
+    from USERS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -101,15 +101,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from users
+    from USERS
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from users
+    delete from USERS
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntityExample" >
-    delete from users
+    delete from USERS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -118,7 +118,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into users (ID, NAME, PASSWORD, 
+    insert into USERS (ID, NAME, PASSWORD, 
       PHONE, WECHAT, EMAIL, 
       INVITATION_CODE, APPLIED_INVITATION_CODE, 
       REFERENCE, LAST_LOGIN_TIME, LAST_MODIFY_TIME, 
@@ -137,7 +137,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into users
+    insert into USERS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="name != null" >
@@ -248,13 +248,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntityExample" resultType="java.lang.Integer" >
-    select count(*) from users
+    select count(*) from USERS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update users
+    update USERS
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -316,7 +316,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update users
+    update USERS
     set ID = #{record.id,jdbcType=INTEGER},
       NAME = #{record.name,jdbcType=VARCHAR},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
@@ -340,7 +340,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
-    update users
+    update USERS
     <set >
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
@@ -397,7 +397,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserEntity" >
-    update users
+    update USERS
     set NAME = #{name,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
       PHONE = #{phone,jdbcType=VARCHAR},

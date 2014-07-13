@@ -141,7 +141,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from course
+    from COURSE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -152,15 +152,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from course
+    from COURSE
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from course
+    delete from COURSE
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseEntityExample" >
-    delete from course
+    delete from COURSE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -169,7 +169,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course (ID, COURSE_NAME, COURSE_TEMPLATE_ID, 
+    insert into COURSE (ID, COURSE_NAME, COURSE_TEMPLATE_ID, 
       CATEGORY_ID, LOCATION_ID, CIRCLE_ID, 
       PARTNER_ID, ADDRESS_ID, PRICE, 
       ORIGINAL_PRICE, CASHBACK, COMMISSION, 
@@ -216,7 +216,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course
+    insert into COURSE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="courseName != null" >
@@ -591,13 +591,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseEntityExample" resultType="java.lang.Integer" >
-    select count(*) from course
+    select count(*) from COURSE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update course
+    update COURSE
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -791,7 +791,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update course
+    update COURSE
     set ID = #{record.id,jdbcType=INTEGER},
       COURSE_NAME = #{record.courseName,jdbcType=VARCHAR},
       COURSE_TEMPLATE_ID = #{record.courseTemplateId,jdbcType=INTEGER},
@@ -859,7 +859,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseEntity" >
-    update course
+    update COURSE
     <set >
       <if test="courseName != null" >
         COURSE_NAME = #{courseName,jdbcType=VARCHAR},
@@ -1048,7 +1048,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseEntity" >
-    update course
+    update COURSE
     set COURSE_NAME = #{courseName,jdbcType=VARCHAR},
       COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       CATEGORY_ID = #{categoryId,jdbcType=INTEGER},

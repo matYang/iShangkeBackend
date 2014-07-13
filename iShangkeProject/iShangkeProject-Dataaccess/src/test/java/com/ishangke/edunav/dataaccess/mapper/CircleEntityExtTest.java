@@ -46,5 +46,7 @@ public class CircleEntityExtTest {
         circleEntityExtMapper.deleteById(circleEntityExt.getId());
         Assert.assertSame(circleEntityExtMapper.getCount(), oldcount - 1);
     }
+    
+    
 
 }

@@ -80,7 +80,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from address
+    from ADDRESS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,15 +91,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from address
+    from ADDRESS
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from address
+    delete from ADDRESS
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.AddressEntityExample" >
-    delete from address
+    delete from ADDRESS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -108,7 +108,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into address (ID, PARTNER_ID, LOCATION_ID, 
+    insert into ADDRESS (ID, PARTNER_ID, LOCATION_ID, 
       CIRCLE_ID, DETAIL, LAST_MODIFY_TIME, 
       CREATE_TIME, ENABLED, DELETED
       )
@@ -121,7 +121,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into address
+    insert into ADDRESS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="partnerId != null" >
@@ -178,13 +178,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.AddressEntityExample" resultType="java.lang.Integer" >
-    select count(*) from address
+    select count(*) from ADDRESS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update address
+    update ADDRESS
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update address
+    update ADDRESS
     set ID = #{record.id,jdbcType=INTEGER},
       PARTNER_ID = #{record.partnerId,jdbcType=INTEGER},
       LOCATION_ID = #{record.locationId,jdbcType=INTEGER},
@@ -234,7 +234,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.AddressEntity" >
-    update address
+    update ADDRESS
     <set >
       <if test="partnerId != null" >
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
@@ -264,7 +264,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.AddressEntity" >
-    update address
+    update ADDRESS
     set PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       LOCATION_ID = #{locationId,jdbcType=INTEGER},
       CIRCLE_ID = #{circleId,jdbcType=INTEGER},

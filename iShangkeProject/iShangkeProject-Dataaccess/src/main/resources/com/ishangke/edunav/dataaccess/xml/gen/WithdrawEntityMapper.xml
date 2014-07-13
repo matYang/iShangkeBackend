@@ -80,7 +80,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from withdraw
+    from WITHDRAW
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,15 +91,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from withdraw
+    from WITHDRAW
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from withdraw
+    delete from WITHDRAW
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.WithdrawEntityExample" >
-    delete from withdraw
+    delete from WITHDRAW
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -108,7 +108,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into withdraw (ID, USER_ID, PAYEE_ID, 
+    insert into WITHDRAW (ID, USER_ID, PAYEE_ID, 
       PEYEE_NAME, TYPE, LAST_MODIFY_TIME, 
       CREATE_TIME, ENABLED, DELETED
       )
@@ -121,7 +121,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into withdraw
+    insert into WITHDRAW
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="userId != null" >
@@ -178,13 +178,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.WithdrawEntityExample" resultType="java.lang.Integer" >
-    select count(*) from withdraw
+    select count(*) from WITHDRAW
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update withdraw
+    update WITHDRAW
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update withdraw
+    update WITHDRAW
     set ID = #{record.id,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
       PAYEE_ID = #{record.payeeId,jdbcType=VARCHAR},
@@ -234,7 +234,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.WithdrawEntity" >
-    update withdraw
+    update WITHDRAW
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -264,7 +264,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.WithdrawEntity" >
-    update withdraw
+    update WITHDRAW
     set USER_ID = #{userId,jdbcType=INTEGER},
       PAYEE_ID = #{payeeId,jdbcType=VARCHAR},
       PEYEE_NAME = #{peyeeName,jdbcType=VARCHAR},

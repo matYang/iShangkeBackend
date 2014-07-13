@@ -80,7 +80,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from course_comment
+    from COURSE_COMMENT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,15 +91,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from course_comment
+    from COURSE_COMMENT
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from course_comment
+    delete from COURSE_COMMENT
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseCommentEntityExample" >
-    delete from course_comment
+    delete from COURSE_COMMENT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -108,7 +108,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course_comment (ID, USER_ID, COURSE_TEMPLATE_ID, 
+    insert into COURSE_COMMENT (ID, USER_ID, COURSE_TEMPLATE_ID, 
       TITLE, CONTENT, LAST_MODIFY_TIME, 
       CREATE_TIME, ENABLED, DELETED
       )
@@ -121,7 +121,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course_comment
+    insert into COURSE_COMMENT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="userId != null" >
@@ -178,13 +178,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseCommentEntityExample" resultType="java.lang.Integer" >
-    select count(*) from course_comment
+    select count(*) from COURSE_COMMENT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update course_comment
+    update COURSE_COMMENT
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update course_comment
+    update COURSE_COMMENT
     set ID = #{record.id,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
       COURSE_TEMPLATE_ID = #{record.courseTemplateId,jdbcType=INTEGER},
@@ -234,7 +234,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseCommentEntity" >
-    update course_comment
+    update COURSE_COMMENT
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -264,7 +264,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseCommentEntity" >
-    update course_comment
+    update COURSE_COMMENT
     set USER_ID = #{userId,jdbcType=INTEGER},
       COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       TITLE = #{title,jdbcType=VARCHAR},

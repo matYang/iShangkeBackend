@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from account_history
+    from ACCOUNT_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,15 +89,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from account_history
+    from ACCOUNT_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from account_history
+    delete from ACCOUNT_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntityExample" >
-    delete from account_history
+    delete from ACCOUNT_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -106,7 +106,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into account_history (ID, USER_ID, WITHDRAW_ID, 
+    insert into ACCOUNT_HISTORY (ID, USER_ID, WITHDRAW_ID, 
       CHARGE, TYPE, CREATE_TIME, 
       REMARK, DELETED)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{withdrawId,jdbcType=INTEGER}, 
@@ -117,7 +117,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into account_history
+    insert into ACCOUNT_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="userId != null" >
@@ -168,13 +168,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntityExample" resultType="java.lang.Integer" >
-    select count(*) from account_history
+    select count(*) from ACCOUNT_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update account_history
+    update ACCOUNT_HISTORY
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -206,7 +206,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update account_history
+    update ACCOUNT_HISTORY
     set ID = #{record.id,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
       WITHDRAW_ID = #{record.withdrawId,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntity" >
-    update account_history
+    update ACCOUNT_HISTORY
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -247,7 +247,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntity" >
-    update account_history
+    update ACCOUNT_HISTORY
     set USER_ID = #{userId,jdbcType=INTEGER},
       WITHDRAW_ID = #{withdrawId,jdbcType=INTEGER},
       CHARGE = #{charge,jdbcType=DOUBLE},
