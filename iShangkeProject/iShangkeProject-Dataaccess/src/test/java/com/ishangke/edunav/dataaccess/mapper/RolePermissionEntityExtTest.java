@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 
@@ -18,7 +19,7 @@ import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 
-public class RolePermissionEntityExtTest {
+public class RolePermissionEntityExtTest extends BaseTest{
 
     @Autowired
     private RolePermissionEntityExtMapper rolePermissionEntityExtMapper;
@@ -79,6 +80,6 @@ public class RolePermissionEntityExtTest {
     
     @Test
     public void testUpdate(){
-        
+        //TODO update foreign key
     }
 }

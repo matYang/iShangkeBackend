@@ -9,19 +9,19 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 public interface TeacherEntityExtMapper {
 
-    public int add(TeacherEntityExt teacherEntityEx);
+    public int add(TeacherEntityExt teacherEntityExt);
 
     public void deleteById(int id);
 
-    public void update(TeacherEntityExt teacherEntityEx);
+    public void update(TeacherEntityExt teacherEntityExt);
 
     public int getCount();
 
     public List<TeacherEntityExt> list(
-            @Param("entity") TeacherEntityExt teacherEntityEx,
+            @Param("entity") TeacherEntityExt teacherEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") TeacherEntityExt teacherEntityEx,
+    public int getListCount(@Param("entity") TeacherEntityExt teacherEntityExt,
             @Param("page") PaginationEntity page);
     
     public List<TeacherEntityExt> listTeacherByPartnerId(int partnerId);

@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 
@@ -20,7 +21,7 @@ import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 
-public class RoleEntityExtTest {
+public class RoleEntityExtTest extends BaseTest{
 
     @Autowired
     private RoleEntityExtMapper roleEntityExtMapper;
