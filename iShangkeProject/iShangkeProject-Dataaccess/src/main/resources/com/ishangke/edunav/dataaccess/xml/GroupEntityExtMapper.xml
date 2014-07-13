@@ -163,32 +163,22 @@
     <if test="entity.name != null and entity.name !='' ">
       AND GROUPS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
     </if>
-    
-    <if test="entity.createTime != null">
-      AND GROUPS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
-        <if test="entity.createTimeStart != null">
+           <if test="entity.createTimeStart != null">
           <![CDATA[AND GROUPS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND GROUPS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+   
     
-    <if test="entity.lastModifyTime != null">
-        AND GROUPS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+         
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND GROUPS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND GROUPS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+    
       
       <if test="entity.enabled != null">
         AND GROUPS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
@@ -250,31 +240,21 @@
       AND GROUPS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
     </if>
     
-    <if test="entity.createTime != null">
-      AND GROUPS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
+       
         <if test="entity.createTimeStart != null">
           <![CDATA[AND GROUPS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND GROUPS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
-    
-    <if test="entity.lastModifyTime != null">
-        AND GROUPS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+        </if>     
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND GROUPS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND GROUPS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+    
       
       <if test="entity.enabled != null">
         AND GROUPS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
