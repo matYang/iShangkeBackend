@@ -71,7 +71,7 @@ public class BookingHistoryEntityExtTest extends BaseTest{
         Assert.assertSame(bookingHistoryEntityExtMapper.getCount(), oldcount - 1);
     }
 
-    @Test
+    //@Test
     public void testQuery() {
         PaginationEntity page = new PaginationEntity();
         page.setOffset(0);
