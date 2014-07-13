@@ -215,18 +215,6 @@
           <![CDATA[AND BOOKING_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-    
-      <if test="entity.lastModifyTime != null">
-        AND BOOKING_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="entity.lastModifyTime == null">
-        <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
 
       <if test="entity.enabled != null">
         AND BOOKING_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
@@ -305,18 +293,6 @@
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND BOOKING_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
-    
-      <if test="entity.lastModifyTime != null">
-        AND BOOKING_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="entity.lastModifyTime == null">
-        <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND BOOKING_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
 
