@@ -13,13 +13,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class CircleEntityExtTest {
+public class CircleEntityExtTest extends BaseTest{
     @Autowired
     private CircleEntityExtMapper circleEntityExtMapper;
 

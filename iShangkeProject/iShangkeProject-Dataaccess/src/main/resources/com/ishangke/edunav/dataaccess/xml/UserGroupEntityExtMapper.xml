@@ -60,7 +60,7 @@
     #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="UserGroupEntityExt">
-    update USERGROUP
+    update USER_GROUP
     <set>
       <if test="userId != null">
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -113,31 +113,27 @@
         </if>
     </if>  
     
-    <if test="entity.partnerId != null and entity.partnerId != 0">
-        AND USER_GROUP.GROUP_ID = #{entity.partnerId,jdbcType=INTEGER}
+    <if test="entity.groupId != null and entity.groupId != 0">
+        AND USER_GROUP.GROUP_ID = #{entity.groupId,jdbcType=INTEGER}
       </if>
      
-      <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+      <if test="entity.groupId == null or entity.groupId == 0">
+        <if test="entity.groupIdStart != null and entity.groupIdStart != 0">
+          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.groupIdStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        <if test="entity.groupIdEnd != null and entity.groupIdEnd != 0">
+          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.groupIdEnd,jdbcType=INTEGER}]]>
         </if>
     </if>  
     
-    <if test="entity.lastModifyTime != null">
-        AND USER_GROUP.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+   
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+  
                   
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
@@ -178,31 +174,27 @@
         </if>
     </if>  
     
-    <if test="entity.partnerId != null and entity.partnerId != 0">
-        AND USER_GROUP.GROUP_ID = #{entity.partnerId,jdbcType=INTEGER}
+    <if test="entity.groupId != null and entity.groupId != 0">
+        AND USER_GROUP.GROUP_ID = #{entity.groupId,jdbcType=INTEGER}
       </if>
      
-      <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+      <if test="entity.groupId == null or entity.groupId == 0">
+        <if test="entity.groupIdStart != null and entity.groupIdStart != 0">
+          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.groupIdStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        <if test="entity.groupIdEnd != null and entity.groupIdEnd != 0">
+          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.groupIdEnd,jdbcType=INTEGER}]]>
         </if>
     </if>  
-    
-    <if test="entity.lastModifyTime != null">
-        AND USER_GROUP.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+   
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+      
                   
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}

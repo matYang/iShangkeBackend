@@ -10,12 +10,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class CourseTemplateClassPhotoEntityExtTest {
+public class CourseTemplateClassPhotoEntityExtTest extends BaseTest{
     @Autowired
     private CourseTemplateClassPhotoEntityExtMapper courseTemplateClassPhotoEntityExtMapper;
 

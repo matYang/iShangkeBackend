@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
@@ -20,7 +21,7 @@ import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 
-public class GroupEntityExtTest {
+public class GroupEntityExtTest extends BaseTest{
 
     @Autowired
     public GroupEntityExtMapper groupEntityExtMapper;
