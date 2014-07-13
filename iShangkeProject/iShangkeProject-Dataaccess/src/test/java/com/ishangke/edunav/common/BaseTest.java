@@ -10,12 +10,15 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 
-public class BaseTest extends AbstractTestExecutionListener {
+@Transactional
+public class BaseTest extends TransactionalTestExecutionListener {
 
     protected String scriptBeforeClass;
     protected String scriptAfterClass;

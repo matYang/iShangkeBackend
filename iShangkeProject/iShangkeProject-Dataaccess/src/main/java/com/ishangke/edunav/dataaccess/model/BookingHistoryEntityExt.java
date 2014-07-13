@@ -13,8 +13,6 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
     private Integer userIdStart;
     private Integer useridEnd;
 
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
     
@@ -54,18 +52,6 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
     }
     public void setUseridEnd(Integer useridEnd) {
         this.useridEnd = useridEnd;
-    }
-    public Date getLastModifyTimeStart() {
-        return lastModifyTimeStart;
-    }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
-        this.lastModifyTimeStart = lastModifyTimeStart;
-    }
-    public Date getLastModifyTimeEnd() {
-        return lastModifyTimeEnd;
-    }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
-        this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
     public Date getCreateTimeStart() {
         return createTimeStart;

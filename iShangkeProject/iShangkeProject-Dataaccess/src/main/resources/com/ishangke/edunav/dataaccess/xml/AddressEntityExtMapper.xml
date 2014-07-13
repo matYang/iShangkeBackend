@@ -181,7 +181,7 @@
 
 
       <if test="entity.detail != null and entity.detail !='' ">
-        AND ADDRESS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+        AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.createTime != null">
@@ -209,6 +209,13 @@
 
       <if test="entity.enabled != null">
         AND ADDRESS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      
+      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          ADDRESS.${listItem.columnKey} ${listItem.order}
+        </foreach>
       </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
@@ -273,7 +280,7 @@
 
 
       <if test="entity.detail != null and entity.detail !='' ">
-        AND ADDRESS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+        AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.createTime != null">
@@ -301,6 +308,12 @@
 
       <if test="entity.enabled != null">
         AND ADDRESS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          ADDRESS.${listItem.columnKey} ${listItem.order}
+        </foreach>
       </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}

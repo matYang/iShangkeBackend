@@ -60,77 +60,75 @@ public class PermissionEntityExtTest {
 
     @Test
     public void testList(){
-//        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-//        permissionEntityExt.setCreateTime(new Date());
-//        permissionEntityExt.setLastModifyTime(new Date());
-//        permissionEntityExt.setDeleted(0);
-//        permissionEntityExt.setEnabled(1);
-//        permissionEntityExt.setName("ishangke");
-//        permissionEntityExt.setPath("ishangke李清");
-//        permissionEntityExtMapper.add(permissionEntityExt);
-//
-//        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 1000000000));
-//        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 1000000000));
-//
-//        List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
-//        Assert.assertSame(list.size(),1);
-//
-//        int listSize = permissionEntityExtMapper.getListCount(permissionEntityExt, null);
-//        Assert.assertSame(listSize,1);
-//
-//        PaginationEntity page = new PaginationEntity();
-//        page.setOffset(0);
-//        page.setSize(1);
-//        
-//        list = permissionEntityExtMapper.list(permissionEntityExt, page);
-//        Assert.assertSame(list.size(),1);
-//
-//        listSize = permissionEntityExtMapper.getListCount(permissionEntityExt, page);
-//        Assert.assertSame(listSize,1);
-//        
-//        RoleEntityExt roleEntityExt = new RoleEntityExt();
-//        roleEntityExt.setCreateTime(new Date());
-//        roleEntityExt.setLastModifyTime(new Date());
-//        roleEntityExt.setDeleted(0);
-//        roleEntityExt.setEnabled(1);
-//        roleEntityExtMapper.add(roleEntityExt);
-//        
-//        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-//        rolePermissionEntityExt.setLastModifyTime(new Date());
-//        rolePermissionEntityExt.setDeleted(0);
-//        rolePermissionEntityExt.setRoleId(roleEntityExt.getId());
-//        rolePermissionEntityExt.setPermissionId(permissionEntityExt.getId());
-//        rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
-//        
-//        list = permissionEntityExtMapper.listPermissionByRoleId(roleEntityExt.getId());
-//        Assert.assertSame(list.size(),1);
-//        Assert.assertSame(list.get(0).getId(),permissionEntityExt.getId());
-        Assert.assertTrue(true);
+        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
+        permissionEntityExt.setCreateTime(new Date());
+        permissionEntityExt.setLastModifyTime(new Date());
+        permissionEntityExt.setDeleted(0);
+        permissionEntityExt.setEnabled(1);
+        permissionEntityExt.setName("ishangke");
+        permissionEntityExt.setPath("ishangke李清");
+        permissionEntityExtMapper.add(permissionEntityExt);
+
+        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 100000000));
+        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 100000000));
+
+        List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
+        Assert.assertSame(list.size(),1);
+
+        int listSize = permissionEntityExtMapper.getListCount(permissionEntityExt, null);
+        Assert.assertSame(listSize,1);
+
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(1);
+        
+        list = permissionEntityExtMapper.list(permissionEntityExt, page);
+        Assert.assertSame(list.size(),1);
+
+        listSize = permissionEntityExtMapper.getListCount(permissionEntityExt, page);
+        Assert.assertSame(listSize,1);
+        
+        RoleEntityExt roleEntityExt = new RoleEntityExt();
+        roleEntityExt.setCreateTime(new Date());
+        roleEntityExt.setLastModifyTime(new Date());
+        roleEntityExt.setDeleted(0);
+        roleEntityExt.setEnabled(1);
+        roleEntityExtMapper.add(roleEntityExt);
+        
+        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
+        rolePermissionEntityExt.setLastModifyTime(new Date());
+        rolePermissionEntityExt.setDeleted(0);
+        rolePermissionEntityExt.setRoleId(roleEntityExt.getId());
+        rolePermissionEntityExt.setPermissionId(permissionEntityExt.getId());
+        rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
+        
+        list = permissionEntityExtMapper.listPermissionByRoleId(roleEntityExt.getId());
+        Assert.assertSame(list.size(),1);
+        Assert.assertSame(list.get(0).getId(),permissionEntityExt.getId());
     }
     
     @Test
     public void testUpdate(){
-//        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-//        permissionEntityExt.setCreateTime(new Date());
-//        permissionEntityExt.setLastModifyTime(new Date());
-//        permissionEntityExt.setDeleted(0);
-//        permissionEntityExt.setEnabled(1);
-//        permissionEntityExt.setName("ishangke");
-//        permissionEntityExt.setPath("ishangke李清");
-//        permissionEntityExtMapper.add(permissionEntityExt);
-//
-//        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 1000000000));
-//        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 1000000000));
-//
-//        List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
-//        String name = "李国庆";
-//        list.get(0).setName(name);
-//        permissionEntityExtMapper.update(list.get(0));
-//        list = permissionEntityExtMapper.list(list.get(0), null);
-//        if(list.get(0).getName().equals(name)){
-//            //Passed;
-//        }else fail();
-        Assert.assertTrue(true);
+        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
+        permissionEntityExt.setCreateTime(new Date());
+        permissionEntityExt.setLastModifyTime(new Date());
+        permissionEntityExt.setDeleted(0);
+        permissionEntityExt.setEnabled(1);
+        permissionEntityExt.setName("ishangke");
+        permissionEntityExt.setPath("ishangke李清");
+        permissionEntityExtMapper.add(permissionEntityExt);
+
+        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 100000000));
+        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 100000000));
+
+        List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
+        String name = "李国庆";
+        list.get(0).setName(name);
+        permissionEntityExtMapper.update(list.get(0));
+        list = permissionEntityExtMapper.list(list.get(0), null);
+        if(list.get(0).getName().equals(name)){
+            //Passed;
+        }else fail();
     }
 
 }
