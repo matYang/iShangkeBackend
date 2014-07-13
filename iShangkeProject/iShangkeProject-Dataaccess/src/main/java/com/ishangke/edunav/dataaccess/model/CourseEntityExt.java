@@ -7,13 +7,47 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.CourseEntity;
 
 public class CourseEntityExt extends CourseEntity {
-    private Integer idStart;
-    private Integer idEnd;
+    private Integereger idStart;
+    private Integereger idEnd;
     private Set<Integer> idSet;
     private Date lastModifyTimeBefore;
     private Date lastModifyTimeAfter;
     private Date createTimeBefore;
     private Date createTimeAfter;
+
+
+    private Integer categoryIdStart;
+    private Integer categoryIdEnd;
+    private Set<Integer> categoryIdSet;
+    private Integer locationIdStart;
+    private Integer locationIdEnd;
+    private Set<Integer> locationIdSet;
+    private Integer circleIdStart;
+    private Integer circleIdEnd;
+    private Set<Integer> circleIdSet;
+    private Integer priceStart;
+    private Integer priceEnd;
+    private Integer originalPriceStart;
+    private Integer originalPriceEnd;
+    private Integer cashbackStart;
+    private Integer cashbackEnd;
+    private Integer commissionStart;
+    private Integer commissionEnd;
+    private Integer serviceChargeStart;
+    private Integer serviceChargeEnd;
+    private Integer popularityStart;
+    private Integer popularityEnd;
+    private Integer classSizeStart;
+    private Integer classSizeEnd;
+    private Integer courseHourNumStart;
+    private Integer courseHourNumEnd;
+    private Date startDateStart;
+    private Date startDateEnd;
+    private Date finishDateStart;
+    private Date finishDateEnd;
+    private Date cutoffDateStart;
+    private Date cutoffDateEnd;
+
     
     //concrete information
     private List<TeacherEntityExt> teacherList;
@@ -23,41 +57,41 @@ public class CourseEntityExt extends CourseEntity {
     private String logoUrl;
     private String wholeName;
     private String instName;
-    private String partnerIntro;
-    private int partnerQualification;
+    private String partnerIntegerro;
+    private Integer partnerQualification;
     private String partnerDistinction;
     
     private String address;
     private String categoryValue;
     private String categoryName;
-    private int categoryRank;
+    private Integer categoryRank;
     private String locationValue;
     private String locationName;
     private String circleValue;
     private String circleName;
     
 
-    public Integer getIdStart() {
+    public Integereger getIdStart() {
         return idStart;
     }
 
-    public void setIdStart(Integer idStart) {
+    public void setIdStart(Integereger idStart) {
         this.idStart = idStart;
     }
 
-    public Integer getIdEnd() {
+    public Integereger getIdEnd() {
         return idEnd;
     }
 
-    public void setIdEnd(Integer idEnd) {
+    public void setIdEnd(Integereger idEnd) {
         this.idEnd = idEnd;
     }
 
-    public Set<Integer> getIdSet() {
+    public Set<Integereger> getIdSet() {
         return idSet;
     }
 
-    public void setIdSet(Set<Integer> idSet) {
+    public void setIdSet(Set<Integereger> idSet) {
         this.idSet = idSet;
     }
 
@@ -133,19 +167,19 @@ public class CourseEntityExt extends CourseEntity {
         this.instName = instName;
     }
 
-    public String getPartnerIntro() {
-        return partnerIntro;
+    public String getPartnerIntegerro() {
+        return partnerIntegerro;
     }
 
-    public void setPartnerIntro(String partnerIntro) {
-        this.partnerIntro = partnerIntro;
+    public void setPartnerIntegerro(String partnerIntegerro) {
+        this.partnerIntegerro = partnerIntegerro;
     }
 
-    public int getPartnerQualification() {
+    public Integer getPartnerQualification() {
         return partnerQualification;
     }
 
-    public void setPartnerQualification(int partnerQualification) {
+    public void setPartnerQualification(Integer partnerQualification) {
         this.partnerQualification = partnerQualification;
     }
 
@@ -181,11 +215,11 @@ public class CourseEntityExt extends CourseEntity {
         this.categoryName = categoryName;
     }
 
-    public int getCategoryRank() {
+    public Integer getCategoryRank() {
         return categoryRank;
     }
 
-    public void setCategoryRank(int categoryRank) {
+    public void setCategoryRank(Integer categoryRank) {
         this.categoryRank = categoryRank;
     }
 

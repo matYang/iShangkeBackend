@@ -7,7 +7,6 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.CourseTemplateEntity;
 
 public class CourseTemplateEntityExt extends CourseTemplateEntity {
-    
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
@@ -16,6 +15,38 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Date createTimeBefore;
     private Date createTimeAfter;
     
+
+    private Integer categoryIdStart;
+    private Integer categoryIdEnd;
+    private Integer locationIdStart;
+    private Integer locationIdEnd;
+    private Integer circleIdStart;
+    private Integer circleIdEnd;
+    private Integer priceStart;
+    private Integer priceEnd;
+    private Integer originalPriceStart;
+    private Integer originalPriceEnd;
+    private Integer cashbackStart;
+    private Integer cashbackEnd;
+    private Integer commissionStart;
+    private Integer commissionEnd;
+    private Integer serviceChargeStart;
+    private Integer serviceChargeEnd;
+    private Integer popularityStart;
+    private Integer popularityEnd;
+    private Integer classSizeStart;
+    private Integer classSizeEnd;
+    private Integer courseHourNumStart;
+    private Integer courseHourNumEnd;
+    private Date startDateStart;
+    private Date startDateEnd;
+    private Date finishDateStart;
+    private Date finishDateEnd;
+    private Date cutoffDateStart;
+    private Date cutoffDateEnd;
+
+
+
     //concrete information
     private List<TeacherEntityExt> teacherList;
     private List<ClassPhotoEntityExt> classPhotoList;
