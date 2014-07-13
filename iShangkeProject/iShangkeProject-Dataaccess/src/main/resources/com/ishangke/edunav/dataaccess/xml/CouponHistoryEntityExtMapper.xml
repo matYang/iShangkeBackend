@@ -91,4 +91,70 @@
   <select id="getCount" resultType="int">
     select count(ID) from COUPON_HISTORY where DELETED = 0
   </select>
+  <select id="list" parameterType="map" resultMap="CouponHistoryExtMap">
+    select
+    <include refid="CouponHistory_Base_Column_List"></include>
+    from COUPON_HISTORY
+    where COUPON_HISTORY.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND COUPON_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND COUPON_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND COUPON_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND COUPON_HISTORY.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.couponId != null and entity.couponId != 0">
+        AND COUPON_HISTORY.COUPON_ID = #{entity.couponId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.charge != null and entity.charge != 0">
+        AND COUPON_HISTORY.CHARGE = #{entity.charge,jdbcType=DOUBLE}
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND COUPON_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND COUPON_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COUPON_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COUPON_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    </if>
+    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        COUPON_HISTORY.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+
+  </select>
 </mapper>
