@@ -120,4 +120,130 @@
     JOIN ROLE_PERMISSION ROLE_PERMISSION ON PERMISSIONS.ID = ROLE_PERMISSION.PERMISSION_ID
     WHERE ROLE_PERMISSION.ROLE_ID = #{roleId} and PERMISSIONS.DELETED = 0
   </select>
+    <select id="list" parameterType="map" resultMap="PermissionExtMap">
+    select
+    <include refid="Permission_Base_Column_List"></include>
+    from PERMISSIONS
+    where PERMISSIONS.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND PERMISSIONS.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND PERMISSIONS.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND PERMISSIONS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND PERMISSIONS.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+        <if test="entity.name != null and entity.name != ''">
+        AND PERMISSIONS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+        <if test="entity.path != null and entity.path != ''">
+        AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
+      </if>
+     
+      
+     
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>      
+      
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND PERMISSIONS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND PERMISSIONS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+    
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND PERMISSIONS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        PERMISSIONS.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="getListCount" parameterType="map" resultType="int">
+  Select count(*) From (
+  select
+    <include refid="Permission_Base_Column_List"></include>
+    from PERMISSIONS
+    where PERMISSIONS.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND PERMISSIONS.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND PERMISSIONS.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND PERMISSIONS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND PERMISSIONS.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+        <if test="entity.name != null and entity.name != ''">
+        AND PERMISSIONS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+        <if test="entity.path != null and entity.path != ''">
+        AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
+      </if>
+     
+      
+     
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>      
+      
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND PERMISSIONS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND PERMISSIONS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+    
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND PERMISSIONS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        PERMISSIONS.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+    ) AS total
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.ishangke.edunav.dataaccess.mapper;
 import java.util.Date;
 import java.util.List;
 
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,15 +56,15 @@ public class BookingHistoryEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
-        bookingHistoryEntityExt.setCreateTime(new Date());
-        bookingHistoryEntityExt.setDeleted(0);
-        bookingHistoryEntityExt.setEnabled(1);
         bookingHistoryEntityExt.setBookingId(1);
         bookingHistoryEntityExt.setUserId(1);
         bookingHistoryEntityExt.setOptName(0);
-        bookingHistoryEntityExt.setPreStatus(1);
-        bookingHistoryEntityExt.setPostStatus(3);
+        bookingHistoryEntityExt.setPostStatus(1);
+        bookingHistoryEntityExt.setPreStatus(3);
         bookingHistoryEntityExt.setNormal(0);
+        bookingHistoryEntityExt.setCreateTime(new Date());
+        bookingHistoryEntityExt.setEnabled(1);
+        bookingHistoryEntityExt.setDeleted(0);
         bookingHistoryEntityExtMapper.add(bookingHistoryEntityExt);
         int oldcount = bookingHistoryEntityExtMapper.getCount();
         bookingHistoryEntityExtMapper.deleteById(bookingHistoryEntityExt.getId());

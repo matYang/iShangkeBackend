@@ -10,7 +10,7 @@
     <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="COURSECOMMENT_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
-    <result column="COURSECOMMENT_DELTED" property="delted" jdbcType="INTEGER" />
+    <result column="COURSECOMMENT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseComment_Base_Column_List">
     COURSE_COMMENT.ID COURSECOMMENT_ID,
@@ -21,9 +21,11 @@
     COURSE_COMMENT.CONTENT COURSECOMMENT_CONTENT,
     COURSE_COMMENT.LAST_MODIFY_TIME
     COURSECOMMENT_LASTMODIFYTIME,
-    COURSE_COMMENT.CREATE_TIME COURSECOMMENT_CREATETIME,
+    COURSE_COMMENT.CREATE_TIME
+    COURSECOMMENT_CREATETIME,
     COURSE_COMMENT.ENABLED COURSECOMMENT_ENABLED,
-    COURSE_COMMENT.DELTED COURSECOMMENT_DELTED
+    COURSE_COMMENT.DELETED
+    COURSECOMMENT_DELETED
   </sql>
   <insert id="add" parameterType="CourseCommentEntityExt">
 
@@ -51,8 +53,8 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="delted != null">
-        DELTED,
+      <if test="deleted != null">
+        DELETED,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -78,8 +80,8 @@
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="delted != null">
-        #{delted,jdbcType=INTEGER},
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -117,13 +119,86 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="delted != null">
-        DELTED = #{delted,jdbcType=INTEGER},
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-   <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from COURSE_COMMENT where DELETED = 0
+  </select>
+  <select id="list" parameterType="map" resultMap="CourseCommentExtMap">
+    select
+    <include refid="CourseComment_Base_Column_List"></include>
+    from COURSE_COMMENT
+    where COURSE_COMMENT.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND COURSE_COMMENT.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND COURSE_COMMENT.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND COURSE_COMMENT.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND COURSE_COMMENT.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.userId != null and entity.userId != 0">
+        AND COURSE_COMMENT.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND COURSE_COMMENT.COURSE_TEMPLATEID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.title != null and entity.title != ''">
+        AND COURSE_COMMENT.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.content != null and entity.content != ''">
+        AND COURSE_COMMENT.CONTENT LIKE "%"#{entity.content,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND COURSE_COMMENT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != null">
+        AND COURSE_COMMENT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND COURSE_COMMENT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+
+    </if>
+    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        COURSE_COMMENT.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
   </select>
 </mapper>
