@@ -6,37 +6,37 @@ import com.ishangke.edunav.dataaccess.model.gen.ClassPhotoEntity;
 
 public class ClassPhotoEntityExt extends ClassPhotoEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int partnerIdStart;
-    private int partnerIdEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer partnerIdStart;
+    private Integer partnerIdEnd;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getPartnerIdStart() {
+    public Integer getPartnerIdStart() {
         return partnerIdStart;
     }
-    public void setPartnerIdStart(int partnerIdStart) {
+    public void setPartnerIdStart(Integer partnerIdStart) {
         this.partnerIdStart = partnerIdStart;
     }
-    public int getPartnerIdEnd() {
+    public Integer getPartnerIdEnd() {
         return partnerIdEnd;
     }
-    public void setPartnerIdEnd(int partnerIdEnd) {
+    public void setPartnerIdEnd(Integer partnerIdEnd) {
         this.partnerIdEnd = partnerIdEnd;
     }
     public Date getLastModifyTimeStart() {

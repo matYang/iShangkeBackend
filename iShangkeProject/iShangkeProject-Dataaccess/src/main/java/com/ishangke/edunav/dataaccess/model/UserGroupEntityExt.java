@@ -6,49 +6,49 @@ import com.ishangke.edunav.dataaccess.model.gen.UserGroupEntity;
 
 public class UserGroupEntityExt extends UserGroupEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int userIdStart;
-    private int userIdEnd;
-    private int groupIdStart;
-    private int groupIdEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer userIdStart;
+    private Integer userIdEnd;
+    private Integer groupIdStart;
+    private Integer groupIdEnd;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;  
     
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getUserIdStart() {
+    public Integer getUserIdStart() {
         return userIdStart;
     }
-    public void setUserIdStart(int userIdStart) {
+    public void setUserIdStart(Integer userIdStart) {
         this.userIdStart = userIdStart;
     }
-    public int getUserIdEnd() {
+    public Integer getUserIdEnd() {
         return userIdEnd;
     }
-    public void setUserIdEnd(int userIdEnd) {
+    public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
-    public int getGroupIdStart() {
+    public Integer getGroupIdStart() {
         return groupIdStart;
     }
-    public void setGroupIdStart(int groupIdStart) {
+    public void setGroupIdStart(Integer groupIdStart) {
         this.groupIdStart = groupIdStart;
     }
-    public int getGroupIdEnd() {
+    public Integer getGroupIdEnd() {
         return groupIdEnd;
     }
-    public void setGroupIdEnd(int groupIdEnd) {
+    public void setGroupIdEnd(Integer groupIdEnd) {
         this.groupIdEnd = groupIdEnd;
     }
     public Date getLastModifyTimeStart() {

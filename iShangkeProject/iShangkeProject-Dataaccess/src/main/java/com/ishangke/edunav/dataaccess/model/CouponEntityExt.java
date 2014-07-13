@@ -6,31 +6,31 @@ import com.ishangke.edunav.dataaccess.model.gen.CouponEntity;
 
 public class CouponEntityExt extends CouponEntity {
 
-    private int idStart;
-    private int idEnd;
+    private Integer idStart;
+    private Integer idEnd;
     private Double totalStart;
     private Double totalEnd;
     private Double balanceStart;
     private Double balanceEnd;
     private Date expiryTimeStart;
     private Date expiryTimeEnd;
-    private int userIdStart;
-    private int userIdEnd;
+    private Integer userIdStart;
+    private Integer userIdEnd;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
     public Double getTotalStart() {
@@ -69,16 +69,16 @@ public class CouponEntityExt extends CouponEntity {
     public void setExpiryTimeEnd(Date expiryTimeEnd) {
         this.expiryTimeEnd = expiryTimeEnd;
     }
-    public int getUserIdStart() {
+    public Integer getUserIdStart() {
         return userIdStart;
     }
-    public void setUserIdStart(int userIdStart) {
+    public void setUserIdStart(Integer userIdStart) {
         this.userIdStart = userIdStart;
     }
-    public int getUserIdEnd() {
+    public Integer getUserIdEnd() {
         return userIdEnd;
     }
-    public void setUserIdEnd(int userIdEnd) {
+    public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
     public Date getLastModifyTimeStart() {

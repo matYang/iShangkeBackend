@@ -6,37 +6,37 @@ import com.ishangke.edunav.dataaccess.model.gen.CategoryEntity;
 
 public class CategoryEntityExt extends CategoryEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int rankStart;
-    private int rankEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer rankStart;
+    private Integer rankEnd;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getRankStart() {
+    public Integer getRankStart() {
         return rankStart;
     }
-    public void setRankStart(int rankStart) {
+    public void setRankStart(Integer rankStart) {
         this.rankStart = rankStart;
     }
-    public int getRankEnd() {
+    public Integer getRankEnd() {
         return rankEnd;
     }
-    public void setRankEnd(int rankEnd) {
+    public void setRankEnd(Integer rankEnd) {
         this.rankEnd = rankEnd;
     }
     public Date getLastModifyTimeStart() {

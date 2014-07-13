@@ -6,27 +6,27 @@ import com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntity;
 
 public class CreditHistoryEntityExt extends CreditHistoryEntity {
 
-    private int idStart;
-    private int idEnd;
+    private Integer idStart;
+    private Integer idEnd;
     private Double chargeStart;
     private Double chargeEnd;
-    private int userIdStart;
-    private int userIdEnd;
+    private Integer userIdStart;
+    private Integer userIdEnd;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
     public Double getChargeStart() {
@@ -41,16 +41,16 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
     public void setChargeEnd(Double chargeEnd) {
         this.chargeEnd = chargeEnd;
     }
-    public int getUserIdStart() {
+    public Integer getUserIdStart() {
         return userIdStart;
     }
-    public void setUserIdStart(int userIdStart) {
+    public void setUserIdStart(Integer userIdStart) {
         this.userIdStart = userIdStart;
     }
-    public int getUserIdEnd() {
+    public Integer getUserIdEnd() {
         return userIdEnd;
     }
-    public void setUserIdEnd(int userIdEnd) {
+    public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
     public Date getLastModifyTimeStart() {
