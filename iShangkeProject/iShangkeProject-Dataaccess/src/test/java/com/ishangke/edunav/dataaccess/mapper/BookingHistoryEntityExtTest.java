@@ -3,7 +3,6 @@ package com.ishangke.edunav.dataaccess.mapper;
 import java.util.Date;
 import java.util.List;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +24,12 @@ import com.ishangke.edunav.dataaccess.model.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-//继承BaseTest
-public class BookingHistoryEntityExtTest extends BaseTest{
+// 继承BaseTest
+public class BookingHistoryEntityExtTest extends BaseTest {
     @Autowired
     private BookingHistoryEntityExtMapper bookingHistoryEntityExtMapper;
 
-    //resource里面
+    // resource里面
     public BookingHistoryEntityExtTest() {
         scriptAfterClass = "BookingHistoryEntityExtTestAfter.sql";
         scriptBeforeClass = "BookingHistoryEntityExtTestBefore.sql";
@@ -71,19 +70,19 @@ public class BookingHistoryEntityExtTest extends BaseTest{
         Assert.assertSame(bookingHistoryEntityExtMapper.getCount(), oldcount - 1);
     }
 
-    //@Test
+    @Test
     public void testQuery() {
         PaginationEntity page = new PaginationEntity();
         page.setOffset(0);
         page.setSize(10);
-        //排序，先按照第一个排序，再按照第二个排序，依次排列
+        // 排序，先按照第一个排序，再按照第二个排序，依次排列
         page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
-        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
         BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
         bookingHistoryEntityExt.setUserId(1);
 
-        List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt,  page);
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("太棒了！耶", result.get(1).getRemark());
+        List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt, page);
+        //3 here, 1 default, 3 added among which 1 is deleted
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("_test_bh_太棒了！耶", result.get(1).getRemark());
     }
 }

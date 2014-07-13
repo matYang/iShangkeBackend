@@ -37,22 +37,32 @@ public class ContactEntityExtTest extends BaseTest{
 
     @Test
     public void testAdd() {
-//        ContactEntityExt contactEntityExt = new ContactEntityExt();
-//        contactEntityExt.setCreateTime(new Date());
-//        contactEntityExt.setDeleted(0);
-//        contactEntityExt.setEnabled(1);
-//
-//        int oldcount = contactEntityExtMapper.getCount();
-//        contactEntityExtMapper.add(contactEntityExt);
-//        Assert.assertSame(contactEntityExtMapper.getCount(), oldcount + 1);
-    }
-
-    //@Test
-    public void testDelete() {
         ContactEntityExt contactEntityExt = new ContactEntityExt();
+        contactEntityExt.setLastModifyTime(new Date());
         contactEntityExt.setCreateTime(new Date());
         contactEntityExt.setDeleted(0);
         contactEntityExt.setEnabled(1);
+        contactEntityExt.setUserId(1);
+        contactEntityExt.setName("清哥");
+        contactEntityExt.setPhone("1568784428");
+        contactEntityExt.setEmail("zuoqinglong@youbaihu.com");
+
+        int oldcount = contactEntityExtMapper.getCount();
+        contactEntityExtMapper.add(contactEntityExt);
+        Assert.assertSame(contactEntityExtMapper.getCount(), oldcount + 1);
+    }
+
+    @Test
+    public void testDelete() {
+        ContactEntityExt contactEntityExt = new ContactEntityExt();
+        contactEntityExt.setLastModifyTime(new Date());
+        contactEntityExt.setCreateTime(new Date());
+        contactEntityExt.setDeleted(0);
+        contactEntityExt.setEnabled(1);
+        contactEntityExt.setUserId(1);
+        contactEntityExt.setName("清哥");
+        contactEntityExt.setPhone("1568784428");
+        contactEntityExt.setEmail("zuoqinglong@youbaihu.com");
         
         contactEntityExtMapper.add(contactEntityExt);
         int oldcount = contactEntityExtMapper.getCount();
@@ -60,7 +70,7 @@ public class ContactEntityExtTest extends BaseTest{
         Assert.assertSame(contactEntityExtMapper.getCount(), oldcount - 1);
     }
 
-    //@Test
+    @Test
     public void testQuery() {
         PaginationEntity page = new PaginationEntity();
         page.setOffset(0);
@@ -69,10 +79,11 @@ public class ContactEntityExtTest extends BaseTest{
         page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
         page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
         ContactEntityExt contactEntityExt = new ContactEntityExt();
-        contactEntityExt.setUserId(1);
+        contactEntityExt.setName("_test_contact_");
 
         List<ContactEntityExt> result = contactEntityExtMapper.list(contactEntityExt,  page);
+        //1 is deleted
         Assert.assertEquals(2, result.size());
-        Assert.assertEquals("太棒了！耶", result.get(1).getName());
+        Assert.assertEquals("_test_contact_2", result.get(1).getName());
     }
 }
