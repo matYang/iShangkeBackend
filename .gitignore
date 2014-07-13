@@ -21,7 +21,7 @@
 **/thriftgen/*
 
 # spring
-**/resources/applicationContext-*.xml
+**/resources/applicationContext-dataaccess*.xml
 **/resources/ENV_*.properties
 
 # log

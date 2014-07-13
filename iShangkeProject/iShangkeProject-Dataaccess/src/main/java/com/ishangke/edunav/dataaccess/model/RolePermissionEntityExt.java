@@ -6,49 +6,49 @@ import com.ishangke.edunav.dataaccess.model.gen.RolePermissionEntity;
 
 public class RolePermissionEntityExt extends RolePermissionEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int roleIdStart;
-    private int roleIdEnd;
-    private int permissionIdStart;
-    private int permissionIdEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer roleIdStart;
+    private Integer roleIdEnd;
+    private Integer permissionIdStart;
+    private Integer permissionIdEnd;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getRoleIdStart() {
+    public Integer getRoleIdStart() {
         return roleIdStart;
     }
-    public void setRoleIdStart(int roleIdStart) {
+    public void setRoleIdStart(Integer roleIdStart) {
         this.roleIdStart = roleIdStart;
     }
-    public int getRoleIdEnd() {
+    public Integer getRoleIdEnd() {
         return roleIdEnd;
     }
-    public void setRoleIdEnd(int roleIdEnd) {
+    public void setRoleIdEnd(Integer roleIdEnd) {
         this.roleIdEnd = roleIdEnd;
     }
-    public int getPermissionIdStart() {
+    public Integer getPermissionIdStart() {
         return permissionIdStart;
     }
-    public void setPermissionIdStart(int permissionIdStart) {
+    public void setPermissionIdStart(Integer permissionIdStart) {
         this.permissionIdStart = permissionIdStart;
     }
-    public int getPermissionIdEnd() {
+    public Integer getPermissionIdEnd() {
         return permissionIdEnd;
     }
-    public void setPermissionIdEnd(int permissionIdEnd) {
+    public void setPermissionIdEnd(Integer permissionIdEnd) {
         this.permissionIdEnd = permissionIdEnd;
     }
     public Date getLastModifyTimeStart() {

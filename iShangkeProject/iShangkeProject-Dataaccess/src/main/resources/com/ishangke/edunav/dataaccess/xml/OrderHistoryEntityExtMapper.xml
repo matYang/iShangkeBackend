@@ -164,7 +164,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND ORDER_HISTORY.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>

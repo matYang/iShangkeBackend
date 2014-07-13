@@ -840,7 +840,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND COURSE.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1093,7 +1093,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND COURSE.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>

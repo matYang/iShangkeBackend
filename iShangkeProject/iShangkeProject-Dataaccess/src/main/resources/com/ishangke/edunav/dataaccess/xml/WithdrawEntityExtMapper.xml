@@ -141,7 +141,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND WITHDRAW.ID IN
-          <foreach collection="entity.idSet.value" item="listItem" open="(" close=")"
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
