@@ -69,8 +69,8 @@ public class PermissionEntityExtTest {
         permissionEntityExt.setPath("ishangke李清");
         permissionEntityExtMapper.add(permissionEntityExt);
 
-        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
+        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 100000000));
+        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 100000000));
 
         List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -118,8 +118,8 @@ public class PermissionEntityExtTest {
         permissionEntityExt.setPath("ishangke李清");
         permissionEntityExtMapper.add(permissionEntityExt);
 
-        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
+        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 100000000));
+        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 100000000));
 
         List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
         String name = "李国庆";
