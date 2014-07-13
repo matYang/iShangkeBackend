@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order_history
+    from ORDER_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,15 +93,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from order_history
+    from ORDER_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order_history
+    delete from ORDER_HISTORY
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderHistoryEntityExample" >
-    delete from order_history
+    delete from ORDER_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,7 +110,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order_history (ID, ORDER_ID, USER_ID, 
+    insert into ORDER_HISTORY (ID, ORDER_ID, USER_ID, 
       OPT_NAME, REMARK, PRE_STATUS, 
       POST_STATUS, NORMAL, CREATE_TIME, 
       ENABLED, DELETED)
@@ -123,7 +123,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order_history
+    insert into ORDER_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="orderId != null" >
@@ -192,13 +192,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderHistoryEntityExample" resultType="java.lang.Integer" >
-    select count(*) from order_history
+    select count(*) from ORDER_HISTORY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update order_history
+    update ORDER_HISTORY
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -239,7 +239,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update order_history
+    update ORDER_HISTORY
     set ID = #{record.id,jdbcType=INTEGER},
       ORDER_ID = #{record.orderId,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
@@ -256,7 +256,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderHistoryEntity" >
-    update order_history
+    update ORDER_HISTORY
     <set >
       <if test="orderId != null" >
         ORDER_ID = #{orderId,jdbcType=INTEGER},
@@ -292,7 +292,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.OrderHistoryEntity" >
-    update order_history
+    update ORDER_HISTORY
     set ORDER_ID = #{orderId,jdbcType=INTEGER},
       USER_ID = #{userId,jdbcType=INTEGER},
       OPT_NAME = #{optName,jdbcType=INTEGER},

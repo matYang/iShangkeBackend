@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from course_template_teacher
+    from COURSE_TEMPLATE_TEACHER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,15 +86,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from course_template_teacher
+    from COURSE_TEMPLATE_TEACHER
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from course_template_teacher
+    delete from COURSE_TEMPLATE_TEACHER
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseTemplateTeacherEntityExample" >
-    delete from course_template_teacher
+    delete from COURSE_TEMPLATE_TEACHER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,7 +103,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course_template_teacher (ID, COURSE_TEMPLATE_ID, TEACHER_ID, 
+    insert into COURSE_TEMPLATE_TEACHER (ID, COURSE_TEMPLATE_ID, TEACHER_ID, 
       CREATE_TIME, DELETED)
     values (#{id,jdbcType=INTEGER}, #{courseTemplateId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
@@ -112,7 +112,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course_template_teacher
+    insert into COURSE_TEMPLATE_TEACHER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="courseTemplateId != null" >
@@ -145,13 +145,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseTemplateTeacherEntityExample" resultType="java.lang.Integer" >
-    select count(*) from course_template_teacher
+    select count(*) from COURSE_TEMPLATE_TEACHER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update course_template_teacher
+    update COURSE_TEMPLATE_TEACHER
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -174,7 +174,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update course_template_teacher
+    update COURSE_TEMPLATE_TEACHER
     set ID = #{record.id,jdbcType=INTEGER},
       COURSE_TEMPLATE_ID = #{record.courseTemplateId,jdbcType=INTEGER},
       TEACHER_ID = #{record.teacherId,jdbcType=INTEGER},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseTemplateTeacherEntity" >
-    update course_template_teacher
+    update COURSE_TEMPLATE_TEACHER
     <set >
       <if test="courseTemplateId != null" >
         COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
@@ -203,7 +203,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseTemplateTeacherEntity" >
-    update course_template_teacher
+    update COURSE_TEMPLATE_TEACHER
     set COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       TEACHER_ID = #{teacherId,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},

@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_group
+    from USER_GROUP
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,15 +86,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_group
+    from USER_GROUP
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_group
+    delete from USER_GROUP
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserGroupEntityExample" >
-    delete from user_group
+    delete from USER_GROUP
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,7 +103,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_group (ID, USER_ID, GROUP_ID, 
+    insert into USER_GROUP (ID, USER_ID, GROUP_ID, 
       LAST_MODIFY_TIME, DELETED)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
       #{lastModifyTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
@@ -112,7 +112,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_group
+    insert into USER_GROUP
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="userId != null" >
@@ -145,13 +145,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserGroupEntityExample" resultType="java.lang.Integer" >
-    select count(*) from user_group
+    select count(*) from USER_GROUP
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user_group
+    update USER_GROUP
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -174,7 +174,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user_group
+    update USER_GROUP
     set ID = #{record.id,jdbcType=INTEGER},
       USER_ID = #{record.userId,jdbcType=INTEGER},
       GROUP_ID = #{record.groupId,jdbcType=INTEGER},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserGroupEntity" >
-    update user_group
+    update USER_GROUP
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=INTEGER},
@@ -203,7 +203,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.UserGroupEntity" >
-    update user_group
+    update USER_GROUP
     set USER_ID = #{userId,jdbcType=INTEGER},
       GROUP_ID = #{groupId,jdbcType=INTEGER},
       LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},

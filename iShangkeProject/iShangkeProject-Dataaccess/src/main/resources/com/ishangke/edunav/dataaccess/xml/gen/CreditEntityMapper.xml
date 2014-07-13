@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from credit
+    from CREDIT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,13 +85,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditEntityExample" >
-    delete from credit
+    delete from CREDIT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditEntity" >
-    insert into credit (ID, CREDIT, LAST_MODIFY_TIME, 
+    insert into CREDIT (ID, CREDIT, LAST_MODIFY_TIME, 
       CREATE_TIME, ENABLED, DELETED
       )
     values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=DOUBLE}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
@@ -99,7 +99,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditEntity" >
-    insert into credit
+    insert into CREDIT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
@@ -142,13 +142,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CreditEntityExample" resultType="java.lang.Integer" >
-    select count(*) from credit
+    select count(*) from CREDIT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update credit
+    update CREDIT
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -174,7 +174,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update credit
+    update CREDIT
     set ID = #{record.id,jdbcType=INTEGER},
       CREDIT = #{record.credit,jdbcType=DOUBLE},
       LAST_MODIFY_TIME = #{record.lastModifyTime,jdbcType=TIMESTAMP},

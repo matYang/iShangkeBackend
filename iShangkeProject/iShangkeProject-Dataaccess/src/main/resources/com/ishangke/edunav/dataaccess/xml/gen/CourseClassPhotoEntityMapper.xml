@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from course_class_photo
+    from COURSE_CLASS_PHOTO
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,15 +86,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from course_class_photo
+    from COURSE_CLASS_PHOTO
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from course_class_photo
+    delete from COURSE_CLASS_PHOTO
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseClassPhotoEntityExample" >
-    delete from course_class_photo
+    delete from COURSE_CLASS_PHOTO
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,7 +103,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course_class_photo (ID, COURSE_ID, CLASS_PHOTO_ID, 
+    insert into COURSE_CLASS_PHOTO (ID, COURSE_ID, CLASS_PHOTO_ID, 
       CREATE_TIME, DELETED)
     values (#{id,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{classPhotoId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
@@ -112,7 +112,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into course_class_photo
+    insert into COURSE_CLASS_PHOTO
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="courseId != null" >
@@ -145,13 +145,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseClassPhotoEntityExample" resultType="java.lang.Integer" >
-    select count(*) from course_class_photo
+    select count(*) from COURSE_CLASS_PHOTO
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update course_class_photo
+    update COURSE_CLASS_PHOTO
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -174,7 +174,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update course_class_photo
+    update COURSE_CLASS_PHOTO
     set ID = #{record.id,jdbcType=INTEGER},
       COURSE_ID = #{record.courseId,jdbcType=INTEGER},
       CLASS_PHOTO_ID = #{record.classPhotoId,jdbcType=INTEGER},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseClassPhotoEntity" >
-    update course_class_photo
+    update COURSE_CLASS_PHOTO
     <set >
       <if test="courseId != null" >
         COURSE_ID = #{courseId,jdbcType=INTEGER},
@@ -203,7 +203,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.CourseClassPhotoEntity" >
-    update course_class_photo
+    update COURSE_CLASS_PHOTO
     set COURSE_ID = #{courseId,jdbcType=INTEGER},
       CLASS_PHOTO_ID = #{classPhotoId,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},

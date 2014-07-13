@@ -83,7 +83,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from activity
+    from ACTIVITY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,15 +94,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from activity
+    from ACTIVITY
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from activity
+    delete from ACTIVITY
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.ActivityEntityExample" >
-    delete from activity
+    delete from ACTIVITY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -111,7 +111,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into activity (ID, NAME, PARTNER_ID, 
+    insert into ACTIVITY (ID, NAME, PARTNER_ID, 
       COURSE_ID, REMARK, START_TIME, 
       END_TIME, STATUS, LAST_MODIFY_TIME, 
       CREATE_TIME, ENABLED, DELETED
@@ -126,7 +126,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into activity
+    insert into ACTIVITY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="name != null" >
@@ -201,13 +201,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.ActivityEntityExample" resultType="java.lang.Integer" >
-    select count(*) from activity
+    select count(*) from ACTIVITY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update activity
+    update ACTIVITY
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -251,7 +251,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update activity
+    update ACTIVITY
     set ID = #{record.id,jdbcType=INTEGER},
       NAME = #{record.name,jdbcType=VARCHAR},
       PARTNER_ID = #{record.partnerId,jdbcType=INTEGER},
@@ -269,7 +269,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.ActivityEntity" >
-    update activity
+    update ACTIVITY
     <set >
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
@@ -308,7 +308,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.ActivityEntity" >
-    update activity
+    update ACTIVITY
     set NAME = #{name,jdbcType=VARCHAR},
       PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       COURSE_ID = #{courseId,jdbcType=INTEGER},

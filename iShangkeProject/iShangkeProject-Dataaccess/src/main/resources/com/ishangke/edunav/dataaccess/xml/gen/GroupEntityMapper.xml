@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from groups
+    from GROUPS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,15 +89,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from groups
+    from GROUPS
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from groups
+    delete from GROUPS
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.GroupEntityExample" >
-    delete from groups
+    delete from GROUPS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -106,7 +106,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into groups (ID, NAME, ROLE_ID, 
+    insert into GROUPS (ID, NAME, ROLE_ID, 
       LAST_MODIFY_TIME, CREATE_TIME, ENABLED, 
       DELETED, PARTNER_ID)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
@@ -117,7 +117,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into groups
+    insert into GROUPS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       ID,
       <if test="name != null" >
@@ -168,13 +168,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ishangke.edunav.dataaccess.model.gen.GroupEntityExample" resultType="java.lang.Integer" >
-    select count(*) from groups
+    select count(*) from GROUPS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update groups
+    update GROUPS
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
@@ -206,7 +206,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update groups
+    update GROUPS
     set ID = #{record.id,jdbcType=INTEGER},
       NAME = #{record.name,jdbcType=VARCHAR},
       ROLE_ID = #{record.roleId,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ishangke.edunav.dataaccess.model.gen.GroupEntity" >
-    update groups
+    update GROUPS
     <set >
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
@@ -247,7 +247,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ishangke.edunav.dataaccess.model.gen.GroupEntity" >
-    update groups
+    update GROUPS
     set NAME = #{name,jdbcType=VARCHAR},
       ROLE_ID = #{roleId,jdbcType=INTEGER},
       LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
