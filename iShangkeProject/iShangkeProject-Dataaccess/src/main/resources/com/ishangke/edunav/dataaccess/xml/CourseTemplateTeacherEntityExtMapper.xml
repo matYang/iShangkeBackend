@@ -56,7 +56,8 @@
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
     update COURSE_TEMPLATE_TEACHER set DELETED = 1
-    where ID
+    where
+    ID
     = #{id,jdbcType=INTEGER}
   </update>
   <update id="update" parameterType="CourseTemplateTeacherEntityExt">
@@ -78,7 +79,63 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-   <select id="getCount" resultType="int">
-    select count(ID) from COURSE_TEMPLATE_TEACHER where DELETED = 0
+  <select id="getCount" resultType="int">
+    select count(ID) from COURSE_TEMPLATE_TEACHER where
+    DELETED = 0
+  </select>
+  <select id="list" parameterType="map" resultMap="CourseTemplateTeacherExtMap">
+    select
+    <include refid="CourseTemplateTeacher_Base_Column_List"></include>
+    from COURSE_TEMPLATE_TEACHER
+    where COURSE_TEMPLATE_TEACHER.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND COURSE_TEMPLATE_TEACHER.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND COURSE_TEMPLATE_TEACHER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND COURSE_TEMPLATE_TEACHER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND COURSE_TEMPLATE_TEACHER.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND COURSE_TEMPLATE_TEACHER.COUPON_TEMPLATE_ID =
+        #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.teacherId != null and entity.teacherId != 0">
+        AND COURSE_TEMPLATE_TEACHER.TEACHERID = #{entity.teacherId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.createTime != null">
+        AND COURSE_TEMPLATE_TEACHER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COURSE_TEMPLATE_TEACHER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE_TEACHER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    </if>
+    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        COURSE_TEMPLATE_TEACHER.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+
   </select>
 </mapper>
