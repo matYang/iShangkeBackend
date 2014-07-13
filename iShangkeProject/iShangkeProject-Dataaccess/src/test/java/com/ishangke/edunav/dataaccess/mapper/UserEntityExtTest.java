@@ -19,12 +19,10 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
-//before/after方法注入，aop
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, UserEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, UserEntityExtTest.class })
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-//继承BaseTest
 public class UserEntityExtTest extends BaseTest {
     @Autowired
     private UserEntityExtMapper userEntityExtMapper;
