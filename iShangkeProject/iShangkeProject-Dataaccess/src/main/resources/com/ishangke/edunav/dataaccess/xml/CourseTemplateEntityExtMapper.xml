@@ -909,6 +909,40 @@
           </foreach>
         </if>
       </if>
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND COURSE_TEMPLATE.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet.size() > 0">
+          AND COURSE_TEMPLATE.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.status != null and entity.status != 0">
+        AND COURSE_TEMPLATE.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND COURSE_TEMPLATE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusSet.size() > 0">
+          AND COURSE_TEMPLATE.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
       <if test="entity.price != null and entity.price != 0">
         AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=INTEGER}
       </if>
@@ -1162,6 +1196,41 @@
           </foreach>
         </if>
       </if>
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND COURSE_TEMPLATE.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet.size() > 0">
+          AND COURSE_TEMPLATE.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.status != null and entity.status != 0">
+        AND COURSE_TEMPLATE.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND COURSE_TEMPLATE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusSet.size() > 0">
+          AND COURSE_TEMPLATE.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
       <if test="entity.price != null and entity.price != 0">
         AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=INTEGER}
       </if>

@@ -14,14 +14,22 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Date lastModifyTimeAfter;
     private Date createTimeBefore;
     private Date createTimeAfter;
-    
 
     private Integer categoryIdStart;
     private Integer categoryIdEnd;
+    private Set<Integer> categoryIdSet;
     private Integer locationIdStart;
     private Integer locationIdEnd;
+    private Set<Integer> locationIdSet;
     private Integer circleIdStart;
     private Integer circleIdEnd;
+    private Set<Integer> circleIdSet;
+    private Integer partnerIdStart;
+    private Integer partnerIdEnd;
+    private Set<Integer> partnerIdSet;
+    private Integer statusStart;
+    private Integer statusEnd;
+    private Set<Integer> statusIdSet;
     private Integer priceStart;
     private Integer priceEnd;
     private Integer originalPriceStart;
@@ -44,7 +52,6 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Date finishDateEnd;
     private Date cutoffDateStart;
     private Date cutoffDateEnd;
-
 
 
     //concrete information

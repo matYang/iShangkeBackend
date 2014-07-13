@@ -15,7 +15,6 @@ public class CourseEntityExt extends CourseEntity {
     private Date createTimeBefore;
     private Date createTimeAfter;
 
-
     private Integer categoryIdStart;
     private Integer categoryIdEnd;
     private Set<Integer> categoryIdSet;
@@ -25,6 +24,14 @@ public class CourseEntityExt extends CourseEntity {
     private Integer circleIdStart;
     private Integer circleIdEnd;
     private Set<Integer> circleIdSet;
+    private Integer partnerIdStart;
+    private Integer partnerIdEnd;
+    private Set<Integer> partnerIdSet;
+    private Integer statusStart;
+    private Integer statusEnd;
+    private Set<Integer> statusIdSet;
+    private Integer courseTemplateIdStart;
+    private Integer courseTemplateIdEnd;
     private Integer priceStart;
     private Integer priceEnd;
     private Integer originalPriceStart;
