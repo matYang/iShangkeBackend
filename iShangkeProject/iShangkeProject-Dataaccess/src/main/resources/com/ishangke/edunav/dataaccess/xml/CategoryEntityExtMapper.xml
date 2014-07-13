@@ -48,8 +48,7 @@
         DELETED,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
+    <trim prefix="values (" suffix=")" suffixOverrides=",">      
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
       </if>
