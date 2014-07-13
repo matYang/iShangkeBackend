@@ -24,8 +24,8 @@
     CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
     CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
-  <sql id="Course_Templete_Base_Column_List">
-  COURSE_TEMPLETE.ID COURSE_TEMPLETE.ID  
+  <sql id="COURSE_TEMPLATE_Base_Column_List">
+  COURSE_TEMPLATE.ID COURSETEMPLATE_ID  
   </sql>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
@@ -33,13 +33,13 @@
     COURSE.COURSE_TEMPLATE_ID
     COURSE_COURSETEMPLATEID
    </sql>
-  <sql id="Course_Templete_Class_Photo_Base_Column_List">
-  COURSE_TEMPLETE_CLASS_PHOTO.ID COURSETEMPLETECLASSPHOTO_ID
-  COURSE_TEMPLETE_CLASS_PHOTO.COURSE_TEMPLETE_ID COURSETEMPLETECLASSPHOTO_COURSETEMPLETEID
-  COURSE_TEMPLETE_CLASS_PHOTO.CLASS_PHOTO_ID COURSETEMPLETECLASSPHOTO_CLASSPHOTOID
+  <sql id="COURSE_TEMPLATE_Class_Photo_Base_Column_List">
+  COURSE_TEMPLATE_CLASS_PHOTO.ID COURSETEMPLATECLASSPHOTO_ID,
+  COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID COURSETEMPLATECLASSPHOTO_COURSETEMPLATEID,
+  COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID COURSETEMPLATECLASSPHOTO_CLASSPHOTOID
   </sql>
   <sql id="Course_Class_Photo_Base_Column_List">
-    COURSE_CLASS_PHOTO.ID COURSECLASSPHOTO_ID
+    COURSE_CLASS_PHOTO.ID COURSECLASSPHOTO_ID,
     COURSE_CLASS_PHOTO.COURSE_ID COURSECLASSPHOTO_COURSEID,
     COURSE_CLASS_PHOTO.CLASS_PHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID
   </sql>
@@ -183,28 +183,23 @@
       <if test="entity.description != null and entity.description != ''">
         AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.lastModifyTime != null">
-        AND CLASS_PHOTO.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="entity.lastModifyTime == null">
+     
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
-      <if test="entity.createTime != null">
-        AND CLASS_PHOTO.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="entity.createTime == null">
+      
+
         <if test="entity.createTimeStart != null">
           <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+     
       <if test="entity.enabled != null">
         AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
@@ -254,28 +249,22 @@
       <if test="entity.description != null and entity.description != ''">
         AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.lastModifyTime != null">
-        AND CLASS_PHOTO.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="entity.lastModifyTime == null">
+      
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
-      <if test="entity.createTime != null">
-        AND CLASS_PHOTO.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="entity.createTime == null">
+     
+     
         <if test="entity.createTimeStart != null">
           <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+    
       <if test="entity.enabled != null">
         AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
@@ -288,7 +277,7 @@
   <select id="listClassPhotoByPartnerId" parameterType="int" resultMap="ClassPhotoExtMap">
   SELECT
   <include refid="ClassPhoto_Base_Column_List"/>
-  WHERE PARTNER_ID = #{partnerId} and DELETED = 0
+  FROM CLASS_PHOTO where CLASS_PHOTO.PARTNER_ID = #{partnerId} and CLASS_PHOTO.DELETED = 0
   </select>
   
   <select id="listClassPhotoByCourseId" parameterType="int" resultMap="ClassPhotoExtMap">
@@ -297,20 +286,20 @@
   <include refid="Course_Base_Column_List"/>,
   <include refid="Course_Class_Photo_Base_Column_List"/>
   FROM CLASS_PHOTO CLASS_PHOTO
-  JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASSPHOTOID
-  JOIN COURSE COURSE ON COURSE.ID = COURSE_CLASS_PHOTO.COURSEID
+  JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
+  JOIN COURSE COURSE ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
   WHERE COURSE.ID = #{courseId} and CLASS_PHOTO.DELETED = 0
   </select>
   
   <select id="listClassPhotoByCourseTempleteId" parameterType="int" resultMap="ClassPhotoExtMap">
   SELECT
   <include refid="ClassPhoto_Base_Column_List"/>,
-  <include refid="Course_Templete_Base_Column_List"/>,
-  <include refid="Course_Templete_Class_Photo_Base_Column_List"/>
+  <include refid="COURSE_TEMPLATE_Base_Column_List"/>,
+  <include refid="COURSE_TEMPLATE_Class_Photo_Base_Column_List"/>
   FROM CLASS_PHOTO CLASS_PHOTO
-  JOIN COURSE_TEMPLETE_CLASS_PHOTO COURSE_TEMPLETE_CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_TEMPLETE_CLASS_PHOTO.CLASSPHOTOID
-  JOIN COURSE_TEMPLETE COURSE_TEMPLETE ON COURSE_TEMPLETE.ID = COURSE_TEMPLETE_CLASS_PHOTO.COURSETEMPLETEID
-  WHERE COURSE_TEMPLETE.ID = #{courseTempleteId} and CLASS_PHOTO.DELETED = 0
+  JOIN COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
+  JOIN COURSE_TEMPLATE COURSE_TEMPLATE ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
+  WHERE COURSE_TEMPLATE.ID = #{courseTempleteId} and CLASS_PHOTO.DELETED = 0
   </select>
   
 </mapper>
