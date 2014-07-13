@@ -2,13 +2,16 @@ package com.ishangke.edunav.dataaccess.model;
 
 import com.ishangke.edunav.dataaccess.model.gen.ContactEntity;
 import java.util.Date;
+import java.util.Set;
 
 public class ContactEntityExt extends ContactEntity {
 
 	private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Integer userIdStart;
     private Integer userIdEnd;
+    private Set<Integer> userIdSet;
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
     private Date createTimeStart;
@@ -62,6 +65,17 @@ public class ContactEntityExt extends ContactEntity {
     public void setCreateTimeEnd(Date createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
+    }
 
-   
 }

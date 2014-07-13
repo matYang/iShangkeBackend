@@ -10,10 +10,10 @@ public class CourseEntityExt extends CourseEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
-    private Date lastModifyTimeBefore;
-    private Date lastModifyTimeAfter;
-    private Date createTimeBefore;
-    private Date createTimeAfter;
+    private Date lastModifyTimeStart;
+    private Date lastModifyTimeEnd;
+    private Date createTimeStart;
+    private Date createTimeEnd;
 
     private Integer categoryIdStart;
     private Integer categoryIdEnd;
@@ -29,7 +29,7 @@ public class CourseEntityExt extends CourseEntity {
     private Set<Integer> partnerIdSet;
     private Integer statusStart;
     private Integer statusEnd;
-    private Set<Integer> statusIdSet;
+    private Set<Integer> statusSet;
     private Integer courseTemplateIdStart;
     private Integer courseTemplateIdEnd;
     private Double priceStart;
@@ -102,36 +102,36 @@ public class CourseEntityExt extends CourseEntity {
         this.idSet = idSet;
     }
 
-    public Date getLastModifyTimeBefore() {
-        return lastModifyTimeBefore;
+    public Date getLastModifyTimeStart() {
+        return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeBefore(Date lastModifyTimeBefore) {
-        this.lastModifyTimeBefore = lastModifyTimeBefore;
+    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+        this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Date getLastModifyTimeAfter() {
-        return lastModifyTimeAfter;
+    public Date getLastModifyTimeEnd() {
+        return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeAfter(Date lastModifyTimeAfter) {
-        this.lastModifyTimeAfter = lastModifyTimeAfter;
+    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+        this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Date getCreateTimeBefore() {
-        return createTimeBefore;
+    public Date getCreateTimeStart() {
+        return createTimeStart;
     }
 
-    public void setCreateTimeBefore(Date createTimeBefore) {
-        this.createTimeBefore = createTimeBefore;
+    public void setCreateTimeStart(Date createTimeStart) {
+        this.createTimeStart = createTimeStart;
     }
 
-    public Date getCreateTimeAfter() {
-        return createTimeAfter;
+    public Date getCreateTimeEnd() {
+        return createTimeEnd;
     }
 
-    public void setCreateTimeAfter(Date createTimeAfter) {
-        this.createTimeAfter = createTimeAfter;
+    public void setCreateTimeEnd(Date createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
     }
 
     public List<TeacherEntityExt> getTeacherList() {
@@ -374,12 +374,12 @@ public class CourseEntityExt extends CourseEntity {
         this.statusEnd = statusEnd;
     }
 
-    public Set<Integer> getStatusIdSet() {
-        return statusIdSet;
+    public Set<Integer> getStatusSet() {
+        return statusSet;
     }
 
-    public void setStatusIdSet(Set<Integer> statusIdSet) {
-        this.statusIdSet = statusIdSet;
+    public void setStatusSet(Set<Integer> statusSet) {
+        this.statusSet = statusSet;
     }
 
     public Integer getCourseTemplateIdStart() {
