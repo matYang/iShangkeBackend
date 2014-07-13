@@ -120,6 +120,8 @@
     </table>
     <table tableName="WITHDRAW" domainObjectName="WithdrawEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
+      <!-- 通过此方法，将生成的时间类型为Calendar -->
+      <!-- <columnOverride  column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/>  -->
     </table>
     <table tableName="COURSE_TEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />

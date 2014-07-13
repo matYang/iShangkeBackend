@@ -8,7 +8,7 @@ UserService
      *  @return 用户实体 UserBo
      *
      */
-    Response register(UserBo)
+    common.ResponseBo register(UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为所有用户提供登录的功能。<br>
@@ -19,7 +19,7 @@ UserService
      *  @return 用户实体 UserBo
      *
      */
-    Response login(LoginBo)
+    common.ResponseBo login(LoginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员创建新用户<br>
@@ -32,7 +32,7 @@ UserService
      *  @return 用户实体 UserBo 
      *
      */
-    Response create(UserBo targetUser, PartnerBo, UserBo currentUser)
+    common.ResponseBo create(UserBo targetUser, PartnerBo, UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员删除用户<br>
@@ -44,7 +44,7 @@ UserService
      *  @return 删除结果 
      *
      */
-    Response delete(UserBo targetUser, UserBo currentUser)
+    common.ResponseBo delete(UserBo targetUser, UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为修改用户信息的功能<br>
@@ -56,7 +56,7 @@ UserService
      *  @return 用户实体 UserBo 
      *
      */
-    Response update(UserBo targetUser, UserBo currentUser)
+    common.ResponseBo update(UserBo targetUser, UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查看用户信息的功能<br>
@@ -68,7 +68,7 @@ UserService
      *  @return 用户实体 UserBo 
      *
      */
-    Response query(UserBo queryUser, UserBo currentUser)
+    common.ResponseBo query(UserBo queryUser, UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户信息的功能<br>
@@ -82,7 +82,7 @@ UserService
      *  @return 用户实体 UserBo 列表
      *
      */
-    Response query(UserBo queryUser, PartnerBo, UserBo currentUser, PagnationBo)
+    common.ResponseBo query(UserBo queryUser, PartnerBo, UserBo currentUser, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户session信息的功能<br>
@@ -92,7 +92,7 @@ UserService
      *  @return 用户session相关信息
      *
      */
-    Response querySession(UserBo)
+    common.ResponseBo querySession(UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为销毁用户session信息的功能<br>
@@ -102,7 +102,7 @@ UserService
      *  @return 
      *
      */
-    Response disposeSession(UserBo)
+    common.ResponseBo disposeSession(UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
 CategoryService
     /**
@@ -115,7 +115,7 @@ CategoryService
      *  @return Category实体 CategoryBo 列表
      *
      */
-    Response query(CategoryBo, PagnationBo)
+    common.ResponseBo query(CategoryBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 LocationService
     /**
@@ -128,7 +128,7 @@ LocationService
      *  @return Category实体 LocationBo 列表
      *
      */
-    Response query(LocationBo, PagnationBo)
+    common.ResponseBo query(LocationBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 CourseFilterService
     /**
@@ -140,7 +140,7 @@ CourseFilterService
      *  @return 课程过滤实体 CourseFilterBo
      *
      */
-    Response filter(CourseFilterBo)
+    common.ResponseBo filter(CourseFilterBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 CourseTemplateService
     /**
@@ -154,7 +154,7 @@ CourseTemplateService
      *  @return 课程模版实体 CourseTemplateBo 
      *
      */
-    Response create(CourseTemplateBo, PartnerBo, UserBo)
+    common.ResponseBo create(CourseTemplateBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为提交课程模版<br>
@@ -167,7 +167,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response submit(CourseTemplateBo, PartnerBo, UserBo) 
+    common.ResponseBo submit(CourseTemplateBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为审核通过课程模版<br>
@@ -181,7 +181,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response approve(CourseTemplateBo, PartnerBo, CommentTemplateApproveBo, UserBo) 
+    common.ResponseBo approve(CourseTemplateBo, PartnerBo, CommentTemplateApproveBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为审核不通过课程模版<br>
@@ -195,7 +195,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response reject(CourseTemplateBo, CommentTemplateRejectBo, PartnerBo, UserBo)
+    common.ResponseBo reject(CourseTemplateBo, CommentTemplateRejectBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为下架课程模版<br>
@@ -208,7 +208,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response cancel(CourseTemplateBo, PartnerBo, UserBo) 
+    common.ResponseBo cancel(CourseTemplateBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为重新上架课程模版<br>
@@ -221,7 +221,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response resubmit(CourseTemplateBo, PartnerBo, UserBo) 
+    common.ResponseBo resubmit(CourseTemplateBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为删除课程模版<br>
@@ -234,7 +234,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response delete(CourseTemplateBo, PartnerBo, UserBo) 
+    common.ResponseBo delete(CourseTemplateBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为修改课程模版<br>
@@ -247,7 +247,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response update(CourseTemplateBo, PartnerBo, UserBo)
+    common.ResponseBo update(CourseTemplateBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为搜索课程模版<br>
@@ -261,7 +261,7 @@ CourseTemplateService
      *  @return  
      *
      */
-    Response query(CourseTemplateBo, UserBo, PartnerBo, PagnationBo)
+    common.ResponseBo query(CourseTemplateBo, UserBo, PartnerBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     
 CourseService
@@ -279,7 +279,7 @@ CourseService
      *  @return 课程实体 CourseBo 
      *
      */
-    Response create(CourseTemplateBo, CourseBo, List<TeacherBo>, LocationBo, PartnerBo, UserBo) 
+    common.ResponseBo create(CourseTemplateBo, CourseBo, List<TeacherBo>, LocationBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为提交课程<br>
@@ -292,7 +292,7 @@ CourseService
      *  @return  
      *
      */
-    Response submit(CourseBo, PartnerBo, UserBo) 
+    common.ResponseBo submit(CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为审核通过课程<br>
@@ -306,7 +306,7 @@ CourseService
      *  @return  
      *
      */
-    Response approve(CourseBo, PartnerBo, CommentCourseApproveBo, UserBo) 
+    common.ResponseBo approve(CourseBo, PartnerBo, CommentCourseApproveBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为审核不通过课程<br>
@@ -320,7 +320,7 @@ CourseService
      *  @return  
      *
      */
-    Response reject(CourseBo, PartnerBo, CommentCourseRejectBo, UserBo)
+    common.ResponseBo reject(CourseBo, PartnerBo, CommentCourseRejectBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为下架课程<br>
@@ -333,7 +333,7 @@ CourseService
      *  @return  
      *
      */
-    Response cancel(CourseBo, PartnerBo, UserBo) 
+    common.ResponseBo cancel(CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为重新上架课程<br>
@@ -346,7 +346,7 @@ CourseService
      *  @return  
      *
      */
-    Response resubmit(CourseBo, PartnerBo, UserBo) 
+    common.ResponseBo resubmit(CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为删除课程<br>
@@ -359,7 +359,7 @@ CourseService
      *  @return  
      *
      */
-    Response delete(CourseBo, PartnerBo, UserBo) 
+    common.ResponseBo delete(CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为修改课程<br>
@@ -372,7 +372,7 @@ CourseService
      *  @return  
      *
      */
-    Response update(CourseBo, PartnerBo, UserBo)
+    common.ResponseBo update(CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为给课程评论<br>
@@ -386,7 +386,7 @@ CourseService
      *  @return  课程评论实体 CommentCourseBo
      *
      */
-    Response comment(CourseBo, CommentCourseBo, PartnerBo, UserBo)
+    common.ResponseBo comment(CourseBo, CommentCourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为根据关键字查找课程<br>
@@ -397,7 +397,7 @@ CourseService
      *  @return  课程实体 CourseBo 列表
      *
      */
-    Response query(String)
+    common.ResponseBo query(String) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商提供查询课程的功能。<br>
@@ -411,7 +411,7 @@ CourseService
      *  @return 课程实体 CourseBo 列表
      *
      */
-    Response query(CourseBo, PartnerBo, UserBo PagnationBo)
+    common.ResponseBo query(CourseBo, PartnerBo, UserBo PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为用户查询课程的功能。<br>
@@ -425,7 +425,7 @@ CourseService
      *  @return 课程实体 CourseBo 列表
      *
      */
-    Response query(CategoryBo, LocationBo, CourseFilterBo, PagnationBo)
+    common.ResponseBo query(CategoryBo, LocationBo, CourseFilterBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为用户查询课程的功能。<br>
@@ -440,7 +440,7 @@ CourseService
      *  @return 课程实体 CourseBo 列表
      *
      */    
-    Response query(CategoryBo, LocationBo, CourseFilterBo, CourseBo, PagnationBo)
+    common.ResponseBo query(CategoryBo, LocationBo, CourseFilterBo, CourseBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为用户查询课程的功能。<br>
@@ -455,7 +455,7 @@ CourseService
      *  @return 课程实体 CourseBo 列表
      *
      */ 
-    Response query(CategoryBo, LocationBo, CourseFilterBo, List<CourseBo>, PagnationBo)
+    common.ResponseBo query(CategoryBo, LocationBo, CourseFilterBo, List<CourseBo>, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
 BookingService
     /**
@@ -470,7 +470,7 @@ BookingService
      *  @return 预定单实体 BookingBo
      *
      */ 
-    Response apply(CourseBo, BookingBo, UserBo, CouponBo)
+    common.ResponseBo apply(CourseBo, BookingBo, UserBo, CouponBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理一个预定单功能。<br>
@@ -483,7 +483,7 @@ BookingService
      *  @return 
      *
      */ 
-    Response acceptByPartner(BookingBo, CommentBo, UserBo)
+    common.ResponseBo acceptByPartner(BookingBo, CommentBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理成功一个预定单功能。<br>
@@ -496,7 +496,7 @@ BookingService
      *  @return 
      *
      */ 
-    Response acceptSucceed(BookingBo, CommentBo, UserBo)
+    common.ResponseBo acceptSucceed(BookingBo, CommentBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理失败一个预定单功能。<br>
@@ -509,7 +509,7 @@ BookingService
      *  @return 
      *
      */ 
-    Response acceptFailed(BookingBo, CommentBo, UserBo)
+    common.ResponseBo acceptFailed(BookingBo, CommentBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为用户取消一个预定单功能。<br>
@@ -522,7 +522,7 @@ BookingService
      *  @return 
      *
      */ 
-    Response validate(BookingBo, CommentBo, UserBo)
+    common.ResponseBo validate(BookingBo, CommentBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商取消一个预定单功能。<br>
@@ -535,7 +535,7 @@ BookingService
      *  @return 
      *
      */ 
-    Response cancel(BookingBo, CommentBo, UserBo)
+    common.ResponseBo cancel(BookingBo, CommentBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -550,7 +550,7 @@ BookingService
      *  @return 预定单实体 BookingBo 列表
      *
      */ 
-    Response query(BookingBo, PartnerBo, UserBo, PagnationBo)
+    common.ResponseBo query(BookingBo, PartnerBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     订单变为“订单成功”状态是自动的，开课日期一定时间之后会自动变为“订单成功”状态
@@ -566,7 +566,7 @@ CouponService
      *
      *  @return 优惠券实体 CouponBo 
      */
-    Response generate(CouponBo, UserBo)
+    common.ResponseBo generate(CouponBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询优惠券功能。<br>
@@ -579,7 +579,7 @@ CouponService
      *  @return 优惠券实体 CouponBo 列表
      *
      */ 
-    Response query(CouponBo, UserBo, PagnationBo)
+    common.ResponseBo query(CouponBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 CreditService
     /**
@@ -593,7 +593,7 @@ CreditService
      *  @return 
      *
      */ 
-    Response exchangeCoupon(CreditBo, CouponBo, UserBo)
+    common.ResponseBo exchangeCoupon(CreditBo, CouponBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为换取现金。<br>
@@ -606,7 +606,7 @@ CreditService
      *  @return 
      *
      */ 
-    Response exchangeAccount(CreditBo, AccountBo, UserBo)
+    common.ResponseBo exchangeAccount(CreditBo, AccountBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询积分功能。<br>
@@ -619,7 +619,7 @@ CreditService
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    Response query(CreditBo, UserBo, PagnationBo)
+    common.ResponseBo query(CreditBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 AccountService
     /**
@@ -633,7 +633,7 @@ AccountService
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    Response query(AccountBo, UserBo, PagnationBo)
+    common.ResponseBo query(AccountBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为账户提现功能。<br>
@@ -645,34 +645,35 @@ AccountService
      *  @return 
      *
      */ 
-    Response exchangeCash(AccountBo, UserBo)
+    common.ResponseBo exchangeCash(AccountBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 PartnerService
-    Response query(ParnterBo, LocationBo, CategoryBo, PagnationBo) 
-    Response comment(ParnterBo, CommentParnterBo, UserBo)
-    Response update(PartnerBo, UserBo)
-    Response create(PartnerBo, UserBo)
+
+    common.ResponseBo query(ParnterBo, LocationBo, CategoryBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    common.ResponseBo comment(ParnterBo, CommentParnterBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo update(PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo create(PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 SpreadService
-    Response generateCode(UserBo, ParterBo, CourseBo, IShangKeBo)
-    Response query(SpreadBo, UserBo, PagnationBo)
-    Response create(SpreadBo, ParterBo, CourseBo, IShangKeBo, UserBo)
-    Response approve(SpreadBo, UserBo)
-    Response reject(SpreadBo, UserBo)
-    Response cancel(SpreadBo, UserBo)
-    Response delete(SpreadBo, UserBo)
+    common.ResponseBo generateCode(UserBo, ParterBo, CourseBo, IShangKeBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(SpreadBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo create(SpreadBo, ParterBo, CourseBo, IShangKeBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo approve(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo reject(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo cancel(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo delete(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 TeacherService
-    Response create(TeacherBo, UserBo)
-    Response delete(TeacherBo, UserBo)
-    Response query(String, PartnerBo, UserBo)
-    Response query(TeacherBo, PartnerBo, UserBo, PagnationBo)
+    common.ResponseBo create(TeacherBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo delete(TeacherBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(String, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(TeacherBo, PartnerBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 ActivityService
-    Response create(ActivityBo, CourseBo, PartnerBo, UserBo)
-    Response submit(ActivityBo, PartnerBo, UserBo)
-    Response approve(ActivityBo, PartnerBo, CommentActivityApproveBo, UserBo)
-    Response reject(ActivityBo, PartnerBo, CommentActivityRejectBo, UserBo)
-    Response cancel(ActivityBo, PartnerBo, UserBo)
-    Response delete(ActivityBo, PartnerBo, UserBo)
-    Response query(ActivityBo, PartnerBo, UserBo, PagnationBo)
+    common.ResponseBo create(ActivityBo, CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo submit(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo approve(ActivityBo, PartnerBo, CommentActivityApproveBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo reject(ActivityBo, PartnerBo, CommentActivityRejectBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo cancel(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo delete(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(ActivityBo, PartnerBo, UserBo, PagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
