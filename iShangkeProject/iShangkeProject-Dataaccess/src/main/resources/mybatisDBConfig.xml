@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <typeAliases>
+ 
+   <typeAliases>
     <typeAlias type="com.ishangke.edunav.dataaccess.model.UserEntityExt" alias="UserEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.ContactEntityExt" alias="ContactEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.RoleEntityExt" alias="RoleEntityExt" />
@@ -43,4 +44,7 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.OrderEntityExt" alias="OrderEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt" alias="OrderHistoryEntityExt" />
   </typeAliases>
+  <typeHandlers>
+ <typeHandler javaType="java.util.Calendar" jdbcType="TIMESTAMP" handler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"/>
+ </typeHandlers>
 </configuration>

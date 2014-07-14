@@ -8,6 +8,13 @@ struct BookingBo {
 }
 
 /**
+ * OrderBo
+ */
+struct OrderBo {
+  1: i32 id
+}
+
+/**
  * CommentBookingAcceptBo
  */
 struct CommentBookingAcceptBo {
@@ -47,3 +54,4 @@ struct CommentCancelBo {
   1: i32 id
   2: string comment
 }
+
