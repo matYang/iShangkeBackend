@@ -1,0 +1,1 @@
+DELETE FROM `order` WHERE type LIKE '%_test_type_%';

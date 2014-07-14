@@ -1,0 +1,1 @@
+DELETE FROM `course_template_teacher` WHERE CREATE_TIME = '2014-07-02 00:00:00';

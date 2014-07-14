@@ -1,0 +1,1 @@
+DELETE FROM `course_comment` WHERE TITLE LIKE '%_test_title_%';
