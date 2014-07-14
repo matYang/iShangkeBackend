@@ -5,7 +5,9 @@ include "partner.thrift"
 include "course.thrift"
 include "booking.thrift"
 
-service CourseService {
+namespace java com.ishangke.edunav.commoncontract.service
+
+service BookingService {
     /**
      *  本方法为用户预定课程的功能。<br>
      *  用户可以预定一个课程
