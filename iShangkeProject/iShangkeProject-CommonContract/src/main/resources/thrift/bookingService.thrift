@@ -128,19 +128,4 @@ service BookingService {
      */ 
     common.ResponseBo queryBooking(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 } 
