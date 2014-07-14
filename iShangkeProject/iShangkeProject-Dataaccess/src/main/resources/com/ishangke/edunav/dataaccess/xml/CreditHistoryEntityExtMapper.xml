@@ -88,20 +88,20 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-   <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from CREDIT_HISTORY where DELETED = 0
   </select>
-  
-   <select id="list" parameterType="map" resultMap="CreditHistoryExtMap">
+
+  <select id="list" parameterType="map" resultMap="CreditHistoryExtMap">
     SELECT
-    <include refid="CreditHistory_Base_Column_List"/>
+    <include refid="CreditHistory_Base_Column_List" />
     from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0
     <if test="entity != null">
-     
+
       <if test="entity.id != null and entity.id != 0">
         AND CREDIT_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-     
+
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idStart != null and entity.idStart != 0">
           <![CDATA[AND CREDIT_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
@@ -109,12 +109,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-    </if>    
-    
-    <if test="entity.userId != null and entity.userId != 0">
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
         AND CREDIT_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
-     
+
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdStart != null and entity.userIdStart != 0">
           <![CDATA[AND CREDIT_HISTORY.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
@@ -122,12 +122,12 @@
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
         </if>
-    </if>    
-    
-    <if test="entity.charge != null and entity.charge != 0">
+      </if>
+
+      <if test="entity.charge != null and entity.charge != 0">
         AND CREDIT_HISTORY.CHARGE = #{entity.charge,jdbcType=DOUBLE}
       </if>
-     
+
       <if test="entity.charge == null or entity.charge == 0">
         <if test="entity.chargeStart != null and entity.chargeStart != 0">
           <![CDATA[AND CREDIT_HISTORY.CHARGE >= #{entity.chargeStart,jdbcType=DOUBLE}]]>
@@ -135,41 +135,47 @@
         <if test="entity.chargeEnd != null and entity.chargeEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
         </if>
-    </if>    
-    
-            <if test="entity.createTimeStart != null">
+      </if>
+
+      <if test="entity.createTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
+      </if>
+      <if test="entity.createTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>   
-    
-       
-        <if test="entity.lastModifyTimeStart != null">
+      </if>
+
+
+      <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
+      </if>
+      <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-        
+      </if>
       
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          CREDIT_HISTORY.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
+
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
-      
+
     </if>
   </select>
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
-     select
-     <include refid="CreditHistory_Base_Column_List"/>
+    select
+    <include refid="CreditHistory_Base_Column_List" />
     from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0
     <if test="entity != null">
-     
+
       <if test="entity.id != null and entity.id != 0">
         AND CREDIT_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-     
+
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idStart != null and entity.idStart != 0">
           <![CDATA[AND CREDIT_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
@@ -177,12 +183,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-    </if>    
-    
-    <if test="entity.userId != null and entity.userId != 0">
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
         AND CREDIT_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
-     
+
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdStart != null and entity.userIdStart != 0">
           <![CDATA[AND CREDIT_HISTORY.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
@@ -190,12 +196,12 @@
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
         </if>
-    </if>    
-    
-    <if test="entity.charge != null and entity.charge != 0">
+      </if>
+
+      <if test="entity.charge != null and entity.charge != 0">
         AND CREDIT_HISTORY.CHARGE = #{entity.charge,jdbcType=DOUBLE}
       </if>
-     
+
       <if test="entity.charge == null or entity.charge == 0">
         <if test="entity.chargeStart != null and entity.chargeStart != 0">
           <![CDATA[AND CREDIT_HISTORY.CHARGE >= #{entity.chargeStart,jdbcType=DOUBLE}]]>
@@ -203,22 +209,22 @@
         <if test="entity.chargeEnd != null and entity.chargeEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
         </if>
-    </if>        
-        
-        <if test="entity.createTimeStart != null">
+      </if>
+
+      <if test="entity.createTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
+      </if>
+      <if test="entity.createTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>          
-     
-        <if test="entity.lastModifyTimeStart != null">
+      </if>
+
+      <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
+      </if>
+      <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>      
+      </if>
     </if>
     ) AS total
-    </select>
+  </select>
 </mapper>

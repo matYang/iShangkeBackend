@@ -183,7 +183,12 @@
       <if test="entity.enabled != null">
         AND GROUPS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        GROUPS.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
