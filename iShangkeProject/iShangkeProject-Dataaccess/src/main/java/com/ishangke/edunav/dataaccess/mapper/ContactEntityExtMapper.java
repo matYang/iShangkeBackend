@@ -19,6 +19,5 @@ public interface ContactEntityExtMapper {
             @Param("entity") ContactEntityExt contactEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") ContactEntityExt contactEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") ContactEntityExt contactEntityExt);
 }

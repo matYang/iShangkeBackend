@@ -21,6 +21,5 @@ public interface CreditEntityExtMapper {
             @Param("entity") CreditEntityExt creditEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") CreditEntityExt creditEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") CreditEntityExt creditEntityExt);
 }

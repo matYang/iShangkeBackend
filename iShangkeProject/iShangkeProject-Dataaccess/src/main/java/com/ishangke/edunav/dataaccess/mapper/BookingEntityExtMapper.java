@@ -21,6 +21,5 @@ public interface BookingEntityExtMapper {
             @Param("entity") BookingEntityExt bookingEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") BookingEntityExt bookingEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") BookingEntityExt bookingEntityExt);
 }

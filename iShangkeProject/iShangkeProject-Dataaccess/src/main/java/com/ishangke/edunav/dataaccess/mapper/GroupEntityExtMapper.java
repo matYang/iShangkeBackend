@@ -21,6 +21,5 @@ public interface GroupEntityExtMapper {
             @Param("entity") GroupEntityExt groupEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") GroupEntityExt groupEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") GroupEntityExt groupEntityExt);
 }

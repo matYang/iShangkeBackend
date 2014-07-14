@@ -21,7 +21,5 @@ public interface AccountHistoryEntityExtMapper {
             @Param("entity") AccountHistoryEntityExt accountHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") AccountHistoryEntityExt accountHistoryEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") AccountHistoryEntityExt accountHistoryEntityExt);
 }

@@ -21,7 +21,5 @@ public interface CouponHistoryEntityExtMapper {
             @Param("entity") CouponHistoryEntityExt couponHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") CouponHistoryEntityExt couponHistoryEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") CouponHistoryEntityExt couponHistoryEntityExt);
 }

@@ -22,7 +22,5 @@ public interface CourseTemplateTeacherEntityExtMapper {
             @Param("entity") CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt);
 }

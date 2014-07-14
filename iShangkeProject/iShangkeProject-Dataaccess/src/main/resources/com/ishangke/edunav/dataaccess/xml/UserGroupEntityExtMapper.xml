@@ -193,12 +193,7 @@
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      
-                  
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>      
+        </if>     
     </if>
     ) AS total
   </select>

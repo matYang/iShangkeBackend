@@ -21,7 +21,5 @@ public interface WithdrawEntityExtMapper {
             @Param("entity") WithdrawEntityExt widthdrawEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") WithdrawEntityExt widthdrawEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") WithdrawEntityExt widthdrawEntityExt);
 }
