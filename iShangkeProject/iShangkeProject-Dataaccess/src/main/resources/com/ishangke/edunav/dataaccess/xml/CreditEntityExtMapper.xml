@@ -143,7 +143,7 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND CREDIT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">
           CREDIT.${listItem.columnKey} ${listItem.order}

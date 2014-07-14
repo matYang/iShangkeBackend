@@ -615,7 +615,7 @@
           <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">
           PARTNER.${listItem.columnKey} ${listItem.order}

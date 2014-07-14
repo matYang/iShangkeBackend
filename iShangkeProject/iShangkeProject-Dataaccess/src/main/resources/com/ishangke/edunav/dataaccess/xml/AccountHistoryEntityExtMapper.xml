@@ -186,7 +186,7 @@
       <if test="entity.remark != null and entity.remark !='' ">
         AND ACCOUNT_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
-      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">
           ACCOUNT_HISTORY.${listItem.columnKey} ${listItem.order}
