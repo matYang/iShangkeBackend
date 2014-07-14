@@ -38,7 +38,7 @@ public class OrderEntityExtTest extends BaseTest {
         OrderEntityExt orderEntityExt = new OrderEntityExt();
         orderEntityExt.setCreateTime(new Date());
      
-       // OrderEntityExt.setDeleted(0);
+        OrderEntityExt.setDeleted(0);
         orderEntityExt.setEnabled(1);
        
         int oldcount = orderEntityExtMapper.getCount();

@@ -1,1 +1,1 @@
-DELETE FROM `course_teacher` WHERE COURSE_ID = 1;
+DELETE FROM `course_teacher` WHERE CREATE_TIME = '2014-07-02 00:00:00';
