@@ -8,6 +8,7 @@ public class ApproveHistoryEntityExt extends ApproveHistoryEntity {
 
     private int idStart;
     private int idEnd;
+    private int idSet;
     private int typeStart;
     private int typeEnd;
     private int attachedIdStart;
@@ -22,7 +23,12 @@ public class ApproveHistoryEntityExt extends ApproveHistoryEntity {
     private int postStatusEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
-    
+    public int getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(int idSet) {
+        this.idSet = idSet;
+    }
     public int getIdStart() {
         return idStart;
     }

@@ -85,11 +85,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  
   <update id="deleteById" parameterType="java.lang.Integer">
     update WITHDRAW set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  
   <update id="update" parameterType="WithdrawEntityExt">
     update WITHDRAW
     <set>
@@ -120,9 +122,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  
   <select id="getCount" resultType="int">
     select count(ID) from WITHDRAW where DELETED = 0
   </select>
+  
   <select id="list" parameterType="map" resultMap="WithdrawExtMap">
     select
     <include refid="Withdraw_Base_Column_List"></include>

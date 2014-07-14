@@ -25,15 +25,19 @@
     USERS.ID USERS_ID,
     USERS.NAME USERS_NAME,
     USERS.PASSWORD USERS_PASSWORD,
-    USERS.PHONE USERS_PHONE,
+    USERS.PHONE
+    USERS_PHONE,
     USERS.WECHAT
     USERS_WECHAT,
     USERS.EMAIL USERS_EMAIL,
-    USERS.INVITATION_CODE USERS_INVITATIONCODE,
+    USERS.INVITATION_CODE
+    USERS_INVITATIONCODE,
     USERS.APPLIED_INVITATION_CODE USERS_APPLIEDINVITATIONCODE,
-    USERS.REFERENCE USERS_REFERENCE,
+    USERS.REFERENCE
+    USERS_REFERENCE,
     USERS.LAST_LOGIN_TIME USERS_LASTLOGINTIME,
-    USERS.LAST_MODIFY_TIME USERS_LASTMODIFYTIME,
+    USERS.LAST_MODIFY_TIME
+    USERS_LASTMODIFYTIME,
     USERS.CREATE_TIME USERS_CREATETIME,
     USERS.ENABLED USERS_ENABLED,
     USERS.DELETED USERS_DELETED,
@@ -222,13 +226,13 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from USERS where DELETED = 0
   </select>
   <select id="list" parameterType="map" resultMap="UserExtMap">
     select
     <include refid="User_Base_Column_List"></include>
-    from USERS 
+    from USERS
     where USERS.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
@@ -243,53 +247,53 @@
         </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND USERS.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.name != null and entity.name != ''">
         AND USERS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.password != null and entity.password != ''">
         AND USERS.PASSWORD LIKE "%"#{entity.password,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.phone != null and entity.phone != ''">
         AND USERS.PHONE LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND USERS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
+
       <if test="entity.wechat != null and entity.wechat != ''">
         AND USERS.WECHAT LIKE "%"#{entity.wechat,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.email != null and entity.email != ''">
         AND USERS.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.invitationCode != null and entity.invitationCode != ''">
         AND USERS.INVITATION_CODE LIKE "%"#{entity.invitationCode,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.appliedInvitationCode != null and entity.appliedInvitationCode != ''">
-        AND USERS.APPLIED_INVITATION_CODE LIKE "%"#{entity.appliedInvitationCode,jdbcType=VARCHAR}"%"
+        AND USERS.APPLIED_INVITATION_CODE LIKE
+        "%"#{entity.appliedInvitationCode,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.reference != null and entity.reference != ''">
         AND USERS.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.school != null and entity.school != ''">
         AND USERS.SCHOOL LIKE "%"#{entity.school,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.major != null and entity.major != ''">
         AND USERS.MAJOR LIKE "%"#{entity.major,jdbcType=VARCHAR}"%"
       </if>
@@ -309,7 +313,7 @@
           <![CDATA[AND USERS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
         AND USERS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
       </if>
@@ -321,7 +325,7 @@
           <![CDATA[AND USERS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-      
+
       <if test="entity.lastLoginTime != null">
         AND USERS.LAST_LOGIN_TIME = #{entity.lastLoginTime,jdbcType=TIMESTAMP}
       </if>
@@ -357,5 +361,131 @@
     <if test="page != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
+  </select>
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="User_Base_Column_List"></include>
+    from USERS
+    where USERS.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND USERS.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND USERS.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND USERS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND USERS.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.name != null and entity.name != ''">
+        AND USERS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.password != null and entity.password != ''">
+        AND USERS.PASSWORD LIKE "%"#{entity.password,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.phone != null and entity.phone != ''">
+        AND USERS.PHONE LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND USERS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.wechat != null and entity.wechat != ''">
+        AND USERS.WECHAT LIKE "%"#{entity.wechat,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.email != null and entity.email != ''">
+        AND USERS.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.invitationCode != null and entity.invitationCode != ''">
+        AND USERS.INVITATION_CODE LIKE "%"#{entity.invitationCode,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.appliedInvitationCode != null and entity.appliedInvitationCode != ''">
+        AND USERS.APPLIED_INVITATION_CODE LIKE
+        "%"#{entity.appliedInvitationCode,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.reference != null and entity.reference != ''">
+        AND USERS.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.school != null and entity.school != ''">
+        AND USERS.SCHOOL LIKE "%"#{entity.school,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.major != null and entity.major != ''">
+        AND USERS.MAJOR LIKE "%"#{entity.major,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.enabled != null">
+        AND USERS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND USERS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND USERS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND USERS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND USERS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND USERS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND USERS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastLoginTime != null">
+        AND USERS.LAST_LOGIN_TIME = #{entity.lastLoginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastLoginTime == null">
+        <if test="entity.lastLoginTimeStart != null">
+          <![CDATA[AND USERS.LAST_LOGIN_TIME >= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastLoginTimeEnd != null">
+          <![CDATA[AND USERS.LAST_LOGIN_TIME <= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.birthday != null">
+        AND USERS.BIRTHDAY = #{entity.birthday,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.birthday == null">
+        <if test="entity.birthdayStart != null">
+          <![CDATA[AND USERS.BIRTHDAY >= #{entity.birthday,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.birthdayEnd != null">
+          <![CDATA[AND USERS.BIRTHDAY <= #{entity.birthday,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+    </if>
+
+    ) AS
+    total
   </select>
 </mapper>

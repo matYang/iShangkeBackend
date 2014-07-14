@@ -8,6 +8,7 @@ public class ActivityEntityExt extends ActivityEntity {
 
     private int idStart;
     private int idEnd;
+    private int idSet;
     private int partnerIdStart;
     private int partnerIdEnd;    
     private int courseIdStart;
@@ -23,6 +24,12 @@ public class ActivityEntityExt extends ActivityEntity {
     private Date createTimeStart;
     private Date createTimeEnd;
     
+    public int getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(int idSet) {
+        this.idSet = idSet;
+    }
     public int getIdStart() {
         return idStart;
     }
