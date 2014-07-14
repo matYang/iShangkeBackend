@@ -648,32 +648,286 @@ AccountService
     common.ResponseBo exchangeCash(AccountBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 PartnerService
+    
+    /**
+     *  查询合作商信息。<br>
+     *  用户可以看到合作商相关信息
+     *
+     *  @param  parnterBo       需要检索的合作商信息
+     *  @param  locationBo      合作商所在的地理区域信息
+     *  @param  categoryBo      removed
+     *  @param  paginationBo    分页信息
+     *
+     *  @return 合作商实体 PartnerBo 列表
+     *
+     */ 
+    //TODO common.ResponseBo query(ParnterBo, LocationBo, CategoryBo, PaginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    common.ResponseBo query(ParnterBo, LocationBo, PaginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
-    common.ResponseBo query(ParnterBo, LocationBo, CategoryBo, PaginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    /**
+     *  评价合作商。<br>
+     *  用户可以给合作商发布评价
+     *
+     *  @param  parnterBo       需要评价的合作商信息
+     *  @param  commentParnterBo      评价内容信息
+     *  @param  userBo          调用方法的用户信息
+     *
+     *  @return TODO
+     *
+     */ 
     common.ResponseBo comment(ParnterBo, CommentParnterBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  更新合作商信息。<br>
+     *  管理员可以更新合作商的信息
+     *
+     *  @param  parnterBo       需要更新的合作商信息
+     *  @param  userBo          调用方法的管理员信息
+     *
+     *  @return 更新过后的合作商信息
+     *
+     */ 
     common.ResponseBo update(PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  创建合作商信息。<br>
+     *  管理员可以录入新合作商的信息
+     *
+     *  @param  parnterBo       需要创建的新合作商信息
+     *  @param  userBo          调用方法的管理员信息
+     *
+     *  @return 创建完毕的合作商信息
+     *
+     */ 
     common.ResponseBo create(PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 SpreadService
+
+    /**
+     *  生成识别码。<br>
+     *  每条推广信息都需要独立的识别码
+     *
+     *  @param  userBo          发布推广信息的用户
+     *  @param  partnerBo       用户推广的机构信息
+     *  @param  courseBo        用户推广的课程信息
+     *  @param  iShangkeBo      用户推广的爱上课信息
+     *
+     *  @return 创建完毕的识别码
+     *
+     */ 
     common.ResponseBo generateCode(UserBo, ParterBo, CourseBo, IShangKeBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  查询推广信息。<br>
+     *  管理员可以查询推广信息
+     *
+     *  @param  spreadBo           需要查询的推广信息
+     *  @param  userBo             推广相关的用户信息
+     *  @param  paginationBo       分页信息
+     *
+     *  @return 推广信息实体 SpreadBo 列表
+     *
+     */ 
     common.ResponseBo query(SpreadBo, UserBo, PaginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  创建推广信息。<br>
+     *  用户可以创建推广信息，以供管理员审查
+     *
+     *  @param  spreadBo        需要创建的推广信息
+     *  @param  partnerBo       用户推广的机构信息
+     *  @param  courseBo        用户推广的课程信息
+     *  @param  iShangkeBo      用户推广的爱上课信息
+     *  @param  userBo          发布推广信息的用户
+     *
+     *  @return 创建完毕的推广信息
+     *
+     */ 
     common.ResponseBo create(SpreadBo, ParterBo, CourseBo, IShangKeBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  认可推广信息。<br>
+     *  管理员可以审核认可用户发布的推广信息
+     *
+     *  @param  spreadBo           待认可的推广信息
+     *  @param  userBo             发起认可的管理员信息
+     *
+     *  @return 认可之后的推广信息
+     *
+     */
     common.ResponseBo approve(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  拒绝推广信息。<br>
+     *  管理员可以审核拒绝用户发布的推广信息
+     *
+     *  @param  spreadBo           待拒绝的推广信息
+     *  @param  userBo             发起拒绝的管理员信息
+     *
+     *  @return 拒绝之后的推广信息
+     *
+     */
     common.ResponseBo reject(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  取消推广信息。<br>
+     *  用户可以取消待审核的推广信息
+     *
+     *  @param  spreadBo           待取消的推广信息
+     *  @param  userBo             发起取消的用户信息
+     *
+     *  @return 取消之后的推广信息
+     *
+     */
     common.ResponseBo cancel(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  删除推广信息。<br>
+     *  用户可以删除推广信息记录
+     *
+     *  @param  spreadBo           待删除的推广信息
+     *  @param  userBo             发起删除的用户信息
+     *
+     *  @return 删除之后的推广信息
+     *
+     */
     common.ResponseBo delete(SpreadBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 TeacherService
+    /**
+     *  创建教师信息。<br>
+     *  管理员与合作商可以创建教师信息
+     *
+     *  @param  teacherBo          需要创建的教师信息
+     *  @param  userBo             发起创建的管理员/合作商信息
+     *
+     *  @return 创建完成的教师信息
+     *
+     */
     common.ResponseBo create(TeacherBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  删除教师信息。<br>
+     *  管理员与合作商可以删除教师信息
+     *
+     *  @param  teacherBo          需要删除的教师信息
+     *  @param  userBo             发起删除的管理员/合作商信息
+     *
+     *  @return 删除完成的教师信息
+     *
+     */
     common.ResponseBo delete(TeacherBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    common.ResponseBo query(String, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  查询教师信息。<br>
+     *  管理员与合作商可以查询教师信息
+     *
+     *  @param  teacherBo          需要查询的教师信息
+     *  @param  teacherBo          教师相关的合作商信息
+     *  @param  userBo             发起查询的用户信息
+     *  @param  paginationBo       分页信息
+     *
+     *  @return 推广信息实体 Teacher 列表
+     *
+     */
+    //TODO common.ResponseBo query(String, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     common.ResponseBo query(TeacherBo, PartnerBo, UserBo, PaginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 ActivityService
+    /**
+     *  创建活动信息。<br>
+     *  管理员与合作商可以创建活动信息
+     *
+     *  @param  activityBo         需要创建的活动信息
+     *  @param  activityBo         活动相关的课程信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  userBo             发起创建的用户信息
+     *
+     *  @return 创建完成的活动信息
+     *
+     */
     common.ResponseBo create(ActivityBo, CourseBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    common.ResponseBo submit(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    common.ResponseBo approve(ActivityBo, PartnerBo, CommentActivityApproveBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    common.ResponseBo reject(ActivityBo, PartnerBo, CommentActivityRejectBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  提交活动信息审核。<br>
+     *  合作商可以提交活动信息审核
+     *
+     *  @param  activityBo         需要提交的活动信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  userBo             发起提交的用户信息
+     *
+     *  @return 提交完成的活动信息
+     *
+     */
+    //TODO common.ResponseBo submit(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo submit(ActivityBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  认可活动信息。<br>
+     *  管理员可以审核认可活动信息
+     *
+     *  @param  activityBo         需要认可的活动信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  commentActivityApproveBo     与认可相关的评论
+     *  @param  userBo             发起认可的管理员信息
+     *
+     *  @return 认可完成的活动信息
+     *
+     */
+    //TODO common.ResponseBo approve(ActivityBo, PartnerBo, CommentActivityApproveBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo approve(ActivityBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  拒绝活动信息。<br>
+     *  管理员可以审核拒绝活动信息
+     *
+     *  @param  activityBo         需要拒绝的活动信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  commentActivityRejectBo     与拒绝相关的评论
+     *  @param  userBo             发起拒绝的管理员信息
+     *
+     *  @return 拒绝完成的活动信息
+     *
+     */
+    //TODO common.ResponseBo reject(ActivityBo, PartnerBo, CommentActivityRejectBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo reject(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  取消活动信息。<br>
+     *  合作商可以取消活动信息
+     *
+     *  @param  activityBo         需要取消的活动信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  userBo             发起取消的用户信息
+     *
+     *  @return 取消完成的活动信息
+     *
+     */
     common.ResponseBo cancel(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  删除活动信息。<br>
+     *  管理员与合作商可以删除活动信息
+     *
+     *  @param  activityBo         需要删除的活动信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  userBo             发起删除的用户信息
+     *
+     *  @return 删除完成的活动信息
+     *
+     */
     common.ResponseBo delete(ActivityBo, PartnerBo, UserBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  查询活动信息。<br>
+     *  用户可以查询活动信息
+     *
+     *  @param  activityBo         需要查询的活动信息
+     *  @param  partnerBo          活动相关的合作商信息
+     *  @param  userBo             发起查询的用户信息
+     *  @param  paginationBo       分页信息
+     *
+     *  @return 推广信息实体 Activity 列表
+     *
+     */
     common.ResponseBo query(ActivityBo, PartnerBo, UserBo, PaginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
