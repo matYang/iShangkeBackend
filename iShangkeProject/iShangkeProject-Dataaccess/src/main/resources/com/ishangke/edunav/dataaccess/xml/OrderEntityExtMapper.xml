@@ -4,7 +4,7 @@
   <resultMap id="OrderExtMap" type="OrderEntityExt">
     <id column="ORDER_ID" property="id" jdbcType="INTEGER" />
     <result column="ORDER_BOOKINGID" property="bookingId" jdbcType="INTEGER" />
-    <result column="ORDER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ORDER_TYPE" property="type" jdbcType="VARCHAR" />
     <result column="ORDER_PRICE" property="price" jdbcType="DOUBLE" />
     <result column="ORDER_RUNINGNUMBER" property="runingNumber" jdbcType="VARCHAR" />
@@ -63,7 +63,7 @@
         #{bookingId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
@@ -103,7 +103,7 @@
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=VARCHAR},

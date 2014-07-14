@@ -15,9 +15,33 @@ struct OrderBo {
 }
 
 /**
+ * CommentBookingCreateBo
+ */
+struct CommentBookingCreateBo {
+  1: i32 id
+  2: string comment
+}
+
+/**
+ * CommentOrderCreateBo
+ */
+struct CommentOrderCreateBo {
+  1: i32 id
+  2: string comment
+}
+
+/**
  * CommentBookingAcceptBo
  */
 struct CommentBookingAcceptBo {
+  1: i32 id
+  2: string comment
+}
+
+/**
+ * CommentOrderAcceptBo
+ */
+struct CommentOrderAcceptBo {
   1: i32 id
   2: string comment
 }
@@ -31,9 +55,25 @@ struct CommentBookingAcceptSuccessBo {
 }
 
 /**
+ * CommentOrderAcceptSuccessBo
+ */
+struct CommentOrderAcceptSuccessBo {
+  1: i32 id
+  2: string comment
+}
+
+/**
  * CommentBookingAcceptFailedBo
  */
 struct CommentBookingAcceptFailedBo {
+  1: i32 id
+  2: string comment
+}
+
+/**
+ * CommentOrderAcceptFailedBo
+ */
+struct CommentOrderAcceptFailedBo {
   1: i32 id
   2: string comment
 }
@@ -46,12 +86,26 @@ struct CommentBookingValidateBo {
   2: string comment
 }
 
-
 /**
- * CommentCancelBo
+ * CommentOrderValidateBo
  */
-struct CommentCancelBo {
+struct CommentOrderValidateBo {
   1: i32 id
   2: string comment
 }
 
+/**
+ * CommentBookingCancelBo
+ */
+struct CommentBookingCancelBo {
+  1: i32 id
+  2: string comment
+}
+
+/**
+ * CommentOrderCancelBo
+ */
+struct CommentOrderCancelBo {
+  1: i32 id
+  2: string comment
+}

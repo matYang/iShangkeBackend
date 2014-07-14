@@ -10,7 +10,7 @@
     <result column="APPROVEHISTORY_PRESTATUS" property="preStatus" jdbcType="VARCHAR" />
     <result column="APPROVEHISTORY_POSTSTATUS" property="postStatus" jdbcType="VARCHAR" />
     <result column="APPROVEHISTORY_COMMENT" property="comment" jdbcType="VARCHAR" />
-    <result column="APPROVEHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVEHISTORY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="APPROVEHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="ApproveHistory_Base_Column_List">
@@ -85,7 +85,7 @@
         #{comment,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
@@ -126,7 +126,7 @@
         COMMENT = #{comment,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},

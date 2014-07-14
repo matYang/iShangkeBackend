@@ -1,7 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +22,7 @@ public class ApproveHistoryEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         ApproveHistoryEntityExt approveHistoryEntityExt = new ApproveHistoryEntityExt();
-        approveHistoryEntityExt.setCreateTime(new Date());
+        approveHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         approveHistoryEntityExt.setType(1);
         approveHistoryEntityExt.setAttachedId(1);
         approveHistoryEntityExt.setDeleted(0);
@@ -37,7 +36,7 @@ public class ApproveHistoryEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         ApproveHistoryEntityExt approveHistoryEntityExt = new ApproveHistoryEntityExt();
-        approveHistoryEntityExt.setCreateTime(new Date());
+        approveHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         approveHistoryEntityExt.setType(1);
         approveHistoryEntityExt.setAttachedId(1);
         approveHistoryEntityExt.setDeleted(0);

@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntity;
 
@@ -12,10 +12,10 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
     private Double chargeEnd;
     private Integer userIdStart;
     private Integer userIdEnd;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     
     public Integer getIdStart() {
         return idStart;
@@ -53,28 +53,28 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
     public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
     

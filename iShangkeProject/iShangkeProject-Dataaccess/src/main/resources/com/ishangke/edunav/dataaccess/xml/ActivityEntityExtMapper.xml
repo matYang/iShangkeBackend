@@ -7,11 +7,11 @@
     <result column="ACTIVITY_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="ACTIVITY_COURSEID" property="courseId" jdbcType="INTEGER" />
     <result column="ACTIVITY_REMARK" property="remark" jdbcType="VARCHAR" />
-    <result column="ACTIVITY_STARTTIME" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="ACTIVITY_ENDTIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVITY_STARTTIME" property="startTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACTIVITY_ENDTIME" property="endTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACTIVITY_STATUS" property="status" jdbcType="VARCHAR" />
-    <result column="ACTIVITY_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="ACTIVITY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVITY_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACTIVITY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACTIVITY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ACTIVITY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -84,19 +84,19 @@
         #{remark,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
+        #{endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -132,19 +132,19 @@
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+        START_TIME = #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="endTime != null">
-        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+        END_TIME = #{endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},

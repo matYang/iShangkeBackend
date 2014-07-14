@@ -4,8 +4,8 @@
   <resultMap id="CreditExtMap" type="CreditEntityExt">
     <result column="CREDIT_ID" property="id" jdbcType="INTEGER" />
     <result column="CREDIT_CREDIT" property="credit" jdbcType="DOUBLE" />
-    <result column="CREDIT_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="CREDIT_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREDIT_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="CREDIT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="CREDIT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CREDIT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -48,10 +48,10 @@
         #{credit,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -76,10 +76,10 @@
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME =
-        #{record.lastModifyTime,jdbcType=TIMESTAMP},
+        #{record.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{record.enabled,jdbcType=INTEGER},

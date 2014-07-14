@@ -7,8 +7,8 @@
     <result column="COURSECOMMENT_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_TITLE" property="title" jdbcType="VARCHAR" />
     <result column="COURSECOMMENT_CONTENT" property="content" jdbcType="VARCHAR" />
-    <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="COURSECOMMENT_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSECOMMENT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -72,10 +72,10 @@
         #{content,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -111,10 +111,10 @@
         CONTENT = #{content,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},

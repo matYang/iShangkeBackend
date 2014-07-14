@@ -5,7 +5,7 @@
     <id column="USERLOCATION_ID" property="id" jdbcType="INTEGER" />
     <result column="USERLOCATION_USERID" property="userId" jdbcType="INTEGER" />
     <result column="USERLOCATION_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-    <result column="USERLOCATION_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="USERLOCATION_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="USERLOCATION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="UserLocation_Base_Column_List">
@@ -43,7 +43,7 @@
         #{locationId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
@@ -69,7 +69,7 @@
         LOCATION_ID = #{locationId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},

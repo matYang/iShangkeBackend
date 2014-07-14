@@ -7,8 +7,8 @@
     <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
     <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
-    <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="ADDRESS_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ADDRESS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -68,10 +68,10 @@
         #{detail,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -106,10 +106,10 @@
         DETAIL = #{detail,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},

@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.PartnerEntity;
@@ -9,12 +9,12 @@ public class PartnerEntityExt extends PartnerEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
-    private Date lastLoginTimeStart;
-    private Date lastLoginTimeEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
+    private Calendar lastLoginTimeStart;
+    private Calendar lastLoginTimeEnd;
     private Integer cutoffDayStart;
     private Integer cutoffDayEnd;
     private Integer cutoffTimeStart;
@@ -39,40 +39,40 @@ public class PartnerEntityExt extends PartnerEntity {
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
-    public Date getLastLoginTimeStart() {
+    public Calendar getLastLoginTimeStart() {
         return lastLoginTimeStart;
     }
-    public void setLastLoginTimeStart(Date lastLoginTimeStart) {
+    public void setLastLoginTimeStart(Calendar lastLoginTimeStart) {
         this.lastLoginTimeStart = lastLoginTimeStart;
     }
-    public Date getLastLoginTimeEnd() {
+    public Calendar getLastLoginTimeEnd() {
         return lastLoginTimeEnd;
     }
-    public void setLastLoginTimeEnd(Date lastLoginTimeEnd) {
+    public void setLastLoginTimeEnd(Calendar lastLoginTimeEnd) {
         this.lastLoginTimeEnd = lastLoginTimeEnd;
     }
     public Integer getCutoffDayStart() {

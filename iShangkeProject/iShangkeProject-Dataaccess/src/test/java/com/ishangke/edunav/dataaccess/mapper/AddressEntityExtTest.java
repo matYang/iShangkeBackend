@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
@@ -36,8 +36,8 @@ public class AddressEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         AddressEntityExt addressEntityExt = new AddressEntityExt();
-        addressEntityExt.setCreateTime(new Date());
-        addressEntityExt.setLastModifyTime(new Date());
+        addressEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        addressEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         addressEntityExt.setEnabled(1);
         addressEntityExt.setDeleted(0);
         addressEntityExt.setCircleId(1);
@@ -53,8 +53,8 @@ public class AddressEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         AddressEntityExt addressEntityExt = new AddressEntityExt();
-        addressEntityExt.setCreateTime(new Date());
-        addressEntityExt.setLastModifyTime(new Date());
+        addressEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        addressEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         addressEntityExt.setEnabled(1);
         addressEntityExt.setDeleted(0);
         addressEntityExt.setCircleId(1);

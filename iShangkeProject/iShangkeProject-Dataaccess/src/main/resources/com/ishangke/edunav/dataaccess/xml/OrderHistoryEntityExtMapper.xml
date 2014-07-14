@@ -10,7 +10,7 @@
     <result column="ORDERHISTORY_PRESTATUS" property="preStatus" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_POSTSTATUS" property="postStatus" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_NORMAL" property="normal" jdbcType="INTEGER" />
-    <result column="ORDERHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ORDERHISTORY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ORDERHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -87,7 +87,7 @@
         #{normal,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -131,7 +131,7 @@
         NORMAL = #{record.normal,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="record.enabled != null">
         ENABLED = #{record.enabled,jdbcType=INTEGER},

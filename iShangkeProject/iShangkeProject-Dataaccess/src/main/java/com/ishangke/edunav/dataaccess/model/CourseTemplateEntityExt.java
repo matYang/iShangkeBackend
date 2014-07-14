@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -10,10 +10,10 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
 
     private Integer categoryIdStart;
     private Integer categoryIdEnd;
@@ -46,12 +46,12 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Integer classSizeEnd;
     private Integer courseHourNumStart;
     private Integer courseHourNumEnd;
-    private Date startDateStart;
-    private Date startDateEnd;
-    private Date finishDateStart;
-    private Date finishDateEnd;
-    private Date cutoffDateStart;
-    private Date cutoffDateEnd;
+    private Calendar startDateStart;
+    private Calendar startDateEnd;
+    private Calendar finishDateStart;
+    private Calendar finishDateEnd;
+    private Calendar cutoffDateStart;
+    private Calendar cutoffDateEnd;
 
 
     //concrete information
@@ -63,13 +63,13 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private String wholeName;
     private String instName;
     private String partnerIntro;
-    private int partnerQualification;
+    private Integer partnerQualification;
     private String partnerDistinction;
     
     private String address;
     private String categoryValue;
     private String categoryName;
-    private int categoryRank;
+    private Integer categoryRank;
     private String locationValue;
     private String locationName;
     private String circleValue;
@@ -100,35 +100,35 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
         this.idSet = idSet;
     }
 
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 
@@ -180,11 +180,11 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
         this.partnerIntro = partnerIntro;
     }
 
-    public int getPartnerQualification() {
+    public Integer getPartnerQualification() {
         return partnerQualification;
     }
 
-    public void setPartnerQualification(int partnerQualification) {
+    public void setPartnerQualification(Integer partnerQualification) {
         this.partnerQualification = partnerQualification;
     }
 
@@ -220,11 +220,11 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
         this.categoryName = categoryName;
     }
 
-    public int getCategoryRank() {
+    public Integer getCategoryRank() {
         return categoryRank;
     }
 
-    public void setCategoryRank(int categoryRank) {
+    public void setCategoryRank(Integer categoryRank) {
         this.categoryRank = categoryRank;
     }
 
@@ -508,51 +508,51 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
         this.courseHourNumEnd = courseHourNumEnd;
     }
 
-    public Date getStartDateStart() {
+    public Calendar getStartDateStart() {
         return startDateStart;
     }
 
-    public void setStartDateStart(Date startDateStart) {
+    public void setStartDateStart(Calendar startDateStart) {
         this.startDateStart = startDateStart;
     }
 
-    public Date getStartDateEnd() {
+    public Calendar getStartDateEnd() {
         return startDateEnd;
     }
 
-    public void setStartDateEnd(Date startDateEnd) {
+    public void setStartDateEnd(Calendar startDateEnd) {
         this.startDateEnd = startDateEnd;
     }
 
-    public Date getFinishDateStart() {
+    public Calendar getFinishDateStart() {
         return finishDateStart;
     }
 
-    public void setFinishDateStart(Date finishDateStart) {
+    public void setFinishDateStart(Calendar finishDateStart) {
         this.finishDateStart = finishDateStart;
     }
 
-    public Date getFinishDateEnd() {
+    public Calendar getFinishDateEnd() {
         return finishDateEnd;
     }
 
-    public void setFinishDateEnd(Date finishDateEnd) {
+    public void setFinishDateEnd(Calendar finishDateEnd) {
         this.finishDateEnd = finishDateEnd;
     }
 
-    public Date getCutoffDateStart() {
+    public Calendar getCutoffDateStart() {
         return cutoffDateStart;
     }
 
-    public void setCutoffDateStart(Date cutoffDateStart) {
+    public void setCutoffDateStart(Calendar cutoffDateStart) {
         this.cutoffDateStart = cutoffDateStart;
     }
 
-    public Date getCutoffDateEnd() {
+    public Calendar getCutoffDateEnd() {
         return cutoffDateEnd;
     }
 
-    public void setCutoffDateEnd(Date cutoffDateEnd) {
+    public void setCutoffDateEnd(Calendar cutoffDateEnd) {
         this.cutoffDateEnd = cutoffDateEnd;
     }
     

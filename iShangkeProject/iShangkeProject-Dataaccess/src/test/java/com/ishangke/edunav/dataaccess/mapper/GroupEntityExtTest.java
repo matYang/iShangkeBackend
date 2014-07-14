@@ -2,7 +2,6 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
@@ -29,8 +29,8 @@ public class GroupEntityExtTest extends BaseTest{
     @Test
     public void testAdd(){
         GroupEntityExt groupEntityExt = new GroupEntityExt();
-        groupEntityExt.setCreateTime(new Date());
-        groupEntityExt.setLastModifyTime(new Date());
+        groupEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        groupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         groupEntityExt.setDeleted(0);
         groupEntityExt.setEnabled(1);
         groupEntityExt.setRoleId(1);
@@ -43,8 +43,8 @@ public class GroupEntityExtTest extends BaseTest{
     @Test
     public void testDeleted(){
         GroupEntityExt groupEntityExt = new GroupEntityExt();
-        groupEntityExt.setCreateTime(new Date());
-        groupEntityExt.setLastModifyTime(new Date());
+        groupEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        groupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         groupEntityExt.setDeleted(0);
         groupEntityExt.setEnabled(1);
         groupEntityExt.setRoleId(1);
@@ -58,15 +58,13 @@ public class GroupEntityExtTest extends BaseTest{
     @Test
     public void testList(){
         GroupEntityExt groupEntityExt = new GroupEntityExt();
-        groupEntityExt.setCreateTime(new Date());
-        groupEntityExt.setLastModifyTime(new Date());
+        groupEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        groupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         groupEntityExt.setDeleted(0);
         groupEntityExt.setEnabled(1);
         groupEntityExt.setRoleId(1);
         groupEntityExt.setPartnerId(1);        
         groupEntityExtMapper.add(groupEntityExt); 
-        groupEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        groupEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
 
         List<GroupEntityExt> list = groupEntityExtMapper.list(groupEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -88,15 +86,13 @@ public class GroupEntityExtTest extends BaseTest{
     @Test
     public void testUpdate(){
         GroupEntityExt groupEntityExt = new GroupEntityExt();
-        groupEntityExt.setCreateTime(new Date());
-        groupEntityExt.setLastModifyTime(new Date());
+        groupEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        groupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         groupEntityExt.setDeleted(0);
         groupEntityExt.setEnabled(1);
         groupEntityExt.setRoleId(1);
         groupEntityExt.setPartnerId(1);        
         groupEntityExtMapper.add(groupEntityExt); 
-        groupEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        groupEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
 
         List<GroupEntityExt> list = groupEntityExtMapper.list(groupEntityExt, null);
         String name = "李清";

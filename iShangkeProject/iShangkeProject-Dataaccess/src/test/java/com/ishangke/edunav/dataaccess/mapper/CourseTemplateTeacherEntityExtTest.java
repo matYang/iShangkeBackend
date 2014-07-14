@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
@@ -33,7 +33,7 @@ public class CourseTemplateTeacherEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt = new CourseTemplateTeacherEntityExt();
-        courseTemplateTeacherEntityExt.setCreateTime(new Date());
+        courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         courseTemplateTeacherEntityExt.setCourseTemplateId(1);
         courseTemplateTeacherEntityExt.setTeacherId(1);
         courseTemplateTeacherEntityExt.setDeleted(0);
@@ -49,7 +49,7 @@ public class CourseTemplateTeacherEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt = new CourseTemplateTeacherEntityExt();
-        courseTemplateTeacherEntityExt.setCreateTime(new Date());
+        courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         courseTemplateTeacherEntityExt.setCourseTemplateId(1);
         courseTemplateTeacherEntityExt.setTeacherId(1);
         courseTemplateTeacherEntityExt.setDeleted(0);

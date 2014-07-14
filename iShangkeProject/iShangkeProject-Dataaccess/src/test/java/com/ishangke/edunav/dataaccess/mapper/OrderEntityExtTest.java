@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
@@ -38,7 +38,7 @@ public class OrderEntityExtTest extends BaseTest {
     @Test
     public void testAdd() {
         OrderEntityExt orderEntityExt = new OrderEntityExt();
-        orderEntityExt.setCreateTime(new Date());
+        orderEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         orderEntityExt.setDeleted(0);
         orderEntityExt.setEnabled(1);
 
@@ -50,7 +50,7 @@ public class OrderEntityExtTest extends BaseTest {
     @Test
     public void testDelete() {
         OrderEntityExt orderEntityExt = new OrderEntityExt();
-        orderEntityExt.setCreateTime(new Date());
+        orderEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
 
          orderEntityExt.setDeleted(0);
         orderEntityExt.setEnabled(1);

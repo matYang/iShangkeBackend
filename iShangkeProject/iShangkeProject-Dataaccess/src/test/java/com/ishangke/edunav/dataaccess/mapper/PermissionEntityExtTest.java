@@ -2,7 +2,6 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
@@ -33,8 +33,8 @@ public class PermissionEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setCreateTime(new Date());
-        permissionEntityExt.setLastModifyTime(new Date());
+        permissionEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        permissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
         permissionEntityExt.setName("ishangke李清");
@@ -47,8 +47,8 @@ public class PermissionEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setCreateTime(new Date());
-        permissionEntityExt.setLastModifyTime(new Date());
+        permissionEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        permissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
         permissionEntityExt.setName("ishangke");
@@ -62,16 +62,16 @@ public class PermissionEntityExtTest extends BaseTest{
     @Test
     public void testList(){
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setCreateTime(new Date());
-        permissionEntityExt.setLastModifyTime(new Date());
+        permissionEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        permissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
         permissionEntityExt.setName("ishangke");
         permissionEntityExt.setPath("ishangke李清");
         permissionEntityExtMapper.add(permissionEntityExt);
 
-//        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 100000000));
-//        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 100000000));
+//        permissionEntityExt.setCreateTimeStart(new Calendar(System.currentTimeMillis() - 100000000));
+//        permissionEntityExt.setLastModifyTimeStart(new Calendar(System.currentTimeMillis() - 100000000));
 
         List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -88,14 +88,14 @@ public class PermissionEntityExtTest extends BaseTest{
 
         
         RoleEntityExt roleEntityExt = new RoleEntityExt();
-        roleEntityExt.setCreateTime(new Date());
-        roleEntityExt.setLastModifyTime(new Date());
+        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         roleEntityExt.setDeleted(0);
         roleEntityExt.setEnabled(1);
         roleEntityExtMapper.add(roleEntityExt);
         
         RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-        rolePermissionEntityExt.setLastModifyTime(new Date());
+        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         rolePermissionEntityExt.setDeleted(0);
         rolePermissionEntityExt.setRoleId(roleEntityExt.getId());
         rolePermissionEntityExt.setPermissionId(permissionEntityExt.getId());
@@ -109,16 +109,16 @@ public class PermissionEntityExtTest extends BaseTest{
     @Test
     public void testUpdate(){
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setCreateTime(new Date());
-        permissionEntityExt.setLastModifyTime(new Date());
+        permissionEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        permissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         permissionEntityExt.setDeleted(0);
         permissionEntityExt.setEnabled(1);
         permissionEntityExt.setName("ishangke");
         permissionEntityExt.setPath("ishangke李清");
         permissionEntityExtMapper.add(permissionEntityExt);
 
-//        permissionEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 100000000));
-//        permissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 100000000));
+//        permissionEntityExt.setCreateTimeStart(new Calendar(System.currentTimeMillis() - 100000000));
+//        permissionEntityExt.setLastModifyTimeStart(new Calendar(System.currentTimeMillis() - 100000000));
 
         List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
         String name = "李国庆";

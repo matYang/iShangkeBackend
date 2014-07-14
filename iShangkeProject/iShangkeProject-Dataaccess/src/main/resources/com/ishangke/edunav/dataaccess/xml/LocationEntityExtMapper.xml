@@ -5,8 +5,8 @@
     <id column="LOCATION_ID" property="id" jdbcType="INTEGER" />
     <result column="LOCATION_VALUE" property="value" jdbcType="VARCHAR" />
     <result column="LOCATION_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="LOCATION_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="LOCATION_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LOCATION_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="LOCATION_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="LOCATION_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="LOCATION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -54,10 +54,10 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -86,10 +86,10 @@
         NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},

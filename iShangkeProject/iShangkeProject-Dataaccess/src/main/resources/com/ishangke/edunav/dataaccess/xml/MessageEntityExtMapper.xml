@@ -6,7 +6,7 @@
     <result column="MESSAGE_MESSAGETEXT" property="messageFext" jdbcType="VARCHAR" />
     <result column="MESSAGE_USERFROMID" property="userFromId" jdbcType="INTEGER" />
     <result column="MESSAGE_USERTOID" property="userToId" jdbcType="INTEGER" />
-    <result column="MESSAGE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MESSAGE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="MESSAGE_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Message_Base_Column_List">
@@ -52,7 +52,7 @@
         #{userToId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
@@ -81,7 +81,7 @@
         USER_TO_ID = #{userToId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},

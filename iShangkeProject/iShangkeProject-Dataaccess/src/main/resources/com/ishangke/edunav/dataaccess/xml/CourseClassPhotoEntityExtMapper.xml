@@ -5,7 +5,7 @@
     <id column="COURSECLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
     <result column="COURSECLASSPHOTO_COURSEID" property="courseId" jdbcType="INTEGER" />
     <result column="COURSECLASSPHOTO_CLASSPHOTOID" property="classPhotoId" jdbcType="INTEGER" />
-    <result column="COURSECLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSECLASSPHOTO_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseClassPhoto_Base_Column_List">
@@ -44,7 +44,7 @@
         #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
@@ -70,7 +70,7 @@
         CLASS_PHOTO_ID = #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},

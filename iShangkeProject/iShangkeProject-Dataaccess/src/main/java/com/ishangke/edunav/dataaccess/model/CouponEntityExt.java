@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.CouponEntity;
 
@@ -12,14 +12,14 @@ public class CouponEntityExt extends CouponEntity {
     private Double totalEnd;
     private Double balanceStart;
     private Double balanceEnd;
-    private Date expiryTimeStart;
-    private Date expiryTimeEnd;
+    private Calendar expiryTimeStart;
+    private Calendar expiryTimeEnd;
     private Integer userIdStart;
     private Integer userIdEnd;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     
     public Integer getIdStart() {
         return idStart;
@@ -57,16 +57,16 @@ public class CouponEntityExt extends CouponEntity {
     public void setBalanceEnd(Double balanceEnd) {
         this.balanceEnd = balanceEnd;
     }
-    public Date getExpiryTimeStart() {
+    public Calendar getExpiryTimeStart() {
         return expiryTimeStart;
     }
-    public void setExpiryTimeStart(Date expiryTimeStart) {
+    public void setExpiryTimeStart(Calendar expiryTimeStart) {
         this.expiryTimeStart = expiryTimeStart;
     }
-    public Date getExpiryTimeEnd() {
+    public Calendar getExpiryTimeEnd() {
         return expiryTimeEnd;
     }
-    public void setExpiryTimeEnd(Date expiryTimeEnd) {
+    public void setExpiryTimeEnd(Calendar expiryTimeEnd) {
         this.expiryTimeEnd = expiryTimeEnd;
     }
     public Integer getUserIdStart() {
@@ -81,28 +81,28 @@ public class CouponEntityExt extends CouponEntity {
     public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
     

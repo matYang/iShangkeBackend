@@ -1,22 +1,11 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import static org.junit.Assert.fail;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.ishangke.edunav.common.BaseTest;
-import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
@@ -70,8 +59,8 @@ public class TeacherEntityExtTest {
 //        teacherEntityExt.setPartnerId(1);
 //        teacherEntityExt.setPopularity(1);       
 //        teacherEntityExtMapper.add(teacherEntityExt);
-////        teacherEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-////        teacherEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
+////        teacherEntityExt.setCreateTimeStart(new Calendar(System.currentTimeMillis() - 10000));
+////        teacherEntityExt.setLastModifyTimeStart(new Calendar(System.currentTimeMillis() - 10000));
 //        
 //        List<TeacherEntityExt> list = teacherEntityExtMapper.list(teacherEntityExt, null);
 //        Assert.assertSame(list.size(),1);
@@ -102,8 +91,8 @@ public class TeacherEntityExtTest {
 //        teacherEntityExt.setPartnerId(1);
 //        teacherEntityExt.setPopularity(1);       
 //        teacherEntityExtMapper.add(teacherEntityExt);
-////        teacherEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-////        teacherEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
+////        teacherEntityExt.setCreateTimeStart(new Calendar(System.currentTimeMillis() - 10000));
+////        teacherEntityExt.setLastModifyTimeStart(new Calendar(System.currentTimeMillis() - 10000));
 //        
 //        List<TeacherEntityExt> list = teacherEntityExtMapper.list(teacherEntityExt, null);
 //        String imgUrl = "李清";

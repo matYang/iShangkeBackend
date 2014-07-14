@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -12,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 
@@ -27,7 +27,7 @@ public class RolePermissionEntityExtTest extends BaseTest{
     @Test
     public void testAdd(){
         RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-        rolePermissionEntityExt.setLastModifyTime(new Date());
+        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         rolePermissionEntityExt.setDeleted(0);
         rolePermissionEntityExt.setRoleId(1);
         rolePermissionEntityExt.setPermissionId(1);
@@ -39,7 +39,7 @@ public class RolePermissionEntityExtTest extends BaseTest{
     @Test
     public void testDelete(){
         RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-        rolePermissionEntityExt.setLastModifyTime(new Date());
+        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         rolePermissionEntityExt.setDeleted(0);
         rolePermissionEntityExt.setRoleId(1);
         rolePermissionEntityExt.setPermissionId(1);        
@@ -52,13 +52,12 @@ public class RolePermissionEntityExtTest extends BaseTest{
     @Test
     public void testList(){
         RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-        rolePermissionEntityExt.setLastModifyTime(new Date());
+        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         rolePermissionEntityExt.setDeleted(0);
         rolePermissionEntityExt.setRoleId(1);
         rolePermissionEntityExt.setPermissionId(1);        
         rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
 
-        rolePermissionEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
 
         List<RolePermissionEntityExt> list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, null);
         Assert.assertSame(list.size(),1);
