@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +14,11 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.OrderByEntity;
+import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseEntityExtTest.class })
@@ -65,6 +70,25 @@ public class CourseEntityExtTest extends BaseTest{
         int oldcount = courseEntityExtMapper.getCount();
         courseEntityExtMapper.deleteById(courseEntityExt.getId());
         Assert.assertSame(courseEntityExtMapper.getCount(), oldcount - 1);
+    }
+    
+
+    @Test
+    public void testQuery() {
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE", DataaccessConstants.ORDER_ASC));
+        
+        CourseEntityExt courseEntityExt = new CourseEntityExt();
+        courseEntityExt.setCourseName("_test_c_");
+
+        List<CourseEntityExt> result = courseEntityExtMapper.list(courseEntityExt, page);
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("_test_c_爱上课英语课（上的都牛逼）", result.get(2).getCourseName());
     }
 
 

@@ -162,6 +162,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND BOOKING_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND BOOKING_HISTORY.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.userId != null and entity.userId != 0">
@@ -174,6 +180,12 @@
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND BOOKING_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND BOOKING_HISTORY.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
       <if test="entity.bookingId != null and entity.bookingId != 0">
         AND BOOKING_HISTORY.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
@@ -184,6 +196,12 @@
         </if>
         <if test="entity.bookingIdEnd != null and entity.bookingIdEnd != 0">
           <![CDATA[AND BOOKING_HISTORY.BOOKING_ID <= #{entity.bookingIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.bookingIdSet != null and entity.bookingIdSet.size() > 0">
+          AND BOOKING_HISTORY.BOOKING_ID IN
+          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -249,6 +267,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND BOOKING_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND BOOKING_HISTORY.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.userId != null and entity.userId != 0">
@@ -261,6 +285,12 @@
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND BOOKING_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND BOOKING_HISTORY.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
       <if test="entity.bookingId != null and entity.bookingId != 0">
         AND BOOKING_HISTORY.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
@@ -271,6 +301,12 @@
         </if>
         <if test="entity.bookingIdEnd != null and entity.bookingIdEnd != 0">
           <![CDATA[AND BOOKING_HISTORY.BOOKING_ID <= #{entity.bookingIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.bookingIdSet != null and entity.bookingIdSet.size() > 0">
+          AND BOOKING_HISTORY.BOOKING_ID IN
+          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 

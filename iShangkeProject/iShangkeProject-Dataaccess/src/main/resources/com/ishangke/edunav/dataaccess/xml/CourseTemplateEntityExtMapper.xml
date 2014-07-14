@@ -84,7 +84,7 @@
       <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
       <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
       <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
-      <result column="TEACHER_POPULATIRY" property="populatiry" jdbcType="INTEGER" />
+      <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
       <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
       <result column="TEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
       <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -104,84 +104,62 @@
   </resultMap>
   <sql id="CourseTemplate_Base_Column_List">
     COURSE_TEMPLATE.ID COURSETEMPLATE_ID,
-    COURSE_TEMPLATE.COURSE_NAME
-    COURSETEMPLATE_COURSENAME,
+    COURSE_TEMPLATE.COURSE_NAME COURSETEMPLATE_COURSENAME,
     COURSE_TEMPLATE.CATEGORY_ID COURSETEMPLATE_CATEGORYID,
-    COURSE_TEMPLATE.LOCATION_ID
-    COURSETEMPLATE_LOCATIONID,
-    COURSE_TEMPLATE.CIRCLE_ID
-    COURSETEMPLATE_CIRCLEID,
+    COURSE_TEMPLATE.LOCATION_ID COURSETEMPLATE_LOCATIONID,
+    COURSE_TEMPLATE.CIRCLE_ID COURSETEMPLATE_CIRCLEID,
     COURSE_TEMPLATE.PARTNER_ID COURSETEMPLATE_PARTNERID,
-    COURSE_TEMPLATE.ADDRESS_ID
-    COURSETEMPLATE_ADDRESSID,
+    COURSE_TEMPLATE.ADDRESS_ID COURSETEMPLATE_ADDRESSID,
     COURSE_TEMPLATE.PRICE COURSETEMPLATE_PRICE,
     COURSE_TEMPLATE.ORIGINAL_PRICE COURSETEMPLATE_ORIGINALPRICE,
-    COURSE_TEMPLATE.CASHBACK
-    COURSETEMPLATE_CASHBACK,
+    COURSE_TEMPLATE.CASHBACK COURSETEMPLATE_CASHBACK,
     COURSE_TEMPLATE.COMMISSION COURSETEMPLATE_COMMISSION,
     COURSE_TEMPLATE.SERVICE_CHARGE COURSETEMPLATE_SERVICECHARGE,
-    COURSE_TEMPLATE.STATUS
-    COURSETEMPLATE_STATUS,
+    COURSE_TEMPLATE.STATUS COURSETEMPLATE_STATUS,
     COURSE_TEMPLATE.LAST_MODIFY_TIME COURSETEMPLATE_LASTMODIFYTIME,
     COURSE_TEMPLATE.CREATE_TIME COURSETEMPLATE_CREATETIME,
-    COURSE_TEMPLATE.ENABLED
-    COURSETEMPLATE_ENABLED,
+    COURSE_TEMPLATE.ENABLED COURSETEMPLATE_ENABLED,
     COURSE_TEMPLATE.DELETED COURSETEMPLATE_DELETED,
     COURSE_TEMPLATE.COURSE_HOUR_NUM COURSETEMPLATE_COURSEHOURNUM,
-    COURSE_TEMPLATE.COURSE_HOUR_LENGTH
-    COURSETEMPLATE_COURSEHOURLENGTH,
+    COURSE_TEMPLATE.COURSE_HOUR_LENGTH COURSETEMPLATE_COURSEHOURLENGTH,
     COURSE_TEMPLATE.CLASS_SIZE COURSETEMPLATE_CLASSSIZE,
     COURSE_TEMPLATE.POPULARITY COURSETEMPLATE_POPULARITY,
-    COURSE_TEMPLATE.START_DATE
-    COURSETEMPLATE_STARTDATE,
+    COURSE_TEMPLATE.START_DATE COURSETEMPLATE_STARTDATE,
     COURSE_TEMPLATE.FINISH_DATE COURSETEMPLATE_FINISHDATE,
     COURSE_TEMPLATE.CUTOFF_DATE COURSETEMPLATE_CUTOFFDATE,
-    COURSE_TEMPLATE.NO_REFUND_DATE
-    COURSETEMPLATE_NOREFUNDDATE,
+    COURSE_TEMPLATE.NO_REFUND_DATE COURSETEMPLATE_NOREFUNDDATE,
     COURSE_TEMPLATE.CASHBACK_DATE COURSETEMPLATE_CASHBACKDATE,
     COURSE_TEMPLATE.BOOKING_TYPE COURSETEMPLATE_BOOKINGTYPE,
-    COURSE_TEMPLATE.START_UPON_ARRIVAL
-    COURSETEMPLATE_STARTUPONARRIVAL,
+    COURSE_TEMPLATE.START_UPON_ARRIVAL COURSETEMPLATE_STARTUPONARRIVAL,
     COURSE_TEMPLATE.START_TIME1 COURSETEMPLATE_STARTTIME1,
     COURSE_TEMPLATE.FINISH_TIME1 COURSETEMPLATE_FINISHTIME1,
-    COURSE_TEMPLATE.START_TIME2
-    COURSETEMPLATE_STARTTIME2,
+    COURSE_TEMPLATE.START_TIME2 COURSETEMPLATE_STARTTIME2,
     COURSE_TEMPLATE.FINISH_TIME2 COURSETEMPLATE_FINISHTIME2,
     COURSE_TEMPLATE.REG_LOCATION COURSETEMPLATE_REGLOCATION,
-    COURSE_TEMPLATE.REFERENCE
-    COURSETEMPLATE_REFERENCE,
+    COURSE_TEMPLATE.REFERENCE COURSETEMPLATE_REFERENCE,
     COURSE_TEMPLATE.COURSE_INTRO COURSETEMPLATE_COURSEINTRO,
     COURSE_TEMPLATE.QUIZ COURSETEMPLATE_QUIZ,
-    COURSE_TEMPLATE.CERTIFICATION
-    COURSETEMPLATE_CERTIFICATION,
-    COURSE_TEMPLATE.OPEN_COURSE_REQUIREMENT
-    COURSETEMPLATE_OPENCOURSEREQUIREMENT,
-    COURSE_TEMPLATE.SUITABLE_STUDENT
-    COURSETEMPLATE_SUITABLESTUDENT,
+    COURSE_TEMPLATE.CERTIFICATION COURSETEMPLATE_CERTIFICATION,
+    COURSE_TEMPLATE.OPEN_COURSE_REQUIREMENT COURSETEMPLATE_OPENCOURSEREQUIREMENT,
+    COURSE_TEMPLATE.SUITABLE_STUDENT COURSETEMPLATE_SUITABLESTUDENT,
     COURSE_TEMPLATE.PREREQUEST COURSETEMPLATE_PREREQUEST,
     COURSE_TEMPLATE.HIGH_SCORE_REWARD COURSETEMPLATE_HIGHSCOREREWARD,
-    COURSE_TEMPLATE.STUDY_DAY_NOTE
-    COURSETEMPLATE_STUDYDAYNOTE,
-    COURSE_TEMPLATE.TEACHING_MATERIAL_INTRO
-    COURSETEMPLATE_TEACHINGMATERIALINTRO,
+    COURSE_TEMPLATE.STUDY_DAY_NOTE COURSETEMPLATE_STUDYDAYNOTE,
+    COURSE_TEMPLATE.TEACHING_MATERIAL_INTRO COURSETEMPLATE_TEACHINGMATERIALINTRO,
     COURSE_TEMPLATE.QUESTION_BANK COURSETEMPLATE_QUESTIONBANK,
     COURSE_TEMPLATE.QUALITY_ASSURANCE COURSETEMPLATE_QUALITYASSURANCE,
-    COURSE_TEMPLATE.PASS_AGREEMENT
-    COURSETEMPLATE_PASSAGREEMENT,
+    COURSE_TEMPLATE.PASS_AGREEMENT COURSETEMPLATE_PASSAGREEMENT,
     COURSE_TEMPLATE.EXTRACURRICULAR COURSETEMPLATE_EXTRACURRICULAR,
     COURSE_TEMPLATE.CONTACT COURSETEMPLATE_CONTACT,
     COURSE_TEMPLATE.REG_PHONE COURSETEMPLATE_REGPHONE,
     COURSE_TEMPLATE.OUTLINE COURSETEMPLATE_OUTLINE,
     COURSE_TEMPLATE.GOAL COURSETEMPLATE_GOAL,
     COURSE_TEMPLATE.CLASS_TEACHER COURSETEMPLATE_CLASSTEACHER,
-    COURSE_TEMPLATE.TEACHING_AND_EXERCISE
-    COURSETEMPLATE_TEACHINGANDEXERCISE,
-    COURSE_TEMPLATE.QUESTION_SESSION
-    COURSETEMPLATE_QUESTIONSESSION,
+    COURSE_TEMPLATE.TEACHING_AND_EXERCISE COURSETEMPLATE_TEACHINGANDEXERCISE,
+    COURSE_TEMPLATE.QUESTION_SESSION COURSETEMPLATE_QUESTIONSESSION,
     COURSE_TEMPLATE.TRAIL COURSETEMPLATE_TRAIL,
     COURSE_TEMPLATE.ASSIGNMENTS COURSETEMPLATE_ASSIGNMENTS,
-    COURSE_TEMPLATE.MARKING
-    COURSETEMPLATE_MARKING,
+    COURSE_TEMPLATE.MARKING COURSETEMPLATE_MARKING,
     COURSE_TEMPLATE.BONUS_SERVICE COURSETEMPLATE_BONUSSERVICE,
     COURSE_TEMPLATE.DOWNLOAD_MATERIALS COURSETEMPLATE_DOWNLOADMATERIALS,
     COURSE_TEMPLATE.TEACHING_MATERIAL_FEE COURSETEMPLATE_TEACHINGMATERIALFEE,
@@ -193,7 +171,7 @@
     TEACHER.IMG_URL TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULATIRY TEACHER_POPULATIRY,
+    TEACHER.POPULARITY TEACHER_POPULARITY,
     TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
     TEACHER.CREATE_TIME TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
@@ -228,11 +206,11 @@
   </sql>
   <sql id="Location_Base_Column_List">
     LOCATION.VALUE LOCATION_VALUE,
-    LOCATION.NAME LOCATION_NAME,
+    LOCATION.NAME LOCATION_NAME
   </sql>
   <sql id="Circle_Base_Column_List">
     CIRCLE.VALUE CIRCLE_VALUE,
-    CIRCLE.NAME CIRCLE_NAME,
+    CIRCLE.NAME CIRCLE_NAME
   </sql>
   
   <insert id="add" parameterType="CourseTemplateEntityExt">
@@ -823,17 +801,26 @@
     <include refid="Address_Base_Column_List"></include>,
     <include refid="Category_Base_Column_List"></include>,
     <include refid="Location_Base_Column_List"></include>,
-    <include refid="Circle_Base_Column_List"></include>,
+    <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
-    join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID
-    join TEACEHR TEACHER ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
-    join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
-    join CLASS_PHOTO CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
-    join PARTNER PARTNER ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
-    join CIRCLE CIRCLE ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
-    join ADDRESS ADDRESS ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
-    join CATEGORY CATEGORY ON CATEGORY.ID = ADDRESS.CATEGORY_ID
-    join LOCATION LOCATION ON LOCATION.ID = ADDRESS.LOCATION_ID
+        join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
+            ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = 1
+        join TEACHER TEACHER 
+            ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
+        join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO 
+            ON COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID = 1
+        join CLASS_PHOTO CLASS_PHOTO 
+            ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
+        join PARTNER PARTNER 
+            ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
+        join CATEGORY CATEGORY 
+            ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+        join ADDRESS ADDRESS 
+            ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
+        join CIRCLE CIRCLE
+            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+        join LOCATION LOCATION 
+            ON LOCATION.ID = ADDRESS.LOCATION_ID
     
     WHERE COURSE_TEMPLATE.DELETED = 0
     <if test="entity != null">
@@ -850,7 +837,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND COURSE_TEMPLATE.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -868,7 +855,7 @@
         <if test="entity.categoryIdEnd != null and entity.categoryIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.CATEGORY_ID <= #{entity.categoryIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.categoryIdSet.size() > 0">
+        <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE_TEMPLATE.CATEGORY_ID IN
           <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -885,7 +872,7 @@
         <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.locationIdSet.size() > 0">
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE_TEMPLATE.LOCATION_ID IN
           <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -902,7 +889,7 @@
         <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.circleIdSet.size() > 0">
+        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE_TEMPLATE.CIRCLE_ID IN
           <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -919,7 +906,7 @@
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.partnerIdSet.size() > 0">
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE_TEMPLATE.PARTNER_ID IN
           <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -936,7 +923,7 @@
         <if test="entity.statusEnd != null and entity.statusEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.statusSet.size() > 0">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE_TEMPLATE.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -1117,17 +1104,26 @@
     <include refid="Address_Base_Column_List"></include>,
     <include refid="Category_Base_Column_List"></include>,
     <include refid="Location_Base_Column_List"></include>,
-    <include refid="Circle_Base_Column_List"></include>,
+    <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
-    join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID
-    join TEACEHR TEACHER ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
-    join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
-    join CLASS_PHOTO CLASS_PHOTO ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
-    join PARTNER PARTNER ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
-    join CIRCLE CIRCLE ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
-    join ADDRESS ADDRESS ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
-    join CATEGORY CATEGORY ON CATEGORY.ID = ADDRESS.CATEGORY_ID
-    join LOCATION LOCATION ON LOCATION.ID = ADDRESS.LOCATION_ID
+        join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
+            ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
+        join TEACHER TEACHER 
+            ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
+        join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO 
+            ON COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
+        join CLASS_PHOTO CLASS_PHOTO 
+            ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
+        join PARTNER PARTNER 
+            ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
+        join CATEGORY CATEGORY 
+            ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+        join ADDRESS ADDRESS 
+            ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
+        join CIRCLE CIRCLE
+            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+        join LOCATION LOCATION 
+            ON LOCATION.ID = ADDRESS.LOCATION_ID
     
     WHERE COURSE_TEMPLATE.DELETED = 0
     <if test="entity != null">
@@ -1144,7 +1140,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND COURSE_TEMPLATE.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -1162,7 +1158,7 @@
         <if test="entity.categoryIdEnd != null and entity.categoryIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.CATEGORY_ID <= #{entity.categoryIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.categoryIdSet.size() > 0">
+        <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE_TEMPLATE.CATEGORY_ID IN
           <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -1179,7 +1175,7 @@
         <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.locationIdSet.size() > 0">
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE_TEMPLATE.LOCATION_ID IN
           <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -1196,7 +1192,7 @@
         <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.circleIdSet.size() > 0">
+        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE_TEMPLATE.CIRCLE_ID IN
           <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -1213,7 +1209,7 @@
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.partnerIdSet.size() > 0">
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE_TEMPLATE.PARTNER_ID IN
           <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -1230,7 +1226,7 @@
         <if test="entity.statusEnd != null and entity.statusEnd != 0">
           <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.statusSet.size() > 0">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE_TEMPLATE.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}

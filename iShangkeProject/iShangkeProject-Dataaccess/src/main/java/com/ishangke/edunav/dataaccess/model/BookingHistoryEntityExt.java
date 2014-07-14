@@ -2,16 +2,20 @@ package com.ishangke.edunav.dataaccess.model;
 
 import com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntity;
 import java.util.Date;
+import java.util.Set;
 
 public class BookingHistoryEntityExt extends BookingHistoryEntity {
 
 	private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
 
     private Integer bookingIdStart;
     private Integer bookingIdEnd;
+    private Set<Integer> bookingIdSet;
     private Integer userIdStart;
-    private Integer useridEnd;
+    private Integer userIdEnd;
+    private Set<Integer> userIdSet;
 
     private Date createTimeStart;
     private Date createTimeEnd;
@@ -48,10 +52,10 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
         this.userIdStart = userIdStart;
     }
     public Integer getUseridEnd() {
-        return useridEnd;
+        return userIdEnd;
     }
-    public void setUseridEnd(Integer useridEnd) {
-        this.useridEnd = useridEnd;
+    public void setUseridEnd(Integer userIdEnd) {
+        this.userIdEnd = userIdEnd;
     }
     public Date getCreateTimeStart() {
         return createTimeStart;
@@ -64,6 +68,30 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
     }
     public void setCreateTimeEnd(Date createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getBookingIdSet() {
+        return bookingIdSet;
+    }
+    public void setBookingIdSet(Set<Integer> bookingIdSet) {
+        this.bookingIdSet = bookingIdSet;
+    }
+    public Integer getUserIdEnd() {
+        return userIdEnd;
+    }
+    public void setUserIdEnd(Integer userIdEnd) {
+        this.userIdEnd = userIdEnd;
+    }
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
     }
     
 }
