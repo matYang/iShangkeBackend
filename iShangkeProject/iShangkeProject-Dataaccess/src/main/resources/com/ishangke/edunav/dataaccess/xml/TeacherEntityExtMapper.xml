@@ -28,6 +28,27 @@
     TEACHER.ENABLED TEACHER_ENABLED,
     TEACHER.DELETED TEACHER_DELETED
   </sql>
+  <sql id="COURSE_TEMPLATE_Base_Column_List">
+    COURSE_TEMPLATE.ID COURSETEMPLATE_ID  
+  </sql>
+
+  <sql id="Course_Base_Column_List">
+    COURSE.ID COURSE_ID,
+    COURSE.COURSE_NAME COURSE_COURSENAME,
+    COURSE.COURSE_TEMPLATE_ID COURSE_COURSETEMPLATEID
+  </sql>
+
+  <sql id="COURSE_TEMPLATE_Teacher_Base_Column_List">
+    COURSE_TEMPLATE_TEACHER.ID COURSETEMPLATETEACHER_ID,
+    COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID COURSETEMPLATETEACHER_COURSETEMPLATEID,
+    COURSE_TEMPLATE_TEACHER.TEACHER_ID COURSETEMPLATETEACHER_TEACHERID
+  </sql>
+  <sql id="Course_Teacher_Base_Column_List">
+    COURSE_TEACHER.ID COURSETEACHER_ID,
+    COURSE_TEACHER.COURSE_ID COURSETEACHER_COURSEID,
+    COURSE_TEACHER.TEACHER_ID COURSETEACHER_TEACHERID
+  </sql>
+
   <insert id="add" parameterType="TeacherEntityExt">
 
     insert into TEACHER
@@ -161,7 +182,7 @@
             #{listItem}
           </foreach>
         </if>
-    </if>
+      </if>
     
     <if test="entity.partnerId != null and entity.partnerId != 0">
         AND TEACHER.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
@@ -225,16 +246,17 @@
       </if>
       
       <if test="page != null">
+        <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+          ORDER BY
+          <foreach collection="page.orderByEntities" item="listItem" separator=",">
+            TEACHER.${listItem.columnKey} ${listItem.order}
+          </foreach>
+        </if>
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
-      
     </if>
   </select>
-  <select id="listTeacherByPartnerId" parameterType="int" resultMap="TeacherExtMap">
-    SELECT 
-    <include refid="Teacher_Base_Column_List"/>    
-    FROM TEACHER WHERE PARTNER_ID = #{partnerId} and DELETED = 0
-  </select>
+
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
      select
@@ -318,12 +340,43 @@
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND TEACHER.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-
-      
       <if test="entity.enabled != null">
         AND TEACHER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>     
     </if>
     ) AS total
   </select>
+
+  <select id="listTeacherByPartnerId" parameterType="int" resultMap="TeacherExtMap">
+    SELECT 
+    <include refid="Teacher_Base_Column_List"/>    
+    FROM TEACHER WHERE PARTNER_ID = #{partnerId} and DELETED = 0
+  </select>
+
+  <select id="listTeacherByCourseId" parameterType="int" resultMap="TeacherExtMap">
+    SELECT
+    <include refid="Teacher_Base_Column_List"/>,
+    <include refid="Course_Base_Column_List"/>,
+    <include refid="Course_Teacher_Base_Column_List"/>
+    FROM TEACHER TEACHER
+      JOIN COURSE_TEACHER COURSE_TEACHER 
+          ON TEACHER.ID = COURSE_TEACHER.TEACHER_ID
+      JOIN COURSE COURSE 
+          ON COURSE.ID = COURSE_TEACHER.COURSE_ID
+    WHERE COURSE.ID = #{courseId} and TEACHER.DELETED = 0
+  </select>
+  
+  <select id="listTeacherByCourseTempleteId" parameterType="int" resultMap="TeacherExtMap">
+    SELECT
+    <include refid="Teacher_Base_Column_List"/>,
+    <include refid="COURSE_TEMPLATE_Base_Column_List"/>,
+    <include refid="COURSE_TEMPLATE_Teacher_Base_Column_List"/>
+    FROM TEACHER TEACHER
+        JOIN COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
+            ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
+        JOIN COURSE_TEMPLATE COURSE_TEMPLATE 
+            ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID
+    WHERE COURSE_TEMPLATE.ID = #{courseTempleteId} and TEACHER.DELETED = 0
+  </select>
+
 </mapper>

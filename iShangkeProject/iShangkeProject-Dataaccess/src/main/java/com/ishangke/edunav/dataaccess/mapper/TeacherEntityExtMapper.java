@@ -24,4 +24,8 @@ public interface TeacherEntityExtMapper {
     public int getListCount(@Param("entity") TeacherEntityExt teacherEntityExt);
     
     public List<TeacherEntityExt> listTeacherByPartnerId(int partnerId);
+
+    public List<TeacherEntityExt> listTeacherByCourseId(int courseId);
+    
+    public List<TeacherEntityExt> listTeacherByCourseTempleteId(int courseTemplateId);
 }
