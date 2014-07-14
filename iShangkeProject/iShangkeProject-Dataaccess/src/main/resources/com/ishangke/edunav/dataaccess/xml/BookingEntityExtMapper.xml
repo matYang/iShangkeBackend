@@ -540,6 +540,7 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      ) AS total
+    </if>
+    ) AS total
   </select>
 </mapper>
