@@ -1,9 +1,9 @@
 namespace java com.ishangke.edunav.commoncontract.model
 
 /**
- * PartnerBo
+ * WithdrawBo
+ * 客户的付款/提现方式
  */
-struct PartnerBo {
+struct WithdrawBo {
   1: i32 id
-  2: string name
 }

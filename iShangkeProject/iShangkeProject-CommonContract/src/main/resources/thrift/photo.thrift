@@ -1,9 +1,8 @@
 namespace java com.ishangke.edunav.commoncontract.model
 
 /**
- * PartnerBo
+ * PhotoBo
  */
-struct PartnerBo {
+struct PhotoBo {
   1: i32 id
-  2: string name
 }
