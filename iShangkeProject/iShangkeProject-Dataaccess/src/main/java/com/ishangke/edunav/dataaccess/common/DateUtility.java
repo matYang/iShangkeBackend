@@ -10,7 +10,7 @@ import java.util.TimeZone;
 public class DateUtility {
 
     public static String toSQLDateTime(Calendar c){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATEFORMAT);
         return sdf.format(c.getTime());
     }
 
@@ -23,6 +23,6 @@ public class DateUtility {
     }
     
     public static Calendar getCurTimeInstance(){
-        return Calendar.getInstance(TimeZone.getTimeZone("asia/shanghai"));
+        return Calendar.getInstance(TimeZone.getTimeZone(Constants.TIMEZONE));
     }
 }

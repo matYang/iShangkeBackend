@@ -14,18 +14,15 @@
       <property name="suppressAllComments" value="true" />
     </commentGenerator>
 
-    <jdbcConnection driverClass="${db.driver}" connectionURL="${db.url}" userId="${db.user}"
-      password="${db.password}">
+    <jdbcConnection driverClass="${db.driver}" connectionURL="${db.url}" userId="${db.user}" password="${db.password}">
     </jdbcConnection>
 
-    <javaModelGenerator targetPackage="com.ishangke.edunav.dataaccess.model.gen"
-      targetProject="./iShangkeProject-Dataaccess/src/main/java">
+    <javaModelGenerator targetPackage="com.ishangke.edunav.dataaccess.model.gen" targetProject="./iShangkeProject-Dataaccess/src/main/java">
       <property name="trimStrings" value="true" />
       <property name="enableSubPackages" value="true" />
     </javaModelGenerator>
 
-    <sqlMapGenerator targetPackage="com.ishangke.edunav.dataaccess.xml.gen"
-      targetProject="./iShangkeProject-Dataaccess/src/main/resources">
+    <sqlMapGenerator targetPackage="com.ishangke.edunav.dataaccess.xml.gen" targetProject="./iShangkeProject-Dataaccess/src/main/resources">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
@@ -40,32 +37,27 @@
         jdbcType="TIMESTAMP" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="BIRTHDAY" property="birthday" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="BIRTHDAY" property="birthday" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="CONTACT" domainObjectName="ContactEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
 
     <table tableName="ROLES" domainObjectName="RoleEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="GROUPS" domainObjectName="GroupEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="USER_GROUP" domainObjectName="UserGroupEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -76,8 +68,7 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="ROLE_PERMISSION" domainObjectName="RolePermissionEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -89,15 +80,13 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="LOCATION" domainObjectName="LocationEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="PARTNER" domainObjectName="PartnerEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -105,32 +94,26 @@
         jdbcType="TIMESTAMP" />
       <columnOverride column="LAST_LOGIN_TIME" property="lastLoginTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="CIRCLE" domainObjectName="CircleEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COURSE_TEMPLATE" domainObjectName="CourseTemplateEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
       <columnOverride column="NO_REFUND_DATE" property="noRefundDate" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="START_DATE" property="startDate" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="FINISH_DATE" property="finishDate" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="CUTOFF_DATE" property="cutoffDate" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="START_DATE" property="startDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="FINISH_DATE" property="finishDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="CUTOFF_DATE" property="cutoffDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="CASHBACK_DATE" property="cashbackDate" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
     </table>
@@ -139,40 +122,33 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="CASHBACK_DATE" property="cashbackDate" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
       <columnOverride column="NO_REFUND_DATE" property="noRefundDate" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CUTOFF_DATE" property="cutoffDate" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="FINISH_DATE" property="finishDate" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="START_DATE" property="startDate" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CUTOFF_DATE" property="cutoffDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="FINISH_DATE" property="finishDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="START_DATE" property="startDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COURSE_COMMENT" domainObjectName="CourseCommentEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="APPROVE_HISTORY" domainObjectName="ApproveHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="BOOKING" domainObjectName="BookingEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="SCHEDULED_TIME" property="scheduledTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
       <columnOverride column="NO_REFUND_DATE" property="noRefundDate" javaType="java.util.Calendar"
@@ -185,130 +161,109 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="EXPIRY_TIME" property="expiryTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="EXPIRY_TIME" property="expiryTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COUPON_HISTORY" domainObjectName="CouponHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="CREDIT" domainObjectName="CreditEntity">
       <!-- <generatedKey column="ID" sqlStatement="MySql" /> -->
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="CREDIT_HISTORY" domainObjectName="CreditHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="ACCOUNT" domainObjectName="AccountEntity">
       <!-- <generatedKey column="ID" sqlStatement="MySql" /> -->
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="ACCOUNT_HISTORY" domainObjectName="AccountHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="SPREAD" domainObjectName="SpreadEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="TEACHER" domainObjectName="TeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <!-- <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" 
-        jdbcType="TIMESTAMP"/> <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" 
-        jdbcType="TIMESTAMP"/> -->
+      <!-- <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> 
+        <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> -->
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COURSE_TEACHER" domainObjectName="CourseTeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="ACTIVITY" domainObjectName="ActivityEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="START_TIME" property="startTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-      <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="START_TIME" property="startTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="MESSAGE" domainObjectName="MessageEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
-    <!-- <table tableName="PARTNER_CIRCLE" domainObjectName="PartnerCircleEntity"> <generatedKey column="ID" 
-      sqlStatement="MySql" /> </table> -->
+    <!-- <table tableName="PARTNER_CIRCLE" domainObjectName="PartnerCircleEntity"> <generatedKey column="ID" sqlStatement="MySql" 
+      /> </table> -->
     <table tableName="WITHDRAW" domainObjectName="WithdrawEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <!-- 通过此方法，将生成的时间类型为Calendar -->
-      <!-- <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" 
-        jdbcType="TIMESTAMP"/> <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" 
-        jdbcType="TIMESTAMP"/> -->
+      <!-- <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> 
+        <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> -->
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COURSE_TEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
     <table tableName="CLASS_PHOTO" domainObjectName="ClassPhotoEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COURSE_CLASS_PHOTO" domainObjectName="CourseClassPhotoEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="COURSE_TEMPLATE_CLASS_PHOTO" domainObjectName="CourseTemplateClassPhotoEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="USER_LOCATION" domainObjectName="UserLocationEntity">
@@ -321,26 +276,22 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="BOOKING_HISTORY" domainObjectName="BookingHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="ORDER" domainObjectName="OrderEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
     <table tableName="ORDER_HISTORY" domainObjectName="OrderHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>
   </context>
