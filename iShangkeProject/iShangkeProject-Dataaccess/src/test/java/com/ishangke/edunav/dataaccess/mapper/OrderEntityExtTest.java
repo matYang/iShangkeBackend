@@ -19,7 +19,9 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, OrderEntityExtTest.class })
+@TestExecutionListeners(listeners = {
+        DependencyInjectionTestExecutionListener.class,
+        OrderEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -27,7 +29,7 @@ public class OrderEntityExtTest extends BaseTest {
     @Autowired
     private OrderEntityExtMapper orderEntityExtMapper;
 
-    //resource里面
+    // resource里面
     public OrderEntityExtTest() {
         scriptAfterClass = "OrderEntityExtTestAfter.sql";
         scriptBeforeClass = "OrderEntityExtTestBefore.sql";
@@ -37,10 +39,9 @@ public class OrderEntityExtTest extends BaseTest {
     public void testAdd() {
         OrderEntityExt orderEntityExt = new OrderEntityExt();
         orderEntityExt.setCreateTime(new Date());
-     
-        OrderEntityExt.setDeleted(0);
+        orderEntityExt.setDeleted(0);
         orderEntityExt.setEnabled(1);
-       
+
         int oldcount = orderEntityExtMapper.getCount();
         orderEntityExtMapper.add(orderEntityExt);
         Assert.assertSame(orderEntityExtMapper.getCount(), oldcount + 1);
@@ -50,10 +51,10 @@ public class OrderEntityExtTest extends BaseTest {
     public void testDelete() {
         OrderEntityExt orderEntityExt = new OrderEntityExt();
         orderEntityExt.setCreateTime(new Date());
-      
-      //  OrderEntityExt.setDeleted(0);
+
+        // OrderEntityExt.setDeleted(0);
         orderEntityExt.setEnabled(1);
-       
+
         orderEntityExtMapper.add(orderEntityExt);
         int oldcount = orderEntityExtMapper.getCount();
         orderEntityExtMapper.deleteById(orderEntityExt.getId());
@@ -65,13 +66,16 @@ public class OrderEntityExtTest extends BaseTest {
         PaginationEntity page = new PaginationEntity();
         page.setOffset(0);
         page.setSize(10);
-        //排序，先按照第一个排序，再按照第二个排序，依次排列
-        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
-        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
+        // 排序，先按照第一个排序，再按照第二个排序，依次排列
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
+                DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
         OrderEntityExt orderQueryEntity = new OrderEntityExt();
         orderQueryEntity.setBookingId(1);
-        List<OrderEntityExt> result = orderEntityExtMapper.list(orderQueryEntity, page);
+        List<OrderEntityExt> result = orderEntityExtMapper.list(
+                orderQueryEntity, page);
         Assert.assertEquals(3, result.size());
-       // Assert.assertEquals("_test_Order_2_", result.get(0).getName());
+        // Assert.assertEquals("_test_Order_2_", result.get(0).getName());
     }
 }
