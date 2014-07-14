@@ -52,9 +52,9 @@ public class OrderEntityExtTest extends BaseTest {
         OrderEntityExt orderEntityExt = new OrderEntityExt();
         orderEntityExt.setCreateTime(new Date());
 
-        // OrderEntityExt.setDeleted(0);
+         orderEntityExt.setDeleted(0);
         orderEntityExt.setEnabled(1);
-
+     
         orderEntityExtMapper.add(orderEntityExt);
         int oldcount = orderEntityExtMapper.getCount();
         orderEntityExtMapper.deleteById(orderEntityExt.getId());
@@ -69,13 +69,12 @@ public class OrderEntityExtTest extends BaseTest {
         // 排序，先按照第一个排序，再按照第二个排序，依次排列
         page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
                 DataaccessConstants.ORDER_DESC));
-        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
-                DataaccessConstants.ORDER_DESC));
+       
         OrderEntityExt orderQueryEntity = new OrderEntityExt();
-        orderQueryEntity.setBookingId(1);
+        orderQueryEntity.setType("_test_");
         List<OrderEntityExt> result = orderEntityExtMapper.list(
                 orderQueryEntity, page);
         Assert.assertEquals(3, result.size());
-        // Assert.assertEquals("_test_Order_2_", result.get(0).getName());
+         Assert.assertEquals("_test_type_3_", result.get(0).getType());
     }
 }

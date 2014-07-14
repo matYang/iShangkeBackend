@@ -15,19 +15,21 @@
   <sql id="Order_Base_Column_List">
     ORDER.ID ORDER_ID,
     ORDER.BOOKING_ID ORDER_BOOKINGID,
-    ORDER.CREATE_TIME ORDER_CREATETIME,
+    ORDER.CREATE_TIME
+    ORDER_CREATETIME,
     ORDER.TYPE
     ORDER_TYPE,
     ORDER.PRICE ORDER_PRICE,
-    ORDER.RUNING_NUMBER ORDER_RUNINGNUMBER,
+    ORDER.RUNING_NUMBER
+    ORDER_RUNINGNUMBER,
     ORDER.STATUS
     ORDER_STATUS,
     ORDER.ENABLED ORDER_ENABLED,
-    ORDER.DELEDED ORDER_DELEDED
+    ORDER.DELETED ORDER_DELETED
   </sql>
   <insert id="add" parameterType="OrderEntityExt">
 
-    insert into ORDER
+    insert into `ORDER`
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="bookingId != null">
@@ -51,8 +53,8 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleded != null">
-        DELEDED,
+      <if test="deleted != null">
+        DELETED,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -78,8 +80,8 @@
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleded != null">
-        #{deleded,jdbcType=INTEGER},
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -89,13 +91,13 @@
   </insert>
 
   <update id="deleteById" parameterType="java.lang.Integer">
-    update ORDER set DELETED = 1
+    update `ORDER` set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
 
   <update id="update" parameterType="OrderEntityExt">
-    update ORDER
+    update `ORDER`
     <set>
       <if test="bookingId != null">
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
@@ -118,71 +120,73 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleded != null">
-        DELEDED = #{deleded,jdbcType=INTEGER},
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-<select id="getCount" resultType="int">
-    select count(ID) from ORDER where DELETED = 0
+
+  <select id="getCount" resultType="int">
+    select count(ID) from `ORDER` where DELETED = 0
   </select>
+  
   <select id="list" parameterType="map" resultMap="OrderExtMap">
     select
     <include refid="Order_Base_Column_List"></include>
-    from ORDER
-    where ORDER.DELETED = 0
+    from `ORDER`
+    where `ORDER`.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
-        AND ORDER.ID = #{entity.id,jdbcType=INTEGER}
+        AND `ORDER`.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ORDER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND `ORDER`.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
         </if>
         <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ORDER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND `ORDER`.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
-          AND ORDER.ID IN
+          AND `ORDER`.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
       <if test="entity.bookingId != null and entity.bookingId != 0">
-        AND ORDER.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
+        AND `ORDER`.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
       </if>
-     
+
       <if test="entity.createTime != null">
-        AND ORDER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND `ORDER`.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ORDER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND `ORDER`.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ORDER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND `ORDER`.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
       </if>
-      
-       <if test="entity.type != null and entity.type != ''">
-        AND WITHDRAW.TYPE LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
+
+      <if test="entity.type != null and entity.type != ''">
+        AND ORDER.TYPE LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
       </if>
-       <if test="entity.price != null and entity.price != 0">
-        AND ORDER.PRICE = #{entity.price,jdbcType=DOUBLE}
+      <if test="entity.price != null and entity.price != 0">
+        AND `ORDER`.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
-         <if test="entity.runingNumber != null and entity.runingNumber != ''">
-        AND WITHDRAW.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
+      <if test="entity.runingNumber != null and entity.runingNumber != ''">
+        AND ORDER.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
       </if>
-         <if test="entity.status != null and entity.status != ''">
-        AND WITHDRAW.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
+      <if test="entity.status != null and entity.status != ''">
+        AND ORDER.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
-        AND ORDER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+        AND `ORDER`.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
-    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+   <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         ORDER.${listItem.columnKey} ${listItem.order}
