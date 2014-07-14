@@ -60,10 +60,8 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey> -->
+    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER"> SELECT LAST_INSERT_ID() 
+      </selectKey> -->
   </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
     update CREDIT set DELETED = 1
@@ -92,8 +90,124 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-   <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from CREDIT where DELETED = 0
   </select>
-   
+  <select id="list" parameterType="map" resultMap="CreditExtMap">
+    SELECT
+    <include refid="Credit_Base_Column_List" />
+    from CREDIT where CREDIT.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND CREDIT.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND CREDIT.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND CREDIT.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND CREDIT.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.credit != null and entity.credit != 0">
+        AND CREDIT.CRETITY = #{entity.credit,jdbcType=INTEGER}
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND CREDIT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != null">
+        AND CREDIT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND CREDIT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND CREDIT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND CREDIT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          CREDIT.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+ <include refid="Credit_Base_Column_List" />
+    from CREDIT where CREDIT.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND CREDIT.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND CREDIT.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND CREDIT.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND CREDIT.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.credit != null and entity.credit != 0">
+        AND CREDIT.CRETITY = #{entity.credit,jdbcType=INTEGER}
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND CREDIT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != null">
+        AND CREDIT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND CREDIT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND CREDIT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND CREDIT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      </if>
+    ) AS
+    total
+  </select>
 </mapper>

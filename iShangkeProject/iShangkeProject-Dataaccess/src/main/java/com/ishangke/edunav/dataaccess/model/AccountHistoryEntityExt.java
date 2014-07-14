@@ -8,6 +8,7 @@ public class AccountHistoryEntityExt extends AccountHistoryEntity {
 
     private int idStart;
     private int idEnd;
+    private int idSet;
     private int userIdStart;
     private int userIdEnd;
     private int withdrawIdStart;
@@ -19,6 +20,12 @@ public class AccountHistoryEntityExt extends AccountHistoryEntity {
     private Date createTimeStart;
     private Date createTimeEnd;
     
+    public int getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(int idSet) {
+        this.idSet = idSet;
+    }
     public int getIdStart() {
         return idStart;
     }

@@ -201,4 +201,69 @@
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="CourseComment_Base_Column_List"></include>
+    from COURSE_COMMENT
+    where COURSE_COMMENT.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND COURSE_COMMENT.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND COURSE_COMMENT.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND COURSE_COMMENT.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND COURSE_COMMENT.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.userId != null and entity.userId != 0">
+        AND COURSE_COMMENT.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND COURSE_COMMENT.COURSE_TEMPLATEID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.title != null and entity.title != ''">
+        AND COURSE_COMMENT.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.content != null and entity.content != ''">
+        AND COURSE_COMMENT.CONTENT LIKE "%"#{entity.content,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND COURSE_COMMENT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.createTime != null">
+        AND COURSE_COMMENT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND COURSE_COMMENT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    ) AS total
+  </select>
 </mapper>

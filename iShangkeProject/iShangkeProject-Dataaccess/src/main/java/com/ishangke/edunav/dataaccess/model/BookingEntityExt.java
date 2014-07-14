@@ -8,6 +8,7 @@ public class BookingEntityExt extends BookingEntity {
 
     private int idStart;
     private int idEnd;
+    private int idSet;
     private int courseIdStart;
     private int courseIdEnd;
     private int userIdStart;
@@ -29,6 +30,12 @@ public class BookingEntityExt extends BookingEntity {
     private Date createTimeStart;
     private Date createTimeEnd;
     
+    public int getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(int idSet) {
+        this.idSet = idSet;
+    }
     public int getIdStart() {
         return idStart;
     }

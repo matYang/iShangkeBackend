@@ -18,140 +18,383 @@
   <sql id="Activity_Base_Column_List">
     ACTIVITY.ID ACTIVITY_ID,
     ACTIVITY.NAME ACTIVITY_NAME,
-    ACTIVITY.PARTNER_ID ACTIVITY_PARTNERID,
+    ACTIVITY.PARTNER_ID
+    ACTIVITY_PARTNERID,
     ACTIVITY.COURSE_ID ACTIVITY_COURSEID,
     ACTIVITY.REMARK ACTIVITY_REMARK,
     ACTIVITY.START_TIME ACTIVITY_STARTTIME,
     ACTIVITY.END_TIME ACTIVITY_ENDTIME,
-    ACTIVITY_STATUS ACTIVITY_STATUS,
+    ACTIVITY_STATUS
+    ACTIVITY_STATUS,
     ACTIVITY.LAST_MODIFY_TIME ACTIVITY_LASTMODIFYTIME,
-    ACTIVITY.CREATE_TIME ACTIVITY_CREATETIME,
+    ACTIVITY.CREATE_TIME
+    ACTIVITY_CREATETIME,
     ACTIVITY.ENABLED ACTIVITY_ENABLED,
     ACTIVITY.DELETED ACTIVITY_DELETED
   </sql>
-  <insert id="add" parameterType="ActivityEntityExt" >
-    
+
+  <insert id="add" parameterType="ActivityEntityExt">
     insert into ACTIVITY
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-   
-      <if test="name != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
         NAME,
       </if>
-      <if test="partnerId != null" >
+      <if test="partnerId != null">
         PARTNER_ID,
       </if>
-      <if test="courseId != null" >
+      <if test="courseId != null">
         COURSE_ID,
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         REMARK,
       </if>
-      <if test="startTime != null" >
+      <if test="startTime != null">
         START_TIME,
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         END_TIME,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         STATUS,
       </if>
-      <if test="lastModifyTime != null" >
+      <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="enabled != null" >
+      <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null" >
+      <if test="deleted != null">
         DELETED,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-
-      <if test="name != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="partnerId != null" >
+      <if test="partnerId != null">
         #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null" >
+      <if test="courseId != null">
         #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null" >
+      <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="lastModifyTime != null" >
+      <if test="lastModifyTime != null">
         #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="enabled != null" >
+      <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null" >
+      <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
     </selectKey>
-      </insert>
+  </insert>
   <update id="deleteById" parameterType="java.lang.Integer">
     update ACTIVITY set DELETED = 1
-    where ID = #{id,jdbcType=INTEGER}
+    where ID =
+    #{id,jdbcType=INTEGER}
   </update>
-   <update id="update" parameterType="ActivityEntityExt" >
+
+  <update id="update" parameterType="ActivityEntityExt">
     update ACTIVITY
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="partnerId != null" >
+      <if test="partnerId != null">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null" >
+      <if test="courseId != null">
         COURSE_ID = #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null" >
+      <if test="startTime != null">
         START_TIME = #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         END_TIME = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
       </if>
-      <if test="lastModifyTime != null" >
+      <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="enabled != null" >
+      <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null" >
+      <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="getCount" resultType="int">
     select count(ID) from ACTIVITY where DELETED = 0
   </select>
-  </mapper>
+
+
+  <select id="list" parameterType="map" resultMap="ActivityExtMap">
+    SELECT
+    <include refid="Activity_Base_Column_List" />
+    from ACTIVITY where ACTIVITY.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ACTIVITY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ACTIVITY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND ACTIVITY.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.name != null and entity.name !='' ">
+        AND ACTIVITY.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND ACTIVITY.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND ACTIVITY.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.courseId == null or entity.courseId == 0">
+        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
+          <![CDATA[AND ACTIVITY.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
+          <![CDATA[AND ACTIVITY.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.remark != null and entity.remark !='' ">
+        AND ACTIVITY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.createTime != null">
+        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.startTime == null">
+        <if test="entity.startTimeStart != null">
+          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.startTimeEnd != null">
+          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.endTime != null">
+        AND ACTIVITY.END_TIME = #{entity.endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.endTime == null">
+        <if test="entity.endTimeStart != null">
+          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.endTimeEnd != null">
+          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND ACTIVITY.START >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND ACTIVITY.START <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND ACTIVITY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+
+      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          ACTIVITY.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="Activity_Base_Column_List" />
+    from ACTIVITY where ACTIVITY.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ACTIVITY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ACTIVITY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND ACTIVITY.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.name != null and entity.name !='' ">
+        AND ACTIVITY.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
+          <![CDATA[AND ACTIVITY.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
+          <![CDATA[AND ACTIVITY.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.courseId == null or entity.courseId == 0">
+        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
+          <![CDATA[AND ACTIVITY.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
+          <![CDATA[AND ACTIVITY.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.remark != null and entity.remark !='' ">
+        AND ACTIVITY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.createTime != null">
+        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.startTime == null">
+        <if test="entity.startTimeStart != null">
+          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.startTimeEnd != null">
+          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.endTime != null">
+        AND ACTIVITY.END_TIME = #{entity.endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.endTime == null">
+        <if test="entity.endTimeStart != null">
+          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.endTimeEnd != null">
+          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND ACTIVITY.START >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND ACTIVITY.START <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND ACTIVITY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      </if>
+    ) AS
+    total
+  </select>
+</mapper>
