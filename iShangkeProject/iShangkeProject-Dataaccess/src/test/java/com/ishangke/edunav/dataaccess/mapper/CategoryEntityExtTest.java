@@ -67,7 +67,7 @@ public class CategoryEntityExtTest {
         List<CategoryEntityExt> list = CategoryEntityExtMapper.list(categoryEntityExt, null);
         Assert.assertSame(list.size(),1);
 
-        int listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, null);
+        int listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt);
         Assert.assertSame(listSize,1);
         
         PaginationEntity page = new PaginationEntity();
@@ -77,8 +77,6 @@ public class CategoryEntityExtTest {
         list = CategoryEntityExtMapper.list(categoryEntityExt, page);
         Assert.assertSame(list.size(),1);
 
-        listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, page);
-        Assert.assertSame(listSize,1);
     }
 
     @Test

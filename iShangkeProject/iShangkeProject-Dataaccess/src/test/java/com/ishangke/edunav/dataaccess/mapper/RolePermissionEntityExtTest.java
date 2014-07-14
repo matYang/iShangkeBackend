@@ -63,7 +63,7 @@ public class RolePermissionEntityExtTest extends BaseTest{
         List<RolePermissionEntityExt> list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, null);
         Assert.assertSame(list.size(),1);
 
-        int listSize = rolePermissionEntityExtMapper.getListCount(rolePermissionEntityExt, null);
+        int listSize = rolePermissionEntityExtMapper.getListCount(rolePermissionEntityExt);
         Assert.assertSame(listSize,1);
 
         PaginationEntity page = new PaginationEntity();
@@ -73,8 +73,6 @@ public class RolePermissionEntityExtTest extends BaseTest{
         list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, page);
         Assert.assertSame(list.size(),1);
 
-        listSize = rolePermissionEntityExtMapper.getListCount(rolePermissionEntityExt, page);
-        Assert.assertSame(listSize,1);
 
     }
     

@@ -71,7 +71,7 @@ public class GroupEntityExtTest extends BaseTest{
         List<GroupEntityExt> list = groupEntityExtMapper.list(groupEntityExt, null);
         Assert.assertSame(list.size(),1);
 
-        int listSize = groupEntityExtMapper.getListCount(groupEntityExt, null);
+        int listSize = groupEntityExtMapper.getListCount(groupEntityExt);
         Assert.assertSame(listSize,1);
 
         PaginationEntity page = new PaginationEntity();
@@ -81,7 +81,7 @@ public class GroupEntityExtTest extends BaseTest{
         list = groupEntityExtMapper.list(groupEntityExt, null);
         Assert.assertSame(list.size(),1);
 
-        listSize = groupEntityExtMapper.getListCount(groupEntityExt, null);
+        listSize = groupEntityExtMapper.getListCount(groupEntityExt);
         Assert.assertSame(listSize,1);
     }
 

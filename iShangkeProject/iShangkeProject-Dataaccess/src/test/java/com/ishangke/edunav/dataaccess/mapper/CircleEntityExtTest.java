@@ -67,7 +67,7 @@ public class CircleEntityExtTest extends BaseTest{
         List<CircleEntityExt> list = circleEntityExtMapper.list(circleEntityExt, null);
         Assert.assertSame(list.size(),1);
         
-        int listSize = circleEntityExtMapper.getListCount(circleEntityExt, null);
+        int listSize = circleEntityExtMapper.getListCount(circleEntityExt);
         Assert.assertSame(listSize,1);
         
         PaginationEntity page = new PaginationEntity();
@@ -77,8 +77,6 @@ public class CircleEntityExtTest extends BaseTest{
         list = circleEntityExtMapper.list(circleEntityExt, page);
         Assert.assertSame(list.size(),1);
         
-        listSize = circleEntityExtMapper.getListCount(circleEntityExt, page);
-        Assert.assertSame(listSize,1);
     }
     
     @Test

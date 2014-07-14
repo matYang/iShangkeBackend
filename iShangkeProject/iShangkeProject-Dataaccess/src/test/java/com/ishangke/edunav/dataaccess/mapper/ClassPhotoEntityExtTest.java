@@ -80,7 +80,7 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         List<ClassPhotoEntityExt> list = classPhotoEntityExtMapper.list(classPhotoEntityExt, null);
         Assert.assertSame(list.size(),1);
         
-        int listSize = classPhotoEntityExtMapper.getListCount(classPhotoEntityExt, null);
+        int listSize = classPhotoEntityExtMapper.getListCount(classPhotoEntityExt);
         Assert.assertSame(listSize,1);
         
         PaginationEntity page = new PaginationEntity();
@@ -90,8 +90,6 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         list = classPhotoEntityExtMapper.list(classPhotoEntityExt, page);
         Assert.assertSame(list.size(),1);
         
-        listSize = classPhotoEntityExtMapper.getListCount(classPhotoEntityExt, page);
-        Assert.assertSame(listSize,1);
         
         /* Get By PartnerId */
         list = classPhotoEntityExtMapper.listClassPhotoByPartnerId(1);

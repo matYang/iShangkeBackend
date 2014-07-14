@@ -68,7 +68,7 @@ public class CreditHistoryEntityExtTest extends BaseTest{
         List<CreditHistoryEntityExt> list = CreditHistoryEntityExtMapper.list(CreditHistoryEntityExt, null);
         Assert.assertSame(list.size(),1);
         
-        int listSize = CreditHistoryEntityExtMapper.getListCount(CreditHistoryEntityExt, null);
+        int listSize = CreditHistoryEntityExtMapper.getListCount(CreditHistoryEntityExt);
         Assert.assertSame(listSize,1);
         
         PaginationEntity page = new PaginationEntity();
@@ -78,7 +78,7 @@ public class CreditHistoryEntityExtTest extends BaseTest{
         list = CreditHistoryEntityExtMapper.list(CreditHistoryEntityExt, null);
         Assert.assertSame(list.size(),1);
         
-        listSize = CreditHistoryEntityExtMapper.getListCount(CreditHistoryEntityExt, null);
+        listSize = CreditHistoryEntityExtMapper.getListCount(CreditHistoryEntityExt);
         Assert.assertSame(listSize,1);
     }
 
