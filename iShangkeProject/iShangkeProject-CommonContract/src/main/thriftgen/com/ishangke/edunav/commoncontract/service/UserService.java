@@ -44,9 +44,8 @@ public class UserService {
      * @return 用户实体 UserBo
      * 
      * @param userBo
-     * @param paginationBo
      */
-    public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为所有用户提供登录的功能。<br>
@@ -170,7 +169,7 @@ public class UserService {
 
   public interface AsyncIface {
 
-    public void registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -210,17 +209,16 @@ public class UserService {
       super(iprot, oprot);
     }
 
-    public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
     {
-      send_registerUser(userBo, paginationBo);
+      send_registerUser(userBo);
       return recv_registerUser();
     }
 
-    public void send_registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) throws org.apache.thrift.TException
+    public void send_registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws org.apache.thrift.TException
     {
       registerUser_args args = new registerUser_args();
       args.setUserBo(userBo);
-      args.setPaginationBo(paginationBo);
       sendBase("registerUser", args);
     }
 
@@ -471,27 +469,24 @@ public class UserService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      registerUser_call method_call = new registerUser_call(userBo, paginationBo, resultHandler, this, ___protocolFactory, ___transport);
+      registerUser_call method_call = new registerUser_call(userBo, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class registerUser_call extends org.apache.thrift.async.TAsyncMethodCall {
       private com.ishangke.edunav.commoncontract.model.UserBo userBo;
-      private com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo;
-      public registerUser_call(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public registerUser_call(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userBo = userBo;
-        this.paginationBo = paginationBo;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("registerUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
         registerUser_args args = new registerUser_args();
         args.setUserBo(userBo);
-        args.setPaginationBo(paginationBo);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -827,7 +822,7 @@ public class UserService {
       public registerUser_result getResult(I iface, registerUser_args args) throws org.apache.thrift.TException {
         registerUser_result result = new registerUser_result();
         try {
-          result.success = iface.registerUser(args.userBo, args.paginationBo);
+          result.success = iface.registerUser(args.userBo);
         } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
           result.businessExceptionBo = businessExceptionBo;
         }
@@ -1105,7 +1100,7 @@ public class UserService {
       }
 
       public void start(I iface, registerUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
-        iface.registerUser(args.userBo, args.paginationBo,resultHandler);
+        iface.registerUser(args.userBo,resultHandler);
       }
     }
 
@@ -1571,7 +1566,6 @@ public class UserService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("registerUser_args");
 
     private static final org.apache.thrift.protocol.TField USER_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("userBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField PAGINATION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("paginationBo", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -1580,12 +1574,10 @@ public class UserService {
     }
 
     public com.ishangke.edunav.commoncontract.model.UserBo userBo; // required
-    public com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      USER_BO((short)1, "userBo"),
-      PAGINATION_BO((short)2, "paginationBo");
+      USER_BO((short)1, "userBo");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -1602,8 +1594,6 @@ public class UserService {
         switch(fieldId) {
           case 1: // USER_BO
             return USER_BO;
-          case 2: // PAGINATION_BO
-            return PAGINATION_BO;
           default:
             return null;
         }
@@ -1649,8 +1639,6 @@ public class UserService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.USER_BO, new org.apache.thrift.meta_data.FieldMetaData("userBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
-      tmpMap.put(_Fields.PAGINATION_BO, new org.apache.thrift.meta_data.FieldMetaData("paginationBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.PaginationBo.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(registerUser_args.class, metaDataMap);
     }
@@ -1659,12 +1647,10 @@ public class UserService {
     }
 
     public registerUser_args(
-      com.ishangke.edunav.commoncontract.model.UserBo userBo,
-      com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo)
+      com.ishangke.edunav.commoncontract.model.UserBo userBo)
     {
       this();
       this.userBo = userBo;
-      this.paginationBo = paginationBo;
     }
 
     /**
@@ -1673,9 +1659,6 @@ public class UserService {
     public registerUser_args(registerUser_args other) {
       if (other.isSetUserBo()) {
         this.userBo = new com.ishangke.edunav.commoncontract.model.UserBo(other.userBo);
-      }
-      if (other.isSetPaginationBo()) {
-        this.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo(other.paginationBo);
       }
     }
 
@@ -1686,7 +1669,6 @@ public class UserService {
     @Override
     public void clear() {
       this.userBo = null;
-      this.paginationBo = null;
     }
 
     public com.ishangke.edunav.commoncontract.model.UserBo getUserBo() {
@@ -1713,30 +1695,6 @@ public class UserService {
       }
     }
 
-    public com.ishangke.edunav.commoncontract.model.PaginationBo getPaginationBo() {
-      return this.paginationBo;
-    }
-
-    public registerUser_args setPaginationBo(com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) {
-      this.paginationBo = paginationBo;
-      return this;
-    }
-
-    public void unsetPaginationBo() {
-      this.paginationBo = null;
-    }
-
-    /** Returns true if field paginationBo is set (has been assigned a value) and false otherwise */
-    public boolean isSetPaginationBo() {
-      return this.paginationBo != null;
-    }
-
-    public void setPaginationBoIsSet(boolean value) {
-      if (!value) {
-        this.paginationBo = null;
-      }
-    }
-
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case USER_BO:
@@ -1747,14 +1705,6 @@ public class UserService {
         }
         break;
 
-      case PAGINATION_BO:
-        if (value == null) {
-          unsetPaginationBo();
-        } else {
-          setPaginationBo((com.ishangke.edunav.commoncontract.model.PaginationBo)value);
-        }
-        break;
-
       }
     }
 
@@ -1762,9 +1712,6 @@ public class UserService {
       switch (field) {
       case USER_BO:
         return getUserBo();
-
-      case PAGINATION_BO:
-        return getPaginationBo();
 
       }
       throw new IllegalStateException();
@@ -1779,8 +1726,6 @@ public class UserService {
       switch (field) {
       case USER_BO:
         return isSetUserBo();
-      case PAGINATION_BO:
-        return isSetPaginationBo();
       }
       throw new IllegalStateException();
     }
@@ -1807,15 +1752,6 @@ public class UserService {
           return false;
       }
 
-      boolean this_present_paginationBo = true && this.isSetPaginationBo();
-      boolean that_present_paginationBo = true && that.isSetPaginationBo();
-      if (this_present_paginationBo || that_present_paginationBo) {
-        if (!(this_present_paginationBo && that_present_paginationBo))
-          return false;
-        if (!this.paginationBo.equals(that.paginationBo))
-          return false;
-      }
-
       return true;
     }
 
@@ -1827,11 +1763,6 @@ public class UserService {
       builder.append(present_userBo);
       if (present_userBo)
         builder.append(userBo);
-
-      boolean present_paginationBo = true && (isSetPaginationBo());
-      builder.append(present_paginationBo);
-      if (present_paginationBo)
-        builder.append(paginationBo);
 
       return builder.toHashCode();
     }
@@ -1850,16 +1781,6 @@ public class UserService {
       }
       if (isSetUserBo()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.userBo, other.userBo);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = Boolean.valueOf(isSetPaginationBo()).compareTo(other.isSetPaginationBo());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetPaginationBo()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.paginationBo, other.paginationBo);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -1891,14 +1812,6 @@ public class UserService {
         sb.append(this.userBo);
       }
       first = false;
-      if (!first) sb.append(", ");
-      sb.append("paginationBo:");
-      if (this.paginationBo == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.paginationBo);
-      }
-      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -1908,9 +1821,6 @@ public class UserService {
       // check for sub-struct validity
       if (userBo != null) {
         userBo.validate();
-      }
-      if (paginationBo != null) {
-        paginationBo.validate();
       }
     }
 
@@ -1957,15 +1867,6 @@ public class UserService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // PAGINATION_BO
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
-                struct.paginationBo.read(iprot);
-                struct.setPaginationBoIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -1984,11 +1885,6 @@ public class UserService {
         if (struct.userBo != null) {
           oprot.writeFieldBegin(USER_BO_FIELD_DESC);
           struct.userBo.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        if (struct.paginationBo != null) {
-          oprot.writeFieldBegin(PAGINATION_BO_FIELD_DESC);
-          struct.paginationBo.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -2012,31 +1908,20 @@ public class UserService {
         if (struct.isSetUserBo()) {
           optionals.set(0);
         }
-        if (struct.isSetPaginationBo()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
+        oprot.writeBitSet(optionals, 1);
         if (struct.isSetUserBo()) {
           struct.userBo.write(oprot);
-        }
-        if (struct.isSetPaginationBo()) {
-          struct.paginationBo.write(oprot);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, registerUser_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           struct.userBo = new com.ishangke.edunav.commoncontract.model.UserBo();
           struct.userBo.read(iprot);
           struct.setUserBoIsSet(true);
-        }
-        if (incoming.get(1)) {
-          struct.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
-          struct.paginationBo.read(iprot);
-          struct.setPaginationBoIsSet(true);
         }
       }
     }

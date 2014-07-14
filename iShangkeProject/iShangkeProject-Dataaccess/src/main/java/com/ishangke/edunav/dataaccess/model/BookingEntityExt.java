@@ -1,128 +1,135 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.BookingEntity;
 
 public class BookingEntityExt extends BookingEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int courseIdStart;
-    private int courseIdEnd;
-    private int userIdStart;
-    private int userIdEnd;
-    private int statusStart;
-    private int statusEnd;
-    private Date scheduledTimeStart;
-    private Date scheduledTimeEnd;
-    private Date noRefundDateStart;
-    private Date noRefundDateEnd;
-    private Date cashbackDateStart;
-    private Date cashbackDateEnd;
-    private int typeStart;
-    private int typeEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer idSet;
+    private Integer courseIdStart;
+    private Integer courseIdEnd;
+    private Integer userIdStart;
+    private Integer userIdEnd;
+    private Integer statusStart;
+    private Integer statusEnd;
+    private Calendar scheduledTimeStart;
+    private Calendar scheduledTimeEnd;
+    private Calendar noRefundDateStart;
+    private Calendar noRefundDateEnd;
+    private Calendar cashbackDateStart;
+    private Calendar cashbackDateEnd;
+    private Integer typeStart;
+    private Integer typeEnd;
     private Double cashbackAmountStart;
     private Double cashbackAmountEnd;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Integer idSet) {
+        this.idSet = idSet;
+    }
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getCourseIdStart() {
+    public Integer getCourseIdStart() {
         return courseIdStart;
     }
-    public void setCourseIdStart(int courseIdStart) {
+    public void setCourseIdStart(Integer courseIdStart) {
         this.courseIdStart = courseIdStart;
     }
-    public int getCourseIdEnd() {
+    public Integer getCourseIdEnd() {
         return courseIdEnd;
     }
-    public void setCourseIdEnd(int courseIdEnd) {
+    public void setCourseIdEnd(Integer courseIdEnd) {
         this.courseIdEnd = courseIdEnd;
     }
-    public int getUserIdStart() {
+    public Integer getUserIdStart() {
         return userIdStart;
     }
-    public void setUserIdStart(int userIdStart) {
+    public void setUserIdStart(Integer userIdStart) {
         this.userIdStart = userIdStart;
     }
-    public int getUserIdEnd() {
+    public Integer getUserIdEnd() {
         return userIdEnd;
     }
-    public void setUserIdEnd(int userIdEnd) {
+    public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
-    public int getStatusStart() {
+    public Integer getStatusStart() {
         return statusStart;
     }
-    public void setStatusStart(int statusStart) {
+    public void setStatusStart(Integer statusStart) {
         this.statusStart = statusStart;
     }
-    public int getStatusEnd() {
+    public Integer getStatusEnd() {
         return statusEnd;
     }
-    public void setStatusEnd(int statusEnd) {
+    public void setStatusEnd(Integer statusEnd) {
         this.statusEnd = statusEnd;
     }
-    public Date getScheduledTimeStart() {
+    public Calendar getScheduledTimeStart() {
         return scheduledTimeStart;
     }
-    public void setScheduledTimeStart(Date scheduledTimeStart) {
+    public void setScheduledTimeStart(Calendar scheduledTimeStart) {
         this.scheduledTimeStart = scheduledTimeStart;
     }
-    public Date getScheduledTimeEnd() {
+    public Calendar getScheduledTimeEnd() {
         return scheduledTimeEnd;
     }
-    public void setScheduledTimeEnd(Date scheduledTimeEnd) {
+    public void setScheduledTimeEnd(Calendar scheduledTimeEnd) {
         this.scheduledTimeEnd = scheduledTimeEnd;
     }
-    public Date getNoRefundDateStart() {
+    public Calendar getNoRefundDateStart() {
         return noRefundDateStart;
     }
-    public void setNoRefundDateStart(Date noRefundDateStart) {
+    public void setNoRefundDateStart(Calendar noRefundDateStart) {
         this.noRefundDateStart = noRefundDateStart;
     }
-    public Date getNoRefundDateEnd() {
+    public Calendar getNoRefundDateEnd() {
         return noRefundDateEnd;
     }
-    public void setNoRefundDateEnd(Date noRefundDateEnd) {
+    public void setNoRefundDateEnd(Calendar noRefundDateEnd) {
         this.noRefundDateEnd = noRefundDateEnd;
     }
-    public Date getCashbackDateStart() {
+    public Calendar getCashbackDateStart() {
         return cashbackDateStart;
     }
-    public void setCashbackDateStart(Date cashbackDateStart) {
+    public void setCashbackDateStart(Calendar cashbackDateStart) {
         this.cashbackDateStart = cashbackDateStart;
     }
-    public Date getCashbackDateEnd() {
+    public Calendar getCashbackDateEnd() {
         return cashbackDateEnd;
     }
-    public void setCashbackDateEnd(Date cashbackDateEnd) {
+    public void setCashbackDateEnd(Calendar cashbackDateEnd) {
         this.cashbackDateEnd = cashbackDateEnd;
     }
-    public int getTypeStart() {
+    public Integer getTypeStart() {
         return typeStart;
     }
-    public void setTypeStart(int typeStart) {
+    public void setTypeStart(Integer typeStart) {
         this.typeStart = typeStart;
     }
-    public int getTypeEnd() {
+    public Integer getTypeEnd() {
         return typeEnd;
     }
-    public void setTypeEnd(int typeEnd) {
+    public void setTypeEnd(Integer typeEnd) {
         this.typeEnd = typeEnd;
     }
     public Double getCashbackAmountStart() {
@@ -137,28 +144,28 @@ public class BookingEntityExt extends BookingEntity {
     public void setCashbackAmountEnd(Double cashbackAmountEnd) {
         this.cashbackAmountEnd = cashbackAmountEnd;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 }

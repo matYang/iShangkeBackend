@@ -2,7 +2,6 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
@@ -39,8 +39,8 @@ public class ClassPhotoEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
-        classPhotoEntityExt.setCreateTime(new Date());
-        classPhotoEntityExt.setLastModifyTime(new Date());
+        classPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        classPhotoEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         classPhotoEntityExt.setEnabled(1);
         classPhotoEntityExt.setDeleted(0);
         classPhotoEntityExt.setPartnerId(1);
@@ -53,8 +53,8 @@ public class ClassPhotoEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
-        classPhotoEntityExt.setCreateTime(new Date());
-        classPhotoEntityExt.setLastModifyTime(new Date());
+        classPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        classPhotoEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         classPhotoEntityExt.setEnabled(1);
         classPhotoEntityExt.setDeleted(0);
         classPhotoEntityExt.setPartnerId(1);
@@ -67,15 +67,13 @@ public class ClassPhotoEntityExtTest extends BaseTest{
     @Test
     public void testList(){        
         ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
-        classPhotoEntityExt.setCreateTime(new Date());
-        classPhotoEntityExt.setLastModifyTime(new Date());
+        classPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        classPhotoEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         classPhotoEntityExt.setPartnerId(1);        
         classPhotoEntityExt.setEnabled(1);
         classPhotoEntityExt.setDeleted(0);     
         classPhotoEntityExtMapper.add(classPhotoEntityExt);
         int classPhotoId = classPhotoEntityExt.getId();
-        classPhotoEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        classPhotoEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         
         List<ClassPhotoEntityExt> list = classPhotoEntityExtMapper.list(classPhotoEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -99,8 +97,8 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         List<ClassPhotoEntityExt> clist = null;
         /* Get By CourseId */
         CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();      
-        courseTemplateEntityExt.setCreateTime(new Date());
-        courseTemplateEntityExt.setLastModifyTime(new Date());
+        courseTemplateEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        courseTemplateEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         courseTemplateEntityExt.setCategoryId(1);
         courseTemplateEntityExt.setLocationId(1);
         courseTemplateEntityExt.setCircleId(1);
@@ -112,8 +110,8 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         int courseTemplateId = courseTemplateEntityExt.getId();
         
         CourseEntityExt courseEntityExt = new CourseEntityExt();     
-        courseEntityExt.setCreateTime(new Date());
-        courseEntityExt.setLastModifyTime(new Date());
+        courseEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        courseEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         courseEntityExt.setCourseTemplateId(courseTemplateId);
         courseEntityExt.setCategoryId(1);
         courseEntityExt.setLocationId(1);
@@ -128,7 +126,7 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         CourseClassPhotoEntityExt courseClassPhotoEntityExt = new CourseClassPhotoEntityExt();
         courseClassPhotoEntityExt.setCourseId(courseId);
         courseClassPhotoEntityExt.setClassPhotoId(classPhotoId);
-        courseClassPhotoEntityExt.setCreateTime(new Date());
+        courseClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         courseClassPhotoEntityExt.setDeleted(0);
         courseClassPhotoEntityExtMapper.add(courseClassPhotoEntityExt);
         
@@ -139,7 +137,7 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();
         courseTemplateClassPhotoEntityExt.setCourseTemplateId(courseTemplateId);
         courseTemplateClassPhotoEntityExt.setClassPhotoId(classPhotoId);
-        courseTemplateClassPhotoEntityExt.setCreateTime(new Date());
+        courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         courseTemplateClassPhotoEntityExt.setDeleted(0);
         courseTemplateClassPhotoEntityExtMapper.add(courseTemplateClassPhotoEntityExt);
         
@@ -151,15 +149,13 @@ public class ClassPhotoEntityExtTest extends BaseTest{
     @Test
     public void testUpdate(){
         ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
-        classPhotoEntityExt.setCreateTime(new Date());
-        classPhotoEntityExt.setLastModifyTime(new Date());
+        classPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        classPhotoEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         classPhotoEntityExt.setEnabled(1);
         classPhotoEntityExt.setDeleted(0);
         classPhotoEntityExt.setPartnerId(1);
         classPhotoEntityExtMapper.add(classPhotoEntityExt);
         
-        classPhotoEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        classPhotoEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         
         List<ClassPhotoEntityExt> list = classPhotoEntityExtMapper.list(classPhotoEntityExt, null);
         String name = "李清";

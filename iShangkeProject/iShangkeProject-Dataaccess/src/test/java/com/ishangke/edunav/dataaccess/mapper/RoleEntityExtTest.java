@@ -2,7 +2,6 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 
@@ -29,8 +29,8 @@ public class RoleEntityExtTest extends BaseTest{
     @Test
     public void testAdd(){
         RoleEntityExt roleEntityExt = new RoleEntityExt();
-        roleEntityExt.setCreateTime(new Date());
-        roleEntityExt.setLastModifyTime(new Date());
+        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         roleEntityExt.setDeleted(0);
         roleEntityExt.setEnabled(1);
         int oldCount = roleEntityExtMapper.getCount();
@@ -41,8 +41,8 @@ public class RoleEntityExtTest extends BaseTest{
     @Test
     public void testDelete(){
         RoleEntityExt roleEntityExt = new RoleEntityExt();
-        roleEntityExt.setCreateTime(new Date());
-        roleEntityExt.setLastModifyTime(new Date());
+        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         roleEntityExt.setDeleted(0);
         roleEntityExt.setEnabled(1);       
         roleEntityExtMapper.add(roleEntityExt);
@@ -54,13 +54,11 @@ public class RoleEntityExtTest extends BaseTest{
     @Test
     public void testList(){
         RoleEntityExt roleEntityExt = new RoleEntityExt();
-        roleEntityExt.setCreateTime(new Date());
-        roleEntityExt.setLastModifyTime(new Date());
+        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         roleEntityExt.setDeleted(0);
         roleEntityExt.setEnabled(1);       
         roleEntityExtMapper.add(roleEntityExt);
-        roleEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        roleEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
 
         List<RoleEntityExt> list = roleEntityExtMapper.list(roleEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -80,13 +78,11 @@ public class RoleEntityExtTest extends BaseTest{
     @Test
     public void testUpdate(){
         RoleEntityExt roleEntityExt = new RoleEntityExt();
-        roleEntityExt.setCreateTime(new Date());
-        roleEntityExt.setLastModifyTime(new Date());
+        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         roleEntityExt.setDeleted(0);
         roleEntityExt.setEnabled(1);       
         roleEntityExtMapper.add(roleEntityExt);
-        roleEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        roleEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
 
         List<RoleEntityExt> list = roleEntityExtMapper.list(roleEntityExt, null);
         String name = "李清";

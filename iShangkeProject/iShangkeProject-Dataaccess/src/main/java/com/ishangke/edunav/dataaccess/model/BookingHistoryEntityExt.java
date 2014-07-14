@@ -1,7 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntity;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 public class BookingHistoryEntityExt extends BookingHistoryEntity {
@@ -17,8 +17,8 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
     private Integer userIdEnd;
     private Set<Integer> userIdSet;
 
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     
     
     public Integer getIdStart() {
@@ -57,16 +57,16 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
     public void setUseridEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
     public Set<Integer> getIdSet() {

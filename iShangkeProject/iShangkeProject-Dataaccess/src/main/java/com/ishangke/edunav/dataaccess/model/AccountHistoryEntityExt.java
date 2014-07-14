@@ -1,58 +1,65 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntity;
 
 public class AccountHistoryEntityExt extends AccountHistoryEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int userIdStart;
-    private int userIdEnd;
-    private int withdrawIdStart;
-    private int withdrawIdEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer idSet;
+    private Integer userIdStart;
+    private Integer userIdEnd;
+    private Integer withdrawIdStart;
+    private Integer withdrawIdEnd;
     private Double chargeStart;
     private Double chargeEnd;
-    private int typeStart;
-    private int typeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Integer typeStart;
+    private Integer typeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Integer idSet) {
+        this.idSet = idSet;
+    }
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getUserIdStart() {
+    public Integer getUserIdStart() {
         return userIdStart;
     }
-    public void setUserIdStart(int userIdStart) {
+    public void setUserIdStart(Integer userIdStart) {
         this.userIdStart = userIdStart;
     }
-    public int getUserIdEnd() {
+    public Integer getUserIdEnd() {
         return userIdEnd;
     }
-    public void setUserIdEnd(int userIdEnd) {
+    public void setUserIdEnd(Integer userIdEnd) {
         this.userIdEnd = userIdEnd;
     }
-    public int getWithdrawIdStart() {
+    public Integer getWithdrawIdStart() {
         return withdrawIdStart;
     }
-    public void setWithdrawIdStart(int withdrawIdStart) {
+    public void setWithdrawIdStart(Integer withdrawIdStart) {
         this.withdrawIdStart = withdrawIdStart;
     }
-    public int getWithdrawIdEnd() {
+    public Integer getWithdrawIdEnd() {
         return withdrawIdEnd;
     }
-    public void setWithdrawIdEnd(int withdrawIdEnd) {
+    public void setWithdrawIdEnd(Integer withdrawIdEnd) {
         this.withdrawIdEnd = withdrawIdEnd;
     }
     public Double getChargeStart() {
@@ -67,28 +74,28 @@ public class AccountHistoryEntityExt extends AccountHistoryEntity {
     public void setChargeEnd(Double chargeEnd) {
         this.chargeEnd = chargeEnd;
     }
-    public int getTypeStart() {
+    public Integer getTypeStart() {
         return typeStart;
     }
-    public void setTypeStart(int typeStart) {
+    public void setTypeStart(Integer typeStart) {
         this.typeStart = typeStart;
     }
-    public int getTypeEnd() {
+    public Integer getTypeEnd() {
         return typeEnd;
     }
-    public void setTypeEnd(int typeEnd) {
+    public void setTypeEnd(Integer typeEnd) {
         this.typeEnd = typeEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
    

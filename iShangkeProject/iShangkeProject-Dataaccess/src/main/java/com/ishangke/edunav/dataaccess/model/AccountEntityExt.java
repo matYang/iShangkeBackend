@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.AccountEntity;
@@ -11,10 +11,10 @@ public class AccountEntityExt extends AccountEntity {
     private Set<Integer> idSet;
     private Double balanceStart;
     private Double balanceEnd;
-    private Date lastModifyTimeBefore;
-    private Date lastModifyTimeAfter;
-    private Date createTimeBefore;
-    private Date createTimeAfter;
+    private Calendar lastModifyTimeBefore;
+    private Calendar lastModifyTimeAfter;
+    private Calendar createTimeBefore;
+    private Calendar createTimeAfter;
 
     public Integer getIdStart() {
         return idStart;
@@ -56,35 +56,35 @@ public class AccountEntityExt extends AccountEntity {
         this.balanceEnd = balanceEnd;
     }
 
-    public Date getLastModifyTimeBefore() {
+    public Calendar getLastModifyTimeBefore() {
         return lastModifyTimeBefore;
     }
 
-    public void setLastModifyTimeBefore(Date lastModifyTimeBefore) {
+    public void setLastModifyTimeBefore(Calendar lastModifyTimeBefore) {
         this.lastModifyTimeBefore = lastModifyTimeBefore;
     }
 
-    public Date getLastModifyTimeAfter() {
+    public Calendar getLastModifyTimeAfter() {
         return lastModifyTimeAfter;
     }
 
-    public void setLastModifyTimeAfter(Date lastModifyTimeAfter) {
+    public void setLastModifyTimeAfter(Calendar lastModifyTimeAfter) {
         this.lastModifyTimeAfter = lastModifyTimeAfter;
     }
 
-    public Date getCreateTimeBefore() {
+    public Calendar getCreateTimeBefore() {
         return createTimeBefore;
     }
 
-    public void setCreateTimeBefore(Date createTimeBefore) {
+    public void setCreateTimeBefore(Calendar createTimeBefore) {
         this.createTimeBefore = createTimeBefore;
     }
 
-    public Date getCreateTimeAfter() {
+    public Calendar getCreateTimeAfter() {
         return createTimeAfter;
     }
 
-    public void setCreateTimeAfter(Date createTimeAfter) {
+    public void setCreateTimeAfter(Calendar createTimeAfter) {
         this.createTimeAfter = createTimeAfter;
     }
 }

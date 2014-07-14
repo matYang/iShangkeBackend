@@ -2,7 +2,6 @@ package com.ishangke.edunav.dataaccess.mapper;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 
@@ -27,8 +27,8 @@ public class CreditHistoryEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         CreditHistoryEntityExt CreditHistoryEntityExt = new CreditHistoryEntityExt();
-        CreditHistoryEntityExt.setCreateTime(new Date());
-        CreditHistoryEntityExt.setLastModifyTime(new Date());
+        CreditHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        CreditHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
        
         CreditHistoryEntityExt.setDeleted(0);
         CreditHistoryEntityExt.setUserId(1);
@@ -42,8 +42,8 @@ public class CreditHistoryEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         CreditHistoryEntityExt CreditHistoryEntityExt = new CreditHistoryEntityExt();
-        CreditHistoryEntityExt.setCreateTime(new Date());
-        CreditHistoryEntityExt.setLastModifyTime(new Date());
+        CreditHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        CreditHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
       
         CreditHistoryEntityExt.setDeleted(0);
         CreditHistoryEntityExt.setUserId(1);
@@ -57,13 +57,11 @@ public class CreditHistoryEntityExtTest extends BaseTest{
     @Test
     public void testList(){
         CreditHistoryEntityExt CreditHistoryEntityExt = new CreditHistoryEntityExt();
-        CreditHistoryEntityExt.setCreateTime(new Date());
-        CreditHistoryEntityExt.setLastModifyTime(new Date());      
+        CreditHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        CreditHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());      
         CreditHistoryEntityExt.setDeleted(0);
         CreditHistoryEntityExt.setUserId(1);     
         CreditHistoryEntityExtMapper.add(CreditHistoryEntityExt);
-        CreditHistoryEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        CreditHistoryEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         
         List<CreditHistoryEntityExt> list = CreditHistoryEntityExtMapper.list(CreditHistoryEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -85,13 +83,11 @@ public class CreditHistoryEntityExtTest extends BaseTest{
     @Test
     public void testUpdate(){
         CreditHistoryEntityExt CreditHistoryEntityExt = new CreditHistoryEntityExt();
-        CreditHistoryEntityExt.setCreateTime(new Date());
-        CreditHistoryEntityExt.setLastModifyTime(new Date());      
+        CreditHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        CreditHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());      
         CreditHistoryEntityExt.setDeleted(0);
         CreditHistoryEntityExt.setUserId(1);     
         CreditHistoryEntityExtMapper.add(CreditHistoryEntityExt);
-        CreditHistoryEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
-        CreditHistoryEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         
         List<CreditHistoryEntityExt> list = CreditHistoryEntityExtMapper.list(CreditHistoryEntityExt, null);
         Double charge = 1.2;

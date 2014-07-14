@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
@@ -36,9 +36,9 @@ public class SpreadEntityExtTest extends BaseTest {
     @Test
     public void testAdd() {
         SpreadEntityExt spreadEntityExt = new SpreadEntityExt();
-        spreadEntityExt.setCreateTime(new Date());
+        spreadEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
        
-        spreadEntityExt.setLastModifyTime(new Date());
+        spreadEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         spreadEntityExt.setDeleted(0);
         spreadEntityExt.setEnabled(1);
        
@@ -50,9 +50,9 @@ public class SpreadEntityExtTest extends BaseTest {
     @Test
     public void testDelete() {
         SpreadEntityExt spreadEntityExt = new SpreadEntityExt();
-        spreadEntityExt.setCreateTime(new Date());
+        spreadEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         
-        spreadEntityExt.setLastModifyTime(new Date());
+        spreadEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         spreadEntityExt.setDeleted(0);
         spreadEntityExt.setEnabled(1);
         

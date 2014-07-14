@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
@@ -34,7 +34,7 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();
-        courseTemplateClassPhotoEntityExt.setCreateTime(new Date());
+        courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         courseTemplateClassPhotoEntityExt.setClassPhotoId(1);
         courseTemplateClassPhotoEntityExt.setDeleted(0);
         courseTemplateClassPhotoEntityExt.setCourseTemplateId(1);
@@ -47,7 +47,7 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();
-        courseTemplateClassPhotoEntityExt.setCreateTime(new Date());
+        courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         courseTemplateClassPhotoEntityExt.setClassPhotoId(1);
         courseTemplateClassPhotoEntityExt.setDeleted(0);
         courseTemplateClassPhotoEntityExt.setCourseTemplateId(1);

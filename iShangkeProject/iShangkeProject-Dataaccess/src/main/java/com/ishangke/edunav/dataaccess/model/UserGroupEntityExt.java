@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.UserGroupEntity;
 
@@ -12,8 +12,8 @@ public class UserGroupEntityExt extends UserGroupEntity {
     private Integer userIdEnd;
     private Integer groupIdStart;
     private Integer groupIdEnd;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;  
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;  
     
     public Integer getIdStart() {
         return idStart;
@@ -51,16 +51,16 @@ public class UserGroupEntityExt extends UserGroupEntity {
     public void setGroupIdEnd(Integer groupIdEnd) {
         this.groupIdEnd = groupIdEnd;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }    
 }

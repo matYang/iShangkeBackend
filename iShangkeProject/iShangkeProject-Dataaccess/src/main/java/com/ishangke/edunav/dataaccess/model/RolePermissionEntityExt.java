@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.RolePermissionEntity;
 
@@ -12,8 +12,8 @@ public class RolePermissionEntityExt extends RolePermissionEntity {
     private Integer roleIdEnd;
     private Integer permissionIdStart;
     private Integer permissionIdEnd;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
     
     public Integer getIdStart() {
         return idStart;
@@ -51,16 +51,16 @@ public class RolePermissionEntityExt extends RolePermissionEntity {
     public void setPermissionIdEnd(Integer permissionIdEnd) {
         this.permissionIdEnd = permissionIdEnd;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
     

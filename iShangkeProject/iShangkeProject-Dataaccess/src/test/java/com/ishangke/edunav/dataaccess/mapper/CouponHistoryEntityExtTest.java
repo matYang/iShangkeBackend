@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
@@ -33,8 +33,8 @@ public class CouponHistoryEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
-        couponHistoryEntityExt.setCreateTime(new Date());
-        couponHistoryEntityExt.setLastModifyTime(new Date());
+        couponHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponHistoryEntityExt.setCouponId(1);
         couponHistoryEntityExt.setDeleted(0);
        couponHistoryEntityExtMapper.add(couponHistoryEntityExt);
@@ -46,8 +46,8 @@ public class CouponHistoryEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
-        couponHistoryEntityExt.setCreateTime(new Date());
-        couponHistoryEntityExt.setLastModifyTime(new Date());
+        couponHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponHistoryEntityExt.setCouponId(1);
         couponHistoryEntityExt.setDeleted(0);
         couponHistoryEntityExtMapper.add(couponHistoryEntityExt);

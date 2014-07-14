@@ -5,8 +5,8 @@
     <id column="PERMISSIONS_ID" property="id" jdbcType="INTEGER" />
     <result column="PERMISSIONS_NAME" property="name" jdbcType="VARCHAR" />
     <result column="PERMISSIONS_PATH" property="path" jdbcType="VARCHAR" />
-    <result column="PERMISSIONS_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="PERMISSIONS_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PERMISSIONS_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="PERMISSIONS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="PERMISSIONS_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="PERMISSIONS_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -63,10 +63,10 @@
         #{path,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -95,10 +95,10 @@
         PATH = #{path,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},

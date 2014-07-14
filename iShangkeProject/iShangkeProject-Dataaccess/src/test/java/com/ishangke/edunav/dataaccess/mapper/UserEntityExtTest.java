@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
@@ -36,9 +36,9 @@ public class UserEntityExtTest extends BaseTest {
     @Test
     public void testAdd() {
         UserEntityExt userEntityExt = new UserEntityExt();
-        userEntityExt.setCreateTime(new Date());
-        userEntityExt.setLastLoginTime(new Date());
-        userEntityExt.setLastModifyTime(new Date());
+        userEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        userEntityExt.setLastLoginTime(DateUtility.getCurTimeInstance());
+        userEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         userEntityExt.setDeleted(0);
         userEntityExt.setEnabled(1);
         userEntityExt.setName("ishangke李清");
@@ -50,9 +50,9 @@ public class UserEntityExtTest extends BaseTest {
     @Test
     public void testDelete() {
         UserEntityExt userEntityExt = new UserEntityExt();
-        userEntityExt.setCreateTime(new Date());
-        userEntityExt.setLastLoginTime(new Date());
-        userEntityExt.setLastModifyTime(new Date());
+        userEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        userEntityExt.setLastLoginTime(DateUtility.getCurTimeInstance());
+        userEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         userEntityExt.setDeleted(0);
         userEntityExt.setEnabled(1);
         userEntityExt.setName("ishangke");

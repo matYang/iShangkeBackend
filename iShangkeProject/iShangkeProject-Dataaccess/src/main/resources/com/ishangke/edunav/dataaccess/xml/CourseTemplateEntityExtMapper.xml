@@ -15,19 +15,19 @@
     <result column="COURSETEMPLATE_COMMISSION" property="commission" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_STATUS" property="status" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSETEMPLATE_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_POPULARITY" property="popularity" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_STARTDATE" property="startDate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_FINISHDATE" property="finishDate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_CUTOFFDATE" property="cutoffDate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_NOREFUNDDATE" property="noRefundDate" jdbcType="TIMESTAMP" />
-    <result column="COURSETEMPLATE_CASHBACKDATE" property="cashbackDate" jdbcType="TIMESTAMP" />
+    <result column="COURSETEMPLATE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_FINISHDATE" property="finishDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_CUTOFFDATE" property="cutoffDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_NOREFUNDDATE" property="noRefundDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_CASHBACKDATE" property="cashbackDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSETEMPLATE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
@@ -392,10 +392,10 @@
         #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -416,19 +416,19 @@
         #{popularity,jdbcType=INTEGER},
       </if>
       <if test="startDate != null">
-        #{startDate,jdbcType=TIMESTAMP},
+        #{startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="finishDate != null">
-        #{finishDate,jdbcType=TIMESTAMP},
+        #{finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cutoffDate != null">
-        #{cutoffDate,jdbcType=TIMESTAMP},
+        #{cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="noRefundDate != null">
-        #{noRefundDate,jdbcType=TIMESTAMP},
+        #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cashbackDate != null">
-        #{cashbackDate,jdbcType=TIMESTAMP},
+        #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="bookingType != null">
         #{bookingType,jdbcType=INTEGER},
@@ -587,10 +587,10 @@
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -612,19 +612,19 @@
         POPULARITY = #{popularity,jdbcType=INTEGER},
       </if>
       <if test="startDate != null">
-        START_DATE = #{startDate,jdbcType=TIMESTAMP},
+        START_DATE = #{startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="finishDate != null">
-        FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+        FINISH_DATE = #{finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cutoffDate != null">
-        CUTOFF_DATE = #{cutoffDate,jdbcType=TIMESTAMP},
+        CUTOFF_DATE = #{cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="noRefundDate != null">
-        NO_REFUND_DATE = #{noRefundDate,jdbcType=TIMESTAMP},
+        NO_REFUND_DATE = #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cashbackDate != null">
-        CASHBACK_DATE = #{cashbackDate,jdbcType=TIMESTAMP},
+        CASHBACK_DATE = #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="bookingType != null">
         BOOKING_TYPE = #{bookingType,jdbcType=INTEGER},

@@ -1,7 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,12 +22,12 @@ public class CouponEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         CouponEntityExt couponEntityExt = new CouponEntityExt();
-        couponEntityExt.setCreateTime(new Date());
-        couponEntityExt.setLastModifyTime(new Date());
+        couponEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        couponEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntityExt.setEnabled(1);
         couponEntityExt.setDeleted(0);
         couponEntityExt.setUserId(1);
-        couponEntityExt.setExpiryTime(new Date());
+        couponEntityExt.setExpiryTime(DateUtility.getCurTimeInstance());
         couponEntityExtMapper.add(couponEntityExt);
         int oldcount = couponEntityExtMapper.getCount();
         couponEntityExtMapper.add(couponEntityExt);
@@ -38,12 +37,12 @@ public class CouponEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         CouponEntityExt couponEntityExt = new CouponEntityExt();
-        couponEntityExt.setCreateTime(new Date());
-        couponEntityExt.setLastModifyTime(new Date());
+        couponEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        couponEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntityExt.setEnabled(1);
         couponEntityExt.setDeleted(0);
         couponEntityExt.setUserId(1);
-        couponEntityExt.setExpiryTime(new Date());
+        couponEntityExt.setExpiryTime(DateUtility.getCurTimeInstance());
         couponEntityExtMapper.add(couponEntityExt);
         int oldcount = couponEntityExtMapper.getCount();
         couponEntityExtMapper.deleteById(couponEntityExt.getId());

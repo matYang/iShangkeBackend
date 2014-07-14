@@ -1,6 +1,6 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.CourseTemplateTeacherEntity;
@@ -9,8 +9,8 @@ public class CourseTemplateTeacherEntityExt extends CourseTemplateTeacherEntity 
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     public Integer getIdStart() {
         return idStart;
     }
@@ -29,16 +29,16 @@ public class CourseTemplateTeacherEntityExt extends CourseTemplateTeacherEntity 
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
     

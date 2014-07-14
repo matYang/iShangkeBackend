@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,9 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.*;
+import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 
 //before/after方法注入，aop
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, ContactEntityExtTest.class })
@@ -38,8 +38,8 @@ public class ContactEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         ContactEntityExt contactEntityExt = new ContactEntityExt();
-        contactEntityExt.setLastModifyTime(new Date());
-        contactEntityExt.setCreateTime(new Date());
+        contactEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+        contactEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         contactEntityExt.setDeleted(0);
         contactEntityExt.setEnabled(1);
         contactEntityExt.setUserId(1);
@@ -55,8 +55,8 @@ public class ContactEntityExtTest extends BaseTest{
     @Test
     public void testDelete() {
         ContactEntityExt contactEntityExt = new ContactEntityExt();
-        contactEntityExt.setLastModifyTime(new Date());
-        contactEntityExt.setCreateTime(new Date());
+        contactEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+        contactEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         contactEntityExt.setDeleted(0);
         contactEntityExt.setEnabled(1);
         contactEntityExt.setUserId(1);

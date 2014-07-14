@@ -5,7 +5,7 @@
     <id column="USERLOCATION_ID" property="id" jdbcType="INTEGER" />
     <result column="USERLOCATION_USERID" property="userId" jdbcType="INTEGER" />
     <result column="USERLOCATION_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-    <result column="USERLOCATION_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="USERLOCATION_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="USERLOCATION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="UserLocation_Base_Column_List">
@@ -43,7 +43,7 @@
         #{locationId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
@@ -69,7 +69,7 @@
         LOCATION_ID = #{locationId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
@@ -77,13 +77,13 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from USER_LOCATION where DELETED = 0
   </select>
   <select id="list" parameterType="map" resultMap="UserLocationExtMap">
     select
     <include refid="UserLocation_Base_Column_List"></include>
-    from USER_LOCATION 
+    from USER_LOCATION
     where USER_LOCATION.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
@@ -98,8 +98,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND USER_LOCATION.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -118,9 +117,57 @@
       <if test="entity.enabled != null">
         AND USER_LOCATION.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          USER_LOCATION.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
+  </select>
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="UserLocation_Base_Column_List"></include>
+    from USER_LOCATION
+    where USER_LOCATION.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND USER_LOCATION.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND USER_LOCATION.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND USER_LOCATION.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND USER_LOCATION.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.lastModifyTime != null">
+        AND USER_LOCATION.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND USER_LOCATION.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND USER_LOCATION.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null">
+        AND USER_LOCATION.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    ) AS
+    total
   </select>
 </mapper>

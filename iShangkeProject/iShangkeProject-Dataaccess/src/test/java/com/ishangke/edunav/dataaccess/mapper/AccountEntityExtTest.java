@@ -1,7 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
@@ -27,9 +26,9 @@ public class AccountEntityExtTest extends BaseTest{
     @Test
     public void testAdd() {
         UserEntityExt userEntityExt = new UserEntityExt();
-        userEntityExt.setLastLoginTime(new Date());
-        userEntityExt.setLastModifyTime(new Date());
-        userEntityExt.setCreateTime(new Date());
+        userEntityExt.setLastLoginTime(DateUtility.getCurTimeInstance());
+        userEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+        userEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
         userEntityExt.setEnabled(0);
         userEntityExt.setDeleted(0);
         userEntityExtMapper.add(userEntityExt);
@@ -38,12 +37,12 @@ public class AccountEntityExtTest extends BaseTest{
         accountEntityExt.setRealName("中文测试");
         accountEntityExt.setBalance(12.12);
         accountEntityExt.setBalanceEnd(22.2);
-        accountEntityExt.setCreateTime(new Date());
-        accountEntityExt.setCreateTimeAfter(new Date());
-        accountEntityExt.setCreateTimeBefore(new Date());
+        accountEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+        accountEntityExt.setCreateTimeAfter(DateUtility.getCurTimeInstance());
+        accountEntityExt.setCreateTimeBefore(DateUtility.getCurTimeInstance());
         accountEntityExt.setDeleted(0);
         accountEntityExt.setEnabled(0);
-        accountEntityExt.setLastModifyTime(new Date());
+        accountEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         int oldcount = accountEntityExtMapper.getCount();
         accountEntityExtMapper.add(accountEntityExt);
         Assert.assertSame(accountEntityExtMapper.getCount(), oldcount + 1);

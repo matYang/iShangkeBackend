@@ -10,7 +10,7 @@
     <result column="BOOKINGHISTORY_PRESTATUS" property="preStatus" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_POSTSTATUS" property="postStatus" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_NORMAL" property="normal" jdbcType="INTEGER" />
-    <result column="BOOKINGHISTORY_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="BOOKINGHISTORY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKINGHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKINGHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -87,7 +87,7 @@
         #{normal,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -131,7 +131,7 @@
         NORMAL = #{normal,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null" >
         ENABLED = #{enabled,jdbcType=INTEGER},

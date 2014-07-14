@@ -1,8 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import static org.junit.Assert.fail;
-
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
@@ -29,7 +28,7 @@ public class UserGroupEntityExtTest extends BaseTest{
     @Test
     public void testAdd(){
         UserGroupEntityExt userGroupEntityExt = new UserGroupEntityExt();
-        userGroupEntityExt.setLastModifyTime(new Date());
+        userGroupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         userGroupEntityExt.setDeleted(0);
         userGroupEntityExt.setUserId(1);
         userGroupEntityExt.setGroupId(1);
@@ -41,7 +40,7 @@ public class UserGroupEntityExtTest extends BaseTest{
     @Test
     public void testDelete(){
         UserGroupEntityExt userGroupEntityExt = new UserGroupEntityExt();
-        userGroupEntityExt.setLastModifyTime(new Date());
+        userGroupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         userGroupEntityExt.setDeleted(0);
         userGroupEntityExt.setUserId(1);
         userGroupEntityExt.setGroupId(1);      
@@ -54,12 +53,11 @@ public class UserGroupEntityExtTest extends BaseTest{
     @Test
     public void testList(){
         UserGroupEntityExt userGroupEntityExt = new UserGroupEntityExt();
-        userGroupEntityExt.setLastModifyTime(new Date());
+        userGroupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         userGroupEntityExt.setDeleted(0);
         userGroupEntityExt.setUserId(1);
         userGroupEntityExt.setGroupId(1);      
         userGroupEntityExtMapper.add(userGroupEntityExt);
-        userGroupEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         
         List<UserGroupEntityExt> list = userGroupEntityExtMapper.list(userGroupEntityExt, null);
         Assert.assertSame(list.size(),1);
@@ -81,12 +79,12 @@ public class UserGroupEntityExtTest extends BaseTest{
     public void testUpdate(){
 // TODO   update foreign key
 //        UserGroupEntityExt userGroupEntityExt = new UserGroupEntityExt();
-//        userGroupEntityExt.setLastModifyTime(new Date());
+//        userGroupEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
 //        userGroupEntityExt.setDeleted(0);
 //        userGroupEntityExt.setUserId(1);
 //        userGroupEntityExt.setGroupId(1);      
 //        userGroupEntityExtMapper.add(userGroupEntityExt);
-//        userGroupEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
+//        userGroupEntityExt.setLastModifyTimeStart(new Calendar(System.currentTimeMillis() - 10000));
 //        
 //        List<UserGroupEntityExt> list = userGroupEntityExtMapper.list(userGroupEntityExt, null);
 //        list.get(0).setGroupId(2);

@@ -1,122 +1,129 @@
 package com.ishangke.edunav.dataaccess.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.ishangke.edunav.dataaccess.model.gen.ActivityEntity;
 
 public class ActivityEntityExt extends ActivityEntity {
 
-    private int idStart;
-    private int idEnd;
-    private int partnerIdStart;
-    private int partnerIdEnd;    
-    private int courseIdStart;
-    private int courseIdEnd;
-    private Date startTimeStart;
-    private Date startTimeEnd;
-    private Date endTimeStart;
-    private Date endTimeEnd;
-    private int statusStart;
-    private int statusEnd;
-    private Date lastModifyTimeStart;
-    private Date lastModifyTimeEnd;
-    private Date createTimeStart;
-    private Date createTimeEnd;
+    private Integer idStart;
+    private Integer idEnd;
+    private Integer idSet;
+    private Integer partnerIdStart;
+    private Integer partnerIdEnd;    
+    private Integer courseIdStart;
+    private Integer courseIdEnd;
+    private Calendar startTimeStart;
+    private Calendar startTimeEnd;
+    private Calendar endTimeStart;
+    private Calendar endTimeEnd;
+    private Integer statusStart;
+    private Integer statusEnd;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
     
-    public int getIdStart() {
+    public Integer getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Integer idSet) {
+        this.idSet = idSet;
+    }
+    public Integer getIdStart() {
         return idStart;
     }
-    public void setIdStart(int idStart) {
+    public void setIdStart(Integer idStart) {
         this.idStart = idStart;
     }
-    public int getIdEnd() {
+    public Integer getIdEnd() {
         return idEnd;
     }
-    public void setIdEnd(int idEnd) {
+    public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
     }
-    public int getPartnerIdStart() {
+    public Integer getPartnerIdStart() {
         return partnerIdStart;
     }
-    public void setPartnerIdStart(int partnerIdStart) {
+    public void setPartnerIdStart(Integer partnerIdStart) {
         this.partnerIdStart = partnerIdStart;
     }
-    public int getPartnerIdEnd() {
+    public Integer getPartnerIdEnd() {
         return partnerIdEnd;
     }
-    public void setPartnerIdEnd(int partnerIdEnd) {
+    public void setPartnerIdEnd(Integer partnerIdEnd) {
         this.partnerIdEnd = partnerIdEnd;
     }
-    public int getCourseIdStart() {
+    public Integer getCourseIdStart() {
         return courseIdStart;
     }
-    public void setCourseIdStart(int courseIdStart) {
+    public void setCourseIdStart(Integer courseIdStart) {
         this.courseIdStart = courseIdStart;
     }
-    public int getCourseIdEnd() {
+    public Integer getCourseIdEnd() {
         return courseIdEnd;
     }
-    public void setCourseIdEnd(int courseIdEnd) {
+    public void setCourseIdEnd(Integer courseIdEnd) {
         this.courseIdEnd = courseIdEnd;
     }
-    public Date getStartTimeStart() {
+    public Calendar getStartTimeStart() {
         return startTimeStart;
     }
-    public void setStartTimeStart(Date startTimeStart) {
+    public void setStartTimeStart(Calendar startTimeStart) {
         this.startTimeStart = startTimeStart;
     }
-    public Date getStartTimeEnd() {
+    public Calendar getStartTimeEnd() {
         return startTimeEnd;
     }
-    public void setStartTimeEnd(Date startTimeEnd) {
+    public void setStartTimeEnd(Calendar startTimeEnd) {
         this.startTimeEnd = startTimeEnd;
     }
-    public Date getEndTimeStart() {
+    public Calendar getEndTimeStart() {
         return endTimeStart;
     }
-    public void setEndTimeStart(Date endTimeStart) {
+    public void setEndTimeStart(Calendar endTimeStart) {
         this.endTimeStart = endTimeStart;
     }
-    public Date getEndTimeEnd() {
+    public Calendar getEndTimeEnd() {
         return endTimeEnd;
     }
-    public void setEndTimeEnd(Date endTimeEnd) {
+    public void setEndTimeEnd(Calendar endTimeEnd) {
         this.endTimeEnd = endTimeEnd;
     }
-    public int getStatusStart() {
+    public Integer getStatusStart() {
         return statusStart;
     }
-    public void setStatusStart(int statusStart) {
+    public void setStatusStart(Integer statusStart) {
         this.statusStart = statusStart;
     }
-    public int getStatusEnd() {
+    public Integer getStatusEnd() {
         return statusEnd;
     }
-    public void setStatusEnd(int statusEnd) {
+    public void setStatusEnd(Integer statusEnd) {
         this.statusEnd = statusEnd;
     }
-    public Date getLastModifyTimeStart() {
+    public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Date lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Date getLastModifyTimeEnd() {
+    public Calendar getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Date lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
-    public Date getCreateTimeStart() {
+    public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Date createTimeStart) {
+    public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Date getCreateTimeEnd() {
+    public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Date createTimeEnd) {
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 }

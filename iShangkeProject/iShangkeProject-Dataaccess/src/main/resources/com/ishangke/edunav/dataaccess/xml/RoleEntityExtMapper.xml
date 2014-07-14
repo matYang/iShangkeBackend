@@ -4,8 +4,8 @@
   <resultMap id="RoleExtMap" type="RoleEntityExt">
     <id column="ROLES_ID" property="id" jdbcType="INTEGER" />
     <result column="ROLES_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="ROLES_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="ROLES_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ROLES_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ROLES_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ROLES_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ROLES_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -46,10 +46,10 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -75,10 +75,10 @@
         NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -135,7 +135,12 @@
       <if test="entity.enabled != null">
         AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
+       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        ROLES.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>

@@ -16,8 +16,8 @@
     <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
     <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
     <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
-    <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="COURSE_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
@@ -56,92 +56,109 @@
     <result column="COURSE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
     <result column="COURSE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
     <result column="COURSE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
-    <result column="COURSE_CASHBACKDATE" property="cashbackDate" jdbcType="TIMESTAMP" />
-    <result column="COURSE_NOREFUNDDATE" property="noRefundDate" jdbcType="TIMESTAMP" />
-    <result column="COURSE_CUTOFFDATE" property="cutoffDate" jdbcType="TIMESTAMP" />
-    <result column="COURSE_FINISHDATE" property="finishDate" jdbcType="TIMESTAMP" />
-    <result column="COURSE_STARTDATE" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="COURSE_CASHBACKDATE" property="cashbackDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_NOREFUNDDATE" property="noRefundDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_CUTOFFDATE" property="cutoffDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_FINISHDATE" property="finishDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
     <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
-    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR"/>
-    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR"/>
-    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR"/>
-    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR"/>
-    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER"/>
-    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR"/>
-    <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR"/>
-    <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR"/>
-    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR"/>
-    <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER"/>
-    <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR"/>
-    <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR"/>
-    <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR"/>
-    <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR"/>
+    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+    <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+    <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+    <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+    <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+    <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+    <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+    <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
     COURSE.COURSE_NAME COURSE_COURSENAME,
-    COURSE.COURSE_TEMPLATE_ID COURSE_COURSETEMPLATEID,
+    COURSE.COURSE_TEMPLATE_ID
+    COURSE_COURSETEMPLATEID,
     COURSE.CATEGORY_ID COURSE_CATEGORYID,
-    COURSE.LOCATION_ID COURSE_LOCATIONID,
+    COURSE.LOCATION_ID
+    COURSE_LOCATIONID,
     COURSE.CIRCLE_ID COURSE_CIRCLEID,
     COURSE.PARTNER_ID COURSE_PARTNERID,
     COURSE.ADDRESS_ID COURSE_ADDRESSID,
-    COURSE.PRICE COURSE_PRICE, 
-    COURSE.ORIGINAL_PRICE COURSE_ORIGINALPRICE,
+    COURSE.PRICE COURSE_PRICE,
+    COURSE.ORIGINAL_PRICE
+    COURSE_ORIGINALPRICE,
     COURSE.CASHBACK COURSE_CASHBACK,
     COURSE.COMMISSION COURSE_COMMISSION,
     COURSE.SERVICE_CHARGE COURSE_SERVICECHARGE,
     COURSE.STATUS COURSE_STATUS,
-    COURSE.LAST_MODIFY_TIME COURSE_LASTMODIFYTIME,
+    COURSE.LAST_MODIFY_TIME
+    COURSE_LASTMODIFYTIME,
     COURSE.CREATE_TIME COURSE_CREATETIME,
     COURSE.ENABLED COURSE_ENABLED,
     COURSE.DELETED COURSE_DELETED,
     COURSE.COURSE_HOUR_LENGTH COURSE_COURSEHOURLENGTH,
     COURSE.TEACHING_METHOD COURSE_TEACHINGMETHOD,
-    COURSE.TEACHING_MATERIAL_FEE COURSE_TEACHINGMATERIALFEE,
+    COURSE.TEACHING_MATERIAL_FEE
+    COURSE_TEACHINGMATERIALFEE,
     COURSE.DOWNLOAD_MATERIALS COURSE_DOWNLOADMATERIALS,
     COURSE.BONUS_SERVICE COURSE_BONUSSERVICE,
     COURSE.MARKING COURSE_MARKING,
-    COURSE.ASSIGNMENTS COURSE_ASSIGNMENTS,
+    COURSE.ASSIGNMENTS
+    COURSE_ASSIGNMENTS,
     COURSE.TRAIL COURSE_TRAIL,
     COURSE.QUESTION_SESSION COURSE_QUESTIONSESSION,
     COURSE.TEACHING_AND_EXERCISE COURSE_TEACHINGANDEXERCISE,
-    COURSE.CLASS_TEACHER COURSE_CLASSTEACHER,
+    COURSE.CLASS_TEACHER
+    COURSE_CLASSTEACHER,
     COURSE.GOAL COURSE_GOAL,
     COURSE.OUTLINE COURSE_OUTLINE,
-    COURSE.REG_PHONE COURSE_REGPHONE,
+    COURSE.REG_PHONE
+    COURSE_REGPHONE,
     COURSE.CONTACT COURSE_CONTACT,
     COURSE.EXTRACURRICULAR COURSE_EXTRACURRICULAR,
     COURSE.PASS_AGREEMENT COURSE_PASSAGREEMENT,
     COURSE.QUALITY_ASSURANCE COURSE_QUALITYASSURANCE,
     COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
-    COURSE.TEACHING_MATERIAL_INTRO COURSE_TEACHINGMATERIALINTRO,
+    COURSE.TEACHING_MATERIAL_INTRO
+    COURSE_TEACHINGMATERIALINTRO,
     COURSE.STUDY_DAY_NOTE COURSE_STUDYDAYNOTE,
-    COURSE.HIGH_SCORE_REWARD COURSE_HIGHSCOREREWARD,
+    COURSE.HIGH_SCORE_REWARD
+    COURSE_HIGHSCOREREWARD,
     COURSE.PREREQUEST COURSE_PREREQUEST,
-    COURSE.SUITABLE_STUDENT COURSE_SUITABLESTUDENT,
+    COURSE.SUITABLE_STUDENT
+    COURSE_SUITABLESTUDENT,
     COURSE.OPEN_COURSE_REQUIREMENT COURSE_OPENCOURSEREQUIREMENT,
     COURSE.CERTIFICATION COURSE_CERTIFICATION,
     COURSE.QUIZ COURSE_QUIZ,
-    COURSE.COURSE_INTRO COURSE_COURSEINTRO,
+    COURSE.COURSE_INTRO
+    COURSE_COURSEINTRO,
     COURSE.REFERENCE COURSE_REFERENCE,
     COURSE.REG_LOCATION COURSE_REGLOCATION,
     COURSE.FINISH_TIME2 COURSE_FINISHTIME2,
     COURSE.START_TIME2 COURSE_STARTTIME2,
-    COURSE.FINISH_TIME1 COURSE_FINISHTIME1,
+    COURSE.FINISH_TIME1
+    COURSE_FINISHTIME1,
     COURSE.START_TIME1 COURSE_STARTTIME1,
-    COURSE.START_UPON_ARRIVAL COURSE_STARTUPONARRIVAL,
+    COURSE.START_UPON_ARRIVAL
+    COURSE_STARTUPONARRIVAL,
     COURSE.BOOKING_TYPE COURSE_BOOKINGTYPE,
-    COURSE.CASHBACK_DATE COURSE_CASHBACKDATE,
+    COURSE.CASHBACK_DATE
+    COURSE_CASHBACKDATE,
     COURSE.NO_REFUND_DATE COURSE_NOREFUNDDATE,
-    COURSE.CUTOFF_DATE COURSE_CUTOFFDATE,
+    COURSE.CUTOFF_DATE
+    COURSE_CUTOFFDATE,
     COURSE.FINISH_DATE COURSE_FINISHDATE,
     COURSE.START_DATE COURSE_STARTDATE,
     COURSE.POPULARITY COURSE_POPULARITY,
     COURSE.CLASS_SIZE COURSE_CLASSSIZE,
-    COURSE.COURSE_HOUR_NUM COURSE_COURSEHOURNUM
+    COURSE.COURSE_HOUR_NUM
+    COURSE_COURSEHOURNUM
   </sql>
   <sql id="Partner_Base_Column_List">
     PARTNER.LOGO_URL PARTNER_LOGOURL,
@@ -149,7 +166,8 @@
     PARTNER.INST_NAME PARTNER_INSTNAME,
     PARTNER.PARTNER_INTRO PARTNER_INTRO,
     PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
-    PARTNER.PARTNER_DISTINCTION PARTNER_PARTNERDISTINCTION
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION
   </sql>
   <sql id="Address_Base_Column_List">
     ADDRESS.DETAIL ADDRESS_DETAIL
@@ -398,10 +416,10 @@
         #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -518,19 +536,19 @@
         #{bookingType,jdbcType=INTEGER},
       </if>
       <if test="cashbackDate != null">
-        #{cashbackDate,jdbcType=TIMESTAMP},
+        #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="noRefundDate != null">
-        #{noRefundDate,jdbcType=TIMESTAMP},
+        #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cutoffDate != null">
-        #{cutoffDate,jdbcType=TIMESTAMP},
+        #{cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="finishDate != null">
-        #{finishDate,jdbcType=TIMESTAMP},
+        #{finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="startDate != null">
-        #{startDate,jdbcType=TIMESTAMP},
+        #{startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="popularity != null">
         #{popularity,jdbcType=INTEGER},
@@ -596,10 +614,10 @@
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -724,19 +742,19 @@
         BOOKING_TYPE = #{bookingType,jdbcType=INTEGER},
       </if>
       <if test="cashbackDate != null">
-        CASHBACK_DATE = #{cashbackDate,jdbcType=TIMESTAMP},
+        CASHBACK_DATE = #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="noRefundDate != null">
-        NO_REFUND_DATE = #{noRefundDate,jdbcType=TIMESTAMP},
+        NO_REFUND_DATE = #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cutoffDate != null">
-        CUTOFF_DATE = #{cutoffDate,jdbcType=TIMESTAMP},
+        CUTOFF_DATE = #{cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="finishDate != null">
-        FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+        FINISH_DATE = #{finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="startDate != null">
-        START_DATE = #{startDate,jdbcType=TIMESTAMP},
+        START_DATE = #{startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="popularity != null">
         POPULARITY = #{popularity,jdbcType=INTEGER},
@@ -757,24 +775,31 @@
 
   <select id="list" parameterType="map" resultMap="CourseExtMap">
     select
-    <include refid="Course_Base_Column_List"></include>,
-    <include refid="Partner_Base_Column_List"></include>,
-    <include refid="Address_Base_Column_List"></include>,
-    <include refid="Category_Base_Column_List"></include>,
-    <include refid="Location_Base_Column_List"></include>,
+    <include refid="Course_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Address_Base_Column_List"></include>
+    ,
+    <include refid="Category_Base_Column_List"></include>
+    ,
+    <include refid="Location_Base_Column_List"></include>
+    ,
     <include refid="Circle_Base_Column_List"></include>
     from COURSE COURSE
-        join PARTNER PARTNER 
-            ON PARTNER.ID = COURSE.PARTNER_ID
-        join CATEGORY CATEGORY 
-            ON CATEGORY.ID = COURSE.CATEGORY_ID
-        join ADDRESS ADDRESS 
-            ON ADDRESS.ID = COURSE.ADDRESS_ID
-        join CIRCLE CIRCLE 
-            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = ADDRESS.LOCATION_ID
-    
+    join PARTNER PARTNER
+    ON PARTNER.ID = COURSE.PARTNER_ID
+    join CATEGORY CATEGORY
+    ON
+    CATEGORY.ID = COURSE.CATEGORY_ID
+    join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    join CIRCLE
+    CIRCLE
+    ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+    join LOCATION LOCATION
+    ON LOCATION.ID = ADDRESS.LOCATION_ID
+
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
@@ -810,7 +835,8 @@
         </if>
         <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -827,7 +853,8 @@
         </if>
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -844,7 +871,8 @@
         </if>
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -861,7 +889,8 @@
         </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -878,7 +907,8 @@
         </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1043,7 +1073,7 @@
       <if test="entity.enabled != null">
         AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
+
       <if test="page != null">
         <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
           ORDER BY
@@ -1060,24 +1090,31 @@
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-    <include refid="Course_Base_Column_List"></include>,
-    <include refid="Partner_Base_Column_List"></include>,
-    <include refid="Address_Base_Column_List"></include>,
-    <include refid="Category_Base_Column_List"></include>,
-    <include refid="Location_Base_Column_List"></include>,
+    <include refid="Course_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Address_Base_Column_List"></include>
+    ,
+    <include refid="Category_Base_Column_List"></include>
+    ,
+    <include refid="Location_Base_Column_List"></include>
+    ,
     <include refid="Circle_Base_Column_List"></include>
     from COURSE COURSE
-        join PARTNER PARTNER 
-            ON PARTNER.ID = COURSE.PARTNER_ID
-        join CATEGORY CATEGORY 
-            ON CATEGORY.ID = COURSE.CATEGORY_ID
-        join ADDRESS ADDRESS 
-            ON ADDRESS.ID = COURSE.ADDRESS_ID
-        join CIRCLE CIRCLE 
-            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = ADDRESS.LOCATION_ID
-    
+    join PARTNER PARTNER
+    ON PARTNER.ID = COURSE.PARTNER_ID
+    join CATEGORY CATEGORY
+    ON
+    CATEGORY.ID = COURSE.CATEGORY_ID
+    join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    join CIRCLE
+    CIRCLE
+    ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+    join LOCATION LOCATION
+    ON LOCATION.ID = ADDRESS.LOCATION_ID
+
     WHERE COURSE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
@@ -1113,7 +1150,8 @@
         </if>
         <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1130,7 +1168,8 @@
         </if>
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1147,7 +1186,8 @@
         </if>
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1164,7 +1204,8 @@
         </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1181,7 +1222,8 @@
         </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1347,5 +1389,5 @@
     </if>
     ) AS total
   </select>
-  
+
 </mapper>
