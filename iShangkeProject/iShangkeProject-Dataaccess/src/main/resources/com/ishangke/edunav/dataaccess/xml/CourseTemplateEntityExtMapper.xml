@@ -78,29 +78,6 @@
     <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR"/>
     <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR"/>
     <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR"/>
-    <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
-      <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
-      <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-      <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
-      <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
-      <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
-      <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
-      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-      <result column="TEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
-      <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
-      <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
-    </collection>
-    <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
-      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER"/>
-      <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-      <result column="CLASSPHOTO_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
-      <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
-      <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
-    </collection>
   </resultMap>
   <sql id="CourseTemplate_Base_Column_List">
     COURSE_TEMPLATE.ID COURSETEMPLATE_ID,
@@ -164,29 +141,6 @@
     COURSE_TEMPLATE.DOWNLOAD_MATERIALS COURSETEMPLATE_DOWNLOADMATERIALS,
     COURSE_TEMPLATE.TEACHING_MATERIAL_FEE COURSETEMPLATE_TEACHINGMATERIALFEE,
     COURSE_TEMPLATE.TEACHING_METHOD COURSETEMPLATE_TEACHINGMETHOD
-  </sql>
-  <sql id="Teacher_Base_Column_List">
-    TEACHER.ID TEACHER_ID,
-    TEACHER.PARTNER_ID TEACHER_PARTNERID,
-    TEACHER.IMG_URL TEACHER_IMGURL,
-    TEACHER.NAME TEACHER_NAME,
-    TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULARITY TEACHER_POPULARITY,
-    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
-    TEACHER.CREATE_TIME TEACHER_CREATETIME,
-    TEACHER.ENABLED TEACHER_ENABLED,
-    TEACHER.DELETED TEACHER_DELETED
-  </sql>
-  <sql id="ClassPhoto_Base_Column_List">
-    CLASS_PHOTO.ID CLASSPHOTO_ID,
-    CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
-    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
-    CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
-    CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
-    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
-    CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
-    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
-    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
   <sql id="Partner_Base_Column_List">
     PARTNER.LOGO_URL PARTNER_LOGOURL,
@@ -795,22 +749,12 @@
   <select id="list" parameterType="map" resultMap="CourseTemplateEntityExtMap">
     select
     <include refid="CourseTemplate_Base_Column_List"></include>,
-    <include refid="Teacher_Base_Column_List"></include>,
-    <include refid="ClassPhoto_Base_Column_List"></include>,
     <include refid="Partner_Base_Column_List"></include>,
     <include refid="Address_Base_Column_List"></include>,
     <include refid="Category_Base_Column_List"></include>,
     <include refid="Location_Base_Column_List"></include>,
     <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
-        join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
-            ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = 1
-        join TEACHER TEACHER 
-            ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
-        join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO 
-            ON COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID = 1
-        join CLASS_PHOTO CLASS_PHOTO 
-            ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
         join PARTNER PARTNER 
             ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
         join CATEGORY CATEGORY 
@@ -1091,29 +1035,16 @@
   </select>
 
 
-
-
-
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
     <include refid="CourseTemplate_Base_Column_List"></include>,
-    <include refid="Teacher_Base_Column_List"></include>,
-    <include refid="ClassPhoto_Base_Column_List"></include>,
     <include refid="Partner_Base_Column_List"></include>,
     <include refid="Address_Base_Column_List"></include>,
     <include refid="Category_Base_Column_List"></include>,
     <include refid="Location_Base_Column_List"></include>,
     <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
-        join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
-            ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
-        join TEACHER TEACHER 
-            ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
-        join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO 
-            ON COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
-        join CLASS_PHOTO CLASS_PHOTO 
-            ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
         join PARTNER PARTNER 
             ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
         join CATEGORY CATEGORY 
