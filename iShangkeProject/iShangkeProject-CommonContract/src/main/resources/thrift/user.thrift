@@ -18,4 +18,10 @@ struct LoginBo {
   3: string password
 }
 
+/**
+ * CouponBo
+ */
+struct CouponBo {
+  1: i32 id
+}
 

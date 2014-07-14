@@ -223,7 +223,7 @@
       <if test="entity.enabled != null">
         AND ORDER_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-       <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         USERS.${listItem.columnKey} ${listItem.order}
@@ -234,5 +234,87 @@
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
+  </select>
+       <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+     <include refid="OrderHistory_Base_Column_List"></include>
+    from ORDER_HISTORY 
+    where ORDER_HISTORY.DELETED = 0
+    <if test="entity != null">
+      <!-- id -->
+      <if test="entity.id != null and entity.id != 0">
+        AND ORDER_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND ORDER_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND ORDER_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND ORDER_HISTORY.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.orderId != null and entity.orderId != 0">
+        AND ORDER_HISTORY.ORDER_ID = #{entity.orderId,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.userId != null and entity.userId != 0">
+        AND ORDER_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.optName != null and entity.optName != 0">
+        AND ORDER_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
+      </if>
+      
+      <!-- String 属性 -->
+      <if test="entity.remark != null and entity.remark != ''">
+        AND ORDER_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      </if>
+
+      <!-- Integer 属性 -->
+      <if test="entity.preStatus != null and entity.preStatus != 0">
+        AND ORDER_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.postStatus != null and entity.postStatus != 0">
+        AND ORDER_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.normal != null and entity.normal != 0">
+        AND ORDER_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
+      </if>
+      
+      <!-- Date 属性 -->
+      <if test="entity.createTime != 0 and entity.createTime != null">
+        AND ORDER_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null or entity.createTime == 0">
+        <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
+          <![CDATA[AND ORDER_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null and entity.createTimeEnd != 0">
+          <![CDATA[AND ORDER_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      
+      <!-- Integer 属性 -->
+      <if test="entity.enabled != null">
+        AND ORDER_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      </if>
+    ) AS total
   </select>
 </mapper>

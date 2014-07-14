@@ -229,4 +229,318 @@
   <select id="getCount" resultType="int">
     select count(ID) from BOOKING where DELETED = 0
   </select>
+  <select id="list" parameterType="map" resultMap="BookingExtMap">
+    SELECT
+    <include refid="Booking_Base_Column_List" />
+    from BOOKING where BOOKING.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND BOOKING.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND BOOKING.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND BOOKING.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdStart != null and entity.userIdStart != 0">
+          <![CDATA[AND BOOKING.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
+          <![CDATA[AND BOOKING.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.courseId == null or entity.courseId == 0">
+        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
+          <![CDATA[AND BOOKING.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
+          <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.reference != null and entity.reference !='' ">
+        AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.name != null and entity.name !='' ">
+        AND BOOKING.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.phone != null and entity.phone !='' ">
+        AND BOOKING.PHON LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.email != null and entity.email !='' ">
+        AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND BOOKING.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.scheduledTime != null">
+        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.scheduledTime == null">
+        <if test="entity.scheduledTimeStart != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.scheduledTimeEnd != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.noRefundDate != null">
+        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.noRefundDate == null">
+        <if test="entity.noRefundDateStart != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.noRefundDateEnd != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.cashbackDate != null">
+        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.cashbackDate == null">
+        <if test="entity.cashbackDateStart != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.cashbackDateEnd != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.type == null or entity.type == 0">
+        <if test="entity.typeStart != null and entity.typeStart != 0">
+          <![CDATA[AND BOOKING.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.typeEnd != null and entity.typeEnd != 0">
+          <![CDATA[AND BOOKING.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.note != null and entity.note !='' ">
+        AND BOOKING.NOTE LIKE "%"#{entity.note,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.cashbackAmount != null">
+        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.cashbackAmount == null">
+        <if test="entity.cashbackAmountStart != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND BOOKING.CREATE_TIME = #{entity.createTilastModifyTimee=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          BOOKING.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="Booking_Base_Column_List" />
+    from BOOKING where BOOKING.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idStart != null and entity.idStart != 0">
+          <![CDATA[AND BOOKING.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idEnd != null and entity.idEnd != 0">
+          <![CDATA[AND BOOKING.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet.size() > 0">
+          AND BOOKING.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdStart != null and entity.userIdStart != 0">
+          <![CDATA[AND BOOKING.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
+          <![CDATA[AND BOOKING.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.courseId == null or entity.courseId == 0">
+        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
+          <![CDATA[AND BOOKING.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
+          <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.reference != null and entity.reference !='' ">
+        AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.name != null and entity.name !='' ">
+        AND BOOKING.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.phone != null and entity.phone !='' ">
+        AND BOOKING.PHON LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.email != null and entity.email !='' ">
+        AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.status == null or entity.status == 0">
+        <if test="entity.statusStart != null and entity.statusStart != 0">
+          <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+          <![CDATA[AND BOOKING.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.scheduledTime != null">
+        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.scheduledTime == null">
+        <if test="entity.scheduledTimeStart != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.scheduledTimeEnd != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.noRefundDate != null">
+        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.noRefundDate == null">
+        <if test="entity.noRefundDateStart != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.noRefundDateEnd != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.cashbackDate != null">
+        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.cashbackDate == null">
+        <if test="entity.cashbackDateStart != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.cashbackDateEnd != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.type == null or entity.type == 0">
+        <if test="entity.typeStart != null and entity.typeStart != 0">
+          <![CDATA[AND BOOKING.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.typeEnd != null and entity.typeEnd != 0">
+          <![CDATA[AND BOOKING.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+
+      <if test="entity.note != null and entity.note !='' ">
+        AND BOOKING.NOTE LIKE "%"#{entity.note,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.cashbackAmount != null">
+        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.cashbackAmount == null">
+        <if test="entity.cashbackAmountStart != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND BOOKING.CREATE_TIME = #{entity.createTilastModifyTimee=TIMESTAMP}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    ) AS total
+  </select>
 </mapper>
