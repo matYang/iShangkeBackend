@@ -66,6 +66,8 @@
     </table>
     <table tableName="CIRCLE" domainObjectName="CircleEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride  column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> 
+      <columnOverride  column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> 
     </table>
     <table tableName="COURSE_TEMPLATE" domainObjectName="CourseTemplateEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
