@@ -246,15 +246,14 @@
       </if>
       
       <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
         <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
           ORDER BY
           <foreach collection="page.orderByEntities" item="listItem" separator=",">
             TEACHER.${listItem.columnKey} ${listItem.order}
           </foreach>
         </if>
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
-      
     </if>
   </select>
 
