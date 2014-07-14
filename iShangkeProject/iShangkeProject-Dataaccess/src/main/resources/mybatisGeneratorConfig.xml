@@ -105,6 +105,8 @@
     </table>
     <table tableName="TEACHER" domainObjectName="TeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
+      <!-- <columnOverride  column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> 
+      <columnOverride  column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/>  -->
     </table>
     <table tableName="COURSE_TEACHER" domainObjectName="CourseTeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -121,7 +123,8 @@
     <table tableName="WITHDRAW" domainObjectName="WithdrawEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <!-- 通过此方法，将生成的时间类型为Calendar -->
-      <!-- <columnOverride  column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/>  -->
+      <!-- <columnOverride  column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/> 
+      <columnOverride  column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP"/>  -->
     </table>
     <table tableName="COURSE_TEMPLATE_TEACHER" domainObjectName="CourseTemplateTeacherEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
