@@ -1,0 +1,1 @@
+DELETE FROM `course_class_photo` WHERE COURSE_ID = 1;

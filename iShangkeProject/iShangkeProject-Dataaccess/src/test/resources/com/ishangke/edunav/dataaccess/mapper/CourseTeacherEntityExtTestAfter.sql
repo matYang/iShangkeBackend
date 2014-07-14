@@ -1,0 +1,1 @@
+DELETE FROM `course_teacher` WHERE COURSE_ID = 1;

@@ -177,7 +177,7 @@
       </if>
 
     </if>
-    <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         PERMISSIONS.${listItem.columnKey} ${listItem.order}

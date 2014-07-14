@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,15 +11,24 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.OrderByEntity;
+import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class CourseTemplateClassPhotoEntityExtTest {
+public class CourseTemplateClassPhotoEntityExtTest extends BaseTest{
     @Autowired
     private CourseTemplateClassPhotoEntityExtMapper courseTemplateClassPhotoEntityExtMapper;
-
+    
+    public CourseTemplateClassPhotoEntityExtTest() {
+        scriptAfterClass = "CourseTemplateClassPhotoEntityExtTestAfter.sql";
+        scriptBeforeClass = "CourseTemplateClassPhotoEntityExtTestBefore.sql";
+    }
     @Test
     public void testAdd() {
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();
@@ -43,5 +53,19 @@ public class CourseTemplateClassPhotoEntityExtTest {
         int oldcount = courseTemplateClassPhotoEntityExtMapper.getCount();
         courseTemplateClassPhotoEntityExtMapper.deleteById(courseTemplateClassPhotoEntityExt.getId());
         Assert.assertSame(courseTemplateClassPhotoEntityExtMapper.getCount(), oldcount - 1);
+    }
+    @Test
+    public void testQuery() {
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        //排序，先按照第一个排序，再按照第二个排序，依次排列
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
+       
+        CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoQueryEntity = new CourseTemplateClassPhotoEntityExt();
+        courseTemplateClassPhotoQueryEntity.setClassPhotoId(1);
+        List<CourseTemplateClassPhotoEntityExt> result = courseTemplateClassPhotoEntityExtMapper.list(courseTemplateClassPhotoQueryEntity, page);
+        Assert.assertEquals(3, result.size());
+        //Assert.assertEquals("_test_CourseTemplateClassPhotos_2_", result.get(0).getCreateTime());
     }
 }
