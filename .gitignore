@@ -21,7 +21,7 @@
 **/thriftgen/*
 
 # spring
-**/resources/applicationContext-dataaccess*.xml
+**/resources/applicationContext-dataaccess**.xml
 **/resources/ENV_*.properties
 
 # log
@@ -34,3 +34,5 @@
 dump.rdb
 .DS_Store
 EduNav.mwb.bak
+applicationContext-dataaccess.xml
+applicationContext-dataaccessUT.xml

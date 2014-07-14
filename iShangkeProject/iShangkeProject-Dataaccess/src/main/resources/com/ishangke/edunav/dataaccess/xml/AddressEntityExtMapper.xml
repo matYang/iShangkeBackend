@@ -141,6 +141,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND ADDRESS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND ADDRESS.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.partnerId != null and entity.partnerId != 0">
@@ -152,6 +158,12 @@
         </if>
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND ADDRESS.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND ADDRESS.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
       
@@ -165,6 +177,12 @@
         <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
           <![CDATA[AND ADDRESS.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
+          AND ADDRESS.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.circleId != null and entity.circleId != 0">
@@ -177,11 +195,17 @@
         <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
           <![CDATA[AND ADDRESS.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
+          AND ADDRESS.CIRCLE_ID IN
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
 
       <if test="entity.detail != null and entity.detail !='' ">
-        AND ADDRESS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+        AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.createTime != null">
@@ -209,6 +233,13 @@
 
       <if test="entity.enabled != null">
         AND ADDRESS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      
+      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          ADDRESS.${listItem.columnKey} ${listItem.order}
+        </foreach>
       </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
@@ -233,6 +264,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND ADDRESS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND ADDRESS.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.partnerId != null and entity.partnerId != 0">
@@ -244,6 +281,12 @@
         </if>
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND ADDRESS.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND ADDRESS.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
       
@@ -257,6 +300,12 @@
         <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
           <![CDATA[AND ADDRESS.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
+          AND ADDRESS.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.circleId != null and entity.circleId != 0">
@@ -269,11 +318,17 @@
         <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
           <![CDATA[AND ADDRESS.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
+          AND ADDRESS.CIRCLE_ID IN
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
 
       <if test="entity.detail != null and entity.detail !='' ">
-        AND ADDRESS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+        AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.createTime != null">
@@ -301,6 +356,12 @@
 
       <if test="entity.enabled != null">
         AND ADDRESS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          ADDRESS.${listItem.columnKey} ${listItem.order}
+        </foreach>
       </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}

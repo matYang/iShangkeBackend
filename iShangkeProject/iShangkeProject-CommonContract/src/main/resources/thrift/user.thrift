@@ -9,3 +9,13 @@ struct UserBo {
   3: string password
 }
 
+/**
+ * LoginBo
+ */
+struct LoginBo {
+  1: i32 id
+  2: string phone
+  3: string password
+}
+
+

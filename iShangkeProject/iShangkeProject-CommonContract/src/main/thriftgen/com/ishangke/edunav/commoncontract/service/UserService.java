@@ -48,11 +48,145 @@ public class UserService {
      */
     public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
 
+    /**
+     * 本方法为所有用户提供登录的功能。<br>
+     * 所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
+     * 
+     * @param  loginBo       用户登录信息
+     * 
+     * @return 用户实体 UserBo
+     * 
+     * 
+     * @param loginBo
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为ishangke管理员创建新用户<br>
+     * ishangke管理员可以创建合作商管理员，普通用户
+     * 
+     * @param  targetUser    需要被创建的用户信息
+     * @param  partnerBo     合作商信息
+     * @param  currentUser   调用方法的用户的信息
+     * 
+     * @return 用户实体 UserBo
+     * 
+     * 
+     * @param targetUser
+     * @param paginationBo
+     * @param currentUser
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为ishangke管理员删除用户<br>
+     * ishangke管理员可以删除合作商管理员，普通用户
+     * 
+     * @param  targetUser    需要被删除的用户信息
+     * @param  currentUser   调用方法的用户的信息
+     * 
+     * @return 删除结果
+     * 
+     * 
+     * @param targetUser
+     * @param currentUser
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo deleteUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为修改用户信息的功能<br>
+     * ishangke管理员可以修改合作商管理员，普通用户的信息。任意用户可以修改自身的用户信息
+     * 
+     * @param  targetUser    需要被修改的用户信息
+     * @param  currentUser   调用方法的用户的信息
+     * 
+     * @return 用户实体 UserBo
+     * 
+     * 
+     * @param targetUser
+     * @param currentUser
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo updateUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为查看用户信息的功能<br>
+     * ishangke管理员可以查看合作商管理员，普通用户的信息。任意用户可以查看自身的用户信息
+     * 
+     * @param  queryUser     需要被查询的用户信息
+     * @param  currentUser   调用方法的用户的信息
+     * 
+     * @return 用户实体 UserBo
+     * 
+     * 
+     * @param queryUser
+     * @param currentUser
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo queryUserInfo(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为查询用户信息的功能<br>
+     * ishangke管理员可以按条件搜索合作商管理员、普通用户的信息。
+     * 
+     * @param  queryUser     需要检索和过滤的用户信息
+     * @param  partnerBo     合作商的用户的信息
+     * @param  currentUser   调用方法的用户的信息
+     * @param  paginationBo  分页信息
+     * 
+     * @return 用户实体 UserBo 列表
+     * 
+     * 
+     * @param queryUser
+     * @param partnerBo
+     * @param currentUser
+     * @param pagnationBo
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo queryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为查询用户session信息的功能<br>
+     * 
+     * @param  userBo        需要被查询session的用户信息
+     * 
+     * @return 用户session相关信息
+     * 
+     * 
+     * @param userBo
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo querySession(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为销毁用户session信息的功能<br>
+     * 
+     * @param  userBo        需要被销毁session的用户信息
+     * 
+     * @return
+     * 
+     * 
+     * @param userBo
+     */
+    public com.ishangke.edunav.commoncontract.model.ResponseBo disposeSession(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
 
     public void registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void deleteUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void updateUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void queryUserInfo(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void queryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void querySession(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void disposeSession(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -101,6 +235,222 @@ public class UserService {
         throw result.businessExceptionBo;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "registerUser failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_login(loginBo);
+      return recv_login();
+    }
+
+    public void send_login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo) throws org.apache.thrift.TException
+    {
+      login_args args = new login_args();
+      args.setLoginBo(loginBo);
+      sendBase("login", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_login() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      login_result result = new login_result();
+      receiveBase(result, "login");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "login failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_createUser(targetUser, paginationBo, currentUser);
+      return recv_createUser();
+    }
+
+    public void send_createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws org.apache.thrift.TException
+    {
+      createUser_args args = new createUser_args();
+      args.setTargetUser(targetUser);
+      args.setPaginationBo(paginationBo);
+      args.setCurrentUser(currentUser);
+      sendBase("createUser", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_createUser() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      createUser_result result = new createUser_result();
+      receiveBase(result, "createUser");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "createUser failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo deleteUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_deleteUser(targetUser, currentUser);
+      return recv_deleteUser();
+    }
+
+    public void send_deleteUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws org.apache.thrift.TException
+    {
+      deleteUser_args args = new deleteUser_args();
+      args.setTargetUser(targetUser);
+      args.setCurrentUser(currentUser);
+      sendBase("deleteUser", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_deleteUser() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      deleteUser_result result = new deleteUser_result();
+      receiveBase(result, "deleteUser");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "deleteUser failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo updateUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_updateUser(targetUser, currentUser);
+      return recv_updateUser();
+    }
+
+    public void send_updateUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws org.apache.thrift.TException
+    {
+      updateUser_args args = new updateUser_args();
+      args.setTargetUser(targetUser);
+      args.setCurrentUser(currentUser);
+      sendBase("updateUser", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_updateUser() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      updateUser_result result = new updateUser_result();
+      receiveBase(result, "updateUser");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateUser failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo queryUserInfo(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_queryUserInfo(queryUser, currentUser);
+      return recv_queryUserInfo();
+    }
+
+    public void send_queryUserInfo(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws org.apache.thrift.TException
+    {
+      queryUserInfo_args args = new queryUserInfo_args();
+      args.setQueryUser(queryUser);
+      args.setCurrentUser(currentUser);
+      sendBase("queryUserInfo", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_queryUserInfo() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      queryUserInfo_result result = new queryUserInfo_result();
+      receiveBase(result, "queryUserInfo");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "queryUserInfo failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo queryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_queryUser(queryUser, partnerBo, currentUser, pagnationBo);
+      return recv_queryUser();
+    }
+
+    public void send_queryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo) throws org.apache.thrift.TException
+    {
+      queryUser_args args = new queryUser_args();
+      args.setQueryUser(queryUser);
+      args.setPartnerBo(partnerBo);
+      args.setCurrentUser(currentUser);
+      args.setPagnationBo(pagnationBo);
+      sendBase("queryUser", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_queryUser() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      queryUser_result result = new queryUser_result();
+      receiveBase(result, "queryUser");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "queryUser failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo querySession(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_querySession(userBo);
+      return recv_querySession();
+    }
+
+    public void send_querySession(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws org.apache.thrift.TException
+    {
+      querySession_args args = new querySession_args();
+      args.setUserBo(userBo);
+      sendBase("querySession", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_querySession() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      querySession_result result = new querySession_result();
+      receiveBase(result, "querySession");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "querySession failed: unknown result");
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo disposeSession(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      send_disposeSession(userBo);
+      return recv_disposeSession();
+    }
+
+    public void send_disposeSession(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws org.apache.thrift.TException
+    {
+      disposeSession_args args = new disposeSession_args();
+      args.setUserBo(userBo);
+      sendBase("disposeSession", args);
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_disposeSession() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    {
+      disposeSession_result result = new disposeSession_result();
+      receiveBase(result, "disposeSession");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.businessExceptionBo != null) {
+        throw result.businessExceptionBo;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "disposeSession failed: unknown result");
     }
 
   }
@@ -156,6 +506,286 @@ public class UserService {
       }
     }
 
+    public void login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      login_call method_call = new login_call(loginBo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class login_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.LoginBo loginBo;
+      public login_call(com.ishangke.edunav.commoncontract.model.LoginBo loginBo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.loginBo = loginBo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("login", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        login_args args = new login_args();
+        args.setLoginBo(loginBo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_login();
+      }
+    }
+
+    public void createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      createUser_call method_call = new createUser_call(targetUser, paginationBo, currentUser, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class createUser_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo targetUser;
+      private com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo;
+      private com.ishangke.edunav.commoncontract.model.UserBo currentUser;
+      public createUser_call(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.targetUser = targetUser;
+        this.paginationBo = paginationBo;
+        this.currentUser = currentUser;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("createUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        createUser_args args = new createUser_args();
+        args.setTargetUser(targetUser);
+        args.setPaginationBo(paginationBo);
+        args.setCurrentUser(currentUser);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_createUser();
+      }
+    }
+
+    public void deleteUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      deleteUser_call method_call = new deleteUser_call(targetUser, currentUser, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class deleteUser_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo targetUser;
+      private com.ishangke.edunav.commoncontract.model.UserBo currentUser;
+      public deleteUser_call(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.targetUser = targetUser;
+        this.currentUser = currentUser;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("deleteUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        deleteUser_args args = new deleteUser_args();
+        args.setTargetUser(targetUser);
+        args.setCurrentUser(currentUser);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_deleteUser();
+      }
+    }
+
+    public void updateUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      updateUser_call method_call = new updateUser_call(targetUser, currentUser, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class updateUser_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo targetUser;
+      private com.ishangke.edunav.commoncontract.model.UserBo currentUser;
+      public updateUser_call(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.targetUser = targetUser;
+        this.currentUser = currentUser;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("updateUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        updateUser_args args = new updateUser_args();
+        args.setTargetUser(targetUser);
+        args.setCurrentUser(currentUser);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_updateUser();
+      }
+    }
+
+    public void queryUserInfo(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      queryUserInfo_call method_call = new queryUserInfo_call(queryUser, currentUser, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class queryUserInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo queryUser;
+      private com.ishangke.edunav.commoncontract.model.UserBo currentUser;
+      public queryUserInfo_call(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.queryUser = queryUser;
+        this.currentUser = currentUser;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("queryUserInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        queryUserInfo_args args = new queryUserInfo_args();
+        args.setQueryUser(queryUser);
+        args.setCurrentUser(currentUser);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_queryUserInfo();
+      }
+    }
+
+    public void queryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      queryUser_call method_call = new queryUser_call(queryUser, partnerBo, currentUser, pagnationBo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class queryUser_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo queryUser;
+      private com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo;
+      private com.ishangke.edunav.commoncontract.model.UserBo currentUser;
+      private com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo;
+      public queryUser_call(com.ishangke.edunav.commoncontract.model.UserBo queryUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.queryUser = queryUser;
+        this.partnerBo = partnerBo;
+        this.currentUser = currentUser;
+        this.pagnationBo = pagnationBo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("queryUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        queryUser_args args = new queryUser_args();
+        args.setQueryUser(queryUser);
+        args.setPartnerBo(partnerBo);
+        args.setCurrentUser(currentUser);
+        args.setPagnationBo(pagnationBo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_queryUser();
+      }
+    }
+
+    public void querySession(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      querySession_call method_call = new querySession_call(userBo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class querySession_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo userBo;
+      public querySession_call(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.userBo = userBo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("querySession", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        querySession_args args = new querySession_args();
+        args.setUserBo(userBo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_querySession();
+      }
+    }
+
+    public void disposeSession(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      disposeSession_call method_call = new disposeSession_call(userBo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class disposeSession_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.ishangke.edunav.commoncontract.model.UserBo userBo;
+      public disposeSession_call(com.ishangke.edunav.commoncontract.model.UserBo userBo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.userBo = userBo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("disposeSession", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        disposeSession_args args = new disposeSession_args();
+        args.setUserBo(userBo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_disposeSession();
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -170,6 +800,14 @@ public class UserService {
 
     private static <I extends Iface> Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> getProcessMap(Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
       processMap.put("registerUser", new registerUser());
+      processMap.put("login", new login());
+      processMap.put("createUser", new createUser());
+      processMap.put("deleteUser", new deleteUser());
+      processMap.put("updateUser", new updateUser());
+      processMap.put("queryUserInfo", new queryUserInfo());
+      processMap.put("queryUser", new queryUser());
+      processMap.put("querySession", new querySession());
+      processMap.put("disposeSession", new disposeSession());
       return processMap;
     }
 
@@ -197,6 +835,198 @@ public class UserService {
       }
     }
 
+    public static class login<I extends Iface> extends org.apache.thrift.ProcessFunction<I, login_args> {
+      public login() {
+        super("login");
+      }
+
+      public login_args getEmptyArgsInstance() {
+        return new login_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public login_result getResult(I iface, login_args args) throws org.apache.thrift.TException {
+        login_result result = new login_result();
+        try {
+          result.success = iface.login(args.loginBo);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class createUser<I extends Iface> extends org.apache.thrift.ProcessFunction<I, createUser_args> {
+      public createUser() {
+        super("createUser");
+      }
+
+      public createUser_args getEmptyArgsInstance() {
+        return new createUser_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public createUser_result getResult(I iface, createUser_args args) throws org.apache.thrift.TException {
+        createUser_result result = new createUser_result();
+        try {
+          result.success = iface.createUser(args.targetUser, args.paginationBo, args.currentUser);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class deleteUser<I extends Iface> extends org.apache.thrift.ProcessFunction<I, deleteUser_args> {
+      public deleteUser() {
+        super("deleteUser");
+      }
+
+      public deleteUser_args getEmptyArgsInstance() {
+        return new deleteUser_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public deleteUser_result getResult(I iface, deleteUser_args args) throws org.apache.thrift.TException {
+        deleteUser_result result = new deleteUser_result();
+        try {
+          result.success = iface.deleteUser(args.targetUser, args.currentUser);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class updateUser<I extends Iface> extends org.apache.thrift.ProcessFunction<I, updateUser_args> {
+      public updateUser() {
+        super("updateUser");
+      }
+
+      public updateUser_args getEmptyArgsInstance() {
+        return new updateUser_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public updateUser_result getResult(I iface, updateUser_args args) throws org.apache.thrift.TException {
+        updateUser_result result = new updateUser_result();
+        try {
+          result.success = iface.updateUser(args.targetUser, args.currentUser);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class queryUserInfo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, queryUserInfo_args> {
+      public queryUserInfo() {
+        super("queryUserInfo");
+      }
+
+      public queryUserInfo_args getEmptyArgsInstance() {
+        return new queryUserInfo_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public queryUserInfo_result getResult(I iface, queryUserInfo_args args) throws org.apache.thrift.TException {
+        queryUserInfo_result result = new queryUserInfo_result();
+        try {
+          result.success = iface.queryUserInfo(args.queryUser, args.currentUser);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class queryUser<I extends Iface> extends org.apache.thrift.ProcessFunction<I, queryUser_args> {
+      public queryUser() {
+        super("queryUser");
+      }
+
+      public queryUser_args getEmptyArgsInstance() {
+        return new queryUser_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public queryUser_result getResult(I iface, queryUser_args args) throws org.apache.thrift.TException {
+        queryUser_result result = new queryUser_result();
+        try {
+          result.success = iface.queryUser(args.queryUser, args.partnerBo, args.currentUser, args.pagnationBo);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class querySession<I extends Iface> extends org.apache.thrift.ProcessFunction<I, querySession_args> {
+      public querySession() {
+        super("querySession");
+      }
+
+      public querySession_args getEmptyArgsInstance() {
+        return new querySession_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public querySession_result getResult(I iface, querySession_args args) throws org.apache.thrift.TException {
+        querySession_result result = new querySession_result();
+        try {
+          result.success = iface.querySession(args.userBo);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
+    public static class disposeSession<I extends Iface> extends org.apache.thrift.ProcessFunction<I, disposeSession_args> {
+      public disposeSession() {
+        super("disposeSession");
+      }
+
+      public disposeSession_args getEmptyArgsInstance() {
+        return new disposeSession_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public disposeSession_result getResult(I iface, disposeSession_args args) throws org.apache.thrift.TException {
+        disposeSession_result result = new disposeSession_result();
+        try {
+          result.success = iface.disposeSession(args.userBo);
+        } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+          result.businessExceptionBo = businessExceptionBo;
+        }
+        return result;
+      }
+    }
+
   }
 
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
@@ -211,6 +1041,14 @@ public class UserService {
 
     private static <I extends AsyncIface> Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
       processMap.put("registerUser", new registerUser());
+      processMap.put("login", new login());
+      processMap.put("createUser", new createUser());
+      processMap.put("deleteUser", new deleteUser());
+      processMap.put("updateUser", new updateUser());
+      processMap.put("queryUserInfo", new queryUserInfo());
+      processMap.put("queryUser", new queryUser());
+      processMap.put("querySession", new querySession());
+      processMap.put("disposeSession", new disposeSession());
       return processMap;
     }
 
@@ -268,6 +1106,462 @@ public class UserService {
 
       public void start(I iface, registerUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
         iface.registerUser(args.userBo, args.paginationBo,resultHandler);
+      }
+    }
+
+    public static class login<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, login_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public login() {
+        super("login");
+      }
+
+      public login_args getEmptyArgsInstance() {
+        return new login_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            login_result result = new login_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            login_result result = new login_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, login_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.login(args.loginBo,resultHandler);
+      }
+    }
+
+    public static class createUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createUser_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public createUser() {
+        super("createUser");
+      }
+
+      public createUser_args getEmptyArgsInstance() {
+        return new createUser_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            createUser_result result = new createUser_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            createUser_result result = new createUser_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, createUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.createUser(args.targetUser, args.paginationBo, args.currentUser,resultHandler);
+      }
+    }
+
+    public static class deleteUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, deleteUser_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public deleteUser() {
+        super("deleteUser");
+      }
+
+      public deleteUser_args getEmptyArgsInstance() {
+        return new deleteUser_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            deleteUser_result result = new deleteUser_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            deleteUser_result result = new deleteUser_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, deleteUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.deleteUser(args.targetUser, args.currentUser,resultHandler);
+      }
+    }
+
+    public static class updateUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, updateUser_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public updateUser() {
+        super("updateUser");
+      }
+
+      public updateUser_args getEmptyArgsInstance() {
+        return new updateUser_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            updateUser_result result = new updateUser_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            updateUser_result result = new updateUser_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, updateUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.updateUser(args.targetUser, args.currentUser,resultHandler);
+      }
+    }
+
+    public static class queryUserInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, queryUserInfo_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public queryUserInfo() {
+        super("queryUserInfo");
+      }
+
+      public queryUserInfo_args getEmptyArgsInstance() {
+        return new queryUserInfo_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            queryUserInfo_result result = new queryUserInfo_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            queryUserInfo_result result = new queryUserInfo_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, queryUserInfo_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.queryUserInfo(args.queryUser, args.currentUser,resultHandler);
+      }
+    }
+
+    public static class queryUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, queryUser_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public queryUser() {
+        super("queryUser");
+      }
+
+      public queryUser_args getEmptyArgsInstance() {
+        return new queryUser_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            queryUser_result result = new queryUser_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            queryUser_result result = new queryUser_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, queryUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.queryUser(args.queryUser, args.partnerBo, args.currentUser, args.pagnationBo,resultHandler);
+      }
+    }
+
+    public static class querySession<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, querySession_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public querySession() {
+        super("querySession");
+      }
+
+      public querySession_args getEmptyArgsInstance() {
+        return new querySession_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            querySession_result result = new querySession_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            querySession_result result = new querySession_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, querySession_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.querySession(args.userBo,resultHandler);
+      }
+    }
+
+    public static class disposeSession<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, disposeSession_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+      public disposeSession() {
+        super("disposeSession");
+      }
+
+      public disposeSession_args getEmptyArgsInstance() {
+        return new disposeSession_args();
+      }
+
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+            disposeSession_result result = new disposeSession_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            disposeSession_result result = new disposeSession_result();
+            if (e instanceof com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) {
+                        result.businessExceptionBo = (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo) e;
+                        result.setBusinessExceptionBoIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, disposeSession_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+        iface.disposeSession(args.userBo,resultHandler);
       }
     }
 
@@ -1205,6 +2499,7598 @@ public class UserService {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, registerUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class login_args implements org.apache.thrift.TBase<login_args, login_args._Fields>, java.io.Serializable, Cloneable, Comparable<login_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("login_args");
+
+    private static final org.apache.thrift.protocol.TField LOGIN_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("loginBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new login_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new login_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.LoginBo loginBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      LOGIN_BO((short)1, "loginBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // LOGIN_BO
+            return LOGIN_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.LOGIN_BO, new org.apache.thrift.meta_data.FieldMetaData("loginBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.LoginBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(login_args.class, metaDataMap);
+    }
+
+    public login_args() {
+    }
+
+    public login_args(
+      com.ishangke.edunav.commoncontract.model.LoginBo loginBo)
+    {
+      this();
+      this.loginBo = loginBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public login_args(login_args other) {
+      if (other.isSetLoginBo()) {
+        this.loginBo = new com.ishangke.edunav.commoncontract.model.LoginBo(other.loginBo);
+      }
+    }
+
+    public login_args deepCopy() {
+      return new login_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.loginBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.LoginBo getLoginBo() {
+      return this.loginBo;
+    }
+
+    public login_args setLoginBo(com.ishangke.edunav.commoncontract.model.LoginBo loginBo) {
+      this.loginBo = loginBo;
+      return this;
+    }
+
+    public void unsetLoginBo() {
+      this.loginBo = null;
+    }
+
+    /** Returns true if field loginBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetLoginBo() {
+      return this.loginBo != null;
+    }
+
+    public void setLoginBoIsSet(boolean value) {
+      if (!value) {
+        this.loginBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case LOGIN_BO:
+        if (value == null) {
+          unsetLoginBo();
+        } else {
+          setLoginBo((com.ishangke.edunav.commoncontract.model.LoginBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case LOGIN_BO:
+        return getLoginBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case LOGIN_BO:
+        return isSetLoginBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof login_args)
+        return this.equals((login_args)that);
+      return false;
+    }
+
+    public boolean equals(login_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_loginBo = true && this.isSetLoginBo();
+      boolean that_present_loginBo = true && that.isSetLoginBo();
+      if (this_present_loginBo || that_present_loginBo) {
+        if (!(this_present_loginBo && that_present_loginBo))
+          return false;
+        if (!this.loginBo.equals(that.loginBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_loginBo = true && (isSetLoginBo());
+      builder.append(present_loginBo);
+      if (present_loginBo)
+        builder.append(loginBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(login_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetLoginBo()).compareTo(other.isSetLoginBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetLoginBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.loginBo, other.loginBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("login_args(");
+      boolean first = true;
+
+      sb.append("loginBo:");
+      if (this.loginBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.loginBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (loginBo != null) {
+        loginBo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class login_argsStandardSchemeFactory implements SchemeFactory {
+      public login_argsStandardScheme getScheme() {
+        return new login_argsStandardScheme();
+      }
+    }
+
+    private static class login_argsStandardScheme extends StandardScheme<login_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, login_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // LOGIN_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.loginBo = new com.ishangke.edunav.commoncontract.model.LoginBo();
+                struct.loginBo.read(iprot);
+                struct.setLoginBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, login_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.loginBo != null) {
+          oprot.writeFieldBegin(LOGIN_BO_FIELD_DESC);
+          struct.loginBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class login_argsTupleSchemeFactory implements SchemeFactory {
+      public login_argsTupleScheme getScheme() {
+        return new login_argsTupleScheme();
+      }
+    }
+
+    private static class login_argsTupleScheme extends TupleScheme<login_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, login_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetLoginBo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetLoginBo()) {
+          struct.loginBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, login_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.loginBo = new com.ishangke.edunav.commoncontract.model.LoginBo();
+          struct.loginBo.read(iprot);
+          struct.setLoginBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class login_result implements org.apache.thrift.TBase<login_result, login_result._Fields>, java.io.Serializable, Cloneable, Comparable<login_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("login_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new login_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new login_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(login_result.class, metaDataMap);
+    }
+
+    public login_result() {
+    }
+
+    public login_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public login_result(login_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public login_result deepCopy() {
+      return new login_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public login_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public login_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof login_result)
+        return this.equals((login_result)that);
+      return false;
+    }
+
+    public boolean equals(login_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(login_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("login_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class login_resultStandardSchemeFactory implements SchemeFactory {
+      public login_resultStandardScheme getScheme() {
+        return new login_resultStandardScheme();
+      }
+    }
+
+    private static class login_resultStandardScheme extends StandardScheme<login_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, login_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, login_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class login_resultTupleSchemeFactory implements SchemeFactory {
+      public login_resultTupleScheme getScheme() {
+        return new login_resultTupleScheme();
+      }
+    }
+
+    private static class login_resultTupleScheme extends TupleScheme<login_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, login_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, login_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class createUser_args implements org.apache.thrift.TBase<createUser_args, createUser_args._Fields>, java.io.Serializable, Cloneable, Comparable<createUser_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createUser_args");
+
+    private static final org.apache.thrift.protocol.TField TARGET_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("targetUser", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField PAGINATION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("paginationBo", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField CURRENT_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("currentUser", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new createUser_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new createUser_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo targetUser; // required
+    public com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo; // required
+    public com.ishangke.edunav.commoncontract.model.UserBo currentUser; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TARGET_USER((short)1, "targetUser"),
+      PAGINATION_BO((short)2, "paginationBo"),
+      CURRENT_USER((short)3, "currentUser");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TARGET_USER
+            return TARGET_USER;
+          case 2: // PAGINATION_BO
+            return PAGINATION_BO;
+          case 3: // CURRENT_USER
+            return CURRENT_USER;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.TARGET_USER, new org.apache.thrift.meta_data.FieldMetaData("targetUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      tmpMap.put(_Fields.PAGINATION_BO, new org.apache.thrift.meta_data.FieldMetaData("paginationBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.PaginationBo.class)));
+      tmpMap.put(_Fields.CURRENT_USER, new org.apache.thrift.meta_data.FieldMetaData("currentUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createUser_args.class, metaDataMap);
+    }
+
+    public createUser_args() {
+    }
+
+    public createUser_args(
+      com.ishangke.edunav.commoncontract.model.UserBo targetUser,
+      com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo,
+      com.ishangke.edunav.commoncontract.model.UserBo currentUser)
+    {
+      this();
+      this.targetUser = targetUser;
+      this.paginationBo = paginationBo;
+      this.currentUser = currentUser;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public createUser_args(createUser_args other) {
+      if (other.isSetTargetUser()) {
+        this.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.targetUser);
+      }
+      if (other.isSetPaginationBo()) {
+        this.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo(other.paginationBo);
+      }
+      if (other.isSetCurrentUser()) {
+        this.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.currentUser);
+      }
+    }
+
+    public createUser_args deepCopy() {
+      return new createUser_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.targetUser = null;
+      this.paginationBo = null;
+      this.currentUser = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getTargetUser() {
+      return this.targetUser;
+    }
+
+    public createUser_args setTargetUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser) {
+      this.targetUser = targetUser;
+      return this;
+    }
+
+    public void unsetTargetUser() {
+      this.targetUser = null;
+    }
+
+    /** Returns true if field targetUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetTargetUser() {
+      return this.targetUser != null;
+    }
+
+    public void setTargetUserIsSet(boolean value) {
+      if (!value) {
+        this.targetUser = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.PaginationBo getPaginationBo() {
+      return this.paginationBo;
+    }
+
+    public createUser_args setPaginationBo(com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) {
+      this.paginationBo = paginationBo;
+      return this;
+    }
+
+    public void unsetPaginationBo() {
+      this.paginationBo = null;
+    }
+
+    /** Returns true if field paginationBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetPaginationBo() {
+      return this.paginationBo != null;
+    }
+
+    public void setPaginationBoIsSet(boolean value) {
+      if (!value) {
+        this.paginationBo = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getCurrentUser() {
+      return this.currentUser;
+    }
+
+    public createUser_args setCurrentUser(com.ishangke.edunav.commoncontract.model.UserBo currentUser) {
+      this.currentUser = currentUser;
+      return this;
+    }
+
+    public void unsetCurrentUser() {
+      this.currentUser = null;
+    }
+
+    /** Returns true if field currentUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetCurrentUser() {
+      return this.currentUser != null;
+    }
+
+    public void setCurrentUserIsSet(boolean value) {
+      if (!value) {
+        this.currentUser = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case TARGET_USER:
+        if (value == null) {
+          unsetTargetUser();
+        } else {
+          setTargetUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      case PAGINATION_BO:
+        if (value == null) {
+          unsetPaginationBo();
+        } else {
+          setPaginationBo((com.ishangke.edunav.commoncontract.model.PaginationBo)value);
+        }
+        break;
+
+      case CURRENT_USER:
+        if (value == null) {
+          unsetCurrentUser();
+        } else {
+          setCurrentUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case TARGET_USER:
+        return getTargetUser();
+
+      case PAGINATION_BO:
+        return getPaginationBo();
+
+      case CURRENT_USER:
+        return getCurrentUser();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case TARGET_USER:
+        return isSetTargetUser();
+      case PAGINATION_BO:
+        return isSetPaginationBo();
+      case CURRENT_USER:
+        return isSetCurrentUser();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof createUser_args)
+        return this.equals((createUser_args)that);
+      return false;
+    }
+
+    public boolean equals(createUser_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_targetUser = true && this.isSetTargetUser();
+      boolean that_present_targetUser = true && that.isSetTargetUser();
+      if (this_present_targetUser || that_present_targetUser) {
+        if (!(this_present_targetUser && that_present_targetUser))
+          return false;
+        if (!this.targetUser.equals(that.targetUser))
+          return false;
+      }
+
+      boolean this_present_paginationBo = true && this.isSetPaginationBo();
+      boolean that_present_paginationBo = true && that.isSetPaginationBo();
+      if (this_present_paginationBo || that_present_paginationBo) {
+        if (!(this_present_paginationBo && that_present_paginationBo))
+          return false;
+        if (!this.paginationBo.equals(that.paginationBo))
+          return false;
+      }
+
+      boolean this_present_currentUser = true && this.isSetCurrentUser();
+      boolean that_present_currentUser = true && that.isSetCurrentUser();
+      if (this_present_currentUser || that_present_currentUser) {
+        if (!(this_present_currentUser && that_present_currentUser))
+          return false;
+        if (!this.currentUser.equals(that.currentUser))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_targetUser = true && (isSetTargetUser());
+      builder.append(present_targetUser);
+      if (present_targetUser)
+        builder.append(targetUser);
+
+      boolean present_paginationBo = true && (isSetPaginationBo());
+      builder.append(present_paginationBo);
+      if (present_paginationBo)
+        builder.append(paginationBo);
+
+      boolean present_currentUser = true && (isSetCurrentUser());
+      builder.append(present_currentUser);
+      if (present_currentUser)
+        builder.append(currentUser);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(createUser_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetTargetUser()).compareTo(other.isSetTargetUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTargetUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.targetUser, other.targetUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPaginationBo()).compareTo(other.isSetPaginationBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPaginationBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.paginationBo, other.paginationBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetCurrentUser()).compareTo(other.isSetCurrentUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCurrentUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currentUser, other.currentUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("createUser_args(");
+      boolean first = true;
+
+      sb.append("targetUser:");
+      if (this.targetUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.targetUser);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("paginationBo:");
+      if (this.paginationBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.paginationBo);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("currentUser:");
+      if (this.currentUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.currentUser);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (targetUser != null) {
+        targetUser.validate();
+      }
+      if (paginationBo != null) {
+        paginationBo.validate();
+      }
+      if (currentUser != null) {
+        currentUser.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class createUser_argsStandardSchemeFactory implements SchemeFactory {
+      public createUser_argsStandardScheme getScheme() {
+        return new createUser_argsStandardScheme();
+      }
+    }
+
+    private static class createUser_argsStandardScheme extends StandardScheme<createUser_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, createUser_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // TARGET_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.targetUser.read(iprot);
+                struct.setTargetUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // PAGINATION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
+                struct.paginationBo.read(iprot);
+                struct.setPaginationBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // CURRENT_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.currentUser.read(iprot);
+                struct.setCurrentUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, createUser_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.targetUser != null) {
+          oprot.writeFieldBegin(TARGET_USER_FIELD_DESC);
+          struct.targetUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.paginationBo != null) {
+          oprot.writeFieldBegin(PAGINATION_BO_FIELD_DESC);
+          struct.paginationBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.currentUser != null) {
+          oprot.writeFieldBegin(CURRENT_USER_FIELD_DESC);
+          struct.currentUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class createUser_argsTupleSchemeFactory implements SchemeFactory {
+      public createUser_argsTupleScheme getScheme() {
+        return new createUser_argsTupleScheme();
+      }
+    }
+
+    private static class createUser_argsTupleScheme extends TupleScheme<createUser_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, createUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetTargetUser()) {
+          optionals.set(0);
+        }
+        if (struct.isSetPaginationBo()) {
+          optionals.set(1);
+        }
+        if (struct.isSetCurrentUser()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetTargetUser()) {
+          struct.targetUser.write(oprot);
+        }
+        if (struct.isSetPaginationBo()) {
+          struct.paginationBo.write(oprot);
+        }
+        if (struct.isSetCurrentUser()) {
+          struct.currentUser.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, createUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(3);
+        if (incoming.get(0)) {
+          struct.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.targetUser.read(iprot);
+          struct.setTargetUserIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
+          struct.paginationBo.read(iprot);
+          struct.setPaginationBoIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.currentUser.read(iprot);
+          struct.setCurrentUserIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class createUser_result implements org.apache.thrift.TBase<createUser_result, createUser_result._Fields>, java.io.Serializable, Cloneable, Comparable<createUser_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createUser_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new createUser_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new createUser_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createUser_result.class, metaDataMap);
+    }
+
+    public createUser_result() {
+    }
+
+    public createUser_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public createUser_result(createUser_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public createUser_result deepCopy() {
+      return new createUser_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public createUser_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public createUser_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof createUser_result)
+        return this.equals((createUser_result)that);
+      return false;
+    }
+
+    public boolean equals(createUser_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(createUser_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("createUser_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class createUser_resultStandardSchemeFactory implements SchemeFactory {
+      public createUser_resultStandardScheme getScheme() {
+        return new createUser_resultStandardScheme();
+      }
+    }
+
+    private static class createUser_resultStandardScheme extends StandardScheme<createUser_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, createUser_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, createUser_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class createUser_resultTupleSchemeFactory implements SchemeFactory {
+      public createUser_resultTupleScheme getScheme() {
+        return new createUser_resultTupleScheme();
+      }
+    }
+
+    private static class createUser_resultTupleScheme extends TupleScheme<createUser_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, createUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, createUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class deleteUser_args implements org.apache.thrift.TBase<deleteUser_args, deleteUser_args._Fields>, java.io.Serializable, Cloneable, Comparable<deleteUser_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("deleteUser_args");
+
+    private static final org.apache.thrift.protocol.TField TARGET_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("targetUser", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField CURRENT_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("currentUser", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new deleteUser_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new deleteUser_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo targetUser; // required
+    public com.ishangke.edunav.commoncontract.model.UserBo currentUser; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TARGET_USER((short)1, "targetUser"),
+      CURRENT_USER((short)2, "currentUser");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TARGET_USER
+            return TARGET_USER;
+          case 2: // CURRENT_USER
+            return CURRENT_USER;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.TARGET_USER, new org.apache.thrift.meta_data.FieldMetaData("targetUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      tmpMap.put(_Fields.CURRENT_USER, new org.apache.thrift.meta_data.FieldMetaData("currentUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(deleteUser_args.class, metaDataMap);
+    }
+
+    public deleteUser_args() {
+    }
+
+    public deleteUser_args(
+      com.ishangke.edunav.commoncontract.model.UserBo targetUser,
+      com.ishangke.edunav.commoncontract.model.UserBo currentUser)
+    {
+      this();
+      this.targetUser = targetUser;
+      this.currentUser = currentUser;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public deleteUser_args(deleteUser_args other) {
+      if (other.isSetTargetUser()) {
+        this.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.targetUser);
+      }
+      if (other.isSetCurrentUser()) {
+        this.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.currentUser);
+      }
+    }
+
+    public deleteUser_args deepCopy() {
+      return new deleteUser_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.targetUser = null;
+      this.currentUser = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getTargetUser() {
+      return this.targetUser;
+    }
+
+    public deleteUser_args setTargetUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser) {
+      this.targetUser = targetUser;
+      return this;
+    }
+
+    public void unsetTargetUser() {
+      this.targetUser = null;
+    }
+
+    /** Returns true if field targetUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetTargetUser() {
+      return this.targetUser != null;
+    }
+
+    public void setTargetUserIsSet(boolean value) {
+      if (!value) {
+        this.targetUser = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getCurrentUser() {
+      return this.currentUser;
+    }
+
+    public deleteUser_args setCurrentUser(com.ishangke.edunav.commoncontract.model.UserBo currentUser) {
+      this.currentUser = currentUser;
+      return this;
+    }
+
+    public void unsetCurrentUser() {
+      this.currentUser = null;
+    }
+
+    /** Returns true if field currentUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetCurrentUser() {
+      return this.currentUser != null;
+    }
+
+    public void setCurrentUserIsSet(boolean value) {
+      if (!value) {
+        this.currentUser = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case TARGET_USER:
+        if (value == null) {
+          unsetTargetUser();
+        } else {
+          setTargetUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      case CURRENT_USER:
+        if (value == null) {
+          unsetCurrentUser();
+        } else {
+          setCurrentUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case TARGET_USER:
+        return getTargetUser();
+
+      case CURRENT_USER:
+        return getCurrentUser();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case TARGET_USER:
+        return isSetTargetUser();
+      case CURRENT_USER:
+        return isSetCurrentUser();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof deleteUser_args)
+        return this.equals((deleteUser_args)that);
+      return false;
+    }
+
+    public boolean equals(deleteUser_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_targetUser = true && this.isSetTargetUser();
+      boolean that_present_targetUser = true && that.isSetTargetUser();
+      if (this_present_targetUser || that_present_targetUser) {
+        if (!(this_present_targetUser && that_present_targetUser))
+          return false;
+        if (!this.targetUser.equals(that.targetUser))
+          return false;
+      }
+
+      boolean this_present_currentUser = true && this.isSetCurrentUser();
+      boolean that_present_currentUser = true && that.isSetCurrentUser();
+      if (this_present_currentUser || that_present_currentUser) {
+        if (!(this_present_currentUser && that_present_currentUser))
+          return false;
+        if (!this.currentUser.equals(that.currentUser))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_targetUser = true && (isSetTargetUser());
+      builder.append(present_targetUser);
+      if (present_targetUser)
+        builder.append(targetUser);
+
+      boolean present_currentUser = true && (isSetCurrentUser());
+      builder.append(present_currentUser);
+      if (present_currentUser)
+        builder.append(currentUser);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(deleteUser_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetTargetUser()).compareTo(other.isSetTargetUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTargetUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.targetUser, other.targetUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetCurrentUser()).compareTo(other.isSetCurrentUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCurrentUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currentUser, other.currentUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("deleteUser_args(");
+      boolean first = true;
+
+      sb.append("targetUser:");
+      if (this.targetUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.targetUser);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("currentUser:");
+      if (this.currentUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.currentUser);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (targetUser != null) {
+        targetUser.validate();
+      }
+      if (currentUser != null) {
+        currentUser.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class deleteUser_argsStandardSchemeFactory implements SchemeFactory {
+      public deleteUser_argsStandardScheme getScheme() {
+        return new deleteUser_argsStandardScheme();
+      }
+    }
+
+    private static class deleteUser_argsStandardScheme extends StandardScheme<deleteUser_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, deleteUser_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // TARGET_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.targetUser.read(iprot);
+                struct.setTargetUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // CURRENT_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.currentUser.read(iprot);
+                struct.setCurrentUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, deleteUser_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.targetUser != null) {
+          oprot.writeFieldBegin(TARGET_USER_FIELD_DESC);
+          struct.targetUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.currentUser != null) {
+          oprot.writeFieldBegin(CURRENT_USER_FIELD_DESC);
+          struct.currentUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class deleteUser_argsTupleSchemeFactory implements SchemeFactory {
+      public deleteUser_argsTupleScheme getScheme() {
+        return new deleteUser_argsTupleScheme();
+      }
+    }
+
+    private static class deleteUser_argsTupleScheme extends TupleScheme<deleteUser_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, deleteUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetTargetUser()) {
+          optionals.set(0);
+        }
+        if (struct.isSetCurrentUser()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetTargetUser()) {
+          struct.targetUser.write(oprot);
+        }
+        if (struct.isSetCurrentUser()) {
+          struct.currentUser.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, deleteUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.targetUser.read(iprot);
+          struct.setTargetUserIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.currentUser.read(iprot);
+          struct.setCurrentUserIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class deleteUser_result implements org.apache.thrift.TBase<deleteUser_result, deleteUser_result._Fields>, java.io.Serializable, Cloneable, Comparable<deleteUser_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("deleteUser_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new deleteUser_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new deleteUser_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(deleteUser_result.class, metaDataMap);
+    }
+
+    public deleteUser_result() {
+    }
+
+    public deleteUser_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public deleteUser_result(deleteUser_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public deleteUser_result deepCopy() {
+      return new deleteUser_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public deleteUser_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public deleteUser_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof deleteUser_result)
+        return this.equals((deleteUser_result)that);
+      return false;
+    }
+
+    public boolean equals(deleteUser_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(deleteUser_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("deleteUser_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class deleteUser_resultStandardSchemeFactory implements SchemeFactory {
+      public deleteUser_resultStandardScheme getScheme() {
+        return new deleteUser_resultStandardScheme();
+      }
+    }
+
+    private static class deleteUser_resultStandardScheme extends StandardScheme<deleteUser_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, deleteUser_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, deleteUser_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class deleteUser_resultTupleSchemeFactory implements SchemeFactory {
+      public deleteUser_resultTupleScheme getScheme() {
+        return new deleteUser_resultTupleScheme();
+      }
+    }
+
+    private static class deleteUser_resultTupleScheme extends TupleScheme<deleteUser_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, deleteUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, deleteUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class updateUser_args implements org.apache.thrift.TBase<updateUser_args, updateUser_args._Fields>, java.io.Serializable, Cloneable, Comparable<updateUser_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("updateUser_args");
+
+    private static final org.apache.thrift.protocol.TField TARGET_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("targetUser", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField CURRENT_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("currentUser", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new updateUser_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new updateUser_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo targetUser; // required
+    public com.ishangke.edunav.commoncontract.model.UserBo currentUser; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TARGET_USER((short)1, "targetUser"),
+      CURRENT_USER((short)2, "currentUser");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TARGET_USER
+            return TARGET_USER;
+          case 2: // CURRENT_USER
+            return CURRENT_USER;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.TARGET_USER, new org.apache.thrift.meta_data.FieldMetaData("targetUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      tmpMap.put(_Fields.CURRENT_USER, new org.apache.thrift.meta_data.FieldMetaData("currentUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(updateUser_args.class, metaDataMap);
+    }
+
+    public updateUser_args() {
+    }
+
+    public updateUser_args(
+      com.ishangke.edunav.commoncontract.model.UserBo targetUser,
+      com.ishangke.edunav.commoncontract.model.UserBo currentUser)
+    {
+      this();
+      this.targetUser = targetUser;
+      this.currentUser = currentUser;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public updateUser_args(updateUser_args other) {
+      if (other.isSetTargetUser()) {
+        this.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.targetUser);
+      }
+      if (other.isSetCurrentUser()) {
+        this.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.currentUser);
+      }
+    }
+
+    public updateUser_args deepCopy() {
+      return new updateUser_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.targetUser = null;
+      this.currentUser = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getTargetUser() {
+      return this.targetUser;
+    }
+
+    public updateUser_args setTargetUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser) {
+      this.targetUser = targetUser;
+      return this;
+    }
+
+    public void unsetTargetUser() {
+      this.targetUser = null;
+    }
+
+    /** Returns true if field targetUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetTargetUser() {
+      return this.targetUser != null;
+    }
+
+    public void setTargetUserIsSet(boolean value) {
+      if (!value) {
+        this.targetUser = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getCurrentUser() {
+      return this.currentUser;
+    }
+
+    public updateUser_args setCurrentUser(com.ishangke.edunav.commoncontract.model.UserBo currentUser) {
+      this.currentUser = currentUser;
+      return this;
+    }
+
+    public void unsetCurrentUser() {
+      this.currentUser = null;
+    }
+
+    /** Returns true if field currentUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetCurrentUser() {
+      return this.currentUser != null;
+    }
+
+    public void setCurrentUserIsSet(boolean value) {
+      if (!value) {
+        this.currentUser = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case TARGET_USER:
+        if (value == null) {
+          unsetTargetUser();
+        } else {
+          setTargetUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      case CURRENT_USER:
+        if (value == null) {
+          unsetCurrentUser();
+        } else {
+          setCurrentUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case TARGET_USER:
+        return getTargetUser();
+
+      case CURRENT_USER:
+        return getCurrentUser();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case TARGET_USER:
+        return isSetTargetUser();
+      case CURRENT_USER:
+        return isSetCurrentUser();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof updateUser_args)
+        return this.equals((updateUser_args)that);
+      return false;
+    }
+
+    public boolean equals(updateUser_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_targetUser = true && this.isSetTargetUser();
+      boolean that_present_targetUser = true && that.isSetTargetUser();
+      if (this_present_targetUser || that_present_targetUser) {
+        if (!(this_present_targetUser && that_present_targetUser))
+          return false;
+        if (!this.targetUser.equals(that.targetUser))
+          return false;
+      }
+
+      boolean this_present_currentUser = true && this.isSetCurrentUser();
+      boolean that_present_currentUser = true && that.isSetCurrentUser();
+      if (this_present_currentUser || that_present_currentUser) {
+        if (!(this_present_currentUser && that_present_currentUser))
+          return false;
+        if (!this.currentUser.equals(that.currentUser))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_targetUser = true && (isSetTargetUser());
+      builder.append(present_targetUser);
+      if (present_targetUser)
+        builder.append(targetUser);
+
+      boolean present_currentUser = true && (isSetCurrentUser());
+      builder.append(present_currentUser);
+      if (present_currentUser)
+        builder.append(currentUser);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(updateUser_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetTargetUser()).compareTo(other.isSetTargetUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTargetUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.targetUser, other.targetUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetCurrentUser()).compareTo(other.isSetCurrentUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCurrentUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currentUser, other.currentUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("updateUser_args(");
+      boolean first = true;
+
+      sb.append("targetUser:");
+      if (this.targetUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.targetUser);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("currentUser:");
+      if (this.currentUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.currentUser);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (targetUser != null) {
+        targetUser.validate();
+      }
+      if (currentUser != null) {
+        currentUser.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class updateUser_argsStandardSchemeFactory implements SchemeFactory {
+      public updateUser_argsStandardScheme getScheme() {
+        return new updateUser_argsStandardScheme();
+      }
+    }
+
+    private static class updateUser_argsStandardScheme extends StandardScheme<updateUser_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, updateUser_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // TARGET_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.targetUser.read(iprot);
+                struct.setTargetUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // CURRENT_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.currentUser.read(iprot);
+                struct.setCurrentUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, updateUser_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.targetUser != null) {
+          oprot.writeFieldBegin(TARGET_USER_FIELD_DESC);
+          struct.targetUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.currentUser != null) {
+          oprot.writeFieldBegin(CURRENT_USER_FIELD_DESC);
+          struct.currentUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class updateUser_argsTupleSchemeFactory implements SchemeFactory {
+      public updateUser_argsTupleScheme getScheme() {
+        return new updateUser_argsTupleScheme();
+      }
+    }
+
+    private static class updateUser_argsTupleScheme extends TupleScheme<updateUser_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, updateUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetTargetUser()) {
+          optionals.set(0);
+        }
+        if (struct.isSetCurrentUser()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetTargetUser()) {
+          struct.targetUser.write(oprot);
+        }
+        if (struct.isSetCurrentUser()) {
+          struct.currentUser.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, updateUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.targetUser.read(iprot);
+          struct.setTargetUserIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.currentUser.read(iprot);
+          struct.setCurrentUserIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class updateUser_result implements org.apache.thrift.TBase<updateUser_result, updateUser_result._Fields>, java.io.Serializable, Cloneable, Comparable<updateUser_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("updateUser_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new updateUser_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new updateUser_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(updateUser_result.class, metaDataMap);
+    }
+
+    public updateUser_result() {
+    }
+
+    public updateUser_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public updateUser_result(updateUser_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public updateUser_result deepCopy() {
+      return new updateUser_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public updateUser_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public updateUser_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof updateUser_result)
+        return this.equals((updateUser_result)that);
+      return false;
+    }
+
+    public boolean equals(updateUser_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(updateUser_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("updateUser_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class updateUser_resultStandardSchemeFactory implements SchemeFactory {
+      public updateUser_resultStandardScheme getScheme() {
+        return new updateUser_resultStandardScheme();
+      }
+    }
+
+    private static class updateUser_resultStandardScheme extends StandardScheme<updateUser_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, updateUser_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, updateUser_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class updateUser_resultTupleSchemeFactory implements SchemeFactory {
+      public updateUser_resultTupleScheme getScheme() {
+        return new updateUser_resultTupleScheme();
+      }
+    }
+
+    private static class updateUser_resultTupleScheme extends TupleScheme<updateUser_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, updateUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, updateUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class queryUserInfo_args implements org.apache.thrift.TBase<queryUserInfo_args, queryUserInfo_args._Fields>, java.io.Serializable, Cloneable, Comparable<queryUserInfo_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("queryUserInfo_args");
+
+    private static final org.apache.thrift.protocol.TField QUERY_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("queryUser", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField CURRENT_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("currentUser", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new queryUserInfo_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new queryUserInfo_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo queryUser; // required
+    public com.ishangke.edunav.commoncontract.model.UserBo currentUser; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      QUERY_USER((short)1, "queryUser"),
+      CURRENT_USER((short)2, "currentUser");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // QUERY_USER
+            return QUERY_USER;
+          case 2: // CURRENT_USER
+            return CURRENT_USER;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.QUERY_USER, new org.apache.thrift.meta_data.FieldMetaData("queryUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      tmpMap.put(_Fields.CURRENT_USER, new org.apache.thrift.meta_data.FieldMetaData("currentUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(queryUserInfo_args.class, metaDataMap);
+    }
+
+    public queryUserInfo_args() {
+    }
+
+    public queryUserInfo_args(
+      com.ishangke.edunav.commoncontract.model.UserBo queryUser,
+      com.ishangke.edunav.commoncontract.model.UserBo currentUser)
+    {
+      this();
+      this.queryUser = queryUser;
+      this.currentUser = currentUser;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public queryUserInfo_args(queryUserInfo_args other) {
+      if (other.isSetQueryUser()) {
+        this.queryUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.queryUser);
+      }
+      if (other.isSetCurrentUser()) {
+        this.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.currentUser);
+      }
+    }
+
+    public queryUserInfo_args deepCopy() {
+      return new queryUserInfo_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.queryUser = null;
+      this.currentUser = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getQueryUser() {
+      return this.queryUser;
+    }
+
+    public queryUserInfo_args setQueryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser) {
+      this.queryUser = queryUser;
+      return this;
+    }
+
+    public void unsetQueryUser() {
+      this.queryUser = null;
+    }
+
+    /** Returns true if field queryUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetQueryUser() {
+      return this.queryUser != null;
+    }
+
+    public void setQueryUserIsSet(boolean value) {
+      if (!value) {
+        this.queryUser = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getCurrentUser() {
+      return this.currentUser;
+    }
+
+    public queryUserInfo_args setCurrentUser(com.ishangke.edunav.commoncontract.model.UserBo currentUser) {
+      this.currentUser = currentUser;
+      return this;
+    }
+
+    public void unsetCurrentUser() {
+      this.currentUser = null;
+    }
+
+    /** Returns true if field currentUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetCurrentUser() {
+      return this.currentUser != null;
+    }
+
+    public void setCurrentUserIsSet(boolean value) {
+      if (!value) {
+        this.currentUser = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case QUERY_USER:
+        if (value == null) {
+          unsetQueryUser();
+        } else {
+          setQueryUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      case CURRENT_USER:
+        if (value == null) {
+          unsetCurrentUser();
+        } else {
+          setCurrentUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case QUERY_USER:
+        return getQueryUser();
+
+      case CURRENT_USER:
+        return getCurrentUser();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case QUERY_USER:
+        return isSetQueryUser();
+      case CURRENT_USER:
+        return isSetCurrentUser();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof queryUserInfo_args)
+        return this.equals((queryUserInfo_args)that);
+      return false;
+    }
+
+    public boolean equals(queryUserInfo_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_queryUser = true && this.isSetQueryUser();
+      boolean that_present_queryUser = true && that.isSetQueryUser();
+      if (this_present_queryUser || that_present_queryUser) {
+        if (!(this_present_queryUser && that_present_queryUser))
+          return false;
+        if (!this.queryUser.equals(that.queryUser))
+          return false;
+      }
+
+      boolean this_present_currentUser = true && this.isSetCurrentUser();
+      boolean that_present_currentUser = true && that.isSetCurrentUser();
+      if (this_present_currentUser || that_present_currentUser) {
+        if (!(this_present_currentUser && that_present_currentUser))
+          return false;
+        if (!this.currentUser.equals(that.currentUser))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_queryUser = true && (isSetQueryUser());
+      builder.append(present_queryUser);
+      if (present_queryUser)
+        builder.append(queryUser);
+
+      boolean present_currentUser = true && (isSetCurrentUser());
+      builder.append(present_currentUser);
+      if (present_currentUser)
+        builder.append(currentUser);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(queryUserInfo_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetQueryUser()).compareTo(other.isSetQueryUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetQueryUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.queryUser, other.queryUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetCurrentUser()).compareTo(other.isSetCurrentUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCurrentUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currentUser, other.currentUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("queryUserInfo_args(");
+      boolean first = true;
+
+      sb.append("queryUser:");
+      if (this.queryUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.queryUser);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("currentUser:");
+      if (this.currentUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.currentUser);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (queryUser != null) {
+        queryUser.validate();
+      }
+      if (currentUser != null) {
+        currentUser.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class queryUserInfo_argsStandardSchemeFactory implements SchemeFactory {
+      public queryUserInfo_argsStandardScheme getScheme() {
+        return new queryUserInfo_argsStandardScheme();
+      }
+    }
+
+    private static class queryUserInfo_argsStandardScheme extends StandardScheme<queryUserInfo_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, queryUserInfo_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // QUERY_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.queryUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.queryUser.read(iprot);
+                struct.setQueryUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // CURRENT_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.currentUser.read(iprot);
+                struct.setCurrentUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, queryUserInfo_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.queryUser != null) {
+          oprot.writeFieldBegin(QUERY_USER_FIELD_DESC);
+          struct.queryUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.currentUser != null) {
+          oprot.writeFieldBegin(CURRENT_USER_FIELD_DESC);
+          struct.currentUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class queryUserInfo_argsTupleSchemeFactory implements SchemeFactory {
+      public queryUserInfo_argsTupleScheme getScheme() {
+        return new queryUserInfo_argsTupleScheme();
+      }
+    }
+
+    private static class queryUserInfo_argsTupleScheme extends TupleScheme<queryUserInfo_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, queryUserInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetQueryUser()) {
+          optionals.set(0);
+        }
+        if (struct.isSetCurrentUser()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetQueryUser()) {
+          struct.queryUser.write(oprot);
+        }
+        if (struct.isSetCurrentUser()) {
+          struct.currentUser.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, queryUserInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.queryUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.queryUser.read(iprot);
+          struct.setQueryUserIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.currentUser.read(iprot);
+          struct.setCurrentUserIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class queryUserInfo_result implements org.apache.thrift.TBase<queryUserInfo_result, queryUserInfo_result._Fields>, java.io.Serializable, Cloneable, Comparable<queryUserInfo_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("queryUserInfo_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new queryUserInfo_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new queryUserInfo_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(queryUserInfo_result.class, metaDataMap);
+    }
+
+    public queryUserInfo_result() {
+    }
+
+    public queryUserInfo_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public queryUserInfo_result(queryUserInfo_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public queryUserInfo_result deepCopy() {
+      return new queryUserInfo_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public queryUserInfo_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public queryUserInfo_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof queryUserInfo_result)
+        return this.equals((queryUserInfo_result)that);
+      return false;
+    }
+
+    public boolean equals(queryUserInfo_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(queryUserInfo_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("queryUserInfo_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class queryUserInfo_resultStandardSchemeFactory implements SchemeFactory {
+      public queryUserInfo_resultStandardScheme getScheme() {
+        return new queryUserInfo_resultStandardScheme();
+      }
+    }
+
+    private static class queryUserInfo_resultStandardScheme extends StandardScheme<queryUserInfo_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, queryUserInfo_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, queryUserInfo_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class queryUserInfo_resultTupleSchemeFactory implements SchemeFactory {
+      public queryUserInfo_resultTupleScheme getScheme() {
+        return new queryUserInfo_resultTupleScheme();
+      }
+    }
+
+    private static class queryUserInfo_resultTupleScheme extends TupleScheme<queryUserInfo_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, queryUserInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, queryUserInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class queryUser_args implements org.apache.thrift.TBase<queryUser_args, queryUser_args._Fields>, java.io.Serializable, Cloneable, Comparable<queryUser_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("queryUser_args");
+
+    private static final org.apache.thrift.protocol.TField QUERY_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("queryUser", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField PARTNER_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("partnerBo", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField CURRENT_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("currentUser", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+    private static final org.apache.thrift.protocol.TField PAGNATION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("pagnationBo", org.apache.thrift.protocol.TType.STRUCT, (short)4);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new queryUser_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new queryUser_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo queryUser; // required
+    public com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo; // required
+    public com.ishangke.edunav.commoncontract.model.UserBo currentUser; // required
+    public com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      QUERY_USER((short)1, "queryUser"),
+      PARTNER_BO((short)2, "partnerBo"),
+      CURRENT_USER((short)3, "currentUser"),
+      PAGNATION_BO((short)4, "pagnationBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // QUERY_USER
+            return QUERY_USER;
+          case 2: // PARTNER_BO
+            return PARTNER_BO;
+          case 3: // CURRENT_USER
+            return CURRENT_USER;
+          case 4: // PAGNATION_BO
+            return PAGNATION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.QUERY_USER, new org.apache.thrift.meta_data.FieldMetaData("queryUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      tmpMap.put(_Fields.PARTNER_BO, new org.apache.thrift.meta_data.FieldMetaData("partnerBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.PartnerBo.class)));
+      tmpMap.put(_Fields.CURRENT_USER, new org.apache.thrift.meta_data.FieldMetaData("currentUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      tmpMap.put(_Fields.PAGNATION_BO, new org.apache.thrift.meta_data.FieldMetaData("pagnationBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.PaginationBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(queryUser_args.class, metaDataMap);
+    }
+
+    public queryUser_args() {
+    }
+
+    public queryUser_args(
+      com.ishangke.edunav.commoncontract.model.UserBo queryUser,
+      com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo,
+      com.ishangke.edunav.commoncontract.model.UserBo currentUser,
+      com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo)
+    {
+      this();
+      this.queryUser = queryUser;
+      this.partnerBo = partnerBo;
+      this.currentUser = currentUser;
+      this.pagnationBo = pagnationBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public queryUser_args(queryUser_args other) {
+      if (other.isSetQueryUser()) {
+        this.queryUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.queryUser);
+      }
+      if (other.isSetPartnerBo()) {
+        this.partnerBo = new com.ishangke.edunav.commoncontract.model.PartnerBo(other.partnerBo);
+      }
+      if (other.isSetCurrentUser()) {
+        this.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.currentUser);
+      }
+      if (other.isSetPagnationBo()) {
+        this.pagnationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo(other.pagnationBo);
+      }
+    }
+
+    public queryUser_args deepCopy() {
+      return new queryUser_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.queryUser = null;
+      this.partnerBo = null;
+      this.currentUser = null;
+      this.pagnationBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getQueryUser() {
+      return this.queryUser;
+    }
+
+    public queryUser_args setQueryUser(com.ishangke.edunav.commoncontract.model.UserBo queryUser) {
+      this.queryUser = queryUser;
+      return this;
+    }
+
+    public void unsetQueryUser() {
+      this.queryUser = null;
+    }
+
+    /** Returns true if field queryUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetQueryUser() {
+      return this.queryUser != null;
+    }
+
+    public void setQueryUserIsSet(boolean value) {
+      if (!value) {
+        this.queryUser = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.PartnerBo getPartnerBo() {
+      return this.partnerBo;
+    }
+
+    public queryUser_args setPartnerBo(com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo) {
+      this.partnerBo = partnerBo;
+      return this;
+    }
+
+    public void unsetPartnerBo() {
+      this.partnerBo = null;
+    }
+
+    /** Returns true if field partnerBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetPartnerBo() {
+      return this.partnerBo != null;
+    }
+
+    public void setPartnerBoIsSet(boolean value) {
+      if (!value) {
+        this.partnerBo = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getCurrentUser() {
+      return this.currentUser;
+    }
+
+    public queryUser_args setCurrentUser(com.ishangke.edunav.commoncontract.model.UserBo currentUser) {
+      this.currentUser = currentUser;
+      return this;
+    }
+
+    public void unsetCurrentUser() {
+      this.currentUser = null;
+    }
+
+    /** Returns true if field currentUser is set (has been assigned a value) and false otherwise */
+    public boolean isSetCurrentUser() {
+      return this.currentUser != null;
+    }
+
+    public void setCurrentUserIsSet(boolean value) {
+      if (!value) {
+        this.currentUser = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.PaginationBo getPagnationBo() {
+      return this.pagnationBo;
+    }
+
+    public queryUser_args setPagnationBo(com.ishangke.edunav.commoncontract.model.PaginationBo pagnationBo) {
+      this.pagnationBo = pagnationBo;
+      return this;
+    }
+
+    public void unsetPagnationBo() {
+      this.pagnationBo = null;
+    }
+
+    /** Returns true if field pagnationBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetPagnationBo() {
+      return this.pagnationBo != null;
+    }
+
+    public void setPagnationBoIsSet(boolean value) {
+      if (!value) {
+        this.pagnationBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case QUERY_USER:
+        if (value == null) {
+          unsetQueryUser();
+        } else {
+          setQueryUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      case PARTNER_BO:
+        if (value == null) {
+          unsetPartnerBo();
+        } else {
+          setPartnerBo((com.ishangke.edunav.commoncontract.model.PartnerBo)value);
+        }
+        break;
+
+      case CURRENT_USER:
+        if (value == null) {
+          unsetCurrentUser();
+        } else {
+          setCurrentUser((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      case PAGNATION_BO:
+        if (value == null) {
+          unsetPagnationBo();
+        } else {
+          setPagnationBo((com.ishangke.edunav.commoncontract.model.PaginationBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case QUERY_USER:
+        return getQueryUser();
+
+      case PARTNER_BO:
+        return getPartnerBo();
+
+      case CURRENT_USER:
+        return getCurrentUser();
+
+      case PAGNATION_BO:
+        return getPagnationBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case QUERY_USER:
+        return isSetQueryUser();
+      case PARTNER_BO:
+        return isSetPartnerBo();
+      case CURRENT_USER:
+        return isSetCurrentUser();
+      case PAGNATION_BO:
+        return isSetPagnationBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof queryUser_args)
+        return this.equals((queryUser_args)that);
+      return false;
+    }
+
+    public boolean equals(queryUser_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_queryUser = true && this.isSetQueryUser();
+      boolean that_present_queryUser = true && that.isSetQueryUser();
+      if (this_present_queryUser || that_present_queryUser) {
+        if (!(this_present_queryUser && that_present_queryUser))
+          return false;
+        if (!this.queryUser.equals(that.queryUser))
+          return false;
+      }
+
+      boolean this_present_partnerBo = true && this.isSetPartnerBo();
+      boolean that_present_partnerBo = true && that.isSetPartnerBo();
+      if (this_present_partnerBo || that_present_partnerBo) {
+        if (!(this_present_partnerBo && that_present_partnerBo))
+          return false;
+        if (!this.partnerBo.equals(that.partnerBo))
+          return false;
+      }
+
+      boolean this_present_currentUser = true && this.isSetCurrentUser();
+      boolean that_present_currentUser = true && that.isSetCurrentUser();
+      if (this_present_currentUser || that_present_currentUser) {
+        if (!(this_present_currentUser && that_present_currentUser))
+          return false;
+        if (!this.currentUser.equals(that.currentUser))
+          return false;
+      }
+
+      boolean this_present_pagnationBo = true && this.isSetPagnationBo();
+      boolean that_present_pagnationBo = true && that.isSetPagnationBo();
+      if (this_present_pagnationBo || that_present_pagnationBo) {
+        if (!(this_present_pagnationBo && that_present_pagnationBo))
+          return false;
+        if (!this.pagnationBo.equals(that.pagnationBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_queryUser = true && (isSetQueryUser());
+      builder.append(present_queryUser);
+      if (present_queryUser)
+        builder.append(queryUser);
+
+      boolean present_partnerBo = true && (isSetPartnerBo());
+      builder.append(present_partnerBo);
+      if (present_partnerBo)
+        builder.append(partnerBo);
+
+      boolean present_currentUser = true && (isSetCurrentUser());
+      builder.append(present_currentUser);
+      if (present_currentUser)
+        builder.append(currentUser);
+
+      boolean present_pagnationBo = true && (isSetPagnationBo());
+      builder.append(present_pagnationBo);
+      if (present_pagnationBo)
+        builder.append(pagnationBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(queryUser_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetQueryUser()).compareTo(other.isSetQueryUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetQueryUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.queryUser, other.queryUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPartnerBo()).compareTo(other.isSetPartnerBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPartnerBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.partnerBo, other.partnerBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetCurrentUser()).compareTo(other.isSetCurrentUser());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCurrentUser()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currentUser, other.currentUser);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPagnationBo()).compareTo(other.isSetPagnationBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPagnationBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.pagnationBo, other.pagnationBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("queryUser_args(");
+      boolean first = true;
+
+      sb.append("queryUser:");
+      if (this.queryUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.queryUser);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("partnerBo:");
+      if (this.partnerBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.partnerBo);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("currentUser:");
+      if (this.currentUser == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.currentUser);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("pagnationBo:");
+      if (this.pagnationBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.pagnationBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (queryUser != null) {
+        queryUser.validate();
+      }
+      if (partnerBo != null) {
+        partnerBo.validate();
+      }
+      if (currentUser != null) {
+        currentUser.validate();
+      }
+      if (pagnationBo != null) {
+        pagnationBo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class queryUser_argsStandardSchemeFactory implements SchemeFactory {
+      public queryUser_argsStandardScheme getScheme() {
+        return new queryUser_argsStandardScheme();
+      }
+    }
+
+    private static class queryUser_argsStandardScheme extends StandardScheme<queryUser_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, queryUser_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // QUERY_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.queryUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.queryUser.read(iprot);
+                struct.setQueryUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // PARTNER_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.partnerBo = new com.ishangke.edunav.commoncontract.model.PartnerBo();
+                struct.partnerBo.read(iprot);
+                struct.setPartnerBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // CURRENT_USER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.currentUser.read(iprot);
+                struct.setCurrentUserIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // PAGNATION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.pagnationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
+                struct.pagnationBo.read(iprot);
+                struct.setPagnationBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, queryUser_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.queryUser != null) {
+          oprot.writeFieldBegin(QUERY_USER_FIELD_DESC);
+          struct.queryUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.partnerBo != null) {
+          oprot.writeFieldBegin(PARTNER_BO_FIELD_DESC);
+          struct.partnerBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.currentUser != null) {
+          oprot.writeFieldBegin(CURRENT_USER_FIELD_DESC);
+          struct.currentUser.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.pagnationBo != null) {
+          oprot.writeFieldBegin(PAGNATION_BO_FIELD_DESC);
+          struct.pagnationBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class queryUser_argsTupleSchemeFactory implements SchemeFactory {
+      public queryUser_argsTupleScheme getScheme() {
+        return new queryUser_argsTupleScheme();
+      }
+    }
+
+    private static class queryUser_argsTupleScheme extends TupleScheme<queryUser_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, queryUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetQueryUser()) {
+          optionals.set(0);
+        }
+        if (struct.isSetPartnerBo()) {
+          optionals.set(1);
+        }
+        if (struct.isSetCurrentUser()) {
+          optionals.set(2);
+        }
+        if (struct.isSetPagnationBo()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetQueryUser()) {
+          struct.queryUser.write(oprot);
+        }
+        if (struct.isSetPartnerBo()) {
+          struct.partnerBo.write(oprot);
+        }
+        if (struct.isSetCurrentUser()) {
+          struct.currentUser.write(oprot);
+        }
+        if (struct.isSetPagnationBo()) {
+          struct.pagnationBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, queryUser_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(4);
+        if (incoming.get(0)) {
+          struct.queryUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.queryUser.read(iprot);
+          struct.setQueryUserIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.partnerBo = new com.ishangke.edunav.commoncontract.model.PartnerBo();
+          struct.partnerBo.read(iprot);
+          struct.setPartnerBoIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.currentUser.read(iprot);
+          struct.setCurrentUserIsSet(true);
+        }
+        if (incoming.get(3)) {
+          struct.pagnationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
+          struct.pagnationBo.read(iprot);
+          struct.setPagnationBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class queryUser_result implements org.apache.thrift.TBase<queryUser_result, queryUser_result._Fields>, java.io.Serializable, Cloneable, Comparable<queryUser_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("queryUser_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new queryUser_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new queryUser_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(queryUser_result.class, metaDataMap);
+    }
+
+    public queryUser_result() {
+    }
+
+    public queryUser_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public queryUser_result(queryUser_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public queryUser_result deepCopy() {
+      return new queryUser_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public queryUser_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public queryUser_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof queryUser_result)
+        return this.equals((queryUser_result)that);
+      return false;
+    }
+
+    public boolean equals(queryUser_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(queryUser_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("queryUser_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class queryUser_resultStandardSchemeFactory implements SchemeFactory {
+      public queryUser_resultStandardScheme getScheme() {
+        return new queryUser_resultStandardScheme();
+      }
+    }
+
+    private static class queryUser_resultStandardScheme extends StandardScheme<queryUser_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, queryUser_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, queryUser_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class queryUser_resultTupleSchemeFactory implements SchemeFactory {
+      public queryUser_resultTupleScheme getScheme() {
+        return new queryUser_resultTupleScheme();
+      }
+    }
+
+    private static class queryUser_resultTupleScheme extends TupleScheme<queryUser_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, queryUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, queryUser_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class querySession_args implements org.apache.thrift.TBase<querySession_args, querySession_args._Fields>, java.io.Serializable, Cloneable, Comparable<querySession_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("querySession_args");
+
+    private static final org.apache.thrift.protocol.TField USER_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("userBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new querySession_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new querySession_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo userBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      USER_BO((short)1, "userBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // USER_BO
+            return USER_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.USER_BO, new org.apache.thrift.meta_data.FieldMetaData("userBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(querySession_args.class, metaDataMap);
+    }
+
+    public querySession_args() {
+    }
+
+    public querySession_args(
+      com.ishangke.edunav.commoncontract.model.UserBo userBo)
+    {
+      this();
+      this.userBo = userBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public querySession_args(querySession_args other) {
+      if (other.isSetUserBo()) {
+        this.userBo = new com.ishangke.edunav.commoncontract.model.UserBo(other.userBo);
+      }
+    }
+
+    public querySession_args deepCopy() {
+      return new querySession_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.userBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getUserBo() {
+      return this.userBo;
+    }
+
+    public querySession_args setUserBo(com.ishangke.edunav.commoncontract.model.UserBo userBo) {
+      this.userBo = userBo;
+      return this;
+    }
+
+    public void unsetUserBo() {
+      this.userBo = null;
+    }
+
+    /** Returns true if field userBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetUserBo() {
+      return this.userBo != null;
+    }
+
+    public void setUserBoIsSet(boolean value) {
+      if (!value) {
+        this.userBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case USER_BO:
+        if (value == null) {
+          unsetUserBo();
+        } else {
+          setUserBo((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case USER_BO:
+        return getUserBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case USER_BO:
+        return isSetUserBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof querySession_args)
+        return this.equals((querySession_args)that);
+      return false;
+    }
+
+    public boolean equals(querySession_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_userBo = true && this.isSetUserBo();
+      boolean that_present_userBo = true && that.isSetUserBo();
+      if (this_present_userBo || that_present_userBo) {
+        if (!(this_present_userBo && that_present_userBo))
+          return false;
+        if (!this.userBo.equals(that.userBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_userBo = true && (isSetUserBo());
+      builder.append(present_userBo);
+      if (present_userBo)
+        builder.append(userBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(querySession_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetUserBo()).compareTo(other.isSetUserBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetUserBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.userBo, other.userBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("querySession_args(");
+      boolean first = true;
+
+      sb.append("userBo:");
+      if (this.userBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.userBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (userBo != null) {
+        userBo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class querySession_argsStandardSchemeFactory implements SchemeFactory {
+      public querySession_argsStandardScheme getScheme() {
+        return new querySession_argsStandardScheme();
+      }
+    }
+
+    private static class querySession_argsStandardScheme extends StandardScheme<querySession_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, querySession_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // USER_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.userBo = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.userBo.read(iprot);
+                struct.setUserBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, querySession_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.userBo != null) {
+          oprot.writeFieldBegin(USER_BO_FIELD_DESC);
+          struct.userBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class querySession_argsTupleSchemeFactory implements SchemeFactory {
+      public querySession_argsTupleScheme getScheme() {
+        return new querySession_argsTupleScheme();
+      }
+    }
+
+    private static class querySession_argsTupleScheme extends TupleScheme<querySession_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, querySession_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetUserBo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetUserBo()) {
+          struct.userBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, querySession_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.userBo = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.userBo.read(iprot);
+          struct.setUserBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class querySession_result implements org.apache.thrift.TBase<querySession_result, querySession_result._Fields>, java.io.Serializable, Cloneable, Comparable<querySession_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("querySession_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new querySession_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new querySession_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(querySession_result.class, metaDataMap);
+    }
+
+    public querySession_result() {
+    }
+
+    public querySession_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public querySession_result(querySession_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public querySession_result deepCopy() {
+      return new querySession_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public querySession_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public querySession_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof querySession_result)
+        return this.equals((querySession_result)that);
+      return false;
+    }
+
+    public boolean equals(querySession_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(querySession_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("querySession_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class querySession_resultStandardSchemeFactory implements SchemeFactory {
+      public querySession_resultStandardScheme getScheme() {
+        return new querySession_resultStandardScheme();
+      }
+    }
+
+    private static class querySession_resultStandardScheme extends StandardScheme<querySession_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, querySession_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, querySession_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class querySession_resultTupleSchemeFactory implements SchemeFactory {
+      public querySession_resultTupleScheme getScheme() {
+        return new querySession_resultTupleScheme();
+      }
+    }
+
+    private static class querySession_resultTupleScheme extends TupleScheme<querySession_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, querySession_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, querySession_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+          struct.businessExceptionBo.read(iprot);
+          struct.setBusinessExceptionBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class disposeSession_args implements org.apache.thrift.TBase<disposeSession_args, disposeSession_args._Fields>, java.io.Serializable, Cloneable, Comparable<disposeSession_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("disposeSession_args");
+
+    private static final org.apache.thrift.protocol.TField USER_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("userBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new disposeSession_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new disposeSession_argsTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo userBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      USER_BO((short)1, "userBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // USER_BO
+            return USER_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.USER_BO, new org.apache.thrift.meta_data.FieldMetaData("userBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(disposeSession_args.class, metaDataMap);
+    }
+
+    public disposeSession_args() {
+    }
+
+    public disposeSession_args(
+      com.ishangke.edunav.commoncontract.model.UserBo userBo)
+    {
+      this();
+      this.userBo = userBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public disposeSession_args(disposeSession_args other) {
+      if (other.isSetUserBo()) {
+        this.userBo = new com.ishangke.edunav.commoncontract.model.UserBo(other.userBo);
+      }
+    }
+
+    public disposeSession_args deepCopy() {
+      return new disposeSession_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.userBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.UserBo getUserBo() {
+      return this.userBo;
+    }
+
+    public disposeSession_args setUserBo(com.ishangke.edunav.commoncontract.model.UserBo userBo) {
+      this.userBo = userBo;
+      return this;
+    }
+
+    public void unsetUserBo() {
+      this.userBo = null;
+    }
+
+    /** Returns true if field userBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetUserBo() {
+      return this.userBo != null;
+    }
+
+    public void setUserBoIsSet(boolean value) {
+      if (!value) {
+        this.userBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case USER_BO:
+        if (value == null) {
+          unsetUserBo();
+        } else {
+          setUserBo((com.ishangke.edunav.commoncontract.model.UserBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case USER_BO:
+        return getUserBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case USER_BO:
+        return isSetUserBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof disposeSession_args)
+        return this.equals((disposeSession_args)that);
+      return false;
+    }
+
+    public boolean equals(disposeSession_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_userBo = true && this.isSetUserBo();
+      boolean that_present_userBo = true && that.isSetUserBo();
+      if (this_present_userBo || that_present_userBo) {
+        if (!(this_present_userBo && that_present_userBo))
+          return false;
+        if (!this.userBo.equals(that.userBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_userBo = true && (isSetUserBo());
+      builder.append(present_userBo);
+      if (present_userBo)
+        builder.append(userBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(disposeSession_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetUserBo()).compareTo(other.isSetUserBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetUserBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.userBo, other.userBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("disposeSession_args(");
+      boolean first = true;
+
+      sb.append("userBo:");
+      if (this.userBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.userBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (userBo != null) {
+        userBo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class disposeSession_argsStandardSchemeFactory implements SchemeFactory {
+      public disposeSession_argsStandardScheme getScheme() {
+        return new disposeSession_argsStandardScheme();
+      }
+    }
+
+    private static class disposeSession_argsStandardScheme extends StandardScheme<disposeSession_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, disposeSession_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // USER_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.userBo = new com.ishangke.edunav.commoncontract.model.UserBo();
+                struct.userBo.read(iprot);
+                struct.setUserBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, disposeSession_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.userBo != null) {
+          oprot.writeFieldBegin(USER_BO_FIELD_DESC);
+          struct.userBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class disposeSession_argsTupleSchemeFactory implements SchemeFactory {
+      public disposeSession_argsTupleScheme getScheme() {
+        return new disposeSession_argsTupleScheme();
+      }
+    }
+
+    private static class disposeSession_argsTupleScheme extends TupleScheme<disposeSession_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, disposeSession_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetUserBo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetUserBo()) {
+          struct.userBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, disposeSession_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.userBo = new com.ishangke.edunav.commoncontract.model.UserBo();
+          struct.userBo.read(iprot);
+          struct.setUserBoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class disposeSession_result implements org.apache.thrift.TBase<disposeSession_result, disposeSession_result._Fields>, java.io.Serializable, Cloneable, Comparable<disposeSession_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("disposeSession_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField BUSINESS_EXCEPTION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("businessExceptionBo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new disposeSession_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new disposeSession_resultTupleSchemeFactory());
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      BUSINESS_EXCEPTION_BO((short)1, "businessExceptionBo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // BUSINESS_EXCEPTION_BO
+            return BUSINESS_EXCEPTION_BO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+      tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(disposeSession_result.class, metaDataMap);
+    }
+
+    public disposeSession_result() {
+    }
+
+    public disposeSession_result(
+      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
+    {
+      this();
+      this.success = success;
+      this.businessExceptionBo = businessExceptionBo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public disposeSession_result(disposeSession_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+      }
+      if (other.isSetBusinessExceptionBo()) {
+        this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
+      }
+    }
+
+    public disposeSession_result deepCopy() {
+      return new disposeSession_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.businessExceptionBo = null;
+    }
+
+    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+      return this.success;
+    }
+
+    public disposeSession_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo getBusinessExceptionBo() {
+      return this.businessExceptionBo;
+    }
+
+    public disposeSession_result setBusinessExceptionBo(com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
+      this.businessExceptionBo = businessExceptionBo;
+      return this;
+    }
+
+    public void unsetBusinessExceptionBo() {
+      this.businessExceptionBo = null;
+    }
+
+    /** Returns true if field businessExceptionBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetBusinessExceptionBo() {
+      return this.businessExceptionBo != null;
+    }
+
+    public void setBusinessExceptionBoIsSet(boolean value) {
+      if (!value) {
+        this.businessExceptionBo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+        }
+        break;
+
+      case BUSINESS_EXCEPTION_BO:
+        if (value == null) {
+          unsetBusinessExceptionBo();
+        } else {
+          setBusinessExceptionBo((com.ishangke.edunav.commoncontract.model.BusinessExceptionBo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case BUSINESS_EXCEPTION_BO:
+        return getBusinessExceptionBo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case BUSINESS_EXCEPTION_BO:
+        return isSetBusinessExceptionBo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof disposeSession_result)
+        return this.equals((disposeSession_result)that);
+      return false;
+    }
+
+    public boolean equals(disposeSession_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_businessExceptionBo = true && this.isSetBusinessExceptionBo();
+      boolean that_present_businessExceptionBo = true && that.isSetBusinessExceptionBo();
+      if (this_present_businessExceptionBo || that_present_businessExceptionBo) {
+        if (!(this_present_businessExceptionBo && that_present_businessExceptionBo))
+          return false;
+        if (!this.businessExceptionBo.equals(that.businessExceptionBo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      boolean present_success = true && (isSetSuccess());
+      builder.append(present_success);
+      if (present_success)
+        builder.append(success);
+
+      boolean present_businessExceptionBo = true && (isSetBusinessExceptionBo());
+      builder.append(present_businessExceptionBo);
+      if (present_businessExceptionBo)
+        builder.append(businessExceptionBo);
+
+      return builder.toHashCode();
+    }
+
+    @Override
+    public int compareTo(disposeSession_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetBusinessExceptionBo()).compareTo(other.isSetBusinessExceptionBo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBusinessExceptionBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.businessExceptionBo, other.businessExceptionBo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("disposeSession_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("businessExceptionBo:");
+      if (this.businessExceptionBo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.businessExceptionBo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class disposeSession_resultStandardSchemeFactory implements SchemeFactory {
+      public disposeSession_resultStandardScheme getScheme() {
+        return new disposeSession_resultStandardScheme();
+      }
+    }
+
+    private static class disposeSession_resultStandardScheme extends StandardScheme<disposeSession_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, disposeSession_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // BUSINESS_EXCEPTION_BO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo();
+                struct.businessExceptionBo.read(iprot);
+                struct.setBusinessExceptionBoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, disposeSession_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.businessExceptionBo != null) {
+          oprot.writeFieldBegin(BUSINESS_EXCEPTION_BO_FIELD_DESC);
+          struct.businessExceptionBo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class disposeSession_resultTupleSchemeFactory implements SchemeFactory {
+      public disposeSession_resultTupleScheme getScheme() {
+        return new disposeSession_resultTupleScheme();
+      }
+    }
+
+    private static class disposeSession_resultTupleScheme extends TupleScheme<disposeSession_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, disposeSession_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetBusinessExceptionBo()) {
+          struct.businessExceptionBo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, disposeSession_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {

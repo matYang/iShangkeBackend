@@ -2,17 +2,22 @@ package com.ishangke.edunav.dataaccess.model;
 
 import com.ishangke.edunav.dataaccess.model.gen.AddressEntity;
 import java.util.Date;
+import java.util.Set;
 
 public class AddressEntityExt extends AddressEntity {
 	private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
 
     private Integer partnerIdStart;
     private Integer partnerIdEnd;
+    private Set<Integer> partnerIdSet;
     private Integer locationIdStart;
     private Integer locationIdEnd;
+    private Set<Integer> locationIdSet;
     private Integer circleIdStart;
     private Integer circleIdEnd;
+    private Set<Integer> circleIdSet;
 
     private Date lastModifyTimeStart;
     private Date lastModifyTimeEnd;
@@ -93,6 +98,29 @@ public class AddressEntityExt extends AddressEntity {
     public void setCreateTimeEnd(Date createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
-    
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
+    }
+    public Set<Integer> getCircleIdSet() {
+        return circleIdSet;
+    }
+    public void setCircleIdSet(Set<Integer> circleIdSet) {
+        this.circleIdSet = circleIdSet;
+    }
     
 }

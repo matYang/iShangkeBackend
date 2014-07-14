@@ -137,31 +137,21 @@
         </if>
     </if>    
     
-    <if test="entity.createTime != null">
-      AND CREDIT_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
-        <if test="entity.createTimeStart != null">
+            <if test="entity.createTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
+        </if>   
     
-    <if test="entity.lastModifyTime != null">
-        AND CREDIT_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+       
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>     
+        
       
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
@@ -213,33 +203,21 @@
         <if test="entity.chargeEnd != null and entity.chargeEnd != 0">
           <![CDATA[AND CREDIT_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
         </if>
-    </if>    
-    
-    <if test="entity.createTime != null">
-      AND CREDIT_HISTORY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
+    </if>        
+        
         <if test="entity.createTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>
-    
-    <if test="entity.lastModifyTime != null">
-        AND CREDIT_HISTORY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+        </if>          
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND CREDIT_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      </if>     
+        </if>      
       
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}

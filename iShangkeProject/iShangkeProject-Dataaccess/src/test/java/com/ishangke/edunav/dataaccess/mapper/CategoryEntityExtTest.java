@@ -1,5 +1,7 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import static org.junit.Assert.fail;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,14 +62,23 @@ public class CategoryEntityExtTest {
         categoryEntityExt.setRank(1);        
         CategoryEntityExtMapper.add(categoryEntityExt);     
 
-        categoryEntityExt.setCreateTimeStart(categoryEntityExt.getCreateTime());
-        categoryEntityExt.setLastModifyTimeStart(categoryEntityExt.getLastModifyTime());
+        categoryEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
+        categoryEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         List<CategoryEntityExt> list = CategoryEntityExtMapper.list(categoryEntityExt, null);
         Assert.assertSame(list.size(),1);
 
         int listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, null);
         Assert.assertSame(listSize,1);
+        
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(1);
+        
+        list = CategoryEntityExtMapper.list(categoryEntityExt, page);
+        Assert.assertSame(list.size(),1);
 
+        listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, page);
+        Assert.assertSame(listSize,1);
     }
 
     @Test
@@ -79,16 +91,16 @@ public class CategoryEntityExtTest {
         categoryEntityExt.setRank(1);        
         CategoryEntityExtMapper.add(categoryEntityExt);     
         
-        categoryEntityExt.setCreateTimeStart(categoryEntityExt.getCreateTime());
-        categoryEntityExt.setLastModifyTimeStart(categoryEntityExt.getLastModifyTime());
+        categoryEntityExt.setCreateTimeStart(new Date(System.currentTimeMillis() - 10000));
+        categoryEntityExt.setLastModifyTimeStart(new Date(System.currentTimeMillis() - 10000));
         List<CategoryEntityExt> list = CategoryEntityExtMapper.list(categoryEntityExt, null);
-        list.get(0).setName("李清");
-        CategoryEntityExtMapper.update(categoryEntityExt);
-
-        list = CategoryEntityExtMapper.list(categoryEntityExt, null);
-        Assert.assertSame(list.size(),1);
-
-        int listSize = CategoryEntityExtMapper.getListCount(categoryEntityExt, null);
-        Assert.assertSame(listSize,1);
+        String name = "李清";
+        list.get(0).setName(name);        
+        CategoryEntityExtMapper.update(list.get(0));
+        list = CategoryEntityExtMapper.list(categoryEntityExt, null);      
+       
+        if(list.get(0).getName().equals(name)){
+            //Passed;
+        }else fail();
     }
 }

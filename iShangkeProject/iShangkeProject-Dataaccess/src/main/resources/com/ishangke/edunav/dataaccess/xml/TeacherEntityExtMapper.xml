@@ -7,7 +7,7 @@
     <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
     <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
     <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
-    <result column="TEACHER_POPULARITY" property="POPULARITY" jdbcType="INTEGER" />
+    <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
     <result column="TEACHER_CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -45,7 +45,7 @@
       <if test="intro != null">
         INTRO,
       </if>
-      <if test="POPULARITY != null">
+      <if test="popularity != null">
         POPULARITY,
       </if>
       <if test="lastModifyTime != null">
@@ -75,8 +75,8 @@
       <if test="intro != null">
         #{intro,jdbcType=VARCHAR},
       </if>
-      <if test="POPULARITY != null">
-        #{POPULARITY,jdbcType=INTEGER},
+      <if test="popularity != null">
+        #{popularity,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,jdbcType=TIMESTAMP},
@@ -116,8 +116,8 @@
       <if test="intro != null">
         INTRO = #{intro,jdbcType=VARCHAR},
       </if>
-      <if test="POPULARITY != null">
-        POPULARITY = #{POPULARITY,jdbcType=INTEGER},
+      <if test="popularity != null">
+        POPULARITY = #{popularity,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
@@ -194,31 +194,19 @@
     <if test="entity.intro != null and entity.intro !='' ">
       AND TEACHER.INTRO LIKE "%"#{entity.intro,jdbcType=VARCHAR}"%"
     </if>
-    <if test="entity.createTime != null">
-      AND TEACHER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
-    
-    <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
           <![CDATA[AND TEACHER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND TEACHER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
-    
-    <if test="entity.lastModifyTime != null">
-        AND TEACHER.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND TEACHER.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND TEACHER.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
       
       <if test="entity.enabled != null">
         AND TEACHER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
@@ -292,31 +280,21 @@
     <if test="entity.intro != null and entity.intro !='' ">
       AND TEACHER.INTRO LIKE "%"#{entity.intro,jdbcType=VARCHAR}"%"
     </if>
-    <if test="entity.createTime != null">
-      AND TEACHER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
-    </if>
     
-    <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
           <![CDATA[AND TEACHER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND TEACHER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
-    
-    <if test="entity.lastModifyTime != null">
-        AND TEACHER.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
-      </if>
-      
-      <if test="entity.lastModifyTime == null">
+     
         <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND TEACHER.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND TEACHER.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
         </if>
-      </if>
+
       
       <if test="entity.enabled != null">
         AND TEACHER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
