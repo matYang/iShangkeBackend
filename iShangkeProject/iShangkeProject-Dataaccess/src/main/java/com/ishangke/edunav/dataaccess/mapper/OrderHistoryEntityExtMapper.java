@@ -21,7 +21,5 @@ public interface OrderHistoryEntityExtMapper {
             @Param("entity") OrderHistoryEntityExt orderHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") OrderHistoryEntityExt orderHistoryEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") OrderHistoryEntityExt orderHistoryEntityExt);
 }

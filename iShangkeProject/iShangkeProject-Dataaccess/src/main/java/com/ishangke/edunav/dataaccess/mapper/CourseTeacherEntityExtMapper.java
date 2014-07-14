@@ -21,7 +21,5 @@ public interface CourseTeacherEntityExtMapper {
             @Param("entity") CourseTeacherEntityExt courseTeacherEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") CourseTeacherEntityExt courseTeacherEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") CourseTeacherEntityExt courseTeacherEntityExt);
 }

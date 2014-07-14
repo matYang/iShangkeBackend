@@ -21,6 +21,5 @@ public interface CircleEntityExtMapper {
             @Param("entity") CircleEntityExt circleEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") CircleEntityExt circleEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") CircleEntityExt circleEntityExt);
 }

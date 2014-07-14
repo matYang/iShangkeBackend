@@ -21,6 +21,5 @@ public interface SpreadEntityExtMapper {
             @Param("entity") SpreadEntityExt spreadEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") SpreadEntityExt spreadEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") SpreadEntityExt spreadEntityExt);
 }

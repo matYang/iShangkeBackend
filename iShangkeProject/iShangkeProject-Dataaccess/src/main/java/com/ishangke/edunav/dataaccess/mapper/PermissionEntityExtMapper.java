@@ -21,9 +21,7 @@ public interface PermissionEntityExtMapper {
             @Param("entity") PermissionEntityExt permissionEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") PermissionEntityExt permissionEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") PermissionEntityExt permissionEntityExt);
     
     public List<PermissionEntityExt>listPermissionByRoleId(int roleId);
 }

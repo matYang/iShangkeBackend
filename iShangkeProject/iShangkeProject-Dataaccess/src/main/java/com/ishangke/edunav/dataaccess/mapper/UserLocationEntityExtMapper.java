@@ -21,7 +21,5 @@ public interface UserLocationEntityExtMapper {
             @Param("entity") UserLocationEntityExt userLocationEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") UserLocationEntityExt userLocationEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") UserLocationEntityExt userLocationEntityExt);
 }

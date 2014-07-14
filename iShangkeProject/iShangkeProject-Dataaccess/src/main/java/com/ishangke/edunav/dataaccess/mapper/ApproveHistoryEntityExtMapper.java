@@ -21,7 +21,5 @@ public interface ApproveHistoryEntityExtMapper {
             @Param("entity") ApproveHistoryEntityExt approveHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
-    public int getListCount(
-            @Param("entity") ApproveHistoryEntityExt approveHistoryEntityExt,
-            @Param("page") PaginationEntity page);
+    public int getListCount(@Param("entity") ApproveHistoryEntityExt approveHistoryEntityExt);
 }
