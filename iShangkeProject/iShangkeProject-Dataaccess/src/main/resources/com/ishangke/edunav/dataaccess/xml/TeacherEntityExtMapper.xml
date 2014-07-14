@@ -155,6 +155,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND TEACHER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND TEACHER.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
     </if>
     
     <if test="entity.partnerId != null and entity.partnerId != 0">
@@ -167,6 +173,12 @@
         </if>
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND TEACHER.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND TEACHER.PARTNER_ID IN
+          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
     </if>
     
@@ -241,6 +253,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND TEACHER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND TEACHER.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
     </if>
     
     <if test="entity.partnerId != null and entity.partnerId != 0">
@@ -253,6 +271,12 @@
         </if>
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND TEACHER.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND TEACHER.PARTNER_ID IN
+          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
     </if>
     

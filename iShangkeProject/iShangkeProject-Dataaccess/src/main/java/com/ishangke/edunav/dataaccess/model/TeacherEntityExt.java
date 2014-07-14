@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.TeacherEntity;
 
@@ -8,8 +9,10 @@ public class TeacherEntityExt extends TeacherEntity {
 
     private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Integer partnerIdStart;
     private Integer partnerIdEnd;
+    private Set<Integer> partnerIdSet;
     private Integer popularityStart;
     private Integer popularityEnd;
     private Date lastModifyTimeStart;
@@ -76,6 +79,18 @@ public class TeacherEntityExt extends TeacherEntity {
     }
     public void setCreateTimeEnd(Date createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
     }
     
     
