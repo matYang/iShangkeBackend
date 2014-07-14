@@ -76,7 +76,7 @@ public class TeacherEntityExtTest {
 //        List<TeacherEntityExt> list = teacherEntityExtMapper.list(teacherEntityExt, null);
 //        Assert.assertSame(list.size(),1);
 //        
-//        int listSize = teacherEntityExtMapper.getListCount(teacherEntityExt, null);
+//        int listSize = teacherEntityExtMapper.getListCount(teacherEntityExt);
 //        Assert.assertSame(listSize,1);
 //        
 //        PaginationEntity page = new PaginationEntity();
@@ -86,7 +86,7 @@ public class TeacherEntityExtTest {
 //        list = teacherEntityExtMapper.list(teacherEntityExt, null);
 //        Assert.assertSame(list.size(),1);
 //        
-//        listSize = teacherEntityExtMapper.getListCount(teacherEntityExt, null);
+//        listSize = teacherEntityExtMapper.getListCount(teacherEntityExt);
 //        Assert.assertSame(listSize,1);
 //        
 //    }
