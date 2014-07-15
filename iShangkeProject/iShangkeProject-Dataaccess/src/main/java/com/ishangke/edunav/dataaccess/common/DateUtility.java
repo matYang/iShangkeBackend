@@ -10,7 +10,7 @@ import java.util.TimeZone;
 public class DateUtility {
 
     public static String toSQLDateTime(Calendar c){
-        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATEFORMAT);
+        SimpleDateFormat sdf = new SimpleDateFormat(DataaccessConstants.DATEFORMAT);
         return sdf.format(c.getTime());
     }
 
@@ -23,6 +23,6 @@ public class DateUtility {
     }
     
     public static Calendar getCurTimeInstance(){
-        return Calendar.getInstance(TimeZone.getTimeZone(Constants.TIMEZONE));
+        return Calendar.getInstance(TimeZone.getTimeZone(DataaccessConstants.TIMEZONE));
     }
 }
