@@ -45,7 +45,7 @@ public class UserService {
      * 
      * @param userBo
      */
-    public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public com.ishangke.edunav.commoncontract.model.UserBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为所有用户提供登录的功能。<br>
@@ -209,7 +209,7 @@ public class UserService {
       super(iprot, oprot);
     }
 
-    public com.ishangke.edunav.commoncontract.model.ResponseBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    public com.ishangke.edunav.commoncontract.model.UserBo registerUser(com.ishangke.edunav.commoncontract.model.UserBo userBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
     {
       send_registerUser(userBo);
       return recv_registerUser();
@@ -222,7 +222,7 @@ public class UserService {
       sendBase("registerUser", args);
     }
 
-    public com.ishangke.edunav.commoncontract.model.ResponseBo recv_registerUser() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    public com.ishangke.edunav.commoncontract.model.UserBo recv_registerUser() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
     {
       registerUser_result result = new registerUser_result();
       receiveBase(result, "registerUser");
@@ -491,7 +491,7 @@ public class UserService {
         prot.writeMessageEnd();
       }
 
-      public com.ishangke.edunav.commoncontract.model.ResponseBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
+      public com.ishangke.edunav.commoncontract.model.UserBo getResult() throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -1047,7 +1047,7 @@ public class UserService {
       return processMap;
     }
 
-    public static class registerUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, registerUser_args, com.ishangke.edunav.commoncontract.model.ResponseBo> {
+    public static class registerUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, registerUser_args, com.ishangke.edunav.commoncontract.model.UserBo> {
       public registerUser() {
         super("registerUser");
       }
@@ -1056,10 +1056,10 @@ public class UserService {
         return new registerUser_args();
       }
 
-      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.UserBo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo>() { 
-          public void onComplete(com.ishangke.edunav.commoncontract.model.ResponseBo o) {
+        return new AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.UserBo>() { 
+          public void onComplete(com.ishangke.edunav.commoncontract.model.UserBo o) {
             registerUser_result result = new registerUser_result();
             result.success = o;
             try {
@@ -1099,7 +1099,7 @@ public class UserService {
         return false;
       }
 
-      public void start(I iface, registerUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
+      public void start(I iface, registerUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.UserBo> resultHandler) throws TException {
         iface.registerUser(args.userBo,resultHandler);
       }
     }
@@ -1940,7 +1940,7 @@ public class UserService {
       schemes.put(TupleScheme.class, new registerUser_resultTupleSchemeFactory());
     }
 
-    public com.ishangke.edunav.commoncontract.model.ResponseBo success; // required
+    public com.ishangke.edunav.commoncontract.model.UserBo success; // required
     public com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -2009,7 +2009,7 @@ public class UserService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.ResponseBo.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
       tmpMap.put(_Fields.BUSINESS_EXCEPTION_BO, new org.apache.thrift.meta_data.FieldMetaData("businessExceptionBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -2020,7 +2020,7 @@ public class UserService {
     }
 
     public registerUser_result(
-      com.ishangke.edunav.commoncontract.model.ResponseBo success,
+      com.ishangke.edunav.commoncontract.model.UserBo success,
       com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo)
     {
       this();
@@ -2033,7 +2033,7 @@ public class UserService {
      */
     public registerUser_result(registerUser_result other) {
       if (other.isSetSuccess()) {
-        this.success = new com.ishangke.edunav.commoncontract.model.ResponseBo(other.success);
+        this.success = new com.ishangke.edunav.commoncontract.model.UserBo(other.success);
       }
       if (other.isSetBusinessExceptionBo()) {
         this.businessExceptionBo = new com.ishangke.edunav.commoncontract.model.BusinessExceptionBo(other.businessExceptionBo);
@@ -2050,11 +2050,11 @@ public class UserService {
       this.businessExceptionBo = null;
     }
 
-    public com.ishangke.edunav.commoncontract.model.ResponseBo getSuccess() {
+    public com.ishangke.edunav.commoncontract.model.UserBo getSuccess() {
       return this.success;
     }
 
-    public registerUser_result setSuccess(com.ishangke.edunav.commoncontract.model.ResponseBo success) {
+    public registerUser_result setSuccess(com.ishangke.edunav.commoncontract.model.UserBo success) {
       this.success = success;
       return this;
     }
@@ -2104,7 +2104,7 @@ public class UserService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((com.ishangke.edunav.commoncontract.model.ResponseBo)value);
+          setSuccess((com.ishangke.edunav.commoncontract.model.UserBo)value);
         }
         break;
 
@@ -2308,7 +2308,7 @@ public class UserService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+                struct.success = new com.ishangke.edunav.commoncontract.model.UserBo();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -2387,7 +2387,7 @@ public class UserService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.success = new com.ishangke.edunav.commoncontract.model.ResponseBo();
+          struct.success = new com.ishangke.edunav.commoncontract.model.UserBo();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
