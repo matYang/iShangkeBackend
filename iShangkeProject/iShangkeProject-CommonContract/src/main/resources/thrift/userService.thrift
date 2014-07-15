@@ -36,7 +36,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    common.ResponseBo createUser(1: user.UserBo targetUser, 2: common.PaginationBo paginationBo, 3: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo createUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员删除用户<br>
