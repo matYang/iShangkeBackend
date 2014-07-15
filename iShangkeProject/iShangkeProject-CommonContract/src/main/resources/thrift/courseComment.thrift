@@ -1,15 +1,11 @@
 namespace java com.ishangke.edunav.commoncontract.model
 
-/**
- * WithdrawBo
- * 客户的付款/提现方式
- */
-struct WithdrawBo {
+struct CourseCommentBo {
     1: i32 id
     2: i32 userId
-    3: string payeeId
-    4: string peyeeName
-    5: i32 type
+    3: i32 courseTemplateId
+    4: string title
+    5: string content
     6: i64 lastModifyTime
     7: i64 createTime
     8: i32 enabled
