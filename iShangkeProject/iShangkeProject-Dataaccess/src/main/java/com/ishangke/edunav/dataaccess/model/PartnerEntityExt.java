@@ -22,6 +22,8 @@ public class PartnerEntityExt extends PartnerEntity {
     private Integer cutoffTimeEnd;
     private Integer partnerQualificationStart;
     private Integer partnerQualificationEnd;
+    private Double ratingStart;
+    private Double ratingEnd;
     
     //concrete information
     private List<TeacherEntityExt> teacherList;
@@ -136,6 +138,18 @@ public class PartnerEntityExt extends PartnerEntity {
     }
     public void setAddressList(List<AddressEntityExt> addressList) {
         this.addressList = addressList;
+    }
+    public Double getRatingStart() {
+        return ratingStart;
+    }
+    public void setRatingStart(Double ratingStart) {
+        this.ratingStart = ratingStart;
+    }
+    public Double getRatingEnd() {
+        return ratingEnd;
+    }
+    public void setRatingEnd(Double ratingEnd) {
+        this.ratingEnd = ratingEnd;
     }
     
 }

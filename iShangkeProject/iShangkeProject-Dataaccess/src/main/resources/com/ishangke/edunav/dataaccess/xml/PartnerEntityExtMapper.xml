@@ -36,6 +36,7 @@
     <result column="PARTNER_CUTOFFDAY" property="cutoffDay" jdbcType="INTEGER" />
     <result column="PARTNER_CUTOFFTIME" property="cutoffTime" jdbcType="INTEGER" />
     <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+    <result column="PARTNER_RATING" property="rating" jdbcType="DOUBLE" />
 
     <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
       <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
@@ -63,9 +64,9 @@
     <collection property="addressList" javaType="java.util.ArrayList" ofType="AddressEntityExt">
       <id column="ADDRESS_ID" property="id" jdbcType="INTEGER" />
       <result column="ADDRESS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-      <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-      <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
       <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
+      <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
       <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="ADDRESS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -123,6 +124,7 @@
     PARTNER.CUTOFF_TIME PARTNER_CUTOFFTIME,
     PARTNER.PARTNER_QUALIFICATION
     PARTNER_PARTNERQUALIFICATION,
+    PARTNER.RATING PARTNER_RATING 
   </sql>
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
@@ -150,9 +152,9 @@
   <sql id="Address_Base_Column_List">
     ADDRESS.ID ADDRESS_ID,
     ADDRESS.PARTNER_ID ADDRESS_PARTNERID,
-    ADDRESS.LOCATION_ID ADDRESS_LOCATIONID,
-    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
     ADDRESS.DETAIL ADDRESS_DETAIL,
+    ADDRESS.LAT ADDRESS_LAT,
+    ADDRESS.LNG ADDRESS_LNG,
     ADDRESS.LAST_MODIFY_TIME ADDRESS_LASTMODIFYTIME,
     ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
@@ -259,6 +261,9 @@
       <if test="partnerQualification != null">
         PARTNER_QUALIFICATION,
       </if>
+      <if test="rating != null">
+        PARTNER_RATING,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -357,6 +362,9 @@
       </if>
       <if test="partnerQualification != null">
         #{partnerQualification,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null">
+        #{rating,jdbcType=DOUBLE},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -472,6 +480,9 @@
       <if test="partnerQualification != null">
         PARTNER_QUALIFICATION =
         #{partnerQualification,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null">
+        PARTNER_RATING = #{rating,jdbcType=DOUBLE},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -627,40 +638,51 @@
         AND PARTNER.REG_CONTACT_FAX LIKE "%"#{entity.regContactFax,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.cutoffDay != null and entity.cutoffDay != 0">
+      <if test="entity.cutoffDay != null">
         AND PARTNER.CUTOFF_DAY = #{entity.cutoffDay,jdbcType=INTEGER}
       </if>
-      <if test="entity.cutoffDay == null or entity.cutoffDay == 0">
-        <if test="entity.cutoffDayStart != null and entity.cutoffDayStart != 0">
+      <if test="entity.cutoffDay == null">
+        <if test="entity.cutoffDayStart != null">
           <![CDATA[AND PARTNER.CUTOFF_DAY >= #{entity.cutoffDayStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.cutoffDayEnd != null and entity.cutoffDayEnd != 0">
+        <if test="entity.cutoffDayEnd != null">
           <![CDATA[AND PARTNER.CUTOFF_DAY <= #{entity.cutoffDayEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
-      <if test="entity.cutoffTime != null and entity.cutoffTime != 0">
+      <if test="entity.cutoffTime != null">
         AND PARTNER.CUTOFF_TIME = #{entity.cutoffTime,jdbcType=INTEGER}
       </if>
-      <if test="entity.cutoffTime == null or entity.cutoffTime == 0">
-        <if test="entity.cutoffTimeStart != null and entity.cutoffTimeStart != 0">
+      <if test="entity.cutoffTime == null">
+        <if test="entity.cutoffTimeStart != null">
           <![CDATA[AND PARTNER.CUTOFF_TIME >= #{entity.cutoffTimeStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.cutoffTimeEnd != null and entity.cutoffTimeEnd != 0">
+        <if test="entity.cutoffTimeEnd != null">
           <![CDATA[AND PARTNER.CUTOFF_TIME <= #{entity.cutoffTimeEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
-      <if test="entity.partnerQualification != null and entity.partnerQualification != 0">
+      <if test="entity.partnerQualification != null">
         AND PARTNER.PARTNER_QUALIFICATION =
         #{entity.partnerQualification,jdbcType=INTEGER}
       </if>
-      <if test="entity.partnerQualification == null or entity.partnerQualification == 0">
-        <if test="entity.partnerQualificationStart != null and entity.partnerQualificationStart != 0">
+      <if test="entity.partnerQualification == null">
+        <if test="entity.partnerQualificationStart != null">
           <![CDATA[AND PARTNER.PARTNER_QUALIFICATION >= #{entity.partnerQualificationStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.partnerQualificationEnd != null and entity.partnerQualificationEnd != 0">
+        <if test="entity.partnerQualificationEnd != null">
           <![CDATA[AND PARTNER.PARTNER_QUALIFICATION <= #{entity.partnerQualificationEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.rating != null">
+        AND PARTNER.RATING = #{entity.rating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.rating == null">
+        <if test="entity.ratingStart != null">
+          <![CDATA[AND PARTNER.RATING >= #{entity.ratingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.ratingEnd != null">
+          <![CDATA[AND PARTNER.RATING <= #{entity.ratingEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
@@ -844,40 +866,51 @@
         AND PARTNER.REG_CONTACT_FAX LIKE "%"#{entity.regContactFax,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.cutoffDay != null and entity.cutoffDay != 0">
+      <if test="entity.cutoffDay != null">
         AND PARTNER.CUTOFF_DAY = #{entity.cutoffDay,jdbcType=INTEGER}
       </if>
-      <if test="entity.cutoffDay == null or entity.cutoffDay == 0">
-        <if test="entity.cutoffDayStart != null and entity.cutoffDayStart != 0">
+      <if test="entity.cutoffDay == null">
+        <if test="entity.cutoffDayStart != null">
           <![CDATA[AND PARTNER.CUTOFF_DAY >= #{entity.cutoffDayStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.cutoffDayEnd != null and entity.cutoffDayEnd != 0">
+        <if test="entity.cutoffDayEnd != null">
           <![CDATA[AND PARTNER.CUTOFF_DAY <= #{entity.cutoffDayEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
-      <if test="entity.cutoffTime != null and entity.cutoffTime != 0">
+      <if test="entity.cutoffTime != null">
         AND PARTNER.CUTOFF_TIME = #{entity.cutoffTime,jdbcType=INTEGER}
       </if>
-      <if test="entity.cutoffTime == null or entity.cutoffTime == 0">
-        <if test="entity.cutoffTimeStart != null and entity.cutoffTimeStart != 0">
+      <if test="entity.cutoffTime == null">
+        <if test="entity.cutoffTimeStart != null">
           <![CDATA[AND PARTNER.CUTOFF_TIME >= #{entity.cutoffTimeStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.cutoffTimeEnd != null and entity.cutoffTimeEnd != 0">
+        <if test="entity.cutoffTimeEnd != null">
           <![CDATA[AND PARTNER.CUTOFF_TIME <= #{entity.cutoffTimeEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
-      <if test="entity.partnerQualification != null and entity.partnerQualification != 0">
+      <if test="entity.partnerQualification != null">
         AND PARTNER.PARTNER_QUALIFICATION =
         #{entity.partnerQualification,jdbcType=INTEGER}
       </if>
-      <if test="entity.partnerQualification == null or entity.partnerQualification == 0">
-        <if test="entity.partnerQualificationStart != null and entity.partnerQualificationStart != 0">
+      <if test="entity.partnerQualification == null">
+        <if test="entity.partnerQualificationStart != null">
           <![CDATA[AND PARTNER.PARTNER_QUALIFICATION >= #{entity.partnerQualificationStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.partnerQualificationEnd != null and entity.partnerQualificationEnd != 0">
+        <if test="entity.partnerQualificationEnd != null">
           <![CDATA[AND PARTNER.PARTNER_QUALIFICATION <= #{entity.partnerQualificationEnd,jdbcType=INTEGER}]]>
+        </if>
+      </if>
+      <if test="entity.rating != null">
+        AND PARTNER.RATING = #{entity.rating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.rating == null">
+        <if test="entity.ratingStart != null">
+          <![CDATA[AND PARTNER.RATING >= #{entity.ratingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.ratingEnd != null">
+          <![CDATA[AND PARTNER.RATING <= #{entity.ratingEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 

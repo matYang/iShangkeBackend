@@ -5,6 +5,7 @@
     <id column="BOOKING_ID" property="id" jdbcType="INTEGER" />
     <result column="BOOKING_USERID" property="userId" jdbcType="INTEGER" />
     <result column="BOOKING_COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="BOOKING_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="BOOKING_REFERENCE" property="reference" jdbcType="VARCHAR" />
     <result column="BOOKING_NAME" property="name" jdbcType="VARCHAR" />
     <result column="BOOKING_PHONE" property="phone" jdbcType="VARCHAR" />
@@ -26,6 +27,8 @@
     BOOKING.USER_ID BOOKING_USERID,
     BOOKING.COURSE_ID
     BOOKING_COURSEID,
+    BOOKING.COURSE_TEMPLATE_ID 
+    BOOKING_COURSETEMPLATEID,
     BOOKING.REFERENCE
     BOOKING_REFERENCE,
     BOOKING.NAME BOOKING_NAME,
@@ -59,6 +62,9 @@
       </if>
       <if test="courseId != null">
         COURSE_ID,
+      </if>
+      <if test="courseTemplateId != null">
+        COURSE_TEMPLATE_ID ,
       </if>
       <if test="reference != null">
         REFERENCE,
@@ -112,6 +118,9 @@
       </if>
       <if test="courseId != null">
         #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseTemplateId != null">
+        #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="reference != null">
         #{reference,jdbcType=VARCHAR},
@@ -177,6 +186,9 @@
       </if>
       <if test="courseId != null">
         COURSE_ID = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseTemplateId != null">
+        COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="reference != null">
         REFERENCE = #{reference,jdbcType=VARCHAR},
@@ -269,6 +281,25 @@
           <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
+
+      <if test="entity.courseTemplateId != null">
+        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId == null">
+        <if test="entity.courseTemplateIdStart != null">
+          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID >= #{entity.courseTemplateIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseTemplateIdEnd != null">
+          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID <= #{entity.courseTemplateIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
+          AND PARTNER.COURSE_TEMPLATE_ID IN
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.reference != null and entity.reference !='' ">
         AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
@@ -282,11 +313,11 @@
         AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.status == null or entity.status == 0">
-        <if test="entity.statusStart != null and entity.statusStart != 0">
+      <if test="entity.status == null">
+        <if test="entity.statusStart != null">
           <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+        <if test="entity.statusEnd != null">
           <![CDATA[AND BOOKING.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
@@ -327,11 +358,14 @@
         </if>
       </if>
 
-      <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeStart != null and entity.typeStart != 0">
+      <if test="entity.type != null">
+        AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
+      </if>
+      <if test="entity.type == null">
+        <if test="entity.typeStart != null">
           <![CDATA[AND BOOKING.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.typeEnd != null and entity.typeEnd != 0">
+        <if test="entity.typeEnd != null">
           <![CDATA[AND BOOKING.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
@@ -341,14 +375,14 @@
       </if>
 
       <if test="entity.cashbackAmount != null">
-        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=TIMESTAMP}
+        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashbackAmount == null">
         <if test="entity.cashbackAmountStart != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackAmountEnd != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
@@ -431,6 +465,25 @@
           <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
+
+      <if test="entity.courseTemplateId != null">
+        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId == null">
+        <if test="entity.courseTemplateIdStart != null">
+          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID >= #{entity.courseTemplateIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseTemplateIdEnd != null">
+          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID <= #{entity.courseTemplateIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
+          AND PARTNER.COURSE_TEMPLATE_ID IN
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.reference != null and entity.reference !='' ">
         AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>

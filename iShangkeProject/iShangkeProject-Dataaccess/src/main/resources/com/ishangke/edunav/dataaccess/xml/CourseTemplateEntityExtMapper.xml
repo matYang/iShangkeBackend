@@ -850,6 +850,9 @@
       <if test="entity.courseName != null and entity.courseName != ''">
         AND COURSE_TEMPLATE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
+      <if test="entity.reference != null and entity.reference != ''">
+        AND COURSE_TEMPLATE.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_TEMPLATE.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -954,58 +957,36 @@
         </if>
       </if>
       <if test="entity.price != null and entity.price != 0">
-        AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=INTEGER}
+        AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
       <if test="entity.price == null or entity.price == 0">
         <if test="entity.priceStart != null and entity.priceStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PRICE >= #{entity.priceStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.priceEnd != null and entity.priceEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.originalPrice != null and entity.originalPrice != 0">
-        AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=INTEGER}
+        AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=DOUBLE}
       </if>
       <if test="entity.originalPrice == null or entity.originalPrice == 0">
         <if test="entity.originalPriceStart != null and entity.originalPriceStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.originalPriceEnd != null and entity.originalPriceEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.cashback != null and entity.cashback != 0">
-        AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=INTEGER}
+        AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashback == null or entity.cashback == 0">
         <if test="entity.cashbackStart != null and entity.cashbackStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CASHBACK >= #{entity.cashbackStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.CASHBACK >= #{entity.cashbackStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackEnd != null and entity.cashbackEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      <if test="entity.commission != null and entity.commission != 0">
-        AND COURSE_TEMPLATE.COMMISSION = #{entity.commission,jdbcType=INTEGER}
-      </if>
-      <if test="entity.commission == null or entity.commission == 0">
-        <if test="entity.commissionStart != null and entity.commissionStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.COMMISSION >= #{entity.commissionStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.commissionEnd != null and entity.commissionEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.COMMISSION <= #{entity.commissionEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      <if test="entity.serviceCharge != null and entity.serviceCharge != 0">
-        AND COURSE_TEMPLATE.SERVICE_CHARGE = #{entity.serviceCharge,jdbcType=INTEGER}
-      </if>
-      <if test="entity.serviceCharge == null or entity.serviceCharge == 0">
-        <if test="entity.serviceChargeStart != null and entity.serviceChargeStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.SERVICE_CHARGE >= #{entity.serviceChargeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.serviceChargeEnd != null and entity.serviceChargeEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.SERVICE_CHARGE <= #{entity.serviceChargeEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.popularity != null and entity.popularity != 0">
@@ -1140,6 +1121,9 @@
       <if test="entity.courseName != null and entity.courseName != ''">
         AND COURSE_TEMPLATE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
+      <if test="entity.reference != null and entity.reference != ''">
+        AND COURSE_TEMPLATE.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_TEMPLATE.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -1245,58 +1229,36 @@
       </if>
       
       <if test="entity.price != null and entity.price != 0">
-        AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=INTEGER}
+        AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
       <if test="entity.price == null or entity.price == 0">
         <if test="entity.priceStart != null and entity.priceStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PRICE >= #{entity.priceStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.priceEnd != null and entity.priceEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.originalPrice != null and entity.originalPrice != 0">
-        AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=INTEGER}
+        AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=DOUBLE}
       </if>
       <if test="entity.originalPrice == null or entity.originalPrice == 0">
         <if test="entity.originalPriceStart != null and entity.originalPriceStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.originalPriceEnd != null and entity.originalPriceEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.cashback != null and entity.cashback != 0">
-        AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=INTEGER}
+        AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashback == null or entity.cashback == 0">
         <if test="entity.cashbackStart != null and entity.cashbackStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CASHBACK >= #{entity.cashbackStart,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.CASHBACK >= #{entity.cashbackStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackEnd != null and entity.cashbackEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      <if test="entity.commission != null and entity.commission != 0">
-        AND COURSE_TEMPLATE.COMMISSION = #{entity.commission,jdbcType=INTEGER}
-      </if>
-      <if test="entity.commission == null or entity.commission == 0">
-        <if test="entity.commissionStart != null and entity.commissionStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.COMMISSION >= #{entity.commissionStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.commissionEnd != null and entity.commissionEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.COMMISSION <= #{entity.commissionEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      <if test="entity.serviceCharge != null and entity.serviceCharge != 0">
-        AND COURSE_TEMPLATE.SERVICE_CHARGE = #{entity.serviceCharge,jdbcType=INTEGER}
-      </if>
-      <if test="entity.serviceCharge == null or entity.serviceCharge == 0">
-        <if test="entity.serviceChargeStart != null and entity.serviceChargeStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.SERVICE_CHARGE >= #{entity.serviceChargeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.serviceChargeEnd != null and entity.serviceChargeEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.SERVICE_CHARGE <= #{entity.serviceChargeEnd,jdbcType=INTEGER}]]>
+          <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.popularity != null and entity.popularity != 0">

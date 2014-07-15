@@ -20,6 +20,7 @@
     <result column="USERS_BIRTHDAY" property="birthday" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="USERS_SCHOOL" property="school" jdbcType="VARCHAR" />
     <result column="USERS_MAJOR" property="major" jdbcType="VARCHAR" />
+    <result column="USERS_AVATARURL" property="avatarUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="User_Base_Column_List">
     USERS.ID USERS_ID,
@@ -44,8 +45,8 @@
     USERS.GENDER USERS_GENDER,
     USERS.BIRTHDAY USERS_BIRTHDAY,
     USERS.SCHOOL USERS_SCHOOL,
-    USERS.MAJOR
-    USERS_MAJOR
+    USERS.MAJOR USERS_MAJOR,
+    USERS.AVATAR_URL USERS_AVATARURL
   </sql>
   <insert id="add" parameterType="UserEntityExt">
 
@@ -103,6 +104,9 @@
       <if test="major != null">
         MAJOR,
       </if>
+      <if test="avatarUrl != null">
+        AVATAR_URL,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -156,6 +160,9 @@
       </if>
       <if test="major != null">
         #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null">
+        #{avatarUrl,jdbcType=VARCHAR},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -222,6 +229,9 @@
       </if>
       <if test="major != null">
         MAJOR = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null">
+        AVATAR_URL = #{avatarUrl,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}

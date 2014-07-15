@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.BookingEntity;
 
@@ -11,6 +12,9 @@ public class BookingEntityExt extends BookingEntity {
     private Integer idSet;
     private Integer courseIdStart;
     private Integer courseIdEnd;
+    private Integer courseTemplateIdStart;
+    private Integer courseTemplateIdEnd;
+    private Set<Integer> courseTemplateIdSet;
     private Integer userIdStart;
     private Integer userIdEnd;
     private Integer statusStart;
@@ -29,6 +33,8 @@ public class BookingEntityExt extends BookingEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    
+    
     
     public Integer getIdSet() {
         return idSet;
@@ -59,6 +65,24 @@ public class BookingEntityExt extends BookingEntity {
     }
     public void setCourseIdEnd(Integer courseIdEnd) {
         this.courseIdEnd = courseIdEnd;
+    }
+    public Integer getCourseTemplateIdStart() {
+        return courseTemplateIdStart;
+    }
+    public void setCourseTemplateIdStart(Integer courseTemplateIdStart) {
+        this.courseTemplateIdStart = courseTemplateIdStart;
+    }
+    public Integer getCourseTemplateIdEnd() {
+        return courseTemplateIdEnd;
+    }
+    public void setCourseTemplateIdEnd(Integer courseTemplateIdEnd) {
+        this.courseTemplateIdEnd = courseTemplateIdEnd;
+    }
+    public Set<Integer> getCourseTemplateIdSet() {
+        return courseTemplateIdSet;
+    }
+    public void setCourseTemplateIdSet(Set<Integer> courseTemplateIdSet) {
+        this.courseTemplateIdSet = courseTemplateIdSet;
     }
     public Integer getUserIdStart() {
         return userIdStart;

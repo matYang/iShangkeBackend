@@ -4,9 +4,9 @@
   <resultMap id="AddressExtMap" type="AddressEntityExt">
     <id column="ADDRESS_ID" property="id" jdbcType="INTEGER" />
     <result column="ADDRESS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-    <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-    <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
     <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
+    <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
+    <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
     <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ADDRESS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -15,10 +15,9 @@
   <sql id="Address_Base_Column_List">
     ADDRESS.ID ADDRESS_ID,
     ADDRESS.PARTNER_ID ADDRESS_PARTNERID,
-    ADDRESS.LOCATION_ID
-    ADDRESS_LOCATIONID,
-    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
     ADDRESS.DETAIL ADDRESS_DETAIL,
+    ADDRESS.LAT ADDRESS_LAT,
+    ADDRESS.LNG ADDRESS_LNG,
     ADDRESS.LAST_MODIFY_TIME ADDRESS_LASTMODIFYTIME,
     ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
@@ -31,14 +30,14 @@
       <if test="partnerId != null">
         PARTNER_ID,
       </if>
-      <if test="locationId != null">
-        LOCATION_ID,
-      </if>
-      <if test="circleId != null">
-        CIRCLE_ID,
-      </if>
       <if test="detail != null">
         DETAIL,
+      </if>
+      <if test="lat != null">
+        LAT,
+      </if>
+      <if test="lng != null">
+        LNG,
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
@@ -58,14 +57,14 @@
       <if test="partnerId != null">
         #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="locationId != null">
-        #{locationId,jdbcType=INTEGER},
-      </if>
-      <if test="circleId != null">
-        #{circleId,jdbcType=INTEGER},
-      </if>
       <if test="detail != null">
         #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -96,14 +95,14 @@
       <if test="partnerId != null">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="locationId != null">
-        LOCATION_ID = #{locationId,jdbcType=INTEGER},
-      </if>
-      <if test="circleId != null">
-        CIRCLE_ID = #{circleId,jdbcType=INTEGER},
-      </if>
       <if test="detail != null">
         DETAIL = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        LAT = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="lng != null">
+        LNG = #{lng,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -166,47 +165,34 @@
           </foreach>
         </if>
       </if>
-      
-      <if test="entity.locationId != null and entity.locationId != 0">
-        AND ADDRESS.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
-      </if>
-      <if test="entity.locationId == null or entity.locationId == 0">
-        <if test="entity.locationIdStart != null and entity.locationIdStart != 0">
-          <![CDATA[AND ADDRESS.LOCATION_ID >= #{entity.locationIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
-          <![CDATA[AND ADDRESS.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
-          AND ADDRESS.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
-
-      <if test="entity.circleId != null and entity.circleId != 0">
-        AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
-      </if>
-      <if test="entity.circleId == null or entity.circleId == 0">
-        <if test="entity.circleIdStart != null and entity.circleIdStart != 0">
-          <![CDATA[AND ADDRESS.CIRCLE_ID >= #{entity.circleIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
-          <![CDATA[AND ADDRESS.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
-          AND ADDRESS.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
-
 
       <if test="entity.detail != null and entity.detail !='' ">
         AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
+
+      <if test="entity.lat != null">
+        AND ADDRESS.LAT = #{entity.lat,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.lat == null">
+        <if test="entity.latStart != null">
+          <![CDATA[AND ADDRESS.LAT >= #{entity.latStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.latEnd != null">
+          <![CDATA[AND ADDRESS.LAT <= #{entity.latEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.lng != null">
+        AND ADDRESS.LNG = #{entity.lng,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.lng == null">
+        <if test="entity.lngStart != null">
+          <![CDATA[AND ADDRESS.LNG >= #{entity.lngStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.lngEnd != null">
+          <![CDATA[AND ADDRESS.LNG <= #{entity.lngEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
 
       <if test="entity.createTime != null">
         AND ADDRESS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
@@ -290,45 +276,31 @@
         </if>
       </if>
       
-      <if test="entity.locationId != null and entity.locationId != 0">
-        AND ADDRESS.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
-      </if>
-      <if test="entity.locationId == null or entity.locationId == 0">
-        <if test="entity.locationIdStart != null and entity.locationIdStart != 0">
-          <![CDATA[AND ADDRESS.LOCATION_ID >= #{entity.locationIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
-          <![CDATA[AND ADDRESS.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
-          AND ADDRESS.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
-
-      <if test="entity.circleId != null and entity.circleId != 0">
-        AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
-      </if>
-      <if test="entity.circleId == null or entity.circleId == 0">
-        <if test="entity.circleIdStart != null and entity.circleIdStart != 0">
-          <![CDATA[AND ADDRESS.CIRCLE_ID >= #{entity.circleIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
-          <![CDATA[AND ADDRESS.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
-          AND ADDRESS.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
-
-
       <if test="entity.detail != null and entity.detail !='' ">
         AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.lat != null">
+        AND ADDRESS.LAT = #{entity.lat,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.lat == null">
+        <if test="entity.latStart != null">
+          <![CDATA[AND ADDRESS.LAT >= #{entity.latStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.latEnd != null">
+          <![CDATA[AND ADDRESS.LAT <= #{entity.latEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.lng != null">
+        AND ADDRESS.LNG = #{entity.lng,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.lng == null">
+        <if test="entity.lngStart != null">
+          <![CDATA[AND ADDRESS.LNG >= #{entity.lngStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.lngEnd != null">
+          <![CDATA[AND ADDRESS.LNG <= #{entity.lngEnd,jdbcType=DOUBLE}]]>
+        </if>
       </if>
 
       <if test="entity.createTime != null">

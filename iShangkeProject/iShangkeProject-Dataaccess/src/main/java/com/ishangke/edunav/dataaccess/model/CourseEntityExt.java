@@ -59,6 +59,7 @@ public class CourseEntityExt extends CourseEntity {
     //concrete information
     private List<TeacherEntityExt> teacherList;
     private List<ClassPhotoEntityExt> classPhotoList;
+    private Double costPerformance;
     
     //placing values identified by FK here, and this is really ugly
     private String logoUrl;

@@ -7,6 +7,12 @@
     <result column="COURSECOMMENT_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_TITLE" property="title" jdbcType="VARCHAR" />
     <result column="COURSECOMMENT_CONTENT" property="content" jdbcType="VARCHAR" />
+
+    <result column="COURSECOMMENT_TOTALRATING" property="totalRating" jdbcType="DOUBLE" />
+    <result column="COURSECOMMENT_CONDITIONRATING" property="conditionRatingRating" jdbcType="DOUBLE" />
+    <result column="COURSECOMMENT_ATTITUDERATING" property="attitudeRatingRating" jdbcType="DOUBLE" />
+    <result column="COURSECOMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
+
     <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECOMMENT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
@@ -19,6 +25,12 @@
     COURSE_COMMENT.TITLE
     COURSECOMMENT_TITLE,
     COURSE_COMMENT.CONTENT COURSECOMMENT_CONTENT,
+
+    COURSE_COMMENT.TOTAL_RATING COURSECOMMENT_TOTALRATING,
+    COURSE_COMMENT.CONDITION_RATING COURSECOMMENT_CONDITIONRATING,
+    COURSE_COMMENT.ATTITUDE_RATING COURSECOMMENT_ATTITUDERATING,
+    COURSE_COMMENT.SATISFACTION_RATING COURSECOMMENT_SATISFACTIONRATING,
+
     COURSE_COMMENT.LAST_MODIFY_TIME
     COURSECOMMENT_LASTMODIFYTIME,
     COURSE_COMMENT.CREATE_TIME
@@ -43,6 +55,18 @@
       </if>
       <if test="content != null">
         CONTENT,
+      </if>
+      <if test="totalRating != null">
+        TOTAL_RATING,
+      </if>
+      <if test="conditionRating != null">
+        CONDITION_RATING,
+      </if>
+      <if test="attitudeRating != null">
+        ATTITUDE_RATING,
+      </if>
+      <if test="satisfactionRating != null">
+        SATISFACTION_RATING,
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
@@ -70,6 +94,18 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="totalRating != null">
+        #{totalRating,jdbcType=DOUBLE},
+      </if>
+      <if test="conditionRating != null">
+        #{conditionRating,jdbcType=DOUBLE},
+      </if>
+      <if test="attitudeRating != null">
+        #{attitudeRating,jdbcType=DOUBLE},
+      </if>
+      <if test="satisfactionRating != null">
+        #{satisfactionRating,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -109,6 +145,18 @@
       </if>
       <if test="content != null">
         CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="totalRating != null">
+        TOTAL_RATING = #{totalRating,jdbcType=DOUBLE},
+      </if>
+      <if test="conditionRating != null">
+        CONDITION_RATING = #{conditionRating,jdbcType=DOUBLE},
+      </if>
+      <if test="attitudeRating != null">
+        ATTITUDE_RATING = #{attitudeRating,jdbcType=DOUBLE},
+      </if>
+      <if test="satisfactionRating != null">
+        SATISFACTION_RATING = #{satisfactionRating,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -151,6 +199,52 @@
           </foreach>
         </if>
       </if>
+
+      <if test="entity.totalRating != null">
+        AND COURSE_COMMENT.TOTAL_RATING = #{entity.totalRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.totalRating == null">
+        <if test="entity.totalRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.TOTAL_RATING >= #{entity.totalRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.totalRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.TOTAL_RATING <= #{entity.totalRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.conditionRating != null">
+        AND COURSE_COMMENT.CONDITION_RATING = #{entity.conditionRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.conditionRating == null">
+        <if test="entity.conditionRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.CONDITION_RATING >= #{entity.conditionRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.conditionRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.CONDITION_RATING <= #{entity.conditionRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.attitudeRating != null">
+        AND COURSE_COMMENT.ATTITUDE_RATING = #{entity.attitudeRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.attitudeRating == null">
+        <if test="entity.attitudeRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.ATTITUDE_RATING >= #{entity.attitudeRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.attitudeRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.ATTITUDE_RATING <= #{entity.attitudeRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.satisfactionRating != null">
+        AND COURSE_COMMENT.SATISFACTION_RATING = #{entity.satisfactionRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.satisfactionRating == null">
+        <if test="entity.satisfactionRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.SATISFACTION_RATING >= #{entity.satisfactionRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.satisfactionRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.SATISFACTION_RATING <= #{entity.satisfactionRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
       <if test="entity.userId != null and entity.userId != 0">
         AND COURSE_COMMENT.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
@@ -224,6 +318,50 @@
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
+        </if>
+      </if>
+      <if test="entity.totalRating != null">
+        AND COURSE_COMMENT.TOTAL_RATING = #{entity.totalRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.totalRating == null">
+        <if test="entity.totalRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.TOTAL_RATING >= #{entity.totalRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.totalRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.TOTAL_RATING <= #{entity.totalRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.conditionRating != null">
+        AND COURSE_COMMENT.CONDITION_RATING = #{entity.conditionRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.conditionRating == null">
+        <if test="entity.conditionRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.CONDITION_RATING >= #{entity.conditionRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.conditionRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.CONDITION_RATING <= #{entity.conditionRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.attitudeRating != null">
+        AND COURSE_COMMENT.ATTITUDE_RATING = #{entity.attitudeRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.attitudeRating == null">
+        <if test="entity.attitudeRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.ATTITUDE_RATING >= #{entity.attitudeRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.attitudeRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.ATTITUDE_RATING <= #{entity.attitudeRatingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.satisfactionRating != null">
+        AND COURSE_COMMENT.SATISFACTION_RATING = #{entity.satisfactionRating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.satisfactionRating == null">
+        <if test="entity.satisfactionRatingStart != null">
+          <![CDATA[AND COURSE_COMMENT.SATISFACTION_RATING >= #{entity.satisfactionRatingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.satisfactionRatingEnd != null">
+          <![CDATA[AND COURSE_COMMENT.SATISFACTION_RATING <= #{entity.satisfactionRatingEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <if test="entity.userId != null and entity.userId != 0">

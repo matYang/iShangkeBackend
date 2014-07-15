@@ -12,18 +12,16 @@ public class AddressEntityExt extends AddressEntity {
     private Integer partnerIdStart;
     private Integer partnerIdEnd;
     private Set<Integer> partnerIdSet;
-    private Integer locationIdStart;
-    private Integer locationIdEnd;
-    private Set<Integer> locationIdSet;
-    private Integer circleIdStart;
-    private Integer circleIdEnd;
-    private Set<Integer> circleIdSet;
+
+    private Double latStart;
+    private Double latEnd;
+    private Double lngStart;
+    private Double lngEnd;
 
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-    
     
     
     public Integer getIdStart() {
@@ -49,30 +47,6 @@ public class AddressEntityExt extends AddressEntity {
     }
     public void setPartnerIdEnd(Integer partnerIdEnd) {
         this.partnerIdEnd = partnerIdEnd;
-    }
-    public Integer getLocationIdStart() {
-        return locationIdStart;
-    }
-    public void setLocationIdStart(Integer locationIdStart) {
-        this.locationIdStart = locationIdStart;
-    }
-    public Integer getLocationIdEnd() {
-        return locationIdEnd;
-    }
-    public void setLocationIdEnd(Integer locationIdEnd) {
-        this.locationIdEnd = locationIdEnd;
-    }
-    public Integer getCircleIdStart() {
-        return circleIdStart;
-    }
-    public void setCircleIdStart(Integer circleIdStart) {
-        this.circleIdStart = circleIdStart;
-    }
-    public Integer getCircleIdEnd() {
-        return circleIdEnd;
-    }
-    public void setCircleIdEnd(Integer circleIdEnd) {
-        this.circleIdEnd = circleIdEnd;
     }
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
@@ -110,17 +84,30 @@ public class AddressEntityExt extends AddressEntity {
     public void setPartnerIdSet(Set<Integer> partnerIdSet) {
         this.partnerIdSet = partnerIdSet;
     }
-    public Set<Integer> getLocationIdSet() {
-        return locationIdSet;
+    public Double getLatStart() {
+        return latStart;
     }
-    public void setLocationIdSet(Set<Integer> locationIdSet) {
-        this.locationIdSet = locationIdSet;
+    public void setLatStart(Double latStart) {
+        this.latStart = latStart;
     }
-    public Set<Integer> getCircleIdSet() {
-        return circleIdSet;
+    public Double getLatEnd() {
+        return latEnd;
     }
-    public void setCircleIdSet(Set<Integer> circleIdSet) {
-        this.circleIdSet = circleIdSet;
+    public void setLatEnd(Double latEnd) {
+        this.latEnd = latEnd;
     }
+    public Double getLngStart() {
+        return lngStart;
+    }
+    public void setLngStart(Double lngStart) {
+        this.lngStart = lngStart;
+    }
+    public Double getLngEnd() {
+        return lngEnd;
+    }
+    public void setLngEnd(Double lngEnd) {
+        this.lngEnd = lngEnd;
+    }
+    
     
 }
