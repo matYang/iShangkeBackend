@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.PartnerEntity;
@@ -21,6 +22,13 @@ public class PartnerEntityExt extends PartnerEntity {
     private Integer cutoffTimeEnd;
     private Integer partnerQualificationStart;
     private Integer partnerQualificationEnd;
+    
+    //concrete information
+    private List<TeacherEntityExt> teacherList;
+    private List<ClassPhotoEntityExt> classPhotoList;
+    private List<AddressEntityExt> addressList;
+    
+    
     public Integer getIdStart() {
         return idStart;
     }
@@ -111,4 +119,23 @@ public class PartnerEntityExt extends PartnerEntity {
     public void setPartnerQualificationEnd(Integer partnerQualificationEnd) {
         this.partnerQualificationEnd = partnerQualificationEnd;
     }
+    public List<TeacherEntityExt> getTeacherList() {
+        return teacherList;
+    }
+    public void setTeacherList(List<TeacherEntityExt> teacherList) {
+        this.teacherList = teacherList;
+    }
+    public List<ClassPhotoEntityExt> getClassPhotoList() {
+        return classPhotoList;
+    }
+    public void setClassPhotoList(List<ClassPhotoEntityExt> classPhotoList) {
+        this.classPhotoList = classPhotoList;
+    }
+    public List<AddressEntityExt> getAddressList() {
+        return addressList;
+    }
+    public void setAddressList(List<AddressEntityExt> addressList) {
+        this.addressList = addressList;
+    }
+    
 }
