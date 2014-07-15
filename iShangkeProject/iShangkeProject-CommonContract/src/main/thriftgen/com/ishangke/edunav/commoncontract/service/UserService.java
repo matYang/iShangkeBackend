@@ -72,10 +72,10 @@ public class UserService {
      * 
      * 
      * @param targetUser
-     * @param paginationBo
+     * @param partnerBo
      * @param currentUser
      */
-    public com.ishangke.edunav.commoncontract.model.ResponseBo createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public com.ishangke.edunav.commoncontract.model.ResponseBo createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为ishangke管理员删除用户<br>
@@ -173,7 +173,7 @@ public class UserService {
 
     public void login(com.ishangke.edunav.commoncontract.model.LoginBo loginBo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void deleteUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -261,17 +261,17 @@ public class UserService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "login failed: unknown result");
     }
 
-    public com.ishangke.edunav.commoncontract.model.ResponseBo createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
+    public com.ishangke.edunav.commoncontract.model.ResponseBo createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException
     {
-      send_createUser(targetUser, paginationBo, currentUser);
+      send_createUser(targetUser, partnerBo, currentUser);
       return recv_createUser();
     }
 
-    public void send_createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws org.apache.thrift.TException
+    public void send_createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser) throws org.apache.thrift.TException
     {
       createUser_args args = new createUser_args();
       args.setTargetUser(targetUser);
-      args.setPaginationBo(paginationBo);
+      args.setPartnerBo(partnerBo);
       args.setCurrentUser(currentUser);
       sendBase("createUser", args);
     }
@@ -533,21 +533,21 @@ public class UserService {
       }
     }
 
-    public void createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void createUser(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      createUser_call method_call = new createUser_call(targetUser, paginationBo, currentUser, resultHandler, this, ___protocolFactory, ___transport);
+      createUser_call method_call = new createUser_call(targetUser, partnerBo, currentUser, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class createUser_call extends org.apache.thrift.async.TAsyncMethodCall {
       private com.ishangke.edunav.commoncontract.model.UserBo targetUser;
-      private com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo;
+      private com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo;
       private com.ishangke.edunav.commoncontract.model.UserBo currentUser;
-      public createUser_call(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public createUser_call(com.ishangke.edunav.commoncontract.model.UserBo targetUser, com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo, com.ishangke.edunav.commoncontract.model.UserBo currentUser, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.targetUser = targetUser;
-        this.paginationBo = paginationBo;
+        this.partnerBo = partnerBo;
         this.currentUser = currentUser;
       }
 
@@ -555,7 +555,7 @@ public class UserService {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("createUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
         createUser_args args = new createUser_args();
         args.setTargetUser(targetUser);
-        args.setPaginationBo(paginationBo);
+        args.setPartnerBo(partnerBo);
         args.setCurrentUser(currentUser);
         args.write(prot);
         prot.writeMessageEnd();
@@ -870,7 +870,7 @@ public class UserService {
       public createUser_result getResult(I iface, createUser_args args) throws org.apache.thrift.TException {
         createUser_result result = new createUser_result();
         try {
-          result.success = iface.createUser(args.targetUser, args.paginationBo, args.currentUser);
+          result.success = iface.createUser(args.targetUser, args.partnerBo, args.currentUser);
         } catch (com.ishangke.edunav.commoncontract.model.BusinessExceptionBo businessExceptionBo) {
           result.businessExceptionBo = businessExceptionBo;
         }
@@ -1214,7 +1214,7 @@ public class UserService {
       }
 
       public void start(I iface, createUser_args args, org.apache.thrift.async.AsyncMethodCallback<com.ishangke.edunav.commoncontract.model.ResponseBo> resultHandler) throws TException {
-        iface.createUser(args.targetUser, args.paginationBo, args.currentUser,resultHandler);
+        iface.createUser(args.targetUser, args.partnerBo, args.currentUser,resultHandler);
       }
     }
 
@@ -3244,7 +3244,7 @@ public class UserService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createUser_args");
 
     private static final org.apache.thrift.protocol.TField TARGET_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("targetUser", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField PAGINATION_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("paginationBo", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField PARTNER_BO_FIELD_DESC = new org.apache.thrift.protocol.TField("partnerBo", org.apache.thrift.protocol.TType.STRUCT, (short)2);
     private static final org.apache.thrift.protocol.TField CURRENT_USER_FIELD_DESC = new org.apache.thrift.protocol.TField("currentUser", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -3254,13 +3254,13 @@ public class UserService {
     }
 
     public com.ishangke.edunav.commoncontract.model.UserBo targetUser; // required
-    public com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo; // required
+    public com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo; // required
     public com.ishangke.edunav.commoncontract.model.UserBo currentUser; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       TARGET_USER((short)1, "targetUser"),
-      PAGINATION_BO((short)2, "paginationBo"),
+      PARTNER_BO((short)2, "partnerBo"),
       CURRENT_USER((short)3, "currentUser");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -3278,8 +3278,8 @@ public class UserService {
         switch(fieldId) {
           case 1: // TARGET_USER
             return TARGET_USER;
-          case 2: // PAGINATION_BO
-            return PAGINATION_BO;
+          case 2: // PARTNER_BO
+            return PARTNER_BO;
           case 3: // CURRENT_USER
             return CURRENT_USER;
           default:
@@ -3327,8 +3327,8 @@ public class UserService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.TARGET_USER, new org.apache.thrift.meta_data.FieldMetaData("targetUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
-      tmpMap.put(_Fields.PAGINATION_BO, new org.apache.thrift.meta_data.FieldMetaData("paginationBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.PaginationBo.class)));
+      tmpMap.put(_Fields.PARTNER_BO, new org.apache.thrift.meta_data.FieldMetaData("partnerBo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.PartnerBo.class)));
       tmpMap.put(_Fields.CURRENT_USER, new org.apache.thrift.meta_data.FieldMetaData("currentUser", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.ishangke.edunav.commoncontract.model.UserBo.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -3340,12 +3340,12 @@ public class UserService {
 
     public createUser_args(
       com.ishangke.edunav.commoncontract.model.UserBo targetUser,
-      com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo,
+      com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo,
       com.ishangke.edunav.commoncontract.model.UserBo currentUser)
     {
       this();
       this.targetUser = targetUser;
-      this.paginationBo = paginationBo;
+      this.partnerBo = partnerBo;
       this.currentUser = currentUser;
     }
 
@@ -3356,8 +3356,8 @@ public class UserService {
       if (other.isSetTargetUser()) {
         this.targetUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.targetUser);
       }
-      if (other.isSetPaginationBo()) {
-        this.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo(other.paginationBo);
+      if (other.isSetPartnerBo()) {
+        this.partnerBo = new com.ishangke.edunav.commoncontract.model.PartnerBo(other.partnerBo);
       }
       if (other.isSetCurrentUser()) {
         this.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo(other.currentUser);
@@ -3371,7 +3371,7 @@ public class UserService {
     @Override
     public void clear() {
       this.targetUser = null;
-      this.paginationBo = null;
+      this.partnerBo = null;
       this.currentUser = null;
     }
 
@@ -3399,27 +3399,27 @@ public class UserService {
       }
     }
 
-    public com.ishangke.edunav.commoncontract.model.PaginationBo getPaginationBo() {
-      return this.paginationBo;
+    public com.ishangke.edunav.commoncontract.model.PartnerBo getPartnerBo() {
+      return this.partnerBo;
     }
 
-    public createUser_args setPaginationBo(com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) {
-      this.paginationBo = paginationBo;
+    public createUser_args setPartnerBo(com.ishangke.edunav.commoncontract.model.PartnerBo partnerBo) {
+      this.partnerBo = partnerBo;
       return this;
     }
 
-    public void unsetPaginationBo() {
-      this.paginationBo = null;
+    public void unsetPartnerBo() {
+      this.partnerBo = null;
     }
 
-    /** Returns true if field paginationBo is set (has been assigned a value) and false otherwise */
-    public boolean isSetPaginationBo() {
-      return this.paginationBo != null;
+    /** Returns true if field partnerBo is set (has been assigned a value) and false otherwise */
+    public boolean isSetPartnerBo() {
+      return this.partnerBo != null;
     }
 
-    public void setPaginationBoIsSet(boolean value) {
+    public void setPartnerBoIsSet(boolean value) {
       if (!value) {
-        this.paginationBo = null;
+        this.partnerBo = null;
       }
     }
 
@@ -3457,11 +3457,11 @@ public class UserService {
         }
         break;
 
-      case PAGINATION_BO:
+      case PARTNER_BO:
         if (value == null) {
-          unsetPaginationBo();
+          unsetPartnerBo();
         } else {
-          setPaginationBo((com.ishangke.edunav.commoncontract.model.PaginationBo)value);
+          setPartnerBo((com.ishangke.edunav.commoncontract.model.PartnerBo)value);
         }
         break;
 
@@ -3481,8 +3481,8 @@ public class UserService {
       case TARGET_USER:
         return getTargetUser();
 
-      case PAGINATION_BO:
-        return getPaginationBo();
+      case PARTNER_BO:
+        return getPartnerBo();
 
       case CURRENT_USER:
         return getCurrentUser();
@@ -3500,8 +3500,8 @@ public class UserService {
       switch (field) {
       case TARGET_USER:
         return isSetTargetUser();
-      case PAGINATION_BO:
-        return isSetPaginationBo();
+      case PARTNER_BO:
+        return isSetPartnerBo();
       case CURRENT_USER:
         return isSetCurrentUser();
       }
@@ -3530,12 +3530,12 @@ public class UserService {
           return false;
       }
 
-      boolean this_present_paginationBo = true && this.isSetPaginationBo();
-      boolean that_present_paginationBo = true && that.isSetPaginationBo();
-      if (this_present_paginationBo || that_present_paginationBo) {
-        if (!(this_present_paginationBo && that_present_paginationBo))
+      boolean this_present_partnerBo = true && this.isSetPartnerBo();
+      boolean that_present_partnerBo = true && that.isSetPartnerBo();
+      if (this_present_partnerBo || that_present_partnerBo) {
+        if (!(this_present_partnerBo && that_present_partnerBo))
           return false;
-        if (!this.paginationBo.equals(that.paginationBo))
+        if (!this.partnerBo.equals(that.partnerBo))
           return false;
       }
 
@@ -3560,10 +3560,10 @@ public class UserService {
       if (present_targetUser)
         builder.append(targetUser);
 
-      boolean present_paginationBo = true && (isSetPaginationBo());
-      builder.append(present_paginationBo);
-      if (present_paginationBo)
-        builder.append(paginationBo);
+      boolean present_partnerBo = true && (isSetPartnerBo());
+      builder.append(present_partnerBo);
+      if (present_partnerBo)
+        builder.append(partnerBo);
 
       boolean present_currentUser = true && (isSetCurrentUser());
       builder.append(present_currentUser);
@@ -3591,12 +3591,12 @@ public class UserService {
           return lastComparison;
         }
       }
-      lastComparison = Boolean.valueOf(isSetPaginationBo()).compareTo(other.isSetPaginationBo());
+      lastComparison = Boolean.valueOf(isSetPartnerBo()).compareTo(other.isSetPartnerBo());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetPaginationBo()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.paginationBo, other.paginationBo);
+      if (isSetPartnerBo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.partnerBo, other.partnerBo);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -3639,11 +3639,11 @@ public class UserService {
       }
       first = false;
       if (!first) sb.append(", ");
-      sb.append("paginationBo:");
-      if (this.paginationBo == null) {
+      sb.append("partnerBo:");
+      if (this.partnerBo == null) {
         sb.append("null");
       } else {
-        sb.append(this.paginationBo);
+        sb.append(this.partnerBo);
       }
       first = false;
       if (!first) sb.append(", ");
@@ -3664,8 +3664,8 @@ public class UserService {
       if (targetUser != null) {
         targetUser.validate();
       }
-      if (paginationBo != null) {
-        paginationBo.validate();
+      if (partnerBo != null) {
+        partnerBo.validate();
       }
       if (currentUser != null) {
         currentUser.validate();
@@ -3715,11 +3715,11 @@ public class UserService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // PAGINATION_BO
+            case 2: // PARTNER_BO
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
-                struct.paginationBo.read(iprot);
-                struct.setPaginationBoIsSet(true);
+                struct.partnerBo = new com.ishangke.edunav.commoncontract.model.PartnerBo();
+                struct.partnerBo.read(iprot);
+                struct.setPartnerBoIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -3753,9 +3753,9 @@ public class UserService {
           struct.targetUser.write(oprot);
           oprot.writeFieldEnd();
         }
-        if (struct.paginationBo != null) {
-          oprot.writeFieldBegin(PAGINATION_BO_FIELD_DESC);
-          struct.paginationBo.write(oprot);
+        if (struct.partnerBo != null) {
+          oprot.writeFieldBegin(PARTNER_BO_FIELD_DESC);
+          struct.partnerBo.write(oprot);
           oprot.writeFieldEnd();
         }
         if (struct.currentUser != null) {
@@ -3784,7 +3784,7 @@ public class UserService {
         if (struct.isSetTargetUser()) {
           optionals.set(0);
         }
-        if (struct.isSetPaginationBo()) {
+        if (struct.isSetPartnerBo()) {
           optionals.set(1);
         }
         if (struct.isSetCurrentUser()) {
@@ -3794,8 +3794,8 @@ public class UserService {
         if (struct.isSetTargetUser()) {
           struct.targetUser.write(oprot);
         }
-        if (struct.isSetPaginationBo()) {
-          struct.paginationBo.write(oprot);
+        if (struct.isSetPartnerBo()) {
+          struct.partnerBo.write(oprot);
         }
         if (struct.isSetCurrentUser()) {
           struct.currentUser.write(oprot);
@@ -3812,9 +3812,9 @@ public class UserService {
           struct.setTargetUserIsSet(true);
         }
         if (incoming.get(1)) {
-          struct.paginationBo = new com.ishangke.edunav.commoncontract.model.PaginationBo();
-          struct.paginationBo.read(iprot);
-          struct.setPaginationBoIsSet(true);
+          struct.partnerBo = new com.ishangke.edunav.commoncontract.model.PartnerBo();
+          struct.partnerBo.read(iprot);
+          struct.setPartnerBoIsSet(true);
         }
         if (incoming.get(2)) {
           struct.currentUser = new com.ishangke.edunav.commoncontract.model.UserBo();
