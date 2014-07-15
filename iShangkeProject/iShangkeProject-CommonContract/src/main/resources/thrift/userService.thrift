@@ -12,7 +12,7 @@ service UserService {
      *  @param  userBo    用户注册信息
      *  @return 用户实体 UserBo
      */
-    common.ResponseBo registerUser(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo registerUser(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为所有用户提供登录的功能。<br>
