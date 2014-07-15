@@ -38,14 +38,8 @@ public class CourseEntityExt extends CourseEntity {
     private Double originalPriceEnd;
     private Double cashbackStart;
     private Double cashbackEnd;
-    private Double commissionStart;
-    private Double commissionEnd;
-    private Double serviceChargeStart;
-    private Double serviceChargeEnd;
     private Integer popularityStart;
     private Integer popularityEnd;
-    private Integer classSizeStart;
-    private Integer classSizeEnd;
     private Integer courseHourNumStart;
     private Integer courseHourNumEnd;
     private Calendar startDateStart;
@@ -55,11 +49,21 @@ public class CourseEntityExt extends CourseEntity {
     private Calendar cutoffDateStart;
     private Calendar cutoffDateEnd;
 
+    private Integer classTypeStart;
+    private Integer classTypeEnd;
+    private Set<Integer> classTypeSet;
+    private Double discountStart;
+    private Double discountEnd;
+    
+    
+    
+    //not being used as search criteria here
+    private Double rating;
+    private Integer bookingTotal;
     
     //concrete information
     private List<TeacherEntityExt> teacherList;
     private List<ClassPhotoEntityExt> classPhotoList;
-    private Double costPerformance;
     
     //placing values identified by FK here, and this is really ugly
     private String logoUrl;
@@ -68,8 +72,11 @@ public class CourseEntityExt extends CourseEntity {
     private String partnerIntegerro;
     private Integer partnerQualification;
     private String partnerDistinction;
+    private Double partnerRating;
     
     private String address;
+    private Double addressLat;
+    private Double addressLng;
     private String categoryValue;
     private String categoryName;
     private Integer categoryRank;
@@ -447,38 +454,6 @@ public class CourseEntityExt extends CourseEntity {
         this.cashbackEnd = cashbackEnd;
     }
 
-    public Double getCommissionStart() {
-        return commissionStart;
-    }
-
-    public void setCommissionStart(Double commissionStart) {
-        this.commissionStart = commissionStart;
-    }
-
-    public Double getCommissionEnd() {
-        return commissionEnd;
-    }
-
-    public void setCommissionEnd(Double commissionEnd) {
-        this.commissionEnd = commissionEnd;
-    }
-
-    public Double getServiceChargeStart() {
-        return serviceChargeStart;
-    }
-
-    public void setServiceChargeStart(Double serviceChargeStart) {
-        this.serviceChargeStart = serviceChargeStart;
-    }
-
-    public Double getServiceChargeEnd() {
-        return serviceChargeEnd;
-    }
-
-    public void setServiceChargeEnd(Double serviceChargeEnd) {
-        this.serviceChargeEnd = serviceChargeEnd;
-    }
-
     public Integer getPopularityStart() {
         return popularityStart;
     }
@@ -493,22 +468,6 @@ public class CourseEntityExt extends CourseEntity {
 
     public void setPopularityEnd(Integer popularityEnd) {
         this.popularityEnd = popularityEnd;
-    }
-
-    public Integer getClassSizeStart() {
-        return classSizeStart;
-    }
-
-    public void setClassSizeStart(Integer classSizeStart) {
-        this.classSizeStart = classSizeStart;
-    }
-
-    public Integer getClassSizeEnd() {
-        return classSizeEnd;
-    }
-
-    public void setClassSizeEnd(Integer classSizeEnd) {
-        this.classSizeEnd = classSizeEnd;
     }
 
     public Integer getCourseHourNumStart() {
@@ -573,6 +532,30 @@ public class CourseEntityExt extends CourseEntity {
 
     public void setCutoffDateEnd(Calendar cutoffDateEnd) {
         this.cutoffDateEnd = cutoffDateEnd;
+    }
+
+    public Double getPartnerRating() {
+        return partnerRating;
+    }
+
+    public void setPartnerRating(Double partnerRating) {
+        this.partnerRating = partnerRating;
+    }
+
+    public Double getAddressLat() {
+        return addressLat;
+    }
+
+    public void setAddressLat(Double addressLat) {
+        this.addressLat = addressLat;
+    }
+
+    public Double getAddressLng() {
+        return addressLng;
+    }
+
+    public void setAddressLng(Double addressLng) {
+        this.addressLng = addressLng;
     }
     
     

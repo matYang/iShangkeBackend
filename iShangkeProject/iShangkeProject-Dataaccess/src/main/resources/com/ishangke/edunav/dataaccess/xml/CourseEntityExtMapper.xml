@@ -62,7 +62,7 @@
     <result column="COURSE_FINISHDATE" property="finishDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
-    <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="INTEGER" />
+    <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
     <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
     <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
@@ -70,7 +70,10 @@
     <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
     <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
     <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+    <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
     <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+    <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE"/>
+    <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE"/>
     <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
     <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
     <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
@@ -189,11 +192,13 @@
     PARTNER.INST_NAME PARTNER_INSTNAME,
     PARTNER.PARTNER_INTRO PARTNER_INTRO,
     PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
-    PARTNER.PARTNER_DISTINCTION
-    PARTNER_PARTNERDISTINCTION
+    PARTNER.PARTNER_DISTINCTION PARTNER_PARTNERDISTINCTION,
+    PARTNER.RATING PARTNER_RATING
   </sql>
   <sql id="Address_Base_Column_List">
-    ADDRESS.DETAIL ADDRESS_DETAIL
+    ADDRESS.DETAIL ADDRESS_DETAIL,
+    ADDRESS.LAT ADDRESS_LAT,
+    ADDRESS.LNG ADDRESS_LNG
   </sql>
   <sql id="Category_Base_Column_List">
     CATEGORY.VALUE CATEGORY_VALUE,
@@ -600,7 +605,7 @@
         #{popularity,jdbcType=INTEGER},
       </if>
       <if test="classSize != null">
-        #{classSize,jdbcType=INTEGER},
+        #{classSize,jdbcType=VARCHAR},
       </if>
       <if test="courseHourNum != null">
         #{courseHourNum,jdbcType=INTEGER},
@@ -806,7 +811,7 @@
         POPULARITY = #{popularity,jdbcType=INTEGER},
       </if>
       <if test="classSize != null">
-        CLASS_SIZE = #{classSize,jdbcType=INTEGER},
+        CLASS_SIZE = #{classSize,jdbcType=VARCHAR},
       </if>
       <if test="courseHourNum != null">
         COURSE_HOUR_NUM = #{courseHourNum,jdbcType=INTEGER},
@@ -1050,17 +1055,6 @@
         </if>
         <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
           <![CDATA[AND COURSE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      <if test="entity.classSize != null and entity.classSize != 0">
-        AND COURSE.CLASS_SIZE = #{entity.classSize,jdbcType=INTEGER}
-      </if>
-      <if test="entity.classSize == null or entity.classSize == 0">
-        <if test="entity.classSizeStart != null and entity.classSizeStart != 0">
-          <![CDATA[AND COURSE.CLASS_SIZE >= #{entity.classSizeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.classSizeEnd != null and entity.classSizeEnd != 0">
-          <![CDATA[AND COURSE.CLASS_SIZE <= #{entity.classSizeEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
       <if test="entity.courseHourNum != null and entity.courseHourNum != 0">
@@ -1344,17 +1338,6 @@
         </if>
         <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
           <![CDATA[AND COURSE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      <if test="entity.classSize != null and entity.classSize != 0">
-        AND COURSE.CLASS_SIZE = #{entity.classSize,jdbcType=INTEGER}
-      </if>
-      <if test="entity.classSize == null or entity.classSize == 0">
-        <if test="entity.classSizeStart != null and entity.classSizeStart != 0">
-          <![CDATA[AND COURSE.CLASS_SIZE >= #{entity.classSizeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.classSizeEnd != null and entity.classSizeEnd != 0">
-          <![CDATA[AND COURSE.CLASS_SIZE <= #{entity.classSizeEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
       <if test="entity.courseHourNum != null and entity.courseHourNum != 0">
