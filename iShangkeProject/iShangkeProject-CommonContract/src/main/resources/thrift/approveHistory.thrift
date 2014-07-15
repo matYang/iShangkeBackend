@@ -1,0 +1,31 @@
+namespace java com.ishangke.edunav.commoncontract.model
+
+struct ApproveHistoryBo {
+    1: i32 id
+    2: i32 type
+    3: i32 attachedId
+    4: i32 submitUserId
+    5: i32 approveUserId
+    6: i32 preStatus
+    7: i32 postStatus
+    8: string comment
+    9: i64 createTime
+    10: i32 deleted
+    11: i32 idStart
+    12: i32 idEnd
+    13: i32 idSet
+    14: i32 typeStart
+    15: i32 typeEnd
+    16: i32 attachedIdStart
+    17: i32 attachedIdEnd
+    18: i32 submitUserIdStart
+    19: i32 submitUserIdEnd
+    20: i32 approveUserIdStart
+    21: i32 approveUserIdEnd
+    22: i32 preStatusStart
+    23: i32 preStatusEnd
+    24: i32 postStatusStart
+    25: i32 postStatusEnd
+    26: i64 createTimeStart
+    27: i64 createTimeEnd
+}
