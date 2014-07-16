@@ -127,5 +127,5 @@ service BookingService {
      *  @return 预定单实体 BookingBo 列表
      *
      */ 
-    common.ResponseBo queryBooking(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 

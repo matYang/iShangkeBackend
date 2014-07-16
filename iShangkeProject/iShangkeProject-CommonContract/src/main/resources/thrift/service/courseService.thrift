@@ -176,5 +176,18 @@ service CourseService {
      */ 
     common.ResponseBo queryByFilter(1: course.CourseBo courseBo, 2: category.CategoryBo categoryBo, 3: location.LocationBo locationBo, 4: circle.CircleBo circleBo,5: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+
+    /**
+     *  本方法返回课程详情<br>
+     *  合作商/管理员可以通过此方法调取课程详情
+     *
+     *  @param  id           课程id
+     *  @param  userBo       调用方法的用户的信息
+     *
+     *  @return  
+     *
+     */
+    common.ResponseBo queryById(1: i32 id, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
 }
 

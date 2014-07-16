@@ -102,6 +102,6 @@ service ActivityService{
      *  @return 推广信息实体 Activity 列表
      *
      */
-    common.ResponseBo queryActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

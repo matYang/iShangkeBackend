@@ -15,6 +15,6 @@ service CategoryService {
      *  @return Category实体 CategoryBo 列表
      *
      */
-    common.ResponseBo queryCategory(1: category.CategoryBo categoryBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: category.CategoryBo categoryBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

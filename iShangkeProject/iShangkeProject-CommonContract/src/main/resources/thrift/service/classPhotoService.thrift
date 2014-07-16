@@ -55,6 +55,6 @@ service ClassPhotoService{
      *  @return 推广信息实体 ClassPhoto 列表
      *
      */
-    common.ResponseBo queryClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: classPhoto.ClassPhotoBo classPhotoBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

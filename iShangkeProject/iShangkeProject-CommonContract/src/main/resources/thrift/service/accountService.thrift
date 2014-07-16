@@ -19,7 +19,7 @@ service AccountService{
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    common.ResponseBo queryAccount(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为账户提现功能。<br>

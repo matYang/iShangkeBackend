@@ -29,6 +29,6 @@ service CouponService{
      *  @return 优惠券实体 CouponBo 列表
      *
      */ 
-    common.ResponseBo queryCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

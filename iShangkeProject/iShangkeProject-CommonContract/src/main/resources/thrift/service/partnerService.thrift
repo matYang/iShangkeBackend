@@ -13,23 +13,24 @@ service PartnerService{
      *
      *  @param  partnerBo       需要检索的合作商信息
      *  @param  paginationBo    分页信息
+     *  @param  userBo    		用户信息
      *
      *  @return 合作商实体 PartnerBo 列表
      *
      */ 
-    common.ResponseBo queryPartner(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    common.ResponseBo query(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  查询合作商完整信息。<br>
      *  用户可以看到合作商完整信息
      *
      *  @param  id       		合作商Id
-     *  @param  paginationBo    分页信息
+     *  @param  UserBo 	  		用户信息
      *
      *  @return 合作商实体 PartnerBo
      *
      */ 
-    common.ResponseBo queryPartnerById(1: i32 id, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    common.ResponseBo queryById(1: i32 id, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  更新合作商信息。<br>

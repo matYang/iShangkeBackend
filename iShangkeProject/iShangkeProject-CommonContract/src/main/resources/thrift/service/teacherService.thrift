@@ -55,6 +55,6 @@ service TeacherService{
      *  @return 推广信息实体 Teacher 列表
      *
      */
-    common.ResponseBo queryTeacher(1: teacher.TeacherBo teacherBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: teacher.TeacherBo teacherBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

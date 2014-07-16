@@ -34,7 +34,7 @@ service SpreadService{
      *  @return 推广信息实体 SpreadBo 列表
      *
      */ 
-    common.ResponseBo querySpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo query(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  创建推广信息。<br>
