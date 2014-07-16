@@ -13,7 +13,7 @@ service WithdrawService{
      *  用户可以创建存取款信息
      *
      *  @param  withdrawBo         需要创建的存取款信息
-     *  @param  userBo             发起创建的管理员/合作商信息
+     *  @param  userBo             发起创建的用户信息
      *
      *  @return 创建完成的存取款信息
      *
@@ -25,7 +25,7 @@ service WithdrawService{
      *  用户可以更新存取款信息
      *
      *  @param  withdrawBo         需要更新的存取款信息
-     *  @param  userBo             发起更新的管理员/合作商信息
+     *  @param  userBo             发起更新的用户信息
      *
      *  @return 更新完成的存取款信息
      *
@@ -37,7 +37,7 @@ service WithdrawService{
      *  用户可以删除存取款信息
      *
      *  @param  withdrawBo         需要删除的存取款信息
-     *  @param  userBo             发起删除的管理员/合作商信息
+     *  @param  userBo             发起删除的用户信息
      *
      *  @return 
      *
