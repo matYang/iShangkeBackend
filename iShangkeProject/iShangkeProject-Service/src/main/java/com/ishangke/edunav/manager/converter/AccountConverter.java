@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 
 public class AccountConverter {
     public static AccountBo toBo(AccountEntityExt e) {
-        return new AccountBo();
+        AccountBo accountBo = new AccountBo();
+        return accountBo;
     }
 
     public static AccountEntityExt fromBo(AccountBo bo) {
-        return new AccountEntityExt();
+        AccountEntityExt accountEntityExt = new AccountEntityExt();
+        return accountEntityExt;
     }
 }
