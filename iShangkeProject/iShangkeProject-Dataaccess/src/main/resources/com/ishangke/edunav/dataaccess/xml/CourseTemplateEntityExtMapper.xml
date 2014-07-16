@@ -63,10 +63,10 @@
     <result column="COURSETEMPLATE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_CLASS_TYPE" property="classType" jdbcType="INT" />
+    <result column="COURSETEMPLATE_CLASSTYPE" property="classType" jdbcType="INT" />
     <result column="COURSETEMPLATE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_RATING" property="rating" jdbcType="DOUBLE" />
-    <result column="COURSETEMPLATE_BOOKING_TOTAL" property="bookingTotal" jdbcType="INT" />
+    <result column="COURSETEMPLATE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INT" />
     
     <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR"/>
     <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR"/>
@@ -850,7 +850,7 @@
     <include refid="Address_Base_Column_List"></include>,
     <include refid="Category_Base_Column_List"></include>,
     <include refid="Location_Base_Column_List"></include>,
-    <include refid="Circle_Base_Column_List"></include>
+    <include refid="Circle_Base_Column_List"></include>,
     from COURSE_TEMPLATE COURSE_TEMPLATE
         join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
             ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
@@ -864,12 +864,12 @@
             ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
         join CATEGORY CATEGORY 
             ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+        join CIRCLE CIRCLE
+            ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
+        join LOCATION LOCATION 
+            ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
         join ADDRESS ADDRESS 
             ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
-        join CIRCLE CIRCLE
-            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = ADDRESS.LOCATION_ID
 
     where COURSE_TEMPLATE.DELETED = 0 AND COURSE_TEMPLATE.ID = #{id}
   </select>
@@ -882,18 +882,18 @@
     <include refid="Address_Base_Column_List"></include>,
     <include refid="Category_Base_Column_List"></include>,
     <include refid="Location_Base_Column_List"></include>,
-    <include refid="Circle_Base_Column_List"></include>
+    <include refid="Circle_Base_Column_List"></include>,
     from COURSE_TEMPLATE COURSE_TEMPLATE
         join PARTNER PARTNER 
             ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
         join CATEGORY CATEGORY 
             ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+        join CIRCLE CIRCLE
+            ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
+        join LOCATION LOCATION 
+            ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
         join ADDRESS ADDRESS 
             ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
-        join CIRCLE CIRCLE
-            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = ADDRESS.LOCATION_ID
     
     WHERE COURSE_TEMPLATE.DELETED = 0
     <if test="entity != null">
@@ -989,14 +989,14 @@
           </foreach>
         </if>
       </if>
-      <if test="entity.status != null and entity.status != 0">
+      <if test="entity.status != null">
         AND COURSE_TEMPLATE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
-      <if test="entity.status == null or entity.status == 0">
-        <if test="entity.statusStart != null and entity.statusStart != 0">
+      <if test="entity.status == null">
+        <if test="entity.statusStart != null">
           <![CDATA[AND COURSE_TEMPLATE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+        <if test="entity.statusEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
         </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
@@ -1006,58 +1006,58 @@
           </foreach>
         </if>
       </if>
-      <if test="entity.price != null and entity.price != 0">
+      <if test="entity.price != null">
         AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
-      <if test="entity.price == null or entity.price == 0">
-        <if test="entity.priceStart != null and entity.priceStart != 0">
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
           <![CDATA[AND COURSE_TEMPLATE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.priceEnd != null and entity.priceEnd != 0">
+        <if test="entity.priceEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      <if test="entity.originalPrice != null and entity.originalPrice != 0">
+      <if test="entity.originalPrice != null">
         AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=DOUBLE}
       </if>
-      <if test="entity.originalPrice == null or entity.originalPrice == 0">
-        <if test="entity.originalPriceStart != null and entity.originalPriceStart != 0">
+      <if test="entity.originalPrice == null">
+        <if test="entity.originalPriceStart != null">
           <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.originalPriceEnd != null and entity.originalPriceEnd != 0">
+        <if test="entity.originalPriceEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      <if test="entity.cashback != null and entity.cashback != 0">
+      <if test="entity.cashback != null">
         AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=DOUBLE}
       </if>
-      <if test="entity.cashback == null or entity.cashback == 0">
-        <if test="entity.cashbackStart != null and entity.cashbackStart != 0">
+      <if test="entity.cashback == null">
+        <if test="entity.cashbackStart != null">
           <![CDATA[AND COURSE_TEMPLATE.CASHBACK >= #{entity.cashbackStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.cashbackEnd != null and entity.cashbackEnd != 0">
+        <if test="entity.cashbackEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      <if test="entity.popularity != null and entity.popularity != 0">
+      <if test="entity.popularity != null">
         AND COURSE_TEMPLATE.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
       </if>
-      <if test="entity.popularity == null or entity.popularity == 0">
-        <if test="entity.popularityStart != null and entity.popularityStart != 0">
+      <if test="entity.popularity == null">
+        <if test="entity.popularityStart != null">
           <![CDATA[AND COURSE_TEMPLATE.POPULARITY >= #{entity.popularityStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
+        <if test="entity.popularityEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
-      <if test="entity.courseHourNum != null and entity.courseHourNum != 0">
+      <if test="entity.courseHourNum != null">
         AND COURSE_TEMPLATE.COURSE_HOUR_NUM = #{entity.courseHourNum,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseHourNum == null or entity.courseHourNum == 0">
-        <if test="entity.courseHourNumStart != null and entity.courseHourNumStart != 0">
+      <if test="entity.courseHourNum == null">
+        <if test="entity.courseHourNumStart != null">
           <![CDATA[AND COURSE_TEMPLATE.COURSE_HOUR_NUM >= #{entity.courseHourNumStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.courseHourNumEnd != null and entity.courseHourNumEnd != 0">
+        <if test="entity.courseHourNumEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.COURSE_HOUR_NUM <= #{entity.courseHourNumEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
@@ -1092,6 +1092,58 @@
         </if>
         <if test="entity.cutoffDateEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.CUTOFF_DATE <= #{entity.cutoffDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.classType != null">
+        AND COURSE_TEMPLATE.CLASS_TYPE = #{entity.classType,jdbcType=INTEGER}
+      </if>
+      <if test="entity.classType == null">
+        <if test="entity.classTypeStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE >= #{entity.classTypeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.classTypeEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE <= #{entity.classTypeEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.classTypeSet != null and entity.classTypeSet.size() > 0">
+          AND COURSE_TEMPLATE.CLASS_TYPE IN
+          <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.discount != null">
+        AND COURSE_TEMPLATE.DISCOUNT = #{entity.discount,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.discount == null">
+        <if test="entity.discountStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.DISCOUNT >= #{entity.discountStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.discountEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.DISCOUNT <= #{entity.discountEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.rating != null">
+        AND COURSE_TEMPLATE.RATING = #{entity.rating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.rating == null">
+        <if test="entity.ratingStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.RATING >= #{entity.ratingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.ratingEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.RATING <= #{entity.ratingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.bookingTotal != null">
+        AND COURSE_TEMPLATE.BOOKING_TOTAL = #{entity.bookingTotal,jdbcType=INTEGER}
+      </if>
+      <if test="entity.bookingTotal == null">
+        <if test="entity.bookingTotalStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL >= #{entity.bookingTotalStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.bookingTotalEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL <= #{entity.bookingTotalEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
@@ -1148,12 +1200,13 @@
             ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
         join CATEGORY CATEGORY 
             ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+        join CIRCLE CIRCLE
+            ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
+        join LOCATION LOCATION 
+            ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
         join ADDRESS ADDRESS 
             ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
-        join CIRCLE CIRCLE
-            ON CIRCLE.ID = ADDRESS.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = ADDRESS.LOCATION_ID
+
     
     WHERE COURSE_TEMPLATE.DELETED = 0
     <if test="entity != null">
@@ -1249,14 +1302,14 @@
           </foreach>
         </if>
       </if>
-      <if test="entity.status != null and entity.status != 0">
+      <if test="entity.status != null">
         AND COURSE_TEMPLATE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
-      <if test="entity.status == null or entity.status == 0">
-        <if test="entity.statusStart != null and entity.statusStart != 0">
+      <if test="entity.status == null">
+        <if test="entity.statusStart != null">
           <![CDATA[AND COURSE_TEMPLATE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+        <if test="entity.statusEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
         </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
@@ -1267,58 +1320,58 @@
         </if>
       </if>
       
-      <if test="entity.price != null and entity.price != 0">
+      <if test="entity.price != null">
         AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
-      <if test="entity.price == null or entity.price == 0">
-        <if test="entity.priceStart != null and entity.priceStart != 0">
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
           <![CDATA[AND COURSE_TEMPLATE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.priceEnd != null and entity.priceEnd != 0">
+        <if test="entity.priceEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      <if test="entity.originalPrice != null and entity.originalPrice != 0">
+      <if test="entity.originalPrice != null">
         AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=DOUBLE}
       </if>
-      <if test="entity.originalPrice == null or entity.originalPrice == 0">
-        <if test="entity.originalPriceStart != null and entity.originalPriceStart != 0">
+      <if test="entity.originalPrice == null">
+        <if test="entity.originalPriceStart != null">
           <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE >= #{entity.originalPriceStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.originalPriceEnd != null and entity.originalPriceEnd != 0">
+        <if test="entity.originalPriceEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      <if test="entity.cashback != null and entity.cashback != 0">
+      <if test="entity.cashback != null">
         AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=DOUBLE}
       </if>
-      <if test="entity.cashback == null or entity.cashback == 0">
-        <if test="entity.cashbackStart != null and entity.cashbackStart != 0">
+      <if test="entity.cashback == null">
+        <if test="entity.cashbackStart != null">
           <![CDATA[AND COURSE_TEMPLATE.CASHBACK >= #{entity.cashbackStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.cashbackEnd != null and entity.cashbackEnd != 0">
+        <if test="entity.cashbackEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      <if test="entity.popularity != null and entity.popularity != 0">
+      <if test="entity.popularity != null">
         AND COURSE_TEMPLATE.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
       </if>
-      <if test="entity.popularity == null or entity.popularity == 0">
-        <if test="entity.popularityStart != null and entity.popularityStart != 0">
+      <if test="entity.popularity == null">
+        <if test="entity.popularityStart != null">
           <![CDATA[AND COURSE_TEMPLATE.POPULARITY >= #{entity.popularityStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.popularityEnd != null and entity.popularityEnd != 0">
+        <if test="entity.popularityEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
-      <if test="entity.courseHourNum != null and entity.courseHourNum != 0">
+      <if test="entity.courseHourNum != null">
         AND COURSE_TEMPLATE.COURSE_HOUR_NUM = #{entity.courseHourNum,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseHourNum == null or entity.courseHourNum == 0">
-        <if test="entity.courseHourNumStart != null and entity.courseHourNumStart != 0">
+      <if test="entity.courseHourNum == null">
+        <if test="entity.courseHourNumStart != null">
           <![CDATA[AND COURSE_TEMPLATE.COURSE_HOUR_NUM >= #{entity.courseHourNumStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.courseHourNumEnd != null and entity.courseHourNumEnd != 0">
+        <if test="entity.courseHourNumEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.COURSE_HOUR_NUM <= #{entity.courseHourNumEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
@@ -1353,6 +1406,58 @@
         </if>
         <if test="entity.cutoffDateEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.CUTOFF_DATE <= #{entity.cutoffDateEnd,jdbcType=TIMESTAMP}]]>
+        </if>
+      </if>
+
+      <if test="entity.classType != null">
+        AND COURSE_TEMPLATE.CLASS_TYPE = #{entity.classType,jdbcType=INTEGER}
+      </if>
+      <if test="entity.classType == null">
+        <if test="entity.classTypeStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE >= #{entity.classTypeStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.classTypeEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE <= #{entity.classTypeEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.classTypeSet != null and entity.classTypeSet.size() > 0">
+          AND COURSE_TEMPLATE.CLASS_TYPE IN
+          <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.discount != null">
+        AND COURSE_TEMPLATE.DISCOUNT = #{entity.discount,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.discount == null">
+        <if test="entity.discountStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.DISCOUNT >= #{entity.discountStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.discountEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.DISCOUNT <= #{entity.discountEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.rating != null">
+        AND COURSE_TEMPLATE.RATING = #{entity.rating,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.rating == null">
+        <if test="entity.ratingStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.RATING >= #{entity.ratingStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.ratingEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.RATING <= #{entity.ratingEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.bookingTotal != null">
+        AND COURSE_TEMPLATE.BOOKING_TOTAL = #{entity.bookingTotal,jdbcType=INTEGER}
+      </if>
+      <if test="entity.bookingTotal == null">
+        <if test="entity.bookingTotalStart != null">
+          <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL >= #{entity.bookingTotalStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.bookingTotalEnd != null">
+          <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL <= #{entity.bookingTotalEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 

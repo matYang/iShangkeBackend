@@ -557,6 +557,62 @@ public class CourseEntityExt extends CourseEntity {
     public void setAddressLng(Double addressLng) {
         this.addressLng = addressLng;
     }
+
+    public Integer getClassTypeStart() {
+        return classTypeStart;
+    }
+
+    public void setClassTypeStart(Integer classTypeStart) {
+        this.classTypeStart = classTypeStart;
+    }
+
+    public Integer getClassTypeEnd() {
+        return classTypeEnd;
+    }
+
+    public void setClassTypeEnd(Integer classTypeEnd) {
+        this.classTypeEnd = classTypeEnd;
+    }
+
+    public Set<Integer> getClassTypeSet() {
+        return classTypeSet;
+    }
+
+    public void setClassTypeSet(Set<Integer> classTypeSet) {
+        this.classTypeSet = classTypeSet;
+    }
+
+    public Double getDiscountStart() {
+        return discountStart;
+    }
+
+    public void setDiscountStart(Double discountStart) {
+        this.discountStart = discountStart;
+    }
+
+    public Double getDiscountEnd() {
+        return discountEnd;
+    }
+
+    public void setDiscountEnd(Double discountEnd) {
+        this.discountEnd = discountEnd;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getBookingTotal() {
+        return bookingTotal;
+    }
+
+    public void setBookingTotal(Integer bookingTotal) {
+        this.bookingTotal = bookingTotal;
+    }
     
     
 }
