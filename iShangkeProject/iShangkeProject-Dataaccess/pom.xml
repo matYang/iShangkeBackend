@@ -133,7 +133,7 @@
             <configuration>
               <target name="copy file">
                 <copy
-                  file="${project.basedir}/src/main/resources/applicationContext-dataaccess.xml.template"
+                  file="${project.basedir}/src/main/resources/applicationContext-dataaccessUT.xml.template"
                   tofile="${project.basedir}/src/test/resources/applicationContext-dataaccessUT.xml"
                   overwrite="true" />
               </target>
