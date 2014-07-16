@@ -4,6 +4,7 @@ include "model/user.thrift"
 include "model/partner.thrift"
 include "model/course.thrift"
 include "model/booking.thrift"
+include "model/bookingHistory.thrift"
 include "model/coupon.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
@@ -128,4 +129,18 @@ service BookingService {
      *
      */ 
     common.ResponseBo query(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法为查询订单历史操作。<br>
+     *  合作商可以按条件查询自己的所有预定单历史操作，ishangke管理员可以按条件查找所有合作商的预定单历史操作
+     *
+     *  @param  bookingHistoryBo        需要检索和过滤的预定单历史信息
+     *  @param  partnerBo               合作商信息
+     *  @param  userBo                  调用方法的用户的信息
+     *  @param  paginationBo            分页信息
+     *
+     *  @return 预定单实体 BookingBo 列表
+     *
+     */ 
+    common.ResponseBo queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 
