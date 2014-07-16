@@ -1,6 +1,6 @@
-include "fault.thrift"
-include "common.thrift"
-include "location.thrift"
+include "model/fault.thrift"
+include "model/common.thrift"
+include "model/location.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service 
 service LocationService {

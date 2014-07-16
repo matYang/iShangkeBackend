@@ -1,10 +1,10 @@
-include "fault.thrift"
-include "common.thrift"
-include "user.thrift"
-include "partner.thrift"
-include "course.thrift"
-include "booking.thrift"
-include "coupon.thrift"
+include "model/fault.thrift"
+include "model/common.thrift"
+include "model/user.thrift"
+include "model/partner.thrift"
+include "model/course.thrift"
+include "model/booking.thrift"
+include "model/coupon.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
