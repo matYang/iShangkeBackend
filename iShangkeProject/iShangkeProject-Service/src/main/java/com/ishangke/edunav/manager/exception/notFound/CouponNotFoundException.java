@@ -15,8 +15,8 @@ public class CouponNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 7;
-    }
+//    @Override
+//    public int getCode() {
+//        return 7;
+//    }
 }

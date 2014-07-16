@@ -15,8 +15,8 @@ public class CreditNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 8;
-    }
+//    @Override
+//    public int getCode() {
+//        return 8;
+//    }
 }

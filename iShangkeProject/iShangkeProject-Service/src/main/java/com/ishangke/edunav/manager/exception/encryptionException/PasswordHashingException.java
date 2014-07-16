@@ -14,8 +14,8 @@ public class PasswordHashingException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 16;
-    }
+//    @Override
+//    public int getCode() {
+//        return 16;
+//    }
 }
