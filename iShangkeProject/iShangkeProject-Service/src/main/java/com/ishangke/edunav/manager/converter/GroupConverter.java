@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
 public class GroupConverter {
     public static GroupBo toBo(GroupEntityExt e) {
-        return new GroupBo();
+        GroupBo groupBo = new GroupBo();
+        return groupBo;
     }
 
     public static GroupEntityExt fromBo(GroupBo bo) {
-        return new GroupEntityExt();
+        GroupEntityExt groupEntityExt = new GroupEntityExt();
+        return groupEntityExt;
     }
 }

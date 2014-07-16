@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 
 public class ContactConverter {
     public static ContactBo toBo(ContactEntityExt e) {
-        return new ContactBo();
+        ContactBo contactBo = new ContactBo();
+        return contactBo;
     }
 
     public static ContactEntityExt fromBo(ContactBo bo) {
-        return new ContactEntityExt();
+        ContactEntityExt contactEntityExt = new ContactEntityExt();
+        return contactEntityExt;
     }
 }

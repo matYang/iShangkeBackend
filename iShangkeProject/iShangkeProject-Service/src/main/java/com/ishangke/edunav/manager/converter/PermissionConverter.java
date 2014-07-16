@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 
 public class PermissionConverter {
     public static PermissionBo toBo(PermissionEntityExt e) {
-        return new PermissionBo();
+        PermissionBo permissionBo = new PermissionBo();
+        return permissionBo;
     }
 
     public static PermissionEntityExt fromBo(PermissionBo bo) {
-        return new PermissionEntityExt();
+        PermissionEntityExt permissionEntityExt =new PermissionEntityExt();
+        return permissionEntityExt;
     }
 }

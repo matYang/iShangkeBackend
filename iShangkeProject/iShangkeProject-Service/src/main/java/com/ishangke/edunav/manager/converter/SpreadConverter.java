@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
 
 public class SpreadConverter {
     public static SpreadBo toBo(SpreadEntityExt e) {
-        return new SpreadBo();
+        SpreadBo spreadBo =new SpreadBo();
+        return spreadBo;
     }
 
     public static SpreadEntityExt fromBo(SpreadBo bo) {
-        return new SpreadEntityExt();
+        SpreadEntityExt spreadEntityExt =new SpreadEntityExt();
+        return spreadEntityExt;
     }
 }

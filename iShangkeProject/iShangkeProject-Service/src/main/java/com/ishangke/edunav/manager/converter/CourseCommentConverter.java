@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
 
 public class CourseCommentConverter {
     public static CourseCommentBo toBo(CourseCommentEntityExt e) {
-        return new CourseCommentBo();
+        CourseCommentBo courseCommentBo = new CourseCommentBo();
+        return courseCommentBo;
     }
 
     public static CourseCommentEntityExt fromBo(CourseCommentBo bo) {
-        return new CourseCommentEntityExt();
+        CourseCommentEntityExt courseCommentEntityExt = new CourseCommentEntityExt();
+        return courseCommentEntityExt;
     }
 }

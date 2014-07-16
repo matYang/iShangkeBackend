@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CourseTeacherEntityExt;
 
 public class CourseTeacherConverter {
     public static CourseTeacherBo toBo(CourseTeacherEntityExt e) {
-        return new CourseTeacherBo();
+        CourseTeacherBo courseTeacherBo = new CourseTeacherBo();
+        return courseTeacherBo;
     }
 
     public static CourseTeacherEntityExt fromBo(CourseTeacherBo bo) {
-        return new CourseTeacherEntityExt();
+        CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
+        return courseTeacherEntityExt;
     }
 }

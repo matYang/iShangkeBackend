@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 
 public class RolePermissionConverter {
     public static RolePermissionBo toBo(RolePermissionEntityExt e) {
-        return new RolePermissionBo();
+        RolePermissionBo rolePermissionBo = new RolePermissionBo();
+        return rolePermissionBo;
     }
 
     public static RolePermissionEntityExt fromBo(RolePermissionBo bo) {
-        return new RolePermissionEntityExt();
+        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
+        return rolePermissionEntityExt;
     }
 }
