@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 
 public class BookingConverter {
     public static BookingBo toBo(BookingEntityExt e) {
-        return new BookingBo();
+        BookingBo bookingBo = new BookingBo();
+        return bookingBo;
     }
 
     public static BookingEntityExt fromBo(BookingBo bo) {
-        return new BookingEntityExt();
+        BookingEntityExt bookingEntityExt = new BookingEntityExt();
+        return bookingEntityExt;
     }
 }

@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
 
 public class ActivityConverter {
     public static ActivityBo toBo(ActivityEntityExt e) {
-        return new ActivityBo();
+        ActivityBo activityBo = new ActivityBo();
+        return activityBo;
     }
 
     public static ActivityEntityExt fromBo(ActivityBo bo) {
-        return new ActivityEntityExt();
+        ActivityEntityExt activityEntityExt = new ActivityEntityExt();
+        return activityEntityExt;
     }
 }

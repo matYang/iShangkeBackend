@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 
 public class ApproveHistoryConverter {
     public static ApproveHistoryBo toBo(ApproveHistoryEntityExt e) {
-        return new ApproveHistoryBo();
+        ApproveHistoryBo approveHistoryBo = new ApproveHistoryBo();
+        return approveHistoryBo;
     }
 
     public static ApproveHistoryEntityExt fromBo(ApproveHistoryBo bo) {
-        return new ApproveHistoryEntityExt();
+        ApproveHistoryEntityExt approveHistoryEntityExt = new ApproveHistoryEntityExt();
+        return approveHistoryEntityExt;
     }
 }

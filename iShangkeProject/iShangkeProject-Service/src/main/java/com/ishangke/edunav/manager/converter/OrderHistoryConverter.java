@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 
 public class OrderHistoryConverter {
     public static OrderHistoryBo toBo(OrderHistoryEntityExt e) {
-        return new OrderHistoryBo();
+        OrderHistoryBo orderHistoryBo = new OrderHistoryBo();
+        return orderHistoryBo;
     }
 
     public static OrderHistoryEntityExt fromBo(OrderHistoryBo bo) {
-        return new OrderHistoryEntityExt();
+        OrderHistoryEntityExt orderHistoryEntityExt = new OrderHistoryEntityExt();
+        return orderHistoryEntityExt;
     }
 }

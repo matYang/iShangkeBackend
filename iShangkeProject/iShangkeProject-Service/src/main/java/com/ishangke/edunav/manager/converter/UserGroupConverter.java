@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
 public class UserGroupConverter {
     public static UserGroupBo toBo(UserGroupEntityExt e) {
-        return new UserGroupBo();
+        UserGroupBo userGroupBo = new UserGroupBo();
+        return userGroupBo;
     }
 
     public static UserGroupEntityExt fromBo(UserGroupBo bo) {
-        return new UserGroupEntityExt();
+        UserGroupEntityExt userGroupEntityExt = new UserGroupEntityExt();
+        return userGroupEntityExt;
     }
 }

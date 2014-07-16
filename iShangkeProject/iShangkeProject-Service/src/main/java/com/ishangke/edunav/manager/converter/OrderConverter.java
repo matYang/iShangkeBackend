@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 
 public class OrderConverter {
     public static OrderBo toBo(OrderEntityExt e) {
-        return new OrderBo();
+        OrderBo orderBo =new OrderBo();
+        return orderBo;
     }
 
     public static OrderEntityExt fromBo(OrderBo bo) {
-        return new OrderEntityExt();
+        OrderEntityExt orderEntityExt = new OrderEntityExt();
+        return orderEntityExt;
     }
 }

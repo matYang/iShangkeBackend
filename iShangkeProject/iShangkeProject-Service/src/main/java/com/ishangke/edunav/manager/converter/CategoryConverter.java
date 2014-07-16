@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 
 public class CategoryConverter {
     public static CategoryBo toBo(CategoryEntityExt e) {
-        return new CategoryBo();
+        CategoryBo categoryBo = new CategoryBo();
+        return categoryBo;
     }
 
     public static CategoryEntityExt fromBo(CategoryBo bo) {
-        return new CategoryEntityExt();
+        CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
+        return categoryEntityExt;
     }
 }

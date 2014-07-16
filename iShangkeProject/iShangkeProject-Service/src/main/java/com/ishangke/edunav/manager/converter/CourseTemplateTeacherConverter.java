@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 
 public class CourseTemplateTeacherConverter {
     public static CourseTemplateTeacherBo toBo(CourseTemplateTeacherEntityExt e) {
-        return new CourseTemplateTeacherBo();
+        CourseTemplateTeacherBo courseTemplateTeacherBo = new CourseTemplateTeacherBo();
+        return courseTemplateTeacherBo;
     }
 
     public static CourseTemplateTeacherEntityExt fromBo(CourseTemplateTeacherBo bo) {
-        return new CourseTemplateTeacherEntityExt();
+        CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt = new CourseTemplateTeacherEntityExt();
+        return courseTemplateTeacherEntityExt;
     }
 }

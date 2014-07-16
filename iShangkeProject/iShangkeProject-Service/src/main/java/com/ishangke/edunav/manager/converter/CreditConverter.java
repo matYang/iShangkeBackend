@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 
 public class CreditConverter {
     public static CreditBo toBo(CreditEntityExt e) {
-        return new CreditBo();
+        CreditBo creditBo = new CreditBo();
+        return creditBo;
     }
 
     public static CreditEntityExt fromBo(CreditBo bo) {
-        return new CreditEntityExt();
+        CreditEntityExt creditEntityExt = new CreditEntityExt();
+        return creditEntityExt;
     }
 }

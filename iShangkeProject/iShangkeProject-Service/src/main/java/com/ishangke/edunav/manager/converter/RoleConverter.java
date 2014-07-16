@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 
 public class RoleConverter {
     public static RoleBo toBo(RoleEntityExt e) {
-        return new RoleBo();
+        RoleBo roleBo = new RoleBo();
+        return roleBo;
     }
 
     public static RoleEntityExt fromBo(RoleBo bo) {
-        return new RoleEntityExt();
+        RoleEntityExt roleEntityExt = new RoleEntityExt();
+        return roleEntityExt;
     }
 }

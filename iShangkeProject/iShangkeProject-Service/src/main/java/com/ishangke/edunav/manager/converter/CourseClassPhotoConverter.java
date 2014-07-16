@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 
 public class CourseClassPhotoConverter {
     public static CourseClassPhotoBo toBo(CourseClassPhotoEntityExt e) {
-        return new CourseClassPhotoBo();
+        CourseClassPhotoBo courseClassPhotoBo = new CourseClassPhotoBo();
+        return courseClassPhotoBo;
     }
 
     public static CourseClassPhotoEntityExt fromBo(CourseClassPhotoBo bo) {
-        return new CourseClassPhotoEntityExt();
+        CourseClassPhotoEntityExt courseClassPhotoEntityExt = new CourseClassPhotoEntityExt();
+        return courseClassPhotoEntityExt;
     }
 }

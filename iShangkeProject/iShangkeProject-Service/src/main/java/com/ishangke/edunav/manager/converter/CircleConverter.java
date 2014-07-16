@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 
 public class CircleConverter {
     public static CircleBo toBo(CircleEntityExt e) {
-        return new CircleBo();
+        CircleBo circleBo = new CircleBo();
+        return circleBo;
     }
 
     public static CircleEntityExt fromBo(CircleBo bo) {
-        return new CircleEntityExt();
+        CircleEntityExt circleEntityExt = new CircleEntityExt();
+        return circleEntityExt;
     }
 }

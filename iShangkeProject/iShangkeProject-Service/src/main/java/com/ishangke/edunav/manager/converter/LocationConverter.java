@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.LocationEntityExt;
 
 public class LocationConverter {
     public static LocationBo toBo(LocationEntityExt e) {
-        return new LocationBo();
+        LocationBo locationBo = new LocationBo();
+        return locationBo;
     }
 
     public static LocationEntityExt fromBo(LocationBo bo) {
-        return new LocationEntityExt();
+        LocationEntityExt locationEntityExt = new LocationEntityExt();
+        return locationEntityExt;
     }
 }

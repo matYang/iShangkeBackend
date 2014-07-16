@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 
 public class CouponConverter {
     public static CouponBo toBo(CouponEntityExt e) {
-        return new CouponBo();
+        CouponBo couponBo = new CouponBo();
+        return couponBo;
     }
 
     public static CouponEntityExt fromBo(CouponBo bo) {
-        return new CouponEntityExt();
+        CouponEntityExt couponEntityExt = new CouponEntityExt();
+        return couponEntityExt;
     }
 }

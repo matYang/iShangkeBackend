@@ -5,10 +5,12 @@ import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 
 public class WithdrawConverter {
     public static WithdrawBo toBo(WithdrawEntityExt e) {
-        return new WithdrawBo();
+        WithdrawBo withdrawBo = new WithdrawBo();
+        return withdrawBo;
     }
 
     public static WithdrawEntityExt fromBo(WithdrawBo bo) {
-        return new WithdrawEntityExt();
+        WithdrawEntityExt withdrawEntityExt =new WithdrawEntityExt();
+        return withdrawEntityExt;
     }
 }
