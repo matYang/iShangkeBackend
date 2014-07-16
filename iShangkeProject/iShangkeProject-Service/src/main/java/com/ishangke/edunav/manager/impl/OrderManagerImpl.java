@@ -1,5 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;

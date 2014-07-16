@@ -2,6 +2,9 @@ package com.ishangke.edunav.manager.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptFailedBo;
