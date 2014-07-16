@@ -2,6 +2,7 @@ include "model/fault.thrift"
 include "model/common.thrift"
 include "model/address.thrift"
 include "model/user.thrift"
+include "model/partner.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
@@ -13,11 +14,12 @@ service AddressService{
      *
      *  @param  addressBo          需要创建的校区信息
      *  @param  userBo             发起创建的管理员/合作商信息
+     *	@param 	partnerBo 		   合作商信息
      *
      *  @return 创建完成的校区信息
      *
      */
-    common.ResponseBo createAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo createAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新校区信息。<br>
@@ -25,11 +27,12 @@ service AddressService{
      *
      *  @param  addressBo          需要更新的校区信息
      *  @param  userBo             发起更新的管理员/合作商信息
+     *	@param 	partnerBo 		   合作商信息
      *
      *  @return 更新完成的校区信息
      *
      */
-    common.ResponseBo updateAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo updateAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除校区信息。<br>
@@ -37,11 +40,12 @@ service AddressService{
      *
      *  @param  addressBo          需要删除的校区信息
      *  @param  userBo             发起删除的管理员/合作商信息
+     *	@param 	partnerBo 		   合作商信息
      *
      *  @return 
      *
      */
-    common.ResponseBo deleteAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo deleteAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询校区信息。<br>
