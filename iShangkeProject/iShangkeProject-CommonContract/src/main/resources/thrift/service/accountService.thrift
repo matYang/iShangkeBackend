@@ -15,7 +15,7 @@ service AccountService{
      *
      *  @param  accountBo       需要检索和过滤的账户信息
      *  @param  userBo          调用方法的用户的信息
-     *  @param  paginationBo 	调用方法的用户的信息
+     *  @param  paginationBo 	分页信息
      *
      *  @return AccountBo 列表
      *
@@ -40,10 +40,11 @@ service AccountService{
      *
      *  @param  accountBo       需要检索和过滤的账户信息
      *  @param  userBo          调用方法的用户的信息
-     *  @param  paginationBo 	调用方法的用户的信息
+     *  @param  paginationBo 	分页信息
      *
      *  @return AccountHistoryBo 列表
      *
      */ 
      common.ResponseBo queryHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
 }
