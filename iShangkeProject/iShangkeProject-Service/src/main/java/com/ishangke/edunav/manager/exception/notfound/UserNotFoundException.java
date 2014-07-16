@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class UserNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 2476249717398715525L;
 
     public UserNotFoundException(){

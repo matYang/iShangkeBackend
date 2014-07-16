@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class AccountNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -7756249070182014274L;
 
     public AccountNotFoundException(){

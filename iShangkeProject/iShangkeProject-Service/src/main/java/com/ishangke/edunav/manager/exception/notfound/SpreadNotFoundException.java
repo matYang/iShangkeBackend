@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class SpreadNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -5104251417514300649L;
 
     public SpreadNotFoundException(){

@@ -3,10 +3,7 @@ package com.ishangke.edunav.manager.exception.notfound;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class AddressNotFoundException extends ManagerException{
-
-    /**
-     * 
-     */
+    
     private static final long serialVersionUID = 2109823935259825700L;
 
     public AddressNotFoundException(){

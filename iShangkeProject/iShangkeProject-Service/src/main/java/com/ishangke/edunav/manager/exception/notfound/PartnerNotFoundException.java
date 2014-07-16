@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class PartnerNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 5160624755152751640L;
 
     public PartnerNotFoundException(){

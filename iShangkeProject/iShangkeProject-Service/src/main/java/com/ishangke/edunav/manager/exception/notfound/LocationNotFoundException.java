@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class LocationNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -3144842668700928931L;
 
     public LocationNotFoundException(){

@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class ActivityNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -2151849652768270798L;
 
     public ActivityNotFoundException(){

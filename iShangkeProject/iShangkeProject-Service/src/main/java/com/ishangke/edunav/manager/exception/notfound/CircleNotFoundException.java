@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class CircleNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -1411999829107847145L;
 
     public CircleNotFoundException(){

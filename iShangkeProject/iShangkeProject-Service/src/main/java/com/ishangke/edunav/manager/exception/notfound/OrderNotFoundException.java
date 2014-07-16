@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class OrderNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 3131891105982213334L;
 
     public OrderNotFoundException(){

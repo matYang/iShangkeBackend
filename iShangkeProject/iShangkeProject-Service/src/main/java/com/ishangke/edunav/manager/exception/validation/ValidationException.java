@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class ValidationException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -5931623981225280453L;
 
     public ValidationException(){

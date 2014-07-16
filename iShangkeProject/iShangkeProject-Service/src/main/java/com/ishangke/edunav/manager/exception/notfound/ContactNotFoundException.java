@@ -4,9 +4,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class ContactNotFoundException extends ManagerException{
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 2613481156973314857L;
 
     public ContactNotFoundException(){
