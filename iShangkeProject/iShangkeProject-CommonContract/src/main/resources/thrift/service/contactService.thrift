@@ -3,11 +3,9 @@ include "model/common.thrift"
 include "model/user.thrift"
 include "model/contact.thrift"
 
-
 namespace java com.ishangke.edunav.commoncontract.service
 
 service ContactService{
-
 
 	/**
      *  创建常用联系人信息。<br>
