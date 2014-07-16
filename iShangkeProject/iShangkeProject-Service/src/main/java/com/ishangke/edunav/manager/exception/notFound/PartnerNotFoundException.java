@@ -15,8 +15,8 @@ public class PartnerNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 2;
-    }
+//    @Override
+//    public int getCode() {
+//        return 2;
+//    }
 }

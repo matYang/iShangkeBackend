@@ -15,8 +15,8 @@ public class ClassPhotoNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 9;
-    }
+//    @Override
+//    public int getCode() {
+//        return 9;
+//    }
 }

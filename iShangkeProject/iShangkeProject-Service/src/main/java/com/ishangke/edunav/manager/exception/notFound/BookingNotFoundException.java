@@ -15,8 +15,8 @@ public class BookingNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 5;
-    }
+//    @Override
+//    public int getCode() {
+//        return 5;
+//    }
 }

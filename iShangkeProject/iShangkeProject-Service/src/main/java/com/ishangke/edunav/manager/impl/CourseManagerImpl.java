@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
+import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseApproveBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseRejectBo;
@@ -15,7 +16,6 @@ import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
-import com.ishangke.edunav.commoncontract.model.PhotoBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.CourseManager;
@@ -24,7 +24,7 @@ public class CourseManagerImpl implements CourseManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseManagerImpl.class);
     
     @Override
-    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, List<TeacherBo> listTeacherBo, List<PhotoBo> listPhotoBo, LocationBo locationBo, PartnerBo partnerBo,
+    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, List<TeacherBo> listTeacherBo, List<ClassPhotoBo> listClassPhotoBo, LocationBo locationBo, PartnerBo partnerBo,
             UserBo userBo) {
         // TODO Auto-generated method stub
         return null;

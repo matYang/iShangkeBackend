@@ -15,8 +15,8 @@ public class TeacherNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-    @Override
-    public int getCode() {
-        return 10;
-    }
+//    @Override
+//    public int getCode() {
+//        return 10;
+//    }
 }
