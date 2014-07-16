@@ -7,7 +7,7 @@ include "model/user.thrift"
 include "model/category.thrift"
 include "model/circle.thrift"
 include "model/teacher.thrift"
-include "model/photo.thrift"
+include "model/classPhoto.thrift"
 include "model/courseTemplate.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
@@ -27,7 +27,7 @@ service CourseService {
      *  @return 课程实体 CourseBo 
      *
      */
-    common.ResponseBo createCourse(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: course.CourseBo courseBo, 3: list<teacher.TeacherBo> listTeacherBo, 4: list<photo.PhotoBo> listPhotoBo,  5: location.LocationBo locationBo, 6: partner.PartnerBo partnerBo, 7: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo createCourse(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: course.CourseBo courseBo,  3: partner.PartnerBo partnerBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为提交课程<br>

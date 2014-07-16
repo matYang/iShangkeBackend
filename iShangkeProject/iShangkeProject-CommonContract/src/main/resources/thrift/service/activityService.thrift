@@ -5,6 +5,8 @@ include "model/partner.thrift"
 include "model/common.thrift"
 include "model/course.thrift"
 
+namespace java com.ishangke.edunav.commoncontract.service
+
 service ActivityService{
 	
 	/**

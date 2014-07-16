@@ -17,12 +17,11 @@ service BookingService {
      *  @param  bookingBo                    预定单信息
      *  @param  CommentBookingAcceptBo       创建预定单留言信息
      *  @param  userBo                       调用方法的用户的信息
-     *  @param  couponBo                     优惠券信息
      *
      *  @return 预定单实体 BookingBo
      *
      */ 
-    common.ResponseBo createBookingByUser(1: course.CourseBo courseBo, 2: booking.BookingBo bookingBo, 3: booking.CommentBookingCreateBo commentBookingCreateBo, 4: user.UserBo userBo, 5: coupon.CouponBo couponBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo createBookingByUser(1: course.CourseBo courseBo, 2: booking.BookingBo bookingBo, 3: booking.CommentBookingCreateBo commentBookingCreateBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理一个预定单功能。<br>

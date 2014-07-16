@@ -823,7 +823,7 @@ TeacherService
      *  管理员与合作商可以查询教师信息
      *
      *  @param  teacherBo          需要查询的教师信息
-     *  @param  teacherBo          教师相关的合作商信息
+     *  @param  partnerBo          教师相关的合作商信息
      *  @param  userBo             发起查询的用户信息
      *  @param  paginationBo       分页信息
      *
