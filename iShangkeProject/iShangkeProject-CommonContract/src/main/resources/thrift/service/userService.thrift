@@ -15,6 +15,55 @@ service UserService {
     user.UserBo registerUser(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
+     *  本方法为普通用户提供手机验证。<br>
+     *  用户可以通过此方法向用户发送验证短信。
+     *  @param  sessionBo          用户信息
+     *  @return 用户实体          UserBo
+     */
+    user.UserBo openCellSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法验证用户手机验证码。<br>
+     *  用户可以通过此方法验证手机,如果通过则关闭session
+     *  @param  sessionBo        用户信息
+     *  @return 用户实体          UserBo
+     */
+    user.UserBo verifyCellSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法为普通用户提供忘记密码时手机验证。<br>
+     *  用户可以通过此方法向用户发送验证短信。
+     *  @param  sessionBo        用户信息
+     *  @return 用户实体          UserBo
+     */
+    user.UserBo openForgetPasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法验证用户手机验证忘记密码的验证码。<br>
+     *  用户可以通过此方法验证忘记密码,如果通过则关闭session
+     *  @param  sessionBo        用户信息
+     *  @return 用户实体          UserBo
+     */
+    user.UserBo verifyForgetPasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法为普通用户提供修改密码时手机验证。<br>
+     *  用户可以通过此方法向用户发送验证短信。
+     *  @param  sessionBo        用户信息
+     *  @return 用户实体          UserBo
+     */
+    user.UserBo openChangePasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法验证用户手机验证修改密码的验证码。<br>
+     *  用户可以通过此方法验证修改密码,如果通过则关闭session
+     *  @param  sessionBo        用户信息
+     *  @return 用户实体          UserBo
+     */
+    user.UserBo verifyChangePasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+
+    /**
      *  本方法为所有用户提供登录的功能。<br>
      *  所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
      *
