@@ -1,6 +1,6 @@
 namespace java com.ishangke.edunav.commoncontract.model
 
-struct BookingHistory {
+struct BookingHistoryBo {
     1: i32 id
     2: i32 bookingId
     3: i32 userId

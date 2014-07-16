@@ -1,13 +1,12 @@
-include "fault.thrift"
-include "common.thrift"
-include "user.thrift"
-include "booking.thrift"
-include "order.thrift"
-include "withdraw.thrift"
+package com.ishangke.edunav.manager;
 
-namespace java com.ishangke.edunav.commoncontract.service
+import com.ishangke.edunav.commoncontract.model.BookingBo;
+import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
+import com.ishangke.edunav.commoncontract.model.OrderBo;
+import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 
-service OrderService { 
+public interface OrderManager {
     /**
      *  本方法为用户支付课程的功能。<br>
      *  用户可以对booking进行支付
@@ -20,7 +19,7 @@ service OrderService {
      *  @return 预定单实体 BookingBo
      *
      */ 
-    common.ResponseBo createOrderByUser(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: withdraw.WithdrawBo withdrawBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo);
 
     /**
      *  本方法为合作商受理一个预定单功能。<br>
@@ -33,5 +32,5 @@ service OrderService {
      *  @return 
      *
      */ 
-    common.ResponseBo acceptOrderByAdmin(1: order.OrderBo orderBo, 2: order.CommentOrderAcceptBo commentBookingAcceptBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo);
 }

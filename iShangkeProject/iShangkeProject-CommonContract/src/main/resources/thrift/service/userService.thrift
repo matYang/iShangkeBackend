@@ -1,7 +1,7 @@
-include "fault.thrift"
-include "common.thrift"
-include "user.thrift"
-include "partner.thrift"
+include "model/fault.thrift"
+include "model/common.thrift"
+include "model/user.thrift"
+include "model/partner.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 

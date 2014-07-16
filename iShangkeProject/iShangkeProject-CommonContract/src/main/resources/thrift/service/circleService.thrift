@@ -1,6 +1,6 @@
-include "fault.thrift"
-include "common.thrift"
-include "circle.thrift"
+include "model/fault.thrift"
+include "model/common.thrift"
+include "model/circle.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service 
 service CircleService {
