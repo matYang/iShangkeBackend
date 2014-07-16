@@ -14,7 +14,7 @@ service ActivityService{
      *  管理员与合作商可以创建活动信息
      *
      *  @param  activityBo         需要创建的活动信息
-     *  @param  courseBo         活动相关的课程信息
+     *  @param  courseBo           活动相关的课程信息
      *  @param  partnerBo          活动相关的合作商信息
      *  @param  userBo             发起创建的用户信息
      *

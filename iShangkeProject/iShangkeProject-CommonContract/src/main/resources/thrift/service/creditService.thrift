@@ -3,6 +3,7 @@ include "model/common.thrift"
 include "model/user.thrift"
 include "model/account.thrift"
 include "model/credit.thrift"
+include "model/creditHistory.thrift"
 include "model/coupon.thrift"
 
 
@@ -47,4 +48,18 @@ service CreditService{
      *
      */ 
     common.ResponseBo query(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+        /**
+     *  本方法为查询积分历史功能。<br>
+     *  用户可以查询自己的使用积分历史，系统可以查看所有积分历史
+     *
+     *  @param  creditHistoryBo         需要检索和过滤的积分信息历史
+     *  @param  userBo                  调用方法的用户的信息
+     *  @param  paginationBo            分页信息
+     *
+     *  @return 积分实体 CreditBo 列表
+     *
+     */ 
+    common.ResponseBo queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
 }

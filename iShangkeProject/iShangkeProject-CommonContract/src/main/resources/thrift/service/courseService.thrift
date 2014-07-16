@@ -181,13 +181,13 @@ service CourseService {
      *  本方法返回课程详情<br>
      *  合作商/管理员可以通过此方法调取课程详情
      *
-     *  @param  id           课程id
+     *  @param  courseBo     课程id
      *  @param  userBo       调用方法的用户的信息
      *
      *  @return  
      *
      */
-    common.ResponseBo queryById(1: i32 id, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo queryById(1: course.CourseBo courseBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }
 

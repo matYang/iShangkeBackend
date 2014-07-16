@@ -24,13 +24,13 @@ service PartnerService{
      *  查询合作商完整信息。<br>
      *  用户可以看到合作商完整信息
      *
-     *  @param  id       		合作商Id
+     *  @param  partnerBo       合作商Id
      *  @param  UserBo 	  		用户信息
      *
      *  @return 合作商实体 PartnerBo
      *
      */ 
-    common.ResponseBo queryById(1: i32 id, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    common.ResponseBo queryById(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  更新合作商信息。<br>
