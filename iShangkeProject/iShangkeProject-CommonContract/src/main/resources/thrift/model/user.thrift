@@ -18,3 +18,11 @@ struct LoginBo {
   3: string password
 }
 
+/**
+ *	SessionBo
+ */
+struct SessionBo {
+  1: i32 id
+  2: string phone
+  3: string authCode
+}
