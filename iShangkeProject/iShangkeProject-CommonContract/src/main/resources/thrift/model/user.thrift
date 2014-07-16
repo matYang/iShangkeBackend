@@ -19,10 +19,10 @@ struct LoginBo {
 }
 
 /**
- *
+ *	SessionBo
  */
 struct SessionBo {
   1: i32 id
   2: string phone
-  3: authCode
+  3: string authCode
 }
