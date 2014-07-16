@@ -14,7 +14,7 @@ import com.ishangke.edunav.web.user.vo.QueryVo;
 @RequestMapping("/api/v2/welcome")
 public class WelcomeController extends AbstractController {
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse<String> welcomePost(@RequestBody QueryVo queryVo) {
         String name = queryVo.getName();
         JsonResponse<String> result = new JsonResponse<>();
