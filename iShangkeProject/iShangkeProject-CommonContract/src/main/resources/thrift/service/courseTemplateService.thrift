@@ -133,13 +133,13 @@ service CourseTemplateService {
      *  本方法返回课程模版详情<br>
      *  合作商/管理员可以通过此方法调取
      *
-     *  @param  id           课程模板id
-     *  @param  userBo       调用方法的用户的信息
+     *  @param  courseTemplateBo            课程模板id
+     *  @param  userBo                      调用方法的用户的信息
      *
      *  @return  
      *
      */
-    common.ResponseBo queryCourseTempalteById(1: i32 id, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    common.ResponseBo queryCourseTempalteById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 }
