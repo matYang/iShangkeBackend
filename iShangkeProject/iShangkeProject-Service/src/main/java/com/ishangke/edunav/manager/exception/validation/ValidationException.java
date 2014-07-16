@@ -4,7 +4,10 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class ValidationException extends ManagerException{
 
-    private static final long serialVersionUID = 3127196085207317575L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5931623981225280453L;
 
     public ValidationException(){
         super("验证失败，请核对内容");
