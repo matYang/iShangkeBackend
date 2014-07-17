@@ -15,19 +15,26 @@
     <result column="COURSETEMPLATE_COMMISSION" property="commission" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_STATUS" property="status" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSETEMPLATE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSETEMPLATE_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_POPULARITY" property="popularity" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSETEMPLATE_FINISHDATE" property="finishDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSETEMPLATE_CUTOFFDATE" property="cutoffDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSETEMPLATE_NOREFUNDDATE" property="noRefundDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSETEMPLATE_CASHBACKDATE" property="cashbackDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_STARTDATE" property="startDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_FINISHDATE" property="finishDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_CUTOFFDATE" property="cutoffDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_NOREFUNDDATE" property="noRefundDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATE_CASHBACKDATE" property="cashbackDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSETEMPLATE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
@@ -39,12 +46,14 @@
     <result column="COURSETEMPLATE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUIZ" property="quiz" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_OPENCOURSEREQUIREMENT" property="openCourseRequirement"
+      jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_STUDYDAYNOTE" property="studyDayNote" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro"
+      jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
@@ -54,37 +63,41 @@
     <result column="COURSETEMPLATE_OUTLINE" property="outline" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_GOAL" property="goal" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGANDEXERCISE" property="teachingAndExercise"
+      jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TRAIL" property="trail" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_MARKING" property="marking" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_TEACHINGMATERIALFEE" property="teachingMaterialFee"
+      jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_RATING" property="rating" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INTEGER" />
-    
-    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR"/>
-    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR"/>
-    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR"/>
-    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR"/>
-    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER"/>
-    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR"/>
+    <result column="COURSETEMPLATE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_SCHOOLTIMEWEEK" property="schooltimeWeek" jdbcType="INTEGER" />
+
+    <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+    <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+    <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+    <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+    <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+    <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
     <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
-    <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR"/>
-    <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE"/>
-    <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE"/>
-    <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR"/>
-    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR"/>
-    <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER"/>
-    <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR"/>
-    <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR"/>
-    <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR"/>
-    <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR"/>
+    <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+    <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+    <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+    <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+    <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+    <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+    <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+    <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+    <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
     <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
       <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
       <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
@@ -92,89 +105,119 @@
       <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
       <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
       <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
-      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
-      <result column="TEACHER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
+      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="TEACHER_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
     <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
-      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER"/>
+      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
       <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
-      <result column="CLASSPHOTO_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
+      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
+      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
+      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="CLASSPHOTO_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
   </resultMap>
   <sql id="CourseTemplate_Base_Column_List">
     COURSE_TEMPLATE.ID COURSETEMPLATE_ID,
-    COURSE_TEMPLATE.COURSE_NAME COURSETEMPLATE_COURSENAME,
+    COURSE_TEMPLATE.COURSE_NAME
+    COURSETEMPLATE_COURSENAME,
     COURSE_TEMPLATE.CATEGORY_ID COURSETEMPLATE_CATEGORYID,
     COURSE_TEMPLATE.LOCATION_ID COURSETEMPLATE_LOCATIONID,
-    COURSE_TEMPLATE.CIRCLE_ID COURSETEMPLATE_CIRCLEID,
+    COURSE_TEMPLATE.CIRCLE_ID
+    COURSETEMPLATE_CIRCLEID,
     COURSE_TEMPLATE.PARTNER_ID COURSETEMPLATE_PARTNERID,
     COURSE_TEMPLATE.ADDRESS_ID COURSETEMPLATE_ADDRESSID,
     COURSE_TEMPLATE.PRICE COURSETEMPLATE_PRICE,
     COURSE_TEMPLATE.ORIGINAL_PRICE COURSETEMPLATE_ORIGINALPRICE,
-    COURSE_TEMPLATE.CASHBACK COURSETEMPLATE_CASHBACK,
+    COURSE_TEMPLATE.CASHBACK
+    COURSETEMPLATE_CASHBACK,
     COURSE_TEMPLATE.COMMISSION COURSETEMPLATE_COMMISSION,
     COURSE_TEMPLATE.SERVICE_CHARGE COURSETEMPLATE_SERVICECHARGE,
-    COURSE_TEMPLATE.STATUS COURSETEMPLATE_STATUS,
+    COURSE_TEMPLATE.STATUS
+    COURSETEMPLATE_STATUS,
     COURSE_TEMPLATE.LAST_MODIFY_TIME COURSETEMPLATE_LASTMODIFYTIME,
     COURSE_TEMPLATE.CREATE_TIME COURSETEMPLATE_CREATETIME,
-    COURSE_TEMPLATE.ENABLED COURSETEMPLATE_ENABLED,
+    COURSE_TEMPLATE.ENABLED
+    COURSETEMPLATE_ENABLED,
     COURSE_TEMPLATE.DELETED COURSETEMPLATE_DELETED,
     COURSE_TEMPLATE.COURSE_HOUR_NUM COURSETEMPLATE_COURSEHOURNUM,
-    COURSE_TEMPLATE.COURSE_HOUR_LENGTH COURSETEMPLATE_COURSEHOURLENGTH,
+    COURSE_TEMPLATE.COURSE_HOUR_LENGTH
+    COURSETEMPLATE_COURSEHOURLENGTH,
     COURSE_TEMPLATE.CLASS_SIZE COURSETEMPLATE_CLASSSIZE,
     COURSE_TEMPLATE.POPULARITY COURSETEMPLATE_POPULARITY,
-    COURSE_TEMPLATE.START_DATE COURSETEMPLATE_STARTDATE,
+    COURSE_TEMPLATE.START_DATE
+    COURSETEMPLATE_STARTDATE,
     COURSE_TEMPLATE.FINISH_DATE COURSETEMPLATE_FINISHDATE,
     COURSE_TEMPLATE.CUTOFF_DATE COURSETEMPLATE_CUTOFFDATE,
-    COURSE_TEMPLATE.NO_REFUND_DATE COURSETEMPLATE_NOREFUNDDATE,
+    COURSE_TEMPLATE.NO_REFUND_DATE
+    COURSETEMPLATE_NOREFUNDDATE,
     COURSE_TEMPLATE.CASHBACK_DATE COURSETEMPLATE_CASHBACKDATE,
     COURSE_TEMPLATE.BOOKING_TYPE COURSETEMPLATE_BOOKINGTYPE,
-    COURSE_TEMPLATE.START_UPON_ARRIVAL COURSETEMPLATE_STARTUPONARRIVAL,
+    COURSE_TEMPLATE.START_UPON_ARRIVAL
+    COURSETEMPLATE_STARTUPONARRIVAL,
     COURSE_TEMPLATE.START_TIME1 COURSETEMPLATE_STARTTIME1,
     COURSE_TEMPLATE.FINISH_TIME1 COURSETEMPLATE_FINISHTIME1,
-    COURSE_TEMPLATE.START_TIME2 COURSETEMPLATE_STARTTIME2,
+    COURSE_TEMPLATE.START_TIME2
+    COURSETEMPLATE_STARTTIME2,
     COURSE_TEMPLATE.FINISH_TIME2 COURSETEMPLATE_FINISHTIME2,
     COURSE_TEMPLATE.REG_LOCATION COURSETEMPLATE_REGLOCATION,
-    COURSE_TEMPLATE.REFERENCE COURSETEMPLATE_REFERENCE,
+    COURSE_TEMPLATE.REFERENCE
+    COURSETEMPLATE_REFERENCE,
     COURSE_TEMPLATE.COURSE_INTRO COURSETEMPLATE_COURSEINTRO,
     COURSE_TEMPLATE.QUIZ COURSETEMPLATE_QUIZ,
-    COURSE_TEMPLATE.CERTIFICATION COURSETEMPLATE_CERTIFICATION,
-    COURSE_TEMPLATE.OPEN_COURSE_REQUIREMENT COURSETEMPLATE_OPENCOURSEREQUIREMENT,
-    COURSE_TEMPLATE.SUITABLE_STUDENT COURSETEMPLATE_SUITABLESTUDENT,
+    COURSE_TEMPLATE.CERTIFICATION
+    COURSETEMPLATE_CERTIFICATION,
+    COURSE_TEMPLATE.OPEN_COURSE_REQUIREMENT
+    COURSETEMPLATE_OPENCOURSEREQUIREMENT,
+    COURSE_TEMPLATE.SUITABLE_STUDENT
+    COURSETEMPLATE_SUITABLESTUDENT,
     COURSE_TEMPLATE.PREREQUEST COURSETEMPLATE_PREREQUEST,
     COURSE_TEMPLATE.HIGH_SCORE_REWARD COURSETEMPLATE_HIGHSCOREREWARD,
-    COURSE_TEMPLATE.STUDY_DAY_NOTE COURSETEMPLATE_STUDYDAYNOTE,
-    COURSE_TEMPLATE.TEACHING_MATERIAL_INTRO COURSETEMPLATE_TEACHINGMATERIALINTRO,
+    COURSE_TEMPLATE.STUDY_DAY_NOTE
+    COURSETEMPLATE_STUDYDAYNOTE,
+    COURSE_TEMPLATE.TEACHING_MATERIAL_INTRO
+    COURSETEMPLATE_TEACHINGMATERIALINTRO,
     COURSE_TEMPLATE.QUESTION_BANK COURSETEMPLATE_QUESTIONBANK,
     COURSE_TEMPLATE.QUALITY_ASSURANCE COURSETEMPLATE_QUALITYASSURANCE,
     COURSE_TEMPLATE.PASS_AGREEMENT COURSETEMPLATE_PASSAGREEMENT,
-    COURSE_TEMPLATE.EXTRACURRICULAR COURSETEMPLATE_EXTRACURRICULAR,
+    COURSE_TEMPLATE.EXTRACURRICULAR
+    COURSETEMPLATE_EXTRACURRICULAR,
     COURSE_TEMPLATE.CONTACT COURSETEMPLATE_CONTACT,
     COURSE_TEMPLATE.REG_PHONE COURSETEMPLATE_REGPHONE,
-    COURSE_TEMPLATE.OUTLINE COURSETEMPLATE_OUTLINE,
+    COURSE_TEMPLATE.OUTLINE
+    COURSETEMPLATE_OUTLINE,
     COURSE_TEMPLATE.GOAL COURSETEMPLATE_GOAL,
-    COURSE_TEMPLATE.CLASS_TEACHER COURSETEMPLATE_CLASSTEACHER,
-    COURSE_TEMPLATE.TEACHING_AND_EXERCISE COURSETEMPLATE_TEACHINGANDEXERCISE,
-    COURSE_TEMPLATE.QUESTION_SESSION COURSETEMPLATE_QUESTIONSESSION,
+    COURSE_TEMPLATE.CLASS_TEACHER
+    COURSETEMPLATE_CLASSTEACHER,
+    COURSE_TEMPLATE.TEACHING_AND_EXERCISE
+    COURSETEMPLATE_TEACHINGANDEXERCISE,
+    COURSE_TEMPLATE.QUESTION_SESSION
+    COURSETEMPLATE_QUESTIONSESSION,
     COURSE_TEMPLATE.TRAIL COURSETEMPLATE_TRAIL,
     COURSE_TEMPLATE.ASSIGNMENTS COURSETEMPLATE_ASSIGNMENTS,
-    COURSE_TEMPLATE.MARKING COURSETEMPLATE_MARKING,
+    COURSE_TEMPLATE.MARKING
+    COURSETEMPLATE_MARKING,
     COURSE_TEMPLATE.BONUS_SERVICE COURSETEMPLATE_BONUSSERVICE,
     COURSE_TEMPLATE.DOWNLOAD_MATERIALS COURSETEMPLATE_DOWNLOADMATERIALS,
     COURSE_TEMPLATE.TEACHING_MATERIAL_FEE COURSETEMPLATE_TEACHINGMATERIALFEE,
     COURSE_TEMPLATE.TEACHING_METHOD COURSETEMPLATE_TEACHINGMETHOD,
-    COURSE_TEMPLATE.CLASS_TYPE COURSETEMPLATE_CLASSTYPE,
+    COURSE_TEMPLATE.CLASS_TYPE
+    COURSETEMPLATE_CLASSTYPE,
     COURSE_TEMPLATE.DISCOUNT COURSETEMPLATE_DISCOUNT,
-    COURSE_TEMPLATE.RATING  COURSETEMPLATE_RATING,
-    COURSE_TEMPLATE.BOOKING_TOTAL COURSETEMPLATE_BOOKINGTOTAL
+    COURSE_TEMPLATE.RATING COURSETEMPLATE_RATING,
+    COURSE_TEMPLATE.BOOKING_TOTAL
+    COURSETEMPLATE_BOOKINGTOTAL,
+    COURSE_TEMPLATE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
+    COURSE_TEMPLATE.SCHOOLTIME_WEEK COURSE_SCHOOLTIMEWEEK
   </sql>
   <sql id="Partner_Base_Column_List">
     PARTNER.LOGO_URL PARTNER_LOGOURL,
@@ -182,7 +225,8 @@
     PARTNER.INST_NAME PARTNER_INSTNAME,
     PARTNER.PARTNER_INTRO PARTNER_INTRO,
     PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
-    PARTNER.PARTNER_DISTINCTION PARTNER_PARTNERDISTINCTION,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION,
     PARTNER.RATING PARTNER_RATING
   </sql>
   <sql id="Address_Base_Column_List">
@@ -206,12 +250,15 @@
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
-    TEACHER.IMG_URL TEACHER_IMGURL,
+    TEACHER.IMG_URL
+    TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULARITY TEACHER_POPULARITY,
+    TEACHER.POPULARITY
+    TEACHER_POPULARITY,
     TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
-    TEACHER.CREATE_TIME TEACHER_CREATETIME,
+    TEACHER.CREATE_TIME
+    TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
     TEACHER.DELETED TEACHER_DELETED
   </sql>
@@ -221,12 +268,15 @@
     CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
     CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
     CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
-    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.LAST_MODIFY_TIME
+    CLASSPHOTO_LASTMODIFYTIME,
     CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
-    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.ENABLED
+    CLASSPHOTO_ENABLED,
     CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
-  
+
+  <!-- add -->
   <insert id="add" parameterType="CourseTemplateEntityExt">
 
     insert into COURSE_TEMPLATE
@@ -424,6 +474,12 @@
       <if test="bookingTotal != null">
         BOOKING_TOTAL,
       </if>
+      <if test="schooltimeDay != null">
+        SCHOOLTIME_DAY,
+      </if>
+      <if test="schooltimeWeek != null">
+        SCHOOLTIME_WEEK,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -619,18 +675,27 @@
       <if test="bookingTotal != null">
         #{bookingTotal,jdbcType=INTEGER},
       </if>
+      <if test="schooltimeDay != null">
+        #{schooltimeDay,jdbcType=INTEGER},
+      </if>
+      <if test="schooltimeWeek != null">
+        #{schooltimeWeek,jdbcType=INTEGER},
+      </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update COURSE_TEMPLATE set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
 
+  <!-- update -->
   <update id="update" parameterType="CourseTemplateEntityExt">
     update COURSE_TEMPLATE
     <set>
@@ -671,10 +736,12 @@
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -696,19 +763,24 @@
         POPULARITY = #{popularity,jdbcType=INTEGER},
       </if>
       <if test="startDate != null">
-        START_DATE = #{startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        START_DATE =
+        #{startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="finishDate != null">
-        FINISH_DATE = #{finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        FINISH_DATE =
+        #{finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cutoffDate != null">
-        CUTOFF_DATE = #{cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CUTOFF_DATE =
+        #{cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="noRefundDate != null">
-        NO_REFUND_DATE = #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        NO_REFUND_DATE =
+        #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cashbackDate != null">
-        CASHBACK_DATE = #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CASHBACK_DATE =
+        #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="bookingType != null">
         BOOKING_TYPE = #{bookingType,jdbcType=INTEGER},
@@ -834,85 +906,114 @@
       <if test="bookingTotal != null">
         BOOKING_TOTAL = #{bookingTotal,jdbcType=INTEGER},
       </if>
+      <if test="startTime1 != null">
+        SCHOOLTIME_DAY = #{schooltimeDay,jdbcType=INTEGER},
+      </if>
+      <if test="startTime1 != null">
+        SCHOOLTIME_WEEK = #{schooltimeWeek,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from COURSE_TEMPLATE where DELETED = 0
   </select>
 
+  <!-- getInfoById -->
   <select id="getInfoById" parameterType="int" resultMap="CourseTemplateEntityExtMap">
-    select 
-    <include refid="CourseTemplate_Base_Column_List"></include>,
-    <include refid="Teacher_Base_Column_List"></include>,
-    <include refid="ClassPhoto_Base_Column_List"></include>,
-    <include refid="Partner_Base_Column_List"></include>,
-    <include refid="Address_Base_Column_List"></include>,
-    <include refid="Category_Base_Column_List"></include>,
-    <include refid="Location_Base_Column_List"></include>,
-    <include refid="Circle_Base_Column_List"></include>,
+    select
+    <include refid="CourseTemplate_Base_Column_List"></include>
+    ,
+    <include refid="Teacher_Base_Column_List"></include>
+    ,
+    <include refid="ClassPhoto_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Address_Base_Column_List"></include>
+    ,
+    <include refid="Category_Base_Column_List"></include>
+    ,
+    <include refid="Location_Base_Column_List"></include>
+    ,
+    <include refid="Circle_Base_Column_List"></include>
+    ,
     from COURSE_TEMPLATE COURSE_TEMPLATE
-        join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER 
-            ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
-        join TEACHER TEACHER 
-            ON TEACHER.ID = COURSE_TEMPLATE_TEACHER.TEACHER_ID
-        join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO 
-            ON COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
-        join CLASS_PHOTO CLASS_PHOTO 
-            ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
-        join PARTNER PARTNER 
-            ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
-        join CATEGORY CATEGORY 
-            ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
-        join CIRCLE CIRCLE
-            ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
-        join ADDRESS ADDRESS 
-            ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
+    join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER
+    ON
+    COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
+    join TEACHER TEACHER
+    ON TEACHER.ID
+    = COURSE_TEMPLATE_TEACHER.TEACHER_ID
+    join COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO
+    ON COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
+    join CLASS_PHOTO
+    CLASS_PHOTO
+    ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
+    join PARTNER PARTNER
+    ON
+    PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
+    join CATEGORY CATEGORY
+    ON CATEGORY.ID =
+    COURSE_TEMPLATE.CATEGORY_ID
+    join CIRCLE CIRCLE
+    ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
+    join
+    LOCATION LOCATION
+    ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
+    join ADDRESS ADDRESS
+    ON ADDRESS.ID =
+    COURSE_TEMPLATE.ADDRESS_ID
 
-    where COURSE_TEMPLATE.DELETED = 0 AND COURSE_TEMPLATE.ID = #{id}
+    where COURSE_TEMPLATE.DELETED = 0 AND COURSE_TEMPLATE.ID =
+    #{id}
   </select>
 
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseTemplateEntityExtMap">
     select
-    <include refid="CourseTemplate_Base_Column_List"></include>,
-    <include refid="Partner_Base_Column_List"></include>,
-    <include refid="Address_Base_Column_List"></include>,
-    <include refid="Category_Base_Column_List"></include>,
-    <include refid="Location_Base_Column_List"></include>,
+    <include refid="CourseTemplate_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Address_Base_Column_List"></include>
+    ,
+    <include refid="Category_Base_Column_List"></include>
+    ,
+    <include refid="Location_Base_Column_List"></include>
+    ,
     <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
-        join PARTNER PARTNER 
-            ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
-        join CATEGORY CATEGORY 
-            ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
-        join CIRCLE CIRCLE
-            ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
-        join ADDRESS ADDRESS 
-            ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
-    
-    WHERE COURSE_TEMPLATE.DELETED = 0
+    join PARTNER PARTNER
+    ON PARTNER.ID =
+    COURSE_TEMPLATE.PARTNER_ID
+    join CATEGORY CATEGORY
+    ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+    join CIRCLE CIRCLE
+    ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
+    join LOCATION LOCATION
+    ON LOCATION.ID =
+    COURSE_TEMPLATE.LOCATION_ID
+    join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
+
+    WHERE
+    COURSE_TEMPLATE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
         AND COURSE_TEMPLATE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.reference != null and entity.reference != ''">
         AND COURSE_TEMPLATE.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_TEMPLATE.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND COURSE_TEMPLATE.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -925,87 +1026,67 @@
         AND COURSE_TEMPLATE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
       </if>
       <if test="entity.categoryId == null or entity.categoryId == 0">
-        <if test="entity.categoryIdStart != null and entity.categoryIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CATEGORY_ID >= #{entity.categoryIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.categoryIdEnd != null and entity.categoryIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CATEGORY_ID <= #{entity.categoryIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE_TEMPLATE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.locationId != null and entity.locationId != 0">
         AND COURSE_TEMPLATE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
       </if>
       <if test="entity.locationId == null or entity.locationId == 0">
-        <if test="entity.locationIdStart != null and entity.locationIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.LOCATION_ID >= #{entity.locationIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE_TEMPLATE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.circleId != null and entity.circleId != 0">
         AND COURSE_TEMPLATE.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
       </if>
       <if test="entity.circleId == null or entity.circleId == 0">
-        <if test="entity.circleIdStart != null and entity.circleIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CIRCLE_ID >= #{entity.circleIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE_TEMPLATE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND COURSE_TEMPLATE.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE_TEMPLATE.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.status != null">
         AND COURSE_TEMPLATE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
-        <if test="entity.statusStart != null">
-          <![CDATA[AND COURSE_TEMPLATE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null">
-          <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE_TEMPLATE.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.price != null">
         AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
@@ -1017,6 +1098,7 @@
           <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.originalPrice != null">
         AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=DOUBLE}
       </if>
@@ -1028,6 +1110,7 @@
           <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.cashback != null">
         AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=DOUBLE}
       </if>
@@ -1039,6 +1122,7 @@
           <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.popularity != null">
         AND COURSE_TEMPLATE.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
       </if>
@@ -1049,7 +1133,15 @@
         <if test="entity.popularityEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
+          AND COURSE_TEMPLATE.POPULARITY IN
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
+
       <if test="entity.courseHourNum != null">
         AND COURSE_TEMPLATE.COURSE_HOUR_NUM = #{entity.courseHourNum,jdbcType=INTEGER}
       </if>
@@ -1060,9 +1152,18 @@
         <if test="entity.courseHourNumEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.COURSE_HOUR_NUM <= #{entity.courseHourNumEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.courseHourNumSet != null and entity.courseHourNumSet.size() > 0">
+          AND COURSE_TEMPLATE.COURSE_HOUR_NUM IN
+          <foreach collection="entity.courseHourNumSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
+
       <if test="entity.startDate != null">
-        AND COURSE_TEMPLATE.START_DATE = #{entity.startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.START_DATE =
+        #{entity.startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
@@ -1072,8 +1173,10 @@
           <![CDATA[AND COURSE_TEMPLATE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.finishDate != null">
-        AND COURSE_TEMPLATE.FINISH_DATE = #{entity.finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.FINISH_DATE =
+        #{entity.finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.finishDate == null">
         <if test="entity.finishDateStart != null">
@@ -1083,8 +1186,10 @@
           <![CDATA[AND COURSE_TEMPLATE.FINISH_DATE <= #{entity.finishDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.cutoffDate != null">
-        AND COURSE_TEMPLATE.CUTOFF_DATE = #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.CUTOFF_DATE =
+        #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
@@ -1099,12 +1204,6 @@
         AND COURSE_TEMPLATE.CLASS_TYPE = #{entity.classType,jdbcType=INTEGER}
       </if>
       <if test="entity.classType == null">
-        <if test="entity.classTypeStart != null">
-          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE >= #{entity.classTypeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.classTypeEnd != null">
-          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE <= #{entity.classTypeEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.classTypeSet != null and entity.classTypeSet.size() > 0">
           AND COURSE_TEMPLATE.CLASS_TYPE IN
           <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")"
@@ -1113,6 +1212,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.discount != null">
         AND COURSE_TEMPLATE.DISCOUNT = #{entity.discount,jdbcType=DOUBLE}
       </if>
@@ -1124,6 +1224,7 @@
           <![CDATA[AND COURSE_TEMPLATE.DISCOUNT <= #{entity.discountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.rating != null">
         AND COURSE_TEMPLATE.RATING = #{entity.rating,jdbcType=DOUBLE}
       </if>
@@ -1135,6 +1236,7 @@
           <![CDATA[AND COURSE_TEMPLATE.RATING <= #{entity.ratingEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.bookingTotal != null">
         AND COURSE_TEMPLATE.BOOKING_TOTAL = #{entity.bookingTotal,jdbcType=INTEGER}
       </if>
@@ -1145,10 +1247,18 @@
         <if test="entity.bookingTotalEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL <= #{entity.bookingTotalEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.bookingTotalSet != null and entity.bookingTotalSet.size() > 0">
+          AND COURSE.BOOKING_TOTAL IN
+          <foreach collection="entity.bookingTotalSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND COURSE_TEMPLATE.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -1158,8 +1268,10 @@
           <![CDATA[AND COURSE_TEMPLATE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.createTime != null">
-        AND COURSE_TEMPLATE.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -1169,63 +1281,94 @@
           <![CDATA[AND COURSE_TEMPLATE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
+      <if test="entity.schooltimeDay != null">
+        AND COURSE.SCHOOLTIME_DAY = #{entity.schooltimeDay,jdbcType=INTEGER}
+      </if>
+      <if test="entity.schooltimeDay == null">
+        <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
+          AND COURSE.SCHOOLTIME_DAY IN
+          <foreach collection="entity.schooltimeDaySet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.schooltimeWeek != null">
+        AND COURSE.SCHOOLTIME_WEEK = #{entity.schooltimeWeek,jdbcType=INTEGER}
+      </if>
+      <if test="entity.schooltimeWeek == null">
+        <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
+          AND COURSE.SCHOOLTIME_WEEK IN
+          <foreach collection="entity.schooltimeWeekSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.enabled != null">
         AND COURSE_TEMPLATE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
-      <if test="page != null">
-        <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
-          ORDER BY
-          <foreach collection="page.orderByEntities" item="listItem" separator=",">
-            COURSE_TEMPLATE.${listItem.columnKey} ${listItem.order}
-          </foreach>
-        </if>
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
+
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        COURSE_COMMENT.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
 
-
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-    <include refid="CourseTemplate_Base_Column_List"></include>,
-    <include refid="Partner_Base_Column_List"></include>,
-    <include refid="Address_Base_Column_List"></include>,
-    <include refid="Category_Base_Column_List"></include>,
-    <include refid="Location_Base_Column_List"></include>,
+    <include refid="CourseTemplate_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Address_Base_Column_List"></include>
+    ,
+    <include refid="Category_Base_Column_List"></include>
+    ,
+    <include refid="Location_Base_Column_List"></include>
+    ,
     <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
-        join PARTNER PARTNER 
-            ON PARTNER.ID = COURSE_TEMPLATE.PARTNER_ID
-        join CATEGORY CATEGORY 
-            ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
-        join CIRCLE CIRCLE
-            ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
-        join LOCATION LOCATION 
-            ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
-        join ADDRESS ADDRESS 
-            ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
+    join PARTNER PARTNER
+    ON PARTNER.ID =
+    COURSE_TEMPLATE.PARTNER_ID
+    join CATEGORY CATEGORY
+    ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+    join CIRCLE CIRCLE
+    ON CIRCLE.ID = COURSE_TEMPLATE.CIRCLE_ID
+    join LOCATION LOCATION
+    ON LOCATION.ID =
+    COURSE_TEMPLATE.LOCATION_ID
+    join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID
 
-    
-    WHERE COURSE_TEMPLATE.DELETED = 0
+    WHERE
+    COURSE_TEMPLATE.DELETED = 0
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
         AND COURSE_TEMPLATE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.reference != null and entity.reference != ''">
         AND COURSE_TEMPLATE.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_TEMPLATE.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND COURSE_TEMPLATE.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -1238,88 +1381,67 @@
         AND COURSE_TEMPLATE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
       </if>
       <if test="entity.categoryId == null or entity.categoryId == 0">
-        <if test="entity.categoryIdStart != null and entity.categoryIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CATEGORY_ID >= #{entity.categoryIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.categoryIdEnd != null and entity.categoryIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CATEGORY_ID <= #{entity.categoryIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE_TEMPLATE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.locationId != null and entity.locationId != 0">
         AND COURSE_TEMPLATE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
       </if>
       <if test="entity.locationId == null or entity.locationId == 0">
-        <if test="entity.locationIdStart != null and entity.locationIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.LOCATION_ID >= #{entity.locationIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.locationIdEnd != null and entity.locationIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.LOCATION_ID <= #{entity.locationIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE_TEMPLATE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.circleId != null and entity.circleId != 0">
         AND COURSE_TEMPLATE.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
       </if>
       <if test="entity.circleId == null or entity.circleId == 0">
-        <if test="entity.circleIdStart != null and entity.circleIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CIRCLE_ID >= #{entity.circleIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.circleIdEnd != null and entity.circleIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.CIRCLE_ID <= #{entity.circleIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE_TEMPLATE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND COURSE_TEMPLATE.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE_TEMPLATE.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.status != null">
         AND COURSE_TEMPLATE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
-        <if test="entity.statusStart != null">
-          <![CDATA[AND COURSE_TEMPLATE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null">
-          <![CDATA[AND COURSE_TEMPLATE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE_TEMPLATE.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.price != null">
         AND COURSE_TEMPLATE.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
@@ -1331,6 +1453,7 @@
           <![CDATA[AND COURSE_TEMPLATE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.originalPrice != null">
         AND COURSE_TEMPLATE.ORIGINAL_PRICE = #{entity.originalPrice,jdbcType=DOUBLE}
       </if>
@@ -1342,6 +1465,7 @@
           <![CDATA[AND COURSE_TEMPLATE.ORIGINAL_PRICE <= #{entity.originalPriceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.cashback != null">
         AND COURSE_TEMPLATE.CASHBACK = #{entity.cashback,jdbcType=DOUBLE}
       </if>
@@ -1353,6 +1477,7 @@
           <![CDATA[AND COURSE_TEMPLATE.CASHBACK <= #{entity.cashbackEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.popularity != null">
         AND COURSE_TEMPLATE.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
       </if>
@@ -1363,7 +1488,15 @@
         <if test="entity.popularityEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.POPULARITY <= #{entity.popularityEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
+          AND COURSE_TEMPLATE.POPULARITY IN
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
+
       <if test="entity.courseHourNum != null">
         AND COURSE_TEMPLATE.COURSE_HOUR_NUM = #{entity.courseHourNum,jdbcType=INTEGER}
       </if>
@@ -1374,9 +1507,18 @@
         <if test="entity.courseHourNumEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.COURSE_HOUR_NUM <= #{entity.courseHourNumEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.courseHourNumSet != null and entity.courseHourNumSet.size() > 0">
+          AND COURSE_TEMPLATE.COURSE_HOUR_NUM IN
+          <foreach collection="entity.courseHourNumSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
+
       <if test="entity.startDate != null">
-        AND COURSE_TEMPLATE.START_DATE = #{entity.startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.START_DATE =
+        #{entity.startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
@@ -1386,8 +1528,10 @@
           <![CDATA[AND COURSE_TEMPLATE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.finishDate != null">
-        AND COURSE_TEMPLATE.FINISH_DATE = #{entity.finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.FINISH_DATE =
+        #{entity.finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.finishDate == null">
         <if test="entity.finishDateStart != null">
@@ -1397,8 +1541,10 @@
           <![CDATA[AND COURSE_TEMPLATE.FINISH_DATE <= #{entity.finishDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.cutoffDate != null">
-        AND COURSE_TEMPLATE.CUTOFF_DATE = #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.CUTOFF_DATE =
+        #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
@@ -1413,12 +1559,6 @@
         AND COURSE_TEMPLATE.CLASS_TYPE = #{entity.classType,jdbcType=INTEGER}
       </if>
       <if test="entity.classType == null">
-        <if test="entity.classTypeStart != null">
-          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE >= #{entity.classTypeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.classTypeEnd != null">
-          <![CDATA[AND COURSE_TEMPLATE.CLASS_TYPE <= #{entity.classTypeEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.classTypeSet != null and entity.classTypeSet.size() > 0">
           AND COURSE_TEMPLATE.CLASS_TYPE IN
           <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")"
@@ -1427,6 +1567,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.discount != null">
         AND COURSE_TEMPLATE.DISCOUNT = #{entity.discount,jdbcType=DOUBLE}
       </if>
@@ -1438,6 +1579,7 @@
           <![CDATA[AND COURSE_TEMPLATE.DISCOUNT <= #{entity.discountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.rating != null">
         AND COURSE_TEMPLATE.RATING = #{entity.rating,jdbcType=DOUBLE}
       </if>
@@ -1449,6 +1591,7 @@
           <![CDATA[AND COURSE_TEMPLATE.RATING <= #{entity.ratingEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.bookingTotal != null">
         AND COURSE_TEMPLATE.BOOKING_TOTAL = #{entity.bookingTotal,jdbcType=INTEGER}
       </if>
@@ -1459,10 +1602,18 @@
         <if test="entity.bookingTotalEnd != null">
           <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL <= #{entity.bookingTotalEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.bookingTotalSet != null and entity.bookingTotalSet.size() > 0">
+          AND COURSE.BOOKING_TOTAL IN
+          <foreach collection="entity.bookingTotalSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND COURSE_TEMPLATE.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -1472,8 +1623,10 @@
           <![CDATA[AND COURSE_TEMPLATE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.createTime != null">
-        AND COURSE_TEMPLATE.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -1483,12 +1636,38 @@
           <![CDATA[AND COURSE_TEMPLATE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
+      <if test="entity.schooltimeDay != null">
+        AND COURSE.SCHOOLTIME_DAY = #{entity.schooltimeDay,jdbcType=INTEGER}
+      </if>
+      <if test="entity.schooltimeDay == null">
+        <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
+          AND COURSE.SCHOOLTIME_DAY IN
+          <foreach collection="entity.schooltimeDaySet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.schooltimeWeek != null">
+        AND COURSE.SCHOOLTIME_WEEK = #{entity.schooltimeWeek,jdbcType=INTEGER}
+      </if>
+      <if test="entity.schooltimeWeek == null">
+        <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
+          AND COURSE.SCHOOLTIME_WEEK IN
+          <foreach collection="entity.schooltimeWeekSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.enabled != null">
         AND COURSE_TEMPLATE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
     ) AS total
   </select>
-  
-   
+
 </mapper>

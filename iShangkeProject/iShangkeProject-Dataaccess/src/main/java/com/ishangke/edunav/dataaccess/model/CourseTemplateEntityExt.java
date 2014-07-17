@@ -43,6 +43,8 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Integer bookingTotalStart;
     private Integer bookingTotalEnd;
     private Set<Integer> bookingTotalSet;
+    private Set<Integer> schooltimeDaySet;
+    private Set<Integer> schooltimeWeekSet;
 
     // concrete information
     private List<TeacherEntityExt> teacherList;
@@ -67,6 +69,22 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+
+    public Set<Integer> getSchooltimeDaySet() {
+        return schooltimeDaySet;
+    }
+
+    public void setSchooltimeDaySet(Set<Integer> schooltimeDaySet) {
+        this.schooltimeDaySet = schooltimeDaySet;
+    }
+
+    public Set<Integer> getSchooltimeWeekSet() {
+        return schooltimeWeekSet;
+    }
+
+    public void setSchooltimeWeekSet(Set<Integer> schooltimeWeekSet) {
+        this.schooltimeWeekSet = schooltimeWeekSet;
+    }
 
     public Set<Integer> getIdSet() {
         return idSet;

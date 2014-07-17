@@ -6,6 +6,7 @@
     <result column="COUPON_CODE" property="code" jdbcType="VARCHAR" />
     <result column="COUPON_TOTAL" property="total" jdbcType="DOUBLE" />
     <result column="COUPON_BALANCE" property="balance" jdbcType="DOUBLE" />
+    <result column="COUPON_ORIGIN" property="origin" jdbcType="DOUBLE" />
     <result column="COUPON_EXPIRYTIME" property="expiryTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COUPON_REMARK" property="remark" jdbcType="VARCHAR" />
@@ -23,8 +24,10 @@
     COUPON.TOTAL COUPON_TOTAL,
     COUPON.BALANCE
     COUPON_BALANCE,
+    COUPON.ORIGIN COUPON_ORIGIN,
     COUPON.EXPIRY_TIME COUPON_EXPIRYTIME,
-    COUPON.REMARK COUPON_REMARK,
+    COUPON.REMARK
+    COUPON_REMARK,
     COUPON.USER_ID
     COUPON_USERID,
     COUPON.LAST_MODIFY_TIME COUPON_LASTMODIFYTIME,
@@ -45,6 +48,9 @@
       </if>
       <if test="balance != null">
         BALANCE,
+      </if>
+      <if test="origin != null">
+        ORIGIN,
       </if>
       <if test="expiryTime != null">
         EXPIRY_TIME,
@@ -77,6 +83,9 @@
       </if>
       <if test="balance != null">
         #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=Integer},
       </if>
       <if test="expiryTime != null">
         #{expiryTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -123,6 +132,9 @@
       </if>
       <if test="balance != null">
         BALANCE = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="origin != null">
+        ORIGIN = #{origin,jdbcType=DOUBLE},
       </if>
       <if test="expiryTime != null">
         EXPIRY_TIME =
@@ -212,6 +224,19 @@
         </if>
       </if>
 
+      <if test="entity.origin != null and entity.origin != 0">
+        AND COUPON.BALANCE = #{entity.origin,jdbcType=INTEGER}
+      </if>
+      <if test="entity.origin == null or entity.origin == 0">
+        <if test="entity.originSet != null and entity.originSet.size() > 0">
+          AND COUPON.ORIGIN IN
+          <foreach collection="entity.originSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.code != null and !entity.equals('') ">
         AND COUPON.CODE LIKE "%"#{entity.code,jdbcType=VARCHAR}"%"
       </if>
@@ -263,15 +288,15 @@
       </if>
 
       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-      ORDER BY
-      <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        COUPON.${listItem.columnKey} ${listItem.order}
-      </foreach>
-    </if>
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          COUPON.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
 
-    <if test="page.offset != null and page.size != null">
-      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-    </if>
+      <if test="page.offset != null and page.size != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
     </if>
   </select>
   <!-- listCouponByUserId -->
@@ -339,6 +364,19 @@
         </if>
       </if>
 
+      <if test="entity.origin != null and entity.origin != 0">
+        AND COUPON.BALANCE = #{entity.origin,jdbcType=INTEGER}
+      </if>
+      <if test="entity.origin == null or entity.origin == 0">
+        <if test="entity.originSet != null and entity.originSet.size() > 0">
+          AND COUPON.ORIGIN IN
+          <foreach collection="entity.originSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.code != null and !entity.equals('') ">
         AND COUPON.CODE LIKE "%"#{entity.code,jdbcType=VARCHAR}"%"
       </if>
@@ -388,7 +426,7 @@
       <if test="entity.enabled != null">
         AND COUPON.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      </if>
+    </if>
     ) AS total
   </select>
 </mapper>

@@ -39,6 +39,8 @@ public class CourseEntityExt extends CourseEntity {
     private Set<Integer> classTypeSet;
     private Double discountStart;
     private Double discountEnd;
+    private Set<Integer> schooltimeDaySet;
+    private Set<Integer> schooltimeWeekSet;
 
     // not being used as search criteria here
     private Double rating;
@@ -67,6 +69,22 @@ public class CourseEntityExt extends CourseEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+
+    public Set<Integer> getSchooltimeDaySet() {
+        return schooltimeDaySet;
+    }
+
+    public void setSchooltimeDaySet(Set<Integer> schooltimeDaySet) {
+        this.schooltimeDaySet = schooltimeDaySet;
+    }
+
+    public Set<Integer> getSchooltimeWeekSet() {
+        return schooltimeWeekSet;
+    }
+
+    public void setSchooltimeWeekSet(Set<Integer> schooltimeWeekSet) {
+        this.schooltimeWeekSet = schooltimeWeekSet;
+    }
 
     public Set<Integer> getIdSet() {
         return idSet;

@@ -5,6 +5,7 @@
     <id column="PERMISSIONS_ID" property="id" jdbcType="INTEGER" />
     <result column="PERMISSIONS_NAME" property="name" jdbcType="VARCHAR" />
     <result column="PERMISSIONS_PATH" property="path" jdbcType="VARCHAR" />
+    <result column="PERMISSIONS_TAG" property="tag" jdbcType="VARCHAR" />
     <result column="PERMISSIONS_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="PERMISSIONS_CREATETIME" property="createTime"
@@ -17,10 +18,13 @@
     PERMISSIONS.NAME PERMISSIONS_NAME,
     PERMISSIONS.PATH
     PERMISSIONS_PATH,
-    PERMISSIONS.LAST_MODIFY_TIME PERMISSIONS_LASTMODIFYTIME,
+    PERMISSIONS.TAG PERMISSIONS_TAG,
+    PERMISSIONS.LAST_MODIFY_TIME
+    PERMISSIONS_LASTMODIFYTIME,
     PERMISSIONS.CREATE_TIME
     PERMISSIONS_CREATETIME,
-    PERMISSIONS.ENABLED PERMISSIONS_ENABLED,
+    PERMISSIONS.ENABLED
+    PERMISSIONS_ENABLED,
     PERMISSIONS.DELETED
     PERMISSIONS_DELETED
   </sql>
@@ -42,6 +46,9 @@
       <if test="path != null">
         PATH,
       </if>
+      <if test="tag != null">
+        TAG,
+      </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
       </if>
@@ -61,6 +68,9 @@
       </if>
       <if test="path != null">
         #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -95,6 +105,9 @@
       </if>
       <if test="path != null">
         PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        TAG = #{tag,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME =
@@ -156,6 +169,10 @@
 
       <if test="entity.path != null and !entity.path.equals('')">
         AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.tag != null and !entity.tag.equals('')">
+        AND PERMISSIONS.TAG LIKE "%"#{entity.tag,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != null">
@@ -227,6 +244,10 @@
 
       <if test="entity.path != null and !entity.path.equals('')">
         AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.tag != null and !entity.tag.equals('')">
+        AND PERMISSIONS.TAG LIKE "%"#{entity.tag,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != null">
