@@ -22,10 +22,9 @@ import com.ishangke.edunav.manager.CourseManager;
 
 public class CourseManagerImpl implements CourseManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseManagerImpl.class);
-    
+
     @Override
-    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, List<TeacherBo> listTeacherBo, List<ClassPhotoBo> listClassPhotoBo, LocationBo locationBo, PartnerBo partnerBo,
-            UserBo userBo) {
+    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -79,21 +78,28 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public CourseBo queryByKeyword(String keyword) {
+    public List<CourseBo> queryByKeyword(String keyword) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public CourseBo queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public CourseBo queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo, CircleBo circleBo, PaginationBo paginationBo) {
+    public List<CourseBo> queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo, CircleBo circleBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public CourseBo queryById(CourseBo courseBo, UserBo userBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
 
 }

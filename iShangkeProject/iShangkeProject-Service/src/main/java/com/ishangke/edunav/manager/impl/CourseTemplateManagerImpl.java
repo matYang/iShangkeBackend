@@ -15,7 +15,7 @@ import com.ishangke.edunav.manager.CourseTemplateManager;
 
 public class CourseTemplateManagerImpl implements CourseTemplateManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseTemplateManagerImpl.class);
-    
+
     @Override
     public CourseTemplateBo createCourseTemplateBo(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // TODO Auto-generated method stub
@@ -70,4 +70,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         return null;
     }
 
+    @Override
+    public List<CourseTemplateBo> queryCourseTempalteById(CourseTemplateBo courseTemplateBo, UserBo userBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
 }
