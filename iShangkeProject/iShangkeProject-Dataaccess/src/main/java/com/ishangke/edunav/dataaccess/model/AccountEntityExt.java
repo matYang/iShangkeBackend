@@ -9,10 +9,10 @@ public class AccountEntityExt extends AccountEntity {
     private Set<Integer> idSet;
     private Double balanceStart;
     private Double balanceEnd;
-    private Calendar lastModifyTimeBefore;
-    private Calendar lastModifyTimeAfter;
-    private Calendar createTimeBefore;
-    private Calendar createTimeAfter;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
 
     public Set<Integer> getIdSet() {
         return idSet;
@@ -38,35 +38,36 @@ public class AccountEntityExt extends AccountEntity {
         this.balanceEnd = balanceEnd;
     }
 
-    public Calendar getLastModifyTimeBefore() {
-        return lastModifyTimeBefore;
+    public Calendar getLastModifyTimeStart() {
+        return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeBefore(Calendar lastModifyTimeBefore) {
-        this.lastModifyTimeBefore = lastModifyTimeBefore;
+    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+        this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Calendar getLastModifyTimeAfter() {
-        return lastModifyTimeAfter;
+    public Calendar getLastModifyTimeEnd() {
+        return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeAfter(Calendar lastModifyTimeAfter) {
-        this.lastModifyTimeAfter = lastModifyTimeAfter;
+    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+        this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Calendar getCreateTimeBefore() {
-        return createTimeBefore;
+    public Calendar getCreateTimeStart() {
+        return createTimeStart;
     }
 
-    public void setCreateTimeBefore(Calendar createTimeBefore) {
-        this.createTimeBefore = createTimeBefore;
+    public void setCreateTimeStart(Calendar createTimeStart) {
+        this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeAfter() {
-        return createTimeAfter;
+    public Calendar getCreateTimeEnd() {
+        return createTimeEnd;
     }
 
-    public void setCreateTimeAfter(Calendar createTimeAfter) {
-        this.createTimeAfter = createTimeAfter;
+    public void setCreateTimeEnd(Calendar createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
     }
+
 }
