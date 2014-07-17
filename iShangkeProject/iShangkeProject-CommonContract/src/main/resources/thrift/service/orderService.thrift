@@ -21,7 +21,7 @@ service OrderService {
      *  @return 预定单实体 OrderBo
      *
      */ 
-    common.ResponseBo createOrderByUser(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: withdraw.WithdrawBo withdrawBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    order.OrderBo createOrderByUser(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: withdraw.WithdrawBo withdrawBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理一个预定单功能。<br>
@@ -34,7 +34,7 @@ service OrderService {
      *  @return 
      *
      */ 
-    common.ResponseBo acceptOrderByAdmin(1: order.OrderBo orderBo, 2: order.CommentOrderAcceptBo commentBookingAcceptBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    order.OrderBo acceptOrderByAdmin(1: order.OrderBo orderBo, 2: order.CommentOrderAcceptBo commentBookingAcceptBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询Order功能。<br>
@@ -48,7 +48,7 @@ service OrderService {
      *  @return OrderBo 列表
      *
      */ 
-     common.ResponseBo query(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     list<order.OrderBo> query(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询Order历史功能。<br>
@@ -62,7 +62,7 @@ service OrderService {
      *  @return OrderHistoryBo 列表
      *
      */ 
-     common.ResponseBo queryHistory(1: orderHistory.OrderHistoryBo orderHistory, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     list<order.OrderBo> queryHistory(1: orderHistory.OrderHistoryBo orderHistory, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 }

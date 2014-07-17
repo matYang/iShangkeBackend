@@ -18,7 +18,7 @@ service PartnerService{
      *  @return 合作商实体 PartnerBo 列表
      *
      */ 
-    common.ResponseBo query(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    list<partner.PartnerBo>  query(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  查询合作商完整信息。<br>
@@ -30,7 +30,7 @@ service PartnerService{
      *  @return 合作商实体 PartnerBo
      *
      */ 
-    common.ResponseBo queryById(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    partner.PartnerBo  queryById(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  更新合作商信息。<br>
@@ -42,7 +42,7 @@ service PartnerService{
      *  @return 更新过后的合作商信息
      *
      */ 
-    common.ResponseBo updatePartner(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    partner.PartnerBo  updatePartner(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  创建合作商信息。<br>
@@ -54,6 +54,6 @@ service PartnerService{
      *  @return 创建完毕的合作商信息
      *
      */ 
-    common.ResponseBo createPartner(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    partner.PartnerBo  createPartner(1: partner.PartnerBo partnerBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
 }

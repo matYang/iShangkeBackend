@@ -72,7 +72,7 @@ service UserService {
      *  @return 用户实体 UserBo
      *
      */
-    common.ResponseBo login(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo login(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员创建新用户<br>
@@ -85,7 +85,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    common.ResponseBo createUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo createUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员删除用户<br>
@@ -97,7 +97,7 @@ service UserService {
      *  @return 删除结果 
      *
      */
-    common.ResponseBo deleteUser(1: user.UserBo targetUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo deleteUser(1: user.UserBo targetUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为修改用户信息的功能<br>
@@ -109,7 +109,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    common.ResponseBo updateUser(1: user.UserBo targetUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo updateUser(1: user.UserBo targetUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
      /**
      *  本方法为查看用户信息的功能<br>
@@ -121,7 +121,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    common.ResponseBo queryUserInfo(1: user.UserBo queryUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> queryUserInfo(1: user.UserBo queryUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户信息的功能<br>
@@ -135,7 +135,7 @@ service UserService {
      *  @return 用户实体 UserBo 列表
      *
      */
-    common.ResponseBo queryUser(1: user.UserBo queryUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: common.PaginationBo pagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> queryUser(1: user.UserBo queryUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: common.PaginationBo pagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户session信息的功能<br>
@@ -145,7 +145,7 @@ service UserService {
      *  @return 用户session相关信息
      *
      */
-    common.ResponseBo querySession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> querySession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -156,7 +156,7 @@ service UserService {
      *  @return 
      *
      */
-    common.ResponseBo disposeSession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo disposeSession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }
 
