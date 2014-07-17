@@ -19,7 +19,7 @@ service AddressService{
      *  @return 创建完成的校区信息
      *
      */
-    common.ResponseBo createAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressBo createAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新校区信息。<br>
@@ -32,7 +32,7 @@ service AddressService{
      *  @return 更新完成的校区信息
      *
      */
-    common.ResponseBo updateAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressBo updateAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除校区信息。<br>
@@ -45,7 +45,7 @@ service AddressService{
      *  @return 
      *
      */
-    common.ResponseBo deleteAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressBo deleteAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询校区信息。<br>
@@ -58,7 +58,7 @@ service AddressService{
      *  @return  Address 列表
      *
      */
-    common.ResponseBo query(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<address.AddressBo> query(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 	
 
