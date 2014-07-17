@@ -30,8 +30,8 @@ public class CourseCommentServiceImpl implements CourseCommentService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CourseComment_CREATE_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CourseComment_CREATE_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.COURSECOMMENT_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSECOMMENT_CREATE_ERROR_KEY);
             throw exception;
         }
     }
@@ -43,8 +43,8 @@ public class CourseCommentServiceImpl implements CourseCommentService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CourseComment_DELETE_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CourseComment_DELETE_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.COURSECOMMENT_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSECOMMENT_DELETE_ERROR_KEY);
             throw exception;
         }
     }
@@ -56,8 +56,8 @@ public class CourseCommentServiceImpl implements CourseCommentService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CourseComment_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CourseComment_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.COURSECOMMENT_QUERY_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSECOMMENT_QUERY_ERROR_KEY);
             throw exception;
         }
     }

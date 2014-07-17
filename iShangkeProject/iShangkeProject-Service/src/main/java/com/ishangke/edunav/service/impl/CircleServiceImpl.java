@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.ResponseBo;
 import com.ishangke.edunav.commoncontract.service.CircleService;
 import com.ishangke.edunav.manager.CircleManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
