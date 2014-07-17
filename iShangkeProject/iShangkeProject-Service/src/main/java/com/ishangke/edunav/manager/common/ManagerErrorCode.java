@@ -125,6 +125,12 @@ public class ManagerErrorCode {
     public static final String LOCATION_NOTFOUND_ERROR_KEY = "location_notfound_error";
     
     //account
+    public static final int ACCOUNT_EXCHANGECASH_ERROR = 0x00090001;
+    public static final String ACCOUNT_EXCHANGECASH_ERROR_KEY = "account_exchangecash_error";
+    public static final int ACCOUNT_QUERY_ERROR = 0x00090002;
+    public static final String ACCOUNT_QUERY_ERROR_KEY = "account_query_error";
+    public static final int ACCOUNT_QUERYHISTORY_ERROR = 0x00090003;
+    public static final String ACCOUNT_QUERYHISTORY_ERROR_KEY ="account_queryhistory_error";
     public static final int ACCOUONT_NOTFOUND_ERROR = 0x00090404;
     public static final String ACCOUONT_NOTFOUND_ERROR_KEY = "account_notfound_error";
     

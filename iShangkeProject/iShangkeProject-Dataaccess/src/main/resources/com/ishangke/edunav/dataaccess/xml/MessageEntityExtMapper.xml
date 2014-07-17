@@ -19,8 +19,8 @@
     MESSAGE.DELETED
     MESSAGE_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="MessageEntityExt">
-
     insert into MESSAGE
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
@@ -63,11 +63,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update MESSAGE set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="MessageEntityExt">
     update MESSAGE
     <set>
@@ -81,7 +83,8 @@
         USER_TO_ID = #{userToId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
@@ -89,7 +92,150 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from MESSAGE where DELETED = 0
+  </select>
+  <!-- list -->
+  <select id="list" parameterType="map" resultMap="MessageExtMap">
+    SELECT
+    <include refid="Message_Base_Column_List" />
+    from MESSAGE where MESSAGE.DELETED = 0
+    <if test="entity != null">
+
+      <if test="entity.id != null and entity.id != 0">
+        AND MESSAGE.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null andentity.idSet.size() > 0">
+          AND MESSAGE.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.messageText != null and !entity.messageText.equals('')">
+        AND MESSAGE.MESSAGE_TEXT LIKE "%"#{entity.messageText,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.userFromId != null and entity.userFromId != 0">
+        AND MESSAGE.USER_FROM_ID = #{entity.userFromId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userFromId == null or entity.userFromId == 0">
+        <if test="entity.userFromIdSet.size() > 0">
+          AND MESSAGE.USER_FROM_ID IN
+          <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.userToId  != null and entity.userToId  != 0">
+        AND MESSAGE.USER_TO_ID = #{entity.userToId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userToId == null or entity.userToId == 0">
+        <if test="entity.userToIdSet.size() > 0">
+          MESSAGE.USER_TO_ID IN
+          <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND MESSAGE.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+            <![CDATA[AND MESSAGE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+            <![CDATA[AND MESSAGE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        MESSAGE.${listItem.columnKey}
+        ${listItem.order}
+      </foreach>
+    </if>
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!-- getListCount -->
+  <select id="getListCount" parameterType="int" resultMap="int">
+    SELECT COUNT(*) FROM (
+    SELECT
+    <include refid="Message_Base_Column_List" />
+    from MESSAGE where MESSAGE.DELETED = 0
+    <if test="entity != null">
+
+      <if test="entity.id != null and entity.id != 0">
+        AND MESSAGE.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null andentity.idSet.size() > 0">
+          AND MESSAGE.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.messageText != null and !entity.messageText.equals('')">
+        AND MESSAGE.MESSAGE_TEXT LIKE "%"#{entity.messageText,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.userFromId != null and entity.userFromId != 0">
+        AND MESSAGE.USER_FROM_ID = #{entity.userFromId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userFromId == null or entity.userFromId == 0">
+        <if test="entity.userFromIdSet.size() > 0">
+          AND MESSAGE.USER_FROM_ID IN
+          <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.userToId  != null and entity.userToId  != 0">
+        AND MESSAGE.USER_TO_ID = #{entity.userToId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userToId == null or entity.userToId == 0">
+        <if test="entity.userToIdSet.size() > 0">
+          MESSAGE.USER_TO_ID IN
+          <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND MESSAGE.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+            <![CDATA[AND MESSAGE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+            <![CDATA[AND MESSAGE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+    </if>
+    ) AS total
+  </select>
+  <!-- listAll -->
+  <select id="listAll">
+    SELECT
+    <include refid="Message_Base_Column_List" />
+    from MESSAGE where MESSAGE.DELETED = 0
   </select>
 </mapper>
