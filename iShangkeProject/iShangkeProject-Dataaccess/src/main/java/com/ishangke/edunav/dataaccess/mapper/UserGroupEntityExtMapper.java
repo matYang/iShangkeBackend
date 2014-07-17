@@ -15,11 +15,15 @@ public interface UserGroupEntityExtMapper {
 
     public void update(UserGroupEntityExt userGroupEntityExt);
 
-    public int getCount();
-
     public List<UserGroupEntityExt> list(
             @Param("entity") UserGroupEntityExt userGroupEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") UserGroupEntityExt userGroupEntityExt);
+
+    public List<UserGroupEntityExt> listAll();
+
+    public int getCount();
+
+    public UserGroupEntityExt getById(int id);
 }

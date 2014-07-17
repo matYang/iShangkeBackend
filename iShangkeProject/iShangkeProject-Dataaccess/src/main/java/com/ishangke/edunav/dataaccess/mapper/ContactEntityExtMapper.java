@@ -13,11 +13,15 @@ public interface ContactEntityExtMapper {
 
     public void update(ContactEntityExt contactEntityExt);
 
-    public int getCount();
-
     public List<ContactEntityExt> list(
             @Param("entity") ContactEntityExt contactEntityExt,
             @Param("page") PaginationEntity page);
-
+    
     public int getListCount(@Param("entity") ContactEntityExt contactEntityExt);
+
+    public List<ContactEntityExt> listAll();
+
+    public int getCount();
+
+    public ContactEntityExt getById(int id);
 }

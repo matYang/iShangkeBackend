@@ -15,17 +15,27 @@ public interface ClassPhotoEntityExtMapper {
 
     public void update(ClassPhotoEntityExt classphotoEntityExt);
 
-    public int getCount();
-
     public List<ClassPhotoEntityExt> list(
             @Param("entity") ClassPhotoEntityExt classphotoEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") ClassPhotoEntityExt classphotoEntityExt);
-    
+
+    public List<ClassPhotoEntityExt> listAll();
+
+    public int getCount();
+
+    public ClassPhotoEntityExt getById(int id);
+
     public List<ClassPhotoEntityExt> listClassPhotoByPartnerId(int partnerId);
+
+    public int getCountByPartnerId(int partnerId);
     
     public List<ClassPhotoEntityExt> listClassPhotoByCourseId(int courseId);
+
+    public int getCountByCourseId(int courseId);
     
     public List<ClassPhotoEntityExt> listClassPhotoByCourseTempleteId(int courseTemplateId);
+
+    public int getCountByCourseTemplateId(int courseTemplateId);
 }

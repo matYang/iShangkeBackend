@@ -15,13 +15,27 @@ public interface PermissionEntityExtMapper {
 
     public void update(PermissionEntityExt permissionEntityExt);
 
-    public int getCount();
-
     public List<PermissionEntityExt> list(
             @Param("entity") PermissionEntityExt permissionEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") PermissionEntityExt permissionEntityExt);
+
+    public List<PermissionEntityExt> listAll();
+
+    public int getCount();
+
+    public List<PermissionEntityExt> listPermissionByRoleId(int roleId);
     
-    public List<PermissionEntityExt>listPermissionByRoleId(int roleId);
+    public int getCountByRoleId(int roleId);
+    
+    public List<PermissionEntityExt> listPermissionsByUserId(int userId);
+
+    public int getCountByUserId(int userId);
+    
+    public List<PermissionEntityExt> listPermissionsByGroupId(int groupId);
+    
+    public int getCountByGroupId(int groupId);
+    
+    public PermissionEntityExt getById(int id);
 }

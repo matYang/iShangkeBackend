@@ -15,11 +15,15 @@ public interface AddressEntityExtMapper {
 
     public void update(AddressEntityExt addressEntityExt);
 
-    public int getCount();
-
     public List<AddressEntityExt> list(
             @Param("entity") AddressEntityExt addressEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") AddressEntityExt addressEntityExt);
+
+    public List<AddressEntityExt> listAll();
+
+    public int getCount();
+
+    public AddressEntityExt getById(int id);
 }
