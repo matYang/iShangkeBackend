@@ -23,7 +23,7 @@ public class BookingManagerImpl implements BookingManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingManagerImpl.class);
 
     @Override
-    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo, CouponBo couponBo) {
+    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }

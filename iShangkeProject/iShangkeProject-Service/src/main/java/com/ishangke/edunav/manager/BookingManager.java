@@ -23,13 +23,12 @@ public interface BookingManager {
      *  @param  courseBo                     被预定的课程信息
      *  @param  bookingBo                    预定单信息
      *  @param  CommentBookingAcceptBo       创建预定单留言信息
-     *  @param  userBo                       调用方法的用户的信息
-     *  @param  couponBo                     优惠券信息
+     *  @param  userBo                       调用方法的用户的信息     
      *
      *  @return 预定单实体 BookingBo
      *
      */ 
-    BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo, CouponBo couponBo);
+    BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo);
 
     /**
      *  本方法为合作商受理一个预定单功能。<br>
