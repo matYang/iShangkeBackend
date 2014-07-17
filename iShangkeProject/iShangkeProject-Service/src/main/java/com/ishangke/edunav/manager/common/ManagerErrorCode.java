@@ -165,14 +165,36 @@ public class ManagerErrorCode {
     public static final String ADDRESS_NOTFOUND_ERROR_KEY = "address_notfound_error";
     
     //classphoto
+    public static final int CLASSPHOTO_CREATE_ERROR = 0x000C0001;
+    public static final String CLASSPHOTO_CREATE_ERROR_KEY = "classphoto_create_error";
+    public static final int CLASSPHOTO_UPDATE_ERROR = 0x000C0002;
+    public static final String CLASSPHOTO_UPDATE_ERROR_KEY = "classphoto_update_error";
+    public static final int CLASSPHOTO_DELETE_ERROR = 0x000C0003;
+    public static final String CLASSPHOTO_DELETE_ERROR_KEY = "classphoto_delete_error";
+    public static final int CLASSPHOTO_QUERY_ERROR = 0x000C0004;
+    public static final String CLASSPHOTO_QUERY_ERROR_KEY = "classphoto_query_error";
     public static final int CLASSPHOTO_NOTFOUND_ERROR = 0x000C0404;
     public static final String CLASSPHOTO_NOTFOUND_ERROR_KEY = "classphoto_notfound_error";
     
     //contact
+    public static final int CONTACT_CREATE_ERROR = 0x000D0001;
+    public static final String CONTACT_CREATE_ERROR_KEY = "contact_create_error";
+    public static final int CONTACT_UPDATE_ERROR = 0x000D0002;
+    public static final String CONTACT_UPDATE_ERROR_KEY = "contact_update_error";
+    public static final int CONTACT_DELETE_ERROR = 0x000D0003;
+    public static final String CONTACT_DELETE_ERROR_KEY = "contact_delete_error";
+    public static final int CONTACT_QUERY_ERROR = 0x000D0004;
+    public static final String CONTACT_QUERY_ERROR_KEY = "contact_query_error";
     public static final int CONTACT_NOTFOUND_ERROR = 0x000D0404;
     public static final String CONTACT_NOTFOUND_ERROR_KEY = "contact_notfound_error";
     
     //coupon
+    public static final int COUPON_CREATE_ERROR = 0x000E0001;
+    public static final String COUPON_CREATE_ERROR_KEY = "coupon_generate_error";
+    public static final int COUPON_QUERY_ERROR = 0x000E0002;
+    public static final String COUPON_QUERY_ERROR_KEY = "coupon_query_error";
+    public static final int COUPON_QUERYHISTORY_ERROR = 0x000E0003;
+    public static final String COUPON_QUERYHISTORY_ERROR_KEY = "coupon_queryhistory_error";
     public static final int COUPON_NOTFOUND_ERROR = 0x000E0404;
     public static final String COUPON_NOTFOUND_ERROR_KEY = "coupon_notfound_error";
     
@@ -203,5 +225,13 @@ public class ManagerErrorCode {
     //authentication
     public static final int AUTHENTICATION_ERROR = 0x00150001;
     public static final String AUTHENTICATION_ERROR_KEY = "authentication_error_key";
+    
+    //courseComment
+    public static final int CourseComment_CREATE_ERROR = 0x00160001;
+    public static final String CourseComment_CREATE_ERROR_KEY = "coursecomment_create_error";
+    public static final int CourseComment_DELETE_ERROR = 0x00160002;
+    public static final String CourseComment_DELETE_ERROR_KEY = "coursecomment_delete_error";
+    public static final int CourseComment_QUERY_ERROR = 0x00160003;
+    public static final String CourseComment_QUERY_ERROR_KEY = "coursecomment_query_error";
     
 }
