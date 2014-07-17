@@ -17,7 +17,7 @@ service MessageService{
      *  @return 发送完成的消息
      *
      */
-    common.ResponseBo sendMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    message.MessageBo sendMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  读取消息。<br>
@@ -29,7 +29,7 @@ service MessageService{
      *  @return 读取完成的消息
      *
      */
-    common.ResponseBo receiveMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    message.MessageBo receiveMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除消息。<br>
@@ -41,7 +41,7 @@ service MessageService{
      *  @return 
      *
      */
-    common.ResponseBo deleteMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    message.MessageBo deleteMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询消息。<br>
@@ -54,7 +54,7 @@ service MessageService{
      *  @return  Message 列表
      *
      */
-    common.ResponseBo query(1: message.MessageBo messageBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<message.MessageBo> query(1: message.MessageBo messageBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
 
 }

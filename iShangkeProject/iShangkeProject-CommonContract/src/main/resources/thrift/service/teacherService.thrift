@@ -17,7 +17,7 @@ service TeacherService{
      *  @return 创建完成的教师信息
      *
      */
-    common.ResponseBo createTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    teacher.TeacherBo createTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新教师信息。<br>
@@ -29,7 +29,7 @@ service TeacherService{
      *  @return 更新完成的教师信息
      *
      */
-    common.ResponseBo updateTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    teacher.TeacherBo updateTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除教师信息。<br>
@@ -41,7 +41,7 @@ service TeacherService{
      *  @return 删除完成的教师信息
      *
      */
-    common.ResponseBo deleteTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    teacher.TeacherBo deleteTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询教师信息。<br>
@@ -55,6 +55,6 @@ service TeacherService{
      *  @return 推广信息实体 Teacher 列表
      *
      */
-    common.ResponseBo query(1: teacher.TeacherBo teacherBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<teacher.TeacherBo> query(1: teacher.TeacherBo teacherBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }
