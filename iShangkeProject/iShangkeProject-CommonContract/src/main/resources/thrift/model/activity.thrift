@@ -12,23 +12,17 @@ struct ActivityBo {
     9: i64 lastModifyTime
     10: i64 createTime
     11: i32 enabled
-    12: i32 deleted
-    13: i32 idStart
-    14: i32 idEnd
-    15: i32 idSet
-    16: i32 partnerIdStart
-    17: i32 partnerIdEnd    
-    18: i32 courseIdStart
-    19: i32 courseIdEnd
-    20: i64 startTimeStart
-    21: i64 startTimeEnd
-    22: i64 endTimeStart
-    23: i64 endTimeEnd
-    24: i32 statusStart
-    25: i32 statusEnd
-    26: i64 lastModifyTimeStart
-    27: i64 lastModifyTimeEnd
-    28: i64 createTimeStart
-    29: i64 createTimeEnd
-}
+    12: set<i32> idSet
+    13: set<i32> partnerIdSet
+    14: set<i32> courseIdSet
+    15: i64 startTimeStart
+    16: i64 startTimeEnd
+    17: i64 endTimeStart 
+    18: i64 endTimeEnd
+    19: set<i32> statusSet
+    20: i64 lastModifyTimeStart
+    21: i64 lastModifyTimeEnd
+    22: i64 createTimeStart
+    23: i64 createTimeEnd
+   }
 

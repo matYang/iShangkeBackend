@@ -9,19 +9,14 @@ struct AddressBo {
     6: i64 lastModifyTime
     7: i64 createTime
     8: i32 enabled
-    9: i32 deleted
-    10: i32 idStart
-    11: i32 idEnd
-    12: set<i32> idSet
-    13: i32 partnerIdStart
-    14: i32 partnerIdEnd
-    15: set<i32> partnerIdSet
-    16: double latStart
-    17: double latEnd
-    18: double lngStart
-    19: double lngEnd
-    20: i64 lastModifyTimeStart
-    21: i64 lastModifyTimeEnd
-    22: i64 createTimeStart
-    23: i64 createTimeEnd
+    9: set<i32> idSet
+    10: set<i32> partnerIdSet
+    11: double latStart
+    12: double latEnd
+    13: double lngStart
+    14: double lngEnd
+    15: i64 lastModifyTimeStart
+    16: i64 lastModifyTimeEnd
+    17: i64 createTimeStart
+    18: i64 createTimeEnd
 }

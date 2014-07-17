@@ -12,8 +12,8 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.ActivityManager;
 
-public class ActivityManagerImp implements ActivityManager{
-	private static final Logger LOGGER = LoggerFactory.getLogger(AccountManagerImpl.class);
+public class ActivityManagerImpl implements ActivityManager{
+	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityManagerImpl.class);
 	
 	@Override
 	public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo,

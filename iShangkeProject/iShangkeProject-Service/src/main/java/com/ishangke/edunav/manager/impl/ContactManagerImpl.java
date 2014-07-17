@@ -11,7 +11,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.ContactManager;
 
 public class ContactManagerImpl implements ContactManager{
-	private static final Logger LOGGER = LoggerFactory.getLogger(AccountManagerImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ContactManagerImpl.class);
 	
 	@Override
 	public ContactBo createContact(ContactBo contactBo, UserBo userBo) {
