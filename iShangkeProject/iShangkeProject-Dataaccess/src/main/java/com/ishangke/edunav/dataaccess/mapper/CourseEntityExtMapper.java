@@ -15,13 +15,15 @@ public interface CourseEntityExtMapper {
 
     public void update(CourseEntityExt courseEntityExt);
 
-    public int getCount();
-
     public List<CourseEntityExt> list(
             @Param("entity") CourseEntityExt courseEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") CourseEntityExt courseEntityExt);
-    
+
+    public List<CourseEntityExt> listAll();
+
+    public int getCount();
+
     public CourseEntityExt getInfoById(int id);
 }

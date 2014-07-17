@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ishangke.edunav.commoncontract.model.BookingBo;
+import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptFailedBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptSuccessBo;
@@ -23,7 +24,7 @@ public class BookingManagerImpl implements BookingManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingManagerImpl.class);
 
     @Override
-    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo, CouponBo couponBo) {
+    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -75,5 +76,12 @@ public class BookingManagerImpl implements BookingManager {
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo,
+			PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -6,29 +6,18 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.BookingEntity;
 
 public class BookingEntityExt extends BookingEntity {
-
-    private Integer idStart;
-    private Integer idEnd;
     private Set<Integer> idSet;
-    private Integer courseIdStart;
-    private Integer courseIdEnd;
     private Set<Integer> courseIdSet;
-    private Integer courseTemplateIdStart;
-    private Integer courseTemplateIdEnd;
     private Set<Integer> courseTemplateIdSet;
-    private Integer userIdStart;
-    private Integer userIdEnd;
     private Set<Integer> userIdSet;
-    private Integer statusStart;
-    private Integer statusEnd;
+    private Set<Integer> statusSet;
     private Calendar scheduledTimeStart;
     private Calendar scheduledTimeEnd;
     private Calendar noRefundDateStart;
     private Calendar noRefundDateEnd;
     private Calendar cashbackDateStart;
     private Calendar cashbackDateEnd;
-    private Integer typeStart;
-    private Integer typeEnd;
+    private Set<Integer> typeSet;
     private Double cashbackAmountStart;
     private Double cashbackAmountEnd;
     private Calendar lastModifyTimeStart;
@@ -60,92 +49,12 @@ public class BookingEntityExt extends BookingEntity {
         this.userIdSet = userIdSet;
     }
 
-    public Integer getIdStart() {
-        return idStart;
-    }
-
-    public void setIdStart(Integer idStart) {
-        this.idStart = idStart;
-    }
-
-    public Integer getIdEnd() {
-        return idEnd;
-    }
-
-    public void setIdEnd(Integer idEnd) {
-        this.idEnd = idEnd;
-    }
-
-    public Integer getCourseIdStart() {
-        return courseIdStart;
-    }
-
-    public void setCourseIdStart(Integer courseIdStart) {
-        this.courseIdStart = courseIdStart;
-    }
-
-    public Integer getCourseIdEnd() {
-        return courseIdEnd;
-    }
-
-    public void setCourseIdEnd(Integer courseIdEnd) {
-        this.courseIdEnd = courseIdEnd;
-    }
-
-    public Integer getCourseTemplateIdStart() {
-        return courseTemplateIdStart;
-    }
-
-    public void setCourseTemplateIdStart(Integer courseTemplateIdStart) {
-        this.courseTemplateIdStart = courseTemplateIdStart;
-    }
-
-    public Integer getCourseTemplateIdEnd() {
-        return courseTemplateIdEnd;
-    }
-
-    public void setCourseTemplateIdEnd(Integer courseTemplateIdEnd) {
-        this.courseTemplateIdEnd = courseTemplateIdEnd;
-    }
-
     public Set<Integer> getCourseTemplateIdSet() {
         return courseTemplateIdSet;
     }
 
     public void setCourseTemplateIdSet(Set<Integer> courseTemplateIdSet) {
         this.courseTemplateIdSet = courseTemplateIdSet;
-    }
-
-    public Integer getUserIdStart() {
-        return userIdStart;
-    }
-
-    public void setUserIdStart(Integer userIdStart) {
-        this.userIdStart = userIdStart;
-    }
-
-    public Integer getUserIdEnd() {
-        return userIdEnd;
-    }
-
-    public void setUserIdEnd(Integer userIdEnd) {
-        this.userIdEnd = userIdEnd;
-    }
-
-    public Integer getStatusStart() {
-        return statusStart;
-    }
-
-    public void setStatusStart(Integer statusStart) {
-        this.statusStart = statusStart;
-    }
-
-    public Integer getStatusEnd() {
-        return statusEnd;
-    }
-
-    public void setStatusEnd(Integer statusEnd) {
-        this.statusEnd = statusEnd;
     }
 
     public Calendar getScheduledTimeStart() {
@@ -196,22 +105,6 @@ public class BookingEntityExt extends BookingEntity {
         this.cashbackDateEnd = cashbackDateEnd;
     }
 
-    public Integer getTypeStart() {
-        return typeStart;
-    }
-
-    public void setTypeStart(Integer typeStart) {
-        this.typeStart = typeStart;
-    }
-
-    public Integer getTypeEnd() {
-        return typeEnd;
-    }
-
-    public void setTypeEnd(Integer typeEnd) {
-        this.typeEnd = typeEnd;
-    }
-
     public Double getCashbackAmountStart() {
         return cashbackAmountStart;
     }
@@ -259,4 +152,21 @@ public class BookingEntityExt extends BookingEntity {
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
+
+    public Set<Integer> getStatusSet() {
+        return statusSet;
+    }
+
+    public void setStatusSet(Set<Integer> statusSet) {
+        this.statusSet = statusSet;
+    }
+
+    public Set<Integer> getTypeSet() {
+        return typeSet;
+    }
+
+    public void setTypeSet(Set<Integer> typeSet) {
+        this.typeSet = typeSet;
+    }
+
 }

@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.CourseTeacherBo;
-import com.ishangke.edunav.dataaccess.model.CourseTeacherEntityExt;
+import com.ishangke.edunav.web.user.model.CourseTeacherVo;
 
 public class CourseTeacherConverter {
-    public static CourseTeacherBo toBo(CourseTeacherEntityExt e) {
+    public static CourseTeacherBo fromModel(CourseTeacherVo e) {
         CourseTeacherBo courseTeacherBo = new CourseTeacherBo();
         return courseTeacherBo;
     }
 
-    public static CourseTeacherEntityExt fromBo(CourseTeacherBo bo) {
-        CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
-        return courseTeacherEntityExt;
+    public static CourseTeacherVo toModel(CourseTeacherBo bo) {
+        CourseTeacherVo courseTeacherVo = new CourseTeacherVo();
+        return courseTeacherVo;
     }
 }

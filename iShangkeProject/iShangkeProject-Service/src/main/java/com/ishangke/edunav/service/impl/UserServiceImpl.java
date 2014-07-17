@@ -1,5 +1,7 @@
 package com.ishangke.edunav.service.impl;
 
+import java.util.List;
+
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +12,7 @@ import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
-import com.ishangke.edunav.commoncontract.model.ResponseBo;
+import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
@@ -43,51 +45,51 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public ResponseBo login(LoginBo loginBo) throws BusinessExceptionBo, TException {
+    public UserBo login(LoginBo loginBo) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser)
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser)
             throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo deleteUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public UserBo deleteUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo updateUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public UserBo updateUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo queryUserInfo(UserBo queryUser, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo)
+    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo)
             throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo querySession(UserBo userBo) throws BusinessExceptionBo, TException {
+    public List<UserBo> querySession(UserBo userBo) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ResponseBo disposeSession(UserBo userBo) throws BusinessExceptionBo, TException {
+    public UserBo disposeSession(UserBo userBo) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }

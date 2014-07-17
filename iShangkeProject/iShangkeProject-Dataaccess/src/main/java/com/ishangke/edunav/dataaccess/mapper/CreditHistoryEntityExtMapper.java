@@ -15,11 +15,16 @@ public interface CreditHistoryEntityExtMapper {
 
     public void update(CreditHistoryEntityExt creditHistoryEntityExt);
 
-    public int getCount();
-
     public List<CreditHistoryEntityExt> list(
             @Param("entity") CreditHistoryEntityExt creditHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") CreditHistoryEntityExt creditHistoryEntityExt);
+
+    public List<CreditHistoryEntityExt> listAll();
+
+    public int getCount();
+
+    public CreditHistoryEntityExt getById(int id);
+
 }

@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.AddressBo;
-import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
+import com.ishangke.edunav.web.user.model.AddressVo;
 
 public class AddressConverter {
-   public static AddressBo toBo(AddressEntityExt e) {
+   public static AddressBo fromModel(AddressVo e) {
        AddressBo addressBo = new AddressBo();
        return addressBo;
    }
 
-   public static AddressEntityExt fromBo(AddressBo bo) {
-       AddressEntityExt addressEntityExt = new AddressEntityExt();
-       return addressEntityExt;
+   public static AddressVo toModel(AddressBo bo) {
+       AddressVo addressVo = new AddressVo();
+       return addressVo;
    }
 }

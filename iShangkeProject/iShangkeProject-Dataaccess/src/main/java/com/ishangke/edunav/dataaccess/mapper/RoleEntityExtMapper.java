@@ -15,11 +15,23 @@ public interface RoleEntityExtMapper {
 
     public void update(RoleEntityExt roleEntityExt);
 
-    public int getCount();
-
     public List<RoleEntityExt> list(
             @Param("entity") RoleEntityExt roleEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") RoleEntityExt roleEntityExt);
+
+    public List<RoleEntityExt> listAll();
+
+    public int getCount();
+    
+    public List<RoleEntityExt> listRolesByUserId(int userId);
+    
+    public int getCountByUserId(int userId);
+    
+    public List<RoleEntityExt> listRoleByGroupId(int groupId);
+    
+    public int getCountByGroupId(int groupId);
+
+    public RoleEntityExt getById(int id);
 }

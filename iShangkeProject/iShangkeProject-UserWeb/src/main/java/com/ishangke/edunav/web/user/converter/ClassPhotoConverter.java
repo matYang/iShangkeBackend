@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
-import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
+import com.ishangke.edunav.web.user.model.ClassPhotoVo;
 
 public class ClassPhotoConverter {
-    public static ClassPhotoBo toBo(ClassPhotoEntityExt e) {
+    public static ClassPhotoBo fromModel(ClassPhotoVo e) {
         ClassPhotoBo classPhotoBo = new ClassPhotoBo();
         return classPhotoBo;
     }
 
-    public static ClassPhotoEntityExt fromBo(ClassPhotoBo bo) {
-        ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
-        return classPhotoEntityExt;
+    public static ClassPhotoVo toModel(ClassPhotoBo bo) {
+        ClassPhotoVo classPhotoVo = new ClassPhotoVo();
+        return classPhotoVo;
     }
 }

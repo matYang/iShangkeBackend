@@ -15,11 +15,15 @@ public interface AccountHistoryEntityExtMapper {
 
     public void update(AccountHistoryEntityExt accountHistoryEntityExt);
 
-    public int getCount();
-
     public List<AccountHistoryEntityExt> list(
             @Param("entity") AccountHistoryEntityExt accountHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") AccountHistoryEntityExt accountHistoryEntityExt);
+
+    public List<AccountHistoryEntityExt> listAll();
+
+    public int getCount();
+
+    public AccountHistoryEntityExt getById(int id);
 }

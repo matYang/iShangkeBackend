@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.CouponBo;
-import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
+import com.ishangke.edunav.web.user.model.CouponVo;
 
 public class CouponConverter {
-    public static CouponBo toBo(CouponEntityExt e) {
+    public static CouponBo fromModel(CouponVo e) {
         CouponBo couponBo = new CouponBo();
         return couponBo;
     }
 
-    public static CouponEntityExt fromBo(CouponBo bo) {
-        CouponEntityExt couponEntityExt = new CouponEntityExt();
-        return couponEntityExt;
+    public static CouponVo toModel(CouponBo bo) {
+        CouponVo couponVo = new CouponVo();
+        return couponVo;
     }
 }

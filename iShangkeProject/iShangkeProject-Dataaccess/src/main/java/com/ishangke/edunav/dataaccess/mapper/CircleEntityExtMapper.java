@@ -15,11 +15,15 @@ public interface CircleEntityExtMapper {
 
     public void update(CircleEntityExt circleEntityExt);
 
-    public int getCount();
-
     public List<CircleEntityExt> list(
             @Param("entity") CircleEntityExt circleEntityExt,
             @Param("page") PaginationEntity page);
-
+ 
     public int getListCount(@Param("entity") CircleEntityExt circleEntityExt);
+
+    public List<CircleEntityExt> listAll();
+
+    public int getCount();
+
+    public CircleEntityExt getById(int id);
 }

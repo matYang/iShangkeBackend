@@ -21,7 +21,7 @@ service CreditService{
      *  @return 
      *
      */ 
-    common.ResponseBo exchangeCoupon(1: credit.CreditBo creditBo, 2: coupon.CouponBo couponBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    credit.CreditBo exchangeCoupon(1: credit.CreditBo creditBo, 2: coupon.CouponBo couponBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为换取现金。<br>
@@ -34,7 +34,7 @@ service CreditService{
      *  @return 
      *
      */ 
-    common.ResponseBo exchangeAccount(1: credit.CreditBo creditBo, 2: account.AccountBo accountBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    credit.CreditBo exchangeAccount(1: credit.CreditBo creditBo, 2: account.AccountBo accountBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询积分功能。<br>
@@ -47,7 +47,7 @@ service CreditService{
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    common.ResponseBo query(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<credit.CreditBo> query(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
         /**
      *  本方法为查询积分历史功能。<br>
@@ -60,6 +60,6 @@ service CreditService{
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    common.ResponseBo queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<credit.CreditBo> queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
 }

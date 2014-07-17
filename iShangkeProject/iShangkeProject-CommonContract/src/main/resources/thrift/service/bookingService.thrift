@@ -1,11 +1,11 @@
 include "model/fault.thrift"
-include "model/common.thrift"
 include "model/user.thrift"
 include "model/partner.thrift"
 include "model/course.thrift"
 include "model/booking.thrift"
 include "model/bookingHistory.thrift"
 include "model/coupon.thrift"
+include "model/common.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
@@ -22,7 +22,7 @@ service BookingService {
      *  @return 预定单实体 BookingBo
      *
      */ 
-    common.ResponseBo createBookingByUser(1: course.CourseBo courseBo, 2: booking.BookingBo bookingBo, 3: booking.CommentBookingCreateBo commentBookingCreateBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo createBookingByUser(1: course.CourseBo courseBo, 2: booking.BookingBo bookingBo, 3: booking.CommentBookingCreateBo commentBookingCreateBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理一个预定单功能。<br>
@@ -35,7 +35,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo acceptBookingByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingAcceptBo commentBookingAcceptBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+   booking.BookingBo acceptBookingByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingAcceptBo commentBookingAcceptBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理成功一个预定单功能。<br>
@@ -48,7 +48,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo acceptBookingSucceedByPartner(1: booking.BookingBo bookinbBo, 2: booking.CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo acceptBookingSucceedByPartner(1: booking.BookingBo bookinbBo, 2: booking.CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商受理失败一个预定单功能。<br>
@@ -61,7 +61,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo acceptBookingFailedByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo acceptBookingFailedByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -75,7 +75,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo validateBookingByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingValidateBo commentBookingValidateBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo validateBookingByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingValidateBo commentBookingValidateBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为取消一个预定单功能。<br>
@@ -88,7 +88,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo cancelBookingByUser(1: booking.BookingBo bookingBo, 2: booking.CommentBookingCancelBo commentBookingCancelBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo cancelBookingByUser(1: booking.BookingBo bookingBo, 2: booking.CommentBookingCancelBo commentBookingCancelBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为取消一个预定单功能。<br>
@@ -101,7 +101,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo cancelBookingByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingCancelBo commentBookingCancelBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo cancelBookingByPartner(1: booking.BookingBo bookingBo, 2: booking.CommentBookingCancelBo commentBookingCancelBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为取消一个预定单功能。<br>
@@ -114,7 +114,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    common.ResponseBo cancelBookingByAdmin(1: booking.BookingBo bookingBo, 2: booking.CommentBookingCancelBo commentBookingCancelBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo cancelBookingByAdmin(1: booking.BookingBo bookingBo, 2: booking.CommentBookingCancelBo commentBookingCancelBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询预定单预定单功能。<br>
@@ -128,7 +128,7 @@ service BookingService {
      *  @return 预定单实体 BookingBo 列表
      *
      */ 
-    common.ResponseBo query(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<booking.BookingBo> query(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询订单历史操作。<br>
@@ -142,5 +142,5 @@ service BookingService {
      *  @return 预定单实体 BookingBo 列表
      *
      */ 
-    common.ResponseBo queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<bookingHistory.BookingHistoryBo> queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 

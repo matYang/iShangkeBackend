@@ -95,6 +95,8 @@ public class ManagerErrorCode {
     public static final String BOOKING_CANCELBYADMIN_ERROR_KEY = "booking_cancelbyadmin_error";
     public static final int BOOKING_QUERY_ERROR = 0x00040009;
     public static final String BOOKING_QUERY_ERROR_KEY = "booking_query_error";
+    public static final int BOOKING_QUERYHISTORY_ERROR = 0x0004000A;
+    public static final String BOOKING_QUERYHISTORY_ERROR_KEY = "booking_queryhistory_error";
     public static final int BOOKING_NOTFOUND_ERROR = 0x00040404;
     public static final String BOOKING_NOTFOUND_ERROR_KEY = "booking_notfound_error";
     
@@ -123,10 +125,30 @@ public class ManagerErrorCode {
     public static final String LOCATION_NOTFOUND_ERROR_KEY = "location_notfound_error";
     
     //account
+    public static final int ACCOUNT_EXCHANGECASH_ERROR = 0x00090001;
+    public static final String ACCOUNT_EXCHANGECASH_ERROR_KEY = "account_exchangecash_error";
+    public static final int ACCOUNT_QUERY_ERROR = 0x00090002;
+    public static final String ACCOUNT_QUERY_ERROR_KEY = "account_query_error";
+    public static final int ACCOUNT_QUERYHISTORY_ERROR = 0x00090003;
+    public static final String ACCOUNT_QUERYHISTORY_ERROR_KEY ="account_queryhistory_error";
     public static final int ACCOUONT_NOTFOUND_ERROR = 0x00090404;
     public static final String ACCOUONT_NOTFOUND_ERROR_KEY = "account_notfound_error";
     
     //activity
+    public static final int ACTIVITY_CREATE_ERROR = 0x000A0001;
+    public static final String ACTIVITY_CREATE_ERROR_KEY = "activity_create_error";
+    public static final int ACTIVITY_SUBMIT_ERROR = 0x000A0002;
+    public static final String ACTIVITY_SUBMIT_ERROR_KEY = "activity_submit_error";
+    public static final int ACTIVITY_APPROVE_ERROR = 0x000A0003;
+    public static final String ACTIVITY_APPROVE_ERROR_KEY = "activity_approve_error";
+    public static final int ACTIVITY_REJECT_ERROR = 0x000A0004;
+    public static final String ACTIVITY_REJECT_ERROR_KEY = "activity_reject_error";
+    public static final int ACTIVITY_CANCEL_ERROR = 0x000A0005;
+    public static final String ACTIVITY_CANCEL_ERROR_KEY = "activity_cancel_error";
+    public static final int ACTIVITY_DELETE_ERROR = 0x000A0006;
+    public static final String ACTIVITY_DELETE_ERROR_KEY = "activity_delete_error";
+    public static final int ACTIVITY_QUERY_ERROR = 0x000A0007;
+    public static final String ACTIVITY_QUERY_ERROR_KEY = "activity_query_error";
     public static final int ACTIVITY_NOTFOUND_ERROR = 0x000A0404;
     public static final String ACTIVITY_NOTFOUND_ERROR_KEY = "activity_notfound_error";
     

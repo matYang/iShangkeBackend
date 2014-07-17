@@ -20,7 +20,7 @@ service CourseTemplateService {
      *  @return 课程模版实体 CourseTemplateBo 
      *
      */
-    common.ResponseBo createCourseTemplateBo(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplateBo createCourseTemplateBo(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为提交课程模版<br>
@@ -33,7 +33,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo submitCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    courseTemplate.CourseTemplateBo submitCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为审核通过课程模版<br>
@@ -47,7 +47,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo approveCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: courseTemplate.CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    courseTemplate.CourseTemplateBo approveCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: courseTemplate.CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为审核不通过课程模版<br>
@@ -61,7 +61,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo rejectCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: courseTemplate.CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, 3: partner.PartnerBo partnerBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplateBo rejectCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: courseTemplate.CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, 3: partner.PartnerBo partnerBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为下架课程模版<br>
@@ -74,7 +74,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo cancelCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    courseTemplate.CourseTemplateBo cancelCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
      /**
      *  本方法为重新上架课程模版<br>
@@ -87,7 +87,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo resubmitCourserTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    courseTemplate.CourseTemplateBo resubmitCourserTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  本方法为删除课程模版<br>
@@ -100,7 +100,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo deleteCourseTempalte(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    courseTemplate.CourseTemplateBo deleteCourseTempalte(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
      /**
      *  本方法为修改课程模版<br>
@@ -113,7 +113,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo updateCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplateBo updateCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为搜索课程模版<br>
@@ -127,7 +127,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo queryCourseTempalte(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<courseTemplate.CourseTemplateBo> queryCourseTempalte(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法返回课程模版详情<br>
@@ -139,7 +139,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    common.ResponseBo queryCourseTempalteById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<courseTemplate.CourseTemplateBo> queryCourseTempalteById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 }

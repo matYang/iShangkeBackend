@@ -15,17 +15,27 @@ public interface TeacherEntityExtMapper {
 
     public void update(TeacherEntityExt teacherEntityExt);
 
-    public int getCount();
-
     public List<TeacherEntityExt> list(
             @Param("entity") TeacherEntityExt teacherEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") TeacherEntityExt teacherEntityExt);
+
+    public List<TeacherEntityExt> listAll();
+
+    public int getCount();
+
+    public TeacherEntityExt getById(int id);
     
     public List<TeacherEntityExt> listTeacherByPartnerId(int partnerId);
 
+    public int getCountByPartnerId(int partnerId);
+
     public List<TeacherEntityExt> listTeacherByCourseId(int courseId);
+
+    public int getCountByCourseId(int courseId);
     
     public List<TeacherEntityExt> listTeacherByCourseTempleteId(int courseTemplateId);
+
+    public int getCountByCourseTemplateId(int courseTemplateId);
 }

@@ -6,61 +6,59 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.OrderEntity;
 
 public class OrderEntityExt extends OrderEntity {
-    private Integer idStart;
-    private Integer idEnd;
     private Set<Integer> idSet;
     private Set<Integer> bookingIdSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     private Double priceStart;
     private Double priceEnd;
-    public Integer getIdStart() {
-        return idStart;
-    }
-    public void setIdStart(Integer idStart) {
-        this.idStart = idStart;
-    }
-    public Integer getIdEnd() {
-        return idEnd;
-    }
-    public void setIdEnd(Integer idEnd) {
-        this.idEnd = idEnd;
-    }
+
     public Set<Integer> getIdSet() {
         return idSet;
     }
+
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
+
     public Set<Integer> getBookingIdSet() {
         return bookingIdSet;
     }
+
     public void setBookingIdSet(Set<Integer> bookingIdSet) {
         this.bookingIdSet = bookingIdSet;
     }
+
     public Double getPriceStart() {
         return priceStart;
     }
+
     public void setPriceStart(Double priceStart) {
         this.priceStart = priceStart;
     }
+
     public Double getPriceEnd() {
         return priceEnd;
     }
+
     public void setPriceEnd(Double priceEnd) {
         this.priceEnd = priceEnd;
     }
+
     public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
+
     public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
+
     public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
+
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
-    
+
 }

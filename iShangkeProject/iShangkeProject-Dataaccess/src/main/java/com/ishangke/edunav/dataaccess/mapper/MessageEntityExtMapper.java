@@ -15,11 +15,16 @@ public interface MessageEntityExtMapper {
 
     public void update(MessageEntityExt messageEntityExt);
 
-    public int getCount();
-
     public List<MessageEntityExt> list(
             @Param("entity") MessageEntityExt messageEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") MessageEntityExt messageEntityExt);
+
+    public List<MessageEntityExt> listAll();
+
+    public int getCount();
+
+    public MessageEntityExt getById(int id);
+
 }

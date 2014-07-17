@@ -21,5 +21,9 @@ public interface AccountEntityExtMapper {
             @Param("entity") AccountEntityExt accountEntityExt,
             @Param("page") PaginationEntity page);
 
+    public List<AccountEntityExt> listAll();
+
+    public AccountEntityExt getById(int id);
+
     public int getListCount(@Param("entity") AccountEntityExt accountEntityExt);
 }

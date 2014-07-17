@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
-import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
+import com.ishangke.edunav.web.user.model.PartnerVo;
 
 public class PartnerConverter {
-    public static PartnerBo toBo(PartnerEntityExt e) {
+    public static PartnerBo fromModel(PartnerVo e) {
         PartnerBo partnerBo = new PartnerBo();
         return partnerBo;
     }
 
-    public static PartnerEntityExt fromBo(PartnerBo bo) {
-        PartnerEntityExt partnerEntityExt = new PartnerEntityExt();
-        return partnerEntityExt;
+    public static PartnerVo toModel(PartnerBo bo) {
+        PartnerVo partnerVo = new PartnerVo();
+        return partnerVo;
     }
 }
