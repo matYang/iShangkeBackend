@@ -5,7 +5,7 @@ import com.ishangke.edunav.web.user.model.CourseTemplateClassPhotoVo;
 
 public class CourseTemplateClassPhotoConverter {
     public static CourseTemplateClassPhotoBo fromModel(CourseTemplateClassPhotoVo e) {
-        CourseTemplateClassPhotoBo courseTemplateClassPhotoBo = new CourseTemplateClassPhofromModel();
+        CourseTemplateClassPhotoBo courseTemplateClassPhotoBo = new CourseTemplateClassPhotoBo();
         return courseTemplateClassPhotoBo;
     }
 
