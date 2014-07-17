@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
-import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
+import com.ishangke.edunav.web.user.model.CategoryVo;
 
 public class CategoryConverter {
-    public static CategoryBo toBo(CategoryEntityExt e) {
+    public static CategoryBo fromModel(CategoryVo e) {
         CategoryBo categoryBo = new CategoryBo();
         return categoryBo;
     }
 
-    public static CategoryEntityExt fromBo(CategoryBo bo) {
-        CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
-        return categoryEntityExt;
+    public static CategoryVo toModel(CategoryBo bo) {
+        CategoryVo categoryVo = new CategoryVo();
+        return categoryVo;
     }
 }

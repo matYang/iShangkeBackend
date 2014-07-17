@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
-import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
+import com.ishangke.edunav.web.user.model.PermissionVo;
 
 public class PermissionConverter {
-    public static PermissionBo toBo(PermissionEntityExt e) {
+    public static PermissionBo fromModel(PermissionVo e) {
         PermissionBo permissionBo = new PermissionBo();
         return permissionBo;
     }
 
-    public static PermissionEntityExt fromBo(PermissionBo bo) {
-        PermissionEntityExt permissionEntityExt =new PermissionEntityExt();
-        return permissionEntityExt;
+    public static PermissionVo toModel(PermissionBo bo) {
+        PermissionVo permissionVo =new PermissionVo();
+        return permissionVo;
     }
 }

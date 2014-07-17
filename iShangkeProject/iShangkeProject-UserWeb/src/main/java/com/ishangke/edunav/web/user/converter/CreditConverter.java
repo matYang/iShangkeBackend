@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.CreditBo;
-import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
+import com.ishangke.edunav.web.user.model.CreditVo;
 
 public class CreditConverter {
-    public static CreditBo toBo(CreditEntityExt e) {
+    public static CreditBo fromModel(CreditVo e) {
         CreditBo creditBo = new CreditBo();
         return creditBo;
     }
 
-    public static CreditEntityExt fromBo(CreditBo bo) {
-        CreditEntityExt creditEntityExt = new CreditEntityExt();
-        return creditEntityExt;
+    public static CreditVo toModel(CreditBo bo) {
+        CreditVo creditVo = new CreditVo();
+        return creditVo;
     }
 }

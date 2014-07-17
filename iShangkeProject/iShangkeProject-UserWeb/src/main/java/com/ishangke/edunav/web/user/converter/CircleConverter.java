@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.CircleBo;
-import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
+import com.ishangke.edunav.web.user.model.CircleVo;
 
 public class CircleConverter {
-    public static CircleBo toBo(CircleEntityExt e) {
+    public static CircleBo fromModel(CircleVo e) {
         CircleBo circleBo = new CircleBo();
         return circleBo;
     }
 
-    public static CircleEntityExt fromBo(CircleBo bo) {
-        CircleEntityExt circleEntityExt = new CircleEntityExt();
-        return circleEntityExt;
+    public static CircleVo toModel(CircleBo bo) {
+        CircleVo circleVo = new CircleVo();
+        return circleVo;
     }
 }

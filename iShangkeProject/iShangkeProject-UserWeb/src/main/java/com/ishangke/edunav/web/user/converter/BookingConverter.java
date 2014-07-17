@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.BookingBo;
-import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
+import com.ishangke.edunav.web.user.model.BookingVo;
 
 public class BookingConverter {
-    public static BookingBo toBo(BookingEntityExt e) {
+    public static BookingBo fromModel(BookingVo e) {
         BookingBo bookingBo = new BookingBo();
         return bookingBo;
     }
 
-    public static BookingEntityExt fromBo(BookingBo bo) {
-        BookingEntityExt bookingEntityExt = new BookingEntityExt();
-        return bookingEntityExt;
+    public static BookingVo toModel(BookingBo bo) {
+        BookingVo bookingVo = new BookingVo();
+        return bookingVo;
     }
 }

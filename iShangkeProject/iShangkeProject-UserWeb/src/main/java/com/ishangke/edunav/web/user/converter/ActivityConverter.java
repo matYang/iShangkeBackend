@@ -1,16 +1,16 @@
 package com.ishangke.edunav.web.user.converter;
 
 import com.ishangke.edunav.commoncontract.model.ActivityBo;
-import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
+import com.ishangke.edunav.web.user.model.ActivityVo;
 
 public class ActivityConverter {
-    public static ActivityBo toBo(ActivityEntityExt e) {
+    public static ActivityBo fromModel(ActivityVo e) {
         ActivityBo activityBo = new ActivityBo();
         return activityBo;
     }
 
-    public static ActivityEntityExt fromBo(ActivityBo bo) {
-        ActivityEntityExt activityEntityExt = new ActivityEntityExt();
-        return activityEntityExt;
+    public static ActivityVo toModel(ActivityBo bo) {
+        ActivityVo activityVo = new ActivityVo();
+        return activityVo;
     }
 }
