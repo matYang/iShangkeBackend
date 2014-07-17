@@ -21,11 +21,10 @@
     CIRCLE.ENABLED CIRCLE_ENABLED,
     CIRCLE.DELETED CIRCLE_DELETED
   </sql>
+  <!--add -->
   <insert id="add" parameterType="CircleEntityExt">
-
     insert into CIRCLE
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="value != null">
         VALUE,
       </if>
@@ -46,7 +45,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
       </if>
@@ -71,11 +69,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update CIRCLE set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="CircleEntityExt">
     update CIRCLE
     <set>
@@ -102,10 +102,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from CIRCLE where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="CircleExtMap">
     SELECT
     <include refid="Circle_Base_Column_List" />
@@ -115,13 +116,12 @@
       <if test="entity.id != null and entity.id != 0">
         AND CIRCLE.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND CIRCLE.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND CIRCLE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND CIRCLE.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -157,36 +157,36 @@
       <if test="entity.enabled != null">
         AND CIRCLE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          CIRCLE.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        CIRCLE.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
 
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-  
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-      <include refid="Circle_Base_Column_List" />
+
+    <include refid="Circle_Base_Column_List" />
     from CIRCLE where CIRCLE.DELETED = 0
     <if test="entity != null">
 
       <if test="entity.id != null and entity.id != 0">
         AND CIRCLE.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND CIRCLE.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND CIRCLE.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND CIRCLE.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -222,7 +222,18 @@
       <if test="entity.enabled != null">
         AND CIRCLE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          CIRCLE.${listItem.columnKey} ${listItem.order}
+        </foreach>
       </if>
+
+      <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
     ) AS total
   </select>
 </mapper>

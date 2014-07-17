@@ -6,7 +6,8 @@
     <result column="COURSETEMPLATETEACHER_COURSETEMPLATEID" property="courseTemplateId"
       jdbcType="INTEGER" />
     <result column="COURSETEMPLATETEACHER_TEACHERID" property="teacherId" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATETEACHER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSETEMPLATETEACHER_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSETEMPLATETEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CourseTemplateTeacher_Base_Column_List">
@@ -16,11 +17,10 @@
     COURSE_TEMPLATE_TEACHER.CREATE_TIME COURSETEMPLATETEACHER_CREATETIME,
     COURSE_TEMPLATE_TEACHER.DELETED COURSETEMPLATETEACHER_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="CourseTemplateTeacherEntityExt">
-
     insert into COURSE_TEMPLATE_TEACHER
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="courseTemplateId != null">
         COURSE_TEMPLATE_ID,
       </if>
@@ -35,7 +35,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="courseTemplateId != null">
         #{courseTemplateId,jdbcType=INTEGER},
       </if>
@@ -54,12 +53,14 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update COURSE_TEMPLATE_TEACHER set DELETED = 1
     where
     ID
     = #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="CourseTemplateTeacherEntityExt">
     update COURSE_TEMPLATE_TEACHER
     <set>
@@ -71,7 +72,8 @@
         TEACHER_ID = #{teacherId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
@@ -79,26 +81,23 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from COURSE_TEMPLATE_TEACHER where
     DELETED = 0
   </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseTemplateTeacherExtMap">
     select
     <include refid="CourseTemplateTeacher_Base_Column_List"></include>
     from COURSE_TEMPLATE_TEACHER
     where COURSE_TEMPLATE_TEACHER.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_TEMPLATE_TEACHER.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE_TEACHER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE_TEACHER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND COURSE_TEMPLATE_TEACHER.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -106,6 +105,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
         AND COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID =
         #{entity.courseTemplateId,jdbcType=INTEGER}
@@ -119,6 +119,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.teacherId != null and entity.teacherId != 0">
         AND COURSE_TEMPLATE_TEACHER.TEACHERID = #{entity.teacherId,jdbcType=INTEGER}
       </if>
@@ -133,7 +134,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND COURSE_TEMPLATE_TEACHER.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE_TEACHER.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -144,6 +146,7 @@
         </if>
       </if>
     </if>
+
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -151,28 +154,23 @@
       </foreach>
     </if>
 
-    <if test="page != null">
+    <if test="page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
-
   </select>
-       <select id="getListCount" parameterType="map" resultType="int">
+  <!-- getListCount -->
+  <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-      <include refid="CourseTemplateTeacher_Base_Column_List"></include>
+    <include refid="CourseTemplateTeacher_Base_Column_List"></include>
     from COURSE_TEMPLATE_TEACHER
     where COURSE_TEMPLATE_TEACHER.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_TEMPLATE_TEACHER.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND COURSE_TEMPLATE_TEACHER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND COURSE_TEMPLATE_TEACHER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND COURSE_TEMPLATE_TEACHER.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -180,6 +178,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
         AND COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID =
         #{entity.courseTemplateId,jdbcType=INTEGER}
@@ -193,6 +192,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.teacherId != null and entity.teacherId != 0">
         AND COURSE_TEMPLATE_TEACHER.TEACHERID = #{entity.teacherId,jdbcType=INTEGER}
       </if>
@@ -207,7 +207,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND COURSE_TEMPLATE_TEACHER.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND COURSE_TEMPLATE_TEACHER.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">

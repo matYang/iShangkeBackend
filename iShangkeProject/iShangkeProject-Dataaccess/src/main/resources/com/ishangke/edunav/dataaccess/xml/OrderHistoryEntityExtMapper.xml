@@ -10,7 +10,8 @@
     <result column="ORDERHISTORY_PRESTATUS" property="preStatus" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_POSTSTATUS" property="postStatus" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_NORMAL" property="normal" jdbcType="INTEGER" />
-    <result column="ORDERHISTORY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ORDERHISTORY_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ORDERHISTORY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ORDERHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -27,11 +28,10 @@
     ORDER_HISTORY.ENABLED ORDERHISTORY_ENABLED,
     ORDER_HISTORY.DELETED ORDERHISTORY_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="OrderHistoryEntityExt">
-
     insert into ORDER_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="orderId != null">
         ORDER_ID,
       </if>
@@ -64,7 +64,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="orderId != null">
         #{orderId,jdbcType=INTEGER},
       </if>
@@ -101,11 +100,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update ORDER_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="OrderHistoryEntityExt">
     update ORDER_HISTORY
     <set>
@@ -131,7 +132,8 @@
         NORMAL = #{record.normal,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="record.enabled != null">
         ENABLED = #{record.enabled,jdbcType=INTEGER},
@@ -142,115 +144,119 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- "getCount" -->
   <select id="getCount" resultType="int">
     select count(ID) from ORDER_HISTORY where DELETED = 0
   </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="OrderHistoryExtMap">
     select
     <include refid="OrderHistory_Base_Column_List"></include>
-    from ORDER_HISTORY 
+    from ORDER_HISTORY
     where ORDER_HISTORY.DELETED = 0
     <if test="entity != null">
-      <!-- id -->
+
       <if test="entity.id != null and entity.id != 0">
         AND ORDER_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ORDER_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ORDER_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ORDER_HISTORY.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.orderId != null and entity.orderId != 0">
+        AND ORDER_HISTORY.ORDER_ID = #{entity.orderId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.orderId == null or entity.orderId == 0">
+        <if test="entity.orderIdSet != null and entity.orderIdSet.size() > 0">
+          AND ORDER_HISTORY.ORDER_ID IN
+          <foreach collection="entity.orderIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
-      <!-- Integer 属性 -->
-      <if test="entity.orderId != null and entity.orderId != 0">
-        AND ORDER_HISTORY.ORDER_ID = #{entity.orderId,jdbcType=INTEGER}
-      </if>
-      <if test="entity.orderId == null or entity.orderId == 0">
-      <if test="entity.orderIdSet.size() > 0">
-          AND ORDER_HISTORY.ORDER_ID IN
-          <foreach collection="entity.orderIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.userId != null and entity.userId != 0">
         AND ORDER_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
+
       <if test="entity.userId == null or entity.userId == 0">
-      <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND ORDER_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.optName != null and entity.optName != 0">
         AND ORDER_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
       </if>
+
       <if test="entity.optName == null or entity.optName == 0">
-      <if test="entity.optNameSet.size() > 0">
+        <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND ORDER_HISTORY.OPT_NAME IN
-          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- String 属性 -->
+
       <if test="entity.remark != null and !entity.remark.equals('')">
         AND ORDER_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <!-- Integer 属性 -->
       <if test="entity.preStatus != null and entity.preStatus != 0">
         AND ORDER_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
+
       <if test="entity.preStatus == null or entity.preStatus == 0">
-      <if test="entity.preStatusSet.size() > 0">
+        <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND ORDER_HISTORY.PRE_STATUS IN
-          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.postStatus != null and entity.postStatus != 0">
         AND ORDER_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
       <if test="entity.postStatus == null or entity.postStatus == 0">
-      <if test="entity.postStatusSet.size() > 0">
+        <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND ORDER_HISTORY.POST_STATUS IN
-          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.normal != null and entity.normal != 0">
         AND ORDER_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
       </if>
       <if test="entity.normal == null or entity.normal == 0">
-      <if test="entity.normalSet.size() > 0">
+        <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND ORDER_HISTORY.NORMAL IN
-          <foreach collection="entity.normalSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.normalSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Date 属性 -->
+
       <if test="entity.createTime != 0 and entity.createTime != null">
-        AND ORDER_HISTORY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND ORDER_HISTORY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null or entity.createTime == 0">
         <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
@@ -260,130 +266,134 @@
           <![CDATA[AND ORDER_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
-      <!-- Integer 属性 -->
+
       <if test="entity.enabled != null">
         AND ORDER_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    </if>
+
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        USERS.${listItem.columnKey} ${listItem.order}
+        ORDER_HISTORY.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
-      <!-- 分页、必需 -->
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
+
   </select>
-       <select id="getListCount" parameterType="map" resultType="int">
+  <!-- getListCount -->
+  <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-   <include refid="OrderHistory_Base_Column_List"></include>
-    from ORDER_HISTORY 
+    <include refid="OrderHistory_Base_Column_List"></include>
+    from ORDER_HISTORY
     where ORDER_HISTORY.DELETED = 0
     <if test="entity != null">
-      <!-- id -->
+
       <if test="entity.id != null and entity.id != 0">
         AND ORDER_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ORDER_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ORDER_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ORDER_HISTORY.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.orderId != null and entity.orderId != 0">
+        AND ORDER_HISTORY.ORDER_ID = #{entity.orderId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.orderId == null or entity.orderId == 0">
+        <if test="entity.orderIdSet != null and entity.orderIdSet.size() > 0">
+          AND ORDER_HISTORY.ORDER_ID IN
+          <foreach collection="entity.orderIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
-      <!-- Integer 属性 -->
-      <if test="entity.orderId != null and entity.orderId != 0">
-        AND ORDER_HISTORY.ORDER_ID = #{entity.orderId,jdbcType=INTEGER}
-      </if>
-      <if test="entity.orderId == null or entity.orderId == 0">
-      <if test="entity.orderIdSet.size() > 0">
-          AND ORDER_HISTORY.ORDER_ID IN
-          <foreach collection="entity.orderIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.userId != null and entity.userId != 0">
         AND ORDER_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
+
       <if test="entity.userId == null or entity.userId == 0">
-      <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND ORDER_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.optName != null and entity.optName != 0">
         AND ORDER_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
       </if>
+
       <if test="entity.optName == null or entity.optName == 0">
-      <if test="entity.optNameSet.size() > 0">
+        <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND ORDER_HISTORY.OPT_NAME IN
-          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- String 属性 -->
+
       <if test="entity.remark != null and !entity.remark.equals('')">
         AND ORDER_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <!-- Integer 属性 -->
       <if test="entity.preStatus != null and entity.preStatus != 0">
         AND ORDER_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
+
       <if test="entity.preStatus == null or entity.preStatus == 0">
-      <if test="entity.preStatusSet.size() > 0">
+        <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND ORDER_HISTORY.PRE_STATUS IN
-          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.postStatus != null and entity.postStatus != 0">
         AND ORDER_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
       <if test="entity.postStatus == null or entity.postStatus == 0">
-      <if test="entity.postStatusSet.size() > 0">
+        <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND ORDER_HISTORY.POST_STATUS IN
-          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Integer 属性 -->
+
       <if test="entity.normal != null and entity.normal != 0">
         AND ORDER_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
       </if>
       <if test="entity.normal == null or entity.normal == 0">
-      <if test="entity.normalSet.size() > 0">
+        <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND ORDER_HISTORY.NORMAL IN
-          <foreach collection="entity.normalSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.normalSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      <!-- Date 属性 -->
+
       <if test="entity.createTime != 0 and entity.createTime != null">
-        AND ORDER_HISTORY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND ORDER_HISTORY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null or entity.createTime == 0">
         <if test="entity.createTimeStart != null and entity.createTimeStart != 0">
@@ -393,12 +403,11 @@
           <![CDATA[AND ORDER_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
-      <!-- Integer 属性 -->
+
       <if test="entity.enabled != null">
         AND ORDER_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      </if>
+    </if>
     ) AS total
   </select>
 </mapper>

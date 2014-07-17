@@ -153,6 +153,14 @@ public class ManagerErrorCode {
     public static final String ACTIVITY_NOTFOUND_ERROR_KEY = "activity_notfound_error";
     
     //address
+    public static final int ADDRESS_CREATE_ERROR = 0x000B0001;
+    public static final String ADDRESS_CREATE_ERROR_KEY = "address_create_error";
+    public static final int ADDRESS_UPDATE_ERROR = 0x000B0002;
+    public static final String ADDRESS_UPDATE_ERROR_KEY = "address_update_error";
+    public static final int ADDRESS_DELETE_ERROR = 0x000B0003;
+    public static final String ADDRESS_DELETE_ERROR_KEY = "address_delete_error";
+    public static final int ADDRESS_QUERY_ERROR = 0x000B0004;
+    public static final String ADDRESS_QUERY_ERROR_KEY = "address_query_error";
     public static final int ADDRESS_NOTFOUND_ERROR = 0x000B0404;
     public static final String ADDRESS_NOTFOUND_ERROR_KEY = "address_notfound_error";
     

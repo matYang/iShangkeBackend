@@ -222,7 +222,8 @@
       </if>
 
       <if test="entity.startTime != null">
-        AND ACTIVITY.START_TIME = #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND ACTIVITY.START_TIME =
+        #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startTime == null">
         <if test="entity.startTimeStart != null">
@@ -234,7 +235,8 @@
       </if>
 
       <if test="entity.endTime != null">
-        AND ACTIVITY.END_TIME = #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.END_TIME =
+        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.endTime == null">
         <if test="entity.endTimeStart != null">
@@ -248,12 +250,19 @@
       <if test="entity.status != null and entity.status != 0">
         AND ACTIVITY.START = #{entity.status,jdbcType=INTEGER}
       </if>
-      <if test="entity.status == null or entity.status == 0">
-        <!-- 加上set -->
+      <if test="entity.status == null or entity.status== 0">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND ACCOUNT_HISTORY.START IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -265,7 +274,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND ACTIVITY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -279,18 +289,18 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND ACTIVITY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          ACTIVITY.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+</if>
+   <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        ACTIVITY.${listItem.columnKey} ${listItem.order}
+      </foreach>
     </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+      
   </select>
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
@@ -348,7 +358,8 @@
       </if>
 
       <if test="entity.startTime != null">
-        AND ACTIVITY.START_TIME = #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.START_TIME =
+        #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.startTime == null">
         <if test="entity.startTimeStart != null">
@@ -360,7 +371,8 @@
       </if>
 
       <if test="entity.endTime != null">
-        AND ACTIVITY.END_TIME = #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.END_TIME =
+        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.endTime == null">
         <if test="entity.endTimeStart != null">
@@ -375,11 +387,18 @@
         AND ACTIVITY.START = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null or entity.status == 0">
-        <!-- 加上set -->
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND ACCOUNT_HISTORY.START IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -391,7 +410,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND ACTIVITY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ACTIVITY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
