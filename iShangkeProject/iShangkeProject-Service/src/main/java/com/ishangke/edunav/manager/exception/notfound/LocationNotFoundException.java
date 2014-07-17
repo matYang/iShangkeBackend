@@ -14,9 +14,11 @@ public class LocationNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        //TODO
-//        return -1;
-//    }
+     public LocationNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public LocationNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

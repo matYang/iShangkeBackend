@@ -14,8 +14,11 @@ public class CourseNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        return 3;
-//    }
+     public CourseNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public CourseNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }
