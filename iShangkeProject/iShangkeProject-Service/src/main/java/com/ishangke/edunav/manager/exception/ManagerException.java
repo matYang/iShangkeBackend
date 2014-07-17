@@ -42,14 +42,17 @@ public class ManagerException extends RuntimeException {
 
     public ManagerException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+        this.errorMessage = message;
     }
 
     public ManagerException(String message, Throwable cause) {
         super(message, cause);
+        this.errorMessage = message;
     }
 
     public ManagerException(String message) {
         super(message);
+        this.errorMessage = message;
     }
 
     public ManagerException(Throwable cause) {
