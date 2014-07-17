@@ -12,7 +12,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.AddressManager;
 
 public class AddressManagerImpl implements AddressManager{
-	private static final Logger LOGGER = LoggerFactory.getLogger(AccountManagerImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AddressManagerImpl.class);
 	@Override
 	public AddressBo createAddress(AddressBo addressBo, UserBo userBo,
 			PartnerBo partnerBo) {
