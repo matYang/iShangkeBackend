@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
+import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
@@ -56,31 +57,67 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    public UserBo openCellSession(SessionBo sessionBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo verifyCellSession(SessionBo sessionBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo openForgetPasswordSession(SessionBo sessionBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo verifyForgetPasswordSession(SessionBo sessionBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo openChangePasswordSession(SessionBo sessionBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo verifyChangePasswordSession(SessionBo sessionBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public UserBo login(LoginBo loginBo) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partenrBo, UserBo currentUser) {
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public int deleteUser(UserBo targetUser, UserBo currentUser) {
+    public UserBo deleteUser(UserBo targetUser, UserBo currentUser) {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
 
     @Override
-    public int updateUser(UserBo targetUser, UserBo currentUser) {
+    public UserBo updateUser(UserBo targetUser, UserBo currentUser) {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
 
     @Override
-    public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser) {
+    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -92,15 +129,17 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserBo querySession(UserBo userBo) {
+    public List<UserBo> querySession(UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public int disposeSession(UserBo userBo) {
+    public UserBo disposeSession(UserBo userBo) {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
+
+    
 
 }
