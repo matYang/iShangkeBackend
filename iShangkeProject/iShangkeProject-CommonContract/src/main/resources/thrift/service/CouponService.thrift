@@ -17,7 +17,7 @@ service CouponService{
      *
      *  @return 优惠券实体 CouponBo 
      */
-    coupon.CouponBo generateCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    coupon.CouponBo createCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询优惠券功能。<br>
