@@ -78,7 +78,7 @@ public class BookingManagerImpl implements BookingManager {
     }
 
 	@Override
-	public List<BookingBo> queryHistory(BookingHistoryBo bookingHistoryBo,
+	public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo,
 			PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
 		// TODO Auto-generated method stub
 		return null;

@@ -149,5 +149,5 @@ public interface BookingManager {
      *  @return 预定单实体 BookingBo 列表
      *
      */ 
-    List<BookingBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 }

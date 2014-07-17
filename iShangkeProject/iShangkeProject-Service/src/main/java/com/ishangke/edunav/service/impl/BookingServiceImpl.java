@@ -167,7 +167,7 @@ public class BookingServiceImpl implements BookingService.Iface{
 	}
 
 	@Override
-	public List<BookingBo> queryHistory(BookingHistoryBo bookingHistoryBo,
+	public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo,
 			PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo)
 			throws BusinessExceptionBo, TException {
 		try{
