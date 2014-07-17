@@ -42,47 +42,89 @@ public class ActivityServiceImpl implements ActivityService.Iface{
 	@Override
 	public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo)
 			throws BusinessExceptionBo, TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return activityManager.submitActivity(activityBo, userBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_SUBMIT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_SUBMIT_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 	@Override
 	public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo)
 			throws BusinessExceptionBo, TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return activityManager.approveActivity(activityBo, userBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_APPROVE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_APPROVE_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 	@Override
 	public ActivityBo rejectActivity(ActivityBo activityBo,
 			PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
 			TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return activityManager.rejectActivity(activityBo, partnerBo, userBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_REJECT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_REJECT_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 	@Override
 	public ActivityBo cancelActivity(ActivityBo activityBo,
 			PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
 			TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return activityManager.cancelActivity(activityBo, partnerBo, userBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_CANCEL_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_CANCEL_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 	@Override
 	public ActivityBo deleteActivity(ActivityBo activityBo,
 			PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
 			TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return activityManager.deleteActivity(activityBo, partnerBo, userBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_DELETE_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 	@Override
 	public List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo,
 			UserBo userBo, PaginationBo paginationBo)
 			throws BusinessExceptionBo, TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return activityManager.query(activityBo, partnerBo, userBo, paginationBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_QUERY_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_QUERY_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 }
