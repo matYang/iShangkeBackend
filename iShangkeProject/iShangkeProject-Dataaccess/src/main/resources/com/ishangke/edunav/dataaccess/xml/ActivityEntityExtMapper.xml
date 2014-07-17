@@ -36,7 +36,7 @@
     ACTIVITY.ENABLED ACTIVITY_ENABLED,
     ACTIVITY.DELETED ACTIVITY_DELETED
   </sql>
-
+  <!-- add -->
   <insert id="add" parameterType="ActivityEntityExt">
     insert into ACTIVITY
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -114,12 +114,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update ACTIVITY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- update -->
   <update id="update" parameterType="ActivityEntityExt">
     update ACTIVITY
     <set>
@@ -163,12 +164,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from ACTIVITY where DELETED = 0
   </select>
-
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="ActivityExtMap">
     SELECT
     <include refid="Activity_Base_Column_List" />
@@ -179,12 +179,6 @@
         AND ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ACTIVITY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ACTIVITY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ACTIVITY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -201,12 +195,6 @@
         AND ACTIVITY.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND ACTIVITY.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND ACTIVITY.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND ACTIVITY.PARTNER_ID IN
           <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
@@ -220,12 +208,6 @@
         AND ACTIVITY.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseId == null or entity.courseId == 0">
-        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
-          <![CDATA[AND ACTIVITY.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
-          <![CDATA[AND ACTIVITY.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND ACTIVITY.COURSE_ID IN
           <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
@@ -267,12 +249,7 @@
         AND ACTIVITY.START = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null or entity.status == 0">
-        <if test="entity.statusStart != null and entity.statusStart != 0">
-          <![CDATA[AND ACTIVITY.START >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null and entity.statusEnd != 0">
-          <![CDATA[AND ACTIVITY.START <= #{entity.statusEnd,jdbcType=INTEGER}]]>
-        </if>
+        <!-- 加上set -->
       </if>
 
       <if test="entity.lastModifyTime != null">
@@ -309,12 +286,13 @@
           ACTIVITY.${listItem.columnKey} ${listItem.order}
         </foreach>
       </if>
+
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
   </select>
-
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
@@ -326,12 +304,6 @@
         AND ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ACTIVITY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ACTIVITY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ACTIVITY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -348,12 +320,6 @@
         AND ACTIVITY.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND ACTIVITY.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND ACTIVITY.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND ACTIVITY.PARTNER_ID IN
           <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
@@ -367,12 +333,6 @@
         AND ACTIVITY.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseId == null or entity.courseId == 0">
-        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
-          <![CDATA[AND ACTIVITY.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
-          <![CDATA[AND ACTIVITY.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND ACTIVITY.COURSE_ID IN
           <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
@@ -415,12 +375,7 @@
         AND ACTIVITY.START = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null or entity.status == 0">
-        <if test="entity.statusStart != null and entity.statusStart != 0">
-          <![CDATA[AND ACTIVITY.START >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null and entity.statusEnd != 0">
-          <![CDATA[AND ACTIVITY.START <= #{entity.statusEnd,jdbcType=INTEGER}]]>
-        </if>
+        <!-- 加上set -->
       </if>
 
       <if test="entity.lastModifyTime != null">
