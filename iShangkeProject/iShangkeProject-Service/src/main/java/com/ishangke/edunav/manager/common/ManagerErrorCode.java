@@ -95,6 +95,8 @@ public class ManagerErrorCode {
     public static final String BOOKING_CANCELBYADMIN_ERROR_KEY = "booking_cancelbyadmin_error";
     public static final int BOOKING_QUERY_ERROR = 0x00040009;
     public static final String BOOKING_QUERY_ERROR_KEY = "booking_query_error";
+    public static final int BOOKING_QUERYHISTORY_ERROR = 0x0004000A;
+    public static final String BOOKING_QUERYHISTORY_ERROR_KEY = "booking_queryhistory_error";
     public static final int BOOKING_NOTFOUND_ERROR = 0x00040404;
     public static final String BOOKING_NOTFOUND_ERROR_KEY = "booking_notfound_error";
     

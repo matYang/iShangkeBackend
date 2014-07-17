@@ -1,4 +1,6 @@
 package com.ishangke.edunav.service.impl;
+import java.util.List;
+
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -150,11 +152,11 @@ public class BookingServiceImpl implements BookingService.Iface{
 	}
 
 	@Override
-	public BookingBo query(BookingBo bookingBo, PartnerBo partnerBo,
+	public List<BookingBo> query(BookingBo bookingBo, PartnerBo partnerBo,
 			UserBo userBo, PaginationBo paginationBo)
 			throws BusinessExceptionBo, TException {
 		try{
-			return null;
+			return bookingManager.queryBooking(bookingBo, partnerBo, userBo, paginationBo);
 		}catch(ManagerException e){
 			LOGGER.info(e.getMessage(), e);
 			BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -168,8 +170,15 @@ public class BookingServiceImpl implements BookingService.Iface{
 	public BookingBo queryHistory(BookingHistoryBo bookingHistoryBo,
 			PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo)
 			throws BusinessExceptionBo, TException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return bookingManager.queryHistory(bookingHistoryBo, partnerBo, userBo, paginationBo);
+		}catch(ManagerException e){
+			LOGGER.info(e.getMessage(), e);
+			BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_QUERYHISTORY_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_QUERYHISTORY_ERROR_KEY);
+            throw exception;
+		}
 	}
 
 }
