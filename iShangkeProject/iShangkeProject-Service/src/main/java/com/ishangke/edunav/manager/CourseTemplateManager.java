@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseTemplateApproveBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseTemplateRejectBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
@@ -29,7 +28,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo createCourseTemplateBo(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseTemplateBo createCourseTemplateBo(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为提交课程模版<br>
@@ -49,7 +48,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为审核通过课程模版<br>
@@ -73,7 +72,7 @@ public interface CourseTemplateManager {
      * @param userBo
      */
     public CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo)
-            throws BusinessExceptionBo, org.apache.thrift.TException;
+           ;
 
     /**
      * 本方法为审核不通过课程模版<br>
@@ -97,7 +96,7 @@ public interface CourseTemplateManager {
      * @param userBo
      */
     public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo)
-            throws BusinessExceptionBo, org.apache.thrift.TException;
+           ;
 
     /**
      * 本方法为下架课程模版<br>
@@ -117,7 +116,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为重新上架课程模版<br>
@@ -137,7 +136,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为删除课程模版<br>
@@ -157,7 +156,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo deleteCourseTempalte(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseTemplateBo deleteCourseTempalte(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为修改课程模版<br>
@@ -177,7 +176,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为搜索课程模版<br>
@@ -200,8 +199,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param paginationBo
      */
-    public List<CourseTemplateBo> queryCourseTempalte(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo) throws BusinessExceptionBo,
-            org.apache.thrift.TException;
+    public List<CourseTemplateBo> queryCourseTempalte(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo);
 
     /**
      * 本方法返回课程模版详情<br>
@@ -218,6 +216,6 @@ public interface CourseTemplateManager {
      * @param courseTemplateBo
      * @param userBo
      */
-    public List<CourseTemplateBo> queryCourseTempalteById(CourseTemplateBo courseTemplateBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<CourseTemplateBo> queryCourseTempalteById(CourseTemplateBo courseTemplateBo, UserBo userBo);
 
 }

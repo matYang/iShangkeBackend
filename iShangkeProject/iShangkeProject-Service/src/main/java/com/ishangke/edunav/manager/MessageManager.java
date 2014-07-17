@@ -2,6 +2,10 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
+import com.ishangke.edunav.commoncontract.model.MessageBo;
+import com.ishangke.edunav.commoncontract.model.PaginationBo;
+import com.ishangke.edunav.commoncontract.model.UserBo;
+
 public interface MessageManager {
 
     /**
@@ -19,8 +23,7 @@ public interface MessageManager {
      * @param messageBo
      * @param userBo
      */
-    public com.ishangke.edunav.commoncontract.model.MessageBo sendMessage(com.ishangke.edunav.commoncontract.model.MessageBo messageBo, com.ishangke.edunav.commoncontract.model.UserBo userBo)
-            throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo);
 
     /**
      * 读取消息。<br>
@@ -37,8 +40,7 @@ public interface MessageManager {
      * @param messageBo
      * @param userBo
      */
-    public com.ishangke.edunav.commoncontract.model.MessageBo receiveMessage(com.ishangke.edunav.commoncontract.model.MessageBo messageBo, com.ishangke.edunav.commoncontract.model.UserBo userBo)
-            throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo);
 
     /**
      * 删除消息。<br>
@@ -55,8 +57,7 @@ public interface MessageManager {
      * @param messageBo
      * @param userBo
      */
-    public com.ishangke.edunav.commoncontract.model.MessageBo deleteMessage(com.ishangke.edunav.commoncontract.model.MessageBo messageBo, com.ishangke.edunav.commoncontract.model.UserBo userBo)
-            throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo);
 
     /**
      * 查询消息。<br>
@@ -76,7 +77,6 @@ public interface MessageManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<com.ishangke.edunav.commoncontract.model.MessageBo> query(com.ishangke.edunav.commoncontract.model.MessageBo messageBo, com.ishangke.edunav.commoncontract.model.UserBo userBo,
-            com.ishangke.edunav.commoncontract.model.PaginationBo paginationBo) throws com.ishangke.edunav.commoncontract.model.BusinessExceptionBo, org.apache.thrift.TException;
+    public List<MessageBo> query(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo);
 
 }

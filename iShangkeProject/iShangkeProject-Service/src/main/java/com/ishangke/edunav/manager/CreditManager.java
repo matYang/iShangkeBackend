@@ -3,7 +3,6 @@ package com.ishangke.edunav.manager;
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.AccountBo;
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CreditBo;
 import com.ishangke.edunav.commoncontract.model.CreditHistoryBo;
@@ -29,7 +28,7 @@ public interface CreditManager {
      * @param couponBo
      * @param userBo
      */
-    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo);
 
     /**
      * 本方法为换取现金。<br>
@@ -49,7 +48,7 @@ public interface CreditManager {
      * @param accountBo
      * @param userBo
      */
-    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo);
 
     /**
      * 本方法为查询积分功能。<br>
@@ -69,7 +68,7 @@ public interface CreditManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询积分历史功能。<br>
@@ -89,6 +88,6 @@ public interface CreditManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<CreditBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<CreditBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo);
 
 }

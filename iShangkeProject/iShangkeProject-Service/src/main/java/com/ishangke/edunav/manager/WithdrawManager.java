@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
@@ -24,7 +23,7 @@ public interface WithdrawManager {
      * @param withdrawBo
      * @param userBo
      */
-    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo);
 
     /**
      * 更新存取款信息。<br>
@@ -41,7 +40,7 @@ public interface WithdrawManager {
      * @param withdrawBo
      * @param userBo
      */
-    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo);
 
     /**
      * 删除存取款信息。<br>
@@ -58,7 +57,7 @@ public interface WithdrawManager {
      * @param withdrawBo
      * @param userBo
      */
-    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo);
 
     /**
      * 查询存取款信息。<br>
@@ -78,6 +77,6 @@ public interface WithdrawManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo);
 
 }

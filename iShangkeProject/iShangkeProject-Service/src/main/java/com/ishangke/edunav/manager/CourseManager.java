@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseApproveBo;
@@ -41,7 +40,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为提交课程<br>
@@ -61,7 +60,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo submitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo submitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为审核通过课程<br>
@@ -84,7 +83,7 @@ public interface CourseManager {
      * @param commentCourseApproveBo
      * @param userBo
      */
-    public CourseBo approveCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseApproveBo commentCourseApproveBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo approveCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseApproveBo commentCourseApproveBo, UserBo userBo);
 
     /**
      * 本方法为审核不通过课程<br>
@@ -107,7 +106,7 @@ public interface CourseManager {
      * @param commentCourseRejectBo
      * @param userBo
      */
-    public CourseBo rejectCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseRejectBo commentCourseRejectBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo rejectCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseRejectBo commentCourseRejectBo, UserBo userBo);
 
     /**
      * 本方法为下架课程<br>
@@ -127,7 +126,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo cancelCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo cancelCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为重新上架课程<br>
@@ -147,7 +146,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo resubmitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo resubmitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为删除课程<br>
@@ -167,7 +166,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo deleteCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo deleteCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为修改课程<br>
@@ -187,7 +186,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo updateCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo updateCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为给课程评论<br>
@@ -210,7 +209,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseBo commentCourse(CourseBo courseBo, CommentCourseBo commentCourseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo commentCourse(CourseBo courseBo, CommentCourseBo commentCourseBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为根据关键字查找课程<br>
@@ -224,7 +223,7 @@ public interface CourseManager {
      * 
      * @param keyword
      */
-    public List<CourseBo> queryByKeyword(String keyword) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<CourseBo> queryByKeyword(String keyword);
 
     /**
      * 本方法为合作商提供查询课程的功能。<br>
@@ -247,7 +246,7 @@ public interface CourseManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为用户查询课程的功能。<br>
@@ -273,8 +272,7 @@ public interface CourseManager {
      * @param circleBo
      * @param paginationBo
      */
-    public List<CourseBo> queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo, CircleBo circleBo, PaginationBo paginationBo) throws BusinessExceptionBo,
-            org.apache.thrift.TException;
+    public List<CourseBo> queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo, CircleBo circleBo, PaginationBo paginationBo);
 
     /**
      * 本方法返回课程详情<br>
@@ -291,6 +289,6 @@ public interface CourseManager {
      * @param courseBo
      * @param userBo
      */
-    public CourseBo queryById(CourseBo courseBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public CourseBo queryById(CourseBo courseBo, UserBo userBo);
 
 }

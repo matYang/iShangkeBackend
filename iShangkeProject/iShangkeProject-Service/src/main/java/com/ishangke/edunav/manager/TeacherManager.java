@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
@@ -24,7 +23,7 @@ public interface TeacherManager {
      * @param teacherBo
      * @param userBo
      */
-    public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo);
 
     /**
      * 更新教师信息。<br>
@@ -41,7 +40,7 @@ public interface TeacherManager {
      * @param teacherBo
      * @param userBo
      */
-    public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo);
 
     /**
      * 删除教师信息。<br>
@@ -58,7 +57,7 @@ public interface TeacherManager {
      * @param teacherBo
      * @param userBo
      */
-    public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo);
 
     /**
      * 查询教师信息。<br>
@@ -81,6 +80,6 @@ public interface TeacherManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 
 }

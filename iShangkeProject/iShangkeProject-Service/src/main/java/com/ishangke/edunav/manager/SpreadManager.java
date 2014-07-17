@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -31,7 +30,7 @@ public interface SpreadManager {
      * @param partnerBo
      * @param courseBo
      */
-    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo);
 
     /**
      * 查询推广信息。<br>
@@ -51,7 +50,7 @@ public interface SpreadManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<SpreadBo> query(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<SpreadBo> query(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 创建推广信息。<br>
@@ -76,7 +75,7 @@ public interface SpreadManager {
      * @param courseBo
      * @param userBo
      */
-    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo);
 
     /**
      * 认可推广信息。<br>
@@ -93,7 +92,7 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo);
 
     /**
      * 拒绝推广信息。<br>
@@ -110,7 +109,7 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo);
 
     /**
      * 取消推广信息。<br>
@@ -127,7 +126,7 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo);
 
     /**
      * 删除推广信息。<br>
@@ -144,6 +143,6 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo);
 
 }

@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -27,7 +26,7 @@ public interface PartnerManager {
      * @param paginationBo
      * @param userBo
      */
-    public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo);
 
     /**
      * 查询合作商完整信息。<br>
@@ -44,7 +43,7 @@ public interface PartnerManager {
      * @param partnerBo
      * @param userBo
      */
-    public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 更新合作商信息。<br>
@@ -61,7 +60,7 @@ public interface PartnerManager {
      * @param partnerBo
      * @param userBo
      */
-    public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 创建合作商信息。<br>
@@ -78,6 +77,6 @@ public interface PartnerManager {
      * @param partnerBo
      * @param userBo
      */
-    public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo);
 
 }

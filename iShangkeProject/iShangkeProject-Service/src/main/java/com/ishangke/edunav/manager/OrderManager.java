@@ -3,7 +3,6 @@ package com.ishangke.edunav.manager;
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.BookingBo;
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
@@ -34,7 +33,7 @@ public interface OrderManager {
      * @param userBo
      * @param withdrawBo
      */
-    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo);
 
     /**
      * 本方法为合作商受理一个预定单功能。<br>
@@ -54,7 +53,7 @@ public interface OrderManager {
      * @param commentBookingAcceptBo
      * @param userBo
      */
-    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo);
 
     /**
      * 本方法为查询Order功能。<br>
@@ -77,7 +76,7 @@ public interface OrderManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询Order历史功能。<br>
@@ -100,6 +99,6 @@ public interface OrderManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<OrderBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<OrderBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
 
 }

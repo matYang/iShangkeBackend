@@ -2,7 +2,6 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
-import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 
@@ -22,6 +21,6 @@ public interface LocationManager {
      * @param locationBo
      * @param paginationBo
      */
-    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo);
 
 }
