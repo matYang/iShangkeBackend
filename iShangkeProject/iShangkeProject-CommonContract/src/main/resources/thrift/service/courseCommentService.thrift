@@ -6,7 +6,7 @@ include "model/courseComment.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
-service CourseCourseCommentService {
+service CourseCommentService {
 
 	/**
      *  创建课程评论。<br>
