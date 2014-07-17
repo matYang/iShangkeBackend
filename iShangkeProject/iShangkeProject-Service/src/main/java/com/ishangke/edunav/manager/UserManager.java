@@ -2,9 +2,11 @@ package com.ishangke.edunav.manager;
 
 import java.util.List;
 
+import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
+import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface UserManager {
@@ -19,7 +21,79 @@ public interface UserManager {
      * 
      * @param userBo
      */
-    public UserBo registerUser(UserBo userBo);
+    public UserBo registerUser(UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为普通用户提供手机验证。<br>
+     * 用户可以通过此方法向用户发送验证短信。
+     * 
+     * @param sessionBo
+     *            用户信息
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionBo
+     */
+    public UserBo openCellSession(SessionBo sessionBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法验证用户手机验证码。<br>
+     * 用户可以通过此方法验证手机,如果通过则关闭session
+     * 
+     * @param sessionBo
+     *            用户信息
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionBo
+     */
+    public UserBo verifyCellSession(SessionBo sessionBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为普通用户提供忘记密码时手机验证。<br>
+     * 用户可以通过此方法向用户发送验证短信。
+     * 
+     * @param sessionBo
+     *            用户信息
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionBo
+     */
+    public UserBo openForgetPasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法验证用户手机验证忘记密码的验证码。<br>
+     * 用户可以通过此方法验证忘记密码,如果通过则关闭session
+     * 
+     * @param sessionBo
+     *            用户信息
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionBo
+     */
+    public UserBo verifyForgetPasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法为普通用户提供修改密码时手机验证。<br>
+     * 用户可以通过此方法向用户发送验证短信。
+     * 
+     * @param sessionBo
+     *            用户信息
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionBo
+     */
+    public UserBo openChangePasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, org.apache.thrift.TException;
+
+    /**
+     * 本方法验证用户手机验证修改密码的验证码。<br>
+     * 用户可以通过此方法验证修改密码,如果通过则关闭session
+     * 
+     * @param sessionBo
+     *            用户信息
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionBo
+     */
+    public UserBo verifyChangePasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为所有用户提供登录的功能。<br>
@@ -33,7 +107,7 @@ public interface UserManager {
      * 
      * @param loginBo
      */
-    public UserBo login(LoginBo loginBo);
+    public UserBo login(LoginBo loginBo) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为ishangke管理员创建新用户<br>
@@ -50,10 +124,10 @@ public interface UserManager {
      * 
      * 
      * @param targetUser
-     * @param partenrBo
+     * @param partnerBo
      * @param currentUser
      */
-    public UserBo createUser(UserBo targetUser, PartnerBo partenrBo, UserBo currentUser);
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为ishangke管理员删除用户<br>
@@ -70,7 +144,7 @@ public interface UserManager {
      * @param targetUser
      * @param currentUser
      */
-    public int deleteUser(UserBo targetUser, UserBo currentUser);
+    public UserBo deleteUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为修改用户信息的功能<br>
@@ -87,7 +161,7 @@ public interface UserManager {
      * @param targetUser
      * @param currentUser
      */
-    public int updateUser(UserBo targetUser, UserBo currentUser);
+    public UserBo updateUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为查看用户信息的功能<br>
@@ -104,7 +178,7 @@ public interface UserManager {
      * @param queryUser
      * @param currentUser
      */
-    public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser);
+    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为查询用户信息的功能<br>
@@ -127,7 +201,7 @@ public interface UserManager {
      * @param currentUser
      * @param pagnationBo
      */
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo);
+    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为查询用户session信息的功能<br>
@@ -135,12 +209,12 @@ public interface UserManager {
      * @param userBo
      *            需要被查询session的用户信息
      * 
-     * @return 用户session相关信息
+     * @return 用户session相关信息s
      * 
      * 
      * @param userBo
      */
-    public UserBo querySession(UserBo userBo);
+    public List<UserBo> querySession(UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
 
     /**
      * 本方法为销毁用户session信息的功能<br>
@@ -153,6 +227,6 @@ public interface UserManager {
      * 
      * @param userBo
      */
-    public int disposeSession(UserBo userBo);
+    public UserBo disposeSession(UserBo userBo) throws BusinessExceptionBo, org.apache.thrift.TException;
 
 }

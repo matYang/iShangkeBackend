@@ -20,12 +20,10 @@
     ROLES.ENABLED ROLES_ENABLED,
     ROLES.DELETED ROLES_DELETED
   </sql>
-
+  <!-- add -->
   <insert id="add" parameterType="RoleEntityExt">
-
     insert into ROLES
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="name != null">
         NAME,
       </if>
@@ -43,7 +41,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -65,6 +62,7 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update ROLES set DELETED = 1
     where ID =
@@ -93,10 +91,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from ROLES where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
@@ -107,12 +106,6 @@
         AND ROLES.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ROLES.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ROLES.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ROLES.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -137,7 +130,7 @@
           <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
         AND ROLES.CREATE_TIME =
         #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -154,18 +147,20 @@
       <if test="entity.enabled != null">
         AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          ROLES.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
 
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        ROLES.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
@@ -176,13 +171,12 @@
       <if test="entity.id != null and entity.id != 0">
         AND ROLES.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ROLES.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ROLES.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND ROLES.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -190,20 +184,31 @@
         AND ROLES.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.createTimeStart != null">
-          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      <if test="entity.lastModifyTime != null">
+        AND ROLES.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
-      <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
-
-      <if test="entity.lastModifyTimeStart != null">
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND ROLES.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
-      <if test="entity.lastModifyTimeEnd != null">
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
       </if>
 
+      <if test="entity.createTime != null">
+        AND ROLES.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
 
       <if test="entity.enabled != null">
         AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}

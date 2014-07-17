@@ -18,11 +18,10 @@
     USER_GROUP.DELETED
     USERGROUP_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="UserGroupEntityExt">
-
     insert into USER_GROUP
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="userId != null">
         USER_ID,
       </if>
@@ -37,7 +36,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
@@ -56,11 +54,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update USER_GROUP set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="UserGroupEntityExt">
     update USER_GROUP
     <set>
@@ -80,10 +80,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from USER_GROUP where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="UserGroupExtMap">
     SELECT
     <include refid="UserGroup_Base_Column_List" />
@@ -95,13 +96,7 @@
       </if>
 
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND USER_GROUP.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND USER_GROUP.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND USER_GROUP.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -113,13 +108,7 @@
         AND USER_GROUP.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdStart != null and entity.userIdStart != 0">
-          <![CDATA[AND USER_GROUP.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
-          <![CDATA[AND USER_GROUP.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND USER_GROUP.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -132,13 +121,7 @@
         AND USER_GROUP.GROUP_ID = #{entity.groupId,jdbcType=INTEGER}
       </if>
       <if test="entity.groupId == null or entity.groupId == 0">
-        <if test="entity.groupIdStart != null and entity.groupIdStart != 0">
-          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.groupIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.groupIdEnd != null and entity.groupIdEnd != 0">
-          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.groupIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.groupIdSet.size() > 0">
+        <if test="entity.groupIdSet != null and entity.groupIdSet.size() > 0">
           AND USER_GROUP.GROUP_ID IN
           <foreach collection="entity.groupIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -146,7 +129,7 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.lastModifyTime != null">
         AND USER_GROUP.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -159,19 +142,19 @@
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          USER_GROUP.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        USER_GROUP.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
 
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+  <!--getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
@@ -184,13 +167,7 @@
       </if>
 
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND USER_GROUP.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND USER_GROUP.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND USER_GROUP.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -201,15 +178,8 @@
       <if test="entity.userId != null and entity.userId != 0">
         AND USER_GROUP.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
-
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdStart != null and entity.userIdStart != 0">
-          <![CDATA[AND USER_GROUP.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
-          <![CDATA[AND USER_GROUP.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND USER_GROUP.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -221,15 +191,8 @@
       <if test="entity.groupId != null and entity.groupId != 0">
         AND USER_GROUP.GROUP_ID = #{entity.groupId,jdbcType=INTEGER}
       </if>
-
       <if test="entity.groupId == null or entity.groupId == 0">
-        <if test="entity.groupIdStart != null and entity.groupIdStart != 0">
-          <![CDATA[AND USER_GROUP.GROUP_IDD >= #{entity.groupIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.groupIdEnd != null and entity.groupIdEnd != 0">
-          <![CDATA[AND USER_GROUP.GROUP_ID <= #{entity.groupIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.groupIdSet.size() > 0">
+        <if test="entity.groupIdSet != null and entity.groupIdSet.size() > 0">
           AND USER_GROUP.GROUP_ID IN
           <foreach collection="entity.groupIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -237,6 +200,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.lastModifyTime != null">
         AND USER_GROUP.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -248,8 +212,8 @@
         <if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND USER_GROUP.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
-        </if>
-        </if>
+      </if>
+    </if>
     ) AS total
   </select>
 </mapper>

@@ -28,11 +28,10 @@
     ORDER.ENABLED ORDER_ENABLED,
     ORDER.DELETED ORDER_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="OrderEntityExt">
-
     insert into `ORDER`
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="bookingId != null">
         BOOKING_ID,
       </if>
@@ -59,7 +58,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="bookingId != null">
         #{bookingId,jdbcType=INTEGER},
       </if>
@@ -90,13 +88,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
-
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update `ORDER` set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- update -->
   <update id="update" parameterType="OrderEntityExt">
     update `ORDER`
     <set>
@@ -128,27 +126,23 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from `ORDER` where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="OrderExtMap">
     select
     <include refid="Order_Base_Column_List"></include>
     from `ORDER`
     where `ORDER`.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND `ORDER`.ID = #{entity.id,jdbcType=INTEGER}
       </if>
+
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND `ORDER`.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND `ORDER`.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND `ORDER`.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -156,7 +150,7 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.bookingId != null and entity.bookingId != 0">
         AND `ORDER`.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
       </if>
@@ -169,9 +163,10 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
-        AND `ORDER`.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND `ORDER`.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -197,49 +192,46 @@
           <![CDATA[AND `ORDER`.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      
+
       <if test="entity.runingNumber != null and !entity.runingNumber.equals('')">
         AND ORDER.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.status != null and !entity.status.equals('')">
         AND ORDER.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND `ORDER`.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
-    
+
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        ORDER.${listItem.columnKey} ${listItem.order}
+        USERS.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
 
-    <if test="page != null">
+    <if test="page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
 
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
- <include refid="Order_Base_Column_List"></include>
+    <include refid="Order_Base_Column_List"></include>
     from `ORDER`
     where `ORDER`.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND `ORDER`.ID = #{entity.id,jdbcType=INTEGER}
       </if>
+
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND `ORDER`.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND `ORDER`.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND `ORDER`.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -247,11 +239,12 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.bookingId != null and entity.bookingId != 0">
         AND `ORDER`.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
       </if>
-      <if test="entity.bookingIdStart != null and entity.bookingIdStart != 0">
-        <if test="entity.bookingIdSet.size() > 0">
+      <if test="entity.bookingId == null or entity.bookingId == 0">
+        <if test="entity.bookingIdSet != null and entity.bookingIdSet.size() > 0">
           `ORDER`.BOOKING_ID IN
           <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -259,8 +252,10 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.createTime != null">
-        AND `ORDER`.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND `ORDER`.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -286,12 +281,15 @@
           <![CDATA[AND `ORDER`.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.runingNumber != null and !entity.runingNumber.equals('')">
         AND ORDER.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.status != null and !entity.status.equals('')">
         AND ORDER.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND `ORDER`.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>

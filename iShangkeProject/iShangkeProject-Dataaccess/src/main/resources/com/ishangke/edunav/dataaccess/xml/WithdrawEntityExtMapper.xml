@@ -25,11 +25,10 @@
     WITHDRAW.ENABLED WITHDRAW_ENABLED,
     WITHDRAW.DELETED WITHDRAW_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="WithdrawEntityExt">
-
     insert into WITHDRAW
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="userId != null">
         USER_ID,
       </if>
@@ -56,7 +55,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
@@ -87,13 +85,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
-
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update WITHDRAW set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- update -->
   <update id="update" parameterType="WithdrawEntityExt">
     update WITHDRAW
     <set>
@@ -126,39 +124,35 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from WITHDRAW where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="WithdrawExtMap">
     select
     <include refid="Withdraw_Base_Column_List"></include>
     from WITHDRAW WITHDRAW
     where WITHDRAW.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND WITHDRAW.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND WITHDRAW.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND WITHDRAW.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND WITHDRAW.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.userId != null and entity.userId != 0">
         AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND WITHDRAW.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -166,7 +160,8 @@
           </foreach>
         </if>
       </if>
-       <if test="entity.peyeeId != null and !entity.peyeeId.equals('')">
+
+      <if test="entity.peyeeId != null and !entity.peyeeId.equals('')">
         AND WITHDRAW.PEYEE_ID LIKE "%"#{entity.peyeeId,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
@@ -176,27 +171,30 @@
         AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeSet.size() > 0">
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
           AND WITHDRAW.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.lastModifyTime != null">
-        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND WITHDRAW.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND WITHDRAW.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND WITHDRAW.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -210,46 +208,44 @@
       <if test="entity.enabled != null">
         AND WITHDRAW.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          WITHDRAW.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        WITHDRAW.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-    <include refid="Withdraw_Base_Column_List"></include>
+        <include refid="Withdraw_Base_Column_List"></include>
     from WITHDRAW WITHDRAW
     where WITHDRAW.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND WITHDRAW.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND WITHDRAW.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND WITHDRAW.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND WITHDRAW.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
+
       <if test="entity.userId != null and entity.userId != 0">
         AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND WITHDRAW.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -257,24 +253,41 @@
           </foreach>
         </if>
       </if>
+
+      <if test="entity.peyeeId != null and !entity.peyeeId.equals('')">
+        AND WITHDRAW.PEYEE_ID LIKE "%"#{entity.peyeeId,jdbcType=VARCHAR}"%"
+      </if>
       <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
         AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
+      <if test="entity.type != null and entity.type != 0">
+        AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}
+      </if>
+      <if test="entity.type == null or entity.type == 0">
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND WITHDRAW.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
 
       <if test="entity.lastModifyTime != null">
-        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND WITHDRAW.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND WITHDRAW.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND WITHDRAW.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">

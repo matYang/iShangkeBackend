@@ -5,8 +5,10 @@
     <id column="LOCATION_ID" property="id" jdbcType="INTEGER" />
     <result column="LOCATION_VALUE" property="value" jdbcType="VARCHAR" />
     <result column="LOCATION_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="LOCATION_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="LOCATION_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="LOCATION_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="LOCATION_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="LOCATION_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="LOCATION_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -21,11 +23,10 @@
     LOCATION_ENABLED,
     LOCATION.DELETED LOCATION_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="LocationEntityExt">
-
     insert into LOCATION
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="value != null">
         VALUE,
       </if>
@@ -46,7 +47,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
       </if>
@@ -71,11 +71,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update LOCATION set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="LocationEntityExt">
     update LOCATION
     <set>
@@ -86,10 +88,12 @@
         NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -100,10 +104,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from LOCATION where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="LocationExtMap">
     SELECT
     <include refid="Location_Base_Column_List" />
@@ -115,13 +120,7 @@
       </if>
 
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND LOCATION.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND LOCATION.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND LOCATION.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -137,7 +136,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND LOCATION.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND LOCATION.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
 
       <if test="entity.createTime == null">
@@ -150,7 +150,8 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND LOCATION.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND LOCATION.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
 
       <if test="entity.lastModifyTime == null">
@@ -165,22 +166,25 @@
       <if test="entity.enabled != null">
         AND LOCATION.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          LOCATION.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
-
     </if>
+
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        LOCATION.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-       <include refid="Location_Base_Column_List" />
+    <include refid="Location_Base_Column_List" />
     from LOCATION where LOCATION.DELETED = 0
     <if test="entity != null">
 
@@ -189,13 +193,7 @@
       </if>
 
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND LOCATION.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND LOCATION.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND LOCATION.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -211,7 +209,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND LOCATION.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND LOCATION.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
 
       <if test="entity.createTime == null">
@@ -224,7 +223,8 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND LOCATION.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND LOCATION.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
 
       <if test="entity.lastModifyTime == null">
@@ -239,7 +239,7 @@
       <if test="entity.enabled != null">
         AND LOCATION.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      </if>
+    </if>
     ) AS total
   </select>
 </mapper>
