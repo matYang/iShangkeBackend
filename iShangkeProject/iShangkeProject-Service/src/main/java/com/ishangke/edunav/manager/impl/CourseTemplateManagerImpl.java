@@ -75,5 +75,5 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
 }

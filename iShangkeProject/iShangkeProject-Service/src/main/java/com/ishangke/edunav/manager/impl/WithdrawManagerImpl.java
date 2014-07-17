@@ -10,7 +10,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.manager.WithdrawManager;
 
-public class WithdrawManagerImpl implements WithdrawManager{
+public class WithdrawManagerImpl implements WithdrawManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(WithdrawManagerImpl.class);
 
     @Override
@@ -36,7 +36,5 @@ public class WithdrawManagerImpl implements WithdrawManager{
         // TODO Auto-generated method stub
         return null;
     }
-    
-    
 
 }

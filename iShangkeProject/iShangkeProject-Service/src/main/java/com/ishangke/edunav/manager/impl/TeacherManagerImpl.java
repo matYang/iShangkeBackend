@@ -11,7 +11,7 @@ import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.TeacherManager;
 
-public class TeacherManagerImpl implements TeacherManager{
+public class TeacherManagerImpl implements TeacherManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(TeacherManagerImpl.class);
 
     @Override

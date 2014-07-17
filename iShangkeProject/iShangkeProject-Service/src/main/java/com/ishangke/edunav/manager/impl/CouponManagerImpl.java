@@ -11,27 +11,25 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.CouponManager;
 
-public class CouponManagerImpl implements CouponManager{
-	private static final Logger LOGGER = LoggerFactory.getLogger(CouponManagerImpl.class);
+public class CouponManagerImpl implements CouponManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CouponManagerImpl.class);
 
-	@Override
-	public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<CouponBo> query(CouponBo couponBo, UserBo userBo,
-			PaginationBo paginationBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<CouponBo> queryHistory(CouponHistoryBo couponHistoryBo,
-			UserBo userBo, PaginationBo paginationBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<CouponBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

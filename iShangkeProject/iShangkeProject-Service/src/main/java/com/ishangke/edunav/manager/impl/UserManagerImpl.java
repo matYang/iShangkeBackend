@@ -140,6 +140,4 @@ public class UserManagerImpl implements UserManager {
         return null;
     }
 
-    
-
 }

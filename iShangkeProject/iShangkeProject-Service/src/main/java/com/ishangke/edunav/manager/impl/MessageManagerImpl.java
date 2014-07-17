@@ -10,7 +10,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.MessageManager;
 
-public class MessageManagerImpl implements MessageManager{
+public class MessageManagerImpl implements MessageManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageManagerImpl.class);
 
     @Override
@@ -36,7 +36,5 @@ public class MessageManagerImpl implements MessageManager{
         // TODO Auto-generated method stub
         return null;
     }
-
-    
 
 }

@@ -16,25 +16,24 @@ import com.ishangke.edunav.manager.CategoryManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
-public class CategoryServiceImpl implements CategoryService.Iface{
+public class CategoryServiceImpl implements CategoryService.Iface {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CategoryServiceImpl.class);
-	
-	@Autowired
-	private CategoryManager categoryManager;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
-	@Override
-	public List<CategoryBo> query(CategoryBo categoryBo, PaginationBo paginationBo)
-			throws BusinessExceptionBo, TException {
-		try{
-			return categoryManager.queryCategory(categoryBo, paginationBo);
-		}catch(ManagerException e){
-			LOGGER.info(e.getMessage(), e);
-			BusinessExceptionBo exception = new BusinessExceptionBo();
+    @Autowired
+    private CategoryManager categoryManager;
+
+    @Override
+    public List<CategoryBo> query(CategoryBo categoryBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+        try {
+            return categoryManager.queryCategory(categoryBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.CATEGORY_QUERY_ERROR);
             exception.setMessageKey(ManagerErrorCode.CATEGORY_QUERY_ERROR_KEY);
             throw exception;
-		}
-	}
-	
+        }
+    }
+
 }

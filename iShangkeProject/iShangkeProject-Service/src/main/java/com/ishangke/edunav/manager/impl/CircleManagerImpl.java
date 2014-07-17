@@ -11,7 +11,7 @@ import com.ishangke.edunav.manager.CircleManager;
 
 public class CircleManagerImpl implements CircleManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CircleManagerImpl.class);
-    
+
     @Override
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
