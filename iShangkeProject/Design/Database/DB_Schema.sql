@@ -373,7 +373,7 @@ COMMENT = '<double-click to overwrite multiple objects>';
 -- Table `EduNav`.`COURSE`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `EduNav`.`COURSE` (
-  `ID` INT NOT NULL ,
+  `ID` INT NOT NULL AUTO_INCREMENT ,
   `COURSE_NAME` VARCHAR(45) NULL ,
   `COURSE_TEMPLATE_ID` INT NOT NULL ,
   `CATEGORY_ID` INT NOT NULL ,
