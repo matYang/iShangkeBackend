@@ -11,14 +11,19 @@
     <result column="BOOKING_PHONE" property="phone" jdbcType="VARCHAR" />
     <result column="BOOKING_EMAIL" property="email" jdbcType="VARCHAR" />
     <result column="BOOKING_STATUS" property="status" jdbcType="INTEGER" />
-    <result column="BOOKING_SCHEDULEDTIME" property="scheduledTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="BOOKING_NOREFUNDDATE" property="noRefundDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="BOOKING_CASHBACKDATE" property="cashbackDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_SCHEDULEDTIME" property="scheduledTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_NOREFUNDDATE" property="noRefundDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_CASHBACKDATE" property="cashbackDate"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_TYPE" property="type" jdbcType="INTEGER" />
     <result column="BOOKING_NOTE" property="note" jdbcType="VARCHAR" />
     <result column="BOOKING_CASHBACKAMOUNT" property="cashbackAmount" jdbcType="DOUBLE" />
-    <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="BOOKING_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -27,7 +32,7 @@
     BOOKING.USER_ID BOOKING_USERID,
     BOOKING.COURSE_ID
     BOOKING_COURSEID,
-    BOOKING.COURSE_TEMPLATE_ID 
+    BOOKING.COURSE_TEMPLATE_ID
     BOOKING_COURSETEMPLATEID,
     BOOKING.REFERENCE
     BOOKING_REFERENCE,
@@ -206,13 +211,16 @@
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="scheduledTime != null">
-        SCHEDULED_TIME = #{scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        SCHEDULED_TIME =
+        #{scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="noRefundDate != null">
-        NO_REFUND_DATE = #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        NO_REFUND_DATE =
+        #{noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="cashbackDate != null">
-        CASHBACK_DATE = #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CASHBACK_DATE =
+        #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
@@ -224,10 +232,12 @@
         CASHBACK_AMOUNT = #{cashbackAmount,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -246,6 +256,7 @@
     <include refid="Booking_Base_Column_List" />
     from BOOKING where BOOKING.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -264,6 +275,9 @@
         </if>
       </if>
 
+      <if test="entity.userId != null and entity.userId != 0">
+        AND BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdStart != null and entity.userIdStart != 0">
           <![CDATA[AND BOOKING.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
@@ -271,14 +285,31 @@
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND BOOKING.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.userIdSet.size() > 0">
+          AND BOOKING.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND BOOKING.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
           <![CDATA[AND BOOKING.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
         </if>
         <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
           <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseIdSet.size() > 0">
+          AND BOOKING.COURSE_ID IN
+          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -294,25 +325,29 @@
         </if>
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
 
-      <if test="entity.reference != null and entity.reference !='' ">
+      <if test="entity.reference != null and !entity.reference.equals('') ">
         AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.name != null and entity.name !='' ">
+      <if test="entity.name != null and !entity.name.equals('') ">
         AND BOOKING.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.phone != null and entity.phone !='' ">
+      <if test="entity.phone != null and !entity.phone.equals('') ">
         AND BOOKING.PHON LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.email != null and entity.email !='' ">
+      <if test="entity.email != null and !entity.email.equals('') ">
         AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
       </if>
 
+      <if test="entity.status != null">
+        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
       <if test="entity.status == null">
         <if test="entity.statusStart != null">
           <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
@@ -323,38 +358,38 @@
       </if>
 
       <if test="entity.scheduledTime != null">
-        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,jdbcType=TIMESTAMP}
+        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.scheduledTime == null">
         <if test="entity.scheduledTimeStart != null">
-          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.scheduledTimeEnd != null">
-          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.noRefundDate != null">
-        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,jdbcType=TIMESTAMP}
+        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.noRefundDate == null">
         <if test="entity.noRefundDateStart != null">
-          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.noRefundDateEnd != null">
-          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.cashbackDate != null">
-        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,jdbcType=TIMESTAMP}
+        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.cashbackDate == null">
         <if test="entity.cashbackDateStart != null">
-          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.cashbackDateEnd != null">
-          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
@@ -370,7 +405,7 @@
         </if>
       </if>
 
-      <if test="entity.note != null and entity.note !='' ">
+      <if test="entity.note != null and !entity.note.equals('')">
         AND BOOKING.NOTE LIKE "%"#{entity.note,jdbcType=VARCHAR}"%"
       </if>
 
@@ -387,26 +422,26 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND BOOKING.CREATE_TIME = #{entity.createTilastModifyTimee=TIMESTAMP}
+        AND BOOKING.CREATE_TIME = #{entity.createTime, typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
@@ -426,10 +461,11 @@
 
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
-    select
+    SELECT
     <include refid="Booking_Base_Column_List" />
     from BOOKING where BOOKING.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -448,6 +484,9 @@
         </if>
       </if>
 
+      <if test="entity.userId != null and entity.userId != 0">
+        AND BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdStart != null and entity.userIdStart != 0">
           <![CDATA[AND BOOKING.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
@@ -455,14 +494,31 @@
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND BOOKING.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.userIdSet.size() > 0">
+          AND BOOKING.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND BOOKING.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
           <![CDATA[AND BOOKING.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
         </if>
         <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
           <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.courseIdSet.size() > 0">
+          AND BOOKING.COURSE_ID IN
+          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -478,116 +534,123 @@
         </if>
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
 
-      <if test="entity.reference != null and entity.reference !='' ">
+      <if test="entity.reference != null and !entity.reference.equals('') ">
         AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.name != null and entity.name !='' ">
+      <if test="entity.name != null and !entity.name.equals('') ">
         AND BOOKING.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.phone != null and entity.phone !='' ">
+      <if test="entity.phone != null and !entity.phone.equals('') ">
         AND BOOKING.PHON LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.email != null and entity.email !='' ">
+      <if test="entity.email != null and !entity.email.equals('') ">
         AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.status == null or entity.status == 0">
-        <if test="entity.statusStart != null and entity.statusStart != 0">
+      <if test="entity.status != null">
+        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusStart != null">
           <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.statusEnd != null and entity.statusEnd != 0">
+        <if test="entity.statusEnd != null">
           <![CDATA[AND BOOKING.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
       <if test="entity.scheduledTime != null">
-        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,jdbcType=TIMESTAMP}
+        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.scheduledTime == null">
         <if test="entity.scheduledTimeStart != null">
-          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.scheduledTimeEnd != null">
-          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.noRefundDate != null">
-        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,jdbcType=TIMESTAMP}
+        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.noRefundDate == null">
         <if test="entity.noRefundDateStart != null">
-          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.noRefundDateEnd != null">
-          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.cashbackDate != null">
-        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,jdbcType=TIMESTAMP}
+        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.cashbackDate == null">
         <if test="entity.cashbackDateStart != null">
-          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.cashbackDateEnd != null">
-          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
-      <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeStart != null and entity.typeStart != 0">
+      <if test="entity.type != null">
+        AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
+      </if>
+      <if test="entity.type == null">
+        <if test="entity.typeStart != null">
           <![CDATA[AND BOOKING.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.typeEnd != null and entity.typeEnd != 0">
+        <if test="entity.typeEnd != null">
           <![CDATA[AND BOOKING.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
         </if>
       </if>
 
-      <if test="entity.note != null and entity.note !='' ">
+      <if test="entity.note != null and !entity.note.equals('')">
         AND BOOKING.NOTE LIKE "%"#{entity.note,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.cashbackAmount != null">
-        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=TIMESTAMP}
+        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashbackAmount == null">
         <if test="entity.cashbackAmountStart != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackAmountEnd != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND BOOKING.CREATE_TIME = #{entity.createTilastModifyTimee=TIMESTAMP}
+        AND BOOKING.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">

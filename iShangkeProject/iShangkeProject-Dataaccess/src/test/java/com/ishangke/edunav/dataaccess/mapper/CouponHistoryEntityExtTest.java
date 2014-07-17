@@ -19,17 +19,17 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CouponHistoryEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CouponHistoryEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 public class CouponHistoryEntityExtTest extends BaseTest{
     @Autowired
     private CouponHistoryEntityExtMapper couponHistoryEntityExtMapper;
-    public  CouponHistoryEntityExtTest() {
-        scriptAfterClass = "CouponHistoryEntityExtTestAfter.sql";
-        scriptBeforeClass = "CouponHistoryEntityExtTestBefore.sql";
-    }
+//    public  CouponHistoryEntityExtTest() {
+//        scriptAfterClass = "CouponHistoryEntityExtTestAfter.sql";
+//        scriptBeforeClass = "CouponHistoryEntityExtTestBefore.sql";
+//    }
     @Test
     public void testAdd() {
         CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();

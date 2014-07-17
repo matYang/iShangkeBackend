@@ -20,18 +20,18 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, AddressEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, AddressEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 public class AddressEntityExtTest extends BaseTest{
     @Autowired
     private AddressEntityExtMapper addressEntityExtMapper;
-    
-    public AddressEntityExtTest() {
-        scriptAfterClass = "AddressEntityExtTestAfter.sql";
-        scriptBeforeClass = "AddressEntityExtTestBefore.sql";
-    }
+//    
+//    public AddressEntityExtTest() {
+//        scriptAfterClass = "AddressEntityExtTestAfter.sql";
+//        scriptBeforeClass = "AddressEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {
@@ -40,8 +40,6 @@ public class AddressEntityExtTest extends BaseTest{
         addressEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         addressEntityExt.setEnabled(1);
         addressEntityExt.setDeleted(0);
-        addressEntityExt.setCircleId(1);
-        addressEntityExt.setLocationId(1);
         addressEntityExt.setPartnerId(1);
         addressEntityExt.setDetail("ishangke李清01");
         addressEntityExtMapper.add(addressEntityExt);
@@ -57,8 +55,6 @@ public class AddressEntityExtTest extends BaseTest{
         addressEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
         addressEntityExt.setEnabled(1);
         addressEntityExt.setDeleted(0);
-        addressEntityExt.setCircleId(1);
-        addressEntityExt.setLocationId(1);
         addressEntityExt.setPartnerId(1);
         addressEntityExt.setDetail("ishangke李清01");
         addressEntityExtMapper.add(addressEntityExt);
@@ -77,11 +73,11 @@ public class AddressEntityExtTest extends BaseTest{
         page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
 
         AddressEntityExt addressEntityExt = new AddressEntityExt();
-        addressEntityExt.setDetail("_test_a_");
+        addressEntityExt.setDetail("_test_detail_");
 
         List<AddressEntityExt> result = addressEntityExtMapper.list(addressEntityExt, page);
-        Assert.assertEquals(2, result.size());
-      //  Assert.assertEquals("_test_a_清哥家捡肥皂", result.get(1).getDetail());
+        Assert.assertEquals(4, result.size());
+       Assert.assertEquals("_test_detail_3_爱上课", result.get(1).getDetail());
     }
 
 }

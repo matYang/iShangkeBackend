@@ -8,14 +8,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class BookingEntityExtTest extends BaseTest{
+public class BookingEntityExtTest{
     @Autowired
     private BookingEntityExtMapper bookingEntityExtMapper;
 
@@ -28,6 +27,7 @@ public class BookingEntityExtTest extends BaseTest{
         bookingEntityExt.setDeleted(0);
         bookingEntityExt.setUserId(1);
         bookingEntityExt.setCourseId(1);
+        bookingEntityExt.setCourseTemplateId(1);
         bookingEntityExtMapper.add(bookingEntityExt);
         int oldcount = bookingEntityExtMapper.getCount();
         bookingEntityExtMapper.add(bookingEntityExt);
@@ -43,6 +43,7 @@ public class BookingEntityExtTest extends BaseTest{
         bookingEntityExt.setDeleted(0);
         bookingEntityExt.setUserId(1);
         bookingEntityExt.setCourseId(1);
+        bookingEntityExt.setCourseTemplateId(1);
         bookingEntityExtMapper.add(bookingEntityExt);
         int oldcount = bookingEntityExtMapper.getCount();
         bookingEntityExtMapper.deleteById(bookingEntityExt.getId());

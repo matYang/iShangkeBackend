@@ -9,6 +9,8 @@ public class CourseClassPhotoEntityExt extends CourseClassPhotoEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
+    private Set<Integer> courseIdSet;
+    private Set<Integer> classPhotoIdSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     public Integer getIdStart() {
@@ -26,9 +28,23 @@ public class CourseClassPhotoEntityExt extends CourseClassPhotoEntity {
     public Set<Integer> getIdSet() {
         return idSet;
     }
+   
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
+    public Set<Integer> getCourseIdSet() {
+        return courseIdSet;
+    }
+    public void setCourseIdSet(Set<Integer> courseIdSet) {
+        this.courseIdSet = courseIdSet;
+    }
+    public Set<Integer> getClassPhotoIdSet() {
+        return classPhotoIdSet;
+    }
+    public void setClassPhotoIdSet(Set<Integer> classPhotoIdSet) {
+        this.classPhotoIdSet = classPhotoIdSet;
+    }
+   
     public Calendar getCreateTimeStart() {
         return createTimeStart;
     }

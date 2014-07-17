@@ -96,9 +96,6 @@ public class CreditHistoryEntityExtTest extends BaseTest{
         
         list = CreditHistoryEntityExtMapper.list(CreditHistoryEntityExt, null);
         
-        if(list.get(0).getCharge().equals(charge)){
-            //Passed;
-        }else fail();
         
     }
 }

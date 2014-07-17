@@ -687,26 +687,26 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND PARTNER.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND PARTNER.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND PARTNER.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND PARTNER.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND PARTNER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND PARTNER.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND PARTNER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND PARTNER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null">
@@ -714,14 +714,14 @@
       </if>
 
       <if test="entity.lastLoginTime != null">
-        AND PARTNER.LAST_LOGIN_TIME = #{entity.lastLoginTime,jdbcType=TIMESTAMP}
+        AND PARTNER.LAST_LOGIN_TIME = #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastLoginTime == null">
         <if test="entity.lastLoginTimeStart != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME >= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_LOGIN_TIME >= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastLoginTimeEnd != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
@@ -915,26 +915,26 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND PARTNER.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND PARTNER.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND PARTNER.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND PARTNER.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND PARTNER.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND PARTNER.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND PARTNER.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND PARTNER.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null">
@@ -942,14 +942,14 @@
       </if>
 
       <if test="entity.lastLoginTime != null">
-        AND PARTNER.LAST_LOGIN_TIME = #{entity.lastLoginTime,jdbcType=TIMESTAMP}
+        AND PARTNER.LAST_LOGIN_TIME = #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastLoginTime == null">
         <if test="entity.lastLoginTimeStart != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME >= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_LOGIN_TIME >= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastLoginTimeEnd != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       </if>

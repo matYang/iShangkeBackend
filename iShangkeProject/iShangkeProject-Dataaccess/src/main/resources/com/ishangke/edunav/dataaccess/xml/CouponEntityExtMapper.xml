@@ -167,6 +167,12 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND COUPON.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND COUPON.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
     </if>
     
     <if test="entity.userId != null and entity.userId != 0">
@@ -179,6 +185,12 @@
         </if>
         <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
           <![CDATA[AND COUPON.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND COUPON.USER_ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
     </if>
     
@@ -208,49 +220,49 @@
         </if>
     </if>
     
-    <if test="entity.code != null and entity.code !='' ">
+    <if test="entity.code != null and !entity.equals('') ">
       AND COUPON.CODE LIKE "%"#{entity.code,jdbcType=VARCHAR}"%"
     </if>
-    <if test="entity.remark != null and entity.remark !='' ">
+    <if test="entity.remark != null and !entity.remark.equals('') ">
       AND COUPON.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
     </if>    
     
     <if test="entity.createTime != null">
-      AND COUPON.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      AND COUPON.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
     </if>
     
     <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND COUPON.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COUPON.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
     
     <if test="entity.expiryTime != null">
-      AND COUPON.EXPIRY_TIME = #{entity.expiryTime,jdbcType=TIMESTAMP}
+      AND COUPON.EXPIRY_TIME = #{entity.expiryTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
     </if>
     
     <if test="entity.expiryTime == null">
         <if test="entity.expiryTimeStart != null">
-          <![CDATA[AND COUPON.EXPIRY_TIME >= #{entity.expiryTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.EXPIRY_TIME >= #{entity.expiryTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.expiryTimeEnd != null">
-          <![CDATA[AND COUPON.EXPIRY_TIME <= #{entity.expiryTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.EXPIRY_TIME <= #{entity.expiryTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       
     <if test="entity.lastModifyTime != null">
-        AND COUPON.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND COUPON.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COUPON.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COUPON.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       
@@ -334,49 +346,49 @@
         </if>
     </if>
     
-    <if test="entity.code != null and entity.code !='' ">
+    <if test="entity.code != null and !entity.code.equals('')">
       AND COUPON.CODE LIKE "%"#{entity.code,jdbcType=VARCHAR}"%"
     </if>
-    <if test="entity.remark != null and entity.remark !='' ">
+    <if test="entity.remark != null and !entity.remark.equals('') ">
       AND COUPON.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
     </if>    
     
     <if test="entity.createTime != null">
-      AND COUPON.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      AND COUPON.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
     </if>
     
     <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND COUPON.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COUPON.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
     
     <if test="entity.expiryTime != null">
-      AND COUPON.EXPIRY_TIME = #{entity.expiryTime,jdbcType=TIMESTAMP}
+      AND COUPON.EXPIRY_TIME = #{entity.expiryTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
     </if>
     
     <if test="entity.expiryTime == null">
         <if test="entity.expiryTimeStart != null">
-          <![CDATA[AND COUPON.EXPIRY_TIME >= #{entity.expiryTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.EXPIRY_TIME >= #{entity.expiryTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.expiryTimeEnd != null">
-          <![CDATA[AND COUPON.EXPIRY_TIME <= #{entity.expiryTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.EXPIRY_TIME <= #{entity.expiryTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       
     <if test="entity.lastModifyTime != null">
-        AND COUPON.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND COUPON.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COUPON.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COUPON.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COUPON.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       

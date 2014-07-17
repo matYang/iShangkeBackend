@@ -7,18 +7,22 @@
     <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
     <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
     <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
-    <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ADDRESS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ADDRESS_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Address_Base_Column_List">
     ADDRESS.ID ADDRESS_ID,
     ADDRESS.PARTNER_ID ADDRESS_PARTNERID,
-    ADDRESS.DETAIL ADDRESS_DETAIL,
+    ADDRESS.DETAIL
+    ADDRESS_DETAIL,
     ADDRESS.LAT ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG,
-    ADDRESS.LAST_MODIFY_TIME ADDRESS_LASTMODIFYTIME,
+    ADDRESS.LAST_MODIFY_TIME
+    ADDRESS_LASTMODIFYTIME,
     ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
     ADDRESS.DELETED ADDRESS_DELETED
@@ -105,10 +109,12 @@
         LNG = #{lng,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -126,7 +132,7 @@
 
   <select id="list" parameterType="map" resultMap="AddressExtMap">
     SELECT
-    <include refid="Address_Base_Column_List"/>
+    <include refid="Address_Base_Column_List" />
     from ADDRESS where ADDRESS.DELETED = 0
     <if test="entity != null">
 
@@ -160,13 +166,14 @@
         </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND ADDRESS.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
 
-      <if test="entity.detail != null and entity.detail !='' ">
+      <if test="entity.detail != null and !entity.detail.equals('') ">
         AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
 
@@ -195,25 +202,25 @@
 
 
       <if test="entity.createTime != null">
-        AND ADDRESS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND ADDRESS.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ADDRESS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ADDRESS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
       <if test="entity.lastModifyTime != null">
-        AND ADDRESS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND ADDRESS.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
@@ -235,8 +242,8 @@
 
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
-     select
-    <include refid="Address_Base_Column_List"/>
+    select
+    <include refid="Address_Base_Column_List" />
     from ADDRESS where ADDRESS.DELETED = 0
     <if test="entity != null">
 
@@ -270,13 +277,14 @@
         </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND ADDRESS.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
-      <if test="entity.detail != null and entity.detail !='' ">
+
+      <if test="entity.detail != null and !entity.detail.equals('') ">
         AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
       </if>
 
@@ -304,25 +312,25 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND ADDRESS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND ADDRESS.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ADDRESS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ADDRESS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
       <if test="entity.lastModifyTime != null">
-        AND ADDRESS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND ADDRESS.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ADDRESS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 

@@ -19,7 +19,7 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateClassPhotoEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateClassPhotoEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -27,10 +27,10 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest{
     @Autowired
     private CourseTemplateClassPhotoEntityExtMapper courseTemplateClassPhotoEntityExtMapper;
     
-    public CourseTemplateClassPhotoEntityExtTest() {
-        scriptAfterClass = "CourseTemplateClassPhotoEntityExtTestAfter.sql";
-        scriptBeforeClass = "CourseTemplateClassPhotoEntityExtTestBefore.sql";
-    }
+//    public CourseTemplateClassPhotoEntityExtTest() {
+//        scriptAfterClass = "CourseTemplateClassPhotoEntityExtTestAfter.sql";
+//        scriptBeforeClass = "CourseTemplateClassPhotoEntityExtTestBefore.sql";
+//    }
     @Test
     public void testAdd() {
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();

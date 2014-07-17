@@ -20,7 +20,6 @@ import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-
 public class RoleEntityExtTest extends BaseTest{
 
     @Autowired

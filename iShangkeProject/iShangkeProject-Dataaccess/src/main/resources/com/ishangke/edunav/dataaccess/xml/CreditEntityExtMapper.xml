@@ -4,8 +4,10 @@
   <resultMap id="CreditExtMap" type="CreditEntityExt">
     <result column="CREDIT_ID" property="id" jdbcType="INTEGER" />
     <result column="CREDIT_CREDIT" property="credit" jdbcType="DOUBLE" />
-    <result column="CREDIT_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="CREDIT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="CREDIT_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="CREDIT_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="CREDIT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CREDIT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -79,7 +81,8 @@
         #{record.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{record.enabled,jdbcType=INTEGER},
@@ -115,29 +118,40 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.credit != null and entity.credit != 0">
-        AND CREDIT.CRETITY = #{entity.credit,jdbcType=INTEGER}
+        AND CREDIT.CRETITY = #{entity.credit,jdbcType=DOUBLE}
       </if>
+      <if test="entity.credit == null or entity.credit == 0">
+        <if test="entity.creditStart != null and entity.creditStart != 0">
+          <![CDATA[AND CREDIT.CRETITY >= #{entity.creditStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.creditEnd != null and entity.creditEnd != 0">
+          <![CDATA[AND CREDIT.CRETITY <= #{entity.creditEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+
       <if test="entity.lastModifyTime != null">
-        AND CREDIT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND CREDIT.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND CREDIT.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND CREDIT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.createTime != null">
-        AND CREDIT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND CREDIT.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND CREDIT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND CREDIT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
@@ -158,7 +172,7 @@
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
- <include refid="Credit_Base_Column_List" />
+    <include refid="Credit_Base_Column_List" />
     from CREDIT where CREDIT.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
@@ -178,35 +192,46 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.credit != null and entity.credit != 0">
-        AND CREDIT.CRETITY = #{entity.credit,jdbcType=INTEGER}
+        AND CREDIT.CRETITY = #{entity.credit,jdbcType=DOUBLE}
       </if>
+      <if test="entity.credit == null or entity.credit == 0">
+        <if test="entity.creditStart != null and entity.creditStart != 0">
+          <![CDATA[AND CREDIT.CRETITY >= #{entity.creditStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.creditEnd != null and entity.creditEnd != 0">
+          <![CDATA[AND CREDIT.CRETITY <= #{entity.creditEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+
       <if test="entity.lastModifyTime != null">
-        AND CREDIT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND CREDIT.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND CREDIT.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND CREDIT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.createTime != null">
-        AND CREDIT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND CREDIT.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND CREDIT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND CREDIT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CREDIT.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
         AND CREDIT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      </if>
+    </if>
     ) AS
     total
   </select>

@@ -9,10 +9,16 @@ public class CouponHistoryEntityExt extends CouponHistoryEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
+    private Integer couponIdStart;
+    private Integer couponIdEnd;
+    private Set<Integer> couponIdSet;
+    private Double chargeStart;
+    private Double chargeEnd;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    
     public Integer getIdStart() {
         return idStart;
     }
@@ -30,6 +36,36 @@ public class CouponHistoryEntityExt extends CouponHistoryEntity {
     }
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Integer getCouponIdStart() {
+        return couponIdStart;
+    }
+    public void setCouponIdStart(Integer couponIdStart) {
+        this.couponIdStart = couponIdStart;
+    }
+    public Integer getCouponIdEnd() {
+        return couponIdEnd;
+    }
+    public void setCouponIdEnd(Integer couponIdEnd) {
+        this.couponIdEnd = couponIdEnd;
+    }
+    public Set<Integer> getCouponIdSet() {
+        return couponIdSet;
+    }
+    public void setCouponIdSet(Set<Integer> couponIdSet) {
+        this.couponIdSet = couponIdSet;
+    }
+    public Double getChargeStart() {
+        return chargeStart;
+    }
+    public void setChargeStart(Double chargeStart) {
+        this.chargeStart = chargeStart;
+    }
+    public Double getChargeEnd() {
+        return chargeEnd;
+    }
+    public void setChargeEnd(Double chargeEnd) {
+        this.chargeEnd = chargeEnd;
     }
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;

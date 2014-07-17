@@ -4,7 +4,8 @@
   <resultMap id="OrderExtMap" type="OrderEntityExt">
     <id column="ORDER_ID" property="id" jdbcType="INTEGER" />
     <result column="ORDER_BOOKINGID" property="bookingId" jdbcType="INTEGER" />
-    <result column="ORDER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ORDER_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ORDER_TYPE" property="type" jdbcType="VARCHAR" />
     <result column="ORDER_PRICE" property="price" jdbcType="DOUBLE" />
     <result column="ORDER_RUNINGNUMBER" property="runingNumber" jdbcType="VARCHAR" />
@@ -103,7 +104,8 @@
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=VARCHAR},
@@ -130,7 +132,7 @@
   <select id="getCount" resultType="int">
     select count(ID) from `ORDER` where DELETED = 0
   </select>
-  
+
   <select id="list" parameterType="map" resultMap="OrderExtMap">
     select
     <include refid="Order_Base_Column_List"></include>
@@ -154,39 +156,62 @@
           </foreach>
         </if>
       </if>
+      
       <if test="entity.bookingId != null and entity.bookingId != 0">
         AND `ORDER`.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
       </if>
-
+      <if test="entity.bookingId == null or entity.bookingId == 0">
+        <if test="entity.bookingIdSet != null and entity.bookingIdSet.size() > 0">
+          `ORDER`.BOOKING_ID IN
+          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
       <if test="entity.createTime != null">
-        AND `ORDER`.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND `ORDER`.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND `ORDER`.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND `ORDER`.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND `ORDER`.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND `ORDER`.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
-      <if test="entity.type != null and entity.type != ''">
+      <if test="entity.type != null and !entity.type.equals('')">
         AND ORDER.TYPE LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.price != null and entity.price != 0">
         AND `ORDER`.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
-      <if test="entity.runingNumber != null and entity.runingNumber != ''">
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
+          <![CDATA[AND `ORDER`.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.priceEnd != null">
+          <![CDATA[AND `ORDER`.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      
+      <if test="entity.runingNumber != null and !entity.runingNumber.equals('')">
         AND ORDER.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.status != null and entity.status != ''">
+      
+      <if test="entity.status != null and !entity.status.equals('')">
         AND ORDER.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
       </if>
+      
       <if test="entity.enabled != null and entity.enabled != 0">
         AND `ORDER`.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
-   <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         ORDER.${listItem.columnKey} ${listItem.order}
@@ -198,10 +223,10 @@
     </if>
 
   </select>
-       <select id="getListCount" parameterType="map" resultType="int">
+  <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-       <include refid="Order_Base_Column_List"></include>
+ <include refid="Order_Base_Column_List"></include>
     from `ORDER`
     where `ORDER`.DELETED = 0
     <if test="entity != null">
@@ -225,29 +250,46 @@
       <if test="entity.bookingId != null and entity.bookingId != 0">
         AND `ORDER`.BOOKING_ID = #{entity.bookingId,jdbcType=INTEGER}
       </if>
-
+      <if test="entity.bookingIdStart != null and entity.bookingIdStart != 0">
+        <if test="entity.bookingIdSet.size() > 0">
+          `ORDER`.BOOKING_ID IN
+          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
       <if test="entity.createTime != null">
-        AND `ORDER`.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND `ORDER`.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND `ORDER`.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND `ORDER`.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND `ORDER`.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND `ORDER`.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
-      <if test="entity.type != null and entity.type != ''">
+      <if test="entity.type != null and !entity.type.equals('')">
         AND ORDER.TYPE LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.price != null and entity.price != 0">
         AND `ORDER`.PRICE = #{entity.price,jdbcType=DOUBLE}
       </if>
-      <if test="entity.runingNumber != null and entity.runingNumber != ''">
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
+          <![CDATA[AND `ORDER`.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.priceEnd != null">
+          <![CDATA[AND `ORDER`.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      <if test="entity.runingNumber != null and !entity.runingNumber.equals('')">
         AND ORDER.RUNING_NUMBER LIKE "%"#{entity.runingNumber,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.status != null and entity.status != ''">
+      <if test="entity.status != null and !entity.status.equals('')">
         AND ORDER.STATUS LIKE "%"#{entity.status,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">

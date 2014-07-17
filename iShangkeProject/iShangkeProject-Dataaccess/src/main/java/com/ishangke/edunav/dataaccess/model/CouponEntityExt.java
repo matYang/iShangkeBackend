@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.CouponEntity;
 
@@ -8,6 +9,7 @@ public class CouponEntityExt extends CouponEntity {
 
     private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Double totalStart;
     private Double totalEnd;
     private Double balanceStart;
@@ -16,11 +18,24 @@ public class CouponEntityExt extends CouponEntity {
     private Calendar expiryTimeEnd;
     private Integer userIdStart;
     private Integer userIdEnd;
+    private Set<Integer> userIdSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
+    }
     public Integer getIdStart() {
         return idStart;
     }

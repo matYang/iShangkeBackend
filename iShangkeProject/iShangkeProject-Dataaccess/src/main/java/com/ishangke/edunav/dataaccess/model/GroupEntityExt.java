@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.GroupEntity;
 
@@ -8,10 +9,13 @@ public class GroupEntityExt extends GroupEntity {
 
     private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Integer roleIdStart;
     private Integer roleIdEnd;
+    private Set<Integer> roleIdSet;
     private Integer partnerIdStart;
     private Integer partnerIdEnd;
+    private Set<Integer> partnerIdSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
@@ -28,6 +32,24 @@ public class GroupEntityExt extends GroupEntity {
     }
     public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
+    }
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getRoleIdSet() {
+        return roleIdSet;
+    }
+    public void setRoleIdSet(Set<Integer> roleIdSet) {
+        this.roleIdSet = roleIdSet;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
     }
     public Integer getRoleIdStart() {
         return roleIdStart;

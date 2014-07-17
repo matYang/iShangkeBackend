@@ -20,7 +20,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 
 //before/after方法注入，aop
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, ContactEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, ContactEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -30,10 +30,10 @@ public class ContactEntityExtTest extends BaseTest{
     private ContactEntityExtMapper contactEntityExtMapper;
 
     //resource里面
-    public ContactEntityExtTest() {
-        scriptAfterClass = "ContactEntityExtTestAfter.sql";
-        scriptBeforeClass = "ContactEntityExtTestBefore.sql";
-    }
+//    public ContactEntityExtTest() {
+//        scriptAfterClass = "ContactEntityExtTestAfter.sql";
+//        scriptBeforeClass = "ContactEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {
