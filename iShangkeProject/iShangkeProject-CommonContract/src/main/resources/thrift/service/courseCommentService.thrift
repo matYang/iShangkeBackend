@@ -19,7 +19,7 @@ service CourseCommentService {
      *  @return 创建完成的课程评论
      *
      */
-    common.ResponseBo createCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseComment.CourseCommentBo createCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  删除课程评论。<br>
@@ -32,7 +32,7 @@ service CourseCommentService {
      *  @return 
      *
      */
-    common.ResponseBo deleteCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseComment.CourseCommentBo deleteCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询课程评论。<br>
@@ -46,7 +46,7 @@ service CourseCommentService {
      *  @return  CourseComment 列表
      *
      */
-    common.ResponseBo query(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<courseComment.CourseCommentBo> query(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
 
 
