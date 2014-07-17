@@ -8,6 +8,8 @@ public class CreditEntityExt extends CreditEntity {
     private Integer idStart;
     private Integer idEnd;
     private Integer idSet;
+    private Double creditStart;
+    private Double creditEnd;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
@@ -29,6 +31,18 @@ public class CreditEntityExt extends CreditEntity {
     }
     public void setIdSet(Integer idSet) {
         this.idSet = idSet;
+    }
+    public Double getCreditStart() {
+        return creditStart;
+    }
+    public void setCreditStart(Double creditStart) {
+        this.creditStart = creditStart;
+    }
+    public Double getCreditEnd() {
+        return creditEnd;
+    }
+    public void setCreditEnd(Double creditEnd) {
+        this.creditEnd = creditEnd;
     }
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;

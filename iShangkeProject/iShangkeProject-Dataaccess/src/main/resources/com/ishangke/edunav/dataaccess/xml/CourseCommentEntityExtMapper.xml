@@ -13,8 +13,10 @@
     <result column="COURSECOMMENT_ATTITUDERATING" property="attitudeRatingRating" jdbcType="DOUBLE" />
     <result column="COURSECOMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
 
-    <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSECOMMENT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSECOMMENT_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -26,10 +28,12 @@
     COURSECOMMENT_TITLE,
     COURSE_COMMENT.CONTENT COURSECOMMENT_CONTENT,
 
-    COURSE_COMMENT.TOTAL_RATING COURSECOMMENT_TOTALRATING,
+    COURSE_COMMENT.TOTAL_RATING
+    COURSECOMMENT_TOTALRATING,
     COURSE_COMMENT.CONDITION_RATING COURSECOMMENT_CONDITIONRATING,
     COURSE_COMMENT.ATTITUDE_RATING COURSECOMMENT_ATTITUDERATING,
-    COURSE_COMMENT.SATISFACTION_RATING COURSECOMMENT_SATISFACTIONRATING,
+    COURSE_COMMENT.SATISFACTION_RATING
+    COURSECOMMENT_SATISFACTIONRATING,
 
     COURSE_COMMENT.LAST_MODIFY_TIME
     COURSECOMMENT_LASTMODIFYTIME,
@@ -159,10 +163,12 @@
         SATISFACTION_RATING = #{satisfactionRating,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -234,7 +240,8 @@
         </if>
       </if>
       <if test="entity.satisfactionRating != null">
-        AND COURSE_COMMENT.SATISFACTION_RATING = #{entity.satisfactionRating,jdbcType=DOUBLE}
+        AND COURSE_COMMENT.SATISFACTION_RATING =
+        #{entity.satisfactionRating,jdbcType=DOUBLE}
       </if>
       <if test="entity.satisfactionRating == null">
         <if test="entity.satisfactionRatingStart != null">
@@ -248,35 +255,54 @@
       <if test="entity.userId != null and entity.userId != 0">
         AND COURSE_COMMENT.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND COURSE_COMMENT.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
       <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
         AND COURSE_COMMENT.COURSE_TEMPLATEID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.title != null and entity.title != ''">
+      <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
+          AND COURSE_COMMENT.COURSE_TEMPLATEID IN
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.title != null and !entity.title.equals('')">
         AND COURSE_COMMENT.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.content != null and entity.content != ''">
+      <if test="entity.content != null and !entity.content.equals('')">
         AND COURSE_COMMENT.CONTENT LIKE "%"#{entity.content,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.lastModifyTime != null">
-        AND COURSE_COMMENT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND COURSE_COMMENT.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.createTime != null">
-        AND COURSE_COMMENT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND COURSE_COMMENT.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND COURSE_COMMENT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COURSE_COMMENT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
@@ -320,6 +346,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.totalRating != null">
         AND COURSE_COMMENT.TOTAL_RATING = #{entity.totalRating,jdbcType=DOUBLE}
       </if>
@@ -354,7 +381,8 @@
         </if>
       </if>
       <if test="entity.satisfactionRating != null">
-        AND COURSE_COMMENT.SATISFACTION_RATING = #{entity.satisfactionRating,jdbcType=DOUBLE}
+        AND COURSE_COMMENT.SATISFACTION_RATING =
+        #{entity.satisfactionRating,jdbcType=DOUBLE}
       </if>
       <if test="entity.satisfactionRating == null">
         <if test="entity.satisfactionRatingStart != null">
@@ -364,43 +392,64 @@
           <![CDATA[AND COURSE_COMMENT.SATISFACTION_RATING <= #{entity.satisfactionRatingEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.userId != null and entity.userId != 0">
         AND COURSE_COMMENT.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND COURSE_COMMENT.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
       <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
         AND COURSE_COMMENT.COURSE_TEMPLATEID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.title != null and entity.title != ''">
+      <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
+          AND COURSE_COMMENT.COURSE_TEMPLATEID IN
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.title != null and !entity.title.equals('')">
         AND COURSE_COMMENT.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.content != null and entity.content != ''">
+      <if test="entity.content != null and !entity.content.equals('')">
         AND COURSE_COMMENT.CONTENT LIKE "%"#{entity.content,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.lastModifyTime != null">
-        AND COURSE_COMMENT.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND COURSE_COMMENT.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.createTime != null">
-        AND COURSE_COMMENT.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND COURSE_COMMENT.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND COURSE_COMMENT.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COURSE_COMMENT.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE_COMMENT.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
         AND COURSE_COMMENT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+   
     </if>
     ) AS total
   </select>

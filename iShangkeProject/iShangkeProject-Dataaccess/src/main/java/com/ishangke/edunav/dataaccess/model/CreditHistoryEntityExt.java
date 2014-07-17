@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.CreditHistoryEntity;
 
@@ -8,10 +9,12 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
 
     private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Double chargeStart;
     private Double chargeEnd;
     private Integer userIdStart;
     private Integer userIdEnd;
+    private Set<Integer> userIdSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
@@ -28,6 +31,18 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
     }
     public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
+    }
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
     }
     public Double getChargeStart() {
         return chargeStart;

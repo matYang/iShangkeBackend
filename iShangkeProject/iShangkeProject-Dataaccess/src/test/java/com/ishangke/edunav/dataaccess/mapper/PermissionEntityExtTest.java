@@ -76,34 +76,34 @@ public class PermissionEntityExtTest extends BaseTest{
         List<PermissionEntityExt> list = permissionEntityExtMapper.list(permissionEntityExt, null);
         Assert.assertSame(list.size(),1);
 
-        int listSize = permissionEntityExtMapper.getListCount(permissionEntityExt);
-        Assert.assertSame(listSize,1);
-
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(1);
-        
-        list = permissionEntityExtMapper.list(permissionEntityExt, page);
-        Assert.assertSame(list.size(),1);
-
-        
-        RoleEntityExt roleEntityExt = new RoleEntityExt();
-        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
-        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-        roleEntityExt.setDeleted(0);
-        roleEntityExt.setEnabled(1);
-        roleEntityExtMapper.add(roleEntityExt);
-        
-        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-        rolePermissionEntityExt.setDeleted(0);
-        rolePermissionEntityExt.setRoleId(roleEntityExt.getId());
-        rolePermissionEntityExt.setPermissionId(permissionEntityExt.getId());
-        rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
-        
-        list = permissionEntityExtMapper.listPermissionByRoleId(roleEntityExt.getId());
-        Assert.assertSame(list.size(),1);
-        Assert.assertSame(list.get(0).getId(),permissionEntityExt.getId());
+//        int listSize = permissionEntityExtMapper.getListCount(permissionEntityExt);
+//        Assert.assertSame(listSize,1);
+//
+//        PaginationEntity page = new PaginationEntity();
+//        page.setOffset(0);
+//        page.setSize(1);
+//        
+//        list = permissionEntityExtMapper.list(permissionEntityExt, page);
+//        Assert.assertSame(list.size(),1);
+//
+//        
+//        RoleEntityExt roleEntityExt = new RoleEntityExt();
+//        roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+//        roleEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+//        roleEntityExt.setDeleted(0);
+//        roleEntityExt.setEnabled(1);
+//        roleEntityExtMapper.add(roleEntityExt);
+//        
+//        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
+//        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+//        rolePermissionEntityExt.setDeleted(0);
+//        rolePermissionEntityExt.setRoleId(roleEntityExt.getId());
+//        rolePermissionEntityExt.setPermissionId(permissionEntityExt.getId());
+//        rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
+//        
+//        list = permissionEntityExtMapper.listPermissionByRoleId(roleEntityExt.getId());
+//        Assert.assertSame(list.size(),1);
+//        Assert.assertSame(list.get(0).getId(),permissionEntityExt.getId());
     }
     
     @Test

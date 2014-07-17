@@ -1,1 +1,0 @@
-DELETE FROM `BOOKING_HISTORY` WHERE remark LIKE '%_test_bh_%';

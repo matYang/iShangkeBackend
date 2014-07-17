@@ -139,9 +139,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  
   <select id="getCount" resultType="int">
     select count(ID) from CLASS_PHOTO where DELETED = 0
   </select>
+  
   <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
   SELECT
   <include refid="ClassPhoto_Base_Column_List"/>
@@ -185,18 +187,18 @@
      
      
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       
 
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
      
       <if test="entity.enabled != null">
@@ -256,18 +258,18 @@
       </if>
       
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
      
      
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
     
       <if test="entity.enabled != null">

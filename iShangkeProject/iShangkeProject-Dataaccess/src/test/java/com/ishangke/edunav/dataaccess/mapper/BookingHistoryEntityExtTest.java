@@ -20,7 +20,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 
 //before/after方法注入，aop
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, BookingHistoryEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, BookingHistoryEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -29,11 +29,11 @@ public class BookingHistoryEntityExtTest extends BaseTest {
     @Autowired
     private BookingHistoryEntityExtMapper bookingHistoryEntityExtMapper;
 
-    // resource里面
-    public BookingHistoryEntityExtTest() {
-        scriptAfterClass = "BookingHistoryEntityExtTestAfter.sql";
-        scriptBeforeClass = "BookingHistoryEntityExtTestBefore.sql";
-    }
+//    // resource里面
+//    public BookingHistoryEntityExtTest() {
+//        scriptAfterClass = "BookingHistoryEntityExtTestAfter.sql";
+//        scriptBeforeClass = "BookingHistoryEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {

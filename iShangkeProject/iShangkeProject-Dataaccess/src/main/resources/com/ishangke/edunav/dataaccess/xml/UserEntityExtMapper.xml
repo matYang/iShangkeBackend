@@ -263,15 +263,15 @@
         </if>
       </if>
 
-      <if test="entity.name != null and entity.name != ''">
+      <if test="entity.name != null and !entity.name.equals('')">
         AND USERS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.password != null and entity.password != ''">
+      <if test="entity.password != null and !entity.password.equals('')">
         AND USERS.PASSWORD LIKE "%"#{entity.password,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.phone != null and entity.phone != ''">
+      <if test="entity.phone != null and !entity.phone.equals('')">
         AND USERS.PHONE LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
       </if>
 
@@ -279,32 +279,32 @@
         AND USERS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.wechat != null and entity.wechat != ''">
+      <if test="entity.wechat != null and !entity.wechat.equals('')">
         AND USERS.WECHAT LIKE "%"#{entity.wechat,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.email != null and entity.email != ''">
+      <if test="entity.email != null and !entity.email.equals('')">
         AND USERS.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.invitationCode != null and entity.invitationCode != ''">
+      <if test="entity.invitationCode != null and !entity.invitationCode.equals('')">
         AND USERS.INVITATION_CODE LIKE "%"#{entity.invitationCode,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.appliedInvitationCode != null and entity.appliedInvitationCode != ''">
+      <if test="entity.appliedInvitationCode != null and !entity.appliedInvitationCode.equals('')">
         AND USERS.APPLIED_INVITATION_CODE LIKE
         "%"#{entity.appliedInvitationCode,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.reference != null and entity.reference != ''">
+      <if test="entity.reference != null and !entity.reference.equals('')">
         AND USERS.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.school != null and entity.school != ''">
+      <if test="entity.school != null and !entity.school.equals('')">
         AND USERS.SCHOOL LIKE "%"#{entity.school,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.major != null and entity.major != ''">
+      <if test="entity.major != null and !entity.major.equals('')">
         AND USERS.MAJOR LIKE "%"#{entity.major,jdbcType=VARCHAR}"%"
       </if>
 
@@ -313,50 +313,50 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND USERS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND USERS.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND USERS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND USERS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND USERS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND USERS.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND USERS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND USERS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.lastLoginTime != null">
-        AND USERS.LAST_LOGIN_TIME = #{entity.lastLoginTime,jdbcType=TIMESTAMP}
+        AND USERS.LAST_LOGIN_TIME = #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastLoginTime == null">
         <if test="entity.lastLoginTimeStart != null">
-          <![CDATA[AND USERS.LAST_LOGIN_TIME >= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_LOGIN_TIME >= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastLoginTimeEnd != null">
-          <![CDATA[AND USERS.LAST_LOGIN_TIME <= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.birthday != null">
-        AND USERS.BIRTHDAY = #{entity.birthday,jdbcType=TIMESTAMP}
+        AND USERS.BIRTHDAY = #{entity.birthday,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.birthday == null">
         <if test="entity.birthdayStart != null">
-          <![CDATA[AND USERS.BIRTHDAY >= #{entity.birthday,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.BIRTHDAY >= #{entity.birthday,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.birthdayEnd != null">
-          <![CDATA[AND USERS.BIRTHDAY <= #{entity.birthday,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.BIRTHDAY <= #{entity.birthday,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
     </if>
@@ -397,15 +397,15 @@
         </if>
       </if>
 
-      <if test="entity.name != null and entity.name != ''">
+      <if test="entity.name != null and entity.name.equals('')">
         AND USERS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.password != null and entity.password != ''">
+      <if test="entity.password != null and entity.password.equals('')">
         AND USERS.PASSWORD LIKE "%"#{entity.password,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.phone != null and entity.phone != ''">
+      <if test="entity.phone != null and entity.phone.equals('')">
         AND USERS.PHONE LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
       </if>
 
@@ -413,32 +413,32 @@
         AND USERS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.wechat != null and entity.wechat != ''">
+      <if test="entity.wechat != null and entity.wechat.equals('')">
         AND USERS.WECHAT LIKE "%"#{entity.wechat,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.email != null and entity.email != ''">
+      <if test="entity.email != null and entity.email.equals('')">
         AND USERS.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.invitationCode != null and entity.invitationCode != ''">
+      <if test="entity.invitationCode != null and entity.invitationCode.equals('')">
         AND USERS.INVITATION_CODE LIKE "%"#{entity.invitationCode,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.appliedInvitationCode != null and entity.appliedInvitationCode != ''">
+      <if test="entity.appliedInvitationCode != null and entity.appliedInvitationCode.equals('')">
         AND USERS.APPLIED_INVITATION_CODE LIKE
         "%"#{entity.appliedInvitationCode,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.reference != null and entity.reference != ''">
+      <if test="entity.reference != null and entity.reference.equals('')">
         AND USERS.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.school != null and entity.school != ''">
+      <if test="entity.school != null and entity.school.equals('')">
         AND USERS.SCHOOL LIKE "%"#{entity.school,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.major != null and entity.major != ''">
+      <if test="entity.major != null and entity.major.equals('')">
         AND USERS.MAJOR LIKE "%"#{entity.major,jdbcType=VARCHAR}"%"
       </if>
 
@@ -447,50 +447,50 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND USERS.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND USERS.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND USERS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND USERS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND USERS.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND USERS.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND USERS.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND USERS.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.lastLoginTime != null">
-        AND USERS.LAST_LOGIN_TIME = #{entity.lastLoginTime,jdbcType=TIMESTAMP}
+        AND USERS.LAST_LOGIN_TIME = #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastLoginTime == null">
         <if test="entity.lastLoginTimeStart != null">
-          <![CDATA[AND USERS.LAST_LOGIN_TIME >= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_LOGIN_TIME >= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastLoginTimeEnd != null">
-          <![CDATA[AND USERS.LAST_LOGIN_TIME <= #{entity.lastLoginTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.birthday != null">
-        AND USERS.BIRTHDAY = #{entity.birthday,jdbcType=TIMESTAMP}
+        AND USERS.BIRTHDAY = #{entity.birthday,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.birthday == null">
         <if test="entity.birthdayStart != null">
-          <![CDATA[AND USERS.BIRTHDAY >= #{entity.birthday,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.BIRTHDAY >= #{entity.birthday,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.birthdayEnd != null">
-          <![CDATA[AND USERS.BIRTHDAY <= #{entity.birthday,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND USERS.BIRTHDAY <= #{entity.birthday,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
     </if>

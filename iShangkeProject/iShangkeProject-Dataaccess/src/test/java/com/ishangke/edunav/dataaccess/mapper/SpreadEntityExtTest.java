@@ -19,7 +19,7 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, SpreadEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, SpreadEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -28,10 +28,10 @@ public class SpreadEntityExtTest extends BaseTest {
     private SpreadEntityExtMapper spreadEntityExtMapper;
 
     //resource里面
-    public SpreadEntityExtTest() {
-        scriptAfterClass = "SpreadEntityExtTestAfter.sql";
-        scriptBeforeClass = "SpreadEntityExtTestBefore.sql";
-    }
+//    public SpreadEntityExtTest() {
+//        scriptAfterClass = "SpreadEntityExtTestAfter.sql";
+//        scriptBeforeClass = "SpreadEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {

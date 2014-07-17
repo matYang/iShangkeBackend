@@ -9,6 +9,8 @@ public class CourseTeacherEntityExt extends CourseTeacherEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
+    private Set<Integer> courseIdSet;
+    private Set<Integer> teacherIdSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     public Integer getIdStart() {
@@ -28,6 +30,18 @@ public class CourseTeacherEntityExt extends CourseTeacherEntity {
     }
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getCourseIdSet() {
+        return courseIdSet;
+    }
+    public void setCourseIdSet(Set<Integer> courseIdSet) {
+        this.courseIdSet = courseIdSet;
+    }
+    public Set<Integer> getTeacherIdSet() {
+        return teacherIdSet;
+    }
+    public void setTeacherIdSet(Set<Integer> teacherIdSet) {
+        this.teacherIdSet = teacherIdSet;
     }
     public Calendar getCreateTimeStart() {
         return createTimeStart;

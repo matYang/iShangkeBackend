@@ -8,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
@@ -16,7 +15,7 @@ import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class AccountEntityExtTest extends BaseTest{
+public class AccountEntityExtTest{
     @Autowired
     private AccountEntityExtMapper accountEntityExtMapper;
     

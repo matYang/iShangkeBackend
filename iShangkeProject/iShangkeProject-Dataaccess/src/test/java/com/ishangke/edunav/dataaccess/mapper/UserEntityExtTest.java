@@ -28,10 +28,10 @@ public class UserEntityExtTest extends BaseTest {
     private UserEntityExtMapper userEntityExtMapper;
 
     //resource里面
-    public UserEntityExtTest() {
-        scriptAfterClass = "UserEntityExtTestAfter.sql";
-        scriptBeforeClass = "UserEntityExtTestBefore.sql";
-    }
+//    public UserEntityExtTest() {
+//        scriptAfterClass = "UserEntityExtTestAfter.sql";
+//        scriptBeforeClass = "UserEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {

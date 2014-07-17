@@ -1,1 +1,0 @@
-DELETE FROM `course_class_photo` WHERE CREATE_TIME = '2014-07-02 00:00:00';

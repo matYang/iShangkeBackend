@@ -64,10 +64,10 @@
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
     <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
-    <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INT" />
+    <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
     <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_RATING" property="rating" jdbcType="DOUBLE" />
-    <result column="COURSETEMPLATE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INT" />
+    <result column="COURSETEMPLATE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INTEGER" />
     <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
     <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
@@ -599,7 +599,7 @@
         #{startUponArrival,jdbcType=INTEGER},
       </if>
       <if test="bookingType != null">
-        #{bookingType,jdbcType=INTEGER},
+  #{bookingType,jdbcType=INTEGER},
       </if>
       <if test="cashbackDate != null">
         #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -1101,36 +1101,36 @@
         </if>
       </if>
       <if test="entity.startDate != null">
-        AND COURSE.START_DATE = #{entity.startDate,jdbcType=TIMESTAMP}
+        AND COURSE.START_DATE = #{entity.startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
-          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.finishDate != null">
-        AND COURSE.FINISH_DATE = #{entity.finishDate,jdbcType=TIMESTAMP}
+        AND COURSE.FINISH_DATE = #{entity.finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.finishDate == null">
         <if test="entity.finishDateStart != null">
-          <![CDATA[AND COURSE.FINISH_DATE >= #{entity.finishDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.FINISH_DATE >= #{entity.finishDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.finishDateEnd != null">
-          <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.cutoffDate != null">
-        AND COURSE.CUTOFF_DATE = #{entity.cutoffDate,jdbcType=TIMESTAMP}
+        AND COURSE.CUTOFF_DATE = #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.cutoffDateEnd != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -1165,25 +1165,25 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COURSE.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COURSE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.createTime != null">
-        AND COURSE.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND COURSE.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND COURSE.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null">
@@ -1418,36 +1418,36 @@
         </if>
       </if>
       <if test="entity.startDate != null">
-        AND COURSE.START_DATE = #{entity.startDate,jdbcType=TIMESTAMP}
+        AND COURSE.START_DATE = #{entity.startDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
-          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.finishDate != null">
-        AND COURSE.FINISH_DATE = #{entity.finishDate,jdbcType=TIMESTAMP}
+        AND COURSE.FINISH_DATE = #{entity.finishDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.finishDate == null">
         <if test="entity.finishDateStart != null">
-          <![CDATA[AND COURSE.FINISH_DATE >= #{entity.finishDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.FINISH_DATE >= #{entity.finishDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.finishDateEnd != null">
-          <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.cutoffDate != null">
-        AND COURSE.CUTOFF_DATE = #{entity.cutoffDate,jdbcType=TIMESTAMP}
+        AND COURSE.CUTOFF_DATE = #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.cutoffDateEnd != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -1482,25 +1482,25 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND COURSE.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COURSE.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COURSE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.createTime != null">
-        AND COURSE.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND COURSE.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND COURSE.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
       <if test="entity.enabled != null">

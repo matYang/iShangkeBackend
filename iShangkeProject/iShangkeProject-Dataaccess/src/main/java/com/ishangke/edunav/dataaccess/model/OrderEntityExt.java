@@ -9,8 +9,11 @@ public class OrderEntityExt extends OrderEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
+    private Set<Integer> bookingIdSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Double priceStart;
+    private Double priceEnd;
     public Integer getIdStart() {
         return idStart;
     }
@@ -28,6 +31,24 @@ public class OrderEntityExt extends OrderEntity {
     }
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getBookingIdSet() {
+        return bookingIdSet;
+    }
+    public void setBookingIdSet(Set<Integer> bookingIdSet) {
+        this.bookingIdSet = bookingIdSet;
+    }
+    public Double getPriceStart() {
+        return priceStart;
+    }
+    public void setPriceStart(Double priceStart) {
+        this.priceStart = priceStart;
+    }
+    public Double getPriceEnd() {
+        return priceEnd;
+    }
+    public void setPriceEnd(Double priceEnd) {
+        this.priceEnd = priceEnd;
     }
     public Calendar getCreateTimeStart() {
         return createTimeStart;

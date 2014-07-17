@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.ActivityEntity;
 
@@ -8,11 +9,13 @@ public class ActivityEntityExt extends ActivityEntity {
 
     private Integer idStart;
     private Integer idEnd;
-    private Integer idSet;
+    private Set<Integer> idSet;
     private Integer partnerIdStart;
-    private Integer partnerIdEnd;    
+    private Integer partnerIdEnd;  
+    private Set<Integer> partnerIdSet;
     private Integer courseIdStart;
     private Integer courseIdEnd;
+    private Set<Integer> courseIdSet;
     private Calendar startTimeStart;
     private Calendar startTimeEnd;
     private Calendar endTimeStart;
@@ -24,11 +27,24 @@ public class ActivityEntityExt extends ActivityEntity {
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     
-    public Integer getIdSet() {
+   
+    public Set<Integer> getIdSet() {
         return idSet;
     }
-    public void setIdSet(Integer idSet) {
+    public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
+    public Set<Integer> getCourseIdSet() {
+        return courseIdSet;
+    }
+    public void setCourseIdSet(Set<Integer> courseIdSet) {
+        this.courseIdSet = courseIdSet;
     }
     public Integer getIdStart() {
         return idStart;
