@@ -15,13 +15,17 @@ public interface PartnerEntityExtMapper {
 
     public void update(PartnerEntityExt partnerEntityExt);
 
-    public int getCount();
-
     public List<PartnerEntityExt> list(
             @Param("entity") PartnerEntityExt partnerEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") PartnerEntityExt partnerEntityExt);
+
+    public List<PartnerEntityExt> listAll();
+
+    public int getCount();
+
+    public PartnerEntityExt getById(int id);
     
     public PartnerEntityExt getInfoById(int id);
 }

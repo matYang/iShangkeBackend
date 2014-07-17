@@ -15,13 +15,19 @@ public interface CouponEntityExtMapper {
 
     public void update(CouponEntityExt couponEntityExt);
 
-    public int getCount();
-
     public List<CouponEntityExt> list(
             @Param("entity") CouponEntityExt couponEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") CouponEntityExt couponEntityExt);
-    
-    public List<CouponEntityExt>listCouponByUserId(int userId);
+
+    public List<CouponEntityExt> listAll();
+
+    public int getCount();
+
+    public List<CouponEntityExt> listCouponByUserId(int userId);
+
+    public int getCountByUserId(int userId);
+
+    public CouponEntityExt getById(int id);
 }

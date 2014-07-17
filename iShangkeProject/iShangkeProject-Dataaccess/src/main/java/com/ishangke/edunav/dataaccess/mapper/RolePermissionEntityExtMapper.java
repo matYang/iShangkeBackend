@@ -15,11 +15,15 @@ public interface RolePermissionEntityExtMapper {
 
     public void update(RolePermissionEntityExt rolePermissionEntityExt);
 
-    public int getCount();
-
     public List<RolePermissionEntityExt> list(
             @Param("entity") RolePermissionEntityExt rolePermissionEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") RolePermissionEntityExt rolePermissionEntityExt);
+
+    public List<RolePermissionEntityExt> listAll();
+
+    public int getCount();
+
+    public RolePermissionEntityExt getById(int id);
 }

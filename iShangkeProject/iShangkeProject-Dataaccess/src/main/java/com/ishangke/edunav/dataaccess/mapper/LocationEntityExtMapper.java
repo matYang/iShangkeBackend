@@ -15,11 +15,16 @@ public interface LocationEntityExtMapper {
 
     public void update(LocationEntityExt locationEntityExt);
 
-    public int getCount();
-
     public List<LocationEntityExt> list(
             @Param("entity") LocationEntityExt locationEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") LocationEntityExt locationEntityExt);
+
+    public List<LocationEntityExt> listAll();
+
+    public int getCount();
+
+    public LocationEntityExt getById(int id);
+
 }

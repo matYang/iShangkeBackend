@@ -15,11 +15,16 @@ public interface OrderHistoryEntityExtMapper {
 
     public void update(OrderHistoryEntityExt orderHistoryEntityExt);
 
-    public int getCount();
-
     public List<OrderHistoryEntityExt> list(
             @Param("entity") OrderHistoryEntityExt orderHistoryEntityExt,
             @Param("page") PaginationEntity page);
-
+    
     public int getListCount(@Param("entity") OrderHistoryEntityExt orderHistoryEntityExt);
+
+    public List<OrderHistoryEntityExt> listAll();
+
+    public int getCount();
+
+    public OrderHistoryEntityExt getById(int id);
+
 }

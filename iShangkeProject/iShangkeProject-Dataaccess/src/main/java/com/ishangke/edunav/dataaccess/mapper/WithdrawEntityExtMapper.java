@@ -15,11 +15,15 @@ public interface WithdrawEntityExtMapper {
 
     public void update(WithdrawEntityExt widthdrawEntityExt);
 
-    public int getCount();
-
     public List<WithdrawEntityExt> list(
             @Param("entity") WithdrawEntityExt widthdrawEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") WithdrawEntityExt widthdrawEntityExt);
+
+    public List<WithdrawEntityExt> listAll();
+
+    public int getCount();
+
+    public WithdrawEntityExt getById(int id);
 }
