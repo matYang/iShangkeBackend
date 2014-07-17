@@ -7,11 +7,15 @@
     <result column="ACTIVITY_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="ACTIVITY_COURSEID" property="courseId" jdbcType="INTEGER" />
     <result column="ACTIVITY_REMARK" property="remark" jdbcType="VARCHAR" />
-    <result column="ACTIVITY_STARTTIME" property="startTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ACTIVITY_ENDTIME" property="endTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACTIVITY_STARTTIME" property="startTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACTIVITY_ENDTIME" property="endTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACTIVITY_STATUS" property="status" jdbcType="VARCHAR" />
-    <result column="ACTIVITY_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ACTIVITY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACTIVITY_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACTIVITY_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACTIVITY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ACTIVITY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -24,7 +28,7 @@
     ACTIVITY.REMARK ACTIVITY_REMARK,
     ACTIVITY.START_TIME ACTIVITY_STARTTIME,
     ACTIVITY.END_TIME ACTIVITY_ENDTIME,
-    ACTIVITY_STATUS
+    ACTIVITY.STATUS
     ACTIVITY_STATUS,
     ACTIVITY.LAST_MODIFY_TIME ACTIVITY_LASTMODIFYTIME,
     ACTIVITY.CREATE_TIME
@@ -132,19 +136,23 @@
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        START_TIME = #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        START_TIME =
+        #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="endTime != null">
-        END_TIME = #{endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        END_TIME =
+        #{endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -166,6 +174,7 @@
     <include refid="Activity_Base_Column_List" />
     from ACTIVITY where ACTIVITY.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -176,7 +185,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND ACTIVITY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ACTIVITY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -184,10 +193,13 @@
         </if>
       </if>
 
-      <if test="entity.name != null and entity.name !='' ">
+      <if test="entity.name != null and !entity.equals('') ">
         AND ACTIVITY.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND ACTIVITY.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
           <![CDATA[AND ACTIVITY.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
@@ -195,8 +207,18 @@
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND ACTIVITY.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND ACTIVITY.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND ACTIVITY.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
           <![CDATA[AND ACTIVITY.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
@@ -204,36 +226,46 @@
         <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
           <![CDATA[AND ACTIVITY.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
+          AND ACTIVITY.COURSE_ID IN
+          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
-      <if test="entity.remark != null and entity.remark !='' ">
+      <if test="entity.remark != null and !entity.remark.equals('') ">
         AND ACTIVITY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.createTime != null">
-        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      <if test="entity.startTime != null">
+        AND ACTIVITY.START_TIME = #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startTime == null">
         <if test="entity.startTimeStart != null">
-          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.startTimeEnd != null">
-          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.endTime != null">
-        AND ACTIVITY.END_TIME = #{entity.endTime,jdbcType=TIMESTAMP}
+        AND ACTIVITY.END_TIME = #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.endTime == null">
         <if test="entity.endTimeStart != null">
-          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.endTimeEnd != null">
-          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
+      <if test="entity.status != null and entity.status != 0">
+        AND ACTIVITY.START = #{entity.status,jdbcType=INTEGER}
+      </if>
       <if test="entity.status == null or entity.status == 0">
         <if test="entity.statusStart != null and entity.statusStart != 0">
           <![CDATA[AND ACTIVITY.START >= #{entity.statusStart,jdbcType=INTEGER}]]>
@@ -244,26 +276,26 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND ACTIVITY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
@@ -289,6 +321,7 @@
     <include refid="Activity_Base_Column_List" />
     from ACTIVITY where ACTIVITY.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -299,7 +332,7 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND ACTIVITY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ACTIVITY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -307,10 +340,13 @@
         </if>
       </if>
 
-      <if test="entity.name != null and entity.name !='' ">
+      <if test="entity.name != null and !entity.equals('') ">
         AND ACTIVITY.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND ACTIVITY.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
           <![CDATA[AND ACTIVITY.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
@@ -318,8 +354,18 @@
         <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
           <![CDATA[AND ACTIVITY.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND ACTIVITY.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND ACTIVITY.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
           <![CDATA[AND ACTIVITY.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
@@ -327,36 +373,47 @@
         <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
           <![CDATA[AND ACTIVITY.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
         </if>
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
+          AND ACTIVITY.COURSE_ID IN
+          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
       </if>
 
-      <if test="entity.remark != null and entity.remark !='' ">
-        AND ACTIVITY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
+      <if test="entity.remark != null and !entity.remark.equals('')">
+        AND ACTIVITY.REMARK LIKE " %"
+        entity.remark , jdbcType=VARCHAR} "%"
       </if>
 
-      <if test="entity.createTime != null">
-        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+      <if test="entity.startTime != null">
+        AND ACTIVITY.START_TIME = #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.startTime == null">
         <if test="entity.startTimeStart != null">
-          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.startTimeEnd != null">
-          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.endTime != null">
-        AND ACTIVITY.END_TIME = #{entity.endTime,jdbcType=TIMESTAMP}
+        AND ACTIVITY.END_TIME = #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.endTime == null">
         <if test="entity.endTimeStart != null">
-          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.endTimeEnd != null">
-          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
+      <if test="entity.status != null and entity.status != 0">
+        AND ACTIVITY.START = #{entity.status,jdbcType=INTEGER}
+      </if>
       <if test="entity.status == null or entity.status == 0">
         <if test="entity.statusStart != null and entity.statusStart != 0">
           <![CDATA[AND ACTIVITY.START >= #{entity.statusStart,jdbcType=INTEGER}]]>
@@ -367,33 +424,29 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND ACTIVITY.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
-        AND ACTIVITY.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND ACTIVITY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
-
-      <if test="entity.enabled != null and entity.enabled != 0">
-        AND ACTIVITY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
-      </if>
-      </if>
+    </if>
     ) AS
     total
   </select>

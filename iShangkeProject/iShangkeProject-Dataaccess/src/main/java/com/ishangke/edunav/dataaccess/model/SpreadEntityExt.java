@@ -9,6 +9,10 @@ public class SpreadEntityExt extends SpreadEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
+    private Set<Integer> userIdSet;
+    private Set<Integer> partnerIdSet;
+    private Set<Integer> courseIdSet;
+    private Set<Integer> statusSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
@@ -30,6 +34,30 @@ public class SpreadEntityExt extends SpreadEntity {
     }
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
+    public Set<Integer> getCourseIdSet() {
+        return courseIdSet;
+    }
+    public void setCourseIdSet(Set<Integer> courseIdSet) {
+        this.courseIdSet = courseIdSet;
+    }
+    public Set<Integer> getStatusSet() {
+        return statusSet;
+    }
+    public void setStatusSet(Set<Integer> statusSet) {
+        this.statusSet = statusSet;
     }
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;

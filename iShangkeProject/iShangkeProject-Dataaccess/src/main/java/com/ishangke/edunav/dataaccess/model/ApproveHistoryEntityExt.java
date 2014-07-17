@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.ApproveHistoryEntity;
 
@@ -8,26 +9,48 @@ public class ApproveHistoryEntityExt extends ApproveHistoryEntity {
 
     private Integer idStart;
     private Integer idEnd;
-    private Integer idSet;
+    private Set<Integer> idSet;
     private Integer typeStart;
     private Integer typeEnd;
     private Integer attachedIdStart;
     private Integer attachedIdEnd;
+    private Set<Integer> attachedIdSet;
     private Integer submitUserIdStart;
     private Integer submitUserIdEnd;
+    private Set<Integer> submitUserIdSet;
     private Integer approveUserIdStart;
     private Integer approveUserIdEnd;
+    private Set<Integer> approveUserIdSet;
     private Integer preStatusStart;
     private Integer preStatusEnd;
     private Integer postStatusStart;
     private Integer postStatusEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-    public Integer getIdSet() {
+   
+    public Set<Integer> getIdSet() {
         return idSet;
     }
-    public void setIdSet(Integer idSet) {
+    public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getAttachedIdSet() {
+        return attachedIdSet;
+    }
+    public void setAttachedIdSet(Set<Integer> attachedIdSet) {
+        this.attachedIdSet = attachedIdSet;
+    }
+    public Set<Integer> getSubmitUserIdSet() {
+        return submitUserIdSet;
+    }
+    public void setSubmitUserIdSet(Set<Integer> submitUserIdSet) {
+        this.submitUserIdSet = submitUserIdSet;
+    }
+    public Set<Integer> getApproveUserIdSet() {
+        return approveUserIdSet;
+    }
+    public void setApproveUserIdSet(Set<Integer> approveUserIdSet) {
+        this.approveUserIdSet = approveUserIdSet;
     }
     public Integer getIdStart() {
         return idStart;

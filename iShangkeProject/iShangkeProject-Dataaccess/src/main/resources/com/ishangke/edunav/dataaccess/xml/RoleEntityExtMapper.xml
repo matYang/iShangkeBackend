@@ -4,8 +4,10 @@
   <resultMap id="RoleExtMap" type="RoleEntityExt">
     <id column="ROLES_ID" property="id" jdbcType="INTEGER" />
     <result column="ROLES_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="ROLES_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ROLES_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ROLES_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ROLES_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ROLES_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ROLES_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -17,8 +19,8 @@
     ROLES.CREATE_TIME ROLES_CREATETIME,
     ROLES.ENABLED ROLES_ENABLED,
     ROLES.DELETED ROLES_DELETED
-  </sql>  
-  
+  </sql>
+
   <insert id="add" parameterType="RoleEntityExt">
 
     insert into ROLES
@@ -75,10 +77,12 @@
         NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -89,20 +93,19 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getCount" resultType="int">
+  <select id="getCount" resultType="int">
     select count(ID) from ROLES where DELETED = 0
   </select>
-  
+
   <select id="list" parameterType="map" resultMap="RoleExtMap">
     SELECT
-    <include refid="Role_Base_Column_List"/>
+    <include refid="Role_Base_Column_List" />
     from ROLES where ROLES.DELETED = 0
     <if test="entity != null">
-     
+
       <if test="entity.id != null and entity.id != 0">
         AND ROLES.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-     
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idStart != null and entity.idStart != 0">
           <![CDATA[AND ROLES.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
@@ -110,54 +113,70 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND ROLES.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-    </if>
-    
-    <if test="entity.name != null and entity.name !='' ">
-      AND ROLES.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
-    </if>
-    
-          <if test="entity.createTimeStart != null">
-          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND ROLES.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-  
-     
+      </if>
+
+      <if test="entity.name != null and entity.name !='' ">
+        AND ROLES.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND ROLES.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ROLES.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ROLES.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
+      </if>
       
-      
+      <if test="entity.createTime != null">
+        AND ROLES.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
       <if test="entity.enabled != null">
         AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-      ORDER BY
-      <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        ROLES.${listItem.columnKey} ${listItem.order}
-      </foreach>
-    </if>
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+          ROLES.${listItem.columnKey} ${listItem.order}
+        </foreach>
+      </if>
       <if test="page != null">
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
-      
+
     </if>
   </select>
-   <select id="getListCount" parameterType="map" resultType="int">
+  <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
-     select
-     <include refid="Role_Base_Column_List"/>
+    select
+    <include refid="Role_Base_Column_List" />
     from ROLES where ROLES.DELETED = 0
     <if test="entity != null">
-     
+
       <if test="entity.id != null and entity.id != 0">
         AND ROLES.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-     
+
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idStart != null and entity.idStart != 0">
           <![CDATA[AND ROLES.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
@@ -165,31 +184,31 @@
         <if test="entity.idEnd != null and entity.idEnd != 0">
           <![CDATA[AND ROLES.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
         </if>
-    </if>
-    
-    <if test="entity.name != null and entity.name !='' ">
-      AND ROLES.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
-    </if>
-      
-        <if test="entity.createTimeStart != null">
-          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-     
-        <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ROLES.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,jdbcType=TIMESTAMP}]]>
-        </if>
-      
-      
+      </if>
+
+      <if test="entity.name != null and entity.name !='' ">
+        AND ROLES.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.createTimeStart != null">
+          <![CDATA[AND ROLES.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+      <if test="entity.createTimeEnd != null">
+          <![CDATA[AND ROLES.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+
+      <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND ROLES.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+      <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND ROLES.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+
+
       <if test="entity.enabled != null">
         AND ROLES.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
     ) AS total
-    </select>
+  </select>
 </mapper>

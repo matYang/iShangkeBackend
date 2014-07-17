@@ -7,8 +7,10 @@
     <result column="WITHDRAW_PAYEEID" property="payeeId" jdbcType="VARCHAR" />
     <result column="WITHDRAW_PEYEENAME" property="peyeeName" jdbcType="VARCHAR" />
     <result column="WITHDRAW_TYPE" property="type" jdbcType="INTEGER" />
-    <result column="WITHDRAW_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="WITHDRAW_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="WITHDRAW_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="WITHDRAW_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="WITHDRAW_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="WITHDRAW_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -85,13 +87,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
-  
+
   <update id="deleteById" parameterType="java.lang.Integer">
     update WITHDRAW set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
-  
+
   <update id="update" parameterType="WithdrawEntityExt">
     update WITHDRAW
     <set>
@@ -108,10 +110,12 @@
         TYPE = #{type,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -122,11 +126,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <select id="getCount" resultType="int">
     select count(ID) from WITHDRAW where DELETED = 0
   </select>
-  
+
   <select id="list" parameterType="map" resultMap="WithdrawExtMap">
     select
     <include refid="Withdraw_Base_Column_List"></include>
@@ -145,8 +149,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND WITHDRAW.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -154,38 +157,60 @@
       <if test="entity.userId != null and entity.userId != 0">
         AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
-      <if test="entity.peyeeName != null and entity.peyeeName != ''">
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet.size() > 0">
+          AND WITHDRAW.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+       <if test="entity.peyeeId != null and !entity.peyeeId.equals('')">
+        AND WITHDRAW.PEYEE_ID LIKE "%"#{entity.peyeeId,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
         AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
-
+      <if test="entity.type != null and entity.type != 0">
+        AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}
+      </if>
+      <if test="entity.type == null or entity.type == 0">
+        <if test="entity.typeSet.size() > 0">
+          AND WITHDRAW.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
       <if test="entity.lastModifyTime != null">
-        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
-        AND WITHDRAW.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND WITHDRAW.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND WITHDRAW.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND WITHDRAW.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.enabled != null">
         AND WITHDRAW.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">
           WITHDRAW.${listItem.columnKey} ${listItem.order}
@@ -196,10 +221,10 @@
       </if>
     </if>
   </select>
-   <select id="getListCount" parameterType="map" resultType="int">
+  <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-        <include refid="Withdraw_Base_Column_List"></include>
+    <include refid="Withdraw_Base_Column_List"></include>
     from WITHDRAW WITHDRAW
     where WITHDRAW.DELETED = 0
     <if test="entity != null">
@@ -215,8 +240,7 @@
         </if>
         <if test="entity.idSet.size() > 0">
           AND WITHDRAW.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -224,39 +248,48 @@
       <if test="entity.userId != null and entity.userId != 0">
         AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
-      <if test="entity.peyeeName != null and entity.peyeeName != ''">
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet.size() > 0">
+          AND WITHDRAW.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
         AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,jdbcType=TIMESTAMP}
+        AND WITHDRAW.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
-        AND WITHDRAW.CREATE_TIME = #{entity.createTime,jdbcType=TIMESTAMP}
+        AND WITHDRAW.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND WITHDRAW.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND WITHDRAW.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+          <![CDATA[AND WITHDRAW.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.enabled != null">
         AND WITHDRAW.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      </if>
-      ) AS
+    </if>
+    ) AS
     total
   </select>
 </mapper>

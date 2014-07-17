@@ -19,9 +19,9 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 
-@TestExecutionListeners(listeners = {
-        DependencyInjectionTestExecutionListener.class,
-        OrderEntityExtTest.class })
+//@TestExecutionListeners(listeners = {
+//        DependencyInjectionTestExecutionListener.class,
+//        OrderEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -30,10 +30,10 @@ public class OrderEntityExtTest extends BaseTest {
     private OrderEntityExtMapper orderEntityExtMapper;
 
     // resource里面
-    public OrderEntityExtTest() {
-        scriptAfterClass = "OrderEntityExtTestAfter.sql";
-        scriptBeforeClass = "OrderEntityExtTestBefore.sql";
-    }
+//    public OrderEntityExtTest() {
+//        scriptAfterClass = "OrderEntityExtTestAfter.sql";
+//        scriptBeforeClass = "OrderEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {

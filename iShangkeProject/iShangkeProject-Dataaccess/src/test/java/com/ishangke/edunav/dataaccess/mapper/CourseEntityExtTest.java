@@ -20,7 +20,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
@@ -28,10 +28,10 @@ public class CourseEntityExtTest extends BaseTest{
     @Autowired
     private CourseEntityExtMapper courseEntityExtMapper;
     
-    public CourseEntityExtTest() {
-        scriptAfterClass = "CourseEntityExtTestAfter.sql";
-        scriptBeforeClass = "CourseEntityExtTestBefore.sql";
-    }
+//    public CourseEntityExtTest() {
+//        scriptAfterClass = "CourseEntityExtTestAfter.sql";
+//        scriptBeforeClass = "CourseEntityExtTestBefore.sql";
+//    }
 
     @Test
     public void testAdd() {

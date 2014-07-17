@@ -5,8 +5,10 @@
     <id column="COUPONHISTORY_ID" property="id" jdbcType="INTEGER" />
     <result column="COUPONHISTORY_COUPONID" property="couponId" jdbcType="INTEGER" />
     <result column="COUPONHISTORY_CHARGE" property="charge" jdbcType="DOUBLE" />
-    <result column="COUPONHISTORY_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COUPONHISTORY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COUPONHISTORY_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COUPONHISTORY_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COUPONHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="CouponHistory_Base_Column_List">
@@ -77,10 +79,12 @@
         CHARGE = #{charge,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
@@ -114,28 +118,61 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.couponId != null and entity.couponId != 0">
         AND COUPON_HISTORY.COUPON_ID = #{entity.couponId,jdbcType=INTEGER}
       </if>
-      <if test="entity.charge != null and entity.charge != 0">
-        AND COUPON_HISTORY.CHARGE = #{entity.charge,jdbcType=DOUBLE}
-      </if>    
-     
-        <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+      <if test="entity.couponId == null or entity.couponId == 0">
+        <if test="entity.couponIdStart != null and entity.couponIdStart != 0">
+          <![CDATA[AND COUPON_HISTORY.COUPON_ID >= #{entity.couponIdStart,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
-        </if>     
-     
-        <if test="entity.createTimeStart != null">
-          <![CDATA[AND COUPON_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
+        <if test="entity.couponIdEnd != null and entity.couponIdEnd != 0">
+          <![CDATA[AND COUPON_HISTORY.COUPON_ID <= #{entity.couponIdEnd,jdbcType=INTEGER}]]>
         </if>
-        <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COUPON_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        <if test="entity.couponIdSet.size() > 0">
+          AND COUPON_HISTORY.COUPON_ID IN
+          <foreach collection="entity.couponIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
-    
+
+      <if test="entity.charge != null and entity.charge != 0">
+        AND COUPON_HISTORY.CHARGE = #{entity.charge,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.charge == null or entity.charge == 0">
+        <if test="entity.chargeStart != null and entity.chargeStart != 0">
+          <![CDATA[AND COUPON_HISTORY.CHARGE >= #{entity.chargeStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.chargeEnd != null and entity.chargeEnd != 0">
+          <![CDATA[AND COUPON_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND COUPON_HISTORY.LAST_MODIFY_TIME =
+        #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+      <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND COUPON_HISTORY.CREATE_TIME =
+        #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTimeStart != null">
+          <![CDATA[AND COUPON_HISTORY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+      <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COUPON_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+    </if>
+
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -172,27 +209,60 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.couponId != null and entity.couponId != 0">
-        AND COUPON_HISTORY.COUPON_ID = #{entity.couponId,jdbcType=INTEGER}
+        AND COUPON_HISTORY.COUPON_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
+      <if test="entity.couponId == null or entity.couponId == 0">
+        <if test="entity.couponIdStart != null and entity.couponIdStart != 0">
+          <![CDATA[AND COUPON_HISTORY.COUPON_ID >= #{entity.couponIdStart,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.couponIdEnd != null and entity.couponIdEnd != 0">
+          <![CDATA[AND COUPON_HISTORY.COUPON_ID <= #{entity.couponIdEnd,jdbcType=INTEGER}]]>
+        </if>
+        <if test="entity.couponIdSet.size() > 0">
+          AND COUPON_HISTORY.COUPON_ID IN
+          <foreach collection="entity.couponIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.charge != null and entity.charge != 0">
-        AND COUPON_HISTORY.CHARGE = #{entity.charge,jdbcType=DOUBLE}
-      </if>    
-     
-        <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
+        AND COUPON_HISTORY.CHARGE = #{entity.withdrawId,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.charge == null or entity.charge == 0">
+        <if test="entity.chargeStart != null and entity.chargeStart != 0">
+          <![CDATA[AND COUPON_HISTORY.CHARGE >= #{entity.chargeStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTime,jdbcType=TIMESTAMP}]]>
-        </if>     
-     
-        <if test="entity.createTimeStart != null">
-          <![CDATA[AND COUPON_HISTORY.CREATE_TIME >= #{entity.createTimeStart,jdbcType=TIMESTAMP}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
-          <![CDATA[AND COUPON_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,jdbcType=TIMESTAMP}]]>
+        <if test="entity.chargeEnd != null and entity.chargeEnd != 0">
+          <![CDATA[AND COUPON_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND COUPON_HISTORY.LAST_MODIFY_TIME =
+        #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+      <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND COUPON_HISTORY.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND COUPON_HISTORY.CREATE_TIME =
+        #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTimeStart != null">
+          <![CDATA[AND COUPON_HISTORY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+      <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COUPON_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+      </if>
+    </if>
     ) AS total
   </select>
 </mapper>

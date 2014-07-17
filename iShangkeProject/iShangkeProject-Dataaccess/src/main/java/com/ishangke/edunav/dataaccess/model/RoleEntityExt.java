@@ -1,12 +1,14 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.RoleEntity;
 
 public class RoleEntityExt extends RoleEntity {
     private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
@@ -23,6 +25,12 @@ public class RoleEntityExt extends RoleEntity {
     }
     public void setIdEnd(Integer idEnd) {
         this.idEnd = idEnd;
+    }
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
     }
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;

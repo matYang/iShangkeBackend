@@ -9,6 +9,8 @@ public class WithdrawEntityExt extends WithdrawEntity {
     private Integer idStart;
     private Integer idEnd;
     private Set<Integer> idSet;
+    private Set<Integer> userIdSet;
+    private Set<Integer> typeSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
@@ -30,6 +32,18 @@ public class WithdrawEntityExt extends WithdrawEntity {
     }
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
+    }
+    public Set<Integer> getTypeSet() {
+        return typeSet;
+    }
+    public void setTypeSet(Set<Integer> typeSet) {
+        this.typeSet = typeSet;
     }
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;

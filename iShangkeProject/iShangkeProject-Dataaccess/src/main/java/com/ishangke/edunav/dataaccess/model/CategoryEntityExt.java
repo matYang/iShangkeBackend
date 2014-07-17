@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.CategoryEntity;
 
@@ -8,6 +9,7 @@ public class CategoryEntityExt extends CategoryEntity {
 
     private Integer idStart;
     private Integer idEnd;
+    private Set<Integer> idSet;
     private Integer rankStart;
     private Integer rankEnd;
     private Calendar lastModifyTimeStart;
@@ -15,6 +17,12 @@ public class CategoryEntityExt extends CategoryEntity {
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     
+    public Set<Integer> getIdSet() {
+        return idSet;
+    }
+    public void setIdSet(Set<Integer> idSet) {
+        this.idSet = idSet;
+    }
     public Integer getIdStart() {
         return idStart;
     }

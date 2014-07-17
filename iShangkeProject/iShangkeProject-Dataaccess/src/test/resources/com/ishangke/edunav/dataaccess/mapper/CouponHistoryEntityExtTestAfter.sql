@@ -1,1 +1,0 @@
-DELETE FROM `coupon_history` WHERE CHARGE = 2.0;

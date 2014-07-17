@@ -10,6 +10,9 @@ public class CourseCommentEntityExt extends CourseCommentEntity {
     private Integer idEnd;
     private Set<Integer> idSet;
     
+    private Set<Integer> userIdSet;
+    private Set<Integer> courseTemplateIdSet;
+    
     private Double totalRatingStart;
     private Double totalRatingEnd;
     private Double conditionRatingStart;
@@ -42,6 +45,22 @@ public class CourseCommentEntityExt extends CourseCommentEntity {
 
     public Set<Integer> getIdSet() {
         return idSet;
+    }
+
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
+    }
+
+    public Set<Integer> getCourseTemplateIdSet() {
+        return courseTemplateIdSet;
+    }
+
+    public void setCourseTemplateIdSet(Set<Integer> courseTemplateIdSet) {
+        this.courseTemplateIdSet = courseTemplateIdSet;
     }
 
     public void setIdSet(Set<Integer> idSet) {

@@ -19,17 +19,17 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateTeacherEntityExtTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateTeacherEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 public class CourseTemplateTeacherEntityExtTest extends BaseTest{
     @Autowired
     private CourseTemplateTeacherEntityExtMapper courseTemplateTeacherEntityExtMapper;
-    public CourseTemplateTeacherEntityExtTest() {
-        scriptAfterClass = "CourseTemplateTeacherEntityExtTestAfter.sql";
-        scriptBeforeClass = "CourseTemplateTeacherEntityExtTestBefore.sql";
-    }
+//    public CourseTemplateTeacherEntityExtTest() {
+//        scriptAfterClass = "CourseTemplateTeacherEntityExtTestAfter.sql";
+//        scriptBeforeClass = "CourseTemplateTeacherEntityExtTestBefore.sql";
+//    }
     @Test
     public void testAdd() {
         CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt = new CourseTemplateTeacherEntityExt();

@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntity;
 
@@ -8,9 +9,10 @@ public class AccountHistoryEntityExt extends AccountHistoryEntity {
 
     private Integer idStart;
     private Integer idEnd;
-    private Integer idSet;
+    private Set<Integer> idSet;
     private Integer userIdStart;
     private Integer userIdEnd;
+    private Set<Integer> userIdSets;
     private Integer withdrawIdStart;
     private Integer withdrawIdEnd;
     private Double chargeStart;
@@ -20,11 +22,18 @@ public class AccountHistoryEntityExt extends AccountHistoryEntity {
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     
-    public Integer getIdSet() {
+    
+    public Set<Integer> getIdSet() {
         return idSet;
     }
-    public void setIdSet(Integer idSet) {
+    public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
+    }
+    public Set<Integer> getUserIdSets() {
+        return userIdSets;
+    }
+    public void setUserIdSets(Set<Integer> userIdSets) {
+        this.userIdSets = userIdSets;
     }
     public Integer getIdStart() {
         return idStart;
