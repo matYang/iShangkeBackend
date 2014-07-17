@@ -58,8 +58,8 @@
     BOOKING.DELETED
     BOOKING_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="BookingEntityExt">
-
     insert into BOOKING
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -178,11 +178,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!--deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update BOOKING set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="BookingEntityExt">
     update BOOKING
     <set>
@@ -248,9 +250,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!--getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from BOOKING where DELETED = 0
   </select>
+  <!--list -->
   <select id="list" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
@@ -261,13 +265,7 @@
         AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND BOOKING.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND BOOKING.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND BOOKING.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -279,13 +277,7 @@
         AND BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdStart != null and entity.userIdStart != 0">
-          <![CDATA[AND BOOKING.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
-          <![CDATA[AND BOOKING.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -298,16 +290,10 @@
         AND BOOKING.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseId == null or entity.courseId == 0">
-        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
-          <![CDATA[AND BOOKING.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
-          <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseIdSet.size() > 0">
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
+            open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -349,16 +335,18 @@
         AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
-        <if test="entity.statusStart != null">
-          <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null">
-          <![CDATA[AND BOOKING.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND PARTNER.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
       <if test="entity.scheduledTime != null">
-        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.SCHEDULED_TIME =
+        #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.scheduledTime == null">
         <if test="entity.scheduledTimeStart != null">
@@ -370,7 +358,8 @@
       </if>
 
       <if test="entity.noRefundDate != null">
-        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.NO_REFUND_DATE =
+        #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.noRefundDate == null">
         <if test="entity.noRefundDateStart != null">
@@ -382,7 +371,8 @@
       </if>
 
       <if test="entity.cashbackDate != null">
-        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.CASHBACK_DATE =
+        #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.cashbackDate == null">
         <if test="entity.cashbackDateStart != null">
@@ -397,11 +387,11 @@
         AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null">
-        <if test="entity.typeStart != null">
-          <![CDATA[AND BOOKING.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.typeEnd != null">
-          <![CDATA[AND BOOKING.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND PARTNER.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -422,7 +412,8 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.LOST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -434,7 +425,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND BOOKING.CREATE_TIME = #{entity.createTime, typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND BOOKING.CREATE_TIME = #{entity.createTime,
+        typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -444,21 +436,23 @@
           <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          BOOKING.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        BOOKING.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     SELECT
@@ -470,13 +464,7 @@
         AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND BOOKING.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND BOOKING.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND BOOKING.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -488,13 +476,7 @@
         AND BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdStart != null and entity.userIdStart != 0">
-          <![CDATA[AND BOOKING.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
-          <![CDATA[AND BOOKING.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -507,16 +489,10 @@
         AND BOOKING.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseId == null or entity.courseId == 0">
-        <if test="entity.courseIdStart != null and entity.courseIdStart != 0">
-          <![CDATA[AND BOOKING.COURSE_ID >= #{entity.courseIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseIdEnd != null and entity.courseIdEnd != 0">
-          <![CDATA[AND BOOKING.COURSE_ID <= #{entity.courseIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseIdSet.size() > 0">
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
+            open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -558,16 +534,18 @@
         AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
-        <if test="entity.statusStart != null">
-          <![CDATA[AND BOOKING.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null">
-          <![CDATA[AND BOOKING.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND PARTNER.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
       <if test="entity.scheduledTime != null">
-        AND BOOKING.SCHEDULED_TIME = #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.SCHEDULED_TIME =
+        #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.scheduledTime == null">
         <if test="entity.scheduledTimeStart != null">
@@ -579,7 +557,8 @@
       </if>
 
       <if test="entity.noRefundDate != null">
-        AND BOOKING.NO_REFUND_DATE = #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.NO_REFUND_DATE =
+        #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.noRefundDate == null">
         <if test="entity.noRefundDateStart != null">
@@ -591,7 +570,8 @@
       </if>
 
       <if test="entity.cashbackDate != null">
-        AND BOOKING.CASHBACK_DATE = #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.CASHBACK_DATE =
+        #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.cashbackDate == null">
         <if test="entity.cashbackDateStart != null">
@@ -606,11 +586,11 @@
         AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null">
-        <if test="entity.typeStart != null">
-          <![CDATA[AND BOOKING.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.typeEnd != null">
-          <![CDATA[AND BOOKING.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND PARTNER.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -631,7 +611,8 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND BOOKING.LOST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.LOST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -643,7 +624,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND BOOKING.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND BOOKING.CREATE_TIME = #{entity.createTime,
+        typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -653,6 +635,7 @@
           <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>

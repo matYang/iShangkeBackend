@@ -30,6 +30,7 @@
     SPREAD.ENABLED SPREAD_ENABLED,
     SPREAD.DELETED SPREAD_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="SpreadEntityExt">
     insert into SPREAD
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -101,11 +102,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update SPREAD set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="SpreadEntityExt">
     update SPREAD
     <set>
@@ -144,25 +147,23 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from SPREAD where DELETED = 0
   </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="SpreadExtMap">
     select
     <include refid="Spread_Base_Column_List"></include>
     from SPREAD
     where SPREAD.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND SPREAD.ID = #{entity.id,jdbcType=INTEGER}
       </if>
+
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND SPREAD.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND SPREAD.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND SPREAD.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -170,6 +171,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.userId != null and entity.userId != 0">
         AND SPREAD.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
@@ -182,6 +184,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND SPREAD.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
@@ -194,6 +197,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.courseId != null and entity.courseId != 0">
         AND SPREAD.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
@@ -206,12 +210,15 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.url != null and !entity.url.equals('')">
         AND SPREAD.URL LIKE "%"#{entity.url,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.remark != null and !entity.remark.equals('')">
         AND SPREAD.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.status != null and entity.status != 0">
         AND SPREAD.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
@@ -224,19 +231,23 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.lastModifyTime != null">
-        AND SPREAD.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND SPREAD.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND SPREAD.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND SPREAD.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND SPREAD.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND SPREAD.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.createTime != null">
-        AND SPREAD.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND SPREAD.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -246,11 +257,12 @@
           <![CDATA[AND SPREAD.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND SPREAD.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-
     </if>
+   
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -258,27 +270,24 @@
       </foreach>
     </if>
 
-    <if test="page != null">
+    <if test="page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+  <!--getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-   <include refid="Spread_Base_Column_List"></include>
+    <include refid="Spread_Base_Column_List"></include>
     from SPREAD
     where SPREAD.DELETED = 0
     <if test="entity != null">
+
       <if test="entity.id != null and entity.id != 0">
         AND SPREAD.ID = #{entity.id,jdbcType=INTEGER}
       </if>
+
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND SPREAD.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND SPREAD.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND SPREAD.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -286,6 +295,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.userId != null and entity.userId != 0">
         AND SPREAD.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
@@ -298,6 +308,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND SPREAD.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
@@ -310,6 +321,7 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.courseId != null and entity.courseId != 0">
         AND SPREAD.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
@@ -322,12 +334,15 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.url != null and !entity.url.equals('')">
         AND SPREAD.URL LIKE "%"#{entity.url,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.remark != null and !entity.remark.equals('')">
         AND SPREAD.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
+
       <if test="entity.status != null and entity.status != 0">
         AND SPREAD.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
@@ -340,19 +355,23 @@
           </foreach>
         </if>
       </if>
+
       <if test="entity.lastModifyTime != null">
-        AND SPREAD.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND SPREAD.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND SPREAD.LAST_MODIFY_TIME >= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND SPREAD.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND SPREAD.LAST_MODIFY_TIME <= #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND SPREAD.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.createTime != null">
-        AND SPREAD.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND SPREAD.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -362,10 +381,10 @@
           <![CDATA[AND SPREAD.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
+
       <if test="entity.enabled != null and entity.enabled != 0">
         AND SPREAD.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-
     </if>
     ) AS total
   </select>

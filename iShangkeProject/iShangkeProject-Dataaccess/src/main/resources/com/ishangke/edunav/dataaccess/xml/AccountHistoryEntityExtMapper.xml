@@ -7,7 +7,8 @@
     <result column="ACCOUNTHISTORY_WITHDRAWID" property="withdrawId" jdbcType="INTEGER" />
     <result column="ACCOUNTHISTORY_CHARGE" property="charge" jdbcType="DOUBLE" />
     <result column="ACCOUNTHISTORY_TYPE" property="type" jdbcType="INTEGER" />
-    <result column="ACCOUNTHISTORY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACCOUNTHISTORY_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACCOUNTHISTORY_REMARK" property="remark" jdbcType="VARCHAR" />
     <result column="ACCOUNTHISTORY_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -25,10 +26,10 @@
     ACCOUNT_HISTORY.DELETED
     ACCOUNTHISTORY_DELETED
   </sql>
+  <!--add -->
   <insert id="add" parameterType="AccountHistoryEntityExt">
     insert into ACCOUNT_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="userId != null">
         USER_ID,
       </if>
@@ -52,7 +53,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
@@ -80,12 +80,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
-
+  <!--deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update ACCOUNT_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="AccountHistoryEntityExt">
     update ACCOUNT_HISTORY
     <set>
@@ -102,7 +103,8 @@
         TYPE = #{type,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="remark != null">
         REMARK = #{remark,jdbcType=VARCHAR},
@@ -113,73 +115,57 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
+  <!--getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from ACCOUNT_HISTORY where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="AccountHistoryExtMap">
     SELECT
     <include refid="AccountHistory_Base_Column_List" />
     from ACCOUNT_HISTORY where ACCOUNT_HISTORY.DELETED = 0
     <if test="entity != null">
-    
+
       <if test="entity.id != null and entity.id != 0">
         AND ACCOUNT_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ACCOUNT_HISTORY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.userId != null and entity.userId != 0">
         AND ACCOUNT_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdStart != null and entity.userIdStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND ACCOUNT_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.withdrawId != null and entity.withdrawId != 0">
         AND ACCOUNT_HISTORY.WITHDRAW_ID = #{entity.withdrawId,jdbcType=INTEGER}
       </if>
       <if test="entity.withdrawId == null or entity.withdrawId == 0">
-        <if test="entity.withdrawIdStart != null and entity.withdrawIdStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.WITHDRAW_ID >= #{entity.withdrawIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.withdrawIdEnd != null and entity.withdrawIdEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.WITHDRAW_ID <= #{entity.withdrawIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.withdrawIdSet.size() > 0">
+        <if test="entity.withdrawIdSet != null and entity.withdrawIdSet.size() > 0">
           AND ACCOUNT_HISTORY.WITHDRAW_ID IN
-          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.charge != null and entity.charge != 0">
-        AND ACCOUNT_HISTORY.CHARGE  = #{entity.charge ,jdbcType=DOUBLE}
+        AND ACCOUNT_HISTORY.CHARGE = #{entity.charge ,jdbcType=DOUBLE}
       </if>
       <if test="entity.charge == null or entity.charge == 0">
         <if test="entity.chargeStart != null and entity.chargeStart != 0">
@@ -189,111 +175,95 @@
           <![CDATA[AND ACCOUNT_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      
+
       <if test="entity.type != null and entity.type != 0">
         AND ACCOUNT_HISTORY.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeStart != null and entity.typeStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.typeEnd != null and entity.typeEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND ACCOUNT_HISTORY.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
-        AND ACCOUNT_HISTORY.CREATE_TIME = #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND ACCOUNT_HISTORY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ACCOUNT_HISTORY.CREATE_TIME >= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND ACCOUNT_HISTORY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND ACCOUNT_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.remark != null and !entity.remark.equals('') ">
         AND ACCOUNT_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
-      
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          ACCOUNT_HISTORY.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        ACCOUNT_HISTORY.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-
+  <!--getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-   <include refid="AccountHistory_Base_Column_List" />
+    <include refid="AccountHistory_Base_Column_List" />
     from ACCOUNT_HISTORY where ACCOUNT_HISTORY.DELETED = 0
     <if test="entity != null">
-    
+
       <if test="entity.id != null and entity.id != 0">
         AND ACCOUNT_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ACCOUNT_HISTORY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.userId != null and entity.userId != 0">
         AND ACCOUNT_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdStart != null and entity.userIdStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.USER_ID >= #{entity.userIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdEnd != null and entity.userIdEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.USER_ID <= #{entity.userIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.userIdSet.size() > 0">
-          AND ACCOUNT_HISTORY.ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND ACCOUNT_HISTORY.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.withdrawId != null and entity.withdrawId != 0">
         AND ACCOUNT_HISTORY.WITHDRAW_ID = #{entity.withdrawId,jdbcType=INTEGER}
       </if>
       <if test="entity.withdrawId == null or entity.withdrawId == 0">
-        <if test="entity.withdrawIdStart != null and entity.withdrawIdStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.WITHDRAW_ID >= #{entity.withdrawIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.withdrawIdEnd != null and entity.withdrawIdEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.WITHDRAW_ID <= #{entity.withdrawIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.withdrawIdSet.size() > 0">
-          AND ACCOUNT_HISTORY.ID IN
-          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")" separator=",">
+        <if test="entity.withdrawIdSet != null and entity.withdrawIdSet.size() > 0">
+          AND ACCOUNT_HISTORY.WITHDRAW_ID IN
+          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.charge != null and entity.charge != 0">
-        AND ACCOUNT_HISTORY.WITHDRAW_ID = #{entity.withdrawId,jdbcType=DOUBLE}
+        AND ACCOUNT_HISTORY.CHARGE = #{entity.charge ,jdbcType=DOUBLE}
       </if>
       <if test="entity.charge == null or entity.charge == 0">
         <if test="entity.chargeStart != null and entity.chargeStart != 0">
@@ -303,35 +273,36 @@
           <![CDATA[AND ACCOUNT_HISTORY.CHARGE <= #{entity.chargeEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-      
+
       <if test="entity.type != null and entity.type != 0">
-        AND ACCOUNT_HISTORY.TYPE =  #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND ACCOUNT_HISTORY.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeStart != null and entity.typeStart != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.typeEnd != null and entity.typeEnd != 0">
-          <![CDATA[AND ACCOUNT_HISTORY.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND ACCOUNT_HISTORY.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
-      
+
       <if test="entity.createTime != null">
-        AND ACCOUNT_HISTORY.CREATE_TIME = #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND ACCOUNT_HISTORY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ACCOUNT_HISTORY.CREATE_TIME >= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND ACCOUNT_HISTORY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
           <![CDATA[AND ACCOUNT_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.remark != null and !entity.remark.equals('') ">
         AND ACCOUNT_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
-      </if>
+    </if>
     ) AS total
   </select>
 </mapper>

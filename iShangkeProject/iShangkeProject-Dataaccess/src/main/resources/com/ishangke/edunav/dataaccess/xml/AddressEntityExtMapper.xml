@@ -27,10 +27,10 @@
     ADDRESS.ENABLED ADDRESS_ENABLED,
     ADDRESS.DELETED ADDRESS_DELETED
   </sql>
+  <!--add -->
   <insert id="add" parameterType="AddressEntityExt">
     insert into ADDRESS
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="partnerId != null">
         PARTNER_ID,
       </if>
@@ -57,7 +57,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="partnerId != null">
         #{partnerId,jdbcType=INTEGER},
       </if>
@@ -88,11 +87,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!--deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update ADDRESS set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="AddressEntityExt">
     update ADDRESS
     <set>
@@ -125,11 +126,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from ADDRESS where DELETED = 0
   </select>
-
-
+  <!--list -->
   <select id="list" parameterType="map" resultMap="AddressExtMap">
     SELECT
     <include refid="Address_Base_Column_List" />
@@ -140,12 +141,6 @@
         AND ADDRESS.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ADDRESS.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ADDRESS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ADDRESS.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -158,12 +153,6 @@
         AND ADDRESS.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND ADDRESS.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND ADDRESS.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND ADDRESS.PARTNER_ID IN
           <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
@@ -188,6 +177,7 @@
           <![CDATA[AND ADDRESS.LAT <= #{entity.latEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.lng != null">
         AND ADDRESS.LNG = #{entity.lng,jdbcType=DOUBLE}
       </if>
@@ -200,9 +190,9 @@
         </if>
       </if>
 
-
       <if test="entity.createTime != null">
-        AND ADDRESS.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ADDRESS.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -213,7 +203,8 @@
         </if>
       </if>
       <if test="entity.lastModifyTime != null">
-        AND ADDRESS.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ADDRESS.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -227,19 +218,19 @@
       <if test="entity.enabled != null">
         AND ADDRESS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        ADDRESS.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
 
-      <if test="page != null">
-        <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
-          ORDER BY
-          <foreach collection="page.orderByEntities" item="listItem" separator=",">
-            ADDRESS.${listItem.columnKey} ${listItem.order}
-          </foreach>
-        </if>
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
@@ -251,12 +242,6 @@
         AND ADDRESS.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND ADDRESS.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND ADDRESS.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND ADDRESS.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
@@ -269,12 +254,6 @@
         AND ADDRESS.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND ADDRESS.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND ADDRESS.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND ADDRESS.PARTNER_ID IN
           <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
@@ -299,6 +278,7 @@
           <![CDATA[AND ADDRESS.LAT <= #{entity.latEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+
       <if test="entity.lng != null">
         AND ADDRESS.LNG = #{entity.lng,jdbcType=DOUBLE}
       </if>
@@ -312,7 +292,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND ADDRESS.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ADDRESS.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -323,7 +304,8 @@
         </if>
       </if>
       <if test="entity.lastModifyTime != null">
-        AND ADDRESS.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND ADDRESS.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -340,5 +322,4 @@
     </if>
     ) AS total
   </select>
-
 </mapper>

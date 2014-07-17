@@ -29,11 +29,10 @@
     APPROVE_HISTORY.DELETED
     APPROVEHISTORY_DELETED
   </sql>
+  <!--add -->
   <insert id="add" parameterType="ApproveHistoryEntityExt">
-
     insert into APPROVE_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="type != null">
         TYPE,
       </if>
@@ -63,7 +62,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
@@ -92,16 +90,20 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
+
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT
       LAST_INSERT_ID()
     </selectKey>
+
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update APPROVE_HISTORY set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="ApproveHistoryEntityExt">
     update APPROVE_HISTORY
     <set>
@@ -136,27 +138,21 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from APPROVE_HISTORY where DELETED = 0
   </select>
-
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="ApproveHistoryExtMap">
     SELECT
     <include refid="ApproveHistory_Base_Column_List" />
     from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0
     <if test="entity != null">
-
       <if test="entity.id != null and entity.id != 0">
         AND APPROVE_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND APPROVE_HISTORY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -168,11 +164,11 @@
         AND APPROVE_HISTORY.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeStart != null and entity.typeStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.typeEnd != null and entity.typeEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND APPROVE_HISTORY.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -180,13 +176,7 @@
         AND APPROVE_HISTORY.ATTACHED_ID = #{entity.attachedId,jdbcType=INTEGER}
       </if>
       <if test="entity.attachedId == null or entity.attachedId == 0">
-        <if test="entity.attachedIdStart != null and entity.attachedIdStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.ATTACHED_ID >= #{entity.attachedIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.attachedIdEnd != null and entity.attachedIdEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.ATTACHED_ID <= #{entity.attachedIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.attachedIdSet.size() > 0">
+        <if test="entity.attachedIdSet != null and entity.attachedIdSet.size() > 0">
           AND APPROVE_HISTORY.ATTACHED_ID IN
           <foreach collection="entity.attachedIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -199,13 +189,7 @@
         AND APPROVE_HISTORY.SUBMIT_USER_ID = #{entity.submitUserId,jdbcType=INTEGER}
       </if>
       <if test="entity.submitUserId == null or entity.submitUserId == 0">
-        <if test="entity.submitUserIdStart != null and entity.submitUserIdStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.SUBMIT_USER_ID >= #{entity.submitUserIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.submitUserIdEnd != null and entity.submitUserIdEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.SUBMIT_USER_ID <= #{entity.submitUserIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.submitUserIdSet.size() > 0">
+        <if test="entity.submitUserIdSet != null and entity.submitUserIdSet.size() > 0">
           AND APPROVE_HISTORY.SUBMIT_USER_ID IN
           <foreach collection="entity.submitUserIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -218,13 +202,7 @@
         AND APPROVE_HISTORY.APPROVE_USER_ID = #{entity.approveUserId,jdbcType=INTEGER}
       </if>
       <if test="entity.approveUserId == null or entity.type == 0">
-        <if test="entity.approveUserIdStart != null and entity.approveUserIdStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.APPROVE_USER_ID >= #{entity.approveUserIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.approveUserIdEnd != null and entity.approveUserIdEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.APPROVE_USER_ID <= #{entity.approveUserIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.approveUserIdSet.size() > 0">
+        <if test="entity.approveUserIdSet != null and entity.approveUserIdSet.size() > 0">
           AND APPROVE_HISTORY.APPROVE_USER_ID IN
           <foreach collection="entity.approveUserIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -237,11 +215,12 @@
         AND APPROVE_HISTORY.PER_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
       <if test="entity.preStatus == null or entity.type == 0">
-        <if test="entity.preStatusStart != null and entity.preStatusStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.PER_STATUS >= #{entity.preStatusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.preStatusEnd != null and entity.preStatusEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.PER_STATUS <= #{entity.preStatusEnd,jdbcType=INTEGER}]]>
+        <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
+          AND APPROVE_HISTORY.PER_STATUS IN
+          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -249,11 +228,12 @@
         AND APPROVE_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
       <if test="entity.postStatus == null or entity.type == 0">
-        <if test="entity.postStatusStart != null and entity.postStatusStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.POST_STATUS >= #{entity.postStatusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.postStatusEnd != null and entity.postStatusEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.POST_STATUS <= #{entity.postStatusEnd,jdbcType=INTEGER}]]>
+        <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
+          AND APPROVE_HISTORY.POST_STATUS IN
+          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -262,7 +242,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND APPROVE_HISTORY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND APPROVE_HISTORY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -272,37 +253,30 @@
           <![CDATA[AND APPROVE_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        APPROVE_HISTORY.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
 
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          APPROVE_HISTORY.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-
+  <!--getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-      <include refid="ApproveHistory_Base_Column_List" />
+    <include refid="ApproveHistory_Base_Column_List" />
     from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0
     <if test="entity != null">
-
       <if test="entity.id != null and entity.id != 0">
         AND APPROVE_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND APPROVE_HISTORY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -314,11 +288,11 @@
         AND APPROVE_HISTORY.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
       <if test="entity.type == null or entity.type == 0">
-        <if test="entity.typeStart != null and entity.typeStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.TYPE >= #{entity.typeStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.typeEnd != null and entity.typeEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.TYPE <= #{entity.typeEnd,jdbcType=INTEGER}]]>
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND APPROVE_HISTORY.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -326,13 +300,7 @@
         AND APPROVE_HISTORY.ATTACHED_ID = #{entity.attachedId,jdbcType=INTEGER}
       </if>
       <if test="entity.attachedId == null or entity.attachedId == 0">
-        <if test="entity.attachedIdStart != null and entity.attachedIdStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.ATTACHED_ID >= #{entity.attachedIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.attachedIdEnd != null and entity.attachedIdEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.ATTACHED_ID <= #{entity.attachedIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.attachedIdSet.size() > 0">
+        <if test="entity.attachedIdSet != null and entity.attachedIdSet.size() > 0">
           AND APPROVE_HISTORY.ATTACHED_ID IN
           <foreach collection="entity.attachedIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -345,15 +313,9 @@
         AND APPROVE_HISTORY.SUBMIT_USER_ID = #{entity.submitUserId,jdbcType=INTEGER}
       </if>
       <if test="entity.submitUserId == null or entity.submitUserId == 0">
-        <if test="entity.submitUserIdStart != null and entity.submitUserIdStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.SUBMIT_USER_ID >= #{entity.submitUserIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.submitUserIdEnd != null and entity.submitUserIdEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.SUBMIT_USER_ID <= #{entity.submitUserIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.submitUserIdEnd.size() > 0">
+        <if test="entity.submitUserIdSet != null and entity.submitUserIdSet.size() > 0">
           AND APPROVE_HISTORY.SUBMIT_USER_ID IN
-          <foreach collection="entity.submitUserIdEnd" item="listItem" open="(" close=")"
+          <foreach collection="entity.submitUserIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
@@ -364,15 +326,9 @@
         AND APPROVE_HISTORY.APPROVE_USER_ID = #{entity.approveUserId,jdbcType=INTEGER}
       </if>
       <if test="entity.approveUserId == null or entity.type == 0">
-        <if test="entity.approveUserIdStart != null and entity.approveUserIdStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.APPROVE_USER_ID >= #{entity.approveUserIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.approveUserIdEnd != null and entity.approveUserIdEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.APPROVE_USER_ID <= #{entity.approveUserIdEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.approveUserIdEnd.size() > 0">
+        <if test="entity.approveUserIdSet != null and entity.approveUserIdSet.size() > 0">
           AND APPROVE_HISTORY.APPROVE_USER_ID IN
-          <foreach collection="entity.approveUserIdEnd" item="listItem" open="(" close=")"
+          <foreach collection="entity.approveUserIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
@@ -383,11 +339,12 @@
         AND APPROVE_HISTORY.PER_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
       <if test="entity.preStatus == null or entity.type == 0">
-        <if test="entity.preStatusStart != null and entity.preStatusStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.PER_STATUS >= #{entity.preStatusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.preStatusEnd != null and entity.preStatusEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.PER_STATUS <= #{entity.preStatusEnd,jdbcType=INTEGER}]]>
+        <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
+          AND APPROVE_HISTORY.PER_STATUS IN
+          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -395,11 +352,12 @@
         AND APPROVE_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
       <if test="entity.postStatus == null or entity.type == 0">
-        <if test="entity.postStatusStart != null and entity.postStatusStart != 0">
-          <![CDATA[AND APPROVE_HISTORY.POST_STATUS >= #{entity.postStatusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.postStatusEnd != null and entity.postStatusEnd != 0">
-          <![CDATA[AND APPROVE_HISTORY.POST_STATUS <= #{entity.postStatusEnd,jdbcType=INTEGER}]]>
+        <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
+          AND APPROVE_HISTORY.POST_STATUS IN
+          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
 
@@ -408,7 +366,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND APPROVE_HISTORY.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        AND APPROVE_HISTORY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -418,7 +377,7 @@
           <![CDATA[AND APPROVE_HISTORY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
-   </if>
+    </if>
     ) AS total
   </select>
 
