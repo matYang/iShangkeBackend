@@ -7,31 +7,17 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.CourseEntity;
 
 public class CourseEntityExt extends CourseEntity {
-    private Integer idStart;
-    private Integer idEnd;
     private Set<Integer> idSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-
-    private Integer categoryIdStart;
-    private Integer categoryIdEnd;
     private Set<Integer> categoryIdSet;
-    private Integer locationIdStart;
-    private Integer locationIdEnd;
     private Set<Integer> locationIdSet;
-    private Integer circleIdStart;
-    private Integer circleIdEnd;
     private Set<Integer> circleIdSet;
-    private Integer partnerIdStart;
-    private Integer partnerIdEnd;
     private Set<Integer> partnerIdSet;
-    private Integer statusStart;
-    private Integer statusEnd;
     private Set<Integer> statusSet;
-    private Integer courseTemplateIdStart;
-    private Integer courseTemplateIdEnd;
+    private Set<Integer> courseTemplateIdSet;
     private Double priceStart;
     private Double priceEnd;
     private Double originalPriceStart;
@@ -40,32 +26,29 @@ public class CourseEntityExt extends CourseEntity {
     private Double cashbackEnd;
     private Integer popularityStart;
     private Integer popularityEnd;
+    private Set<Integer> popularitySet;
     private Integer courseHourNumStart;
     private Integer courseHourNumEnd;
+    private Set<Integer> courseHourNumSet;
     private Calendar startDateStart;
     private Calendar startDateEnd;
     private Calendar finishDateStart;
     private Calendar finishDateEnd;
     private Calendar cutoffDateStart;
     private Calendar cutoffDateEnd;
-
-    private Integer classTypeStart;
-    private Integer classTypeEnd;
     private Set<Integer> classTypeSet;
     private Double discountStart;
     private Double discountEnd;
-    
-    
-    
-    //not being used as search criteria here
+
+    // not being used as search criteria here
     private Double rating;
     private Integer bookingTotal;
-    
-    //concrete information
+
+    // concrete information
     private List<TeacherEntityExt> teacherList;
     private List<ClassPhotoEntityExt> classPhotoList;
-    
-    //placing values identified by FK here, and this is really ugly
+
+    // placing values identified by FK here, and this is really ugly
     private String logoUrl;
     private String wholeName;
     private String instName;
@@ -73,7 +56,7 @@ public class CourseEntityExt extends CourseEntity {
     private Integer partnerQualification;
     private String partnerDistinction;
     private Double partnerRating;
-    
+
     private String address;
     private Double addressLat;
     private Double addressLng;
@@ -84,23 +67,6 @@ public class CourseEntityExt extends CourseEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
-    
-
-    public Integer getIdStart() {
-        return idStart;
-    }
-
-    public void setIdStart(Integer idStart) {
-        this.idStart = idStart;
-    }
-
-    public Integer getIdEnd() {
-        return idEnd;
-    }
-
-    public void setIdEnd(Integer idEnd) {
-        this.idEnd = idEnd;
-    }
 
     public Set<Integer> getIdSet() {
         return idSet;
@@ -270,44 +236,12 @@ public class CourseEntityExt extends CourseEntity {
         this.circleName = circleName;
     }
 
-    public Integer getCategoryIdStart() {
-        return categoryIdStart;
-    }
-
-    public void setCategoryIdStart(Integer categoryIdStart) {
-        this.categoryIdStart = categoryIdStart;
-    }
-
-    public Integer getCategoryIdEnd() {
-        return categoryIdEnd;
-    }
-
-    public void setCategoryIdEnd(Integer categoryIdEnd) {
-        this.categoryIdEnd = categoryIdEnd;
-    }
-
     public Set<Integer> getCategoryIdSet() {
         return categoryIdSet;
     }
 
     public void setCategoryIdSet(Set<Integer> categoryIdSet) {
         this.categoryIdSet = categoryIdSet;
-    }
-
-    public Integer getLocationIdStart() {
-        return locationIdStart;
-    }
-
-    public void setLocationIdStart(Integer locationIdStart) {
-        this.locationIdStart = locationIdStart;
-    }
-
-    public Integer getLocationIdEnd() {
-        return locationIdEnd;
-    }
-
-    public void setLocationIdEnd(Integer locationIdEnd) {
-        this.locationIdEnd = locationIdEnd;
     }
 
     public Set<Integer> getLocationIdSet() {
@@ -318,44 +252,12 @@ public class CourseEntityExt extends CourseEntity {
         this.locationIdSet = locationIdSet;
     }
 
-    public Integer getCircleIdStart() {
-        return circleIdStart;
-    }
-
-    public void setCircleIdStart(Integer circleIdStart) {
-        this.circleIdStart = circleIdStart;
-    }
-
-    public Integer getCircleIdEnd() {
-        return circleIdEnd;
-    }
-
-    public void setCircleIdEnd(Integer circleIdEnd) {
-        this.circleIdEnd = circleIdEnd;
-    }
-
     public Set<Integer> getCircleIdSet() {
         return circleIdSet;
     }
 
     public void setCircleIdSet(Set<Integer> circleIdSet) {
         this.circleIdSet = circleIdSet;
-    }
-
-    public Integer getPartnerIdStart() {
-        return partnerIdStart;
-    }
-
-    public void setPartnerIdStart(Integer partnerIdStart) {
-        this.partnerIdStart = partnerIdStart;
-    }
-
-    public Integer getPartnerIdEnd() {
-        return partnerIdEnd;
-    }
-
-    public void setPartnerIdEnd(Integer partnerIdEnd) {
-        this.partnerIdEnd = partnerIdEnd;
     }
 
     public Set<Integer> getPartnerIdSet() {
@@ -366,44 +268,12 @@ public class CourseEntityExt extends CourseEntity {
         this.partnerIdSet = partnerIdSet;
     }
 
-    public Integer getStatusStart() {
-        return statusStart;
-    }
-
-    public void setStatusStart(Integer statusStart) {
-        this.statusStart = statusStart;
-    }
-
-    public Integer getStatusEnd() {
-        return statusEnd;
-    }
-
-    public void setStatusEnd(Integer statusEnd) {
-        this.statusEnd = statusEnd;
-    }
-
     public Set<Integer> getStatusSet() {
         return statusSet;
     }
 
     public void setStatusSet(Set<Integer> statusSet) {
         this.statusSet = statusSet;
-    }
-
-    public Integer getCourseTemplateIdStart() {
-        return courseTemplateIdStart;
-    }
-
-    public void setCourseTemplateIdStart(Integer courseTemplateIdStart) {
-        this.courseTemplateIdStart = courseTemplateIdStart;
-    }
-
-    public Integer getCourseTemplateIdEnd() {
-        return courseTemplateIdEnd;
-    }
-
-    public void setCourseTemplateIdEnd(Integer courseTemplateIdEnd) {
-        this.courseTemplateIdEnd = courseTemplateIdEnd;
     }
 
     public Double getPriceStart() {
@@ -558,22 +428,6 @@ public class CourseEntityExt extends CourseEntity {
         this.addressLng = addressLng;
     }
 
-    public Integer getClassTypeStart() {
-        return classTypeStart;
-    }
-
-    public void setClassTypeStart(Integer classTypeStart) {
-        this.classTypeStart = classTypeStart;
-    }
-
-    public Integer getClassTypeEnd() {
-        return classTypeEnd;
-    }
-
-    public void setClassTypeEnd(Integer classTypeEnd) {
-        this.classTypeEnd = classTypeEnd;
-    }
-
     public Set<Integer> getClassTypeSet() {
         return classTypeSet;
     }
@@ -613,6 +467,29 @@ public class CourseEntityExt extends CourseEntity {
     public void setBookingTotal(Integer bookingTotal) {
         this.bookingTotal = bookingTotal;
     }
-    
-    
+
+    public Set<Integer> getCourseTemplateIdSet() {
+        return courseTemplateIdSet;
+    }
+
+    public void setCourseTemplateIdSet(Set<Integer> courseTemplateIdSet) {
+        this.courseTemplateIdSet = courseTemplateIdSet;
+    }
+
+    public Set<Integer> getPopularitySet() {
+        return popularitySet;
+    }
+
+    public void setPopularitySet(Set<Integer> popularitySet) {
+        this.popularitySet = popularitySet;
+    }
+
+    public Set<Integer> getCourseHourNumSet() {
+        return courseHourNumSet;
+    }
+
+    public void setCourseHourNumSet(Set<Integer> courseHourNumSet) {
+        this.courseHourNumSet = courseHourNumSet;
+    }
+
 }
