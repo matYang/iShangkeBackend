@@ -135,6 +135,20 @@ public class ManagerErrorCode {
     public static final String ACCOUONT_NOTFOUND_ERROR_KEY = "account_notfound_error";
     
     //activity
+    public static final int ACTIVITY_CREATE_ERROR = 0x000A0001;
+    public static final String ACTIVITY_CREATE_ERROR_KEY = "activity_create_error";
+    public static final int ACTIVITY_SUBMIT_ERROR = 0x000A0002;
+    public static final String ACTIVITY_SUBMIT_ERROR_KEY = "activity_submit_error";
+    public static final int ACTIVITY_APPROVE_ERROR = 0x000A0003;
+    public static final String ACTIVITY_APPROVE_ERROR_KEY = "activity_approve_error";
+    public static final int ACTIVITY_REJECT_ERROR = 0x000A0004;
+    public static final String ACTIVITY_REJECT_ERROR_KEY = "activity_reject_error";
+    public static final int ACTIVITY_CANCEL_ERROR = 0x000A0005;
+    public static final String ACTIVITY_CANCEL_ERROR_KEY = "activity_cancel_error";
+    public static final int ACTIVITY_DELETE_ERROR = 0x000A0006;
+    public static final String ACTIVITY_DELETE_ERROR_KEY = "activity_delete_error";
+    public static final int ACTIVITY_QUERY_ERROR = 0x000A0007;
+    public static final String ACTIVITY_QUERY_ERROR_KEY = "activity_query_error";
     public static final int ACTIVITY_NOTFOUND_ERROR = 0x000A0404;
     public static final String ACTIVITY_NOTFOUND_ERROR_KEY = "activity_notfound_error";
     
