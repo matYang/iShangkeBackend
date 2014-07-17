@@ -12,7 +12,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.CouponManager;
 
 public class CouponManagerImpl implements CouponManager{
-	private static final Logger LOGGER = LoggerFactory.getLogger(AccountManagerImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CouponManagerImpl.class);
 
 	@Override
 	public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) {
