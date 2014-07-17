@@ -14,5 +14,5 @@ service LocationService {
      *  @return Category实体 LocationBo 列表
      *
      */
-    common.ResponseBo query(1: location.LocationBo locationBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<location.LocationBo> query(1: location.LocationBo locationBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }
