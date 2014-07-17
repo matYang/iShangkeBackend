@@ -5,93 +5,86 @@ import java.util.Calendar;
 import java.util.Set;
 
 public class BookingHistoryEntityExt extends BookingHistoryEntity {
-
-	private Integer idStart;
-    private Integer idEnd;
     private Set<Integer> idSet;
-
-    private Integer bookingIdStart;
-    private Integer bookingIdEnd;
     private Set<Integer> bookingIdSet;
-    private Integer userIdStart;
-    private Integer userIdEnd;
     private Set<Integer> userIdSet;
-
+    private Set<Integer> optNameSet;
+    private Set<Integer> preStatusSet;
+    private Set<Integer> postStatusSet;
+    private Set<Integer> normalSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-    
-    
-    public Integer getIdStart() {
-        return idStart;
+
+    public Set<Integer> getOptNameSet() {
+        return optNameSet;
     }
-    public void setIdStart(Integer idStart) {
-        this.idStart = idStart;
+
+    public void setOptNameSet(Set<Integer> optNameSet) {
+        this.optNameSet = optNameSet;
     }
-    public Integer getIdEnd() {
-        return idEnd;
+
+    public Set<Integer> getPreStatusSet() {
+        return preStatusSet;
     }
-    public void setIdEnd(Integer idEnd) {
-        this.idEnd = idEnd;
+
+    public void setPreStatusSet(Set<Integer> preStatusSet) {
+        this.preStatusSet = preStatusSet;
     }
-    public Integer getBookingIdStart() {
-        return bookingIdStart;
+
+    public Set<Integer> getPostStatusSet() {
+        return postStatusSet;
     }
-    public void setBookingIdStart(Integer bookingIdStart) {
-        this.bookingIdStart = bookingIdStart;
+
+    public void setPostStatusSet(Set<Integer> postStatusSet) {
+        this.postStatusSet = postStatusSet;
     }
-    public Integer getBookingIdEnd() {
-        return bookingIdEnd;
+
+    public Set<Integer> getNormalSet() {
+        return normalSet;
     }
-    public void setBookingIdEnd(Integer bookingIdEnd) {
-        this.bookingIdEnd = bookingIdEnd;
+
+    public void setNormalSet(Set<Integer> normalSet) {
+        this.normalSet = normalSet;
     }
-    public Integer getUserIdStart() {
-        return userIdStart;
-    }
-    public void setUserIdStart(Integer userIdStart) {
-        this.userIdStart = userIdStart;
-    }
-    public Integer getUseridEnd() {
-        return userIdEnd;
-    }
-    public void setUseridEnd(Integer userIdEnd) {
-        this.userIdEnd = userIdEnd;
-    }
+
     public Calendar getCreateTimeStart() {
         return createTimeStart;
     }
+
     public void setCreateTimeStart(Calendar createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
+
     public Calendar getCreateTimeEnd() {
         return createTimeEnd;
     }
+
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
+
     public Set<Integer> getIdSet() {
         return idSet;
     }
+
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
     }
+
     public Set<Integer> getBookingIdSet() {
         return bookingIdSet;
     }
+
     public void setBookingIdSet(Set<Integer> bookingIdSet) {
         this.bookingIdSet = bookingIdSet;
     }
-    public Integer getUserIdEnd() {
-        return userIdEnd;
-    }
-    public void setUserIdEnd(Integer userIdEnd) {
-        this.userIdEnd = userIdEnd;
-    }
+
     public Set<Integer> getUserIdSet() {
         return userIdSet;
     }
+
     public void setUserIdSet(Set<Integer> userIdSet) {
         this.userIdSet = userIdSet;
     }
-    
+
 }

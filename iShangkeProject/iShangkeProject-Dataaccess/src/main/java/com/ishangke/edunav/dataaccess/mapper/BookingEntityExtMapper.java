@@ -15,11 +15,15 @@ public interface BookingEntityExtMapper {
 
     public void update(BookingEntityExt bookingEntityExt);
 
-    public int getCount();
-
     public List<BookingEntityExt> list(
             @Param("entity") BookingEntityExt bookingEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") BookingEntityExt bookingEntityExt);
+
+    public List<BookingEntityExt> listAll();
+
+    public int getCount();
+
+    public BookingEntityExt getById(int id);
 }

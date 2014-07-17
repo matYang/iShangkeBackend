@@ -6,9 +6,6 @@ import java.util.Set;
 import com.ishangke.edunav.dataaccess.model.gen.CircleEntity;
 
 public class CircleEntityExt extends CircleEntity {
-
-    private Integer idStart;
-    private Integer idEnd;
     private Set<Integer> idSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
@@ -21,22 +18,6 @@ public class CircleEntityExt extends CircleEntity {
 
     public void setIdSet(Set<Integer> idSet) {
         this.idSet = idSet;
-    }
-
-    public Integer getIdStart() {
-        return idStart;
-    }
-
-    public void setIdStart(Integer idStart) {
-        this.idStart = idStart;
-    }
-
-    public Integer getIdEnd() {
-        return idEnd;
-    }
-
-    public void setIdEnd(Integer idEnd) {
-        this.idEnd = idEnd;
     }
 
     public Calendar getLastModifyTimeStart() {

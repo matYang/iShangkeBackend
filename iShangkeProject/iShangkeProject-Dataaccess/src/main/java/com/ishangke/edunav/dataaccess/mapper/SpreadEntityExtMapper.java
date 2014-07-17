@@ -15,11 +15,15 @@ public interface SpreadEntityExtMapper {
 
     public void update(SpreadEntityExt spreadEntityExt);
 
-    public int getCount();
-
     public List<SpreadEntityExt> list(
             @Param("entity") SpreadEntityExt spreadEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") SpreadEntityExt spreadEntityExt);
+
+    public List<SpreadEntityExt> listAll();
+
+    public int getCount();
+
+    public SpreadEntityExt getById(int id);
 }

@@ -15,11 +15,15 @@ public interface CategoryEntityExtMapper {
 
     public void update(CategoryEntityExt categoryEntityExt);
 
-    public int getCount();
-
     public List<CategoryEntityExt> list(
             @Param("entity") CategoryEntityExt categoryEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") CategoryEntityExt categoryEntityExt);
+
+    public List<CategoryEntityExt> listAll();
+
+    public int getCount();
+
+    public CategoryEntityExt getById(int id);
 }

@@ -14,11 +14,15 @@ public interface ActivityEntityExtMapper {
 
     public void update(ActivityEntityExt activityEntityExt);
 
-    public int getCount();
-
     public List<ActivityEntityExt> list(
             @Param("entity") ActivityEntityExt activityEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") ActivityEntityExt activityEntityExt);
+
+    public List<ActivityEntityExt> listAll();
+
+    public int getCount();
+
+    public ActivityEntityExt getById(int id);
 }

@@ -17,11 +17,16 @@ public interface CourseTemplateClassPhotoEntityExtMapper {
     public void update(
             CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt);
 
-    public int getCount();
-
     public List<CourseTemplateClassPhotoEntityExt> list(
             @Param("entity") CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt);
+
+    public List<CourseTemplateClassPhotoEntityExt> listAll();
+
+    public int getCount();
+
+    public CourseTemplateClassPhotoEntityExt getById(int id);
+
 }

@@ -15,11 +15,15 @@ public interface ApproveHistoryEntityExtMapper {
 
     public void update(ApproveHistoryEntityExt approveHistoryEntityExt);
 
-    public int getCount();
-
     public List<ApproveHistoryEntityExt> list(
             @Param("entity") ApproveHistoryEntityExt approveHistoryEntityExt,
             @Param("page") PaginationEntity page);
 
     public int getListCount(@Param("entity") ApproveHistoryEntityExt approveHistoryEntityExt);
+
+    public List<ApproveHistoryEntityExt> listAll();
+
+    public int getCount();
+
+    public ApproveHistoryEntityExt getById(int id);
 }
