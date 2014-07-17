@@ -14,8 +14,11 @@ public class BookingNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        return 5;
-//    }
+    public BookingNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public BookingNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

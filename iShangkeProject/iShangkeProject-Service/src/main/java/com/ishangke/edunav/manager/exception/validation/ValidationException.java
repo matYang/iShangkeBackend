@@ -14,8 +14,11 @@ public class ValidationException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        return 18;
-//    }
+	public ValidationException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public ValidationException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

@@ -14,9 +14,11 @@ public class ContactNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        //TODO
-//        return -1;
-//    }
+    public ContactNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public ContactNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

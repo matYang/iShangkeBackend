@@ -14,9 +14,11 @@ public class SpreadNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        //TODO
-//        return -1;
-//    }
+    public SpreadNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public SpreadNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

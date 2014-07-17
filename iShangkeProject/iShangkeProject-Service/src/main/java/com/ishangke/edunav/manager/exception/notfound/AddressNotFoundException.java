@@ -14,9 +14,11 @@ public class AddressNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        //TODO
-//        return -1;
-//    }
+    public AddressNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public AddressNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

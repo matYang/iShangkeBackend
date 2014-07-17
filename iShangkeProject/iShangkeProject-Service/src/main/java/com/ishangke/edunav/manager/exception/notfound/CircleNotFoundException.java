@@ -14,9 +14,11 @@ public class CircleNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        //TODO
-//        return -1;
-//    }
+      public CircleNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public CircleNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

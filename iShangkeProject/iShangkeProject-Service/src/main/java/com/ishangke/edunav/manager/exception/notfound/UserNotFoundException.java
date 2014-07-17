@@ -14,8 +14,11 @@ public class UserNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        return 1;
-//    }
+	public UserNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public UserNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

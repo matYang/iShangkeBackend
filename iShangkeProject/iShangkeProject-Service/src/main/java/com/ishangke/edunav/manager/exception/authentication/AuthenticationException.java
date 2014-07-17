@@ -13,8 +13,11 @@ public class AuthenticationException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        return 17;
-//    }
+    public AuthenticationException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public AuthenticationException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }

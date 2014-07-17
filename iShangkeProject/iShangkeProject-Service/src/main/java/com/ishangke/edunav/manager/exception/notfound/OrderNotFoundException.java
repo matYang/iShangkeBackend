@@ -14,9 +14,11 @@ public class OrderNotFoundException extends ManagerException{
         super(exceptionText);
     }
 
-//    @Override
-//    public int getCode() {
-//        //TODO
-//        return -1;
-//    }
+    public OrderNotFoundException(String message, int errorCode){
+    	super(message,errorCode);
+    } 
+    
+    public OrderNotFoundException(String message, int errorCode, Throwable cause){
+    	super(message,errorCode,cause);
+    }
 }
