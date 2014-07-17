@@ -28,7 +28,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo createCourseTemplateBo(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为提交课程模版<br>
@@ -156,7 +156,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo deleteCourseTempalte(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    public CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为修改课程模版<br>
@@ -199,7 +199,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param paginationBo
      */
-    public List<CourseTemplateBo> queryCourseTempalte(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo);
+    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo);
 
     /**
      * 本方法返回课程模版详情<br>
@@ -216,6 +216,6 @@ public interface CourseTemplateManager {
      * @param courseTemplateBo
      * @param userBo
      */
-    public List<CourseTemplateBo> queryCourseTempalteById(CourseTemplateBo courseTemplateBo, UserBo userBo);
+    public List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo);
 
 }

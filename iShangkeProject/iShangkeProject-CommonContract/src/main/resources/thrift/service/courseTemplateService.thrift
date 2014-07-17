@@ -20,7 +20,7 @@ service CourseTemplateService {
      *  @return 课程模版实体 CourseTemplateBo 
      *
      */
-    courseTemplate.CourseTemplateBo createCourseTemplateBo(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplateBo createCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为提交课程模版<br>
@@ -100,7 +100,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    courseTemplate.CourseTemplateBo deleteCourseTempalte(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    courseTemplate.CourseTemplateBo deleteCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
      /**
      *  本方法为修改课程模版<br>
@@ -127,7 +127,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    list<courseTemplate.CourseTemplateBo> queryCourseTempalte(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<courseTemplate.CourseTemplateBo> queryCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法返回课程模版详情<br>
@@ -139,7 +139,7 @@ service CourseTemplateService {
      *  @return  
      *
      */
-    list<courseTemplate.CourseTemplateBo> queryCourseTempalteById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<courseTemplate.CourseTemplateBo> queryCourseTemplateById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 }

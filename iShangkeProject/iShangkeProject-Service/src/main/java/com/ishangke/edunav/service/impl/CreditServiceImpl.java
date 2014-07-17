@@ -16,6 +16,8 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.CreditService;
 import com.ishangke.edunav.manager.CreditManager;
+import com.ishangke.edunav.manager.common.ManagerErrorCode;
+import com.ishangke.edunav.manager.exception.ManagerException;
 
 public class CreditServiceImpl implements CreditService.Iface{
     private static final Logger LOGGER = LoggerFactory.getLogger(CreditServiceImpl.class);
@@ -26,7 +28,15 @@ public class CreditServiceImpl implements CreditService.Iface{
 
     @Override
     public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
+//        try {
+//            return creditManager.exchangeCoupon(creditBo, couponBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode);
+//            exception.setMessageKey(ManagerErrorCode.COUPON_CREATE_ERROR_KEY);
+//            throw exception;
+//        }
         return null;
     }
 

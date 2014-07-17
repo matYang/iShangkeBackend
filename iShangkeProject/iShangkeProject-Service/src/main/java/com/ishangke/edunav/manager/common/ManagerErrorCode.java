@@ -59,8 +59,8 @@ public class ManagerErrorCode {
     public static final String COURSE_NOTFOUND_ERROR_KEY = "course_notfound_error";
 
     // courseTemplate
-    public static final int COURSETEMPLATEBO_CREATE_ERROR = 0x00030001;
-    public static final String COURSETEMPLATEBO_CREATE_ERROR_KEY = "coursetemplatebo_create_error";
+    public static final int COURSETEMPLATE_CREATE_ERROR = 0x00030001;
+    public static final String COURSETEMPLATE_CREATE_ERROR_KEY = "coursetemplatebo_create_error";
     public static final int COURSETEMPLATE_SUBMIT_ERROR = 0x00030002;
     public static final String COURSETEMPLATE_SUBMIT_ERROR_KEY = "coursetemplate_submit_error";
     public static final int COURSETEMPLATE_APPROVE_ERROR = 0x00030003;
@@ -77,6 +77,9 @@ public class ManagerErrorCode {
     public static final String COURSETEMPLATE_UPDATE_ERROR_KEY = "coursetemplate_update_error";
     public static final int COURSETEMPLATE_QUERY_ERROR = 0x00030009;
     public static final String COURSETEMPLATE_QUERY_ERROR_KEY = "coursetemplate_query_error";
+    public static final int COURSETEMPLATE_QUERYBYID_ERROR = 0x0003000A;
+    public static final String COURSETEMPLATE_QUERYBYID_ERROR_KEY = "coursetemplate_querybyid_error";
+
 
     // booking
     public static final int BOOKING_CREATEBYUSER_ERROR = 0x00040001;
