@@ -11,6 +11,7 @@ import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.ResponseBo;
+import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
 import com.ishangke.edunav.manager.UserManager;
@@ -87,6 +88,42 @@ public class UserServiceImpl implements UserService.Iface {
 
     @Override
     public ResponseBo disposeSession(UserBo userBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo openCellSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo verifyCellSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo openForgetPasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo verifyForgetPasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo openChangePasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo verifyChangePasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }

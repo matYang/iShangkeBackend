@@ -823,7 +823,7 @@ TeacherService
      *  管理员与合作商可以查询教师信息
      *
      *  @param  teacherBo          需要查询的教师信息
-     *  @param  teacherBo          教师相关的合作商信息
+     *  @param  partnerBo          教师相关的合作商信息
      *  @param  userBo             发起查询的用户信息
      *  @param  paginationBo       分页信息
      *
@@ -839,7 +839,7 @@ ActivityService
      *  管理员与合作商可以创建活动信息
      *
      *  @param  activityBo         需要创建的活动信息
-     *  @param  activityBo         活动相关的课程信息
+     *  @param  courseBo           活动相关的课程信息
      *  @param  partnerBo          活动相关的合作商信息
      *  @param  userBo             发起创建的用户信息
      *
