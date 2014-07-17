@@ -9,10 +9,10 @@ public class AccountEntityExt extends AccountEntity {
     private Set<Integer> idSet;
     private Double balanceStart;
     private Double balanceEnd;
-    private Calendar lastModifyTimeBefore;
-    private Calendar lastModifyTimeAfter;
-    private Calendar createTimeBefore;
-    private Calendar createTimeAfter;
+    private Calendar lastModifyTimeStart;
+    private Calendar lastModifyTimeEnd;
+    private Calendar createTimeStart;
+    private Calendar createTimeEnd;
 
     public Set<Integer> getIdSet() {
         return idSet;

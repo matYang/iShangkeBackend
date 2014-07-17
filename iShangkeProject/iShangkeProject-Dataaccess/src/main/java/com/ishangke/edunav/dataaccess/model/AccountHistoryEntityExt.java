@@ -7,7 +7,7 @@ import com.ishangke.edunav.dataaccess.model.gen.AccountHistoryEntity;
 
 public class AccountHistoryEntityExt extends AccountHistoryEntity {
     private Set<Integer> idSet;
-    private Set<Integer> userIdSets;
+    private Set<Integer> userIdSet;
     private Set<Integer> withdrawIdSet;
     private Double chargeStart;
     private Double chargeEnd;
@@ -23,12 +23,12 @@ public class AccountHistoryEntityExt extends AccountHistoryEntity {
         this.idSet = idSet;
     }
 
-    public Set<Integer> getUserIdSets() {
-        return userIdSets;
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
     }
 
-    public void setUserIdSets(Set<Integer> userIdSets) {
-        this.userIdSets = userIdSets;
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSets = userIdSet;
     }
 
     public Set<Integer> getWithdrawIdSet() {

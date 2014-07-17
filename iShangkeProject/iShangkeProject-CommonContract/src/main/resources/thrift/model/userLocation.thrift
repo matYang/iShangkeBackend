@@ -1,6 +1,6 @@
 namespace java com.ishangke.edunav.commoncontract.model
 
-struct UserLocation {
+struct UserLocationBo {
     1: i32 id
     2: i32 userId
     3: i32 locationId
