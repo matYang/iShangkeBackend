@@ -17,7 +17,7 @@ service ContactService{
      *  @return 创建完成的常用联系人信息
      *
      */
-    common.ResponseBo createContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    contact.ContactBo createContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新常用联系人信息。<br>
@@ -29,7 +29,7 @@ service ContactService{
      *  @return 更新完成的常用联系人信息
      *
      */
-    common.ResponseBo updateContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    contact.ContactBo updateContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除常用联系人信息。<br>
@@ -41,7 +41,7 @@ service ContactService{
      *  @return 
      *
      */
-    common.ResponseBo deleteContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    contact.ContactBo deleteContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询常用联系人信息。<br>
@@ -54,7 +54,7 @@ service ContactService{
      *  @return  Contact 列表
      *
      */
-    common.ResponseBo query(1: contact.ContactBo contactBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<contact.ContactBo> query(1: contact.ContactBo contactBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
 	
 }
