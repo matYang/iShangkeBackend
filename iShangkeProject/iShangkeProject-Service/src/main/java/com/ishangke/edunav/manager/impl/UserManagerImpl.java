@@ -51,6 +51,8 @@ public class UserManagerImpl implements UserManager {
         }
 
         if (result > 0) {
+            // TODO set id maybe?
+            userEntity.setId(result);
             return UserConverter.toBo(userEntity);
         } else {
             throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed");
