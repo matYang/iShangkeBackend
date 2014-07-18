@@ -19,45 +19,67 @@ import com.ishangke.edunav.manager.CreditManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
-public class CreditServiceImpl implements CreditService.Iface{
+public class CreditServiceImpl implements CreditService.Iface {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreditServiceImpl.class);
-    
+
     @Autowired
     private CreditManager creditManager;
-    
 
     @Override
-    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo, TException {
-//        try {
-//            return creditManager.exchangeCoupon(creditBo, couponBo, userBo);
-//        } catch (ManagerException e) {
-//            LOGGER.info(e.getMessage(), e);
-//            BusinessExceptionBo exception = new BusinessExceptionBo();
-//            exception.setErrorCode(ManagerErrorCode);
-//            exception.setMessageKey(ManagerErrorCode.COUPON_CREATE_ERROR_KEY);
-//            throw exception;
-//        }
-        return null;
+    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
+        try {
+            return creditManager.exchangeCoupon(creditBo, couponBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.CREDIT_EXCHANGE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CREDIT_EXCHANGE_ERROR_KEY);
+            throw exception;
+        }
+
     }
 
     @Override
-    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
+        try {
+            return creditManager.exchangeAccount(creditBo, accountBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR_KEY);
+            throw exception;
+        }
     }
 
     @Override
-    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo)
+            throws BusinessExceptionBo, TException {
+        try {
+            return creditManager.query(creditBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.CREDIT_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CREDIT_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
     }
 
     @Override
-    public List<CreditBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<CreditBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo)
+            throws BusinessExceptionBo, TException {
+        try {
+            return creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR_KEY);
+            throw exception;
+        }
     }
-    
-    
-    
+
 }

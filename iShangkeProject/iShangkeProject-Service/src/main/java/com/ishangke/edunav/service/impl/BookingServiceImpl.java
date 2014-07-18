@@ -143,8 +143,8 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.BOOKING_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_NOTFOUND_ERROR_KEy);
             throw exception;
         }
     }

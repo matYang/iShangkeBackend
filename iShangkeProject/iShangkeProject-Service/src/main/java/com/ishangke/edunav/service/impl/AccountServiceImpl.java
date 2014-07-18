@@ -43,8 +43,8 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.ACCOUNT_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.ACCOUNT_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }

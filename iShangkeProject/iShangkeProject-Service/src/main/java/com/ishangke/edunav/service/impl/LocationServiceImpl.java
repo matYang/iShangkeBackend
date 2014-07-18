@@ -12,17 +12,27 @@ import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.service.LocationService;
 import com.ishangke.edunav.manager.LocationManager;
+import com.ishangke.edunav.manager.common.ManagerErrorCode;
+import com.ishangke.edunav.manager.exception.ManagerException;
 
-public class LocationServiceImpl implements LocationService.Iface{
+public class LocationServiceImpl implements LocationService.Iface {
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationServiceImpl.class);
 
     @Autowired
     private LocationManager locationManager;
 
     @Override
-    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo) throws BusinessExceptionBo,
+            TException {
+        try {
+            return locationManager.query(locationBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.LOCATION_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.LOCATION_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
     }
-    
+
 }

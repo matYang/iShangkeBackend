@@ -129,6 +129,13 @@ struct CourseBo {
     120: string locationName;
     121: string circleValue;
     122: string circleName;
+    123: double rating;
+    124: i32 bookingTotal;
+    125: i64 noRefundDateStart;
+    126: i64 noRefundDateEnd;
+    127: i64 cashbackDateStart;
+    128: i64 cashbackDateEnd;
+    129: set<i32> courseTemplateIdSet
 }
 
 struct CommentCourseApproveBo {

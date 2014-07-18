@@ -29,8 +29,8 @@ public class CategoryServiceImpl implements CategoryService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CATEGORY_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CATEGORY_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.CATEGORY_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CATEGORY_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }

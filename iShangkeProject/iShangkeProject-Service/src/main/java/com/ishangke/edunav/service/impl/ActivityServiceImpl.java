@@ -109,8 +109,8 @@ public class ActivityServiceImpl implements ActivityService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.ACTIVITY_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.ACTIVITY_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.ACTIVITY_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ACTIVITY_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }
