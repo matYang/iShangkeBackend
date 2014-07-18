@@ -14,4 +14,6 @@ struct UserLocationBo {
     11: i64 lastLoginTimeEnd
     12: i64 birthdayStart
     13: i64 birthdayEnd
+    14: set<i32> userIdSet
+    15: set<i32> locationIdSet
 }
