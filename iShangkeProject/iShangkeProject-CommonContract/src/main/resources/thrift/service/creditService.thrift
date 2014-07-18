@@ -57,9 +57,9 @@ service CreditService{
      *  @param  userBo                  调用方法的用户的信息
      *  @param  paginationBo            分页信息
      *
-     *  @return 积分实体 CreditBo 列表
+     *  @return 积分实体 CreditHistoryBo 列表
      *
      */ 
-    list<credit.CreditBo> queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<creditHistory.CreditHistoryBo> queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
 }

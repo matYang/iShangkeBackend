@@ -9,17 +9,15 @@ import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 
 public interface WithdrawEntityExtMapper {
 
-    public int add(WithdrawEntityExt widthdrawEntityExt);
+    public int add(WithdrawEntityExt withdrawEntityExt);
 
     public void deleteById(int id);
 
-    public void update(WithdrawEntityExt widthdrawEntityExt);
+    public void update(WithdrawEntityExt withdrawEntityExt);
 
-    public List<WithdrawEntityExt> list(
-            @Param("entity") WithdrawEntityExt widthdrawEntityExt,
-            @Param("page") PaginationEntity page);
+    public List<WithdrawEntityExt> list(@Param("entity") WithdrawEntityExt withdrawEntityExt, @Param("page") PaginationEntity page);
 
-    public int getListCount(@Param("entity") WithdrawEntityExt widthdrawEntityExt);
+    public int getListCount(@Param("entity") WithdrawEntityExt withdrawEntityExt);
 
     public List<WithdrawEntityExt> listAll();
 

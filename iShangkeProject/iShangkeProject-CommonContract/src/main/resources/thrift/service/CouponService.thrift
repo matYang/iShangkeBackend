@@ -36,14 +36,14 @@ service CouponService{
      *  本方法为查询优惠券历史功能。<br>
      *  用户可以查询自己拥有的优惠券历史，系统可以查看所有优惠券历史
      *
-     *  @param  couponHistoryBo        需要检索和过滤的优惠券历史
+     *  @param  couponHistoryBo 需要检索和过滤的优惠券历史
      *  @param  userBo          调用方法的用户的信息
      *  @param  paginationBo    分页信息
      *
      *  @return CouponHistoryBo 列表
      *
      */ 
-    list<coupon.CouponBo> queryHistory(1: couponHistory.CouponHistoryBo couponHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<couponHistory.CouponHistoryBo> queryHistory(1: couponHistory.CouponHistoryBo couponHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 }

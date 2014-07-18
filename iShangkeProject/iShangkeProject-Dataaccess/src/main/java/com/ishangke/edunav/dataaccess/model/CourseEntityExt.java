@@ -36,6 +36,8 @@ public class CourseEntityExt extends CourseEntity {
     private Calendar finishDateEnd;
     private Calendar cutoffDateStart;
     private Calendar cutoffDateEnd;
+    private Calendar noRefundDateStart;
+    private Calendar noRefundDateEnd;
     private Set<Integer> classTypeSet;
     private Double discountStart;
     private Double discountEnd;
@@ -54,7 +56,7 @@ public class CourseEntityExt extends CourseEntity {
     private String logoUrl;
     private String wholeName;
     private String instName;
-    private String partnerIntegerro;
+    private String partnerIntro;
     private Integer partnerQualification;
     private String partnerDistinction;
     private Double partnerRating;
@@ -69,6 +71,22 @@ public class CourseEntityExt extends CourseEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+
+    public Calendar getNoRefundDateStart() {
+        return noRefundDateStart;
+    }
+
+    public void setNoRefundDateStart(Calendar noRefundDateStart) {
+        this.noRefundDateStart = noRefundDateStart;
+    }
+
+    public Calendar getNoRefundDateEnd() {
+        return noRefundDateEnd;
+    }
+
+    public void setNoRefundDateEnd(Calendar noRefundDateEnd) {
+        this.noRefundDateEnd = noRefundDateEnd;
+    }
 
     public Set<Integer> getSchooltimeDaySet() {
         return schooltimeDaySet;
@@ -166,12 +184,12 @@ public class CourseEntityExt extends CourseEntity {
         this.instName = instName;
     }
 
-    public String getPartnerIntegerro() {
-        return partnerIntegerro;
+    public String getPartnerIntro() {
+        return partnerIntro;
     }
 
-    public void setPartnerIntegerro(String partnerIntegerro) {
-        this.partnerIntegerro = partnerIntegerro;
+    public void setPartnerIntro(String partnerIntro) {
+        this.partnerIntro = partnerIntro;
     }
 
     public Integer getPartnerQualification() {

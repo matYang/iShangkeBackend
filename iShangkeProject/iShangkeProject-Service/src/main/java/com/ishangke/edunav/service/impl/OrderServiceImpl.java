@@ -27,8 +27,7 @@ public class OrderServiceImpl implements OrderService.Iface {
     private OrderManager orderManager;
 
     @Override
-    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo)
-            throws BusinessExceptionBo, TException {
+    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo) throws BusinessExceptionBo, TException {
         try {
             return orderManager.createOrderByUser(orderBo, bookingBo, userBo, withdrawBo);
         } catch (ManagerException e) {
@@ -41,8 +40,7 @@ public class OrderServiceImpl implements OrderService.Iface {
     }
 
     @Override
-    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo)
-            throws BusinessExceptionBo, TException {
+    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo) throws BusinessExceptionBo, TException {
         try {
             return orderManager.acceptOrderByAdmin(orderBo, commentBookingAcceptBo, userBo);
         } catch (ManagerException e) {
@@ -55,8 +53,7 @@ public class OrderServiceImpl implements OrderService.Iface {
     }
 
     @Override
-    public List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo)
-            throws BusinessExceptionBo, TException {
+    public List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
             return orderManager.query(orderBo, bookingBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -69,8 +66,7 @@ public class OrderServiceImpl implements OrderService.Iface {
     }
 
     @Override
-    public List<OrderBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo,
-            PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
             return orderManager.queryHistory(orderHistory, bookingBo, userBo, paginationBo);
         } catch (ManagerException e) {

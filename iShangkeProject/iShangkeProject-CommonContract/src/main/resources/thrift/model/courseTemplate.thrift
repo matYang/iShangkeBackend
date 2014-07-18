@@ -127,6 +127,10 @@ struct CourseTemplateBo {
     121: string locationName
     122: string circleValue
     123: string circleName
+    124: i64 noRefundDateStart
+    125: i64 noRefundDateEnd
+    126: i64 cashbackDateStart
+    127: i64 cashbackDateEnd
 }
 
 struct CommentCourseTemplateApproveBo {

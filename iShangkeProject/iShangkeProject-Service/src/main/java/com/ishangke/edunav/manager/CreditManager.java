@@ -88,6 +88,6 @@ public interface CreditManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<CreditBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo);
+    public List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo);
 
 }
