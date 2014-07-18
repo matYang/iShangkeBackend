@@ -27,4 +27,5 @@ struct CouponBo {
     21: i64 lastModifyTimeEnd
     22: i64 createTimeStart
     23: i64 createTimeEnd
+    24: set<i32> originSet
 }

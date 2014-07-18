@@ -37,7 +37,8 @@ public class AccountEntityExtTest{
         accountEntityExt.setBalance(12.12);
         accountEntityExt.setBalanceEnd(22.2);
         accountEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
-       
+        accountEntityExt.setCreateTimeEnd(DateUtility.getCurTimeInstance());
+        accountEntityExt.setCreateTimeStart(DateUtility.getCurTimeInstance());
         accountEntityExt.setDeleted(0);
         accountEntityExt.setEnabled(0);
         accountEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -45,5 +46,4 @@ public class AccountEntityExtTest{
         accountEntityExtMapper.add(accountEntityExt);
         Assert.assertSame(accountEntityExtMapper.getCount(), oldcount + 1);
     }
-    
 }
