@@ -11,29 +11,25 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.CourseCommentManager;
 
-public class CourseCommentManagerImpl implements CourseCommentManager{
-	private static final Logger LOGGER = LoggerFactory.getLogger(CourseCommentManagerImpl.class);
-	
-	@Override
-	public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo,
-			CourseTemplateBo courseTemplateBo, UserBo userBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class CourseCommentManagerImpl implements CourseCommentManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CourseCommentManagerImpl.class);
 
-	@Override
-	public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo,
-			CourseTemplateBo courseTemplateBo, UserBo userBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<CourseCommentBo> query(CourseCommentBo courseCommentBo,
-			CourseTemplateBo courseTemplateBo, UserBo userBo,
-			PaginationBo paginationBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

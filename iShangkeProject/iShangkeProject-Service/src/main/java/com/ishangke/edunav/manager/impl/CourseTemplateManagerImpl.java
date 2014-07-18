@@ -17,7 +17,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseTemplateManagerImpl.class);
 
     @Override
-    public CourseTemplateBo createCourseTemplateBo(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
+    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -53,7 +53,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     }
 
     @Override
-    public CourseTemplateBo deleteCourseTempalte(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
+    public CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -65,15 +65,15 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     }
 
     @Override
-    public List<CourseTemplateBo> queryCourseTempalte(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo) {
+    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<CourseTemplateBo> queryCourseTempalteById(CourseTemplateBo courseTemplateBo, UserBo userBo) {
+    public List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo) {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
 }

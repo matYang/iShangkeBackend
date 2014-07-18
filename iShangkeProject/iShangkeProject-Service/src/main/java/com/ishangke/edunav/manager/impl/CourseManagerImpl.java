@@ -100,6 +100,5 @@ public class CourseManagerImpl implements CourseManager {
         // TODO Auto-generated method stub
         return null;
     }
-    
 
 }

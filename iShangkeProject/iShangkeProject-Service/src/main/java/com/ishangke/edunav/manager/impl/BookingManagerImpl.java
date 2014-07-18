@@ -77,11 +77,10 @@ public class BookingManagerImpl implements BookingManager {
         return null;
     }
 
-	@Override
-	public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo,
-			PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

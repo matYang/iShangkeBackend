@@ -12,7 +12,7 @@ import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.SpreadManager;
 
-public class SpreadManagerImpl implements SpreadManager{
+public class SpreadManagerImpl implements SpreadManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(SpreadManagerImpl.class);
 
     @Override
@@ -56,7 +56,5 @@ public class SpreadManagerImpl implements SpreadManager{
         // TODO Auto-generated method stub
         return null;
     }
-    
-    
 
 }

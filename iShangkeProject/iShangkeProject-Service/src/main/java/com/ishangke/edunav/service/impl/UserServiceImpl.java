@@ -51,8 +51,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser)
-            throws BusinessExceptionBo, TException {
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }
@@ -76,8 +75,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo)
-            throws BusinessExceptionBo, TException {
+    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo) throws BusinessExceptionBo, TException {
         // TODO Auto-generated method stub
         return null;
     }

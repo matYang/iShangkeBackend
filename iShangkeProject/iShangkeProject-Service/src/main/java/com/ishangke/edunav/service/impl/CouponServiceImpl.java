@@ -17,56 +17,49 @@ import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
-public class CouponServiceImpl implements CouponService.Iface{
-	private static final Logger LOGGER = LoggerFactory.getLogger(CouponServiceImpl.class);
-	
-	@Autowired
-	private CouponManager couponManager;
+public class CouponServiceImpl implements CouponService.Iface {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CouponServiceImpl.class);
 
-	@Override
-	public CouponBo createCoupon(CouponBo couponBo, UserBo userBo)
-			throws BusinessExceptionBo, TException {
-		try{
-			return couponManager.createCoupon(couponBo, userBo);
-		}catch(ManagerException e){
-			LOGGER.info(e.getMessage(), e);
-			BusinessExceptionBo exception = new BusinessExceptionBo();
+    @Autowired
+    private CouponManager couponManager;
+
+    @Override
+    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo, TException {
+        try {
+            return couponManager.createCoupon(couponBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.COUPON_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_CREATE_ERROR_KEY);
             throw exception;
-		}
-	}
+        }
+    }
 
-	@Override
-	public List<CouponBo> query(CouponBo couponBo, UserBo userBo,
-			PaginationBo paginationBo) throws BusinessExceptionBo, TException {
-		try{
-			return couponManager.query(couponBo, userBo, paginationBo);
-		}catch(ManagerException e){
-			LOGGER.info(e.getMessage(), e);
-			BusinessExceptionBo exception = new BusinessExceptionBo();
+    @Override
+    public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+        try {
+            return couponManager.query(couponBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.COUPON_QUERY_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_QUERY_ERROR_KEY);
             throw exception;
-		}
-	}
+        }
+    }
 
-	@Override
-	public List<CouponBo> queryHistory(CouponHistoryBo couponHistoryBo,
-			UserBo userBo, PaginationBo paginationBo)
-			throws BusinessExceptionBo, TException {
-		try{
-			return couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
-		}catch(ManagerException e){
-			LOGGER.info(e.getMessage(), e);
-			BusinessExceptionBo exception = new BusinessExceptionBo();
+    @Override
+    public List<CouponBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+        try {
+            return couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR_KEY);
             throw exception;
-		}
-	}
+        }
+    }
 
-	
-	
-	
 }

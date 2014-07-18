@@ -10,9 +10,9 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.PartnerManager;
 
-public class PartnerManagerImpl implements PartnerManager{
+public class PartnerManagerImpl implements PartnerManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(PartnerManagerImpl.class);
-    
+
     @Override
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
         // TODO Auto-generated method stub
@@ -36,7 +36,5 @@ public class PartnerManagerImpl implements PartnerManager{
         // TODO Auto-generated method stub
         return null;
     }
-
-    
 
 }
