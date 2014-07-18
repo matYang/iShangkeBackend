@@ -12,6 +12,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.AccountEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.AccountHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
@@ -32,6 +33,8 @@ public class AccountManagerImpl implements AccountManager {
     private AccountEntityExtMapper accountMapper;
     @Autowired
     private UserEntityExtMapper userMapper;
+    @Autowired
+    private AccountHistoryEntityExtMapper accountHistoryMapper;
 
     @Override
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo) {
@@ -103,13 +106,14 @@ public class AccountManagerImpl implements AccountManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("User Exchange Cash failed", t);
+            throw new ManagerException("Account Query failed", t);
         }
 
     }
 
     @Override
-    public List<AccountBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo,
+            PaginationBo paginationBo) {
         // Check whether parameters are null
         if (userBo == null) {
             throw new ManagerException("UserBo is null");
@@ -121,13 +125,23 @@ public class AccountManagerImpl implements AccountManager {
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         AccountHistoryEntityExt accountHistoryEntity = AccountHistoryConverter.fromBo(accountHistoryBo);
+        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
 
         // Check
         if (userEntity.getId() != accountHistoryEntity.getUserId()) {
             throw new ManagerException("该账户历史不属于此用户");
         }
+        List<AccountHistoryEntityExt> accountHistoryList = null;
+        List<AccountHistoryBo> resultList = null;
+        try {
+            accountHistoryList = accountHistoryMapper.list(accountHistoryEntity, pageEntity);
+            for (AccountHistoryEntityExt accountHistoryPo : accountHistoryList) {
+                resultList.add(AccountHistoryConverter.toBo(accountHistoryPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("AccountHistory Query failed", t);
+        }
 
-        return null;
     }
-
 }
