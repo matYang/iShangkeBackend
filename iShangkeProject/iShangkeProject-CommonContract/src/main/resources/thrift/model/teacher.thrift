@@ -13,18 +13,15 @@ struct TeacherBo {
     7: i64 lastModifyTime
     8: i64 createTime
     9: i32 enabled
-    10: i32 deleted
-    11: i32 idStart
-    12: i32 idEnd
-    13: set<i32> idSet
-    14: i32 partnerIdStart
-    15: i32 partnerIdEnd
-    16: set<i32> partnerIdSet
-    17: i32 popularityStart
-    18: i32 popularityEnd
-    19: i64 lastModifyTimeStart
-    20: i64 lastModifyTimeEnd
-    21: i64 createTimeStart
-    22: i64 createTimeEnd
+    10: set<i32> idSet
+    11: set<i32> partnerIdSet
+    12: i32 popularityStart
+    13: i32 popularityEnd
+    14: set<i32> popularitySet
+    15: i64 lastModifyTimeStart
+    16: i64 lastModifyTimeEnd
+    17: i64 createTimeStart
+    18: i64 createTimeEnd
+
 }
 
