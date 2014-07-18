@@ -107,22 +107,26 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  
   <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from ACCOUNT where DELETED = 0
   </select>
+  
   <!-- listAll -->
    <select id="listAll" resultMap="AccountExtMap">
     SELECT
     <include refid="Account_Base_Column_List" />
     from ACCOUNT where ACCOUNT.DELETED = 0
   </select>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="AccountExtMap">
     SELECT
     <include refid="Account_Base_Column_List" />
     from ACCOUNT where ACCOUNT.DELETED = 0
     <if test="entity != null">
+      <!-- id -->
       <if test="entity.id != null and entity.id != 0">
         AND ACCOUNT.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -134,7 +138,8 @@
           </foreach>
         </if>
       </if>
-
+    
+    <!-- balance -->
       <if test="entity.balance != null and entity.balance != 0">
         AND ACCOUNT.CRETITY = #{entity.balance,jdbcType=DOUBLE}
       </if>
