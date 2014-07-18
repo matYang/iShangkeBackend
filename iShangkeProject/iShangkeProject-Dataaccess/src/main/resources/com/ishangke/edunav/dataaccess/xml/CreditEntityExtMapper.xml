@@ -123,14 +123,14 @@
       </if>
 
       <if test="entity.credit != null and entity.credit != 0">
-        AND CREDIT.CRETITY = #{entity.credit,jdbcType=DOUBLE}
+        AND CREDIT.CREDIT = #{entity.credit,jdbcType=DOUBLE}
       </if>
       <if test="entity.credit == null or entity.credit == 0">
         <if test="entity.creditStart != null and entity.creditStart != 0">
-          <![CDATA[AND CREDIT.CRETITY >= #{entity.creditStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND CREDIT.CREDIT >= #{entity.creditStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.creditEnd != null and entity.creditEnd != 0">
-          <![CDATA[AND CREDIT.CRETITY <= #{entity.creditEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND CREDIT.CREDIT <= #{entity.creditEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 

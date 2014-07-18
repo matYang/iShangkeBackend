@@ -131,7 +131,7 @@
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ContactExtMap">
-    SELECT
+    SELECT 
     <include refid="Contact_Base_Column_List" />
     from CONTACT where CONTACT.DELETED = 0
     <if test="entity != null">

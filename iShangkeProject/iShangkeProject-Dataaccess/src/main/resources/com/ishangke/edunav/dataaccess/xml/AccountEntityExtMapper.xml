@@ -112,7 +112,7 @@
     select count(ID) from ACCOUNT where DELETED = 0
   </select>
   <!-- listAll -->
-  <select id="list" resultMap="AccountExtMap">
+   <select id="listAll" resultMap="AccountExtMap">
     SELECT
     <include refid="Account_Base_Column_List" />
     from ACCOUNT where ACCOUNT.DELETED = 0
@@ -261,7 +261,7 @@
     ) AS total
   </select>
   <!-- getById -->
-  <select id="list" parameterType="int" resultMap="AccountExtMap">
+  <select id="getById" parameterType="int" resultMap="AccountExtMap">
     SELECT
     <include refid="Account_Base_Column_List" />
     from ACCOUNT where ACCOUNT.DELETED = 0 and ACCOUNT.ID = #{id,jdbcType=INTEGER}

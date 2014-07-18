@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
@@ -73,7 +71,7 @@ public class SpreadEntityExtTest extends BaseTest {
         SpreadEntityExt SpreadQueryEntity = new SpreadEntityExt();
         SpreadQueryEntity.setUrl("_test_");
         List<SpreadEntityExt> result = spreadEntityExtMapper.list(SpreadQueryEntity, page);
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals("_test_url_2_", result.get(0).getUrl());
+        Assert.assertEquals(4, result.size());
+        Assert.assertEquals("_test_url_1_爱上课", result.get(0).getUrl());
     }
 }

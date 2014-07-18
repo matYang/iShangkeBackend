@@ -11,7 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
+import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 
@@ -49,34 +51,50 @@ public class RolePermissionEntityExtTest extends BaseTest{
         Assert.assertSame(rolePermissionEntityExtMapper.getCount(),oldCount - 1);
     }
 
+//    @Test
+//    public void testList(){
+//        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
+//        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+//        rolePermissionEntityExt.setDeleted(0);
+//        rolePermissionEntityExt.setRoleId(1);
+//        rolePermissionEntityExt.setPermissionId(1);        
+//        rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
+//
+//
+//        List<RolePermissionEntityExt> list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, null);
+//        Assert.assertSame(list.size(),1);
+//
+//        int listSize = rolePermissionEntityExtMapper.getListCount(rolePermissionEntityExt);
+//        Assert.assertSame(listSize,1);
+//
+//        PaginationEntity page = new PaginationEntity();
+//        page.setOffset(0);
+//        page.setSize(1);
+//        
+//        list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, page);
+//        Assert.assertSame(list.size(),1);
+//
+//
+//    }
+//    
+//    @Test
+//    public void testUpdate(){
+//        //TODO update foreign key
+//    }
     @Test
-    public void testList(){
-        RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
-        rolePermissionEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-        rolePermissionEntityExt.setDeleted(0);
-        rolePermissionEntityExt.setRoleId(1);
-        rolePermissionEntityExt.setPermissionId(1);        
-        rolePermissionEntityExtMapper.add(rolePermissionEntityExt);
-
-
-        List<RolePermissionEntityExt> list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, null);
-        Assert.assertSame(list.size(),1);
-
-        int listSize = rolePermissionEntityExtMapper.getListCount(rolePermissionEntityExt);
-        Assert.assertSame(listSize,1);
-
+    public void testQuery() {
         PaginationEntity page = new PaginationEntity();
         page.setOffset(0);
-        page.setSize(1);
-        
-        list = rolePermissionEntityExtMapper.list(rolePermissionEntityExt, page);
-        Assert.assertSame(list.size(),1);
-
-
-    }
-    
-    @Test
-    public void testUpdate(){
-        //TODO update foreign key
+        page.setSize(10);
+        // 排序，先按照第一个排序，再按照第二个排序，依次排列
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
+       
+        RolePermissionEntityExt RolePermissionEntityExt = new RolePermissionEntityExt();
+        RolePermissionEntityExt.setPermissionId(2);
+        List<RolePermissionEntityExt> result = rolePermissionEntityExtMapper.list(
+                RolePermissionEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        // Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
     }
 }

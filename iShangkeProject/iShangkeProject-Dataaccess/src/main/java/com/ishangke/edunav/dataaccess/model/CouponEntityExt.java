@@ -11,6 +11,7 @@ public class CouponEntityExt extends CouponEntity {
     private Double totalEnd;
     private Double balanceStart;
     private Double balanceEnd;
+    private Set<Integer> originSet;
     private Calendar expiryTimeStart;
     private Calendar expiryTimeEnd;
     private Set<Integer> userIdSet;
@@ -33,6 +34,14 @@ public class CouponEntityExt extends CouponEntity {
 
     public void setUserIdSet(Set<Integer> userIdSet) {
         this.userIdSet = userIdSet;
+    }
+
+    public Set<Integer> getOriginSet() {
+        return originSet;
+    }
+
+    public void setOriginSet(Set<Integer> originSet) {
+        this.originSet = originSet;
     }
 
     public Double getTotalStart() {

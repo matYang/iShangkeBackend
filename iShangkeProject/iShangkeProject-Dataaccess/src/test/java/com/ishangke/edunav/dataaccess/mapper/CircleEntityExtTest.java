@@ -1,7 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import static org.junit.Assert.fail;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -13,7 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 
@@ -51,31 +50,19 @@ public class CircleEntityExtTest {
     }
     
     @Test
-    public void testList(){
-        CircleEntityExt circleEntityExt = new CircleEntityExt();
-        circleEntityExt.setCreateTime(time);
-        circleEntityExt.setLastModifyTime(time);
-        circleEntityExt.setEnabled(1);
-        circleEntityExt.setDeleted(0);     
-        circleEntityExtMapper.add(circleEntityExt);
-        
-        List<CircleEntityExt> list = circleEntityExtMapper.list(circleEntityExt, null);
-        Assert.assertSame(list.size(),1);
-        
-        int listSize = circleEntityExtMapper.getListCount(circleEntityExt);
-        Assert.assertSame(listSize,1);
+    public void testQuery() {
         PaginationEntity page = new PaginationEntity();
         page.setOffset(0);
-        page.setSize(1);
-        
-        list = circleEntityExtMapper.list(circleEntityExt, page);
-        Assert.assertSame(list.size(),1);
-        
-    }
-    
-    @Test
-    public void testUpdate(){
-        
+        page.setSize(10);
+
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
+
+        CircleEntityExt circleEntityExt = new CircleEntityExt();
+        circleEntityExt.setName("_test_");
+
+        List<CircleEntityExt> result = circleEntityExtMapper.list(circleEntityExt, page);
+        Assert.assertEquals(4, result.size());
+       Assert.assertEquals("_test_name_3_爱上课", result.get(1).getName());
     }
 
 }

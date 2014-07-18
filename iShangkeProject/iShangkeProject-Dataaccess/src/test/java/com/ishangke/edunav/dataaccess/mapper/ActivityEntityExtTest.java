@@ -1,6 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -8,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
@@ -18,7 +15,6 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
-import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, ActivityEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,8 +23,7 @@ import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 public class ActivityEntityExtTest {
     @Autowired
     private ActivityEntityExtMapper activityEntityExtMapper;
-    private CircleEntityExtMapper circleEntityExtMapper;
-    private Calendar time = Calendar.getInstance();
+   
 
     // public ActivityEntityExtTest() {
     // scriptAfterClass = "AddressEntityExtTestAfter.sql";
@@ -77,7 +72,7 @@ public class ActivityEntityExtTest {
         List<ActivityEntityExt> result = activityEntityExtMapper.list(
                 activityEntityExt, page);
         Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(1).getName());
+        Assert.assertEquals("_test_name_3_爱上课_", result.get(1).getName());
     }
 
 }

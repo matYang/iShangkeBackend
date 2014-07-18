@@ -303,12 +303,6 @@
         AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseTemplateId == null">
-        <if test="entity.courseTemplateIdStart != null">
-          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID >= #{entity.courseTemplateIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseTemplateIdEnd != null">
-          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID <= #{entity.courseTemplateIdEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"

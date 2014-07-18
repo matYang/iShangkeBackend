@@ -66,7 +66,7 @@ public class CourseClassPhotoEntityExtTest{
         CourseClassPhotoEntityExt courseClassPhotoQueryEntity = new CourseClassPhotoEntityExt();
         courseClassPhotoQueryEntity.setCourseId(1);
         List<CourseClassPhotoEntityExt> result = courseClassPhotoEntityExtMapper.list(courseClassPhotoQueryEntity, page);
-        Assert.assertEquals(4, result.size());
+        Assert.assertEquals(1, result.size());
         //Assert.assertEquals("_test_CourseTemplateClassPhotos_2_", result.get(0).getCreateTime());
     }
 

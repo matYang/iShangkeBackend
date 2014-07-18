@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
@@ -74,7 +72,7 @@ public class OrderEntityExtTest extends BaseTest {
         orderQueryEntity.setType("_test_");
         List<OrderEntityExt> result = orderEntityExtMapper.list(
                 orderQueryEntity, page);
-        Assert.assertEquals(3, result.size());
-         Assert.assertEquals("_test_type_3_", result.get(0).getType());
+        Assert.assertEquals(4, result.size());
+         Assert.assertEquals("_test_type_1_爱上课", result.get(0).getType());
     }
 }

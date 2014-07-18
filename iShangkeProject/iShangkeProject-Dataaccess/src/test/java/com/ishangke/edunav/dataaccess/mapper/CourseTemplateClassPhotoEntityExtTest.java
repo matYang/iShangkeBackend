@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
@@ -67,7 +65,7 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest{
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoQueryEntity = new CourseTemplateClassPhotoEntityExt();
         courseTemplateClassPhotoQueryEntity.setClassPhotoId(1);
         List<CourseTemplateClassPhotoEntityExt> result = courseTemplateClassPhotoEntityExtMapper.list(courseTemplateClassPhotoQueryEntity, page);
-        Assert.assertEquals(4, result.size());
+        Assert.assertEquals(1, result.size());
         //Assert.assertEquals("_test_CourseTemplateClassPhotos_2_", result.get(0).getCreateTime());
     }
 }

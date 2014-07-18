@@ -108,7 +108,7 @@
       </if>
 
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idSet != null andentity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND MESSAGE.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -124,7 +124,7 @@
         AND MESSAGE.USER_FROM_ID = #{entity.userFromId,jdbcType=INTEGER}
       </if>
       <if test="entity.userFromId == null or entity.userFromId == 0">
-        <if test="entity.userFromIdSet.size() > 0">
+        <if test="entity.userFromIdSet != null and entity.userFromIdSet.size() > 0">
           AND MESSAGE.USER_FROM_ID IN
           <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -136,7 +136,7 @@
         AND MESSAGE.USER_TO_ID = #{entity.userToId,jdbcType=INTEGER}
       </if>
       <if test="entity.userToId == null or entity.userToId == 0">
-        <if test="entity.userToIdSet.size() > 0">
+        <if test="entity.userToIdSet != null and entity.userToIdSet.size() > 0">
           MESSAGE.USER_TO_ID IN
           <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -157,6 +157,7 @@
         </if>
       </if>
     </if>
+    
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -169,7 +170,7 @@
     </if>
   </select>
   <!-- getListCount -->
-  <select id="getListCount" parameterType="int" resultMap="int">
+  <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     SELECT
     <include refid="Message_Base_Column_List" />

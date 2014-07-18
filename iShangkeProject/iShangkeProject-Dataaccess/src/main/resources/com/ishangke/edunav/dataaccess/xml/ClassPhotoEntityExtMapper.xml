@@ -7,8 +7,10 @@
     <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
     <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
     <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
-    <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="CLASSPHOTO_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="CLASSPHOTO_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -19,18 +21,21 @@
     CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
     CLASS_PHOTO.DESCRIPTION
     CLASSPHOTO_DESCRIPTION,
-    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.LAST_MODIFY_TIME
+    CLASSPHOTO_LASTMODIFYTIME,
     CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
-    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.ENABLED
+    CLASSPHOTO_ENABLED,
     CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
   <sql id="COURSE_TEMPLATE_Base_Column_List">
-    COURSE_TEMPLATE.ID COURSETEMPLATE_ID  
+    COURSE_TEMPLATE.ID COURSETEMPLATE_ID
   </sql>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
     COURSE.COURSE_NAME COURSE_COURSENAME,
-    COURSE.COURSE_TEMPLATE_ID COURSE_COURSETEMPLATEID
+    COURSE.COURSE_TEMPLATE_ID
+    COURSE_COURSETEMPLATEID
   </sql>
   <sql id="COURSE_TEMPLATE_Class_Photo_Base_Column_List">
     COURSE_TEMPLATE_CLASS_PHOTO.ID COURSETEMPLATECLASSPHOTO_ID,
@@ -39,7 +44,8 @@
   </sql>
   <sql id="Course_Class_Photo_Base_Column_List">
     COURSE_CLASS_PHOTO.ID COURSECLASSPHOTO_ID,
-    COURSE_CLASS_PHOTO.COURSE_ID COURSECLASSPHOTO_COURSEID,
+    COURSE_CLASS_PHOTO.COURSE_ID
+    COURSECLASSPHOTO_COURSEID,
     COURSE_CLASS_PHOTO.CLASS_PHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID
   </sql>
   <insert id="add" parameterType="ClassPhotoEntityExt">
@@ -125,10 +131,12 @@
         DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -139,176 +147,210 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <select id="getCount" resultType="int">
     select count(ID) from CLASS_PHOTO where DELETED = 0
   </select>
-  
-  <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
-  SELECT
-  <include refid="ClassPhoto_Base_Column_List"/>
-  from CLASS_PHOTO WHERE CLASS_PHOTO.DELETED = 0
-  <if test="entity != null">
-    <if test="entity.id != null and entity.id != 0">
-        AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
-    </if>
-    
-      <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND CLASS_PHOTO.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND CLASS_PHOTO.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-       </if>
-       
-    <if test="entity.partnerId != null and entity.partnerId != 0">
-        AND CLASS_PHOTO.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
-    </if>
-    
-      <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND CLASS_PHOTO.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND CLASS_PHOTO.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
-        </if>
-      </if>
-      
-      <if test="entity.imgUrl != null and entity.imgUrl != ''">
-        AND CLASS_PHOTO.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
-      </if>      
-       <if test="entity.title != null and entity.title != ''">
-        AND CLASS_PHOTO.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
-      </if>
-      <if test="entity.description != null and entity.description != ''">
-        AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
-      </if>
-     
-     
-        <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      
 
-        <if test="entity.createTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-     
-      <if test="entity.enabled != null">
-        AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+  <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
+    SELECT
+    <include refid="ClassPhoto_Base_Column_List" />
+    from CLASS_PHOTO WHERE CLASS_PHOTO.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-      <if test="page != null">
-        <if test="page.orderByEntities != null and page.orderByEntities.size() > 0">
-          ORDER BY
-          <foreach collection="page.orderByEntities" item="listItem" separator=",">
-            CLASS_PHOTO.${listItem.columnKey} ${listItem.order}
+
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND CLASS_PHOTO.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
           </foreach>
         </if>
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
-  </if>
-  </select>
-  <select id="getListCount" parameterType="map" resultType="int">
-   SELECT COUNT(*) FROM (
-   select
-  <include refid="ClassPhoto_Base_Column_List"/>
-  from CLASS_PHOTO WHERE CLASS_PHOTO.DELETED = 0
-  <if test="entity != null">
-    <if test="entity.id != null and entity.id != 0">
-        AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
-    </if>
-    
-      <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND CLASS_PHOTO.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND CLASS_PHOTO.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-       </if>
-       
-    <if test="entity.partnerId != null and entity.partnerId != 0">
+
+      <if test="entity.partnerId != null and entity.partnerId != 0">
         AND CLASS_PHOTO.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
-    </if>
-    
+      </if>
+
       <if test="entity.partnerId == null or entity.partnerId == 0">
-        <if test="entity.partnerIdStart != null and entity.partnerIdStart != 0">
-          <![CDATA[AND CLASS_PHOTO.PARTNER_ID >= #{entity.partnerIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.partnerIdEnd != null and entity.partnerIdEnd != 0">
-          <![CDATA[AND CLASS_PHOTO.PARTNER_ID <= #{entity.partnerIdEnd,jdbcType=INTEGER}]]>
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND CLASS_PHOTO.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
         </if>
       </if>
-      
-      <if test="entity.imgUrl != null and entity.imgUrl != ''">
+
+      <if test="entity.imgUrl != null and !entity.imgUrl.equals('')">
         AND CLASS_PHOTO.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
-      </if>      
-       <if test="entity.title != null and entity.title != ''">
+      </if>
+      <if test="entity.title != null and !entity.title.equals('')">
         AND CLASS_PHOTO.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.description != null and entity.description != ''">
+      <if test="entity.description != null and !entity.description.equals('')">
         AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
       </if>
-      
+
+
+      <if test="entity.lastModifyTime != null">
+        AND CLASS_PHOTO.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
-     
-     
+      </if>
+
+      <if test="entity.createTime != null">
+        AND ACTIVITY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
-    
+      </if>
+
       <if test="entity.enabled != null">
         AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
-  ) AS total
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        CLASS_PHOTO.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="getListCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM (
+    select
+    <include refid="ClassPhoto_Base_Column_List" />
+    from CLASS_PHOTO WHERE CLASS_PHOTO.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND CLASS_PHOTO.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND CLASS_PHOTO.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND CLASS_PHOTO.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.imgUrl != null and !entity.imgUrl.equals('')">
+        AND CLASS_PHOTO.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.title != null and !entity.title.equals('')">
+        AND CLASS_PHOTO.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.description != null and !entity.description.equals('')">
+        AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
+      </if>
+
+
+      <if test="entity.lastModifyTime != null">
+        AND CLASS_PHOTO.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND CLASS_PHOTO.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND ACTIVITY.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND CLASS_PHOTO.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null">
+        AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    ) AS total
   </select>
 
   <select id="listClassPhotoByPartnerId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
-    <include refid="ClassPhoto_Base_Column_List"/>
+    <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO where CLASS_PHOTO.PARTNER_ID = #{partnerId} and CLASS_PHOTO.DELETED = 0
   </select>
-  
+
   <select id="listClassPhotoByCourseId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
-    <include refid="ClassPhoto_Base_Column_List"/>,
-    <include refid="Course_Base_Column_List"/>,
-    <include refid="Course_Class_Photo_Base_Column_List"/>
+    <include refid="ClassPhoto_Base_Column_List" />
+    ,
+    <include refid="Course_Base_Column_List" />
+    ,
+    <include refid="Course_Class_Photo_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
-      JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO 
-          ON CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
-      JOIN COURSE COURSE 
-          ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
+    JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO
+    ON CLASS_PHOTO.ID =
+    COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
+    JOIN COURSE COURSE
+    ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
     WHERE COURSE.ID = #{courseId} and CLASS_PHOTO.DELETED = 0
   </select>
-  
+
   <select id="listClassPhotoByCourseTempleteId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
-    <include refid="ClassPhoto_Base_Column_List"/>,
-    <include refid="COURSE_TEMPLATE_Base_Column_List"/>,
-    <include refid="COURSE_TEMPLATE_Class_Photo_Base_Column_List"/>
+    <include refid="ClassPhoto_Base_Column_List" />
+    ,
+    <include refid="COURSE_TEMPLATE_Base_Column_List" />
+    ,
+    <include refid="COURSE_TEMPLATE_Class_Photo_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
-        JOIN COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO 
-            ON CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
-        JOIN COURSE_TEMPLATE COURSE_TEMPLATE 
-            ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
-    WHERE COURSE_TEMPLATE.ID = #{courseTempleteId} and CLASS_PHOTO.DELETED = 0
+    JOIN COURSE_TEMPLATE_CLASS_PHOTO COURSE_TEMPLATE_CLASS_PHOTO
+    ON
+    CLASS_PHOTO.ID = COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
+    JOIN COURSE_TEMPLATE COURSE_TEMPLATE
+    ON COURSE_TEMPLATE.ID = COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
+    WHERE COURSE_TEMPLATE.ID =
+    #{courseTempleteId} and CLASS_PHOTO.DELETED = 0
   </select>
-  
+
 </mapper>

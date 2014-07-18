@@ -107,7 +107,7 @@
         AND CREDIT_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND CREDIT_HISTORY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -119,7 +119,7 @@
         AND CREDIT_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND CREDIT_HISTORY.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">
@@ -169,7 +169,7 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        COURSE_TEMPLATE_TEACHER.${listItem.columnKey} ${listItem.order}
+        CREDIT_HISTORY.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
 
@@ -188,7 +188,7 @@
         AND CREDIT_HISTORY.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND CREDIT_HISTORY.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -200,7 +200,7 @@
         AND CREDIT_HISTORY.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
       <if test="entity.userId == null or entity.userId == 0">
-        <if test="entity.userIdSet.size() > 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND CREDIT_HISTORY.USER_ID IN
           <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
             separator=",">

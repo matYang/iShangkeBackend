@@ -68,8 +68,8 @@ public class CourseCommentEntityExtTest {
         CourseCommentEntityExt courseCommentQueryEntity = new CourseCommentEntityExt();
         courseCommentQueryEntity.setTitle("_test_title_");
         List<CourseCommentEntityExt> result = courseCommentEntityExtMapper.list(courseCommentQueryEntity, page);
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals("_test_title_2_", result.get(0).getTitle());
+        Assert.assertEquals(4, result.size());
+        Assert.assertEquals("_test_title_1_爱上课", result.get(0).getTitle());
     }
 
 }

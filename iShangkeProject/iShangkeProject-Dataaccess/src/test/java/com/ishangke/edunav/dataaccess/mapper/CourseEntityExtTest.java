@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
@@ -78,16 +76,16 @@ public class CourseEntityExtTest extends BaseTest{
         page.setOffset(0);
         page.setSize(10);
 
-        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
+       
         page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
         page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE", DataaccessConstants.ORDER_ASC));
         
         CourseEntityExt courseEntityExt = new CourseEntityExt();
-        courseEntityExt.setCourseName("_test_c_");
+        courseEntityExt.setCourseName("_test_");
 
         List<CourseEntityExt> result = courseEntityExtMapper.list(courseEntityExt, page);
         Assert.assertEquals(3, result.size());
-        //Assert.assertEquals("_test_c_爱上课英语课（上的都牛逼）", result.get(2).getCourseName());
+        Assert.assertEquals("_test_c_爱上课英语课（上的都牛逼）", result.get(2).getCourseName());
     }
 
 

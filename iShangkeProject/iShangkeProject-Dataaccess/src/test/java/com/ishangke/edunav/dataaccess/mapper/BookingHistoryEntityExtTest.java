@@ -7,12 +7,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
@@ -25,7 +22,7 @@ import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
 // 继承BaseTest
-public class BookingHistoryEntityExtTest extends BaseTest {
+public class BookingHistoryEntityExtTest {
     @Autowired
     private BookingHistoryEntityExtMapper bookingHistoryEntityExtMapper;
 
@@ -78,11 +75,11 @@ public class BookingHistoryEntityExtTest extends BaseTest {
         // 排序，先按照第一个排序，再按照第二个排序，依次排列
         page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
         BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
-        bookingHistoryEntityExt.setUserId(1);
+        bookingHistoryEntityExt.setRemark("_test_");
 
         List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt, page);
         //3 here, 1 default, 3 added among which 1 is deleted
-        Assert.assertEquals(3, result.size());
-      //  Assert.assertEquals("_test_bh_太棒了！耶", result.get(1).getRemark());
+        Assert.assertEquals(4, result.size());
+       Assert.assertEquals("_test_remark_2_爱上课", result.get(1).getRemark());
     }
 }

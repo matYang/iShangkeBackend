@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
@@ -73,7 +71,7 @@ public class CourseTemplateTeacherEntityExtTest extends BaseTest{
         CourseTemplateTeacherEntityExt courseTemplateTeacherQueryEntity = new CourseTemplateTeacherEntityExt();
         courseTemplateTeacherQueryEntity.setCourseTemplateId(1);
         List<CourseTemplateTeacherEntityExt> result = courseTemplateTeacherEntityExtMapper.list(courseTemplateTeacherQueryEntity, page);
-        Assert.assertEquals(4, result.size());
+        Assert.assertEquals(1, result.size());
         //Assert.assertEquals("_test_CourseTemplateTeachers_2_", result.get(0).getCreateTime());
     }
 }

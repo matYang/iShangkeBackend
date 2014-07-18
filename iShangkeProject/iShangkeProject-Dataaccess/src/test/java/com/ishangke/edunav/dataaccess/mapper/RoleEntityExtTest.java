@@ -1,7 +1,5 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import org.junit.Assert;
@@ -13,7 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
+import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 
@@ -50,7 +50,7 @@ public class RoleEntityExtTest extends BaseTest{
         Assert.assertSame(roleEntityExtMapper.getCount(),oldCount - 1);
     }
 
-    @Test
+   /* @Test
     public void testList(){
         RoleEntityExt roleEntityExt = new RoleEntityExt();
         roleEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
@@ -92,5 +92,22 @@ public class RoleEntityExtTest extends BaseTest{
         if(list.get(0).getName().equals(name)){
             //Passed;
         }else fail();
+    }*/
+    @Test
+    public void testQuery() {
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        // 排序，先按照第一个排序，再按照第二个排序，依次排列
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
+                DataaccessConstants.ORDER_DESC));
+       
+        RoleEntityExt RoleEntityExt = new RoleEntityExt();
+        RoleEntityExt.setName("_test_");
+        List<RoleEntityExt> result = roleEntityExtMapper.list(
+                RoleEntityExt, page);
+        Assert.assertEquals(4, result.size());
+         Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
     }
+
 }
