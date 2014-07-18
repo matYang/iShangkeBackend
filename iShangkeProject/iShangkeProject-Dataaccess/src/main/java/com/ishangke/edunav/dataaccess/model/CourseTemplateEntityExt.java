@@ -45,6 +45,10 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private Set<Integer> bookingTotalSet;
     private Set<Integer> schooltimeDaySet;
     private Set<Integer> schooltimeWeekSet;
+    private Calendar noRefundDateStart;
+    private Calendar noRefundDateEnd;
+    private Calendar cashbackDateStart;
+    private Calendar cashbackDateEnd;
 
     // concrete information
     private List<TeacherEntityExt> teacherList;
@@ -69,6 +73,38 @@ public class CourseTemplateEntityExt extends CourseTemplateEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+
+    public Calendar getNoRefundDateStart() {
+        return noRefundDateStart;
+    }
+
+    public void setNoRefundDateStart(Calendar noRefundDateStart) {
+        this.noRefundDateStart = noRefundDateStart;
+    }
+
+    public Calendar getNoRefundDateEnd() {
+        return noRefundDateEnd;
+    }
+
+    public void setNoRefundDateEnd(Calendar noRefundDateEnd) {
+        this.noRefundDateEnd = noRefundDateEnd;
+    }
+
+    public Calendar getCashbackDateStart() {
+        return cashbackDateStart;
+    }
+
+    public void setCashbackDateStart(Calendar cashbackDateStart) {
+        this.cashbackDateStart = cashbackDateStart;
+    }
+
+    public Calendar getCashbackDateEnd() {
+        return cashbackDateEnd;
+    }
+
+    public void setCashbackDateEnd(Calendar cashbackDateEnd) {
+        this.cashbackDateEnd = cashbackDateEnd;
+    }
 
     public Set<Integer> getSchooltimeDaySet() {
         return schooltimeDaySet;
