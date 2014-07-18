@@ -24,7 +24,7 @@ public class UserManagerImpl implements UserManager {
 
     @Autowired
     private UserEntityExtMapper userMapper;
-
+    
     @Override
     public UserBo registerUser(UserBo userBo) {
         // 参数验证
