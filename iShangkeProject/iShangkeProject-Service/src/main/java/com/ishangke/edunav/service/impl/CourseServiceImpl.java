@@ -31,7 +31,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     private CourseManager courseManager;
 
     @Override
-    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo,
+            UserBo userBo) throws BusinessExceptionBo, TException {
         try {
             return courseManager.createCourse(courseTemplateBo, courseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -44,7 +45,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo submitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo submitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
         try {
             return courseManager.submitCourse(courseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -57,7 +59,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo approveCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseApproveBo commentCourseApproveBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo approveCourse(CourseBo courseBo, PartnerBo partnerBo,
+            CommentCourseApproveBo commentCourseApproveBo, UserBo userBo) throws BusinessExceptionBo, TException {
         try {
             return courseManager.approveCourse(courseBo, partnerBo, commentCourseApproveBo, userBo);
         } catch (ManagerException e) {
@@ -70,7 +73,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo rejectCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseRejectBo commentCourseRejectBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo rejectCourse(CourseBo courseBo, PartnerBo partnerBo, CommentCourseRejectBo commentCourseRejectBo,
+            UserBo userBo) throws BusinessExceptionBo, TException {
         try {
             return courseManager.rejectCourse(courseBo, partnerBo, commentCourseRejectBo, userBo);
         } catch (ManagerException e) {
@@ -83,7 +87,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo cancelCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo cancelCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
         try {
             return courseManager.cancelCourse(courseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -96,7 +101,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo resubmitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo resubmitCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
         try {
             return courseManager.resubmitCourse(courseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -109,7 +115,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo deleteCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo deleteCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
         try {
             return courseManager.deleteCourse(courseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -122,7 +129,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo updateCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo updateCourse(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo,
+            TException {
         try {
             return courseManager.updateCourse(courseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -135,7 +143,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo commentCourse(CourseBo courseBo, CommentCourseBo commentCourseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseBo commentCourse(CourseBo courseBo, CommentCourseBo commentCourseBo, PartnerBo partnerBo, UserBo userBo)
+            throws BusinessExceptionBo, TException {
         try {
             return courseManager.commentCourse(courseBo, commentCourseBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -161,7 +170,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo,
+            PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
             return courseManager.queryByPartner(courseBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -174,7 +184,8 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo, CircleBo circleBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CourseBo> queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo,
+            CircleBo circleBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
             return courseManager.queryByFilter(courseBo, categoryBo, locationBo, circleBo, paginationBo);
         } catch (ManagerException e) {

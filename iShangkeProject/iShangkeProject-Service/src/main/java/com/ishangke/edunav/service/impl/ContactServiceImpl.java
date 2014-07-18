@@ -68,8 +68,8 @@ public class ContactServiceImpl implements ContactService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CONTACT_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CONTACT_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.CONTACT_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }

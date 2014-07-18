@@ -43,8 +43,8 @@ public class CouponServiceImpl implements CouponService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.COUPON_QUERY_ERROR);
-            exception.setMessageKey(ManagerErrorCode.COUPON_QUERY_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.COUPON_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COUPON_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }
