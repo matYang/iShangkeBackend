@@ -5,13 +5,9 @@ struct RolePermissionBo {
     2: i32 roleId
     3: i32 permissionId
     4: i64 lastModifyTime
-    5: i32 deleted
-    6: i32 idStart
-    7: i32 idEnd
-    8: i32 roleIdStart
-    9: i32 roleIdEnd
-    10: i32 permissionIdStart
-    11: i32 permissionIdEnd
-    12: i64 lastModifyTimeStart
-    13: i64 lastModifyTimeEnd
+    5: set<i32> idSet
+    6: set<i32> roleIdSet
+    7: set<i32> permissionIdSet
+    8: i64 lastModifyTimeStart
+    9: i64 lastModifyTimeEnd
 }

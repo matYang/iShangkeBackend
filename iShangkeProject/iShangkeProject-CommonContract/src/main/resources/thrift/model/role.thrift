@@ -6,11 +6,10 @@ struct RoleBo {
     3: i64 lastModifyTime
     4: i64 createTime
     5: i32 enabled
-    6: i32 deleted
-    7: i32 idStart
-    8: i32 idEnd
-    9: i64 lastModifyTimeStart
-    10: i64 lastModifyTimeEnd
-    11: i64 createTimeStart
-    12: i64 createTimeEnd
+    6: set<i32> idSet;
+    7: set<i32> bookingIdSet;
+    8: i64 createTimeStart;
+    9: i64 createTimeEnd;
+    10: double priceStart;
+    11: double priceEnd;
 }

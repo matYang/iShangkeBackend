@@ -6,15 +6,26 @@ struct CourseCommentBo {
     3: i32 courseTemplateId
     4: string title
     5: string content
-    6: i64 lastModifyTime
-    7: i64 createTime
-    8: i32 enabled
-    9: i32 deleted
-    10: i32 idStart
-    11: i32 idEnd
-    12: set<i32> idSet
-    13: i64 lastModifyTimeStart
-    14: i64 lastModifyTimeEnd
-    15: i64 createTimeStart
-    16: i64 createTimeEnd
+    6: double totalRating
+    7: double conditionRating
+    8: double attitudeRating
+    9: double satisfactionRating
+    10: i64 lastModifyTime
+    11: i64 createTime
+    12: i32 enabled
+    13: set<i32> idSet
+    14: set<i32> userIdSet
+    15: set<i32> courseTemplateIdSet
+    16: double totalRatingStart
+    17: double totalRatingEnd
+    18: double conditionRatingStart
+    19: double conditionRatingEnd
+    20: double attitudeRatingStart
+    21: double attitudeRatingEnd
+    22: double satisfactionRatingStart
+    23: double satisfactionRatingEnd
+    24: i64 lastModifyTimeStart
+    25: i64 lastModifyTimeEnd
+    26: i64 createTimeStart
+    27: i64 createTimeEnd
 }

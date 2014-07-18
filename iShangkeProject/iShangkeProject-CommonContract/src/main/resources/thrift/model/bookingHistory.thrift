@@ -11,16 +11,13 @@ struct BookingHistoryBo {
     8: i32 normal
     9: i64 createTime
     10: i32 enabled
-    11: i32 deleted
-    12: i32 idStart
-    13: i32 idEnd
-    14: set<i32> idSet
-    15: i32 bookingIdStart
-    16: i32 bookingIdEnd
-    17: set<i32> bookingIdSet
-    18: i32 userIdStart
-    19: i32 userIdEnd
-    20: set<i32> userIdSet
-    21: i64 createTimeStart
-    22: i64 createTimeEnd
-}
+    11: set<i32> idSet
+    12: set<i32> bookingIdSet
+    13: set<i32> userIdSet
+    14: set<i32> optNameSet
+    15: set<i32> preStatusSet
+    16: set<i32> postStatusSet
+    17: set<i32> normalSet
+    18: i64 createTimeStart
+    19: i64 createTimeEnd
+    }
