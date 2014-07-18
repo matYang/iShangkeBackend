@@ -1022,6 +1022,9 @@
           </foreach>
         </if>
       </if>
+      
+      
+      
       <if test="entity.locationId != null and entity.locationId != 0">
         AND COURSE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
       </if>
@@ -1190,6 +1193,32 @@
         </if>
         <if test="entity.finishDateEnd != null">
           <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+      
+      <if test="entity.noRefundDate != null">
+        AND COURSE.NO_REFUND_DATE =
+        #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.noRefundDate == null">
+        <if test="entity.noRefundDateStart != null">
+          <![CDATA[AND COURSE.NO_REFUND_DATE >= #{entity.noRefundDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.noRefundDateEnd != null">
+          <![CDATA[AND COURSE.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+      
+      <if test="entity.cashbackDate != null">
+        AND COURSE.CASHBACK_DATE =
+        #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.cashbackDate == null">
+        <if test="entity.cashbackDateStart != null">
+          <![CDATA[AND COURSE.CASHBACK_DATE >= #{entity.cashbackDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.cashbackDateEnd != null">
+          <![CDATA[AND COURSE.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -1535,6 +1564,32 @@
         </if>
         <if test="entity.finishDateEnd != null">
           <![CDATA[AND COURSE.FINISH_DATE <= #{entity.finishDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+      
+      <if test="entity.noRefundDate != null">
+        AND COURSE.NO_REFUND_DATE =
+        #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.noRefundDate == null">
+        <if test="entity.noRefundDateStart != null">
+          <![CDATA[AND COURSE.NO_REFUND_DATE >= #{entity.noRefundDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.noRefundDateEnd != null">
+          <![CDATA[AND COURSE.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+      
+      <if test="entity.cashbackDate != null">
+        AND COURSE.CASHBACK_DATE =
+        #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.cashbackDate == null">
+        <if test="entity.cashbackDateStart != null">
+          <![CDATA[AND COURSE.CASHBACK_DATE >= #{entity.cashbackDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.cashbackDateEnd != null">
+          <![CDATA[AND COURSE.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
