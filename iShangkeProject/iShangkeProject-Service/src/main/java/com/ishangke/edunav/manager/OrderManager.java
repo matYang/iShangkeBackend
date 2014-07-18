@@ -99,6 +99,6 @@ public interface OrderManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<OrderBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
 
 }
