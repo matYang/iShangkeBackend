@@ -24,7 +24,7 @@
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>
-		<aop:pointcut id="managerPointcut" expression="execution(* com.ishangke.edunav.manager.customer..*ManagerImpl.*(..))" />
+		<aop:pointcut id="managerPointcut" expression="execution(* com.ishangke.edunav.manager..*ManagerImpl.*(..))" />
 		<aop:advisor pointcut-ref="managerPointcut" advice-ref="managerAdvice" />
 	</aop:config>
 </beans>

@@ -1068,12 +1068,6 @@
         AND COURSE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
-        <if test="entity.statusStart != null">
-          <![CDATA[AND COURSE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null">
-          <![CDATA[AND COURSE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
@@ -1439,12 +1433,6 @@
         AND COURSE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
-        <if test="entity.statusStart != null">
-          <![CDATA[AND COURSE.STATUS >= #{entity.statusStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.statusEnd != null">
-          <![CDATA[AND COURSE.STATUS <= #{entity.statusEnd,jdbcType=INTEGER}]]>
-        </if>
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")"

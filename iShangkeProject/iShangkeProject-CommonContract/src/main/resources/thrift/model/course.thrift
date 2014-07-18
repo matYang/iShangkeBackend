@@ -3,9 +3,6 @@ include "classPhoto.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.model
 
-/**
- * CourseBo
- */
 struct CourseBo {
     1: i32 id
     2: string courseName
@@ -72,69 +69,69 @@ struct CourseBo {
     63: double discount
     64: i32 schooltimeDay
     65: i32 schooltimeWeek
-    66: set<i32> idSet;
-    67: i64 lastModifyTimeStart;
-    68: i64 lastModifyTimeEnd;
-    69: i64 createTimeStart;
-    70: i64 createTimeEnd;
-    71: set<i32> categoryIdSet;
-    72: set<i32> locationIdSet;
-    73: set<i32> circleIdSet;
-    74: set<i32> partnerIdSet;
-    75: set<i32> statusSet;
-    76: double priceStart;
-    77: double priceEnd;
-    78: double originalPriceStart;
-    79: double originalPriceEnd;
-    80: double cashbackStart;
-    81: double cashbackEnd;
-    82: i32 popularityStart;
-    83: i32 popularityEnd;
-    84: set<i32> popularitySet;
-    85: i32 courseHourNumStart;
-    86: i32 courseHourNumEnd;
-    87: set<i32> courseHourNumSet;
-    88: i64 startDateStart;
-    89: i64 startDateEnd;
-    90: i64 finishDateStart;
-    91: i64 finishDateEnd;
-    92: i64 cutoffDateStart;
-    93: i64 cutoffDateEnd;
-    94: set<i32> classTypeSet;
-    95: double discountStart;
-    96: double discountEnd;
-    97: double ratingStart;
-    98: double ratingEnd;
-    99: i32 bookingTotalStart;
-    100: i32 bookingTotalEnd;
-    101: set<i32> bookingTotalSet;
-    102: set<i32> schooltimeDaySet;
-    103: set<i32> schooltimeWeekSet;
-    104: list<teacher.TeacherBo> teacherList;
-    105: list<classPhoto.ClassPhotoBo> classPhotoList;
-    106: string logoUrl;
-    107: string wholeName;
-    108: string instName;
-    109: string partnerIntro;
-    110: i32 partnerQualification;
-    111: string partnerDistinction;
-    112: double partnerRating;
-    113: string address;
-    114: double addressLat;
-    115: double addressLng;
-    116: string categoryValue;
-    117: string categoryName;
-    118: i32 categoryRank;
-    119: string locationValue;
-    120: string locationName;
-    121: string circleValue;
-    122: string circleName;
-    123: double rating;
-    124: i32 bookingTotal;
-    125: i64 noRefundDateStart;
-    126: i64 noRefundDateEnd;
-    127: i64 cashbackDateStart;
-    128: i64 cashbackDateEnd;
+    66: set<i32> idSet
+    67: i64 lastModifyTimeStart
+    68: i64 lastModifyTimeEnd
+    69: i64 createTimeStart
+    70: i64 createTimeEnd
+    71: set<i32> categoryIdSet
+    72: set<i32> locationIdSet
+    73: set<i32> circleIdSet
+    74: set<i32> partnerIdSet
+    75: set<i32> statusSet
+    76: double priceStart
+    77: double priceEnd
+    78: double originalPriceStart
+    79: double originalPriceEnd
+    80: double cashbackStart
+    81: double cashbackEnd
+    82: i32 popularityStart
+    83: i32 popularityEnd
+    84: set<i32> popularitySet
+    85: i32 courseHourNumStart
+    86: i32 courseHourNumEnd
+    87: set<i32> courseHourNumSet
+    88: i64 startDateStart
+    89: i64 startDateEnd
+    90: i64 finishDateStart
+    91: i64 finishDateEnd
+    92: i64 cutoffDateStart
+    93: i64 cutoffDateEnd
+    94: set<i32> classTypeSet
+    95: double discountStart
+    96: double discountEnd
+    97: double ratingStart
+    98: double ratingEnd
+    99: i32 bookingTotalStart
+    100: i32 bookingTotalEnd
+    101: set<i32> bookingTotalSet
+    102: set<i32> schooltimeDaySet
+    103: set<i32> schooltimeWeekSet
+    104: list<teacher.TeacherBo> teacherList
+    105: list<classPhoto.ClassPhotoBo> classPhotoList
+    106: string logoUrl
+    107: string wholeName
+    108: string instName
+    109: string partnerIntro
+    110: i32 partnerQualification
+    111: string partnerDistinction
+    112: double partnerRating
+    113: string address
+    114: double addressLat
+    115: double addressLng
+    116: string categoryValue
+    117: string categoryName
+    118: i32 categoryRank
+    119: string locationValue
+    120: string locationName
+    121: string circleValue
+    122: string circleName
+    123: double rating
+    124: i32 bookingTotal
+    125: i64 noRefundDateStart
+    126: i64 noRefundDateEnd
+    127: i64 cashbackDateStart
+    128: i64 cashbackDateEnd
     129: set<i32> courseTemplateIdSet
 }
 
