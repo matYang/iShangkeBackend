@@ -95,7 +95,7 @@ public interface UserManager {
     public UserBo verifyChangePasswordSession(SessionBo sessionBo);
 
     /**
-     * 本方法为所有用户提供登录的功能。<br>
+     * 本方法为所有用户提供用户使用手机号码登录的功能。<br>
      * 所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
      * 
      * @param loginBo
@@ -106,7 +106,21 @@ public interface UserManager {
      * 
      * @param loginBo
      */
-    public UserBo login(LoginBo loginBo);
+    public UserBo loginByPhone(LoginBo loginBo);
+
+    /**
+     * 本方法为所有用户提供使用识别码登录的功能。<br>
+     * 所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
+     * 
+     * @param loginBo
+     *            用户登录信息
+     * 
+     * @return 用户实体 UserBo
+     * 
+     * 
+     * @param loginBo
+     */
+    public UserBo loginByReference(LoginBo loginBo);
 
     /**
      * 本方法为ishangke管理员创建新用户<br>

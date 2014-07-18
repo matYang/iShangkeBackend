@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<AccountBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
             return accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
         } catch (ManagerException e) {

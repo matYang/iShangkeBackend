@@ -27,7 +27,7 @@ public class CouponManagerImpl implements CouponManager {
     }
 
     @Override
-    public List<CouponBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }

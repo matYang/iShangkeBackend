@@ -13,7 +13,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.CreditManager;
 
-public class CreditManagerImpl implements CreditManager{
+public class CreditManagerImpl implements CreditManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreditManagerImpl.class);
 
     @Override
@@ -35,11 +35,9 @@ public class CreditManagerImpl implements CreditManager{
     }
 
     @Override
-    public List<CreditBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }
-    
-    
 
 }

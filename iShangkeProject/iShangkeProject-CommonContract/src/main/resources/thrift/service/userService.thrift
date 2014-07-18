@@ -64,7 +64,7 @@ service UserService {
 
 
     /**
-     *  本方法为所有用户提供登录的功能。<br>
+     *  本方法为所有用户提供使用手机号码是登录的功能。<br>
      *  所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
      *
      *  @param  loginBo       用户登录信息
@@ -72,7 +72,19 @@ service UserService {
      *  @return 用户实体 UserBo
      *
      */
-    user.UserBo login(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo loginByPhone(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    /**
+     *  本方法为所有用户提供使用识别号登录的功能。<br>
+     *  所有有记录的用户都可以包括普通用户，合作商管理员，ishangke管理员。
+     *
+     *  @param  loginBo       用户登录信息
+     *
+     *  @return 用户实体 UserBo
+     *
+     */
+    user.UserBo loginByReference(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
 
     /**
      *  本方法为ishangke管理员创建新用户<br>

@@ -50,7 +50,7 @@ public class CouponServiceImpl implements CouponService.Iface {
     }
 
     @Override
-    public List<CouponBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
             return couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
         } catch (ManagerException e) {
