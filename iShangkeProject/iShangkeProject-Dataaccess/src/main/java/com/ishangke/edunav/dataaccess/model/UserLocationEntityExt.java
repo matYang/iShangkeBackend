@@ -9,6 +9,8 @@ public class UserLocationEntityExt extends UserLocationEntity {
     private Set<Integer> idSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
+    private Set<Integer> userIdSet;
+    private Set<Integer> locationIdSet;
 
     public Set<Integer> getIdSet() {
         return idSet;
@@ -32,6 +34,22 @@ public class UserLocationEntityExt extends UserLocationEntity {
 
     public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
+    }
+
+    public Set<Integer> getUserIdSet() {
+        return userIdSet;
+    }
+
+    public void setUserIdSet(Set<Integer> userIdSet) {
+        this.userIdSet = userIdSet;
+    }
+
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
     }
 
 }

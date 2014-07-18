@@ -1081,9 +1081,9 @@
         AND COURSE.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseTemplateId == null">
-        <if test="entity.courseTemplateSet != null and entity.courseTemplateSet.size() > 0">
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND COURSE.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateSet" item="listItem" open="(" close=")"
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>
@@ -1313,7 +1313,7 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        COURSE_COMMENT.${listItem.columnKey} ${listItem.order}
+        COURSE.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
 
@@ -1446,9 +1446,9 @@
         AND COURSE.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseTemplateId == null">
-        <if test="entity.courseTemplateSet != null and entity.courseTemplateSet.size() > 0">
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND COURSE.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateSet" item="listItem" open="(" close=")"
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
           </foreach>

@@ -101,7 +101,33 @@
           </foreach>
         </if>
       </if>
-
+      
+      <if test="entity.userId != null and entity.userId != 0">
+        AND USER_LOCATION.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId== null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND USER_LOCATION.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+       <if test="entity.locationId != null and entity.locationId != 0">
+        AND USER_LOCATION.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.locationId== null or entity.locationId == 0">
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
+          AND USER_LOCATION.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
       <if test="entity.lastModifyTime != null">
         AND USER_LOCATION.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
