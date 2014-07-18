@@ -32,21 +32,23 @@ struct UserBo {
     26: i64 birthdayStart
     27: i64 birthdayEnd
 }
-
+    
 /**
  * LoginBo
+ * note different users have diferent account identifiers, eg, user logs in with phone, admin may login with reference
  */
 struct LoginBo {
   1: i32 id
-  2: string phone
+  2: string accountIdentifier
   3: string password
 }
 
 /**
  *	SessionBo
+ *  note different users have diferent account identifiers, eg, user logs in with phone, admin may login with reference
  */
 struct SessionBo {
   1: i32 id
-  2: string phone
+  2: string accountIdentifier
   3: string authCode
 }

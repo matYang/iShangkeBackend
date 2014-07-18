@@ -11,29 +11,31 @@ public class ManagerErrorCode {
     public static final String USER_REGISTER_ERROR_KEY = "user_register_error";
     public static final int USER_CREATE_ERROR = 0x00010002;
     public static final String USER_CREATE_ERROR_KEY = "user_create_error";
-    public static final int USER_LOGIN_ERROR = 0x00010003;
-    public static final String USER_LOGIN_ERROR_KEY = "user_login_error";
-    public static final int USER_DELETE_ERROR = 0x00010004;
+    public static final int USER_LOGINBYPHONE_ERROR = 0x00010003;
+    public static final String USER_LOGINBYPHONE_ERROR_KEY = "user_loginByPhone_error";
+    public static final int USER_LOGINBYREFERENCE_ERROR = 0x00010004;
+    public static final String USER_LOGINBYREFERENCE_ERROR_KEY = "user_loginByReference_error";
+    public static final int USER_DELETE_ERROR = 0x00010005;
     public static final String USER_DELETE_ERROR_KEY = "user_delete_error";
-    public static final int USER_UPDATE_ERROR = 0x00010005;
-    public static final String USER_UPDATE_ERROR_KEY = "user_update_error";   
-    public static final int USER_QUERYINFO_ERROR = 0X00010006;
+    public static final int USER_UPDATE_ERROR = 0x00010006;
+    public static final String USER_UPDATE_ERROR_KEY = "user_update_error";
+    public static final int USER_QUERYINFO_ERROR = 0X00010007;
     public static final String USER_QUERYINFO_ERROR_KEY = "user_queryinfo_error";
-    public static final int USER_QUERYSESSION_ERROR = 0x00010007;
+    public static final int USER_QUERYSESSION_ERROR = 0x00010008;
     public static final String USER_QUERYSESSION_ERROR_KEY = "user_querysession_error";
-    public static final int USER_DISPOSESESSION_ERROR = 0X00010008;
+    public static final int USER_DISPOSESESSION_ERROR = 0X00010009;
     public static final String USER_DISPOSESESSION_ERROR_KEY = "user_disposesession_error";
-    public static final int USER_OPENCELLSESSION_ERROR = 0X00010009;
+    public static final int USER_OPENCELLSESSION_ERROR = 0X0001000A;
     public static final String USER_OPENCELLSESSION_ERROR_KEY = "user_opencellsession_error";
-    public static final int USER_VERIFYCELLSESSION_ERROR = 0X0001000A;
+    public static final int USER_VERIFYCELLSESSION_ERROR = 0X0001000B;
     public static final String USER_VERIFYCELLSESSION_ERROR_KEY = "user_verifycellsession_error";
-    public static final int USER_OPENCHANGEPASSWORDSESSION_ERROR = 0X0001000B;
+    public static final int USER_OPENCHANGEPASSWORDSESSION_ERROR = 0X0001000C;
     public static final String USER_OPENCHANGEPASSWORDSESSION_ERROR_KEY = "user_openchangepasswordsession_error";
-    public static final int USER_VERIFYCHANGEPASSWORDSESSION_ERROR = 0X0001000C;
+    public static final int USER_VERIFYCHANGEPASSWORDSESSION_ERROR = 0X0001000D;
     public static final String USER_VERIFYCHANGEPASSWORDSESSION_ERROR_KEY = "user_verifychangepasswordsession_error";
-    public static final int USER_OPENFORGETPASSWORDSESSION_ERROR = 0X0001000D;
+    public static final int USER_OPENFORGETPASSWORDSESSION_ERROR = 0X0001000E;
     public static final String USER_OPENFORGETPASSWORDSESSION_ERROR_KEY = "user_openforgetpasswordsession_error";
-    public static final int USER_VERIFYFORGETPASSWORDSESSION_ERROR = 0X0001000E;
+    public static final int USER_VERIFYFORGETPASSWORDSESSION_ERROR = 0X0001000F;
     public static final String USER_VERIFYFORGETPASSWORDSESSION_ERROR_KEY = "user_verifyforgetpasswordsession_error";
     public static final int USER_NOTFOUND_ERROR = 0x00010404;
     public static final String USER_NOTFOUND_ERROR_KEY = "user_notfound_error";
@@ -64,7 +66,7 @@ public class ManagerErrorCode {
     public static final int COURSE_QUERYBYFILTER_ERROR = 0x0002000C;
     public static final String COURSE_QUERYBYFILTER_ERROR_KEY = "course_querybyfilter_error";
     public static final int COURSE_QUERYBYID_ERROR = 0x0002000D;
-    public static final String COURSE_QUERYBYID_ERROR_KEY = "course_querybyid_error";   
+    public static final String COURSE_QUERYBYID_ERROR_KEY = "course_querybyid_error";
 
     // courseTemplate
     public static final int COURSETEMPLATE_CREATE_ERROR = 0x00030001;
@@ -104,17 +106,17 @@ public class ManagerErrorCode {
     public static final int BOOKING_CANCELBYPARTNER_ERROR = 0x00040007;
     public static final String BOOKING_CANCELBYPARTNER_ERROR_KEY = "booking_cancelbypartner_error";
     public static final int BOOKING_CANCELBYADMIN_ERROR = 0x00040008;
-    public static final String BOOKING_CANCELBYADMIN_ERROR_KEY = "booking_cancelbyadmin_error";    
+    public static final String BOOKING_CANCELBYADMIN_ERROR_KEY = "booking_cancelbyadmin_error";
     public static final int BOOKING_QUERYHISTORY_ERROR = 0x00040009;
     public static final String BOOKING_QUERYHISTORY_ERROR_KEY = "booking_queryhistory_error";
     public static final int BOOKING_NOTFOUND_ERROR = 0x00040404;
-    public static final String BOOKING_NOTFOUND_ERROR_KEy = "booking_notfound_error";   
+    public static final String BOOKING_NOTFOUND_ERROR_KEy = "booking_notfound_error";
 
     // order
     public static final int ORDER_CREATEBYUSER_ERROR = 0x00050001;
     public static final String ORDER_CREATEBYUSER_ERROR_KEY = "order_createbyuser_error";
     public static final int ORDER_ACCEPTBYADMIN_ERROR = 0x00050002;
-    public static final String ORDER_ACCEPTBYADMIN_ERROR_KEY = "order_acceptbyadmin_error";   
+    public static final String ORDER_ACCEPTBYADMIN_ERROR_KEY = "order_acceptbyadmin_error";
     public static final int ORDER_QUERYHISTORY_ERROR = 0x00050003;
     public static final String ORDER_QUERYHISTORY_ERROR_KEY = "order_queryhistory_error";
     public static final int ORDER_NOTFOUND_ERROR = 0x00050404;
@@ -127,14 +129,14 @@ public class ManagerErrorCode {
     // circle
     public static final int CIRCLE_NOTFOUND_ERROR = 0x00070404;
     public static final String CIRCLE_NOTFOUND_ERROR_KEY = "circle_notfound_error";
-    
-    // location    
+
+    // location
     public static final int LOCATION_NOTFOUND_ERROR = 0x00080404;
     public static final String LOCATION_NOTFOUND_ERROR_KEY = "location_notfound_error";
 
     // account
     public static final int ACCOUNT_EXCHANGECASH_ERROR = 0x00090001;
-    public static final String ACCOUNT_EXCHANGECASH_ERROR_KEY = "account_exchangecash_error";   
+    public static final String ACCOUNT_EXCHANGECASH_ERROR_KEY = "account_exchangecash_error";
     public static final int ACCOUNT_QUERYHISTORY_ERROR = 0x00090002;
     public static final String ACCOUNT_QUERYHISTORY_ERROR_KEY = "account_queryhistory_error";
     public static final int ACCOUONT_NOTFOUND_ERROR = 0x00090404;
@@ -152,7 +154,7 @@ public class ManagerErrorCode {
     public static final int ACTIVITY_CANCEL_ERROR = 0x000A0005;
     public static final String ACTIVITY_CANCEL_ERROR_KEY = "activity_cancel_error";
     public static final int ACTIVITY_DELETE_ERROR = 0x000A0006;
-    public static final String ACTIVITY_DELETE_ERROR_KEY = "activity_delete_error";   
+    public static final String ACTIVITY_DELETE_ERROR_KEY = "activity_delete_error";
     public static final int ACTIVITY_NOTFOUND_ERROR = 0x000A0404;
     public static final String ACTIVITY_NOTFOUND_ERROR_KEY = "activity_notfound_error";
 
@@ -162,7 +164,7 @@ public class ManagerErrorCode {
     public static final int ADDRESS_UPDATE_ERROR = 0x000B0002;
     public static final String ADDRESS_UPDATE_ERROR_KEY = "address_update_error";
     public static final int ADDRESS_DELETE_ERROR = 0x000B0003;
-    public static final String ADDRESS_DELETE_ERROR_KEY = "address_delete_error";   
+    public static final String ADDRESS_DELETE_ERROR_KEY = "address_delete_error";
     public static final int ADDRESS_NOTFOUND_ERROR = 0x000B0404;
     public static final String ADDRESS_NOTFOUND_ERROR_KEY = "address_notfound_error";
 
@@ -172,7 +174,7 @@ public class ManagerErrorCode {
     public static final int CLASSPHOTO_UPDATE_ERROR = 0x000C0002;
     public static final String CLASSPHOTO_UPDATE_ERROR_KEY = "classphoto_update_error";
     public static final int CLASSPHOTO_DELETE_ERROR = 0x000C0003;
-    public static final String CLASSPHOTO_DELETE_ERROR_KEY = "classphoto_delete_error";    
+    public static final String CLASSPHOTO_DELETE_ERROR_KEY = "classphoto_delete_error";
     public static final int CLASSPHOTO_NOTFOUND_ERROR = 0x000C0404;
     public static final String CLASSPHOTO_NOTFOUND_ERROR_KEY = "classphoto_notfound_error";
 
@@ -182,13 +184,13 @@ public class ManagerErrorCode {
     public static final int CONTACT_UPDATE_ERROR = 0x000D0002;
     public static final String CONTACT_UPDATE_ERROR_KEY = "contact_update_error";
     public static final int CONTACT_DELETE_ERROR = 0x000D0003;
-    public static final String CONTACT_DELETE_ERROR_KEY = "contact_delete_error";   
+    public static final String CONTACT_DELETE_ERROR_KEY = "contact_delete_error";
     public static final int CONTACT_NOTFOUND_ERROR = 0x000D0404;
     public static final String CONTACT_NOTFOUND_ERROR_KEY = "contact_notfound_error";
 
     // coupon
     public static final int COUPON_CREATE_ERROR = 0x000E0001;
-    public static final String COUPON_CREATE_ERROR_KEY = "coupon_generate_error";   
+    public static final String COUPON_CREATE_ERROR_KEY = "coupon_generate_error";
     public static final int COUPON_QUERYHISTORY_ERROR = 0x000E0002;
     public static final String COUPON_QUERYHISTORY_ERROR_KEY = "coupon_queryhistory_error";
     public static final int COUPON_EXCHANGE_ERROR = 0x000E003;
@@ -200,7 +202,7 @@ public class ManagerErrorCode {
 
     // credit
     public static final int CREDIT_CREATE_ERROR = 0x000E0001;
-    public static final String CREDIT_CREATE_ERROR_KEY = "coupon_generate_error";   
+    public static final String CREDIT_CREATE_ERROR_KEY = "coupon_generate_error";
     public static final int CREDIT_QUERYHISTORY_ERROR = 0x000E0002;
     public static final String CREDIT_QUERYHISTORY_ERROR_KEY = "coupon_queryhistory_error";
     public static final int CREDIT_EXCHANGE_ERROR = 0x000E003;
@@ -214,7 +216,7 @@ public class ManagerErrorCode {
     public static final int PARTNER_CREATE_ERROR = 0x00100001;
     public static final String PARTNER_CREATE_ERROR_KEY = "partner_create_error";
     public static final int PARTNER_UPDATE_ERROR = 0x00100002;
-    public static final String PARTNER_UPDATE_ERROR_KEY = "partner_update_error";    
+    public static final String PARTNER_UPDATE_ERROR_KEY = "partner_update_error";
     public static final int PARTNER_NOTFOUND_ERROR = 0x00100404;
     public static final String PARTNER_NOTFOUND_ERROR_KEY = "partner_notfound_error";
 
@@ -222,7 +224,7 @@ public class ManagerErrorCode {
     public static final int SPREAD_CREATE_ERROR = 0x00110001;
     public static final String SPREAD_CREATE_ERROR_KEY = "spread_create_error";
     public static final int SPREAD_GENERATECODE_ERROR = 0x00110002;
-    public static final String SPREAD_GENERATECODE_ERROR_KEY = "spread_generatecode_error";    
+    public static final String SPREAD_GENERATECODE_ERROR_KEY = "spread_generatecode_error";
     public static final int SPREAD_APPROVE_ERROR = 0x00110003;
     public static final String SPREAD_APPROVE_ERROR_KEY = "spread_approve_error";
     public static final int SPREAD_REJECT_ERROR = 0x00110004;
@@ -273,8 +275,8 @@ public class ManagerErrorCode {
     public static final String MESSAGE_DELETE_ERROR_KEY = "message_delete_error";
     public static final int MESSAGE_NOTFOUND_ERROR = 0x00170404;
     public static final String MESSAGE_NOTFOUND_ERROR_KEY = "message_notfound_error";
-    
-    //withdraw
+
+    // withdraw
     public static final int WITHDRAW_CREATE_ERROR = 0x00180001;
     public static final String WITHDRAW_CREATE_ERROR_KEY = "withdraw_create_error";
     public static final int WITHDRAW_UPDATE_ERROR = 0x00180002;

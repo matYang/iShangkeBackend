@@ -139,7 +139,7 @@ service BookingService {
      *  @param  userBo                  调用方法的用户的信息
      *  @param  paginationBo            分页信息
      *
-     *  @return 预定单实体 BookingBo 列表
+     *  @return 预定单实体 bookingHistoryBo 列表
      *
      */ 
     list<bookingHistory.BookingHistoryBo> queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)

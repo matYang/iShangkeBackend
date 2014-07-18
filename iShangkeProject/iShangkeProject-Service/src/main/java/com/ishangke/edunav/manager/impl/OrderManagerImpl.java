@@ -36,10 +36,9 @@ public class OrderManagerImpl implements OrderManager {
     }
 
     @Override
-    public List<OrderBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }
-    
-    
+
 }

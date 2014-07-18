@@ -38,13 +38,13 @@ service AccountService{
      *  本方法为查询账户历史功能。<br>
      *  用户可以查询自己拥有的账户的历史信息，系统可以查看所有账户的历史信息
      *
-     *  @param  accountBo       需要检索和过滤的账户信息
-     *  @param  userBo          调用方法的用户的信息
-     *  @param  paginationBo 	分页信息
+     *  @param  accountHistoryBo        需要检索和过滤的账户信息
+     *  @param  userBo                  调用方法的用户的信息
+     *  @param  paginationBo 	          分页信息
      *
      *  @return AccountHistoryBo 列表
      *
      */ 
-     list<account.AccountBo> queryHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     list<accountHistory.AccountHistoryBo> queryHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

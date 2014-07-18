@@ -27,7 +27,7 @@ public class AccountManagerImpl implements AccountManager {
     }
 
     @Override
-    public List<AccountBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         // TODO Auto-generated method stub
         return null;
     }

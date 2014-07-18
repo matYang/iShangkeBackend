@@ -24,7 +24,7 @@ public class UserManagerImpl implements UserManager {
 
     @Autowired
     private UserEntityExtMapper userMapper;
-    
+
     @Override
     public UserBo registerUser(UserBo userBo) {
         // 参数验证
@@ -32,12 +32,13 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("Invalid parameter");
         }
 
-        // 判断是否存在登录名一样的USER
-        // TODO getUserByName
+        // 判断是否存在手机号码一样的USER
         UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setName(userBo.getName());
-        if (entityInDb != null) {
-            throw new ManagerException("User xxx has already in db");
+        entityInDb.setPhone(userBo.getPhone());
+
+        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
+        if (entityList.size() != 0) {
+            throw new ManagerException(userBo.getPhone() + " is already in db");
         }
 
         // 插入新的USER
@@ -46,13 +47,13 @@ public class UserManagerImpl implements UserManager {
         try {
             result = userMapper.add(userEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Register user xxx failed", t);
+            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed", t);
         }
 
         if (result > 0) {
             return UserConverter.toBo(userEntity);
         } else {
-            throw new ManagerException("Register user xxx failed");
+            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed");
         }
     }
 
@@ -93,7 +94,13 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserBo login(LoginBo loginBo) {
+    public UserBo loginByPhone(LoginBo loginBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserBo loginByReference(LoginBo loginBo) {
         // TODO Auto-generated method stub
         return null;
     }

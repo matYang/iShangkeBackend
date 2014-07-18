@@ -7,12 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
+import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
@@ -39,21 +40,33 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo login(LoginBo loginBo) throws BusinessExceptionBo, TException {
+    public UserBo loginByPhone(LoginBo loginBo) throws BusinessExceptionBo, TException {
         try {
-            return userManager.login(loginBo);
+            return userManager.loginByPhone(loginBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.USER_LOGIN_ERROR);
-            exception.setMessageKey(ManagerErrorCode.USER_LOGIN_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_LOGINBYPHONE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_LOGINBYPHONE_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo,
-            TException {
+    public UserBo loginByReference(LoginBo loginBo) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.loginByReference(loginBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo, TException {
         try {
             return userManager.createUser(targetUser, partnerBo, currentUser);
         } catch (ManagerException e) {
@@ -105,8 +118,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo)
-            throws BusinessExceptionBo, TException {
+    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo) throws BusinessExceptionBo, TException {
         try {
             return userManager.queryUser(queryUser, partnerBo, currentUser, pagnationBo);
         } catch (ManagerException e) {
