@@ -11,12 +11,14 @@ struct SpreadBo {
     8: i64 lastModifyTime
     9: i64 createTime
     10: i32 enabled
-    11: i32 deleted
-    12: i32 idStart
-    13: i32 idEnd
-    14: set<i32> idSet
-    15: i64 lastModifyTimeStart
-    16: i64 lastModifyTimeEnd
-    17: i64 createTimeStart
-    18: i64 createTimeEnd
+    11: set<i32> idSet
+    12: set<i32> userIdSet
+    13: set<i32> partnerIdSet
+    14: set<i32> courseIdSet
+    15: set<i32> statusSet
+    16: i64 lastModifyTimeStart
+    17: i64 lastModifyTimeEnd
+    18: i64 createTimeStart
+    19: i64 createTimeEnd
+
 }
