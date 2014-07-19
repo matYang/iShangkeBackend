@@ -172,6 +172,21 @@
               <goal>run</goal>
             </goals>
           </execution>
+          <execution>
+            <id>Copy applicationContext-dataaccessUT to service test</id>
+            <phase>initialize</phase>
+            <configuration>
+              <target name="copy file">
+                <copy
+                  file="${project.basedir}/src/test/resources/applicationContext-dataaccessUT.xml"
+                  tofile="${main.basedir}iShangkeProject-Service/src/test/resources/applicationContext-dataaccessUT.xml"
+                  overwrite="true" />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
       <plugin>

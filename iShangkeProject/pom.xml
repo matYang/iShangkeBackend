@@ -23,18 +23,18 @@
 				<ENV>Local</ENV>
 			</properties>
 		</profile>
-        <profile>
-            <id>Production</id>
-            <properties>
-                <ENV>Prod</ENV>
-            </properties>
-        </profile>
-        <profile>
-            <id>Win</id>
-            <properties>
-                <ENV>Win</ENV>
-            </properties>
-        </profile>
+		<profile>
+			<id>Production</id>
+			<properties>
+				<ENV>Prod</ENV>
+			</properties>
+		</profile>
+		<profile>
+			<id>Win</id>
+			<properties>
+				<ENV>Win</ENV>
+			</properties>
+		</profile>
 	</profiles>
 	<build>
 		<plugins>
@@ -272,6 +272,21 @@
 				<groupId>com.zaxxer</groupId>
 				<artifactId>HikariCP</artifactId>
 				<version>1.3.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.8.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>1.7.2</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
