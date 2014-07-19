@@ -3,7 +3,7 @@ package com.ishangke.edunav.common.enums;
 public class SpreadEnums {
 
     public static enum Status implements EnumInterface {
-        naive(0), approved(1), rejected(2), cancelled(3);
+        NAIVE(0), APPROVED(1), REJECTED(2), CANCELLED(3);
         public int code;
 
         @Override

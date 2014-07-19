@@ -84,7 +84,7 @@ public class SpreadManagerImpl implements SpreadManager {
 
         int result = 0;
         try {
-            spreadEntity.setStatus(SpreadEnums.Status.naive.code);
+            spreadEntity.setStatus(SpreadEnums.Status.NAIVE.code);
             result = spreadMapper.add(spreadEntity);
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
@@ -108,8 +108,8 @@ public class SpreadManagerImpl implements SpreadManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         // only if a spread is in naive state can it be approved
-        if (spreadEntity.getStatus() == SpreadEnums.Status.naive.code) {
-            spreadEntity.setStatus(SpreadEnums.Status.approved.code);
+        if (spreadEntity.getStatus() == SpreadEnums.Status.NAIVE.code) {
+            spreadEntity.setStatus(SpreadEnums.Status.APPROVED.code);
         } else {
             throw new ManagerException("Spread approval failed for user: " + userEntity.getId());
         }
@@ -134,8 +134,8 @@ public class SpreadManagerImpl implements SpreadManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         // only if a spread is in naive state can it be rejected
-        if (spreadEntity.getStatus() == SpreadEnums.Status.naive.code) {
-            spreadEntity.setStatus(SpreadEnums.Status.rejected.code);
+        if (spreadEntity.getStatus() == SpreadEnums.Status.NAIVE.code) {
+            spreadEntity.setStatus(SpreadEnums.Status.REJECTED.code);
         } else {
             throw new ManagerException("Spread approval failed for user: " + userEntity.getId());
         }
@@ -160,8 +160,8 @@ public class SpreadManagerImpl implements SpreadManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         // only if a spread is in naive state can it be rejected
-        if (spreadEntity.getStatus() == SpreadEnums.Status.naive.code) {
-            spreadEntity.setStatus(SpreadEnums.Status.cancelled.code);
+        if (spreadEntity.getStatus() == SpreadEnums.Status.NAIVE.code) {
+            spreadEntity.setStatus(SpreadEnums.Status.CANCELLED.code);
         } else {
             throw new ManagerException("Spread approval failed for user: " + userEntity.getId());
         }

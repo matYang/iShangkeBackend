@@ -19,14 +19,14 @@ public class DateUtility {
         return c.getTimeInMillis();
     }
 
-    public static Calendar getTimeFromLong(long mili) {
+    public static Calendar getTimeFromLong(final long mili) {
         Calendar c = getCurTimeInstance();
         c.setTimeInMillis(mili);
         return c;
     }
 
     // convert sql.date and calendar
-    public static String toSQLDateTime(Calendar c) {
+    public static String toSQLDateTime(final Calendar c) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(c.getTime());
     }
@@ -41,7 +41,7 @@ public class DateUtility {
     }
 
     // format the calendar into a string that fits in SMS contents
-    public static String smsFormat(Calendar c) {
+    public static String smsFormat(final Calendar c) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日HH:mm");
         // this is not needed as when date does not have time zone info, just
         // placed here to clarify
@@ -55,17 +55,47 @@ public class DateUtility {
     }
 
     // compare if two calendars are on the same day, ignore hh mm ss
-    public static int compareday(Calendar cal1, Calendar cal2) {
+    public static int compareday(final Calendar cal1, final Calendar cal2) {
         if (cal1.get(Calendar.YEAR) < cal2.get(Calendar.YEAR)) {
             return -1;
-        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) < cal2.get(Calendar.DAY_OF_YEAR)) {
+        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+                && cal1.get(Calendar.DAY_OF_YEAR) < cal2.get(Calendar.DAY_OF_YEAR)) {
             return -1;
-        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)) {
+        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+                && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)) {
             return 0;
         } else {
             return 1;
         }
 
+    }
+
+    public static String formatReadable(final Calendar c) {
+        // do not change the original calendar, make a copy
+        Calendar cur = getCurTimeInstance();
+        cur.setTimeInMillis(c.getTimeInMillis());
+        cur.setTimeZone(TimeZone.getTimeZone("asia/shanghai"));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日 HH:mm");
+        String dateStr = sdf.format(cur.getTime());
+        if (dateStr.indexOf("0") == 0) {
+            dateStr = dateStr.substring(1, dateStr.length());
+        }
+        return dateStr;
+    }
+
+    public static String formatReadableDate(final Calendar c) {
+        // do not change the original calendar, make a copy
+        Calendar cur = getCurTimeInstance();
+        cur.setTimeInMillis(c.getTimeInMillis());
+        cur.setTimeZone(TimeZone.getTimeZone("asia/shanghai"));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日");
+        String dateStr = sdf.format(cur.getTime());
+        if (dateStr.indexOf("0") == 0) {
+            dateStr = dateStr.substring(1, dateStr.length());
+        }
+        return dateStr;
     }
 
 }
