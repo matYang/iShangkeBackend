@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ishangke.edunav.common.enums.OrderEnums;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
@@ -71,13 +72,11 @@ public class OrderManagerImpl implements OrderManager {
         OrderEntityExt orderEntity = OrderConverter.fromBo(orderBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        // TODO type must be int
-        // if (orderEntity.getStatus() == OrderEnums.Status.naive.code) {
-        // orderEntity.setStatus(OrderEnums.Status.approved.code);
-        // } else {
-        // throw new ManagerException("Order approval failed for user: " +
-        // userEntity.getId());
-        // }
+        if (orderEntity.getStatus() == OrderEnums.Status.NAIVE.code) {
+            orderEntity.setStatus(OrderEnums.Status.ACCEPTED.code);
+        } else {
+            throw new ManagerException("Order approval failed for user: " + userEntity.getId());
+        }
 
         try {
             orderMapper.update(orderEntity);
@@ -122,11 +121,13 @@ public class OrderManagerImpl implements OrderManager {
     }
 
     @Override
-    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistoryBo, BookingBo bookingBo, UserBo userBo,
+            PaginationBo paginationBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        OrderHistoryEntityExt orderHistoryEntity = orderHistoryBo == null ? null : OrderHistoryConverter.fromBo(orderHistoryBo);
+        OrderHistoryEntityExt orderHistoryEntity = orderHistoryBo == null ? null : OrderHistoryConverter
+                .fromBo(orderHistoryBo);
         // TODO BookingEntityExt bookingEntity = bookingBo == null ? null :
         // BookingConverter.fromBo(bookingBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
