@@ -6,7 +6,13 @@
     <result column="MESSAGE_MESSAGETEXT" property="messageFext" jdbcType="VARCHAR" />
     <result column="MESSAGE_USERFROMID" property="userFromId" jdbcType="INTEGER" />
     <result column="MESSAGE_USERTOID" property="userToId" jdbcType="INTEGER" />
-    <result column="MESSAGE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+
+    <result column="MESSAGE_STATUS" property="status" jdbcType="INTEGER" />
+    <result column="MESSAGE_READTIME" property="readTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+
+    <result column="MESSAGE_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="MESSAGE_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Message_Base_Column_List">
@@ -15,9 +21,10 @@
     MESSAGE.USER_FROM_ID
     MESSAGE_USERFROMID,
     MESSAGE.USER_TO_ID MESSAGE_USERTOID,
+    MESSAGE.STATUS MESSAGE_STATE
+    MESSAGE.READ_TIME MESSAGE_READTIME
     MESSAGE.CREATE_TIME MESSAGE_CREATETIME,
-    MESSAGE.DELETED
-    MESSAGE_DELETED
+    MESSAGE.DELETED MESSAGE_DELETED
   </sql>
   <!-- add -->
   <insert id="add" parameterType="MessageEntityExt">
@@ -32,6 +39,12 @@
       </if>
       <if test="userToId != null">
         USER_TO_ID,
+      </if>
+      <if test="status != null">
+        SATUS,
+      </if>
+      <if test="readTime != null">
+        READ_TIME,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -50,6 +63,12 @@
       </if>
       <if test="userToId != null">
         #{userToId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null">
+        #{readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -82,9 +101,14 @@
       <if test="userToId != null">
         USER_TO_ID = #{userToId,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null">
+        READ_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
       <if test="createTime != null">
-        CREATE_TIME =
-        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
@@ -126,7 +150,8 @@
       <if test="entity.userFromId == null or entity.userFromId == 0">
         <if test="entity.userFromIdSet != null and entity.userFromIdSet.size() > 0">
           AND MESSAGE.USER_FROM_ID IN
-          <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -138,9 +163,35 @@
       <if test="entity.userToId == null or entity.userToId == 0">
         <if test="entity.userToIdSet != null and entity.userToIdSet.size() > 0">
           MESSAGE.USER_TO_ID IN
-          <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.status != null">
+        AND MESSAGE.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          MESSAGE.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.readTime != null">
+        AND MESSAGE.READ_TIME = #{entity.readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.readTime == null">
+        <if test="entity.readTimeStart != null">
+            <![CDATA[AND MESSAGE.READ_TIME >= #{entity.readTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.readTimeEnd != null">
+            <![CDATA[AND MESSAGE.READ_TIME <= #{entity.readTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -157,7 +208,7 @@
         </if>
       </if>
     </if>
-    
+
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -200,7 +251,8 @@
       <if test="entity.userFromId == null or entity.userFromId == 0">
         <if test="entity.userFromIdSet.size() > 0">
           AND MESSAGE.USER_FROM_ID IN
-          <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userFromIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -212,9 +264,35 @@
       <if test="entity.userToId == null or entity.userToId == 0">
         <if test="entity.userToIdSet.size() > 0">
           MESSAGE.USER_TO_ID IN
-          <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userToIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.status != null">
+        AND MESSAGE.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          MESSAGE.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.readTime != null">
+        AND MESSAGE.READ_TIME = #{entity.readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.readTime == null">
+        <if test="entity.readTimeStart != null">
+            <![CDATA[AND MESSAGE.READ_TIME >= #{entity.readTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.readTimeEnd != null">
+            <![CDATA[AND MESSAGE.READ_TIME <= #{entity.readTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 

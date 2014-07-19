@@ -6,7 +6,7 @@ import com.ishangke.edunav.manager.common.DateUtility;
 
 public class OrderConverter {
     public static OrderBo toBo(OrderEntityExt e) {
-        OrderBo orderBo =new OrderBo();
+        OrderBo orderBo = new OrderBo();
         orderBo.setBookingId(e.getBookingId());
         orderBo.setBookingIdSet(e.getBookingIdSet());
         orderBo.setCreateTime(e.getCreateTime().getTimeInMillis());
@@ -20,6 +20,7 @@ public class OrderConverter {
         orderBo.setPriceStart(e.getPriceStart());
         orderBo.setRuningNumber(e.getRuningNumber());
         orderBo.setStatus(e.getStatus());
+        orderBo.setStatusSet(e.getStatusSet());
         orderBo.setType(e.getType());
         return orderBo;
     }
@@ -39,6 +40,7 @@ public class OrderConverter {
         orderEntityExt.setPriceStart(bo.getPriceStart());
         orderEntityExt.setRuningNumber(bo.getRuningNumber());
         orderEntityExt.setStatus(bo.getStatus());
+        orderEntityExt.setStatusSet(bo.getStatusSet());
         orderEntityExt.setType(bo.getType());
         return orderEntityExt;
     }
