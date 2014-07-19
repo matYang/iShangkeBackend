@@ -26,6 +26,12 @@ public class UserManagerImpl implements UserManager {
     private UserEntityExtMapper userMapper;
 
     @Override
+    public UserBo authenticate(String sessionString) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public UserBo registerUser(UserBo userBo) {
         // 参数验证
         if (userBo == null) {
