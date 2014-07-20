@@ -125,11 +125,8 @@ public class ContactManagerImpl implements ContactManager {
         List<ContactEntityExt> contactList = null;
         List<ContactBo> resultList = null;
 
-        if (convertEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("此用户无法查找该常用联系人");
-        }
-
         try {
+            // TODO权限
             contactList = contactEntityExtMapper.list(convertEntity, pageEntity);
             for (ContactEntityExt contactPo : contactList) {
                 resultList.add(ContactConverter.toBo(contactPo));

@@ -124,10 +124,6 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         List<ClassPhotoEntityExt> classPhotoList = null;
         List<ClassPhotoBo> resultList = null;
 
-        if (partnerEntity.getId() != classPhotoEntity.getPartnerId()) {
-            throw new ManagerException("合作商非班级照片的合作商");
-        }
-
         try {
             // TODO权限
             classPhotoList = classPhotoEntityExtMapper.list(classPhotoEntity, pageEntity);
