@@ -84,6 +84,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from USER_GROUP where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="UserGroupExtMap">
+    SELECT
+    <include refid="UserGroup_Base_Column_List" />
+    from USER_GROUP where USER_GROUP.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserGroupExtMap">
     SELECT

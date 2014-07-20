@@ -106,6 +106,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from CIRCLE where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="CircleExtMap">
+    SELECT
+    <include refid="Circle_Base_Column_List" />
+    from CIRCLE where CIRCLE.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CircleExtMap">
     SELECT

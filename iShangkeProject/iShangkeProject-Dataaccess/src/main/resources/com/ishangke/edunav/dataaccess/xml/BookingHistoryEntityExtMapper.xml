@@ -152,6 +152,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from BOOKING_HISTORY where DELETED = 0
   </select>
+  
+   <!-- listAll -->
+   <select id="listAll" resultMap="BookingHistoryExtMap">
+    SELECT
+    <include refid="BookingHistory_Base_Column_List" />
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
+  </select>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="BookingHistoryExtMap">
     SELECT

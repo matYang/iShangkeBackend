@@ -143,6 +143,12 @@
     PERMISSIONS.DELETED =
     0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="PermissionExtMap">
+    SELECT
+    <include refid="Permission_Base_Column_List" />
+    from PERMISSIONS where PERMISSIONS.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="PermissionExtMap">
     select

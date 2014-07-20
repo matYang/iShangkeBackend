@@ -148,6 +148,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from ORDER_HISTORY where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="OrderHistoryExtMap">
+    SELECT
+    <include refid="OrderHistory_Base_Column_List" />
+    from ORDER_HISTORY where ORDER_HISTORY.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="OrderHistoryExtMap">
     select

@@ -128,6 +128,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from WITHDRAW where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="WithdrawExtMap">
+    SELECT
+    <include refid="Withdraw_Base_Column_List" />
+    from WITHDRAW where WITHDRAW.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="WithdrawExtMap">
     select

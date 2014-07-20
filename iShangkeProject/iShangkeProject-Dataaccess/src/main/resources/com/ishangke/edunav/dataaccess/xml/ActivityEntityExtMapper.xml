@@ -168,6 +168,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from ACTIVITY where DELETED = 0
   </select>
+  
+  <!-- listAll -->
+   <select id="listAll" resultMap="ActivityExtMap">
+    SELECT
+    <include refid="Activity_Base_Column_List" />
+    from ACTIVITY where ACCOUNT.DELETED = 0
+  </select>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ActivityExtMap">
     SELECT

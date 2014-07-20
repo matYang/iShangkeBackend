@@ -118,6 +118,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from GROUPS where DELETED = 0
   </select>
+   <!-- listAll -->
+   <select id="listAll" resultMap="GroupExtMap">
+    SELECT
+    <include refid="Group_Base_Column_List" />
+    from GROUPS where GROUPS.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="GroupExtMap">
     SELECT

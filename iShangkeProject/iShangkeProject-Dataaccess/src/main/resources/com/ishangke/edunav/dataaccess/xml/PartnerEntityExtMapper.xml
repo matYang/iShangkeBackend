@@ -160,6 +160,7 @@
     ADDRESS.ENABLED ADDRESS_ENABLED,
     ADDRESS.DELETED ADDRESS_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="PartnerEntityExt">
 
     insert into partner
@@ -372,11 +373,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update PARTNER set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="PartnerEntityExt">
     update PARTNER
     <set>
@@ -487,10 +490,11 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from PARTNER where DELETED = 0
   </select>
-
+<!-- getInfoById -->
   <select id="getInfoById" parameterType="int" resultMap="PartnerExtMap">
     select 
     <include refid="Partner_Base_Column_List"></include>,
@@ -507,7 +511,13 @@
     where PARNTER.DELETED = 0 AND PARNTER.ID = #{id}
   </select>  
 
-
+<!-- listAll -->
+   <select id="listAll" resultMap="PartnerExtMap">
+    SELECT
+    <include refid="Partner_Base_Column_List" />
+    from PARTNER where PARTNER.DELETED = 0
+  </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="PartnerExtMap">
     select
     <include refid="Partner_Base_Column_List"></include>
@@ -735,6 +745,7 @@
       </if>
     </if>
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select

@@ -5,8 +5,10 @@
     <result column="ACCOUNT_ID" property="id" jdbcType="INTEGER" />
     <result column="ACCOUNT_BALANCE" property="balance" jdbcType="INTEGER" />
     <result column="ACCOUNT_REALNAME" property="realName" jdbcType="VARCHAR" />
-    <result column="ACCOUNT_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ACCOUNT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACCOUNT_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ACCOUNT_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACCOUNT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ACCOUNT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -71,9 +73,8 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-      ACCOUNT has no id // todo
-    </selectKey> -->
+    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER"> ACCOUNT has no id 
+      // todo </selectKey> -->
   </insert>
   <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
@@ -96,7 +97,8 @@
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -107,19 +109,19 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from ACCOUNT where DELETED = 0
   </select>
-  
+
   <!-- listAll -->
-   <select id="listAll" resultMap="AccountExtMap">
+  <select id="listAll" resultMap="AccountExtMap">
     SELECT
     <include refid="Account_Base_Column_List" />
     from ACCOUNT where ACCOUNT.DELETED = 0
   </select>
-  
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="AccountExtMap">
     SELECT
@@ -138,8 +140,8 @@
           </foreach>
         </if>
       </if>
-    
-    <!-- balance -->
+
+      <!-- balance -->
       <if test="entity.balance != null and entity.balance != 0">
         AND ACCOUNT.CRETITY = #{entity.balance,jdbcType=DOUBLE}
       </if>
@@ -151,11 +153,11 @@
           <![CDATA[AND ACCOUNT.CRETITY <= #{entity.balanceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-
+      <!--realName -->
       <if test="entity.realName != null and !entity.realName.equals('')">
         AND CIRCLE.REAL_NAME LIKE "%"#{entity.realName,jdbcType=VARCHAR}"%"
       </if>
-
+      <!-- lastModifyTime -->
       <if test="entity.lastModifyTime != null">
         AND ACCOUNT.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -168,7 +170,7 @@
           <![CDATA[AND ACCOUNT.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-
+      <!-- createTime -->
       <if test="entity.createTime != null">
         AND ACCOUNT.CREATE_TIME =
         #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -181,11 +183,11 @@
           <![CDATA[AND ACCOUNT.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-
+      <!-- enabled -->
       <if test="entity.enabled != null and entity.enabled != 0">
         AND ACCOUNT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-
+      <!-- page -->
       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">

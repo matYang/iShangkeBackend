@@ -96,6 +96,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from COUPON_HISTORY where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="CouponHistoryExtMap">
+    SELECT
+    <include refid="CouponHistory_Base_Column_List" />
+    from COUPON_HISTORY where COUPON_HISTORY.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CouponHistoryExtMap">
     select

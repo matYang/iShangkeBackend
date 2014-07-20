@@ -129,6 +129,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from CONTACT where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="ContactExtMap">
+    SELECT
+    <include refid="Contact_Base_Column_List" />
+    from CONTACT where CONTACT.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ContactExtMap">
     SELECT 

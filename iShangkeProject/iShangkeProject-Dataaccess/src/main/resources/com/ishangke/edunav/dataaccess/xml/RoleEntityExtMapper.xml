@@ -95,6 +95,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from ROLES where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="RoleExtMap">
+    SELECT
+    <include refid="Role_Base_Column_List" />
+    from ROLES where ROLES.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="RoleExtMap">
     SELECT

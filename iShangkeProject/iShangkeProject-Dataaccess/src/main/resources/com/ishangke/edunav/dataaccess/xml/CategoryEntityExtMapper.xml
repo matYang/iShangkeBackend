@@ -118,6 +118,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from CATEGORY where DELETED = 0
   </select>
+  
+   <!-- listAll -->
+   <select id="listAll" resultMap="CategoryExtMap">
+    SELECT
+    <include refid="Category_Base_Column_List" />
+    from CATEGORY where CATEGORY.DELETED = 0
+  </select>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CategoryExtMap">
     SELECT

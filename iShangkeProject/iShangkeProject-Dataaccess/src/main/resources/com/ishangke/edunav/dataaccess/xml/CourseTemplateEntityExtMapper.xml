@@ -970,7 +970,12 @@
     where COURSE_TEMPLATE.DELETED = 0 AND COURSE_TEMPLATE.ID =
     #{id}
   </select>
-
+<!-- listAll -->
+   <select id="listAll" resultMap="CourseTemplateEntityExtMap">
+    SELECT
+    <include refid="CourseTemplate_Base_Column_List" />
+    from COURSE_TEMPLATE where COURSE_TEMPLATE.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseTemplateEntityExtMap">
     select

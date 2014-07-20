@@ -182,6 +182,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from COURSE_COMMENT where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="CourseCommentExtMap">
+    SELECT
+    <include refid="CourseComment_Base_Column_List" />
+    from COURSE_COMMENT where COURSE_COMMENT.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseCommentExtMap">
     select

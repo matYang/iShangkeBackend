@@ -82,6 +82,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from COURSE_TEACHER where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="CourseTeacherExtMap">
+    SELECT
+    <include refid="CourseTeacher_Base_Column_List" />
+    from COURSE_TEACHER where COURSE_TEACHER.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseTeacherExtMap">
     select

@@ -83,6 +83,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from USER_LOCATION where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="UserLocationExtMap">
+    SELECT
+    <include refid="UserLocation_Base_Column_List" />
+    from USER_LOCATION where USER_LOCATION.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserLocationExtMap">
     select

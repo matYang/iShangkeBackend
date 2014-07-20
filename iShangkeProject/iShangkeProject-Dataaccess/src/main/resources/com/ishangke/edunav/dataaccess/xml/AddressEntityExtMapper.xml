@@ -130,6 +130,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from ADDRESS where DELETED = 0
   </select>
+  
+  <!-- listAll -->
+   <select id="listAll" resultMap="AddressExtMap">
+    SELECT
+    <include refid="Address_Base_Column_List" />
+    from ADDRESS where ADDRESS.DELETED = 0
+  </select>
+  
   <!--list -->
   <select id="list" parameterType="map" resultMap="AddressExtMap">
     SELECT

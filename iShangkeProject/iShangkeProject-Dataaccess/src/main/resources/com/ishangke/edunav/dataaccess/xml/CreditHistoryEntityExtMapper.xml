@@ -96,7 +96,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from CREDIT_HISTORY where DELETED = 0
   </select>
-  <!-- list -->
+ 
+  <!-- listAll -->
+   <select id="listAll" resultMap="CreditHistoryExtMap">
+    SELECT
+    <include refid="CreditHistory_Base_Column_List" />
+    from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0
+  </select>
+   <!-- list -->
   <select id="list" parameterType="map" resultMap="CreditHistoryExtMap">
     SELECT
     <include refid="CreditHistory_Base_Column_List" />

@@ -151,6 +151,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from SPREAD where DELETED = 0
   </select>
+  <!-- listAll -->
+   <select id="listAll" resultMap="SpreadExtMap">
+    SELECT
+    <include refid="Spread_Base_Column_List" />
+    from SPREAD where SPREAD.DELETED = 0
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="SpreadExtMap">
     select

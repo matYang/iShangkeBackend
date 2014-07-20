@@ -142,6 +142,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from APPROVE_HISTORY where DELETED = 0
   </select>
+  
+  <!-- listAll -->
+   <select id="listAll" resultMap="ApproveHistoryExtMap">
+    SELECT
+    <include refid="ApproveHistory_Base_Column_List" />
+    from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0
+  </select>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ApproveHistoryExtMap">
     SELECT
