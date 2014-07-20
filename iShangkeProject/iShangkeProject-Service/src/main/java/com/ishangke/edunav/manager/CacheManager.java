@@ -1,8 +1,11 @@
 package com.ishangke.edunav.manager;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
+
+import net.spy.memcached.MemcachedClient;
 
 public interface CacheManager {
 
@@ -19,7 +22,13 @@ public interface CacheManager {
      */
     public List<Object> getBulk(List<String> keys);
 
-    public Future<?> set(String key, Object obj);
+    /**
+     * @param key 
+     * @param expt
+     * @param obj
+     * @return
+     */
+    public Future<Boolean> set(String key, long expt, Serializable obj);
 
     /**
      * Memcache does not support setBulk by its nature, memcache client does so
@@ -30,6 +39,13 @@ public interface CacheManager {
      * @param keys
      * @return
      */
-    public Map<String, Future<?>> setBulk(Map<String, Object> kvps);
+    public Map<String, Future<Boolean>> setBulk(Map<String, Serializable> kvps);
+    
+    public Future<Boolean> del(String key);
+    
+    /**
+     * @return Memcached client 实例
+     */
+    public MemcachedClient getClient();
 
 }
