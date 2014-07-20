@@ -10,6 +10,7 @@ import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CouponHistoryEntityExtMapper;
@@ -50,6 +51,15 @@ public class CouponManagerImpl implements CouponManager {
             couponEntity.setUserId(userEntity.getId());
             result = couponEntityExtMapper.add(couponEntity);
             if (result > 0) {
+                // add to History
+                CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
+                couponHistoryEntityExt.setCharge(couponEntity.getTotal() - couponEntity.getBalance());
+                couponHistoryEntityExt.setCouponId(couponEntity.getId());
+                couponHistoryEntityExt.setDeleted(0);
+                couponHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                couponHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
+                couponHistoryEntityExtMapper.add(couponHistoryEntityExt);
+                // add Coupon to Databases
                 return CouponConverter.toBo(couponEntity);
             } else {
                 throw new ManagerException("Coupon Create Failed");
@@ -76,11 +86,8 @@ public class CouponManagerImpl implements CouponManager {
         List<CouponEntityExt> couponList = null;
         List<CouponBo> resultList = null;
 
-        if (couponEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("此用户无法查看该优惠劵");
-        }
-
         try {
+            // TODO权限
             couponList = couponEntityExtMapper.list(couponEntity, pageEntity);
             for (CouponEntityExt couponPo : couponList) {
                 resultList.add(CouponConverter.toBo(couponPo));
@@ -109,6 +116,7 @@ public class CouponManagerImpl implements CouponManager {
         List<CouponHistoryBo> resultList = null;
 
         try {
+            // TODO权限
             couponHistoryList = couponHistoryEntityExtMapper.list(couponHistoryEntity, pageEntity);
             for (CouponHistoryEntityExt couponHistoryPo : couponHistoryList) {
                 CouponEntityExt couponPo = couponEntityExtMapper.getById(couponHistoryPo.getCouponId());
