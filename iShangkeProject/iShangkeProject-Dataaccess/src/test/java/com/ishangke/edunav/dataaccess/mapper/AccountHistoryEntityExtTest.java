@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -72,5 +74,45 @@ public class AccountHistoryEntityExtTest {
                 .list(accountHistoryEntityExt, page);
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_remark_3_爱上课", result.get(1).getRemark());
+    }
+    
+    @Test
+    public void testQuery2() {
+        AccountHistoryEntityExt accountHistoryEntityExt = new AccountHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        accountHistoryEntityExt.setIdSet(idSet);
+        List<AccountHistoryEntityExt> result = accountHistoryEntityExtMapper.list(accountHistoryEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        AccountHistoryEntityExt accountHistoryEntityExt = new AccountHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        accountHistoryEntityExt.setUserId(5);
+        accountHistoryEntityExt.setWithdrawId(2);;
+        List<AccountHistoryEntityExt> result = accountHistoryEntityExtMapper.list(accountHistoryEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("3.14", result.get(0).getCharge().toString());
+    }
+    
+    @Test
+    public void testQuery4() {
+        AccountHistoryEntityExt accountHistoryEntityExt = new AccountHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        accountHistoryEntityExt.setUserId(5);
+        accountHistoryEntityExt.setWithdrawId(3);;
+        List<AccountHistoryEntityExt> result = accountHistoryEntityExtMapper.list(accountHistoryEntityExt, page);
+        Assert.assertEquals(0, result.size());
     }
 }

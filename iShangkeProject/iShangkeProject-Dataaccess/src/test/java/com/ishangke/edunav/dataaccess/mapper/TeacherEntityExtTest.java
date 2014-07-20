@@ -1,7 +1,9 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -126,5 +129,46 @@ public class TeacherEntityExtTest {
         List<TeacherEntityExt> result = teacherEntityExtMapper.list(teacherEntityExt, page);
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+    }
+    @Test
+    public void testQuery2() {
+        TeacherEntityExt TeacherEntityExt = new TeacherEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        TeacherEntityExt.setIdSet(idSet);
+        List<TeacherEntityExt> result = teacherEntityExtMapper.list(TeacherEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        TeacherEntityExt TeacherEntityExt = new TeacherEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        TeacherEntityExt.setEnabled(2);
+        page.addOrderByEntity(new OrderByEntity("POPULARITY", DataaccessConstants.ORDER_DESC));
+        List<TeacherEntityExt> result = teacherEntityExtMapper.list(TeacherEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_name_2_爱上课", result.get(0).getName());
+        Assert.assertEquals("_test_name_2_爱上课", result.get(0).getName());
+    }
+    
+    @Test
+    public void testQuery4() {
+        TeacherEntityExt TeacherEntityExt = new TeacherEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        TeacherEntityExt.setEnabled(2);
+        TeacherEntityExt.setPartnerId(2);
+        List<TeacherEntityExt> result = teacherEntityExtMapper.list(TeacherEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_name_2_爱上课", result.get(0).getName());
     }
 }

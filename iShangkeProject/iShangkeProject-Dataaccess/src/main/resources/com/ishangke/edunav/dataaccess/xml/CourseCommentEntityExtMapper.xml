@@ -8,8 +8,8 @@
     <result column="COURSECOMMENT_TITLE" property="title" jdbcType="VARCHAR" />
     <result column="COURSECOMMENT_CONTENT" property="content" jdbcType="VARCHAR" />
     <result column="COURSECOMMENT_TOTALRATING" property="totalRating" jdbcType="DOUBLE" />
-    <result column="COURSECOMMENT_CONDITIONRATING" property="conditionRatingRating" jdbcType="DOUBLE" />
-    <result column="COURSECOMMENT_ATTITUDERATING" property="attitudeRatingRating" jdbcType="DOUBLE" />
+    <result column="COURSECOMMENT_CONDITIONRATING" property="conditionRating" jdbcType="DOUBLE" />
+    <result column="COURSECOMMENT_ATTITUDERATING" property="attitudeRating" jdbcType="DOUBLE" />
     <result column="COURSECOMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
     <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
@@ -266,11 +266,11 @@
       </if>
 
       <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
-        AND COURSE_COMMENT.COURSE_TEMPLATEID = #{entity.courseTemplateId,jdbcType=INTEGER}
+        AND COURSE_COMMENT.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
-          AND COURSE_COMMENT.COURSE_TEMPLATEID IN
+          AND COURSE_COMMENT.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}

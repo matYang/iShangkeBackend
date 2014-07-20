@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -69,4 +71,34 @@ public class CourseTeacherEntityExtTest extends BaseTest{
         Assert.assertEquals(1, result.size());
         //Assert.assertEquals("_test_CourseTemplateClassPhotos_2_", result.get(0).getCreateTime());
     }
+    @Test
+    public void testQuery2() {
+        CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        courseTeacherEntityExt.setIdSet(idSet);
+        List<CourseTeacherEntityExt> result = courseTeacherEntityExtMapper.list(courseTeacherEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+       courseTeacherEntityExt.setCourseId(5);
+       
+        List<CourseTeacherEntityExt> result = courseTeacherEntityExtMapper.list(courseTeacherEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertSame(2, result.get(0).getTeacherId());
+       
+    }
+    
+    
 }

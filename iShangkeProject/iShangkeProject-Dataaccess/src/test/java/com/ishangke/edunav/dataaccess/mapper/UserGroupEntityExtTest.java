@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -113,5 +116,47 @@ public class UserGroupEntityExtTest extends BaseTest {
                 userGroupQueryEntity, page);
         Assert.assertEquals(2, result.size());
         // Assert.assertEquals("_test_name_2_爱上课", result.get(0).getName());
+    }
+    @Test
+    public void testQuery2() {
+        UserGroupEntityExt UserGroupEntityExt = new UserGroupEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        UserGroupEntityExt.setIdSet(idSet);
+        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(UserGroupEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        UserGroupEntityExt UserGroupEntityExt = new UserGroupEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        UserGroupEntityExt.setUserId(2);
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
+        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(UserGroupEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertSame(4, result.get(0).getGroupId());
+        Assert.assertSame(2, result.get(1).getGroupId());
+    }
+    
+    @Test
+    public void testQuery4() {
+        UserGroupEntityExt UserGroupEntityExt = new UserGroupEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        UserGroupEntityExt.setUserId(2);
+        UserGroupEntityExt.setGroupId(4);
+        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(UserGroupEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertSame(4, result.get(0).getGroupId());
     }
 }

@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -120,4 +122,47 @@ public class GroupEntityExtTest extends BaseTest {
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_name_4_爱上课", result.get(0).getName());
     }
-}
+    @Test
+    public void testQuery2() {
+        GroupEntityExt groupEntityExt = new GroupEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        groupEntityExt.setIdSet(idSet);
+        List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        GroupEntityExt groupEntityExt = new GroupEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        groupEntityExt.setRoleId(2);
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
+                DataaccessConstants.ORDER_DESC));
+        List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_name_3_爱上课", result.get(0).getName());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(1).getName());
+    }
+    
+    @Test
+    public void testQuery4() {
+        GroupEntityExt groupEntityExt = new GroupEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        groupEntityExt.setRoleId(2);
+        groupEntityExt.setId(2);
+        List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+    }
+    }
+

@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,19 +18,19 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 
-
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, AddressEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class AddressEntityExtTest  {
+public class AddressEntityExtTest {
     @Autowired
     private AddressEntityExtMapper addressEntityExtMapper;
-//    
-//    public AddressEntityExtTest() {
-//        scriptAfterClass = "AddressEntityExtTestAfter.sql";
-//        scriptBeforeClass = "AddressEntityExtTestBefore.sql";
-//    }
+
+    //
+    // public AddressEntityExtTest() {
+    // scriptAfterClass = "AddressEntityExtTestAfter.sql";
+    // scriptBeforeClass = "AddressEntityExtTestBefore.sql";
+    // }
 
     @Test
     public void testAdd() {
@@ -66,15 +68,62 @@ public class AddressEntityExtTest  {
         page.setOffset(0);
         page.setSize(10);
 
-        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
-        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
+                DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
 
         AddressEntityExt addressEntityExt = new AddressEntityExt();
         addressEntityExt.setDetail("_test_detail_");
 
-        List<AddressEntityExt> result = addressEntityExtMapper.list(addressEntityExt, page);
+        List<AddressEntityExt> result = addressEntityExtMapper.list(
+                addressEntityExt, page);
         Assert.assertEquals(4, result.size());
-       Assert.assertEquals("_test_detail_3_爱上课", result.get(1).getDetail());
+        Assert.assertEquals("_test_detail_3_爱上课", result.get(1).getDetail());
     }
 
+    @Test
+    public void testQuery2() {
+        AddressEntityExt addressEntityExt = new AddressEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        addressEntityExt.setIdSet(idSet);
+        List<AddressEntityExt> result = addressEntityExtMapper.list(
+                addressEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+
+    @Test
+    public void testQuery3() {
+        AddressEntityExt addressEntityExt = new AddressEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        addressEntityExt.setPartnerId(2);
+
+        List<AddressEntityExt> result = addressEntityExtMapper.list(
+                addressEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_detail_2_爱上课", result.get(0).getDetail());
+        Assert.assertEquals("_test_detail_2_爱上课", result.get(1).getDetail());
+    }
+
+    @Test
+    public void testQuery4() {
+        AddressEntityExt addressEntityExt = new AddressEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        addressEntityExt.setPartnerId(2);
+        addressEntityExt.setId(5);
+        List<AddressEntityExt> result = addressEntityExtMapper.list(
+                addressEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_detail_2_爱上课", result.get(0).getDetail());
+    }
 }

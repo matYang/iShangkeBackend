@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -74,5 +76,49 @@ public class ActivityEntityExtTest {
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_name_3_爱上课_", result.get(1).getName());
     }
+
+    @Test
+    public void testQuery2() {
+        ActivityEntityExt activityEntityExt = new ActivityEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        activityEntityExt.setIdSet(idSet);
+        List<ActivityEntityExt> result = activityEntityExtMapper.list(
+                activityEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+
+    @Test
+    public void testQuery3() {
+        ActivityEntityExt activityEntityExt = new ActivityEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        activityEntityExt.setCourseId(2);
+        activityEntityExt.setPartnerId(5);
+        List<ActivityEntityExt> result = activityEntityExtMapper.list(
+                activityEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_remark_1_爱上课_", result.get(0).getRemark());
+    }
+
+    @Test
+    public void testQuery4() {
+        ActivityEntityExt activityEntityExt = new ActivityEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        activityEntityExt.setCourseId(3);
+        activityEntityExt.setPartnerId(5);
+        List<ActivityEntityExt> result = activityEntityExtMapper.list(
+                activityEntityExt, page);
+        Assert.assertEquals(0, result.size());
+    }
+    
 
 }
