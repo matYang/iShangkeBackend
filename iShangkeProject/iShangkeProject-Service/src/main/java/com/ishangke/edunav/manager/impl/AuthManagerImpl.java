@@ -58,9 +58,12 @@ public class AuthManagerImpl implements AuthManager {
                 // 没有找到失败记录
                 return true;
             }
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("IsAbleToLogin", t);
-            throw new ManagerException("IsAbleToLogin failed");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -92,9 +95,12 @@ public class AuthManagerImpl implements AuthManager {
             
             //过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间缓存不过期的不稳定问题
             return cache.set(ACConfig.PREFIX + identifier, 0, acRecord);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("Fail", t);
-            throw new ManagerException("Fail failed");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -106,9 +112,12 @@ public class AuthManagerImpl implements AuthManager {
     public Future<Boolean> success(String identifier) {
         try {
             return cache.del(ACConfig.PREFIX + identifier);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("Success", t);
-            throw new ManagerException("Success failed");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
 
@@ -175,9 +184,12 @@ public class AuthManagerImpl implements AuthManager {
             }
             
             return found == true;
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("ValidateAuthSession", t);
-            throw new ManagerException("ValidateAuthSession failed");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -238,9 +250,12 @@ public class AuthManagerImpl implements AuthManager {
             mutator.cas(key, initialValue, 0, mutation);
             
             return authCode;
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("ValidateAuthSession", t);
-            throw new ManagerException("ValidateAuthSession failed");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -276,9 +291,12 @@ public class AuthManagerImpl implements AuthManager {
            
             //开始同步的CAS
             mutator.cas(key, null, 0, mutation);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("ValidateAuthSession", t);
-            throw new ManagerException("ValidateAuthSession failed");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -289,6 +307,9 @@ public class AuthManagerImpl implements AuthManager {
     public Future<Boolean> closeAllAuthSession(final int identifier) {
         try {
             return cache.del(AuthConfig.PREFIX + identifier);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
             LOGGER.debug("CloseForgetPasswordSession", t);
             throw new ManagerException("CloseForgetPasswordSession");
@@ -302,24 +323,27 @@ public class AuthManagerImpl implements AuthManager {
     public boolean validateCellVerificationSession(String cell, String authCode) {
         try{
             String key = CellVerificationConfig.PREFIX + cell;
-            CellVerificationConfigObj fpRecord = (CellVerificationConfigObj)cache.get(key);
+            CellVerificationConfigObj cvRecord = (CellVerificationConfigObj)cache.get(key);
             
-            if(fpRecord == null){
+            if(cvRecord == null){
                 return false;
             }else{
                 
-                if(!fpRecord.authCode.equalsIgnoreCase(authCode)){
+                if(!cvRecord.authCode.equalsIgnoreCase(authCode)){
                     return false;
                 }
-                if((DateUtility.getCurTime() - fpRecord.timeStamp) > CellVerificationConfig.EXPIRETHRESHOLD){
+                if((DateUtility.getCurTime() - cvRecord.timeStamp) > CellVerificationConfig.EXPIRETHRESHOLD){
                     cache.del(key);
                     return false;
                 }
                 return true;
             }
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("ValidateCellVerificationSession", t);
-            throw new ManagerException("ValidateCellVerificationSession");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -344,9 +368,12 @@ public class AuthManagerImpl implements AuthManager {
             //过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间缓存不过期的不稳定问题
             cache.set(key, 0, cvRecord);
             return cvRecord.authCode;
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("OpenCellVerificationSession", t);
-            throw new ManagerException("OpenCellVerificationSession");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -355,9 +382,12 @@ public class AuthManagerImpl implements AuthManager {
     public Future<Boolean> closeCellVerificationSession(String identifier) {
         try {
             return cache.del(CellVerificationConfig.PREFIX + identifier);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("CloseCellVerificationSession", t);
-            throw new ManagerException("CloseCellVerificationSession");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -383,9 +413,12 @@ public class AuthManagerImpl implements AuthManager {
                 }
                 return true;
             }
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("ValidateForgetPasswordSession", t);
-            throw new ManagerException("ValidateForgetPasswordSession");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -410,9 +443,12 @@ public class AuthManagerImpl implements AuthManager {
             //过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间不稳定的问题
             cache.set(key, 0, fpRecord);
             return fpRecord.authCode;
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
-            LOGGER.debug("OpenForgetPasswordSession", t);
-            throw new ManagerException("OpenForgetPasswordSession");
+            LOGGER.debug("CloseForgetPasswordSession", t);
+            throw new ManagerException("CloseForgetPasswordSession");
         }
     }
     
@@ -421,6 +457,9 @@ public class AuthManagerImpl implements AuthManager {
     public Future<Boolean> closeForgetPasswordSession(String identifier) {
         try {
             return cache.del(ForgetPasswordConfig.PREFIX + identifier);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseForgetPasswordSession", e);
+            throw e;
         } catch (Throwable t) {
             LOGGER.debug("CloseForgetPasswordSession", t);
             throw new ManagerException("CloseForgetPasswordSession");
