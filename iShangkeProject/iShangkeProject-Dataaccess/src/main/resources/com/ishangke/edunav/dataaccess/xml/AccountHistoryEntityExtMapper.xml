@@ -109,9 +109,6 @@
       <if test="remark != null">
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -119,6 +116,13 @@
   <select id="getCount" resultType="int">
     select count(ID) from ACCOUNT_HISTORY where DELETED = 0
   </select>
+  <!-- listAll -->
+  <select id="listAll" resultMap="AccountHistoryExtMap">
+    SELECT
+    <include refid="AccountHistory_Base_Column_List" />
+    from ACCOUNT_HISTORY where ACCOUNT_HISTORY.DELETED = 0
+  </select>
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="AccountHistoryExtMap">
     SELECT

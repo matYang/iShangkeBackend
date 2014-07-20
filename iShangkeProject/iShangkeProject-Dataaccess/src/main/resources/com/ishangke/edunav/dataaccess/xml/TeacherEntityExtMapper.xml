@@ -51,7 +51,7 @@
     COURSE_TEACHER.COURSE_ID COURSETEACHER_COURSEID,
     COURSE_TEACHER.TEACHER_ID COURSETEACHER_TEACHERID
   </sql>
-
+  <!-- add -->
   <insert id="add" parameterType="TeacherEntityExt">
 
     insert into TEACHER
@@ -120,11 +120,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update TEACHER set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="TeacherEntityExt">
     update TEACHER
     <set>
@@ -154,16 +156,20 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from TEACHER where DELETED = 0
   </select>
-
+  <!-- listAll -->
+  <select id="listAll" resultMap="TeacherExtMap">
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
+    from TEACHER where TEACHER.DELETED = 0
+  </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List" />
@@ -252,7 +258,7 @@
         AND TEACHER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
-     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         TEACHER.${listItem.columnKey} ${listItem.order}
@@ -263,11 +269,11 @@
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-   <include refid="Teacher_Base_Column_List" />
+    <include refid="Teacher_Base_Column_List" />
     from TEACHER where TEACHER.DELETED = 0
     <if test="entity != null">
 
@@ -355,13 +361,13 @@
     </if>
     ) AS total
   </select>
-
+  <!-- listTeacherByPartnerId -->
   <select id="listTeacherByPartnerId" parameterType="int" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List" />
     FROM TEACHER WHERE PARTNER_ID = #{partnerId} and DELETED = 0
   </select>
-
+  <!-- listTeacherByCourseId -->
   <select id="listTeacherByCourseId" parameterType="int" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List" />
@@ -377,7 +383,7 @@
     WHERE COURSE.ID = #{courseId} and
     TEACHER.DELETED = 0
   </select>
-
+  <!-- listTeacherByCourseTempleteId -->
   <select id="listTeacherByCourseTempleteId" parameterType="int" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List" />

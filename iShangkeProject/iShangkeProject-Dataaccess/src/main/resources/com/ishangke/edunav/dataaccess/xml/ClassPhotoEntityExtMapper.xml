@@ -48,11 +48,10 @@
     COURSECLASSPHOTO_COURSEID,
     COURSE_CLASS_PHOTO.CLASS_PHOTO_ID COURSECLASSPHOTO_CLASSPHOTOID
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="ClassPhotoEntityExt">
-
     insert into CLASS_PHOTO
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="partnerId != null">
         PARTNER_ID,
       </if>
@@ -79,7 +78,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
       <if test="partnerId != null">
         #{partnerId,jdbcType=INTEGER},
       </if>
@@ -110,11 +108,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update CLASS_PHOTO set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="ClassPhotoEntityExt">
     update CLASS_PHOTO
     <set>
@@ -141,17 +141,20 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from CLASS_PHOTO where DELETED = 0
   </select>
-
+  <!-- listAll -->
+  <select id="listAll" resultMap="ClassPhotoExtMap">
+    SELECT
+    <include refid="ClassPhoto_Base_Column_List" />
+    from CLASS_PHOTO where CLASS_PHOTO.DELETED = 0
+  </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
     SELECT
     <include refid="ClassPhoto_Base_Column_List" />
@@ -160,7 +163,6 @@
       <if test="entity.id != null and entity.id != 0">
         AND CLASS_PHOTO.ID = #{entity.id,jdbcType=INTEGER}
       </if>
-
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND CLASS_PHOTO.ID IN
@@ -169,11 +171,9 @@
           </foreach>
         </if>
       </if>
-
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND CLASS_PHOTO.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
-
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND CLASS_PHOTO.PARTNER_ID IN
@@ -183,7 +183,6 @@
           </foreach>
         </if>
       </if>
-
       <if test="entity.imgUrl != null and !entity.imgUrl.equals('')">
         AND CLASS_PHOTO.IMG_URL LIKE "%"#{entity.imgUrl,jdbcType=VARCHAR}"%"
       </if>
@@ -193,8 +192,6 @@
       <if test="entity.description != null and !entity.description.equals('')">
         AND CLASS_PHOTO.DESCRIPTION LIKE "%"#{entity.description,jdbcType=VARCHAR}"%"
       </if>
-
-
       <if test="entity.lastModifyTime != null">
         AND CLASS_PHOTO.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
@@ -231,12 +228,11 @@
         CLASS_PHOTO.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
-
     <if test="page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
-
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
@@ -313,13 +309,13 @@
     </if>
     ) AS total
   </select>
-
+  <!-- listClassPhotoByPartnerId -->
   <select id="listClassPhotoByPartnerId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
     <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO where CLASS_PHOTO.PARTNER_ID = #{partnerId} and CLASS_PHOTO.DELETED = 0
   </select>
-
+  <!-- listClassPhotoByCourseId -->
   <select id="listClassPhotoByCourseId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
     <include refid="ClassPhoto_Base_Column_List" />
@@ -335,7 +331,7 @@
     ON COURSE.ID = COURSE_CLASS_PHOTO.COURSE_ID
     WHERE COURSE.ID = #{courseId} and CLASS_PHOTO.DELETED = 0
   </select>
-
+  <!-- listClassPhotoByCourseTempleteId -->
   <select id="listClassPhotoByCourseTempleteId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
     <include refid="ClassPhoto_Base_Column_List" />
@@ -352,5 +348,4 @@
     WHERE COURSE_TEMPLATE.ID =
     #{courseTempleteId} and CLASS_PHOTO.DELETED = 0
   </select>
-
 </mapper>

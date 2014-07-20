@@ -158,9 +158,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -168,6 +165,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from ACTIVITY where DELETED = 0
   </select>
+
+  <!-- listAll -->
+  <select id="listAll" resultMap="ActivityExtMap">
+    SELECT
+    <include refid="Activity_Base_Column_List" />
+    from ACTIVITY where ACCOUNT.DELETED = 0
+  </select>
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ActivityExtMap">
     SELECT
@@ -289,8 +294,8 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND ACTIVITY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-</if>
-   <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         ACTIVITY.${listItem.columnKey} ${listItem.order}
@@ -300,7 +305,7 @@
     <if test="page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
-      
+
   </select>
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">

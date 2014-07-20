@@ -120,9 +120,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -142,6 +139,12 @@
     WHERE ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
     PERMISSIONS.DELETED =
     0
+  </select>
+  <!-- listAll -->
+  <select id="listAll" resultMap="PermissionExtMap">
+    SELECT
+    <include refid="Permission_Base_Column_List" />
+    from PERMISSIONS where PERMISSIONS.DELETED = 0
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="PermissionExtMap">

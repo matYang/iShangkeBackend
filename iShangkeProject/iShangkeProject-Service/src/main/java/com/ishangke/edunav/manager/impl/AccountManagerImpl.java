@@ -97,9 +97,6 @@ public class AccountManagerImpl implements AccountManager {
 
         try {
             // TODO 权限问题
-            if (userEntity.getId() != accountEntity.getId()) {
-                throw new ManagerException("User Query failed: 该账户不属于此用户");
-            }
             accountList = accountMapper.list(accountEntity, pageEntity);
             for (AccountEntityExt accountPo : accountList) {
                 resultList.add(AccountConverter.toBo(accountPo));
@@ -127,10 +124,7 @@ public class AccountManagerImpl implements AccountManager {
         AccountHistoryEntityExt accountHistoryEntity = AccountHistoryConverter.fromBo(accountHistoryBo);
         PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
 
-        // Check
-        if (userEntity.getId() != accountHistoryEntity.getUserId()) {
-            throw new ManagerException("该账户历史不属于此用户");
-        }
+        // TODO权限
         List<AccountHistoryEntityExt> accountHistoryList = null;
         List<AccountHistoryBo> resultList = null;
         try {

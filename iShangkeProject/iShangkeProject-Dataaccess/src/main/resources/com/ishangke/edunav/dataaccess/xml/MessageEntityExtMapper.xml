@@ -24,7 +24,8 @@
     MESSAGE.STATUS MESSAGE_STATE
     MESSAGE.READ_TIME MESSAGE_READTIME
     MESSAGE.CREATE_TIME MESSAGE_CREATETIME,
-    MESSAGE.DELETED MESSAGE_DELETED
+    MESSAGE.DELETED
+    MESSAGE_DELETED
   </sql>
   <!-- add -->
   <insert id="add" parameterType="MessageEntityExt">
@@ -105,13 +106,12 @@
         STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="readTime != null">
-        READ_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        READ_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -169,7 +169,7 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.status != null">
         AND MESSAGE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
@@ -182,9 +182,10 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.readTime != null">
-        AND MESSAGE.READ_TIME = #{entity.readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND MESSAGE.READ_TIME =
+        #{entity.readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.readTime == null">
         <if test="entity.readTimeStart != null">
@@ -270,7 +271,7 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.status != null">
         AND MESSAGE.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
@@ -283,9 +284,10 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.readTime != null">
-        AND MESSAGE.READ_TIME = #{entity.readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND MESSAGE.READ_TIME =
+        #{entity.readTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.readTime == null">
         <if test="entity.readTimeStart != null">

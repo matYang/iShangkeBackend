@@ -45,21 +45,6 @@ public class CourseEntityExt extends CourseEntity {
     private Set<Integer> schooltimeWeekSet;
     private Calendar cashbackDateStart;
     private Calendar cashbackDateEnd;
-    public Calendar getCashbackDateStart() {
-        return cashbackDateStart;
-    }
-
-    public void setCashbackDateStart(Calendar cashbackDateStart) {
-        this.cashbackDateStart = cashbackDateStart;
-    }
-
-    public Calendar getCashbackDateEnd() {
-        return cashbackDateEnd;
-    }
-
-    public void setCashbackDateEnd(Calendar cashbackDateEnd) {
-        this.cashbackDateEnd = cashbackDateEnd;
-    }
 
     // not being used as search criteria here
     private Double rating;
@@ -88,7 +73,21 @@ public class CourseEntityExt extends CourseEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+    public Calendar getCashbackDateStart() {
+        return cashbackDateStart;
+    }
 
+    public void setCashbackDateStart(Calendar cashbackDateStart) {
+        this.cashbackDateStart = cashbackDateStart;
+    }
+
+    public Calendar getCashbackDateEnd() {
+        return cashbackDateEnd;
+    }
+
+    public void setCashbackDateEnd(Calendar cashbackDateEnd) {
+        this.cashbackDateEnd = cashbackDateEnd;
+    }
     public Calendar getNoRefundDateStart() {
         return noRefundDateStart;
     }

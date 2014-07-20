@@ -110,36 +110,32 @@
   <update id="update" parameterType="OrderHistoryEntityExt">
     update ORDER_HISTORY
     <set>
-      <if test="record.orderId != null">
-        ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="record.userId != null">
-        USER_ID = #{record.userId,jdbcType=INTEGER},
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="record.optName != null">
-        OPT_NAME = #{record.optName,jdbcType=INTEGER},
+      <if test="optName != null">
+        OPT_NAME = #{optName,jdbcType=INTEGER},
       </if>
-      <if test="record.remark != null">
-        REMARK = #{record.remark,jdbcType=VARCHAR},
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.preStatus != null">
-        PRE_STATUS = #{record.preStatus,jdbcType=INTEGER},
+      <if test="preStatus != null">
+        PRE_STATUS = #{preStatus,jdbcType=INTEGER},
       </if>
-      <if test="record.postStatus != null">
-        POST_STATUS = #{record.postStatus,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        POST_STATUS = #{postStatus,jdbcType=INTEGER},
       </if>
-      <if test="record.normal != null">
-        NORMAL = #{record.normal,jdbcType=INTEGER},
+      <if test="normal != null">
+        NORMAL = #{normal,jdbcType=INTEGER},
       </if>
-      <if test="record.createTime != null">
-        CREATE_TIME =
-        #{record.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.enabled != null">
-        ENABLED = #{record.enabled,jdbcType=INTEGER},
-      </if>
-      <if test="record.deleted != null">
-        DELETED = #{record.deleted,jdbcType=INTEGER},
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -147,6 +143,12 @@
   <!-- "getCount" -->
   <select id="getCount" resultType="int">
     select count(ID) from ORDER_HISTORY where DELETED = 0
+  </select>
+  <!-- listAll -->
+  <select id="listAll" resultMap="OrderHistoryExtMap">
+    SELECT
+    <include refid="OrderHistory_Base_Column_List" />
+    from ORDER_HISTORY where ORDER_HISTORY.DELETED = 0
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="OrderHistoryExtMap">

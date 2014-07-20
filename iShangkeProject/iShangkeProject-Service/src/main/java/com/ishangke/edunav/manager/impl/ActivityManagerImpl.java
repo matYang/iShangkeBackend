@@ -256,9 +256,6 @@ public class ActivityManagerImpl implements ActivityManager {
         List<ActivityBo> resultList = null;
 
         try {
-            if (partnerEntity.getId() != activityEntity.getPartnerId()) {
-                throw new ManagerException("此活动的合作商不符合");
-            }
             // TODO 权限
             activityList = activityEntityExtMapper.list(activityEntity, pageEntity);
             for (ActivityEntityExt activityPo : activityList) {
