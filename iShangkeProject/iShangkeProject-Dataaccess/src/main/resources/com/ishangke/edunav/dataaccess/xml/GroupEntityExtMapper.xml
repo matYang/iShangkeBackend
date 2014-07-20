@@ -7,8 +7,7 @@
     <result column="GROUPS_ROLEID" property="roleId" jdbcType="INTEGER" />
     <result column="GROUPS_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="GROUPS_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="GROUPS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="GROUPS_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="GROUPS_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="GROUPS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
@@ -22,8 +21,19 @@
     GROUPS.CREATE_TIME GROUPS_CREATETIME,
     GROUPS.ENABLED
     GROUPS_ENABLED,
-    GROUPS.DELETED GROUPS_DELETED,
+    GROUPS.DELETED
+    GROUPS_DELETED,
     GROUPS.PARTNER_ID GROUPS_PARTNERID
+  </sql>
+  <sql id="UserGroup_Base_Column_List">
+    USER_GROUP.ID USERGROUP_ID,
+    USER_GROUP.USER_ID
+    USERGROUP_USE_ID,
+    USER_GROUP.GROUP_ID
+    USERGROUP_GROUPID,
+    USER_GROUP.LAST_MODIFY_TIME USERGROUP_LASTMODIFYTIME,
+    USER_GROUP.DELETED
+    USERGROUP_DELETED
   </sql>
   <!-- add -->
   <insert id="add" parameterType="GroupEntityExt">
@@ -128,7 +138,6 @@
     <include refid="Group_Base_Column_List" />
     from GROUPS where GROUPS.DELETED = 0
     <if test="entity != null">
-
       <if test="entity.id != null and entity.id != 0">
         AND GROUPS.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -147,8 +156,7 @@
       <if test="entity.roleId == null or entity.roleId == 0">
         <if test="entity.roleIdSet != null and entity.roleIdSet.size() > 0">
           AND GROUPS.ROLE_ID IN
-          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -160,8 +168,7 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           GROUPS.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -202,10 +209,11 @@
       </if>
     </if>
 
-    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size ()>0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        GROUPS.${listItem.columnKey} ${listItem.order}
+        GROUPS.${listItem.columnKey}
+        ${listItem.order}
       </foreach>
     </if>
 
@@ -240,8 +248,7 @@
       <if test="entity.roleId == null or entity.roleId == 0">
         <if test="entity.roleIdSet != null and entity.roleIdSet.size() > 0">
           AND GROUPS.ROLE_ID IN
-          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -253,8 +260,7 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           GROUPS.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -295,6 +301,34 @@
       </if>
     </if>
 
+    ) AS total
+  </select>
+  <select id="listGroupsByUserId" parameterType="int" resultMap="GroupExtMap">
+    SELECT
+    <include refid="Group_Base_Column_List" />
+    ,
+    <include refid="UserGroup_Base_Column_List" />
+    FROM GROUPS GROUPS
+    JOIN USER_GROUP USER_GROUP
+    JOIN USERS USERS
+    ON GROUPS.ID = USER_GROUP.GROUP_ID
+    WHERE
+    USER_GROUP.USER_ID = #{userId}
+    AND GROUPS.DELETED = 0
+  </select>
+  <select id="getCountByUserId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM(
+    SELECT
+    <include refid="Group_Base_Column_List" />
+    ,
+    <include refid="UserGroup_Base_Column_List" />
+    FROM GROUPS GROUPS
+    JOIN USER_GROUP USER_GROUP
+    JOIN USERS USERS
+    ON GROUPS.ID = USER_GROUP.GROUP_ID
+    WHERE
+    USER_GROUP.USER_ID = #{userId}
+    AND GROUPS.DELETED = 0
     ) AS total
   </select>
 </mapper>

@@ -10,8 +10,7 @@
     <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="TEACHER_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="TEACHER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -20,15 +19,18 @@
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
     TEACHER.IMG_URL
     TEACHER_IMGURL,
-    TEACHER.NAME TEACHER_NAME,
+    TEACHER.NAME
+    TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
     TEACHER.POPULARITY
     TEACHER_POPULARITY,
-    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
+    TEACHER.LAST_MODIFY_TIME
+    TEACHER_LASTMODIFYTIME,
     TEACHER.CREATE_TIME
     TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
-    TEACHER.DELETED TEACHER_DELETED
+    TEACHER.DELETED
+    TEACHER_DELETED
   </sql>
   <sql id="COURSE_TEMPLATE_Base_Column_List">
     COURSE_TEMPLATE.ID COURSETEMPLATE_ID
@@ -43,7 +45,8 @@
 
   <sql id="COURSE_TEMPLATE_Teacher_Base_Column_List">
     COURSE_TEMPLATE_TEACHER.ID COURSETEMPLATETEACHER_ID,
-    COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID COURSETEMPLATETEACHER_COURSETEMPLATEID,
+    COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID
+    COURSETEMPLATETEACHER_COURSETEMPLATEID,
     COURSE_TEMPLATE_TEACHER.TEACHER_ID COURSETEMPLATETEACHER_TEACHERID
   </sql>
   <sql id="Course_Teacher_Base_Column_List">
@@ -196,8 +199,7 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND TEACHER.PARTNER_ID IN
-          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -210,8 +212,7 @@
       <if test="entity.popularity == null or entity.popularity == 0">
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND TEACHER.POPULARITY IN
-          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -261,7 +262,8 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        TEACHER.${listItem.columnKey} ${listItem.order}
+        TEACHER.${listItem.columnKey}
+        ${listItem.order}
       </foreach>
     </if>
 
@@ -297,8 +299,7 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND TEACHER.PARTNER_ID IN
-          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -311,8 +312,7 @@
       <if test="entity.popularity == null or entity.popularity == 0">
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND TEACHER.POPULARITY IN
-          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -367,6 +367,29 @@
     <include refid="Teacher_Base_Column_List" />
     FROM TEACHER WHERE PARTNER_ID = #{partnerId} and DELETED = 0
   </select>
+  <!-- getCountByPartnerId -->
+  <select id="getCountByPartnerId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM (
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
+    from TEACHER where TEACHER.DELETED = 0 AND TEACHER.PARTNER_ID =
+    {#partnerId}) AS total
+  </select>
+  <!-- getCountByCourseId -->
+  <select id="getCountByCourseId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM (
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
+    ,
+    <include refid="Course_Teacher_Base_Column_List" />
+    from TEACHER TEACHER JOIN COURSE_TEACHER COURSE_TEACHER
+    ON
+    COURSE_TEACHER.TEACHER_ID = TEACHER.ID
+    WHERE COURSE.ID =
+    #{courseId}
+    and
+    TEACHER.DELETED = 0) AS total
+  </select>
   <!-- listTeacherByCourseId -->
   <select id="listTeacherByCourseId" parameterType="int" resultMap="TeacherExtMap">
     SELECT
@@ -377,11 +400,37 @@
     <include refid="Course_Teacher_Base_Column_List" />
     FROM TEACHER TEACHER
     JOIN COURSE_TEACHER COURSE_TEACHER
-    ON TEACHER.ID = COURSE_TEACHER.TEACHER_ID
+    ON TEACHER.ID =
+    COURSE_TEACHER.TEACHER_ID
     JOIN COURSE COURSE
-    ON COURSE.ID = COURSE_TEACHER.COURSE_ID
+    ON
+    COURSE.ID =
+    COURSE_TEACHER.COURSE_ID
     WHERE COURSE.ID = #{courseId} and
     TEACHER.DELETED = 0
+  </select>
+  <!-- getCountByCourseTemplateId -->
+  <select id="getCountByCourseTemplateId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM (
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
+    ,
+    <include refid="COURSE_TEMPLATE_Base_Column_List" />
+    ,
+    <include refid="COURSE_TEMPLATE_Teacher_Base_Column_List" />
+    FROM TEACHER TEACHER
+    JOIN COURSE_TEMPLATE_TEACHER
+    COURSE_TEMPLATE_TEACHER
+    ON TEACHER.ID =
+    COURSE_TEMPLATE_TEACHER.TEACHER_ID
+    JOIN COURSE_TEMPLATE COURSE_TEMPLATE
+    ON COURSE_TEMPLATE.ID =
+    COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID
+    WHERE COURSE_TEMPLATE.ID =
+    #{courseTempleteId} and
+    TEACHER.DELETED = 0)
+    AS
+    total
   </select>
   <!-- listTeacherByCourseTempleteId -->
   <select id="listTeacherByCourseTempleteId" parameterType="int" resultMap="TeacherExtMap">
@@ -392,7 +441,8 @@
     ,
     <include refid="COURSE_TEMPLATE_Teacher_Base_Column_List" />
     FROM TEACHER TEACHER
-    JOIN COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER
+    JOIN COURSE_TEMPLATE_TEACHER
+    COURSE_TEMPLATE_TEACHER
     ON TEACHER.ID =
     COURSE_TEMPLATE_TEACHER.TEACHER_ID
     JOIN COURSE_TEMPLATE COURSE_TEMPLATE

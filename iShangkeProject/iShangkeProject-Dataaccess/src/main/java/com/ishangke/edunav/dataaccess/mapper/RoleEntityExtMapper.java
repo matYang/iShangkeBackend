@@ -29,7 +29,7 @@ public interface RoleEntityExtMapper {
     
     public int getCountByUserId(int userId);
     
-    public List<RoleEntityExt> listRoleByGroupId(int groupId);
+    public List<RoleEntityExt> listRolesByGroupId(int groupId);
     
     public int getCountByGroupId(int groupId);
 
