@@ -1,287 +1,443 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ishangke.edunav.dataaccess.mapper.PermissionEntityExtMapper">
-  <resultMap id="PermissionExtMap" type="PermissionEntityExt">
-    <id column="PERMISSIONS_ID" property="id" jdbcType="INTEGER" />
-    <result column="PERMISSIONS_NAME" property="name" jdbcType="VARCHAR" />
-    <result column="PERMISSIONS_PATH" property="path" jdbcType="VARCHAR" />
-    <result column="PERMISSIONS_TAG" property="tag" jdbcType="VARCHAR" />
-    <result column="PERMISSIONS_LASTMODIFYTIME" property="lastModifyTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="PERMISSIONS_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="PERMISSIONS_ENABLED" property="enabled" jdbcType="INTEGER" />
-    <result column="PERMISSIONS_DELETED" property="deleted" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Permission_Base_Column_List">
-    PERMISSIONS.ID PERMISSIONS_ID,
-    PERMISSIONS.NAME PERMISSIONS_NAME,
-    PERMISSIONS.PATH
-    PERMISSIONS_PATH,
-    PERMISSIONS.TAG PERMISSIONS_TAG,
-    PERMISSIONS.LAST_MODIFY_TIME
-    PERMISSIONS_LASTMODIFYTIME,
-    PERMISSIONS.CREATE_TIME
-    PERMISSIONS_CREATETIME,
-    PERMISSIONS.ENABLED
-    PERMISSIONS_ENABLED,
-    PERMISSIONS.DELETED
-    PERMISSIONS_DELETED
-  </sql>
-  <sql id="RolePermission_Base_Column_List">
-    ROLE_PERMISSION.ID ROLEPERMISSION_ID,
-    ROLE_PERMISSION.ROLE_ID ROLEPERMISSION_ROLEID,
-    ROLE_PERMISSION.PERMISSION_ID ROLEPERMISSION_PERMISSIONID,
-    ROLE_PERMISSION.LAST_MODIFY_TIME
-    ROLEPERMISSION_LASTMODIFYTIME,
-    ROLE_PERMISSION.DELETED ROLEPERMISSION_DELETED
-  </sql>
-  <!-- add -->
-  <insert id="add" parameterType="PermissionEntityExt">
-    insert into PERMISSIONS
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        NAME,
-      </if>
-      <if test="path != null">
-        PATH,
-      </if>
-      <if test="tag != null">
-        TAG,
-      </if>
-      <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME,
-      </if>
-      <if test="createTime != null">
-        CREATE_TIME,
-      </if>
-      <if test="enabled != null">
-        ENABLED,
-      </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null">
-        #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null">
-        #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyTime != null">
-        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="createTime != null">
-        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="enabled != null">
-        #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
-      </if>
-    </trim>
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
-  </insert>
-  <!-- deleteById -->
-  <update id="deleteById" parameterType="java.lang.Integer">
-    update PERMISSIONS set DELETED = 1
-    where ID =
-    #{id,jdbcType=INTEGER}
-  </update>
-  <!-- update -->
-  <update id="update" parameterType="PermissionEntityExt">
-    update PERMISSIONS
-    <set>
-      <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null">
-        PATH = #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null">
-        TAG = #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME =
-        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="createTime != null">
-        CREATE_TIME =
-        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="enabled != null">
-        ENABLED = #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <!-- getCount -->
-  <select id="getCount" resultType="int">
-    select count(ID) from PERMISSIONS where DELETED = 0
-  </select>
-  <!-- listPermissionByRoleId -->
-  <select id="listPermissionByRoleId" parameterType="int" resultMap="PermissionExtMap">
-    SELECT
-    <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
-    FROM PERMISSIONS PERMISSIONS
-    JOIN ROLE_PERMISSION ROLE_PERMISSION ON PERMISSIONS.ID =
-    ROLE_PERMISSION.PERMISSION_ID
-    WHERE ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
-    PERMISSIONS.DELETED =
-    0
-  </select>
-  <!-- list -->
-  <select id="list" parameterType="map" resultMap="PermissionExtMap">
-    select
-    <include refid="Permission_Base_Column_List"></include>
-    from PERMISSIONS
-    where PERMISSIONS.DELETED = 0
-    <if test="entity != null">
+<mapper
+	namespace="com.ishangke.edunav.dataaccess.mapper.PermissionEntityExtMapper">
+	<resultMap id="PermissionExtMap" type="PermissionEntityExt">
+		<id column="PERMISSIONS_ID" property="id" jdbcType="INTEGER" />
+		<result column="PERMISSIONS_NAME" property="name" jdbcType="VARCHAR" />
+		<result column="PERMISSIONS_PATH" property="path" jdbcType="VARCHAR" />
+		<result column="PERMISSIONS_TAG" property="tag" jdbcType="VARCHAR" />
+		<result column="PERMISSIONS_LASTMODIFYTIME" property="lastModifyTime"
+			typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+		<result column="PERMISSIONS_CREATETIME" property="createTime"
+			typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+		<result column="PERMISSIONS_ENABLED" property="enabled"
+			jdbcType="INTEGER" />
+		<result column="PERMISSIONS_DELETED" property="deleted"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Permission_Base_Column_List">
+		PERMISSIONS.ID PERMISSIONS_ID,
+		PERMISSIONS.NAME
+		PERMISSIONS_NAME,
+		PERMISSIONS.PATH
+		PERMISSIONS_PATH,
+		PERMISSIONS.TAG
+		PERMISSIONS_TAG,
+		PERMISSIONS.LAST_MODIFY_TIME
+		PERMISSIONS_LASTMODIFYTIME,
+		PERMISSIONS.CREATE_TIME
+		PERMISSIONS_CREATETIME,
+		PERMISSIONS.ENABLED
+		PERMISSIONS_ENABLED,
+		PERMISSIONS.DELETED
+		PERMISSIONS_DELETED
+	</sql>
+	<sql id="RolePermission_Base_Column_List">
+		ROLE_PERMISSION.ID ROLEPERMISSION_ID,
+		ROLE_PERMISSION.ROLE_ID ROLEPERMISSION_ROLEID,
+		ROLE_PERMISSION.PERMISSION_ID ROLEPERMISSION_PERMISSIONID,
+		ROLE_PERMISSION.LAST_MODIFY_TIME
+		ROLEPERMISSION_LASTMODIFYTIME,
+		ROLE_PERMISSION.DELETED ROLEPERMISSION_DELETED
+	</sql>
+	<sql id="Group_Base_Column_List">
+		GROUPS.ID GROUPS_ID,
+		GROUPS.NAME GROUPS_NAME,
+		GROUPS.ROLE_ID
+		GROUPS_ROLEID,
+		GROUPS.LAST_MODIFY_TIME
+		GROUPS_LASTMODIFYTIME,
+		GROUPS.CREATE_TIME GROUPS_CREATETIME,
+		GROUPS.ENABLED
+		GROUPS_ENABLED,
+		GROUPS.DELETED GROUPS_DELETED,
+		GROUPS.PARTNER_ID GROUPS_PARTNERID
+	</sql>
+	<sql id="UserGroup_Base_Column_List">
+		USER_GROUP.ID USERGROUP_ID,
+		USER_GROUP.USER_ID
+		USERGROUP_USE_ID,
+		USER_GROUP.GROUP_ID
+		USERGROUP_GROUPID,
+		USER_GROUP.LAST_MODIFY_TIME USERGROUP_LASTMODIFYTIME,
+		USER_GROUP.DELETED
+		USERGROUP_DELETED
+	</sql>
+	<!-- add -->
+	<insert id="add" parameterType="PermissionEntityExt">
+		insert into PERMISSIONS
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="path != null">
+				PATH,
+			</if>
+			<if test="tag != null">
+				TAG,
+			</if>
+			<if test="lastModifyTime != null">
+				LAST_MODIFY_TIME,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="enabled != null">
+				ENABLED,
+			</if>
+			<if test="deleted != null">
+				DELETED,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				#{path,jdbcType=VARCHAR},
+			</if>
+			<if test="tag != null">
+				#{tag,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+			</if>
+			<if test="createTime != null">
+				#{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+			</if>
+			<if test="enabled != null">
+				#{enabled,jdbcType=INTEGER},
+			</if>
+			<if test="deleted != null">
+				#{deleted,jdbcType=INTEGER},
+			</if>
+		</trim>
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<!-- deleteById -->
+	<update id="deleteById" parameterType="java.lang.Integer">
+		update PERMISSIONS set
+		DELETED = 1
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<!-- update -->
+	<update id="update" parameterType="PermissionEntityExt">
+		update PERMISSIONS
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				PATH = #{path,jdbcType=VARCHAR},
+			</if>
+			<if test="tag != null">
+				TAG = #{tag,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifyTime != null">
+				LAST_MODIFY_TIME =
+				#{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME =
+				#{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+			</if>
+			<if test="enabled != null">
+				ENABLED = #{enabled,jdbcType=INTEGER},
+			</if>
+			<if test="deleted != null">
+				DELETED = #{deleted,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- getCount -->
+	<select id="getCount" resultType="int">
+		select count(ID) from
+		PERMISSIONS where DELETED = 0
+	</select>
+	<!-- listPermissionByRoleId -->
+	<select id="listPermissionByRoleId" parameterType="int"
+		resultMap="PermissionExtMap">
+		SELECT
+		<include refid="Permission_Base_Column_List" />
+		,
+		<include refid="RolePermission_Base_Column_List" />
+		FROM PERMISSIONS PERMISSIONS
+		JOIN ROLE_PERMISSION ROLE_PERMISSION ON
+		PERMISSIONS.ID =
+		ROLE_PERMISSION.PERMISSION_ID
+		WHERE
+		ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
+		PERMISSIONS.DELETED =
+		0
+	</select>
+	<select id="getCountByRoleId" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM(
+		SELECT
+		<include refid="Permission_Base_Column_List" />
+		,
+		<include refid="RolePermission_Base_Column_List" />
+		FROM PERMISSIONS PERMISSIONS
+		JOIN ROLE_PERMISSION ROLE_PERMISSION ON
+		PERMISSIONS.ID =
+		ROLE_PERMISSION.PERMISSION_ID
+		WHERE
+		ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
+		PERMISSIONS.DELETED =
+		0
+		) AS total
+	</select>
+	<select id="listPermissionsByUserId" parameterType="int"
+		resultMap="PermissionExtMap">
+		SELECT
+		<include refid="Permission_Base_Column_List" />
+		,
+		<include refid="RolePermission_Base_Column_List" />
+		,
+		<include refid="Group_Base_Column_List" />
+		,
+		<include refid="UserGroup_Base_Column_List" />
+		FROM PERMISSIONS PERMISSIONS
+		JOIN ROLE_PERMISSION ROLE_PERMISSION
+		JOIN
+		GROUPS GROUPS
+		JOIN USER_GROUP USER_GROUP
+		ON
+		PERMISSIONS_ID =
+		ROLE_PERMISSION.PERMISSION_ID
+		AND GROUPS.ROLE_ID =
+		ROLE_PERMISSION.ROLE_ID
+		AND USER_GROUP.GROUP_ID = GROUPS_ID
+		WHERE
+		USER_GROUP.USER_ID = #{userId} AND PERMISSIONS.DELETED = 0
+	</select>
+	<select id="getCountByUserId" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM(
+		SELECT
+		<include refid="Permission_Base_Column_List" />
+		,
+		<include refid="RolePermission_Base_Column_List" />
+		,
+		<include refid="Group_Base_Column_List" />
+		,
+		<include refid="UserGroup_Base_Column_List" />
+		FROM PERMISSIONS PERMISSIONS
+		JOIN ROLE_PERMISSION ROLE_PERMISSION
+		JOIN
+		GROUPS GROUPS
+		JOIN USER_GROUP USER_GROUP
+		ON
+		PERMISSIONS_ID =
+		ROLE_PERMISSION.PERMISSION_ID
+		AND GROUPS.ROLE_ID =
+		ROLE_PERMISSION.ROLE_ID
+		AND USER_GROUP.GROUP_ID = GROUPS_ID
+		WHERE
+		USER_GROUP.USER_ID = #{userId} AND PERMISSIONS.DELETED = 0
+		) AS total
+	</select>
+	<select id="listPermissionsByGroupId" parameterType="int"
+		resultMap="PermissionExtMap">
+		SELECT
+		<include refid="Permission_Base_Column_List" />
+		,
+		<include refid="RolePermission_Base_Column_List" />
+		,
+		<include refid="Group_Base_Column_List" />
+		FROM PERMISSIONS PERMISSIONS
+		JOIN ROLE_PERMISSION ROLE_PERMISSION
+		JOIN
+		GROUPS GROUPS
+		ON PERMISSIONS_ID = ROLE_PERMISSION.PERMISSION_ID
+		AND
+		ROLE_PERMISSION.ROLE_ID = GROUPS.ROLE_ID
+		WHERE GROUPS.ID = #{groupId}
+		AND PERMISSIONS.DELETED = 0
+	</select>
+	<select id="getCountByGroupId" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM(
+		SELECT
+		<include refid="Permission_Base_Column_List" />
+		,
+		<include refid="RolePermission_Base_Column_List" />
+		,
+		<include refid="Group_Base_Column_List" />
+		FROM PERMISSIONS PERMISSIONS
+		JOIN ROLE_PERMISSION ROLE_PERMISSION
+		JOIN
+		GROUPS GROUPS
+		ON PERMISSIONS_ID = ROLE_PERMISSION.PERMISSION_ID
+		AND
+		ROLE_PERMISSION.ROLE_ID = GROUPS.ROLE_ID
+		WHERE GROUPS.ID = #{groupId}
+		AND PERMISSIONS.DELETED = 0
+		) AS total
+	</select>
+	<select id="getById" parameterType="int" resultMap="PermissionExtMap">
+		SELECT
+		<include refid="Permission_Base_Column_List"></include>
+		from PERMISSIONS
+		where PERMISSIONS.DELETED = 0 AND PERMISSIONS.ID =
+		#{id}
+	</select>
+	<!-- list -->
+	<select id="list" parameterType="map" resultMap="PermissionExtMap">
+		select
+		<include refid="Permission_Base_Column_List"></include>
+		from PERMISSIONS
+		where PERMISSIONS.DELETED = 0
+		<if test="entity != null">
 
-      <if test="entity.id != null and entity.id != 0">
-        AND PERMISSIONS.ID = #{entity.id,jdbcType=INTEGER}
-      </if>
-      <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idSet != null and entity.idSet.size() > 0">
-          AND PERMISSIONS.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
+			<if test="entity.id != null and entity.id != 0">
+				AND PERMISSIONS.ID = #{entity.id,jdbcType=INTEGER}
+			</if>
+			<if test="entity.id == null or entity.id == 0">
+				<if test="entity.idSet != null and entity.idSet.size() > 0">
+					AND PERMISSIONS.ID IN
+					<foreach collection="entity.idSet" item="listItem" open="("
+						close=")" separator=",">
+						#{listItem}
+					</foreach>
+				</if>
+			</if>
 
-      <if test="entity.name != null and !entity.name.equals('')">
-        AND PERMISSIONS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
-      </if>
+			<if test="entity.name != null and !entity.name.equals('')">
+				AND PERMISSIONS.NAME LIKE
+				"%"#{entity.name,jdbcType=VARCHAR}"%"
+			</if>
 
-      <if test="entity.path != null and !entity.path.equals('')">
-        AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
-      </if>
+			<if test="entity.path != null and !entity.path.equals('')">
+				AND PERMISSIONS.PATH LIKE
+				"%"#{entity.path,jdbcType=VARCHAR}"%"
+			</if>
 
-      <if test="entity.tag != null and !entity.tag.equals('')">
-        AND PERMISSIONS.TAG LIKE "%"#{entity.tag,jdbcType=VARCHAR}"%"
-      </if>
+			<if test="entity.tag != null and !entity.tag.equals('')">
+				AND PERMISSIONS.TAG LIKE
+				"%"#{entity.tag,jdbcType=VARCHAR}"%"
+			</if>
 
-      <if test="entity.lastModifyTime != null">
-        AND PERMISSIONS.LAST_MODIFY_TIME =
-        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.lastModifyTime == null">
-        <if test="entity.lastModifyTimeStart != null">
+			<if test="entity.lastModifyTime != null">
+				AND PERMISSIONS.LAST_MODIFY_TIME =
+				#{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+			</if>
+			<if test="entity.lastModifyTime == null">
+				<if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
+				</if>
+				<if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      </if>
+				</if>
+			</if>
 
-      <if test="entity.createTime != null">
-        AND PERMISSIONS.CREATE_TIME =
-        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.createTime == null">
-        <if test="entity.createTimeStart != null">
+			<if test="entity.createTime != null">
+				AND PERMISSIONS.CREATE_TIME =
+				#{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+			</if>
+			<if test="entity.createTime == null">
+				<if test="entity.createTimeStart != null">
           <![CDATA[AND PERMISSIONS.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
+				</if>
+				<if test="entity.createTimeEnd != null">
           <![CDATA[AND PERMISSIONS.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      </if>
+				</if>
+			</if>
 
-      <if test="entity.enabled != null and entity.enabled != 0">
-        AND PERMISSIONS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
-      </if>
-    </if>
+			<if test="entity.enabled != null and entity.enabled != 0">
+				AND PERMISSIONS.ENABLED =
+				#{entity.enabled,jdbcType=INTEGER}
+			</if>
+		</if>
 
-    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-      ORDER BY
-      <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        PERMISSIONS.${listItem.columnKey} ${listItem.order}
-      </foreach>
-    </if>
+		<if
+			test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+			ORDER BY
+			<foreach collection="page.orderByEntities" item="listItem"
+				separator=",">
+				PERMISSIONS.${listItem.columnKey} ${listItem.order}
+			</foreach>
+		</if>
 
-    <if test="page.offset != null and page.size != null">
-      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-    </if>
-  </select>
-  <!-- getListCount -->
-  <select id="getListCount" parameterType="map" resultType="int">
-    SELECT COUNT(*) FROM (
-    select
-    <include refid="Permission_Base_Column_List"></include>
-    from PERMISSIONS
-    where PERMISSIONS.DELETED = 0
-    <if test="entity != null">
+		<if test="page.offset != null and page.size != null">
+			LIMIT
+			#{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- getListCount -->
+	<select id="getListCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM (
+		select
+		<include refid="Permission_Base_Column_List"></include>
+		from PERMISSIONS
+		where PERMISSIONS.DELETED = 0
+		<if test="entity != null">
 
-      <if test="entity.id != null and entity.id != 0">
-        AND PERMISSIONS.ID = #{entity.id,jdbcType=INTEGER}
-      </if>
-      <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idSet != null and entity.idSet.size() > 0">
-          AND PERMISSIONS.ID IN
-          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
+			<if test="entity.id != null and entity.id != 0">
+				AND PERMISSIONS.ID = #{entity.id,jdbcType=INTEGER}
+			</if>
+			<if test="entity.id == null or entity.id == 0">
+				<if test="entity.idSet != null and entity.idSet.size() > 0">
+					AND PERMISSIONS.ID IN
+					<foreach collection="entity.idSet" item="listItem" open="("
+						close=")" separator=",">
+						#{listItem}
+					</foreach>
+				</if>
+			</if>
 
-      <if test="entity.name != null and !entity.name.equals('')">
-        AND PERMISSIONS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
-      </if>
+			<if test="entity.name != null and !entity.name.equals('')">
+				AND PERMISSIONS.NAME LIKE
+				"%"#{entity.name,jdbcType=VARCHAR}"%"
+			</if>
 
-      <if test="entity.path != null and !entity.path.equals('')">
-        AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
-      </if>
+			<if test="entity.path != null and !entity.path.equals('')">
+				AND PERMISSIONS.PATH LIKE
+				"%"#{entity.path,jdbcType=VARCHAR}"%"
+			</if>
 
-      <if test="entity.tag != null and !entity.tag.equals('')">
-        AND PERMISSIONS.TAG LIKE "%"#{entity.tag,jdbcType=VARCHAR}"%"
-      </if>
+			<if test="entity.tag != null and !entity.tag.equals('')">
+				AND PERMISSIONS.TAG LIKE
+				"%"#{entity.tag,jdbcType=VARCHAR}"%"
+			</if>
 
-      <if test="entity.lastModifyTime != null">
-        AND PERMISSIONS.LAST_MODIFY_TIME =
-        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.lastModifyTime == null">
-        <if test="entity.lastModifyTimeStart != null">
+			<if test="entity.lastModifyTime != null">
+				AND PERMISSIONS.LAST_MODIFY_TIME =
+				#{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+			</if>
+			<if test="entity.lastModifyTime == null">
+				<if test="entity.lastModifyTimeStart != null">
           <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.lastModifyTimeEnd != null">
+				</if>
+				<if test="entity.lastModifyTimeEnd != null">
           <![CDATA[AND PERMISSIONS.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      </if>
+				</if>
+			</if>
 
-      <if test="entity.createTime != null">
-        AND PERMISSIONS.CREATE_TIME =
-        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.createTime == null">
-        <if test="entity.createTimeStart != null">
+			<if test="entity.createTime != null">
+				AND PERMISSIONS.CREATE_TIME =
+				#{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+			</if>
+			<if test="entity.createTime == null">
+				<if test="entity.createTimeStart != null">
           <![CDATA[AND PERMISSIONS.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.createTimeEnd != null">
+				</if>
+				<if test="entity.createTimeEnd != null">
           <![CDATA[AND PERMISSIONS.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      </if>
+				</if>
+			</if>
 
-      <if test="entity.enabled != null and entity.enabled != 0">
-        AND PERMISSIONS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
-      </if>
-    </if>
+			<if test="entity.enabled != null and entity.enabled != 0">
+				AND PERMISSIONS.ENABLED =
+				#{entity.enabled,jdbcType=INTEGER}
+			</if>
+		</if>
 
-    ) AS total
-  </select>
+		) AS total
+	</select>
 
 </mapper>

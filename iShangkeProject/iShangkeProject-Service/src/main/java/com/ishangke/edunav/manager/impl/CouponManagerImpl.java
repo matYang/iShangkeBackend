@@ -119,10 +119,6 @@ public class CouponManagerImpl implements CouponManager {
             // TODO权限
             couponHistoryList = couponHistoryEntityExtMapper.list(couponHistoryEntity, pageEntity);
             for (CouponHistoryEntityExt couponHistoryPo : couponHistoryList) {
-                CouponEntityExt couponPo = couponEntityExtMapper.getById(couponHistoryPo.getCouponId());
-                if (couponPo.getUserId() != userEntity.getId()) {
-                    throw new ManagerException("此用户: " + userEntity.getId() + " 无法查看该优惠劵: " + couponPo.getId());
-                }
                 resultList.add(CouponHistoryConverter.toBo(couponHistoryPo));
             }
             return resultList;

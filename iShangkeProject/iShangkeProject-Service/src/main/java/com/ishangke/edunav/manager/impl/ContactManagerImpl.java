@@ -39,11 +39,8 @@ public class ContactManagerImpl implements ContactManager {
         ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        if (convertEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("此用户无法创建该常用联系人");
-        }
-
         try {
+            // TODO权限
             int result = 0;
             result = contactEntityExtMapper.add(convertEntity);
             if (result > 0) {
@@ -70,11 +67,8 @@ public class ContactManagerImpl implements ContactManager {
         ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        if (convertEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("此用户无法更新该常用联系人");
-        }
-
         try {
+            // TODO权限
             contactEntityExtMapper.update(convertEntity);
             return ContactConverter.toBo(convertEntity);
         } catch (Throwable t) {
@@ -96,11 +90,8 @@ public class ContactManagerImpl implements ContactManager {
         ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        if (convertEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("此用户无法删除该常用联系人");
-        }
-
         try {
+            // TODO权限
             contactEntityExtMapper.deleteById(convertEntity.getId());
             return ContactConverter.toBo(convertEntity);
         } catch (Throwable t) {

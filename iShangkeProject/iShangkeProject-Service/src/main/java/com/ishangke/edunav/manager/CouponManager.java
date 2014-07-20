@@ -29,7 +29,7 @@ public interface CouponManager {
      * @param couponBo
      *            需要检索和过滤的优惠券
      * @param userBo
-     *            调用方法的用户的信息
+     *            调用方法的用户的信息   $
      * @param paginationBo
      *            分页信息
      *
@@ -45,7 +45,7 @@ public interface CouponManager {
      * @param couponHistoryBo
      *            需要检索和过滤的优惠券历史
      * @param userBo
-     *            调用方法的用户的信息
+     *            调用方法的用户的信息   $
      * @param paginationBo
      *            分页信息
      *

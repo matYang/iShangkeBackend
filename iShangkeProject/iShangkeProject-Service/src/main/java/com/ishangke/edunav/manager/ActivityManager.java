@@ -54,7 +54,7 @@ public interface ActivityManager {
 	 *  管理员可以审核拒绝活动信息
 	 *
 	 *  @param  activityBo         需要拒绝的活动信息
-	 *  @param  partnerBo          活动相关的合作商信息
+	 *  @param  partnerBo          活动相关的合作商信息   $
 	 *  @param  commentActivityRejectBo     与拒绝相关的评论
 	 *  @param  userBo             发起拒绝的管理员信息
 	 *
@@ -68,7 +68,7 @@ public interface ActivityManager {
 	 *  合作商可以取消活动信息
 	 *
 	 *  @param  activityBo         需要取消的活动信息
-	 *  @param  partnerBo          活动相关的合作商信息
+	 *  @param  partnerBo          活动相关的合作商信息   $
 	 *  @param  userBo             发起取消的用户信息
 	 *
 	 *  @return 取消完成的活动信息
@@ -81,7 +81,7 @@ public interface ActivityManager {
 	 *  管理员与合作商可以删除活动信息
 	 *
 	 *  @param  activityBo         需要删除的活动信息
-	 *  @param  partnerBo          活动相关的合作商信息
+	 *  @param  partnerBo          活动相关的合作商信息   $
 	 *  @param  userBo             发起删除的用户信息
 	 *
 	 *  @return 删除完成的活动信息
@@ -94,7 +94,7 @@ public interface ActivityManager {
 	 *  用户可以查询活动信息
 	 *
 	 *  @param  activityBo         需要查询的活动信息
-	 *  @param  partnerBo          活动相关的合作商信息
+	 *  @param  partnerBo          活动相关的合作商信息   $
 	 *  @param  userBo             发起查询的用户信息
 	 *  @param  paginationBo       分页信息
 	 *
