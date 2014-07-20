@@ -12,8 +12,11 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.WithdrawEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 import com.ishangke.edunav.manager.WithdrawManager;
+import com.ishangke.edunav.manager.converter.PaginationConverter;
+import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.converter.WithdrawConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
@@ -32,17 +35,19 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
         // 插入新的WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+
         int result = 0;
         try {
             result = withdrawMapper.add(withdrawEntity);
         } catch (Throwable t) {
-            LOGGER.debug(t.getMessage(), t);
-            throw new ManagerException("Withdraw creation failed for user: " + userBo.getId(), t);
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
             return WithdrawConverter.toBo(withdrawEntity);
         } else {
-            throw new ManagerException("Withdraw creation failed for user: " + userBo.getId());
+            throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId());
         }
     }
 
@@ -55,11 +60,13 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
         // 更新WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+
         try {
             withdrawMapper.update(withdrawEntity);
         } catch (Throwable t) {
-            LOGGER.debug(t.getMessage(), t);
-            throw new ManagerException("Withdraw creation failed for user: " + userBo.getId(), t);
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Withdraw update failed for user: " + userEntity.getId(), t);
         }
 
         return WithdrawConverter.toBo(withdrawEntity);
@@ -72,14 +79,16 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Invalid parameter");
         }
 
-        // 更新WITHDRAW记录
+        // 删除WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+
         try {
-            withdrawMapper.deleteById(withdrawEntity.getId());
             withdrawEntity.setDeleted(1);
+            withdrawMapper.deleteById(withdrawEntity.getId());
         } catch (Throwable t) {
-            LOGGER.debug(t.getMessage(), t);
-            throw new ManagerException("Withdraw creation failed for user: " + userBo.getId(), t);
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Withdraw deletion failed for user: " + userEntity.getId(), t);
         }
 
         return WithdrawConverter.toBo(withdrawEntity);
@@ -90,17 +99,16 @@ public class WithdrawManagerImpl implements WithdrawManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
-        PaginationEntity page = null;
-        // TODO
-        // PaginationEntity page =
-        // PaginationConverter.fromBo(paginationBo);
+        WithdrawEntityExt withdrawEntity = withdrawBo == null ? null : WithdrawConverter.fromBo(withdrawBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+
         List<WithdrawEntityExt> results = null;
         try {
             results = withdrawMapper.list(withdrawEntity, page);
         } catch (Throwable t) {
-            LOGGER.debug(t.getMessage(), t);
-            throw new ManagerException("Withdraw query failed", t);
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Withdraw query failed for user: " + userEntity.getId(), t);
         }
 
         if (results == null) {

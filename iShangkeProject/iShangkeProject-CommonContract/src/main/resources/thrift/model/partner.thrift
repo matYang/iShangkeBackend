@@ -1,3 +1,7 @@
+include "classPhoto.thrift"
+include "teacher.thrift"
+include "address.thrift"
+
 namespace java com.ishangke.edunav.commoncontract.model
 
 /**
@@ -54,4 +58,7 @@ struct PartnerBo {
     48: i32 partnerQualificationEnd
     49: double ratingStart
     50: double ratingEnd 
+    51: list<teacher.TeacherBo> teacherList;
+    52: list<classPhoto.ClassPhotoBo> classPhotoList;
+    53: list<address.AddressBo> addressList;
 }

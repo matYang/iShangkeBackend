@@ -6,6 +6,16 @@ include "model/partner.thrift"
 namespace java com.ishangke.edunav.commoncontract.service
 
 service UserService {
+
+    /**
+     *  本方法为普通用户提供自动识别的功能。<br>
+     *  API端读取用户前端存储的session string，调用该方法自动获得当前用户信息
+     *  @param  sessionString 
+     *  @return 用户实体 UserBo
+     */
+    user.UserBo authenticate(1: string sessionString) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+
     /**
      *  本方法为普通用户提供注册的功能。<br>
      *  用户可以通过此方法进行注册。

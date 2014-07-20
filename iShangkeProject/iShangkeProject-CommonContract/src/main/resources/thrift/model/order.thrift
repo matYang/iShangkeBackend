@@ -10,14 +10,15 @@ struct OrderBo {
     4: string type
     5: double price
     6: string runingNumber
-    7: string status
+    7: i32 status
     8: i32 enabled
     9: set<i32> idSet
     10: set<i32> bookingIdSet
-    11: i64 createTimeStart
-    12: i64 createTimeEnd
-    13: double priceStart
-    14: double priceEnd
+    11: set<i32> statusSet
+    12: i64 createTimeStart
+    13: i64 createTimeEnd
+    14: double priceStart
+    15: double priceEnd
 }
 
 /**

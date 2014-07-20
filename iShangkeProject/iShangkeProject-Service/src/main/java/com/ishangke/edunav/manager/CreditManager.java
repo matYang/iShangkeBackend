@@ -10,6 +10,27 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface CreditManager {
+
+    /**
+     * 本方法为换取优惠券。<br>
+     * 用户可以将自己的积分换取优惠券
+     * 
+     * @param creditBo
+     *            积分信息
+     * @param couponBo
+     *            优惠券信息
+     * @param userBo
+     *            调用方法的用户的信息
+     * 
+     * @return
+     * 
+     * 
+     * @param creditBo
+     * @param couponBo
+     * @param userBo
+     */
+    public CreditBo modifyCredit(CreditBo creditBo, UserBo userBo);
+
     /**
      * 本方法为换取优惠券。<br>
      * 用户可以将自己的积分换取优惠券

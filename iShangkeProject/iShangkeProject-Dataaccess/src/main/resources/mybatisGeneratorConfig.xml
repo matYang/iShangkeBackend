@@ -230,6 +230,7 @@
     </table>
     <table tableName="MESSAGE" domainObjectName="MessageEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="READ_TIME" property="readTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
 
     </table>

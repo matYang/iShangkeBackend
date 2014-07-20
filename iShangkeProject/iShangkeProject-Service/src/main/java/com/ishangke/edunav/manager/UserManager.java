@@ -11,6 +11,17 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 public interface UserManager {
 
     /**
+     * 本方法为普通用户提供自动识别的功能。<br>
+     * API端读取用户前端存储的session string，调用该方法自动获得当前用户信息
+     * 
+     * @param sessionString
+     * @return 用户实体 UserBo
+     * 
+     * @param sessionString
+     */
+    public UserBo authenticate(String sessionString);
+
+    /**
      * 本方法为普通用户提供注册的功能。<br>
      * 用户可以通过此方法进行注册。
      * 

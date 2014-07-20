@@ -8,6 +8,7 @@ import com.ishangke.edunav.dataaccess.model.gen.OrderEntity;
 public class OrderEntityExt extends OrderEntity {
     private Set<Integer> idSet;
     private Set<Integer> bookingIdSet;
+    private Set<Integer> statusSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     private Double priceStart;
@@ -59,6 +60,14 @@ public class OrderEntityExt extends OrderEntity {
 
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+
+    public Set<Integer> getStatusSet() {
+        return statusSet;
+    }
+
+    public void setStatusSet(Set<Integer> statusSet) {
+        this.statusSet = statusSet;
     }
 
 }

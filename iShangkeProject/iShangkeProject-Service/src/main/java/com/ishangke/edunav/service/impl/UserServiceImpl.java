@@ -27,6 +27,19 @@ public class UserServiceImpl implements UserService.Iface {
     private UserManager userManager;
 
     @Override
+    public UserBo authenticate(String sessionString) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.authenticate(sessionString);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_REGISTER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
     public UserBo registerUser(UserBo userBo) throws BusinessExceptionBo, TException {
         try {
             return userManager.registerUser(userBo);
@@ -66,7 +79,8 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo,
+            TException {
         try {
             return userManager.createUser(targetUser, partnerBo, currentUser);
         } catch (ManagerException e) {
@@ -118,7 +132,8 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo) throws BusinessExceptionBo, TException {
+    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo)
+            throws BusinessExceptionBo, TException {
         try {
             return userManager.queryUser(queryUser, partnerBo, currentUser, pagnationBo);
         } catch (ManagerException e) {
