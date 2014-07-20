@@ -91,7 +91,6 @@ public class SpreadManagerImpl implements SpreadManager {
             throw new ManagerException("Spread creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            spreadEntity.setId(result);
             return SpreadConverter.toBo(spreadEntity);
         } else {
             throw new ManagerException("Spread creation failed for user: " + userEntity.getId());

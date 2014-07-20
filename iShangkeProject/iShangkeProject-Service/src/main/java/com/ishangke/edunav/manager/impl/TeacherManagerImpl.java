@@ -48,7 +48,6 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Teacher creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            teacherEntity.setId(result);
             return TeacherConverter.toBo(teacherEntity);
         } else {
             throw new ManagerException("Teacher creation failed for user: " + userEntity.getId());

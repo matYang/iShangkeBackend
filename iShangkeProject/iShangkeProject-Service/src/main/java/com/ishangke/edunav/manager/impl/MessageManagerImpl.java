@@ -46,7 +46,6 @@ public class MessageManagerImpl implements MessageManager {
             throw new ManagerException("Message creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            messageEntity.setId(result);
             return MessageConverter.toBo(messageEntity);
         } else {
             throw new ManagerException("Message creation failed for user: " + userEntity.getId());
