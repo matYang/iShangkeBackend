@@ -7,12 +7,10 @@
     <result column="COURSECOMMENT_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_TITLE" property="title" jdbcType="VARCHAR" />
     <result column="COURSECOMMENT_CONTENT" property="content" jdbcType="VARCHAR" />
-
     <result column="COURSECOMMENT_TOTALRATING" property="totalRating" jdbcType="DOUBLE" />
     <result column="COURSECOMMENT_CONDITIONRATING" property="conditionRatingRating" jdbcType="DOUBLE" />
     <result column="COURSECOMMENT_ATTITUDERATING" property="attitudeRatingRating" jdbcType="DOUBLE" />
     <result column="COURSECOMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
-
     <result column="COURSECOMMENT_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECOMMENT_CREATETIME" property="createTime"
@@ -172,15 +170,18 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from COURSE_COMMENT where DELETED = 0
+  </select>
+  <!-- listAll -->
+  <select id="listAll" resultMap="CourseCommentExtMap">
+    SELECT
+    <include refid="CourseComment_Base_Column_List" />
+    from COURSE_COMMENT where COURSE_COMMENT.DELETED = 0
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseCommentExtMap">

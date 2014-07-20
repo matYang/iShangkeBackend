@@ -6,9 +6,12 @@
     <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
     <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_CONTRACT" property="contract" jdbcType="VARCHAR" />
-    <result column="PARTNER_LASTLOGINTIME" property="lastLoginTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="PARTNER_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="PARTNER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="PARTNER_LASTLOGINTIME" property="lastLoginTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="PARTNER_LASTMODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="PARTNER_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="PARTNER_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="PARTNER_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
@@ -45,19 +48,23 @@
       <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
       <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
       <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
-      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
-      <result column="TEACHER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
+      <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="TEACHER_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
     <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
-      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER"/>
+      <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
       <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR"/>
-      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
-      <result column="CLASSPHOTO_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler"  />
+      <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+      <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
+      <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
+      <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="CLASSPHOTO_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
@@ -67,8 +74,10 @@
       <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
       <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
-      <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="ADDRESS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="ADDRESS_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
@@ -124,17 +133,20 @@
     PARTNER.CUTOFF_TIME PARTNER_CUTOFFTIME,
     PARTNER.PARTNER_QUALIFICATION
     PARTNER_PARTNERQUALIFICATION,
-    PARTNER.RATING PARTNER_RATING 
+    PARTNER.RATING PARTNER_RATING
   </sql>
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
-    TEACHER.IMG_URL TEACHER_IMGURL,
+    TEACHER.IMG_URL
+    TEACHER_IMGURL,
     TEACHER.NAME TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
-    TEACHER.POPULARITY TEACHER_POPULARITY,
+    TEACHER.POPULARITY
+    TEACHER_POPULARITY,
     TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
-    TEACHER.CREATE_TIME TEACHER_CREATETIME,
+    TEACHER.CREATE_TIME
+    TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
     TEACHER.DELETED TEACHER_DELETED
   </sql>
@@ -144,22 +156,27 @@
     CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
     CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
     CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
-    CLASS_PHOTO.LAST_MODIFY_TIME CLASSPHOTO_LASTMODIFYTIME,
+    CLASS_PHOTO.LAST_MODIFY_TIME
+    CLASSPHOTO_LASTMODIFYTIME,
     CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
-    CLASS_PHOTO.ENABLED CLASSPHOTO_ENABLED,
+    CLASS_PHOTO.ENABLED
+    CLASSPHOTO_ENABLED,
     CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
   <sql id="Address_Base_Column_List">
     ADDRESS.ID ADDRESS_ID,
     ADDRESS.PARTNER_ID ADDRESS_PARTNERID,
-    ADDRESS.DETAIL ADDRESS_DETAIL,
+    ADDRESS.DETAIL
+    ADDRESS_DETAIL,
     ADDRESS.LAT ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG,
-    ADDRESS.LAST_MODIFY_TIME ADDRESS_LASTMODIFYTIME,
+    ADDRESS.LAST_MODIFY_TIME
+    ADDRESS_LASTMODIFYTIME,
     ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
     ADDRESS.DELETED ADDRESS_DELETED
   </sql>
+  <!-- add -->
   <insert id="add" parameterType="PartnerEntityExt">
 
     insert into partner
@@ -372,11 +389,13 @@
       LAST_INSERT_ID()
     </selectKey>
   </insert>
+  <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update PARTNER set DELETED = 1
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="PartnerEntityExt">
     update PARTNER
     <set>
@@ -390,19 +409,19 @@
         CONTRACT = #{contract,jdbcType=VARCHAR},
       </if>
       <if test="lastLoginTime != null">
-        LAST_LOGIN_TIME = #{lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_LOGIN_TIME =
+        #{lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="lastModifyTime != null">
-        LAST_MODIFY_TIME = #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        LAST_MODIFY_TIME =
+        #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
       </if>
       <if test="wholeName != null">
         WHOLE_NAME = #{wholeName,jdbcType=VARCHAR},
@@ -487,27 +506,37 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from PARTNER where DELETED = 0
   </select>
-
+  <!-- getInfoById -->
   <select id="getInfoById" parameterType="int" resultMap="PartnerExtMap">
-    select 
-    <include refid="Partner_Base_Column_List"></include>,
-    <include refid="Teacher_Base_Column_List"></include>,
-    <include refid="ClassPhoto_Base_Column_List"></include>,
+    select
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Teacher_Base_Column_List"></include>
+    ,
+    <include refid="ClassPhoto_Base_Column_List"></include>
+    ,
     <include refid="Address_Base_Column_List"></include>
     from PARNTER PARNTER
-        join TEACHER TEACHER 
-            ON TEACHER.PARTNER_ID = PARNTER.ID
-        join CLASS_PHOTO CLASS_PHOTO 
-            ON CLASS_PHOTO.PARTNER_ID = PARNTER.ID
-        join ADDRESS ADDRESS
-            ON ADDRESS.PARTNER_ID = PARTNER.ID
+    join TEACHER TEACHER
+    ON TEACHER.PARTNER_ID = PARNTER.ID
+    join CLASS_PHOTO CLASS_PHOTO
+    ON CLASS_PHOTO.PARTNER_ID = PARNTER.ID
+    join ADDRESS ADDRESS
+    ON ADDRESS.PARTNER_ID = PARTNER.ID
     where PARNTER.DELETED = 0 AND PARNTER.ID = #{id}
-  </select>  
+  </select>
 
-
+  <!-- listAll -->
+  <select id="listAll" resultMap="PartnerExtMap">
+    SELECT
+    <include refid="Partner_Base_Column_List" />
+    from PARTNER where PARTNER.DELETED = 0
+  </select>
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="PartnerExtMap">
     select
     <include refid="Partner_Base_Column_List"></include>
@@ -687,7 +716,8 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND PARTNER.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND PARTNER.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -699,7 +729,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND PARTNER.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND PARTNER.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -714,7 +745,8 @@
       </if>
 
       <if test="entity.lastLoginTime != null">
-        AND PARTNER.LAST_LOGIN_TIME = #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND PARTNER.LAST_LOGIN_TIME =
+        #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastLoginTime == null">
         <if test="entity.lastLoginTimeStart != null">
@@ -735,6 +767,7 @@
       </if>
     </if>
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
@@ -915,7 +948,8 @@
       </if>
 
       <if test="entity.lastModifyTime != null">
-        AND PARTNER.LAST_MODIFY_TIME = #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND PARTNER.LAST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
@@ -927,7 +961,8 @@
       </if>
 
       <if test="entity.createTime != null">
-        AND PARTNER.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND PARTNER.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
@@ -942,7 +977,8 @@
       </if>
 
       <if test="entity.lastLoginTime != null">
-        AND PARTNER.LAST_LOGIN_TIME = #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        AND PARTNER.LAST_LOGIN_TIME =
+        #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastLoginTime == null">
         <if test="entity.lastLoginTimeStart != null">
@@ -952,8 +988,8 @@
           <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      </if>
-      ) AS
-      total
+    </if>
+    ) AS
+    total
   </select>
 </mapper>

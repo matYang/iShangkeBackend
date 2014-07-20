@@ -111,6 +111,7 @@
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="BookingHistoryEntityExt">
     update BOOKING_HISTORY
     <set>
@@ -142,9 +143,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -152,6 +150,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from BOOKING_HISTORY where DELETED = 0
   </select>
+
+  <!-- listAll -->
+  <select id="listAll" resultMap="BookingHistoryExtMap">
+    SELECT
+    <include refid="BookingHistory_Base_Column_List" />
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
+  </select>
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="BookingHistoryExtMap">
     SELECT
@@ -269,7 +275,7 @@
         AND BOOKING_HISTORY.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
-       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
         BOOKING_HISTORY.${listItem.columnKey} ${listItem.order}
@@ -280,7 +286,7 @@
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-<!-- getListCount -->
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
