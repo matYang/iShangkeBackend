@@ -957,7 +957,7 @@
 <!-- listAll -->
    <select id="listAll" resultMap="CourseExtMap">
     SELECT
-    <include refid="CourseComment_Base_Column_List" />
+    <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0
   </select>
   <!-- list -->

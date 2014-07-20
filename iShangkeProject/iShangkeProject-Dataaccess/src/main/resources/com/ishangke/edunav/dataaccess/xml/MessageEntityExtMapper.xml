@@ -120,13 +120,7 @@
   <select id="getCount" resultType="int">
     select count(ID) from MESSAGE where DELETED = 0
   </select>
-  <!-- listAll -->
-   <select id="listAll" resultMap="MessageExtMap">
-    SELECT
-    <include refid="Message_Base_Column_List" />
-    from MESSAGE where MESSAGE.DELETED = 0
-  </select>
-  <!-- list -->
+    <!-- list -->
   <select id="list" parameterType="map" resultMap="MessageExtMap">
     SELECT
     <include refid="Message_Base_Column_List" />
