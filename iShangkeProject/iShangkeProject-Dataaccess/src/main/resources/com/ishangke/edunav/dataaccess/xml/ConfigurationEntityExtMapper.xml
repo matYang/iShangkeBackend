@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.ConfigurationEntityExtMapper" >
+  <resultMap id="ConfigurationExtResultMap" type="com.ishangke.edunav.dataaccess.model.ConfigurationEntityExt" >
+    <id column="CONFIGURATION_ID" property="id" jdbcType="INTEGER" />
+    <result column="CONFIGURATION_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CONFIGURATION_CONFIGDATA" property="configData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Configuration_Column_List" >
+    CONFIGURATION.ID CONFIGURATION_ID, 
+    CONFIGURATION.NAME CONFIGURATION_NAME, 
+    CONFIGURATION.CONFIG_DATA CONFIGURATION_CONFIGDATA
+  </sql>
+  <!-- getByName -->
+  <select id="getByName" resultMap="ConfigurationExtResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Configuration_Column_List" />
+    from CONFIGURATION where name = #{name, jdbcType=VARCHAR}
+  </select>
+  <!-- listAll -->
+  <select id="listAll" resultMap="ConfigurationExtResultMap" >
+    select
+    <include refid="Configuration_Column_List" />
+    from CONFIGURATION
+  </select>
+</mapper>
