@@ -231,7 +231,6 @@
     from WITHDRAW WITHDRAW
     where WITHDRAW.DELETED = 0
     <if test="entity != null">
-
       <if test="entity.id != null and entity.id != 0">
         AND WITHDRAW.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -243,7 +242,6 @@
           </foreach>
         </if>
       </if>
-
       <if test="entity.userId != null and entity.userId != 0">
         AND WITHDRAW.USER_ID = #{entity.userId,jdbcType=INTEGER}
       </if>
