@@ -7,14 +7,12 @@
     <result column="COUPON_TOTAL" property="total" jdbcType="DOUBLE" />
     <result column="COUPON_BALANCE" property="balance" jdbcType="DOUBLE" />
     <result column="COUPON_ORIGIN" property="origin" jdbcType="INTEGER" />
-    <result column="COUPON_EXPIRYTIME" property="expiryTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COUPON_EXPIRYTIME" property="expiryTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COUPON_REMARK" property="remark" jdbcType="VARCHAR" />
     <result column="COUPON_USERID" property="userId" jdbcType="INTEGER" />
     <result column="COUPON_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COUPON_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COUPON_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COUPON_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COUPON_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -33,7 +31,8 @@
     COUPON.LAST_MODIFY_TIME COUPON_LASTMODIFYTIME,
     COUPON.CREATE_TIME
     COUPON_CREATETIME,
-    COUPON.ENABLED COUPON_ENABLED,
+    COUPON.ENABLED
+    COUPON_ENABLED,
     COUPON.DELETED COUPON_DELETED
   </sql>
   <!-- add -->
@@ -195,8 +194,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND COUPON.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -233,8 +231,7 @@
       <if test="entity.origin == null or entity.origin == 0">
         <if test="entity.originSet != null and entity.originSet.size() > 0">
           AND COUPON.ORIGIN IN
-          <foreach collection="entity.originSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.originSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -293,7 +290,8 @@
       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          COUPON.${listItem.columnKey} ${listItem.order}
+          COUPON.${listItem.columnKey}
+          ${listItem.order}
         </foreach>
       </if>
 
@@ -335,8 +333,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND COUPON.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -373,8 +370,7 @@
       <if test="entity.origin == null or entity.origin == 0">
         <if test="entity.originSet != null and entity.originSet.size() > 0">
           AND COUPON.ORIGIN IN
-          <foreach collection="entity.originSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.originSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>

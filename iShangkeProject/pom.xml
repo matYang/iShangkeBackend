@@ -298,6 +298,7 @@
 		<module>iShangkeProject-UserFacade</module>
 		<module>iShangkeProject-PartnerFacade</module>
 		<module>iShangkeProject-AdminFacade</module>
+		<module>iShangkeProject-WebCommon</module>
 		<module>iShangkeProject-UserWeb</module>
 		<module>iShangkeProject-PartnerWeb</module>
 		<module>iShangkeProject-AdminWeb</module>

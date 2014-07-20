@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -81,5 +83,44 @@ public class BookingHistoryEntityExtTest {
         //3 here, 1 default, 3 added among which 1 is deleted
         Assert.assertEquals(4, result.size());
        Assert.assertEquals("_test_remark_2_爱上课", result.get(1).getRemark());
+    }
+    @Test
+    public void testQuery2() {
+        BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        bookingHistoryEntityExt.setIdSet(idSet);
+        List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        bookingHistoryEntityExt.setUserId(5);
+        bookingHistoryEntityExt.setBookingId(2);
+        List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_remark_1_爱上课", result.get(0).getRemark());
+    }
+    
+    @Test
+    public void testQuery4() {
+        BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        bookingHistoryEntityExt.setUserId(5);
+        bookingHistoryEntityExt.setBookingId(3);
+        List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt, page);
+        Assert.assertEquals(0, result.size());
     }
 }

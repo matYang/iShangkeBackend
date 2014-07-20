@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -178,4 +180,45 @@ public class ClassPhotoEntityExtTest extends BaseTest{
         Assert.assertEquals(4, result.size());
        Assert.assertEquals("_test_title_2_爱上课", result.get(1).getTitle());
     }
+    @Test
+    public void testQuery2() {
+        ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        classPhotoEntityExt.setIdSet(idSet);
+        List<ClassPhotoEntityExt> result = classPhotoEntityExtMapper.list(classPhotoEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        classPhotoEntityExt.setPartnerId(4);
+      
+        List<ClassPhotoEntityExt> result = classPhotoEntityExtMapper.list(classPhotoEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_IU_2_爱上课", result.get(0).getImgUrl());
+    }
+    
+    @Test
+    public void testQuery4() {
+        ClassPhotoEntityExt classPhotoEntityExt = new ClassPhotoEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        classPhotoEntityExt.setPartnerId(4);
+        classPhotoEntityExt.setId(2);
+        List<ClassPhotoEntityExt> result = classPhotoEntityExtMapper.list(classPhotoEntityExt, page);
+        Assert.assertEquals(0, result.size());
+    }
 }
+
+

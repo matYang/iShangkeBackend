@@ -6,19 +6,48 @@
     <result column="ROLES_NAME" property="name" jdbcType="VARCHAR" />
     <result column="ROLES_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ROLES_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ROLES_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ROLES_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ROLES_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
-
   <sql id="Role_Base_Column_List">
     ROLES.ID ROLES_ID,
     ROLES.NAME ROLES_NAME,
     ROLES.LAST_MODIFY_TIME ROLES_LASTMODIFYTIME,
-    ROLES.CREATE_TIME ROLES_CREATETIME,
+    ROLES.CREATE_TIME
+    ROLES_CREATETIME,
     ROLES.ENABLED ROLES_ENABLED,
     ROLES.DELETED ROLES_DELETED
+  </sql>
+  <sql id="Group_Base_Column_List">
+    GROUPS.ID GROUPS_ID,
+    GROUPS.NAME GROUPS_NAME,
+    GROUPS.ROLE_ID
+    GROUPS_ROLEID,
+    GROUPS.LAST_MODIFY_TIME
+    GROUPS_LASTMODIFYTIME,
+    GROUPS.CREATE_TIME GROUPS_CREATETIME,
+    GROUPS.ENABLED
+    GROUPS_ENABLED,
+    GROUPS.DELETED
+    GROUPS_DELETED,
+    GROUPS.PARTNER_ID GROUPS_PARTNERID
+  </sql>
+  <sql id="UserGroup_Base_Column_List">
+    USER_GROUP.ID USERGROUP_ID,
+    USER_GROUP.USER_ID
+    USERGROUP_USE_ID,
+    USER_GROUP.GROUP_ID
+    USERGROUP_GROUPID,
+    USER_GROUP.LAST_MODIFY_TIME USERGROUP_LASTMODIFYTIME,
+    USER_GROUP.DELETED
+    USERGROUP_DELETED
+  </sql>
+  <sql id="User_Base_Column_List">
+    USERS.ID USERS_ID,
+    USERS.NAME USERS_NAME,
+    USERS.PASSWORD
+    USERS_PASSWORD
   </sql>
   <!-- add -->
   <insert id="add" parameterType="RoleEntityExt">
@@ -105,7 +134,6 @@
     <include refid="Role_Base_Column_List" />
     from ROLES where ROLES.DELETED = 0
     <if test="entity != null">
-
       <if test="entity.id != null and entity.id != 0">
         AND ROLES.ID = #{entity.id,jdbcType=INTEGER}
       </if>
@@ -161,7 +189,8 @@
     </if>
 
     <if test="page.offset != null and page.size != null">
-      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      LIMIT
+      #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
   <!-- getListCount -->
@@ -219,5 +248,52 @@
       </if>
     </if>
     ) AS total
+  </select>
+  <select id="listRolesByUserId" parameterType="int" resultMap="RoleExtMap">
+    SELECT
+    <include refid="Role_Base_Column_List" />
+    FROM ROLES ROLES JOIN GROUPS GROUPS
+    JOIN USER_GROUP USER_GROUP
+    JOIN
+    USERS USERS
+    ON ROLES.ID = GROUPS.ROLE_ID AND GROUPS.ID =
+    USER_GROUP.GROUP_ID WHERE
+    USER_GROUP.USER_ID = #{userId} AND
+    ROLES.DELETED = 0
+  </select>
+  <select id="getCountByUserId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM(
+    SELECT *
+    FROM ROLES ROLES JOIN GROUPS GROUPS
+    JOIN USER_GROUP USER_GROUP
+    JOIN
+    USERS USERS
+    ON ROLES.ID = GROUPS.ROLE_ID AND GROUPS.ID =
+    USER_GROUP.GROUP_ID WHERE
+    USER_GROUP.USER_ID = #{userId} AND
+    ROLES.DELETED = 0
+    ) AS total
+  </select>
+  <select id="listRoleByGroupId" parameterType="int" resultMap="RoleExtMap">
+    SELECT
+    <include refid="Role_Base_Column_List" />
+    FROM ROLES ROLES JOIN GROUPS GROUPS
+    ON ROLES.ID = GROUPS.ROLE_ID WHERE
+    GROUPS.ID = #{groupId} AND
+    ROLES.DELETED = 0
+  </select>
+  <select id="getCountByGroupId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM(
+    SELECT *
+    FROM ROLES ROLES JOIN GROUPS GROUPS
+    ON ROLES.ID = GROUPS.ROLE_ID WHERE
+    GROUPS.ID = #{groupId} AND
+    ROLES.DELETED = 0
+    ) AS total
+  </select>
+  <select id="getById" parameterType="int" resultMap="RoleExtMap">
+    SELECT
+    <include refid="Role_Base_Column_List" />
+    FROM ROLES ROLES WHERE ROLES.ID = {#id} AND ROLES.DELETED = 0
   </select>
 </mapper>

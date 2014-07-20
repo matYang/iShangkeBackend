@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,6 +72,47 @@ public class CourseCommentEntityExtTest {
         List<CourseCommentEntityExt> result = courseCommentEntityExtMapper.list(courseCommentQueryEntity, page);
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_title_1_爱上课", result.get(0).getTitle());
+    }
+    @Test
+    public void testQuery2() {
+        CourseCommentEntityExt courseCommentEntityExt = new CourseCommentEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        courseCommentEntityExt.setIdSet(idSet);
+        List<CourseCommentEntityExt> result = courseCommentEntityExtMapper.list(courseCommentEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        CourseCommentEntityExt courseCommentEntityExt = new CourseCommentEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        courseCommentEntityExt.setUserId(2);
+      
+        List<CourseCommentEntityExt> result = courseCommentEntityExtMapper.list(courseCommentEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_title_1_爱上课", result.get(0).getTitle());
+        Assert.assertEquals("_test_title_3_爱上课", result.get(1).getTitle());
+    }
+    
+    @Test
+    public void testQuery4() {
+        CourseCommentEntityExt courseCommentEntityExt = new CourseCommentEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        courseCommentEntityExt.setUserId(2);
+        courseCommentEntityExt.setCourseTemplateId(4);
+        List<CourseCommentEntityExt> result = courseCommentEntityExtMapper.list(courseCommentEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_title_3_爱上课", result.get(0).getTitle());
     }
 
 }

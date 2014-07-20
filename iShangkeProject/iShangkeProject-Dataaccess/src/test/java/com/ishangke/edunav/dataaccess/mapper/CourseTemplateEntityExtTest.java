@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -105,6 +107,47 @@ public class CourseTemplateEntityExtTest extends BaseTest {
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_name_2_爱上课", result.get(0).getCourseName());
     }
-
+    @Test
+    public void testQuery2() {
+        CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        courseTemplateEntityExt.setIdSet(idSet);
+        List<CourseTemplateEntityExt> result = courseTemplateEntityExtMapper.list(courseTemplateEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        courseTemplateEntityExt.setCategoryId(2);
+        
+        List<CourseTemplateEntityExt> result = courseTemplateEntityExtMapper.list(courseTemplateEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_CI_2_爱上课", result.get(0).getCourseIntro());
+        Assert.assertEquals("_test_CI_2_爱上课", result.get(1).getCourseIntro());
+    }
+    
+    @Test
+    public void testQuery4() {
+        CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        courseTemplateEntityExt.setCategoryId(2);
+        courseTemplateEntityExt.setLocationId(3);
+        List<CourseTemplateEntityExt> result = courseTemplateEntityExtMapper.list(courseTemplateEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_reference_2_爱上课", result.get(0).getReference());
+       
+    }
 
 }

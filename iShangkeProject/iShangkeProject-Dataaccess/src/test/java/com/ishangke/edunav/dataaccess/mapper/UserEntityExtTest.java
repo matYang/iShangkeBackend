@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,6 +19,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,4 +79,20 @@ public class UserEntityExtTest extends BaseTest {
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_name_2_爱上课", result.get(0).getName());
     }
+    @Test
+    public void testQuery2() {
+        UserEntityExt UserEntityExt = new UserEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        UserEntityExt.setIdSet(idSet);
+        List<UserEntityExt> result = userEntityExtMapper.list(UserEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+   
 }

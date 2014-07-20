@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -119,4 +121,21 @@ public class CreditHistoryEntityExtTest extends BaseTest {
         Assert.assertEquals(2, result.size());
       
     }
+    @Test
+    public void testQuery2() {
+        CreditHistoryEntityExt creditHistoryEntityExt = new CreditHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        creditHistoryEntityExt.setIdSet(idSet);
+        List<CreditHistoryEntityExt> result = CreditHistoryEntityExtMapper.list(creditHistoryEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+   
+  
 }

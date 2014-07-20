@@ -87,9 +87,6 @@ public class AddressManagerImpl implements AddressManager {
         AddressBo result = null;
 
         try {
-            if (partnerEntity.getId() != addressEntity.getPartnerId()) {
-                throw new ManagerException("此合作商不是该地址的合作商");
-            }
             // TODO权限
             addressEntityExtMapper.update(addressEntity);
             result = AddressConverter.toBo(addressEntity);
@@ -119,9 +116,6 @@ public class AddressManagerImpl implements AddressManager {
         AddressBo result = null;
 
         try {
-            if (partnerEntity.getId() != addressEntity.getPartnerId()) {
-                throw new ManagerException("此合作商不是该地址的合作商");
-            }
             // TODO权限
             addressEntityExtMapper.deleteById(addressEntity.getId());
             result = AddressConverter.toBo(addressEntity);

@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -143,5 +145,19 @@ public class PermissionEntityExtTest extends BaseTest{
         Assert.assertEquals(4, result.size());
          Assert.assertEquals("_test_name_3_爱上课", result.get(0).getName());
     }
-
+    @Test
+    public void testQuery2() {
+        PermissionEntityExt PermissionEntityExt = new PermissionEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        PermissionEntityExt.setIdSet(idSet);
+        List<PermissionEntityExt> result = permissionEntityExtMapper.list(PermissionEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+   
 }

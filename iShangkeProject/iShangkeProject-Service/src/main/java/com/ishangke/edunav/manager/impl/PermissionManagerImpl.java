@@ -10,7 +10,6 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PermissionEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
-import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.PermissionManager;
@@ -25,16 +24,13 @@ public class PermissionManagerImpl implements PermissionManager {
     private RoleEntityExtMapper roleMapper;
 
     @Autowired
-    private UserEntityExtMapper userMapper;
-
-    @Autowired
     private GroupEntityExtMapper groupMapper;
 
     @Override
     public List<PermissionBo> listPermissionsByUser(UserBo user) {
         int userId = user.getId();
-        List<RoleEntityExt> result1 = userMapper.getRolesByUserId(userId);
-        List<GroupEntityExt> result2 = userMapper.getGroupsByUserId(userId);
+        List<RoleEntityExt> result1 = roleMapper.listRolesByGroupId(userId);
+        List<GroupEntityExt> result2 = groupMapper.listGroupsByUserId(userId);
         return null;
     }
 }

@@ -36,6 +36,30 @@
     ROLEPERMISSION_LASTMODIFYTIME,
     ROLE_PERMISSION.DELETED ROLEPERMISSION_DELETED
   </sql>
+  <sql id="Group_Base_Column_List">
+    GROUPS.ID GROUPS_ID,
+    GROUPS.NAME GROUPS_NAME,
+    GROUPS.ROLE_ID
+    GROUPS_ROLEID,
+    GROUPS.LAST_MODIFY_TIME
+    GROUPS_LASTMODIFYTIME,
+    GROUPS.CREATE_TIME GROUPS_CREATETIME,
+    GROUPS.ENABLED
+    GROUPS_ENABLED,
+    GROUPS.DELETED
+    GROUPS_DELETED,
+    GROUPS.PARTNER_ID GROUPS_PARTNERID
+  </sql>
+  <sql id="UserGroup_Base_Column_List">
+    USER_GROUP.ID USERGROUP_ID,
+    USER_GROUP.USER_ID
+    USERGROUP_USE_ID,
+    USER_GROUP.GROUP_ID
+    USERGROUP_GROUPID,
+    USER_GROUP.LAST_MODIFY_TIME USERGROUP_LASTMODIFYTIME,
+    USER_GROUP.DELETED
+    USERGROUP_DELETED
+  </sql>
   <!-- add -->
   <insert id="add" parameterType="PermissionEntityExt">
     insert into PERMISSIONS
@@ -131,14 +155,102 @@
   <select id="listPermissionByRoleId" parameterType="int" resultMap="PermissionExtMap">
     SELECT
     <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
     FROM PERMISSIONS PERMISSIONS
-    JOIN ROLE_PERMISSION ROLE_PERMISSION ON PERMISSIONS.ID =
+    JOIN ROLE_PERMISSION ROLE_PERMISSION ON
+    PERMISSIONS.ID =
     ROLE_PERMISSION.PERMISSION_ID
-    WHERE ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
+    WHERE
+    ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
     PERMISSIONS.DELETED =
     0
+  </select>
+  <select id="getCountByRoleId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM(
+    SELECT *
+    FROM PERMISSIONS PERMISSIONS
+    JOIN ROLE_PERMISSION ROLE_PERMISSION ON
+    PERMISSIONS.ID =
+    ROLE_PERMISSION.PERMISSION_ID
+    WHERE
+    ROLE_PERMISSION.ROLE_ID = #{roleId, jdbcType=INTEGER} and
+    PERMISSIONS.DELETED =
+    0
+    ) AS total
+  </select>
+  <select id="listPermissionsByUserId" parameterType="int" resultMap="PermissionExtMap">
+    SELECT
+    <include refid="Permission_Base_Column_List" />
+    FROM PERMISSIONS PERMISSIONS
+    JOIN ROLE_PERMISSION ROLE_PERMISSION
+    JOIN
+    GROUPS GROUPS
+    JOIN USER_GROUP USER_GROUP
+    ON
+    PERMISSIONS_ID =
+    ROLE_PERMISSION.PERMISSION_ID
+    AND GROUPS.ROLE_ID =
+    ROLE_PERMISSION.ROLE_ID
+    AND USER_GROUP.GROUP_ID =
+    GROUPS_ID
+    WHERE
+    USER_GROUP.USER_ID = #{userId} AND PERMISSIONS.DELETED = 0
+  </select>
+  <select id="getCountByUserId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM(
+    SELECT *
+    FROM PERMISSIONS PERMISSIONS
+    JOIN ROLE_PERMISSION ROLE_PERMISSION
+    JOIN
+    GROUPS GROUPS
+    JOIN USER_GROUP USER_GROUP
+    ON
+    PERMISSIONS_ID =
+    ROLE_PERMISSION.PERMISSION_ID
+    AND GROUPS.ROLE_ID =
+    ROLE_PERMISSION.ROLE_ID
+    AND USER_GROUP.GROUP_ID =
+    GROUPS_ID
+    WHERE
+    USER_GROUP.USER_ID = #{userId} AND PERMISSIONS.DELETED = 0
+    ) AS total
+  </select>
+  <select id="listPermissionsByGroupId" parameterType="int" resultMap="PermissionExtMap">
+    SELECT
+    <include refid="Permission_Base_Column_List" />
+    FROM PERMISSIONS PERMISSIONS
+    JOIN ROLE_PERMISSION ROLE_PERMISSION
+    JOIN
+    GROUPS GROUPS
+    ON PERMISSIONS_ID =
+    ROLE_PERMISSION.PERMISSION_ID
+    AND
+    ROLE_PERMISSION.ROLE_ID = GROUPS.ROLE_ID
+    WHERE GROUPS.ID = #{groupId}
+    AND
+    PERMISSIONS.DELETED = 0
+  </select>
+  <select id="getCountByGroupId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM(
+    SELECT *
+    FROM PERMISSIONS PERMISSIONS
+    JOIN ROLE_PERMISSION ROLE_PERMISSION
+    JOIN
+    GROUPS GROUPS
+    ON PERMISSIONS_ID =
+    ROLE_PERMISSION.PERMISSION_ID
+    AND
+    ROLE_PERMISSION.ROLE_ID = GROUPS.ROLE_ID
+    WHERE GROUPS.ID = #{groupId}
+    AND
+    PERMISSIONS.DELETED = 0
+    ) AS total
+  </select>
+  <select id="getById" parameterType="int" resultMap="PermissionExtMap">
+    SELECT
+    <include refid="Permission_Base_Column_List"></include>
+    from PERMISSIONS
+    where PERMISSIONS.DELETED = 0 AND PERMISSIONS.ID =
+    #{id}
   </select>
   <!-- listAll -->
   <select id="listAll" resultMap="PermissionExtMap">
@@ -167,15 +279,18 @@
       </if>
 
       <if test="entity.name != null and !entity.name.equals('')">
-        AND PERMISSIONS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+        AND PERMISSIONS.NAME LIKE
+        "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.path != null and !entity.path.equals('')">
-        AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
+        AND PERMISSIONS.PATH LIKE
+        "%"#{entity.path,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.tag != null and !entity.tag.equals('')">
-        AND PERMISSIONS.TAG LIKE "%"#{entity.tag,jdbcType=VARCHAR}"%"
+        AND PERMISSIONS.TAG LIKE
+        "%"#{entity.tag,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != null">
@@ -205,19 +320,22 @@
       </if>
 
       <if test="entity.enabled != null and entity.enabled != 0">
-        AND PERMISSIONS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+        AND PERMISSIONS.ENABLED =
+        #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
 
-    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size ()>0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        PERMISSIONS.${listItem.columnKey} ${listItem.order}
+        PERMISSIONS.${listItem.columnKey}
+        ${listItem.order}
       </foreach>
     </if>
 
     <if test="page.offset != null and page.size != null">
-      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      LIMIT
+      #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
   <!-- getListCount -->
@@ -242,15 +360,18 @@
       </if>
 
       <if test="entity.name != null and !entity.name.equals('')">
-        AND PERMISSIONS.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+        AND PERMISSIONS.NAME LIKE
+        "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.path != null and !entity.path.equals('')">
-        AND PERMISSIONS.PATH LIKE "%"#{entity.path,jdbcType=VARCHAR}"%"
+        AND PERMISSIONS.PATH LIKE
+        "%"#{entity.path,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.tag != null and !entity.tag.equals('')">
-        AND PERMISSIONS.TAG LIKE "%"#{entity.tag,jdbcType=VARCHAR}"%"
+        AND PERMISSIONS.TAG LIKE
+        "%"#{entity.tag,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != null">
@@ -280,7 +401,8 @@
       </if>
 
       <if test="entity.enabled != null and entity.enabled != 0">
-        AND PERMISSIONS.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+        AND PERMISSIONS.ENABLED =
+        #{entity.enabled,jdbcType=INTEGER}
       </if>
     </if>
 

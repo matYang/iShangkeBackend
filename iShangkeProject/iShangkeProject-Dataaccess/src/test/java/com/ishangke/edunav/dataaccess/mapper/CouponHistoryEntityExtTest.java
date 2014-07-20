@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -67,5 +69,47 @@ public class CouponHistoryEntityExtTest extends BaseTest{
         List<CouponHistoryEntityExt> result = couponHistoryEntityExtMapper.list(couponHistoryQueryEntity, page);
         Assert.assertEquals(2, result.size());
         //Assert.assertEquals("_test_CourseTemplateClassPhotos_2_", result.get(0).getCreateTime());
+    }
+    @Test
+    public void testQuery2() {
+        CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        couponHistoryEntityExt.setIdSet(idSet);
+        List<CouponHistoryEntityExt> result = couponHistoryEntityExtMapper.list(couponHistoryEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        couponHistoryEntityExt.setCouponId(4);
+      
+        List<CouponHistoryEntityExt> result = couponHistoryEntityExtMapper.list(couponHistoryEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("5.8", result.get(0).getCharge().toString());
+    }
+    
+    @Test
+    public void testQuery4() {
+        CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        couponHistoryEntityExt.setCharge(5.8);
+        page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
+        List<CouponHistoryEntityExt> result = couponHistoryEntityExtMapper.list(couponHistoryEntityExt, page);
+        Assert.assertEquals(2, result.size());
+        Assert.assertSame(5, result.get(0).getId());
+        Assert.assertSame(2, result.get(1).getId());
+       
     }
 }

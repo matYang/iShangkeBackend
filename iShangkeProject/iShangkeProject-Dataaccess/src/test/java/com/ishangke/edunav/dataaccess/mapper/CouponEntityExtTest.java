@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -68,5 +70,44 @@ public class CouponEntityExtTest extends BaseTest{
        
         Assert.assertEquals(4, result.size());
         Assert.assertEquals("_test_remark_3_爱上课", result.get(1).getRemark());
+    }
+    @Test
+    public void testQuery2() {
+        CouponEntityExt couponEntityExt = new CouponEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        Set<Integer> idSet = new HashSet();
+        idSet.add(1);
+        idSet.add(2);
+        idSet.add(3);
+        couponEntityExt.setIdSet(idSet);
+        List<CouponEntityExt> result = couponEntityExtMapper.list(couponEntityExt, page);
+        Assert.assertEquals(3, result.size());
+    }
+    
+    @Test
+    public void testQuery3() {
+        CouponEntityExt couponEntityExt = new CouponEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        couponEntityExt.setTotal(3.0);
+        couponEntityExt.setBalance(3.0);
+        List<CouponEntityExt> result = couponEntityExtMapper.list(couponEntityExt, page);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_remark_3_爱上课", result.get(0).getRemark());
+    }
+    
+    @Test
+    public void testQuery4() {
+        CouponEntityExt couponEntityExt = new CouponEntityExt();
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        couponEntityExt.setUserId(3);
+        couponEntityExt.setId(2);
+        List<CouponEntityExt> result = couponEntityExtMapper.list(couponEntityExt, page);
+        Assert.assertEquals(0, result.size());
     }
 }
