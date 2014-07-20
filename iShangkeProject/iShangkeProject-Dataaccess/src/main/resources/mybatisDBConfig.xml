@@ -47,6 +47,8 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.OrderEntityExt" alias="OrderEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt" alias="OrderHistoryEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.ConfigurationEntityExt" alias="ConfigurationEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.SchoolEntityExt" alias="SchoolEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.CareerEntityExt" alias="CareerEntityExt" />
   </typeAliases>
   <typeHandlers>
     <typeHandler javaType="java.util.Calendar" jdbcType="TIMESTAMP"

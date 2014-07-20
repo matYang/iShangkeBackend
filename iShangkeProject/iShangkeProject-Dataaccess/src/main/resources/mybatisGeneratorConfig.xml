@@ -272,6 +272,18 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="CONFIG_DATA" jdbcType="VARCHAR"></columnOverride>
     </table>
+    <table tableName="SCHOOL" domainObjectName="SchoolEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
+        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
+    <table tableName="CAREER" domainObjectName="CareerEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
+        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
   </context>
 
 </generatorConfiguration>

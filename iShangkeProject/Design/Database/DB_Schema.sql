@@ -9,6 +9,36 @@ CREATE SCHEMA IF NOT EXISTS `EduNav` DEFAULT CHARACTER SET utf8 ;
 USE `EduNav` ;
 
 -- -----------------------------------------------------
+-- Table `EduNav`.`SCHOOL`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `EduNav`.`SCHOOL` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `VALUE` VARCHAR(45) NULL,
+  `NAME` VARCHAR(45) NULL,
+  `LAST_MODIFY_TIME` DATETIME NOT NULL,
+  `CREATE_TIME` DATETIME NOT NULL,
+  `ENABLED` INT NOT NULL,
+  `DELETED` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `EduNav`.`CAREER`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `EduNav`.`CAREER` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `VALUE` VARCHAR(45) NULL,
+  `NAME` VARCHAR(45) NULL,
+  `LAST_MODIFY_TIME` DATETIME NOT NULL,
+  `CREATE_TIME` DATETIME NOT NULL,
+  `ENABLED` INT NOT NULL,
+  `DELETED` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `EduNav`.`USERS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EduNav`.`USERS` (
@@ -31,7 +61,21 @@ CREATE TABLE IF NOT EXISTS `EduNav`.`USERS` (
   `BIRTHDAY` DATETIME NULL,
   `SCHOOL` VARCHAR(45) NULL,
   `MAJOR` VARCHAR(45) NULL,
-  PRIMARY KEY (`ID`))
+  `SCHOOL_ID` INT NULL,
+  `CAREER_ID` INT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `PK_SCHOOL_USERS_idx` (`SCHOOL_ID` ASC),
+  INDEX `FK_CAREER_USERS_idx` (`CAREER_ID` ASC),
+  CONSTRAINT `PK_SCHOOL_USERS`
+    FOREIGN KEY (`SCHOOL_ID`)
+    REFERENCES `EduNav`.`SCHOOL` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_CAREER_USERS`
+    FOREIGN KEY (`CAREER_ID`)
+    REFERENCES `EduNav`.`CAREER` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = '<double-click to overwrite multiple objects>';
 
