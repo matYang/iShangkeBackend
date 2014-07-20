@@ -19,7 +19,7 @@ public final class SessionConfig {
         public static final long UPDATETHRESHOLD = 259200000l; // 3 days
         public static final long EXPIRETHRESHOLD = 604800000l; // 7 days
 
-        public static final int MAXRECORDS = 20;
+        public static final int MAXRECORDS = 10;
 
         public static final int CLIENT_WEB = 0;
         public static final int CLIENT_MOBILE = 1;
@@ -34,7 +34,7 @@ public final class SessionConfig {
         public static final long EXPIRETHRESHOLD = 300000l; // 5min
     }
 
-    public static class ForgetPassword {
+    public static class ForgetPasswordConfig {
         public static final String PREFIX = "forgetPassword-";
         public static final int AUTHCODELENGTH = 6;
         public static final long RESENDTHRESHOLD = 60000l; // 1min
@@ -67,12 +67,11 @@ public final class SessionConfig {
         public long timeStamp;
     }
 
-    public static class ForgetPasswordObj implements Serializable {
+    public static class ForgetPasswordConfigObj implements Serializable {
         private static final long serialVersionUID = -9146948343673617643L;
 
         public String authCode;
         public long timeStamp;
-
     }
 
 }
