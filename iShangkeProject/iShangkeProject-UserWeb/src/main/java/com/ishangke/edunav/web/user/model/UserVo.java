@@ -48,6 +48,10 @@ public class UserVo {
     private Calendar lastLoginTimeEnd;
     private Calendar birthdayStart;
     private Calendar birthdayEnd;
+    private Integer careerId;
+    private Integer schoolId;
+    private Set<Integer> careerIdSet;
+    private Set<Integer> schoolIdSet;
     public Integer getId() {
         return id;
     }
@@ -209,6 +213,30 @@ public class UserVo {
     }
     public void setBirthdayEnd(Calendar birthdayEnd) {
         this.birthdayEnd = birthdayEnd;
+    }
+    public Integer getCareerId() {
+        return careerId;
+    }
+    public void setCareerId(Integer careerId) {
+        this.careerId = careerId;
+    }
+    public Integer getSchoolId() {
+        return schoolId;
+    }
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
+    }
+    public Set<Integer> getCareerIdSet() {
+        return careerIdSet;
+    }
+    public void setCareerIdSet(Set<Integer> careerIdSet) {
+        this.careerIdSet = careerIdSet;
+    }
+    public Set<Integer> getSchoolIdSet() {
+        return schoolIdSet;
+    }
+    public void setSchoolIdSet(Set<Integer> schoolIdSet) {
+        this.schoolIdSet = schoolIdSet;
     }
     
 }

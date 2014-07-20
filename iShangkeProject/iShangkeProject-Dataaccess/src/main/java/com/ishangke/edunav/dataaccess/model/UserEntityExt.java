@@ -15,6 +15,24 @@ public class UserEntityExt extends UserEntity {
     private Calendar lastLoginTimeEnd;
     private Calendar birthdayStart;
     private Calendar birthdayEnd;
+    private Set<Integer> careerIdSet;
+    private Set<Integer> schoolIdSet;
+
+    public Set<Integer> getCareerIdSet() {
+        return careerIdSet;
+    }
+
+    public void setCareerIdSet(Set<Integer> careerIdSet) {
+        this.careerIdSet = careerIdSet;
+    }
+
+    public Set<Integer> getSchoolIdSet() {
+        return schoolIdSet;
+    }
+
+    public void setSchoolIdSet(Set<Integer> schoolIdSet) {
+        this.schoolIdSet = schoolIdSet;
+    }
 
     public Set<Integer> getIdSet() {
         return idSet;
