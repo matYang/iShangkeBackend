@@ -56,7 +56,6 @@ public class OrderManagerImpl implements OrderManager {
             throw new ManagerException("Order creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            orderEntity.setId(result);
             return OrderConverter.toBo(orderEntity);
         } else {
             throw new ManagerException("Order creation failed for user: " + userEntity.getId());

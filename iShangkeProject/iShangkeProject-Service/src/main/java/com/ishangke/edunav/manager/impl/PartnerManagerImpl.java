@@ -115,7 +115,6 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            partnerEntity.setId(result);
             return PartnerConverter.toBo(partnerEntity);
         } else {
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId());

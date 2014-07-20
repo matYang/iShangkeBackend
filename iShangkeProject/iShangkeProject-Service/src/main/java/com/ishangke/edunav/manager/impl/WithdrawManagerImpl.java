@@ -45,7 +45,6 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            withdrawEntity.setId(result);
             return WithdrawConverter.toBo(withdrawEntity);
         } else {
             throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId());
