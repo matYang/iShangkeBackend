@@ -118,9 +118,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -129,7 +126,7 @@
     select count(ID) from WITHDRAW where DELETED = 0
   </select>
   <!-- listAll -->
-   <select id="listAll" resultMap="WithdrawExtMap">
+  <select id="listAll" resultMap="WithdrawExtMap">
     SELECT
     <include refid="Withdraw_Base_Column_List" />
     from WITHDRAW where WITHDRAW.DELETED = 0
@@ -230,7 +227,7 @@
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-        <include refid="Withdraw_Base_Column_List"></include>
+    <include refid="Withdraw_Base_Column_List"></include>
     from WITHDRAW WITHDRAW
     where WITHDRAW.DELETED = 0
     <if test="entity != null">

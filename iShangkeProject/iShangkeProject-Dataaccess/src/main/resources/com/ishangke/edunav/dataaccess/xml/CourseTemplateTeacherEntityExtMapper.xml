@@ -75,9 +75,6 @@
         CREATE_TIME =
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -87,7 +84,7 @@
     DELETED = 0
   </select>
   <!-- listAll -->
-   <select id="listAll" resultMap="CourseTemplateTeacherExtMap">
+  <select id="listAll" resultMap="CourseTemplateTeacherExtMap">
     SELECT
     <include refid="CourseTemplateTeacher_Base_Column_List" />
     from COURSE_TEMPLATE_TEACHER where COURSE_TEMPLATE_TEACHER.DELETED = 0

@@ -6,7 +6,8 @@
     <result column="CREDIT_CREDIT" property="credit" jdbcType="DOUBLE" />
     <result column="CREDIT_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="CREDIT_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="CREDIT_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="CREDIT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CREDIT_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -62,7 +63,8 @@
         #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
-    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER"> SELECT LAST_INSERT_ID() </selectKey> -->
+    <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER"> SELECT LAST_INSERT_ID() 
+      </selectKey> -->
   </insert>
   <!-- delete -->
   <update id="deleteById" parameterType="java.lang.Integer">
@@ -88,9 +90,6 @@
       <if test="enabled != null">
         ENABLED = #{record.enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{record.deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -104,7 +103,7 @@
   <select id="getCount" resultType="int">
     select count(ID) from CREDIT where DELETED = 0
   </select>
-  
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CreditExtMap">
     SELECT

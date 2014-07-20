@@ -74,9 +74,6 @@
         LAST_MODIFY_TIME =
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -85,7 +82,7 @@
     select count(ID) from USER_GROUP where DELETED = 0
   </select>
   <!-- listAll -->
-   <select id="listAll" resultMap="UserGroupExtMap">
+  <select id="listAll" resultMap="UserGroupExtMap">
     SELECT
     <include refid="UserGroup_Base_Column_List" />
     from USER_GROUP where USER_GROUP.DELETED = 0

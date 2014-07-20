@@ -222,9 +222,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
       <if test="gender != null">
         GENDER = #{gender,jdbcType=INTEGER},
       </if>
@@ -249,7 +246,7 @@
     select count(ID) from USERS where DELETED = 0
   </select>
   <!-- listAll -->
-   <select id="listAll" resultMap="UserExtMap">
+  <select id="listAll" resultMap="UserExtMap">
     SELECT
     <include refid="User_Base_Column_List" />
     from USERS where USERS.DELETED = 0

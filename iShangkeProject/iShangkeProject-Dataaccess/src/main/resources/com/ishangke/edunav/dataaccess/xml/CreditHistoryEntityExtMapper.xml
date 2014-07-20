@@ -86,9 +86,6 @@
         CREATE_TIME =
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -96,14 +93,14 @@
   <select id="getCount" resultType="int">
     select count(ID) from CREDIT_HISTORY where DELETED = 0
   </select>
- 
+
   <!-- listAll -->
-   <select id="listAll" resultMap="CreditHistoryExtMap">
+  <select id="listAll" resultMap="CreditHistoryExtMap">
     SELECT
     <include refid="CreditHistory_Base_Column_List" />
     from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0
   </select>
-   <!-- list -->
+  <!-- list -->
   <select id="list" parameterType="map" resultMap="CreditHistoryExtMap">
     SELECT
     <include refid="CreditHistory_Base_Column_List" />

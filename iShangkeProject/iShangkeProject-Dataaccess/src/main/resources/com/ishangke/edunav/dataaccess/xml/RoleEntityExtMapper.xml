@@ -68,6 +68,7 @@
     where ID =
     #{id,jdbcType=INTEGER}
   </update>
+  <!-- update -->
   <update id="update" parameterType="RoleEntityExt">
     update ROLES
     <set>
@@ -85,9 +86,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -96,7 +94,7 @@
     select count(ID) from ROLES where DELETED = 0
   </select>
   <!-- listAll -->
-   <select id="listAll" resultMap="RoleExtMap">
+  <select id="listAll" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
     from ROLES where ROLES.DELETED = 0

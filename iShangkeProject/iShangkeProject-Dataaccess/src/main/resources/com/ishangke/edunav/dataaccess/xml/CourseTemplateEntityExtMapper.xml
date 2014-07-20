@@ -746,9 +746,6 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
-      </if>
       <if test="courseHourNum != null">
         COURSE_HOUR_NUM = #{courseHourNum,jdbcType=INTEGER},
       </if>
@@ -970,8 +967,8 @@
     where COURSE_TEMPLATE.DELETED = 0 AND COURSE_TEMPLATE.ID =
     #{id}
   </select>
-<!-- listAll -->
-   <select id="listAll" resultMap="CourseTemplateEntityExtMap">
+  <!-- listAll -->
+  <select id="listAll" resultMap="CourseTemplateEntityExtMap">
     SELECT
     <include refid="CourseTemplate_Base_Column_List" />
     from COURSE_TEMPLATE where COURSE_TEMPLATE.DELETED = 0
@@ -1204,7 +1201,7 @@
           <![CDATA[AND COURSE_TEMPLATE.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.cashbackDate != null">
         AND COURSE_TEMPLATE.CASHBACK_DATE =
         #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -1586,7 +1583,7 @@
           <![CDATA[AND COURSE_TEMPLATE.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      
+
       <if test="entity.cashbackDate != null">
         AND COURSE_TEMPLATE.CASHBACK_DATE =
         #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -1652,10 +1649,11 @@
 
       <if test="entity.bookingTotal != null">
         AND COURSE_TEMPLATE.BOOKING_TOTAL = #{entity.bookingTotal,jdbcType=INTEGER}
-      <if test="entity.createTime != null">
-        AND COURSE_TEMPLATE.CREATE_TIME =
-        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if></if>
+        <if test="entity.createTime != null">
+          AND COURSE_TEMPLATE.CREATE_TIME =
+          #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        </if>
+      </if>
       <if test="entity.bookingTotal == null">
         <if test="entity.bookingTotalStart != null">
           <![CDATA[AND COURSE_TEMPLATE.BOOKING_TOTAL >= #{entity.bookingTotalStart,jdbcType=INTEGER}]]>
@@ -1685,7 +1683,7 @@
         </if>
       </if>
 
-      
+
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
           <![CDATA[AND COURSE_TEMPLATE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
