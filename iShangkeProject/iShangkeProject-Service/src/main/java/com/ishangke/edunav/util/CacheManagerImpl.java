@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.impl;
+package com.ishangke.edunav.util;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.util.CacheManager;
+import com.ishangke.edunav.manager.CacheManager;
 
 @Component
 public class CacheManagerImpl implements CacheManager {

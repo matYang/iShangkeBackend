@@ -14,7 +14,7 @@
   <!-- Imports dataaccess spring config -->
   <import resource="classpath*:applicationContext-dataaccess.xml" />
   <!-- Scans all manager class -->
-  <context:component-scan base-package="com.ishangke.edunav.manager, com.ishangke.edunav.service, com.ishangke.edunav.util.CacheManager" />
+  <context:component-scan base-package="com.ishangke.edunav.manager, com.ishangke.edunav.service, com.ishangke.edunav.util" />
   <bean id="manager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
   </bean>

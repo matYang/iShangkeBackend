@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
 import com.ishangke.edunav.commoncontract.model.RoleBo;
+import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.RoleManager;
 import com.ishangke.edunav.manager.common.ServiceConstants;
-import com.ishangke.edunav.util.CacheManager;
 
 @Component
 public class ApplicationServer {

@@ -1,4 +1,4 @@
-package com.ishangke.edunav.util;
+package com.ishangke.edunav.manager;
 
 import java.io.Serializable;
 import java.util.List;

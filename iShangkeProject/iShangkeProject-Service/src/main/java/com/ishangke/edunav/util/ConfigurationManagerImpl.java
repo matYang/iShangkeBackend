@@ -1,9 +1,9 @@
-package com.ishangke.edunav.manager.impl;
+package com.ishangke.edunav.util;
 
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.ConfigurationBo;
-import com.ishangke.edunav.util.ConfigurationManager;
+import com.ishangke.edunav.manager.ConfigurationManager;
 
 public class ConfigurationManagerImpl implements ConfigurationManager {
 

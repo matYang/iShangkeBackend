@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.impl;
+package com.ishangke.edunav.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.manager.AuthManager;
+import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.common.DateUtility;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfigObj;
@@ -27,7 +28,6 @@ import com.ishangke.edunav.manager.common.SessionConfig.CellVerificationConfigOb
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfigObj;
 import com.ishangke.edunav.manager.exception.ManagerException;
-import com.ishangke.edunav.util.CacheManager;
 
 @Component
 public class AuthManagerImpl implements AuthManager {
