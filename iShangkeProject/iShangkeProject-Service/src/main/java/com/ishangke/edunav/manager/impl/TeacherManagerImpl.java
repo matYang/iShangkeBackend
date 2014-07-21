@@ -129,4 +129,55 @@ public class TeacherManagerImpl implements TeacherManager {
         return convertedResults;
     }
 
+    // @Override
+    public List<TeacherBo> listByCourseId(int courseId) {
+        List<TeacherEntityExt> teacherList = null;
+        List<TeacherBo> resultList = null;
+
+        try {
+            teacherList = teacherMapper.listTeacherByCourseId(courseId);
+            for (TeacherEntityExt teacherPo : teacherList) {
+                resultList.add(TeacherConverter.toBo(teacherPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Teacher listByCourseId Failed");
+        }
+    }
+
+    // @Override
+    public List<TeacherBo> listByCourseTemplateId(int courseTemplateId) {
+        List<TeacherEntityExt> teacherList = null;
+        List<TeacherBo> resultList = null;
+
+        try {
+            teacherList = teacherMapper.listTeacherByCourseTempleteId(courseTemplateId);
+            for (TeacherEntityExt teacherPo : teacherList) {
+                resultList.add(TeacherConverter.toBo(teacherPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Teacher listByCourseTemplateId Failed");
+        }
+    }
+
+    // @Override
+    public List<TeacherBo> listByPartnerId(int partnerId) {
+        List<TeacherEntityExt> teacherList = null;
+        List<TeacherBo> resultList = null;
+
+        try {
+            teacherList = teacherMapper.listTeacherByPartnerId(partnerId);
+            for (TeacherEntityExt teacherPo : teacherList) {
+                resultList.add(TeacherConverter.toBo(teacherPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Teacher listByPartnerId Failed");
+        }
+    }
+
 }

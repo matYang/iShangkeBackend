@@ -11,6 +11,8 @@
 所有的失败均返回非4XX/5XX状态码
 ====================================================================================
 状态转移操作
+CourseVo/CourseTemplateVo/BookingVo多一个属性，支持下一步操作类型
+action:[{"name":#{name}},{"name":#{name}},...]
 course
     创建 POST /course
         返回: 
