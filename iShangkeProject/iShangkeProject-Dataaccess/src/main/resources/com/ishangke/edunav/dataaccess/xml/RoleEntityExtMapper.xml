@@ -252,12 +252,6 @@
   <select id="listRolesByUserId" parameterType="int" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
-    ,
-    <include refid="UserGroup_Base_Column_List" />
-    ,
-    <include refid="User_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
     JOIN USER_GROUP USER_GROUP
     JOIN
@@ -270,14 +264,7 @@
   <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="Role_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
-    ,
-    <include refid="UserGroup_Base_Column_List" />
-    ,
-    <include refid="User_Base_Column_List" />
+    SELECT *
     FROM ROLES ROLES JOIN GROUPS GROUPS
     JOIN USER_GROUP USER_GROUP
     JOIN
@@ -291,8 +278,6 @@
   <select id="listRolesByGroupId" parameterType="int" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
     ON ROLES.ID = GROUPS.ROLE_ID WHERE
     GROUPS.ID = #{groupId} AND
@@ -300,10 +285,7 @@
   </select>
   <select id="getCountByGroupId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="Role_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
+    SELECT *
     FROM ROLES ROLES JOIN GROUPS GROUPS
     ON ROLES.ID = GROUPS.ROLE_ID WHERE
     GROUPS.ID = #{groupId} AND

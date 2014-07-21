@@ -307,8 +307,6 @@
   <select id="listGroupsByUserId" parameterType="int" resultMap="GroupExtMap">
     SELECT
     <include refid="Group_Base_Column_List" />
-    ,
-    <include refid="UserGroup_Base_Column_List" />
     FROM GROUPS GROUPS
     JOIN USER_GROUP USER_GROUP
     JOIN USERS USERS
@@ -320,17 +318,15 @@
   <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="Group_Base_Column_List" />
-    ,
-    <include refid="UserGroup_Base_Column_List" />
+    SELECT *
     FROM GROUPS GROUPS
     JOIN USER_GROUP USER_GROUP
     JOIN USERS USERS
     ON GROUPS.ID = USER_GROUP.GROUP_ID
     WHERE
     USER_GROUP.USER_ID = #{userId}
-    AND GROUPS.DELETED = 0
+    AND
+    GROUPS.DELETED = 0
     ) AS total
   </select>
 </mapper>

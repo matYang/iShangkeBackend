@@ -34,6 +34,10 @@ public class UserConverter {
         userBo.setReference(vo.getReference());
         userBo.setSchool(vo.getSchool());
         userBo.setWechat(vo.getWechat());
+        userBo.setCareerId(vo.getCareerId());
+        userBo.setCareerIdSet(vo.getCareerIdSet());
+        userBo.setSchoolId(vo.getSchoolId());
+        userBo.setSchoolIdSet(vo.getSchoolIdSet());
         return userBo;
     }
 
@@ -66,6 +70,10 @@ public class UserConverter {
         userVo.setReference(bo.getReference());
         userVo.setSchool(bo.getSchool());
         userVo.setWechat(bo.getWechat());
+        userVo.setCareerId(bo.getCareerId());
+        userVo.setCareerIdSet(bo.getCareerIdSet());
+        userVo.setSchoolId(bo.getSchoolId());
+        userVo.setSchoolIdSet(bo.getSchoolIdSet());
         return userVo;
     }
 }

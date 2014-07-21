@@ -31,6 +31,10 @@ struct UserBo {
     25: i64 lastLoginTimeEnd
     26: i64 birthdayStart
     27: i64 birthdayEnd
+    28: i32 careerId
+    29: i32 schoolId
+    30: set<i32> careerIdSet
+    31: set<i32> schoolIdSet
 }
     
 /**

@@ -331,10 +331,6 @@
   <select id="listClassPhotoByCourseId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
     <include refid="ClassPhoto_Base_Column_List" />
-    ,
-    <include refid="Course_Base_Column_List" />
-    ,
-    <include refid="Course_Class_Photo_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO
     ON CLASS_PHOTO.ID =
@@ -347,12 +343,7 @@
   <!-- getCountByCourseId -->
   <select id="getCountByCourseId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="ClassPhoto_Base_Column_List" />
-    ,
-    <include refid="Course_Base_Column_List" />
-    ,
-    <include refid="Course_Class_Photo_Base_Column_List" />
+    SELECT *
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO
     ON CLASS_PHOTO.ID =
@@ -367,10 +358,6 @@
   <select id="listClassPhotoByCourseTempleteId" parameterType="int" resultMap="ClassPhotoExtMap">
     SELECT
     <include refid="ClassPhoto_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Class_Photo_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_TEMPLATE_CLASS_PHOTO
     COURSE_TEMPLATE_CLASS_PHOTO
@@ -389,12 +376,7 @@
   <!-- getCountByCourseTemplateId -->
   <select id="getCountByCourseTemplateId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="ClassPhoto_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Class_Photo_Base_Column_List" />
+    SELECT *
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_TEMPLATE_CLASS_PHOTO
     COURSE_TEMPLATE_CLASS_PHOTO

@@ -378,10 +378,7 @@
   <!-- getCountByCourseId -->
   <select id="getCountByCourseId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM (
-    SELECT
-    <include refid="Teacher_Base_Column_List" />
-    ,
-    <include refid="Course_Teacher_Base_Column_List" />
+    SELECT *
     from TEACHER TEACHER JOIN COURSE_TEACHER COURSE_TEACHER
     ON
     COURSE_TEACHER.TEACHER_ID = TEACHER.ID
@@ -394,10 +391,6 @@
   <select id="listTeacherByCourseId" parameterType="int" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List" />
-    ,
-    <include refid="Course_Base_Column_List" />
-    ,
-    <include refid="Course_Teacher_Base_Column_List" />
     FROM TEACHER TEACHER
     JOIN COURSE_TEACHER COURSE_TEACHER
     ON TEACHER.ID =
@@ -412,12 +405,7 @@
   <!-- getCountByCourseTemplateId -->
   <select id="getCountByCourseTemplateId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM (
-    SELECT
-    <include refid="Teacher_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Teacher_Base_Column_List" />
+    SELECT *
     FROM TEACHER TEACHER
     JOIN COURSE_TEMPLATE_TEACHER
     COURSE_TEMPLATE_TEACHER
@@ -436,10 +424,6 @@
   <select id="listTeacherByCourseTempleteId" parameterType="int" resultMap="TeacherExtMap">
     SELECT
     <include refid="Teacher_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Base_Column_List" />
-    ,
-    <include refid="COURSE_TEMPLATE_Teacher_Base_Column_List" />
     FROM TEACHER TEACHER
     JOIN COURSE_TEMPLATE_TEACHER
     COURSE_TEMPLATE_TEACHER

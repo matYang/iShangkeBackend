@@ -155,8 +155,6 @@
   <select id="listPermissionByRoleId" parameterType="int" resultMap="PermissionExtMap">
     SELECT
     <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
     FROM PERMISSIONS PERMISSIONS
     JOIN ROLE_PERMISSION ROLE_PERMISSION ON
     PERMISSIONS.ID =
@@ -168,10 +166,7 @@
   </select>
   <select id="getCountByRoleId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
+    SELECT *
     FROM PERMISSIONS PERMISSIONS
     JOIN ROLE_PERMISSION ROLE_PERMISSION ON
     PERMISSIONS.ID =
@@ -185,12 +180,6 @@
   <select id="listPermissionsByUserId" parameterType="int" resultMap="PermissionExtMap">
     SELECT
     <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
-    ,
-    <include refid="UserGroup_Base_Column_List" />
     FROM PERMISSIONS PERMISSIONS
     JOIN ROLE_PERMISSION ROLE_PERMISSION
     JOIN
@@ -208,14 +197,7 @@
   </select>
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
-    ,
-    <include refid="UserGroup_Base_Column_List" />
+    SELECT *
     FROM PERMISSIONS PERMISSIONS
     JOIN ROLE_PERMISSION ROLE_PERMISSION
     JOIN
@@ -235,10 +217,6 @@
   <select id="listPermissionsByGroupId" parameterType="int" resultMap="PermissionExtMap">
     SELECT
     <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
     FROM PERMISSIONS PERMISSIONS
     JOIN ROLE_PERMISSION ROLE_PERMISSION
     JOIN
@@ -253,12 +231,7 @@
   </select>
   <select id="getCountByGroupId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT
-    <include refid="Permission_Base_Column_List" />
-    ,
-    <include refid="RolePermission_Base_Column_List" />
-    ,
-    <include refid="Group_Base_Column_List" />
+    SELECT *
     FROM PERMISSIONS PERMISSIONS
     JOIN ROLE_PERMISSION ROLE_PERMISSION
     JOIN
