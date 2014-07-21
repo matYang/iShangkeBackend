@@ -264,7 +264,8 @@
   <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT *
+    SELECT
+    <include refid="Role_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
     JOIN USER_GROUP USER_GROUP
     JOIN
@@ -285,7 +286,8 @@
   </select>
   <select id="getCountByGroupId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT *
+    SELECT
+    <include refid="Role_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
     ON ROLES.ID = GROUPS.ROLE_ID WHERE
     GROUPS.ID = #{groupId} AND
