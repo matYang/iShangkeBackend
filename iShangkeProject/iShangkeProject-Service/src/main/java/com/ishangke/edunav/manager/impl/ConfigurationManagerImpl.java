@@ -3,7 +3,7 @@ package com.ishangke.edunav.manager.impl;
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.ConfigurationBo;
-import com.ishangke.edunav.manager.ConfigurationManager;
+import com.ishangke.edunav.util.ConfigurationManager;
 
 public class ConfigurationManagerImpl implements ConfigurationManager {
 

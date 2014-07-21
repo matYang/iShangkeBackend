@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.manager.CacheManager;
+import com.ishangke.edunav.util.CacheManager;
 
 @Component
 public class CacheManagerImpl implements CacheManager {

@@ -15,11 +15,11 @@ import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
-import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.common.ServiceConstants;
 import com.ishangke.edunav.manager.converter.PermissionConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.util.CacheManager;
 
 @Component
 public class PermissionManagerImpl implements PermissionManager {

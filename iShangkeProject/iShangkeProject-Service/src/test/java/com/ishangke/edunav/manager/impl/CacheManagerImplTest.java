@@ -16,7 +16,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
-import com.ishangke.edunav.manager.CacheManager;
+import com.ishangke.edunav.util.CacheManager;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CacheManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
