@@ -133,6 +133,7 @@ public class AuthManagerImpl implements AuthManager {
      */
     @Override
     public boolean validateAuthSession(int identifier, final String authCode) {
+        final long curTime = DateUtility.getCurTime();
         try {
             String key = AuthConfig.PREFIX + identifier;
 
@@ -152,14 +153,14 @@ public class AuthManagerImpl implements AuthManager {
                     // loop中涉及到删除，故从末尾开始
                     for (int i = list.size() - 1; i >= 0; i--) {
                         AuthConfigObj curObj = list.get(i);
-                        if ((DateUtility.getCurTime() - curObj.timeStamp) > AuthConfig.EXPIRETHRESHOLD) {
+                        if ((curTime - curObj.timeStamp) > AuthConfig.EXPIRETHRESHOLD) {
                             // 如果已经超过了过期时间，则自动从列表中删除
                             list.remove(i);
                         } else {
                             if (curObj.authCode.equals(authCode)) {
-                                if ((DateUtility.getCurTime() - curObj.timeStamp) > AuthConfig.UPDATETHRESHOLD) {
+                                if ((curTime - curObj.timeStamp) > AuthConfig.UPDATETHRESHOLD) {
                                     // 如果超过了更新时间却依旧在列表中，则更新Session的更新时间
-                                    list.get(i).timeStamp = DateUtility.getCurTime();
+                                    list.get(i).timeStamp = curTime;
                                 }
                             }
                         }
@@ -173,14 +174,19 @@ public class AuthManagerImpl implements AuthManager {
             // 初始值设为null，mutator只会修改原来已经存在的内容并返回最新值
             @SuppressWarnings("unchecked")
             List<AuthConfigObj> casResults = (List<AuthConfigObj>) mutator.cas(key, null, 0, mutation);
-
+            
+            /**
+             * 当键值对不存在并且没有标明初始值的时候，返回null
+             */
+            if (casResults == null) {
+                return false;
+            }
             boolean found = false;
             for (AuthConfigObj singleResult : casResults) {
                 if (singleResult.authCode.equals(authCode)) {
                     found = true;
                 }
             }
-
             return found;
         } catch (ManagerException e) {
             LOGGER.debug("ValidateAuthSession", e);
@@ -199,6 +205,7 @@ public class AuthManagerImpl implements AuthManager {
         try {
             final String key = AuthConfig.PREFIX + identifier;
             final String authCode = RandomStringUtils.randomAlphanumeric(AuthConfig.AUTHCODELENGTH);
+            final long curTime = DateUtility.getCurTime();
 
             // 新建用以完成CAS操作的mutator
             CASMutation<Object> mutation = new CASMutation<Object>() {
@@ -208,7 +215,7 @@ public class AuthManagerImpl implements AuthManager {
                     List<AuthConfigObj> temp = (List<AuthConfigObj>) (current);
                     // 使用ArrayList使得access time变为O(1)，不使用LinkedList
                     List<AuthConfigObj> list = new ArrayList<AuthConfigObj>(temp);
-
+                    
                     // Memcached键值对中，值最大容量为1MB，因此必须限制用户Session数量
                     // 一旦超过AUTOCLEAR上限，意味着出现了不该出现的问题导致session数量超标达到预设临界值
                     // 为了防止数据损坏，采取极端措施，按照timestamp逐一逐出Session缓存,留下最近使用的十个
@@ -234,7 +241,7 @@ public class AuthManagerImpl implements AuthManager {
                     // stamp最小的session)
                     // 注意，这里被逐出的Session记录可能已过期或者没有过期
                     if (list.size() > AuthConfig.MAXRECORDS) {
-                        long trackingTimeStamp = DateUtility.getCurTime();
+                        long trackingTimeStamp = curTime;
                         int trackingIndex = 0;
                         for (int i = list.size() - 1; i >= 0; i--) {
                             if (list.get(i).timeStamp < trackingTimeStamp) {
@@ -248,7 +255,7 @@ public class AuthManagerImpl implements AuthManager {
                     // 插入最新的Session记录
                     AuthConfigObj newObj = new AuthConfigObj();
                     newObj.authCode = authCode;
-                    newObj.timeStamp = DateUtility.getCurTime();
+                    newObj.timeStamp = curTime;
                     newObj.client = AuthConfig.CLIENT_WEB;
                     list.add(newObj);
 
@@ -261,7 +268,7 @@ public class AuthManagerImpl implements AuthManager {
             // 创建新建Session情况提供给CAS用以Session记录尚未存在的情况
             AuthConfigObj initObj = new AuthConfigObj();
             initObj.authCode = authCode;
-            initObj.timeStamp = DateUtility.getCurTime();
+            initObj.timeStamp = curTime;
             initObj.client = AuthConfig.CLIENT_WEB;
             List<AuthConfigObj> initialValue = Collections.singletonList(initObj);
 
@@ -297,7 +304,7 @@ public class AuthManagerImpl implements AuthManager {
 
                     // 依旧假设authcode的唯一性，则一个authCode将会对应一个session，逐出该session
                     // 保证当前session被逐出缓存，逐出所有authcode相等的情况，从尾部开始
-                    for (int i = list.size() - 1; i >= 0; i++) {
+                    for (int i = list.size() - 1; i >= 0; i--) {
                         if (list.get(i).equals(authCode)) {
                             list.remove(i);
                         }
@@ -386,7 +393,7 @@ public class AuthManagerImpl implements AuthManager {
             cvRecord.timeStamp = DateUtility.getCurTime();
 
             // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间缓存不过期的不稳定问题
-            cache.set(key, 0, cvRecord);
+            cache.set(key, 0, cvRecord).get();
             return cvRecord.authCode;
         } catch (ManagerException e) {
             LOGGER.debug("OpenCellVerificationSession", e);
@@ -414,7 +421,7 @@ public class AuthManagerImpl implements AuthManager {
      * 验证忘记密码验证码
      */
     @Override
-    public boolean validateForgetPasswordSession(String identifier, String authCode) {
+    public boolean validateForgetPasswordSession(int identifier, String authCode) {
         try {
             String key = ForgetPasswordConfig.PREFIX + identifier;
             ForgetPasswordConfigObj fpRecord = (ForgetPasswordConfigObj) cache.get(key);
@@ -445,7 +452,7 @@ public class AuthManagerImpl implements AuthManager {
      * 生成并记录忘记密码验证码
      */
     @Override
-    public String openForgetPasswordSession(String identifier) {
+    public String openForgetPasswordSession(int identifier) {
         try {
             String key = ForgetPasswordConfig.PREFIX + identifier;
             ForgetPasswordConfigObj fpRecord = (ForgetPasswordConfigObj) cache.get(key);
@@ -460,7 +467,7 @@ public class AuthManagerImpl implements AuthManager {
             fpRecord.timeStamp = DateUtility.getCurTime();
 
             // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间不稳定的问题
-            cache.set(key, 0, fpRecord);
+            cache.set(key, 0, fpRecord).get();
             return fpRecord.authCode;
         } catch (ManagerException e) {
             LOGGER.debug("OpenForgetPasswordSession", e);
@@ -472,7 +479,7 @@ public class AuthManagerImpl implements AuthManager {
     }
 
     @Override
-    public Future<Boolean> closeForgetPasswordSession(String identifier) {
+    public Future<Boolean> closeForgetPasswordSession(int  identifier) {
         try {
             return cache.del(ForgetPasswordConfig.PREFIX + identifier);
         } catch (ManagerException e) {

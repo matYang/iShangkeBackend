@@ -20,6 +20,8 @@
 	</bean>
     <bean id="cache" class="com.ishangke.edunav.manager.impl.CacheManagerImpl">
     </bean>
+    <bean id="auth" class="com.ishangke.edunav.manager.impl.AuthManagerImpl">
+    </bean>
 	<tx:advice id="managerAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="java.lang.Exception" />

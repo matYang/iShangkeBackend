@@ -36,10 +36,10 @@ public interface AuthManager {
     /**
      * used for forget password
      */
-    public boolean validateForgetPasswordSession(final String identifier, final String authCode);
+    public boolean validateForgetPasswordSession(final int identifier, final String authCode);
 
-    public String openForgetPasswordSession(final String identifier);
+    public String openForgetPasswordSession(final int  identifier);
 
-    public Future<Boolean> closeForgetPasswordSession(final String identifier);
+    public Future<Boolean> closeForgetPasswordSession(final int identifier);
 
 }
