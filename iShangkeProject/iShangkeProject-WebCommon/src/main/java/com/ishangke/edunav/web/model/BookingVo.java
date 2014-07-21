@@ -1,7 +1,10 @@
 package com.ishangke.edunav.web.model;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
+
+import com.ishangke.edunav.web.common.ActionVo;
 
 public class BookingVo {
     private Integer id;
@@ -57,6 +60,14 @@ public class BookingVo {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private List<ActionVo> actionsList;
+    
+    public List<ActionVo> getActionsList() {
+        return actionsList;
+    }
+    public void setActionsList(List<ActionVo> actionsList) {
+        this.actionsList = actionsList;
+    }
     public Integer getId() {
         return id;
     }

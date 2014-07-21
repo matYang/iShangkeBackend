@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import com.ishangke.edunav.web.common.ActionVo;
+
 public class CourseVo {
     private Integer id;
 
@@ -198,6 +200,14 @@ public class CourseVo {
     private String locationName;
     private String circleValue;
     private String circleName;
+    private List<ActionVo> actionsList;
+    
+    public List<ActionVo> getActionsList() {
+        return actionsList;
+    }
+    public void setActionsList(List<ActionVo> actionsList) {
+        this.actionsList = actionsList;
+    }
     public Integer getId() {
         return id;
     }
