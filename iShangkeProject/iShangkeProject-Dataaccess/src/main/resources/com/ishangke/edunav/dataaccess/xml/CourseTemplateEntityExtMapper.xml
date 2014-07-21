@@ -327,9 +327,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
       <if test="courseHourNum != null">
         COURSE_HOUR_NUM,
       </if>
@@ -527,9 +524,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="courseHourNum != null">
         #{courseHourNum,jdbcType=INTEGER},

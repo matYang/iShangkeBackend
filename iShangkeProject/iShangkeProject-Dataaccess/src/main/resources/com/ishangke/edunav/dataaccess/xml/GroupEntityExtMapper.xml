@@ -7,7 +7,8 @@
     <result column="GROUPS_ROLEID" property="roleId" jdbcType="INTEGER" />
     <result column="GROUPS_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="GROUPS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="GROUPS_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="GROUPS_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="GROUPS_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="GROUPS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
@@ -54,9 +55,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
       <if test="partnerId != null">
         PARTNER_ID,
       </if>
@@ -76,9 +74,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="partnerId != null">
         #{partnerId,jdbcType=INTEGER},
@@ -156,7 +151,8 @@
       <if test="entity.roleId == null or entity.roleId == 0">
         <if test="entity.roleIdSet != null and entity.roleIdSet.size() > 0">
           AND GROUPS.ROLE_ID IN
-          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -168,7 +164,8 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           GROUPS.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -248,7 +245,8 @@
       <if test="entity.roleId == null or entity.roleId == 0">
         <if test="entity.roleIdSet != null and entity.roleIdSet.size() > 0">
           AND GROUPS.ROLE_ID IN
-          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.roleIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -260,7 +258,8 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           GROUPS.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>

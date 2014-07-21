@@ -77,9 +77,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -114,9 +111,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -266,7 +260,8 @@
       </if>
 
       <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
-        AND COURSE_COMMENT.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+        AND COURSE_COMMENT.COURSE_TEMPLATE_ID =
+        #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
