@@ -37,7 +37,7 @@ public class AuthManagerImplTest extends BaseTest {
     @Autowired
     private CacheManager cache;
 
-    // @Test
+    @Test
     public void testAccessControl() throws InterruptedException, ExecutionException {
         boolean wait = false;
         final String identifier = "testAccessControl-18662241356";
@@ -101,7 +101,7 @@ public class AuthManagerImplTest extends BaseTest {
         cache.getClient().delete(ACConfig.PREFIX + identifier2).get();
     }
 
-    // @Test
+    @Test
     public void testAuthentication() throws InterruptedException, ExecutionException {
         cache.getClient().flush();
 
@@ -126,7 +126,7 @@ public class AuthManagerImplTest extends BaseTest {
         authCode1 = auth.openAuthSession(identifier);
 
         long startTime1 = DateUtility.getCurTime();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1000; i++) {
             auth.openAuthSession(identifier);
         }
         long diff1 = DateUtility.getCurTime() - startTime1;
@@ -139,28 +139,28 @@ public class AuthManagerImplTest extends BaseTest {
         authCode2 = auth.openAuthSession(identifier2);
 
         long startTime2 = DateUtility.getCurTime();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1000; i++) {
             auth.validateAuthSession(identifier, authCode1);
         }
         long diff2 = DateUtility.getCurTime() - startTime2;
 
         long startTime3 = DateUtility.getCurTime();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1000; i++) {
             auth.closeAuthSession(identifier, authCode1);
         }
         long diff3 = DateUtility.getCurTime() - startTime3;
 
         System.out
-                .println("==============>10000 basic cas login costs: " + diff1 / 1000 + "sec " + diff1 % 1000 + "ms");
-        System.out.println("==============>10000 basic cas validation costs: " + diff2 / 1000 + "sec " + diff2 % 1000
+                .println("==============>1000 basic cas login costs: " + diff1 / 1000 + "sec " + diff1 % 1000 + "ms");
+        System.out.println("==============>1000 basic cas validation costs: " + diff2 / 1000 + "sec " + diff2 % 1000
                 + "ms");
-        System.out.println("==============>10000 basic cas logout costs: " + diff3 / 1000 + "sec " + diff3 % 1000
+        System.out.println("==============>1000 basic cas logout costs: " + diff3 / 1000 + "sec " + diff3 % 1000
                 + "ms");
 
         Thread.sleep(5000);
     }
 
-    // @Test
+    @Test
     public void testCellVerification() throws InterruptedException, ExecutionException {
         boolean wait = false;
         cache.getClient().flush();
@@ -202,7 +202,7 @@ public class AuthManagerImplTest extends BaseTest {
         }
     }
 
-    // @Test
+    @Test
     public void testForgetPassword() throws InterruptedException, ExecutionException {
         boolean wait = false;
         cache.getClient().flush();
@@ -261,6 +261,9 @@ public class AuthManagerImplTest extends BaseTest {
      */
     @Test
     public void testConcurrentParallelCAS() throws InterruptedException {
+        failureCount = 0;
+        cacheEvictCount = 0;
+        cache.getClient().flush();
         final ArrayList<Integer> idList = new ArrayList<Integer>();
         for (int i = 0; i < 20; i++) {
             idList.add((i + 1) * 10);
@@ -340,6 +343,100 @@ public class AuthManagerImplTest extends BaseTest {
         long finishTime = DateUtility.getCurTime();
         long diff = finishTime - startTime;
         System.out.println("Test Concurrent Parallel CAS Test finished, time cost: " + diff / 1000 + "sec " + diff
+                % 1000 + "ms, failure count: " + failureCount + " cache eviction count: " + cacheEvictCount);
+
+    }
+    
+    
+    /**
+     * simulating moderate concurrency competition level simulation level: 100
+     * distinct accounts, 1 active users per account, 20 interations per user,
+     * 30% login, 20% logout, 50% validate
+     */
+    @Test
+    public void testConcurrentUniqueCAS() throws InterruptedException {
+        failureCount = 0;
+        cacheEvictCount = 0;
+        cache.getClient().flush();
+        final ArrayList<Integer> idList = new ArrayList<Integer>();
+        for (int i = 0; i < 100; i++) {
+            idList.add((i + 1) * 10);
+        }
+        final ExecutorService exe = Executors.newCachedThreadPool();
+        final CountDownLatch userLatch = new CountDownLatch(100);
+        final AuthManager authManager = auth;
+        long startTime = DateUtility.getCurTime();
+        
+        //循环100个id
+        for (int i = 0; i < 100; i++) {
+            //对于每个id发起1条线程
+            for (int j = 0; j < 1; j++) {
+                //btw 设为final是的callable的inner class可以access
+                final Integer id = idList.get(i);
+                //推荐使用Java 8这样俺这里可以写一个lambda.......
+                exe.submit(new Callable<Boolean>() {
+                    @Override
+                    public Boolean call() throws Exception {
+                        try {
+                            //以运行纳秒数作为随机种子
+                            Random random = new Random(System.nanoTime());
+                            //存贮已经生成的验证码
+                            ArrayList<String> authCodeList = new ArrayList<String>();
+                            for (int k = 0; k < 20; k++) {
+                                //随机[0, 10)
+                                int opt = random.nextInt(10);
+                                int index = authCodeList.size() == 0 ? -1 : random.nextInt(authCodeList.size());
+                                
+                                //[0, 2]
+                                if (opt < 3) {
+                                    String newCode = authManager.openAuthSession(id);
+                                    authCodeList.add(newCode);
+                                }
+                                //[3, 4]
+                                else if (opt < 5) {
+                                    if (index >= 0) {
+                                        authManager.closeAuthSession(id, authCodeList.get(index));
+                                        authCodeList.remove(index);
+                                    }
+                                    else {
+                                        authManager.closeAuthSession(id, "default");
+                                    }
+                                }
+                                //[5, 9]
+                                else {
+                                    if (index >= 0) {
+                                        if (authManager.validateAuthSession(id, authCodeList.get(index))) {
+                                            //all good
+                                        }
+                                        //cache eviction took place
+                                        else {
+                                            authCodeList.remove(index);
+                                            cacheEvict();
+                                            //nothing else we can really do
+                                        }
+                                    }
+                                    else {
+                                        Assert.assertFalse(authManager.validateAuthSession(id, "default"));
+                                    }
+                                }
+                            }
+                            authManager.closeAllAuthSession(id);
+                            return true;
+                        } catch(Throwable t) {
+                            incrFailure();
+                            return false;
+                        } finally {
+                            userLatch.countDown();
+                        }
+                    }
+                });
+            }
+        }
+        
+        userLatch.await();
+        long finishTime = DateUtility.getCurTime();
+        long diff = finishTime - startTime;
+        System.out.println("Test Concurrent Unique CAS Test finished, time cost: " + diff / 1000 + "sec " + diff
                 % 1000 + "ms, failure count: " + failureCount + " cache eviction count: " + cacheEvictCount);
 
     }
