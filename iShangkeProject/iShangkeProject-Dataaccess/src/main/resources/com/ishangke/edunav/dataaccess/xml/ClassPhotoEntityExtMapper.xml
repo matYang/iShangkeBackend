@@ -343,7 +343,8 @@
   <!-- getCountByCourseId -->
   <select id="getCountByCourseId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT *
+    SELECT 
+    <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO
     ON CLASS_PHOTO.ID =
@@ -376,7 +377,8 @@
   <!-- getCountByCourseTemplateId -->
   <select id="getCountByCourseTemplateId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT *
+    SELECT 
+    <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_TEMPLATE_CLASS_PHOTO
     COURSE_TEMPLATE_CLASS_PHOTO

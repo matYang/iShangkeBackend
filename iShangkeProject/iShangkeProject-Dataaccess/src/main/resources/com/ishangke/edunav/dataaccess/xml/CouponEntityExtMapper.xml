@@ -300,6 +300,14 @@
       </if>
     </if>
   </select>
+   <!-- getCountByUserId -->
+  <select id="getCountByUserId" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM (
+    SELECT
+    <include refid="Coupon_Base_Column_List" />
+    from COUPON where COUPON.DELETED = 0 AND COUPON.User_ID =
+    #{userId}) AS total
+  </select>
   <!-- listCouponByUserId -->
   <select id="listCouponByUserId" parameterType="int" resultMap="CouponExtMap">
     SELECT

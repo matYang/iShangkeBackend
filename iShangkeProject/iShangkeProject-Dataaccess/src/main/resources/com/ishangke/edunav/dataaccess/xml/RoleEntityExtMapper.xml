@@ -261,9 +261,11 @@
     USER_GROUP.USER_ID = #{userId} AND
     ROLES.DELETED = 0
   </select>
+  <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT *
+    SELECT
+    <include refid="Role_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
     JOIN USER_GROUP USER_GROUP
     JOIN
@@ -274,7 +276,7 @@
     ROLES.DELETED = 0
     ) AS total
   </select>
-  <select id="listRoleByGroupId" parameterType="int" resultMap="RoleExtMap">
+  <select id="listRolesByGroupId" parameterType="int" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
@@ -284,7 +286,8 @@
   </select>
   <select id="getCountByGroupId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT *
+    SELECT
+    <include refid="Role_Base_Column_List" />
     FROM ROLES ROLES JOIN GROUPS GROUPS
     ON ROLES.ID = GROUPS.ROLE_ID WHERE
     GROUPS.ID = #{groupId} AND
@@ -294,6 +297,6 @@
   <select id="getById" parameterType="int" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
-    FROM ROLES ROLES WHERE ROLES.ID = {#id} AND ROLES.DELETED = 0
+    FROM ROLES ROLES WHERE ROLES.ID =  #{id} AND ROLES.DELETED = 0
   </select>
 </mapper>
