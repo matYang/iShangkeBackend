@@ -7,20 +7,25 @@ import java.util.concurrent.Future;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.manager.CacheManager;
 
-//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CacheManagerImplTest.class })
-//@RunWith(SpringJUnit4ClassRunner.class)
-////@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
-//@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
+@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CacheManagerImplTest.class })
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@Transactional
 public class CacheManagerImplTest extends BaseTest {
-
-    // @Autowired
-    // private CacheManager cache;
-
-    private CacheManager cache = new CacheManagerImpl();
+    
+    @Autowired
+    private CacheManager cache;
 
     @Test
     public void testSet() throws InterruptedException, ExecutionException {
@@ -83,6 +88,9 @@ public class CacheManagerImplTest extends BaseTest {
         for (String key : keyList) {
             Assert.assertTrue(cache.del(key).get());
         }
+        
+        setResult = cache.set("test-myKey", 1, "123");
+        Assert.assertTrue(setResult.get());
         Assert.assertTrue(cache.del("test-myKey").get());
     }
 
