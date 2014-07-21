@@ -285,4 +285,12 @@ public class ManagerErrorCode {
     public static final String WITHDRAW_DELETE_ERROR_KEY = "withdraw_delete_error";
     public static final int WITHDRAW_NOTFOUND_ERROR = 0x00180404;
     public static final String WITHDRAW_NOTFOUND_ERROR_KEY = "withdraw_notfound_error";
+
+    // career
+    public static final int CAREER_NOTFOUND_ERROR = 0x00190404;
+    public static final String CAREER_NOTFOUND_ERROR_KEY = "career_notfound_error";
+
+    // school
+    public static final int SCHOOL_NOTFOUND_ERROR = 0x001A0404;
+    public static final String SCHOOL_NOTFOUND_ERROR_KEY = "school_notfound_error";
 }

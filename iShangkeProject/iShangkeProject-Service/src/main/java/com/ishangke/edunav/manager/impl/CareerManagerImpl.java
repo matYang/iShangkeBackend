@@ -1,0 +1,49 @@
+package com.ishangke.edunav.manager.impl;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ishangke.edunav.commoncontract.model.CareerBo;
+import com.ishangke.edunav.commoncontract.model.PaginationBo;
+import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.mapper.CareerEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.CareerEntityExt;
+import com.ishangke.edunav.manager.CareerManager;
+import com.ishangke.edunav.manager.converter.CareerConverter;
+import com.ishangke.edunav.manager.converter.PaginationConverter;
+import com.ishangke.edunav.manager.exception.ManagerException;
+
+public class CareerManagerImpl implements CareerManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CareerManagerImpl.class);
+
+    @Autowired
+    private CareerEntityExtMapper careerEntityExtMapper;
+
+    @Override
+    public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo) {
+        // Check Null
+        if (careerBo == null) {
+            throw new ManagerException("CareerBo is null");
+        }
+
+        // Convert
+        CareerEntityExt careerEntity = CareerConverter.fromBo(careerBo);
+        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
+        List<CareerEntityExt> careerList = null;
+        List<CareerBo> resultList = null;
+
+        try {
+            careerList = careerEntityExtMapper.list(careerEntity, pageEntity);
+            for (CareerEntityExt careerPo : careerList) {
+                resultList.add(CareerConverter.toBo(careerPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("Career Query Failed");
+        }
+    }
+
+}
