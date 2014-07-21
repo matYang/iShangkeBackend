@@ -10,6 +10,7 @@ import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
@@ -137,6 +138,57 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             return resultList;
         } catch (Throwable t) {
             throw new ManagerException("ClassPhoto Query Failed");
+        }
+    }
+
+    // @override
+    public List<ClassPhotoBo> listByPartnerId(int partnerId) {
+        List<ClassPhotoEntityExt> classPhotoList = null;
+        List<ClassPhotoBo> resultList = null;
+
+        try {
+            // TODO 权限
+            classPhotoList = classPhotoEntityExtMapper.listClassPhotoByPartnerId(partnerId);
+            for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
+                resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("ClassPhoto listByPartnerId Failed");
+        }
+    }
+
+    // @override
+    public List<ClassPhotoBo> listByCourseId(int courseId) {
+        List<ClassPhotoEntityExt> classPhotoList = null;
+        List<ClassPhotoBo> resultList = null;
+
+        try {
+            // TODO 权限
+            classPhotoList = classPhotoEntityExtMapper.listClassPhotoByCourseId(courseId);
+            for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
+                resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("ClassPhoto listByCourseId Failed");
+        }
+    }
+
+    // @override
+    public List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId) {
+        List<ClassPhotoEntityExt> classPhotoList = null;
+        List<ClassPhotoBo> resultList = null;
+
+        try {
+            // TODO 权限
+            classPhotoList = classPhotoEntityExtMapper.listClassPhotoByCourseTempleteId(courseTemplateId);
+            for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
+                resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("ClassPhoto listByCourseTemplateId Failed");
         }
     }
 

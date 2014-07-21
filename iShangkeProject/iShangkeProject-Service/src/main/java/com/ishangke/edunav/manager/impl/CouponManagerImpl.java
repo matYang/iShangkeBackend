@@ -131,4 +131,21 @@ public class CouponManagerImpl implements CouponManager {
         }
     }
 
+    // @Override
+    public List<CouponBo> listCouponByUserId(int userId) {
+        List<CouponEntityExt> couponList = null;
+        List<CouponBo> resultList = null;
+
+        try {
+            // TODO 权限
+            couponList = couponEntityExtMapper.listCouponByUserId(userId);
+            for (CouponEntityExt couponPo : couponList) {
+                resultList.add(CouponConverter.toBo(couponPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("Coupon listByUserId Failed");
+        }
+    }
+
 }
