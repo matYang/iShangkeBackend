@@ -87,7 +87,7 @@ public class CouponManagerImpl implements CouponManager {
         List<CouponBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             couponList = couponEntityExtMapper.list(couponEntity, pageEntity);
             for (CouponEntityExt couponPo : couponList) {
                 resultList.add(CouponConverter.toBo(couponPo));
@@ -100,6 +100,8 @@ public class CouponManagerImpl implements CouponManager {
 
     @Override
     public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (couponHistoryBo == null) {
             throw new ManagerException("couponHistoryBo is null");
@@ -107,16 +109,18 @@ public class CouponManagerImpl implements CouponManager {
         if (userBo == null) {
             throw new ManagerException("userBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         CouponHistoryEntityExt couponHistoryEntity = CouponHistoryConverter.fromBo(couponHistoryBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<CouponHistoryEntityExt> couponHistoryList = null;
         List<CouponHistoryBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             couponHistoryList = couponHistoryEntityExtMapper.list(couponHistoryEntity, pageEntity);
             for (CouponHistoryEntityExt couponHistoryPo : couponHistoryList) {
                 resultList.add(CouponHistoryConverter.toBo(couponHistoryPo));

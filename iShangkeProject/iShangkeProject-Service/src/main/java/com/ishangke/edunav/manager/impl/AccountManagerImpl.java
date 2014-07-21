@@ -80,6 +80,8 @@ public class AccountManagerImpl implements AccountManager {
 
     @Override
     public List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check whether parameters are null
         if (userBo == null) {
             throw new ManagerException("UserBo is null");
@@ -87,13 +89,15 @@ public class AccountManagerImpl implements AccountManager {
         if (accountBo == null) {
             throw new ManagerException("AccountBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         List<AccountBo> resultList = null;
         List<AccountEntityExt> accountList = null;
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
 
         try {
             // TODO 权限问题
@@ -111,6 +115,8 @@ public class AccountManagerImpl implements AccountManager {
     @Override
     public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo,
             PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check whether parameters are null
         if (userBo == null) {
             throw new ManagerException("UserBo is null");
@@ -118,13 +124,15 @@ public class AccountManagerImpl implements AccountManager {
         if (accountHistoryBo == null) {
             throw new ManagerException("AccountHistoryBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         AccountHistoryEntityExt accountHistoryEntity = AccountHistoryConverter.fromBo(accountHistoryBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
 
-        // TODO权限
+        // TODO 权限
         List<AccountHistoryEntityExt> accountHistoryList = null;
         List<AccountHistoryBo> resultList = null;
         try {

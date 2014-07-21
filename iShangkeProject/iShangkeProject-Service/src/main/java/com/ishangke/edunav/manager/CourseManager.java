@@ -70,7 +70,7 @@ public interface CourseManager {
      *            需要被审核的课程信息
      * @param partnerBo
      *            合作商信息
-     * @param commentCourseApproveBo
+     * @param commentCourseApproveBo   $
      *            审核通过课程评论信息
      * @param userBo
      *            调用方法的用户的信息
@@ -93,7 +93,7 @@ public interface CourseManager {
      *            需要被审核的课程信息
      * @param partnerBo
      *            合作商信息
-     * @param commentCourseApproveBo
+     * @param commentCourseApproveBo  $
      *            审核不通过课程评论信息
      * @param userBo
      *            调用方法的用户的信息
@@ -194,7 +194,7 @@ public interface CourseManager {
      * 
      * @param courseBo
      *            需要被评论的课程信息
-     * @param commentCourseBo
+     * @param commentCourseBo   $
      *            课程评论信息
      * @param partnerBo
      *            合作商信息
