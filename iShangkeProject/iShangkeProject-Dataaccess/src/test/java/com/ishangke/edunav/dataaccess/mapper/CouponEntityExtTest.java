@@ -18,6 +18,7 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
@@ -110,4 +111,16 @@ public class CouponEntityExtTest extends BaseTest{
         List<CouponEntityExt> result = couponEntityExtMapper.list(couponEntityExt, page);
         Assert.assertEquals(0, result.size());
     }
+    @Test
+    public void testQuery5() {
+
+        int teacherCount = couponEntityExtMapper.getCountByUserId(2);
+     
+        Assert.assertSame(1, teacherCount);
+
+        List<CouponEntityExt> result = couponEntityExtMapper.listCouponByUserId(5);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("_test_remark_2_爱上课", result.get(0).getRemark());
+    }
+
 }

@@ -303,6 +303,7 @@
 
     ) AS total
   </select>
+  <!-- listGroupsByUserId -->
   <select id="listGroupsByUserId" parameterType="int" resultMap="GroupExtMap">
     SELECT
     <include refid="Group_Base_Column_List" />
@@ -314,6 +315,7 @@
     USER_GROUP.USER_ID = #{userId}
     AND GROUPS.DELETED = 0
   </select>
+  <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
     SELECT *

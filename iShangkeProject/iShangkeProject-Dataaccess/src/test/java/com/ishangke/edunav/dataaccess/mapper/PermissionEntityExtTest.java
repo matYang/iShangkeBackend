@@ -159,5 +159,43 @@ public class PermissionEntityExtTest extends BaseTest{
         List<PermissionEntityExt> result = permissionEntityExtMapper.list(PermissionEntityExt, page);
         Assert.assertEquals(3, result.size());
     }
-   
+    @Test
+    public void testQuery3() {
+        int teacherCount = permissionEntityExtMapper.getCountByRoleId(3);
+        Assert.assertSame(2, teacherCount);
+
+        List<PermissionEntityExt> result = permissionEntityExtMapper.listPermissionByRoleId(2);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_path_1_爱上课", result.get(0).getPath());
+        Assert.assertEquals("_test_path_1_爱上课", result.get(1).getPath());
+    }
+    @Test
+    public void testQuery4() {
+        int teacherCount = permissionEntityExtMapper.getCountByUserId(2);
+        Assert.assertSame(4, teacherCount);
+
+        List<PermissionEntityExt> result = permissionEntityExtMapper.listPermissionsByUserId(2);
+        Assert.assertEquals(4, result.size());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(1).getName());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(2).getName());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(3).getName());
+        
+    }
+    @Test
+    public void testQuery5() {
+        int teacherCount = permissionEntityExtMapper.getCountByGroupId(2);
+        Assert.assertSame(2, teacherCount);
+
+        List<PermissionEntityExt> result = permissionEntityExtMapper.listPermissionsByGroupId(2);
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+    }
+    @Test
+    public void testQuery6() {
+        PermissionEntityExt PermissionCount = permissionEntityExtMapper.getById(2);
+        
+        Assert.assertEquals("_test_name_1_爱上课", PermissionCount.getName());
+      
+    }
 }

@@ -373,16 +373,17 @@
     SELECT
     <include refid="Teacher_Base_Column_List" />
     from TEACHER where TEACHER.DELETED = 0 AND TEACHER.PARTNER_ID =
-    {#partnerId}) AS total
+    #{partnerId}) AS total
   </select>
   <!-- getCountByCourseId -->
   <select id="getCountByCourseId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM (
-    SELECT *
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
     from TEACHER TEACHER JOIN COURSE_TEACHER COURSE_TEACHER
     ON
     COURSE_TEACHER.TEACHER_ID = TEACHER.ID
-    WHERE COURSE.ID =
+    WHERE COURSE_TEACHER.ID =
     #{courseId}
     and
     TEACHER.DELETED = 0) AS total
@@ -405,7 +406,8 @@
   <!-- getCountByCourseTemplateId -->
   <select id="getCountByCourseTemplateId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM (
-    SELECT *
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
     FROM TEACHER TEACHER
     JOIN COURSE_TEMPLATE_TEACHER
     COURSE_TEMPLATE_TEACHER
