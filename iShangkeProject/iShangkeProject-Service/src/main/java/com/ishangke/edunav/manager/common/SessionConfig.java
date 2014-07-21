@@ -9,8 +9,8 @@ public final class SessionConfig {
      */
     public static class ACConfig {
         public static final String PREFIX = "acSession-";
-        public static final int lockCount = 5;
-        public static final long lockThreshold = 90000l; // 1min 30s;
+        public static final int LOCKCOUNT = 5;
+        public static final long LOCKTHRESHOLD = 90000l; // 1min 30s;
     }
 
     public static class AuthConfig {
@@ -20,6 +20,7 @@ public final class SessionConfig {
         public static final long EXPIRETHRESHOLD = 604800000l; // 7 days
 
         public static final int MAXRECORDS = 10;
+        public static final int AUTOCLEARRECORDS = 20;
 
         public static final int CLIENT_WEB = 0;
         public static final int CLIENT_MOBILE = 1;
