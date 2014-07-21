@@ -1,7 +1,12 @@
 package com.ishangke.edunav.web.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.web.model.BookingVo;
+import com.ishangke.edunav.web.common.ActionVo;
 import com.ishangke.edunav.web.common.DateUtility;
 
 public class BookingConverter {
@@ -43,6 +48,13 @@ public class BookingConverter {
         bookingBo.setTypeSet(vo.getTypeSet());
         bookingBo.setUserId(vo.getUserId());
         bookingBo.setUserIdSet(vo.getUserIdSet());
+        if (vo.getActionList() != null) {
+            List<ActionBo> list = new ArrayList<>();
+            for (ActionVo a : vo.getActionList()) {
+                list.add(ActionConverter.fromModel(a));
+            }
+            bookingBo.setActionList(list);
+        }
         return bookingBo;
     }
 
@@ -84,6 +96,13 @@ public class BookingConverter {
         bookingVo.setTypeSet(bo.getTypeSet());
         bookingVo.setUserId(bo.getUserId());
         bookingVo.setUserIdSet(bo.getUserIdSet());
+        if (bo.getActionList() != null) {
+            List<ActionVo> list = new ArrayList<>();
+            for (ActionBo a : bo.getActionList()) {
+                list.add(ActionConverter.toModel(a));
+            }
+            bookingVo.setActionList(list);
+        }
         return bookingVo;
     }
 }

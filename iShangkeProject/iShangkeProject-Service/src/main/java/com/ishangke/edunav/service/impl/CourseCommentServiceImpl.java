@@ -24,7 +24,7 @@ public class CourseCommentServiceImpl implements CourseCommentService.Iface {
     private CourseCommentManager courseCommentManager;
 
     @Override
-    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseCommentManager.createCourseComment(courseCommentBo, courseTemplateBo, userBo);
         } catch (ManagerException e) {
@@ -37,7 +37,7 @@ public class CourseCommentServiceImpl implements CourseCommentService.Iface {
     }
 
     @Override
-    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseCommentManager.deleteCourseComment(courseCommentBo, courseTemplateBo, userBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class CourseCommentServiceImpl implements CourseCommentService.Iface {
     }
 
     @Override
-    public List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseCommentManager.query(courseCommentBo, courseTemplateBo, userBo, paginationBo);
         } catch (ManagerException e) {

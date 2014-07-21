@@ -23,7 +23,7 @@ public class MessageServiceImpl implements MessageService.Iface {
     private MessageManager messageManager;
 
     @Override
-    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return messageManager.sendMessage(messageBo, userBo);
         } catch (ManagerException e) {
@@ -36,7 +36,7 @@ public class MessageServiceImpl implements MessageService.Iface {
     }
 
     @Override
-    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return messageManager.receiveMessage(messageBo, userBo);
         } catch (ManagerException e) {
@@ -49,7 +49,7 @@ public class MessageServiceImpl implements MessageService.Iface {
     }
 
     @Override
-    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return messageManager.deleteMessage(messageBo, userBo);
         } catch (ManagerException e) {
@@ -62,7 +62,7 @@ public class MessageServiceImpl implements MessageService.Iface {
     }
 
     @Override
-    public List<MessageBo> query(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo)
+    public List<MessageBo> query(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return messageManager.query(messageBo, userBo, paginationBo);

@@ -24,7 +24,7 @@ public class TeacherServiceImpl implements TeacherService.Iface {
     private TeacherManager teacherManager;
 
     @Override
-    public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return teacherManager.createTeacher(teacherBo, userBo);
         } catch (ManagerException e) {
@@ -37,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService.Iface {
     }
 
     @Override
-    public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return teacherManager.updateTeacher(teacherBo, userBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class TeacherServiceImpl implements TeacherService.Iface {
     }
 
     @Override
-    public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return teacherManager.deleteTeacher(teacherBo, userBo);
         } catch (ManagerException e) {
@@ -63,7 +63,7 @@ public class TeacherServiceImpl implements TeacherService.Iface {
     }
 
     @Override
-    public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo)
+    public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return teacherManager.query(teacherBo, partnerBo, userBo, paginationBo);

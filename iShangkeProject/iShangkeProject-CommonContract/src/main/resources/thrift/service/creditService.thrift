@@ -21,7 +21,7 @@ service CreditService{
      *  @return 
      *
      */ 
-    credit.CreditBo exchangeCoupon(1: credit.CreditBo creditBo, 2: coupon.CouponBo couponBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    credit.CreditBo exchangeCoupon(1: credit.CreditBo creditBo, 2: coupon.CouponBo couponBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为换取现金。<br>
@@ -34,7 +34,7 @@ service CreditService{
      *  @return 
      *
      */ 
-    credit.CreditBo exchangeAccount(1: credit.CreditBo creditBo, 2: account.AccountBo accountBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    credit.CreditBo exchangeAccount(1: credit.CreditBo creditBo, 2: account.AccountBo accountBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询积分功能。<br>
@@ -47,7 +47,7 @@ service CreditService{
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    list<credit.CreditBo> query(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<credit.CreditBo> query(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
         /**
      *  本方法为查询积分历史功能。<br>
@@ -60,6 +60,6 @@ service CreditService{
      *  @return 积分实体 CreditHistoryBo 列表
      *
      */ 
-    list<creditHistory.CreditHistoryBo> queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<creditHistory.CreditHistoryBo> queryHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
 }

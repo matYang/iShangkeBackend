@@ -22,7 +22,7 @@ public class CircleServiceImpl implements CircleService.Iface {
     private CircleManager circleManager;
 
     @Override
-    public List<CircleBo> query(CircleBo circleBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CircleBo> query(CircleBo circleBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return circleManager.queryCircle(circleBo, paginationBo);
         } catch (ManagerException e) {

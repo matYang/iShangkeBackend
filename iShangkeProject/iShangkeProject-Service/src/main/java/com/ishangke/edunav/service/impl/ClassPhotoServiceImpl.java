@@ -24,7 +24,7 @@ public class ClassPhotoServiceImpl implements ClassPhotoService.Iface {
     private ClassPhotoManager classPhotoManager;
 
     @Override
-    public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return classPhotoManager.createClassPhoto(classPhotoBo, userBo);
         } catch (ManagerException e) {
@@ -37,7 +37,7 @@ public class ClassPhotoServiceImpl implements ClassPhotoService.Iface {
     }
 
     @Override
-    public ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return classPhotoManager.updateClassPhoto(classPhotoBo, userBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class ClassPhotoServiceImpl implements ClassPhotoService.Iface {
     }
 
     @Override
-    public ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return classPhotoManager.deleteClassPhoto(classPhotoBo, userBo);
         } catch (ManagerException e) {
@@ -63,7 +63,7 @@ public class ClassPhotoServiceImpl implements ClassPhotoService.Iface {
     }
 
     @Override
-    public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return classPhotoManager.query(classPhotoBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {

@@ -19,7 +19,7 @@ service AccountService{
      *  @return 
      *
      */ 
-    account.AccountBo exchangeCash(1: account.AccountBo accountBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    account.AccountBo exchangeCash(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 	/**
      *  本方法为查询账户功能。<br>
@@ -32,7 +32,7 @@ service AccountService{
      *  @return AccountBo 列表
      *
      */ 
-    list<account.AccountBo> query(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<account.AccountBo> query(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 	/**
      *  本方法为查询账户历史功能。<br>
@@ -45,6 +45,6 @@ service AccountService{
      *  @return AccountHistoryBo 列表
      *
      */ 
-     list<accountHistory.AccountHistoryBo> queryHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     list<accountHistory.AccountHistoryBo> queryHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

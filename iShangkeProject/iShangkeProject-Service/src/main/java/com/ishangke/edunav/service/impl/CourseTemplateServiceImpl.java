@@ -26,7 +26,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     private CourseTemplateManager courseTemplateManager;
 
     @Override
-    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.createCourseTemplate(courseTemplateBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -39,7 +39,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.submitCourseTemplate(courseTemplateBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -52,7 +52,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo)
+    public CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.approveCourseTemplate(courseTemplateBo, partnerBo, commentCourseTemplateApproveBo, userBo);
@@ -66,7 +66,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo)
+    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.rejectCourseTemplate(courseTemplateBo, commentCourseTemplateRejectBo, partnerBo, userBo);
@@ -80,7 +80,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.cancelCourseTemplate(courseTemplateBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -93,7 +93,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.resubmitCourserTemplate(courseTemplateBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -106,7 +106,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.deleteCourseTemplate(courseTemplateBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -119,7 +119,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.updateCourseTemplate(courseTemplateBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -132,7 +132,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.queryCourseTemplate(courseTemplateBo, userBo, partnerBo, paginationBo);
         } catch (ManagerException e) {
@@ -145,7 +145,7 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     }
 
     @Override
-    public List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseTemplateManager.queryCourseTemplateById(courseTemplateBo, userBo);
         } catch (ManagerException e) {

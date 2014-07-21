@@ -22,7 +22,7 @@ public class CareerServiceImpl implements CareerService.Iface {
     private CareerManager careerManager;
 
     @Override
-    public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return careerManager.query(careerBo, paginationBo);
         } catch (ManagerException e) {

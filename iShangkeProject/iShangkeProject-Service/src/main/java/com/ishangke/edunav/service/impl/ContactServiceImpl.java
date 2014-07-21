@@ -23,7 +23,7 @@ public class ContactServiceImpl implements ContactService.Iface {
     private ContactManager contactManager;
 
     @Override
-    public ContactBo createContact(ContactBo contactBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ContactBo createContact(ContactBo contactBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return contactManager.createContact(contactBo, userBo);
         } catch (ManagerException e) {
@@ -36,7 +36,7 @@ public class ContactServiceImpl implements ContactService.Iface {
     }
 
     @Override
-    public ContactBo updateContact(ContactBo contactBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ContactBo updateContact(ContactBo contactBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return contactManager.updateContact(contactBo, userBo);
         } catch (ManagerException e) {
@@ -49,7 +49,7 @@ public class ContactServiceImpl implements ContactService.Iface {
     }
 
     @Override
-    public ContactBo deleteContact(ContactBo contactBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ContactBo deleteContact(ContactBo contactBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return contactManager.deleteContact(contactBo, userBo);
         } catch (ManagerException e) {
@@ -62,7 +62,7 @@ public class ContactServiceImpl implements ContactService.Iface {
     }
 
     @Override
-    public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return contactManager.query(contactBo, userBo, paginationBo);
         } catch (ManagerException e) {

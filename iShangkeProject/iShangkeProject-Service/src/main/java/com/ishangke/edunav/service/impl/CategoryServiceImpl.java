@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService.Iface {
     private CategoryManager categoryManager;
 
     @Override
-    public List<CategoryBo> query(CategoryBo categoryBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CategoryBo> query(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return categoryManager.queryCategory(categoryBo, paginationBo);
         } catch (ManagerException e) {

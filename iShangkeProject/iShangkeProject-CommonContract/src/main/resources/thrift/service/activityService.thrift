@@ -21,7 +21,7 @@ service ActivityService{
      *  @return 创建完成的活动信息
      *
      */
-    activity.ActivityBo createActivity(1: activity.ActivityBo activityBo, 2: course.CourseBo courseBo, 3: partner.PartnerBo partnerBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityBo createActivity(1: activity.ActivityBo activityBo, 2: course.CourseBo courseBo, 3: partner.PartnerBo partnerBo, 4: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  提交活动信息审核。<br>
@@ -34,7 +34,7 @@ service ActivityService{
      *  @return 提交完成的活动信息
      *
      */
-    activity.ActivityBo submitActivity(1: activity.ActivityBo activityBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityBo submitActivity(1: activity.ActivityBo activityBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  认可活动信息。<br>
@@ -48,7 +48,7 @@ service ActivityService{
      *  @return 认可完成的活动信息
      *
      */
-    activity.ActivityBo approveActivity(1: activity.ActivityBo activityBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityBo approveActivity(1: activity.ActivityBo activityBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  拒绝活动信息。<br>
@@ -62,7 +62,7 @@ service ActivityService{
      *  @return 拒绝完成的活动信息
      *
      */
-    activity.ActivityBo rejectActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityBo rejectActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  取消活动信息。<br>
@@ -75,7 +75,7 @@ service ActivityService{
      *  @return 取消完成的活动信息
      *
      */
-    activity.ActivityBo cancelActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityBo cancelActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  删除活动信息。<br>
@@ -88,7 +88,7 @@ service ActivityService{
      *  @return 删除完成的活动信息
      *
      */
-    activity.ActivityBo deleteActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityBo deleteActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询活动信息。<br>
@@ -102,6 +102,6 @@ service ActivityService{
      *  @return 推广信息实体 Activity 列表
      *
      */
-    list<activity.ActivityBo> query(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<activity.ActivityBo> query(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

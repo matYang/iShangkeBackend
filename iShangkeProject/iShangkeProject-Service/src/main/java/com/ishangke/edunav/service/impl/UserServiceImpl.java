@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService.Iface {
     private UserManager userManager;
 
     @Override
-    public UserBo authenticate(String sessionString) throws BusinessExceptionBo, TException {
+    public UserBo authenticate(String sessionString, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.authenticate(sessionString);
         } catch (ManagerException e) {
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo registerUser(UserBo userBo) throws BusinessExceptionBo, TException {
+    public UserBo registerUser(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.registerUser(userBo);
         } catch (ManagerException e) {
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo loginByPhone(LoginBo loginBo) throws BusinessExceptionBo, TException {
+    public UserBo loginByPhone(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByPhone(loginBo);
         } catch (ManagerException e) {
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo loginByReference(LoginBo loginBo) throws BusinessExceptionBo, TException {
+    public UserBo loginByReference(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByReference(loginBo);
         } catch (ManagerException e) {
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser) throws BusinessExceptionBo,
+    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
             return userManager.createUser(targetUser, partnerBo, currentUser);
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo deleteUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public UserBo deleteUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.deleteUser(targetUser, currentUser);
         } catch (ManagerException e) {
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo updateUser(UserBo targetUser, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public UserBo updateUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.updateUser(targetUser, currentUser);
         } catch (ManagerException e) {
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser) throws BusinessExceptionBo, TException {
+    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.queryUserInfo(queryUser, currentUser);
         } catch (ManagerException e) {
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo)
+    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return userManager.queryUser(queryUser, partnerBo, currentUser, pagnationBo);
@@ -146,7 +146,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> querySession(UserBo userBo) throws BusinessExceptionBo, TException {
+    public List<UserBo> querySession(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.querySession(userBo);
         } catch (ManagerException e) {
@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo disposeSession(UserBo userBo) throws BusinessExceptionBo, TException {
+    public UserBo disposeSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.disposeSession(userBo);
         } catch (ManagerException e) {
@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo openCellSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+    public UserBo openCellSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.openCellSession(sessionBo);
         } catch (ManagerException e) {
@@ -185,7 +185,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo verifyCellSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+    public UserBo verifyCellSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.verifyCellSession(sessionBo);
         } catch (ManagerException e) {
@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo openForgetPasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+    public UserBo openForgetPasswordSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.openForgetPasswordSession(sessionBo);
         } catch (ManagerException e) {
@@ -211,7 +211,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo verifyForgetPasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+    public UserBo verifyForgetPasswordSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.verifyForgetPasswordSession(sessionBo);
         } catch (ManagerException e) {
@@ -224,7 +224,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo openChangePasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+    public UserBo openChangePasswordSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.openChangePasswordSession(sessionBo);
         } catch (ManagerException e) {
@@ -237,7 +237,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo verifyChangePasswordSession(SessionBo sessionBo) throws BusinessExceptionBo, TException {
+    public UserBo verifyChangePasswordSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.verifyChangePasswordSession(sessionBo);
         } catch (ManagerException e) {

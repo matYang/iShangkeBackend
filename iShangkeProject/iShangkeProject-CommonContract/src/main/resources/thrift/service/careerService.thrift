@@ -15,5 +15,5 @@ service CareerService {
      *  @return Category实体 careerBo 列表
      *
      */
-    list<career.CareerBo> query(1: career.CareerBo careerBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<career.CareerBo> query(1: career.CareerBo careerBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }

@@ -15,5 +15,5 @@ service SchoolService {
      *  @return Category实体 schoolBo 列表
      *
      */
-    list<school.SchoolBo> query(1: school.SchoolBo schoolBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<school.SchoolBo> query(1: school.SchoolBo schoolBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }

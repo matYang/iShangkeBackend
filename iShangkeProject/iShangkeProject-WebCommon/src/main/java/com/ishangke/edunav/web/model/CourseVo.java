@@ -200,13 +200,13 @@ public class CourseVo {
     private String locationName;
     private String circleValue;
     private String circleName;
-    private List<ActionVo> actionsList;
+    private List<ActionVo> actionList;
     
-    public List<ActionVo> getActionsList() {
-        return actionsList;
+    public List<ActionVo> getActionList() {
+        return actionList;
     }
-    public void setActionsList(List<ActionVo> actionsList) {
-        this.actionsList = actionsList;
+    public void setActionList(List<ActionVo> actionList) {
+        this.actionList = actionList;
     }
     public Integer getId() {
         return id;

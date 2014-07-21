@@ -3,13 +3,15 @@ package com.ishangke.edunav.web.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
+import com.ishangke.edunav.web.common.ActionVo;
+import com.ishangke.edunav.web.common.DateUtility;
 import com.ishangke.edunav.web.model.ClassPhotoVo;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.TeacherVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class CourseConverter {
     public static CourseBo fromModel(CourseVo vo) {
@@ -146,6 +148,13 @@ public class CourseConverter {
         courseBo.setTeachingMethod(vo.getTeachingMethod());
         courseBo.setTrail(vo.getTrail());
         courseBo.setWholeName(vo.getWholeName());
+        if (vo.getActionList() != null) {
+            List<ActionBo> list = new ArrayList<>();
+            for (ActionVo a : vo.getActionList()) {
+                list.add(ActionConverter.fromModel(a));
+            }
+            courseBo.setActionList(list);
+        }
         return courseBo;
     }
 
@@ -283,6 +292,13 @@ public class CourseConverter {
         courseVo.setTeachingMethod(bo.getTeachingMethod());
         courseVo.setTrail(bo.getTrail());
         courseVo.setWholeName(bo.getWholeName());
+        if (bo.getActionList() != null) {
+            List<ActionVo> list = new ArrayList<>();
+            for (ActionBo a : bo.getActionList()) {
+                list.add(ActionConverter.toModel(a));
+            }
+            courseVo.setActionList(list);
+        }
         return courseVo;
     }
 }

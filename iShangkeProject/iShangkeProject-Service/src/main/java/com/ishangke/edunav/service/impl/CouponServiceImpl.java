@@ -24,7 +24,7 @@ public class CouponServiceImpl implements CouponService.Iface {
     private CouponManager couponManager;
 
     @Override
-    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return couponManager.createCoupon(couponBo, userBo);
         } catch (ManagerException e) {
@@ -37,7 +37,7 @@ public class CouponServiceImpl implements CouponService.Iface {
     }
 
     @Override
-    public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return couponManager.query(couponBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class CouponServiceImpl implements CouponService.Iface {
     }
 
     @Override
-    public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
         } catch (ManagerException e) {

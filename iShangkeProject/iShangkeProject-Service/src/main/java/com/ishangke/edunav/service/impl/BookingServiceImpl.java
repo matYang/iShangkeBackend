@@ -32,7 +32,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     private BookingManager bookingManager;
 
     @Override
-    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.createBookingByUser(courseBo, bookingBo, commentBookingCreateBo, userBo);
         } catch (ManagerException e) {
@@ -46,7 +46,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo acceptBookingByPartner(BookingBo bookingBo, CommentBookingAcceptBo commentBookingAcceptBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo acceptBookingByPartner(BookingBo bookingBo, CommentBookingAcceptBo commentBookingAcceptBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.acceptBookingByPartner(bookingBo, commentBookingAcceptBo, userBo);
         } catch (ManagerException e) {
@@ -59,7 +59,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo acceptBookingSucceedByPartner(BookingBo bookinbBo, CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo acceptBookingSucceedByPartner(BookingBo bookinbBo, CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.acceptBookingSucceedByPartner(bookinbBo, commentBookingAcceptSuccessBo, userBo);
         } catch (ManagerException e) {
@@ -72,7 +72,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo acceptBookingFailedByPartner(BookingBo bookingBo, CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo acceptBookingFailedByPartner(BookingBo bookingBo, CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.acceptBookingFailedByPartner(bookingBo, commentBookingAcceptFailedBo, userBo);
         } catch (ManagerException e) {
@@ -85,7 +85,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo validateBookingByPartner(BookingBo bookingBo, CommentBookingValidateBo commentBookingValidateBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo validateBookingByPartner(BookingBo bookingBo, CommentBookingValidateBo commentBookingValidateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.validateBookingByPartner(bookingBo, commentBookingValidateBo, userBo);
         } catch (ManagerException e) {
@@ -98,7 +98,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo cancelBookingByUser(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo cancelBookingByUser(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.cancelBookingByUser(bookingBo, commentBookingCancelBo, userBo);
         } catch (ManagerException e) {
@@ -111,7 +111,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo cancelBookingByPartner(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo cancelBookingByPartner(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.cancelBookingByPartner(bookingBo, commentBookingCancelBo, userBo);
         } catch (ManagerException e) {
@@ -124,7 +124,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingBo cancelBookingByAdmin(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public BookingBo cancelBookingByAdmin(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.cancelBookingByAdmin(bookingBo, commentBookingCancelBo, userBo);
         } catch (ManagerException e) {
@@ -137,7 +137,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public List<BookingBo> query(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<BookingBo> query(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.queryBooking(bookingBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -150,7 +150,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.queryHistory(bookingHistoryBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {

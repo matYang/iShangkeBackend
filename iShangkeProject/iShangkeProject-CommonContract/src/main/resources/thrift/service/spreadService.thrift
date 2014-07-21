@@ -21,7 +21,7 @@ service SpreadService{
      *  @return 创建完毕的识别码
      *
      */ 
-    spread.SpreadBo generateCode(1: user.UserBo userBo, 2: partner.PartnerBo partnerBo, 3: course.CourseBo courseBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadBo generateCode(1: user.UserBo userBo, 2: partner.PartnerBo partnerBo, 3: course.CourseBo courseBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询推广信息。<br>
@@ -34,7 +34,7 @@ service SpreadService{
      *  @return 推广信息实体 SpreadBo 列表
      *
      */ 
-    list<spread.SpreadBo> query(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<spread.SpreadBo> query(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  创建推广信息。<br>
@@ -49,7 +49,7 @@ service SpreadService{
      *  @return 创建完毕的推广信息
      *
      */ 
-    spread.SpreadBo createSpread(1: spread.SpreadBo spreadBo, 2: partner.PartnerBo partnerBo, 3: course.CourseBo courseBo, 4: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadBo createSpread(1: spread.SpreadBo spreadBo, 2: partner.PartnerBo partnerBo, 3: course.CourseBo courseBo, 4: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  认可推广信息。<br>
@@ -61,7 +61,7 @@ service SpreadService{
      *  @return 认可之后的推广信息
      *
      */
-    spread.SpreadBo approveSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadBo approveSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  拒绝推广信息。<br>
@@ -73,7 +73,7 @@ service SpreadService{
      *  @return 拒绝之后的推广信息
      *
      */
-    spread.SpreadBo rejectSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadBo rejectSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  取消推广信息。<br>
@@ -85,7 +85,7 @@ service SpreadService{
      *  @return 取消之后的推广信息
      *
      */
-    spread.SpreadBo cancelSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadBo cancelSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  删除推广信息。<br>
@@ -97,6 +97,6 @@ service SpreadService{
      *  @return 删除之后的推广信息
      *
      */
-    spread.SpreadBo deleteSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadBo deleteSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

@@ -15,5 +15,5 @@ service CircleService {
      *  @return Category实体 circleBo 列表
      *
      */
-    list<circle.CircleBo> query(1: circle.CircleBo circleBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<circle.CircleBo> query(1: circle.CircleBo circleBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }

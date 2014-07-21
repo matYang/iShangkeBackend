@@ -25,7 +25,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     private ActivityManager activityManager;
 
     @Override
-    public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.cancelActivity(activityBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -38,7 +38,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     }
 
     @Override
-    public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.submitActivity(activityBo, userBo);
         } catch (ManagerException e) {
@@ -51,7 +51,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     }
 
     @Override
-    public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.approveActivity(activityBo, userBo);
         } catch (ManagerException e) {
@@ -64,7 +64,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     }
 
     @Override
-    public ActivityBo rejectActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ActivityBo rejectActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.rejectActivity(activityBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -77,7 +77,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     }
 
     @Override
-    public ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.cancelActivity(activityBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -90,7 +90,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     }
 
     @Override
-    public ActivityBo deleteActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public ActivityBo deleteActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.deleteActivity(activityBo, partnerBo, userBo);
         } catch (ManagerException e) {
@@ -103,7 +103,7 @@ public class ActivityServiceImpl implements ActivityService.Iface {
     }
 
     @Override
-    public List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return activityManager.query(activityBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {
