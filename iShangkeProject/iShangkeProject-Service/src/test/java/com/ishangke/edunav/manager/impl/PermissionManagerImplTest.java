@@ -26,6 +26,6 @@ public class PermissionManagerImplTest extends BaseTest {
     public void testListPermissionsByUser() {
         UserBo userBo = new UserBo();
         userBo.setId(1);
-//        permissionManager.listPermissionsByUser(userBo);
+        permissionManager.listPermissionsByUser(userBo);
     }
 }

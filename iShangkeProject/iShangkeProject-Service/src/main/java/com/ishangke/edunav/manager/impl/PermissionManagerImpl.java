@@ -15,13 +15,16 @@ import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
+import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.PermissionManager;
+import com.ishangke.edunav.manager.common.ServiceConstants;
 import com.ishangke.edunav.manager.converter.PermissionConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
 public class PermissionManagerImpl implements PermissionManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(PermissionManagerImpl.class);
+
     @Autowired
     private PermissionEntityExtMapper permissionMapper;
 
@@ -31,6 +34,9 @@ public class PermissionManagerImpl implements PermissionManager {
     @Autowired
     private GroupEntityExtMapper groupMapper;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     @Override
     public List<PermissionBo> listPermissionsByUser(UserBo user) {
         int userId = user.getId();
@@ -39,7 +45,24 @@ public class PermissionManagerImpl implements PermissionManager {
         return null;
     }
 
-    // @Override
+    @Override
+    public List<PermissionBo> listAll() {
+        List<PermissionEntityExt> permissionList = null;
+        List<PermissionBo> resultList = null;
+
+        try {
+            permissionList = permissionMapper.listAll();
+            for (PermissionEntityExt permissionPo : permissionList) {
+                resultList.add(PermissionConverter.toBo(permissionPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Permissions listByUserId Failed");
+        }
+    }
+
+    @Override
     public List<PermissionBo> listPermissionsByUserId(int userId) {
         List<PermissionEntityExt> permissionList = null;
         List<PermissionBo> resultList = null;
@@ -57,7 +80,7 @@ public class PermissionManagerImpl implements PermissionManager {
 
     }
 
-    // @Override
+    @Override
     public List<PermissionBo> listPermissionsByGroupId(int groupId) {
         List<PermissionEntityExt> permissionList = null;
         List<PermissionBo> resultList = null;
@@ -75,7 +98,7 @@ public class PermissionManagerImpl implements PermissionManager {
 
     }
 
-    // @Override
+    @Override
     public List<PermissionBo> listPermissionsByRoleId(int roleId) {
         List<PermissionEntityExt> permissionList = null;
         List<PermissionBo> resultList = null;
@@ -91,5 +114,25 @@ public class PermissionManagerImpl implements PermissionManager {
             throw new ManagerException("Permissions listByRoleId Failed");
         }
 
+    }
+
+    @Override
+    public boolean hasPermissionByRole(int roleId, String permissionTag) {
+        return cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId, permissionTag)) != null;
+    }
+
+    @Override
+    public boolean hasPermissionByUser(int userId, String permissionTag) {
+        List<RoleEntityExt> roleList = roleMapper.listRolesByUserId(userId);
+
+        if (roleList == null || roleList.size() < 1) {
+            return false;
+        }
+        for (RoleEntityExt roleEntity : roleList) {
+            if (hasPermissionByRole(roleEntity.getId(), permissionTag)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
