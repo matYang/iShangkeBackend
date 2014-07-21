@@ -10,11 +10,6 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 public class PaginationConverter {
 
     public static PaginationEntity fromBo(PaginationBo paginationBo) {
-        // Check Null
-        if (paginationBo == null) {
-            return null;
-        }
-
         int size = paginationBo.getSize();
         if (size < 0) {
             // To the last one

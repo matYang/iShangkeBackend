@@ -24,13 +24,17 @@ public class CircleManagerImpl implements CircleManager {
 
     @Override
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (circleBo == null) {
             throw new ManagerException("CircleBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         CircleEntityExt circleEntity = CircleConverter.fromBo(circleBo);
         List<CircleEntityExt> circleList = null;
         List<CircleBo> resultList = null;

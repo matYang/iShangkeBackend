@@ -24,14 +24,18 @@ public class CategoryManagerImpl implements CategoryManager {
 
     @Override
     public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (categoryBo == null) {
             throw new ManagerException("CategoryBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         CategoryEntityExt categoryEntity = CategoryConverter.fromBo(categoryBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<CategoryEntityExt> categoryList = null;
         List<CategoryBo> resultList = null;
 

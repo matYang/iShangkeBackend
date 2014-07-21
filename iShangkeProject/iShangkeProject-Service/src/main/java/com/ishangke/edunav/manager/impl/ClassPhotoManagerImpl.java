@@ -43,7 +43,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             int result = 0;
             result = classPhotoEntityExtMapper.add(classPhotoEntity);
             if (result > 0) {
@@ -71,7 +71,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             classPhotoEntityExtMapper.update(classPhotoEntity);
             return ClassPhotoConverter.toBo(classPhotoEntity);
         } catch (Throwable t) {
@@ -94,7 +94,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             classPhotoEntityExtMapper.deleteById(classPhotoEntity.getId());
             return ClassPhotoConverter.toBo(classPhotoEntity);
         } catch (Throwable t) {
@@ -105,6 +105,8 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     @Override
     public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, PartnerBo partnerBo, UserBo userBo,
             PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (classPhotoBo == null) {
             throw new ManagerException("classPhotoBo is null");
@@ -115,17 +117,19 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         if (partnerBo == null) {
             throw new ManagerException("partnerBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<ClassPhotoEntityExt> classPhotoList = null;
         List<ClassPhotoBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             classPhotoList = classPhotoEntityExtMapper.list(classPhotoEntity, pageEntity);
             for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
                 resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
