@@ -40,7 +40,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             int result = 0;
             result = contactEntityExtMapper.add(convertEntity);
             if (result > 0) {
@@ -68,7 +68,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             contactEntityExtMapper.update(convertEntity);
             return ContactConverter.toBo(convertEntity);
         } catch (Throwable t) {
@@ -91,7 +91,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             contactEntityExtMapper.deleteById(convertEntity.getId());
             return ContactConverter.toBo(convertEntity);
         } catch (Throwable t) {
@@ -101,6 +101,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (contactBo == null) {
             throw new ManagerException("contactBo is null");
@@ -108,16 +110,18 @@ public class ContactManagerImpl implements ContactManager {
         if (userBo == null) {
             throw new ManagerException("userBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<ContactEntityExt> contactList = null;
         List<ContactBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             contactList = contactEntityExtMapper.list(convertEntity, pageEntity);
             for (ContactEntityExt contactPo : contactList) {
                 resultList.add(ContactConverter.toBo(contactPo));

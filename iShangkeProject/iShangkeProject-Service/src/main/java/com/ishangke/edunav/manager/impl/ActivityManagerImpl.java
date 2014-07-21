@@ -97,7 +97,7 @@ public class ActivityManagerImpl implements ActivityManager {
         ActivityBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
@@ -126,7 +126,7 @@ public class ActivityManagerImpl implements ActivityManager {
         ActivityBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
@@ -158,7 +158,7 @@ public class ActivityManagerImpl implements ActivityManager {
         ActivityBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
@@ -190,7 +190,7 @@ public class ActivityManagerImpl implements ActivityManager {
         ActivityBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
@@ -222,7 +222,7 @@ public class ActivityManagerImpl implements ActivityManager {
         ActivityBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
@@ -236,6 +236,8 @@ public class ActivityManagerImpl implements ActivityManager {
 
     @Override
     public List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (activityBo == null) {
             throw new ManagerException("ActivityBo is null");
@@ -246,12 +248,14 @@ public class ActivityManagerImpl implements ActivityManager {
         if (partnerBo == null) {
             throw new ManagerException("Partner is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<ActivityEntityExt> activityList = null;
         List<ActivityBo> resultList = null;
 

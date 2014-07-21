@@ -24,14 +24,18 @@ public class CareerManagerImpl implements CareerManager {
 
     @Override
     public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (careerBo == null) {
             throw new ManagerException("CareerBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         CareerEntityExt careerEntity = CareerConverter.fromBo(careerBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<CareerEntityExt> careerList = null;
         List<CareerBo> resultList = null;
 

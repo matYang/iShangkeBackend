@@ -54,7 +54,7 @@ public class AddressManagerImpl implements AddressManager {
 
         try {
             addressEntity.setPartnerId(partnerEntity.getId());
-            // TODO权限
+            // TODO 权限
             int result = 0;
             result = addressEntityExtMapper.add(addressEntity);
             if (result > 0) {
@@ -87,7 +87,7 @@ public class AddressManagerImpl implements AddressManager {
         AddressBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             addressEntityExtMapper.update(addressEntity);
             result = AddressConverter.toBo(addressEntity);
             return result;
@@ -116,7 +116,7 @@ public class AddressManagerImpl implements AddressManager {
         AddressBo result = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             addressEntityExtMapper.deleteById(addressEntity.getId());
             result = AddressConverter.toBo(addressEntity);
             return result;
@@ -127,21 +127,25 @@ public class AddressManagerImpl implements AddressManager {
 
     @Override
     public List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         if (userBo == null) {
             throw new ManagerException("UserBo is null");
         }
         if (addressBo == null) {
             throw new ManagerException("Address is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         List<AddressEntityExt> addressList = null;
         List<AddressBo> resultList = null;
         try {
-            // TODO权限
+            // TODO 权限
             addressList = addressEntityExtMapper.list(addressEntity, pageEntity);
             for (AddressEntityExt addressPo : addressList) {
                 resultList.add(AddressConverter.toBo(addressPo));

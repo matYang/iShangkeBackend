@@ -24,14 +24,18 @@ public class SchoolManagerImpl implements SchoolManager {
 
     @Override
     public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (schoolBo == null) {
             throw new ManagerException("SchoolBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         SchoolEntityExt schoolEntity = SchoolConverter.fromBo(schoolBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<SchoolEntityExt> schoolList = null;
         List<SchoolBo> resultList = null;
 
