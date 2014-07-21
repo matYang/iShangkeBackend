@@ -14,6 +14,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
@@ -28,6 +29,7 @@ import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfigObj;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class AuthManagerImpl implements AuthManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthManagerImpl.class);
 

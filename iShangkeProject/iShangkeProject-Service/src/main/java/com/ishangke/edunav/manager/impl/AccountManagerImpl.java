@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
@@ -26,6 +27,7 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.AccountNotFoundException;
 import com.ishangke.edunav.manager.exception.notfound.UserNotFoundException;
 
+@Component
 public class AccountManagerImpl implements AccountManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountManagerImpl.class);
 

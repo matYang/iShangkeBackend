@@ -14,9 +14,11 @@ import net.spy.memcached.MemcachedClient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.manager.CacheManager;
 
+@Component
 public class CacheManagerImpl implements CacheManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheManagerImpl.class);
     

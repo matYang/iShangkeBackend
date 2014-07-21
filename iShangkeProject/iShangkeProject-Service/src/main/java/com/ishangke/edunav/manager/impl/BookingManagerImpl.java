@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
@@ -20,6 +21,7 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.manager.BookingManager;
 
+@Component
 public class BookingManagerImpl implements BookingManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingManagerImpl.class);
 

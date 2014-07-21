@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -23,6 +24,7 @@ import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class ClassPhotoManagerImpl implements ClassPhotoManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassPhotoManagerImpl.class);
 

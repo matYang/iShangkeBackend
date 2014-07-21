@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.GroupBo;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
@@ -14,6 +15,7 @@ import com.ishangke.edunav.manager.GroupManager;
 import com.ishangke.edunav.manager.converter.GroupConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class GroupManagerImpl implements GroupManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupManagerImpl.class);
 
