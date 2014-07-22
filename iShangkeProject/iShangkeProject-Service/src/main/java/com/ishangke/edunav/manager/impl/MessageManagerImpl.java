@@ -39,6 +39,16 @@ public class MessageManagerImpl implements MessageManager {
         MessageEntityExt messageEntity = MessageConverter.fromBo(messageBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
+        // Check Ids
+        if (messageEntity.getUserFromId() == null || messageEntity.getUserFromId() == 0) {
+            throw new ManagerException("消息的UserFromId为null或0");
+        }
+
+        // Check whether this message is sent from this user
+        if (messageEntity.getUserFromId() != userEntity.getId()) {
+            throw new ManagerException("此消息非该用户所发");
+        }
+
         int result = 0;
         try {
             messageEntity.setStatus(MessageEnums.Status.UNREAD.code);
@@ -68,6 +78,16 @@ public class MessageManagerImpl implements MessageManager {
             messageEntity.setStatus(MessageEnums.Status.READ.code);
         } else {
             throw new ManagerException("Message approval failed for user: " + userEntity.getId());
+        }
+
+        // Check Ids
+        if (messageEntity.getUserFromId() == null || messageEntity.getUserFromId() == 0) {
+            throw new ManagerException("消息的UserFromId为null或0");
+        }
+
+        // Check whether this message is sent to this user
+        if (messageEntity.getUserToId() != userEntity.getId()) {
+            throw new ManagerException("此消息非该用户所收");
         }
 
         try {

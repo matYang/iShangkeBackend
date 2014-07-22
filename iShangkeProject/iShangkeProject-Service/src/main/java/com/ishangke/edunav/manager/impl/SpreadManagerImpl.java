@@ -81,6 +81,7 @@ public class SpreadManagerImpl implements SpreadManager {
         CourseEntityExt courseEntity = CourseConverter.fromBo(courseBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
+        spreadEntity.setUserId(userEntity.getId());
         spreadEntity.setPartnerId(partnerEntity.getId());
         spreadEntity.setCourseId(courseEntity.getId());
 
