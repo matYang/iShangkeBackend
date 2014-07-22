@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, SpreadEntityExtTest.class })
@@ -91,5 +92,16 @@ public class SpreadEntityExtTest extends BaseTest {
         Assert.assertEquals(3, result.size());
     }
     
-  
+    @Test
+    public void testGet() {
+        SpreadEntityExt getbyid1 = spreadEntityExtMapper
+                .getById(2);
+        SpreadEntityExt getbyid2 = spreadEntityExtMapper
+                .getById(3);
+        SpreadEntityExt getbyid3 = spreadEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_remark_1_爱上课", getbyid1.getRemark());
+        Assert.assertEquals("_test_remark_2_爱上课", getbyid2.getRemark());
+        Assert.assertEquals("_test_remark_3_爱上课", getbyid3.getRemark());
+    }
 }

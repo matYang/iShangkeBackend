@@ -125,6 +125,14 @@
     <include refid="Withdraw_Base_Column_List" />
     from WITHDRAW where WITHDRAW.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="WithdrawExtMap">
+    SELECT
+    <include refid="Withdraw_Base_Column_List" />
+    from WITHDRAW where WITHDRAW.DELETED = 0 and WITHDRAW.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="WithdrawExtMap">
     select

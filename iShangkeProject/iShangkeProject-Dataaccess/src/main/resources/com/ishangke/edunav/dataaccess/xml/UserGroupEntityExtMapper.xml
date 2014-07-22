@@ -81,6 +81,13 @@
     <include refid="UserGroup_Base_Column_List" />
     from USER_GROUP where USER_GROUP.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="UserGroupExtMap">
+    SELECT
+    <include refid="UserGroup_Base_Column_List" />
+    from USER_GROUP where USER_GROUP.DELETED = 0 and USER_GROUP.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserGroupExtMap">
     SELECT

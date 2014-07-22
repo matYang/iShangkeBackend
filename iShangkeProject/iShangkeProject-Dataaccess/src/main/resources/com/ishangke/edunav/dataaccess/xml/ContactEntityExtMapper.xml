@@ -126,6 +126,12 @@
     <include refid="Contact_Base_Column_List" />
     from CONTACT where CONTACT.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="ContactExtMap">
+    SELECT
+    <include refid="Contact_Base_Column_List" />
+    from CONTACT where CONTACT.DELETED = 0 and CONTACT.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ContactExtMap">
     SELECT

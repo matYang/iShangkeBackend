@@ -25,7 +25,6 @@ import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
 public class ActivityEntityExtTest {
     @Autowired
     private ActivityEntityExtMapper activityEntityExtMapper;
-   
 
     // public ActivityEntityExtTest() {
     // scriptAfterClass = "AddressEntityExtTestAfter.sql";
@@ -119,6 +118,18 @@ public class ActivityEntityExtTest {
                 activityEntityExt, page);
         Assert.assertEquals(0, result.size());
     }
-    
+
+    @Test
+    public void testGet() {
+        ActivityEntityExt activityEntityExt1 = activityEntityExtMapper
+                .getById(2);
+        ActivityEntityExt activityEntityExt2 = activityEntityExtMapper
+                .getById(3);
+        ActivityEntityExt activityEntityExt3 = activityEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课_", activityEntityExt1.getName());
+        Assert.assertEquals("_test_name_2_爱上课_", activityEntityExt2.getName());
+        Assert.assertEquals("_test_name_3_爱上课_", activityEntityExt3.getName());
+    }
 
 }

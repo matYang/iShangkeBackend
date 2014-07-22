@@ -116,7 +116,12 @@
     <include refid="Category_Base_Column_List" />
     from CATEGORY where CATEGORY.DELETED = 0
   </select>
-
+ <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CategoryExtMap">
+    SELECT
+    <include refid="Category_Base_Column_List" />
+    from CATEGORY where CATEGORY.DELETED = 0 and CATEGORY.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CategoryExtMap">
     SELECT

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
@@ -219,5 +220,17 @@ public class TeacherEntityExtTest {
                 .listTeacherByCourseTempleteId(5);
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+    }
+    @Test
+    public void testGet() {
+        TeacherEntityExt getbyid1 = teacherEntityExtMapper
+                .getById(2);
+        TeacherEntityExt getbyid2 = teacherEntityExtMapper
+                .getById(3);
+        TeacherEntityExt getbyid3 = teacherEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
 }

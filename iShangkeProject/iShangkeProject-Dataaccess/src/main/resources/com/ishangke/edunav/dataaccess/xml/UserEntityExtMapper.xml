@@ -261,6 +261,13 @@
     <include refid="User_Base_Column_List" />
     from USERS where USERS.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="UserExtMap">
+    SELECT
+    <include refid="User_Base_Column_List" />
+    from USERS where USERS.DELETED = 0 and USERS.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserExtMap">
     select

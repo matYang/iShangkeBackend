@@ -930,7 +930,7 @@
     <include refid="Location_Base_Column_List"></include>
     ,
     <include refid="Circle_Base_Column_List"></include>
-    ,
+
     from COURSE_TEMPLATE COURSE_TEMPLATE
     join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER
     ON

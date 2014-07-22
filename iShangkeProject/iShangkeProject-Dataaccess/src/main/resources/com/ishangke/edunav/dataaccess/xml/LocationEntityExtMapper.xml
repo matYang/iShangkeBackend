@@ -105,6 +105,12 @@
     <include refid="Location_Base_Column_List" />
     from LOCATION where LOCATION.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="LocationExtMap">
+    SELECT
+    <include refid="Location_Base_Column_List" />
+    from LOCATION where LOCATION.DELETED = 0 and LOCATION.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="LocationExtMap">
     SELECT

@@ -128,7 +128,12 @@
     <include refid="Address_Base_Column_List" />
     from ADDRESS where ADDRESS.DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="AddressExtMap">
+    SELECT
+    <include refid="Address_Base_Column_List" />
+    from ADDRESS where ADDRESS.DELETED = 0 and ADDRESS.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!--list -->
   <select id="list" parameterType="map" resultMap="AddressExtMap">
     SELECT

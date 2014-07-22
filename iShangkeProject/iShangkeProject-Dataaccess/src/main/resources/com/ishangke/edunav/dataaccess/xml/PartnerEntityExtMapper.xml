@@ -532,6 +532,12 @@
     <include refid="Partner_Base_Column_List" />
     from PARTNER where PARTNER.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="PartnerExtMap">
+    SELECT
+    <include refid="Partner_Base_Column_List" />
+    from PARTNER where PARTNER.DELETED = 0 and PARTNER.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="PartnerExtMap">
     select

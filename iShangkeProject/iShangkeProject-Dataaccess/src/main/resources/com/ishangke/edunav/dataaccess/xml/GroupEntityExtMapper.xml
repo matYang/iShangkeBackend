@@ -127,6 +127,13 @@
     <include refid="Group_Base_Column_List" />
     from GROUPS where GROUPS.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="GroupExtMap">
+    SELECT
+    <include refid="Group_Base_Column_List" />
+    from GROUPS where GROUPS.DELETED = 0 and GROUPS.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="GroupExtMap">
     SELECT
@@ -308,7 +315,8 @@
     <include refid="Group_Base_Column_List" />
     FROM GROUPS GROUPS
     JOIN USER_GROUP ON USER_GROUP.GROUP_ID = GROUPS.ID
-    JOIN USERS USERS ON USERS.ID = USER_GROUP.USER_ID
+    JOIN USERS USERS ON USERS.ID
+    = USER_GROUP.USER_ID
     WHERE USER_GROUP.USER_ID = #{userId} AND GROUPS.DELETED = 0
   </select>
   <!-- getCountByUserId -->

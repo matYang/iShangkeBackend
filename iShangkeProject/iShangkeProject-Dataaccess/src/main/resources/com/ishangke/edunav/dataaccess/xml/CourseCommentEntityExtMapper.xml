@@ -177,6 +177,12 @@
     <include refid="CourseComment_Base_Column_List" />
     from COURSE_COMMENT where COURSE_COMMENT.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CourseCommentExtMap">
+    SELECT
+    <include refid="CourseComment_Base_Column_List" />
+    from COURSE_COMMENT where COURSE_COMMENT.DELETED = 0 and COURSE_COMMENT.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseCommentExtMap">
     select

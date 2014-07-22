@@ -144,6 +144,12 @@
     <include refid="OrderHistory_Base_Column_List" />
     from ORDER_HISTORY where ORDER_HISTORY.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="OrderHistoryExtMap">
+    SELECT
+    <include refid="OrderHistory_Base_Column_List" />
+    from ORDER_HISTORY where ORDER_HISTORY.DELETED = 0 and ORDER_HISTORY.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="OrderHistoryExtMap">
     select

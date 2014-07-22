@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateTeacherEntityExtTest.class })
@@ -104,5 +105,23 @@ public class CourseTemplateTeacherEntityExtTest extends BaseTest{
         Assert.assertSame(4, result.get(0).getTeacherId());
     }
     
-  
+    @Test
+    public void testGet() {
+        CourseTemplateTeacherEntityExt getbyid1 = courseTemplateTeacherEntityExtMapper
+                .getById(2);
+        CourseTemplateTeacherEntityExt getbyid2 = courseTemplateTeacherEntityExtMapper
+                .getById(3);
+        CourseTemplateTeacherEntityExt getbyid3 = courseTemplateTeacherEntityExtMapper
+                .getById(4);
+        String time = "2014-07-02 02:00:00";
+        Assert.assertEquals(time,
+                DateUtility.toSQLDateTime(getbyid1.getCreateTime()));
+        String time1 = "2014-07-02 01:00:00";
+        Assert.assertEquals(time1,
+                DateUtility.toSQLDateTime(getbyid2.getCreateTime()));
+        String time2 = "2014-07-15 15:03:13";
+        Assert.assertEquals(time2,
+                DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
+
+    }
 }

@@ -165,6 +165,12 @@
     <include refid="Coupon_Base_Column_List" />
     from COUPON where COUPON.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CouponExtMap">
+    SELECT
+    <include refid="Coupon_Base_Column_List" />
+    from COUPON where COUPON.DELETED = 0 and COUPON.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CouponExtMap">
     SELECT

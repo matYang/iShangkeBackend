@@ -24,7 +24,7 @@ public class CalendarTypeHandler implements TypeHandler{
     @Override
     public Object getResult(ResultSet rs, String columnName)
             throws SQLException {
-        return DateUtility.DateToCalendar(rs.getDate(columnName));
+        return DateUtility.DateToCalendar(rs.getTimestamp(columnName));
     }
 
     @Override

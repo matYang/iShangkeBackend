@@ -103,6 +103,13 @@
     <include refid="School_Base_Column_List" />
     from SCHOOL where SCHOOL.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="SchoolExtMap">
+    SELECT
+    <include refid="School_Base_Column_List" />
+    from SCHOOL where SCHOOL.DELETED = 0 and SCHOOL.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="SchoolExtMap">
     SELECT

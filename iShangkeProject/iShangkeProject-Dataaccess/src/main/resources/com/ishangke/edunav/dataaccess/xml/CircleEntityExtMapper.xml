@@ -103,6 +103,12 @@
     <include refid="Circle_Base_Column_List" />
     from CIRCLE where CIRCLE.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CircleExtMap">
+    SELECT
+    <include refid="Circle_Base_Column_List" />
+    from CIRCLE where CIRCLE.DELETED = 0 and CIRCLE.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CircleExtMap">
     SELECT

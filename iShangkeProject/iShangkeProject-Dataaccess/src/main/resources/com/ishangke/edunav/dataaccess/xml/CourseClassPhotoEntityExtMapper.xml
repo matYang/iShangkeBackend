@@ -81,6 +81,12 @@
     <include refid="CourseClassPhoto_Base_Column_List" />
     from COURSE_CLASS_PHOTO where COURSE_CLASS_PHOTO.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CourseClassPhotoExtMap">
+    SELECT
+    <include refid="CourseClassPhoto_Base_Column_List" />
+    from COURSE_CLASS_PHOTO where COURSE_CLASS_PHOTO.DELETED = 0 and COURSE_CLASS_PHOTO.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseClassPhotoExtMap">
     select

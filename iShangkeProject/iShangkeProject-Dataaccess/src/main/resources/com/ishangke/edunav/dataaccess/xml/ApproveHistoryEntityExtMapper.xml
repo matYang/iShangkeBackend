@@ -140,7 +140,12 @@
     <include refid="ApproveHistory_Base_Column_List" />
     from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="ApproveHistoryExtMap">
+    SELECT
+    <include refid="ApproveHistory_Base_Column_List" />
+    from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0 and APPROVE_HISTORY.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ApproveHistoryExtMap">
     SELECT

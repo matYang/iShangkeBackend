@@ -114,6 +114,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from MESSAGE where DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="MessageExtMap">
+    SELECT
+    <include refid="Message_Base_Column_List" />
+    from MESSAGE where MESSAGE.DELETED = 0 and MESSAGE.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="MessageExtMap">
     SELECT

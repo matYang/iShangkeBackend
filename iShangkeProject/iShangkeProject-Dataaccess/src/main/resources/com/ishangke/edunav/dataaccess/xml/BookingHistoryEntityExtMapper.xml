@@ -151,7 +151,13 @@
     <include refid="BookingHistory_Base_Column_List" />
     from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="BookingHistoryExtMap">
+    SELECT
+    <include refid="BookingHistory_Base_Column_List" />
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0 and BOOKING_HISTORY.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="BookingHistoryExtMap">
     SELECT

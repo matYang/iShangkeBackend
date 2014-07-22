@@ -303,4 +303,10 @@
     </if>
     ) AS total
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="AccountHistoryExtMap">
+    SELECT
+    <include refid="AccountHistory_Base_Column_List" />
+    from ACCOUNT_HISTORY where ACCOUNT_HISTORY.DELETED = 0 and ACCOUNT_HISTORY.ID = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

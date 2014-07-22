@@ -97,7 +97,12 @@
   <select id="getCount" resultType="int">
     select count(ID) from CREDIT where DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CreditExtMap">
+    SELECT
+    <include refid="Credit_Base_Column_List" />
+    from CREDIT where CREDIT.DELETED = 0 and CREDIT.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CreditExtMap">
     SELECT

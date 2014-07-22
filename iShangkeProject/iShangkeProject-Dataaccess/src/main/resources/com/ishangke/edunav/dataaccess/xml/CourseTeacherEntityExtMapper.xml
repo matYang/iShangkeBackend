@@ -80,6 +80,12 @@
     <include refid="CourseTeacher_Base_Column_List" />
     from COURSE_TEACHER where COURSE_TEACHER.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CourseTeacherExtMap">
+    SELECT
+    <include refid="CourseTeacher_Base_Column_List" />
+    from COURSE_TEACHER where COURSE_TEACHER.DELETED = 0 and COURSE_TEACHER.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseTeacherExtMap">
     select

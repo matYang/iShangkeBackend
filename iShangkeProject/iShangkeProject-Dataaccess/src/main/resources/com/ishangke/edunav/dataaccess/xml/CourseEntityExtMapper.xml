@@ -951,6 +951,12 @@
     <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CourseExtMap">
+    SELECT
+    <include refid="Course_Base_Column_List" />
+    from COURSE where COURSE.DELETED = 0 and COURSE.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseExtMap">
     select

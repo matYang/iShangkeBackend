@@ -94,6 +94,13 @@
     <include refid="CreditHistory_Base_Column_List" />
     from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CreditHistoryExtMap">
+    SELECT
+    <include refid="CreditHistory_Base_Column_List" />
+    from CREDIT_HISTORY where CREDIT_HISTORY.DELETED = 0 and CREDIT_HISTORY.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CreditHistoryExtMap">
     SELECT
@@ -175,6 +182,7 @@
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+  <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select

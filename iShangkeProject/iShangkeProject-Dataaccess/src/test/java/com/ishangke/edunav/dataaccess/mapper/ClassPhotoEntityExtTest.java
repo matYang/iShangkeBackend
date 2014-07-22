@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 
@@ -272,5 +273,17 @@ public class ClassPhotoEntityExtTest extends BaseTest {
                 .listClassPhotoByCourseTempleteId(3);
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_IU_3_爱上课", result.get(0).getImgUrl());
+    }
+    @Test
+    public void testGet() {
+        ClassPhotoEntityExt getbyid1 = classPhotoEntityExtMapper
+                .getById(2);
+        ClassPhotoEntityExt getbyid2 = classPhotoEntityExtMapper
+                .getById(3);
+        ClassPhotoEntityExt getbyid3 = classPhotoEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_title_1_爱上课", getbyid1.getTitle());
+        Assert.assertEquals("_test_title_2_爱上课", getbyid2.getTitle());
+        Assert.assertEquals("_test_title_3_爱上课", getbyid3.getTitle());
     }
 }

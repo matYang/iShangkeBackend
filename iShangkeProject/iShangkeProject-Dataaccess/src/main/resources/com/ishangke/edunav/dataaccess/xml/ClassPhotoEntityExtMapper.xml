@@ -151,6 +151,12 @@
     <include refid="ClassPhoto_Base_Column_List" />
     from CLASS_PHOTO where CLASS_PHOTO.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="ClassPhotoExtMap">
+    SELECT
+    <include refid="ClassPhoto_Base_Column_List" />
+    from CLASS_PHOTO where CLASS_PHOTO.DELETED = 0 and CLASS_PHOTO.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
     SELECT

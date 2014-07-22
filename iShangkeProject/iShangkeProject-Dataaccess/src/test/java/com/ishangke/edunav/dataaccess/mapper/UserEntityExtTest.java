@@ -19,6 +19,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
@@ -94,5 +95,16 @@ public class UserEntityExtTest extends BaseTest {
         Assert.assertEquals(3, result.size());
     }
     
-   
+    @Test
+    public void testGet() {
+        UserEntityExt getbyid1 = userEntityExtMapper
+                .getById(2);
+        UserEntityExt getbyid2 = userEntityExtMapper
+                .getById(3);
+        UserEntityExt getbyid3 = userEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
 }

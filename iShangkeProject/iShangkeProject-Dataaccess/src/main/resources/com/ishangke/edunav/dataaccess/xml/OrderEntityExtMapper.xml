@@ -125,7 +125,13 @@
   <select id="listAll" resultMap="OrderExtMap">
     SELECT
     <include refid="Order_Base_Column_List" />
-    from ORDER where ORDER.DELETED = 0
+    from `ORDER` where ORDER.DELETED = 0
+  </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="OrderExtMap">
+    SELECT
+    <include refid="Order_Base_Column_List" />
+    from `ORDER` where ORDER.DELETED = 0 and ORDER.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="OrderExtMap">
