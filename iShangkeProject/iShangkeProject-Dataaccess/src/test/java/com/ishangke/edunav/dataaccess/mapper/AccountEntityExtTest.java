@@ -16,13 +16,13 @@ import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class AccountEntityExtTest{
+public class AccountEntityExtTest {
     @Autowired
     private AccountEntityExtMapper accountEntityExtMapper;
-    
+
     @Autowired
     private UserEntityExtMapper userEntityExtMapper;
-    
+
     @Test
     public void testAdd() {
         UserEntityExt userEntityExt = new UserEntityExt();
@@ -33,7 +33,7 @@ public class AccountEntityExtTest{
         userEntityExt.setDeleted(0);
         userEntityExtMapper.add(userEntityExt);
         AccountEntityExt accountEntityExt = new AccountEntityExt();
-        accountEntityExt.setId(userEntityExt.getId());   
+        accountEntityExt.setId(userEntityExt.getId());
         accountEntityExt.setRealName("中文测试");
         accountEntityExt.setBalance(12.12);
         accountEntityExt.setBalanceEnd(22.2);
@@ -47,6 +47,7 @@ public class AccountEntityExtTest{
         accountEntityExtMapper.add(accountEntityExt);
         Assert.assertSame(accountEntityExtMapper.getCount(), oldcount + 1);
     }
+
     @Test
     public void testGet() {
         AccountEntityExt accountEntityExt1 = accountEntityExtMapper.getById(2);
@@ -55,5 +56,16 @@ public class AccountEntityExtTest{
         Assert.assertEquals("_test_RN_1_爱上课", accountEntityExt1.getRealName());
         Assert.assertEquals("_test_RN_2_爱上课", accountEntityExt2.getRealName());
         Assert.assertEquals("_test_RN_3_爱上课", accountEntityExt3.getRealName());
-          }
+    }
+    
+    @Test
+    public void testUpdate() {
+        AccountEntityExt accountEntityExt = accountEntityExtMapper.getById(2);
+        accountEntityExt.setBalance(2.2);
+        accountEntityExt.setRealName("ooxx");
+        accountEntityExtMapper.update(accountEntityExt);
+        accountEntityExt = accountEntityExtMapper.getById(2);
+        Assert.assertEquals("ooxx",accountEntityExt.getRealName());
+           
+    }
 }

@@ -21,6 +21,7 @@ public class ClassPhotoConverter {
         classPhotoBo.setPartnerId(vo.getPartnerId());
         classPhotoBo.setPartnerIdSet(vo.getPartnerIdSet());
         classPhotoBo.setTitle(vo.getTitle());
+        classPhotoBo.setSnapshotUrl(vo.getSnapshotUrl());
         return classPhotoBo;
     }
 
@@ -40,6 +41,7 @@ public class ClassPhotoConverter {
         classPhotoVo.setPartnerId(bo.getPartnerId());
         classPhotoVo.setPartnerIdSet(bo.getPartnerIdSet());
         classPhotoVo.setTitle(bo.getTitle());
+        classPhotoVo.setSnapshotUrl(bo.getSnapshotUrl());
         return classPhotoVo;
     }
 }
