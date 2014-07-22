@@ -82,4 +82,8 @@ public interface TeacherManager {
      */
     public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 
+    public List<TeacherBo> listByCourseId(int courseId);
+
+    public List<TeacherBo> listByCourseTemplateId(int courseTemplateId);
+
 }
