@@ -23,7 +23,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     private PartnerManager partnerManager;
 
     @Override
-    public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo)
+    public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return partnerManager.query(partnerBo, paginationBo, userBo);
@@ -37,7 +37,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     }
 
     @Override
-    public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return partnerManager.queryById(partnerBo, userBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     }
 
     @Override
-    public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return partnerManager.updatePartner(partnerBo, userBo);
         } catch (ManagerException e) {
@@ -63,7 +63,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     }
 
     @Override
-    public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return partnerManager.createPartner(partnerBo, userBo);
         } catch (ManagerException e) {

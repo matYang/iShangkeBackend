@@ -23,7 +23,7 @@ public class WithdrawServiceImpl implements WithdrawService.Iface {
     private WithdrawManager withdrawManager;
 
     @Override
-    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return withdrawManager.createWithdraw(withdrawBo, userBo);
         } catch (ManagerException e) {
@@ -36,7 +36,7 @@ public class WithdrawServiceImpl implements WithdrawService.Iface {
     }
 
     @Override
-    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return withdrawManager.updateWithdraw(withdrawBo, userBo);
         } catch (ManagerException e) {
@@ -49,7 +49,7 @@ public class WithdrawServiceImpl implements WithdrawService.Iface {
     }
 
     @Override
-    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return withdrawManager.deleteWithdraw(withdrawBo, userBo);
         } catch (ManagerException e) {
@@ -62,7 +62,7 @@ public class WithdrawServiceImpl implements WithdrawService.Iface {
     }
 
     @Override
-    public List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo)
+    public List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return withdrawManager.query(withdrawBo, userBo, paginationBo);

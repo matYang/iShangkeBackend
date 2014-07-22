@@ -307,12 +307,9 @@
     SELECT
     <include refid="Group_Base_Column_List" />
     FROM GROUPS GROUPS
-    JOIN USER_GROUP USER_GROUP
-    JOIN USERS USERS
-    ON GROUPS.ID = USER_GROUP.GROUP_ID
-    WHERE
-    USER_GROUP.USER_ID = #{userId}
-    AND GROUPS.DELETED = 0
+    JOIN USER_GROUP ON USER_GROUP.GROUP_ID = GROUPS.ID
+    JOIN USERS USERS ON USERS.ID = USER_GROUP.USER_ID
+    WHERE USER_GROUP.USER_ID = #{userId} AND GROUPS.DELETED = 0
   </select>
   <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">

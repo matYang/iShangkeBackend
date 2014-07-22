@@ -24,7 +24,7 @@ public class AddressServiceImpl implements AddressService.Iface {
     private AddressManager addressManager;
 
     @Override
-    public AddressBo createAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo) throws BusinessExceptionBo, TException {
+    public AddressBo createAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return addressManager.createAddress(addressBo, userBo, partnerBo);
         } catch (ManagerException e) {
@@ -37,7 +37,7 @@ public class AddressServiceImpl implements AddressService.Iface {
     }
 
     @Override
-    public AddressBo updateAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo) throws BusinessExceptionBo, TException {
+    public AddressBo updateAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return addressManager.updateAddress(addressBo, userBo, partnerBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class AddressServiceImpl implements AddressService.Iface {
     }
 
     @Override
-    public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo) throws BusinessExceptionBo, TException {
+    public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return addressManager.deleteAddress(addressBo, userBo, partnerBo);
         } catch (ManagerException e) {
@@ -63,7 +63,7 @@ public class AddressServiceImpl implements AddressService.Iface {
     }
 
     @Override
-    public List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return addressManager.query(addressBo, userBo, paginationBo);
         } catch (ManagerException e) {

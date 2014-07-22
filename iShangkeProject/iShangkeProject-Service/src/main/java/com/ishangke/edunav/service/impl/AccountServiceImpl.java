@@ -24,7 +24,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     private AccountManager accountManager;
 
     @Override
-    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return accountManager.exchangeCash(accountBo, userBo);
         } catch (ManagerException e) {
@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return accountManager.query(accountBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
         } catch (ManagerException e) {

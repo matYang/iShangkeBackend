@@ -1,11 +1,14 @@
 package com.ishangke.edunav.dataaccess.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.PermissionEntity;
 
-public class PermissionEntityExt extends PermissionEntity {
+public class PermissionEntityExt extends PermissionEntity implements Serializable {
+    private static final long serialVersionUID = -359735512858507288L;
+
     private Set<Integer> idSet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;

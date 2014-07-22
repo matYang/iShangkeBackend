@@ -26,7 +26,7 @@ public class CreditServiceImpl implements CreditService.Iface {
     private CreditManager creditManager;
 
     @Override
-    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return creditManager.exchangeCoupon(creditBo, couponBo, userBo);
         } catch (ManagerException e) {
@@ -40,7 +40,7 @@ public class CreditServiceImpl implements CreditService.Iface {
     }
 
     @Override
-    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return creditManager.exchangeAccount(creditBo, accountBo, userBo);
         } catch (ManagerException e) {
@@ -53,7 +53,7 @@ public class CreditServiceImpl implements CreditService.Iface {
     }
 
     @Override
-    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return creditManager.query(creditBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -66,7 +66,7 @@ public class CreditServiceImpl implements CreditService.Iface {
     }
 
     @Override
-    public List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
         } catch (ManagerException e) {

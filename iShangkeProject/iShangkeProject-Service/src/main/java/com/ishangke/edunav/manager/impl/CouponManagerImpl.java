@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
@@ -24,6 +25,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class CouponManagerImpl implements CouponManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CouponManagerImpl.class);
 
@@ -87,7 +89,7 @@ public class CouponManagerImpl implements CouponManager {
         List<CouponBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             couponList = couponEntityExtMapper.list(couponEntity, pageEntity);
             for (CouponEntityExt couponPo : couponList) {
                 resultList.add(CouponConverter.toBo(couponPo));
@@ -100,6 +102,8 @@ public class CouponManagerImpl implements CouponManager {
 
     @Override
     public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (couponHistoryBo == null) {
             throw new ManagerException("couponHistoryBo is null");
@@ -107,16 +111,18 @@ public class CouponManagerImpl implements CouponManager {
         if (userBo == null) {
             throw new ManagerException("userBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         CouponHistoryEntityExt couponHistoryEntity = CouponHistoryConverter.fromBo(couponHistoryBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<CouponHistoryEntityExt> couponHistoryList = null;
         List<CouponHistoryBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             couponHistoryList = couponHistoryEntityExtMapper.list(couponHistoryEntity, pageEntity);
             for (CouponHistoryEntityExt couponHistoryPo : couponHistoryList) {
                 resultList.add(CouponHistoryConverter.toBo(couponHistoryPo));
@@ -124,6 +130,23 @@ public class CouponManagerImpl implements CouponManager {
             return resultList;
         } catch (Throwable t) {
             throw new ManagerException("CouponHistory Query Failed");
+        }
+    }
+
+    // @Override
+    public List<CouponBo> listCouponByUserId(int userId) {
+        List<CouponEntityExt> couponList = null;
+        List<CouponBo> resultList = null;
+
+        try {
+            // TODO 权限
+            couponList = couponEntityExtMapper.listCouponByUserId(userId);
+            for (CouponEntityExt couponPo : couponList) {
+                resultList.add(CouponConverter.toBo(couponPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("Coupon listByUserId Failed");
         }
     }
 

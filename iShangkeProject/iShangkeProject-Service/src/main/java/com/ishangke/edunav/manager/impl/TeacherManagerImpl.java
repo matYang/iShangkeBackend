@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -23,6 +24,7 @@ import com.ishangke.edunav.manager.converter.TeacherConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class TeacherManagerImpl implements TeacherManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(TeacherManagerImpl.class);
 
@@ -127,6 +129,57 @@ public class TeacherManagerImpl implements TeacherManager {
             convertedResults.add(TeacherConverter.toBo(result));
         }
         return convertedResults;
+    }
+
+    // @Override
+    public List<TeacherBo> listByCourseId(int courseId) {
+        List<TeacherEntityExt> teacherList = null;
+        List<TeacherBo> resultList = null;
+
+        try {
+            teacherList = teacherMapper.listTeacherByCourseId(courseId);
+            for (TeacherEntityExt teacherPo : teacherList) {
+                resultList.add(TeacherConverter.toBo(teacherPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Teacher listByCourseId Failed");
+        }
+    }
+
+    // @Override
+    public List<TeacherBo> listByCourseTemplateId(int courseTemplateId) {
+        List<TeacherEntityExt> teacherList = null;
+        List<TeacherBo> resultList = null;
+
+        try {
+            teacherList = teacherMapper.listTeacherByCourseTempleteId(courseTemplateId);
+            for (TeacherEntityExt teacherPo : teacherList) {
+                resultList.add(TeacherConverter.toBo(teacherPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Teacher listByCourseTemplateId Failed");
+        }
+    }
+
+    // @Override
+    public List<TeacherBo> listByPartnerId(int partnerId) {
+        List<TeacherEntityExt> teacherList = null;
+        List<TeacherBo> resultList = null;
+
+        try {
+            teacherList = teacherMapper.listTeacherByPartnerId(partnerId);
+            for (TeacherEntityExt teacherPo : teacherList) {
+                resultList.add(TeacherConverter.toBo(teacherPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            LOGGER.warn(t.getMessage(), t);
+            throw new ManagerException("Teacher listByPartnerId Failed");
+        }
     }
 
 }

@@ -25,7 +25,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     private SpreadManager spreadManager;
 
     @Override
-    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo) throws BusinessExceptionBo,
+    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
             return spreadManager.generateCode(userBo, partnerBo, courseBo);
@@ -39,7 +39,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     }
 
     @Override
-    public List<SpreadBo> query(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo)
+    public List<SpreadBo> query(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return spreadManager.query(spreadBo, userBo, paginationBo);
@@ -53,7 +53,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     }
 
     @Override
-    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo)
+    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             return spreadManager.createSpread(spreadBo, partnerBo, courseBo, userBo);
@@ -67,7 +67,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     }
 
     @Override
-    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return spreadManager.approveSpread(spreadBo, userBo);
         } catch (ManagerException e) {
@@ -80,7 +80,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     }
 
     @Override
-    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return spreadManager.rejectSpread(spreadBo, userBo);
         } catch (ManagerException e) {
@@ -93,7 +93,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     }
 
     @Override
-    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return spreadManager.cancelSpread(spreadBo, userBo);
         } catch (ManagerException e) {
@@ -106,7 +106,7 @@ public class SpreadServiceImpl implements SpreadService.Iface {
     }
 
     @Override
-    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo) throws BusinessExceptionBo, TException {
+    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return spreadManager.deleteSpread(spreadBo, userBo);
         } catch (ManagerException e) {

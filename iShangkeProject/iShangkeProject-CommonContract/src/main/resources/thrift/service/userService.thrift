@@ -13,7 +13,7 @@ service UserService {
      *  @param  sessionString 
      *  @return 用户实体 UserBo
      */
-    user.UserBo authenticate(1: string sessionString) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo authenticate(1: string sessionString, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -22,7 +22,7 @@ service UserService {
      *  @param  userBo    用户注册信息
      *  @return 用户实体 UserBo
      */
-    user.UserBo registerUser(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo registerUser(1: user.UserBo userBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为普通用户提供手机验证。<br>
@@ -30,7 +30,7 @@ service UserService {
      *  @param  sessionBo          用户信息
      *  @return 用户实体          UserBo
      */
-    user.UserBo openCellSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo openCellSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法验证用户手机验证码。<br>
@@ -38,7 +38,7 @@ service UserService {
      *  @param  sessionBo        用户信息
      *  @return 用户实体          UserBo
      */
-    user.UserBo verifyCellSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo verifyCellSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为普通用户提供忘记密码时手机验证。<br>
@@ -46,7 +46,7 @@ service UserService {
      *  @param  sessionBo        用户信息
      *  @return 用户实体          UserBo
      */
-    user.UserBo openForgetPasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo openForgetPasswordSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法验证用户手机验证忘记密码的验证码。<br>
@@ -54,7 +54,7 @@ service UserService {
      *  @param  sessionBo        用户信息
      *  @return 用户实体          UserBo
      */
-    user.UserBo verifyForgetPasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo verifyForgetPasswordSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为普通用户提供修改密码时手机验证。<br>
@@ -62,7 +62,7 @@ service UserService {
      *  @param  sessionBo        用户信息
      *  @return 用户实体          UserBo
      */
-    user.UserBo openChangePasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo openChangePasswordSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法验证用户手机验证修改密码的验证码。<br>
@@ -70,7 +70,7 @@ service UserService {
      *  @param  sessionBo        用户信息
      *  @return 用户实体          UserBo
      */
-    user.UserBo verifyChangePasswordSession(1: user.SessionBo sessionBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo verifyChangePasswordSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -82,7 +82,7 @@ service UserService {
      *  @return 用户实体 UserBo
      *
      */
-    user.UserBo loginByPhone(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo loginByPhone(1: user.LoginBo loginBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为所有用户提供使用识别号登录的功能。<br>
@@ -93,7 +93,7 @@ service UserService {
      *  @return 用户实体 UserBo
      *
      */
-    user.UserBo loginByReference(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo loginByReference(1: user.LoginBo loginBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -107,7 +107,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    user.UserBo createUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo createUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员删除用户<br>
@@ -119,7 +119,7 @@ service UserService {
      *  @return 删除结果 
      *
      */
-    user.UserBo deleteUser(1: user.UserBo targetUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo deleteUser(1: user.UserBo targetUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为修改用户信息的功能<br>
@@ -131,7 +131,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    user.UserBo updateUser(1: user.UserBo targetUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo updateUser(1: user.UserBo targetUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
      /**
      *  本方法为查看用户信息的功能<br>
@@ -143,7 +143,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    list<user.UserBo> queryUserInfo(1: user.UserBo queryUser, 2: user.UserBo currentUser) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> queryUserInfo(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户信息的功能<br>
@@ -157,7 +157,7 @@ service UserService {
      *  @return 用户实体 UserBo 列表
      *
      */
-    list<user.UserBo> queryUser(1: user.UserBo queryUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: common.PaginationBo pagnationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> queryUser(1: user.UserBo queryUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: common.PaginationBo pagnationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户session信息的功能<br>
@@ -167,7 +167,7 @@ service UserService {
      *  @return 用户session相关信息
      *
      */
-    list<user.UserBo> querySession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> querySession(1: user.UserBo userBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -178,7 +178,7 @@ service UserService {
      *  @return 
      *
      */
-    user.UserBo disposeSession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo disposeSession(1: user.UserBo userBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }
 

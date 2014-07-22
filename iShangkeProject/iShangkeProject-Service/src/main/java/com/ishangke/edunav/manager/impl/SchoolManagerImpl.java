@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
@@ -16,6 +17,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.SchoolConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class SchoolManagerImpl implements SchoolManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(SchoolManagerImpl.class);
 
@@ -24,14 +26,18 @@ public class SchoolManagerImpl implements SchoolManager {
 
     @Override
     public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (schoolBo == null) {
             throw new ManagerException("SchoolBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         SchoolEntityExt schoolEntity = SchoolConverter.fromBo(schoolBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<SchoolEntityExt> schoolList = null;
         List<SchoolBo> resultList = null;
 

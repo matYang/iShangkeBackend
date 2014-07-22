@@ -5,11 +5,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
@@ -22,6 +24,7 @@ import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class ClassPhotoManagerImpl implements ClassPhotoManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassPhotoManagerImpl.class);
 
@@ -43,7 +46,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             int result = 0;
             result = classPhotoEntityExtMapper.add(classPhotoEntity);
             if (result > 0) {
@@ -71,7 +74,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             classPhotoEntityExtMapper.update(classPhotoEntity);
             return ClassPhotoConverter.toBo(classPhotoEntity);
         } catch (Throwable t) {
@@ -94,7 +97,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             classPhotoEntityExtMapper.deleteById(classPhotoEntity.getId());
             return ClassPhotoConverter.toBo(classPhotoEntity);
         } catch (Throwable t) {
@@ -105,6 +108,8 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     @Override
     public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, PartnerBo partnerBo, UserBo userBo,
             PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (classPhotoBo == null) {
             throw new ManagerException("classPhotoBo is null");
@@ -115,17 +120,19 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         if (partnerBo == null) {
             throw new ManagerException("partnerBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<ClassPhotoEntityExt> classPhotoList = null;
         List<ClassPhotoBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             classPhotoList = classPhotoEntityExtMapper.list(classPhotoEntity, pageEntity);
             for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
                 resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
@@ -133,6 +140,57 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             return resultList;
         } catch (Throwable t) {
             throw new ManagerException("ClassPhoto Query Failed");
+        }
+    }
+
+    // @override
+    public List<ClassPhotoBo> listByPartnerId(int partnerId) {
+        List<ClassPhotoEntityExt> classPhotoList = null;
+        List<ClassPhotoBo> resultList = null;
+
+        try {
+            // TODO 权限
+            classPhotoList = classPhotoEntityExtMapper.listClassPhotoByPartnerId(partnerId);
+            for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
+                resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("ClassPhoto listByPartnerId Failed");
+        }
+    }
+
+    // @override
+    public List<ClassPhotoBo> listByCourseId(int courseId) {
+        List<ClassPhotoEntityExt> classPhotoList = null;
+        List<ClassPhotoBo> resultList = null;
+
+        try {
+            // TODO 权限
+            classPhotoList = classPhotoEntityExtMapper.listClassPhotoByCourseId(courseId);
+            for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
+                resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("ClassPhoto listByCourseId Failed");
+        }
+    }
+
+    // @override
+    public List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId) {
+        List<ClassPhotoEntityExt> classPhotoList = null;
+        List<ClassPhotoBo> resultList = null;
+
+        try {
+            // TODO 权限
+            classPhotoList = classPhotoEntityExtMapper.listClassPhotoByCourseTempleteId(courseTemplateId);
+            for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
+                resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
+            }
+            return resultList;
+        } catch (Throwable t) {
+            throw new ManagerException("ClassPhoto listByCourseTemplateId Failed");
         }
     }
 

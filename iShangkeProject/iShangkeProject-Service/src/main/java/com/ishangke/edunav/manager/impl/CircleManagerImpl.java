@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -16,6 +17,7 @@ import com.ishangke.edunav.manager.converter.CircleConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class CircleManagerImpl implements CircleManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CircleManagerImpl.class);
 
@@ -24,13 +26,17 @@ public class CircleManagerImpl implements CircleManager {
 
     @Override
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (circleBo == null) {
             throw new ManagerException("CircleBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         CircleEntityExt circleEntity = CircleConverter.fromBo(circleBo);
         List<CircleEntityExt> circleList = null;
         List<CircleBo> resultList = null;

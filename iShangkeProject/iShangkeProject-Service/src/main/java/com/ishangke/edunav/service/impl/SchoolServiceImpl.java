@@ -22,7 +22,7 @@ public class SchoolServiceImpl implements SchoolService.Iface {
     private SchoolManager schoolManager;
 
     @Override
-    public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+    public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return schoolManager.query(schoolBo, paginationBo);
         } catch (ManagerException e) {

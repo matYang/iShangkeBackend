@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.ContactBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -19,6 +20,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class ContactManagerImpl implements ContactManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ContactManagerImpl.class);
 
@@ -40,7 +42,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             int result = 0;
             result = contactEntityExtMapper.add(convertEntity);
             if (result > 0) {
@@ -68,7 +70,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             contactEntityExtMapper.update(convertEntity);
             return ContactConverter.toBo(convertEntity);
         } catch (Throwable t) {
@@ -91,7 +93,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO权限
+            // TODO 权限
             contactEntityExtMapper.deleteById(convertEntity.getId());
             return ContactConverter.toBo(convertEntity);
         } catch (Throwable t) {
@@ -101,6 +103,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (contactBo == null) {
             throw new ManagerException("contactBo is null");
@@ -108,16 +112,18 @@ public class ContactManagerImpl implements ContactManager {
         if (userBo == null) {
             throw new ManagerException("userBo is null");
         }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
+        }
 
         // Convert
         ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<ContactEntityExt> contactList = null;
         List<ContactBo> resultList = null;
 
         try {
-            // TODO权限
+            // TODO 权限
             contactList = contactEntityExtMapper.list(convertEntity, pageEntity);
             for (ContactEntityExt contactPo : contactList) {
                 resultList.add(ContactConverter.toBo(contactPo));

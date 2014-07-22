@@ -1,0 +1,65 @@
+状态码         含义                       说明
+200           OK                        请求成功
+201           CREATED                   创建成功
+202           ACCEPTED                  更新成功
+400           BAD REQUEST               请求的地址不存在或者包含不支持的参数
+401           UNAUTHORIZED              未授权
+403           FORBIDDEN                 被禁止访问
+404           NOT FOUND                 请求的资源不存在
+500           INTERNAL SERVER ERROR     内部错误
+所有的成功均返回2XX状态码
+所有的失败均返回非4XX/5XX状态码
+====================================================================================
+状态转移操作
+CourseVo/CourseTemplateVo/BookingVo多一个属性，支持下一步操作类型
+action:[{"name":#{name}},{"name":#{name}},...]
+course
+    创建 POST /course
+        返回: 
+            {
+                course详情
+            }
+    "操作" POST /course/:id/:operate
+        返回: 
+            {
+                errorCode: #{errorCode} //如果成功就是0
+                msg: #{msg}  //如果成功就是"success"
+                data: #{data}  //如果失败就是""
+            }
+booking
+    创建 POST /booking
+        返回: 
+            {
+                booking详情
+            }
+    "操作" POST /booking/:id/:operate
+        返回: 
+            {
+                errorCode: #{errorCode} //如果成功就是0
+                msg: #{msg}  //如果成功就是"success"
+                data: #{data}  //如果失败就是""
+            }
+====================================================================================
+获取数据   
+    返回多组数据
+        GET /:resource?#{query}&start=:start&count=:count&order=:order&sortby=:sortby
+        {
+            "start" = 0,
+            "count" = 10, 
+            "total" = 34, 
+            "data" = [:data, ...]
+        }
+    返回单个数据
+        GET /:resource/:id
+        {
+            #{resource}
+        }
+====================================================================================
+删除数据
+    删除单个数据 DETELT /:resource/:id
+        返回:
+            {
+                errorCode: #{errorCode} //如果成功就是0
+                msg: #{msg}  //如果成功就是"success"
+            }
+

@@ -1,5 +1,6 @@
 include "teacher.thrift"
 include "classPhoto.thrift"
+include "action.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.model
 
@@ -131,6 +132,7 @@ struct CourseTemplateBo {
     125: i64 noRefundDateEnd
     126: i64 cashbackDateStart
     127: i64 cashbackDateEnd
+    128: list<action.ActionBo> actionList
 }
 
 struct CommentCourseTemplateApproveBo {

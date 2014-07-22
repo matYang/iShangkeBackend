@@ -17,7 +17,7 @@ service ClassPhotoService{
      *  @return 创建完成的教师信息
      *
      */
-    classPhoto.ClassPhotoBo createClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    classPhoto.ClassPhotoBo createClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新教师信息。<br>
@@ -29,7 +29,7 @@ service ClassPhotoService{
      *  @return 更新完成的教师信息
      *
      */
-    classPhoto.ClassPhotoBo updateClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    classPhoto.ClassPhotoBo updateClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除教师信息。<br>
@@ -41,7 +41,7 @@ service ClassPhotoService{
      *  @return 删除完成的教师信息
      *
      */
-    classPhoto.ClassPhotoBo deleteClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    classPhoto.ClassPhotoBo deleteClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询教师信息。<br>
@@ -55,6 +55,6 @@ service ClassPhotoService{
      *  @return 推广信息实体 ClassPhoto 列表
      *
      */
-    list<classPhoto.ClassPhotoBo> query(1: classPhoto.ClassPhotoBo classPhotoBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<classPhoto.ClassPhotoBo> query(1: classPhoto.ClassPhotoBo classPhotoBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }

@@ -18,7 +18,7 @@ service WithdrawService{
      *  @return 创建完成的存取款信息
      *
      */
-    withdraw.WithdrawBo createWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    withdraw.WithdrawBo createWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新存取款信息。<br>
@@ -30,7 +30,7 @@ service WithdrawService{
      *  @return 更新完成的存取款信息
      *
      */
-    withdraw.WithdrawBo updateWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    withdraw.WithdrawBo updateWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除存取款信息。<br>
@@ -42,7 +42,7 @@ service WithdrawService{
      *  @return 
      *
      */
-    withdraw.WithdrawBo deleteWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    withdraw.WithdrawBo deleteWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询存取款信息。<br>
@@ -55,6 +55,6 @@ service WithdrawService{
      *  @return  Withdraw 列表
      *
      */
-    list<withdraw.WithdrawBo> query(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<withdraw.WithdrawBo> query(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
 }

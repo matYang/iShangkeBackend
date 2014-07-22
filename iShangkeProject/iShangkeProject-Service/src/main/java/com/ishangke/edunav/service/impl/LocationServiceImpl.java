@@ -22,7 +22,7 @@ public class LocationServiceImpl implements LocationService.Iface {
     private LocationManager locationManager;
 
     @Override
-    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo) throws BusinessExceptionBo,
+    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
             return locationManager.query(locationBo, paginationBo);

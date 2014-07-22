@@ -58,7 +58,7 @@ public interface CourseTemplateManager {
      *            需要被审核的课程模版信息
      * @param partnerBo
      *            合作商信息
-     * @param commentTemplateApproveBo
+     * @param commentTemplateApproveBo   $
      *            审核通过课程模版评论信息
      * @param userBo
      *            调用方法的用户的信息
@@ -82,7 +82,7 @@ public interface CourseTemplateManager {
      *            需要被审核的课程模版信息
      * @param partnerBo
      *            合作商信息
-     * @param commentTemplateApproveBo
+     * @param commentTemplateApproveBo   $
      *            审核不通过课程模版评论信息
      * @param userBo
      *            调用方法的用户的信息

@@ -1,4 +1,5 @@
 namespace java com.ishangke.edunav.commoncontract.model
+include "action.thrift"
 
 /**
  * BookingBo
@@ -40,6 +41,7 @@ struct BookingBo {
     34: i64 lastModifyTimeEnd
     35: i64 createTimeStart
     36: i64 createTimeEnd
+    37: list<action.ActionBo> actionList
 }
 
 /**

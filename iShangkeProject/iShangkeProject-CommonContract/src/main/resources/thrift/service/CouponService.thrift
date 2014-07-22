@@ -17,7 +17,7 @@ service CouponService{
      *
      *  @return 优惠券实体 CouponBo 
      */
-    coupon.CouponBo createCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    coupon.CouponBo createCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询优惠券功能。<br>
@@ -30,7 +30,7 @@ service CouponService{
      *  @return 优惠券实体 CouponBo 列表
      *
      */ 
-    list<coupon.CouponBo> query(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<coupon.CouponBo> query(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询优惠券历史功能。<br>
@@ -43,7 +43,7 @@ service CouponService{
      *  @return CouponHistoryBo 列表
      *
      */ 
-    list<couponHistory.CouponHistoryBo> queryHistory(1: couponHistory.CouponHistoryBo couponHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<couponHistory.CouponHistoryBo> queryHistory(1: couponHistory.CouponHistoryBo couponHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 }
