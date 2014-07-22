@@ -30,38 +30,36 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseTemplateManagerImpl.class);
 
     @Autowired
-    private CourseTemplateEntityExtMapper courseTemplateEntityExtMapper;
+    private CourseTemplateEntityExtMapper courseTemplateMapper;
 
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Create Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Create Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Create Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
         try {
             courseTemplateEntity.setPartnerId(partnerEntity.getId());
             int result = 0;
-            result = courseTemplateEntityExtMapper.add(courseTemplateEntity);
+            result = courseTemplateMapper.add(courseTemplateEntity);
             if (result > 0) {
                 return CourseTemplateConverter.toBo(courseTemplateEntity);
             } else {
                 throw new ManagerException("CourseTemplate Create Failed");
             }
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Create Failed");
+            throw new ManagerException("CourseTemplate Create Failed", t);
         }
     }
 
@@ -69,29 +67,37 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Submit Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Submit Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Submit Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Submit Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Submit Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
             // Change status
             int status = 0;
             courseTemplateEntity.setStatus(status);
-            courseTemplateEntityExtMapper.update(courseTemplateEntity);
+            courseTemplateMapper.update(courseTemplateEntity);
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Submit Failed");
+            throw new ManagerException("CourseTemplate Submit Failed", t);
         }
     }
 
@@ -100,60 +106,76 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Approve Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Approve Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Approve Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Approve Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Approve Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
             // Change status
             int status = 0;
             courseTemplateEntity.setStatus(status);
-            courseTemplateEntityExtMapper.update(courseTemplateEntity);
+            courseTemplateMapper.update(courseTemplateEntity);
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Approve Failed");
+            throw new ManagerException("CourseTemplate Approve Failed", t);
         }
     }
 
     @Override
-    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo,
-            CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo) {
+    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo,
+            PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Reject Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Reject Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Reject Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Reject Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Reject Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
             // Change status
             int status = 0;
             courseTemplateEntity.setStatus(status);
-            courseTemplateEntityExtMapper.update(courseTemplateEntity);
+            courseTemplateMapper.update(courseTemplateEntity);
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Reject Failed");
+            throw new ManagerException("CourseTemplate Reject Failed", t);
         }
     }
 
@@ -161,60 +183,75 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Cancel Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Cancel Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Cancel Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Cancel Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Cancel Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
             // Change status
             int status = 0;
             courseTemplateEntity.setStatus(status);
-            courseTemplateEntityExtMapper.update(courseTemplateEntity);
+            courseTemplateMapper.update(courseTemplateEntity);
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Cancel Failed");
+            throw new ManagerException("CourseTemplate Cancel Failed", t);
         }
     }
 
     @Override
-    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo,
-            UserBo userBo) {
+    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Resubmit Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Resubmit Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Resubmit Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Resubmit Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Resubmit Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
             // Change status
             int status = 0;
             courseTemplateEntity.setStatus(status);
-            courseTemplateEntityExtMapper.update(courseTemplateEntity);
+            courseTemplateMapper.update(courseTemplateEntity);
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Resubmit Failed");
+            throw new ManagerException("CourseTemplate Resubmit Failed", t);
         }
     }
 
@@ -222,27 +259,34 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Delete Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Delete Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Delete Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Delete Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Delete Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
-            courseTemplateEntity.setDeleted(1);
-            courseTemplateEntityExtMapper.deleteById(courseTemplateEntity.getId());
+            courseTemplateMapper.deleteById(courseTemplateEntity.getId());
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Delete Failed");
+            throw new ManagerException("CourseTemplate Delete Failed", t);
         }
     }
 
@@ -250,46 +294,50 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Update Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Update Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Update Failed: UserBo is null");
         }
 
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
+        // Check Ids
+        if (courseTemplateEntity.getPartnerId() == null || courseTemplateEntity.getPartnerId() == 0) {
+            throw new ManagerException("CourseTemplate Update Failed: 课程template的partnerId为null或0");
+        }
+
+        // Check whether the courseTemplate belongs to the partner
+        if (courseTemplateEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("CourseTemplate Update Failed: 该课程tempalte不属于此合作商");
+        }
+
         try {
-            // Change status
-            int status = 0;
-            courseTemplateEntity.setStatus(status);
-            courseTemplateEntityExtMapper.update(courseTemplateEntity);
+            courseTemplateMapper.update(courseTemplateEntity);
             return CourseTemplateConverter.toBo(courseTemplateEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Update Failed");
+            throw new ManagerException("CourseTemplate Update Failed", t);
         }
     }
 
     @Override
-    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo,
-            PartnerBo partnerBo, PaginationBo paginationBo) {
+    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo) {
         PaginationEntity pageEntity = null;
 
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate Query Failed: CourseTemplateBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("CourseTemplate Query Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate Query Failed: UserBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -298,19 +346,20 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
         List<CourseTemplateEntityExt> courseTemplateList = null;
         List<CourseTemplateBo> resultList = null;
 
-        // TODO 权限
         try {
-            courseTemplateList = courseTemplateEntityExtMapper.list(courseTemplateEntity, pageEntity);
+            courseTemplateList = courseTemplateMapper.list(courseTemplateEntity, pageEntity);
             for (CourseTemplateEntityExt courseTemplatePo : courseTemplateList) {
+                if (courseTemplatePo.getPartnerId() != partnerEntity.getId()) {
+                    throw new ManagerException("CourseTemplate Query Failed: 该课程tempalte不属于此合作商");
+                }
                 resultList.add(CourseTemplateConverter.toBo(courseTemplatePo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate Query Failed");
+            throw new ManagerException("CourseTemplate Query Failed", t);
         }
     }
 
@@ -318,26 +367,24 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplateBo is null");
+            throw new ManagerException("CourseTemplate QueryById Failed: CourseTemplateBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseTemplate QueryById Failed: UserBo is null");
         }
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
         List<CourseTemplateEntityExt> courseTemplateList = null;
         List<CourseTemplateBo> resultList = null;
 
-        // TODO 权限
         try {
-            courseTemplateList = courseTemplateEntityExtMapper.list(courseTemplateEntity, null);
+            courseTemplateList = courseTemplateMapper.list(courseTemplateEntity, null);
             for (CourseTemplateEntityExt courseTemplatePo : courseTemplateList) {
                 resultList.add(CourseTemplateConverter.toBo(courseTemplatePo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("CourseTemplate QueryById Failed");
+            throw new ManagerException("CourseTemplate QueryById Failed", t);
         }
     }
 

@@ -5,10 +5,20 @@ include "model/location.thrift"
 include "model/partner.thrift"
 include "model/user.thrift"
 include "model/category.thrift"
+include "model/courseComment.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
 service CourseTemplateService {
+
+
+
+    /**********************************************************
+    *
+    *   关于课程模板的 CourseTemplate
+    *
+    **********************************************************/
+    
     /**
      *  本方法为创建新课程模版<br>
      *  合作商管理员可以通过此方法创建新课程模版
@@ -142,5 +152,57 @@ service CourseTemplateService {
     list<courseTemplate.CourseTemplateBo> queryCourseTemplateById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
+
+
+
+
+
+    /**********************************************************
+    *
+    *   关于课程评论的 CourseComment
+    *
+    **********************************************************/
+
+    /**
+     *  创建课程评论。<br>
+     *  用户可以创建课程评论
+     *
+     *  @param  courseCommentBo    需要创建的课程评论
+     *  @param  courseTemplateBo   评论相关的课程模板
+     *  @param  userBo             发起创建的用户信息
+     *
+     *  @return 创建完成的课程评论
+     *
+     */
+    courseComment.CourseCommentBo createCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  删除课程评论。<br>
+     *  用户可以删除课程评论
+     *
+     *  @param  courseCommentBo    需要删除的课程评论
+     *  @param  courseTemplateBo   评论相关的课程模板
+     *  @param  userBo             发起删除的用户信息
+     *
+     *  @return 
+     *
+     */
+    courseComment.CourseCommentBo deleteCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  查询课程评论。<br>
+     *  用户可以查询课程评论
+     *
+     *  @param  courseCommentBo    需要查询的课程评论
+     *  @param  courseTemplateBo   评论相关的课程模板
+     *  @param  userBo             发起查询的用户信息
+     *  @param  paginationBo       分页信息
+     *
+     *  @return  CourseComment 列表
+     *
+     */
+    list<courseComment.CourseCommentBo> queryCourseComment(1: courseComment.CourseCommentBo courseCommentBo, 2: courseTemplate.CourseTemplateBo courseTemplateBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    
 }
 

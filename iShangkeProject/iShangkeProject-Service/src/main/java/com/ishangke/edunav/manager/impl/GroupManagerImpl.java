@@ -28,7 +28,7 @@ public class GroupManagerImpl implements GroupManager {
         return null;
     }
 
-    // @Overrride
+    @Override
     public List<GroupBo> listGroupsByUserId(int userId) {
         List<GroupEntityExt> groupList = null;
         List<GroupBo> resultList = null;
@@ -41,7 +41,7 @@ public class GroupManagerImpl implements GroupManager {
             return resultList;
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Group listGroupsByUserId Failed");
+            throw new ManagerException("Group listGroupsByUserId Failed", t);
         }
     }
 

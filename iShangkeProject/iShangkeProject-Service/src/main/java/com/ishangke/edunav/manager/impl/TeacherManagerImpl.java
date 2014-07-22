@@ -131,7 +131,7 @@ public class TeacherManagerImpl implements TeacherManager {
         return convertedResults;
     }
 
-    // @Override
+    @Override
     public List<TeacherBo> listByCourseId(int courseId) {
         List<TeacherEntityExt> teacherList = null;
         List<TeacherBo> resultList = null;
@@ -144,11 +144,11 @@ public class TeacherManagerImpl implements TeacherManager {
             return resultList;
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Teacher listByCourseId Failed");
+            throw new ManagerException("Teacher listByCourseId Failed", t);
         }
     }
 
-    // @Override
+    @Override
     public List<TeacherBo> listByCourseTemplateId(int courseTemplateId) {
         List<TeacherEntityExt> teacherList = null;
         List<TeacherBo> resultList = null;
@@ -161,7 +161,7 @@ public class TeacherManagerImpl implements TeacherManager {
             return resultList;
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Teacher listByCourseTemplateId Failed");
+            throw new ManagerException("Teacher listByCourseTemplateId Failed", t);
         }
     }
 
