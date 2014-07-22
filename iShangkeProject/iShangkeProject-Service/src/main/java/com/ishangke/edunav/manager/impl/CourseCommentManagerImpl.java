@@ -28,20 +28,19 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseCommentManagerImpl.class);
 
     @Autowired
-    private CourseCommentEntityExtMapper courseCommentEntityExtMapper;
+    private CourseCommentEntityExtMapper courseCommentMapper;
 
     @Override
-    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo,
-            UserBo userBo) {
+    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {
         // Check Null
         if (courseCommentBo == null) {
-            throw new ManagerException("CourseCommentBo is null");
+            throw new ManagerException("CourseComment Create Failed: CourseCommentBo is null");
         }
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplageBo is null");
+            throw new ManagerException("CourseComment Create Failed: CourseTemplageBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseComment Create Failed: UserBo is null");
         }
 
         // Convert
@@ -55,7 +54,7 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
             courseCommentEntity.setCourseTemplateId(courseTemplateEntity.getId());
 
             int result = 0;
-            result = courseCommentEntityExtMapper.add(courseCommentEntity);
+            result = courseCommentMapper.add(courseCommentEntity);
 
             if (result > 0) {
                 return CourseCommentConverter.toBo(courseCommentEntity);
@@ -63,22 +62,21 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
                 throw new ManagerException("CourseComment Create Failed");
             }
         } catch (Throwable t) {
-            throw new ManagerException("CourseComment Create Failed");
+            throw new ManagerException("CourseComment Create Failed", t);
         }
     }
 
     @Override
-    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo,
-            UserBo userBo) {
+    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {
         // Check Null
         if (courseCommentBo == null) {
-            throw new ManagerException("CourseCommentBo is null");
+            throw new ManagerException("CourseComment Delete Failed: CourseCommentBo is null");
         }
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplageBo is null");
+            throw new ManagerException("CourseComment Delete Failed: CourseTemplageBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseComment Delete Failed: UserBo is null");
         }
 
         // Convert
@@ -86,38 +84,48 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // TODO 权限
-        // 先做个示范: AS FOLLOWING:
-        if (courseCommentEntity.getCourseTemplateId() != courseTemplateEntity.getId()) {
-            throw new ManagerException("此评论不属于此课程模版");
+        // Check Ids
+        if (courseCommentEntity.getCourseTemplateId() == null || courseCommentEntity.getCourseTemplateId() == 0) {
+            throw new ManagerException("CourseComment Delete Failed: 此课程评论的课程templateId为null或0");
         }
+        if (courseCommentEntity.getUserId() == null || courseCommentEntity.getUserId() == 0) {
+            throw new ManagerException("CourseComment Delete Failed: 此课程评论的用户id为null或0");
+        }
+        if (courseTemplateEntity.getId() == null || courseTemplateEntity.getId() == 0) {
+            throw new ManagerException("CourseComment Delete Failed: 此课程模版id为null或0");
+        }
+
+        // Check whether the courseComment belongs to the courseTemplate
+        if (courseCommentEntity.getCourseTemplateId() != courseTemplateEntity.getId()) {
+            throw new ManagerException("CourseComment Delete Failed: 此评论不属于此课程模版");
+        }
+        // Check whether the courseComment belongs to the user
         if (courseCommentEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("此用户无权删除此评论");
+            throw new ManagerException("CourseComment Delete Failed: 此用户无权删除此评论");
         }
 
         try {
-            courseCommentEntityExtMapper.deleteById(courseCommentEntity.getId());
+            courseCommentMapper.deleteById(courseCommentEntity.getId());
             return CourseCommentConverter.toBo(courseCommentEntity);
         } catch (Throwable t) {
-            throw new ManagerException("CourseComment Delete Failed");
+            throw new ManagerException("CourseComment Delete Failed", t);
         }
 
     }
 
     @Override
-    public List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo,
-            UserBo userBo, PaginationBo paginationBo) {
+    public List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo) {
         PaginationEntity pageEntity = null;
 
         // Check Null
         if (courseCommentBo == null) {
-            throw new ManagerException("CourseCommentBo is null");
+            throw new ManagerException("CourseComment Query Failed: CourseCommentBo is null");
         }
         if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplageBo is null");
+            throw new ManagerException("CourseComment Query Failed: CourseTemplageBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("CourseComment Query Failed: UserBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -130,15 +138,26 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
         List<CourseCommentEntityExt> courseCommentList = null;
         List<CourseCommentBo> resultList = null;
 
+        // Check Ids
+        if (courseTemplateEntity.getId() == null || courseTemplateEntity.getId() == 0) {
+            throw new ManagerException("CourseComment Query Failed: 此课程模版id为null或0");
+        }
+
         try {
             // TODO权限
-            courseCommentList = courseCommentEntityExtMapper.list(courseCommentEntity, pageEntity);
+            courseCommentList = courseCommentMapper.list(courseCommentEntity, pageEntity);
             for (CourseCommentEntityExt courseCommentPo : courseCommentList) {
+                if (courseCommentPo.getCourseTemplateId() != courseTemplateEntity.getId()) {
+                    throw new ManagerException("CourseComment Query Failed: 此评论不属于此课程模版");
+                }
+                if (courseCommentPo.getUserId() != userEntity.getId()) {
+                    throw new ManagerException("CourseComment Query Failed: 此评论不属于这个用户");
+                }
                 resultList.add(CourseCommentConverter.toBo(courseCommentPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("CourseComment Query Failed");
+            throw new ManagerException("CourseComment Query Failed", t);
         }
     }
 
