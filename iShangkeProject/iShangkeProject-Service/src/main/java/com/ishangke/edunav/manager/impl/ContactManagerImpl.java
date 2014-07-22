@@ -25,33 +25,33 @@ public class ContactManagerImpl implements ContactManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ContactManagerImpl.class);
 
     @Autowired
-    private ContactEntityExtMapper contactEntityExtMapper;
+    private ContactEntityExtMapper contactMapper;
 
     @Override
     public ContactBo createContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
         if (contactBo == null) {
-            throw new ManagerException("contactBo is null");
+            throw new ManagerException("Contact Create Failed: contactBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("Contact Create Failed: userBo is null");
         }
 
         // Convert
-        ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
+        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO 权限
             int result = 0;
-            result = contactEntityExtMapper.add(convertEntity);
+            contactEntity.setUserId(userEntity.getId());
+            result = contactMapper.add(contactEntity);
             if (result > 0) {
-                return ContactConverter.toBo(convertEntity);
+                return ContactConverter.toBo(contactEntity);
             } else {
                 throw new ManagerException("Contact Create Failed");
             }
         } catch (Throwable t) {
-            throw new ManagerException("Contact Create Failed");
+            throw new ManagerException("Contact Create Failed", t);
         }
     }
 
@@ -59,22 +59,29 @@ public class ContactManagerImpl implements ContactManager {
     public ContactBo updateContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
         if (contactBo == null) {
-            throw new ManagerException("contactBo is null");
+            throw new ManagerException("Contact Update Failed: contactBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("Contact Update Failed: userBo is null");
         }
 
         // Convert
-        ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
+        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
+        // Check Ids
+        if (contactEntity.getUserId() == 0) {
+            throw new ManagerException("Contact Update Failed: 联系人的userId为0");
+        }
+        if (contactEntity.getUserId() != userEntity.getId()) {
+            throw new ManagerException("Contact Update Failed: 用户id与联系人的userId不匹配");
+        }
+
         try {
-            // TODO 权限
-            contactEntityExtMapper.update(convertEntity);
-            return ContactConverter.toBo(convertEntity);
+            contactMapper.update(contactEntity);
+            return ContactConverter.toBo(contactEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Contact Update Failed");
+            throw new ManagerException("Contact Update Failed", t);
         }
     }
 
@@ -82,22 +89,29 @@ public class ContactManagerImpl implements ContactManager {
     public ContactBo deleteContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
         if (contactBo == null) {
-            throw new ManagerException("contactBo is null");
+            throw new ManagerException("Contact Delete Failed: contactBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("Contact Delete Failed: userBo is null");
         }
 
         // Convert
-        ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
+        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
+        // Check Ids
+        if (contactEntity.getUserId() == 0) {
+            throw new ManagerException("Contact Delete Failed: 联系人的userId为0");
+        }
+        if (contactEntity.getUserId() != userEntity.getId()) {
+            throw new ManagerException("Contact Delete Failed: 用户id与联系人的userId不匹配");
+        }
+
         try {
-            // TODO 权限
-            contactEntityExtMapper.deleteById(convertEntity.getId());
-            return ContactConverter.toBo(convertEntity);
+            contactMapper.deleteById(contactEntity.getId());
+            return ContactConverter.toBo(contactEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Contact Delete Failed");
+            throw new ManagerException("Contact Delete Failed", t);
         }
     }
 
@@ -107,30 +121,32 @@ public class ContactManagerImpl implements ContactManager {
 
         // Check Null
         if (contactBo == null) {
-            throw new ManagerException("contactBo is null");
+            throw new ManagerException("Contact Query Failed: contactBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("Contact Query Failed: userBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
         }
 
         // Convert
-        ContactEntityExt convertEntity = ContactConverter.fromBo(contactBo);
+        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         List<ContactEntityExt> contactList = null;
         List<ContactBo> resultList = null;
 
         try {
-            // TODO 权限
-            contactList = contactEntityExtMapper.list(convertEntity, pageEntity);
+            contactList = contactMapper.list(contactEntity, pageEntity);
             for (ContactEntityExt contactPo : contactList) {
+                if (contactPo.getUserId() != userEntity.getId()) {
+                    throw new ManagerException("Contact Query Failed: 用户id与联系人的userId不匹配");
+                }
                 resultList.add(ContactConverter.toBo(contactPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Contact Query Failed");
+            throw new ManagerException("Contact Query Failed", t);
         }
     }
 

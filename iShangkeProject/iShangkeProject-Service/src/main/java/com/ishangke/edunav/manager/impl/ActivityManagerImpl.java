@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.ishangke.edunav.commoncontract.model.ActivityBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -14,9 +13,6 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ActivityEntityExtMapper;
-import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
-import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
-import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
@@ -34,52 +30,44 @@ public class ActivityManagerImpl implements ActivityManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityManagerImpl.class);
 
     @Autowired
-    private CourseEntityExtMapper courseEntityExtMapper;
-    @Autowired
-    private PartnerEntityExtMapper partnerEntityExtMapper;
-    @Autowired
-    private UserEntityExtMapper userEntityExtMapper;
-    @Autowired
-    private ActivityEntityExtMapper activityEntityExtMapper;
+    private ActivityEntityExtMapper activityMapper;
 
     @Override
     public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (activityBo == null) {
-            throw new ManagerException("ActivityBo is null");
+            throw new ManagerException("Activity Create Failed: ActivityBo is null");
         }
         if (courseBo == null) {
-            throw new ManagerException("CourseBo is null");
+            throw new ManagerException("Activity Create Failed: CourseBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("PartnerBo is null");
+            throw new ManagerException("Activity Create Failed: PartnerBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("Activity Create Failed: UserBo is null");
         }
 
         // Convert
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
         CourseEntityExt courseEntity = CourseConverter.fromBo(courseBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            // TODO 权限
             // Set properties
             activityEntity.setCourseId(courseEntity.getId());
             activityEntity.setPartnerId(partnerEntity.getId());
 
             // Create Activity
             int result = 0;
-            result = activityEntityExtMapper.add(activityEntity);
+            result = activityMapper.add(activityEntity);
             if (result > 0) {
                 return ActivityConverter.toBo(activityEntity);
             } else {
-                throw new ManagerException("Activity Create failed");
+                throw new ManagerException("Activity Create Failed");
             }
         } catch (Throwable t) {
-            throw new ManagerException("Activity Create failed", t);
+            throw new ManagerException("Activity Create Failed", t);
         }
     }
 
@@ -87,27 +75,24 @@ public class ActivityManagerImpl implements ActivityManager {
     public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo) {
         // Check Null
         if (activityBo == null) {
-            throw new ManagerException("ActivityBo is null");
+            throw new ManagerException("Activity Submit Failed: ActivityBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("Activity Submit Failed: UserBo is null");
         }
 
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-        ActivityBo result = null;
 
         try {
-            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
-            activityEntityExtMapper.update(activityEntity);
-            result = ActivityConverter.toBo(activityEntity);
-            return result;
+            activityMapper.update(activityEntity);
+            return ActivityConverter.toBo(activityEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Activity Submit failed", t);
+            throw new ManagerException("Activity Submit Failed", t);
         }
 
     }
@@ -116,27 +101,24 @@ public class ActivityManagerImpl implements ActivityManager {
     public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo) {
         // Check Null
         if (activityBo == null) {
-            throw new ManagerException("ActivityBo is null");
+            throw new ManagerException("Activity Approve Failed: ActivityBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("Activity Approve Failed UserBo is null");
         }
 
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-        ActivityBo result = null;
 
         try {
-            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
-            activityEntityExtMapper.update(activityEntity);
-            result = ActivityConverter.toBo(activityEntity);
-            return result;
+            activityMapper.update(activityEntity);
+            return ActivityConverter.toBo(activityEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Activity Approve failed", t);
+            throw new ManagerException("Activity Approve Failed", t);
         }
     }
 
@@ -147,28 +129,37 @@ public class ActivityManagerImpl implements ActivityManager {
             throw new ManagerException("ActivityBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("UserBo is null");
+            throw new ManagerException("Activity Reject Failed: UserBo is null");
         }
         if (partnerBo == null) {
-            throw new ManagerException("Partner is null");
+            throw new ManagerException("Activity Reject Failed: Partner is null");
         }
 
         // Convert
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        ActivityBo result = null;
+
+        // Check Ids
+        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
+            throw new ManagerException("Activity Reject Failed: 合作商id为null或0");
+        }
+        if (activityEntity.getPartnerId() == null || activityEntity.getPartnerId() == 0) {
+            throw new ManagerException("Activity Reject Failed: 活动的partnerId为null或0");
+        }
+        // Check whether the activity belongs to the partner
+        if (activityEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("Activity Reject Failed: 该活动不属于此合作商");
+        }
 
         try {
-            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
-            activityEntityExtMapper.update(activityEntity);
-            result = ActivityConverter.toBo(activityEntity);
-            return result;
+            activityMapper.update(activityEntity);
+            return ActivityConverter.toBo(activityEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Activity Reject failed", t);
+            throw new ManagerException("Activity Reject Failed", t);
         }
     }
 
@@ -189,18 +180,27 @@ public class ActivityManagerImpl implements ActivityManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        ActivityBo result = null;
+
+        // Check Ids
+        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
+            throw new ManagerException("Activity Cancel Failed: 合作商id为null或0");
+        }
+        if (activityEntity.getPartnerId() == null || activityEntity.getPartnerId() == 0) {
+            throw new ManagerException("Activity Cancel Failed: 活动的partnerId为null或0");
+        }
+        // Check whether the activity belongs to the partner
+        if (activityEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("Activity Cancel Failed: 该活动不属于此合作商");
+        }
 
         try {
-            // TODO 权限
             // TODO status
             int status = 0;
             activityEntity.setStatus(status);
-            activityEntityExtMapper.update(activityEntity);
-            result = ActivityConverter.toBo(activityEntity);
-            return result;
+            activityMapper.update(activityEntity);
+            return ActivityConverter.toBo(activityEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Activity Cancel failed", t);
+            throw new ManagerException("Activity Cancel Failed", t);
         }
     }
 
@@ -221,18 +221,24 @@ public class ActivityManagerImpl implements ActivityManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        ActivityBo result = null;
+
+        // Check Ids
+        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
+            throw new ManagerException("Activity Delete Failed: 合作商id为null或0");
+        }
+        if (activityEntity.getPartnerId() == null || activityEntity.getPartnerId() == 0) {
+            throw new ManagerException("Activity Delete Failed: 活动的partnerId为null或0");
+        }
+        // Check whether the activity belongs to the partner
+        if (activityEntity.getPartnerId() != partnerEntity.getId()) {
+            throw new ManagerException("Activity Delete Failed: 该活动不属于此合作商");
+        }
 
         try {
-            // TODO 权限
-            // TODO status
-            int status = 0;
-            activityEntity.setStatus(status);
-            activityEntityExtMapper.update(activityEntity);
-            result = ActivityConverter.toBo(activityEntity);
-            return result;
+            activityMapper.deleteById(activityEntity.getId());
+            return ActivityConverter.toBo(activityEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Activity Delete failed", t);
+            throw new ManagerException("Activity Delete Failed", t);
         }
     }
 
@@ -261,15 +267,22 @@ public class ActivityManagerImpl implements ActivityManager {
         List<ActivityEntityExt> activityList = null;
         List<ActivityBo> resultList = null;
 
+        // Check Ids
+        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
+            throw new ManagerException("Activity Query Failed: 合作商id为null或0");
+        }
+
         try {
-            // TODO 权限
-            activityList = activityEntityExtMapper.list(activityEntity, pageEntity);
+            activityList = activityMapper.list(activityEntity, pageEntity);
             for (ActivityEntityExt activityPo : activityList) {
+                if (activityPo.getPartnerId() != partnerEntity.getId()) {
+                    throw new ManagerException("Activity Query Failed: 该活动不属于此合作商");
+                }
                 resultList.add(ActivityConverter.toBo(activityPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Activity Query failed", t);
+            throw new ManagerException("Activity Query Failed", t);
         }
     }
 
