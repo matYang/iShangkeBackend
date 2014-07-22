@@ -12,7 +12,16 @@ include "model/courseTemplate.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
+
+
 service CourseService {
+
+    /**********************************************************
+    *
+    *   关于课程的 Course
+    *
+    **********************************************************/
+
     /**
      *  本方法为创建新课程<br>
      *  合作商管理员可以通过此方法创建新课程
@@ -145,7 +154,7 @@ service CourseService {
      *  @return  课程实体 CourseBo 列表
      *
      */
-    list<course.CourseBo> queryByKeyword(1: string keyword, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<course.CourseBo> queryCourseByKeyword(1: string keyword, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为合作商提供查询课程的功能。<br>
@@ -159,7 +168,7 @@ service CourseService {
      *  @return 课程实体 CourseBo 列表
      *
      */
-    list<course.CourseBo> queryByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<course.CourseBo> queryCourseByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
      /**
      *  本方法为用户查询课程的功能。<br>
@@ -174,7 +183,7 @@ service CourseService {
      *  @return 课程实体 CourseBo 列表
      *
      */ 
-    list<course.CourseBo> queryByFilter(1: course.CourseBo courseBo, 2: category.CategoryBo categoryBo, 3: location.LocationBo locationBo, 4: circle.CircleBo circleBo,5: common.PaginationBo paginationBo, 6: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<course.CourseBo> queryCourseByFilter(1: course.CourseBo courseBo, 2: category.CategoryBo categoryBo, 3: location.LocationBo locationBo, 4: circle.CircleBo circleBo,5: common.PaginationBo paginationBo, 6: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     /**
@@ -187,7 +196,7 @@ service CourseService {
      *  @return  
      *
      */
-    course.CourseBo queryById(1: course.CourseBo courseBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    course.CourseBo queryCourseById(1: course.CourseBo courseBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }
 

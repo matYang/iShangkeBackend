@@ -16,12 +16,17 @@ import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptSuccessBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingCancelBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingCreateBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingValidateBo;
+import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
+import com.ishangke.edunav.commoncontract.model.OrderBo;
+import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.manager.BookingManager;
+import com.ishangke.edunav.manager.OrderManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
@@ -30,6 +35,16 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     @Autowired
     private BookingManager bookingManager;
+    @Autowired
+    private OrderManager orderManager;
+    
+    
+
+    /**********************************************************
+    *
+    *   关于预约的 Booking
+    *
+    **********************************************************/
 
     @Override
     public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
@@ -137,7 +152,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public List<BookingBo> query(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public List<BookingBo> queryBooking(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.queryBooking(bookingBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -150,7 +165,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public List<BookingHistoryBo> queryBookingHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return bookingManager.queryHistory(bookingHistoryBo, partnerBo, userBo, paginationBo);
         } catch (ManagerException e) {
@@ -161,5 +176,67 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
+    
+    
+    
+    
+    
+    /**********************************************************
+    *
+    *   关于预订单的 Order
+    *
+    **********************************************************/
+    @Override
+    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return orderManager.createOrderByUser(orderBo, bookingBo, userBo, withdrawBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return orderManager.acceptOrderByAdmin(orderBo, commentBookingAcceptBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ORDER_ACCEPTBYADMIN_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ORDER_ACCEPTBYADMIN_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<OrderBo> queryOrder(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return orderManager.query(orderBo, bookingBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ORDER_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ORDER_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<OrderHistoryBo> queryOrderHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return orderManager.queryHistory(orderHistory, bookingBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ORDER_QUERYHISTORY_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ORDER_QUERYHISTORY_ERROR_KEY);
+            throw exception;
+        }
+    }
+
 
 }

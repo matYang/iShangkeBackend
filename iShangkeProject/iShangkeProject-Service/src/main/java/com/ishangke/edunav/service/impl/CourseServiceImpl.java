@@ -29,6 +29,14 @@ public class CourseServiceImpl implements CourseService.Iface {
 
     @Autowired
     private CourseManager courseManager;
+    
+    
+    
+    /**********************************************************
+    *
+    *   关于课程的 Course
+    *
+    **********************************************************/
 
     @Override
     public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo,
@@ -157,7 +165,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
+    public List<CourseBo> queryCourseByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseManager.queryByKeyword(keyword);
         } catch (ManagerException e) {
@@ -170,7 +178,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo,
+    public List<CourseBo> queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseManager.queryByPartner(courseBo, partnerBo, userBo, paginationBo);
@@ -184,7 +192,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo,
+    public List<CourseBo> queryCourseByFilter(CourseBo courseBo, CategoryBo categoryBo, LocationBo locationBo,
             CircleBo circleBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseManager.queryByFilter(courseBo, categoryBo, locationBo, circleBo, paginationBo);
@@ -198,7 +206,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseBo queryById(CourseBo courseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CourseBo queryCourseById(CourseBo courseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return courseManager.queryById(courseBo, userBo);
         } catch (ManagerException e) {
