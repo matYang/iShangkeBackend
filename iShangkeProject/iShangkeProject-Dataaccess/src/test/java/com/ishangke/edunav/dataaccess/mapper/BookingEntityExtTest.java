@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -122,5 +123,17 @@ public class BookingEntityExtTest {
                 bookingEntityExt, page);
         Assert.assertEquals(1, result.size());
        Assert.assertEquals("_test_reference_1_爱上课", result.get(0).getReference());
+    }
+    @Test
+    public void testGet() {
+        BookingEntityExt getbyid1 = bookingEntityExtMapper
+                .getById(2);
+        BookingEntityExt getbyid2 = bookingEntityExtMapper
+                .getById(3);
+        BookingEntityExt getbyid3 = bookingEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
 }

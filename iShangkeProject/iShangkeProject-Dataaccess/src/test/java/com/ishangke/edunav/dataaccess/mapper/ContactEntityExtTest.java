@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 
 //before/after方法注入，aop
@@ -121,5 +122,17 @@ public class ContactEntityExtTest extends BaseTest{
         contactEntityExt.setId(2);
         List<ContactEntityExt> result = contactEntityExtMapper.list(contactEntityExt, page);
         Assert.assertEquals(0, result.size());
+    }
+    @Test
+    public void testGet() {
+        ContactEntityExt getbyid1 = contactEntityExtMapper
+                .getById(2);
+        ContactEntityExt getbyid2 = contactEntityExtMapper
+                .getById(3);
+        ContactEntityExt getbyid3 = contactEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
 }

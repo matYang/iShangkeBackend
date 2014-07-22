@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateClassPhotoEntityExtTest.class })
@@ -113,4 +114,23 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest {
         Assert.assertSame(5, result.get(0).getCourseTemplateId());
     }
 
+    @Test
+    public void testGet() {
+        CourseTemplateClassPhotoEntityExt getbyid1 = courseTemplateClassPhotoEntityExtMapper
+                .getById(2);
+        CourseTemplateClassPhotoEntityExt getbyid2 = courseTemplateClassPhotoEntityExtMapper
+                .getById(3);
+        CourseTemplateClassPhotoEntityExt getbyid3 = courseTemplateClassPhotoEntityExtMapper
+                .getById(4);
+        String time = "2014-07-15 15:08:14";
+        Assert.assertEquals(time,
+                DateUtility.toSQLDateTime(getbyid1.getCreateTime()));
+        String time1 = "2014-07-15 15:08:38";
+        Assert.assertEquals(time1,
+                DateUtility.toSQLDateTime(getbyid2.getCreateTime()));
+        String time2 = "2014-07-15 15:08:49";
+        Assert.assertEquals(time2,
+                DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
+
+    }
 }

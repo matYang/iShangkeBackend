@@ -31,9 +31,6 @@
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -44,9 +41,6 @@
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -86,6 +80,13 @@
     SELECT
     <include refid="UserGroup_Base_Column_List" />
     from USER_GROUP where USER_GROUP.DELETED = 0
+  </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="UserGroupExtMap">
+    SELECT
+    <include refid="UserGroup_Base_Column_List" />
+    from USER_GROUP where USER_GROUP.DELETED = 0 and USER_GROUP.ID =
+    #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserGroupExtMap">

@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CouponHistoryEntityExtTest.class })
@@ -111,5 +112,21 @@ public class CouponHistoryEntityExtTest extends BaseTest{
         Assert.assertSame(5, result.get(0).getId());
         Assert.assertSame(2, result.get(1).getId());
        
+    }
+    @Test
+    public void testGet() {
+        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();   
+        nf.setGroupingUsed(false);  
+        CouponHistoryEntityExt getbyid1 = couponHistoryEntityExtMapper
+                .getById(2);
+        CouponHistoryEntityExt getbyid2 = couponHistoryEntityExtMapper
+                .getById(3);
+        CouponHistoryEntityExt getbyid3 = couponHistoryEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("5.8", getbyid1.getCharge().toString());
+//        Assert.assertEquals("33.9086755", nf.format(getbyid2.getCharge()).toString());
+        Assert.assertEquals("44235245.9", nf.format(getbyid3.getCharge()).toString());
+//        System.out.println(getbyid2.getCharge());
+//        System.out.println(getbyid3.getCharge());
     }
 }

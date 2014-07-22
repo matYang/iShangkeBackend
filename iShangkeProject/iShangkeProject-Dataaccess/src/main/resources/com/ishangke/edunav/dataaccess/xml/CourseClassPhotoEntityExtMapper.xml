@@ -31,9 +31,6 @@
       <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="courseId != null">
@@ -44,9 +41,6 @@
       </if>
       <if test="createTime != null">
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -86,6 +80,12 @@
     SELECT
     <include refid="CourseClassPhoto_Base_Column_List" />
     from COURSE_CLASS_PHOTO where COURSE_CLASS_PHOTO.DELETED = 0
+  </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CourseClassPhotoExtMap">
+    SELECT
+    <include refid="CourseClassPhoto_Base_Column_List" />
+    from COURSE_CLASS_PHOTO where COURSE_CLASS_PHOTO.DELETED = 0 and COURSE_CLASS_PHOTO.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseClassPhotoExtMap">

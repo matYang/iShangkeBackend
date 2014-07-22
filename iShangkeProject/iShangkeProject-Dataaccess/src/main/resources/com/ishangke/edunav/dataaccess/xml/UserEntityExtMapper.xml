@@ -96,9 +96,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
       <if test="gender != null">
         GENDER,
       </if>
@@ -151,9 +148,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="gender != null">
         #{gender,jdbcType=INTEGER},
@@ -267,6 +261,13 @@
     <include refid="User_Base_Column_List" />
     from USERS where USERS.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="UserExtMap">
+    SELECT
+    <include refid="User_Base_Column_List" />
+    from USERS where USERS.DELETED = 0 and USERS.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserExtMap">
     select
@@ -285,26 +286,28 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.careerId != null and entity.careerId != 0">
         AND USERS.CAREER_ID = #{entity.careerId,jdbcType=INTEGER}
       </if>
       <if test="entity.careerId == null or entity.careerId == 0">
         <if test="entity.careerIdSet != null and entity.careerIdSet.size() > 0">
           AND USERS.CAREER_ID IN
-          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.schoolId != null and entity.schoolId != 0">
         AND USERS.SCHOOL_ID = #{entity.schoolId,jdbcType=INTEGER}
       </if>
       <if test="entity.schoolId == null or entity.schoolId == 0">
         <if test="entity.schoolIdSet != null and entity.schoolIdSet.size() > 0">
           AND USERS.SCHOOL_ID IN
-          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -438,26 +441,28 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.careerId != null and entity.careerId != 0">
         AND USERS.CAREER_ID = #{entity.careerId,jdbcType=INTEGER}
       </if>
       <if test="entity.careerId == null or entity.careerId == 0">
         <if test="entity.careerIdSet != null and entity.careerIdSet.size() > 0">
           AND USERS.CAREER_ID IN
-          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.schoolId != null and entity.schoolId != 0">
         AND USERS.SCHOOL_ID = #{entity.schoolId,jdbcType=INTEGER}
       </if>
       <if test="entity.schoolId == null or entity.schoolId == 0">
         <if test="entity.schoolIdSet != null and entity.schoolIdSet.size() > 0">
           AND USERS.SCHOOL_ID IN
-          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>

@@ -70,9 +70,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -104,9 +101,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -172,7 +166,12 @@
     <include refid="Activity_Base_Column_List" />
     from ACTIVITY where ACCOUNT.DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="ActivityExtMap">
+    SELECT
+    <include refid="Activity_Base_Column_List" />
+    from ACTIVITY where ACTIVITY.DELETED = 0 and ACTIVITY.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ActivityExtMap">
     SELECT
@@ -305,7 +304,6 @@
     <if test="page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
-
   </select>
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">

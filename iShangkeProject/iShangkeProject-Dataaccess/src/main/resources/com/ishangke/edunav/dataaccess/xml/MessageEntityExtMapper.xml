@@ -50,9 +50,6 @@
       <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -73,9 +70,6 @@
       </if>
       <if test="createTime != null">
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -119,6 +113,12 @@
   <!-- getCount -->
   <select id="getCount" resultType="int">
     select count(ID) from MESSAGE where DELETED = 0
+  </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="MessageExtMap">
+    SELECT
+    <include refid="Message_Base_Column_List" />
+    from MESSAGE where MESSAGE.DELETED = 0 and MESSAGE.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="MessageExtMap">

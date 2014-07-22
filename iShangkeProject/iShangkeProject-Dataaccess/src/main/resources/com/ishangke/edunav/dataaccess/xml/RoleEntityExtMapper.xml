@@ -6,7 +6,8 @@
     <result column="ROLES_NAME" property="name" jdbcType="VARCHAR" />
     <result column="ROLES_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="ROLES_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="ROLES_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ROLES_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ROLES_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -65,9 +66,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -81,9 +79,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -256,7 +251,8 @@
     JOIN USER_GROUP USER_GROUP
     JOIN
     USERS USERS
-    ON ROLES.ID = GROUPS.ROLE_ID AND GROUPS.ID =
+    ON ROLES.ID =
+    GROUPS.ROLE_ID AND GROUPS.ID =
     USER_GROUP.GROUP_ID WHERE
     USER_GROUP.USER_ID = #{userId} AND
     ROLES.DELETED = 0
@@ -270,7 +266,8 @@
     JOIN USER_GROUP USER_GROUP
     JOIN
     USERS USERS
-    ON ROLES.ID = GROUPS.ROLE_ID AND GROUPS.ID =
+    ON ROLES.ID =
+    GROUPS.ROLE_ID AND GROUPS.ID =
     USER_GROUP.GROUP_ID WHERE
     USER_GROUP.USER_ID = #{userId} AND
     ROLES.DELETED = 0
@@ -297,6 +294,6 @@
   <select id="getById" parameterType="int" resultMap="RoleExtMap">
     SELECT
     <include refid="Role_Base_Column_List" />
-    FROM ROLES ROLES WHERE ROLES.ID =  #{id} AND ROLES.DELETED = 0
+    FROM ROLES ROLES WHERE ROLES.ID = #{id} AND ROLES.DELETED = 0
   </select>
 </mapper>

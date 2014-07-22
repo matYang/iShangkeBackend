@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
@@ -146,5 +147,17 @@ public class RoleEntityExtTest extends BaseTest {
         
         Assert.assertEquals("_test_name_1_爱上课", teacherCount.getName());
       
+    }
+    @Test
+    public void testGet() {
+        RoleEntityExt getbyid1 = roleEntityExtMapper
+                .getById(2);
+        RoleEntityExt getbyid2 = roleEntityExtMapper
+                .getById(3);
+        RoleEntityExt getbyid3 = roleEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
 }

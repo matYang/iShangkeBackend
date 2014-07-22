@@ -76,9 +76,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="partnerId != null">
@@ -101,9 +98,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -157,6 +151,12 @@
     <include refid="ClassPhoto_Base_Column_List" />
     from CLASS_PHOTO where CLASS_PHOTO.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="ClassPhotoExtMap">
+    SELECT
+    <include refid="ClassPhoto_Base_Column_List" />
+    from CLASS_PHOTO where CLASS_PHOTO.DELETED = 0 and CLASS_PHOTO.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ClassPhotoExtMap">
     SELECT
@@ -180,7 +180,8 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND CLASS_PHOTO.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -262,7 +263,8 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND CLASS_PHOTO.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -325,7 +327,8 @@
     <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO where CLASS_PHOTO.PARTNER_ID = #{partnerId} and
     CLASS_PHOTO.DELETED = 0
-    ) AS total
+    ) AS
+    total
   </select>
   <!-- listClassPhotoByCourseId -->
   <select id="listClassPhotoByCourseId" parameterType="int" resultMap="ClassPhotoExtMap">
@@ -343,7 +346,7 @@
   <!-- getCountByCourseId -->
   <select id="getCountByCourseId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT 
+    SELECT
     <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_CLASS_PHOTO COURSE_CLASS_PHOTO
@@ -367,7 +370,8 @@
     COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
     JOIN COURSE_TEMPLATE
     COURSE_TEMPLATE
-    ON COURSE_TEMPLATE.ID =
+    ON
+    COURSE_TEMPLATE.ID =
     COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
     WHERE COURSE_TEMPLATE.ID
     =
@@ -377,7 +381,7 @@
   <!-- getCountByCourseTemplateId -->
   <select id="getCountByCourseTemplateId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM(
-    SELECT 
+    SELECT
     <include refid="ClassPhoto_Base_Column_List" />
     FROM CLASS_PHOTO CLASS_PHOTO
     JOIN COURSE_TEMPLATE_CLASS_PHOTO
@@ -387,7 +391,8 @@
     COURSE_TEMPLATE_CLASS_PHOTO.CLASS_PHOTO_ID
     JOIN COURSE_TEMPLATE
     COURSE_TEMPLATE
-    ON COURSE_TEMPLATE.ID =
+    ON
+    COURSE_TEMPLATE.ID =
     COURSE_TEMPLATE_CLASS_PHOTO.COURSE_TEMPLATE_ID
     WHERE COURSE_TEMPLATE.ID
     =

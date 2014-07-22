@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateEntityExtTest.class })
@@ -149,5 +150,18 @@ public class CourseTemplateEntityExtTest extends BaseTest {
         Assert.assertEquals("_test_reference_2_爱上课", result.get(0).getReference());
        
     }
-
+    @Test
+    public void testGet() {
+        CourseTemplateEntityExt getbyid1 = courseTemplateEntityExtMapper
+                .getInfoById(2);
+        CourseTemplateEntityExt getbyid2 = courseTemplateEntityExtMapper
+                .getInfoById(3);
+        CourseTemplateEntityExt getbyid3 = courseTemplateEntityExtMapper
+                .getInfoById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getCourseName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getCourseName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getCourseName());
+        
+       
+    }
 }

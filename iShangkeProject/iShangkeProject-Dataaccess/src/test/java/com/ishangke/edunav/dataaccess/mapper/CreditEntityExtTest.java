@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,5 +38,23 @@ public class CreditEntityExtTest extends BaseTest{
         List<CreditEntityExt> result = creditEntityExtMapper.list(creditEntityExt, page);
         Assert.assertEquals(2, result.size());
     }
+    @Test
+    public void testGet() {
+        CreditEntityExt getbyid1 = creditEntityExtMapper
+                .getById(2);
+        CreditEntityExt getbyid2 = creditEntityExtMapper
+                .getById(3);
+        CreditEntityExt getbyid3 = creditEntityExtMapper
+                .getById(4);
+        String time = "2014-07-15 14:34:45";
+        Assert.assertEquals(time,
+                DateUtility.toSQLDateTime(getbyid1.getCreateTime()));
+        String time1 = "2014-07-15 14:35:16";
+        Assert.assertEquals(time1,
+                DateUtility.toSQLDateTime(getbyid2.getCreateTime()));
+        String time2 = "2014-07-15 14:35:32";
+        Assert.assertEquals(time2,
+                DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
 
+    }
 }

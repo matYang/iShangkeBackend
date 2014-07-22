@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 
 //before/after方法注入，aop
@@ -122,5 +123,17 @@ public class BookingHistoryEntityExtTest {
         bookingHistoryEntityExt.setBookingId(3);
         List<BookingHistoryEntityExt> result = bookingHistoryEntityExtMapper.list(bookingHistoryEntityExt, page);
         Assert.assertEquals(0, result.size());
+    }
+    @Test
+    public void testGet() {
+        BookingHistoryEntityExt getbyid1 = bookingHistoryEntityExtMapper
+                .getById(2);
+        BookingHistoryEntityExt getbyid2 = bookingHistoryEntityExtMapper
+                .getById(3);
+        BookingHistoryEntityExt getbyid3 = bookingHistoryEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_remark_1_爱上课", getbyid1.getRemark());
+        Assert.assertEquals("_test_remark_2_爱上课", getbyid2.getRemark());
+        Assert.assertEquals("_test_remark_3_爱上课", getbyid3.getRemark());
     }
 }

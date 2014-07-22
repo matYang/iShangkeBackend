@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -115,4 +116,13 @@ public class AccountHistoryEntityExtTest {
         List<AccountHistoryEntityExt> result = accountHistoryEntityExtMapper.list(accountHistoryEntityExt, page);
         Assert.assertEquals(0, result.size());
     }
+    @Test
+    public void testGet() {
+        AccountHistoryEntityExt accountHistoryEntityExt1 = accountHistoryEntityExtMapper.getById(2);
+        AccountHistoryEntityExt accountHistoryEntityExt2 = accountHistoryEntityExtMapper.getById(3);
+        AccountHistoryEntityExt accountHistoryEntityExt3 = accountHistoryEntityExtMapper.getById(4);
+        Assert.assertEquals("_test_remark_1_爱上课", accountHistoryEntityExt1.getRemark());
+        Assert.assertEquals("_test_remark_2_爱上课", accountHistoryEntityExt2.getRemark());
+        Assert.assertEquals("_test_remark_3_爱上课", accountHistoryEntityExt3.getRemark());
+          }
 }

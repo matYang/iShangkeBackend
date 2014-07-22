@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -80,7 +81,19 @@ public class CircleEntityExtTest {
         List<CircleEntityExt> result = circleEntityExtMapper.list(circleEntityExt, page);
         Assert.assertEquals(3, result.size());
     }
-    
+    @Test
+    public void testGet() {
+        CircleEntityExt getbyid1 = circleEntityExtMapper
+                .getById(2);
+        CircleEntityExt getbyid2 = circleEntityExtMapper
+                .getById(3);
+        CircleEntityExt getbyid3 = circleEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
+
    
 
 }

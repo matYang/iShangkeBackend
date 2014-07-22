@@ -193,3 +193,7 @@ INSERT INTO `contact` (`ID`, `USER_ID`, `NAME`, `PHONE`, `EMAIL`, `LAST_MODIFY_T
 INSERT INTO `contact` (`ID`, `USER_ID`, `NAME`, `PHONE`, `EMAIL`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `DELETED`, `ENABLED`) VALUES (3, 4, '_test_name_2_爱上课', '_test_phone_2_爱上课', '_test_email_2_爱上课', '2014-7-15 15:23:27', '2014-7-15 15:23:29', 0, 2);
 INSERT INTO `contact` (`ID`, `USER_ID`, `NAME`, `PHONE`, `EMAIL`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `DELETED`, `ENABLED`) VALUES (4, 3, '_test_name_3_爱上课', '_test_phone_3_爱上课', '_test_email_3_爱上课', '2014-7-15 15:23:27', '2014-7-15 15:23:29', 0, 3);
 INSERT INTO `contact` (`ID`, `USER_ID`, `NAME`, `PHONE`, `EMAIL`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `DELETED`, `ENABLED`) VALUES (5, 2, '_test_name_2_爱上课', '_test_phone_2_爱上课', '_test_email_1_爱上课', '2014-7-15 15:23:27', '2014-7-15 15:23:29', 0, 2);
+INSERT INTO `configuration` (`ID`, `NAME`, `CONFIG_DATA`) VALUES (1, '_test_name_1_爱上课', '_test_CD_1_爱上课');
+INSERT INTO `configuration` (`ID`, `NAME`, `CONFIG_DATA`) VALUES (2, '_test_name_2_爱上课', '_test_CD_2_爱上课');
+INSERT INTO `configuration` (`ID`, `NAME`, `CONFIG_DATA`) VALUES (3, '_test_name_3_爱上课', '_test_CD_3_爱上课');
+INSERT INTO `configuration` (`ID`, `NAME`, `CONFIG_DATA`) VALUES (4, '_test_name_4_爱上课', '_test_CD_4_爱上课');

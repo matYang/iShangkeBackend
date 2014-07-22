@@ -203,9 +203,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
       <if test="wholeName != null">
         WHOLE_NAME,
       </if>
@@ -304,9 +301,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="wholeName != null">
         #{wholeName,jdbcType=VARCHAR},
@@ -523,10 +517,12 @@
     from PARNTER PARNTER
     join TEACHER TEACHER
     ON TEACHER.PARTNER_ID = PARNTER.ID
-    join CLASS_PHOTO CLASS_PHOTO
+    join CLASS_PHOTO
+    CLASS_PHOTO
     ON CLASS_PHOTO.PARTNER_ID = PARNTER.ID
     join ADDRESS ADDRESS
-    ON ADDRESS.PARTNER_ID = PARTNER.ID
+    ON ADDRESS.PARTNER_ID =
+    PARTNER.ID
     where PARNTER.DELETED = 0 AND PARNTER.ID = #{id}
   </select>
 
@@ -535,6 +531,12 @@
     SELECT
     <include refid="Partner_Base_Column_List" />
     from PARTNER where PARTNER.DELETED = 0
+  </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="PartnerExtMap">
+    SELECT
+    <include refid="Partner_Base_Column_List" />
+    from PARTNER where PARTNER.DELETED = 0 and PARTNER.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="PartnerExtMap">
