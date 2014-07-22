@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.ConfigurationManager;
@@ -31,8 +32,6 @@ public class TransformManagerImpl implements TransformManager {
     @Autowired
     private CacheManager cache;
 
-    public static final String STATUSTRANSFORM = "statusTransform";
-
     @Override
     public List<ActionBo> getActionByGroupName(String groupName, String entityName, int currentStatus) {
         String key = groupName + entityName + currentStatus;
@@ -42,7 +41,7 @@ public class TransformManagerImpl implements TransformManager {
             return tempList;
         }
         LOGGER.warn(String.format("[Transform] has no cached for status transform [groupName: %s][entityName: %s][currentStatus: %d]", groupName, entityName, currentStatus));
-        String configurationJson = configurationManager.getByName(TransformManagerImpl.STATUSTRANSFORM).getConfigData();
+        String configurationJson = configurationManager.getByName(Constant.STATUSTRANSFORM).getConfigData();
         ObjectMapper mapper = new ObjectMapper();
         Transform transform;
         try {

@@ -33,7 +33,7 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
             configurationBo = ConfigurationConverter.toBo(configurationEntityExt);
             return configurationBo;
         } catch (Throwable t) {
-            throw new ManagerException("Circle Query Failed", t);
+            throw new ManagerException("Configuration Query Failed", t);
         }
     }
 
