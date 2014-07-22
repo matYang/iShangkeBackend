@@ -30,7 +30,7 @@ public class CircleManagerImpl implements CircleManager {
 
         // Check Null
         if (circleBo == null) {
-            throw new ManagerException("CircleBo is null");
+            throw new ManagerException("Circle Query Failed: CircleBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -48,7 +48,7 @@ public class CircleManagerImpl implements CircleManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Circle Query Failed");
+            throw new ManagerException("Circle Query Failed", t);
         }
     }
 
