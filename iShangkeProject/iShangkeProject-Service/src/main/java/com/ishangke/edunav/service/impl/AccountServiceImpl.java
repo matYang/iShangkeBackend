@@ -48,7 +48,6 @@ public class AccountServiceImpl implements AccountService.Iface {
     *   关于账户相关的 Account
     *
     **********************************************************/
-
     @Override
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
@@ -144,7 +143,6 @@ public class AccountServiceImpl implements AccountService.Iface {
     *   关于积分 Credit
     *
     **********************************************************/
-    
     @Override
     public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
@@ -207,7 +205,6 @@ public class AccountServiceImpl implements AccountService.Iface {
     *   关于提现账号 WithdrawService
     *
     **********************************************************/
-
     @Override
     public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {

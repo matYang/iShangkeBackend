@@ -37,7 +37,6 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     *   关于课程模板的 CourseTemplate
     *
     **********************************************************/
-
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
@@ -179,7 +178,6 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
     *   关于课程评论的 CourseComment
     *
     **********************************************************/
-    
     @Override
     public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {

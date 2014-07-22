@@ -17,7 +17,7 @@ service GeneralService{
     *   Configuration
     *
     **********************************************************/
-    string getConfigurationByName(1: string name) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    configuration.ConfigurationBo getConfigurationByName(1: string name) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     list<configuration.ConfigurationBo> listAllConfiguration() throws (1: fault.BusinessExceptionBo businessExceptionBo)
 

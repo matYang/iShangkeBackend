@@ -37,7 +37,6 @@ public class CourseServiceImpl implements CourseService.Iface {
     *   关于课程的 Course
     *
     **********************************************************/
-
     @Override
     public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo,
             UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {

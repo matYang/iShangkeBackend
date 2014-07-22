@@ -45,7 +45,6 @@ public class BookingServiceImpl implements BookingService.Iface {
     *   关于预约的 Booking
     *
     **********************************************************/
-
     @Override
     public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {

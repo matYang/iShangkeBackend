@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
+import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
+import com.ishangke.edunav.commoncontract.model.MessageBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
+import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
+import com.ishangke.edunav.manager.MessageManager;
+import com.ishangke.edunav.manager.SpreadManager;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -25,7 +30,19 @@ public class UserServiceImpl implements UserService.Iface {
 
     @Autowired
     private UserManager userManager;
+    @Autowired
+    private MessageManager messageManager;
+    @Autowired
+    private SpreadManager spreadManager;
 
+    
+    
+    
+    /**********************************************************
+    *
+    *   关于用户账号的 User
+    *
+    **********************************************************/
     @Override
     public UserBo authenticate(String sessionString, String permissionTag) throws BusinessExceptionBo, TException {
         try {
@@ -245,6 +262,170 @@ public class UserServiceImpl implements UserService.Iface {
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_VERIFYCHANGEPASSWORDSESSION_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_VERIFYCHANGEPASSWORDSESSION_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    
+    
+    
+    
+    /**********************************************************
+    *
+    *   关于用户之间传信的 Message
+    *
+    **********************************************************/
+    @Override
+    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return messageManager.sendMessage(messageBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.MESSAGE_SEND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.MESSAGE_SEND_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return messageManager.receiveMessage(messageBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.MESSAGE_RECEIVE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.MESSAGE_RECEIVE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return messageManager.deleteMessage(messageBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.MESSAGE_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.MESSAGE_DELETE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<MessageBo> queryMessage(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            return messageManager.query(messageBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    
+    
+
+    /**********************************************************
+    *
+    *   关于宣传的 Spread
+    *
+    **********************************************************/
+    @Override
+    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
+        try {
+            return spreadManager.generateCode(userBo, partnerBo, courseBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_GENERATECODE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_GENERATECODE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<SpreadBo> querySpread(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            return spreadManager.query(spreadBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            return spreadManager.createSpread(spreadBo, partnerBo, courseBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return spreadManager.approveSpread(spreadBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_APPROVE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_APPROVE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return spreadManager.rejectSpread(spreadBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_REJECT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_REJECT_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return spreadManager.cancelSpread(spreadBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_CANCEL_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_CANCEL_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return spreadManager.deleteSpread(spreadBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.SPREAD_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_DELETE_ERROR_KEY);
             throw exception;
         }
     }

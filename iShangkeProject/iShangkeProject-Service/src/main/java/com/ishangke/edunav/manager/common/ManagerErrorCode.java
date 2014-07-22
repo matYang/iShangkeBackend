@@ -293,4 +293,13 @@ public class ManagerErrorCode {
     // school
     public static final int SCHOOL_NOTFOUND_ERROR = 0x001A0404;
     public static final String SCHOOL_NOTFOUND_ERROR_KEY = "school_notfound_error";
+    
+    
+    // school
+    public static final int CONFIGURATION_GETBYNAME_ERROR = 0x001B0001;
+    public static final String CONFIGURATION_GETBYNAME_ERROR_KEY = "configuration_getByName_error";
+    public static final int CONFIGURATION_LISTALL_ERROR = 0x001B0002;
+    public static final String CONFIGURATION_LISTALL_ERROR_KEY = "configuration_listAll_error";
+    public static final int CONFIGURATION_NOTFOUND_ERROR = 0x001B0404;
+    public static final String CONFIGURATION_NOTFOUND_ERROR_KEY = "configuration_notfound_error";
 }
