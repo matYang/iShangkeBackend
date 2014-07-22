@@ -136,9 +136,4 @@ public class PermissionManagerImpl implements PermissionManager {
         return false;
     }
 
-    @Override
-    public boolean hasPermissionByGroup(int groupId, String permissionTag) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 }

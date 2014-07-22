@@ -19,6 +19,4 @@ public interface PermissionManager {
     public boolean hasPermissionByRole(int roleId, String permissionTag);
 
     public boolean hasPermissionByUser(int userId, String permissionTag);
-    
-    public boolean hasPermissionByGroup(int groupId, String permissionTag);
 }
