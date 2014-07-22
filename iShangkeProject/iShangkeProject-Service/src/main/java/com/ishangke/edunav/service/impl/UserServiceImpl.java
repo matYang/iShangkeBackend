@@ -103,13 +103,19 @@ public class UserServiceImpl implements UserService.Iface {
     @Override
     public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
             TException {
-        if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
-            LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag, "createUser"));
-            throw new NoPermissionException();
-        }
-
         try {
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag, "createUser"));
+                throw new NoPermissionException();
+            }
+
             return userManager.createUser(targetUser, partnerBo, currentUser);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CREATE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATE_KEY);
+            throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
