@@ -57,9 +57,6 @@
       <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="type != null">
@@ -85,9 +82,6 @@
       </if>
       <if test="createTime != null">
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
 
@@ -146,7 +140,12 @@
     <include refid="ApproveHistory_Base_Column_List" />
     from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="ApproveHistoryExtMap">
+    SELECT
+    <include refid="ApproveHistory_Base_Column_List" />
+    from APPROVE_HISTORY where APPROVE_HISTORY.DELETED = 0 and APPROVE_HISTORY.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="ApproveHistoryExtMap">
     SELECT

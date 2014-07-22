@@ -198,4 +198,16 @@ public class PermissionEntityExtTest extends BaseTest{
         Assert.assertEquals("_test_name_1_爱上课", PermissionCount.getName());
       
     }
+    @Test
+    public void testGet() {
+        PermissionEntityExt getbyid1 = permissionEntityExtMapper
+                .getById(2);
+        PermissionEntityExt getbyid2 = permissionEntityExtMapper
+                .getById(3);
+        PermissionEntityExt getbyid3 = permissionEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
+        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
+        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
 }

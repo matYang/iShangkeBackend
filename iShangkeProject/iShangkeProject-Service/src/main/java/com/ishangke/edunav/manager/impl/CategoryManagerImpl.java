@@ -22,7 +22,7 @@ public class CategoryManagerImpl implements CategoryManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryManagerImpl.class);
 
     @Autowired
-    private CategoryEntityExtMapper categoryEntityExtMapper;
+    private CategoryEntityExtMapper categoryMapper;
 
     @Override
     public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo) {
@@ -30,7 +30,7 @@ public class CategoryManagerImpl implements CategoryManager {
 
         // Check Null
         if (categoryBo == null) {
-            throw new ManagerException("CategoryBo is null");
+            throw new ManagerException("Category Query Failed: CategoryBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -42,13 +42,13 @@ public class CategoryManagerImpl implements CategoryManager {
         List<CategoryBo> resultList = null;
 
         try {
-            categoryList = categoryEntityExtMapper.list(categoryEntity, pageEntity);
+            categoryList = categoryMapper.list(categoryEntity, pageEntity);
             for (CategoryEntityExt categoryPo : categoryList) {
                 resultList.add(CategoryConverter.toBo(categoryPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Category Query Failed");
+            throw new ManagerException("Category Query Failed", t);
         }
     }
 

@@ -30,18 +30,18 @@ public class CouponManagerImpl implements CouponManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CouponManagerImpl.class);
 
     @Autowired
-    private CouponEntityExtMapper couponEntityExtMapper;
+    private CouponEntityExtMapper couponMapper;
     @Autowired
-    private CouponHistoryEntityExtMapper couponHistoryEntityExtMapper;
+    private CouponHistoryEntityExtMapper couponHistoryMapper;
 
     @Override
     public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) {
         // Check Null
         if (couponBo == null) {
-            throw new ManagerException("couponBo is null");
+            throw new ManagerException("Coupon Create Failed: couponBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("Coupon Create Failed: userBo is null");
         }
 
         // Convert
@@ -49,54 +49,71 @@ public class CouponManagerImpl implements CouponManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
-            int result = 0;
+            int couponResult = 0;
             couponEntity.setUserId(userEntity.getId());
-            result = couponEntityExtMapper.add(couponEntity);
-            if (result > 0) {
-                // add to History
+
+            // Create Coupon
+            couponResult = couponMapper.add(couponEntity);
+
+            if (couponResult > 0) {
+                // Create CouponHistory
                 CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
                 couponHistoryEntityExt.setCharge(couponEntity.getTotal() - couponEntity.getBalance());
                 couponHistoryEntityExt.setCouponId(couponEntity.getId());
                 couponHistoryEntityExt.setDeleted(0);
                 couponHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                 couponHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-                couponHistoryEntityExtMapper.add(couponHistoryEntityExt);
-                // add Coupon to Databases
-                return CouponConverter.toBo(couponEntity);
+
+                int couponHistoryResult = 0;
+                // Create CouponHistory
+                couponHistoryResult = couponHistoryMapper.add(couponHistoryEntityExt);
+
+                if (couponHistoryResult > 0) {
+                    return CouponConverter.toBo(couponEntity);
+                } else {
+                    throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
+                }
+
             } else {
-                throw new ManagerException("Coupon Create Failed");
+                throw new ManagerException("Coupon Create Failed: add Coupon Failed");
             }
         } catch (Throwable t) {
-            throw new ManagerException("Coupon Create Failed");
+            throw new ManagerException("Coupon Create Failed", t);
         }
     }
 
     @Override
     public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo) {
+        PaginationEntity pageEntity = null;
+
         // Check Null
         if (couponBo == null) {
-            throw new ManagerException("couponBo is null");
+            throw new ManagerException("Coupon Query Failed: couponBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("Coupon Query Failed: userBo is null");
+        }
+        if (paginationBo != null) {
+            pageEntity = PaginationConverter.fromBo(paginationBo);
         }
 
         // Convert
         CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        PaginationEntity pageEntity = PaginationConverter.fromBo(paginationBo);
         List<CouponEntityExt> couponList = null;
         List<CouponBo> resultList = null;
 
         try {
-            // TODO 权限
-            couponList = couponEntityExtMapper.list(couponEntity, pageEntity);
+            couponList = couponMapper.list(couponEntity, pageEntity);
             for (CouponEntityExt couponPo : couponList) {
+                if (couponPo.getUserId() != userEntity.getId()) {
+                    throw new ManagerException("Coupon Query Failed: 用户id和优惠券用户id不匹配");
+                }
                 resultList.add(CouponConverter.toBo(couponPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Coupon Query Failed");
+            throw new ManagerException("Coupon Query Failed", t);
         }
     }
 
@@ -106,10 +123,10 @@ public class CouponManagerImpl implements CouponManager {
 
         // Check Null
         if (couponHistoryBo == null) {
-            throw new ManagerException("couponHistoryBo is null");
+            throw new ManagerException("CouponHistory Query Failed: couponHistoryBo is null");
         }
         if (userBo == null) {
-            throw new ManagerException("userBo is null");
+            throw new ManagerException("CouponHistory Query Failed: userBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -117,36 +134,33 @@ public class CouponManagerImpl implements CouponManager {
 
         // Convert
         CouponHistoryEntityExt couponHistoryEntity = CouponHistoryConverter.fromBo(couponHistoryBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
         List<CouponHistoryEntityExt> couponHistoryList = null;
         List<CouponHistoryBo> resultList = null;
 
         try {
-            // TODO 权限
-            couponHistoryList = couponHistoryEntityExtMapper.list(couponHistoryEntity, pageEntity);
+            couponHistoryList = couponHistoryMapper.list(couponHistoryEntity, pageEntity);
             for (CouponHistoryEntityExt couponHistoryPo : couponHistoryList) {
                 resultList.add(CouponHistoryConverter.toBo(couponHistoryPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("CouponHistory Query Failed");
+            throw new ManagerException("CouponHistory Query Failed", t);
         }
     }
 
-    // @Override
+    @Override
     public List<CouponBo> listCouponByUserId(int userId) {
         List<CouponEntityExt> couponList = null;
         List<CouponBo> resultList = null;
 
         try {
-            // TODO 权限
-            couponList = couponEntityExtMapper.listCouponByUserId(userId);
+            couponList = couponMapper.listCouponByUserId(userId);
             for (CouponEntityExt couponPo : couponList) {
                 resultList.add(CouponConverter.toBo(couponPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Coupon listByUserId Failed");
+            throw new ManagerException("Coupon listByUserId Failed", t);
         }
     }
 

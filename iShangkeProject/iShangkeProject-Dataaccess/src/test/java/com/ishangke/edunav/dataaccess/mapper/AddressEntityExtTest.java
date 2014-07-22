@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, AddressEntityExtTest.class })
@@ -125,5 +126,17 @@ public class AddressEntityExtTest {
                 addressEntityExt, page);
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_detail_2_爱上课", result.get(0).getDetail());
+    }
+    @Test
+    public void testGet() {
+        AddressEntityExt addressEntityExt1 = addressEntityExtMapper
+                .getById(2);
+        AddressEntityExt addressEntityExt2 = addressEntityExtMapper
+                .getById(3);
+        AddressEntityExt addressEntityExt3 = addressEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_detail_1_爱上课", addressEntityExt1.getDetail());
+        Assert.assertEquals("_test_detail_2_爱上课", addressEntityExt2.getDetail());
+        Assert.assertEquals("_test_detail_3_爱上课", addressEntityExt3.getDetail());
     }
 }

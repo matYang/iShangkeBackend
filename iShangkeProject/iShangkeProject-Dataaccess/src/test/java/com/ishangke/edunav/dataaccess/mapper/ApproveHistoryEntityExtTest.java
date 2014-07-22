@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -115,5 +116,17 @@ public class ApproveHistoryEntityExtTest {
                 approveHistoryEntityExt, page);
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_comment_2_爱上课", result.get(0).getComment());
+    }
+    @Test
+    public void testGet() {
+        ApproveHistoryEntityExt getbyid1 = approveHistoryEntityExtMapper
+                .getById(2);
+        ApproveHistoryEntityExt getbyid2 = approveHistoryEntityExtMapper
+                .getById(3);
+        ApproveHistoryEntityExt getbyid3 = approveHistoryEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_comment_1_爱上课", getbyid1.getComment());
+        Assert.assertEquals("_test_comment_2_爱上课", getbyid2.getComment());
+        Assert.assertEquals("_test_comment_3_爱上课", getbyid3.getComment());
     }
 }

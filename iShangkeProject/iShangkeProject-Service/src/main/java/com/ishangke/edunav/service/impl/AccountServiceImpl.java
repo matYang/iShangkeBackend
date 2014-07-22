@@ -50,9 +50,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     **********************************************************/
 
     @Override
-    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            return accountManager.exchangeCash(accountBo, userBo);
+            return null;
+            // return accountManager.exchangeCash(accountBo, userBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

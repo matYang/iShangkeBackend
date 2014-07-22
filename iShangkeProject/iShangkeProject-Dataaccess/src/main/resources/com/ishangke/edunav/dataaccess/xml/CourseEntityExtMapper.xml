@@ -321,9 +321,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
       <if test="courseHourLength != null">
         COURSE_HOUR_LENGTH,
       </if>
@@ -518,9 +515,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="courseHourLength != null">
         #{courseHourLength,jdbcType=INTEGER},
@@ -956,6 +950,12 @@
     SELECT
     <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0
+  </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CourseExtMap">
+    SELECT
+    <include refid="Course_Base_Column_List" />
+    from COURSE where COURSE.DELETED = 0 and COURSE.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseExtMap">

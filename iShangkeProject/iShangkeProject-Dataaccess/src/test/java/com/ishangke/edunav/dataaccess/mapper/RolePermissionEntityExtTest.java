@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -141,4 +142,23 @@ public class RolePermissionEntityExtTest extends BaseTest{
         Assert.assertEquals(1, result.size());
         Assert.assertSame(5, result.get(0).getId());
     }
+    @Test
+    public void testGet() {
+        RolePermissionEntityExt getbyid1 = rolePermissionEntityExtMapper
+                .getById(2);
+        RolePermissionEntityExt getbyid2 = rolePermissionEntityExtMapper
+                .getById(3);
+        RolePermissionEntityExt getbyid3 = rolePermissionEntityExtMapper
+                .getById(4);
+        String time = "2014-07-15 12:15:01";
+        Assert.assertEquals(time,
+                DateUtility.toSQLDateTime(getbyid1.getLastModifyTime()));
+        String time1 = "2014-07-16 12:15:19";
+        Assert.assertEquals(time1,
+                DateUtility.toSQLDateTime(getbyid2.getLastModifyTime()));
+        String time2 = "2014-07-17 12:15:41";
+        Assert.assertEquals(time2,
+                DateUtility.toSQLDateTime(getbyid3.getLastModifyTime()));
+
+    }  
 }

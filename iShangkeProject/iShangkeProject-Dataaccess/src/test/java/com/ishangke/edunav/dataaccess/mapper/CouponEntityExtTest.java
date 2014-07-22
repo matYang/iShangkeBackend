@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
@@ -122,5 +123,16 @@ public class CouponEntityExtTest extends BaseTest{
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_remark_2_爱上课", result.get(0).getRemark());
     }
-
+    @Test
+    public void testGet() {
+        CouponEntityExt getbyid1 = couponEntityExtMapper
+                .getById(2);
+        CouponEntityExt getbyid2 = couponEntityExtMapper
+                .getById(3);
+        CouponEntityExt getbyid3 = couponEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_remark_1_爱上课", getbyid1.getRemark());
+        Assert.assertEquals("_test_remark_2_爱上课", getbyid2.getRemark());
+        Assert.assertEquals("_test_remark_3_爱上课", getbyid3.getRemark());
+    }
 }

@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -136,6 +137,24 @@ public class CreditHistoryEntityExtTest extends BaseTest {
         Assert.assertEquals(3, result.size());
     }
     
-   
+    @Test
+    public void testGet() {
+        CreditHistoryEntityExt getbyid1 = CreditHistoryEntityExtMapper
+                .getById(2);
+        CreditHistoryEntityExt getbyid2 = CreditHistoryEntityExtMapper
+                .getById(3);
+        CreditHistoryEntityExt getbyid3 = CreditHistoryEntityExtMapper
+                .getById(4);
+        String time = "2014-07-15 14:36:58";
+        Assert.assertEquals(time,
+                DateUtility.toSQLDateTime(getbyid1.getCreateTime()));
+        String time1 = "2014-07-15 14:37:18";
+        Assert.assertEquals(time1,
+                DateUtility.toSQLDateTime(getbyid2.getCreateTime()));
+        String time2 = "2014-07-15 14:37:27";
+        Assert.assertEquals(time2,
+                DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
+
+    }  
   
 }

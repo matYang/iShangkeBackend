@@ -7,12 +7,14 @@
     <result column="COUPON_TOTAL" property="total" jdbcType="DOUBLE" />
     <result column="COUPON_BALANCE" property="balance" jdbcType="DOUBLE" />
     <result column="COUPON_ORIGIN" property="origin" jdbcType="INTEGER" />
-    <result column="COUPON_EXPIRYTIME" property="expiryTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COUPON_EXPIRYTIME" property="expiryTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COUPON_REMARK" property="remark" jdbcType="VARCHAR" />
     <result column="COUPON_USERID" property="userId" jdbcType="INTEGER" />
     <result column="COUPON_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COUPON_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COUPON_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COUPON_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COUPON_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -69,9 +71,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="code != null">
@@ -103,9 +102,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -169,6 +165,12 @@
     <include refid="Coupon_Base_Column_List" />
     from COUPON where COUPON.DELETED = 0
   </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CouponExtMap">
+    SELECT
+    <include refid="Coupon_Base_Column_List" />
+    from COUPON where COUPON.DELETED = 0 and COUPON.ID = #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CouponExtMap">
     SELECT
@@ -194,7 +196,8 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND COUPON.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -231,7 +234,8 @@
       <if test="entity.origin == null or entity.origin == 0">
         <if test="entity.originSet != null and entity.originSet.size() > 0">
           AND COUPON.ORIGIN IN
-          <foreach collection="entity.originSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.originSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -300,7 +304,7 @@
       </if>
     </if>
   </select>
-   <!-- getCountByUserId -->
+  <!-- getCountByUserId -->
   <select id="getCountByUserId" parameterType="int" resultType="int">
     SELECT COUNT(*) FROM (
     SELECT
@@ -341,7 +345,8 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND COUPON.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -378,7 +383,8 @@
       <if test="entity.origin == null or entity.origin == 0">
         <if test="entity.originSet != null and entity.originSet.size() > 0">
           AND COUPON.ORIGIN IN
-          <foreach collection="entity.originSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.originSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>

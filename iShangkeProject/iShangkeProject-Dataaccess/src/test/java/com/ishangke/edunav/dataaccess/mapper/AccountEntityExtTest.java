@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
+import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,4 +47,13 @@ public class AccountEntityExtTest{
         accountEntityExtMapper.add(accountEntityExt);
         Assert.assertSame(accountEntityExtMapper.getCount(), oldcount + 1);
     }
+    @Test
+    public void testGet() {
+        AccountEntityExt accountEntityExt1 = accountEntityExtMapper.getById(2);
+        AccountEntityExt accountEntityExt2 = accountEntityExtMapper.getById(3);
+        AccountEntityExt accountEntityExt3 = accountEntityExtMapper.getById(4);
+        Assert.assertEquals("_test_RN_1_爱上课", accountEntityExt1.getRealName());
+        Assert.assertEquals("_test_RN_2_爱上课", accountEntityExt2.getRealName());
+        Assert.assertEquals("_test_RN_3_爱上课", accountEntityExt3.getRealName());
+          }
 }

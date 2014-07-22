@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -158,4 +159,23 @@ public class UserGroupEntityExtTest extends BaseTest {
         Assert.assertEquals(1, result.size());
         Assert.assertSame(4, result.get(0).getGroupId());
     }
+    @Test
+    public void testGet() {
+        UserGroupEntityExt getbyid1 = userGroupEntityExtMapper
+                .getById(2);
+        UserGroupEntityExt getbyid2 = userGroupEntityExtMapper
+                .getById(3);
+        UserGroupEntityExt getbyid3 = userGroupEntityExtMapper
+                .getById(4);
+        String time = "2014-07-15 11:22:45";
+        Assert.assertEquals(time,
+                DateUtility.toSQLDateTime(getbyid1.getLastModifyTime()));
+        String time1 = "2014-07-15 11:23:00";
+        Assert.assertEquals(time1,
+                DateUtility.toSQLDateTime(getbyid2.getLastModifyTime()));
+        String time2 = "2014-07-16 11:23:16";
+        Assert.assertEquals(time2,
+                DateUtility.toSQLDateTime(getbyid3.getLastModifyTime()));
+
+    }  
 }

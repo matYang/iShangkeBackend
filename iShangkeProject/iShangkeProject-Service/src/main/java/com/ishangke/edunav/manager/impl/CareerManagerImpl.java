@@ -22,7 +22,7 @@ public class CareerManagerImpl implements CareerManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CareerManagerImpl.class);
 
     @Autowired
-    private CareerEntityExtMapper careerEntityExtMapper;
+    private CareerEntityExtMapper careerMapper;
 
     @Override
     public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo) {
@@ -30,7 +30,7 @@ public class CareerManagerImpl implements CareerManager {
 
         // Check Null
         if (careerBo == null) {
-            throw new ManagerException("CareerBo is null");
+            throw new ManagerException("Career Query Failed: CareerBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -42,13 +42,13 @@ public class CareerManagerImpl implements CareerManager {
         List<CareerBo> resultList = null;
 
         try {
-            careerList = careerEntityExtMapper.list(careerEntity, pageEntity);
+            careerList = careerMapper.list(careerEntity, pageEntity);
             for (CareerEntityExt careerPo : careerList) {
                 resultList.add(CareerConverter.toBo(careerPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Career Query Failed");
+            throw new ManagerException("Career Query Failed", t);
         }
     }
 

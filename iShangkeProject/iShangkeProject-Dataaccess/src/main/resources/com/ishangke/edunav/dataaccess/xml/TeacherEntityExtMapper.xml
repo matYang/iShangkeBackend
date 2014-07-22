@@ -10,7 +10,8 @@
     <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="TEACHER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="TEACHER_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -84,9 +85,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -113,9 +111,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -172,6 +167,13 @@
     <include refid="Teacher_Base_Column_List" />
     from TEACHER where TEACHER.DELETED = 0
   </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="TeacherExtMap">
+    SELECT
+    <include refid="Teacher_Base_Column_List" />
+    from TEACHER where TEACHER.DELETED = 0 and TEACHER.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="TeacherExtMap">
     SELECT
@@ -199,7 +201,8 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND TEACHER.PARTNER_ID IN
-          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -212,7 +215,8 @@
       <if test="entity.popularity == null or entity.popularity == 0">
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND TEACHER.POPULARITY IN
-          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -299,7 +303,8 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND TEACHER.PARTNER_ID IN
-          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entitΩy.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -312,7 +317,8 @@
       <if test="entity.popularity == null or entity.popularity == 0">
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND TEACHER.POPULARITY IN
-          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>

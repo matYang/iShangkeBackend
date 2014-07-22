@@ -22,7 +22,7 @@ public class SchoolManagerImpl implements SchoolManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(SchoolManagerImpl.class);
 
     @Autowired
-    private SchoolEntityExtMapper schoolEntityExtMapper;
+    private SchoolEntityExtMapper schoolMapper;
 
     @Override
     public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo) {
@@ -30,7 +30,7 @@ public class SchoolManagerImpl implements SchoolManager {
 
         // Check Null
         if (schoolBo == null) {
-            throw new ManagerException("SchoolBo is null");
+            throw new ManagerException("School Query Failed: SchoolBo is null");
         }
         if (paginationBo != null) {
             pageEntity = PaginationConverter.fromBo(paginationBo);
@@ -42,13 +42,13 @@ public class SchoolManagerImpl implements SchoolManager {
         List<SchoolBo> resultList = null;
 
         try {
-            schoolList = schoolEntityExtMapper.list(schoolEntity, pageEntity);
+            schoolList = schoolMapper.list(schoolEntity, pageEntity);
             for (SchoolEntityExt schoolPo : schoolList) {
                 resultList.add(SchoolConverter.toBo(schoolPo));
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("School Query Failed");
+            throw new ManagerException("School Query Failed", t);
         }
     }
 

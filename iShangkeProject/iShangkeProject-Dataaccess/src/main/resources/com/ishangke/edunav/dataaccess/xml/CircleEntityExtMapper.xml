@@ -40,9 +40,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="value != null">
@@ -59,9 +56,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -108,6 +102,12 @@
     SELECT
     <include refid="Circle_Base_Column_List" />
     from CIRCLE where CIRCLE.DELETED = 0
+  </select>
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CircleExtMap">
+    SELECT
+    <include refid="Circle_Base_Column_List" />
+    from CIRCLE where CIRCLE.DELETED = 0 and CIRCLE.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CircleExtMap">

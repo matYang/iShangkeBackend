@@ -36,9 +36,6 @@
       <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="couponId != null">
@@ -52,9 +49,6 @@
       </if>
       <if test="createTime != null">
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -98,6 +92,12 @@
     SELECT
     <include refid="CouponHistory_Base_Column_List" />
     from COUPON_HISTORY where COUPON_HISTORY.DELETED = 0
+  </select>
+   <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="CouponHistoryExtMap">
+    SELECT
+    <include refid="CouponHistory_Base_Column_List" />
+    from COUPON_HISTORY where COUPON_HISTORY.DELETED = 0 and COUPON_HISTORY.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CouponHistoryExtMap">

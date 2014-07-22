@@ -18,6 +18,7 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
 //@TestExecutionListeners(listeners = {
 //        DependencyInjectionTestExecutionListener.class,
@@ -115,5 +116,18 @@ public class OrderEntityExtTest extends BaseTest {
         OrderEntityExt.setId(3);
         List<OrderEntityExt> result = orderEntityExtMapper.list(OrderEntityExt, page);
         Assert.assertEquals(0, result.size());
+    }
+    @Test
+    public void testGet() {
+        OrderEntityExt getbyid1 = orderEntityExtMapper
+                .getById(2);
+        OrderEntityExt getbyid2 = orderEntityExtMapper
+                .getById(3);
+        OrderEntityExt getbyid3 = orderEntityExtMapper
+                .getById(4);
+        Assert.assertEquals("_test_type_1_爱上课", getbyid1.getType());
+        Assert.assertEquals("_test_type_2_爱上课", getbyid2.getType());
+        Assert.assertEquals("_test_type_3_爱上课", getbyid3.getType());
+      
     }
 }

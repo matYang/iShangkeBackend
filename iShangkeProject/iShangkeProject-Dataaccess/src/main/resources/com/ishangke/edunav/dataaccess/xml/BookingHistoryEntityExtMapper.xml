@@ -63,9 +63,6 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="deleted != null">
-        DELETED,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -95,9 +92,6 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -157,7 +151,13 @@
     <include refid="BookingHistory_Base_Column_List" />
     from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
   </select>
-
+  <!-- getById -->
+  <select id="getById" parameterType="int" resultMap="BookingHistoryExtMap">
+    SELECT
+    <include refid="BookingHistory_Base_Column_List" />
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0 and BOOKING_HISTORY.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="BookingHistoryExtMap">
     SELECT
