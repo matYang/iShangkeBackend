@@ -1,6 +1,5 @@
 include "model/fault.thrift"
 include "model/common.thrift"
-include "model/configuration.thrift"
 include "model/circle.thrift"
 include "model/category.thrift"
 include "model/location.thrift"
@@ -11,16 +10,6 @@ include "model/career.thrift"
 namespace java com.ishangke.edunav.commoncontract.service
 
 service GeneralService{
-
-    /**********************************************************
-    *
-    *   Configuration
-    *
-    **********************************************************/
-    configuration.ConfigurationBo getConfigurationByName(1: string name) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    
-    list<configuration.ConfigurationBo> listAllConfiguration() throws (1: fault.BusinessExceptionBo businessExceptionBo)
-
 
 
 
