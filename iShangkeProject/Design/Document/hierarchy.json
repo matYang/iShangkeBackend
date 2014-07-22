@@ -1,0 +1,65 @@
+{
+    "start": 0,
+    "count": 10, 
+    "total": 34, 
+    "data": [
+    {
+        "id": 0,
+        "value": "00",
+        "name": "语言培训",
+        "children":[
+        {
+            "id": 2,
+            "value": "0000",
+            "name": "语言培训",
+            "children":[
+            {
+                "id": 5,
+                "value": "000000",
+                "name": "语言培训",
+                "children":[]
+            },
+            {
+                "id": 6,
+                "value": "000001",
+                "name": "语言培训",
+                "children":[]
+            },
+            ...
+            ]
+        },
+        {
+            "id": 3,
+            "value": "0001",
+            "name": "语言培训",
+            "children":[
+            {
+                "id": 7,
+                "value": "000100",
+                "name": "语言培训",
+                "children":[]
+            },
+            ...
+            ]
+        },
+        ...
+        ]
+    },
+    {
+        "id": 1,
+        "value": "01",
+        "name": "学历文凭",
+        "children":[
+        {
+            "id": 4,
+            "value": "0100",
+            "name": "语言培训",
+            "children":[
+                ...                                              
+            ]
+        }
+        ...
+        ]
+    }
+    ]
+}
