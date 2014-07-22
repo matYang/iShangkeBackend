@@ -126,6 +126,7 @@ public class TeacherManagerImpl implements TeacherManager {
         }
         List<TeacherBo> convertedResults = new ArrayList<TeacherBo>();
         for (TeacherEntityExt result : results) {
+
             convertedResults.add(TeacherConverter.toBo(result));
         }
         return convertedResults;
