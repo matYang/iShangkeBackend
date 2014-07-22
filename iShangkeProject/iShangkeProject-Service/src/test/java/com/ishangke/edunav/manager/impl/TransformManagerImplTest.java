@@ -50,5 +50,11 @@ public class TransformManagerImplTest {
             System.out.println(f.getName() + "===>" + f.get(a).toString());
         }
         System.out.println("end~");
+        ActionBo b = ((ArrayList<ActionBo>)cache.get("admincourse0")).get(0);
+        for (Field f : ActionBo.class.getFields()) {
+            System.out.println(f.getName() + "===>" + f.get(b).toString());
+        }
+        System.out.println("end~");
     }
+    
 }
