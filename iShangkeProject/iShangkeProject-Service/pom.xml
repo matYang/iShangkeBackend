@@ -1,58 +1,63 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.ishangke</groupId>
-		<artifactId>iShangkeProject</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>iShangkeProject-Service</artifactId>
-	<packaging>jar</packaging>
-	<properties>
-		<main.basedir>${project.basedir}/../</main.basedir>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.ishangke</groupId>
-			<artifactId>iShangkeProject-Common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ishangke</groupId>
-			<artifactId>iShangkeProject-CommonContract</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ishangke</groupId>
-			<artifactId>iShangkeProject-Dataaccess</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-		</dependency>
-        
-        <!-- Memcached Dependency -->
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.spy</groupId>
-            <artifactId>spymemcached</artifactId>
-            <version>2.11.2</version>
-        </dependency>
-	</dependencies>
-	<build>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ishangke</groupId>
+    <artifactId>iShangkeProject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>iShangkeProject-Service</artifactId>
+  <packaging>jar</packaging>
+  <properties>
+    <main.basedir>${project.basedir}/../</main.basedir>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.ishangke</groupId>
+      <artifactId>iShangkeProject-Common</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ishangke</groupId>
+      <artifactId>iShangkeProject-CommonContract</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ishangke</groupId>
+      <artifactId>iShangkeProject-Dataaccess</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+    </dependency>
+
+    <!-- Memcached Dependency -->
+    <dependency>
+      <groupId>com.codahale.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.spy</groupId>
+      <artifactId>spymemcached</artifactId>
+      <version>2.11.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.4</version>
+    </dependency>
+  </dependencies>
+  <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -64,9 +69,7 @@
             <phase>initialize</phase>
             <configuration>
               <target name="copy file">
-                <copy
-                  file="${project.basedir}/src/main/resources/applicationContext-service.xml"
-                  tofile="${project.basedir}/src/test/resources/applicationContext-serviceUT.xml"
+                <copy file="${project.basedir}/src/main/resources/applicationContext-service.xml" tofile="${project.basedir}/src/test/resources/applicationContext-serviceUT.xml"
                   overwrite="true" />
               </target>
             </configuration>
@@ -79,10 +82,8 @@
             <phase>initialize</phase>
             <configuration>
               <target name="copy file">
-                <copy
-                  file="${main.basedir}iShangkeProject-Dataaccess/src/test/resources/applicationContext-dataaccessUT.xml"
-                  tofile="${project.basedir}/src/test/resources/applicationContext-dataaccessUT.xml"
-                  overwrite="true" />
+                <copy file="${main.basedir}iShangkeProject-Dataaccess/src/test/resources/applicationContext-dataaccessUT.xml"
+                  tofile="${project.basedir}/src/test/resources/applicationContext-dataaccessUT.xml" overwrite="true" />
               </target>
             </configuration>
             <goals>
@@ -116,54 +117,55 @@
       </plugin>
     </plugins>
     <pluginManagement>
-    	<plugins>
-    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-    		<plugin>
-    			<groupId>org.eclipse.m2e</groupId>
-    			<artifactId>lifecycle-mapping</artifactId>
-    			<version>1.0.0</version>
-    			<configuration>
-    				<lifecycleMappingMetadata>
-    					<pluginExecutions>
-    						<pluginExecution>
-    							<pluginExecutionFilter>
-    								<groupId>
-    									com.google.code.maven-replacer-plugin
-    								</groupId>
-    								<artifactId>replacer</artifactId>
-    								<versionRange>
-    									[1.5.2,)
-    								</versionRange>
-    								<goals>
-    									<goal>replace</goal>
-    								</goals>
-    							</pluginExecutionFilter>
-    							<action>
-    								<ignore></ignore>
-    							</action>
-    						</pluginExecution>
-    						<pluginExecution>
-    							<pluginExecutionFilter>
-    								<groupId>
-    									org.apache.maven.plugins
-    								</groupId>
-    								<artifactId>
-    									maven-antrun-plugin
-    								</artifactId>
-    								<versionRange>[1.6,)</versionRange>
-    								<goals>
-    									<goal>run</goal>
-    								</goals>
-    							</pluginExecutionFilter>
-    							<action>
-    								<ignore></ignore>
-    							</action>
-    						</pluginExecution>
-    					</pluginExecutions>
-    				</lifecycleMappingMetadata>
-    			</configuration>
-    		</plugin>
-    	</plugins>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build 
+          itself. -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      com.google.code.maven-replacer-plugin
+                    </groupId>
+                    <artifactId>replacer</artifactId>
+                    <versionRange>
+                      [1.5.2,)
+                    </versionRange>
+                    <goals>
+                      <goal>replace</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.apache.maven.plugins
+                    </groupId>
+                    <artifactId>
+                      maven-antrun-plugin
+                    </artifactId>
+                    <versionRange>[1.6,)</versionRange>
+                    <goals>
+                      <goal>run</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
     </pluginManagement>
-	</build>
+  </build>
 </project>

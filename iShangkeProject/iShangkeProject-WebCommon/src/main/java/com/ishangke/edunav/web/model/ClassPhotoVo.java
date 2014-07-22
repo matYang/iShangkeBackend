@@ -17,7 +17,7 @@ public class ClassPhotoVo {
     private Calendar lastModifyTime;
 
     private Calendar createTime;
-
+    private String snapshotUrl;
     private Integer enabled;
     private Set<Integer> idSet;
     private Set<Integer> partnerIdSet;
@@ -108,6 +108,12 @@ public class ClassPhotoVo {
     }
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+    public String getSnapshotUrl() {
+        return snapshotUrl;
+    }
+    public void setSnapshotUrl(String snapshotUrl) {
+        this.snapshotUrl = snapshotUrl;
     }
     
 }

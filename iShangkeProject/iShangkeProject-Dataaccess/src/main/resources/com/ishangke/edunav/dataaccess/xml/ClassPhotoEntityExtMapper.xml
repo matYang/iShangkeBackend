@@ -13,7 +13,8 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
-  </resultMap>
+   <result column="CLASSPHOTO_SNAPSHOTURL" property="snapshotUrl" jdbcType="VARCHAR" />
+   </resultMap>
   <sql id="ClassPhoto_Base_Column_List">
     CLASS_PHOTO.ID CLASSPHOTO_ID,
     CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
@@ -27,7 +28,8 @@
     CLASS_PHOTO.CREATE_TIME CLASSPHOTO_CREATETIME,
     CLASS_PHOTO.ENABLED
     CLASSPHOTO_ENABLED,
-    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
+    CLASS_PHOTO.DELETED CLASSPHOTO_DELETED,
+    CLASS_PHOTO.SNAPSHOT_URL CLASSPHOTO_SNAPSHOTURL
   </sql>
   <sql id="COURSE_TEMPLATE_Base_Column_List">
     COURSE_TEMPLATE.ID COURSETEMPLATE_ID
@@ -76,6 +78,9 @@
       <if test="enabled != null">
         ENABLED,
       </if>
+      <if test="snapshotUrl != null" >
+        SNAPSHOT_URL,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="partnerId != null">
@@ -98,6 +103,9 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="snapshotUrl != null" >
+        #{snapshotUrl,jdbcType=VARCHAR},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -137,6 +145,9 @@
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="snapshotUrl != null" >
+        SNAPSHOT_URL = #{snapshotUrl,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -224,6 +235,9 @@
       <if test="entity.enabled != null">
         AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+       <if test="entity.snapshotUrl != null and !entity.snapshotUrl.equals('')">
+        AND CLASS_PHOTO.SNAPSHOT_URL LIKE "%"#{entity.snapshotUrl,jdbcType=VARCHAR}"%"
+      </if>
     </if>
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
@@ -309,6 +323,9 @@
 
       <if test="entity.enabled != null">
         AND CLASS_PHOTO.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="entity.snapshotUrl != null and !entity.snapshotUrl.equals('')">
+        AND CLASS_PHOTO.SNAPSHOT_URL LIKE "%"#{entity.snapshotUrl,jdbcType=VARCHAR}"%"
       </if>
     </if>
     ) AS total

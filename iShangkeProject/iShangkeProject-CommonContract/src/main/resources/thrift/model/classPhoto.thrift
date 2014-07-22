@@ -15,4 +15,5 @@ struct ClassPhotoBo {
     12: i64 lastModifyTimeEnd
     13: i64 createTimeStart
     14: i64 createTimeEnd
+    15: string snapshotUrl
 }

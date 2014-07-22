@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseTemplateApproveBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseTemplateRejectBo;
+import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.CourseTemplateService;
+import com.ishangke.edunav.manager.CourseCommentManager;
 import com.ishangke.edunav.manager.CourseTemplateManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -24,7 +26,17 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
 
     @Autowired
     private CourseTemplateManager courseTemplateManager;
+    @Autowired
+    private CourseCommentManager courseCommentManager;
 
+    
+    
+
+    /**********************************************************
+    *
+    *   关于课程模板的 CourseTemplate
+    *
+    **********************************************************/
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
@@ -153,6 +165,54 @@ public class CourseTemplateServiceImpl implements CourseTemplateService.Iface {
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.COURSETEMPLATE_QUERY_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSETEMPLATE_QUERY_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    
+    
+    
+    
+    /**********************************************************
+    *
+    *   关于课程评论的 CourseComment
+    *
+    **********************************************************/
+    @Override
+    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return courseCommentManager.createCourseComment(courseCommentBo, courseTemplateBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.COURSECOMMENT_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSECOMMENT_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return courseCommentManager.deleteCourseComment(courseCommentBo, courseTemplateBo, userBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.COURSECOMMENT_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSECOMMENT_DELETE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<CourseCommentBo> queryCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return courseCommentManager.query(courseCommentBo, courseTemplateBo, userBo, paginationBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.COURSECOMMENT_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSECOMMENT_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }
