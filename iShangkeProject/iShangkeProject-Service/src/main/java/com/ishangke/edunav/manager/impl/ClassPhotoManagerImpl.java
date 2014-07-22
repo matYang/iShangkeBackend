@@ -6,13 +6,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.manager.ClassPhotoManager;
 import com.ishangke.edunav.manager.converter.ClassPhotoConverter;
@@ -27,6 +30,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     @Autowired
     private ClassPhotoEntityExtMapper classPhotoMapper;
 
+    @Autowired
+    private GroupEntityExtMapper groupEntityExtMapper;
+
     @Override
     public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) {
         // Check Null
@@ -35,6 +41,22 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
         if (userBo == null) {
             throw new ManagerException("ClassPhoto Create Failed: userBo is null");
+        }
+
+        // 机构管理员只能给本机构上传图片
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // Convert
@@ -63,6 +85,22 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("ClassPhoto Update Failed: userBo is null");
         }
 
+        // 机构管理员只能给本机构上传图片
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
 
@@ -82,6 +120,22 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
         if (userBo == null) {
             throw new ManagerException("ClassPhoto Delete Failed: userBo is null");
+        }
+
+        // 机构管理员只能删除本机构图片
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // Convert
@@ -113,23 +167,31 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             pageEntity = PaginationConverter.fromBo(paginationBo);
         }
 
+        // 机构管理员只能查询本机构的图片
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
-        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         List<ClassPhotoEntityExt> classPhotoList = null;
         List<ClassPhotoBo> resultList = null;
 
-        // Check Ids
-        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
-            throw new ManagerException("ClassPhoto Query Failed: 合作商id为null或0");
-        }
-
+        classPhotoEntity.setPartnerId(partnerBo.getId());
         try {
             classPhotoList = classPhotoMapper.list(classPhotoEntity, pageEntity);
             for (ClassPhotoEntityExt classPhotoPo : classPhotoList) {
-                if (classPhotoPo.getPartnerId() != partnerEntity.getId()) {
-                    throw new ManagerException("ClassPhoto Query Failed: 此教室照片不属于该合作商");
-                }
                 resultList.add(ClassPhotoConverter.toBo(classPhotoPo));
             }
             return resultList;
@@ -139,9 +201,25 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     }
 
     @Override
-    public List<ClassPhotoBo> listByPartnerId(int partnerId) {
+    public List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo) {
         List<ClassPhotoEntityExt> classPhotoList = null;
         List<ClassPhotoBo> resultList = null;
+
+        // 机构管理员只能查询本机构的图片
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerId) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
 
         try {
             classPhotoList = classPhotoMapper.listClassPhotoByPartnerId(partnerId);
@@ -154,6 +232,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
     }
 
+    /**
+     * 所有用户都可以调用此方法
+     */
     @Override
     public List<ClassPhotoBo> listByCourseId(int courseId) {
         List<ClassPhotoEntityExt> classPhotoList = null;
@@ -170,6 +251,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
     }
 
+    /**
+     * 所有用户都可以调用此方法
+     */
     @Override
     public List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId) {
         List<ClassPhotoEntityExt> classPhotoList = null;
