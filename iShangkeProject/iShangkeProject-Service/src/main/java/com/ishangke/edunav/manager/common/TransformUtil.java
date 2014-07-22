@@ -65,14 +65,9 @@ public class TransformUtil {
         statusEntity.setEntityCode(0);
         statusEntity.setName("booking");
         statusEntity.setCurrentStatuses(currentStatuses);
-        StatusEntity statusEntity2 = new StatusEntity();
-        statusEntity.setEntityCode(0);
-        statusEntity.setName("course");
-        statusEntity.setCurrentStatuses(currentStatuses);
         
         List<StatusEntity> entitys = new ArrayList<>();
         entitys.add(statusEntity);
-        entitys.add(statusEntity2);
         TransformGroup transformGroup = new TransformGroup();
         transformGroup.setName("admin");
         transformGroup.setGroupCode(0);
