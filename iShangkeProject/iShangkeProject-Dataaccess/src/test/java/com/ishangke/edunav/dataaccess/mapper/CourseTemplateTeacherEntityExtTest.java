@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 public class CourseTemplateTeacherEntityExtTest extends BaseTest{
     @Autowired
     private CourseTemplateTeacherEntityExtMapper courseTemplateTeacherEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 //    public CourseTemplateTeacherEntityExtTest() {
 //        scriptAfterClass = "CourseTemplateTeacherEntityExtTestAfter.sql";
 //        scriptBeforeClass = "CourseTemplateTeacherEntityExtTestBefore.sql";
@@ -123,5 +125,16 @@ public class CourseTemplateTeacherEntityExtTest extends BaseTest{
         Assert.assertEquals(time2,
                 DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
 
+    }
+    @Test
+    public void testUpdate() {
+        CourseTemplateTeacherEntityExt upDate = courseTemplateTeacherEntityExtMapper
+                .getById(2);
+
+        upDate.setCreateTime(time);
+        courseTemplateTeacherEntityExtMapper.update(upDate);
+        upDate = courseTemplateTeacherEntityExtMapper.getById(2);
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }

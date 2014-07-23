@@ -125,4 +125,14 @@ public class AccountHistoryEntityExtTest {
         Assert.assertEquals("_test_remark_2_爱上课", accountHistoryEntityExt2.getRemark());
         Assert.assertEquals("_test_remark_3_爱上课", accountHistoryEntityExt3.getRemark());
           }
+    @Test
+    public void testUpdate() {
+        AccountHistoryEntityExt accountHistoryEntityExt = accountHistoryEntityExtMapper.getById(2);
+        accountHistoryEntityExt.setCharge(2.4);
+        accountHistoryEntityExt.setRemark("_test_remark_爱上课_3");
+        accountHistoryEntityExtMapper.update(accountHistoryEntityExt);
+        accountHistoryEntityExt = accountHistoryEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_remark_爱上课_3",accountHistoryEntityExt.getRemark());
+        Assert.assertEquals("2.4", accountHistoryEntityExt.getCharge().toString());  
+    }
 }

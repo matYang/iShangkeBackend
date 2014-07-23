@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,7 +15,6 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
@@ -22,6 +22,7 @@ import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
 public class SchoolEntityExtTest {
     @Autowired
     private SchoolEntityExtMapper schoolEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testAdd() {
         SchoolEntityExt schoolEntityExt = new SchoolEntityExt();
@@ -77,4 +78,17 @@ public class SchoolEntityExtTest {
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
+    @Test
+    public void testUpdate() {
+        SchoolEntityExt upDate = schoolEntityExtMapper
+                .getById(2);
+        upDate.setName("_test_name_爱上课");
+        upDate.setCreateTime(time);
+        schoolEntityExtMapper.update(upDate);
+        upDate = schoolEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_name_爱上课",
+                upDate.getName());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
+}
 }

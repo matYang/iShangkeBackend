@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 public class CreditHistoryEntityExtTest extends BaseTest {
     @Autowired
     private CreditHistoryEntityExtMapper CreditHistoryEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testAdd() {
         CreditHistoryEntityExt CreditHistoryEntityExt = new CreditHistoryEntityExt();
@@ -156,5 +157,16 @@ public class CreditHistoryEntityExtTest extends BaseTest {
                 DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
 
     }  
-  
+    @Test
+    public void testUpdate() {
+        CreditHistoryEntityExt upDate = CreditHistoryEntityExtMapper
+                .getById(2);
+       
+        upDate.setCreateTime(time);
+        CreditHistoryEntityExtMapper.update(upDate);
+        upDate = CreditHistoryEntityExtMapper.getById(2);
+        
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
+    }
 }

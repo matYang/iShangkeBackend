@@ -70,7 +70,7 @@ public class TransformManagerImpl implements TransformManager {
             }
         }
 
-        cache.set(key, Constant.STATUSTRANSFORMEXPIRETIME, actionBoList);
+        cache.set(key, 0, actionBoList);
 
         return actionBoList;
     }

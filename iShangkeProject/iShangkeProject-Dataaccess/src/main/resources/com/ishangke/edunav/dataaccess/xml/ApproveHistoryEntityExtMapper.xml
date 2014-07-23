@@ -114,7 +114,7 @@
         APPROVE_USER_ID = #{approveUserId,jdbcType=INTEGER},
       </if>
       <if test="preStatus != null">
-        PRE_STATUS = #{prestatus,jdbcType=INTEGER},
+        PRE_STATUS = #{preStatus,jdbcType=INTEGER},
       </if>
       <if test="postStatus != null">
         POST_STATUS = #{postStatus,jdbcType=INTEGER},
@@ -265,7 +265,7 @@
       </foreach>
     </if>
 
-    <if test="page.offset != null and page.size != null">
+    <if test="page !=null and page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>

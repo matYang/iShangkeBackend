@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
+import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
@@ -28,7 +30,7 @@ public class GroupEntityExtTest extends BaseTest {
 
     @Autowired
     public GroupEntityExtMapper groupEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testAdd() {
         GroupEntityExt groupEntityExt = new GroupEntityExt();
@@ -193,5 +195,17 @@ public class GroupEntityExtTest extends BaseTest {
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
-
+    @Test
+    public void testUpdate() {
+        GroupEntityExt upDate = groupEntityExtMapper
+                .getById(2);
+        upDate.setName("_test_name_爱上课");
+        upDate.setCreateTime(time);
+        groupEntityExtMapper.update(upDate);
+        upDate = groupEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_name_爱上课",
+               upDate.getName());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
+    }
 }

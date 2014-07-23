@@ -1343,7 +1343,7 @@
       </foreach>
     </if>
 
-    <if test="page.offset != null and page.size != null">
+    <if test="page !=null and page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
@@ -1353,16 +1353,6 @@
     SELECT COUNT(*) FROM (
     select
     <include refid="CourseTemplate_Base_Column_List"></include>
-    ,
-    <include refid="Partner_Base_Column_List"></include>
-    ,
-    <include refid="Address_Base_Column_List"></include>
-    ,
-    <include refid="Category_Base_Column_List"></include>
-    ,
-    <include refid="Location_Base_Column_List"></include>
-    ,
-    <include refid="Circle_Base_Column_List"></include>
     from COURSE_TEMPLATE COURSE_TEMPLATE
     join PARTNER PARTNER
     ON PARTNER.ID =
@@ -1382,6 +1372,26 @@
     <if test="entity != null">
       <if test="entity.courseName != null and entity.courseName != ''">
         AND COURSE_TEMPLATE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
+      </if>
+       <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+        AND CATEGORY.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+        AND CIRCLE.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+        AND LOCATION.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
+      </if>
+       <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+        AND CATEGORY.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+        AND CIRCLE.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+        AND LOCATION.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.reference != null and entity.reference != ''">

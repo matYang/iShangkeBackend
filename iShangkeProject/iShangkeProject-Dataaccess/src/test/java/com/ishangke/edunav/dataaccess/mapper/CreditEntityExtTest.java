@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -16,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,7 +26,7 @@ import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 public class CreditEntityExtTest extends BaseTest{
     @Autowired
     private CreditEntityExtMapper creditEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testQuery() {
         PaginationEntity page = new PaginationEntity();
@@ -56,5 +58,18 @@ public class CreditEntityExtTest extends BaseTest{
         Assert.assertEquals(time2,
                 DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
 
+    }
+    @Test
+    public void testUpdate() {
+        CreditEntityExt upDate = creditEntityExtMapper
+                .getById(2);
+        upDate.setCredit(3.6);
+        upDate.setCreateTime(time);
+        creditEntityExtMapper.update(upDate);
+        upDate = creditEntityExtMapper.getById(2);
+        Assert.assertEquals("3.6",
+               upDate.getCredit().toString());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }

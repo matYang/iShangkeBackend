@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
@@ -27,6 +29,7 @@ public class UserGroupEntityExtTest extends BaseTest {
 
     @Autowired
     private UserGroupEntityExtMapper userGroupEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 
     @Test
     public void testAdd() {
@@ -107,7 +110,7 @@ public class UserGroupEntityExtTest extends BaseTest {
         page.setOffset(0);
         page.setSize(10);
         // 排序，先按照第一个排序，再按照第二个排序，依次排列
-      
+
         page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
                 DataaccessConstants.ORDER_DESC));
         UserGroupEntityExt userGroupQueryEntity = new UserGroupEntityExt();
@@ -117,6 +120,7 @@ public class UserGroupEntityExtTest extends BaseTest {
         Assert.assertEquals(2, result.size());
         // Assert.assertEquals("_test_name_2_爱上课", result.get(0).getName());
     }
+
     @Test
     public void testQuery2() {
         UserGroupEntityExt UserGroupEntityExt = new UserGroupEntityExt();
@@ -128,10 +132,11 @@ public class UserGroupEntityExtTest extends BaseTest {
         idSet.add(2);
         idSet.add(3);
         UserGroupEntityExt.setIdSet(idSet);
-        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(UserGroupEntityExt, page);
+        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(
+                UserGroupEntityExt, page);
         Assert.assertEquals(3, result.size());
     }
-    
+
     @Test
     public void testQuery3() {
         UserGroupEntityExt UserGroupEntityExt = new UserGroupEntityExt();
@@ -141,12 +146,13 @@ public class UserGroupEntityExtTest extends BaseTest {
         UserGroupEntityExt.setUserId(2);
         page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
                 DataaccessConstants.ORDER_DESC));
-        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(UserGroupEntityExt, page);
+        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(
+                UserGroupEntityExt, page);
         Assert.assertEquals(2, result.size());
         Assert.assertSame(4, result.get(0).getGroupId());
         Assert.assertSame(2, result.get(1).getGroupId());
     }
-    
+
     @Test
     public void testQuery4() {
         UserGroupEntityExt UserGroupEntityExt = new UserGroupEntityExt();
@@ -155,18 +161,17 @@ public class UserGroupEntityExtTest extends BaseTest {
         page.setSize(10);
         UserGroupEntityExt.setUserId(2);
         UserGroupEntityExt.setGroupId(4);
-        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(UserGroupEntityExt, page);
+        List<UserGroupEntityExt> result = userGroupEntityExtMapper.list(
+                UserGroupEntityExt, page);
         Assert.assertEquals(1, result.size());
         Assert.assertSame(4, result.get(0).getGroupId());
     }
+
     @Test
     public void testGet() {
-        UserGroupEntityExt getbyid1 = userGroupEntityExtMapper
-                .getById(2);
-        UserGroupEntityExt getbyid2 = userGroupEntityExtMapper
-                .getById(3);
-        UserGroupEntityExt getbyid3 = userGroupEntityExtMapper
-                .getById(4);
+        UserGroupEntityExt getbyid1 = userGroupEntityExtMapper.getById(2);
+        UserGroupEntityExt getbyid2 = userGroupEntityExtMapper.getById(3);
+        UserGroupEntityExt getbyid3 = userGroupEntityExtMapper.getById(4);
         String time = "2014-07-15 11:22:45";
         Assert.assertEquals(time,
                 DateUtility.toSQLDateTime(getbyid1.getLastModifyTime()));
@@ -177,5 +182,17 @@ public class UserGroupEntityExtTest extends BaseTest {
         Assert.assertEquals(time2,
                 DateUtility.toSQLDateTime(getbyid3.getLastModifyTime()));
 
-    }  
+    }
+
+    @Test
+    public void testUpdate() {
+        UserGroupEntityExt upDate = userGroupEntityExtMapper.getById(2);
+
+        upDate.setLastModifyTime(time);
+        userGroupEntityExtMapper.update(upDate);
+        upDate = userGroupEntityExtMapper.getById(2);
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getLastModifyTime()));
+    }
+
 }

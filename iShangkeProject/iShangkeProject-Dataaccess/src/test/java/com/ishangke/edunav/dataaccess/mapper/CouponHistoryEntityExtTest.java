@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
 public class CouponHistoryEntityExtTest extends BaseTest{
     @Autowired
     private CouponHistoryEntityExtMapper couponHistoryEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 //    public  CouponHistoryEntityExtTest() {
 //        scriptAfterClass = "CouponHistoryEntityExtTestAfter.sql";
 //        scriptBeforeClass = "CouponHistoryEntityExtTestBefore.sql";
@@ -128,5 +130,19 @@ public class CouponHistoryEntityExtTest extends BaseTest{
         Assert.assertEquals("44235245.9", nf.format(getbyid3.getCharge()).toString());
 //        System.out.println(getbyid2.getCharge());
 //        System.out.println(getbyid3.getCharge());
+    }
+    @Test
+    public void testUpdate() {
+        CouponHistoryEntityExt upDate = couponHistoryEntityExtMapper
+                .getById(2);
+        upDate.setCharge(4.6);
+       
+        upDate.setCreateTime(time);
+        couponHistoryEntityExtMapper.update(upDate);
+        upDate = couponHistoryEntityExtMapper.getById(2);
+      
+        Assert.assertEquals("4.6", upDate.getCharge().toString());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }

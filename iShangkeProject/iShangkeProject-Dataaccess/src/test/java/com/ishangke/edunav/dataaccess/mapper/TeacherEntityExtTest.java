@@ -14,11 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
@@ -27,6 +29,7 @@ public class TeacherEntityExtTest {
 
     @Autowired
     private TeacherEntityExtMapper teacherEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 
     @Test
     public void testAdd() {
@@ -221,16 +224,29 @@ public class TeacherEntityExtTest {
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
     }
+
     @Test
     public void testGet() {
-        TeacherEntityExt getbyid1 = teacherEntityExtMapper
-                .getById(2);
-        TeacherEntityExt getbyid2 = teacherEntityExtMapper
-                .getById(3);
-        TeacherEntityExt getbyid3 = teacherEntityExtMapper
-                .getById(4);
+        TeacherEntityExt getbyid1 = teacherEntityExtMapper.getById(2);
+        TeacherEntityExt getbyid2 = teacherEntityExtMapper.getById(3);
+        TeacherEntityExt getbyid3 = teacherEntityExtMapper.getById(4);
         Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
+
+    @Test
+    public void testUpdate() {
+        TeacherEntityExt upDate = teacherEntityExtMapper.getById(2);
+        upDate.setName("_test_name_爱上课");
+        ;
+        upDate.setLastModifyTime(time);
+        upDate.setPopularity(100);
+        teacherEntityExtMapper.update(upDate);
+        upDate = teacherEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_name_爱上课", upDate.getName());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getLastModifyTime()));
+        Assert.assertSame(100, upDate.getPopularity());
     }
 }

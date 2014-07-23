@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,7 @@ import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
+import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,6 +30,7 @@ public class RoleEntityExtTest extends BaseTest {
 
     @Autowired
     private RoleEntityExtMapper roleEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 
     @Test
     public void testAdd() {
@@ -100,11 +103,11 @@ public class RoleEntityExtTest extends BaseTest {
                 DataaccessConstants.ORDER_DESC));
 
         RoleEntityExt RoleEntityExt = new RoleEntityExt();
-        RoleEntityExt.setName("_test_");
+        RoleEntityExt.setName("systemadmin");
         List<RoleEntityExt> result = roleEntityExtMapper.list(RoleEntityExt,
                 page);
-        Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("systemadmin", result.get(0).getName());
     }
 
     @Test
@@ -130,8 +133,9 @@ public class RoleEntityExtTest extends BaseTest {
 
         List<RoleEntityExt> result = roleEntityExtMapper.listRolesByUserId(2);
         Assert.assertEquals(10, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("admin", result.get(0).getName());
     }
+
     @Test
     public void testQuery4() {
         int teacherCount = roleEntityExtMapper.getCountByGroupId(2);
@@ -139,25 +143,36 @@ public class RoleEntityExtTest extends BaseTest {
 
         List<RoleEntityExt> result = roleEntityExtMapper.listRolesByGroupId(2);
         Assert.assertEquals(1, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("admin", result.get(0).getName());
     }
+
     @Test
     public void testQuery5() {
         RoleEntityExt teacherCount = roleEntityExtMapper.getById(2);
-        
-        Assert.assertEquals("_test_name_1_爱上课", teacherCount.getName());
-      
+
+        Assert.assertEquals("admin", teacherCount.getName());
+
     }
+
     @Test
     public void testGet() {
-        RoleEntityExt getbyid1 = roleEntityExtMapper
-                .getById(2);
-        RoleEntityExt getbyid2 = roleEntityExtMapper
-                .getById(3);
-        RoleEntityExt getbyid3 = roleEntityExtMapper
-                .getById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+        RoleEntityExt getbyid1 = roleEntityExtMapper.getById(2);
+        RoleEntityExt getbyid2 = roleEntityExtMapper.getById(3);
+        RoleEntityExt getbyid3 = roleEntityExtMapper.getById(4);
+        Assert.assertEquals("admin", getbyid1.getName());
+        Assert.assertEquals("partneradmin", getbyid2.getName());
+        Assert.assertEquals("user", getbyid3.getName());
+    }
+
+    @Test
+    public void testUpdate() {
+        RoleEntityExt upDate = roleEntityExtMapper.getById(2);
+        upDate.setName("_test_name_爱上课");
+        upDate.setLastModifyTime(time);
+        roleEntityExtMapper.update(upDate);
+        upDate = roleEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_name_爱上课", upDate.getName());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getLastModifyTime()));
     }
 }

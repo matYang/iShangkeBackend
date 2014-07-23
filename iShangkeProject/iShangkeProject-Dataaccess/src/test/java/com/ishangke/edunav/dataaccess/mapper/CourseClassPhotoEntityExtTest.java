@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,7 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
+import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseClassPhotoEntityExtTest.class })
@@ -26,6 +28,7 @@ import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 public class CourseClassPhotoEntityExtTest{
     @Autowired
     private CourseClassPhotoEntityExtMapper courseClassPhotoEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 //    public  CourseClassPhotoEntityExtTest() {
 //        scriptAfterClass = "CourseClassPhotoEntityExtTestAfter.sql";
 //        scriptBeforeClass = "CourseClassPhotoEntityExtTestBefore.sql";
@@ -113,5 +116,18 @@ public class CourseClassPhotoEntityExtTest{
 //        Assert.assertEquals("_test_remark_2_爱上课", getbyid2.getRemark());
 //        Assert.assertEquals("_test_remark_3_爱上课", getbyid3.getRemark());
     }
-  
+    @Test
+    public void testUpdate() {
+        CourseClassPhotoEntityExt upDate = courseClassPhotoEntityExtMapper
+                .getById(2);
+        upDate.setClassPhotoId(3);
+       
+        upDate.setCreateTime(time);
+        courseClassPhotoEntityExtMapper.update(upDate);
+        upDate = courseClassPhotoEntityExtMapper.getById(2);
+      
+        Assert.assertSame(3, upDate.getClassPhotoId());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
+    }
 }

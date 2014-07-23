@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -24,6 +25,7 @@ import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 public class CareerEntityExtTest {
     @Autowired
     private CareerEntityExtMapper careerEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testAdd() {
         CareerEntityExt CareerEntityExt = new CareerEntityExt();
@@ -78,5 +80,19 @@ public class CareerEntityExtTest {
         Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
+    @Test
+    public void testUpdate() {
+        CareerEntityExt upDate = careerEntityExtMapper
+                .getById(2);
+        upDate.setName("test_爱上课");
+        upDate.setValue("test_ishangke");
+        upDate.setCreateTime(time);
+        careerEntityExtMapper.update(upDate);
+        upDate = careerEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课",upDate.getName());
+        Assert.assertEquals("test_ishangke",upDate.getValue());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime())); 
     }
 }

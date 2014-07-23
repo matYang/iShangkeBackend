@@ -679,7 +679,7 @@
     update COURSE
     <set>
       <if test="courseName != null">
-        COURSENAME = #{courseName,jdbcType=VARCHAR},
+        COURSE_NAME = #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseTemplateId != null">
         COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
@@ -703,7 +703,7 @@
         PRICE = #{price,jdbcType=DOUBLE},
       </if>
       <if test="originalPrice != null">
-        ORIGINALPRICE = #{originalPrice,jdbcType=DOUBLE},
+        ORIGINAL_PRICE = #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         CASHBACK = #{cashback,jdbcType=DOUBLE},
@@ -712,7 +712,7 @@
         COMMISSION = #{commission,jdbcType=DOUBLE},
       </if>
       <if test="serviceCharge != null">
-        SERVICECHARGE = #{serviceCharge,jdbcType=DOUBLE},
+        SERVICE_CHARGE = #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
@@ -994,6 +994,17 @@
     <if test="entity != null">
       <if test="entity.courseName != null and !entity.courseName.equals('')">
         AND COURSE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+        AND CATEGORY.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+        AND CIRCLE.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+        AND LOCATION.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.reference != null and !entity.reference.equals('')">
@@ -1319,7 +1330,7 @@
       </foreach>
     </if>
 
-    <if test="page.offset != null and page.size != null">
+    <if test="page !=null and page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
@@ -1329,18 +1340,6 @@
     SELECT COUNT(*) FROM (
     select
     <include refid="Course_Base_Column_List"></include>
-    ,
-    <include refid="Partner_Base_Column_List"></include>
-    ,
-    <include refid="Address_Base_Column_List"></include>
-    ,
-    <include refid="Category_Base_Column_List"></include>
-    ,
-    <include refid="Location_Base_Column_List"></include>
-    ,
-    <include refid="Circle_Base_Column_List"></include>
-    ,
-    <include refid="CourseTemplate_Base_Column_List"></include>
     from COURSE COURSE
     join PARTNER PARTNER
     ON PARTNER.ID = COURSE.PARTNER_ID
@@ -1391,6 +1390,17 @@
             #{listItem}
           </foreach>
         </if>
+      </if>
+      
+      <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+        AND CATEGORY.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+        AND CIRCLE.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+        AND LOCATION.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.locationId != null and entity.locationId != 0">
         AND COURSE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
