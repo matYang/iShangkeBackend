@@ -1,8 +1,8 @@
 {
-    "transformGroups": [
+    "transformRoles": [
         {
             "name": "admin",
-            "groupCode": 0,
+            "roleCode": 0,
             "entitys": [
                 {
                     "name": "booking",

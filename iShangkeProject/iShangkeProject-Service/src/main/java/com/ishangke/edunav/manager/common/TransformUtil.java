@@ -13,7 +13,7 @@ import com.ishangke.edunav.manager.transform.CurrentStatus;
 import com.ishangke.edunav.manager.transform.Operation;
 import com.ishangke.edunav.manager.transform.StatusEntity;
 import com.ishangke.edunav.manager.transform.Transform;
-import com.ishangke.edunav.manager.transform.TransformGroup;
+import com.ishangke.edunav.manager.transform.TransformRole;
 
 public class TransformUtil {
     public static ActionBo toActionBo(Operation o) {
@@ -24,9 +24,9 @@ public class TransformUtil {
     }
     
 //    public static List<ActionBo> getActionByGroupName(String groupName, String entityName, int currentStatus) {
-//        List<TransformGroup> transformGroupList = new ArrayList<>();
+//        List<TransformRole> transformGroupList = new ArrayList<>();
 //        List<ActionBo> actionBoList = new ArrayList<>();
-//        for (TransformGroup t: transformGroupList) {
+//        for (TransformRole t: transformGroupList) {
 //            if(t.getName().equals(groupName)) {
 //                List<StatusEntity> statusEntitiesList = t.getEntitys();
 //                for(StatusEntity se : statusEntitiesList) {
@@ -68,15 +68,15 @@ public class TransformUtil {
         
         List<StatusEntity> entitys = new ArrayList<>();
         entitys.add(statusEntity);
-        TransformGroup transformGroup = new TransformGroup();
-        transformGroup.setName("admin");
-        transformGroup.setGroupCode(0);
-        transformGroup.setEntitys(entitys);
+        TransformRole transformRole = new TransformRole();
+        transformRole.setName("admin");
+        transformRole.setRoleCode(0);
+        transformRole.setEntitys(entitys);
         
-        List<TransformGroup> listGroups = new ArrayList<>();
-        listGroups.add(transformGroup);
+        List<TransformRole> listRoles = new ArrayList<>();
+        listRoles.add(transformRole);
         Transform transform = new Transform();
-        transform.setTransformGroups(listGroups);
+        transform.setTransformRoles(listRoles);
         
         ObjectMapper mapper = new ObjectMapper(); 
         String userMapJson = mapper.writeValueAsString(transform);
