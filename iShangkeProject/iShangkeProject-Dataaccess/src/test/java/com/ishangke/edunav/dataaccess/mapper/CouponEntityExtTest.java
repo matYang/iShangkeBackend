@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,7 @@ import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 public class CouponEntityExtTest extends BaseTest{
     @Autowired
     private CouponEntityExtMapper couponEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testAdd() {
         CouponEntityExt couponEntityExt = new CouponEntityExt();
@@ -134,5 +135,19 @@ public class CouponEntityExtTest extends BaseTest{
         Assert.assertEquals("_test_remark_1_爱上课", getbyid1.getRemark());
         Assert.assertEquals("_test_remark_2_爱上课", getbyid2.getRemark());
         Assert.assertEquals("_test_remark_3_爱上课", getbyid3.getRemark());
+    }
+    @Test
+    public void testUpdate() {
+        CouponEntityExt upDate = couponEntityExtMapper
+                .getById(2);
+        upDate.setRemark("test_爱上课");
+        upDate.setBalance(2.4);
+        upDate.setCreateTime(time);
+        couponEntityExtMapper.update(upDate);
+        upDate = couponEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课", upDate.getRemark());
+        Assert.assertEquals("2.4", upDate.getBalance().toString());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }

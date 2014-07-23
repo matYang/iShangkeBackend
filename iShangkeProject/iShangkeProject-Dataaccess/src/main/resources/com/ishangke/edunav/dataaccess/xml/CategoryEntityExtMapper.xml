@@ -8,7 +8,7 @@
     <result column="CATEGORY_RANK" property="rank" jdbcType="INTEGER" />
     <result column="CATEGORY_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="CATEGORY_CREATE_TIME" property="createTime"
+    <result column="CATEGORY_CREATETIME" property="createTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="CATEGORY_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="CATEGORY_DELETED" property="deleted" jdbcType="INTEGER" />

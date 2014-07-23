@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
+import com.ishangke.edunav.dataaccess.model.CourseTeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateClassPhotoEntityExtTest.class })
@@ -27,7 +29,7 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 public class CourseTemplateClassPhotoEntityExtTest extends BaseTest {
     @Autowired
     private CourseTemplateClassPhotoEntityExtMapper courseTemplateClassPhotoEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     // public CourseTemplateClassPhotoEntityExtTest() {
     // scriptAfterClass = "CourseTemplateClassPhotoEntityExtTestAfter.sql";
     // scriptBeforeClass = "CourseTemplateClassPhotoEntityExtTestBefore.sql";
@@ -132,5 +134,16 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest {
         Assert.assertEquals(time2,
                 DateUtility.toSQLDateTime(getbyid3.getCreateTime()));
 
+    }
+    @Test
+    public void testUpdate() {
+        CourseTemplateClassPhotoEntityExt  upDate = courseTemplateClassPhotoEntityExtMapper
+                .getById(2);
+
+        upDate.setCreateTime(time);
+        courseTemplateClassPhotoEntityExtMapper.update(upDate);
+        upDate = courseTemplateClassPhotoEntityExtMapper.getById(2);
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }

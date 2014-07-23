@@ -14,8 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
+import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.CareerEntityExt;
 import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 
@@ -93,7 +95,20 @@ public class CircleEntityExtTest {
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
     }
-
+    @Test
+    public void testUpdate() {
+        CircleEntityExt upDate = circleEntityExtMapper
+                .getById(2);
+        upDate.setName("test_爱上课");
+        upDate.setValue("test_ishangke");
+        upDate.setCreateTime(time);
+        circleEntityExtMapper.update(upDate);
+        upDate = circleEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课",upDate.getName());
+        Assert.assertEquals("test_ishangke",upDate.getValue());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime())); 
+    }
    
 
 }

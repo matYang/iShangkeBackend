@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,7 @@ public class ClassPhotoEntityExtTest extends BaseTest {
     private CourseClassPhotoEntityExtMapper courseClassPhotoEntityExtMapper;
     @Autowired
     private CourseTemplateClassPhotoEntityExtMapper courseTemplateClassPhotoEntityExtMapper;
+    private Calendar time = Calendar.getInstance();
 
     @Test
     public void testAdd() {
@@ -274,16 +276,28 @@ public class ClassPhotoEntityExtTest extends BaseTest {
         Assert.assertEquals(1, result.size());
         Assert.assertEquals("_test_IU_3_爱上课", result.get(0).getImgUrl());
     }
+
     @Test
     public void testGet() {
-        ClassPhotoEntityExt getbyid1 = classPhotoEntityExtMapper
-                .getById(2);
-        ClassPhotoEntityExt getbyid2 = classPhotoEntityExtMapper
-                .getById(3);
-        ClassPhotoEntityExt getbyid3 = classPhotoEntityExtMapper
-                .getById(4);
+        ClassPhotoEntityExt getbyid1 = classPhotoEntityExtMapper.getById(2);
+        ClassPhotoEntityExt getbyid2 = classPhotoEntityExtMapper.getById(3);
+        ClassPhotoEntityExt getbyid3 = classPhotoEntityExtMapper.getById(4);
         Assert.assertEquals("_test_title_1_爱上课", getbyid1.getTitle());
         Assert.assertEquals("_test_title_2_爱上课", getbyid2.getTitle());
         Assert.assertEquals("_test_title_3_爱上课", getbyid3.getTitle());
+    }
+
+    @Test
+    public void testUpdate() {
+        ClassPhotoEntityExt upDate = classPhotoEntityExtMapper.getById(2);
+        upDate.setSnapshotUrl("test_爱上课");
+        upDate.setImgUrl("test_ishangke");
+        upDate.setCreateTime(time);
+        classPhotoEntityExtMapper.update(upDate);
+        upDate = classPhotoEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课", upDate.getSnapshotUrl());
+        Assert.assertEquals("test_ishangke", upDate.getImgUrl());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }

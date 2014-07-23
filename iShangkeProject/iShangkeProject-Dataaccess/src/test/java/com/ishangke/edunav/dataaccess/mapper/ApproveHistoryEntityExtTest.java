@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 
@@ -25,7 +27,7 @@ import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 public class ApproveHistoryEntityExtTest {
     @Autowired
     private ApproveHistoryEntityExtMapper approveHistoryEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     @Test
     public void testAdd() {
         ApproveHistoryEntityExt approveHistoryEntityExt = new ApproveHistoryEntityExt();
@@ -128,5 +130,19 @@ public class ApproveHistoryEntityExtTest {
         Assert.assertEquals("_test_comment_1_爱上课", getbyid1.getComment());
         Assert.assertEquals("_test_comment_2_爱上课", getbyid2.getComment());
         Assert.assertEquals("_test_comment_3_爱上课", getbyid3.getComment());
+    }
+    @Test
+    public void testUpdate() {
+        ApproveHistoryEntityExt upDate = approveHistoryEntityExtMapper
+                .getById(2);
+        upDate.setComment("test_爱上课");
+        upDate.setType(9);
+        upDate.setCreateTime(time);
+        approveHistoryEntityExtMapper.update(upDate);
+        upDate = approveHistoryEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课",upDate.getComment());
+        Assert.assertSame(9, upDate.getType());  
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime())); 
     }
 }

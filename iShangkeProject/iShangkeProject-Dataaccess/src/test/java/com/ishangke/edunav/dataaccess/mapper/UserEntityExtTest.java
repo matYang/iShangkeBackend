@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +23,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, UserEntityExtTest.class })
@@ -30,7 +32,7 @@ import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 public class UserEntityExtTest extends BaseTest {
     @Autowired
     private UserEntityExtMapper userEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     //resource里面
 //    public UserEntityExtTest() {
 //        scriptAfterClass = "UserEntityExtTestAfter.sql";
@@ -106,5 +108,18 @@ public class UserEntityExtTest extends BaseTest {
         Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
+    @Test
+    public void testUpdate() {
+        UserEntityExt upDate = userEntityExtMapper
+                .getById(2);
+        upDate.setName("_test_name_爱上课");;
+        upDate.setLastModifyTime(time);
+        userEntityExtMapper.update(upDate);
+        upDate = userEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_name_爱上课",
+               upDate.getName());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getLastModifyTime()));
     }
 }

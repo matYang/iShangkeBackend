@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, ActivityEntityExtTest.class })
@@ -130,6 +131,19 @@ public class ActivityEntityExtTest {
         Assert.assertEquals("_test_name_1_爱上课_", activityEntityExt1.getName());
         Assert.assertEquals("_test_name_2_爱上课_", activityEntityExt2.getName());
         Assert.assertEquals("_test_name_3_爱上课_", activityEntityExt3.getName());
+    }
+    @Test
+    public void testUpdate() {
+        ActivityEntityExt activityEntityExt = activityEntityExtMapper
+                .getById(2);
+        activityEntityExt.setName("_test_name_爱上课_3");
+        activityEntityExt.setRemark("_test_remark_爱上课_3");
+        activityEntityExt.setStatus(5);
+        activityEntityExtMapper.update(activityEntityExt);
+        activityEntityExt = activityEntityExtMapper.getById(2);
+        Assert.assertEquals("_test_remark_爱上课_3",activityEntityExt.getRemark());
+        Assert.assertEquals("_test_name_爱上课_3", activityEntityExt.getName()); 
+        Assert.assertSame(5, activityEntityExt.getStatus());  
     }
 
 }

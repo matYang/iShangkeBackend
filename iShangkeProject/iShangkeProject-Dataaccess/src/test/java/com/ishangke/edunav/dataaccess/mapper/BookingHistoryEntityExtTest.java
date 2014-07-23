@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,7 @@ import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 public class BookingHistoryEntityExtTest {
     @Autowired
     private BookingHistoryEntityExtMapper bookingHistoryEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
 //    // resource里面
 //    public BookingHistoryEntityExtTest() {
 //        scriptAfterClass = "BookingHistoryEntityExtTestAfter.sql";
@@ -135,5 +136,19 @@ public class BookingHistoryEntityExtTest {
         Assert.assertEquals("_test_remark_1_爱上课", getbyid1.getRemark());
         Assert.assertEquals("_test_remark_2_爱上课", getbyid2.getRemark());
         Assert.assertEquals("_test_remark_3_爱上课", getbyid3.getRemark());
+    }
+    @Test
+    public void testUpdate() {
+        BookingHistoryEntityExt upDate = bookingHistoryEntityExtMapper
+                .getById(2);
+        upDate.setRemark("test_爱上课");
+        upDate.setOptName(7);
+        upDate.setCreateTime(time);
+        bookingHistoryEntityExtMapper.update(upDate);
+        upDate = bookingHistoryEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课",upDate.getRemark());
+        Assert.assertSame(7, upDate.getOptName());  
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime())); 
     }
 }

@@ -679,7 +679,7 @@
     update COURSE
     <set>
       <if test="courseName != null">
-        COURSENAME = #{courseName,jdbcType=VARCHAR},
+        COURSE_NAME = #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseTemplateId != null">
         COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
@@ -703,7 +703,7 @@
         PRICE = #{price,jdbcType=DOUBLE},
       </if>
       <if test="originalPrice != null">
-        ORIGINALPRICE = #{originalPrice,jdbcType=DOUBLE},
+        ORIGINAL_PRICE = #{originalPrice,jdbcType=DOUBLE},
       </if>
       <if test="cashback != null">
         CASHBACK = #{cashback,jdbcType=DOUBLE},
@@ -712,7 +712,7 @@
         COMMISSION = #{commission,jdbcType=DOUBLE},
       </if>
       <if test="serviceCharge != null">
-        SERVICECHARGE = #{serviceCharge,jdbcType=DOUBLE},
+        SERVICE_CHARGE = #{serviceCharge,jdbcType=DOUBLE},
       </if>
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},

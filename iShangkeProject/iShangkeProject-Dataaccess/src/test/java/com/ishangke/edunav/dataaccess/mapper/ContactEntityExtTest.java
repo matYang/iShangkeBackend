@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,7 @@ import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 public class ContactEntityExtTest extends BaseTest{
     @Autowired
     private ContactEntityExtMapper contactEntityExtMapper;
-
+    private Calendar time = Calendar.getInstance();
     //resource里面
 //    public ContactEntityExtTest() {
 //        scriptAfterClass = "ContactEntityExtTestAfter.sql";
@@ -134,5 +135,19 @@ public class ContactEntityExtTest extends BaseTest{
         Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
         Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
         Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+    }
+    @Test
+    public void testUpdate() {
+        ContactEntityExt upDate = contactEntityExtMapper
+                .getById(2);
+        upDate.setName("test_爱上课");
+        upDate.setPhone("test_ishangke");
+        upDate.setCreateTime(time);
+        contactEntityExtMapper.update(upDate);
+        upDate = contactEntityExtMapper.getById(2);
+        Assert.assertEquals("test_爱上课", upDate.getName());
+        Assert.assertEquals("test_ishangke", upDate.getPhone());
+        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+                DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
 }
