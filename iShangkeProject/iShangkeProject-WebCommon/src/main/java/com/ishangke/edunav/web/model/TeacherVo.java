@@ -3,7 +3,9 @@ package com.ishangke.edunav.web.model;
 import java.util.Calendar;
 import java.util.Set;
 
-public class TeacherVo {
+import com.ishangke.edunav.web.tree.HierarchyData;
+
+public class TeacherVo extends HierarchyData{
     private Integer id;
 
     private Integer partnerId;

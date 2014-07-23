@@ -3,10 +3,10 @@ package com.ishangke.edunav.web.model;
 import java.util.Calendar;
 import java.util.Set;
 
-public class CircleVo {
-    private Integer id;
+import com.ishangke.edunav.web.tree.HierarchyData;
 
-    private String value;
+public class CircleVo extends HierarchyData{
+    private Integer id;
 
     private String name;
 
@@ -26,6 +26,7 @@ public class CircleVo {
     public void setId(Integer id) {
         this.id = id;
     }
+    @Override
     public String getValue() {
         return value;
     }
