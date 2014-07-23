@@ -103,11 +103,11 @@ public class CourseTemplateEntityExtTest extends BaseTest {
         page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE", DataaccessConstants.ORDER_ASC));
         
         CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();
-        courseTemplateEntityExt.setCourseName("_test_");
+        courseTemplateEntityExt.setCourseName("雅思");
 
         List<CourseTemplateEntityExt> result = courseTemplateEntityExtMapper.list(courseTemplateEntityExt, page);
-        Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_2_爱上课", result.get(0).getCourseName());
+        Assert.assertEquals(5, result.size());
+        Assert.assertEquals("雅思05", result.get(0).getCourseName());
     }
     @Test
     public void testQuery2() {
@@ -124,33 +124,8 @@ public class CourseTemplateEntityExtTest extends BaseTest {
         Assert.assertEquals(3, result.size());
     }
     
-    @Test
-    public void testQuery3() {
-        CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
-        courseTemplateEntityExt.setCategoryId(2);
-        
-        List<CourseTemplateEntityExt> result = courseTemplateEntityExtMapper.list(courseTemplateEntityExt, page);
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("_test_CI_2_爱上课", result.get(0).getCourseIntro());
-        Assert.assertEquals("_test_CI_2_爱上课", result.get(1).getCourseIntro());
-    }
-    
-    @Test
-    public void testQuery4() {
-        CourseTemplateEntityExt courseTemplateEntityExt = new CourseTemplateEntityExt();
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
-        courseTemplateEntityExt.setCategoryId(2);
-        courseTemplateEntityExt.setLocationId(3);
-        List<CourseTemplateEntityExt> result = courseTemplateEntityExtMapper.list(courseTemplateEntityExt, page);
-        Assert.assertEquals(1, result.size());
-        Assert.assertEquals("_test_reference_2_爱上课", result.get(0).getReference());
-       
-    }
+   
+   
     @Test
     public void testGet() {
         CourseTemplateEntityExt getbyid1 = courseTemplateEntityExtMapper
@@ -159,9 +134,9 @@ public class CourseTemplateEntityExtTest extends BaseTest {
                 .getInfoById(3);
         CourseTemplateEntityExt getbyid3 = courseTemplateEntityExtMapper
                 .getInfoById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getCourseName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getCourseName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getCourseName());
+        Assert.assertEquals("雅思02", getbyid1.getCourseName());
+        Assert.assertEquals("雅思03", getbyid2.getCourseName());
+        Assert.assertEquals("雅思04", getbyid3.getCourseName());
         
        
     }

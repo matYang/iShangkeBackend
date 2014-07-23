@@ -103,11 +103,11 @@ public class RoleEntityExtTest extends BaseTest {
                 DataaccessConstants.ORDER_DESC));
 
         RoleEntityExt RoleEntityExt = new RoleEntityExt();
-        RoleEntityExt.setName("_test_");
+        RoleEntityExt.setName("systemadmin");
         List<RoleEntityExt> result = roleEntityExtMapper.list(RoleEntityExt,
                 page);
-        Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals("systemadmin", result.get(0).getName());
     }
 
     @Test
@@ -133,7 +133,7 @@ public class RoleEntityExtTest extends BaseTest {
 
         List<RoleEntityExt> result = roleEntityExtMapper.listRolesByUserId(2);
         Assert.assertEquals(10, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("admin", result.get(0).getName());
     }
 
     @Test
@@ -143,14 +143,14 @@ public class RoleEntityExtTest extends BaseTest {
 
         List<RoleEntityExt> result = roleEntityExtMapper.listRolesByGroupId(2);
         Assert.assertEquals(1, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("admin", result.get(0).getName());
     }
 
     @Test
     public void testQuery5() {
         RoleEntityExt teacherCount = roleEntityExtMapper.getById(2);
 
-        Assert.assertEquals("_test_name_1_爱上课", teacherCount.getName());
+        Assert.assertEquals("admin", teacherCount.getName());
 
     }
 
@@ -159,9 +159,9 @@ public class RoleEntityExtTest extends BaseTest {
         RoleEntityExt getbyid1 = roleEntityExtMapper.getById(2);
         RoleEntityExt getbyid2 = roleEntityExtMapper.getById(3);
         RoleEntityExt getbyid3 = roleEntityExtMapper.getById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+        Assert.assertEquals("admin", getbyid1.getName());
+        Assert.assertEquals("partneradmin", getbyid2.getName());
+        Assert.assertEquals("user", getbyid3.getName());
     }
 
     @Test
