@@ -4,12 +4,7 @@ import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
-import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptBo;
-import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptFailedBo;
-import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptSuccessBo;
-import com.ishangke.edunav.commoncontract.model.CommentBookingCancelBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingCreateBo;
-import com.ishangke.edunav.commoncontract.model.CommentBookingValidateBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -33,118 +28,6 @@ public interface BookingManager {
      *
      */
     BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo);
-
-    /**
-     * 本方法为合作商受理一个预定单功能。<br>
-     * 合作商可以受理一个用户预定请求
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param CommentBookingAcceptBo
-     *            受理预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo acceptBookingByPartner(BookingBo bookingBo, CommentBookingAcceptBo commentBookingAcceptBo, UserBo userBo);
-
-    /**
-     * 本方法为合作商受理成功一个预定单功能。<br>
-     * 合作商可以将正在受理的预定单标注为受理成功
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param CommentBookingAcceptSuccessBo
-     *            受理成功预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo acceptBookingSucceedByPartner(BookingBo bookinbBo, CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, UserBo userBo);
-
-    /**
-     * 本方法为合作商受理失败一个预定单功能。<br>
-     * 合作商可以将正在受理的预定单标注为受理失败
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param CommentBookingAcceptFailedBo
-     *            受理失败预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo acceptBookingFailedByPartner(BookingBo bookingBo, CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, UserBo userBo);
-
-    /**
-     * 本方法为合作商确认一个订单已生效。<br>
-     * 合作商将一个受理成功的预定单标注为已付款
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param CommentBookingValidateBo
-     *            接收已付款预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo validateBookingByPartner(BookingBo bookingBo, CommentBookingValidateBo commentBookingValidateBo, UserBo userBo);
-
-    /**
-     * 本方法为取消一个预定单功能。<br>
-     * 用户可以取消一个相关预定单
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param commentBookingCancelBo
-     *            取消预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo cancelBookingByUser(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo);
-
-    /**
-     * 本方法为取消一个预定单功能。<br>
-     * 合作商可以取消一个相关预定单
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param commentBookingCancelBo
-     *            取消预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo cancelBookingByPartner(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo);
-
-    /**
-     * 本方法为取消一个预定单功能。<br>
-     * 管理员可以取消一个相关预定单
-     *
-     * @param bookingBo
-     *            预定单信息
-     * @param commentBookingCancelBo
-     *            取消预定单留言信息
-     * @param userBo
-     *            调用方法的用户的信息
-     *
-     * @return
-     *
-     */
-    BookingBo cancelBookingByAdmin(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo);
 
     /**
      * 本方法为查询预定单预定单功能。<br>

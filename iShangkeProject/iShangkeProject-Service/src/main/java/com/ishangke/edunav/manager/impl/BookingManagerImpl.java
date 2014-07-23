@@ -15,13 +15,16 @@ import com.ishangke.edunav.commoncontract.model.CommentBookingAcceptSuccessBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingCancelBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingCreateBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingValidateBo;
-import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.mapper.gen.BookingEntityMapper;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
+import com.ishangke.edunav.manager.ContactManager;
+import com.ishangke.edunav.manager.CouponManager;
+import com.ishangke.edunav.manager.TransformManager;
 
 @Component
 public class BookingManagerImpl implements BookingManager {
@@ -29,52 +32,22 @@ public class BookingManagerImpl implements BookingManager {
     
     @Autowired
     private AuthManager authManager;
+    
+    @Autowired
+    private TransformManager transformManager;
+    
+    @Autowired
+    private BookingEntityMapper bookingMapper;
+    
+    @Autowired 
+    private ContactManager contactManager;
+    
+    @Autowired
+    private CouponManager couponManager;
 
     @Override
     public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo acceptBookingByPartner(BookingBo bookingBo, CommentBookingAcceptBo commentBookingAcceptBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo acceptBookingSucceedByPartner(BookingBo bookinbBo, CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo acceptBookingFailedByPartner(BookingBo bookingBo, CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo validateBookingByPartner(BookingBo bookingBo, CommentBookingValidateBo commentBookingValidateBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo cancelBookingByUser(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo cancelBookingByPartner(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public BookingBo cancelBookingByAdmin(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo) {
-        // TODO Auto-generated method stub
+        // TODO coupon的使用
         return null;
     }
 
