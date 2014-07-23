@@ -4,7 +4,6 @@ package com.ishangke.edunav.manager.transform;
 public class Operation {
     private String name;
     private int operateCode;
-    private String url;
     public String getName() {
         return name;
     }
@@ -16,11 +15,5 @@ public class Operation {
     }
     public void setOperateCode(int operateCode) {
         this.operateCode = operateCode;
-    }
-    public String getUrl() {
-        return url;
-    }
-    public void setUrl(String url) {
-        this.url = url;
     }
 }
