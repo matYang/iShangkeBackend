@@ -12,6 +12,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CircleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CircleManager;
 import com.ishangke.edunav.manager.converter.CircleConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -23,6 +24,8 @@ public class CircleManagerImpl implements CircleManager {
 
     @Autowired
     private CircleEntityExtMapper circleEntityExtMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo) {

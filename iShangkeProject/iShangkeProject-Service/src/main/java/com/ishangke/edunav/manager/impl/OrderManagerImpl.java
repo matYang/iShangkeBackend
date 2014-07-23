@@ -23,6 +23,7 @@ import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.OrderManager;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.OrderConverter;
@@ -39,6 +40,8 @@ public class OrderManagerImpl implements OrderManager {
     private OrderEntityExtMapper orderMapper;
     @Autowired
     private OrderHistoryEntityExtMapper orderHistoryMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo) {

@@ -14,6 +14,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.ContactManager;
 import com.ishangke.edunav.manager.converter.ContactConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -26,6 +27,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Autowired
     private ContactEntityExtMapper contactMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public ContactBo createContact(ContactBo contactBo, UserBo userBo) {

@@ -1,6 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.TeacherManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
@@ -36,6 +38,9 @@ public class TeacherManagerImpl implements TeacherManager {
     @Autowired
     private GroupEntityExtMapper groupMapper;
 
+    @Autowired
+    private AuthManager authManager;
+
     @Override
     public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo) {
         // 参数验证
@@ -45,7 +50,7 @@ public class TeacherManagerImpl implements TeacherManager {
 
         // 验证userBo是否是否属于同一家机构
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
-        if (groupList == null) {
+        if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
@@ -54,6 +59,10 @@ public class TeacherManagerImpl implements TeacherManager {
                 isSameGroup = true;
                 break;
             }
+        }
+        if (authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call createTeacher at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -84,17 +93,21 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Invalid parameter");
         }
 
-        // 验证userBo是否是否属于同一家机构
+        // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
-        if (groupList == null) {
+        if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
         for (GroupEntityExt g : groupList) {
-            if (g.getId() == teacherBo.getPartnerId()) {
+            if (g.getPartnerId() == teacherBo.getPartnerId()) {
                 isSameGroup = true;
                 break;
             }
+        }
+        if (authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call updateTeacher at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -121,17 +134,21 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Invalid parameter");
         }
 
-        // 验证userBo是否是否属于同一家机构
+        // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
-        if (groupList == null) {
+        if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
         for (GroupEntityExt g : groupList) {
-            if (g.getId() == teacherBo.getPartnerId()) {
+            if (g.getPartnerId() == teacherBo.getPartnerId()) {
                 isSameGroup = true;
                 break;
             }
+        }
+        if (authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call deleteTeacher at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -158,17 +175,21 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Invalid parameter");
         }
 
-        // 验证userBo是否是否属于同一家机构
+        // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
-        if (groupList == null) {
+        if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
         for (GroupEntityExt g : groupList) {
-            if (g.getId() == teacherBo.getPartnerId()) {
+            if (g.getPartnerId() == teacherBo.getPartnerId()) {
                 isSameGroup = true;
                 break;
             }
+        }
+        if (authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call query at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -202,6 +223,9 @@ public class TeacherManagerImpl implements TeacherManager {
         return convertedResults;
     }
 
+    /**
+     * 所有人都可以调用此方法
+     */
     @Override
     public List<TeacherBo> listByCourseId(int courseId) {
         List<TeacherEntityExt> teacherList = null;
@@ -219,6 +243,9 @@ public class TeacherManagerImpl implements TeacherManager {
         }
     }
 
+    /**
+     * 所有人都可以调用此方法
+     */
     @Override
     public List<TeacherBo> listByCourseTemplateId(int courseTemplateId) {
         List<TeacherEntityExt> teacherList = null;
@@ -236,11 +263,26 @@ public class TeacherManagerImpl implements TeacherManager {
         }
     }
 
-    // @Override
-    public List<TeacherBo> listByPartnerId(int partnerId) {
+    @Override
+    public List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo) {
         List<TeacherEntityExt> teacherList = null;
         List<TeacherBo> resultList = null;
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getId() == partnerId) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
         try {
             teacherList = teacherMapper.listTeacherByPartnerId(partnerId);
             for (TeacherEntityExt teacherPo : teacherList) {

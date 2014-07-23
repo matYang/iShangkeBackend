@@ -12,6 +12,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CategoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CategoryManager;
 import com.ishangke.edunav.manager.converter.CategoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -23,6 +24,9 @@ public class CategoryManagerImpl implements CategoryManager {
 
     @Autowired
     private CategoryEntityExtMapper categoryMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo) {

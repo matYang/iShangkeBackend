@@ -19,6 +19,7 @@ import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseTemplateManager;
 import com.ishangke.edunav.manager.converter.CourseTemplateConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -37,6 +38,9 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
 
     @Autowired
     private GroupEntityExtMapper groupEntityExtMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {

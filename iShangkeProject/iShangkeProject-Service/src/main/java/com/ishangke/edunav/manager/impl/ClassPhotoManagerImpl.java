@@ -17,6 +17,7 @@ import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.ClassPhotoManager;
 import com.ishangke.edunav.manager.converter.ClassPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -32,6 +33,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
 
     @Autowired
     private GroupEntityExtMapper groupEntityExtMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) {

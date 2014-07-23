@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.mapper.CourseCommentEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseCommentManager;
 import com.ishangke.edunav.manager.converter.CourseCommentConverter;
 import com.ishangke.edunav.manager.converter.CourseTemplateConverter;
@@ -29,6 +30,9 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
 
     @Autowired
     private CourseCommentEntityExtMapper courseCommentMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {

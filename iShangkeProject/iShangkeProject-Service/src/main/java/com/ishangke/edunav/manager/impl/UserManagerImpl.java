@@ -14,6 +14,7 @@ import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -24,6 +25,9 @@ public class UserManagerImpl implements UserManager {
 
     @Autowired
     private UserEntityExtMapper userMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public UserBo authenticate(String sessionString) {

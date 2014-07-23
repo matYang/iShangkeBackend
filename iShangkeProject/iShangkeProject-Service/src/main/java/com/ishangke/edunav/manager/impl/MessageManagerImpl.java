@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.MessageEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.MessageEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.MessageManager;
 import com.ishangke.edunav.manager.converter.MessageConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -28,6 +29,9 @@ public class MessageManagerImpl implements MessageManager {
 
     @Autowired
     private MessageEntityExtMapper messageMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public MessageBo sendMessage(MessageBo messageBo, UserBo userBo) {

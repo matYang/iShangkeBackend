@@ -18,6 +18,7 @@ import com.ishangke.edunav.dataaccess.mapper.CouponHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.CouponHistoryConverter;
@@ -33,6 +34,8 @@ public class CouponManagerImpl implements CouponManager {
     private CouponEntityExtMapper couponMapper;
     @Autowired
     private CouponHistoryEntityExtMapper couponHistoryMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) {

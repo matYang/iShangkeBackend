@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.CommentCourseApproveBo;
@@ -25,6 +26,7 @@ import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.LocationEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseManager;
 import com.ishangke.edunav.manager.converter.CategoryConverter;
 import com.ishangke.edunav.manager.converter.CircleConverter;
@@ -43,6 +45,9 @@ public class CourseManagerImpl implements CourseManager {
 
     @Autowired
     private CourseEntityExtMapper courseMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {

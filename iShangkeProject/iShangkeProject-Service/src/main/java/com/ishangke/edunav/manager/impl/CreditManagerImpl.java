@@ -26,6 +26,7 @@ import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CreditManager;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.CreditConverter;
@@ -48,6 +49,8 @@ public class CreditManagerImpl implements CreditManager {
     private AccountEntityExtMapper accountMapper;
     @Autowired
     private CreditHistoryEntityExtMapper creditHistoryMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public CreditBo modifyCredit(CreditBo creditBo, UserBo userBo) {

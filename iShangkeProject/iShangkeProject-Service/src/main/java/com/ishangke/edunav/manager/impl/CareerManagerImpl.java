@@ -12,6 +12,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CareerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CareerEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CareerManager;
 import com.ishangke.edunav.manager.converter.CareerConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -23,6 +24,9 @@ public class CareerManagerImpl implements CareerManager {
 
     @Autowired
     private CareerEntityExtMapper careerMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo) {

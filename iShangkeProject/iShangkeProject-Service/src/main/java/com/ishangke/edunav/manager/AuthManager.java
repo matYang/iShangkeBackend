@@ -45,6 +45,8 @@ public interface AuthManager {
     /**
      * 系统管理员拥有最高权限，可以做任何事
      */
-    boolean isSystemAdmin(int userId);
+    public boolean isSystemAdmin(final int userId);
+    
+    public String getRole(final int userId);
 
 }

@@ -15,6 +15,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.WithdrawEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.WithdrawManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
@@ -27,6 +28,9 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
     @Autowired
     private WithdrawEntityExtMapper withdrawMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public WithdrawBo createWithdraw(WithdrawBo withdrawBo, final UserBo userBo) {

@@ -501,23 +501,25 @@ public class AuthManagerImpl implements AuthManager {
 
     @Override
     public boolean isSystemAdmin(int userId) {
+        return Constant.ROLESYSTEMADMIN.equals(getRole(userId));
+    }
+
+    @Override
+    public String getRole(int userId) {
         String role = (String)cache.get(Constant.ROLEPREFIX + userId);
-        if (Constant.ROLESYSTEMADMIN.equals(role)) {
-            LOGGER.debug(String.format("[AuthManagerImpl] find systemadmin [user id: %d]", userId));
-            return true;
-        } else if (role != null) {
-            return false;
+        if (role != null) {
+            return role;
         } else {
             List<RoleEntityExt> roleList = roleMapper.listRolesByUserId(userId);
             if (roleList == null || roleList.size() == 0) {
                 LOGGER.warn(String.format("[AuthManager] user [id = %d] cannot find role!", userId));
-                return false;
+                return null;
             }
             String roleName = roleList.get(0).getName();
             cache.set(Constant.ROLEPREFIX + userId, Constant.STATUSTRANSFORMEXPIRETIME, roleName);
             LOGGER.info(String.format("[AuthManagerImpl] add role into memcached [user id: %d] [role name: %s]", userId, roleName));
+            return roleName;
         }
-        return false;
     }
 
 }

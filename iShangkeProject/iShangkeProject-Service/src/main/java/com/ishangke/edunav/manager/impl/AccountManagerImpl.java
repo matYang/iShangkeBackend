@@ -21,6 +21,7 @@ import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 import com.ishangke.edunav.manager.AccountManager;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.converter.AccountConverter;
 import com.ishangke.edunav.manager.converter.AccountHistoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -37,6 +38,8 @@ public class AccountManagerImpl implements AccountManager {
     private AccountHistoryEntityExtMapper accountHistoryMapper;
     @Autowired
     private WithdrawEntityExtMapper withdrawMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type) {
