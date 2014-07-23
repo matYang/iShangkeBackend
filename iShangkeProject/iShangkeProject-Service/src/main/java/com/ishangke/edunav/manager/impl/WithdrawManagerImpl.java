@@ -94,7 +94,6 @@ public class WithdrawManagerImpl implements WithdrawManager {
         try {
             withdrawMapper.update(withdrawEntity);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Withdraw update failed for user: " + userEntity.getId(), t);
         }
 
@@ -125,7 +124,6 @@ public class WithdrawManagerImpl implements WithdrawManager {
             withdrawEntity.setDeleted(1);
             withdrawMapper.deleteById(withdrawEntity.getId());
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Withdraw deletion failed for user: " + userEntity.getId(), t);
         }
 
@@ -140,12 +138,21 @@ public class WithdrawManagerImpl implements WithdrawManager {
         WithdrawEntityExt withdrawEntity = withdrawBo == null ? null : WithdrawConverter.fromBo(withdrawBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-
+        
+        //admin and system admins can query user's withdraws
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
+        }
+        else {
+            if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userBo.getId())) {
+                throw new AuthenticationException("User querying someone else's withdraw");
+            }
+        }
+        
         List<WithdrawEntityExt> results = null;
         try {
             results = withdrawMapper.list(withdrawEntity, page);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Withdraw query failed for user: " + userEntity.getId(), t);
         }
 
