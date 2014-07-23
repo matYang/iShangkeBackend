@@ -8,4 +8,5 @@ public class Constant {
     public static final String STATUSTRANSFORMCOURSETEMPLATE = "coursetemplate";
     public static final String ROLEPREFIX = "role";
     public static final String ROLESYSTEMADMIN = "systemadmin";
+    public static final String ROLEADMIN = "admin";
 }

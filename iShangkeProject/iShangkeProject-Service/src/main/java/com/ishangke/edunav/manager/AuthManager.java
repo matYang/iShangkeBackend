@@ -47,6 +47,8 @@ public interface AuthManager {
      */
     public boolean isSystemAdmin(final int userId);
     
+    public boolean isAdmin(int userId);
+    
     public String getRole(final int userId);
 
 }
