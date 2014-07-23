@@ -3,8 +3,6 @@ package com.ishangke.edunav.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +19,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
 public class LocationManagerImpl implements LocationManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocationManagerImpl.class);
 
     @Autowired
     private LocationEntityExtMapper locationMapper;
@@ -38,7 +35,6 @@ public class LocationManagerImpl implements LocationManager {
         try {
             results = locationMapper.list(locationEntity, page);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Location query failed", t);
         }
 
