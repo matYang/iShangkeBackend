@@ -6,4 +6,6 @@ public class Constant {
     public static final String STATUSTRANSFORMBOOKING = "booking";
     public static final String STATUSTRANSFORMCOURSE = "course";
     public static final String STATUSTRANSFORMCOURSETEMPLATE = "coursetemplate";
+    public static final String ROLEPREFIX = "role";
+    public static final String ROLESYSTEMADMIN = "systemadmin";
 }

@@ -36,7 +36,7 @@ public class TransformManagerImplTest {
     @Test
     public void testGetAction() throws IllegalArgumentException, IllegalAccessException{
         ConfigurationEntityExt configurationEntityExt = new ConfigurationEntityExt();
-        configurationEntityExt.setConfigData("{\"transformGroups\":[{\"name\":\"admin\",\"groupCode\":0,\"entitys\":[{\"name\":\"course\",\"entityCode\":0,\"currentStatuses\":[{\"name\":\"new\",\"statusCode\":0,\"operations\":[{\"name\":\"submit\",\"operateCode\":0,\"url\":\"/submit\"}]}]}]}]}");
+        configurationEntityExt.setConfigData("{\"transformRoles\":[{\"name\":\"admin\",\"roleCode\":0,\"entitys\":[{\"name\":\"course\",\"entityCode\":0,\"currentStatuses\":[{\"name\":\"new\",\"statusCode\":0,\"operations\":[{\"name\":\"submit\",\"operateCode\":0,\"url\":\"/submit\"}]}]}]}]}");
         configurationEntityExt.setName("statusTransform");
         configurationMapper.testAdd(configurationEntityExt);
         List<ActionBo> list = transformManager.getActionByGroupName("admin", "course", 0);
