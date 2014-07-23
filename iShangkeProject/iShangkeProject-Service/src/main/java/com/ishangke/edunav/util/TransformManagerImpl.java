@@ -33,7 +33,7 @@ public class TransformManagerImpl implements TransformManager {
     private CacheManager cache;
 
     @Override
-    public List<ActionBo> getActionByGroupName(String roleName, String entityName, int currentStatus) {
+    public List<ActionBo> getActionByRoleName(String roleName, String entityName, int currentStatus) {
         String key = roleName + entityName + currentStatus;
         @SuppressWarnings("unchecked")
         ArrayList<ActionBo> tempList = (ArrayList<ActionBo>) cache.get(key);

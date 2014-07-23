@@ -5,5 +5,5 @@ import java.util.List;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 
 public interface TransformManager {
-    public List<ActionBo> getActionByGroupName(String groupName, String entityName, int currentStatus);
+    public List<ActionBo> getActionByRoleName(String roleName, String entityName, int currentStatus);
 }

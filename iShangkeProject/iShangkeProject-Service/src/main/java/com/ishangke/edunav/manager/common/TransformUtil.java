@@ -19,7 +19,6 @@ public class TransformUtil {
     public static ActionBo toActionBo(Operation o) {
         ActionBo a = new ActionBo();
         a.setName(o.getName());
-        a.setUrl(o.getUrl());
         return a;
     }
     
@@ -50,7 +49,6 @@ public class TransformUtil {
         Operation operation = new Operation();
         operation.setName("submit");
         operation.setOperateCode(0);
-        operation.setUrl("/submit");
         
         List<Operation> operations = new ArrayList<Operation>();
         operations.add(operation);
