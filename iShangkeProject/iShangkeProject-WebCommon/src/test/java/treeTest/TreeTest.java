@@ -3,8 +3,6 @@ package treeTest;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import org.junit.Test;
 
@@ -194,6 +192,10 @@ public class TreeTest {
         cat30.setName("GMAT");
         catList.add(cat30);
         
+        for (int i = 0; i < 170; i++) {
+            catList.add(cat30);
+        }
+        
         for (int i = 0; i < catList.size(); i++) {
             catList.get(i).setId(i);
             catList.get(i).setRank(i);
@@ -201,59 +203,22 @@ public class TreeTest {
             catList.get(i).setLastModifyTime(DateUtility.getCurTimeInstance());
             catList.get(i).setEnabled(1);
         }
-        
-        //make all the elements ramdonly distributed
-        Collections.shuffle(catList);
-        
 
+        
         try {
-            long startTime = System.currentTimeMillis();
-            for (int i = 0; i < 10000; i++) {
+            long startTime = System.nanoTime();
+            for (int i = 0; i < 1; i++) {
                 TreeParser.parse(catList);
-                
-                Collections.sort(catList, new TestComparator());
-                Collections.shuffle(catList);
             }
-            long diff = System.currentTimeMillis() - startTime;
-            System.out.println("10000 tree parse cost with shuffled: " + diff/1000 + "sec " + diff%1000 + "ms");
+            long diff = System.nanoTime() - startTime;
+            System.out.println("1 tree parse cost with shuffled: " + diff/1000000 + "ms " + diff%1000000 + "ns");
             
         } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
-        
-        Collections.sort(catList, new TestComparator());
-        
-        try {
-            long startTime = System.currentTimeMillis();
-            for (int i = 0; i < 10000; i++) {
-                TreeParser.parse(catList);
-                
-                Collections.shuffle(catList);
-                Collections.sort(catList, new TestComparator());
-            }
-            long diff = System.currentTimeMillis() - startTime;
-            System.out.println("10000 tree parse cost with sort: " + diff/1000 + "sec " + diff%1000 + "ms");
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
+       
     }
-    
-    public static class TestComparator implements Comparator<CategoryVo>{
-        @Override
-        public int compare(CategoryVo o1, CategoryVo o2) {
-            String val1 = o1.getValue();
-            String val2 = o2.getValue();
-            if (val1.length() - val2.length() != 0 ) {
-                return val1.length() - val2.length();
-            }
-            else {
-                return Integer.parseInt(val1) - Integer.parseInt(val2);
-            }
-        }
-        
-    }
+
 
 }
