@@ -11,7 +11,6 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.LocationEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.LocationEntityExt;
-import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.LocationManager;
 import com.ishangke.edunav.manager.converter.LocationConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -22,9 +21,6 @@ public class LocationManagerImpl implements LocationManager {
 
     @Autowired
     private LocationEntityExtMapper locationMapper;
-    
-    @Autowired
-    private AuthManager authManager;
 
     @Override
     public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo) {

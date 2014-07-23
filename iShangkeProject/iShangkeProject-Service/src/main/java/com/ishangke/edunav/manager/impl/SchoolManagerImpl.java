@@ -11,7 +11,6 @@ import com.ishangke.edunav.commoncontract.model.SchoolBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.SchoolEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
-import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.SchoolManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.SchoolConverter;
@@ -22,13 +21,9 @@ public class SchoolManagerImpl implements SchoolManager {
     
     @Autowired
     private SchoolEntityExtMapper schoolMapper;
-    
-    @Autowired
-    private AuthManager authManager;
 
     @Override
     public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo) {
-        
         SchoolEntityExt schoolEntity = schoolBo == null ? null : SchoolConverter.fromBo(schoolBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
 
