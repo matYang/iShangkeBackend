@@ -1,10 +1,6 @@
 package com.ishangke.edunav.manager.transform;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
-@XmlType(propOrder = { "name","operateCode","url" })
 public class Operation {
     private String name;
     private int operateCode;

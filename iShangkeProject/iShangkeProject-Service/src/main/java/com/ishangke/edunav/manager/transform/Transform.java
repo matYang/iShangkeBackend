@@ -3,13 +3,14 @@ package com.ishangke.edunav.manager.transform;
 import java.util.List;
 
 public class Transform {
-    List<TransformGroup> transformGroups;
+    List<TransformRole> transformRoles;
 
-    public List<TransformGroup> getTransformGroups() {
-        return transformGroups;
+    public List<TransformRole> getTransformRoles() {
+        return transformRoles;
     }
 
-    public void setTransformGroups(List<TransformGroup> transformGroups) {
-        this.transformGroups = transformGroups;
+    public void setTransformRoles(List<TransformRole> transformRoles) {
+        this.transformRoles = transformRoles;
     }
+    
 }

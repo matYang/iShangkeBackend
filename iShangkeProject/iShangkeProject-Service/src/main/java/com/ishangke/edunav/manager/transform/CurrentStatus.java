@@ -2,11 +2,6 @@ package com.ishangke.edunav.manager.transform;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-@XmlRootElement
-@XmlType(propOrder = { "name","statusCode","operations" })
 public class CurrentStatus {
     private String name;
     private int statusCode;

@@ -35,6 +35,8 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+//todo
+//关于权限的控制，状态的转移，需要再考虑一下
 @Component
 public class CourseManagerImpl implements CourseManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseManagerImpl.class);

@@ -13,7 +13,9 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.TeacherEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
@@ -31,11 +33,30 @@ public class TeacherManagerImpl implements TeacherManager {
     @Autowired
     private TeacherEntityExtMapper teacherMapper;
 
+    @Autowired
+    private GroupEntityExtMapper groupMapper;
+
     @Override
     public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo) {
         // 参数验证
         if (teacherBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
+        }
+
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // 插入新的teacher记录
@@ -63,6 +84,22 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Invalid parameter");
         }
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getId() == teacherBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // 更新TEACHER记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
@@ -82,6 +119,22 @@ public class TeacherManagerImpl implements TeacherManager {
         // 参数验证
         if (teacherBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
+        }
+
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getId() == teacherBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // 删除TEACHER记录
@@ -104,6 +157,23 @@ public class TeacherManagerImpl implements TeacherManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getId() == teacherBo.getPartnerId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         TeacherEntityExt teacherEntity = teacherBo == null ? null : TeacherConverter.fromBo(teacherBo);
         PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);

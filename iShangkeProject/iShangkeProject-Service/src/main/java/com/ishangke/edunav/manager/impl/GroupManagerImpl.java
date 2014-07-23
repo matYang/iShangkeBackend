@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.commoncontract.model.GroupBo;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
-import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.GroupManager;
 import com.ishangke.edunav.manager.converter.GroupConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -21,12 +20,6 @@ public class GroupManagerImpl implements GroupManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
-
-    @Override
-    public RoleEntityExt getRoleByGroupId(int groupId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public List<GroupBo> listGroupsByUserId(int userId) {

@@ -15,22 +15,28 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.CourseTemplateManager;
 import com.ishangke.edunav.manager.converter.CourseTemplateConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
-import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+
+//todo
+//关于权限的控制，状态的转移，需要再考虑一下
 @Component
 public class CourseTemplateManagerImpl implements CourseTemplateManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseTemplateManagerImpl.class);
 
     @Autowired
     private CourseTemplateEntityExtMapper courseTemplateMapper;
+
+    @Autowired
+    private GroupEntityExtMapper groupEntityExtMapper;
 
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
@@ -45,9 +51,27 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             throw new ManagerException("CourseTemplate Create Failed: UserBo is null");
         }
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
+
+        // to do状态改变
 
         try {
             courseTemplateEntity.setPartnerId(partnerEntity.getId());
@@ -76,6 +100,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             throw new ManagerException("CourseTemplate Submit Failed: UserBo is null");
         }
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
@@ -102,8 +142,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     }
 
     @Override
-    public CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo,
-            CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo) {
+    public CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
             throw new ManagerException("CourseTemplate Approve Failed: CourseTemplateBo is null");
@@ -113,6 +152,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         }
         if (userBo == null) {
             throw new ManagerException("CourseTemplate Approve Failed: UserBo is null");
+        }
+
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // Convert
@@ -141,8 +196,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     }
 
     @Override
-    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo,
-            PartnerBo partnerBo, UserBo userBo) {
+    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo) {
         // Check Null
         if (courseTemplateBo == null) {
             throw new ManagerException("CourseTemplate Reject Failed: CourseTemplateBo is null");
@@ -152,6 +206,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         }
         if (userBo == null) {
             throw new ManagerException("CourseTemplate Reject Failed: UserBo is null");
+        }
+
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // Convert
@@ -192,6 +262,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             throw new ManagerException("CourseTemplate Cancel Failed: UserBo is null");
         }
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
@@ -230,6 +316,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             throw new ManagerException("CourseTemplate Resubmit Failed: UserBo is null");
         }
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
@@ -266,6 +368,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         }
         if (userBo == null) {
             throw new ManagerException("CourseTemplate Delete Failed: UserBo is null");
+        }
+
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
         }
 
         // Convert
@@ -343,6 +461,22 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             pageEntity = PaginationConverter.fromBo(paginationBo);
         }
 
+        // 验证userBo是否是否属于同一家机构
+        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
@@ -372,6 +506,23 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         if (userBo == null) {
             throw new ManagerException("CourseTemplate QueryById Failed: UserBo is null");
         }
+
+        // 验证userBo是否是否属于同一家机构
+//        List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+//        if (groupList == null) {
+//            throw new ManagerException("unlogin user");
+//        }
+//        boolean isSameGroup = false;
+//        for (GroupEntityExt g : groupList) {
+//            if (g.getPartnerId() == partnerBo.getId()) {
+//                isSameGroup = true;
+//                break;
+//            }
+//        }
+//        if (isSameGroup == false) {
+//            throw new ManagerException("Invalid user");
+//        }
+
         // Convert
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         List<CourseTemplateEntityExt> courseTemplateList = null;

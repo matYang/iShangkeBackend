@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -184,12 +185,14 @@ public class AccountManagerImpl implements AccountManager {
             throw new ManagerException("AccountHistory Query Failed: 此用户id为null或0");
         }
 
+        // 用户只能看到自己的账户历史
+        if (accountHistoryBo.getUserId() != userBo.getId()) {
+            throw new ManagerException("AccountHistory Query Failed: 此账户历史信息不属于该用户");
+        }
+
         try {
             accountHistoryList = accountHistoryMapper.list(accountHistoryEntity, pageEntity);
             for (AccountHistoryEntityExt accountHistoryPo : accountHistoryList) {
-                if (accountHistoryPo.getUserId() != userEntity.getId()) {
-                    throw new ManagerException("AccountHistory Query Failed: 此账户历史信息不属于该用户");
-                }
                 resultList.add(AccountHistoryConverter.toBo(accountHistoryPo));
             }
             return resultList;

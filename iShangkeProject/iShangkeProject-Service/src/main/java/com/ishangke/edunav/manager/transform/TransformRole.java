@@ -2,14 +2,9 @@ package com.ishangke.edunav.manager.transform;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-@XmlRootElement
-@XmlType(propOrder = { "name", "groupCode", "entitys" })
-public class TransformGroup {
+public class TransformRole {
     private String name;
-    private int groupCode;
+    private int roleCode;
     private List<StatusEntity> entitys;
 
     public String getName() {
@@ -20,12 +15,12 @@ public class TransformGroup {
         this.name = name;
     }
 
-    public int getGroupCode() {
-        return groupCode;
+    public int getRoleCode() {
+        return roleCode;
     }
 
-    public void setGroupCode(int groupCode) {
-        this.groupCode = groupCode;
+    public void setRoleCode(int roleCode) {
+        this.roleCode = roleCode;
     }
 
     public List<StatusEntity> getEntitys() {
