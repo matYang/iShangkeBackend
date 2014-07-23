@@ -5,6 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * @author Matthew
+ * A static tree parset that produces a list of hierarchy data ready for JSON to consume
+ * Benchmark results are not entirely safisfactory
+ * 200 element parsing require an average around 5-6ms
+ * however, the redundancy that slowed the process down helps to catch errors,
+ * efficiency analysis:
+ * this parsing function has O(n) thanks to the sink
+ * this parsing function behaves most efficiently when sorted, eg no null fills, no sinks, fast
+ * a Collections.sort can really help a lot, but do not run sort every time, as sort costs a lot O(nlogn)
+ * benchmarks show an average of 30%-40% decrease in performance when cost of sorting is considered
+ * performance degrade when sorting is concerned is directly proportional to data size
+ */
 public class TreeParser {
     
     //please do use array list here..do not use fucking linked list, or I will personally kill you
