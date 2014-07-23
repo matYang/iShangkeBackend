@@ -119,7 +119,6 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         try {
             classPhotoMapper.update(classPhotoEntity);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("ClassPhoto update failed for user: " + userEntity.getId(), t);
         }
         return ClassPhotoConverter.toBo(classPhotoEntity);
