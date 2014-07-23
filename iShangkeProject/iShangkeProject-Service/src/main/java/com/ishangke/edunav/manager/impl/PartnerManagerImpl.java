@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.PartnerManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
@@ -29,6 +30,9 @@ public class PartnerManagerImpl implements PartnerManager {
 
     @Autowired
     private PartnerEntityExtMapper partnerMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {

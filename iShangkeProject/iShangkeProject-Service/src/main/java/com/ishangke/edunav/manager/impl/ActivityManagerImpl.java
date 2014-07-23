@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.ishangke.edunav.commoncontract.model.ActivityBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -18,6 +19,7 @@ import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.ActivityManager;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.converter.ActivityConverter;
 import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -31,6 +33,9 @@ public class ActivityManagerImpl implements ActivityManager {
 
     @Autowired
     private ActivityEntityExtMapper activityMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {

@@ -23,6 +23,7 @@ import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.OrderManager;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.OrderConverter;
@@ -39,6 +40,8 @@ public class OrderManagerImpl implements OrderManager {
     private OrderEntityExtMapper orderMapper;
     @Autowired
     private OrderHistoryEntityExtMapper orderHistoryMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo) {
@@ -103,6 +106,11 @@ public class OrderManagerImpl implements OrderManager {
             orderEntity.setBookingId(bookingEntity.getId());
         }
 
+        if (bookingEntity != null && bookingEntity.getUserId() != null && bookingEntity.getUserId() != 0
+                && bookingEntity.getUserId() != userEntity.getId()) {
+            throw new ManagerException("此预定不属于该用户");
+        }
+
         List<OrderEntityExt> results = null;
         try {
             results = orderMapper.list(orderEntity, page);
@@ -122,17 +130,19 @@ public class OrderManagerImpl implements OrderManager {
     }
 
     @Override
-    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistoryBo, BookingBo bookingBo, UserBo userBo,
-            PaginationBo paginationBo) {
+    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        OrderHistoryEntityExt orderHistoryEntity = orderHistoryBo == null ? null : OrderHistoryConverter
-                .fromBo(orderHistoryBo);
-        // TODO BookingEntityExt bookingEntity = bookingBo == null ? null :
-        // BookingConverter.fromBo(bookingBo);
+        OrderHistoryEntityExt orderHistoryEntity = orderHistoryBo == null ? null : OrderHistoryConverter.fromBo(orderHistoryBo);
+        BookingEntityExt bookingEntity = bookingBo == null ? null : BookingConverter.fromBo(bookingBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
+
+        if (bookingEntity != null && bookingEntity.getUserId() != null && bookingEntity.getUserId() != 0
+                && bookingEntity.getUserId() != userEntity.getId()) {
+            throw new ManagerException("此预定不属于该用户");
+        }
 
         List<OrderHistoryEntityExt> results = null;
         try {
@@ -147,6 +157,9 @@ public class OrderManagerImpl implements OrderManager {
         }
         List<OrderHistoryBo> convertedResults = new ArrayList<OrderHistoryBo>();
         for (OrderHistoryEntityExt result : results) {
+            if (result.getUserId() != userEntity.getId()) {
+                throw new ManagerException("此订单历史不属于这个用户");
+            }
             convertedResults.add(OrderHistoryConverter.toBo(result));
         }
         return convertedResults;

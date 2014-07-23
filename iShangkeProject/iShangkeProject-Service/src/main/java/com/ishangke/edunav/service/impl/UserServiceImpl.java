@@ -19,10 +19,12 @@ import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
 import com.ishangke.edunav.manager.MessageManager;
+import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.SpreadManager;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
 
 @Component
 public class UserServiceImpl implements UserService.Iface {
@@ -34,6 +36,9 @@ public class UserServiceImpl implements UserService.Iface {
     private MessageManager messageManager;
     @Autowired
     private SpreadManager spreadManager;
+    
+    @Autowired
+    private PermissionManager permissionManager;
 
     
     
@@ -99,7 +104,18 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag, "createUser"));
+                throw new NoPermissionException();
+            }
+
             return userManager.createUser(targetUser, partnerBo, currentUser);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CREATE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATE_KEY);
+            throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

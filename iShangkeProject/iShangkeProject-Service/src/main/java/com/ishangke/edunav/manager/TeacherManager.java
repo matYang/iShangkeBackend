@@ -86,4 +86,6 @@ public interface TeacherManager {
 
     public List<TeacherBo> listByCourseTemplateId(int courseTemplateId);
 
+    public List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo);
+
 }

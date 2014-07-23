@@ -14,6 +14,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.ContactManager;
 import com.ishangke.edunav.manager.converter.ContactConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -26,6 +27,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Autowired
     private ContactEntityExtMapper contactMapper;
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public ContactBo createContact(ContactBo contactBo, UserBo userBo) {
@@ -35,6 +38,11 @@ public class ContactManagerImpl implements ContactManager {
         }
         if (userBo == null) {
             throw new ManagerException("Contact Create Failed: userBo is null");
+        }
+
+        // 只有用户自己才能创建与自己相关的联系人
+        if (contactBo.getUserId() != userBo.getId()) {
+            throw new ManagerException("Contact Create Failed: Invalid user");
         }
 
         // Convert
@@ -65,6 +73,11 @@ public class ContactManagerImpl implements ContactManager {
             throw new ManagerException("Contact Update Failed: userBo is null");
         }
 
+        // 只有用户自己才能更新与自己相关的联系人
+        if (contactBo.getUserId() != userBo.getId()) {
+            throw new ManagerException("Contact Create Failed: Invalid user");
+        }
+
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
@@ -93,6 +106,11 @@ public class ContactManagerImpl implements ContactManager {
         }
         if (userBo == null) {
             throw new ManagerException("Contact Delete Failed: userBo is null");
+        }
+
+        // 只有用户自己才能删除与自己相关的联系人
+        if (contactBo.getUserId() != userBo.getId()) {
+            throw new ManagerException("Contact Create Failed: Invalid user");
         }
 
         // Convert
@@ -130,6 +148,11 @@ public class ContactManagerImpl implements ContactManager {
             pageEntity = PaginationConverter.fromBo(paginationBo);
         }
 
+        // 只有用户自己才能删除与自己相关的联系人
+        if (contactBo.getUserId() != userBo.getId()) {
+            throw new ManagerException("Contact Create Failed: Invalid user");
+        }
+
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
@@ -139,9 +162,6 @@ public class ContactManagerImpl implements ContactManager {
         try {
             contactList = contactMapper.list(contactEntity, pageEntity);
             for (ContactEntityExt contactPo : contactList) {
-                if (contactPo.getUserId() != userEntity.getId()) {
-                    throw new ManagerException("Contact Query Failed: 用户id与联系人的userId不匹配");
-                }
                 resultList.add(ContactConverter.toBo(contactPo));
             }
             return resultList;

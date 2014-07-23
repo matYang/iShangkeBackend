@@ -79,7 +79,7 @@ public interface ClassPhotoManager {
      * @return 推广信息实体 ClassPhoto 列表
      * 
      */
-    List<ClassPhotoBo> listByPartnerId(int partnerId);
+    List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo);
 
     /**
      * 查询教师信息。<br>

@@ -3,10 +3,10 @@ package com.ishangke.edunav.web.model;
 import java.util.Calendar;
 import java.util.Set;
 
-public class CategoryVo {
-    private Integer id;
+import com.ishangke.edunav.web.tree.HierarchyData;
 
-    private String value;
+public class CategoryVo extends HierarchyData{
+    private Integer id;
 
     private String name;
 
@@ -31,6 +31,7 @@ public class CategoryVo {
     public void setId(Integer id) {
         this.id = id;
     }
+    @Override
     public String getValue() {
         return value;
     }

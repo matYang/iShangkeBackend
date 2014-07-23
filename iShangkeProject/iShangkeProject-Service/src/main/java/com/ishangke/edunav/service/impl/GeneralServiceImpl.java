@@ -13,7 +13,6 @@ import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CareerBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
-import com.ishangke.edunav.commoncontract.model.ConfigurationBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
@@ -21,7 +20,6 @@ import com.ishangke.edunav.commoncontract.service.GeneralService;
 import com.ishangke.edunav.manager.CareerManager;
 import com.ishangke.edunav.manager.CategoryManager;
 import com.ishangke.edunav.manager.CircleManager;
-import com.ishangke.edunav.manager.ConfigurationManager;
 import com.ishangke.edunav.manager.LocationManager;
 import com.ishangke.edunav.manager.SchoolManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
@@ -30,8 +28,6 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 public class GeneralServiceImpl implements GeneralService.Iface{
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneralServiceImpl.class);
     
-    @Autowired
-    private ConfigurationManager configManager;
     @Autowired
     private CategoryManager categoryManager;
     @Autowired
@@ -42,39 +38,7 @@ public class GeneralServiceImpl implements GeneralService.Iface{
     private SchoolManager schoolManager;
     @Autowired
     private CareerManager careerManager;
-    
-    
-    
-    /**********************************************************
-    *
-    *   关于常用上课人 Contact
-    *
-    **********************************************************/
-    @Override
-    public ConfigurationBo getConfigurationByName(String name) throws BusinessExceptionBo, TException {
-        try {
-            return configManager.getByName(name);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CONFIGURATION_GETBYNAME_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CONFIGURATION_GETBYNAME_ERROR_KEY);
-            throw exception;
-        }
-    }
 
-    @Override
-    public List<ConfigurationBo> listAllConfiguration() throws BusinessExceptionBo, TException {
-        try {
-            return configManager.listAll();
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.CONFIGURATION_LISTALL_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CONFIGURATION_LISTALL_ERROR_KEY);
-            throw exception;
-        }
-    }
     
     /**********************************************************
     *

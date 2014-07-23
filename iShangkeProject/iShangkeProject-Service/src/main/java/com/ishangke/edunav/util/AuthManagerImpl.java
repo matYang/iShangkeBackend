@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.common.DateUtility;
@@ -34,7 +37,10 @@ public class AuthManagerImpl implements AuthManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthManagerImpl.class);
 
     @Autowired
-    CacheManager cache;
+    private CacheManager cache;
+    
+    @Autowired
+    private RoleEntityExtMapper roleMapper;
 
     /**
      * 判断用户账号是否因为登陆失败次数过多被上锁
@@ -490,6 +496,29 @@ public class AuthManagerImpl implements AuthManager {
         } catch (Throwable t) {
             LOGGER.debug("CloseForgetPasswordSession", t);
             throw new ManagerException("CloseForgetPasswordSession");
+        }
+    }
+
+    @Override
+    public boolean isSystemAdmin(int userId) {
+        return Constant.ROLESYSTEMADMIN.equals(getRole(userId));
+    }
+
+    @Override
+    public String getRole(int userId) {
+        String role = (String)cache.get(Constant.ROLEPREFIX + userId);
+        if (role != null) {
+            return role;
+        } else {
+            List<RoleEntityExt> roleList = roleMapper.listRolesByUserId(userId);
+            if (roleList == null || roleList.size() == 0) {
+                LOGGER.warn(String.format("[AuthManager] user [id = %d] cannot find role!", userId));
+                return null;
+            }
+            String roleName = roleList.get(0).getName();
+            cache.set(Constant.ROLEPREFIX + userId, Constant.STATUSTRANSFORMEXPIRETIME, roleName);
+            LOGGER.info(String.format("[AuthManagerImpl] add role into memcached [user id: %d] [role name: %s]", userId, roleName));
+            return roleName;
         }
     }
 

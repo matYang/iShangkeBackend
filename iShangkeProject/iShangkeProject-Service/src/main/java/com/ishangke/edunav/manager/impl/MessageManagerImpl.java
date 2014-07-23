@@ -16,6 +16,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.MessageEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.MessageEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.MessageManager;
 import com.ishangke.edunav.manager.converter.MessageConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -28,6 +29,9 @@ public class MessageManagerImpl implements MessageManager {
 
     @Autowired
     private MessageEntityExtMapper messageMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public MessageBo sendMessage(MessageBo messageBo, UserBo userBo) {
@@ -38,6 +42,16 @@ public class MessageManagerImpl implements MessageManager {
         // 插入新的message记录
         MessageEntityExt messageEntity = MessageConverter.fromBo(messageBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
+
+        // Check Ids
+        if (messageEntity.getUserFromId() == null || messageEntity.getUserFromId() == 0) {
+            throw new ManagerException("消息的UserFromId为null或0");
+        }
+
+        // Check whether this message is sent from this user
+        if (messageEntity.getUserFromId() != userEntity.getId()) {
+            throw new ManagerException("此消息非该用户所发");
+        }
 
         int result = 0;
         try {
@@ -68,6 +82,16 @@ public class MessageManagerImpl implements MessageManager {
             messageEntity.setStatus(MessageEnums.Status.READ.code);
         } else {
             throw new ManagerException("Message approval failed for user: " + userEntity.getId());
+        }
+
+        // Check Ids
+        if (messageEntity.getUserFromId() == null || messageEntity.getUserFromId() == 0) {
+            throw new ManagerException("消息的UserFromId为null或0");
+        }
+
+        // Check whether this message is sent to this user
+        if (messageEntity.getUserToId() != userEntity.getId()) {
+            throw new ManagerException("此消息非该用户所收");
         }
 
         try {

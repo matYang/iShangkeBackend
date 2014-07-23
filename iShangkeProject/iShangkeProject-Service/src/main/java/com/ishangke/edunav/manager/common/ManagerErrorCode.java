@@ -302,4 +302,8 @@ public class ManagerErrorCode {
     public static final String CONFIGURATION_LISTALL_ERROR_KEY = "configuration_listAll_error";
     public static final int CONFIGURATION_NOTFOUND_ERROR = 0x001B0404;
     public static final String CONFIGURATION_NOTFOUND_ERROR_KEY = "configuration_notfound_error";
+
+    // permission
+    public static final int PERMISSION_USER_CREATE = 0x010000001;
+    public static final String PERMISSION_USER_CREATE_KEY = "permission_user_create";
 }

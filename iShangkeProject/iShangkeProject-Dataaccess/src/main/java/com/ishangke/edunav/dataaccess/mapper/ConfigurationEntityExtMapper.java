@@ -9,4 +9,6 @@ public interface ConfigurationEntityExtMapper {
     public List<ConfigurationEntityExt> listAll();
 
     public ConfigurationEntityExt getByName(String name);
+    
+    public int testAdd(ConfigurationEntityExt configurationEntityExt);
 }

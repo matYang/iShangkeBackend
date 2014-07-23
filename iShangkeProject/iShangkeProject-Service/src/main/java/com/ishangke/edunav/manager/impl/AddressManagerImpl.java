@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -15,6 +16,7 @@ import com.ishangke.edunav.dataaccess.mapper.AddressEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.manager.AddressManager;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.converter.AddressConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
@@ -26,6 +28,9 @@ public class AddressManagerImpl implements AddressManager {
 
     @Autowired
     private AddressEntityExtMapper addressMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public AddressBo createAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo) {

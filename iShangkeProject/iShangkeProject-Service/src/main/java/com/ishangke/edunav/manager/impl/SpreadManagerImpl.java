@@ -21,6 +21,7 @@ import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.SpreadManager;
 import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -35,6 +36,9 @@ public class SpreadManagerImpl implements SpreadManager {
 
     @Autowired
     private SpreadEntityExtMapper spreadMapper;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo) {
@@ -81,6 +85,7 @@ public class SpreadManagerImpl implements SpreadManager {
         CourseEntityExt courseEntity = CourseConverter.fromBo(courseBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
+        spreadEntity.setUserId(userEntity.getId());
         spreadEntity.setPartnerId(partnerEntity.getId());
         spreadEntity.setCourseId(courseEntity.getId());
 

@@ -440,5 +440,10 @@ public class AuthManagerImplTest extends BaseTest {
                 % 1000 + "ms, failure count: " + failureCount + " cache eviction count: " + cacheEvictCount);
 
     }
+    
+    @Test
+    public void TestIsSystemAdmin() {
+        auth.isSystemAdmin(10);
+    }
 
 }

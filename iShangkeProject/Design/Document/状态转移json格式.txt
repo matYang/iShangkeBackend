@@ -1,0 +1,27 @@
+{
+    "transformRoles": [
+        {
+            "name": "admin",
+            "roleCode": 0,
+            "entitys": [
+                {
+                    "name": "booking",
+                    "entityCode": 0,
+                    "currentStatuses": [
+                        {
+                            "name": "new",
+                            "statusCode": 0,
+                            "operations": [
+                                {
+                                    "name": "submit",
+                                    "operateCode": 0,
+                                    "url": "/submit"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -23,4 +23,7 @@
     <include refid="Configuration_Column_List" />
     from CONFIGURATION
   </select>
+  <insert id="testAdd" parameterType="ConfigurationEntityExt">
+  insert into CONFIGURATION (NAME, CONFIG_DATA) values (#{name,jdbcType=VARCHAR}, #{configData,jdbcType=VARCHAR})
+  </insert>
 </mapper>

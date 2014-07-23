@@ -41,5 +41,12 @@ public interface AuthManager {
     public String openForgetPasswordSession(final int  identifier);
 
     public Future<Boolean> closeForgetPasswordSession(final int identifier);
+    
+    /**
+     * 系统管理员拥有最高权限，可以做任何事
+     */
+    public boolean isSystemAdmin(final int userId);
+    
+    public String getRole(final int userId);
 
 }
