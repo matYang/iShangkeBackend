@@ -22,20 +22,19 @@ import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 
-
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
 @Transactional
-public class CourseEntityExtTest extends BaseTest{
+public class CourseEntityExtTest extends BaseTest {
     @Autowired
     private CourseEntityExtMapper courseEntityExtMapper;
     private Calendar time = Calendar.getInstance();
-    
-//    public CourseEntityExtTest() {
-//        scriptAfterClass = "CourseEntityExtTestAfter.sql";
-//        scriptBeforeClass = "CourseEntityExtTestBefore.sql";
-//    }
+
+    // public CourseEntityExtTest() {
+    // scriptAfterClass = "CourseEntityExtTestAfter.sql";
+    // scriptBeforeClass = "CourseEntityExtTestBefore.sql";
+    // }
 
     @Test
     public void testAdd() {
@@ -74,7 +73,6 @@ public class CourseEntityExtTest extends BaseTest{
         courseEntityExtMapper.deleteById(courseEntityExt.getId());
         Assert.assertSame(courseEntityExtMapper.getCount(), oldcount - 1);
     }
-    
 
     @Test
     public void testQuery() {
@@ -82,17 +80,85 @@ public class CourseEntityExtTest extends BaseTest{
         page.setOffset(0);
         page.setSize(10);
 
-       
-        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME", DataaccessConstants.ORDER_DESC));
-        page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE", DataaccessConstants.ORDER_ASC));
-        
-        CourseEntityExt courseEntityExt = new CourseEntityExt();
-        courseEntityExt.setCourseName("_test_");
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE",
+                DataaccessConstants.ORDER_ASC));
 
-        List<CourseEntityExt> result = courseEntityExtMapper.list(courseEntityExt, page);
-        Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_2_爱上课", result.get(0).getCourseName());
+        CourseEntityExt courseEntityExt = new CourseEntityExt();
+        courseEntityExt.setCategoryValue("0001");
+        List<CourseEntityExt> result = courseEntityExtMapper.list(
+                courseEntityExt, null);
+        System.out.println("count:" + result.size());
+        for (CourseEntityExt c : result) {
+            System.out.println(c.getCourseName() + "===>"
+                    + c.getCategoryValue());
+        }
+        Assert.assertSame(courseEntityExtMapper.getListCount(courseEntityExt),
+                result.size());
+        // Assert.assertEquals(5, result.size());
+        // Assert.assertEquals("雅思05", result.get(0).getCourseName());
     }
+
+    @Test
+    public void testQuery1() {
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(80);
+
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE",
+                DataaccessConstants.ORDER_ASC));
+
+        CourseEntityExt courseEntityExt = new CourseEntityExt();
+        courseEntityExt.setCategoryValue("010000");
+        courseEntityExt.setCircleValue("01");
+        courseEntityExt.setLocationValue("000004");
+        List<CourseEntityExt> result = courseEntityExtMapper.list(
+                courseEntityExt, page);
+        System.out.println("count:" + result.size());
+        for (CourseEntityExt c : result) {
+            System.out.println(c.getCourseName() + "===>"
+                    + DateUtility.toSQLDateTime(c.getLastModifyTime()));
+        }
+        Assert.assertSame(courseEntityExtMapper.getListCount(courseEntityExt),
+                result.size());
+        // Assert.assertEquals(5, result.size());
+        // Assert.assertEquals("雅思05", result.get(0).getCourseName());
+    }
+
+    @Test
+    public void testQuery10() {
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(80);
+
+        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
+                DataaccessConstants.ORDER_DESC));
+        page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE",
+                DataaccessConstants.ORDER_ASC));
+
+        CourseEntityExt courseEntityExt = new CourseEntityExt();
+
+        courseEntityExt.setLocationValue("");
+        courseEntityExt.setCircleValue("");
+        courseEntityExt.setCategoryValue("");
+        courseEntityExt.setPriceStart(1000.0);
+        courseEntityExt.setPriceEnd(3000.0);
+        List<CourseEntityExt> result = courseEntityExtMapper.list(
+                courseEntityExt, page);
+        System.out.println("count:" + result.size());
+        for (CourseEntityExt c : result) {
+            System.out.println(c.getCourseName() + "===>"
+                    + DateUtility.toSQLDateTime(c.getLastModifyTime()) + "===>" + c.getPrice());
+        }
+        Assert.assertSame(courseEntityExtMapper.getListCount(courseEntityExt),
+                result.size());
+        // Assert.assertEquals(5, result.size());
+        // Assert.assertEquals("雅思05", result.get(0).getCourseName());
+    }
+
     @Test
     public void testQuery2() {
         CourseEntityExt courseEntityExt = new CourseEntityExt();
@@ -104,54 +170,25 @@ public class CourseEntityExtTest extends BaseTest{
         idSet.add(2);
         idSet.add(3);
         courseEntityExt.setIdSet(idSet);
-        List<CourseEntityExt> result = courseEntityExtMapper.list(courseEntityExt, page);
+        List<CourseEntityExt> result = courseEntityExtMapper.list(
+                courseEntityExt, page);
         Assert.assertEquals(3, result.size());
     }
-    
-    @Test
-    public void testQuery3() {
-        CourseEntityExt courseEntityExt = new CourseEntityExt();
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
-       courseEntityExt.setCourseTemplateId(2);
-       
-        List<CourseEntityExt> result = courseEntityExtMapper.list(courseEntityExt, page);
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("_test_TM_2_爱上课", result.get(0).getTeachingMethod());
-        Assert.assertEquals("_test_TM_2_爱上课", result.get(1).getTeachingMethod());
-    }
-    
-    @Test
-    public void testQuery4() {
-        CourseEntityExt courseEntityExt = new CourseEntityExt();
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
-        courseEntityExt.setCourseTemplateId(2);
-        courseEntityExt.setCategoryId(3);
-        List<CourseEntityExt> result = courseEntityExtMapper.list(courseEntityExt, page);
-        Assert.assertEquals(1, result.size());
-        Assert.assertEquals("_test_TM_2_爱上课", result.get(0).getTeachingMethod());
-    }
+
     @Test
     public void testGet() {
-        CourseEntityExt getbyid1 = courseEntityExtMapper
-                .getInfoById(2);
-        CourseEntityExt getbyid2 = courseEntityExtMapper
-                .getInfoById(3);
-        CourseEntityExt getbyid3 = courseEntityExtMapper
-                .getInfoById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getCourseName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getCourseName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getCourseName());
-        
-       
+        CourseEntityExt getbyid1 = courseEntityExtMapper.getInfoById(2);
+        CourseEntityExt getbyid2 = courseEntityExtMapper.getInfoById(3);
+        CourseEntityExt getbyid3 = courseEntityExtMapper.getInfoById(4);
+        Assert.assertEquals("雅思02", getbyid1.getCourseName());
+        Assert.assertEquals("雅思03", getbyid2.getCourseName());
+        Assert.assertEquals("雅思04", getbyid3.getCourseName());
+
     }
+
     @Test
     public void testUpdate() {
-        CourseEntityExt upDate = courseEntityExtMapper
-                .getInfoById(2);
+        CourseEntityExt upDate = courseEntityExtMapper.getInfoById(2);
         upDate.setCourseName("test_爱上课");
         upDate.setAssignments("test_ishangke");
         upDate.setCreateTime(time);
@@ -162,5 +199,5 @@ public class CourseEntityExtTest extends BaseTest{
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
-    
+
 }

@@ -63,11 +63,11 @@ public class CircleEntityExtTest {
         page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
 
         CircleEntityExt circleEntityExt = new CircleEntityExt();
-        circleEntityExt.setName("_test_");
+        circleEntityExt.setValue("0_");
 
         List<CircleEntityExt> result = circleEntityExtMapper.list(circleEntityExt, page);
-        Assert.assertEquals(4, result.size());
-       Assert.assertEquals("_test_name_3_爱上课", result.get(1).getName());
+        Assert.assertEquals(5, result.size());
+       Assert.assertEquals("新街口", result.get(0).getName());
     }
     @Test
     public void testQuery2() {
@@ -91,9 +91,9 @@ public class CircleEntityExtTest {
                 .getById(3);
         CircleEntityExt getbyid3 = circleEntityExtMapper
                 .getById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+        Assert.assertEquals("江宁大学城", getbyid1.getName());
+        Assert.assertEquals("浦口大学城", getbyid2.getName());
+        Assert.assertEquals("新街口", getbyid3.getName());
     }
     @Test
     public void testUpdate() {

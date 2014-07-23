@@ -418,7 +418,7 @@
       </foreach>
     </if>
 
-    <if test="page.offset != null and page.size != null">
+    <if test="page !=null and page.offset != null and page.size != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>

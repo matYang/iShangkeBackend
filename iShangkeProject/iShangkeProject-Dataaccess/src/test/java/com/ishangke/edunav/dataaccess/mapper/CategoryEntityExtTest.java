@@ -65,11 +65,11 @@ public class CategoryEntityExtTest {
         page.addOrderByEntity(new OrderByEntity("CREATE_TIME", DataaccessConstants.ORDER_DESC));
 
         CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
-        categoryEntityExt.setName("_test_");
+        categoryEntityExt.setValue("0000_");
 
         List<CategoryEntityExt> result = categoryEntityExtMapper.list(categoryEntityExt, page);
-        Assert.assertEquals(4, result.size());
-       Assert.assertEquals("_test_name_3_爱上课", result.get(1).getName());
+        Assert.assertEquals(10, result.size());
+       Assert.assertEquals("口译笔译", result.get(1).getName());
     }
     @Test
     public void testQuery2() {
@@ -94,9 +94,9 @@ public class CategoryEntityExtTest {
                 .getById(3);
         CategoryEntityExt getbyid3 = categoryEntityExtMapper
                 .getById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+        Assert.assertEquals("英语", getbyid1.getName());
+        Assert.assertEquals("雅思", getbyid2.getName());
+        Assert.assertEquals("四六级", getbyid3.getName());
     }
     @Test
     public void testUpdate() {
