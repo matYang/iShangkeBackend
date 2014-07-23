@@ -76,7 +76,6 @@ public class TeacherManagerImpl implements TeacherManager {
         try {
             result = teacherMapper.add(teacherEntity);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Teacher creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
@@ -120,7 +119,6 @@ public class TeacherManagerImpl implements TeacherManager {
         try {
             teacherMapper.update(teacherEntity);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Teacher update failed for user: " + userEntity.getId(), t);
         }
 
@@ -162,7 +160,6 @@ public class TeacherManagerImpl implements TeacherManager {
             teacherEntity.setDeleted(1);
             teacherMapper.deleteById(teacherEntity.getId());
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Teacher deletion failed for user: " + userEntity.getId(), t);
         }
 
@@ -208,7 +205,6 @@ public class TeacherManagerImpl implements TeacherManager {
         try {
             results = teacherMapper.list(teacherEntity, page);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Teacher query failed for user: " + userEntity.getId(), t);
         }
 
@@ -217,7 +213,6 @@ public class TeacherManagerImpl implements TeacherManager {
         }
         List<TeacherBo> convertedResults = new ArrayList<TeacherBo>();
         for (TeacherEntityExt result : results) {
-
             convertedResults.add(TeacherConverter.toBo(result));
         }
         return convertedResults;
@@ -239,7 +234,6 @@ public class TeacherManagerImpl implements TeacherManager {
             }
             return resultList;
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Teacher listByCourseId Failed", t);
         }
     }
@@ -260,7 +254,6 @@ public class TeacherManagerImpl implements TeacherManager {
             }
             return resultList;
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Teacher listByCourseTemplateId Failed", t);
         }
     }
@@ -274,7 +267,7 @@ public class TeacherManagerImpl implements TeacherManager {
         }
         boolean isSameGroup = false;
         for (GroupEntityExt g : groupList) {
-            if (g.getId() == partnerId) {
+            if (g.getPartnerId() == partnerId) {
                 isSameGroup = true;
                 break;
             }
@@ -294,8 +287,7 @@ public class TeacherManagerImpl implements TeacherManager {
             }
             return resultList;
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Teacher listByPartnerId Failed");
+            throw new ManagerException("Teacher listByPartnerId Failed", t);
         }
     }
 
