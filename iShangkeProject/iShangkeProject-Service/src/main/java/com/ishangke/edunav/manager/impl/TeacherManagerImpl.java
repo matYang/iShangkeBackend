@@ -228,11 +228,12 @@ public class TeacherManagerImpl implements TeacherManager {
      */
     @Override
     public List<TeacherBo> listByCourseId(int courseId) {
-        List<TeacherEntityExt> teacherList = null;
-        List<TeacherBo> resultList = null;
-
         try {
-            teacherList = teacherMapper.listTeacherByCourseId(courseId);
+            List<TeacherBo> resultList = new ArrayList<TeacherBo>();
+            List<TeacherEntityExt> teacherList = teacherMapper.listTeacherByCourseId(courseId);
+            if (teacherList == null) {
+                return resultList;
+            }
             for (TeacherEntityExt teacherPo : teacherList) {
                 resultList.add(TeacherConverter.toBo(teacherPo));
             }
@@ -248,11 +249,12 @@ public class TeacherManagerImpl implements TeacherManager {
      */
     @Override
     public List<TeacherBo> listByCourseTemplateId(int courseTemplateId) {
-        List<TeacherEntityExt> teacherList = null;
-        List<TeacherBo> resultList = null;
-
         try {
-            teacherList = teacherMapper.listTeacherByCourseTempleteId(courseTemplateId);
+            List<TeacherBo> resultList = new ArrayList<TeacherBo>();
+            List<TeacherEntityExt> teacherList = teacherMapper.listTeacherByCourseTempleteId(courseTemplateId);
+            if (teacherList == null) {
+                return resultList;
+            }
             for (TeacherEntityExt teacherPo : teacherList) {
                 resultList.add(TeacherConverter.toBo(teacherPo));
             }
@@ -265,9 +267,6 @@ public class TeacherManagerImpl implements TeacherManager {
 
     @Override
     public List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo) {
-        List<TeacherEntityExt> teacherList = null;
-        List<TeacherBo> resultList = null;
-
         // 验证userBo是否是否属于同一家机构
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
@@ -283,8 +282,13 @@ public class TeacherManagerImpl implements TeacherManager {
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
+        
         try {
-            teacherList = teacherMapper.listTeacherByPartnerId(partnerId);
+            List<TeacherBo> resultList = new ArrayList<TeacherBo>();
+            List<TeacherEntityExt> teacherList = teacherMapper.listTeacherByPartnerId(partnerId);
+            if (teacherList == null) {
+                return resultList;
+            }
             for (TeacherEntityExt teacherPo : teacherList) {
                 resultList.add(TeacherConverter.toBo(teacherPo));
             }
