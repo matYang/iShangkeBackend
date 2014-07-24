@@ -7,6 +7,8 @@ public class Constant {
     public static final String STATUSTRANSFORMCOURSE = "course";
     public static final String STATUSTRANSFORMCOURSETEMPLATE = "coursetemplate";
     public static final String ROLEPREFIX = "role";
+    public static final String TRANSFORMACTION = "transformaction";
+    public static final String TRANSFORMOPERATION = "transformoperation";
     public static final String ROLESYSTEMADMIN = "systemadmin";
 
     public static final int DEFAULTNULL = -1;
