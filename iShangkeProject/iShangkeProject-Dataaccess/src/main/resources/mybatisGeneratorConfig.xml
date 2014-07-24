@@ -263,6 +263,8 @@
     <table tableName="ORDER" domainObjectName="OrderEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="CONFIRMED_TIME" property="confirmedTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+   
     </table>
     <table tableName="ORDER_HISTORY" domainObjectName="OrderHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />

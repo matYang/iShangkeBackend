@@ -22,6 +22,8 @@ struct OrderBo {
     16: string reference
     17: string sign
     18: i64 confirmedTime
+    19: i64 confirmedTimeStart
+    20: i64 confirmedTimeEnd
     
 }
 
