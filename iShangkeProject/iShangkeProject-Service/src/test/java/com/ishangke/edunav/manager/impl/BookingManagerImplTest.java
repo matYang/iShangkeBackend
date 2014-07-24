@@ -1,5 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,10 @@ import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CacheManager;
+import com.ishangke.edunav.manager.TransformManager;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
+import com.ishangke.edunav.manager.transform.Operation;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, BookingManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,10 +40,13 @@ public class BookingManagerImplTest extends BaseTest{
     private BookingEntityExtMapper bookingMapper;
     
     @Autowired
-    private UserEntityExtMapper userMapper;
+    private UserEntityExtMapper userMapper; 
+    
+    @Autowired
+    private TransformManager transformManager;
 
     @Test
-    public void testTransform() {
+    public void testTransform() throws IllegalArgumentException, IllegalAccessException {
         cacheManager.del(Constant.TRANSFORMOPERATION + Constant.ROLESYSTEMADMIN + Constant.STATUSTRANSFORMBOOKING);
         BookingEntityExt booking = new BookingEntityExt();
         booking.setUserId(3);
@@ -53,5 +61,13 @@ public class BookingManagerImplTest extends BaseTest{
         System.out.println(booking.getId());
         bookingManager.transformBookingStatus(BookingConverter.toBo(booking), 1, UserConverter.toBo(userMapper.getById(1)));
         
+        List<Operation> list = transformManager.listAll("booking");
+        for (Operation o : list) {
+            for(Field f : Operation.class.getDeclaredFields()) {
+                f.setAccessible(true);
+                System.out.println(f.getName() + "===>" + f.get(o).toString());
+            }
+            System.out.println("@@@@@@@@@@@@@@@@@");
+        }
     }
 }
