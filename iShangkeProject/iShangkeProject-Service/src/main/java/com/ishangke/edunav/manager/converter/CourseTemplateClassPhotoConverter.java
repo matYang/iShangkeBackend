@@ -8,15 +8,27 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 public class CourseTemplateClassPhotoConverter {
     public static CourseTemplateClassPhotoBo toBo(CourseTemplateClassPhotoEntityExt e) {
         CourseTemplateClassPhotoBo courseTemplateClassPhotoBo = new CourseTemplateClassPhotoBo();
-        courseTemplateClassPhotoBo.setClassPhotoId(e.getClassPhotoId());
-        courseTemplateClassPhotoBo.setClassPhotoIdSet(e.getClassPhotoIdSet());
-        courseTemplateClassPhotoBo.setCourseTemplateId(e.getCourseTemplateId());
-        courseTemplateClassPhotoBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
+        if (e.getClassPhotoId() != null) {
+            courseTemplateClassPhotoBo.setClassPhotoId(e.getClassPhotoId());
+        }
+        if (e.getClassPhotoIdSet() != null) {
+            courseTemplateClassPhotoBo.setClassPhotoIdSet(e.getClassPhotoIdSet());
+        }
+        if (e.getCourseTemplateId() != null) {
+            courseTemplateClassPhotoBo.setCourseTemplateId(e.getCourseTemplateId());
+        }
+        if (e.getCourseTemplateIdSet() != null) {
+            courseTemplateClassPhotoBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
+        }
+        if (e.getId() != null) {
+            courseTemplateClassPhotoBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            courseTemplateClassPhotoBo.setIdSet(e.getIdSet());
+        }
         courseTemplateClassPhotoBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         courseTemplateClassPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         courseTemplateClassPhotoBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        courseTemplateClassPhotoBo.setId(e.getId());
-        courseTemplateClassPhotoBo.setIdSet(e.getIdSet());
         return courseTemplateClassPhotoBo;
     }
 

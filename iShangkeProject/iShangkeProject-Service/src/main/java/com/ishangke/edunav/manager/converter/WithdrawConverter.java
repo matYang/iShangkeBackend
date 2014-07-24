@@ -8,20 +8,36 @@ import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 public class WithdrawConverter {
     public static WithdrawBo toBo(WithdrawEntityExt e) {
         WithdrawBo withdrawBo = new WithdrawBo();
+        if (e.getEnabled() != null) {
+            withdrawBo.setEnabled(e.getEnabled());
+        }        
+        if (e.getId() != null) {
+            withdrawBo.setId(e.getId());
+        }        
+        if (e.getIdSet() != null) {
+            withdrawBo.setIdSet(e.getIdSet());
+        }        
+        if (e.getPayeeId() != null) {
+            withdrawBo.setPayeeId(e.getPayeeId());
+        }        
+        if (e.getPeyeeName() != null) {
+            withdrawBo.setPeyeeName(e.getPeyeeName());
+        }        
+        if (e.getType() != null) {
+            withdrawBo.setType(e.getType());
+        }        
+        if (e.getUserId() != null) {
+            withdrawBo.setUserId(e.getUserId());
+        }        
+        if (e.getUserIdSet() != null) {
+            withdrawBo.setUserIdSet(e.getUserIdSet());
+        }        
         withdrawBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         withdrawBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         withdrawBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        withdrawBo.setEnabled(e.getEnabled());
-        withdrawBo.setId(e.getId());
-        withdrawBo.setIdSet(e.getIdSet());
         withdrawBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         withdrawBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         withdrawBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        withdrawBo.setPayeeId(e.getPayeeId());
-        withdrawBo.setPeyeeName(e.getPeyeeName());
-        withdrawBo.setType(e.getType());
-        withdrawBo.setUserId(e.getUserId());
-        withdrawBo.setUserIdSet(e.getUserIdSet());
         return withdrawBo;
     }
 

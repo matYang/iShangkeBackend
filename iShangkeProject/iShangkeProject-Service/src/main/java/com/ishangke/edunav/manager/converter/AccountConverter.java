@@ -8,20 +8,36 @@ import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 public class AccountConverter {
     public static AccountBo toBo(AccountEntityExt e) {
         AccountBo accountBo = new AccountBo();
-        accountBo.setBalance(e.getBalance());
-        accountBo.setBalanceEnd(e.getBalanceEnd());
-        accountBo.setBalanceStart(e.getBalanceStart());
+        if (e.getBalance() != null) {
+            accountBo.setBalance(e.getBalance());
+        }
+        if (e.getBalanceEnd() != null) {
+            accountBo.setBalanceEnd(e.getBalanceEnd());
+        }
+        if (e.getBalanceStart() != null) {
+            accountBo.setBalanceStart(e.getBalanceStart());
+        }
+        if (e.getEnabled() != null) {
+            accountBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            accountBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            accountBo.setIdSet(e.getIdSet());
+        }
+        if (e.getRealName() != null) {
+            accountBo.setRealName(e.getRealName());
+        }
+        if (e.getAccountNumber() != null) {
+            accountBo.setAccountNumber(e.getAccountNumber());
+        }
         accountBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         accountBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         accountBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        accountBo.setEnabled(e.getEnabled());
-        accountBo.setId(e.getId());
-        accountBo.setIdSet(e.getIdSet());
         accountBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         accountBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         accountBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        accountBo.setRealName(e.getRealName());
-        accountBo.setAccountNumber(e.getAccountNumber());
         return accountBo;
     }
 

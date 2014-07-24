@@ -17,6 +17,145 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 public class PartnerConverter {
     public static PartnerBo toBo(PartnerEntityExt e) {
         PartnerBo partnerBo = new PartnerBo();
+        if (e.getContract() != null) {
+            partnerBo.setContract(e.getContract());
+        }
+        if (e.getCourseContact() != null) {
+            partnerBo.setCourseContact(e.getCourseContact());
+        }
+        if (e.getCourseContactPhone() != null) {
+            partnerBo.setCourseContactPhone(e.getCourseContactPhone());
+        }
+        if (e.getCutoffDay() != null) {
+            partnerBo.setCutoffDay(e.getCutoffDay());
+        }
+        if (e.getCutoffDayEnd() != null) {
+            partnerBo.setCutoffDayEnd(e.getCutoffDayEnd());
+        }
+        if (e.getCutoffDaySet() != null) {
+            partnerBo.setCutoffDaySet(e.getCutoffDaySet());
+        }
+        if (e.getCutoffDayStart() != null) {
+            partnerBo.setCutoffDayStart(e.getCutoffDayStart());
+        }
+        if (e.getCutoffTime() != null) {
+            partnerBo.setCutoffTime(e.getCutoffTime());
+        }
+        if (e.getCutoffTimeEnd() != null) {
+            partnerBo.setCutoffTimeEnd(e.getCutoffTimeEnd());
+        }
+        if (e.getCutoffTimeSet() != null) {
+            partnerBo.setCutoffTimeSet(e.getCutoffTimeSet());
+        }
+        if (e.getCutoffTimeStart() != null) {
+            partnerBo.setCutoffTimeStart(e.getCutoffTimeStart());
+        }
+        if (e.getEduQualificationImgUrl() != null) {
+            partnerBo.setEduQualificationImgUrl(e.getEduQualificationImgUrl());
+        }
+        if (e.getEnabled() != null) {
+            partnerBo.setEnabled(e.getEnabled());
+        }
+        if (e.getHqContact() != null) {
+            partnerBo.setHqContact(e.getHqContact());
+        }
+        if (e.getHqContactPhone() != null) {
+            partnerBo.setHqContactPhone(e.getHqContactPhone());
+        }
+        if (e.getHqContactSecopt() != null) {
+            partnerBo.setHqContactSecopt(e.getHqContactSecopt());
+        }
+        if (e.getHqLocation() != null) {
+            partnerBo.setHqLocation(e.getHqLocation());
+        }
+        if (e.getId() != null) {
+            partnerBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            partnerBo.setIdSet(e.getIdSet());
+        }
+        if (e.getInstName() != null) {
+            partnerBo.setInstName(e.getInstName());
+        }
+        if (e.getLicence() != null) {
+            partnerBo.setLicence(e.getLicence());
+        }
+        if (e.getLicenceImgUrl() != null) {
+            partnerBo.setLicenceImgUrl(e.getLicenceImgUrl());
+        }
+        if (e.getLogoUrl() != null) {
+            partnerBo.setLogoUrl(e.getLogoUrl());
+        }
+        if (e.getOrganizationNum() != null) {
+            partnerBo.setOrganizationNum(e.getOrganizationNum());
+        }
+        if (e.getPartnerDistinction() != null) {
+            partnerBo.setPartnerDistinction(e.getPartnerDistinction());
+        }
+        if (e.getPartnerIntro() != null) {
+            partnerBo.setPartnerIntro(e.getPartnerIntro());
+        }
+        if (e.getPartnerQualification() != null) {
+            partnerBo.setPartnerQualification(e.getPartnerQualification());
+        }
+        if (e.getPartnerQualificationEnd() != null) {
+            partnerBo.setPartnerQualificationEnd(e.getPartnerQualificationEnd());
+        }
+        if (e.getPartnerQualificationStart() != null) {
+            partnerBo.setPartnerQualificationStart(e.getPartnerQualificationStart());
+        }
+        if (e.getPassword() != null) {
+            partnerBo.setPassword(e.getPassword());
+        }
+        if (e.getRating() != null) {
+            partnerBo.setRating(e.getRating());
+        }
+        if (e.getRatingEnd() != null) {
+            partnerBo.setRatingEnd(e.getRatingEnd());
+        }
+        if (e.getRatingStart() != null) {
+            partnerBo.setRatingStart(e.getRatingStart());
+        }
+        if (e.getReference() != null) {
+            partnerBo.setReference(e.getReference());
+        }
+        if (e.getRegContact() != null) {
+            partnerBo.setRegContact(e.getRegContact());
+        }
+        if (e.getRegContactFax() != null) {
+            partnerBo.setRegContactFax(e.getRegContactFax());
+        }
+        if (e.getRegContactPhone() != null) {
+            partnerBo.setRegContactPhone(e.getRegContactPhone());
+        }
+        if (e.getStudentInqueryPhone() != null) {
+            partnerBo.setStudentInqueryPhone(e.getStudentInqueryPhone());
+        }
+        if (e.getTaxRegImgUrl() != null) {
+            partnerBo.setTaxRegImgUrl(e.getTaxRegImgUrl());
+        }
+        if (e.getUniRegLocation() != null) {
+            partnerBo.setUniRegLocation(e.getUniRegLocation());
+        }
+        if (e.getWholeName() != null) {
+            partnerBo.setWholeName(e.getWholeName());
+        }
+        partnerBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        partnerBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        partnerBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        partnerBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime().getTimeInMillis());
+        partnerBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd().getTimeInMillis());
+        partnerBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeStart().getTimeInMillis());
+        partnerBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        partnerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        partnerBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        if (e.getTeacherList() != null) {
+            List<TeacherBo> list = new ArrayList<>();
+            for (TeacherEntityExt a : e.getTeacherList()) {
+                list.add(TeacherConverter.toBo(a));
+            }
+            partnerBo.setTeacherList(list);
+        }
         if (e.getAddressList() != null) {
             List<AddressBo> list = new ArrayList<>();
             for (AddressEntityExt a : e.getAddressList()) {
@@ -31,63 +170,6 @@ public class PartnerConverter {
             }
             partnerBo.setClassPhotoList(list);
         }
-        partnerBo.setContract(e.getContract());
-        partnerBo.setCourseContact(e.getCourseContact());
-        partnerBo.setCourseContactPhone(e.getCourseContactPhone());
-        partnerBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        partnerBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        partnerBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        partnerBo.setCutoffDay(e.getCutoffDay());
-        partnerBo.setCutoffDayEnd(e.getCutoffDayEnd());
-        partnerBo.setCutoffDaySet(e.getCutoffDaySet());
-        partnerBo.setCutoffDayStart(e.getCutoffDayStart());
-        partnerBo.setCutoffTime(e.getCutoffTime());
-        partnerBo.setCutoffTimeEnd(e.getCutoffTimeEnd());
-        partnerBo.setCutoffTimeSet(e.getCutoffTimeSet());
-        partnerBo.setCutoffTimeStart(e.getCutoffTimeStart());
-        partnerBo.setEduQualificationImgUrl(e.getEduQualificationImgUrl());
-        partnerBo.setEnabled(e.getEnabled());
-        partnerBo.setHqContact(e.getHqContact());
-        partnerBo.setHqContactPhone(e.getHqContactPhone());
-        partnerBo.setHqContactSecopt(e.getHqContactSecopt());
-        partnerBo.setHqLocation(e.getHqLocation());
-        partnerBo.setId(e.getId());
-        partnerBo.setIdSet(e.getIdSet());
-        partnerBo.setInstName(e.getInstName());
-        partnerBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime().getTimeInMillis());
-        partnerBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd().getTimeInMillis());
-        partnerBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeStart().getTimeInMillis());
-        partnerBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        partnerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        partnerBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        partnerBo.setLicence(e.getLicence());
-        partnerBo.setLicenceImgUrl(e.getLicenceImgUrl());
-        partnerBo.setLogoUrl(e.getLogoUrl());
-        partnerBo.setOrganizationNum(e.getOrganizationNum());
-        partnerBo.setPartnerDistinction(e.getPartnerDistinction());
-        partnerBo.setPartnerIntro(e.getPartnerIntro());
-        partnerBo.setPartnerQualification(e.getPartnerQualification());
-        partnerBo.setPartnerQualificationEnd(e.getPartnerQualificationEnd());
-        partnerBo.setPartnerQualificationStart(e.getPartnerQualificationStart());
-        partnerBo.setPassword(e.getPassword());
-        partnerBo.setRating(e.getRating());
-        partnerBo.setRatingEnd(e.getRatingEnd());
-        partnerBo.setRatingStart(e.getRatingStart());
-        partnerBo.setReference(e.getReference());
-        partnerBo.setRegContact(e.getRegContact());
-        partnerBo.setRegContactFax(e.getRegContactFax());
-        partnerBo.setRegContactPhone(e.getRegContactPhone());
-        partnerBo.setStudentInqueryPhone(e.getStudentInqueryPhone());
-        partnerBo.setTaxRegImgUrl(e.getTaxRegImgUrl());
-        if (e.getTeacherList() != null) {
-            List<TeacherBo> list = new ArrayList<>();
-            for (TeacherEntityExt a : e.getTeacherList()) {
-                list.add(TeacherConverter.toBo(a));
-            }
-            partnerBo.setTeacherList(list);
-        }
-        partnerBo.setUniRegLocation(e.getUniRegLocation());
-        partnerBo.setWholeName(e.getWholeName());
         return partnerBo;
     }
 

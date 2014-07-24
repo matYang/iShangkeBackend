@@ -9,4 +9,6 @@ public interface TransformManager {
     public List<ActionBo> getActionByRoleName(String roleName, String entityName, int currentStatus);
     
     public List<Operation> getOperationByRoleName(String roleName, String entityName, int currentStatus);
+    
+    public List<Operation> listAll(String entityName);
 }

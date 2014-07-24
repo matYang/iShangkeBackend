@@ -8,19 +8,33 @@ import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
 public class CouponHistoryConverter {
     public static CouponHistoryBo toBo(CouponHistoryEntityExt e) {
         CouponHistoryBo couponHistoryBo = new CouponHistoryBo();
-        couponHistoryBo.setCharge(e.getCharge());
-        couponHistoryBo.setChargeEnd(e.getChargeEnd());
-        couponHistoryBo.setChargeStart(e.getChargeStart());
-        couponHistoryBo.setCouponId(e.getCouponId());
-        couponHistoryBo.setCouponIdSet(e.getCouponIdSet());
-        couponHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        couponHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        couponHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        couponHistoryBo.setId(e.getId());
-        couponHistoryBo.setIdSet(e.getIdSet());
+        if (e.getCharge() != null) {
+            couponHistoryBo.setCharge(e.getCharge());
+        }
+        if (e.getChargeEnd() != null) {
+            couponHistoryBo.setChargeEnd(e.getChargeEnd());
+        }
+        if (e.getChargeStart() != null) {
+            couponHistoryBo.setChargeStart(e.getChargeStart());
+        }
+        if (e.getCouponId() != null) {
+            couponHistoryBo.setCouponId(e.getCouponId());
+        }
+        if (e.getCouponIdSet() != null) {
+            couponHistoryBo.setCouponIdSet(e.getCouponIdSet());
+        }
+        if (e.getId() != null) {
+            couponHistoryBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            couponHistoryBo.setIdSet(e.getIdSet());
+        }
         couponHistoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         couponHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         couponHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        couponHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        couponHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        couponHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         return couponHistoryBo;
     }
 
