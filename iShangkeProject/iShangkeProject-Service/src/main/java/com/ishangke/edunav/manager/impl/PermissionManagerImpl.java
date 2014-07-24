@@ -1,5 +1,6 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PermissionEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
-import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.CacheManager;
@@ -38,20 +37,10 @@ public class PermissionManagerImpl implements PermissionManager {
     private CacheManager cacheManager;
 
     @Override
-    public List<PermissionBo> listPermissionsByUser(UserBo user) {
-        int userId = user.getId();
-        List<RoleEntityExt> result1 = roleMapper.listRolesByGroupId(userId);
-        List<GroupEntityExt> result2 = groupMapper.listGroupsByUserId(userId);
-        return null;
-    }
-
-    @Override
     public List<PermissionBo> listAll() {
-        List<PermissionEntityExt> permissionList = null;
-        List<PermissionBo> resultList = null;
-
         try {
-            permissionList = permissionMapper.listAll();
+            List<PermissionBo> resultList = new ArrayList<PermissionBo>();
+            List<PermissionEntityExt> permissionList = permissionMapper.listAll();
             for (PermissionEntityExt permissionPo : permissionList) {
                 resultList.add(PermissionConverter.toBo(permissionPo));
             }
@@ -64,11 +53,9 @@ public class PermissionManagerImpl implements PermissionManager {
 
     @Override
     public List<PermissionBo> listPermissionsByUserId(int userId) {
-        List<PermissionEntityExt> permissionList = null;
-        List<PermissionBo> resultList = null;
-
         try {
-            permissionList = permissionMapper.listPermissionsByUserId(userId);
+            List<PermissionBo> resultList = new ArrayList<PermissionBo>();;
+            List<PermissionEntityExt> permissionList = permissionMapper.listPermissionsByUserId(userId);
             for (PermissionEntityExt permissionPo : permissionList) {
                 resultList.add(PermissionConverter.toBo(permissionPo));
             }
@@ -77,16 +64,13 @@ public class PermissionManagerImpl implements PermissionManager {
             LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Permissions listByUserId Failed");
         }
-
     }
 
     @Override
     public List<PermissionBo> listPermissionsByGroupId(int groupId) {
-        List<PermissionEntityExt> permissionList = null;
-        List<PermissionBo> resultList = null;
-
         try {
-            permissionList = permissionMapper.listPermissionsByGroupId(groupId);
+            List<PermissionBo> resultList = new ArrayList<PermissionBo>();
+            List<PermissionEntityExt> permissionList = permissionMapper.listPermissionsByGroupId(groupId);
             for (PermissionEntityExt permissionPo : permissionList) {
                 resultList.add(PermissionConverter.toBo(permissionPo));
             }
@@ -100,11 +84,10 @@ public class PermissionManagerImpl implements PermissionManager {
 
     @Override
     public List<PermissionBo> listPermissionsByRoleId(int roleId) {
-        List<PermissionEntityExt> permissionList = null;
-        List<PermissionBo> resultList = null;
 
         try {
-            permissionList = permissionMapper.listPermissionByRoleId(roleId);
+            List<PermissionBo> resultList = new ArrayList<PermissionBo>();
+            List<PermissionEntityExt> permissionList = permissionMapper.listPermissionByRoleId(roleId);
             for (PermissionEntityExt permissionPo : permissionList) {
                 resultList.add(PermissionConverter.toBo(permissionPo));
             }
