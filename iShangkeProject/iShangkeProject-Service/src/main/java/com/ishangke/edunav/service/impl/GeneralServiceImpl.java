@@ -1,13 +1,12 @@
 package com.ishangke.edunav.service.impl;
 
-
-
 import java.util.List;
 
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CareerBo;
@@ -25,9 +24,10 @@ import com.ishangke.edunav.manager.SchoolManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
-public class GeneralServiceImpl implements GeneralService.Iface{
+@Component
+public class GeneralServiceImpl implements GeneralService.Iface {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneralServiceImpl.class);
-    
+
     @Autowired
     private CategoryManager categoryManager;
     @Autowired
@@ -39,12 +39,11 @@ public class GeneralServiceImpl implements GeneralService.Iface{
     @Autowired
     private CareerManager careerManager;
 
-    
     /**********************************************************
-    *
-    *   Category
-    *
-    **********************************************************/
+     *
+     * Category
+     *
+     **********************************************************/
     @Override
     public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
@@ -58,13 +57,12 @@ public class GeneralServiceImpl implements GeneralService.Iface{
             throw exception;
         }
     }
-    
-    
+
     /**********************************************************
-    *
-    *   Location
-    *
-    **********************************************************/
+     *
+     * Location
+     *
+     **********************************************************/
     @Override
     public List<LocationBo> queryLocation(LocationBo locationBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
@@ -79,12 +77,11 @@ public class GeneralServiceImpl implements GeneralService.Iface{
         }
     }
 
-    
     /**********************************************************
-    *
-    *   Circle
-    *
-    **********************************************************/
+     *
+     * Circle
+     *
+     **********************************************************/
     @Override
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
@@ -99,12 +96,11 @@ public class GeneralServiceImpl implements GeneralService.Iface{
         }
     }
 
-    
     /**********************************************************
-    *
-    *   School
-    *
-    **********************************************************/
+     *
+     * School
+     *
+     **********************************************************/
     @Override
     public List<SchoolBo> querySchool(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
@@ -119,12 +115,11 @@ public class GeneralServiceImpl implements GeneralService.Iface{
         }
     }
 
-    
     /**********************************************************
-    *
-    *   Career
-    *
-    **********************************************************/
+     *
+     * Career
+     *
+     **********************************************************/
     @Override
     public List<CareerBo> queryCareer(CareerBo careerBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {

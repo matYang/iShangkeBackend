@@ -13,12 +13,15 @@
     http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
   <!-- Imports dataaccess spring config -->
   <import resource="classpath*:applicationContext-dataaccess.xml" />
+  <import resource="classpath*:applicationContext-commoncontract.xml" />
+  <!-- Application context autoware -->
+  <bean class="com.ishangke.edunav.util.ApplicationContextUtil" />
   <!-- Scans all manager class -->
   <context:component-scan base-package="com.ishangke.edunav.manager, com.ishangke.edunav.service, com.ishangke.edunav.util" />
-  <bean id="manager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
   </bean>
-  <bean id="applicationServer" class="com.ishangke.edunav.server.ApplicationServer" init-method="start" />
+  <bean id="applicationServer" class="com.ishangke.edunav.server.ApplicationServer" />
   <tx:advice id="managerAdvice" transaction-manager="transactionManager">
     <tx:attributes>
       <tx:method name="*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="java.lang.Exception" />
