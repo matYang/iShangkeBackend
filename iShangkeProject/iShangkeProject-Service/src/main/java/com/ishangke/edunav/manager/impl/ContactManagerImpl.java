@@ -45,19 +45,19 @@ public class ContactManagerImpl implements ContactManager {
             throw new ManagerException("Invalid parameter");
         }
 
-        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (userBo.getId() != contactBo.getUserId()) {
-                throw new AuthenticationException("User creating someone else's contact");
-            }
-        }
-
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at " + new Date(), userBo.getName()));
+        }
+        else {
+            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
+                throw new AuthenticationException("User creating someone else's contact");
+            }
+        }
+
         int result = 0;
         try {
             result = contactMapper.add(contactEntity);
@@ -77,19 +77,20 @@ public class ContactManagerImpl implements ContactManager {
         if (contactBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // Convert
+        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
+        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at " + new Date(), userBo.getName()));
         }
         else {
-            if (userBo.getId() != contactBo.getUserId()) {
+            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's contact");
             }
         }
-
-        // Convert
-        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
             contactMapper.update(contactEntity);
@@ -106,19 +107,20 @@ public class ContactManagerImpl implements ContactManager {
         if (contactBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // Convert
+        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
+        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at " + new Date(), userBo.getName()));
         }
         else {
-            if (userBo.getId() != contactBo.getUserId()) {
+            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User deleting someone else's contact");
             }
         }
-
-        // Convert
-        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         try {
             contactEntity.setDeleted(1);
@@ -145,8 +147,8 @@ public class ContactManagerImpl implements ContactManager {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
         else {
-            
-            if (userBo.getId() != contactBo.getUserId()) {
+            //otherwise user can only query their own, thus making an UserId necessary
+            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's contact");
             }
         }
