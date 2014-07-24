@@ -8,15 +8,27 @@ import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 public class CourseClassPhotoConverter {
     public static CourseClassPhotoBo toBo(CourseClassPhotoEntityExt e) {
         CourseClassPhotoBo courseClassPhotoBo = new CourseClassPhotoBo();
-        courseClassPhotoBo.setClassPhotoId(e.getClassPhotoId());
-        courseClassPhotoBo.setClassPhotoIdSet(e.getClassPhotoIdSet());
-        courseClassPhotoBo.setCourseId(e.getCourseId());
-        courseClassPhotoBo.setCourseIdSet(e.getCourseIdSet());
+        if (e.getClassPhotoId() != null) {
+            courseClassPhotoBo.setClassPhotoId(e.getClassPhotoId());
+        }
+        if (e.getClassPhotoIdSet() != null) {
+            courseClassPhotoBo.setClassPhotoIdSet(e.getClassPhotoIdSet());
+        }
+        if (e.getCourseId() != null) {
+            courseClassPhotoBo.setCourseId(e.getCourseId());
+        }
+        if (e.getCourseIdSet() != null) {
+            courseClassPhotoBo.setCourseIdSet(e.getCourseIdSet());
+        }
+        if (e.getId() != null) {
+            courseClassPhotoBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            courseClassPhotoBo.setIdSet(e.getIdSet());
+        }
         courseClassPhotoBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         courseClassPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         courseClassPhotoBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        courseClassPhotoBo.setId(e.getId());
-        courseClassPhotoBo.setIdSet(e.getIdSet());
         return courseClassPhotoBo;
     }
 

@@ -8,15 +8,27 @@ import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 public class UserLocationConverter {
     public static UserLocationBo toBo(UserLocationEntityExt e) {
         UserLocationBo userLocationBo = new UserLocationBo();
-        userLocationBo.setId(e.getId());
-        userLocationBo.setIdSet(e.getIdSet());
+        if (e.getId() != null) {
+            userLocationBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            userLocationBo.setIdSet(e.getIdSet());
+        }
+        if (e.getLocationId() != null) {
+            userLocationBo.setLocationId(e.getLocationId());
+        }
+        if (e.getLocationIdSet() != null) {
+            userLocationBo.setLocationIdSet(e.getLocationIdSet());
+        }
+        if (e.getUserId() != null) {
+            userLocationBo.setUserId(e.getUserId());
+        }
+        if (e.getUserIdSet() != null) {
+            userLocationBo.setUserIdSet(e.getUserIdSet());
+        }
         userLocationBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         userLocationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         userLocationBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        userLocationBo.setLocationId(e.getLocationId());
-        userLocationBo.setLocationIdSet(e.getLocationIdSet());
-        userLocationBo.setUserId(e.getUserId());
-        userLocationBo.setUserIdSet(e.getUserIdSet());
         return userLocationBo;
     }
 

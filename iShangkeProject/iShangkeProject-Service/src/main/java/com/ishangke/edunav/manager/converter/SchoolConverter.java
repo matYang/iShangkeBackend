@@ -8,17 +8,27 @@ import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
 public class SchoolConverter {
     public static SchoolBo toBo(SchoolEntityExt e) {
         SchoolBo schoolBo = new SchoolBo();
+        if (e.getEnabled() != null) {
+            schoolBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            schoolBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            schoolBo.setIdSet(e.getIdSet());
+        }
+        if (e.getName() != null) {
+            schoolBo.setName(e.getName());
+        }
+        if (e.getValue() != null) {
+            schoolBo.setValue(e.getValue());
+        }
         schoolBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         schoolBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         schoolBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        schoolBo.setEnabled(e.getEnabled());
-        schoolBo.setId(e.getId());
-        schoolBo.setIdSet(e.getIdSet());
         schoolBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         schoolBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         schoolBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        schoolBo.setName(e.getName());
-        schoolBo.setValue(e.getValue());
         return schoolBo;
     }
 

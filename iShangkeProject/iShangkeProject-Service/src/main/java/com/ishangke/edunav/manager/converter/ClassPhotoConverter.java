@@ -8,20 +8,36 @@ import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 public class ClassPhotoConverter {
     public static ClassPhotoBo toBo(ClassPhotoEntityExt e) {
         ClassPhotoBo classPhotoBo = new ClassPhotoBo();
+        if (e.getDescription() != null) {
+            classPhotoBo.setDescription(e.getDescription());
+        }
+        if (e.getEnabled() != null) {
+            classPhotoBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            classPhotoBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            classPhotoBo.setIdSet(e.getIdSet());
+        }
+        if (e.getImgUrl() != null) {
+            classPhotoBo.setImgUrl(e.getImgUrl());
+        }
+        if (e.getPartnerId() != null) {
+            classPhotoBo.setPartnerId(e.getPartnerId());
+        }
+        if (e.getPartnerIdSet() != null) {
+            classPhotoBo.setPartnerIdSet(e.getPartnerIdSet());
+        }
+        if (e.getTitle() != null) {
+            classPhotoBo.setTitle(e.getTitle());
+        }
         classPhotoBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         classPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         classPhotoBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        classPhotoBo.setDescription(e.getDescription());
-        classPhotoBo.setEnabled(e.getEnabled());
-        classPhotoBo.setId(e.getId());
-        classPhotoBo.setIdSet(e.getIdSet());
-        classPhotoBo.setImgUrl(e.getImgUrl());
         classPhotoBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         classPhotoBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         classPhotoBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        classPhotoBo.setPartnerId(e.getPartnerId());
-        classPhotoBo.setPartnerIdSet(e.getPartnerIdSet());
-        classPhotoBo.setTitle(e.getTitle());
         return classPhotoBo;
     }
 

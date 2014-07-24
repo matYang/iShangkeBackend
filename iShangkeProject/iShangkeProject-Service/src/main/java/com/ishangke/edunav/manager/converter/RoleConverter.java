@@ -8,16 +8,24 @@ import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 public class RoleConverter {
     public static RoleBo toBo(RoleEntityExt e) {
         RoleBo roleBo = new RoleBo();
+        if (e.getEnabled() != null) {
+            roleBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            roleBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            roleBo.setIdSet(e.getIdSet());
+        }
+        if (e.getName() != null) {
+            roleBo.setName(e.getName());
+        }
         roleBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         roleBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         roleBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        roleBo.setEnabled(e.getEnabled());
-        roleBo.setId(e.getId());
-        roleBo.setIdSet(e.getIdSet());
         roleBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         roleBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         roleBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        roleBo.setName(e.getName());
         return roleBo;
     }
 

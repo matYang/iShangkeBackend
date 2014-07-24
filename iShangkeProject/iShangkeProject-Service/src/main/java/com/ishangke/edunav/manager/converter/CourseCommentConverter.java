@@ -8,29 +8,63 @@ import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
 public class CourseCommentConverter {
     public static CourseCommentBo toBo(CourseCommentEntityExt e) {
         CourseCommentBo courseCommentBo = new CourseCommentBo();
-        courseCommentBo.setAttitudeRating(e.getAttitudeRating());
-        courseCommentBo.setAttitudeRatingEnd(e.getAttitudeRatingEnd());
-        courseCommentBo.setAttitudeRatingStart(e.getAttitudeRatingStart());
-        courseCommentBo.setConditionRating(e.getConditionRating());
-        courseCommentBo.setConditionRatingEnd(e.getConditionRatingEnd());
-        courseCommentBo.setConditionRatingStart(e.getConditionRatingStart());
-        courseCommentBo.setContent(e.getContent());
-        courseCommentBo.setCourseTemplateId(e.getCourseTemplateId());
-        courseCommentBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
+        if (e.getAttitudeRating() != null) {
+            courseCommentBo.setAttitudeRating(e.getAttitudeRating());
+        }
+        if (e.getAttitudeRatingEnd() != null) {
+            courseCommentBo.setAttitudeRatingEnd(e.getAttitudeRatingEnd());
+        }
+        if (e.getAttitudeRatingStart() != null) {
+            courseCommentBo.setAttitudeRatingStart(e.getAttitudeRatingStart());
+        }
+        if (e.getConditionRating() != null) {
+            courseCommentBo.setConditionRating(e.getConditionRating());
+        }
+        if (e.getConditionRatingEnd() != null) {
+            courseCommentBo.setConditionRatingEnd(e.getConditionRatingEnd());
+        }
+        if (e.getConditionRatingStart() != null) {
+            courseCommentBo.setConditionRatingStart(e.getConditionRatingStart());
+        }
+        if (e.getContent() != null) {
+            courseCommentBo.setContent(e.getContent());
+        }
+        if (e.getCourseTemplateId() != null) {
+            courseCommentBo.setCourseTemplateId(e.getCourseTemplateId());
+        }
+        if (e.getCourseTemplateIdSet() != null) {
+            courseCommentBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
+        }
+        if (e.getEnabled() != null) {
+            courseCommentBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            courseCommentBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            courseCommentBo.setIdSet(e.getIdSet());
+        }
+        if (e.getSatisfactionRating() != null) {
+            courseCommentBo.setSatisfactionRating(e.getSatisfactionRating());
+        }
+        if (e.getSatisfactionRatingEnd() != null) {
+            courseCommentBo.setSatisfactionRatingEnd(e.getSatisfactionRatingEnd());
+        }
+        if (e.getTotalRatingStart() != null) {
+            courseCommentBo.setTotalRatingStart(e.getTotalRatingStart());
+        }
+        if (e.getUserId() != null) {
+            courseCommentBo.setUserId(e.getUserId());
+        }
+        if (e.getUserIdSet() != null) {
+            courseCommentBo.setUserIdSet(e.getUserIdSet());
+        }
         courseCommentBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         courseCommentBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         courseCommentBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        courseCommentBo.setEnabled(e.getEnabled());
-        courseCommentBo.setId(e.getId());
-        courseCommentBo.setIdSet(e.getIdSet());
         courseCommentBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         courseCommentBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         courseCommentBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        courseCommentBo.setSatisfactionRating(e.getSatisfactionRating());
-        courseCommentBo.setSatisfactionRatingEnd(e.getSatisfactionRatingEnd());
-        courseCommentBo.setTotalRatingStart(e.getTotalRatingStart());
-        courseCommentBo.setUserId(e.getUserId());
-        courseCommentBo.setUserIdSet(e.getUserIdSet());
         return courseCommentBo;
     }
 
