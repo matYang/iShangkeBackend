@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.ishangke.edunav.web.common.DateUtility;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.web.model.CategoryVo;
 import com.ishangke.edunav.web.tree.TreeParser;
 

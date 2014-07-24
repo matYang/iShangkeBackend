@@ -1,32 +1,33 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class UserConverter {
     public static UserBo toBo(UserEntityExt e) {
         UserBo userBo = new UserBo();
         userBo.setAppliedInvitationCode(e.getAppliedInvitationCode());
         userBo.setAvatarUrl(e.getAvatarUrl());
-        userBo.setBirthday(e.getBirthday().getTimeInMillis());
-        userBo.setBirthdayEnd(e.getBirthdayEnd().getTimeInMillis());
-        userBo.setBirthdayStart(e.getBirthdayStart().getTimeInMillis());
-        userBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        userBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        userBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        userBo.setBirthday(e.getBirthday() == null ? Constant.DEFAULTNULL : e.getBirthday().getTimeInMillis());
+        userBo.setBirthdayEnd(e.getBirthdayEnd() == null ? Constant.DEFAULTNULL : e.getBirthdayEnd().getTimeInMillis());
+        userBo.setBirthdayStart(e.getBirthdayStart() == null ? Constant.DEFAULTNULL : e.getBirthdayStart().getTimeInMillis());
+        userBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        userBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        userBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         userBo.setEmail(e.getEmail());
         userBo.setEnabled(e.getEnabled());
         userBo.setGender(e.getGender());
         userBo.setId(e.getId());
         userBo.setIdSet(e.getIdSet());
         userBo.setInvitationCode(e.getInvitationCode());
-        userBo.setLastLoginTime(e.getLastLoginTime().getTimeInMillis());
-        userBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd().getTimeInMillis());
-        userBo.setLastLoginTimeStart(e.getLastLoginTimeStart().getTimeInMillis());
-        userBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        userBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        userBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        userBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime().getTimeInMillis());
+        userBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd().getTimeInMillis());
+        userBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeStart().getTimeInMillis());
+        userBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        userBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        userBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         userBo.setMajor(e.getMajor());
         userBo.setName(e.getName());
         userBo.setPassword(e.getPassword());

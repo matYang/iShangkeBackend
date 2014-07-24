@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ApproveHistoryBo;
 import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class ApproveHistoryConverter {
     public static ApproveHistoryBo toBo(ApproveHistoryEntityExt e) {
@@ -12,9 +13,9 @@ public class ApproveHistoryConverter {
         approveHistoryBo.setAttachedId(e.getAttachedId());
         approveHistoryBo.setAttachedIdSet(e.getAttachedIdSet());
         approveHistoryBo.setComment(e.getComment());
-        approveHistoryBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        approveHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        approveHistoryBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        approveHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        approveHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        approveHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         approveHistoryBo.setId(e.getId());
         approveHistoryBo.setIdSet(e.getIdSet());
         approveHistoryBo.setPostStatus(e.getPostStatus());

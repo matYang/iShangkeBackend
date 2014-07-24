@@ -453,5 +453,38 @@ public class ManagerErrorCode {
     public static final String PERMISSION_USER_REISTERUSER_KEY = "permission_user_registerUser";
     public static final int PERMISSION_USER_DELETEUSER = 0x0100004B;
     public static final String PERMISSION_USER_DELETEUSER_KEY = "permission_user_deleteUser";
+    public static final int PERMISSION_USER_UPDATEUSER = 0x0100004C;
+    public static final String PERMISSION_USER_UPDATEUSER_KEY = "permission_user_updateUser";
+    public static final int PERMISSION_USER_QUERYUSERINFO = 0x0100004D;
+    public static final String PERMISSION_USER_QUERYUSERINFO_KEY = "permission_user_queryUserInfo";
+    public static final int PERMISSION_USER_QUERYUSER = 0x0100004E;
+    public static final String PERMISSION_USER_QUERYUSER_KEY = "permission_user_queryUser";
+    public static final int PERMISSION_USER_QUERYSESSION = 0x0100004F;
+    public static final String PERMISSION_USER_QUERYSESSION_KEY = "permission_user_querySession";
+    public static final int PERMISSION_USER_DISPOSESESSION = 0x01000050;
+    public static final String PERMISSION_USER_DISPOSESESSION_KEY = "permission_user_disposeSession";
+    public static final int PERMISSION_USER_SENDMESSAGE = 0x01000051;
+    public static final String PERMISSION_USER_SENDMESSAGE_KEY = "permission_user_sendMessage";
+    public static final int PERMISSION_USER_RECEIVEMESSAGE = 0x01000052;
+    public static final String PERMISSION_USER_RECEIVEMESSAGE_KEY = "permission_user_receiveMessage";
+    public static final int PERMISSION_USER_DELETEMESSAGE = 0x01000053;
+    public static final String PERMISSION_USER_DELETEMESSAGE_KEY = "permission_user_deleteMessage";
+    public static final int PERMISSION_USER_QUERYMESSAGE = 0x01000054;
+    public static final String PERMISSION_USER_QUERYMESSAGE_KEY = "permission_user_queryMessage";
+    public static final int PERMISSION_USER_GENERATECODE = 0x01000055;
+    public static final String PERMISSION_USER_GENERATECODE_KEY = "permission_user_generateCode";
+    public static final int PERMISSION_USER_QUERYSPREAD = 0x01000056;
+    public static final String PERMISSION_USER_QUERYSPREAD_KEY = "permission_user_querySpread";
+    public static final int PERMISSION_USER_CREATESPREAD = 0x01000057;
+    public static final String PERMISSION_USER_CREATESPREAD_KEY = "permission_user_createSpread";
+    public static final int PERMISSION_USER_APPROVESPREAD = 0x01000058;
+    public static final String PERMISSION_USER_APPROVESPREAD_KEY = "permission_user_approveSpread";
+    public static final int PERMISSION_USER_REJECTSPREAD = 0x01000059;
+    public static final String PERMISSION_USER_REJECTSPREAD_KEY = "permission_user_rejectSpread";
+    public static final int PERMISSION_USER_CANCELSPREAD = 0x0100005A;
+    public static final String PERMISSION_USER_CANCELSPREAD_KEY = "permission_user_cancelSpread";
+    public static final int PERMISSION_USER_DELETESPREAD = 0x0100005B;
+    public static final String PERMISSION_USER_DELETESPREAD_KEY = "permission_user_deleteSpread";
+    
 
 }

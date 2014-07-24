@@ -1,8 +1,9 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserGroupBo;
 import com.ishangke.edunav.web.model.UserGroupVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class UserGroupConverter {
     public static UserGroupBo fromModel(UserGroupVo vo) {
@@ -11,9 +12,9 @@ public class UserGroupConverter {
         userGroupBo.setGroupIdSet(vo.getGroupIdSet());
         userGroupBo.setId(vo.getId());
         userGroupBo.setIdSet(vo.getIdSet());
-        userGroupBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        userGroupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        userGroupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        userGroupBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        userGroupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        userGroupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         userGroupBo.setUserId(vo.getUserId());
         userGroupBo.setUserIdSet(vo.getUserIdSet());
         return userGroupBo;

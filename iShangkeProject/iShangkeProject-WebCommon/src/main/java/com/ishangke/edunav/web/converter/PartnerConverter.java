@@ -3,6 +3,8 @@ package com.ishangke.edunav.web.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -11,7 +13,6 @@ import com.ishangke.edunav.web.model.AddressVo;
 import com.ishangke.edunav.web.model.ClassPhotoVo;
 import com.ishangke.edunav.web.model.PartnerVo;
 import com.ishangke.edunav.web.model.TeacherVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class PartnerConverter {
     public static PartnerBo fromModel(PartnerVo vo) {
@@ -33,9 +34,9 @@ public class PartnerConverter {
         partnerBo.setContract(vo.getContract());
         partnerBo.setCourseContact(vo.getCourseContact());
         partnerBo.setCourseContactPhone(vo.getCourseContactPhone());
-        partnerBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        partnerBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        partnerBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        partnerBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        partnerBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        partnerBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         partnerBo.setCutoffDay(vo.getCutoffDay());
         partnerBo.setCutoffDayEnd(vo.getCutoffDayEnd());
         partnerBo.setCutoffDaySet(vo.getCutoffDaySet());
@@ -53,12 +54,12 @@ public class PartnerConverter {
         partnerBo.setId(vo.getId());
         partnerBo.setIdSet(vo.getIdSet());
         partnerBo.setInstName(vo.getInstName());
-        partnerBo.setLastLoginTime(vo.getLastLoginTime().getTimeInMillis());
-        partnerBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd().getTimeInMillis());
-        partnerBo.setLastLoginTimeStart(vo.getLastLoginTimeStart().getTimeInMillis());
-        partnerBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        partnerBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        partnerBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        partnerBo.setLastLoginTime(vo.getLastLoginTime() == null ? Constant.DEFAULTNULL : vo.getLastLoginTime().getTimeInMillis());
+        partnerBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeEnd().getTimeInMillis());
+        partnerBo.setLastLoginTimeStart(vo.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeStart().getTimeInMillis());
+        partnerBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        partnerBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        partnerBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         partnerBo.setLicence(vo.getLicence());
         partnerBo.setLicenceImgUrl(vo.getLicenceImgUrl());
         partnerBo.setLogoUrl(vo.getLogoUrl());

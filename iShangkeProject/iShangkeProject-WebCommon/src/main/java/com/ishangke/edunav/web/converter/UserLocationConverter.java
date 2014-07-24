@@ -1,17 +1,18 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserLocationBo;
 import com.ishangke.edunav.web.model.UserLocationVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class UserLocationConverter {
     public static UserLocationBo fromModel(UserLocationVo vo) {
         UserLocationBo userLocationBo = new UserLocationBo();
         userLocationBo.setId(vo.getId());
         userLocationBo.setIdSet(vo.getIdSet());
-        userLocationBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        userLocationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        userLocationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        userLocationBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        userLocationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        userLocationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         userLocationBo.setLocationId(vo.getLocationId());
         userLocationBo.setLocationIdSet(vo.getLocationIdSet());
         userLocationBo.setUserId(vo.getUserId());

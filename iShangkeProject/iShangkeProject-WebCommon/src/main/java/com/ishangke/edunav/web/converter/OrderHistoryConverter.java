@@ -1,15 +1,16 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.web.model.OrderHistoryVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class OrderHistoryConverter {
     public static OrderHistoryBo fromModel(OrderHistoryVo vo) {
         OrderHistoryBo orderHistoryBo = new OrderHistoryBo();
-        orderHistoryBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        orderHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        orderHistoryBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        orderHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        orderHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        orderHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         orderHistoryBo.setEnabled(vo.getEnabled());
         orderHistoryBo.setId(vo.getId());
         orderHistoryBo.setIdSet(vo.getIdSet());

@@ -1,24 +1,25 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CreditBo;
 import com.ishangke.edunav.web.model.CreditVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class CreditConverter {
     public static CreditBo fromModel(CreditVo vo) {
         CreditBo creditBo = new CreditBo();
-        creditBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        creditBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        creditBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        creditBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        creditBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        creditBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         creditBo.setCredit(vo.getCredit());
         creditBo.setCreditEnd(vo.getCreditEnd());
         creditBo.setCreditStart(vo.getCreditStart());
         creditBo.setEnabled(vo.getEnabled());
         creditBo.setId(vo.getId());
         creditBo.setIdSet(vo.getIdSet());
-        creditBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        creditBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        creditBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        creditBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        creditBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        creditBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         return creditBo;
     }
 

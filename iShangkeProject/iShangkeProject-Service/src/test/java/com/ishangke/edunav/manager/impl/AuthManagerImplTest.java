@@ -20,7 +20,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
-import com.ishangke.edunav.manager.common.DateUtility;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.CellVerificationConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfig;

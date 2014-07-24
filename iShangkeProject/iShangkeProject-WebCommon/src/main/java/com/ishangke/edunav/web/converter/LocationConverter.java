@@ -1,21 +1,22 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.web.model.LocationVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class LocationConverter {
     public static LocationBo fromModel(LocationVo vo) {
         LocationBo locationBo = new LocationBo();
-        locationBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        locationBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        locationBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        locationBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        locationBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        locationBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         locationBo.setEnabled(vo.getEnabled());
         locationBo.setId(vo.getId());
         locationBo.setIdSet(vo.getIdSet());
-        locationBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        locationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        locationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        locationBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        locationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        locationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         locationBo.setName(vo.getName());
         locationBo.setValue(vo.getValue());
         return locationBo;

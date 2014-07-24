@@ -1,23 +1,24 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class TeacherConverter {
     public static TeacherBo toBo(TeacherEntityExt e) {
         TeacherBo teacherBo = new TeacherBo();
-        teacherBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        teacherBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        teacherBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        teacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        teacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        teacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         teacherBo.setEnabled(e.getEnabled());
         teacherBo.setId(e.getId());
         teacherBo.setIdSet(e.getIdSet());
         teacherBo.setImgUrl(e.getImgUrl());
         teacherBo.setIntro(e.getIntro());
-        teacherBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        teacherBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        teacherBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        teacherBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        teacherBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        teacherBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         teacherBo.setName(e.getName());
         teacherBo.setPartnerId(e.getPartnerId());
         teacherBo.setPartnerIdSet(e.getPartnerIdSet());

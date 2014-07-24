@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.common;
+package com.ishangke.edunav.common.utilities;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -20,6 +20,9 @@ public class DateUtility {
     }
 
     public static Calendar getTimeFromLong(final long mili) {
+        if (mili < 0){
+            return null;
+        }
         Calendar c = getCurTimeInstance();
         c.setTimeInMillis(mili);
         return c;

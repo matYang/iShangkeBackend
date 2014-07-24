@@ -3,13 +3,14 @@ package com.ishangke.edunav.manager.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CourseTemplateConverter {
     public static CourseTemplateBo toBo(CourseTemplateEntityExt e) {
@@ -27,9 +28,9 @@ public class CourseTemplateConverter {
         courseTemplateBo.setBookingTotalStart(e.getBookingTotalStart());
         courseTemplateBo.setBookingType(e.getBookingType());
         courseTemplateBo.setCashback(e.getCashback());
-        courseTemplateBo.setCashbackDate(e.getCashbackDate().getTimeInMillis());
-        courseTemplateBo.setCashbackDateEnd(e.getCashbackDateEnd().getTimeInMillis());
-        courseTemplateBo.setCashbackDateStart(e.getCashbackDateStart().getTimeInMillis());
+        courseTemplateBo.setCashbackDate(e.getCashbackDate() == null ? Constant.DEFAULTNULL : e.getCashbackDate().getTimeInMillis());
+        courseTemplateBo.setCashbackDateEnd(e.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : e.getCashbackDateEnd().getTimeInMillis());
+        courseTemplateBo.setCashbackDateStart(e.getCashbackDateStart() == null ? Constant.DEFAULTNULL : e.getCashbackDateStart().getTimeInMillis());
         courseTemplateBo.setCashbackEnd(e.getCashbackEnd());
         courseTemplateBo.setCashbackStart(e.getCashbackStart());
         courseTemplateBo.setCategoryId(e.getCategoryId());
@@ -62,12 +63,12 @@ public class CourseTemplateConverter {
         courseTemplateBo.setCourseHourNumStart(e.getCourseHourNumStart());
         courseTemplateBo.setCourseIntro(e.getCourseIntro());
         courseTemplateBo.setCourseName(e.getCourseName());
-        courseTemplateBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        courseTemplateBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        courseTemplateBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
-        courseTemplateBo.setCutoffDate(e.getCutoffDate().getTimeInMillis());
-        courseTemplateBo.setCutoffDateEnd(e.getCutoffDateEnd().getTimeInMillis());
-        courseTemplateBo.setCutoffDateStart(e.getCutoffDateStart().getTimeInMillis());
+        courseTemplateBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        courseTemplateBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        courseTemplateBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        courseTemplateBo.setCutoffDate(e.getCutoffDate() == null ? Constant.DEFAULTNULL : e.getCutoffDate().getTimeInMillis());
+        courseTemplateBo.setCutoffDateEnd(e.getCutoffDateEnd() == null ? Constant.DEFAULTNULL : e.getCutoffDateEnd().getTimeInMillis());
+        courseTemplateBo.setCutoffDateStart(e.getCutoffDateStart() == null ? Constant.DEFAULTNULL : e.getCutoffDateStart().getTimeInMillis());
         courseTemplateBo.setDiscount(e.getDiscount());
         courseTemplateBo.setDiscountEnd(e.getDiscountEnd());
         courseTemplateBo.setDiscountEnd(e.getDiscountEnd());
@@ -75,9 +76,9 @@ public class CourseTemplateConverter {
         courseTemplateBo.setDownloadMaterials(e.getDownloadMaterials());
         courseTemplateBo.setEnabled(e.getEnabled());
         courseTemplateBo.setExtracurricular(e.getExtracurricular());
-        courseTemplateBo.setFinishDate(e.getFinishDate().getTimeInMillis());
-        courseTemplateBo.setFinishDateEnd(e.getFinishDateEnd().getTimeInMillis());
-        courseTemplateBo.setFinishDateStart(e.getFinishDateStart().getTimeInMillis());
+        courseTemplateBo.setFinishDate(e.getFinishDate() == null ? Constant.DEFAULTNULL : e.getFinishDate().getTimeInMillis());
+        courseTemplateBo.setFinishDateEnd(e.getFinishDateEnd() == null ? Constant.DEFAULTNULL : e.getFinishDateEnd().getTimeInMillis());
+        courseTemplateBo.setFinishDateStart(e.getFinishDateStart() == null ? Constant.DEFAULTNULL : e.getFinishDateStart().getTimeInMillis());
         courseTemplateBo.setFinishTime1(e.getFinishTime1());
         courseTemplateBo.setFinishTime2(e.getFinishTime2());
         courseTemplateBo.setGoal(e.getGoal());
@@ -85,18 +86,18 @@ public class CourseTemplateConverter {
         courseTemplateBo.setId(e.getId());
         courseTemplateBo.setIdSet(e.getIdSet());
         courseTemplateBo.setInstName(e.getInstName());
-        courseTemplateBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        courseTemplateBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        courseTemplateBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        courseTemplateBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        courseTemplateBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        courseTemplateBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         courseTemplateBo.setLocationId(e.getLocationId());
         courseTemplateBo.setLocationIdSet(e.getLocationIdSet());
         courseTemplateBo.setLocationName(e.getLocationName());
         courseTemplateBo.setLocationValue(e.getLocationValue());
         courseTemplateBo.setLogoUrl(e.getLogoUrl());
         courseTemplateBo.setMarking(e.getMarking());
-        courseTemplateBo.setNoRefundDate(e.getNoRefundDate().getTimeInMillis());
-        courseTemplateBo.setNoRefundDateEnd(e.getNoRefundDateEnd().getTimeInMillis());
-        courseTemplateBo.setNoRefundDateStart(e.getNoRefundDateStart().getTimeInMillis());
+        courseTemplateBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate().getTimeInMillis());
+        courseTemplateBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd().getTimeInMillis());
+        courseTemplateBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e.getNoRefundDateStart().getTimeInMillis());
         courseTemplateBo.setOpenCourseRequirement(e.getOpenCourseRequirement());
         courseTemplateBo.setOriginalPrice(e.getOriginalPrice());
         courseTemplateBo.setOriginalPriceEnd(e.getOriginalPriceEnd());
@@ -132,9 +133,9 @@ public class CourseTemplateConverter {
         courseTemplateBo.setSchooltimeWeek(e.getSchooltimeWeek());
         courseTemplateBo.setSchooltimeWeekSet(e.getSchooltimeWeekSet());
         courseTemplateBo.setServiceCharge(e.getServiceCharge());
-        courseTemplateBo.setStartDate(e.getStartDate().getTimeInMillis());
-        courseTemplateBo.setStartDateEnd(e.getStartDateEnd().getTimeInMillis());
-        courseTemplateBo.setStartDateStart(e.getStartDateStart().getTimeInMillis());
+        courseTemplateBo.setStartDate(e.getStartDate() == null ? Constant.DEFAULTNULL : e.getStartDate().getTimeInMillis());
+        courseTemplateBo.setStartDateEnd(e.getStartDateEnd() == null ? Constant.DEFAULTNULL : e.getStartDateEnd().getTimeInMillis());
+        courseTemplateBo.setStartDateStart(e.getStartDateStart() == null ? Constant.DEFAULTNULL : e.getStartDateStart().getTimeInMillis());
         courseTemplateBo.setStartTime1(e.getStartTime1());
         courseTemplateBo.setStartTime2(e.getStartTime2());
         courseTemplateBo.setStartUponArrival(e.getStartUponArrival());

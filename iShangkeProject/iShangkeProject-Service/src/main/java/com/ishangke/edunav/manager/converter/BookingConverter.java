@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class BookingConverter {
     public static BookingBo toBo(BookingEntityExt e) {
@@ -10,33 +11,33 @@ public class BookingConverter {
         bookingBo.setCashbackAmount(e.getCashbackAmount());
         bookingBo.setCashbackAmountEnd(e.getCashbackAmountEnd());
         bookingBo.setCashbackAmountStart(e.getCashbackAmountStart());
-        bookingBo.setCashbackDate(e.getCashbackDate().getTimeInMillis());
-        bookingBo.setCashbackDateEnd(e.getCashbackDateEnd().getTimeInMillis());
-        bookingBo.setCashbackDateStart(e.getCashbackDateStart().getTimeInMillis());
+        bookingBo.setCashbackDate(e.getCashbackDate() == null ? Constant.DEFAULTNULL : e.getCashbackDate().getTimeInMillis());
+        bookingBo.setCashbackDateEnd(e.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : e.getCashbackDateEnd().getTimeInMillis());
+        bookingBo.setCashbackDateStart(e.getCashbackDateStart() == null ? Constant.DEFAULTNULL : e.getCashbackDateStart().getTimeInMillis());
         bookingBo.setCourseId(e.getCourseId());
         bookingBo.setCourseIdSet(e.getCourseIdSet());
         bookingBo.setCourseTemplateId(e.getCourseTemplateId());
         bookingBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
-        bookingBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        bookingBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        bookingBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        bookingBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        bookingBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        bookingBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         bookingBo.setEmail(e.getEmail());
         bookingBo.setEnabled(e.getEnabled());
         bookingBo.setId(e.getId());
         bookingBo.setIdSet(e.getIdSet());
-        bookingBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        bookingBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        bookingBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        bookingBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        bookingBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        bookingBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         bookingBo.setName(e.getName());
-        bookingBo.setNoRefundDate(e.getNoRefundDate().getTimeInMillis());
-        bookingBo.setNoRefundDateEnd(e.getNoRefundDateEnd().getTimeInMillis());
-        bookingBo.setNoRefundDateStart(e.getNoRefundDateStart().getTimeInMillis());
+        bookingBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate().getTimeInMillis());
+        bookingBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd().getTimeInMillis());
+        bookingBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e.getNoRefundDateStart().getTimeInMillis());
         bookingBo.setNote(e.getNote());
         bookingBo.setPhone(e.getPhone());
         bookingBo.setReference(e.getReference());
-        bookingBo.setScheduledTime(e.getScheduledTime().getTimeInMillis());
-        bookingBo.setScheduledTimeEnd(e.getScheduledTimeEnd().getTimeInMillis());
-        bookingBo.setScheduledTimeStart(e.getScheduledTimeStart().getTimeInMillis());
+        bookingBo.setScheduledTime(e.getScheduledTime() == null ? Constant.DEFAULTNULL : e.getScheduledTime().getTimeInMillis());
+        bookingBo.setScheduledTimeEnd(e.getScheduledTimeEnd() == null ? Constant.DEFAULTNULL : e.getScheduledTimeEnd().getTimeInMillis());
+        bookingBo.setScheduledTimeStart(e.getScheduledTimeStart() == null ? Constant.DEFAULTNULL : e.getScheduledTimeStart().getTimeInMillis());
         bookingBo.setStatus(e.getStatus());
         bookingBo.setStatusSet(e.getStatusSet());
         bookingBo.setType(e.getType());

@@ -1,21 +1,22 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CareerBo;
 import com.ishangke.edunav.dataaccess.model.CareerEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CareerConverter {
     public static CareerBo toBo(CareerEntityExt e) {
         CareerBo careerBo = new CareerBo();
-        careerBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        careerBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        careerBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        careerBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        careerBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        careerBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         careerBo.setEnabled(e.getEnabled());
         careerBo.setId(e.getId());
         careerBo.setIdSet(e.getIdSet());
-        careerBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        careerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        careerBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        careerBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        careerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        careerBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         careerBo.setName(e.getName());
         careerBo.setValue(e.getValue());
         return careerBo;
