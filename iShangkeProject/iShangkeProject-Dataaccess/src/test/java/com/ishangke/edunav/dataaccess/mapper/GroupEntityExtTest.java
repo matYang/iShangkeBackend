@@ -120,11 +120,11 @@ public class GroupEntityExtTest extends BaseTest {
                 DataaccessConstants.ORDER_DESC));
 
         GroupEntityExt groupEntityExt = new GroupEntityExt();
-        groupEntityExt.setName("_test_");
+        groupEntityExt.setName("管理员");
         List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt,
                 page);
-        Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_4_爱上课", result.get(0).getName());
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("合作商管理员", result.get(0).getName());
     }
 
     @Test
@@ -154,9 +154,9 @@ public class GroupEntityExtTest extends BaseTest {
                 DataaccessConstants.ORDER_DESC));
         List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt,
                 page);
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("_test_name_3_爱上课", result.get(0).getName());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(1).getName());
+        Assert.assertEquals(1, result.size());
+        
+        Assert.assertEquals("管理员", result.get(0).getName());
     }
 
     @Test
@@ -170,7 +170,7 @@ public class GroupEntityExtTest extends BaseTest {
         List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt,
                 page);
         Assert.assertEquals(1, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("管理员", result.get(0).getName());
     }
 
     public void testQuery5() {
@@ -191,9 +191,9 @@ public class GroupEntityExtTest extends BaseTest {
                 .getById(3);
         GroupEntityExt getbyid3 = groupEntityExtMapper
                 .getById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+        Assert.assertEquals("管理员", getbyid1.getName());
+        Assert.assertEquals("普通用户", getbyid2.getName());
+        Assert.assertEquals("合作商管理员", getbyid3.getName());
     }
     @Test
     public void testUpdate() {
