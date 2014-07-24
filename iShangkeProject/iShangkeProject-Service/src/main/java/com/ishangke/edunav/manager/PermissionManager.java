@@ -6,15 +6,15 @@ import com.ishangke.edunav.commoncontract.model.PermissionBo;
 
 public interface PermissionManager {
 
-    public List<PermissionBo> listPermissionsByUserId(int userId);
+    List<PermissionBo> listPermissionsByUserId(int userId);
 
-    public List<PermissionBo> listPermissionsByGroupId(int groupId);
+    List<PermissionBo> listPermissionsByGroupId(int groupId);
 
-    public List<PermissionBo> listPermissionsByRoleId(int roleId);
+    List<PermissionBo> listPermissionsByRoleId(int roleId);
 
-    public List<PermissionBo> listAll();
+    List<PermissionBo> listAll();
 
-    public boolean hasPermissionByRole(int roleId, String permissionTag);
+    boolean hasPermissionByRole(int roleId, String permissionTag);
 
-    public boolean hasPermissionByUser(int userId, String permissionTag);
+    boolean hasPermissionByUser(int userId, String permissionTag);
 }

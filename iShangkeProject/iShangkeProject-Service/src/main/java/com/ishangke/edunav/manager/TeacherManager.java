@@ -22,7 +22,7 @@ public interface TeacherManager {
      * @param teacherBo
      * @param userBo
      */
-    public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo);
+    TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo);
 
     /**
      * 更新教师信息。<br>
@@ -39,7 +39,7 @@ public interface TeacherManager {
      * @param teacherBo
      * @param userBo
      */
-    public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo);
+    TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo);
 
     /**
      * 删除教师信息。<br>
@@ -56,7 +56,7 @@ public interface TeacherManager {
      * @param teacherBo
      * @param userBo
      */
-    public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo);
+    TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo);
 
     /**
      * 查询教师信息。<br>
@@ -79,12 +79,12 @@ public interface TeacherManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<TeacherBo> query(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo);
+    List<TeacherBo> query(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo);
 
-    public List<TeacherBo> listByCourseId(int courseId);
+    List<TeacherBo> listByCourseId(int courseId);
 
-    public List<TeacherBo> listByCourseTemplateId(int courseTemplateId);
+    List<TeacherBo> listByCourseTemplateId(int courseTemplateId);
 
-    public List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo);
+    List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo);
 
 }

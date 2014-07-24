@@ -28,7 +28,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为提交课程模版<br>
@@ -48,7 +48,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo submitCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为审核通过课程模版<br>
@@ -71,7 +71,7 @@ public interface CourseTemplateManager {
      * @param commentCourseTemplateApproveBo
      * @param userBo
      */
-    public CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo)
+    CourseTemplateBo approveCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, CommentCourseTemplateApproveBo commentCourseTemplateApproveBo, UserBo userBo)
            ;
 
     /**
@@ -95,7 +95,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo)
+    CourseTemplateBo rejectCourseTemplate(CourseTemplateBo courseTemplateBo, CommentCourseTemplateRejectBo commentCourseTemplateRejectBo, PartnerBo partnerBo, UserBo userBo)
            ;
 
     /**
@@ -116,7 +116,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo cancelCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为重新上架课程模版<br>
@@ -136,7 +136,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo resubmitCourserTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为删除课程模版<br>
@@ -156,7 +156,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo deleteCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为修改课程模版<br>
@@ -176,7 +176,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    public CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo updateCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 本方法为搜索课程模版<br>
@@ -199,7 +199,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param paginationBo
      */
-    public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo);
+    List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo);
 
     /**
      * 本方法返回课程模版详情<br>
@@ -216,6 +216,6 @@ public interface CourseTemplateManager {
      * @param courseTemplateBo
      * @param userBo
      */
-    public List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo);
+    List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo);
 
 }

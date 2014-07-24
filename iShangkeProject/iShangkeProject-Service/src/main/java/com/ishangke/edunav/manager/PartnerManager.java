@@ -26,7 +26,7 @@ public interface PartnerManager {
      * @param paginationBo
      * @param userBo
      */
-    public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo);
+    List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo);
 
     /**
      * 查询合作商完整信息。<br>
@@ -43,7 +43,7 @@ public interface PartnerManager {
      * @param partnerBo
      * @param userBo
      */
-    public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo);
+    PartnerBo queryById(PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 更新合作商信息。<br>
@@ -60,7 +60,7 @@ public interface PartnerManager {
      * @param partnerBo
      * @param userBo
      */
-    public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo);
+    PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 创建合作商信息。<br>
@@ -77,6 +77,6 @@ public interface PartnerManager {
      * @param partnerBo
      * @param userBo
      */
-    public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo);
+    PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo);
 
 }

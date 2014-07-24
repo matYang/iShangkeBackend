@@ -20,7 +20,7 @@ public interface CourseCommentManager {
      *  @return 创建完成的课程评论
      *
      */
-    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo);
+    CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo);
     
     /**
      *  删除课程评论。<br>
@@ -33,7 +33,7 @@ public interface CourseCommentManager {
      *  @return 
      *
      */
-    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo);
+    CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo);
     
     /**
      *  查询课程评论。<br>
@@ -47,5 +47,5 @@ public interface CourseCommentManager {
      *  @return  CourseComment 列表
      *
      */
-    public List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo,PaginationBo paginationBo);
+    List<CourseCommentBo> query(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo,PaginationBo paginationBo);
 }

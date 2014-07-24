@@ -16,5 +16,5 @@ public interface CareerManager {
      *  @return Category实体 careerBo 列表
      *
      */
-    public List<CareerBo> query(CareerBo careerBo,PaginationBo paginationBo);
+    List<CareerBo> query(CareerBo careerBo,PaginationBo paginationBo);
 }

@@ -20,7 +20,7 @@ public interface ClassPhotoManager {
      * @return 创建完成的教师信息
      * 
      */
-    public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo);
+    ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo);
 
     /**
      * 更新教师信息。<br>
@@ -34,7 +34,7 @@ public interface ClassPhotoManager {
      * @return 更新完成的教师信息
      * 
      */
-    public ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo);
+    ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo);
 
     /**
      * 删除教师信息。<br>
@@ -48,7 +48,7 @@ public interface ClassPhotoManager {
      * @return 删除完成的教师信息
      * 
      */
-    public ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo);
+    ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo);
 
     /**
      * 查询教师信息。<br>
@@ -66,7 +66,7 @@ public interface ClassPhotoManager {
      * @return 推广信息实体 ClassPhoto 列表
      * 
      */
-    public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo);
+    List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 查询教师信息。<br>
@@ -78,7 +78,7 @@ public interface ClassPhotoManager {
      * @return 推广信息实体 ClassPhoto 列表
      * 
      */
-    public List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo);
+    List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo);
 
     /**
      * 查询教师信息。<br>
@@ -90,7 +90,7 @@ public interface ClassPhotoManager {
      * @return 推广信息实体 ClassPhoto 列表
      * 
      */
-    public List<ClassPhotoBo> listByCourseId(int courseId);
+    List<ClassPhotoBo> listByCourseId(int courseId);
 
     /**
      * 查询教师信息。<br>
@@ -102,5 +102,5 @@ public interface ClassPhotoManager {
      * @return 推广信息实体 ClassPhoto 列表
      * 
      */
-    public List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId);
+    List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId);
 }

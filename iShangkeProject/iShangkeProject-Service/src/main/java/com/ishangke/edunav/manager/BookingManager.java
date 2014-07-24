@@ -27,7 +27,7 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo
      *
      */
-    public BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo);
+    BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo);
     
     /**
      * 
@@ -39,7 +39,7 @@ public interface BookingManager {
      *              调用方法的用户信息
      * @return
      */
-    public BookingBo transformBookingStatus(BookingBo bookingBo,int operation, UserBo userBo);
+    BookingBo transformBookingStatus(BookingBo bookingBo,int operation, UserBo userBo);
 
     /**
      * 本方法为查询预定单预定单功能。<br>
@@ -57,7 +57,7 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    public List<BookingBo> queryBooking(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<BookingBo> queryBooking(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询订单历史操作。<br>
@@ -75,5 +75,5 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 }

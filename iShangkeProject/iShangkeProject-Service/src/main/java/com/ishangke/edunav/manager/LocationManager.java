@@ -21,6 +21,6 @@ public interface LocationManager {
      * @param locationBo
      * @param paginationBo
      */
-    public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo);
+    List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo);
 
 }

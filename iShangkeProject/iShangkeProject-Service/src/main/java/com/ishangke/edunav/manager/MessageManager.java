@@ -23,7 +23,7 @@ public interface MessageManager {
      * @param messageBo
      * @param userBo
      */
-    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo);
+    MessageBo sendMessage(MessageBo messageBo, UserBo userBo);
 
     /**
      * 读取消息。<br>
@@ -40,7 +40,7 @@ public interface MessageManager {
      * @param messageBo
      * @param userBo
      */
-    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo);
+    MessageBo receiveMessage(MessageBo messageBo, UserBo userBo);
 
     /**
      * 删除消息。<br>
@@ -57,7 +57,7 @@ public interface MessageManager {
      * @param messageBo
      * @param userBo
      */
-    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo);
+    MessageBo deleteMessage(MessageBo messageBo, UserBo userBo);
 
     /**
      * 查询消息。<br>
@@ -77,6 +77,6 @@ public interface MessageManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<MessageBo> query(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo);
+    List<MessageBo> query(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo);
 
 }

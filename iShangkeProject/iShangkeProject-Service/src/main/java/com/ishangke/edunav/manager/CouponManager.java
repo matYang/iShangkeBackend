@@ -20,7 +20,7 @@ public interface CouponManager {
      * 
      * @return 优惠券实体 CouponBo
      */
-    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo);
+    CouponBo createCoupon(CouponBo couponBo, UserBo userBo);
     
     /**
      * 本方法为修改优惠券功能。<br>
@@ -33,7 +33,7 @@ public interface CouponManager {
      * 
      * @return 优惠券实体 CouponBo
      */
-    public CouponBo updateCoupon(CouponBo couponBo, UserBo userBo);
+    CouponBo updateCoupon(CouponBo couponBo, UserBo userBo);
     
     /**
      * 本方法为修改优惠券功能。<br>
@@ -46,7 +46,7 @@ public interface CouponManager {
      * 
      * @return 优惠券实体 CouponBo
      */
-    public List<CouponBo> updateCouponList(List<CouponBo> couponBoList, UserBo userBo);
+    List<CouponBo> updateCouponList(List<CouponBo> couponBoList, UserBo userBo);
 
     /**
      * 本方法为查询优惠券功能。<br>
@@ -62,7 +62,7 @@ public interface CouponManager {
      * @return 优惠券实体 CouponBo 列表
      * 
      */
-    public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo);
+    List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询优惠券历史功能。<br>
@@ -78,6 +78,6 @@ public interface CouponManager {
      * @return CouponHistoryBo 列表
      * 
      */
-    public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo);
+    List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo);
 
 }

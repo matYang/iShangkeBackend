@@ -18,7 +18,7 @@ public interface ContactManager {
      *  @return 创建完成的常用联系人信息
      *
      */
-    public ContactBo createContact(ContactBo contactBo, UserBo userBo);
+    ContactBo createContact(ContactBo contactBo, UserBo userBo);
     
     /**
      *  更新常用联系人信息。<br>
@@ -30,7 +30,7 @@ public interface ContactManager {
      *  @return 更新完成的常用联系人信息
      *
      */
-    public ContactBo updateContact(ContactBo contactBo, UserBo userBo);
+    ContactBo updateContact(ContactBo contactBo, UserBo userBo);
 
     /**
      *  删除常用联系人信息。<br>
@@ -42,7 +42,7 @@ public interface ContactManager {
      *  @return 
      *
      */
-    public ContactBo deleteContact(ContactBo contactBo, UserBo userBo);
+    ContactBo deleteContact(ContactBo contactBo, UserBo userBo);
     
     /**
      *  查询常用联系人信息。<br>
@@ -55,5 +55,5 @@ public interface ContactManager {
      *  @return  Contact 列表
      *
      */
-    public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo);
+    List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo);
 }
