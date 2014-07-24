@@ -16,5 +16,5 @@ public interface CircleManager {
      *  @return Category实体 circleBo 列表
      *
      */
-    List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo);
+    public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo);
 }

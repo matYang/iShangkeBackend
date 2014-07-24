@@ -16,5 +16,5 @@ public interface CategoryManager {
      *  @return Category实体 CategoryBo 列表
      *
      */
-    List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo);
+    public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo);
 }

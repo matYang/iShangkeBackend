@@ -27,7 +27,7 @@ public interface AccountManager {
      * @return
      * 
      */
-    AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type);
+    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type);
 
     /**
      * 本方法为查询账户功能。<br>
@@ -43,7 +43,7 @@ public interface AccountManager {
      * @return AccountBo 列表
      * 
      */
-    List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo);
+    public List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询账户历史功能。<br>
@@ -59,6 +59,6 @@ public interface AccountManager {
      * @return AccountHistoryBo 列表
      * 
      */
-    List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo);
+    public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo);
 
 }

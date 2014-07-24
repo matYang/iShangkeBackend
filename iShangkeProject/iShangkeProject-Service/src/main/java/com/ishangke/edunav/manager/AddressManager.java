@@ -17,7 +17,7 @@ public interface AddressManager {
 	 *  @return 创建完成的校区信息
 	 *
 	 */
-	AddressBo createAddress(AddressBo addressBo, UserBo userBo);
+    public AddressBo createAddress(AddressBo addressBo, UserBo userBo);
 
 	/**
 	 *  更新校区信息。<br>
@@ -29,7 +29,7 @@ public interface AddressManager {
 	 *  @return 更新完成的校区信息
 	 *
 	 */
-	AddressBo updateAddress(AddressBo addressBo, UserBo userBo);
+    public AddressBo updateAddress(AddressBo addressBo, UserBo userBo);
 
 	/**
 	 *  删除校区信息。<br>
@@ -41,7 +41,7 @@ public interface AddressManager {
 	 *  @return 
 	 *
 	 */
-	AddressBo deleteAddress(AddressBo addressBo, UserBo userBo);
+    public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo);
 
 	/**
 	 *  查询校区信息。<br>
@@ -54,5 +54,5 @@ public interface AddressManager {
 	 *  @return  Address 列表
 	 *
 	 */
-	List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo);
+    public List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo);
 }
