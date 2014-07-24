@@ -85,12 +85,11 @@ service PartnerService{
      *
      *  @param  addressBo          需要创建的校区信息
      *  @param  userBo             发起创建的管理员/合作商信息
-     *  @param  partnerBo          合作商信息
      *
      *  @return 创建完成的校区信息
      *
      */
-    address.AddressBo createAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressBo createAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  更新校区信息。<br>
@@ -98,12 +97,11 @@ service PartnerService{
      *
      *  @param  addressBo          需要更新的校区信息
      *  @param  userBo             发起更新的管理员/合作商信息
-     *  @param  partnerBo          合作商信息
      *
      *  @return 更新完成的校区信息
      *
      */
-    address.AddressBo updateAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressBo updateAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  删除校区信息。<br>
@@ -111,12 +109,11 @@ service PartnerService{
      *
      *  @param  addressBo          需要删除的校区信息
      *  @param  userBo             发起删除的管理员/合作商信息
-     *  @param  partnerBo          合作商信息
      *
      *  @return 
      *
      */
-    address.AddressBo deleteAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: partner.PartnerBo partnerBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressBo deleteAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  查询校区信息。<br>
