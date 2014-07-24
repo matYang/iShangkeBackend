@@ -59,96 +59,96 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     }
 
-    @Override
-    public BookingBo acceptBookingByPartner(BookingBo bookingBo, CommentBookingAcceptBo commentBookingAcceptBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.acceptBookingByPartner(bookingBo, commentBookingAcceptBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_ACCEPTBYPARTNER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_ACCEPTBYPARTNER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingBo acceptBookingSucceedByPartner(BookingBo bookinbBo, CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.acceptBookingSucceedByPartner(bookinbBo, commentBookingAcceptSuccessBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_ACCEPTSUCCEEDBYPARTNER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_ACCEPTSUCCEEDBYPARTNER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingBo acceptBookingFailedByPartner(BookingBo bookingBo, CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.acceptBookingFailedByPartner(bookingBo, commentBookingAcceptFailedBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_ACCEPTFAILEDBYPARTNER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_ACCEPTFAILEDBYPARTNER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingBo validateBookingByPartner(BookingBo bookingBo, CommentBookingValidateBo commentBookingValidateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.validateBookingByPartner(bookingBo, commentBookingValidateBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_VALIDATEBYPARTNER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_VALIDATEBYPARTNER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingBo cancelBookingByUser(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.cancelBookingByUser(bookingBo, commentBookingCancelBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_CANCELBYUSER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_CANCELBYUSER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingBo cancelBookingByPartner(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.cancelBookingByPartner(bookingBo, commentBookingCancelBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_CANCELBYPARTNER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_CANCELBYPARTNER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingBo cancelBookingByAdmin(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return bookingManager.cancelBookingByAdmin(bookingBo, commentBookingCancelBo, userBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_CANCELBYADMIN_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_CANCELBYADMIN_ERROR_KEY);
-            throw exception;
-        }
-    }
+//    @Override
+//    public BookingBo acceptBookingByPartner(BookingBo bookingBo, CommentBookingAcceptBo commentBookingAcceptBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.acceptBookingByPartner(bookingBo, commentBookingAcceptBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_ACCEPTBYPARTNER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_ACCEPTBYPARTNER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingBo acceptBookingSucceedByPartner(BookingBo bookinbBo, CommentBookingAcceptSuccessBo commentBookingAcceptSuccessBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.acceptBookingSucceedByPartner(bookinbBo, commentBookingAcceptSuccessBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_ACCEPTSUCCEEDBYPARTNER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_ACCEPTSUCCEEDBYPARTNER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingBo acceptBookingFailedByPartner(BookingBo bookingBo, CommentBookingAcceptFailedBo commentBookingAcceptFailedBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.acceptBookingFailedByPartner(bookingBo, commentBookingAcceptFailedBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_ACCEPTFAILEDBYPARTNER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_ACCEPTFAILEDBYPARTNER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingBo validateBookingByPartner(BookingBo bookingBo, CommentBookingValidateBo commentBookingValidateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.validateBookingByPartner(bookingBo, commentBookingValidateBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_VALIDATEBYPARTNER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_VALIDATEBYPARTNER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingBo cancelBookingByUser(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.cancelBookingByUser(bookingBo, commentBookingCancelBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_CANCELBYUSER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_CANCELBYUSER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingBo cancelBookingByPartner(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.cancelBookingByPartner(bookingBo, commentBookingCancelBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_CANCELBYPARTNER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_CANCELBYPARTNER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingBo cancelBookingByAdmin(BookingBo bookingBo, CommentBookingCancelBo commentBookingCancelBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            return bookingManager.cancelBookingByAdmin(bookingBo, commentBookingCancelBo, userBo);
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_CANCELBYADMIN_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_CANCELBYADMIN_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
 
     @Override
     public List<BookingBo> queryBooking(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
@@ -175,9 +175,6 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
-    
-    
-    
     
     
     /**********************************************************
