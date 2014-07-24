@@ -28,6 +28,18 @@ public interface BookingManager {
      *
      */
     BookingBo createBookingByUser(CourseBo courseBo, BookingBo bookingBo, CommentBookingCreateBo commentBookingCreateBo, UserBo userBo);
+    
+    /**
+     * 
+     * @param bookingBo
+     *              需要被改变状态的booking
+     * @param operation
+     *              需要进行的操作
+     * @param userBo
+     *              调用方法的用户信息
+     * @return
+     */
+    BookingBo transformBookingStatus(BookingBo bookingBo,int operation, UserBo userBo);
 
     /**
      * 本方法为查询预定单预定单功能。<br>
