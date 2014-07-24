@@ -10,7 +10,11 @@ public class Constant {
     public static final String TRANSFORMACTION = "transformaction";
     public static final String TRANSFORMOPERATION = "transformoperation";
     public static final String ROLESYSTEMADMIN = "systemadmin";
-
-    public static final int DEFAULTNULL = -1;
+    public static final String ROLEPARTNERADMIN = "partneradmin";
     public static final String ROLEADMIN = "admin";
+    public static final String ROLEUSER = "user";
+    public static final int BOOKINGNORMAL = 0;
+    public static final int BOOKINGUNNORMAL = 1;
+    public static final int DEFAULTNULL = -1;
+    
 }

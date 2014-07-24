@@ -8,21 +8,45 @@ import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 public class AccountHistoryConverter {
     public static AccountHistoryBo toBo(AccountHistoryEntityExt e) {
         AccountHistoryBo accountHistoryBo = new AccountHistoryBo();
-        accountHistoryBo.setCharge(e.getCharge());
-        accountHistoryBo.setChargeEnd(e.getChargeEnd());
-        accountHistoryBo.setChargeStart(e.getChargeStart());
+        if (e.getCharge() != null) {
+            accountHistoryBo.setCharge(e.getCharge());
+        }
+        if (e.getChargeEnd() != null) {
+            accountHistoryBo.setChargeEnd(e.getChargeEnd());
+        }
+        if (e.getChargeStart() != null) {
+            accountHistoryBo.setChargeStart(e.getChargeStart());
+        }
+        if (e.getId() != null) {
+            accountHistoryBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            accountHistoryBo.setIdSet(e.getIdSet());
+        }
+        if (e.getRemark() != null) {
+            accountHistoryBo.setRemark(e.getRemark());
+        }
+        if (e.getType() != null) {
+            accountHistoryBo.setType(e.getType());
+        }
+        if (e.getTypeSet() != null) {
+            accountHistoryBo.setTypeSet(e.getTypeSet());
+        }
+        if (e.getUserId() != null) {
+            accountHistoryBo.setUserId(e.getUserId());
+        }
+        if (e.getUserIdSet() != null) {
+            accountHistoryBo.setUserIdSet(e.getUserIdSet());
+        }
+        if (e.getWithdrawId() != null) {
+            accountHistoryBo.setWithdrawId(e.getWithdrawId());
+        }
+        if (e.getWithdrawIdSet() != null) {
+            accountHistoryBo.setWithdrawIdSet(e.getWithdrawIdSet());
+        }
         accountHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         accountHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         accountHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        accountHistoryBo.setId(e.getId());
-        accountHistoryBo.setIdSet(e.getIdSet());
-        accountHistoryBo.setRemark(e.getRemark());
-        accountHistoryBo.setType(e.getType());
-        accountHistoryBo.setTypeSet(e.getTypeSet());
-        accountHistoryBo.setUserId(e.getUserId());
-        accountHistoryBo.setUserIdSet(e.getUserIdSet());
-        accountHistoryBo.setWithdrawId(e.getWithdrawId());
-        accountHistoryBo.setWithdrawIdSet(e.getWithdrawIdSet());
         return accountHistoryBo;
     }
 

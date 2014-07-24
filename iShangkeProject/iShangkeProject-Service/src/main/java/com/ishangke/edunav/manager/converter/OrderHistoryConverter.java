@@ -8,25 +8,57 @@ import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 public class OrderHistoryConverter {
     public static OrderHistoryBo toBo(OrderHistoryEntityExt e) {
         OrderHistoryBo orderHistoryBo = new OrderHistoryBo();
+        if (e.getEnabled() != null) {
+            orderHistoryBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            orderHistoryBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            orderHistoryBo.setIdSet(e.getIdSet());
+        }
+        if (e.getNormal() != null) {
+            orderHistoryBo.setNormal(e.getNormal());
+        }
+        if (e.getNormalSet() != null) {
+            orderHistoryBo.setNormalSet(e.getNormalSet());
+        }
+        if (e.getOptName() != null) {
+            orderHistoryBo.setOptName(e.getOptName());
+        }
+        if (e.getOptNameSet() != null) {
+            orderHistoryBo.setOptNameSet(e.getOptNameSet());
+        }
+        if (e.getOrderId() != null) {
+            orderHistoryBo.setOrderId(e.getOrderId());
+        }
+        if (e.getOrderIdSet() != null) {
+            orderHistoryBo.setOrderIdSet(e.getOrderIdSet());
+        }
+        if (e.getPostStatus() != null) {
+            orderHistoryBo.setPostStatus(e.getPostStatus());
+        }
+        if (e.getPostStatusSet() != null) {
+            orderHistoryBo.setPostStatusSet(e.getPostStatusSet());
+        }
+        if (e.getPreStatus() != null) {
+            orderHistoryBo.setPreStatus(e.getPreStatus());
+        }
+        if (e.getPreStatusSet() != null) {
+            orderHistoryBo.setPreStatusSet(e.getPreStatusSet());
+        }
+        if (e.getRemark() != null) {
+            orderHistoryBo.setRemark(e.getRemark());
+        }
+        if (e.getUserId() != null) {
+            orderHistoryBo.setUserId(e.getUserId());
+        }
+        if (e.getUserIdSet() != null) {
+            orderHistoryBo.setUserIdSet(e.getUserIdSet());
+        }
         orderHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         orderHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         orderHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        orderHistoryBo.setEnabled(e.getEnabled());
-        orderHistoryBo.setId(e.getId());
-        orderHistoryBo.setIdSet(e.getIdSet());
-        orderHistoryBo.setNormal(e.getNormal());
-        orderHistoryBo.setNormalSet(e.getNormalSet());
-        orderHistoryBo.setOptName(e.getOptName());
-        orderHistoryBo.setOptNameSet(e.getOptNameSet());
-        orderHistoryBo.setOrderId(e.getOrderId());
-        orderHistoryBo.setOrderIdSet(e.getOrderIdSet());
-        orderHistoryBo.setPostStatus(e.getPostStatus());
-        orderHistoryBo.setPostStatusSet(e.getPostStatusSet());
-        orderHistoryBo.setPreStatus(e.getPreStatus());
-        orderHistoryBo.setPreStatusSet(e.getPreStatusSet());
-        orderHistoryBo.setRemark(e.getRemark());
-        orderHistoryBo.setUserId(e.getUserId());
-        orderHistoryBo.setUserIdSet(e.getUserIdSet());
         return orderHistoryBo;
     }
 

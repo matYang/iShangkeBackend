@@ -15,34 +15,345 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 public class CourseTemplateConverter {
     public static CourseTemplateBo toBo(CourseTemplateEntityExt e) {
         CourseTemplateBo courseTemplateBo = new CourseTemplateBo();
-        courseTemplateBo.setAddress(e.getAddress());
-        courseTemplateBo.setAddressId(e.getAddressId());
-        courseTemplateBo.setAddressLat(e.getAddressLat());
-        courseTemplateBo.setAddressLat(e.getAddressLat());
-        courseTemplateBo.setAddressLng(e.getAddressLng());
-        courseTemplateBo.setAssignments(e.getAssignments());
-        courseTemplateBo.setBonusService(e.getBonusService());
-        courseTemplateBo.setBookingTotal(e.getBookingTotal());
-        courseTemplateBo.setBookingTotalEnd(e.getBookingTotalEnd());
-        courseTemplateBo.setBookingTotalSet(e.getBookingTotalSet());
-        courseTemplateBo.setBookingTotalStart(e.getBookingTotalStart());
-        courseTemplateBo.setBookingType(e.getBookingType());
-        courseTemplateBo.setCashback(e.getCashback());
+        if (e.getAddress() != null) {
+            courseTemplateBo.setAddress(e.getAddress());
+        }
+        if (e.getAddressId() != null) {
+            courseTemplateBo.setAddressId(e.getAddressId());
+        }
+        if (e.getAddressLat() != null) {
+            courseTemplateBo.setAddressLat(e.getAddressLat());
+        }
+        if (e.getAddressLat() != null) {
+            courseTemplateBo.setAddressLat(e.getAddressLat());
+        }
+        if (e.getAddressLng() != null) {
+            courseTemplateBo.setAddressLng(e.getAddressLng());
+        }
+        if (e.getAssignments() != null) {
+            courseTemplateBo.setAssignments(e.getAssignments());
+        }
+        if (e.getBonusService() != null) {
+            courseTemplateBo.setBonusService(e.getBonusService());
+        }
+        if (e.getBookingTotal() != null) {
+            courseTemplateBo.setBookingTotal(e.getBookingTotal());
+        }
+        if (e.getBookingTotalEnd() != null) {
+            courseTemplateBo.setBookingTotalEnd(e.getBookingTotalEnd());
+        }
+        if (e.getBookingTotalSet() != null) {
+            courseTemplateBo.setBookingTotalSet(e.getBookingTotalSet());
+        }
+        if (e.getBookingTotalStart() != null) {
+            courseTemplateBo.setBookingTotalStart(e.getBookingTotalStart());
+        }
+        if (e.getBookingType() != null) {
+            courseTemplateBo.setBookingType(e.getBookingType());
+        }
+        if (e.getCashback() != null) {
+            courseTemplateBo.setCashback(e.getCashback());
+        }
+        if (e.getCashbackEnd() != null) {
+            courseTemplateBo.setCashbackEnd(e.getCashbackEnd());
+        }
+        if (e.getCashbackStart() != null) {
+            courseTemplateBo.setCashbackStart(e.getCashbackStart());
+        }
+        if (e.getCategoryId() != null) {
+            courseTemplateBo.setCategoryId(e.getCategoryId());
+        }
+        if (e.getCategoryIdSet() != null) {
+            courseTemplateBo.setCategoryIdSet(e.getCategoryIdSet());
+        }
+        if (e.getCategoryName() != null) {
+            courseTemplateBo.setCategoryName(e.getCategoryName());
+        }
+        if (e.getCategoryRank() != null) {
+            courseTemplateBo.setCategoryRank(e.getCategoryRank());
+        }
+        if (e.getCategoryValue() != null) {
+            courseTemplateBo.setCategoryValue(e.getCategoryValue());
+        }
+        if (e.getCertification() != null) {
+            courseTemplateBo.setCertification(e.getCertification());
+        }
+        if (e.getCircleId() != null) {
+            courseTemplateBo.setCircleId(e.getCircleId());
+        }
+        if (e.getCircleIdSet() != null) {
+            courseTemplateBo.setCircleIdSet(e.getCircleIdSet());
+        }
+        if (e.getCircleName() != null) {
+            courseTemplateBo.setCircleName(e.getCircleName());
+        }
+        if (e.getCircleValue() != null) {
+            courseTemplateBo.setCircleValue(e.getCircleValue());
+        }
+        if (e.getClassSize() != null) {
+            courseTemplateBo.setClassSize(e.getClassSize());
+        }
+        if (e.getClassTeacher() != null) {
+            courseTemplateBo.setClassTeacher(e.getClassTeacher());
+        }
+        if (e.getClassType() != null) {
+            courseTemplateBo.setClassType(e.getClassType());
+        }
+        if (e.getClassTypeSet() != null) {
+            courseTemplateBo.setClassTypeSet(e.getClassTypeSet());
+        }
+        if (e.getCommission() != null) {
+            courseTemplateBo.setCommission(e.getCommission());
+        }
+        if (e.getContact() != null) {
+            courseTemplateBo.setContact(e.getContact());
+        }
+        if (e.getCourseHourLength() != null) {
+            courseTemplateBo.setCourseHourLength(e.getCourseHourLength());
+        }
+        if (e.getCourseHourNum() != null) {
+            courseTemplateBo.setCourseHourNum(e.getCourseHourNum());
+        }
+        if (e.getCourseHourNumEnd() != null) {
+            courseTemplateBo.setCourseHourNumEnd(e.getCourseHourNumEnd());
+        }
+        if (e.getCourseHourNumSet() != null) {
+            courseTemplateBo.setCourseHourNumSet(e.getCourseHourNumSet());
+        }
+        if (e.getCourseHourNumStart() != null) {
+            courseTemplateBo.setCourseHourNumStart(e.getCourseHourNumStart());
+        }
+        if (e.getCourseIntro() != null) {
+            courseTemplateBo.setCourseIntro(e.getCourseIntro());
+        }
+        if (e.getCourseName() != null) {
+            courseTemplateBo.setCourseName(e.getCourseName());
+        }
+        if (e.getDiscount() != null) {
+            courseTemplateBo.setDiscount(e.getDiscount());
+        }
+        if (e.getDiscountEnd() != null) {
+            courseTemplateBo.setDiscountEnd(e.getDiscountEnd());
+        }
+        if (e.getDiscountEnd() != null) {
+            courseTemplateBo.setDiscountEnd(e.getDiscountEnd());
+        }
+        if (e.getDiscountStart() != null) {
+            courseTemplateBo.setDiscountStart(e.getDiscountStart());
+        }
+        if (e.getDownloadMaterials() != null) {
+            courseTemplateBo.setDownloadMaterials(e.getDownloadMaterials());
+        }
+        if (e.getEnabled() != null) {
+            courseTemplateBo.setEnabled(e.getEnabled());
+        }
+        if (e.getExtracurricular() != null) {
+            courseTemplateBo.setExtracurricular(e.getExtracurricular());
+        }
+        if (e.getFinishTime1() != null) {
+            courseTemplateBo.setFinishTime1(e.getFinishTime1());
+        }
+        if (e.getFinishTime2() != null) {
+            courseTemplateBo.setFinishTime2(e.getFinishTime2());
+        }
+        if (e.getGoal() != null) {
+            courseTemplateBo.setGoal(e.getGoal());
+        }
+        if (e.getHighScoreReward() != null) {
+            courseTemplateBo.setHighScoreReward(e.getHighScoreReward());
+        }
+        if (e.getId() != null) {
+            courseTemplateBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            courseTemplateBo.setIdSet(e.getIdSet());
+        }
+        if (e.getInstName() != null) {
+            courseTemplateBo.setInstName(e.getInstName());
+        }
+        if (e.getLocationId() != null) {
+            courseTemplateBo.setLocationId(e.getLocationId());
+        }
+        if (e.getLocationIdSet() != null) {
+            courseTemplateBo.setLocationIdSet(e.getLocationIdSet());
+        }
+        if (e.getLocationName() != null) {
+            courseTemplateBo.setLocationName(e.getLocationName());
+        }
+        if (e.getLocationValue() != null) {
+            courseTemplateBo.setLocationValue(e.getLocationValue());
+        }
+        if (e.getLogoUrl() != null) {
+            courseTemplateBo.setLogoUrl(e.getLogoUrl());
+        }
+        if (e.getMarking() != null) {
+            courseTemplateBo.setMarking(e.getMarking());
+        }
+        if (e.getOpenCourseRequirement() != null) {
+            courseTemplateBo.setOpenCourseRequirement(e.getOpenCourseRequirement());
+        }
+        if (e.getOriginalPrice() != null) {
+            courseTemplateBo.setOriginalPrice(e.getOriginalPrice());
+        }
+        if (e.getOriginalPriceEnd() != null) {
+            courseTemplateBo.setOriginalPriceEnd(e.getOriginalPriceEnd());
+        }
+        if (e.getOriginalPriceStart() != null) {
+            courseTemplateBo.setOriginalPriceStart(e.getOriginalPriceStart());
+        }
+        if (e.getOutline() != null) {
+            courseTemplateBo.setOutline(e.getOutline());
+        }
+        if (e.getPartnerDistinction() != null) {
+            courseTemplateBo.setPartnerDistinction(e.getPartnerDistinction());
+        }
+        if (e.getPartnerId() != null) {
+            courseTemplateBo.setPartnerId(e.getPartnerId());
+        }
+        if (e.getPartnerIdSet() != null) {
+            courseTemplateBo.setPartnerIdSet(e.getPartnerIdSet());
+        }
+        if (e.getPartnerIntro() != null) {
+            courseTemplateBo.setPartnerIntro(e.getPartnerIntro());
+        }
+        if (e.getPartnerQualification() != null) {
+            courseTemplateBo.setPartnerQualification(e.getPartnerQualification());
+        }
+        if (e.getPartnerRating() != null) {
+            courseTemplateBo.setPartnerRating(e.getPartnerRating());
+        }
+        if (e.getPassAgreement() != null) {
+            courseTemplateBo.setPassAgreement(e.getPassAgreement());
+        }
+        if (e.getPopularity() != null) {
+            courseTemplateBo.setPopularity(e.getPopularity());
+        }
+        if (e.getPopularityEnd() != null) {
+            courseTemplateBo.setPopularityEnd(e.getPopularityEnd());
+        }
+        if (e.getPopularitySet() != null) {
+            courseTemplateBo.setPopularitySet(e.getPopularitySet());
+        }
+        if (e.getPopularityStart() != null) {
+            courseTemplateBo.setPopularityStart(e.getPopularityStart());
+        }
+        if (e.getPrerequest() != null) {
+            courseTemplateBo.setPrerequest(e.getPrerequest());
+        }
+        if (e.getPrice() != null) {
+            courseTemplateBo.setPrice(e.getPrice());
+        }
+        if (e.getPriceEnd() != null) {
+            courseTemplateBo.setPriceEnd(e.getPriceEnd());
+        }
+        if (e.getPriceStart() != null) {
+            courseTemplateBo.setPriceStart(e.getPriceStart());
+        }
+        if (e.getQualityAssurance() != null) {
+            courseTemplateBo.setQualityAssurance(e.getQualityAssurance());
+        }
+        if (e.getQuestionBank() != null) {
+            courseTemplateBo.setQuestionBank(e.getQuestionBank());
+        }
+        if (e.getQuestionSession() != null) {
+            courseTemplateBo.setQuestionSession(e.getQuestionSession());
+        }
+        if (e.getQuiz() != null) {
+            courseTemplateBo.setQuiz(e.getQuiz());
+        }
+        if (e.getRating() != null) {
+            courseTemplateBo.setRating(e.getRating());
+        }
+        if (e.getRatingEnd() != null) {
+            courseTemplateBo.setRatingEnd(e.getRatingEnd());
+        }
+        if (e.getRatingStart() != null) {
+            courseTemplateBo.setRatingStart(e.getRatingStart());
+        }
+        if (e.getReference() != null) {
+            courseTemplateBo.setReference(e.getReference());
+        }
+        if (e.getRegLocation() != null) {
+            courseTemplateBo.setRegLocation(e.getRegLocation());
+        }
+        if (e.getRegPhone() != null) {
+            courseTemplateBo.setRegPhone(e.getRegPhone());
+        }
+        if (e.getSchooltimeDay() != null) {
+            courseTemplateBo.setSchooltimeDay(e.getSchooltimeDay());
+        }
+        if (e.getSchooltimeDaySet() != null) {
+            courseTemplateBo.setSchooltimeDaySet(e.getSchooltimeDaySet());
+        }
+        if (e.getSchooltimeWeek() != null) {
+            courseTemplateBo.setSchooltimeWeek(e.getSchooltimeWeek());
+        }
+        if (e.getSchooltimeWeekSet() != null) {
+            courseTemplateBo.setSchooltimeWeekSet(e.getSchooltimeWeekSet());
+        }
+        if (e.getServiceCharge() != null) {
+            courseTemplateBo.setServiceCharge(e.getServiceCharge());
+        }
+        if (e.getStartTime1() != null) {
+            courseTemplateBo.setStartTime1(e.getStartTime1());
+        }
+        if (e.getStartTime2() != null) {
+            courseTemplateBo.setStartTime2(e.getStartTime2());
+        }
+        if (e.getStartUponArrival() != null) {
+            courseTemplateBo.setStartUponArrival(e.getStartUponArrival());
+        }
+        if (e.getStatus() != null) {
+            courseTemplateBo.setStatus(e.getStatus());
+        }
+        if (e.getStatusSet() != null) {
+            courseTemplateBo.setStatusSet(e.getStatusSet());
+        }
+        if (e.getStudyDayNote() != null) {
+            courseTemplateBo.setStudyDayNote(e.getStudyDayNote());
+        }
+        if (e.getSuitableStudent() != null) {
+            courseTemplateBo.setSuitableStudent(e.getSuitableStudent());
+        }
+        if (e.getTeachingAndExercise() != null) {
+            courseTemplateBo.setTeachingAndExercise(e.getTeachingAndExercise());
+        }
+        if (e.getTeachingMaterialFee() != null) {
+            courseTemplateBo.setTeachingMaterialFee(e.getTeachingMaterialFee());
+        }
+        if (e.getTeachingMaterialIntro() != null) {
+            courseTemplateBo.setTeachingMaterialIntro(e.getTeachingMaterialIntro());
+        }
+        if (e.getTeachingMethod() != null) {
+            courseTemplateBo.setTeachingMethod(e.getTeachingMethod());
+        }
+        if (e.getTrail() != null) {
+            courseTemplateBo.setTrail(e.getTrail());
+        }
+        if (e.getWholeName() != null) {
+            courseTemplateBo.setWholeName(e.getWholeName());
+        }
+        courseTemplateBo.setStartDate(e.getStartDate() == null ? Constant.DEFAULTNULL : e.getStartDate().getTimeInMillis());
+        courseTemplateBo.setStartDateEnd(e.getStartDateEnd() == null ? Constant.DEFAULTNULL : e.getStartDateEnd().getTimeInMillis());
+        courseTemplateBo.setStartDateStart(e.getStartDateStart() == null ? Constant.DEFAULTNULL : e.getStartDateStart().getTimeInMillis());
+        courseTemplateBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate().getTimeInMillis());
+        courseTemplateBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd().getTimeInMillis());
+        courseTemplateBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e.getNoRefundDateStart().getTimeInMillis());
         courseTemplateBo.setCashbackDate(e.getCashbackDate() == null ? Constant.DEFAULTNULL : e.getCashbackDate().getTimeInMillis());
         courseTemplateBo.setCashbackDateEnd(e.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : e.getCashbackDateEnd().getTimeInMillis());
         courseTemplateBo.setCashbackDateStart(e.getCashbackDateStart() == null ? Constant.DEFAULTNULL : e.getCashbackDateStart().getTimeInMillis());
-        courseTemplateBo.setCashbackEnd(e.getCashbackEnd());
-        courseTemplateBo.setCashbackStart(e.getCashbackStart());
-        courseTemplateBo.setCategoryId(e.getCategoryId());
-        courseTemplateBo.setCategoryIdSet(e.getCategoryIdSet());
-        courseTemplateBo.setCategoryName(e.getCategoryName());
-        courseTemplateBo.setCategoryRank(e.getCategoryRank());
-        courseTemplateBo.setCategoryValue(e.getCategoryValue());
-        courseTemplateBo.setCertification(e.getCertification());
-        courseTemplateBo.setCircleId(e.getCircleId());
-        courseTemplateBo.setCircleIdSet(e.getCircleIdSet());
-        courseTemplateBo.setCircleName(e.getCircleName());
-        courseTemplateBo.setCircleValue(e.getCircleValue());
+        courseTemplateBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        courseTemplateBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        courseTemplateBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        courseTemplateBo.setCutoffDate(e.getCutoffDate() == null ? Constant.DEFAULTNULL : e.getCutoffDate().getTimeInMillis());
+        courseTemplateBo.setCutoffDateEnd(e.getCutoffDateEnd() == null ? Constant.DEFAULTNULL : e.getCutoffDateEnd().getTimeInMillis());
+        courseTemplateBo.setCutoffDateStart(e.getCutoffDateStart() == null ? Constant.DEFAULTNULL : e.getCutoffDateStart().getTimeInMillis());
+        courseTemplateBo.setFinishDate(e.getFinishDate() == null ? Constant.DEFAULTNULL : e.getFinishDate().getTimeInMillis());
+        courseTemplateBo.setFinishDateEnd(e.getFinishDateEnd() == null ? Constant.DEFAULTNULL : e.getFinishDateEnd().getTimeInMillis());
+        courseTemplateBo.setFinishDateStart(e.getFinishDateStart() == null ? Constant.DEFAULTNULL : e.getFinishDateStart().getTimeInMillis());
+        courseTemplateBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        courseTemplateBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        courseTemplateBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         if (e.getClassPhotoList() != null) {
             List<ClassPhotoBo> list = new ArrayList<>();
             for (ClassPhotoEntityExt a : e.getClassPhotoList()) {
@@ -50,99 +361,6 @@ public class CourseTemplateConverter {
             }
             courseTemplateBo.setClassPhotoList(list);
         }
-        courseTemplateBo.setClassSize(e.getClassSize());
-        courseTemplateBo.setClassTeacher(e.getClassTeacher());
-        courseTemplateBo.setClassType(e.getClassType());
-        courseTemplateBo.setClassTypeSet(e.getClassTypeSet());
-        courseTemplateBo.setCommission(e.getCommission());
-        courseTemplateBo.setContact(e.getContact());
-        courseTemplateBo.setCourseHourLength(e.getCourseHourLength());
-        courseTemplateBo.setCourseHourNum(e.getCourseHourNum());
-        courseTemplateBo.setCourseHourNumEnd(e.getCourseHourNumEnd());
-        courseTemplateBo.setCourseHourNumSet(e.getCourseHourNumSet());
-        courseTemplateBo.setCourseHourNumStart(e.getCourseHourNumStart());
-        courseTemplateBo.setCourseIntro(e.getCourseIntro());
-        courseTemplateBo.setCourseName(e.getCourseName());
-        courseTemplateBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        courseTemplateBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        courseTemplateBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        courseTemplateBo.setCutoffDate(e.getCutoffDate() == null ? Constant.DEFAULTNULL : e.getCutoffDate().getTimeInMillis());
-        courseTemplateBo.setCutoffDateEnd(e.getCutoffDateEnd() == null ? Constant.DEFAULTNULL : e.getCutoffDateEnd().getTimeInMillis());
-        courseTemplateBo.setCutoffDateStart(e.getCutoffDateStart() == null ? Constant.DEFAULTNULL : e.getCutoffDateStart().getTimeInMillis());
-        courseTemplateBo.setDiscount(e.getDiscount());
-        courseTemplateBo.setDiscountEnd(e.getDiscountEnd());
-        courseTemplateBo.setDiscountEnd(e.getDiscountEnd());
-        courseTemplateBo.setDiscountStart(e.getDiscountStart());
-        courseTemplateBo.setDownloadMaterials(e.getDownloadMaterials());
-        courseTemplateBo.setEnabled(e.getEnabled());
-        courseTemplateBo.setExtracurricular(e.getExtracurricular());
-        courseTemplateBo.setFinishDate(e.getFinishDate() == null ? Constant.DEFAULTNULL : e.getFinishDate().getTimeInMillis());
-        courseTemplateBo.setFinishDateEnd(e.getFinishDateEnd() == null ? Constant.DEFAULTNULL : e.getFinishDateEnd().getTimeInMillis());
-        courseTemplateBo.setFinishDateStart(e.getFinishDateStart() == null ? Constant.DEFAULTNULL : e.getFinishDateStart().getTimeInMillis());
-        courseTemplateBo.setFinishTime1(e.getFinishTime1());
-        courseTemplateBo.setFinishTime2(e.getFinishTime2());
-        courseTemplateBo.setGoal(e.getGoal());
-        courseTemplateBo.setHighScoreReward(e.getHighScoreReward());
-        courseTemplateBo.setId(e.getId());
-        courseTemplateBo.setIdSet(e.getIdSet());
-        courseTemplateBo.setInstName(e.getInstName());
-        courseTemplateBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        courseTemplateBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        courseTemplateBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        courseTemplateBo.setLocationId(e.getLocationId());
-        courseTemplateBo.setLocationIdSet(e.getLocationIdSet());
-        courseTemplateBo.setLocationName(e.getLocationName());
-        courseTemplateBo.setLocationValue(e.getLocationValue());
-        courseTemplateBo.setLogoUrl(e.getLogoUrl());
-        courseTemplateBo.setMarking(e.getMarking());
-        courseTemplateBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate().getTimeInMillis());
-        courseTemplateBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd().getTimeInMillis());
-        courseTemplateBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e.getNoRefundDateStart().getTimeInMillis());
-        courseTemplateBo.setOpenCourseRequirement(e.getOpenCourseRequirement());
-        courseTemplateBo.setOriginalPrice(e.getOriginalPrice());
-        courseTemplateBo.setOriginalPriceEnd(e.getOriginalPriceEnd());
-        courseTemplateBo.setOriginalPriceStart(e.getOriginalPriceStart());
-        courseTemplateBo.setOutline(e.getOutline());
-        courseTemplateBo.setPartnerDistinction(e.getPartnerDistinction());
-        courseTemplateBo.setPartnerId(e.getPartnerId());
-        courseTemplateBo.setPartnerIdSet(e.getPartnerIdSet());
-        courseTemplateBo.setPartnerIntro(e.getPartnerIntro());
-        courseTemplateBo.setPartnerQualification(e.getPartnerQualification());
-        courseTemplateBo.setPartnerRating(e.getPartnerRating());
-        courseTemplateBo.setPassAgreement(e.getPassAgreement());
-        courseTemplateBo.setPopularity(e.getPopularity());
-        courseTemplateBo.setPopularityEnd(e.getPopularityEnd());
-        courseTemplateBo.setPopularitySet(e.getPopularitySet());
-        courseTemplateBo.setPopularityStart(e.getPopularityStart());
-        courseTemplateBo.setPrerequest(e.getPrerequest());
-        courseTemplateBo.setPrice(e.getPrice());
-        courseTemplateBo.setPriceEnd(e.getPriceEnd());
-        courseTemplateBo.setPriceStart(e.getPriceStart());
-        courseTemplateBo.setQualityAssurance(e.getQualityAssurance());
-        courseTemplateBo.setQuestionBank(e.getQuestionBank());
-        courseTemplateBo.setQuestionSession(e.getQuestionSession());
-        courseTemplateBo.setQuiz(e.getQuiz());
-        courseTemplateBo.setRating(e.getRating());
-        courseTemplateBo.setRatingEnd(e.getRatingEnd());
-        courseTemplateBo.setRatingStart(e.getRatingStart());
-        courseTemplateBo.setReference(e.getReference());
-        courseTemplateBo.setRegLocation(e.getRegLocation());
-        courseTemplateBo.setRegPhone(e.getRegPhone());
-        courseTemplateBo.setSchooltimeDay(e.getSchooltimeDay());
-        courseTemplateBo.setSchooltimeDaySet(e.getSchooltimeDaySet());
-        courseTemplateBo.setSchooltimeWeek(e.getSchooltimeWeek());
-        courseTemplateBo.setSchooltimeWeekSet(e.getSchooltimeWeekSet());
-        courseTemplateBo.setServiceCharge(e.getServiceCharge());
-        courseTemplateBo.setStartDate(e.getStartDate() == null ? Constant.DEFAULTNULL : e.getStartDate().getTimeInMillis());
-        courseTemplateBo.setStartDateEnd(e.getStartDateEnd() == null ? Constant.DEFAULTNULL : e.getStartDateEnd().getTimeInMillis());
-        courseTemplateBo.setStartDateStart(e.getStartDateStart() == null ? Constant.DEFAULTNULL : e.getStartDateStart().getTimeInMillis());
-        courseTemplateBo.setStartTime1(e.getStartTime1());
-        courseTemplateBo.setStartTime2(e.getStartTime2());
-        courseTemplateBo.setStartUponArrival(e.getStartUponArrival());
-        courseTemplateBo.setStatus(e.getStatus());
-        courseTemplateBo.setStatusSet(e.getStatusSet());
-        courseTemplateBo.setStudyDayNote(e.getStudyDayNote());
-        courseTemplateBo.setSuitableStudent(e.getSuitableStudent());
         if (e.getTeacherList() != null) {
             List<TeacherBo> list = new ArrayList<>();
             for (TeacherEntityExt a : e.getTeacherList()) {
@@ -150,12 +368,6 @@ public class CourseTemplateConverter {
             }
             courseTemplateBo.setTeacherList(list);
         }
-        courseTemplateBo.setTeachingAndExercise(e.getTeachingAndExercise());
-        courseTemplateBo.setTeachingMaterialFee(e.getTeachingMaterialFee());
-        courseTemplateBo.setTeachingMaterialIntro(e.getTeachingMaterialIntro());
-        courseTemplateBo.setTeachingMethod(e.getTeachingMethod());
-        courseTemplateBo.setTrail(e.getTrail());
-        courseTemplateBo.setWholeName(e.getWholeName());
         return courseTemplateBo;
     }
 

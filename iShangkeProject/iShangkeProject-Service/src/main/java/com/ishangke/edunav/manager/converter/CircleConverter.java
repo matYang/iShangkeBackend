@@ -8,17 +8,27 @@ import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
 public class CircleConverter {
     public static CircleBo toBo(CircleEntityExt e) {
         CircleBo circleBo = new CircleBo();
+        if (e.getEnabled() != null) {
+            circleBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            circleBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            circleBo.setIdSet(e.getIdSet());
+        }
+        if (e.getName() != null) {
+            circleBo.setName(e.getName());
+        }
+        if (e.getValue() != null) {
+            circleBo.setValue(e.getValue());
+        }
         circleBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         circleBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         circleBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        circleBo.setEnabled(e.getEnabled());
-        circleBo.setId(e.getId());
-        circleBo.setIdSet(e.getIdSet());
         circleBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         circleBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         circleBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        circleBo.setName(e.getName());
-        circleBo.setValue(e.getValue());
         return circleBo;
     }
 

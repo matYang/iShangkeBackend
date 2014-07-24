@@ -8,42 +8,84 @@ import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 public class BookingConverter {
     public static BookingBo toBo(BookingEntityExt e) {
         BookingBo bookingBo = new BookingBo();
-        bookingBo.setCashbackAmount(e.getCashbackAmount());
-        bookingBo.setCashbackAmountEnd(e.getCashbackAmountEnd());
-        bookingBo.setCashbackAmountStart(e.getCashbackAmountStart());
+        if (e.getCashbackAmount() != null) {
+            bookingBo.setCashbackAmount(e.getCashbackAmount());
+        }
+        if (e.getCashbackAmountEnd() != null) {
+            bookingBo.setCashbackAmountEnd(e.getCashbackAmountEnd());
+        }
+        if (e.getCashbackAmountStart() != null) {
+            bookingBo.setCashbackAmountStart(e.getCashbackAmountStart());
+        }
+        if (e.getCourseId() != null) {
+            bookingBo.setCourseId(e.getCourseId());
+        }
+        if (e.getCourseIdSet() != null) {
+            bookingBo.setCourseIdSet(e.getCourseIdSet());
+        }
+        if (e.getCourseTemplateId() != null) {
+            bookingBo.setCourseTemplateId(e.getCourseTemplateId());
+        }
+        if (e.getCourseTemplateIdSet() != null) {
+            bookingBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
+        }
+        if (e.getEmail() != null) {
+            bookingBo.setEmail(e.getEmail());
+        }
+        if (e.getEnabled() != null) {
+            bookingBo.setEnabled(e.getEnabled());
+        }
+        if (e.getId() != null) {
+            bookingBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            bookingBo.setIdSet(e.getIdSet());
+        }
+        if (e.getName() != null) {
+            bookingBo.setName(e.getName());
+        }
+        if (e.getNote() != null) {
+            bookingBo.setNote(e.getNote());
+        }
+        if (e.getPhone() != null) {
+            bookingBo.setPhone(e.getPhone());
+        }
+        if (e.getReference() != null) {
+            bookingBo.setReference(e.getReference());
+        }
+        if (e.getStatus() != null) {
+            bookingBo.setStatus(e.getStatus());
+        }
+        if (e.getStatusSet() != null) {
+            bookingBo.setStatusSet(e.getStatusSet());
+        }
+        if (e.getType() != null) {
+            bookingBo.setType(e.getType());
+        }
+        if (e.getTypeSet() != null) {
+            bookingBo.setTypeSet(e.getTypeSet());
+        }
+        if (e.getUserId() != null) {
+            bookingBo.setUserId(e.getUserId());
+        }
+        if (e.getUserIdSet() != null) {
+            bookingBo.setUserIdSet(e.getUserIdSet());
+        }
         bookingBo.setCashbackDate(e.getCashbackDate() == null ? Constant.DEFAULTNULL : e.getCashbackDate().getTimeInMillis());
         bookingBo.setCashbackDateEnd(e.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : e.getCashbackDateEnd().getTimeInMillis());
         bookingBo.setCashbackDateStart(e.getCashbackDateStart() == null ? Constant.DEFAULTNULL : e.getCashbackDateStart().getTimeInMillis());
-        bookingBo.setCourseId(e.getCourseId());
-        bookingBo.setCourseIdSet(e.getCourseIdSet());
-        bookingBo.setCourseTemplateId(e.getCourseTemplateId());
-        bookingBo.setCourseTemplateIdSet(e.getCourseTemplateIdSet());
         bookingBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         bookingBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         bookingBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        bookingBo.setEmail(e.getEmail());
-        bookingBo.setEnabled(e.getEnabled());
-        bookingBo.setId(e.getId());
-        bookingBo.setIdSet(e.getIdSet());
         bookingBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         bookingBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         bookingBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        bookingBo.setName(e.getName());
         bookingBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate().getTimeInMillis());
         bookingBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd().getTimeInMillis());
         bookingBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e.getNoRefundDateStart().getTimeInMillis());
-        bookingBo.setNote(e.getNote());
-        bookingBo.setPhone(e.getPhone());
-        bookingBo.setReference(e.getReference());
         bookingBo.setScheduledTime(e.getScheduledTime() == null ? Constant.DEFAULTNULL : e.getScheduledTime().getTimeInMillis());
         bookingBo.setScheduledTimeEnd(e.getScheduledTimeEnd() == null ? Constant.DEFAULTNULL : e.getScheduledTimeEnd().getTimeInMillis());
         bookingBo.setScheduledTimeStart(e.getScheduledTimeStart() == null ? Constant.DEFAULTNULL : e.getScheduledTimeStart().getTimeInMillis());
-        bookingBo.setStatus(e.getStatus());
-        bookingBo.setStatusSet(e.getStatusSet());
-        bookingBo.setType(e.getType());
-        bookingBo.setTypeSet(e.getTypeSet());
-        bookingBo.setUserId(e.getUserId());
-        bookingBo.setUserIdSet(e.getUserIdSet());
         return bookingBo;
     }
 
