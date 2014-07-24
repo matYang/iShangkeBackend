@@ -22,29 +22,15 @@ public class TransformUtil {
         return a;
     }
     
-//    public static List<ActionBo> getActionByGroupName(String groupName, String entityName, int currentStatus) {
-//        List<TransformRole> transformGroupList = new ArrayList<>();
-//        List<ActionBo> actionBoList = new ArrayList<>();
-//        for (TransformRole t: transformGroupList) {
-//            if(t.getName().equals(groupName)) {
-//                List<StatusEntity> statusEntitiesList = t.getEntitys();
-//                for(StatusEntity se : statusEntitiesList) {
-//                    if(se.getName().equals(entityName)) {
-//                        List<CurrentStatus> currentStatusList = se.getCurrentStatuses();
-//                        for(CurrentStatus s : currentStatusList) {
-//                            if(s.getStatusCode() == currentStatus) {
-//                                List<Operation> operationsList = s.getOperations();
-//                                for(Operation o : operationsList) {
-//                                    actionBoList.add(TransformUtil.toActionBo(o));
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return actionBoList;
-//    }
+    /**
+     * 其实没有什么特比的作用这个类
+     * 之所已会存在这个类，主要是我希望有这么一个地方，可以让我需要知道json格式的配置文件怎么定义的时候可以通过简单的main就可以复制出来
+     * 没办法 我懒嘛～
+     * @param args
+     * @throws JsonGenerationException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
         Operation operation = new Operation();
         operation.setName("submit");
