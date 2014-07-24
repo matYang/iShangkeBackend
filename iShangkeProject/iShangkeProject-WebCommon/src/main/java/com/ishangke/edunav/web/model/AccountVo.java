@@ -17,6 +17,7 @@ public class AccountVo {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private String accountNumber;
     public Integer getId() {
         return id;
     }
@@ -94,6 +95,12 @@ public class AccountVo {
     }
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
     
 }

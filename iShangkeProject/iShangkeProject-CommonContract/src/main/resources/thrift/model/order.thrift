@@ -19,6 +19,12 @@ struct OrderBo {
     13: i64 createTimeEnd
     14: double priceStart
     15: double priceEnd
+    16: string reference
+    17: string sign
+    18: i64 confirmedTime
+    19: i64 confirmedTimeStart
+    20: i64 confirmedTimeEnd
+    
 }
 
 /**

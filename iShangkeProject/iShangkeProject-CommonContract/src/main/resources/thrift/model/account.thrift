@@ -14,4 +14,5 @@ struct AccountBo {
     11: i64 lastModifyTimeEnd
     12: i64 createTimeStart
     13: i64 createTimeEnd
+    14: string accountNumber
     }

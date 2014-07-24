@@ -19,6 +19,9 @@ public class OrderVo {
     private Integer status;
 
     private Integer enabled;
+    private String reference;
+    private String sign;
+    private Calendar confirmedTime;
     private Set<Integer> idSet;
     private Set<Integer> bookingIdSet;
     private Set<Integer> statusSet;
@@ -26,6 +29,8 @@ public class OrderVo {
     private Calendar createTimeEnd;
     private Double priceStart;
     private Double priceEnd;
+    private Calendar confirmedTimeStart;
+    private Calendar confirmedTimeEnd;
     public Integer getId() {
         return id;
     }
@@ -74,6 +79,24 @@ public class OrderVo {
     public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
+    public String getReference() {
+        return reference;
+    }
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+    public String getSign() {
+        return sign;
+    }
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+    public Calendar getConfirmedTime() {
+        return confirmedTime;
+    }
+    public void setConfirmedTime(Calendar confirmedTime) {
+        this.confirmedTime = confirmedTime;
+    }
     public Set<Integer> getIdSet() {
         return idSet;
     }
@@ -115,6 +138,18 @@ public class OrderVo {
     }
     public void setPriceEnd(Double priceEnd) {
         this.priceEnd = priceEnd;
+    }
+    public Calendar getConfirmedTimeStart() {
+        return confirmedTimeStart;
+    }
+    public void setConfirmedTimeStart(Calendar confirmedTimeStart) {
+        this.confirmedTimeStart = confirmedTimeStart;
+    }
+    public Calendar getConfirmedTimeEnd() {
+        return confirmedTimeEnd;
+    }
+    public void setConfirmedTimeEnd(Calendar confirmedTimeEnd) {
+        this.confirmedTimeEnd = confirmedTimeEnd;
     }
     
 }

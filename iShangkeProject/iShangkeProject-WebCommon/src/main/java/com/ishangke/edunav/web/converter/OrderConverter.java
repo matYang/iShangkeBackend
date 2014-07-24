@@ -23,6 +23,12 @@ public class OrderConverter {
         orderBo.setStatus(vo.getStatus());
         orderBo.setStatusSet(vo.getStatusSet());
         orderBo.setType(vo.getType());
+        orderBo.setReference(vo.getReference());
+        orderBo.setSign(vo.getSign());
+        orderBo.setConfirmedTime(vo.getConfirmedTime() == null ? Constant.DEFAULTNULL : vo.getConfirmedTime().getTimeInMillis());
+        orderBo.setConfirmedTimeEnd(vo.getConfirmedTimeEnd() == null ? Constant.DEFAULTNULL : vo.getConfirmedTimeEnd().getTimeInMillis());
+        orderBo.setConfirmedTimeStart(vo.getConfirmedTimeStart() == null ? Constant.DEFAULTNULL : vo.getConfirmedTimeStart().getTimeInMillis());
+      
         return orderBo;
     }
 
@@ -43,6 +49,11 @@ public class OrderConverter {
         orderVo.setStatus(bo.getStatus());
         orderVo.setStatusSet(bo.getStatusSet());
         orderVo.setType(bo.getType());
+        orderVo.setReference(bo.getReference());
+        orderVo.setSign(bo.getSign());
+        orderVo.setConfirmedTime(DateUtility.getTimeFromLong(bo.getConfirmedTime()));
+        orderVo.setConfirmedTimeEnd(DateUtility.getTimeFromLong(bo.getConfirmedTimeEnd()));
+        orderVo.setConfirmedTimeStart(DateUtility.getTimeFromLong(bo.getConfirmedTimeStart()));
         return orderVo;
     }
 }
