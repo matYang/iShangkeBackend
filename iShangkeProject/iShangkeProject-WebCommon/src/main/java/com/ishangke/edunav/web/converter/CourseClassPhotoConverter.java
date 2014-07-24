@@ -1,8 +1,9 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseClassPhotoBo;
 import com.ishangke.edunav.web.model.CourseClassPhotoVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class CourseClassPhotoConverter {
     public static CourseClassPhotoBo fromModel(CourseClassPhotoVo vo) {
@@ -11,9 +12,9 @@ public class CourseClassPhotoConverter {
         courseClassPhotoBo.setClassPhotoIdSet(vo.getClassPhotoIdSet());
         courseClassPhotoBo.setCourseId(vo.getCourseId());
         courseClassPhotoBo.setCourseIdSet(vo.getCourseIdSet());
-        courseClassPhotoBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        courseClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        courseClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        courseClassPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        courseClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        courseClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         courseClassPhotoBo.setId(vo.getId());
         courseClassPhotoBo.setIdSet(vo.getIdSet());
         return courseClassPhotoBo;

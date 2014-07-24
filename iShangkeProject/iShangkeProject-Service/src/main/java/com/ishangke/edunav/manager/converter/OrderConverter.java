@@ -1,17 +1,18 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class OrderConverter {
     public static OrderBo toBo(OrderEntityExt e) {
         OrderBo orderBo = new OrderBo();
         orderBo.setBookingId(e.getBookingId());
         orderBo.setBookingIdSet(e.getBookingIdSet());
-        orderBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        orderBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        orderBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        orderBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        orderBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        orderBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         orderBo.setEnabled(e.getEnabled());
         orderBo.setId(e.getId());
         orderBo.setIdSet(e.getIdSet());

@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class AccountConverter {
     public static AccountBo toBo(AccountEntityExt e) {
@@ -10,15 +11,15 @@ public class AccountConverter {
         accountBo.setBalance(e.getBalance());
         accountBo.setBalanceEnd(e.getBalanceEnd());
         accountBo.setBalanceStart(e.getBalanceStart());
-        accountBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        accountBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        accountBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        accountBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        accountBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        accountBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         accountBo.setEnabled(e.getEnabled());
         accountBo.setId(e.getId());
         accountBo.setIdSet(e.getIdSet());
-        accountBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        accountBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        accountBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        accountBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        accountBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        accountBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         accountBo.setRealName(e.getRealName());
         return accountBo;
     }

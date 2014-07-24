@@ -1,17 +1,18 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class BookingHistoryConverter {
     public static BookingHistoryBo toBo(BookingHistoryEntityExt e) {
         BookingHistoryBo bookingHistoryBo = new BookingHistoryBo();
         bookingHistoryBo.setBookingId(e.getBookingId());
         bookingHistoryBo.setBookingIdSet(e.getBookingIdSet());
-        bookingHistoryBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        bookingHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        bookingHistoryBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        bookingHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        bookingHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        bookingHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         bookingHistoryBo.setEnabled(e.getEnabled());
         bookingHistoryBo.setId(e.getId());
         bookingHistoryBo.setIdSet(e.getIdSet());

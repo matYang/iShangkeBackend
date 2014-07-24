@@ -1,23 +1,24 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.web.model.SpreadVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class SpreadConverter {
     public static SpreadBo fromModel(SpreadVo vo) {
         SpreadBo spreadBo =new SpreadBo();
         spreadBo.setCourseId(vo.getCourseId());
         spreadBo.setCourseIdSet(vo.getCourseIdSet());
-        spreadBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        spreadBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        spreadBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        spreadBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         spreadBo.setEnabled(vo.getEnabled());
         spreadBo.setId(vo.getId());
         spreadBo.setIdSet(vo.getIdSet());
-        spreadBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        spreadBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         spreadBo.setPartnerId(vo.getPartnerId());
         spreadBo.setPartnerIdSet(vo.getPartnerIdSet());
         spreadBo.setRemark(vo.getRemark());

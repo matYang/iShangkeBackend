@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class AccountHistoryConverter {
     public static AccountHistoryBo toBo(AccountHistoryEntityExt e) {
@@ -10,9 +11,9 @@ public class AccountHistoryConverter {
         accountHistoryBo.setCharge(e.getCharge());
         accountHistoryBo.setChargeEnd(e.getChargeEnd());
         accountHistoryBo.setChargeStart(e.getChargeStart());
-        accountHistoryBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        accountHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        accountHistoryBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        accountHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        accountHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        accountHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         accountHistoryBo.setId(e.getId());
         accountHistoryBo.setIdSet(e.getIdSet());
         accountHistoryBo.setRemark(e.getRemark());

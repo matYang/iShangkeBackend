@@ -1,17 +1,18 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserLocationBo;
 import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class UserLocationConverter {
     public static UserLocationBo toBo(UserLocationEntityExt e) {
         UserLocationBo userLocationBo = new UserLocationBo();
         userLocationBo.setId(e.getId());
         userLocationBo.setIdSet(e.getIdSet());
-        userLocationBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        userLocationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        userLocationBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        userLocationBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        userLocationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        userLocationBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         userLocationBo.setLocationId(e.getLocationId());
         userLocationBo.setLocationIdSet(e.getLocationIdSet());
         userLocationBo.setUserId(e.getUserId());

@@ -1,21 +1,22 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class WithdrawConverter {
     public static WithdrawBo toBo(WithdrawEntityExt e) {
         WithdrawBo withdrawBo = new WithdrawBo();
-        withdrawBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        withdrawBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        withdrawBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        withdrawBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        withdrawBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        withdrawBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         withdrawBo.setEnabled(e.getEnabled());
         withdrawBo.setId(e.getId());
         withdrawBo.setIdSet(e.getIdSet());
-        withdrawBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        withdrawBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        withdrawBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        withdrawBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        withdrawBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        withdrawBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         withdrawBo.setPayeeId(e.getPayeeId());
         withdrawBo.setPeyeeName(e.getPeyeeName());
         withdrawBo.setType(e.getType());

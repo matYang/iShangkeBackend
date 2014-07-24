@@ -1,22 +1,23 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class AddressConverter {
    public static AddressBo toBo(AddressEntityExt e) {
        AddressBo addressBo = new AddressBo();
-       addressBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-       addressBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-       addressBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+       addressBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+       addressBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+       addressBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
        addressBo.setDetail(e.getDetail());
        addressBo.setEnabled(e.getEnabled());
        addressBo.setId(e.getId());
        addressBo.setIdSet(e.getIdSet());
-       addressBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-       addressBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-       addressBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+       addressBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+       addressBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+       addressBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
        addressBo.setLat(e.getLat());
        addressBo.setLatEnd(e.getLatEnd());
        addressBo.setLatStart(e.getLatStart());

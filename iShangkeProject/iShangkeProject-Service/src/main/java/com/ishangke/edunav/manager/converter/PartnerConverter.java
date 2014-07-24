@@ -3,6 +3,8 @@ package com.ishangke.edunav.manager.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -11,7 +13,6 @@ import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class PartnerConverter {
     public static PartnerBo toBo(PartnerEntityExt e) {
@@ -33,9 +34,9 @@ public class PartnerConverter {
         partnerBo.setContract(e.getContract());
         partnerBo.setCourseContact(e.getCourseContact());
         partnerBo.setCourseContactPhone(e.getCourseContactPhone());
-        partnerBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        partnerBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        partnerBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        partnerBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        partnerBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        partnerBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         partnerBo.setCutoffDay(e.getCutoffDay());
         partnerBo.setCutoffDayEnd(e.getCutoffDayEnd());
         partnerBo.setCutoffDaySet(e.getCutoffDaySet());
@@ -53,12 +54,12 @@ public class PartnerConverter {
         partnerBo.setId(e.getId());
         partnerBo.setIdSet(e.getIdSet());
         partnerBo.setInstName(e.getInstName());
-        partnerBo.setLastLoginTime(e.getLastLoginTime().getTimeInMillis());
-        partnerBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd().getTimeInMillis());
-        partnerBo.setLastLoginTimeStart(e.getLastLoginTimeStart().getTimeInMillis());
-        partnerBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        partnerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        partnerBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        partnerBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime().getTimeInMillis());
+        partnerBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd().getTimeInMillis());
+        partnerBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeStart().getTimeInMillis());
+        partnerBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        partnerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        partnerBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         partnerBo.setLicence(e.getLicence());
         partnerBo.setLicenceImgUrl(e.getLicenceImgUrl());
         partnerBo.setLogoUrl(e.getLogoUrl());

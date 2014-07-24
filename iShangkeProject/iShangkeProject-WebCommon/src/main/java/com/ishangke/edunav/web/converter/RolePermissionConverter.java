@@ -1,17 +1,18 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.RolePermissionBo;
 import com.ishangke.edunav.web.model.RolePermissionVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class RolePermissionConverter {
     public static RolePermissionBo fromModel(RolePermissionVo vo) {
         RolePermissionBo rolePermissionBo = new RolePermissionBo();
         rolePermissionBo.setId(vo.getId());
         rolePermissionBo.setIdSet(vo.getIdSet());
-        rolePermissionBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        rolePermissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        rolePermissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        rolePermissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         rolePermissionBo.setPermissionId(vo.getPermissionId());
         rolePermissionBo.setPermissionIdSet(vo.getPermissionIdSet());
         rolePermissionBo.setRoleId(vo.getRoleId());

@@ -1,21 +1,22 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.web.model.CategoryVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class CategoryConverter {
     public static CategoryBo fromModel(CategoryVo vo) {
         CategoryBo categoryBo = new CategoryBo();
-        categoryBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        categoryBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        categoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        categoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         categoryBo.setEnabled(vo.getEnabled());
         categoryBo.setId(vo.getId());
         categoryBo.setIdSet(vo.getIdSet());
-        categoryBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        categoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         categoryBo.setName(vo.getName());
         categoryBo.setRank(vo.getRank());
         categoryBo.setRankEnd(vo.getRankEnd());

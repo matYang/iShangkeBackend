@@ -1,17 +1,18 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseTeacherBo;
 import com.ishangke.edunav.dataaccess.model.CourseTeacherEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CourseTeacherConverter {
     public static CourseTeacherBo toBo(CourseTeacherEntityExt e) {
         CourseTeacherBo courseTeacherBo = new CourseTeacherBo();
         courseTeacherBo.setCourseId(e.getCourseId());
         courseTeacherBo.setCourseIdSet(e.getCourseIdSet());
-        courseTeacherBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        courseTeacherBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        courseTeacherBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        courseTeacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        courseTeacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        courseTeacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         courseTeacherBo.setId(e.getId());
         courseTeacherBo.setIdSet(e.getIdSet());
         courseTeacherBo.setTeacherId(e.getTeacherId());

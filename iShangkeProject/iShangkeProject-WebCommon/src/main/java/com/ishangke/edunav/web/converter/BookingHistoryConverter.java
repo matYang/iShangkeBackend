@@ -1,17 +1,18 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.web.model.BookingHistoryVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class BookingHistoryConverter {
     public static BookingHistoryBo fromModel(BookingHistoryVo vo) {
         BookingHistoryBo bookingHistoryBo = new BookingHistoryBo();
         bookingHistoryBo.setBookingId(vo.getBookingId());
         bookingHistoryBo.setBookingIdSet(vo.getBookingIdSet());
-        bookingHistoryBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        bookingHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        bookingHistoryBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        bookingHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        bookingHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        bookingHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         bookingHistoryBo.setEnabled(vo.getEnabled());
         bookingHistoryBo.setId(vo.getId());
         bookingHistoryBo.setIdSet(vo.getIdSet());

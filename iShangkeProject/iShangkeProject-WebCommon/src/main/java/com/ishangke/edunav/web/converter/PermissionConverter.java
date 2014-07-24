@@ -1,21 +1,22 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
 import com.ishangke.edunav.web.model.PermissionVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class PermissionConverter {
     public static PermissionBo fromModel(PermissionVo vo) {
         PermissionBo permissionBo = new PermissionBo();
-        permissionBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        permissionBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        permissionBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        permissionBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        permissionBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        permissionBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         permissionBo.setEnabled(vo.getEnabled());
         permissionBo.setId(vo.getId());
         permissionBo.setIdSet(vo.getIdSet());
-        permissionBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        permissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        permissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        permissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        permissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        permissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         permissionBo.setName(vo.getName());
         permissionBo.setPath(vo.getPath());
         permissionBo.setTag(vo.getTag());

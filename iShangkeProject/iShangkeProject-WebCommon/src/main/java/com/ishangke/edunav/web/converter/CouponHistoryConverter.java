@@ -1,8 +1,9 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
 import com.ishangke.edunav.web.model.CouponHistoryVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class CouponHistoryConverter {
     public static CouponHistoryBo fromModel(CouponHistoryVo vo) {
@@ -12,14 +13,14 @@ public class CouponHistoryConverter {
         couponHistoryBo.setChargeStart(vo.getChargeStart());
         couponHistoryBo.setCouponId(vo.getCouponId());
         couponHistoryBo.setCouponIdSet(vo.getCouponIdSet());
-        couponHistoryBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        couponHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        couponHistoryBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        couponHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        couponHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        couponHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         couponHistoryBo.setId(vo.getId());
         couponHistoryBo.setIdSet(vo.getIdSet());
-        couponHistoryBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        couponHistoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        couponHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         return couponHistoryBo;
     }
 

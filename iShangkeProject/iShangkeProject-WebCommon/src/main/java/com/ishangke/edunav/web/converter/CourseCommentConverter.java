@@ -1,8 +1,9 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.web.model.CourseCommentVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class CourseCommentConverter {
     public static CourseCommentBo fromModel(CourseCommentVo vo) {
@@ -16,18 +17,15 @@ public class CourseCommentConverter {
         courseCommentBo.setContent(vo.getContent());
         courseCommentBo.setCourseTemplateId(vo.getCourseTemplateId());
         courseCommentBo.setCourseTemplateIdSet(vo.getCourseTemplateIdSet());
-        courseCommentBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        courseCommentBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        courseCommentBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
-        courseCommentBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        courseCommentBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        courseCommentBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        courseCommentBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        courseCommentBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        courseCommentBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         courseCommentBo.setEnabled(vo.getEnabled());
         courseCommentBo.setId(vo.getId());
         courseCommentBo.setIdSet(vo.getIdSet());
-        courseCommentBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        courseCommentBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        courseCommentBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        courseCommentBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        courseCommentBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        courseCommentBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         courseCommentBo.setSatisfactionRating(vo.getSatisfactionRating());
         courseCommentBo.setSatisfactionRatingEnd(vo.getSatisfactionRatingEnd());
         courseCommentBo.setTotalRatingStart(vo.getTotalRatingStart());
@@ -47,9 +45,6 @@ public class CourseCommentConverter {
         courseCommentVo.setContent(bo.getContent());
         courseCommentVo.setCourseTemplateId(bo.getCourseTemplateId());
         courseCommentVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
-        courseCommentVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        courseCommentVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        courseCommentVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
         courseCommentVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         courseCommentVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         courseCommentVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));

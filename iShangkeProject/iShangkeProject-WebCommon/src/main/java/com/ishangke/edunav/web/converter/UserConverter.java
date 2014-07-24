@@ -1,32 +1,33 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.web.model.UserVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class UserConverter {
     public static UserBo fromModel(UserVo vo) {
         UserBo userBo = new UserBo();
         userBo.setAppliedInvitationCode(vo.getAppliedInvitationCode());
         userBo.setAvatarUrl(vo.getAvatarUrl());
-        userBo.setBirthday(vo.getBirthday().getTimeInMillis());
-        userBo.setBirthdayEnd(vo.getBirthdayEnd().getTimeInMillis());
-        userBo.setBirthdayStart(vo.getBirthdayStart().getTimeInMillis());
-        userBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        userBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        userBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        userBo.setBirthday(vo.getBirthday() == null ? Constant.DEFAULTNULL : vo.getBirthday().getTimeInMillis());
+        userBo.setBirthdayEnd(vo.getBirthdayEnd() == null ? Constant.DEFAULTNULL : vo.getBirthdayEnd().getTimeInMillis());
+        userBo.setBirthdayStart(vo.getBirthdayStart() == null ? Constant.DEFAULTNULL : vo.getBirthdayStart().getTimeInMillis());
+        userBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        userBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        userBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         userBo.setEmail(vo.getEmail());
         userBo.setEnabled(vo.getEnabled());
         userBo.setGender(vo.getGender());
         userBo.setId(vo.getId());
         userBo.setIdSet(vo.getIdSet());
         userBo.setInvitationCode(vo.getInvitationCode());
-        userBo.setLastLoginTime(vo.getLastLoginTime().getTimeInMillis());
-        userBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd().getTimeInMillis());
-        userBo.setLastLoginTimeStart(vo.getLastLoginTimeStart().getTimeInMillis());
-        userBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        userBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        userBo.setLastLoginTime(vo.getLastLoginTime() == null ? Constant.DEFAULTNULL : vo.getLastLoginTime().getTimeInMillis());
+        userBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeEnd().getTimeInMillis());
+        userBo.setLastLoginTimeStart(vo.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeStart().getTimeInMillis());
+        userBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        userBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         userBo.setMajor(vo.getMajor());
         userBo.setName(vo.getName());
         userBo.setPassword(vo.getPassword());
