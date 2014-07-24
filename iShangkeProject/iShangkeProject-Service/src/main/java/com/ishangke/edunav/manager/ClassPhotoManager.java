@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface ClassPhotoManager {
@@ -67,7 +66,7 @@ public interface ClassPhotoManager {
      * @return 推广信息实体 ClassPhoto 列表
      * 
      */
-    List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 查询教师信息。<br>

@@ -306,4 +306,14 @@ public class ManagerErrorCode {
     // permission
     public static final int PERMISSION_USER_CREATE = 0x010000001;
     public static final String PERMISSION_USER_CREATE_KEY = "permission_user_create";
+    public static final int PERMISSION_PARTNER_QUERYPARTNER = 0x010000002;
+    public static final String PERMISSION_PARTNER_QUERYPARTNER_KEY = "permission_partner_queryPartner";
+    public static final int PERMISSION_PARTNER_QUERYPARTNERBYID = 0x010000003;
+    public static final String PERMISSION_PARTNER_QUERYPARTNERBYID_KEY = "permission_partner_queryPartnerById";
+    public static final int PERMISSION_PARTNER_UPDATEPARTNER = 0x010000004;
+    public static final String PERMISSION_PARTNER_UPDATEPARTNER_KEY = "permission_partner_updatePartner";
+
+
+    
+
 }

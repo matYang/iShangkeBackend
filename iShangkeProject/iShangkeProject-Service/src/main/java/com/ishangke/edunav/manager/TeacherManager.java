@@ -3,7 +3,6 @@ package com.ishangke.edunav.manager;
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
@@ -80,7 +79,7 @@ public interface TeacherManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    public List<TeacherBo> query(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo);
 
     public List<TeacherBo> listByCourseId(int courseId);
 

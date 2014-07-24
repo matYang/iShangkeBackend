@@ -1,6 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,7 +13,9 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
@@ -32,6 +35,9 @@ public class PartnerManagerImpl implements PartnerManager {
     private PartnerEntityExtMapper partnerMapper;
     
     @Autowired
+    private GroupEntityExtMapper groupMapper;
+    
+    @Autowired
     private AuthManager authManager;
 
     @Override
@@ -39,6 +45,27 @@ public class PartnerManagerImpl implements PartnerManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // 验证用户是否属于此partner
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null || groupList.size() == 0) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call query at " + new Date(), userBo.getName()));
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
+        
         PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);

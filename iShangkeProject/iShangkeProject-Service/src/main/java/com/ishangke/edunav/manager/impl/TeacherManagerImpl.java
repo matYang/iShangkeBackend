@@ -10,20 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.TeacherEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
-import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.TeacherManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
-import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.TeacherConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -167,7 +164,7 @@ public class TeacherManagerImpl implements TeacherManager {
     }
 
     @Override
-    public List<TeacherBo> query(TeacherBo teacherBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<TeacherBo> query(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -193,13 +190,9 @@ public class TeacherManagerImpl implements TeacherManager {
         }
 
         TeacherEntityExt teacherEntity = teacherBo == null ? null : TeacherConverter.fromBo(teacherBo);
-        PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        if (teacherEntity != null && partnerEntity != null) {
-            teacherEntity.setPartnerId(partnerEntity.getId());
-        }
 
         List<TeacherEntityExt> results = null;
         try {

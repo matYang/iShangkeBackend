@@ -11,20 +11,17 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
-import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.ClassPhotoManager;
 import com.ishangke.edunav.manager.converter.ClassPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
-import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
@@ -161,7 +158,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     }
 
     @Override
-    public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -173,7 +170,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
         boolean isSameGroup = false;
         for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == partnerBo.getId()) {
+            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
                 isSameGroup = true;
                 break;
             }
@@ -188,13 +185,8 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
 
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
-        PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
-        if (classPhotoEntity != null && partnerEntity != null) {
-            classPhotoEntity.setPartnerId(partnerEntity.getId());
-        }
 
         List<ClassPhotoEntityExt> results = null;
         try {

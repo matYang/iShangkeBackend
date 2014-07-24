@@ -192,7 +192,7 @@ service PartnerService{
      *  @return 推广信息实体 ClassPhoto 列表
      *
      */
-    list<classPhoto.ClassPhotoBo> queryClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<classPhoto.ClassPhotoBo> queryClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -255,7 +255,7 @@ service PartnerService{
      *  @return 推广信息实体 Teacher 列表
      *
      */
-    list<teacher.TeacherBo> queryTeacher(1: teacher.TeacherBo teacherBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<teacher.TeacherBo> queryTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
