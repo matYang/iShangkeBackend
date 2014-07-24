@@ -21,7 +21,7 @@ import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
-import com.ishangke.edunav.manager.common.DateUtility;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfigObj;
 import com.ishangke.edunav.manager.common.SessionConfig.AuthConfig;

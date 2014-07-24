@@ -1,21 +1,22 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CategoryConverter {
     public static CategoryBo toBo(CategoryEntityExt e) {
         CategoryBo categoryBo = new CategoryBo();
-        categoryBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        categoryBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        categoryBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        categoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        categoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        categoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         categoryBo.setEnabled(e.getEnabled());
         categoryBo.setId(e.getId());
         categoryBo.setIdSet(e.getIdSet());
-        categoryBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        categoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        categoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        categoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        categoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        categoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         categoryBo.setName(e.getName());
         categoryBo.setRank(e.getRank());
         categoryBo.setRankEnd(e.getRankEnd());

@@ -1,18 +1,19 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.MessageBo;
 import com.ishangke.edunav.dataaccess.model.MessageEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class MessageConverter {
     public static MessageBo toBo(MessageEntityExt e) {
         MessageBo messageBo = new MessageBo();
-        messageBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        messageBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        messageBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
-        messageBo.setReadTime(e.getReadTime().getTimeInMillis());
-        messageBo.setReadTimeEnd(e.getReadTimeEnd().getTimeInMillis());
-        messageBo.setReadTimeStart(e.getReadTimeStart().getTimeInMillis());
+        messageBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        messageBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        messageBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        messageBo.setReadTime(e.getReadTime() == null ? Constant.DEFAULTNULL : e.getReadTime().getTimeInMillis());
+        messageBo.setReadTimeEnd(e.getReadTimeEnd() == null ? Constant.DEFAULTNULL : e.getReadTimeEnd().getTimeInMillis());
+        messageBo.setReadTimeStart(e.getReadTimeStart() == null ? Constant.DEFAULTNULL : e.getReadTimeStart().getTimeInMillis());
         messageBo.setId(e.getId());
         messageBo.setIdSet(e.getIdSet());
         messageBo.setMessageText(e.getMessageText());

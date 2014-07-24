@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CreditHistoryBo;
 import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CreditHistoryConverter {
     public static CreditHistoryBo toBo(CreditHistoryEntityExt e) {
@@ -10,14 +11,14 @@ public class CreditHistoryConverter {
         creditHistoryBo.setCharge(e.getCharge());
         creditHistoryBo.setChargeEnd(e.getChargeEnd());
         creditHistoryBo.setChargeStart(e.getChargeStart());
-        creditHistoryBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        creditHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        creditHistoryBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        creditHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        creditHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        creditHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         creditHistoryBo.setId(e.getId());
         creditHistoryBo.setIdSet(e.getIdSet());
-        creditHistoryBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        creditHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        creditHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        creditHistoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        creditHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        creditHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         creditHistoryBo.setUserId(e.getUserId());
         creditHistoryBo.setUserIdSet(e.getUserIdSet());
         return creditHistoryBo;

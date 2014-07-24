@@ -1,21 +1,22 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
-import com.ishangke.edunav.web.model.WithdrawVo;
 import com.ishangke.edunav.web.common.DateUtility;
+import com.ishangke.edunav.web.model.WithdrawVo;
 
 public class WithdrawConverter {
     public static WithdrawBo fromModel(WithdrawVo vo) {
         WithdrawBo withdrawBo = new WithdrawBo();
-        withdrawBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        withdrawBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        withdrawBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        withdrawBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        withdrawBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        withdrawBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         withdrawBo.setEnabled(vo.getEnabled());
         withdrawBo.setId(vo.getId());
         withdrawBo.setIdSet(vo.getIdSet());
-        withdrawBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        withdrawBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        withdrawBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        withdrawBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        withdrawBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        withdrawBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         withdrawBo.setPayeeId(vo.getPayeeId());
         withdrawBo.setPeyeeName(vo.getPeyeeName());
         withdrawBo.setType(vo.getType());

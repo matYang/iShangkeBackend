@@ -1,23 +1,24 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class ClassPhotoConverter {
     public static ClassPhotoBo toBo(ClassPhotoEntityExt e) {
         ClassPhotoBo classPhotoBo = new ClassPhotoBo();
-        classPhotoBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        classPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        classPhotoBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        classPhotoBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        classPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        classPhotoBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         classPhotoBo.setDescription(e.getDescription());
         classPhotoBo.setEnabled(e.getEnabled());
         classPhotoBo.setId(e.getId());
         classPhotoBo.setIdSet(e.getIdSet());
         classPhotoBo.setImgUrl(e.getImgUrl());
-        classPhotoBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        classPhotoBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        classPhotoBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        classPhotoBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         classPhotoBo.setPartnerId(e.getPartnerId());
         classPhotoBo.setPartnerIdSet(e.getPartnerIdSet());
         classPhotoBo.setTitle(e.getTitle());

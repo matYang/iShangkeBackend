@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CouponConverter {
     public static CouponBo toBo(CouponEntityExt e) {
@@ -11,18 +12,18 @@ public class CouponConverter {
         couponBo.setBalanceEnd(e.getBalanceEnd());
         couponBo.setBalanceStart(e.getBalanceStart());
         couponBo.setCode(e.getCode());
-        couponBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        couponBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        couponBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        couponBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        couponBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        couponBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         couponBo.setEnabled(e.getEnabled());
-        couponBo.setExpiryTime(e.getExpiryTime().getTimeInMillis());
-        couponBo.setExpiryTimeEnd(e.getExpiryTimeEnd().getTimeInMillis());
-        couponBo.setExpiryTimeStart(e.getExpiryTimeStart().getTimeInMillis());
+        couponBo.setExpiryTime(e.getExpiryTime() == null ? Constant.DEFAULTNULL : e.getExpiryTime().getTimeInMillis());
+        couponBo.setExpiryTimeEnd(e.getExpiryTimeEnd() == null ? Constant.DEFAULTNULL : e.getExpiryTimeEnd().getTimeInMillis());
+        couponBo.setExpiryTimeStart(e.getExpiryTimeStart() == null ? Constant.DEFAULTNULL : e.getExpiryTimeStart().getTimeInMillis());
         couponBo.setId(e.getId());
         couponBo.setIdSet(e.getIdSet());
-        couponBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        couponBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        couponBo.setExpiryTimeStart(e.getExpiryTimeStart().getTimeInMillis());
+        couponBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        couponBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        couponBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         couponBo.setOrigin(e.getOrigin());
         couponBo.setOriginSet(e.getOriginSet());
         couponBo.setRemark(e.getRemark());
@@ -51,7 +52,7 @@ public class CouponConverter {
         couponEntityExt.setIdSet(bo.getIdSet());
         couponEntityExt.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
         couponEntityExt.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        couponEntityExt.setExpiryTimeStart(DateUtility.getTimeFromLong(bo.getExpiryTimeStart()));
+        couponEntityExt.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         couponEntityExt.setOrigin(bo.getOrigin());
         couponEntityExt.setOriginSet(bo.getOriginSet());
         couponEntityExt.setRemark(bo.getRemark());

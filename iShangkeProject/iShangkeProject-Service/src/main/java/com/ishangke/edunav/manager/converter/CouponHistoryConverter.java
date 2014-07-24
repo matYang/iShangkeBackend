@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
 import com.ishangke.edunav.dataaccess.model.CouponHistoryEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class CouponHistoryConverter {
     public static CouponHistoryBo toBo(CouponHistoryEntityExt e) {
@@ -12,14 +13,14 @@ public class CouponHistoryConverter {
         couponHistoryBo.setChargeStart(e.getChargeStart());
         couponHistoryBo.setCouponId(e.getCouponId());
         couponHistoryBo.setCouponIdSet(e.getCouponIdSet());
-        couponHistoryBo.setCreateTime(e.getCreateTime().getTimeInMillis());
-        couponHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd().getTimeInMillis());
-        couponHistoryBo.setCreateTimeStart(e.getCreateTimeStart().getTimeInMillis());
+        couponHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        couponHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        couponHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
         couponHistoryBo.setId(e.getId());
         couponHistoryBo.setIdSet(e.getIdSet());
-        couponHistoryBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        couponHistoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        couponHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        couponHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         return couponHistoryBo;
     }
 

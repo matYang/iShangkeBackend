@@ -1,8 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserGroupBo;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
-import com.ishangke.edunav.manager.common.DateUtility;
 
 public class UserGroupConverter {
     public static UserGroupBo toBo(UserGroupEntityExt e) {
@@ -11,9 +12,9 @@ public class UserGroupConverter {
         userGroupBo.setGroupIdSet(e.getGroupIdSet());
         userGroupBo.setId(e.getId());
         userGroupBo.setIdSet(e.getIdSet());
-        userGroupBo.setLastModifyTime(e.getLastModifyTime().getTimeInMillis());
-        userGroupBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd().getTimeInMillis());
-        userGroupBo.setLastModifyTimeStart(e.getLastModifyTimeStart().getTimeInMillis());
+        userGroupBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
+        userGroupBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
+        userGroupBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         userGroupBo.setUserId(e.getUserId());
         userGroupBo.setUserIdSet(e.getUserIdSet());
         return userGroupBo;

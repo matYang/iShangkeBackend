@@ -1,23 +1,24 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.web.model.ClassPhotoVo;
-import com.ishangke.edunav.web.common.DateUtility;
 
 public class ClassPhotoConverter {
     public static ClassPhotoBo fromModel(ClassPhotoVo vo) {
         ClassPhotoBo classPhotoBo = new ClassPhotoBo();
-        classPhotoBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        classPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        classPhotoBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        classPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        classPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        classPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         classPhotoBo.setDescription(vo.getDescription());
         classPhotoBo.setEnabled(vo.getEnabled());
         classPhotoBo.setId(vo.getId());
         classPhotoBo.setIdSet(vo.getIdSet());
         classPhotoBo.setImgUrl(vo.getImgUrl());
-        classPhotoBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        classPhotoBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        classPhotoBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        classPhotoBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         classPhotoBo.setPartnerId(vo.getPartnerId());
         classPhotoBo.setPartnerIdSet(vo.getPartnerIdSet());
         classPhotoBo.setTitle(vo.getTitle());

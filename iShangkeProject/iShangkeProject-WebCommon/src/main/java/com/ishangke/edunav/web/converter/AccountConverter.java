@@ -1,7 +1,8 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
-import com.ishangke.edunav.web.common.DateUtility;
 import com.ishangke.edunav.web.model.AccountVo;
 
 public class AccountConverter {
@@ -10,15 +11,15 @@ public class AccountConverter {
         accountBo.setBalance(vo.getBalance());
         accountBo.setBalanceEnd(vo.getBalanceEnd());
         accountBo.setBalanceStart(vo.getBalanceStart());
-        accountBo.setCreateTime(vo.getCreateTime().getTimeInMillis());
-        accountBo.setCreateTimeEnd(vo.getCreateTimeEnd().getTimeInMillis());
-        accountBo.setCreateTimeStart(vo.getCreateTimeStart().getTimeInMillis());
+        accountBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
+        accountBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
+        accountBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         accountBo.setEnabled(vo.getEnabled());
         accountBo.setId(vo.getId());
         accountBo.setIdSet(vo.getIdSet());
-        accountBo.setLastModifyTime(vo.getLastModifyTime().getTimeInMillis());
-        accountBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd().getTimeInMillis());
-        accountBo.setLastModifyTimeStart(vo.getLastModifyTimeStart().getTimeInMillis());
+        accountBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
+        accountBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
+        accountBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
         accountBo.setRealName(vo.getRealName());
         return accountBo;
     }
