@@ -25,6 +25,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.PartnerNotFoundException;
 
 @Component
@@ -45,27 +46,6 @@ public class PartnerManagerImpl implements PartnerManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
-        // 验证用户是否属于此partner
-        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
-        if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
-        }
-        boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == partnerBo.getId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
-        if (authManager.isSystemAdmin(userBo.getId())) {
-            isSameGroup = true;
-            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
-        }
-        
         PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
@@ -74,7 +54,6 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             results = partnerMapper.list(partnerEntity, page);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Partner query failed for user: " + userEntity.getId(), t);
         }
 
@@ -100,7 +79,6 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             result = partnerMapper.getById(partnerEntity.getId());
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Partner queryById failed for user: " + userEntity.getId(), t);
         }
 
@@ -115,15 +93,34 @@ public class PartnerManagerImpl implements PartnerManager {
         if (partnerBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // 验证用户是否属于此partner
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+        if (groupList == null || groupList.size() == 0) {
+            throw new ManagerException("unlogin user");
+        }
+        boolean isSameGroup = false;
+        for (GroupEntityExt g : groupList) {
+            if (g.getPartnerId() == partnerBo.getId()) {
+                isSameGroup = true;
+                break;
+            }
+        }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin [%s] call updatePartner at " + new Date(), userBo.getName()));
+        }
+        if (isSameGroup == false) {
+            throw new ManagerException("Invalid user");
+        }
 
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+ 
         try {
             partnerMapper.update(partnerEntity);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Partner update failed for user: " + userEntity.getId(), t);
         }
 
@@ -134,6 +131,14 @@ public class PartnerManagerImpl implements PartnerManager {
     public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
+        }
+        
+        // 验证用户是否为admin
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin [%s] call createPartner at " + new Date(), userBo.getName()));
+        }
+        else {
+            throw new AuthenticationException("Only admins can create partners");
         }
 
         // 插入新的partner记录

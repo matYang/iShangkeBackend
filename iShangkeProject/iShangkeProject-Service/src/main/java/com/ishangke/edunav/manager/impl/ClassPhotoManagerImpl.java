@@ -57,9 +57,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin [%s] call createClassPhoto at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin  || admin [%s] call createClassPhoto at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -101,9 +101,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin [%s] call updateClassPhoto at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call updateClassPhoto at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -140,6 +140,10 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                 break;
             }
         }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at " + new Date(), userBo.getName()));
+        }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -175,9 +179,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin [%s] call query at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -276,6 +280,5 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("ClassPhoto listByPartnerId Failed", t);
         }
     }
-
 
 }
