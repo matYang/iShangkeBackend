@@ -18,9 +18,7 @@ import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
 //@TestExecutionListeners(listeners = {
 //        DependencyInjectionTestExecutionListener.class,
