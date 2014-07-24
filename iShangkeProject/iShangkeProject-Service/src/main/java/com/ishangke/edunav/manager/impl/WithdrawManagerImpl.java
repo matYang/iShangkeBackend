@@ -45,13 +45,13 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Invalid parameter");
         }
         
-        if (!authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin[%s] call createWithdraw at " + new Date(), userBo.getName()));
+        }
+        else {
             if (userBo.getId() != withdrawBo.getUserId()) {
                 throw new AuthenticationException("User creating someone else's withdraw");
             }
-        }
-        else {
-            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin [%s] call createWithdraw at " + new Date(), userBo.getName()));
         }
         
         // 插入新的WITHDRAW记录
@@ -78,13 +78,13 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Invalid parameter");
         }
         
-        if (!authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call updateWithdraw at " + new Date(), userBo.getName()));
+        }
+        else {
             if (userBo.getId() != withdrawBo.getUserId()) {
                 throw new AuthenticationException("User updating someone else's withdraw");
             }
-        }
-        else {
-            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin [%s] call updateWithdraw at " + new Date(), userBo.getName()));
         }
 
         // 更新WITHDRAW记录
@@ -107,13 +107,13 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Invalid parameter");
         }
         
-        if (!authManager.isSystemAdmin(userBo.getId())) {
-            if (userBo.getId() != withdrawBo.getUserId()) {
-                throw new AuthenticationException("User deleting someone else's withdraw");
-            }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
         }
         else {
-            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
+            if (userBo.getId() != withdrawBo.getUserId()) {
+                throw new AuthenticationException("User updating someone else's withdraw");
+            }
         }
 
         // 删除WITHDRAW记录
@@ -135,13 +135,14 @@ public class WithdrawManagerImpl implements WithdrawManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
         WithdrawEntityExt withdrawEntity = withdrawBo == null ? null : WithdrawConverter.fromBo(withdrawBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
         //admin and system admins can query user's withdraws
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call queryat " + new Date(), userBo.getName()));
         }
         else {
             //otherwise user can only query their own, thus making an UserId necessary

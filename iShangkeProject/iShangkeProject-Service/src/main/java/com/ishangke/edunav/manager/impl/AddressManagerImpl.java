@@ -34,6 +34,7 @@ public class AddressManagerImpl implements AddressManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
+    
     @Autowired
     private AuthManager authManager;
 

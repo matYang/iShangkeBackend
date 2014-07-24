@@ -1,5 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
@@ -20,6 +23,7 @@ import com.ishangke.edunav.manager.converter.ContactConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 
 @Component
 public class ContactManagerImpl implements ContactManager {
@@ -27,147 +31,140 @@ public class ContactManagerImpl implements ContactManager {
 
     @Autowired
     private ContactEntityExtMapper contactMapper;
+
+    @Autowired
+    private GroupEntityExtMapper groupMapper;
+    
     @Autowired
     private AuthManager authManager;
 
     @Override
     public ContactBo createContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
-        if (contactBo == null) {
-            throw new ManagerException("Contact Create Failed: contactBo is null");
-        }
-        if (userBo == null) {
-            throw new ManagerException("Contact Create Failed: userBo is null");
+        if (contactBo == null || userBo == null) {
+            throw new ManagerException("Invalid parameter");
         }
 
-        // 只有用户自己才能创建与自己相关的联系人
-        if (contactBo.getUserId() != userBo.getId()) {
-            throw new ManagerException("Contact Create Failed: Invalid user");
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at " + new Date(), userBo.getName()));
+        }
+        else {
+            if (userBo.getId() != contactBo.getUserId()) {
+                throw new AuthenticationException("User creating someone else's contact");
+            }
         }
 
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-
+        
+        int result = 0;
         try {
-            int result = 0;
-            contactEntity.setUserId(userEntity.getId());
             result = contactMapper.add(contactEntity);
-            if (result > 0) {
-                return ContactConverter.toBo(contactEntity);
-            } else {
-                throw new ManagerException("Contact Create Failed");
-            }
         } catch (Throwable t) {
-            throw new ManagerException("Contact Create Failed", t);
+            throw new ManagerException("Contact creation failed for user: " + userEntity.getId(), t);
+        }
+        if (result > 0) {
+            return ContactConverter.toBo(contactEntity);
+        } else {
+            throw new ManagerException("Contact creation failed for user: " + userEntity.getId());
         }
     }
 
     @Override
     public ContactBo updateContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
-        if (contactBo == null) {
-            throw new ManagerException("Contact Update Failed: contactBo is null");
-        }
-        if (userBo == null) {
-            throw new ManagerException("Contact Update Failed: userBo is null");
+        if (contactBo == null || userBo == null) {
+            throw new ManagerException("Invalid parameter");
         }
 
-        // 只有用户自己才能更新与自己相关的联系人
-        if (contactBo.getUserId() != userBo.getId()) {
-            throw new ManagerException("Contact Create Failed: Invalid user");
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at " + new Date(), userBo.getName()));
+        }
+        else {
+            if (userBo.getId() != contactBo.getUserId()) {
+                throw new AuthenticationException("User updating someone else's contact");
+            }
         }
 
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // Check Ids
-        if (contactEntity.getUserId() == 0) {
-            throw new ManagerException("Contact Update Failed: 联系人的userId为0");
-        }
-        if (contactEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("Contact Update Failed: 用户id与联系人的userId不匹配");
-        }
-
         try {
             contactMapper.update(contactEntity);
-            return ContactConverter.toBo(contactEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Contact Update Failed", t);
+            throw new ManagerException("Contact update failed for user: " + userEntity.getId(), t);
         }
+        
+        return ContactConverter.toBo(contactEntity);
     }
 
     @Override
     public ContactBo deleteContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
-        if (contactBo == null) {
-            throw new ManagerException("Contact Delete Failed: contactBo is null");
-        }
-        if (userBo == null) {
-            throw new ManagerException("Contact Delete Failed: userBo is null");
+        if (contactBo == null || userBo == null) {
+            throw new ManagerException("Invalid parameter");
         }
 
-        // 只有用户自己才能删除与自己相关的联系人
-        if (contactBo.getUserId() != userBo.getId()) {
-            throw new ManagerException("Contact Create Failed: Invalid user");
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at " + new Date(), userBo.getName()));
+        }
+        else {
+            if (userBo.getId() != contactBo.getUserId()) {
+                throw new AuthenticationException("User deleting someone else's contact");
+            }
         }
 
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        // Check Ids
-        if (contactEntity.getUserId() == 0) {
-            throw new ManagerException("Contact Delete Failed: 联系人的userId为0");
-        }
-        if (contactEntity.getUserId() != userEntity.getId()) {
-            throw new ManagerException("Contact Delete Failed: 用户id与联系人的userId不匹配");
-        }
-
         try {
+            contactEntity.setDeleted(1);
             contactMapper.deleteById(contactEntity.getId());
-            return ContactConverter.toBo(contactEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Contact Delete Failed", t);
+            throw new ManagerException("Contact deletion failed for user: " + userEntity.getId(), t);
         }
+        
+        return ContactConverter.toBo(contactEntity);
     }
 
     @Override
     public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo) {
-        PaginationEntity pageEntity = null;
-
-        // Check Null
-        if (contactBo == null) {
-            throw new ManagerException("Contact Query Failed: contactBo is null");
-        }
         if (userBo == null) {
-            throw new ManagerException("Contact Query Failed: userBo is null");
-        }
-        if (paginationBo != null) {
-            pageEntity = PaginationConverter.fromBo(paginationBo);
+            throw new ManagerException("Invalid parameter");
         }
 
-        // 只有用户自己才能删除与自己相关的联系人
-        if (contactBo.getUserId() != userBo.getId()) {
-            throw new ManagerException("Contact Create Failed: Invalid user");
-        }
-
-        // Convert
-        ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
+        ContactEntityExt contactEntity = contactBo == null ? null : ContactConverter.fromBo(contactBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        List<ContactEntityExt> contactList = null;
-        List<ContactBo> resultList = null;
 
-        try {
-            contactList = contactMapper.list(contactEntity, pageEntity);
-            for (ContactEntityExt contactPo : contactList) {
-                resultList.add(ContactConverter.toBo(contactPo));
-            }
-            return resultList;
-        } catch (Throwable t) {
-            throw new ManagerException("Contact Query Failed", t);
+        
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
+        else {
+            
+            if (userBo.getId() != contactBo.getUserId()) {
+                throw new AuthenticationException("User querying someone else's contact");
+            }
+        }
+        
+        List<ContactEntityExt> results = null;
+        try {
+            results = contactMapper.list(contactEntity, page);
+        } catch (Throwable t) {
+            throw new ManagerException("Contact query failed for user: " + userEntity.getId(), t);
+        }
+        
+        if (results == null) {
+            return new ArrayList<ContactBo>();
+        }
+        List<ContactBo> convertedResults = new ArrayList<ContactBo>();
+        for (ContactEntityExt contactPo : results) {
+            convertedResults.add(ContactConverter.toBo(contactPo));
+        }
+        return convertedResults;
     }
-
 }
