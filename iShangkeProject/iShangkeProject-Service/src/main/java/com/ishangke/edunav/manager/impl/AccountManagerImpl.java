@@ -183,7 +183,6 @@ public class AccountManagerImpl implements AccountManager {
             }
         }
         
-        
         List<AccountHistoryEntityExt> results = null;
         try {
             results = accountHistoryMapper.list(accountHistoryEntity, page);

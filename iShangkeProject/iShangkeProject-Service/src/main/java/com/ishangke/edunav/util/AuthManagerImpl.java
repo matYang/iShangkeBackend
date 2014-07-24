@@ -17,11 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfigObj;
 import com.ishangke.edunav.manager.common.SessionConfig.AuthConfig;
@@ -38,6 +38,9 @@ public class AuthManagerImpl implements AuthManager {
 
     @Autowired
     private CacheManager cache;
+    
+    @Autowired
+    private AuthManager authManager;
     
     @Autowired
     private RoleEntityExtMapper roleMapper;
