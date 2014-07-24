@@ -11,6 +11,7 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACCOUNT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ACCOUNT_DELETED" property="deleted" jdbcType="INTEGER" />
+     <result column="ACCOUNT_ACCOUNT_NUMBER" property="deleted" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Account_Base_Column_List">
@@ -22,7 +23,8 @@
     ACCOUNT.CREATE_TIME
     ACCOUNT_CREATETIME,
     ACCOUNT.ENABLED ACCOUNT_ENABLED,
-    ACCOUNT.DELETED ACCOUNT_DELETED
+    ACCOUNT.DELETED ACCOUNT_DELETED,
+    ACCOUNT.ACCOUNT_NUMBER ACCOUNT_ACCOUNTNUMBER
   </sql>
   <!-- add -->
   <insert id="add" parameterType="AccountEntityExt">
@@ -46,6 +48,9 @@
       <if test="enabled != null">
         ENABLED,
       </if>
+      <if test="accountNumber != null">
+        ACCOUNT_NUMBER,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -65,6 +70,9 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="accountNumber != null">
+        #{accountNumber,jdbcType=VARCHAR},
       </if>
     </trim>
     <!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER"> ACCOUNT has no id 
@@ -96,6 +104,9 @@
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="accountNumber != null">
+        ACCOUNT_NUMBER = #{accountNumber,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -178,6 +189,9 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND ACCOUNT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+      <if test="entity.accountNumber != null and !entity.accountNumber.equals('')">
+        AND CIRCLE.ACCOUNT_NUMBER LIKE "%"#{entity.accountNumber,jdbcType=VARCHAR}"%"
+      </if>
       <!-- page -->
       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
@@ -254,6 +268,9 @@
 
       <if test="entity.enabled != null and entity.enabled != 0">
         AND ACCOUNT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="entity.accountNumber != null and !entity.accountNumber.equals('')">
+        AND CIRCLE.ACCOUNT_NUMBER LIKE "%"#{entity.accountNumber,jdbcType=VARCHAR}"%"
       </if>
     </if>
     ) AS total
