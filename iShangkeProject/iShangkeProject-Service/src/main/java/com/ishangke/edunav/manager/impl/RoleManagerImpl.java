@@ -1,15 +1,23 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.RoleBo;
+import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.RoleManager;
+import com.ishangke.edunav.manager.converter.RoleConverter;
 
 @Component
 public class RoleManagerImpl implements RoleManager {
+
+    @Autowired
+    private RoleEntityExtMapper roleMapper;
 
     @Override
     public int add(RoleBo roleBo) {
@@ -43,8 +51,12 @@ public class RoleManagerImpl implements RoleManager {
 
     @Override
     public List<RoleBo> listAll() {
-        // TODO Auto-generated method stub
-        return null;
+        List<RoleEntityExt> roleList = roleMapper.listAll();
+        List<RoleBo> result = new ArrayList<>();
+        for (RoleEntityExt roleEntity : roleList) {
+            result.add(RoleConverter.toBo(roleEntity));
+        }
+        return result;
     }
 
     @Override
