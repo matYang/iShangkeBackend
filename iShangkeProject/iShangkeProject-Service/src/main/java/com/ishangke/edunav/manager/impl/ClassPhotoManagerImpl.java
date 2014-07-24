@@ -51,16 +51,19 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin  || admin [%s] call createClassPhoto at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -95,16 +98,19 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call updateClassPhoto at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -134,16 +140,20 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -173,16 +183,22 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
+        else {
+            if (classPhotoBo == null) {
+                throw new ManagerException("ClassPhotoBo null for non-admin user at query"); 
+             }
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -250,22 +266,29 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     
     @Override
     public List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo) {
+        if (userBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
         // 机构管理员只能查询本机构的图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == partnerId) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == partnerId) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }

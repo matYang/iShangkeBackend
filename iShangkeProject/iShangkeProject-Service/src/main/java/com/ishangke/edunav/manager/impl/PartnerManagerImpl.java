@@ -100,16 +100,19 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == partnerBo.getId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin [%s] call updatePartner at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin[%s] call updatePartner at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == partnerBo.getId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+        
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }

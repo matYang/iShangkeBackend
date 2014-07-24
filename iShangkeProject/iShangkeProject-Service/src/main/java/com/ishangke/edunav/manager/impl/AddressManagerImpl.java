@@ -50,16 +50,19 @@ public class AddressManagerImpl implements AddressManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == addressBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call createAddress at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -94,16 +97,19 @@ public class AddressManagerImpl implements AddressManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == addressBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call updateAddress at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -134,16 +140,19 @@ public class AddressManagerImpl implements AddressManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == addressBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call deleteAddress at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -174,16 +183,22 @@ public class AddressManagerImpl implements AddressManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == addressBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
         }
+        else {
+            if (addressBo == null) {
+                throw new ManagerException("AddressBo null for non-admin user at query"); 
+            }
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }

@@ -51,16 +51,19 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == teacherBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call createTeacher at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -95,16 +98,19 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == teacherBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call updateTeacher at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -135,16 +141,19 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == teacherBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call deleteTeacher at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -175,16 +184,22 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == teacherBo.getPartnerId()) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
         }
+        else {
+            if (teacherBo == null) {
+               throw new ManagerException("TeacherBo null for non-admin user at query"); 
+            }
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -253,22 +268,29 @@ public class TeacherManagerImpl implements TeacherManager {
 
     @Override
     public List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo) {
+        if (userBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
         // 验证userBo是否是否属于同一家机构
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
             throw new ManagerException("unlogin user");
         }
         boolean isSameGroup = false;
-        for (GroupEntityExt g : groupList) {
-            if (g.getPartnerId() == partnerId) {
-                isSameGroup = true;
-                break;
-            }
-        }
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
         }
+        else {
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId() == partnerId) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+        }
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
