@@ -8,29 +8,63 @@ import com.ishangke.edunav.web.model.CourseCommentVo;
 public class CourseCommentConverter {
     public static CourseCommentBo fromModel(CourseCommentVo vo) {
         CourseCommentBo courseCommentBo = new CourseCommentBo();
-        courseCommentBo.setAttitudeRating(vo.getAttitudeRating());
-        courseCommentBo.setAttitudeRatingEnd(vo.getAttitudeRatingEnd());
-        courseCommentBo.setAttitudeRatingStart(vo.getAttitudeRatingStart());
-        courseCommentBo.setConditionRating(vo.getConditionRating());
-        courseCommentBo.setConditionRatingEnd(vo.getConditionRatingEnd());
-        courseCommentBo.setConditionRatingStart(vo.getConditionRatingStart());
-        courseCommentBo.setContent(vo.getContent());
-        courseCommentBo.setCourseTemplateId(vo.getCourseTemplateId());
-        courseCommentBo.setCourseTemplateIdSet(vo.getCourseTemplateIdSet());
+        if (vo.getAttitudeRating() != null) {
+            courseCommentBo.setAttitudeRating(vo.getAttitudeRating());
+        }
+        if (vo.getAttitudeRatingEnd() != null) {
+            courseCommentBo.setAttitudeRatingEnd(vo.getAttitudeRatingEnd());
+        }
+        if (vo.getAttitudeRatingStart() != null) {
+            courseCommentBo.setAttitudeRatingStart(vo.getAttitudeRatingStart());
+        }
+        if (vo.getConditionRating() != null) {
+            courseCommentBo.setConditionRating(vo.getConditionRating());
+        }
+        if (vo.getConditionRatingEnd() != null) {
+            courseCommentBo.setConditionRatingEnd(vo.getConditionRatingEnd());
+        }
+        if (vo.getConditionRatingStart() != null) {
+            courseCommentBo.setConditionRatingStart(vo.getConditionRatingStart());
+        }
+        if (vo.getContent() != null) {
+            courseCommentBo.setContent(vo.getContent());
+        }
+        if (vo.getCourseTemplateId() != null) {
+            courseCommentBo.setCourseTemplateId(vo.getCourseTemplateId());
+        }
+        if (vo.getCourseTemplateIdSet() != null) {
+            courseCommentBo.setCourseTemplateIdSet(vo.getCourseTemplateIdSet());
+        }
+        if (vo.getEnabled() != null) {
+            courseCommentBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            courseCommentBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            courseCommentBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getSatisfactionRating() != null) {
+            courseCommentBo.setSatisfactionRating(vo.getSatisfactionRating());
+        }
+        if (vo.getSatisfactionRatingEnd() != null) {
+            courseCommentBo.setSatisfactionRatingEnd(vo.getSatisfactionRatingEnd());
+        }
+        if (vo.getTotalRatingStart() != null) {
+            courseCommentBo.setTotalRatingStart(vo.getTotalRatingStart());
+        }
+        if (vo.getUserId() != null) {
+            courseCommentBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            courseCommentBo.setUserIdSet(vo.getUserIdSet());
+        }
         courseCommentBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         courseCommentBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         courseCommentBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        courseCommentBo.setEnabled(vo.getEnabled());
-        courseCommentBo.setId(vo.getId());
-        courseCommentBo.setIdSet(vo.getIdSet());
         courseCommentBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         courseCommentBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         courseCommentBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        courseCommentBo.setSatisfactionRating(vo.getSatisfactionRating());
-        courseCommentBo.setSatisfactionRatingEnd(vo.getSatisfactionRatingEnd());
-        courseCommentBo.setTotalRatingStart(vo.getTotalRatingStart());
-        courseCommentBo.setUserId(vo.getUserId());
-        courseCommentBo.setUserIdSet(vo.getUserIdSet());
         return courseCommentBo;
     }
 

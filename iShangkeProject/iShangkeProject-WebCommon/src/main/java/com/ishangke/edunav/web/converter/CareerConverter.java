@@ -8,17 +8,27 @@ import com.ishangke.edunav.web.model.CareerVo;
 public class CareerConverter {
     public static CareerBo fromModel(CareerVo vo) {
         CareerBo careerBo = new CareerBo();
+        if (vo.getEnabled() != null) {
+            careerBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            careerBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            careerBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getName() != null) {
+            careerBo.setName(vo.getName());
+        }
+        if (vo.getValue() != null) {
+            careerBo.setValue(vo.getValue());
+        }
         careerBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         careerBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         careerBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        careerBo.setEnabled(vo.getEnabled());
-        careerBo.setId(vo.getId());
-        careerBo.setIdSet(vo.getIdSet());
         careerBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         careerBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         careerBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        careerBo.setName(vo.getName());
-        careerBo.setValue(vo.getValue());
         return careerBo;
     }
 

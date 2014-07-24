@@ -8,25 +8,57 @@ import com.ishangke.edunav.web.model.BookingHistoryVo;
 public class BookingHistoryConverter {
     public static BookingHistoryBo fromModel(BookingHistoryVo vo) {
         BookingHistoryBo bookingHistoryBo = new BookingHistoryBo();
-        bookingHistoryBo.setBookingId(vo.getBookingId());
-        bookingHistoryBo.setBookingIdSet(vo.getBookingIdSet());
+        if (vo.getBookingId() != null) {
+            bookingHistoryBo.setBookingId(vo.getBookingId());
+        }
+        if (vo.getBookingIdSet() != null) {
+            bookingHistoryBo.setBookingIdSet(vo.getBookingIdSet());
+        }
+        if (vo.getEnabled() != null) {
+            bookingHistoryBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            bookingHistoryBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            bookingHistoryBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getNormal() != null) {
+            bookingHistoryBo.setNormal(vo.getNormal());
+        }
+        if (vo.getNormalSet() != null) {
+            bookingHistoryBo.setNormalSet(vo.getNormalSet());
+        }
+        if (vo.getOptName() != null) {
+            bookingHistoryBo.setOptName(vo.getOptName());
+        }
+        if (vo.getOptNameSet() != null) {
+            bookingHistoryBo.setOptNameSet(vo.getOptNameSet());
+        }
+        if (vo.getPostStatus() != null) {
+            bookingHistoryBo.setPostStatus(vo.getPostStatus());
+        }
+        if (vo.getPostStatusSet() != null) {
+            bookingHistoryBo.setPostStatusSet(vo.getPostStatusSet());
+        }
+        if (vo.getPreStatus() != null) {
+            bookingHistoryBo.setPreStatus(vo.getPreStatus());
+        }
+        if (vo.getPreStatusSet() != null) {
+            bookingHistoryBo.setPreStatusSet(vo.getPreStatusSet());
+        }
+        if (vo.getRemark() != null) {
+            bookingHistoryBo.setRemark(vo.getRemark());
+        }
+        if (vo.getUserId() != null) {
+            bookingHistoryBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            bookingHistoryBo.setUserIdSet(vo.getUserIdSet());
+        }
         bookingHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         bookingHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         bookingHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        bookingHistoryBo.setEnabled(vo.getEnabled());
-        bookingHistoryBo.setId(vo.getId());
-        bookingHistoryBo.setIdSet(vo.getIdSet());
-        bookingHistoryBo.setNormal(vo.getNormal());
-        bookingHistoryBo.setNormalSet(vo.getNormalSet());
-        bookingHistoryBo.setOptName(vo.getOptName());
-        bookingHistoryBo.setOptNameSet(vo.getOptNameSet());
-        bookingHistoryBo.setPostStatus(vo.getPostStatus());
-        bookingHistoryBo.setPostStatusSet(vo.getPostStatusSet());
-        bookingHistoryBo.setPreStatus(vo.getPreStatus());
-        bookingHistoryBo.setPreStatusSet(vo.getPreStatusSet());
-        bookingHistoryBo.setRemark(vo.getRemark());
-        bookingHistoryBo.setUserId(vo.getUserId());
-        bookingHistoryBo.setUserIdSet(vo.getUserIdSet());
         return bookingHistoryBo;
     }
 

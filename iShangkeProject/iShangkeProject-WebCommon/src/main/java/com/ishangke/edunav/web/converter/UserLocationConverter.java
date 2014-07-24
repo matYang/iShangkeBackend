@@ -8,15 +8,27 @@ import com.ishangke.edunav.web.model.UserLocationVo;
 public class UserLocationConverter {
     public static UserLocationBo fromModel(UserLocationVo vo) {
         UserLocationBo userLocationBo = new UserLocationBo();
-        userLocationBo.setId(vo.getId());
-        userLocationBo.setIdSet(vo.getIdSet());
+        if (vo.getId() != null) {
+            userLocationBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            userLocationBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getLocationId() != null) {
+            userLocationBo.setLocationId(vo.getLocationId());
+        }
+        if (vo.getLocationIdSet() != null) {
+            userLocationBo.setLocationIdSet(vo.getLocationIdSet());
+        }
+        if (vo.getUserId() != null) {
+            userLocationBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            userLocationBo.setUserIdSet(vo.getUserIdSet());
+        }
         userLocationBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         userLocationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         userLocationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        userLocationBo.setLocationId(vo.getLocationId());
-        userLocationBo.setLocationIdSet(vo.getLocationIdSet());
-        userLocationBo.setUserId(vo.getUserId());
-        userLocationBo.setUserIdSet(vo.getUserIdSet());
         return userLocationBo;
     }
 

@@ -8,20 +8,36 @@ import com.ishangke.edunav.web.model.ContactVo;
 public class ContactConverter {
     public static ContactBo fromModel(ContactVo vo) {
         ContactBo contactBo = new ContactBo();
+        if (vo.getEmail() != null) {
+            contactBo.setEmail(vo.getEmail());
+        }
+        if (vo.getEnabled() != null) {
+            contactBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            contactBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            contactBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getName() != null) {
+            contactBo.setName(vo.getName());
+        }
+        if (vo.getPhone() != null) {
+            contactBo.setPhone(vo.getPhone());
+        }
+        if (vo.getUserId() != null) {
+            contactBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            contactBo.setUserIdSet(vo.getUserIdSet());
+        }
         contactBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         contactBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         contactBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        contactBo.setEmail(vo.getEmail());
-        contactBo.setEnabled(vo.getEnabled());
-        contactBo.setId(vo.getId());
-        contactBo.setIdSet(vo.getIdSet());
         contactBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         contactBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         contactBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        contactBo.setName(vo.getName());
-        contactBo.setPhone(vo.getPhone());
-        contactBo.setUserId(vo.getUserId());
-        contactBo.setUserIdSet(vo.getUserIdSet());
         return contactBo;
     }
 

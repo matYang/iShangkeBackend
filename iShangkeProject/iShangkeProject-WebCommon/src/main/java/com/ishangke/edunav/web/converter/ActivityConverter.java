@@ -8,17 +8,27 @@ import com.ishangke.edunav.web.model.ActivityVo;
 public class ActivityConverter {
     public static ActivityBo fromModel(ActivityVo vo) {
         ActivityBo activityBo = new ActivityBo();
-        activityBo.setCourseId(vo.getCourseId());
-        activityBo.setCourseIdSet(vo.getCourseIdSet());
+        if (vo.getCourseId() != null) {
+            activityBo.setCourseId(vo.getCourseId());
+        }
+        if (vo.getCourseIdSet() != null) {
+            activityBo.setCourseIdSet(vo.getCourseIdSet());
+        }
+        if (vo.getEnabled() != null) {
+            activityBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getStatus() != null) {
+            activityBo.setStatus(vo.getStatus());
+        }
+        if (vo.getStatusSet() != null) {
+            activityBo.setStatusSet(vo.getStatusSet());
+        }
         activityBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         activityBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         activityBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        activityBo.setEnabled(vo.getEnabled());
         activityBo.setEndTime(vo.getEndTime() == null ? Constant.DEFAULTNULL : vo.getEndTime().getTimeInMillis());
         activityBo.setEndTimeEnd(vo.getEndTimeEnd() == null ? Constant.DEFAULTNULL : vo.getEndTimeEnd().getTimeInMillis());
         activityBo.setEndTimeStart(vo.getEndTimeStart() == null ? Constant.DEFAULTNULL : vo.getEndTimeStart().getTimeInMillis());
-        activityBo.setStatus(vo.getStatus());
-        activityBo.setStatusSet(vo.getStatusSet());
         return activityBo;
     }
 

@@ -8,24 +8,48 @@ import com.ishangke.edunav.web.model.AddressVo;
 public class AddressConverter {
    public static AddressBo fromModel(AddressVo vo) {
        AddressBo addressBo = new AddressBo();
+       if (vo.getDetail() != null) {
+            addressBo.setDetail(vo.getDetail());
+       }
+       if (vo.getEnabled() != null) {
+            addressBo.setEnabled(vo.getEnabled());
+       }
+       if (vo.getId() != null) {
+            addressBo.setId(vo.getId());
+       }
+       if (vo.getIdSet() != null) {
+            addressBo.setIdSet(vo.getIdSet());
+       }
+       if (vo.getLat() != null) {
+            addressBo.setLat(vo.getLat());
+       }
+       if (vo.getLatEnd() != null) {
+            addressBo.setLatEnd(vo.getLatEnd());
+       }
+       if (vo.getLatStart() != null) {
+            addressBo.setLatStart(vo.getLatStart());
+       }
+       if (vo.getLng() != null) {
+            addressBo.setLng(vo.getLng());
+       }
+       if (vo.getLngEnd() != null) {
+            addressBo.setLngEnd(vo.getLngEnd());
+       }
+       if (vo.getLngStart() != null) {
+            addressBo.setLngStart(vo.getLngStart());
+       }
+       if (vo.getPartnerId() != null) {
+            addressBo.setPartnerId(vo.getPartnerId());
+       }
+       if (vo.getPartnerIdSet() != null) {
+            addressBo.setPartnerIdSet(vo.getPartnerIdSet());
+       }
        addressBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
        addressBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
        addressBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-       addressBo.setDetail(vo.getDetail());
-       addressBo.setEnabled(vo.getEnabled());
-       addressBo.setId(vo.getId());
-       addressBo.setIdSet(vo.getIdSet());
        addressBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
        addressBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
        addressBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-       addressBo.setLat(vo.getLat());
-       addressBo.setLatEnd(vo.getLatEnd());
-       addressBo.setLatStart(vo.getLatStart());
-       addressBo.setLng(vo.getLng());
-       addressBo.setLngEnd(vo.getLngEnd());
-       addressBo.setLngStart(vo.getLngStart());
-       addressBo.setPartnerId(vo.getPartnerId());
-       addressBo.setPartnerIdSet(vo.getPartnerIdSet());
        return addressBo;
    }
 

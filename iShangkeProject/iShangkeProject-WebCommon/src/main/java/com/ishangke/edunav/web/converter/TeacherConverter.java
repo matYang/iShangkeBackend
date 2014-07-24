@@ -8,24 +8,48 @@ import com.ishangke.edunav.web.model.TeacherVo;
 public class TeacherConverter {
     public static TeacherBo fromModel(TeacherVo vo) {
         TeacherBo teacherBo = new TeacherBo();
+        if (vo.getEnabled() != null) {
+            teacherBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            teacherBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            teacherBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getImgUrl() != null) {
+            teacherBo.setImgUrl(vo.getImgUrl());
+        }
+        if (vo.getIntro() != null) {
+            teacherBo.setIntro(vo.getIntro());
+        }
+        if (vo.getName() != null) {
+            teacherBo.setName(vo.getName());
+        }
+        if (vo.getPartnerId() != null) {
+            teacherBo.setPartnerId(vo.getPartnerId());
+        }
+        if (vo.getPartnerIdSet() != null) {
+            teacherBo.setPartnerIdSet(vo.getPartnerIdSet());
+        }
+        if (vo.getPopularity() != null) {
+            teacherBo.setPopularity(vo.getPopularity());
+        }
+        if (vo.getPopularityEnd() != null) {
+            teacherBo.setPopularityEnd(vo.getPopularityEnd());
+        }
+        if (vo.getPopularitySet() != null) {
+            teacherBo.setPopularitySet(vo.getPopularitySet());
+        }
+        if (vo.getPopularityStart() != null) {
+            teacherBo.setPopularityStart(vo.getPopularityStart());
+        }
         teacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         teacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         teacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        teacherBo.setEnabled(vo.getEnabled());
-        teacherBo.setId(vo.getId());
-        teacherBo.setIdSet(vo.getIdSet());
-        teacherBo.setImgUrl(vo.getImgUrl());
-        teacherBo.setIntro(vo.getIntro());
         teacherBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         teacherBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         teacherBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        teacherBo.setName(vo.getName());
-        teacherBo.setPartnerId(vo.getPartnerId());
-        teacherBo.setPartnerIdSet(vo.getPartnerIdSet());
-        teacherBo.setPopularity(vo.getPopularity());
-        teacherBo.setPopularityEnd(vo.getPopularityEnd());
-        teacherBo.setPopularitySet(vo.getPopularitySet());
-        teacherBo.setPopularityStart(vo.getPopularityStart());
         return teacherBo;
     }
 

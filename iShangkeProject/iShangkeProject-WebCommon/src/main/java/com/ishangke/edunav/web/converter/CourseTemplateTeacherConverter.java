@@ -8,15 +8,27 @@ import com.ishangke.edunav.web.model.CourseTemplateTeacherVo;
 public class CourseTemplateTeacherConverter {
     public static CourseTemplateTeacherBo fromModel(CourseTemplateTeacherVo vo) {
         CourseTemplateTeacherBo courseTemplateTeacherBo = new CourseTemplateTeacherBo();
-        courseTemplateTeacherBo.setCourseTemplateId(vo.getCourseTemplateId());
-        courseTemplateTeacherBo.setCourseTemplateIdSet(vo.getCourseTemplateIdSet());
+        if (vo.getCourseTemplateId() != null) {
+            courseTemplateTeacherBo.setCourseTemplateId(vo.getCourseTemplateId());
+        }
+        if (vo.getCourseTemplateIdSet() != null) {
+            courseTemplateTeacherBo.setCourseTemplateIdSet(vo.getCourseTemplateIdSet());
+        }
+        if (vo.getId() != null) {
+            courseTemplateTeacherBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            courseTemplateTeacherBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getTeacherId() != null) {
+            courseTemplateTeacherBo.setTeacherId(vo.getTeacherId());
+        }
+        if (vo.getTeacherIdSet() != null) {
+            courseTemplateTeacherBo.setTeacherIdSet(vo.getTeacherIdSet());
+        }
         courseTemplateTeacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         courseTemplateTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         courseTemplateTeacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        courseTemplateTeacherBo.setId(vo.getId());
-        courseTemplateTeacherBo.setIdSet(vo.getIdSet());
-        courseTemplateTeacherBo.setTeacherId(vo.getTeacherId());
-        courseTemplateTeacherBo.setTeacherIdSet(vo.getTeacherIdSet());
         return courseTemplateTeacherBo;
     }
 

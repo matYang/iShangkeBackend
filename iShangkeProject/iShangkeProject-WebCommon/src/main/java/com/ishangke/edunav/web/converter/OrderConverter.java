@@ -8,27 +8,54 @@ import com.ishangke.edunav.web.model.OrderVo;
 public class OrderConverter {
     public static OrderBo fromModel(OrderVo vo) {
         OrderBo orderBo = new OrderBo();
-        orderBo.setBookingId(vo.getBookingId());
-        orderBo.setBookingIdSet(vo.getBookingIdSet());
+        if (vo.getBookingId() != null) {
+            orderBo.setBookingId(vo.getBookingId());
+        }
+        if (vo.getBookingIdSet() != null) {
+            orderBo.setBookingIdSet(vo.getBookingIdSet());
+        }
+        if (vo.getEnabled() != null) {
+            orderBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            orderBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            orderBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getPrice() != null) {
+            orderBo.setPrice(vo.getPrice());
+        }
+        if (vo.getPriceEnd() != null) {
+            orderBo.setPriceEnd(vo.getPriceEnd());
+        }
+        if (vo.getPriceStart() != null) {
+            orderBo.setPriceStart(vo.getPriceStart());
+        }
+        if (vo.getRuningNumber() != null) {
+            orderBo.setRuningNumber(vo.getRuningNumber());
+        }
+        if (vo.getStatus() != null) {
+            orderBo.setStatus(vo.getStatus());
+        }
+        if (vo.getStatusSet() != null) {
+            orderBo.setStatusSet(vo.getStatusSet());
+        }
+        if (vo.getType() != null) {
+            orderBo.setType(vo.getType());
+        }
+        if (vo.getReference() != null) {
+            orderBo.setReference(vo.getReference());
+        }
+        if (vo.getSign() != null) {
+            orderBo.setSign(vo.getSign());
+        }
         orderBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         orderBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         orderBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        orderBo.setEnabled(vo.getEnabled());
-        orderBo.setId(vo.getId());
-        orderBo.setIdSet(vo.getIdSet());
-        orderBo.setPrice(vo.getPrice());
-        orderBo.setPriceEnd(vo.getPriceEnd());
-        orderBo.setPriceStart(vo.getPriceStart());
-        orderBo.setRuningNumber(vo.getRuningNumber());
-        orderBo.setStatus(vo.getStatus());
-        orderBo.setStatusSet(vo.getStatusSet());
-        orderBo.setType(vo.getType());
-        orderBo.setReference(vo.getReference());
-        orderBo.setSign(vo.getSign());
         orderBo.setConfirmedTime(vo.getConfirmedTime() == null ? Constant.DEFAULTNULL : vo.getConfirmedTime().getTimeInMillis());
         orderBo.setConfirmedTimeEnd(vo.getConfirmedTimeEnd() == null ? Constant.DEFAULTNULL : vo.getConfirmedTimeEnd().getTimeInMillis());
         orderBo.setConfirmedTimeStart(vo.getConfirmedTimeStart() == null ? Constant.DEFAULTNULL : vo.getConfirmedTimeStart().getTimeInMillis());
-      
         return orderBo;
     }
 
