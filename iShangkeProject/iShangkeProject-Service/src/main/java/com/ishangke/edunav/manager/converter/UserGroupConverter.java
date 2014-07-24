@@ -8,22 +8,22 @@ import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 public class UserGroupConverter {
     public static UserGroupBo toBo(UserGroupEntityExt e) {
         UserGroupBo userGroupBo = new UserGroupBo();
-        if (e.getGroupId()) {
+        if (e.getGroupId() != null) {
             userGroupBo.setGroupId(e.getGroupId());
         }
-        if (e.getGroupIdSet()) {
+        if (e.getGroupIdSet() != null) {
             userGroupBo.setGroupIdSet(e.getGroupIdSet());
         }
-        if (e.getId()) {
+        if (e.getId() != null) {
             userGroupBo.setId(e.getId());
         }
-        if (e.getIdSet()) {
+        if (e.getIdSet() != null) {
             userGroupBo.setIdSet(e.getIdSet());
         }
-        if (e.getUserId()) {
+        if (e.getUserId() != null) {
             userGroupBo.setUserId(e.getUserId());
         }
-        if (e.getUserIdSet()) {
+        if (e.getUserIdSet() != null) {
             userGroupBo.setUserIdSet(e.getUserIdSet());
         }
         userGroupBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());

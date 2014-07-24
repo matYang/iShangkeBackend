@@ -8,19 +8,33 @@ import com.ishangke.edunav.web.model.CreditHistoryVo;
 public class CreditHistoryConverter {
     public static CreditHistoryBo fromModel(CreditHistoryVo vo) {
         CreditHistoryBo creditHistoryBo = new CreditHistoryBo();
-        creditHistoryBo.setCharge(vo.getCharge());
-        creditHistoryBo.setChargeEnd(vo.getChargeEnd());
-        creditHistoryBo.setChargeStart(vo.getChargeStart());
+        if (vo.getCharge() != null) {
+            creditHistoryBo.setCharge(vo.getCharge());
+        }
+        if (vo.getChargeEnd() != null) {
+            creditHistoryBo.setChargeEnd(vo.getChargeEnd());
+        }
+        if (vo.getChargeStart() != null) {
+            creditHistoryBo.setChargeStart(vo.getChargeStart());
+        }
+        if (vo.getId() != null) {
+            creditHistoryBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            creditHistoryBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getUserId() != null) {
+            creditHistoryBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            creditHistoryBo.setUserIdSet(vo.getUserIdSet());
+        }
         creditHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         creditHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         creditHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        creditHistoryBo.setId(vo.getId());
-        creditHistoryBo.setIdSet(vo.getIdSet());
         creditHistoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         creditHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         creditHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        creditHistoryBo.setUserId(vo.getUserId());
-        creditHistoryBo.setUserIdSet(vo.getUserIdSet());
         return creditHistoryBo;
     }
 

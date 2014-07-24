@@ -8,20 +8,36 @@ import com.ishangke.edunav.web.model.GroupVo;
 public class GroupConverter {
     public static GroupBo fromModel(GroupVo vo) {
         GroupBo groupBo = new GroupBo();
+        if (vo.getEnabled() != null) {
+            groupBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            groupBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            groupBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getName() != null) {
+            groupBo.setName(vo.getName());
+        }
+        if (vo.getPartnerId() != null) {
+            groupBo.setPartnerId(vo.getPartnerId());
+        }
+        if (vo.getPartnerIdSet() != null) {
+            groupBo.setPartnerIdSet(vo.getPartnerIdSet());
+        }
+        if (vo.getRoleId() != null) {
+            groupBo.setRoleId(vo.getRoleId());
+        }
+        if (vo.getRoleIdSet() != null) {
+            groupBo.setRoleIdSet(vo.getRoleIdSet());
+        }
         groupBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         groupBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         groupBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        groupBo.setEnabled(vo.getEnabled());
-        groupBo.setId(vo.getId());
-        groupBo.setIdSet(vo.getIdSet());
         groupBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         groupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         groupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        groupBo.setName(vo.getName());
-        groupBo.setPartnerId(vo.getPartnerId());
-        groupBo.setPartnerIdSet(vo.getPartnerIdSet());
-        groupBo.setRoleId(vo.getRoleId());
-        groupBo.setRoleIdSet(vo.getRoleIdSet());
         return groupBo;
     }
 

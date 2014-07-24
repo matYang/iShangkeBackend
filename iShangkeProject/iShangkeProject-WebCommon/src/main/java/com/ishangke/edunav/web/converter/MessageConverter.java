@@ -8,21 +8,39 @@ import com.ishangke.edunav.web.model.MessageVo;
 public class MessageConverter {
     public static MessageBo fromModel(MessageVo vo) {
         MessageBo messageBo = new MessageBo();
+        if (vo.getId() != null) {
+            messageBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            messageBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getMessageText() != null) {
+            messageBo.setMessageText(vo.getMessageText());
+        }
+        if (vo.getUserFromId() != null) {
+            messageBo.setUserFromId(vo.getUserFromId());
+        }
+        if (vo.getUserToId() != null) {
+            messageBo.setUserToId(vo.getUserToId());
+        }
+        if (vo.getStatus() != null) {
+            messageBo.setStatus(vo.getStatus());
+        }
+        if (vo.getUserFromIdSet() != null) {
+            messageBo.setUserFromIdSet(vo.getUserFromIdSet());
+        }
+        if (vo.getUserToIdSet() != null) {
+            messageBo.setUserToIdSet(vo.getUserToIdSet());
+        }
+        if (vo.getStatusSet() != null) {
+            messageBo.setStatusSet(vo.getStatusSet());
+        }
         messageBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         messageBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         messageBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
         messageBo.setReadTime(vo.getReadTime() == null ? Constant.DEFAULTNULL : vo.getReadTime().getTimeInMillis());
         messageBo.setReadTimeEnd(vo.getReadTimeEnd() == null ? Constant.DEFAULTNULL : vo.getReadTimeEnd().getTimeInMillis());
         messageBo.setReadTimeStart(vo.getReadTimeStart() == null ? Constant.DEFAULTNULL : vo.getReadTimeStart().getTimeInMillis());
-        messageBo.setId(vo.getId());
-        messageBo.setIdSet(vo.getIdSet());
-        messageBo.setMessageText(vo.getMessageText());
-        messageBo.setUserFromId(vo.getUserFromId());
-        messageBo.setUserToId(vo.getUserToId());
-        messageBo.setStatus(vo.getStatus());
-        messageBo.setUserFromIdSet(vo.getUserFromIdSet());
-        messageBo.setUserToIdSet(vo.getUserToIdSet());
-        messageBo.setStatusSet(vo.getStatusSet());
         return messageBo;
     }
 

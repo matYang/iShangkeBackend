@@ -8,15 +8,27 @@ import com.ishangke.edunav.web.model.CreditVo;
 public class CreditConverter {
     public static CreditBo fromModel(CreditVo vo) {
         CreditBo creditBo = new CreditBo();
+        if (vo.getCredit() != null) {
+            creditBo.setCredit(vo.getCredit());
+        }
+        if (vo.getCreditEnd() != null) {
+            creditBo.setCreditEnd(vo.getCreditEnd());
+        }
+        if (vo.getCreditStart() != null) {
+            creditBo.setCreditStart(vo.getCreditStart());
+        }
+        if (vo.getEnabled() != null) {
+            creditBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            creditBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            creditBo.setIdSet(vo.getIdSet());
+        }
         creditBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         creditBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         creditBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        creditBo.setCredit(vo.getCredit());
-        creditBo.setCreditEnd(vo.getCreditEnd());
-        creditBo.setCreditStart(vo.getCreditStart());
-        creditBo.setEnabled(vo.getEnabled());
-        creditBo.setId(vo.getId());
-        creditBo.setIdSet(vo.getIdSet());
         creditBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         creditBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         creditBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
