@@ -57,9 +57,9 @@ public class TeacherManagerImpl implements TeacherManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call createTeacher at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call createTeacher at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -101,9 +101,9 @@ public class TeacherManagerImpl implements TeacherManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call updateTeacher at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call updateTeacher at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -141,9 +141,9 @@ public class TeacherManagerImpl implements TeacherManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call deleteTeacher at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call deleteTeacher at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -181,9 +181,9 @@ public class TeacherManagerImpl implements TeacherManager {
                 break;
             }
         }
-        if (authManager.isSystemAdmin(userBo.getId())) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[TeacherManagerImpl]system admin [%s] call query at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
@@ -264,6 +264,10 @@ public class TeacherManagerImpl implements TeacherManager {
                 isSameGroup = true;
                 break;
             }
+        }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
         }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");

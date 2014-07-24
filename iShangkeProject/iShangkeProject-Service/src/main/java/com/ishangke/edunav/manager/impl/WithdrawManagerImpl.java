@@ -144,6 +144,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
         }
         else {
+            //otherwise user can only query their own, thus making an UserId necessary
             if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userBo.getId())) {
                 throw new AuthenticationException("User querying someone else's withdraw");
             }
