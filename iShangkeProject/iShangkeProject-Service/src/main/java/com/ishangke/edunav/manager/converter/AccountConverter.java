@@ -21,6 +21,7 @@ public class AccountConverter {
         accountBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         accountBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
         accountBo.setRealName(e.getRealName());
+        accountBo.setAccountNumber(e.getAccountNumber());
         return accountBo;
     }
 
@@ -38,7 +39,8 @@ public class AccountConverter {
         accountEntityExt.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
         accountEntityExt.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         accountEntityExt.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
-        accountEntityExt.setRealName(bo.getRealName());        
+        accountEntityExt.setRealName(bo.getRealName()); 
+        accountEntityExt.setAccountNumber(bo.getAccountNumber());
         return accountEntityExt;
     }
 }

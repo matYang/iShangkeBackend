@@ -13,7 +13,8 @@ public class OrderEntityExt extends OrderEntity {
     private Calendar createTimeEnd;
     private Double priceStart;
     private Double priceEnd;
-
+    private Calendar confirmedTimeStart;
+    private Calendar confirmedTimeEnd;
     public Set<Integer> getIdSet() {
         return idSet;
     }
@@ -68,6 +69,22 @@ public class OrderEntityExt extends OrderEntity {
 
     public void setStatusSet(Set<Integer> statusSet) {
         this.statusSet = statusSet;
+    }
+
+    public Calendar getConfirmedTimeStart() {
+        return confirmedTimeStart;
+    }
+
+    public void setConfirmedTimeStart(Calendar confirmedTimeStart) {
+        this.confirmedTimeStart = confirmedTimeStart;
+    }
+
+    public Calendar getConfirmedTimeEnd() {
+        return confirmedTimeEnd;
+    }
+
+    public void setConfirmedTimeEnd(Calendar confirmedTimeEnd) {
+        this.confirmedTimeEnd = confirmedTimeEnd;
     }
 
 }

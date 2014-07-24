@@ -12,6 +12,10 @@
     <result column="ORDER_STATUS" property="status" jdbcType="VARCHAR" />
     <result column="ORDER_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ORDER_DELEDED" property="deleded" jdbcType="INTEGER" />
+    <result column="ORDER_REFERENCE" property="reference" jdbcType="VARCHAR" />
+    <result column="ORDER_SIGN" property="sign" jdbcType="VARCHAR" />
+    <result column="ORDER_CONFIRMEDTIME" property="confirmedTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
   </resultMap>
   <sql id="Order_Base_Column_List">
     ORDER.ID ORDER_ID,
@@ -26,7 +30,11 @@
     ORDER.STATUS
     ORDER_STATUS,
     ORDER.ENABLED ORDER_ENABLED,
-    ORDER.DELETED ORDER_DELETED
+    ORDER.DELETED ORDER_DELETED,
+    ORDER.REFERENCE
+    ORDER_REFERENCE,
+    ORDER.SIGN ORDER_SIGN,
+    ORDER.CONFIRMED_TIME ORDER_CONFIRMEDTIME
   </sql>
   <!-- add -->
   <insert id="add" parameterType="OrderEntityExt">
@@ -53,6 +61,15 @@
       <if test="enabled != null">
         ENABLED,
       </if>
+      <if test="reference != null">
+        REFERENCE,
+      </if>
+      <if test="sign != null">
+        SIGN,
+      </if>
+      <if test="confirmedTime != null">
+        CONFIRMED_TIME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="bookingId != null">
@@ -75,6 +92,15 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="reference != null">
+        #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmedTime != null">
+        #{confirmedTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -113,6 +139,15 @@
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="reference != null">
+        REFERENCE = #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+       SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmedTime != null">
+       CONFIRMED_TIME = #{confirmedTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -220,6 +255,27 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND `ORDER`.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+      
+       <if test="entity.reference != null and !entity.reference.equals('')">
+        AND ORDER.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+       <if test="entity.sign != null and !entity.sign.equals('')">
+        AND ORDER.SIGN LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.confirmedTime != null">
+        AND `ORDER`.CONFIRMED_TIME =
+        #{entity.confirmedTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.confirmedTime == null">
+        <if test="entity.confirmedTimeStart != null">
+          <![CDATA[AND `ORDER`.CONFIRMED_TIME >= #{entity.confirmedTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.confirmedTimeEnd != null">
+          <![CDATA[AND `ORDER`.CONFIRMED_TIME <= #{entity.confirmedTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+      
     </if>
 
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
@@ -321,6 +377,25 @@
 
       <if test="entity.enabled != null and entity.enabled != 0">
         AND `ORDER`.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+       <if test="entity.reference != null and !entity.reference.equals('')">
+        AND ORDER.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+       <if test="entity.sign != null and !entity.sign.equals('')">
+        AND ORDER.SIGN LIKE "%"#{entity.type,jdbcType=VARCHAR}"%"
+      </if>
+      
+      <if test="entity.confirmedTime != null">
+        AND `ORDER`.CONFIRMED_TIME =
+        #{entity.confirmedTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.confirmedTime == null">
+        <if test="entity.confirmedTimeStart != null">
+          <![CDATA[AND `ORDER`.CONFIRMED_TIME >= #{entity.confirmedTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.confirmedTimeEnd != null">
+          <![CDATA[AND `ORDER`.CONFIRMED_TIME <= #{entity.confirmedTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
       </if>
     </if>
     ) AS total

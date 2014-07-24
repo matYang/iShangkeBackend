@@ -331,7 +331,7 @@ INSERT INTO `course_class_photo` VALUES (1, 1, 1, '2014-7-11 13:47:18', 0);
 INSERT INTO `course_template_class_photo` VALUES (1, 1, 1, '2014-7-11 13:47:38', 0);
 INSERT INTO `user_location` VALUES (1, 1, 1, '2014-7-11 13:47:58', 0);
 INSERT INTO `booking_history` VALUES (1, 1, 1, 1, '1', 1, 1, 1, '2014-7-11 13:48:28', 1, 0);
-INSERT INTO `order` VALUES (1, 1, '2014-7-11 13:48:59', '1', 1, '1', 0, 1, 0);
+INSERT INTO `order` VALUES (1, 1, '2014-7-11 13:48:59', '1', 1, '1', 0, 1, 0,'1','1','2014-5-11 13:48:59');
 INSERT INTO `order_history` VALUES (1, 1, 1, 1, '1', 1, 1, 1, '2014-7-11 13:49:15', 1, 0);
 INSERT INTO `contact`  VALUES (1, 1, '1', '1', '1', '2014-7-15 15:20:53', '2014-7-15 15:20:56', 0, 1);
 INSERT INTO `school` (`ID`, `VALUE`, `NAME`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `ENABLED`, `DELETED`) VALUES (2, '_test_value_1_爱上课', '_test_name_1_爱上课', '2014-7-21 11:01:17', '2014-7-21 11:01:20', 2, 0);
