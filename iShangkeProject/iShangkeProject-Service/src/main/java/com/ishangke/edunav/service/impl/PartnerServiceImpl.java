@@ -158,13 +158,13 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     *
     **********************************************************/
     @Override
-    public AddressBo createAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public AddressBo createAddress(AddressBo addressBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createAddress"));
                 throw new NoPermissionException();
             }
-            return addressManager.createAddress(addressBo, userBo, partnerBo);
+            return addressManager.createAddress(addressBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -181,13 +181,13 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     }
 
     @Override
-    public AddressBo updateAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public AddressBo updateAddress(AddressBo addressBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updateAddress"));
                 throw new NoPermissionException();
             }
-            return addressManager.updateAddress(addressBo, userBo, partnerBo);
+            return addressManager.updateAddress(addressBo, userBo);
         }  catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -204,13 +204,13 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     }
 
     @Override
-    public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo, PartnerBo partnerBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteAddress"));
                 throw new NoPermissionException();
             }
-            return addressManager.deleteAddress(addressBo, userBo, partnerBo);
+            return addressManager.deleteAddress(addressBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

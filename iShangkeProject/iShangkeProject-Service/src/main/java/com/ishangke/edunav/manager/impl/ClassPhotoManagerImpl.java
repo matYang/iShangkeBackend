@@ -262,6 +262,10 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                 break;
             }
         }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            isSameGroup = true;
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
+        }
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
