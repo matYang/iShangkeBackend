@@ -1,9 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,6 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CareerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CareerEntityExt;
-import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CareerManager;
 import com.ishangke.edunav.manager.converter.CareerConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -20,40 +18,30 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
 public class CareerManagerImpl implements CareerManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CareerManagerImpl.class);
 
     @Autowired
     private CareerEntityExtMapper careerMapper;
-    
-    @Autowired
-    private AuthManager authManager;
 
     @Override
     public List<CareerBo> query(CareerBo careerBo, PaginationBo paginationBo) {
-        PaginationEntity pageEntity = null;
+        CareerEntityExt careerEntity = careerBo == null ? null : CareerConverter.fromBo(careerBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
 
-        // Check Null
-        if (careerBo == null) {
-            throw new ManagerException("Career Query Failed: CareerBo is null");
-        }
-        if (paginationBo != null) {
-            pageEntity = PaginationConverter.fromBo(paginationBo);
-        }
-
-        // Convert
-        CareerEntityExt careerEntity = CareerConverter.fromBo(careerBo);
-        List<CareerEntityExt> careerList = null;
-        List<CareerBo> resultList = null;
-
+        List<CareerEntityExt> results = null;
         try {
-            careerList = careerMapper.list(careerEntity, pageEntity);
-            for (CareerEntityExt careerPo : careerList) {
-                resultList.add(CareerConverter.toBo(careerPo));
-            }
-            return resultList;
+            results = careerMapper.list(careerEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Career Query Failed", t);
+            throw new ManagerException("Career query failed", t);
         }
+
+        if (results == null) {
+            return new ArrayList<CareerBo>();
+        }
+        List<CareerBo> convertedResults = new ArrayList<CareerBo>();
+        for (CareerEntityExt result : results) {
+            convertedResults.add(CareerConverter.toBo(result));
+        }
+        return convertedResults;
     }
 
 }

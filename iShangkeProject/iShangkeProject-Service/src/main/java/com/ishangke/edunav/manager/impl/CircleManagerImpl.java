@@ -1,9 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,6 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CircleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CircleEntityExt;
-import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CircleManager;
 import com.ishangke.edunav.manager.converter.CircleConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -20,39 +18,30 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
 public class CircleManagerImpl implements CircleManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CircleManagerImpl.class);
 
     @Autowired
-    private CircleEntityExtMapper circleEntityExtMapper;
-    @Autowired
-    private AuthManager authManager;
+    private CircleEntityExtMapper circleMapper;
 
     @Override
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo) {
-        PaginationEntity pageEntity = null;
+        CircleEntityExt circleEntity = circleBo == null ? null : CircleConverter.fromBo(circleBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
 
-        // Check Null
-        if (circleBo == null) {
-            throw new ManagerException("Circle Query Failed: CircleBo is null");
-        }
-        if (paginationBo != null) {
-            pageEntity = PaginationConverter.fromBo(paginationBo);
-        }
-
-        // Convert
-        CircleEntityExt circleEntity = CircleConverter.fromBo(circleBo);
-        List<CircleEntityExt> circleList = null;
-        List<CircleBo> resultList = null;
-
+        List<CircleEntityExt> results = null;
         try {
-            circleList = circleEntityExtMapper.list(circleEntity, pageEntity);
-            for (CircleEntityExt circlePo : circleList) {
-                resultList.add(CircleConverter.toBo(circlePo));
-            }
-            return resultList;
+            results = circleMapper.list(circleEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Circle Query Failed", t);
+            throw new ManagerException("Circle query failed", t);
         }
+
+        if (results == null) {
+            return new ArrayList<CircleBo>();
+        }
+        List<CircleBo> convertedResults = new ArrayList<CircleBo>();
+        for (CircleEntityExt result : results) {
+            convertedResults.add(CircleConverter.toBo(result));
+        }
+        return convertedResults;
     }
 
 }

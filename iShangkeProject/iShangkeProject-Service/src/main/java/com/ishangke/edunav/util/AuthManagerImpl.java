@@ -503,6 +503,11 @@ public class AuthManagerImpl implements AuthManager {
     public boolean isSystemAdmin(int userId) {
         return Constant.ROLESYSTEMADMIN.equals(getRole(userId));
     }
+    
+    @Override
+    public boolean isAdmin(int userId) {
+        return Constant.ROLEADMIN.equals(getRole(userId));
+    }
 
     @Override
     public String getRole(int userId) {

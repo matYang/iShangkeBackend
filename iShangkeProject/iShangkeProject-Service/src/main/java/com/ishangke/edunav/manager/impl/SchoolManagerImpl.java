@@ -1,9 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,6 @@ import com.ishangke.edunav.commoncontract.model.SchoolBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.SchoolEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
-import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.SchoolManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.SchoolConverter;
@@ -20,40 +18,30 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
 public class SchoolManagerImpl implements SchoolManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SchoolManagerImpl.class);
-
-    @Autowired
-    private SchoolEntityExtMapper schoolMapper;
     
     @Autowired
-    private AuthManager authManager;
+    private SchoolEntityExtMapper schoolMapper;
 
     @Override
     public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo) {
-        PaginationEntity pageEntity = null;
+        SchoolEntityExt schoolEntity = schoolBo == null ? null : SchoolConverter.fromBo(schoolBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
 
-        // Check Null
-        if (schoolBo == null) {
-            throw new ManagerException("School Query Failed: SchoolBo is null");
-        }
-        if (paginationBo != null) {
-            pageEntity = PaginationConverter.fromBo(paginationBo);
-        }
-
-        // Convert
-        SchoolEntityExt schoolEntity = SchoolConverter.fromBo(schoolBo);
-        List<SchoolEntityExt> schoolList = null;
-        List<SchoolBo> resultList = null;
-
+        List<SchoolEntityExt> results = null;
         try {
-            schoolList = schoolMapper.list(schoolEntity, pageEntity);
-            for (SchoolEntityExt schoolPo : schoolList) {
-                resultList.add(SchoolConverter.toBo(schoolPo));
-            }
-            return resultList;
+            results = schoolMapper.list(schoolEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("School Query Failed", t);
+            throw new ManagerException("School query failed", t);
         }
+
+        if (results == null) {
+            return new ArrayList<SchoolBo>();
+        }
+        List<SchoolBo> convertedResults = new ArrayList<SchoolBo>();
+        for (SchoolEntityExt result : results) {
+            convertedResults.add(SchoolConverter.toBo(result));
+        }
+        return convertedResults;
     }
 
 }

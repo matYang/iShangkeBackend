@@ -3,8 +3,6 @@ package com.ishangke.edunav.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +11,6 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.LocationEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.LocationEntityExt;
-import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.LocationManager;
 import com.ishangke.edunav.manager.converter.LocationConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -21,13 +18,9 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
 public class LocationManagerImpl implements LocationManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocationManagerImpl.class);
 
     @Autowired
     private LocationEntityExtMapper locationMapper;
-    
-    @Autowired
-    private AuthManager authManager;
 
     @Override
     public List<LocationBo> query(LocationBo locationBo, PaginationBo paginationBo) {
@@ -38,7 +31,6 @@ public class LocationManagerImpl implements LocationManager {
         try {
             results = locationMapper.list(locationEntity, page);
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Location query failed", t);
         }
 
