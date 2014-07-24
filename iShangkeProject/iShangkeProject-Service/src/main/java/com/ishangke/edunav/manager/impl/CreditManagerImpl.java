@@ -74,18 +74,24 @@ public class CreditManagerImpl implements CreditManager {
         
         //TODO we probably need a way to tell how much credit is used instead reading previous credit out
         CreditEntityExt previousCredit = creditMapper.getById(creditEntity.getId());
+        if (previousCredit == null) {
+            throw new ManagerException("Previous credit is null");
+        }
+        
         
         CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
-        creditHistory.setCharge(previousCredit.getCredit() - creditEntity.getCredit());
         creditHistory.setUserId(creditEntity.getId());
+        creditHistory.setCharge(previousCredit.getCredit() - creditEntity.getCredit());
         creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
         creditHistory.setDeleted(0);
         try {
             creditMapper.update(creditEntity);
-            creditHistoryMapper.add(creditHistory);
+            int historyResult = creditHistoryMapper.add(creditHistory);
+            if (historyResult <= 0) {
+                throw new ManagerException("Credit Create Failed: add CreditHistory Failed");
+            }
         } catch (Throwable t) {
-            LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Credit Modify Failed for user: " + userEntity.getId(), t);
         }
 

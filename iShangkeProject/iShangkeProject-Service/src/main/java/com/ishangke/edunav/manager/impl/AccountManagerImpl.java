@@ -1,5 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,6 +22,7 @@ import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
+import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AccountManager;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.converter.AccountConverter;
@@ -27,6 +30,7 @@ import com.ishangke.edunav.manager.converter.AccountHistoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 
 @Component
 public class AccountManagerImpl implements AccountManager {
@@ -42,6 +46,7 @@ public class AccountManagerImpl implements AccountManager {
     private AuthManager authManager;
 
     @Override
+    //TODO left for harry
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type) {
         // Check whether parameters are null
         if (userBo == null) {
@@ -120,88 +125,80 @@ public class AccountManagerImpl implements AccountManager {
 
     @Override
     public List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo) {
-        PaginationEntity pageEntity = null;
-
-        // Check whether parameters are null
         if (userBo == null) {
-            throw new ManagerException("Account Query Failed: UserBo is null");
+            throw new ManagerException("Invalid parameter");
         }
-        if (accountBo == null) {
-            throw new ManagerException("Account Query Failed: AccountBo is null");
+        
+        AccountEntityExt accountEntity = accountBo == null ? null : AccountConverter.fromBo(accountBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+
+        //admin and system admins can query user's accounts
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[AccountManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
-        if (paginationBo != null) {
-            pageEntity = PaginationConverter.fromBo(paginationBo);
-        }
-
-        List<AccountBo> resultList = null;
-        List<AccountEntityExt> accountList = null;
-
-        // Convert
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
-
-        // Check User's id
-        if (userEntity.getId() == null || userEntity.getId() == 0) {
-            throw new ManagerException("Account Query Failed: 此用户id为null或0");
-        }
-
-        try {
-            accountList = accountMapper.list(accountEntity, pageEntity);
-            for (AccountEntityExt accountPo : accountList) {
-                // Check whether the account belongs to the user
-                if (accountPo.getId() != userEntity.getId()) {
-                    throw new ManagerException("Account Query Failed: 此账户不属于该用户");
-                }
-                resultList.add(AccountConverter.toBo(accountPo));
+        else {
+            //otherwise user can only query their own, thus making an UserId necessary
+            if (accountEntity == null || accountEntity.getId() == null || !accountEntity.getId().equals(userEntity.getId())) {
+                throw new AuthenticationException("User querying someone else's account");
             }
-            return resultList;
-        } catch (Throwable t) {
-            throw new ManagerException("Account Query Failed", t);
         }
+
+        List<AccountEntityExt> results = null;
+        try {
+            results = accountMapper.list(accountEntity, page);
+        } catch (Throwable t) {
+            throw new ManagerException("Account query failed for user: " + userEntity.getId(), t);
+        }
+        
+        if (results == null) {
+            return new ArrayList<AccountBo>();
+        }
+        List<AccountBo> convertedResults = new ArrayList<AccountBo>();
+        for (AccountEntityExt result : results) {
+            convertedResults.add(AccountConverter.toBo(result));
+        }
+        return convertedResults;
 
     }
 
     @Override
     public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) {
-        PaginationEntity pageEntity = null;
-
-        // Check whether parameters are null
         if (userBo == null) {
-            throw new ManagerException("AccountHistory Query Failed: UserBo is null");
-        }
-        if (accountHistoryBo == null) {
-            throw new ManagerException("AccountHistory Query Failed: AccountHistoryBo is null");
-        }
-        if (paginationBo != null) {
-            pageEntity = PaginationConverter.fromBo(paginationBo);
+            throw new ManagerException("Invalid parameter");
         }
 
-        // Convert
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        AccountHistoryEntityExt accountHistoryEntity = AccountHistoryConverter.fromBo(accountHistoryBo);
+        AccountHistoryEntityExt accountHistoryEntity = accountHistoryBo == null ? null : AccountHistoryConverter.fromBo(accountHistoryBo);
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        List<AccountHistoryEntityExt> accountHistoryList = null;
-        List<AccountHistoryBo> resultList = null;
-
-        // Check the User's id
-        if (userEntity.getId() == null || userEntity.getId() == 0) {
-            throw new ManagerException("AccountHistory Query Failed: 此用户id为null或0");
+        //admin and system admins can query user's accountHistorys
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[AccountHistoryManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
-
-        // 用户只能看到自己的账户历史
-        if (accountHistoryBo.getUserId() != userBo.getId()) {
-            throw new ManagerException("AccountHistory Query Failed: 此账户历史信息不属于该用户");
-        }
-
-        try {
-            accountHistoryList = accountHistoryMapper.list(accountHistoryEntity, pageEntity);
-            for (AccountHistoryEntityExt accountHistoryPo : accountHistoryList) {
-                resultList.add(AccountHistoryConverter.toBo(accountHistoryPo));
+        else {
+            //otherwise user can only query their own, thus making an UserId necessary
+            if (accountHistoryEntity == null || accountHistoryEntity.getUserId() == null || !accountHistoryEntity.getUserId().equals(userEntity.getId())) {
+                throw new AuthenticationException("User querying someone else's accountHistory");
             }
-            return resultList;
-        } catch (Throwable t) {
-            throw new ManagerException("AccountHistory Query Failed", t);
         }
-
+        
+        
+        List<AccountHistoryEntityExt> results = null;
+        try {
+            results = accountHistoryMapper.list(accountHistoryEntity, page);
+        } catch (Throwable t) {
+            throw new ManagerException("Account queryHistory failed for user: " + userEntity.getId(), t);
+        }
+        
+        if (results == null) {
+            return new ArrayList<AccountHistoryBo>();
+        }
+        List<AccountHistoryBo> convertedResults = new ArrayList<AccountHistoryBo>();
+        for (AccountHistoryEntityExt result : results) {
+            convertedResults.add(AccountHistoryConverter.toBo(result));
+        }
+        return convertedResults;
     }
+    
 }
