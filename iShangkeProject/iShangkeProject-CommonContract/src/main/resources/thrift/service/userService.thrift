@@ -23,7 +23,7 @@ service UserService {
      *  @param  sessionString 
      *  @return 用户实体 UserBo
      */
-    user.UserBo authenticate(1: string sessionString, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo authenticate(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为销毁用户session信息的功能<br>
@@ -33,7 +33,7 @@ service UserService {
      *  @return 
      *
      */
-    user.UserBo disposeSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    void disposeSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为普通用户提供手机验证。<br>
@@ -104,7 +104,9 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    user.UserBo createUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo createPartnerUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     
+    user.UserBo createUser(1: user.UserBo targetUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为ishangke管理员删除用户<br>
@@ -140,7 +142,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    list<user.UserBo> queryUserInfo(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo queryUserInfo(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询用户信息的功能<br>
@@ -154,7 +156,7 @@ service UserService {
      *  @return 用户实体 UserBo 列表
      *
      */
-    list<user.UserBo> queryUser(1: user.UserBo queryUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: common.PaginationBo pagnationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<user.UserBo> queryUser(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: common.PaginationBo pagnationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 

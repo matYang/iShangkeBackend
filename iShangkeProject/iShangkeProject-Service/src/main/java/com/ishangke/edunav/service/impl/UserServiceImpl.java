@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser, String permissionTag)
+    public UserBo createUser(UserBo targetUser, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
@@ -107,7 +107,33 @@ public class UserServiceImpl implements UserService.Iface {
                 throw new NoPermissionException();
             }
 
-            return userManager.createUser(targetUser, partnerBo, currentUser);
+            return userManager.createUser(targetUser, currentUser);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CREATE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATE_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.USER_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
+    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "createUser"));
+                throw new NoPermissionException();
+            }
+
+            return userManager.createPartnerUser(targetUser, partner, currentUser);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -174,7 +200,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser, String permissionTag)
+    public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
@@ -199,7 +225,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo,
+    public List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
@@ -207,7 +233,7 @@ public class UserServiceImpl implements UserService.Iface {
                         "queryUser"));
                 throw new NoPermissionException();
             }
-            return userManager.queryUser(queryUser, partnerBo, currentUser, pagnationBo);
+            return userManager.queryUser(queryUser, currentUser, pagnationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -224,9 +250,9 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo authenticate(String sessionString, String permissionTag) throws BusinessExceptionBo, TException {
+    public UserBo authenticate(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            return userManager.authenticate(sessionString);
+            return userManager.authenticate(sessionBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -237,9 +263,9 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo disposeSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public void disposeSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            return userManager.disposeSession(sessionBo);
+            userManager.disposeSession(sessionBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

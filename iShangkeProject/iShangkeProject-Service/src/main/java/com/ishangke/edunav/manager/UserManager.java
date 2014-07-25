@@ -19,18 +19,17 @@ public interface UserManager {
      *            需要被销毁session的用户信息
      * @return
      */
-    UserBo disposeSession(SessionBo sessionBo);
+    void disposeSession(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供自动识别的功能。<br>
      * API端读取用户前端存储的session string，调用该方法自动获得当前用户信息
      * 
-     * @param sessionString
+     * @param sessionBo
      * @return 用户实体 UserBo
      * 
-     * @param sessionString
      */
-    UserBo authenticate(String sessionString);
+    UserBo authenticate(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供注册的功能。<br>
@@ -111,8 +110,6 @@ public interface UserManager {
      * 
      * @param targetUser
      *            需要被创建的用户信息
-     * @param partnerBo
-     *            合作商信息
      * @param currentUser
      *            调用方法的用户的信息
      * 
@@ -120,10 +117,11 @@ public interface UserManager {
      * 
      * 
      * @param targetUser
-     * @param partnerBo
      * @param currentUser
      */
-    UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser);
+    UserBo createUser(UserBo targetUser,  UserBo currentUser);
+    
+    UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser);
 
     /**
      * 本方法为ishangke管理员删除用户<br>
@@ -174,7 +172,7 @@ public interface UserManager {
      * @param queryUser
      * @param currentUser
      */
-    List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser);
+    UserBo queryUserInfo(UserBo queryUser, UserBo currentUser);
 
     /**
      * 本方法为查询用户信息的功能<br>
@@ -182,8 +180,6 @@ public interface UserManager {
      * 
      * @param queryUser
      *            需要检索和过滤的用户信息
-     * @param partnerBo
-     *            合作商的用户的信息
      * @param currentUser
      *            调用方法的用户的信息
      * @param paginationBo
@@ -193,11 +189,10 @@ public interface UserManager {
      * 
      * 
      * @param queryUser
-     * @param partnerBo
      * @param currentUser
      * @param pagnationBo
      */
-    List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo);
+    List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo);
 
 
 }
