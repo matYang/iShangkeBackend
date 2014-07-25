@@ -29,3 +29,9 @@ struct CouponBo {
     23: i64 createTimeEnd
     24: set<i32> originSet
 }
+struct CouponBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<CouponBo> data
+} 

@@ -151,3 +151,9 @@ struct CommentCourseBo {
     1: i32 id
     2: string commnet 
 }
+struct CourseBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<CourseBo> data
+} 

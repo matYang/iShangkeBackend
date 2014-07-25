@@ -17,3 +17,9 @@ struct UserLocationBo {
     14: set<i32> userIdSet
     15: set<i32> locationIdSet
 }
+struct UserLocationBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<UserLocationBo> data
+} 

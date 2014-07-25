@@ -144,4 +144,9 @@ struct CommentCourseTemplateRejectBo {
     1: i32 id
     2: string comment
 }
-
+struct CourseTemplateBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<CourseTemplateBo> data
+} 

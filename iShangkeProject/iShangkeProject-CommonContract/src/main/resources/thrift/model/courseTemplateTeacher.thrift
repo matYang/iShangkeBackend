@@ -11,3 +11,9 @@ struct CourseTemplateTeacherBo {
     8: i64 createTimeStart
     9: i64 createTimeEnd
 }
+struct CourseTemplateTeacherBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<CourseTemplateTeacherBo> data
+} 

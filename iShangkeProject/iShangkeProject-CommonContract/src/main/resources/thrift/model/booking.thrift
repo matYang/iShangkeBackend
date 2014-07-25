@@ -53,4 +53,9 @@ struct BookingBo {
 struct CommentBookingBo {
   1: string comment
 }
-
+  struct BookingBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<BookingBo> data
+} 

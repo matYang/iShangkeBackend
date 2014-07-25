@@ -15,3 +15,9 @@ struct CouponHistoryBo {
     12: i64 createTimeStart
     13: i64 createTimeEnd
 }
+struct CouponHistoryBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<CouponHistoryBo> data
+} 
