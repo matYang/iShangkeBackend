@@ -39,8 +39,6 @@ public class AuthManagerImpl implements AuthManager {
     @Autowired
     private CacheManager cache;
     
-    @Autowired
-    private AuthManager authManager;
     
     @Autowired
     private RoleEntityExtMapper roleMapper;

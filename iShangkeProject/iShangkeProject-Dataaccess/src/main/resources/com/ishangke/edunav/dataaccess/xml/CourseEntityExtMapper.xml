@@ -18,8 +18,7 @@
     <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
     <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSE_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
@@ -62,12 +61,9 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_NOREFUNDDATE" property="noRefundDate"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSE_CUTOFFDATE" property="cutoffDate"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSE_FINISHDATE" property="finishDate"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="COURSE_STARTDATE" property="startDate"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_CUTOFFDATE" property="cutoffDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_FINISHDATE" property="finishDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
     <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
@@ -130,7 +126,8 @@
     COURSE.CATEGORY_ID COURSE_CATEGORYID,
     COURSE.LOCATION_ID
     COURSE_LOCATIONID,
-    COURSE.CIRCLE_ID COURSE_CIRCLEID,
+    COURSE.CIRCLE_ID
+    COURSE_CIRCLEID,
     COURSE.PARTNER_ID COURSE_PARTNERID,
     COURSE.ADDRESS_ID COURSE_ADDRESSID,
     COURSE.PRICE COURSE_PRICE,
@@ -144,7 +141,8 @@
     COURSE_LASTMODIFYTIME,
     COURSE.CREATE_TIME COURSE_CREATETIME,
     COURSE.ENABLED COURSE_ENABLED,
-    COURSE.DELETED COURSE_DELETED,
+    COURSE.DELETED
+    COURSE_DELETED,
     COURSE.COURSE_HOUR_LENGTH COURSE_COURSEHOURLENGTH,
     COURSE.TEACHING_METHOD COURSE_TEACHINGMETHOD,
     COURSE.TEACHING_MATERIAL_FEE
@@ -156,15 +154,18 @@
     COURSE_ASSIGNMENTS,
     COURSE.TRAIL COURSE_TRAIL,
     COURSE.QUESTION_SESSION COURSE_QUESTIONSESSION,
-    COURSE.TEACHING_AND_EXERCISE COURSE_TEACHINGANDEXERCISE,
+    COURSE.TEACHING_AND_EXERCISE
+    COURSE_TEACHINGANDEXERCISE,
     COURSE.CLASS_TEACHER
     COURSE_CLASSTEACHER,
     COURSE.GOAL COURSE_GOAL,
-    COURSE.OUTLINE COURSE_OUTLINE,
+    COURSE.OUTLINE
+    COURSE_OUTLINE,
     COURSE.REG_PHONE
     COURSE_REGPHONE,
     COURSE.CONTACT COURSE_CONTACT,
-    COURSE.EXTRACURRICULAR COURSE_EXTRACURRICULAR,
+    COURSE.EXTRACURRICULAR
+    COURSE_EXTRACURRICULAR,
     COURSE.PASS_AGREEMENT COURSE_PASSAGREEMENT,
     COURSE.QUALITY_ASSURANCE COURSE_QUALITYASSURANCE,
     COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
@@ -173,21 +174,25 @@
     COURSE.STUDY_DAY_NOTE COURSE_STUDYDAYNOTE,
     COURSE.HIGH_SCORE_REWARD
     COURSE_HIGHSCOREREWARD,
-    COURSE.PREREQUEST COURSE_PREREQUEST,
+    COURSE.PREREQUEST
+    COURSE_PREREQUEST,
     COURSE.SUITABLE_STUDENT
     COURSE_SUITABLESTUDENT,
-    COURSE.OPEN_COURSE_REQUIREMENT COURSE_OPENCOURSEREQUIREMENT,
+    COURSE.OPEN_COURSE_REQUIREMENT
+    COURSE_OPENCOURSEREQUIREMENT,
     COURSE.CERTIFICATION COURSE_CERTIFICATION,
     COURSE.QUIZ COURSE_QUIZ,
     COURSE.COURSE_INTRO
     COURSE_COURSEINTRO,
     COURSE.REFERENCE COURSE_REFERENCE,
     COURSE.REG_LOCATION COURSE_REGLOCATION,
-    COURSE.FINISH_TIME2 COURSE_FINISHTIME2,
+    COURSE.FINISH_TIME2
+    COURSE_FINISHTIME2,
     COURSE.START_TIME2 COURSE_STARTTIME2,
     COURSE.FINISH_TIME1
     COURSE_FINISHTIME1,
-    COURSE.START_TIME1 COURSE_STARTTIME1,
+    COURSE.START_TIME1
+    COURSE_STARTTIME1,
     COURSE.START_UPON_ARRIVAL
     COURSE_STARTUPONARRIVAL,
     COURSE.BOOKING_TYPE COURSE_BOOKINGTYPE,
@@ -198,14 +203,17 @@
     COURSE_CUTOFFDATE,
     COURSE.FINISH_DATE COURSE_FINISHDATE,
     COURSE.START_DATE COURSE_STARTDATE,
-    COURSE.POPULARITY COURSE_POPULARITY,
+    COURSE.POPULARITY
+    COURSE_POPULARITY,
     COURSE.CLASS_SIZE COURSE_CLASSSIZE,
     COURSE.COURSE_HOUR_NUM
     COURSE_COURSEHOURNUM,
-    COURSE.CLASS_TYPE COURSE_CLASSTYPE,
+    COURSE.CLASS_TYPE
+    COURSE_CLASSTYPE,
     COURSE.DISCOUNT COURSE_DISCOUNT,
     COURSE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
-    COURSE.SCHOOLTIME_WEEK COURSE_SCHOOLTIMEWEEK
+    COURSE.SCHOOLTIME_WEEK
+    COURSE_SCHOOLTIMEWEEK
   </sql>
   <sql id="Partner_Base_Column_List">
     PARTNER.LOGO_URL PARTNER_LOGOURL,
@@ -245,20 +253,24 @@
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
     TEACHER.IMG_URL
     TEACHER_IMGURL,
-    TEACHER.NAME TEACHER_NAME,
+    TEACHER.NAME
+    TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
     TEACHER.POPULARITY
     TEACHER_POPULARITY,
-    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
+    TEACHER.LAST_MODIFY_TIME
+    TEACHER_LASTMODIFYTIME,
     TEACHER.CREATE_TIME
     TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
-    TEACHER.DELETED TEACHER_DELETED
+    TEACHER.DELETED
+    TEACHER_DELETED
   </sql>
   <sql id="ClassPhoto_Base_Column_List">
     CLASS_PHOTO.ID CLASSPHOTO_ID,
     CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
-    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
+    CLASS_PHOTO.IMG_URL
+    CLASSPHOTO_IMGURL,
     CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
     CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
     CLASS_PHOTO.LAST_MODIFY_TIME
@@ -919,31 +931,37 @@
     ON COURSE_TEACHER.COURSE_ID = COURSE.ID
     join
     TEACHER TEACHER
-    ON TEACHER.ID = COURSE_TEACHER.TEACHER_ID
+    ON
+    TEACHER.ID = COURSE_TEACHER.TEACHER_ID
     join COURSE_CLASS_PHOTO
     COURSE_CLASS_PHOTO
-    ON COURSE_CLASS_PHOTO.COURSE_ID = COURSE.ID
+    ON COURSE_CLASS_PHOTO.COURSE_ID =
+    COURSE.ID
     join CLASS_PHOTO CLASS_PHOTO
     ON
     CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
     join PARTNER PARTNER
-    ON PARTNER.ID =
+    ON
+    PARTNER.ID =
     COURSE.PARTNER_ID
     join CATEGORY CATEGORY
     ON CATEGORY.ID = COURSE.CATEGORY_ID
     join CIRCLE CIRCLE
     ON
-    CIRCLE.ID = COURSE.CIRCLE_ID
+    CIRCLE.ID
+    = COURSE.CIRCLE_ID
     join LOCATION LOCATION
     ON LOCATION.ID = COURSE.LOCATION_ID
     join
     ADDRESS ADDRESS
-    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    ON ADDRESS.ID =
+    COURSE.ADDRESS_ID
     join COURSE_TEMPLATE COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
 
-    where COURSE.DELETED = 0 AND COURSE.ID = #{id}
+    where
+    COURSE.DELETED = 0 AND COURSE.ID = #{id}
   </select>
   <!-- listAll -->
   <select id="listAll" resultMap="CourseExtMap">
@@ -951,7 +969,7 @@
     <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0
   </select>
-   <!-- getById -->
+  <!-- getById -->
   <select id="getById" parameterType="int" resultMap="CourseExtMap">
     SELECT
     <include refid="Course_Base_Column_List" />
@@ -978,16 +996,19 @@
     ON PARTNER.ID = COURSE.PARTNER_ID
     join CATEGORY CATEGORY
     ON
-    CATEGORY.ID = COURSE.CATEGORY_ID
+    CATEGORY.ID =
+    COURSE.CATEGORY_ID
     join CIRCLE CIRCLE
     ON CIRCLE.ID = COURSE.CIRCLE_ID
     join LOCATION
     LOCATION
-    ON LOCATION.ID = COURSE.LOCATION_ID
+    ON LOCATION.ID =
+    COURSE.LOCATION_ID
     join ADDRESS ADDRESS
     ON ADDRESS.ID = COURSE.ADDRESS_ID
     join COURSE_TEMPLATE COURSE_TEMPLATE
-    ON COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
+    ON
+    COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
 
     WHERE
     COURSE.DELETED = 0
@@ -995,11 +1016,11 @@
       <if test="entity.courseName != null and !entity.courseName.equals('')">
         AND COURSE.COURSE_NAME LIKE "%"#{entity.courseName,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
         AND CATEGORY.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.circleValue != null and !entity.circleValue.equals('')">
         AND CIRCLE.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
       </if>
@@ -1029,8 +1050,7 @@
       <if test="entity.categoryId == null or entity.categoryId == 0">
         <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1044,8 +1064,7 @@
       <if test="entity.locationId == null or entity.locationId == 0">
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1057,8 +1076,7 @@
       <if test="entity.circleId == null or entity.circleId == 0">
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1070,8 +1088,7 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1083,8 +1100,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1096,8 +1112,7 @@
       <if test="entity.courseTemplateId == null">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND COURSE.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1151,8 +1166,7 @@
         </if>
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND COURSE.POPULARITY IN
-          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1170,8 +1184,7 @@
         </if>
         <if test="entity.courseHourNumSet != null and entity.courseHourNumSet.size() > 0">
           AND COURSE.COURSE_HOUR_NUM IN
-          <foreach collection="entity.courseHourNumSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseHourNumSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1248,8 +1261,7 @@
       <if test="entity.classType == null">
         <if test="entity.classTypeSet != null and entity.classTypeSet.size() > 0">
           AND COURSE.CLASS_TYPE IN
-          <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1273,8 +1285,7 @@
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
           AND COURSE.SCHOOLTIME_DAY IN
-          <foreach collection="entity.schooltimeDaySet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.schooltimeDaySet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1286,8 +1297,7 @@
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
           AND COURSE.SCHOOLTIME_WEEK IN
-          <foreach collection="entity.schooltimeWeekSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.schooltimeWeekSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1326,7 +1336,8 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        COURSE.${listItem.columnKey} ${listItem.order}
+        COURSE.${listItem.columnKey}
+        ${listItem.order}
       </foreach>
     </if>
 
@@ -1345,16 +1356,19 @@
     ON PARTNER.ID = COURSE.PARTNER_ID
     join CATEGORY CATEGORY
     ON
-    CATEGORY.ID = COURSE.CATEGORY_ID
+    CATEGORY.ID =
+    COURSE.CATEGORY_ID
     join CIRCLE CIRCLE
     ON CIRCLE.ID = COURSE.CIRCLE_ID
     join LOCATION
     LOCATION
-    ON LOCATION.ID = COURSE.LOCATION_ID
+    ON LOCATION.ID =
+    COURSE.LOCATION_ID
     join ADDRESS ADDRESS
     ON ADDRESS.ID = COURSE.ADDRESS_ID
     join COURSE_TEMPLATE COURSE_TEMPLATE
-    ON COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
+    ON
+    COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
 
     WHERE
     COURSE.DELETED = 0
@@ -1385,17 +1399,16 @@
       <if test="entity.categoryId == null or entity.categoryId == 0">
         <if test="entity.categoryIdSet != null and entity.categoryIdSet.size() > 0">
           AND COURSE.CATEGORY_ID IN
-          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.categoryIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
         AND CATEGORY.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
       </if>
-      
+
       <if test="entity.circleValue != null and !entity.circleValue.equals('')">
         AND CIRCLE.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
       </if>
@@ -1408,8 +1421,7 @@
       <if test="entity.locationId == null or entity.locationId == 0">
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND COURSE.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1421,8 +1433,7 @@
       <if test="entity.circleId == null or entity.circleId == 0">
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
           AND COURSE.CIRCLE_ID IN
-          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1434,8 +1445,7 @@
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND COURSE.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1447,8 +1457,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND COURSE.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1460,8 +1469,7 @@
       <if test="entity.courseTemplateId == null">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND COURSE.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1515,8 +1523,7 @@
         </if>
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND COURSE.POPULARITY IN
-          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.popularitySet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1534,8 +1541,7 @@
         </if>
         <if test="entity.courseHourNumSet != null and entity.courseHourNumSet.size() > 0">
           AND COURSE.COURSE_HOUR_NUM IN
-          <foreach collection="entity.courseHourNumSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseHourNumSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1612,8 +1618,7 @@
       <if test="entity.classType == null">
         <if test="entity.classTypeSet != null and entity.classTypeSet.size() > 0">
           AND COURSE.CLASS_TYPE IN
-          <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.classTypeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1637,8 +1642,7 @@
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
           AND COURSE.SCHOOLTIME_DAY IN
-          <foreach collection="entity.schooltimeDaySet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.schooltimeDaySet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1650,8 +1654,7 @@
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
           AND COURSE.SCHOOLTIME_WEEK IN
-          <foreach collection="entity.schooltimeWeekSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.schooltimeWeekSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -1688,5 +1691,10 @@
     </if>
     ) AS total
   </select>
-
+<!--   <select id="getById" parameterType="int" resultMap="CourseExtMap">
+    select
+    <include refid="Course_Base_Column_List"></include>
+    from COURSE COURSE
+    where COURSE.DELETED = 0 AND COURSE.ID = #{id}
+  </select> -->
 </mapper>

@@ -28,49 +28,9 @@ struct OrderBo {
 }
 
 /**
- * CommentOrderCreateBo
+ * CommentOrderBo
  */
-struct CommentOrderCreateBo {
-  1: i32 id
-  2: string comment
-}
-
-/**
- * CommentOrderAcceptBo
- */
-struct CommentOrderAcceptBo {
-  1: i32 id
-  2: string comment
-}
-
-/**
- * CommentOrderAcceptSuccessBo
- */
-struct CommentOrderAcceptSuccessBo {
-  1: i32 id
-  2: string comment
-}
-
-/**
- * CommentOrderAcceptFailedBo
- */
-struct CommentOrderAcceptFailedBo {
-  1: i32 id
-  2: string comment
-}
-
-/**
- * CommentOrderValidateBo
- */
-struct CommentOrderValidateBo {
-  1: i32 id
-  2: string comment
-}
-
-/**
- * CommentOrderCancelBo
- */
-struct CommentOrderCancelBo {
+struct CommentOrderBo {
   1: i32 id
   2: string comment
 }

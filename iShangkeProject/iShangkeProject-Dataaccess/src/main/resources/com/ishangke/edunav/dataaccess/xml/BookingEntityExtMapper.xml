@@ -23,8 +23,7 @@
     <result column="BOOKING_CASHBACKAMOUNT" property="cashbackAmount" jdbcType="DOUBLE" />
     <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="BOOKING_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -56,7 +55,8 @@
     BOOKING.LAST_MODIFY_TIME BOOKING_LASTMODIFYTIME,
     BOOKING.CREATE_TIME
     BOOKING_CREATETIME,
-    BOOKING.ENABLED BOOKING_ENABLED,
+    BOOKING.ENABLED
+    BOOKING_ENABLED,
     BOOKING.DELETED
     BOOKING_DELETED
   </sql>
@@ -263,7 +263,7 @@
     <include refid="Booking_Base_Column_List" />
     from BOOKING where BOOKING.DELETED = 0
   </select>
- <!-- getById -->
+  <!-- getById -->
   <select id="getById" parameterType="int" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
@@ -294,8 +294,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -307,8 +306,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
+            close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -320,8 +319,7 @@
       <if test="entity.courseTemplateId == null">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -346,8 +344,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND PARTNER.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -465,7 +462,8 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        BOOKING.${listItem.columnKey} ${listItem.order}
+        BOOKING.${listItem.columnKey}
+        ${listItem.order}
       </foreach>
     </if>
 
@@ -499,8 +497,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -512,8 +509,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
+            close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -531,8 +528,7 @@
         </if>
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -557,8 +553,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND PARTNER.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -662,5 +657,21 @@
       </if>
     </if>
     ) AS total
+  </select>
+  <select id="listByUserId" parameterType="map" resultMap="BookingExtMap">
+    SELECT
+    <include refid="Booking_Base_Column_List" />
+    from BOOKING where BOOKING.DELETED = 0
+  </select>
+  <select id="getCountByUserId" resultType="map">
+    select count(ID) from BOOKING where DELETED = 0
+  </select>
+    <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
+    SELECT
+    <include refid="Booking_Base_Column_List" />
+    from BOOKING where BOOKING.DELETED = 0
+  </select>
+  <select id="getCountByPartnerId" resultType="map">
+    select count(ID) from BOOKING where DELETED = 0
   </select>
 </mapper>
