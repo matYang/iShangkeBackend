@@ -56,3 +56,13 @@ struct SessionBo {
   2: string accountIdentifier
   3: string authCode
 }
+
+struct PasswordBo {
+  1: i32 id
+  2: string accountIdentifier
+  3: string authCode
+  4: string newPassword
+  5: string oldPassword
+}
+
+

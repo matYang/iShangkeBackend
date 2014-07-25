@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
+import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
@@ -29,11 +30,6 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private AuthManager authManager;
 
-    @Override
-    public UserBo authenticate(String sessionString) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public UserBo registerUser(UserBo userBo) {
@@ -68,37 +64,82 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserBo openCellSession(SessionBo sessionBo) {
+    public SessionBo openCellSession(UserBo userBo) {
+        if (userBo == null || userBo.getPhone() == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
+        UserEntityExt searchEntity = new UserEntityExt();
+        searchEntity.setPhone(userBo.getPhone());
+        
+        int result = 0;
+        try {
+            result = userMapper.getListCount(searchEntity);
+        } catch (Throwable t) {
+            throw new ManagerException("OpenCellSession with phone number: " + userBo.getPhone() + " failed", t);
+        }
+        if (result > 0) {
+            throw new ManagerException("Phone number is already registered");
+        }
+        
+        String authCode = authManager.openCellVerificationSession(userBo.getPhone());
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(-1);
+        sessionBo.setAccountIdentifier(userBo.getPhone());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
+    }
+
+    @Override
+    public SessionBo openForgetPasswordSession(UserBo userBo) {
+        if (userBo == null || userBo.getPhone() == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
+        UserEntityExt searchEntity = new UserEntityExt();
+        searchEntity.setPhone(userBo.getPhone());
+        List<UserEntityExt> result = null;
+        try {
+            result = userMapper.list(searchEntity, null);
+        } catch (Throwable t) {
+            throw new ManagerException("OpenCellSession with phone number: " + userBo.getPhone() + " failed", t);
+        }
+        
+        if (result == null || result.size() == 0) {
+            throw new ManagerException("Phone number is not registered");
+        }
+        
+        UserEntityExt curUser = result.get(0);
+        String authCode = authManager.openForgetPasswordSession(curUser.getId());
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier("");
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
+    }
+    
+
+    @Override
+    public UserBo recoverPassword(PasswordBo passwordBo) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public UserBo verifyCellSession(SessionBo sessionBo) {
+    public UserBo changePassword(PasswordBo passwordBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public UserBo authenticate(String sessionString) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public UserBo openForgetPasswordSession(SessionBo sessionBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public UserBo verifyForgetPasswordSession(SessionBo sessionBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public UserBo openChangePasswordSession(SessionBo sessionBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public UserBo verifyChangePasswordSession(SessionBo sessionBo) {
+    public UserBo disposeSession(SessionBo sessionBo) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -144,17 +185,6 @@ public class UserManagerImpl implements UserManager {
         // TODO Auto-generated method stub
         return null;
     }
-
-    @Override
-    public List<UserBo> querySession(UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public UserBo disposeSession(UserBo userBo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    
 
 }
