@@ -32,10 +32,10 @@
   <insert id="add" parameterType="OrderHistoryEntityExt">
     insert into ORDER_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
+      <if test="orderId != null and orderId != 0">
         ORDER_ID,
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID,
       </if>
       <if test="optName != null">
@@ -61,10 +61,10 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
+      <if test="orderId != null and orderId != 0">
         #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="optName != null">
@@ -198,11 +198,11 @@
         </if>
       </if>
 
-      <if test="entity.optName != null and entity.optName != 0">
+      <if test="entity.optName != null ">
         AND ORDER_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.optName == null or entity.optName == 0">
+      <if test="entity.optName == null ">
         <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND ORDER_HISTORY.OPT_NAME IN
           <foreach collection="entity.optNameSet" item="listItem" open="(" close=")"
@@ -216,11 +216,11 @@
         AND ORDER_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.preStatus != null and entity.preStatus != 0">
+      <if test="entity.preStatus != null ">
         AND ORDER_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.preStatus == null or entity.preStatus == 0">
+      <if test="entity.preStatus == null ">
         <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND ORDER_HISTORY.PRE_STATUS IN
           <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
@@ -230,10 +230,10 @@
         </if>
       </if>
 
-      <if test="entity.postStatus != null and entity.postStatus != 0">
+      <if test="entity.postStatus != null ">
         AND ORDER_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
-      <if test="entity.postStatus == null or entity.postStatus == 0">
+      <if test="entity.postStatus == null ">
         <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND ORDER_HISTORY.POST_STATUS IN
           <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
@@ -243,10 +243,10 @@
         </if>
       </if>
 
-      <if test="entity.normal != null and entity.normal != 0">
+      <if test="entity.normal != null ">
         AND ORDER_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
       </if>
-      <if test="entity.normal == null or entity.normal == 0">
+      <if test="entity.normal == null ">
         <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND ORDER_HISTORY.NORMAL IN
           <foreach collection="entity.normalSet" item="listItem" open="(" close=")"
@@ -335,11 +335,11 @@
         </if>
       </if>
 
-      <if test="entity.optName != null and entity.optName != 0">
+      <if test="entity.optName != null ">
         AND ORDER_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.optName == null or entity.optName == 0">
+      <if test="entity.optName == null ">
         <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND ORDER_HISTORY.OPT_NAME IN
           <foreach collection="entity.optNameSet" item="listItem" open="(" close=")"
@@ -353,11 +353,11 @@
         AND ORDER_HISTORY.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.preStatus != null and entity.preStatus != 0">
+      <if test="entity.preStatus != null ">
         AND ORDER_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.preStatus == null or entity.preStatus == 0">
+      <if test="entity.preStatus == null ">
         <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND ORDER_HISTORY.PRE_STATUS IN
           <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
@@ -367,10 +367,10 @@
         </if>
       </if>
 
-      <if test="entity.postStatus != null and entity.postStatus != 0">
+      <if test="entity.postStatus != null ">
         AND ORDER_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
-      <if test="entity.postStatus == null or entity.postStatus == 0">
+      <if test="entity.postStatus == null ">
         <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND ORDER_HISTORY.POST_STATUS IN
           <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
@@ -380,10 +380,10 @@
         </if>
       </if>
 
-      <if test="entity.normal != null and entity.normal != 0">
+      <if test="entity.normal != null ">
         AND ORDER_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
       </if>
-      <if test="entity.normal == null or entity.normal == 0">
+      <if test="entity.normal == null ">
         <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND ORDER_HISTORY.NORMAL IN
           <foreach collection="entity.normalSet" item="listItem" open="(" close=")"

@@ -31,7 +31,7 @@
   <insert id="add" parameterType="AddressEntityExt">
     insert into ADDRESS
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0 ">
         PARTNER_ID,
       </if>
       <if test="detail != null">
@@ -54,7 +54,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         #{partnerId,jdbcType=INTEGER},
       </if>
       <if test="detail != null">
@@ -91,7 +91,7 @@
   <update id="update" parameterType="AddressEntityExt">
     update ADDRESS
     <set>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
       <if test="detail != null">
