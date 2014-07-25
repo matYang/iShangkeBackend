@@ -142,7 +142,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         
         //admin and system admins can query user's withdraws
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call queryat " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         }
         else {
             //otherwise user can only query their own, thus making an UserId necessary

@@ -19,7 +19,7 @@ public interface UserManager {
      * 
      * @param sessionString
      */
-    public UserBo authenticate(String sessionString);
+    UserBo authenticate(String sessionString);
 
     /**
      * 本方法为普通用户提供注册的功能。<br>
@@ -31,7 +31,7 @@ public interface UserManager {
      * 
      * @param userBo
      */
-    public UserBo registerUser(UserBo userBo);
+    UserBo registerUser(UserBo userBo);
 
     /**
      * 本方法为普通用户提供手机验证。<br>
@@ -43,7 +43,7 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    public UserBo openCellSession(SessionBo sessionBo);
+    UserBo openCellSession(SessionBo sessionBo);
 
     /**
      * 本方法验证用户手机验证码。<br>
@@ -55,7 +55,7 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    public UserBo verifyCellSession(SessionBo sessionBo);
+    UserBo verifyCellSession(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供忘记密码时手机验证。<br>
@@ -67,7 +67,7 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    public UserBo openForgetPasswordSession(SessionBo sessionBo);
+    UserBo openForgetPasswordSession(SessionBo sessionBo);
 
     /**
      * 本方法验证用户手机验证忘记密码的验证码。<br>
@@ -79,7 +79,7 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    public UserBo verifyForgetPasswordSession(SessionBo sessionBo);
+    UserBo verifyForgetPasswordSession(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供修改密码时手机验证。<br>
@@ -91,7 +91,7 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    public UserBo openChangePasswordSession(SessionBo sessionBo);
+    UserBo openChangePasswordSession(SessionBo sessionBo);
 
     /**
      * 本方法验证用户手机验证修改密码的验证码。<br>
@@ -103,7 +103,7 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    public UserBo verifyChangePasswordSession(SessionBo sessionBo);
+    UserBo verifyChangePasswordSession(SessionBo sessionBo);
 
     /**
      * 本方法为所有用户提供用户使用手机号码登录的功能。<br>
@@ -117,7 +117,7 @@ public interface UserManager {
      * 
      * @param loginBo
      */
-    public UserBo loginByPhone(LoginBo loginBo);
+    UserBo loginByPhone(LoginBo loginBo);
 
     /**
      * 本方法为所有用户提供使用识别码登录的功能。<br>
@@ -131,7 +131,7 @@ public interface UserManager {
      * 
      * @param loginBo
      */
-    public UserBo loginByReference(LoginBo loginBo);
+    UserBo loginByReference(LoginBo loginBo);
 
     /**
      * 本方法为ishangke管理员创建新用户<br>
@@ -151,7 +151,7 @@ public interface UserManager {
      * @param partnerBo
      * @param currentUser
      */
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser);
+    UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser);
 
     /**
      * 本方法为ishangke管理员删除用户<br>
@@ -168,7 +168,7 @@ public interface UserManager {
      * @param targetUser
      * @param currentUser
      */
-    public UserBo deleteUser(UserBo targetUser, UserBo currentUser);
+    UserBo deleteUser(UserBo targetUser, UserBo currentUser);
 
     /**
      * 本方法为修改用户信息的功能<br>
@@ -185,7 +185,7 @@ public interface UserManager {
      * @param targetUser
      * @param currentUser
      */
-    public UserBo updateUser(UserBo targetUser, UserBo currentUser);
+    UserBo updateUser(UserBo targetUser, UserBo currentUser);
 
     /**
      * 本方法为查看用户信息的功能<br>
@@ -202,7 +202,7 @@ public interface UserManager {
      * @param queryUser
      * @param currentUser
      */
-    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser);
+    List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser);
 
     /**
      * 本方法为查询用户信息的功能<br>
@@ -225,7 +225,7 @@ public interface UserManager {
      * @param currentUser
      * @param pagnationBo
      */
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo);
+    List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo);
 
     /**
      * 本方法为查询用户session信息的功能<br>
@@ -238,7 +238,7 @@ public interface UserManager {
      * 
      * @param userBo
      */
-    public List<UserBo> querySession(UserBo userBo);
+    List<UserBo> querySession(UserBo userBo);
 
     /**
      * 本方法为销毁用户session信息的功能<br>
@@ -251,6 +251,6 @@ public interface UserManager {
      * 
      * @param userBo
      */
-    public UserBo disposeSession(UserBo userBo);
+    UserBo disposeSession(UserBo userBo);
 
 }

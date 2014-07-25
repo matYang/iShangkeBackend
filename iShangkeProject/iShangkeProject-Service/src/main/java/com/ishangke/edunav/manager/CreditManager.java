@@ -29,7 +29,7 @@ public interface CreditManager {
      * @param couponBo
      * @param userBo
      */
-    public CreditBo modifyCredit(CreditBo creditBo, UserBo userBo);
+    CreditBo modifyCredit(CreditBo creditBo, UserBo userBo);
 
     /**
      * 本方法为换取优惠券。<br>
@@ -49,7 +49,7 @@ public interface CreditManager {
      * @param couponBo
      * @param userBo
      */
-    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo);
+    CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo);
 
     /**
      * 本方法为换取现金。<br>
@@ -69,7 +69,7 @@ public interface CreditManager {
      * @param accountBo
      * @param userBo
      */
-    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo);
+    CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo);
 
     /**
      * 本方法为查询积分功能。<br>
@@ -89,7 +89,7 @@ public interface CreditManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo);
+    List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询积分历史功能。<br>
@@ -109,6 +109,6 @@ public interface CreditManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo);
+    List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo);
 
 }

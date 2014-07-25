@@ -8,24 +8,54 @@ import com.ishangke.edunav.web.model.ApproveHistoryVo;
 public class ApproveHistoryConverter {
     public static ApproveHistoryBo fromModel(ApproveHistoryVo vo) {
         ApproveHistoryBo approveHistoryBo = new ApproveHistoryBo();
-        approveHistoryBo.setApproveUserId(vo.getApproveUserId());
-        approveHistoryBo.setApproveUserIdSet(vo.getApproveUserIdSet());
-        approveHistoryBo.setAttachedId(vo.getAttachedId());
-        approveHistoryBo.setAttachedIdSet(vo.getAttachedIdSet());
-        approveHistoryBo.setComment(vo.getComment());
+        if (vo.getApproveUserId() != null) {
+            approveHistoryBo.setApproveUserId(vo.getApproveUserId());
+        }
+        if (vo.getApproveUserIdSet() != null) {
+            approveHistoryBo.setApproveUserIdSet(vo.getApproveUserIdSet());
+        }
+        if (vo.getAttachedId() != null) {
+            approveHistoryBo.setAttachedId(vo.getAttachedId());
+        }
+        if (vo.getAttachedIdSet() != null) {
+            approveHistoryBo.setAttachedIdSet(vo.getAttachedIdSet());
+        }
+        if (vo.getComment() != null) {
+            approveHistoryBo.setComment(vo.getComment());
+        }
+        if (vo.getId() != null) {
+            approveHistoryBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            approveHistoryBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getPostStatus() != null) {
+            approveHistoryBo.setPostStatus(vo.getPostStatus());
+        }
+        if (vo.getPostStatusSet() != null) {
+            approveHistoryBo.setPostStatusSet(vo.getPostStatusSet());
+        }
+        if (vo.getPreStatus() != null) {
+            approveHistoryBo.setPreStatus(vo.getPreStatus());
+        }
+        if (vo.getPreStatusSet() != null) {
+            approveHistoryBo.setPreStatusSet(vo.getPreStatusSet());
+        }
+        if (vo.getSubmitUserId() != null) {
+            approveHistoryBo.setSubmitUserId(vo.getSubmitUserId());
+        }
+        if (vo.getSubmitUserIdSet() != null) {
+            approveHistoryBo.setSubmitUserIdSet(vo.getSubmitUserIdSet());
+        }
+        if (vo.getType() != null) {
+            approveHistoryBo.setType(vo.getType());
+        }
+        if (vo.getTypeSet() != null) {
+            approveHistoryBo.setTypeSet(vo.getTypeSet());
+        }
         approveHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         approveHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         approveHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        approveHistoryBo.setId(vo.getId());
-        approveHistoryBo.setIdSet(vo.getIdSet());
-        approveHistoryBo.setPostStatus(vo.getPostStatus());
-        approveHistoryBo.setPostStatusSet(vo.getPostStatusSet());
-        approveHistoryBo.setPreStatus(vo.getPreStatus());
-        approveHistoryBo.setPreStatusSet(vo.getPreStatusSet());
-        approveHistoryBo.setSubmitUserId(vo.getSubmitUserId());
-        approveHistoryBo.setSubmitUserIdSet(vo.getSubmitUserIdSet());
-        approveHistoryBo.setType(vo.getType());
-        approveHistoryBo.setTypeSet(vo.getTypeSet());
         return approveHistoryBo;
     }
 

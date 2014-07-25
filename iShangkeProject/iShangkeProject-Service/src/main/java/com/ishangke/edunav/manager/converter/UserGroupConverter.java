@@ -8,15 +8,27 @@ import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 public class UserGroupConverter {
     public static UserGroupBo toBo(UserGroupEntityExt e) {
         UserGroupBo userGroupBo = new UserGroupBo();
-        userGroupBo.setGroupId(e.getGroupId());
-        userGroupBo.setGroupIdSet(e.getGroupIdSet());
-        userGroupBo.setId(e.getId());
-        userGroupBo.setIdSet(e.getIdSet());
+        if (e.getGroupId() != null) {
+            userGroupBo.setGroupId(e.getGroupId());
+        }
+        if (e.getGroupIdSet() != null) {
+            userGroupBo.setGroupIdSet(e.getGroupIdSet());
+        }
+        if (e.getId() != null) {
+            userGroupBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            userGroupBo.setIdSet(e.getIdSet());
+        }
+        if (e.getUserId() != null) {
+            userGroupBo.setUserId(e.getUserId());
+        }
+        if (e.getUserIdSet() != null) {
+            userGroupBo.setUserIdSet(e.getUserIdSet());
+        }
         userGroupBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         userGroupBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         userGroupBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        userGroupBo.setUserId(e.getUserId());
-        userGroupBo.setUserIdSet(e.getUserIdSet());
         return userGroupBo;
     }
 

@@ -21,7 +21,7 @@ public interface ActivityManager {
 	 *  @return 创建完成的活动信息
 	 *
 	 */
-	ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
+    ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
 	/**
 	 *  提交活动信息审核。<br>
 	 *  合作商可以提交活动信息审核
@@ -33,7 +33,7 @@ public interface ActivityManager {
 	 *  @return 提交完成的活动信息
 	 *
 	 */
-	ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo);
+    ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo);
 
 	/**
 	 *  认可活动信息。<br>
@@ -47,7 +47,7 @@ public interface ActivityManager {
 	 *  @return 认可完成的活动信息
 	 *
 	 */
-	ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo);
+    ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo);
 
 	/**
 	 *  拒绝活动信息。<br>
@@ -61,7 +61,7 @@ public interface ActivityManager {
 	 *  @return 拒绝完成的活动信息
 	 *
 	 */
-	ActivityBo rejectActivity(ActivityBo activityBo,PartnerBo partnerBo, UserBo userBo);
+    ActivityBo rejectActivity(ActivityBo activityBo,PartnerBo partnerBo, UserBo userBo);
 
 	/**
 	 *  取消活动信息。<br>
@@ -74,7 +74,7 @@ public interface ActivityManager {
 	 *  @return 取消完成的活动信息
 	 *
 	 */
-	ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo);
+    ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo);
 
 	/**
 	 *  删除活动信息。<br>
@@ -87,7 +87,7 @@ public interface ActivityManager {
 	 *  @return 删除完成的活动信息
 	 *
 	 */
-	ActivityBo deleteActivity(ActivityBo activityBo,PartnerBo partnerBo,UserBo userBo);
+    ActivityBo deleteActivity(ActivityBo activityBo,PartnerBo partnerBo,UserBo userBo);
 
 	/**
 	 *  查询活动信息。<br>
@@ -101,5 +101,5 @@ public interface ActivityManager {
 	 *  @return 推广信息实体 Activity 列表
 	 *
 	 */
-	List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 }

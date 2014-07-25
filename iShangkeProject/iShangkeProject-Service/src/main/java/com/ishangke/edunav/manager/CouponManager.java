@@ -21,6 +21,32 @@ public interface CouponManager {
      * @return 优惠券实体 CouponBo
      */
     CouponBo createCoupon(CouponBo couponBo, UserBo userBo);
+    
+    /**
+     * 本方法为修改优惠券功能。<br>
+     * 根据用户使用情况，修改优惠券
+     * 
+     * @param couponBo
+     *            优惠券信息
+     * @param userBo
+     *            调用方法的用户的信息
+     * 
+     * @return 优惠券实体 CouponBo
+     */
+    CouponBo updateCoupon(CouponBo couponBo, UserBo userBo);
+    
+    /**
+     * 本方法为修改优惠券功能。<br>
+     * 根据用户使用情况，修改优惠券
+     * 
+     * @param couponBoList
+     *            优惠券信息 (list)
+     * @param userBo
+     *            调用方法的用户的信息
+     * 
+     * @return 优惠券实体 CouponBo
+     */
+    List<CouponBo> updateCouponList(List<CouponBo> couponBoList, UserBo userBo);
 
     /**
      * 本方法为查询优惠券功能。<br>
@@ -53,16 +79,5 @@ public interface CouponManager {
      * 
      */
     List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo);
-
-    /**
-     * 本方法为查询优惠券功能。<br>
-     * 用户可以查询自己拥有的优惠券，系统可以查看所有优惠券
-     * 
-     * @param userId
-     * 
-     * @return 优惠券实体 CouponBo 列表
-     * 
-     */
-    List<CouponBo> listCouponByUserId(int userId);
 
 }

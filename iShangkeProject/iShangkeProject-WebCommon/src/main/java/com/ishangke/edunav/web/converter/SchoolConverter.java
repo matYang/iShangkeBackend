@@ -8,17 +8,27 @@ import com.ishangke.edunav.web.model.SchoolVo;
 public class SchoolConverter {
     public static SchoolBo fromModel(SchoolVo vo) {
         SchoolBo schoolBo = new SchoolBo();
+        if (vo.getEnabled() != null) {
+            schoolBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            schoolBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            schoolBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getName() != null) {
+            schoolBo.setName(vo.getName());
+        }
+        if (vo.getValue() != null) {
+            schoolBo.setValue(vo.getValue());
+        }
         schoolBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         schoolBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         schoolBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        schoolBo.setEnabled(vo.getEnabled());
-        schoolBo.setId(vo.getId());
-        schoolBo.setIdSet(vo.getIdSet());
         schoolBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         schoolBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         schoolBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        schoolBo.setName(vo.getName());
-        schoolBo.setValue(vo.getValue());
         return schoolBo;
     }
 

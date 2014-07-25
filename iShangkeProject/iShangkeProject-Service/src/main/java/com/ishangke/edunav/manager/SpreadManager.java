@@ -30,7 +30,7 @@ public interface SpreadManager {
      * @param partnerBo
      * @param courseBo
      */
-    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo);
+    SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo);
 
     /**
      * 查询推广信息。<br>
@@ -50,7 +50,7 @@ public interface SpreadManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<SpreadBo> query(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo);
+    List<SpreadBo> query(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 创建推广信息。<br>
@@ -75,7 +75,7 @@ public interface SpreadManager {
      * @param courseBo
      * @param userBo
      */
-    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo);
+    SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo);
 
     /**
      * 认可推广信息。<br>
@@ -92,7 +92,7 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo);
+    SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo);
 
     /**
      * 拒绝推广信息。<br>
@@ -109,7 +109,7 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo);
+    SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo);
 
     /**
      * 取消推广信息。<br>
@@ -126,7 +126,7 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo);
+    SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo);
 
     /**
      * 删除推广信息。<br>
@@ -143,6 +143,6 @@ public interface SpreadManager {
      * @param spreadBo
      * @param userBo
      */
-    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo);
+    SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo);
 
 }

@@ -84,7 +84,9 @@
                             "operations": [
                                 {
                                     "name": "onlineRefund",
-                                    "operateCode": 0
+                                    "operateCode": 21,
+                                    "nextStatus": 15,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -109,7 +111,9 @@
                             "operations": [
                                 {
                                     "name": "onlineCashback",
-                                    "operateCode": 0
+                                    "operateCode": 22,
+                                    "nextStatus": 19,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -137,6 +141,11 @@
                             "name": "offlineNoPayed",
                             "statusCode": 23,
                             "operations": []
+                        },
+                        {
+                            "name": "offlineCashbacked",
+                            "statusCode": 24,
+                            "operations": []
                         }
                     ]
                 },
@@ -150,11 +159,15 @@
                             "operations": [
                                 {
                                     "name": "approve",
-                                    "operateCode": 0
+                                    "operateCode": 0,
+                                    "nextStatus": 2,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "reject",
-                                    "operateCode": 0
+                                    "operateCode": 0,
+                                    "nextStatus": 1,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -200,11 +213,15 @@
                             "operations": [
                                 {
                                     "name": "approve",
-                                    "operateCode": 0
+                                    "operateCode": 0,
+                                    "nextStatus": 2,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "reject",
-                                    "operateCode": 0
+                                    "operateCode": 0,
+                                    "nextStatus": 1,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -256,11 +273,15 @@
                             "operations": [
                                 {
                                     "name": "offlineConfirm",
-                                    "operateCode": 0
+                                    "operateCode": 11,
+                                    "nextStatus": 3,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlineReject",
-                                    "operateCode": 0
+                                    "operateCode": 12,
+                                    "nextStatus": 1,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -280,11 +301,15 @@
                             "operations": [
                                 {
                                     "name": "offlineRegister",
-                                    "operateCode": 0
+                                    "operateCode": 15,
+                                    "nextStatus": 6,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlinePartnerDelay",
-                                    "operateCode": 0
+                                    "operateCode": 13,
+                                    "nextStatus": 4,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -294,11 +319,15 @@
                             "operations": [
                                 {
                                     "name": "offlineRegister",
-                                    "operateCode": 0
+                                    "operateCode": 15,
+                                    "nextStatus": 6,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlineNoShow",
-                                    "operateCode": 0
+                                    "operateCode": 7,
+                                    "nextStatus": 5,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -308,7 +337,9 @@
                             "operations": [
                                 {
                                     "name": "offlinePartnerDelay",
-                                    "operateCode": 0
+                                    "operateCode": 13,
+                                    "nextStatus": 4,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -318,11 +349,15 @@
                             "operations": [
                                 {
                                     "name": "offlinePay",
-                                    "operateCode": 0
+                                    "operateCode": 16,
+                                    "nextStatus": 7,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlineNoPay",
-                                    "operateCode": 0
+                                    "operateCode": 17,
+                                    "nextStatus": 23,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -332,11 +367,15 @@
                             "operations": [
                                 {
                                     "name": "offlineStartSchool",
-                                    "operateCode": 0
+                                    "operateCode": 19,
+                                    "nextStatus": 17,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlineQuit",
-                                    "operateCode": 0
+                                    "operateCode": 18,
+                                    "nextStatus": 9,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -346,11 +385,15 @@
                             "operations": [
                                 {
                                     "name": "offlineQuit",
-                                    "operateCode": 0
+                                    "operateCode": 18,
+                                    "nextStatus": 9,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlineEnroll",
-                                    "operateCode": 0
+                                    "operateCode": 20,
+                                    "nextStatus": 18,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -380,11 +423,15 @@
                             "operations": [
                                 {
                                     "name": "onlineConfirm",
-                                    "operateCode": 0
+                                    "operateCode": 5,
+                                    "nextStatus": 16,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "onlineReject",
-                                    "operateCode": 0
+                                    "operateCode": 12,
+                                    "nextStatus": 14,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -404,11 +451,15 @@
                             "operations": [
                                 {
                                     "name": "onlineStartSchool",
-                                    "operateCode": 0
+                                    "operateCode": 9,
+                                    "nextStatus": 17,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "onlineNoShow",
-                                    "operateCode": 0
+                                    "operateCode": 7,
+                                    "nextStatus": 14,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -418,11 +469,15 @@
                             "operations": [
                                 {
                                     "name": "onlineEnroll",
-                                    "operateCode": 0
+                                    "operateCode": 10,
+                                    "nextStatus": 18,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "onlineQuit",
-                                    "operateCode": 0
+                                    "operateCode": 8,
+                                    "nextStatus": 15,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -455,6 +510,11 @@
                             "name": "offlineNoPayed",
                             "statusCode": 23,
                             "operations": []
+                        },
+                        {
+                            "name": "offlineCashbacked",
+                            "statusCode": 24,
+                            "operations": []
                         }
                     ]
                 },
@@ -473,11 +533,15 @@
                             "operations": [
                                 {
                                     "name": "submitUpdated",
-                                    "operateCode": 0
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "takeOffline",
-                                    "operateCode": 0
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -487,11 +551,15 @@
                             "operations": [
                                 {
                                     "name": "takeOffline",
-                                    "operateCode": 0
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "submitUpdated",
-                                    "operateCode": 0
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -501,11 +569,15 @@
                             "operations": [
                                 {
                                     "name": "submitUpdated",
-                                    "operateCode": 0
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "delete",
-                                    "operateCode": 0
+                                    "operateCode": 4,
+                                    "nextStatus": 4,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -541,11 +613,15 @@
                             "operations": [
                                 {
                                     "name": "submitUpdated",
-                                    "operateCode": 0
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "takeOffline",
-                                    "operateCode": 0
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -555,11 +631,15 @@
                             "operations": [
                                 {
                                     "name": "takeOffline",
-                                    "operateCode": 0
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "submitUpdated",
-                                    "operateCode": 0
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -569,11 +649,15 @@
                             "operations": [
                                 {
                                     "name": "submitUpdated",
-                                    "operateCode": 0
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "delete",
-                                    "operateCode": 0
+                                    "operateCode": 4,
+                                    "nextStatus": 4,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -609,8 +693,10 @@
                             "statusCode": 0,
                             "operations": [
                                 {
-                                    "name": "offlineSubmitBooking",
-                                    "operateCode": 0
+                                    "name": "offlineCancel",
+                                    "operateCode": 3,
+                                    "nextStatus": 2,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -629,12 +715,16 @@
                             "statusCode": 3,
                             "operations": [
                                 {
-                                    "name": "offlineSubmitBooking",
-                                    "operateCode": 0
+                                    "name": "offlineCancel",
+                                    "operateCode": 3,
+                                    "nextStatus": 2,
+                                    "toDos": []
                                 },
                                 {
                                     "name": "offlineUserDelay",
-                                    "operateCode": 0
+                                    "operateCode": 4,
+                                    "nextStatus": 4,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -686,7 +776,14 @@
                         {
                             "name": "onlinePayed",
                             "statusCode": 13,
-                            "operations": []
+                            "operations": [
+                                {
+                                    "name": "onlineCancel",
+                                    "operateCode": 1,
+                                    "nextStatus": 14,
+                                    "toDos": []
+                                }
+                            ]
                         },
                         {
                             "name": "onlinePendingRefund",
@@ -736,6 +833,11 @@
                         {
                             "name": "offlineNoPayed",
                             "statusCode": 23,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineCashbacked",
+                            "statusCode": 24,
                             "operations": []
                         }
                     ]

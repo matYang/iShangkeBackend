@@ -23,7 +23,7 @@ public interface WithdrawManager {
      * @param withdrawBo
      * @param userBo
      */
-    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo);
+    WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo);
 
     /**
      * 更新存取款信息。<br>
@@ -40,7 +40,7 @@ public interface WithdrawManager {
      * @param withdrawBo
      * @param userBo
      */
-    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo);
+    WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo);
 
     /**
      * 删除存取款信息。<br>
@@ -57,7 +57,7 @@ public interface WithdrawManager {
      * @param withdrawBo
      * @param userBo
      */
-    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo);
+    WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo);
 
     /**
      * 查询存取款信息。<br>
@@ -77,6 +77,6 @@ public interface WithdrawManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo);
+    List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo);
 
 }

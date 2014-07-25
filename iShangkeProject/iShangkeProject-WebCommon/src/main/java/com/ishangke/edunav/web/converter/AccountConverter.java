@@ -8,20 +8,36 @@ import com.ishangke.edunav.web.model.AccountVo;
 public class AccountConverter {
     public static AccountBo fromModel(AccountVo vo) {
         AccountBo accountBo = new AccountBo();
-        accountBo.setBalance(vo.getBalance());
-        accountBo.setBalanceEnd(vo.getBalanceEnd());
-        accountBo.setBalanceStart(vo.getBalanceStart());
+        if (vo.getBalance() != null) {
+            accountBo.setBalance(vo.getBalance());
+        }
+        if (vo.getBalanceEnd() != null) {
+            accountBo.setBalanceEnd(vo.getBalanceEnd());
+        }
+        if (vo.getBalanceStart() != null) {
+            accountBo.setBalanceStart(vo.getBalanceStart());
+        }
+        if (vo.getEnabled() != null) {
+            accountBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            accountBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            accountBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getRealName() != null) {
+            accountBo.setRealName(vo.getRealName());
+        }
+        if (vo.getAccountNumber() != null) {
+            accountBo.setAccountNumber(vo.getAccountNumber());
+        }
         accountBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         accountBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         accountBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        accountBo.setEnabled(vo.getEnabled());
-        accountBo.setId(vo.getId());
-        accountBo.setIdSet(vo.getIdSet());
         accountBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         accountBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         accountBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        accountBo.setRealName(vo.getRealName());
-        accountBo.setAccountNumber(vo.getAccountNumber());
         return accountBo;
     }
 

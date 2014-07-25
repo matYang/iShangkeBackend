@@ -7,28 +7,28 @@ import com.ishangke.edunav.commoncontract.model.RoleBo;
 
 public interface RoleManager {
 
-    public int add(RoleBo roleBo);
+    int add(RoleBo roleBo);
 
-    public void deleteById(int id);
+    void deleteById(int id);
 
-    public void update(RoleBo roleBo);
+    void update(RoleBo roleBo);
 
-    public List<RoleBo> list(RoleBo roleBo, PaginationBo page);
+    List<RoleBo> list(RoleBo roleBo, PaginationBo page);
 
-    public int getListCount(RoleBo roleBo);
+    int getListCount(RoleBo roleBo);
 
-    public List<RoleBo> listAll();
+    List<RoleBo> listAll();
 
-    public int getCount();
+    int getCount();
 
-    public List<RoleBo> listRolesByUserId(int userId);
+    List<RoleBo> listRolesByUserId(int userId);
 
-    public int getCountByUserId(int userId);
+    int getCountByUserId(int userId);
 
-    public List<RoleBo> listRolesByGroupId(int groupId);
+    List<RoleBo> listRolesByGroupId(int groupId);
 
-    public int getCountByGroupId(int groupId);
+    int getCountByGroupId(int groupId);
 
-    public RoleBo getById(int id);
+    RoleBo getById(int id);
 
 }

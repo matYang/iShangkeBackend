@@ -8,21 +8,45 @@ import com.ishangke.edunav.web.model.AccountHistoryVo;
 public class AccountHistoryConverter {
     public static AccountHistoryBo fromModel(AccountHistoryVo vo) {
         AccountHistoryBo accountHistoryBo = new AccountHistoryBo();
-        accountHistoryBo.setCharge(vo.getCharge());
-        accountHistoryBo.setChargeEnd(vo.getChargeEnd());
-        accountHistoryBo.setChargeStart(vo.getChargeStart());
+        if (vo.getCharge() != null) {
+            accountHistoryBo.setCharge(vo.getCharge());
+        }
+        if (vo.getChargeEnd() != null) {
+            accountHistoryBo.setChargeEnd(vo.getChargeEnd());
+        }
+        if (vo.getChargeStart() != null) {
+            accountHistoryBo.setChargeStart(vo.getChargeStart());
+        }
+        if (vo.getId() != null) {
+            accountHistoryBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            accountHistoryBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getRemark() != null) {
+            accountHistoryBo.setRemark(vo.getRemark());
+        }
+        if (vo.getType() != null) {
+            accountHistoryBo.setType(vo.getType());
+        }
+        if (vo.getTypeSet() != null) {
+            accountHistoryBo.setTypeSet(vo.getTypeSet());
+        }
+        if (vo.getUserId() != null) {
+            accountHistoryBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            accountHistoryBo.setUserIdSet(vo.getUserIdSet());
+        }
+        if (vo.getWithdrawId() != null) {
+            accountHistoryBo.setWithdrawId(vo.getWithdrawId());
+        }
+        if (vo.getWithdrawIdSet() != null) {
+            accountHistoryBo.setWithdrawIdSet(vo.getWithdrawIdSet());
+        }
         accountHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         accountHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         accountHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        accountHistoryBo.setId(vo.getId());
-        accountHistoryBo.setIdSet(vo.getIdSet());
-        accountHistoryBo.setRemark(vo.getRemark());
-        accountHistoryBo.setType(vo.getType());
-        accountHistoryBo.setTypeSet(vo.getTypeSet());
-        accountHistoryBo.setUserId(vo.getUserId());
-        accountHistoryBo.setUserIdSet(vo.getUserIdSet());
-        accountHistoryBo.setWithdrawId(vo.getWithdrawId());
-        accountHistoryBo.setWithdrawIdSet(vo.getWithdrawIdSet());
         return accountHistoryBo;
     }
 

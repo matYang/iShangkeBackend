@@ -8,25 +8,51 @@ import com.ishangke.edunav.web.model.SpreadVo;
 public class SpreadConverter {
     public static SpreadBo fromModel(SpreadVo vo) {
         SpreadBo spreadBo =new SpreadBo();
-        spreadBo.setCourseId(vo.getCourseId());
-        spreadBo.setCourseIdSet(vo.getCourseIdSet());
+        if (vo.getCourseId() != null) {
+            spreadBo.setCourseId(vo.getCourseId());
+        }
+        if (vo.getCourseIdSet() != null) {
+            spreadBo.setCourseIdSet(vo.getCourseIdSet());
+        }
+        if (vo.getEnabled() != null) {
+            spreadBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            spreadBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            spreadBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getPartnerId() != null) {
+            spreadBo.setPartnerId(vo.getPartnerId());
+        }
+        if (vo.getPartnerIdSet() != null) {
+            spreadBo.setPartnerIdSet(vo.getPartnerIdSet());
+        }
+        if (vo.getRemark() != null) {
+            spreadBo.setRemark(vo.getRemark());
+        }
+        if (vo.getStatus() != null) {
+            spreadBo.setStatus(vo.getStatus());
+        }
+        if (vo.getStatusSet() != null) {
+            spreadBo.setStatusSet(vo.getStatusSet());
+        }
+        if (vo.getUrl() != null) {
+            spreadBo.setUrl(vo.getUrl());
+        }
+        if (vo.getUserId() != null) {
+            spreadBo.setUserId(vo.getUserId());
+        }
+        if (vo.getUserIdSet() != null) {
+            spreadBo.setUserIdSet(vo.getUserIdSet());
+        }
         spreadBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         spreadBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        spreadBo.setEnabled(vo.getEnabled());
-        spreadBo.setId(vo.getId());
-        spreadBo.setIdSet(vo.getIdSet());
         spreadBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        spreadBo.setPartnerId(vo.getPartnerId());
-        spreadBo.setPartnerIdSet(vo.getPartnerIdSet());
-        spreadBo.setRemark(vo.getRemark());
-        spreadBo.setStatus(vo.getStatus());
-        spreadBo.setStatusSet(vo.getStatusSet());
-        spreadBo.setUrl(vo.getUrl());
-        spreadBo.setUserId(vo.getUserId());
-        spreadBo.setUserIdSet(vo.getUserIdSet());
         return spreadBo;
     }
 

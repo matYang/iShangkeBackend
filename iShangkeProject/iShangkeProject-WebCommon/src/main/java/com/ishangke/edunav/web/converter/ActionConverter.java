@@ -6,7 +6,9 @@ import com.ishangke.edunav.web.common.ActionVo;
 public class ActionConverter {
     public static ActionBo fromModel(ActionVo vo) {
         ActionBo actionBo = new ActionBo();
-        actionBo.setName(vo.getName());
+        if (vo.getName() != null) {
+            actionBo.setName(vo.getName());
+        }
         return actionBo;
     }
 

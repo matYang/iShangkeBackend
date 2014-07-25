@@ -9,7 +9,7 @@ import net.spy.memcached.MemcachedClient;
 
 public interface CacheManager {
 
-    public Object get(String key);
+    Object get(String key);
 
     /**
      * Memcache does not support getBulk by its nature, memcache client does so
@@ -20,15 +20,15 @@ public interface CacheManager {
      * @param keys
      * @return
      */
-    public Map<String, Object> getBulk(List<String> keys);
+    Map<String, Object> getBulk(List<String> keys);
 
-    public Future<Boolean> set(String key, int exp, Serializable obj);
+    Future<Boolean> set(String key, int exp, Serializable obj);
 
-    public Future<Boolean> del(String key);
+    Future<Boolean> del(String key);
 
     /**
      * @return Memcached client 实例
      */
-    public MemcachedClient getClient();
+    MemcachedClient getClient();
 
 }

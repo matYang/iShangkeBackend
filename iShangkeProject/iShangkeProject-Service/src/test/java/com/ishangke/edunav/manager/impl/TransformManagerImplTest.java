@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.dataaccess.mapper.ConfigurationEntityExtMapper;
-import com.ishangke.edunav.dataaccess.model.ConfigurationEntityExt;
 import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.TransformManager;
 import com.ishangke.edunav.manager.transform.Operation;

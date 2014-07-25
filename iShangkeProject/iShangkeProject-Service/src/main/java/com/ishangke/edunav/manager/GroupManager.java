@@ -5,5 +5,5 @@ import java.util.List;
 import com.ishangke.edunav.commoncontract.model.GroupBo;
 
 public interface GroupManager {
-    public List<GroupBo> listGroupsByUserId(int userId);
+    List<GroupBo> listGroupsByUserId(int userId);
 }

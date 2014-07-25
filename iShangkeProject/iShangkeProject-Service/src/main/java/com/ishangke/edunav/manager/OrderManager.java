@@ -33,7 +33,7 @@ public interface OrderManager {
      * @param userBo
      * @param withdrawBo
      */
-    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo);
+    OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo);
 
     /**
      * 本方法为合作商受理一个预定单功能。<br>
@@ -53,7 +53,7 @@ public interface OrderManager {
      * @param commentBookingAcceptBo
      * @param userBo
      */
-    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo);
+    OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo);
 
     /**
      * 本方法为查询Order功能。<br>
@@ -76,7 +76,7 @@ public interface OrderManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为查询Order历史功能。<br>
@@ -99,6 +99,6 @@ public interface OrderManager {
      * @param userBo
      * @param paginationBo
      */
-    public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistory, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
 
 }

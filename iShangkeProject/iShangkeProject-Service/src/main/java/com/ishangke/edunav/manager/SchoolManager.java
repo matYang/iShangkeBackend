@@ -16,5 +16,5 @@ public interface SchoolManager {
     *  @return Category实体 careerBo 列表
     *
     */
-    List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo);
+    public List<SchoolBo> query(SchoolBo schoolBo, PaginationBo paginationBo);
 }

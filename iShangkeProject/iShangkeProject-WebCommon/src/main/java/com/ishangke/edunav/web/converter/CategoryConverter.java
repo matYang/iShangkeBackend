@@ -8,21 +8,39 @@ import com.ishangke.edunav.web.model.CategoryVo;
 public class CategoryConverter {
     public static CategoryBo fromModel(CategoryVo vo) {
         CategoryBo categoryBo = new CategoryBo();
+        if (vo.getEnabled() != null) {
+            categoryBo.setEnabled(vo.getEnabled());
+        }
+        if (vo.getId() != null) {
+            categoryBo.setId(vo.getId());
+        }
+        if (vo.getIdSet() != null) {
+            categoryBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getName() != null) {
+            categoryBo.setName(vo.getName());
+        }
+        if (vo.getRank() != null) {
+            categoryBo.setRank(vo.getRank());
+        }
+        if (vo.getRankEnd() != null) {
+            categoryBo.setRankEnd(vo.getRankEnd());
+        }
+        if (vo.getRankSet() != null) {
+            categoryBo.setRankSet(vo.getRankSet());
+        }
+        if (vo.getRankStart() != null) {
+            categoryBo.setRankStart(vo.getRankStart());
+        }
+        if (vo.getValue() != null) {
+            categoryBo.setValue(vo.getValue());
+        }
         categoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
         categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
         categoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        categoryBo.setEnabled(vo.getEnabled());
-        categoryBo.setId(vo.getId());
-        categoryBo.setIdSet(vo.getIdSet());
         categoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
         categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
         categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
-        categoryBo.setName(vo.getName());
-        categoryBo.setRank(vo.getRank());
-        categoryBo.setRankEnd(vo.getRankEnd());
-        categoryBo.setRankSet(vo.getRankSet());
-        categoryBo.setRankStart(vo.getRankStart());
-        categoryBo.setValue(vo.getValue());
         return categoryBo;
     }
 

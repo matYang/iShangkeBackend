@@ -8,24 +8,54 @@ import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 public class ApproveHistoryConverter {
     public static ApproveHistoryBo toBo(ApproveHistoryEntityExt e) {
         ApproveHistoryBo approveHistoryBo = new ApproveHistoryBo();
-        approveHistoryBo.setApproveUserId(e.getApproveUserId());
-        approveHistoryBo.setApproveUserIdSet(e.getApproveUserIdSet());
-        approveHistoryBo.setAttachedId(e.getAttachedId());
-        approveHistoryBo.setAttachedIdSet(e.getAttachedIdSet());
-        approveHistoryBo.setComment(e.getComment());
+        if (e.getApproveUserId() != null) {
+            approveHistoryBo.setApproveUserId(e.getApproveUserId());
+        }
+        if (e.getApproveUserIdSet() != null) {
+            approveHistoryBo.setApproveUserIdSet(e.getApproveUserIdSet());
+        }
+        if (e.getAttachedId() != null) {
+            approveHistoryBo.setAttachedId(e.getAttachedId());
+        }
+        if (e.getAttachedIdSet() != null) {
+            approveHistoryBo.setAttachedIdSet(e.getAttachedIdSet());
+        }
+        if (e.getComment() != null) {
+            approveHistoryBo.setComment(e.getComment());
+        }
+        if (e.getId() != null) {
+            approveHistoryBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            approveHistoryBo.setIdSet(e.getIdSet());
+        }
+        if (e.getPostStatus() != null) {
+            approveHistoryBo.setPostStatus(e.getPostStatus());
+        }
+        if (e.getPostStatusSet() != null) {
+            approveHistoryBo.setPostStatusSet(e.getPostStatusSet());
+        }
+        if (e.getPreStatus() != null) {
+            approveHistoryBo.setPreStatus(e.getPreStatus());
+        }
+        if (e.getPreStatusSet() != null) {
+            approveHistoryBo.setPreStatusSet(e.getPreStatusSet());
+        }
+        if (e.getSubmitUserId() != null) {
+            approveHistoryBo.setSubmitUserId(e.getSubmitUserId());
+        }
+        if (e.getSubmitUserIdSet() != null) {
+            approveHistoryBo.setSubmitUserIdSet(e.getSubmitUserIdSet());
+        }
+        if (e.getType() != null) {
+            approveHistoryBo.setType(e.getType());
+        }
+        if (e.getTypeSet() != null) {
+            approveHistoryBo.setTypeSet(e.getTypeSet());
+        }
         approveHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         approveHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         approveHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        approveHistoryBo.setId(e.getId());
-        approveHistoryBo.setIdSet(e.getIdSet());
-        approveHistoryBo.setPostStatus(e.getPostStatus());
-        approveHistoryBo.setPostStatusSet(e.getPostStatusSet());
-        approveHistoryBo.setPreStatus(e.getPreStatus());
-        approveHistoryBo.setPreStatusSet(e.getPreStatusSet());
-        approveHistoryBo.setSubmitUserId(e.getSubmitUserId());
-        approveHistoryBo.setSubmitUserIdSet(e.getSubmitUserIdSet());
-        approveHistoryBo.setType(e.getType());
-        approveHistoryBo.setTypeSet(e.getTypeSet());
         return approveHistoryBo;
     }
 

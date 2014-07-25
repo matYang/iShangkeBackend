@@ -8,37 +8,75 @@ import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 public class UserConverter {
     public static UserBo toBo(UserEntityExt e) {
         UserBo userBo = new UserBo();
-        userBo.setAppliedInvitationCode(e.getAppliedInvitationCode());
-        userBo.setAvatarUrl(e.getAvatarUrl());
+        if (e.getAppliedInvitationCode() != null) {
+            userBo.setAppliedInvitationCode(e.getAppliedInvitationCode());
+        }
+        if (e.getAvatarUrl() != null) {
+            userBo.setAvatarUrl(e.getAvatarUrl());
+        }
+        if (e.getEmail() != null) {
+            userBo.setEmail(e.getEmail());
+        }
+        if (e.getEnabled() != null) {
+            userBo.setEnabled(e.getEnabled());
+        }
+        if (e.getGender() != null) {
+            userBo.setGender(e.getGender());
+        }
+        if (e.getId() != null) {
+            userBo.setId(e.getId());
+        }
+        if (e.getIdSet() != null) {
+            userBo.setIdSet(e.getIdSet());
+        }
+        if (e.getInvitationCode() != null) {
+            userBo.setInvitationCode(e.getInvitationCode());
+        }
+        if (e.getMajor() != null) {
+            userBo.setMajor(e.getMajor());
+        }
+        if (e.getName() != null) {
+            userBo.setName(e.getName());
+        }
+        if (e.getPassword() != null) {
+            userBo.setPassword(e.getPassword());
+        }
+        if (e.getPhone() != null) {
+            userBo.setPhone(e.getPhone());
+        }
+        if (e.getReference() != null) {
+            userBo.setReference(e.getReference());
+        }
+        if (e.getSchool() != null) {
+            userBo.setSchool(e.getSchool());
+        }
+        if (e.getWechat() != null) {
+            userBo.setWechat(e.getWechat());
+        }
+        if (e.getCareerId() != null) {
+            userBo.setCareerId(e.getCareerId());
+        }
+        if (e.getCareerIdSet() != null) {
+            userBo.setCareerIdSet(e.getCareerIdSet());
+        }
+        if (e.getSchoolId() != null) {
+            userBo.setSchoolId(e.getSchoolId());
+        }
+        if (e.getSchoolIdSet() != null) {
+            userBo.setSchoolIdSet(e.getSchoolIdSet());
+        }
         userBo.setBirthday(e.getBirthday() == null ? Constant.DEFAULTNULL : e.getBirthday().getTimeInMillis());
         userBo.setBirthdayEnd(e.getBirthdayEnd() == null ? Constant.DEFAULTNULL : e.getBirthdayEnd().getTimeInMillis());
         userBo.setBirthdayStart(e.getBirthdayStart() == null ? Constant.DEFAULTNULL : e.getBirthdayStart().getTimeInMillis());
         userBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         userBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         userBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        userBo.setEmail(e.getEmail());
-        userBo.setEnabled(e.getEnabled());
-        userBo.setGender(e.getGender());
-        userBo.setId(e.getId());
-        userBo.setIdSet(e.getIdSet());
-        userBo.setInvitationCode(e.getInvitationCode());
         userBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime().getTimeInMillis());
         userBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd().getTimeInMillis());
         userBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeStart().getTimeInMillis());
         userBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
         userBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
         userBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        userBo.setMajor(e.getMajor());
-        userBo.setName(e.getName());
-        userBo.setPassword(e.getPassword());
-        userBo.setPhone(e.getPhone());
-        userBo.setReference(e.getReference());
-        userBo.setSchool(e.getSchool());
-        userBo.setWechat(e.getWechat());
-        userBo.setCareerId(e.getCareerId());
-        userBo.setCareerIdSet(e.getCareerIdSet());
-        userBo.setSchoolId(e.getSchoolId());
-        userBo.setSchoolIdSet(e.getSchoolIdSet());
         return userBo;
     }
 
