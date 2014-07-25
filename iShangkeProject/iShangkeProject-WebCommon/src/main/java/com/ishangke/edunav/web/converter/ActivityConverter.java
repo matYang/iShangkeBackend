@@ -19,16 +19,23 @@ public class ActivityConverter {
         }
         if (vo.getStatus() != null) {
             activityBo.setStatus(vo.getStatus());
+        } else {
+            activityBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getStatusSet() != null) {
             activityBo.setStatusSet(vo.getStatusSet());
         }
-        activityBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        activityBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        activityBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        activityBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        activityBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        activityBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
         activityBo.setEndTime(vo.getEndTime() == null ? Constant.DEFAULTNULL : vo.getEndTime().getTimeInMillis());
-        activityBo.setEndTimeEnd(vo.getEndTimeEnd() == null ? Constant.DEFAULTNULL : vo.getEndTimeEnd().getTimeInMillis());
-        activityBo.setEndTimeStart(vo.getEndTimeStart() == null ? Constant.DEFAULTNULL : vo.getEndTimeStart().getTimeInMillis());
+        activityBo.setEndTimeEnd(vo.getEndTimeEnd() == null ? Constant.DEFAULTNULL : vo.getEndTimeEnd()
+                .getTimeInMillis());
+        activityBo.setEndTimeStart(vo.getEndTimeStart() == null ? Constant.DEFAULTNULL : vo.getEndTimeStart()
+                .getTimeInMillis());
         return activityBo;
     }
 
@@ -43,7 +50,9 @@ public class ActivityConverter {
         activityVo.setEndTime(DateUtility.getTimeFromLong(bo.getEndTime()));
         activityVo.setEndTimeEnd(DateUtility.getTimeFromLong(bo.getEndTimeEnd()));
         activityVo.setEndTimeStart(DateUtility.getTimeFromLong(bo.getEndTimeStart()));
-        activityVo.setStatus(bo.getStatus());
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
+            activityVo.setStatus(bo.getStatus());
+        }
         activityVo.setStatusSet(bo.getStatusSet());
         return activityVo;
     }

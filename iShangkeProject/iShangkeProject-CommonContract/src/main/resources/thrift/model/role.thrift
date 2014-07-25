@@ -12,3 +12,9 @@ struct RoleBo {
     9: i64 lastModifyTimeStart
     10: i64 lastModifyTimeEnd
 }
+struct RoleBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<RoleBo> data
+} 

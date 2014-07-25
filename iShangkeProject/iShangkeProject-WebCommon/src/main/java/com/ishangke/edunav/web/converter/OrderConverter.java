@@ -37,6 +37,8 @@ public class OrderConverter {
         }
         if (vo.getStatus() != null) {
             orderBo.setStatus(vo.getStatus());
+        }  else {
+            orderBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getStatusSet() != null) {
             orderBo.setStatusSet(vo.getStatusSet());
@@ -73,7 +75,9 @@ public class OrderConverter {
         orderVo.setPriceEnd(bo.getPriceEnd());
         orderVo.setPriceStart(bo.getPriceStart());
         orderVo.setRuningNumber(bo.getRuningNumber());
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
         orderVo.setStatus(bo.getStatus());
+        }
         orderVo.setStatusSet(bo.getStatusSet());
         orderVo.setType(bo.getType());
         orderVo.setReference(bo.getReference());

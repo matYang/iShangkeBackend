@@ -37,6 +37,8 @@ public class OrderConverter {
         }
         if (e.getStatus() != null) {
             orderBo.setStatus(e.getStatus());
+        } else {
+            orderBo.setStatus(Constant.DEFAULTNULL);
         }
         if (e.getStatusSet() != null) {
             orderBo.setStatusSet(e.getStatusSet());
@@ -50,13 +52,18 @@ public class OrderConverter {
         if (e.getSign() != null) {
             orderBo.setSign(e.getSign());
         }
-        orderBo.setConfirmedTime(e.getConfirmedTime() == null ? Constant.DEFAULTNULL : e.getConfirmedTime().getTimeInMillis());
-        orderBo.setConfirmedTimeEnd(e.getConfirmedTimeEnd() == null ? Constant.DEFAULTNULL : e.getConfirmedTimeEnd().getTimeInMillis());
-        orderBo.setConfirmedTimeStart(e.getConfirmedTimeStart() == null ? Constant.DEFAULTNULL : e.getConfirmedTimeStart().getTimeInMillis());
+        orderBo.setConfirmedTime(e.getConfirmedTime() == null ? Constant.DEFAULTNULL : e.getConfirmedTime()
+                .getTimeInMillis());
+        orderBo.setConfirmedTimeEnd(e.getConfirmedTimeEnd() == null ? Constant.DEFAULTNULL : e.getConfirmedTimeEnd()
+                .getTimeInMillis());
+        orderBo.setConfirmedTimeStart(e.getConfirmedTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getConfirmedTimeStart().getTimeInMillis());
         orderBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        orderBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        orderBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-      
+        orderBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        orderBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+
         return orderBo;
     }
 
@@ -74,7 +81,9 @@ public class OrderConverter {
         orderEntityExt.setPriceEnd(bo.getPriceEnd());
         orderEntityExt.setPriceStart(bo.getPriceStart());
         orderEntityExt.setRuningNumber(bo.getRuningNumber());
-        orderEntityExt.setStatus(bo.getStatus());
+        if (bo.getStatus() != Constant.DEFAULTNULL) {
+            orderEntityExt.setStatus(bo.getStatus());
+        }
         orderEntityExt.setStatusSet(bo.getStatusSet());
         orderEntityExt.setType(bo.getType());
         orderEntityExt.setReference(bo.getReference());

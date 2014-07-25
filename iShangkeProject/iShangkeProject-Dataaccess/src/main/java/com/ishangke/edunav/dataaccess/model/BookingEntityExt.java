@@ -17,6 +17,8 @@ public class BookingEntityExt extends BookingEntity {
     private Calendar noRefundDateEnd;
     private Calendar cashbackDateStart;
     private Calendar cashbackDateEnd;
+    private Double priceStart;
+    private Double priceEnd;
     private Set<Integer> typeSet;
     private Double cashbackAmountStart;
     private Double cashbackAmountEnd;
@@ -159,6 +161,22 @@ public class BookingEntityExt extends BookingEntity {
 
     public void setStatusSet(Set<Integer> statusSet) {
         this.statusSet = statusSet;
+    }
+
+    public Double getPriceStart() {
+        return priceStart;
+    }
+
+    public void setPriceStart(Double priceStart) {
+        this.priceStart = priceStart;
+    }
+
+    public Double getPriceEnd() {
+        return priceEnd;
+    }
+
+    public void setPriceEnd(Double priceEnd) {
+        this.priceEnd = priceEnd;
     }
 
     public Set<Integer> getTypeSet() {

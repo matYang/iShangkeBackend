@@ -19,6 +19,8 @@ public class ActivityConverter {
         }
         if (e.getStatus() != null) {
             activityBo.setStatus(e.getStatus());
+        }else {
+            activityBo.setStatus(Constant.DEFAULTNULL);
         }
         if (e.getStatusSet() != null) {
             activityBo.setStatusSet(e.getStatusSet());
@@ -43,7 +45,9 @@ public class ActivityConverter {
         activityEntityExt.setEndTime(DateUtility.getTimeFromLong(bo.getEndTime()));
         activityEntityExt.setEndTimeEnd(DateUtility.getTimeFromLong(bo.getEndTimeEnd()));
         activityEntityExt.setEndTimeStart(DateUtility.getTimeFromLong(bo.getEndTimeStart()));
+        if (bo.getStatus() != Constant.DEFAULTNULL) {
         activityEntityExt.setStatus(bo.getStatus());
+        }
         activityEntityExt.setStatusSet(bo.getStatusSet());
         return activityEntityExt;
     }

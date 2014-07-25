@@ -22,6 +22,8 @@ public class UserConverter {
         }
         if (e.getGender() != null) {
             userBo.setGender(e.getGender());
+        } else {
+            userBo.setGender(Constant.DEFAULTNULL);
         }
         if (e.getId() != null) {
             userBo.setId(e.getId());
@@ -92,7 +94,9 @@ public class UserConverter {
         userEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
         userEntityExt.setEmail(bo.getEmail());
         userEntityExt.setEnabled(bo.getEnabled());
+        if (bo.getGender() != Constant.DEFAULTNULL) {
         userEntityExt.setGender(bo.getGender());
+        }
         userEntityExt.setId(bo.getId());
         userEntityExt.setIdSet(bo.getIdSet());
         userEntityExt.setInvitationCode(bo.getInvitationCode());

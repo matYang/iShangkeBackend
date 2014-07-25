@@ -25,6 +25,8 @@ public class MessageConverter {
         }
         if (e.getStatus() != null) {
             messageBo.setStatus(e.getStatus());
+        } else {
+            messageBo.setStatus(Constant.DEFAULTNULL);
         }
         if (e.getUserFromIdSet() != null) {
             messageBo.setUserFromIdSet(e.getUserFromIdSet());
@@ -57,7 +59,9 @@ public class MessageConverter {
         messageEntityExt.setMessageText(bo.getMessageText());
         messageEntityExt.setUserFromId(bo.getUserFromId());
         messageEntityExt.setUserToId(bo.getUserToId());
+        if (bo.getStatus() != Constant.DEFAULTNULL) {
         messageEntityExt.setStatus(bo.getStatus());
+        }
         messageEntityExt.setUserFromIdSet(bo.getUserFromIdSet());
         messageEntityExt.setUserToIdSet(bo.getUserToIdSet());
         messageEntityExt.setStatusSet(bo.getStatusSet());

@@ -21,10 +21,10 @@
   <insert id="add" parameterType="UserLocationEntityExt">
     insert into USER_LOCATION
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID,
       </if>
-      <if test="locationId != null">
+      <if test="locationId != null and locationId != 0">
         LOCATION_ID,
       </if>
       <if test="lastModifyTime != null">
@@ -32,10 +32,10 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="locationId != null">
+      <if test="locationId != null and locationId != 0">
         #{locationId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
@@ -57,10 +57,10 @@
   <update id="update" parameterType="UserLocationEntityExt">
     update USER_LOCATION
     <set>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="locationId != null">
+      <if test="locationId != null and locationId != 0">
         LOCATION_ID = #{locationId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">

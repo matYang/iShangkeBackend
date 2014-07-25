@@ -29,10 +29,10 @@
   <insert id="add" parameterType="WithdrawEntityExt">
     insert into WITHDRAW
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID,
       </if>
-      <if test="payeeId != null">
+      <if test="payeeId != null and payeeId != 0">
         PAYEE_ID,
       </if>
       <if test="peyeeName != null">
@@ -52,10 +52,10 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="payeeId != null">
+      <if test="payeeId != null and payeeId != 0">
         #{payeeId,jdbcType=VARCHAR},
       </if>
       <if test="peyeeName != null">
@@ -89,10 +89,10 @@
   <update id="update" parameterType="WithdrawEntityExt">
     update WITHDRAW
     <set>
-      <if test="userId != null">
+      <if test="userId != null and userId !=0">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="payeeId != null">
+      <if test="payeeId != null and payeeId != 0">
         PAYEE_ID = #{payeeId,jdbcType=VARCHAR},
       </if>
       <if test="peyeeName != null">
@@ -172,10 +172,10 @@
       <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
         AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.type != null and entity.type != 0">
+      <if test="entity.type != null ">
         AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
-      <if test="entity.type == null or entity.type == 0">
+      <if test="entity.type == null ">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
           AND WITHDRAW.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
@@ -263,10 +263,10 @@
       <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
         AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.type != null and entity.type != 0">
+      <if test="entity.type != null ">
         AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
-      <if test="entity.type == null or entity.type == 0">
+      <if test="entity.type == null ">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
           AND WITHDRAW.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">

@@ -17,12 +17,14 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_CASHBACKDATE" property="cashbackDate"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_PRICE" property="price" jdbcType="DOUBLE" />
     <result column="BOOKING_TYPE" property="type" jdbcType="INTEGER" />
     <result column="BOOKING_NOTE" property="note" jdbcType="VARCHAR" />
     <result column="BOOKING_CASHBACKAMOUNT" property="cashbackAmount" jdbcType="DOUBLE" />
     <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="BOOKING_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -46,6 +48,7 @@
     BOOKING.NO_REFUND_DATE BOOKING_NOREFUNDDATE,
     BOOKING.CASHBACK_DATE
     BOOKING_CASHBACKDATE,
+    BOOKING.PRICE BOOKING_PRICE,
     BOOKING.TYPE BOOKING_TYPE,
     BOOKING.NOTE BOOKING_NOTE,
     BOOKING.CASHBACK_AMOUNT
@@ -62,13 +65,13 @@
   <insert id="add" parameterType="BookingEntityExt">
     insert into BOOKING
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID,
       </if>
-      <if test="courseId != null">
+      <if test="courseId != null and courseId != 0 ">
         COURSE_ID,
       </if>
-      <if test="courseTemplateId != null">
+      <if test="courseTemplateId != null and courseTemplateId != 0">
         COURSE_TEMPLATE_ID ,
       </if>
       <if test="reference != null">
@@ -95,6 +98,9 @@
       <if test="cashbackDate != null">
         CASHBACK_DATE,
       </if>
+      <if test="price != null">
+        PRICE,
+      </if>
       <if test="type != null">
         TYPE,
       </if>
@@ -115,13 +121,13 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0 ">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null">
+      <if test="courseId != null and courseId != 0 ">
         #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="courseTemplateId != null">
+      <if test="courseTemplateId != null and courseTemplateId != 0 ">
         #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="reference != null">
@@ -147,6 +153,9 @@
       </if>
       <if test="cashbackDate != null">
         #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -182,13 +191,13 @@
   <update id="update" parameterType="BookingEntityExt">
     update BOOKING
     <set>
-      <if test="userId != null">
+      <if test="userId != null and userId !=0">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null">
+      <if test="courseId != null and courseId != 0">
         COURSE_ID = #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="courseTemplateId != null">
+      <if test="courseTemplateId != null and courseTemplateId != 0">
         COURSE_TEMPLATE_ID = #{courseTemplateId,jdbcType=INTEGER},
       </if>
       <if test="reference != null">
@@ -217,6 +226,9 @@
       <if test="cashbackDate != null">
         CASHBACK_DATE =
         #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DOUBLE},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
@@ -283,7 +295,8 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -295,8 +308,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
-            close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
+            open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -308,7 +321,8 @@
       <if test="entity.courseTemplateId == null">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -333,7 +347,8 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND PARTNER.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -375,6 +390,18 @@
         </if>
         <if test="entity.cashbackDateEnd != null">
           <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.price != null">
+        AND BOOKING.PRICE = #{entity.price,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
+          <![CDATA[AND BOOKING.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
@@ -474,7 +501,8 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -486,8 +514,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
-            close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
+            open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -505,7 +533,8 @@
         </if>
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND PARTNER.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -530,7 +559,8 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND PARTNER.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -643,7 +673,7 @@
   <select id="getCountByUserId" resultType="map">
     select count(ID) from BOOKING where DELETED = 0
   </select>
-    <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
+  <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
     from BOOKING where BOOKING.DELETED = 0

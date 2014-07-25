@@ -123,8 +123,8 @@ public class GroupEntityExtTest extends BaseTest {
         groupEntityExt.setName("管理员");
         List<GroupEntityExt> result = groupEntityExtMapper.list(groupEntityExt,
                 page);
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals("合作商管理员", result.get(0).getName());
+        Assert.assertEquals(8, result.size());
+        Assert.assertEquals("东方管理员1", result.get(0).getName());
     }
 
     @Test
@@ -193,7 +193,7 @@ public class GroupEntityExtTest extends BaseTest {
                 .getById(4);
         Assert.assertEquals("管理员", getbyid1.getName());
         Assert.assertEquals("普通用户", getbyid2.getName());
-        Assert.assertEquals("合作商管理员", getbyid3.getName());
+        Assert.assertEquals("达内管理员1", getbyid3.getName());
     }
     @Test
     public void testUpdate() {

@@ -28,6 +28,8 @@ public class PartnerConverter {
         }
         if (e.getCutoffDay() != null) {
             partnerBo.setCutoffDay(e.getCutoffDay());
+        } else {
+            partnerBo.setCutoffDay(Constant.DEFAULTNULL);
         }
         if (e.getCutoffDayEnd() != null) {
             partnerBo.setCutoffDayEnd(e.getCutoffDayEnd());
@@ -40,6 +42,8 @@ public class PartnerConverter {
         }
         if (e.getCutoffTime() != null) {
             partnerBo.setCutoffTime(e.getCutoffTime());
+        } else {
+            partnerBo.setCutoffTime(Constant.DEFAULTNULL);
         }
         if (e.getCutoffTimeEnd() != null) {
             partnerBo.setCutoffTimeEnd(e.getCutoffTimeEnd());
@@ -97,6 +101,8 @@ public class PartnerConverter {
         }
         if (e.getPartnerQualification() != null) {
             partnerBo.setPartnerQualification(e.getPartnerQualification());
+        } else {
+            partnerBo.setPartnerQualification(Constant.DEFAULTNULL);
         }
         if (e.getPartnerQualificationEnd() != null) {
             partnerBo.setPartnerQualificationEnd(e.getPartnerQualificationEnd());
@@ -136,6 +142,8 @@ public class PartnerConverter {
         }
         if (e.getUniRegLocation() != null) {
             partnerBo.setUniRegLocation(e.getUniRegLocation());
+        } else {
+            partnerBo.setUniRegLocation(Constant.DEFAULTNULL);
         }
         if (e.getWholeName() != null) {
             partnerBo.setWholeName(e.getWholeName());
@@ -195,11 +203,15 @@ public class PartnerConverter {
         partnerEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         partnerEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         partnerEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        if (bo.getCutoffDay() != Constant.DEFAULTNULL) {
         partnerEntityExt.setCutoffDay(bo.getCutoffDay());
+        }
         partnerEntityExt.setCutoffDayEnd(bo.getCutoffDayEnd());
         partnerEntityExt.setCutoffDaySet(bo.getCutoffDaySet());
         partnerEntityExt.setCutoffDayStart(bo.getCutoffDayStart());
+        if (bo.getCutoffTime() != Constant.DEFAULTNULL) {
         partnerEntityExt.setCutoffTime(bo.getCutoffTime());
+        }
         partnerEntityExt.setCutoffTimeEnd(bo.getCutoffTimeEnd());
         partnerEntityExt.setCutoffTimeSet(bo.getCutoffTimeSet());
         partnerEntityExt.setCutoffTimeStart(bo.getCutoffTimeStart());
@@ -224,7 +236,9 @@ public class PartnerConverter {
         partnerEntityExt.setOrganizationNum(bo.getOrganizationNum());
         partnerEntityExt.setPartnerDistinction(bo.getPartnerDistinction());
         partnerEntityExt.setPartnerIntro(bo.getPartnerIntro());
+        if (bo.getPartnerQualification() != Constant.DEFAULTNULL) {
         partnerEntityExt.setPartnerQualification(bo.getPartnerQualification());
+        }
         partnerEntityExt.setPartnerQualificationEnd(bo.getPartnerQualificationEnd());
         partnerEntityExt.setPartnerQualificationStart(bo.getPartnerQualificationStart());
         partnerEntityExt.setPassword(bo.getPassword());
@@ -244,7 +258,9 @@ public class PartnerConverter {
             }
             partnerEntityExt.setTeacherList(list);
         }
+        if (bo.getUniRegLocation() != Constant.DEFAULTNULL) {
         partnerEntityExt.setUniRegLocation(bo.getUniRegLocation());
+        }
         partnerEntityExt.setWholeName(bo.getWholeName());
         return partnerEntityExt;
     }

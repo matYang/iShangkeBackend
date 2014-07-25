@@ -84,10 +84,10 @@
   <update id="update" parameterType="AccountHistoryEntityExt">
     update ACCOUNT_HISTORY
     <set>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="withdrawId != null">
+      <if test="withdrawId != null and withdrawId != 0">
         WITHDRAW_ID = #{withdrawId,jdbcType=INTEGER},
       </if>
       <if test="charge != null">
@@ -174,10 +174,10 @@
         </if>
       </if>
 
-      <if test="entity.type != null and entity.type != 0">
+      <if test="entity.type != null">
         AND ACCOUNT_HISTORY.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
-      <if test="entity.type == null or entity.type == 0">
+      <if test="entity.type == null">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
           AND ACCOUNT_HISTORY.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
@@ -272,10 +272,10 @@
         </if>
       </if>
 
-      <if test="entity.type != null and entity.type != 0">
+      <if test="entity.type != null">
         AND ACCOUNT_HISTORY.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>
-      <if test="entity.type == null or entity.type == 0">
+      <if test="entity.type == null">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
           AND ACCOUNT_HISTORY.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">

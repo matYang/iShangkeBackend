@@ -228,10 +228,10 @@
         </if>
       </if>
 
-      <if test="entity.origin != null and entity.origin != 0">
+      <if test="entity.origin != null ">
         AND COUPON.ORIGIN = #{entity.origin,jdbcType=INTEGER}
       </if>
-      <if test="entity.origin == null or entity.origin == 0">
+      <if test="entity.origin == null ">
         <if test="entity.originSet != null and entity.originSet.size() > 0">
           AND COUPON.ORIGIN IN
           <foreach collection="entity.originSet" item="listItem" open="(" close=")"
@@ -377,10 +377,10 @@
         </if>
       </if>
 
-      <if test="entity.origin != null and entity.origin != 0">
+      <if test="entity.origin != null">
         AND COUPON.ORIGIN = #{entity.origin,jdbcType=INTEGER}
       </if>
-      <if test="entity.origin == null or entity.origin == 0">
+      <if test="entity.origin == null ">
         <if test="entity.originSet != null and entity.originSet.size() > 0">
           AND COUPON.ORIGIN IN
           <foreach collection="entity.originSet" item="listItem" open="(" close=")"

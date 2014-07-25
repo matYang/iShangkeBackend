@@ -34,13 +34,13 @@
   <insert id="add" parameterType="SpreadEntityExt">
     insert into SPREAD
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID,
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID,
       </if>
-      <if test="courseId != null">
+      <if test="courseId != null and courseId != 0">
         COURSE_ID,
       </if>
       <if test="url != null">
@@ -63,13 +63,13 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId !=0">
         #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null">
+      <if test="courseId != null and courseId != 0">
         #{courseId,jdbcType=INTEGER},
       </if>
       <if test="url != null">
@@ -106,13 +106,13 @@
   <update id="update" parameterType="SpreadEntityExt">
     update SPREAD
     <set>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null">
+      <if test="courseId != null and courseId != 0">
         COURSE_ID = #{courseId,jdbcType=INTEGER},
       </if>
       <if test="url != null">
@@ -223,10 +223,10 @@
         AND SPREAD.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.status != null and entity.status != 0">
+      <if test="entity.status != null ">
         AND SPREAD.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
-      <if test="entity.status == null or entity.status == 0">
+      <if test="entity.status == null ">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND SPREAD.STATUS IN
           <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"
@@ -347,10 +347,10 @@
         AND SPREAD.REMARK LIKE "%"#{entity.remark,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.status != null and entity.status != 0">
+      <if test="entity.status != null ">
         AND SPREAD.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
-      <if test="entity.status == null or entity.status == 0">
+      <if test="entity.status == null ">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND SPREAD.STATUS IN
           <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")"

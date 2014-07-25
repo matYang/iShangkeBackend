@@ -31,12 +31,16 @@ public class ApproveHistoryConverter {
         }
         if (vo.getPostStatus() != null) {
             approveHistoryBo.setPostStatus(vo.getPostStatus());
+        } else {
+            approveHistoryBo.setPostStatus(Constant.DEFAULTNULL);
         }
         if (vo.getPostStatusSet() != null) {
             approveHistoryBo.setPostStatusSet(vo.getPostStatusSet());
         }
         if (vo.getPreStatus() != null) {
             approveHistoryBo.setPreStatus(vo.getPreStatus());
+        } else {
+            approveHistoryBo.setPreStatus(Constant.DEFAULTNULL);
         }
         if (vo.getPreStatusSet() != null) {
             approveHistoryBo.setPreStatusSet(vo.getPreStatusSet());
@@ -49,13 +53,18 @@ public class ApproveHistoryConverter {
         }
         if (vo.getType() != null) {
             approveHistoryBo.setType(vo.getType());
+        } else {
+            approveHistoryBo.setType(Constant.DEFAULTNULL);
         }
         if (vo.getTypeSet() != null) {
             approveHistoryBo.setTypeSet(vo.getTypeSet());
         }
-        approveHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        approveHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        approveHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        approveHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        approveHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        approveHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
         return approveHistoryBo;
     }
 
@@ -71,13 +80,19 @@ public class ApproveHistoryConverter {
         approveHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
         approveHistoryVo.setId(bo.getId());
         approveHistoryVo.setIdSet(bo.getIdSet());
-        approveHistoryVo.setPostStatus(bo.getPostStatus());
+        if (Constant.DEFAULTNULL != bo.getPostStatus()) {
+            approveHistoryVo.setPostStatus(bo.getPostStatus());
+        }
         approveHistoryVo.setPostStatusSet(bo.getPostStatusSet());
-        approveHistoryVo.setPreStatus(bo.getPreStatus());
+        if (Constant.DEFAULTNULL != bo.getPreStatus()) {
+            approveHistoryVo.setPreStatus(bo.getPreStatus());
+        }
         approveHistoryVo.setPreStatusSet(bo.getPreStatusSet());
         approveHistoryVo.setSubmitUserId(bo.getSubmitUserId());
         approveHistoryVo.setSubmitUserIdSet(bo.getSubmitUserIdSet());
-        approveHistoryVo.setType(bo.getType());
+        if (Constant.DEFAULTNULL != bo.getType()) {
+            approveHistoryVo.setType(bo.getType());
+        }
         approveHistoryVo.setTypeSet(bo.getTypeSet());
         return approveHistoryVo;
     }

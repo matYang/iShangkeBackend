@@ -22,7 +22,10 @@ public class CategoryConverter {
         }
         if (vo.getRank() != null) {
             categoryBo.setRank(vo.getRank());
+        }  else {
+            categoryBo.setRank(Constant.DEFAULTNULL);
         }
+
         if (vo.getRankEnd() != null) {
             categoryBo.setRankEnd(vo.getRankEnd());
         }
@@ -56,7 +59,9 @@ public class CategoryConverter {
         categoryVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         categoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         categoryVo.setName(bo.getName());
+        if (Constant.DEFAULTNULL != bo.getRank()) {
         categoryVo.setRank(bo.getRank());
+        }
         categoryVo.setRankEnd(bo.getRankEnd());
         categoryVo.setRankSet(bo.getRankSet());
         categoryVo.setRankStart(bo.getRankStart());

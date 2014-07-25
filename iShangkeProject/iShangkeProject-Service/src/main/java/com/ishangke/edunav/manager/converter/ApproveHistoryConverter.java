@@ -31,12 +31,17 @@ public class ApproveHistoryConverter {
         }
         if (e.getPostStatus() != null) {
             approveHistoryBo.setPostStatus(e.getPostStatus());
+        } else {
+            approveHistoryBo.setPostStatus(Constant.DEFAULTNULL);
         }
+
         if (e.getPostStatusSet() != null) {
             approveHistoryBo.setPostStatusSet(e.getPostStatusSet());
         }
         if (e.getPreStatus() != null) {
             approveHistoryBo.setPreStatus(e.getPreStatus());
+        } else {
+            approveHistoryBo.setPreStatus(Constant.DEFAULTNULL);
         }
         if (e.getPreStatusSet() != null) {
             approveHistoryBo.setPreStatusSet(e.getPreStatusSet());
@@ -49,13 +54,18 @@ public class ApproveHistoryConverter {
         }
         if (e.getType() != null) {
             approveHistoryBo.setType(e.getType());
+        } else {
+            approveHistoryBo.setType(Constant.DEFAULTNULL);
         }
         if (e.getTypeSet() != null) {
             approveHistoryBo.setTypeSet(e.getTypeSet());
         }
-        approveHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        approveHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        approveHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        approveHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        approveHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        approveHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
         return approveHistoryBo;
     }
 
@@ -71,13 +81,19 @@ public class ApproveHistoryConverter {
         approveHistoryEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
         approveHistoryEntityExt.setId(bo.getId());
         approveHistoryEntityExt.setIdSet(bo.getIdSet());
-        approveHistoryEntityExt.setPostStatus(bo.getPostStatus());
+        if (bo.getPostStatus() != Constant.DEFAULTNULL) {
+            approveHistoryEntityExt.setPostStatus(bo.getPostStatus());
+        }
         approveHistoryEntityExt.setPostStatusSet(bo.getPostStatusSet());
-        approveHistoryEntityExt.setPreStatus(bo.getPreStatus());
+        if (bo.getPreStatus() != Constant.DEFAULTNULL) {
+            approveHistoryEntityExt.setPreStatus(bo.getPreStatus());
+        }
         approveHistoryEntityExt.setPreStatusSet(bo.getPreStatusSet());
         approveHistoryEntityExt.setSubmitUserId(bo.getSubmitUserId());
         approveHistoryEntityExt.setSubmitUserIdSet(bo.getSubmitUserIdSet());
-        approveHistoryEntityExt.setType(bo.getType());
+        if (bo.getType() != Constant.DEFAULTNULL) {
+            approveHistoryEntityExt.setType(bo.getType());
+        }
         approveHistoryEntityExt.setTypeSet(bo.getTypeSet());
         return approveHistoryEntityExt;
     }

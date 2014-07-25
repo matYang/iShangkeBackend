@@ -35,10 +35,10 @@
       <if test="messageText != null">
         MESSAGE_TEXT,
       </if>
-      <if test="userFromId != null">
+      <if test="userFromId != null and userFromId != 0">
         USER_FROM_ID,
       </if>
-      <if test="userToId != null">
+      <if test="userToId != null and userToId != 0 ">
         USER_TO_ID,
       </if>
       <if test="status != null">
@@ -56,10 +56,10 @@
       <if test="messageText != null">
         #{messagetext,jdbcType=VARCHAR},
       </if>
-      <if test="userFromId != null">
+      <if test="userFromId != null and userFromId != 0">
         #{userFromId,jdbcType=INTEGER},
       </if>
-      <if test="userToId != null">
+      <if test="userToId != null and userToId != 0">
         #{userToId,jdbcType=INTEGER},
       </if>
       <if test="status != null">
@@ -90,10 +90,10 @@
       <if test="messageText != null">
         MESSAGE_TEXT = #{messageText,jdbcType=VARCHAR},
       </if>
-      <if test="userFromId != null">
+      <if test="userFromId != null and userFromId != 0">
         USER_FROM_ID = #{userFromId,jdbcType=INTEGER},
       </if>
-      <if test="userToId != null">
+      <if test="userToId != null and userToId != 0">
         USER_TO_ID = #{userToId,jdbcType=INTEGER},
       </if>
       <if test="status != null">
