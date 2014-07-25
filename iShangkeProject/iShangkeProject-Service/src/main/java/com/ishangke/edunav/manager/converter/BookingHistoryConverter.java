@@ -25,24 +25,32 @@ public class BookingHistoryConverter {
         }
         if (e.getNormal() != null) {
             bookingHistoryBo.setNormal(e.getNormal());
+        } else {
+            bookingHistoryBo.setNormal(Constant.DEFAULTNULL);
         }
         if (e.getNormalSet() != null) {
             bookingHistoryBo.setNormalSet(e.getNormalSet());
         }
         if (e.getOptName() != null) {
             bookingHistoryBo.setOptName(e.getOptName());
+        } else {
+            bookingHistoryBo.setOptName(Constant.DEFAULTNULL);
         }
         if (e.getOptNameSet() != null) {
             bookingHistoryBo.setOptNameSet(e.getOptNameSet());
         }
         if (e.getPostStatus() != null) {
             bookingHistoryBo.setPostStatus(e.getPostStatus());
+        } else {
+            bookingHistoryBo.setPostStatus(Constant.DEFAULTNULL);
         }
         if (e.getPostStatusSet() != null) {
             bookingHistoryBo.setPostStatusSet(e.getPostStatusSet());
         }
         if (e.getPreStatus() != null) {
             bookingHistoryBo.setPreStatus(e.getPreStatus());
+        } else {
+            bookingHistoryBo.setPreStatus(Constant.DEFAULTNULL);
         }
         if (e.getPreStatusSet() != null) {
             bookingHistoryBo.setPreStatusSet(e.getPreStatusSet());
@@ -56,9 +64,12 @@ public class BookingHistoryConverter {
         if (e.getUserIdSet() != null) {
             bookingHistoryBo.setUserIdSet(e.getUserIdSet());
         }
-        bookingHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        bookingHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        bookingHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        bookingHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        bookingHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        bookingHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
         return bookingHistoryBo;
     }
 
@@ -72,13 +83,21 @@ public class BookingHistoryConverter {
         bookingHistoryEntityExt.setEnabled(bo.getEnabled());
         bookingHistoryEntityExt.setId(bo.getId());
         bookingHistoryEntityExt.setIdSet(bo.getIdSet());
-        bookingHistoryEntityExt.setNormal(bo.getNormal());
+        if (bo.getNormal() != Constant.DEFAULTNULL) {
+            bookingHistoryEntityExt.setNormal(bo.getNormal());
+        }
         bookingHistoryEntityExt.setNormalSet(bo.getNormalSet());
-        bookingHistoryEntityExt.setOptName(bo.getOptName());
+        if (bo.getOptName() != Constant.DEFAULTNULL) {
+            bookingHistoryEntityExt.setOptName(bo.getOptName());
+        }
         bookingHistoryEntityExt.setOptNameSet(bo.getOptNameSet());
-        bookingHistoryEntityExt.setPostStatus(bo.getPostStatus());
+        if (bo.getPostStatus() != Constant.DEFAULTNULL) {
+            bookingHistoryEntityExt.setPostStatus(bo.getPostStatus());
+        }
         bookingHistoryEntityExt.setPostStatusSet(bo.getPostStatusSet());
-        bookingHistoryEntityExt.setPreStatus(bo.getPreStatus());
+        if (bo.getPreStatus() != Constant.DEFAULTNULL) {
+            bookingHistoryEntityExt.setPreStatus(bo.getPreStatus());
+        }
         bookingHistoryEntityExt.setPreStatusSet(bo.getPreStatusSet());
         bookingHistoryEntityExt.setRemark(bo.getRemark());
         bookingHistoryEntityExt.setUserId(bo.getUserId());

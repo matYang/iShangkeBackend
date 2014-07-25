@@ -40,7 +40,10 @@ public class CourseConverter {
         }
         if (vo.getBookingType() != null) {
             courseBo.setBookingType(vo.getBookingType());
+        } else {
+            courseBo.setBookingType(Constant.DEFAULTNULL);
         }
+
         if (vo.getCashback() != null) {
             courseBo.setCashback(vo.getCashback());
         }
@@ -88,7 +91,10 @@ public class CourseConverter {
         }
         if (vo.getClassType() != null) {
             courseBo.setClassType(vo.getClassType());
+        } else {
+            courseBo.setClassType(Constant.DEFAULTNULL);
         }
+
         if (vo.getClassTypeSet() != null) {
             courseBo.setClassTypeSet(vo.getClassTypeSet());
         }
@@ -100,10 +106,15 @@ public class CourseConverter {
         }
         if (vo.getCourseHourLength() != null) {
             courseBo.setCourseHourLength(vo.getCourseHourLength());
+        } else {
+            courseBo.setCourseHourLength(Constant.DEFAULTNULL);
         }
         if (vo.getCourseHourNum() != null) {
             courseBo.setCourseHourNum(vo.getCourseHourNum());
+        } else {
+            courseBo.setCourseHourNum(Constant.DEFAULTNULL);
         }
+
         if (vo.getCourseHourNumEnd() != null) {
             courseBo.setCourseHourNumEnd(vo.getCourseHourNumEnd());
         }
@@ -145,10 +156,16 @@ public class CourseConverter {
         }
         if (vo.getFinishTime1() != null) {
             courseBo.setFinishTime1(vo.getFinishTime1());
+        } else {
+            courseBo.setFinishTime1(Constant.DEFAULTNULL);
         }
+
         if (vo.getFinishTime2() != null) {
             courseBo.setFinishTime2(vo.getFinishTime2());
+        } else {
+            courseBo.setFinishTime2(Constant.DEFAULTNULL);
         }
+
         if (vo.getGoal() != null) {
             courseBo.setGoal(vo.getGoal());
         }
@@ -220,7 +237,10 @@ public class CourseConverter {
         }
         if (vo.getPopularity() != null) {
             courseBo.setPopularity(vo.getPopularity());
+        } else {
+            courseBo.setPopularity(Constant.DEFAULTNULL);
         }
+
         if (vo.getPopularityEnd() != null) {
             courseBo.setPopularityEnd(vo.getPopularityEnd());
         }
@@ -256,13 +276,19 @@ public class CourseConverter {
         }
         if (vo.getSchooltimeDay() != null) {
             courseBo.setSchooltimeDay(vo.getSchooltimeDay());
+        } else {
+            courseBo.setSchooltimeDay(Constant.DEFAULTNULL);
         }
+
         if (vo.getSchooltimeDaySet() != null) {
             courseBo.setSchooltimeDaySet(vo.getSchooltimeDaySet());
         }
         if (vo.getSchooltimeWeek() != null) {
             courseBo.setSchooltimeWeek(vo.getSchooltimeWeek());
+        } else {
+            courseBo.setSchooltimeWeek(Constant.DEFAULTNULL);
         }
+
         if (vo.getSchooltimeWeekSet() != null) {
             courseBo.setSchooltimeWeekSet(vo.getSchooltimeWeekSet());
         }
@@ -271,15 +297,26 @@ public class CourseConverter {
         }
         if (vo.getStartTime1() != null) {
             courseBo.setStartTime1(vo.getStartTime1());
+        } else {
+            courseBo.setStartTime1(Constant.DEFAULTNULL);
         }
+
         if (vo.getStartTime2() != null) {
             courseBo.setStartTime2(vo.getStartTime2());
+        } else {
+            courseBo.setStartTime2(Constant.DEFAULTNULL);
         }
+
         if (vo.getStartUponArrival() != null) {
             courseBo.setStartUponArrival(vo.getStartUponArrival());
+        } else {
+            courseBo.setStartUponArrival(Constant.DEFAULTNULL);
         }
+
         if (vo.getStatus() != null) {
             courseBo.setStatus(vo.getStatus());
+        } else {
+            courseBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getStatusSet() != null) {
             courseBo.setStatusSet(vo.getStatusSet());
@@ -309,26 +346,43 @@ public class CourseConverter {
             courseBo.setWholeName(vo.getWholeName());
         }
         courseBo.setStartDate(vo.getStartDate() == null ? Constant.DEFAULTNULL : vo.getStartDate().getTimeInMillis());
-        courseBo.setStartDateEnd(vo.getStartDateEnd() == null ? Constant.DEFAULTNULL : vo.getStartDateEnd().getTimeInMillis());
-        courseBo.setStartDateStart(vo.getStartDateStart() == null ? Constant.DEFAULTNULL : vo.getStartDateStart().getTimeInMillis());
-        courseBo.setNoRefundDate(vo.getNoRefundDate() == null ? Constant.DEFAULTNULL : vo.getNoRefundDate().getTimeInMillis());
-        courseBo.setNoRefundDateStart(vo.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : vo.getNoRefundDateStart().getTimeInMillis());
-        courseBo.setNoRefundDateEnd(vo.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : vo.getNoRefundDateEnd().getTimeInMillis());
-        courseBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        courseBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        courseBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        courseBo.setStartDateEnd(vo.getStartDateEnd() == null ? Constant.DEFAULTNULL : vo.getStartDateEnd()
+                .getTimeInMillis());
+        courseBo.setStartDateStart(vo.getStartDateStart() == null ? Constant.DEFAULTNULL : vo.getStartDateStart()
+                .getTimeInMillis());
+        courseBo.setNoRefundDate(vo.getNoRefundDate() == null ? Constant.DEFAULTNULL : vo.getNoRefundDate()
+                .getTimeInMillis());
+        courseBo.setNoRefundDateStart(vo.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : vo
+                .getNoRefundDateStart().getTimeInMillis());
+        courseBo.setNoRefundDateEnd(vo.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : vo.getNoRefundDateEnd()
+                .getTimeInMillis());
+        courseBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        courseBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        courseBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         courseBo.setFinishDate(vo.getFinishDate() == null ? Constant.DEFAULTNULL : vo.getFinishDate().getTimeInMillis());
-        courseBo.setFinishDateEnd(vo.getFinishDateEnd() == null ? Constant.DEFAULTNULL : vo.getFinishDateEnd().getTimeInMillis());
-        courseBo.setFinishDateStart(vo.getFinishDateStart() == null ? Constant.DEFAULTNULL : vo.getFinishDateStart().getTimeInMillis());
+        courseBo.setFinishDateEnd(vo.getFinishDateEnd() == null ? Constant.DEFAULTNULL : vo.getFinishDateEnd()
+                .getTimeInMillis());
+        courseBo.setFinishDateStart(vo.getFinishDateStart() == null ? Constant.DEFAULTNULL : vo.getFinishDateStart()
+                .getTimeInMillis());
         courseBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        courseBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        courseBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        courseBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        courseBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
         courseBo.setCutoffDate(vo.getCutoffDate() == null ? Constant.DEFAULTNULL : vo.getCutoffDate().getTimeInMillis());
-        courseBo.setCutoffDateEnd(vo.getCutoffDateEnd() == null ? Constant.DEFAULTNULL : vo.getCutoffDateEnd().getTimeInMillis());
-        courseBo.setCutoffDateStart(vo.getCutoffDateStart() == null ? Constant.DEFAULTNULL : vo.getCutoffDateStart().getTimeInMillis());
-        courseBo.setCashbackDate(vo.getCashbackDate() == null ? Constant.DEFAULTNULL : vo.getCashbackDate().getTimeInMillis());
-        courseBo.setCashbackDateStart(vo.getCashbackDateStart() == null ? Constant.DEFAULTNULL : vo.getCashbackDateStart().getTimeInMillis());
-        courseBo.setCashbackDateEnd(vo.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : vo.getCashbackDateEnd().getTimeInMillis());
+        courseBo.setCutoffDateEnd(vo.getCutoffDateEnd() == null ? Constant.DEFAULTNULL : vo.getCutoffDateEnd()
+                .getTimeInMillis());
+        courseBo.setCutoffDateStart(vo.getCutoffDateStart() == null ? Constant.DEFAULTNULL : vo.getCutoffDateStart()
+                .getTimeInMillis());
+        courseBo.setCashbackDate(vo.getCashbackDate() == null ? Constant.DEFAULTNULL : vo.getCashbackDate()
+                .getTimeInMillis());
+        courseBo.setCashbackDateStart(vo.getCashbackDateStart() == null ? Constant.DEFAULTNULL : vo
+                .getCashbackDateStart().getTimeInMillis());
+        courseBo.setCashbackDateEnd(vo.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : vo.getCashbackDateEnd()
+                .getTimeInMillis());
         if (vo.getClassPhotoList() != null) {
             List<ClassPhotoBo> list = new ArrayList<>();
             for (ClassPhotoVo a : vo.getClassPhotoList()) {
@@ -362,7 +416,9 @@ public class CourseConverter {
         courseVo.setAssignments(bo.getAssignments());
         courseVo.setBonusService(bo.getBonusService());
         courseVo.setBookingTotal(bo.getBookingTotal());
-        courseVo.setBookingType(bo.getBookingType());
+        if (Constant.DEFAULTNULL != bo.getBookingType()) {
+            courseVo.setBookingType(bo.getBookingType());
+        }
         courseVo.setCashback(bo.getCashback());
         courseVo.setCashbackDate(DateUtility.getTimeFromLong(bo.getCashbackDate()));
         courseVo.setCashbackDateStart(DateUtility.getTimeFromLong(bo.getCashbackDateStart()));
@@ -388,12 +444,18 @@ public class CourseConverter {
         }
         courseVo.setClassSize(bo.getClassSize());
         courseVo.setClassTeacher(bo.getClassTeacher());
-        courseVo.setClassType(bo.getClassType());
+        if (Constant.DEFAULTNULL != bo.getClassType()) {
+            courseVo.setClassType(bo.getClassType());
+        }
         courseVo.setClassTypeSet(bo.getClassTypeSet());
         courseVo.setCommission(bo.getCommission());
         courseVo.setContact(bo.getContact());
-        courseVo.setCourseHourLength(bo.getCourseHourLength());
-        courseVo.setCourseHourNum(bo.getCourseHourNum());
+        if (Constant.DEFAULTNULL != bo.getCourseHourLength()) {
+            courseVo.setCourseHourLength(bo.getCourseHourLength());
+        }
+        if (Constant.DEFAULTNULL != bo.getCourseHourNum()) {
+            courseVo.setCourseHourNum(bo.getCourseHourNum());
+        }
         courseVo.setCourseHourNumEnd(bo.getCourseHourNumEnd());
         courseVo.setCourseHourNumSet(bo.getCourseHourNumSet());
         courseVo.setCourseHourNumStart(bo.getCourseHourNumStart());
@@ -416,8 +478,12 @@ public class CourseConverter {
         courseVo.setFinishDate(DateUtility.getTimeFromLong(bo.getFinishDate()));
         courseVo.setFinishDateEnd(DateUtility.getTimeFromLong(bo.getFinishDateEnd()));
         courseVo.setFinishDateStart(DateUtility.getTimeFromLong(bo.getFinishDateStart()));
-        courseVo.setFinishTime1(bo.getFinishTime1());
-        courseVo.setFinishTime2(bo.getFinishTime2());
+        if (Constant.DEFAULTNULL != bo.getFinishTime1()) {
+            courseVo.setFinishTime1(bo.getFinishTime1());
+        }
+        if (Constant.DEFAULTNULL != bo.getFinishTime2()) {
+            courseVo.setFinishTime2(bo.getFinishTime2());
+        }
         courseVo.setGoal(bo.getGoal());
         courseVo.setHighScoreReward(bo.getHighScoreReward());
         courseVo.setId(bo.getId());
@@ -447,7 +513,9 @@ public class CourseConverter {
         courseVo.setPartnerQualification(bo.getPartnerQualification());
         courseVo.setPartnerRating(bo.getPartnerRating());
         courseVo.setPassAgreement(bo.getPassAgreement());
-        courseVo.setPopularity(bo.getPopularity());
+        if (Constant.DEFAULTNULL != bo.getPopularity()) {
+            courseVo.setPopularity(bo.getPopularity());
+        }
         courseVo.setPopularityEnd(bo.getPopularityEnd());
         courseVo.setPopularitySet(bo.getPopularitySet());
         courseVo.setPopularityStart(bo.getPopularityStart());
@@ -459,18 +527,30 @@ public class CourseConverter {
         courseVo.setReference(bo.getReference());
         courseVo.setRegLocation(bo.getRegLocation());
         courseVo.setRegPhone(bo.getRegPhone());
-        courseVo.setSchooltimeDay(bo.getSchooltimeDay());
+        if (Constant.DEFAULTNULL != bo.getSchooltimeDay()) {
+            courseVo.setSchooltimeDay(bo.getSchooltimeDay());
+        }
         courseVo.setSchooltimeDaySet(bo.getSchooltimeDaySet());
-        courseVo.setSchooltimeWeek(bo.getSchooltimeWeek());
+        if (Constant.DEFAULTNULL != bo.getSchooltimeWeek()) {
+            courseVo.setSchooltimeWeek(bo.getSchooltimeWeek());
+        }
         courseVo.setSchooltimeWeekSet(bo.getSchooltimeWeekSet());
         courseVo.setServiceCharge(bo.getServiceCharge());
         courseVo.setStartDate(DateUtility.getTimeFromLong(bo.getStartDate()));
         courseVo.setStartDateEnd(DateUtility.getTimeFromLong(bo.getStartDateEnd()));
         courseVo.setStartDateStart(DateUtility.getTimeFromLong(bo.getStartDateStart()));
-        courseVo.setStartTime1(bo.getStartTime1());
-        courseVo.setStartTime2(bo.getStartTime2());
-        courseVo.setStartUponArrival(bo.getStartUponArrival());
-        courseVo.setStatus(bo.getStatus());
+        if (Constant.DEFAULTNULL != bo.getStartTime1()) {
+            courseVo.setStartTime1(bo.getStartTime1());
+        }
+        if (Constant.DEFAULTNULL != bo.getStartTime2()) {
+            courseVo.setStartTime2(bo.getStartTime2());
+        }
+        if (Constant.DEFAULTNULL != bo.getStartUponArrival()) {
+            courseVo.setStartUponArrival(bo.getStartUponArrival());
+        }
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
+            courseVo.setStatus(bo.getStatus());
+        }
         courseVo.setStatusSet(bo.getStatusSet());
         courseVo.setStudyDayNote(bo.getStudyDayNote());
         courseVo.setSuitableStudent(bo.getSuitableStudent());

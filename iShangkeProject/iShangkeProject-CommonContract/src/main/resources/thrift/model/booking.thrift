@@ -42,6 +42,9 @@ struct BookingBo {
     35: i64 createTimeStart
     36: i64 createTimeEnd
     37: list<action.ActionBo> actionList
+    38: double price
+    39: double priceStart
+    40: double priceEnd
 }
 
 /**

@@ -28,6 +28,8 @@ public class PartnerConverter {
         }
         if (vo.getCutoffDay() != null) {
             partnerBo.setCutoffDay(vo.getCutoffDay());
+        }else {
+            partnerBo.setCutoffDay(Constant.DEFAULTNULL);
         }
         if (vo.getCutoffDayEnd() != null) {
             partnerBo.setCutoffDayEnd(vo.getCutoffDayEnd());
@@ -40,6 +42,8 @@ public class PartnerConverter {
         }
         if (vo.getCutoffTime() != null) {
             partnerBo.setCutoffTime(vo.getCutoffTime());
+        }else {
+            partnerBo.setCutoffTime(Constant.DEFAULTNULL);
         }
         if (vo.getCutoffTimeEnd() != null) {
             partnerBo.setCutoffTimeEnd(vo.getCutoffTimeEnd());
@@ -97,6 +101,8 @@ public class PartnerConverter {
         }
         if (vo.getPartnerQualification() != null) {
             partnerBo.setPartnerQualification(vo.getPartnerQualification());
+        }else {
+            partnerBo.setPartnerQualification(Constant.DEFAULTNULL);
         }
         if (vo.getPartnerQualificationEnd() != null) {
             partnerBo.setPartnerQualificationEnd(vo.getPartnerQualificationEnd());
@@ -136,6 +142,8 @@ public class PartnerConverter {
         }
         if (vo.getUniRegLocation() != null) {
             partnerBo.setUniRegLocation(vo.getUniRegLocation());
+        }else {
+            partnerBo.setUniRegLocation(Constant.DEFAULTNULL);
         }
         if (vo.getWholeName() != null) {
             partnerBo.setWholeName(vo.getWholeName());
@@ -195,11 +203,15 @@ public class PartnerConverter {
         partnerVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         partnerVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         partnerVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        if (Constant.DEFAULTNULL != bo.getCutoffDay()) {
         partnerVo.setCutoffDay(bo.getCutoffDay());
+        }
         partnerVo.setCutoffDayEnd(bo.getCutoffDayEnd());
         partnerVo.setCutoffDaySet(bo.getCutoffDaySet());
         partnerVo.setCutoffDayStart(bo.getCutoffDayStart());
+        if (Constant.DEFAULTNULL != bo.getCutoffTime()) {
         partnerVo.setCutoffTime(bo.getCutoffTime());
+        }
         partnerVo.setCutoffTimeEnd(bo.getCutoffTimeEnd());
         partnerVo.setCutoffTimeSet(bo.getCutoffTimeSet());
         partnerVo.setCutoffTimeStart(bo.getCutoffTimeStart());
@@ -224,7 +236,9 @@ public class PartnerConverter {
         partnerVo.setOrganizationNum(bo.getOrganizationNum());
         partnerVo.setPartnerDistinction(bo.getPartnerDistinction());
         partnerVo.setPartnerIntro(bo.getPartnerIntro());
+        if (Constant.DEFAULTNULL != bo.getPartnerQualification()) {
         partnerVo.setPartnerQualification(bo.getPartnerQualification());
+        }
         partnerVo.setPartnerQualificationEnd(bo.getPartnerQualificationEnd());
         partnerVo.setPartnerQualificationStart(bo.getPartnerQualificationStart());
         partnerVo.setPassword(bo.getPassword());
@@ -244,7 +258,9 @@ public class PartnerConverter {
             }
             partnerVo.setTeacherList(list);
         }
+        if (Constant.DEFAULTNULL != bo.getUniRegLocation()) {
         partnerVo.setUniRegLocation(bo.getUniRegLocation());
+        }
         partnerVo.setWholeName(bo.getWholeName());
         return partnerVo;
     }

@@ -60,12 +60,25 @@ public class BookingConverter {
         }
         if (vo.getStatus() != null) {
             bookingBo.setStatus(vo.getStatus());
+        } else {
+            bookingBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getStatusSet() != null) {
             bookingBo.setStatusSet(vo.getStatusSet());
         }
+        if (vo.getPrice() != null) {
+            bookingBo.setPrice(vo.getPrice());
+        }
+        if (vo.getPriceEnd() != null) {
+            bookingBo.setPriceEnd(vo.getPriceEnd());
+        }
+        if (vo.getPriceStart() != null) {
+            bookingBo.setPriceStart(vo.getPriceStart());
+        }
         if (vo.getType() != null) {
             bookingBo.setType(vo.getType());
+        } else {
+            bookingBo.setType(Constant.DEFAULTNULL);
         }
         if (vo.getTypeSet() != null) {
             bookingBo.setTypeSet(vo.getTypeSet());
@@ -133,9 +146,16 @@ public class BookingConverter {
         bookingVo.setScheduledTime(DateUtility.getTimeFromLong(bo.getScheduledTime()));
         bookingVo.setScheduledTimeEnd(DateUtility.getTimeFromLong(bo.getScheduledTimeEnd()));
         bookingVo.setScheduledTimeStart(DateUtility.getTimeFromLong(bo.getScheduledTimeStart()));
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
         bookingVo.setStatus(bo.getStatus());
+        }
         bookingVo.setStatusSet(bo.getStatusSet());
+        if (Constant.DEFAULTNULL != bo.getType()) {
         bookingVo.setType(bo.getType());
+        }
+        bookingVo.setPrice(bo.getPrice());
+        bookingVo.setPriceEnd(bo.getPriceEnd());
+        bookingVo.setPriceStart(bo.getPriceStart());
         bookingVo.setTypeSet(bo.getTypeSet());
         bookingVo.setUserId(bo.getUserId());
         bookingVo.setUserIdSet(bo.getUserIdSet());

@@ -55,12 +55,26 @@ public class BookingConverter {
         }
         if (e.getStatus() != null) {
             bookingBo.setStatus(e.getStatus());
+        } else {
+            bookingBo.setStatus(Constant.DEFAULTNULL);
         }
         if (e.getStatusSet() != null) {
             bookingBo.setStatusSet(e.getStatusSet());
         }
+        if (e.getPrice() != null) {
+            bookingBo.setPrice(e.getPrice());
+        } 
+        if (e.getPriceEnd() != null) {
+            bookingBo.setPriceEnd(e.getPriceEnd());
+        }
+        if (e.getPriceStart() != null) {
+            bookingBo.setPriceStart(e.getPriceStart());
+        }
+        
         if (e.getType() != null) {
             bookingBo.setType(e.getType());
+        } else {
+            bookingBo.setType(Constant.DEFAULTNULL);
         }
         if (e.getTypeSet() != null) {
             bookingBo.setTypeSet(e.getTypeSet());
@@ -71,21 +85,35 @@ public class BookingConverter {
         if (e.getUserIdSet() != null) {
             bookingBo.setUserIdSet(e.getUserIdSet());
         }
-        bookingBo.setCashbackDate(e.getCashbackDate() == null ? Constant.DEFAULTNULL : e.getCashbackDate().getTimeInMillis());
-        bookingBo.setCashbackDateEnd(e.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : e.getCashbackDateEnd().getTimeInMillis());
-        bookingBo.setCashbackDateStart(e.getCashbackDateStart() == null ? Constant.DEFAULTNULL : e.getCashbackDateStart().getTimeInMillis());
+        bookingBo.setCashbackDate(e.getCashbackDate() == null ? Constant.DEFAULTNULL : e.getCashbackDate()
+                .getTimeInMillis());
+        bookingBo.setCashbackDateEnd(e.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : e.getCashbackDateEnd()
+                .getTimeInMillis());
+        bookingBo.setCashbackDateStart(e.getCashbackDateStart() == null ? Constant.DEFAULTNULL : e
+                .getCashbackDateStart().getTimeInMillis());
         bookingBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        bookingBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        bookingBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        bookingBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        bookingBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        bookingBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
-        bookingBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate().getTimeInMillis());
-        bookingBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd().getTimeInMillis());
-        bookingBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e.getNoRefundDateStart().getTimeInMillis());
-        bookingBo.setScheduledTime(e.getScheduledTime() == null ? Constant.DEFAULTNULL : e.getScheduledTime().getTimeInMillis());
-        bookingBo.setScheduledTimeEnd(e.getScheduledTimeEnd() == null ? Constant.DEFAULTNULL : e.getScheduledTimeEnd().getTimeInMillis());
-        bookingBo.setScheduledTimeStart(e.getScheduledTimeStart() == null ? Constant.DEFAULTNULL : e.getScheduledTimeStart().getTimeInMillis());
+        bookingBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        bookingBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        bookingBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        bookingBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        bookingBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
+        bookingBo.setNoRefundDate(e.getNoRefundDate() == null ? Constant.DEFAULTNULL : e.getNoRefundDate()
+                .getTimeInMillis());
+        bookingBo.setNoRefundDateEnd(e.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : e.getNoRefundDateEnd()
+                .getTimeInMillis());
+        bookingBo.setNoRefundDateStart(e.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : e
+                .getNoRefundDateStart().getTimeInMillis());
+        bookingBo.setScheduledTime(e.getScheduledTime() == null ? Constant.DEFAULTNULL : e.getScheduledTime()
+                .getTimeInMillis());
+        bookingBo.setScheduledTimeEnd(e.getScheduledTimeEnd() == null ? Constant.DEFAULTNULL : e.getScheduledTimeEnd()
+                .getTimeInMillis());
+        bookingBo.setScheduledTimeStart(e.getScheduledTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getScheduledTimeStart().getTimeInMillis());
         return bookingBo;
     }
 
@@ -121,9 +149,16 @@ public class BookingConverter {
         bookingEntityExt.setScheduledTime(DateUtility.getTimeFromLong(bo.getScheduledTime()));
         bookingEntityExt.setScheduledTimeEnd(DateUtility.getTimeFromLong(bo.getScheduledTimeEnd()));
         bookingEntityExt.setScheduledTimeStart(DateUtility.getTimeFromLong(bo.getScheduledTimeStart()));
-        bookingEntityExt.setStatus(bo.getStatus());
+        if (bo.getStatus() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setStatus(bo.getStatus());
+        }
         bookingEntityExt.setStatusSet(bo.getStatusSet());
-        bookingEntityExt.setType(bo.getType());
+        if (bo.getType() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setType(bo.getType());
+        }
+        bookingEntityExt.setPrice(bo.getPrice());
+        bookingEntityExt.setPriceEnd(bo.getPriceEnd());
+        bookingEntityExt.setPriceStart(bo.getPriceStart());
         bookingEntityExt.setTypeSet(bo.getTypeSet());
         bookingEntityExt.setUserId(bo.getUserId());
         bookingEntityExt.setUserIdSet(bo.getUserIdSet());

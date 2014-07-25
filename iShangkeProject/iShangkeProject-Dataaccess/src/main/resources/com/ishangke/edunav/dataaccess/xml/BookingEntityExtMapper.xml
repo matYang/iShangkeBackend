@@ -17,6 +17,7 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_CASHBACKDATE" property="cashbackDate"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="BOOKING_PRICE" property="price" jdbcType="DOUBLE" />
     <result column="BOOKING_TYPE" property="type" jdbcType="INTEGER" />
     <result column="BOOKING_NOTE" property="note" jdbcType="VARCHAR" />
     <result column="BOOKING_CASHBACKAMOUNT" property="cashbackAmount" jdbcType="DOUBLE" />
@@ -47,6 +48,7 @@
     BOOKING.NO_REFUND_DATE BOOKING_NOREFUNDDATE,
     BOOKING.CASHBACK_DATE
     BOOKING_CASHBACKDATE,
+    BOOKING.PRICE BOOKING_PRICE,
     BOOKING.TYPE BOOKING_TYPE,
     BOOKING.NOTE BOOKING_NOTE,
     BOOKING.CASHBACK_AMOUNT
@@ -94,6 +96,9 @@
       </if>
       <if test="cashbackDate != null">
         CASHBACK_DATE,
+      </if>
+      <if test="price != null">
+        PRICE,
       </if>
       <if test="type != null">
         TYPE,
@@ -147,6 +152,9 @@
       </if>
       <if test="cashbackDate != null">
         #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+       <if test="price != null">
+         #{price,jdbcType=DOUBLE},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -217,6 +225,9 @@
       <if test="cashbackDate != null">
         CASHBACK_DATE =
         #{cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+       <if test="price != null">
+        PRICE = #{price,jdbcType=DOUBLE},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
@@ -380,7 +391,19 @@
           <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
         </if>
       </if>
-
+      
+ <if test="entity.price != null">
+        AND BOOKING.PRICE = #{entity.price,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
+          <![CDATA[AND BOOKING.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+      
       <if test="entity.type != null">
         AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
       </if>

@@ -22,6 +22,8 @@ public class CategoryConverter {
         }
         if (e.getRank() != null) {
             categoryBo.setRank(e.getRank());
+        } else {
+            categoryBo.setRank(Constant.DEFAULTNULL);
         }
         if (e.getRankEnd() != null) {
             categoryBo.setRankEnd(e.getRankEnd());
@@ -35,12 +37,18 @@ public class CategoryConverter {
         if (e.getValue() != null) {
             categoryBo.setValue(e.getValue());
         }
-        categoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        categoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        categoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        categoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        categoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        categoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        categoryBo
+                .setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        categoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        categoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        categoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        categoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        categoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return categoryBo;
     }
 
@@ -56,7 +64,9 @@ public class CategoryConverter {
         categoryEntityExt.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         categoryEntityExt.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         categoryEntityExt.setName(bo.getName());
-        categoryEntityExt.setRank(bo.getRank());
+        if (bo.getRank() != Constant.DEFAULTNULL) {
+            categoryEntityExt.setRank(bo.getRank());
+        }
         categoryEntityExt.setRankEnd(bo.getRankEnd());
         categoryEntityExt.setRankSet(bo.getRankSet());
         categoryEntityExt.setRankStart(bo.getRankStart());

@@ -31,7 +31,10 @@ public class CouponConverter {
         }
         if (vo.getOrigin() != null) {
             couponBo.setOrigin(vo.getOrigin());
+        }  else {
+            couponBo.setOrigin(Constant.DEFAULTNULL);
         }
+
         if (vo.getOriginSet() != null) {
             couponBo.setOriginSet(vo.getOriginSet());
         }
@@ -83,7 +86,9 @@ public class CouponConverter {
         couponVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
         couponVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         couponVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        if (Constant.DEFAULTNULL != bo.getOrigin()) {
         couponVo.setOrigin(bo.getOrigin());
+        }
         couponVo.setOriginSet(bo.getOriginSet());
         couponVo.setRemark(bo.getRemark());
         couponVo.setTotal(bo.getTotal());

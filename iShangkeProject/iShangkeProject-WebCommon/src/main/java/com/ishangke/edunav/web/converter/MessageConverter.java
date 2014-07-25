@@ -25,6 +25,8 @@ public class MessageConverter {
         }
         if (vo.getStatus() != null) {
             messageBo.setStatus(vo.getStatus());
+        } else {
+            messageBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getUserFromIdSet() != null) {
             messageBo.setUserFromIdSet(vo.getUserFromIdSet());
@@ -35,12 +37,17 @@ public class MessageConverter {
         if (vo.getStatusSet() != null) {
             messageBo.setStatusSet(vo.getStatusSet());
         }
-        messageBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        messageBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        messageBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        messageBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        messageBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        messageBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
         messageBo.setReadTime(vo.getReadTime() == null ? Constant.DEFAULTNULL : vo.getReadTime().getTimeInMillis());
-        messageBo.setReadTimeEnd(vo.getReadTimeEnd() == null ? Constant.DEFAULTNULL : vo.getReadTimeEnd().getTimeInMillis());
-        messageBo.setReadTimeStart(vo.getReadTimeStart() == null ? Constant.DEFAULTNULL : vo.getReadTimeStart().getTimeInMillis());
+        messageBo.setReadTimeEnd(vo.getReadTimeEnd() == null ? Constant.DEFAULTNULL : vo.getReadTimeEnd()
+                .getTimeInMillis());
+        messageBo.setReadTimeStart(vo.getReadTimeStart() == null ? Constant.DEFAULTNULL : vo.getReadTimeStart()
+                .getTimeInMillis());
         return messageBo;
     }
 
@@ -57,7 +64,9 @@ public class MessageConverter {
         messageVo.setMessageText(bo.getMessageText());
         messageVo.setUserFromId(bo.getUserFromId());
         messageVo.setUserToId(bo.getUserToId());
-        messageVo.setStatus(bo.getStatus());
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
+            messageVo.setStatus(bo.getStatus());
+        }
         messageVo.setUserFromIdSet(bo.getUserFromIdSet());
         messageVo.setUserToIdSet(bo.getUserToIdSet());
         messageVo.setStatusSet(bo.getStatusSet());

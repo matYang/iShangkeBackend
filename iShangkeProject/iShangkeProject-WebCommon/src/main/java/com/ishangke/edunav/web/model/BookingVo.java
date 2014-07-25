@@ -30,7 +30,7 @@ public class BookingVo {
     private Calendar noRefundDate;
 
     private Calendar cashbackDate;
-
+    private Double price;
     private Integer type;
 
     private String note;
@@ -61,7 +61,8 @@ public class BookingVo {
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
     private List<ActionVo> actionList;
-    
+    private Double priceStart;
+    private Double priceEnd;
     public List<ActionVo> getActionList() {
         return actionList;
     }
@@ -110,8 +111,26 @@ public class BookingVo {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    public Double getPriceStart() {
+        return priceStart;
+    }
+    public void setPriceStart(Double priceStart) {
+        this.priceStart = priceStart;
+    }
+    public Double getPriceEnd() {
+        return priceEnd;
+    }
+    public void setPriceEnd(Double priceEnd) {
+        this.priceEnd = priceEnd;
+    }
     public String getEmail() {
         return email;
+    }
+    public Double getPrice() {
+        return price;
+    }
+    public void setPrice(Double price) {
+        this.price = price;
     }
     public void setEmail(String email) {
         this.email = email;

@@ -34,6 +34,8 @@ public class SpreadConverter {
         }
         if (vo.getStatus() != null) {
             spreadBo.setStatus(vo.getStatus());
+        }  else {
+            spreadBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getStatusSet() != null) {
             spreadBo.setStatusSet(vo.getStatusSet());
@@ -72,7 +74,9 @@ public class SpreadConverter {
         spreadVo.setPartnerId(bo.getPartnerId());
         spreadVo.setPartnerIdSet(bo.getPartnerIdSet());
         spreadVo.setRemark(bo.getRemark());
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
         spreadVo.setStatus(bo.getStatus());
+        }
         spreadVo.setStatusSet(bo.getStatusSet());
         spreadVo.setUrl(bo.getUrl());
         spreadVo.setUserId(bo.getUserId());

@@ -34,6 +34,8 @@ public class TeacherConverter {
         }
         if (vo.getPopularity() != null) {
             teacherBo.setPopularity(vo.getPopularity());
+        }  else {
+            teacherBo.setPopularity(Constant.DEFAULTNULL);
         }
         if (vo.getPopularityEnd() != null) {
             teacherBo.setPopularityEnd(vo.getPopularityEnd());
@@ -69,7 +71,9 @@ public class TeacherConverter {
         teacherVo.setName(bo.getName());
         teacherVo.setPartnerId(bo.getPartnerId());
         teacherVo.setPartnerIdSet(bo.getPartnerIdSet());
+        if (Constant.DEFAULTNULL != bo.getPopularity()) {
         teacherVo.setPopularity(bo.getPopularity());
+        }
         teacherVo.setPopularityEnd(bo.getPopularityEnd());
         teacherVo.setPopularitySet(bo.getPopularitySet());
         teacherVo.setPopularityStart(bo.getPopularityStart());

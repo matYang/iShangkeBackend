@@ -28,6 +28,8 @@ public class AccountHistoryConverter {
         }
         if (vo.getType() != null) {
             accountHistoryBo.setType(vo.getType());
+        } else {
+            accountHistoryBo.setType(Constant.DEFAULTNULL);
         }
         if (vo.getTypeSet() != null) {
             accountHistoryBo.setTypeSet(vo.getTypeSet());
@@ -61,7 +63,9 @@ public class AccountHistoryConverter {
         accountHistoryVo.setId(bo.getId());
         accountHistoryVo.setIdSet(bo.getIdSet());
         accountHistoryVo.setRemark(bo.getRemark());
-        accountHistoryVo.setType(bo.getType());
+        if (Constant.DEFAULTNULL != bo.getType()) {
+            accountHistoryVo.setType(bo.getType());
+        }
         accountHistoryVo.setTypeSet(bo.getTypeSet());
         accountHistoryVo.setUserId(bo.getUserId());
         accountHistoryVo.setUserIdSet(bo.getUserIdSet());

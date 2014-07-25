@@ -19,12 +19,16 @@ public class OrderHistoryConverter {
         }
         if (vo.getNormal() != null) {
             orderHistoryBo.setNormal(vo.getNormal());
+        } else {
+            orderHistoryBo.setNormal(Constant.DEFAULTNULL);
         }
         if (vo.getNormalSet() != null) {
             orderHistoryBo.setNormalSet(vo.getNormalSet());
         }
         if (vo.getOptName() != null) {
             orderHistoryBo.setOptName(vo.getOptName());
+        } else {
+            orderHistoryBo.setOptName(Constant.DEFAULTNULL);
         }
         if (vo.getOptNameSet() != null) {
             orderHistoryBo.setOptNameSet(vo.getOptNameSet());
@@ -37,12 +41,16 @@ public class OrderHistoryConverter {
         }
         if (vo.getPostStatus() != null) {
             orderHistoryBo.setPostStatus(vo.getPostStatus());
+        } else {
+            orderHistoryBo.setPostStatus(Constant.DEFAULTNULL);
         }
         if (vo.getPostStatusSet() != null) {
             orderHistoryBo.setPostStatusSet(vo.getPostStatusSet());
         }
         if (vo.getPreStatus() != null) {
             orderHistoryBo.setPreStatus(vo.getPreStatus());
+        } else {
+            orderHistoryBo.setPreStatus(Constant.DEFAULTNULL);
         }
         if (vo.getPreStatusSet() != null) {
             orderHistoryBo.setPreStatusSet(vo.getPreStatusSet());
@@ -70,15 +78,23 @@ public class OrderHistoryConverter {
         orderHistoryVo.setEnabled(bo.getEnabled());
         orderHistoryVo.setId(bo.getId());
         orderHistoryVo.setIdSet(bo.getIdSet());
+        if (Constant.DEFAULTNULL != bo.getNormal()) {
         orderHistoryVo.setNormal(bo.getNormal());
+        }
         orderHistoryVo.setNormalSet(bo.getNormalSet());
+        if (Constant.DEFAULTNULL != bo.getOptName()) {
         orderHistoryVo.setOptName(bo.getOptName());
+        }
         orderHistoryVo.setOptNameSet(bo.getOptNameSet());
         orderHistoryVo.setOrderId(bo.getOrderId());
         orderHistoryVo.setOrderIdSet(bo.getOrderIdSet());
+        if (Constant.DEFAULTNULL != bo.getPostStatus()) {
         orderHistoryVo.setPostStatus(bo.getPostStatus());
+        }
         orderHistoryVo.setPostStatusSet(bo.getPostStatusSet());
+        if (Constant.DEFAULTNULL != bo.getPreStatus()) {
         orderHistoryVo.setPreStatus(bo.getPreStatus());
+        }
         orderHistoryVo.setPreStatusSet(bo.getPreStatusSet());
         orderHistoryVo.setRemark(bo.getRemark());
         orderHistoryVo.setUserId(bo.getUserId());
