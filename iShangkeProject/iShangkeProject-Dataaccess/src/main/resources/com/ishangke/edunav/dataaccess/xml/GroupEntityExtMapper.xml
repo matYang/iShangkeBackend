@@ -43,7 +43,7 @@
       <if test="name != null">
         NAME,
       </if>
-      <if test="roleId != null">
+      <if test="roleId != null and roleId != 0">
         ROLE_ID,
       </if>
       <if test="lastModifyTime != null">
@@ -55,7 +55,7 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID,
       </if>
     </trim>
@@ -63,7 +63,7 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
+      <if test="roleId != null and roleId != 0">
         #{roleId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
@@ -75,7 +75,7 @@
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         #{partnerId,jdbcType=INTEGER},
       </if>
     </trim>
@@ -97,7 +97,7 @@
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
+      <if test="roleId != null and roleId != 0">
         ROLE_ID = #{roleId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
@@ -111,7 +111,7 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId !=0">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
     </set>

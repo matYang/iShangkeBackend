@@ -32,10 +32,10 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="courseTemplateId != null">
+      <if test="courseTemplateId != null and courseTemplateId != 0">
         #{courseTemplateId,jdbcType=INTEGER},
       </if>
-      <if test="classPhotoId != null">
+      <if test="classPhotoId != null and classPhotoId != 0">
         #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
@@ -57,11 +57,11 @@
   <update id="update" parameterType="CourseTemplateClassPhotoEntityExt">
     update COURSE_TEMPLATE_CLASS_PHOTO
     <set>
-      <if test="courseTemplateId != null">
+      <if test="courseTemplateId != null and courseTemplateId != 0">
         COURSE_TEMPLATE_ID =
         #{courseTemplateId,jdbcType=INTEGER},
       </if>
-      <if test="classPhotoId != null">
+      <if test="classPhotoId != null and classPhotoId !=0">
         CLASS_PHOTO_ID = #{classPhotoId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">

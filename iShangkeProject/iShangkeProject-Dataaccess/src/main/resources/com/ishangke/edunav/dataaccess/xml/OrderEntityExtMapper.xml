@@ -40,7 +40,7 @@
   <insert id="add" parameterType="OrderEntityExt">
     insert into `ORDER`
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bookingId != null">
+      <if test="bookingId != null and bookingId != 0">
         BOOKING_ID,
       </if>
       <if test="createTime != null">
@@ -72,7 +72,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bookingId != null">
+      <if test="bookingId != null and bookingId != 0">
         #{bookingId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
@@ -118,7 +118,7 @@
   <update id="update" parameterType="OrderEntityExt">
     update `ORDER`
     <set>
-      <if test="bookingId != null">
+      <if test="bookingId != null and bookingId != 0">
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">

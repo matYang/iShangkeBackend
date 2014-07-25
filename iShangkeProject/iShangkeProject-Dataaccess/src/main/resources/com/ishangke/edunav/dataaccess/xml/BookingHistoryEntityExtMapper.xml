@@ -39,10 +39,10 @@
   <insert id="add" parameterType="BookingHistoryEntityExt">
     insert into BOOKING_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bookingId != null">
+      <if test="bookingId != null and bookingId != 0">
         BOOKING_ID,
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId !=0">
         USER_ID,
       </if>
       <if test="optName != null">
@@ -69,10 +69,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="bookingId != null">
+      <if test="bookingId != null and bookingId != 0">
         #{bookingId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="optName != null">
@@ -112,10 +112,10 @@
   <update id="update" parameterType="BookingHistoryEntityExt">
     update BOOKING_HISTORY
     <set>
-      <if test="bookingId != null">
+      <if test="bookingId != null and bookingId != 0">
         BOOKING_ID = #{bookingId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId !=0 ">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
       <if test="optName != null">
@@ -210,7 +210,7 @@
       <if test="entity.optName != null">
         AND BOOKING_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
       </if>
-      <if test="entity.optName == null or entity.optName == 0">
+      <if test="entity.optName == null ">
         <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND BOOKING_HISTORY.OPT_NAME IN
           <foreach collection="entity.optNameSet" item="listItem" open="(" close=")" separator=",">
@@ -222,7 +222,7 @@
       <if test="entity.preStatus != null">
         AND BOOKING_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
-      <if test="entity.preStatus == null or entity.preStatus == 0">
+      <if test="entity.preStatus == null ">
         <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND BOOKING_HISTORY.PRE_STATUS IN
           <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")" separator=",">
@@ -234,7 +234,7 @@
       <if test="entity.postStatus != null">
         AND BOOKING_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
-      <if test="entity.postStatus == null or entity.postStatus == 0">
+      <if test="entity.postStatus == null ">
         <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND BOOKING_HISTORY.POST_STATUS IN
           <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")" separator=",">
@@ -246,7 +246,7 @@
       <if test="entity.normal != null">
         AND BOOKING_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
       </if>
-      <if test="entity.normal == null or entity.normal == 0">
+      <if test="entity.normal == null ">
         <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND BOOKING_HISTORY.NORMAL IN
           <foreach collection="entity.normalSet" item="listItem" open="(" close=")" separator=",">
@@ -333,7 +333,7 @@
       <if test="entity.optName != null">
         AND BOOKING_HISTORY.OPT_NAME = #{entity.optName,jdbcType=INTEGER}
       </if>
-      <if test="entity.optName == null or entity.optName == 0">
+      <if test="entity.optName == null ">
         <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND BOOKING_HISTORY.OPT_NAME IN
           <foreach collection="entity.optNameSet" item="listItem" open="(" close=")" separator=",">
@@ -345,7 +345,7 @@
       <if test="entity.preStatus != null">
         AND BOOKING_HISTORY.PRE_STATUS = #{entity.preStatus,jdbcType=INTEGER}
       </if>
-      <if test="entity.preStatus == null or entity.preStatus == 0">
+      <if test="entity.preStatus == null ">
         <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND BOOKING_HISTORY.PRE_STATUS IN
           <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")" separator=",">
@@ -357,7 +357,7 @@
       <if test="entity.postStatus != null">
         AND BOOKING_HISTORY.POST_STATUS = #{entity.postStatus,jdbcType=INTEGER}
       </if>
-      <if test="entity.postStatus == null or entity.postStatus == 0">
+      <if test="entity.postStatus == null ">
         <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND BOOKING_HISTORY.POST_STATUS IN
           <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")" separator=",">
@@ -369,7 +369,7 @@
       <if test="entity.normal != null">
         AND BOOKING_HISTORY.NORMAL = #{entity.normal,jdbcType=INTEGER}
       </if>
-      <if test="entity.normal == null or entity.normal == 0">
+      <if test="entity.normal == null ">
         <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND BOOKING_HISTORY.NORMAL IN
           <foreach collection="entity.normalSet" item="listItem" open="(" close=")" separator=",">

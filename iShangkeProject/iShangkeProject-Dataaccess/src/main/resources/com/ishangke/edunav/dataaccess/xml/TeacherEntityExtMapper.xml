@@ -61,7 +61,7 @@
     insert into TEACHER
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID,
       </if>
       <if test="imgUrl != null">
@@ -88,7 +88,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         #{partnerId,jdbcType=INTEGER},
       </if>
       <if test="imgUrl != null">
@@ -128,7 +128,7 @@
   <update id="update" parameterType="TeacherEntityExt">
     update TEACHER
     <set>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
       <if test="imgUrl != null">
@@ -208,11 +208,11 @@
         </if>
       </if>
 
-      <if test="entity.popularity != null and entity.popularity != 0">
+      <if test="entity.popularity != null ">
         AND TEACHER.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.popularity == null or entity.popularity == 0">
+      <if test="entity.popularity == null ">
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND TEACHER.POPULARITY IN
           <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"
@@ -310,11 +310,11 @@
         </if>
       </if>
 
-      <if test="entity.popularity != null and entity.popularity != 0">
+      <if test="entity.popularity != null ">
         AND TEACHER.POPULARITY = #{entity.popularity,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.popularity == null or entity.popularity == 0">
+      <if test="entity.popularity == null ">
         <if test="entity.popularitySet != null and entity.popularitySet.size() > 0">
           AND TEACHER.POPULARITY IN
           <foreach collection="entity.popularitySet" item="listItem" open="(" close=")"

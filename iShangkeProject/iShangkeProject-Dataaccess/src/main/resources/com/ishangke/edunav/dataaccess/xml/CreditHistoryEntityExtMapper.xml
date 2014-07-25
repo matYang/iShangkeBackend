@@ -27,7 +27,7 @@
       <if test="charge != null">
         CHARGE,
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID,
       </if>
       <if test="lastModifyTime != null">
@@ -41,7 +41,7 @@
       <if test="charge != null">
         #{charge,jdbcType=DOUBLE},
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
@@ -69,7 +69,7 @@
       <if test="charge != null">
         CHARGE = #{charge,jdbcType=DOUBLE},
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != 0">
         USER_ID = #{userId,jdbcType=INTEGER},
       </if>
       <if test="lastModifyTime != null">
