@@ -1,6 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Test;
@@ -23,13 +25,14 @@ import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.TransformManager;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
+import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.transform.Operation;
 
-@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, BookingManagerImplTest.class })
+//@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, BookingManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
-public class BookingManagerImplTest extends BaseTest{
+public class BookingManagerImplTest {
     @Autowired
     private CacheManager cacheManager;
 
@@ -45,12 +48,11 @@ public class BookingManagerImplTest extends BaseTest{
     @Autowired
     private TransformManager transformManager;
 
-    @Test
+    @Test(expected = ManagerException.class)
     public void testTransform() throws IllegalArgumentException, IllegalAccessException {
         cacheManager.del(Constant.TRANSFORMOPERATION + Constant.ROLESYSTEMADMIN + Constant.STATUSTRANSFORMBOOKING);
         BookingEntityExt booking = new BookingEntityExt();
         booking.setUserId(3);
-        //course id 为1的partner为1
         booking.setCourseId(1);
         booking.setCourseTemplateId(1);
         booking.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -59,7 +61,7 @@ public class BookingManagerImplTest extends BaseTest{
         booking.setStatus(0);
         bookingMapper.add(booking);
         System.out.println(booking.getId());
-        bookingManager.transformBookingStatus(BookingConverter.toBo(booking), 1, UserConverter.toBo(userMapper.getById(1)));
+        bookingManager.transformBookingStatus(BookingConverter.toBo(booking), 12, UserConverter.toBo(userMapper.getById(5)));
         
         List<Operation> list = transformManager.listAll("booking");
         for (Operation o : list) {
@@ -69,5 +71,18 @@ public class BookingManagerImplTest extends BaseTest{
             }
             System.out.println("@@@@@@@@@@@@@@@@@");
         }
+        System.out.println(list.size());
+        Collections.sort(list, new Comparator<Operation>(){
+            @Override
+            public int compare(Operation o1, Operation o2) {
+                return o1.getOperateCode() - o2.getOperateCode();
+            }
+            
+        });
+        for (Operation o : list) {
+            System.out.println(o.getOperateCode());
+        }
+        BookingEntityExt e = bookingMapper.getById(booking.getId());
+        System.out.println(e.getStatus());
     }
 }

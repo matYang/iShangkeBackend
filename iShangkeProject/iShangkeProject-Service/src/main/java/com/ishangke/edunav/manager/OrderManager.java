@@ -3,7 +3,7 @@ package com.ishangke.edunav.manager;
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.BookingBo;
-import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
+import com.ishangke.edunav.commoncontract.model.CommentOrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -53,7 +53,7 @@ public interface OrderManager {
      * @param commentBookingAcceptBo
      * @param userBo
      */
-    OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo);
+    OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderBo commentOrderBo, UserBo userBo);
 
     /**
      * 本方法为查询Order功能。<br>

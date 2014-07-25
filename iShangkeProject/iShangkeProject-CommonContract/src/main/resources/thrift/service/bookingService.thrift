@@ -32,7 +32,7 @@ service BookingService {
      *  @return 预定单实体 BookingBo
      *
      */ 
-    booking.BookingBo createBookingByUser(1: course.CourseBo courseBo, 2: booking.BookingBo bookingBo, 3: booking.CommentBookingCreateBo commentBookingCreateBo, 4: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo createBookingByUser(1: course.CourseBo courseBo, 2: booking.BookingBo bookingBo, 3: booking.CommentBookingBo commentBookingBo, 4: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询预定单预定单功能。<br>
@@ -101,7 +101,7 @@ service BookingService {
      *  @return 
      *
      */ 
-    order.OrderBo acceptOrderByAdmin(1: order.OrderBo orderBo, 2: order.CommentOrderAcceptBo commentBookingAcceptBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    order.OrderBo acceptOrderByAdmin(1: order.OrderBo orderBo, 2: order.CommentOrderBo commentOrderBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询Order功能。<br>

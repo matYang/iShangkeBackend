@@ -22,15 +22,18 @@
     BOOKING_HISTORY.USER_ID BOOKINGHISTORY_USERID,
     BOOKING_HISTORY.OPT_NAME
     BOOKINGHISTORY_OPTNAME,
-    BOOKING_HISTORY.REMARK BOOKINGHISTORY_REMARK,
+    BOOKING_HISTORY.REMARK
+    BOOKINGHISTORY_REMARK,
     BOOKING_HISTORY.PRE_STATUS
     BOOKINGHISTORY_PRESTATUS,
-    BOOKING_HISTORY.POST_STATUS BOOKINGHISTORY_POSTSTATUS,
+    BOOKING_HISTORY.POST_STATUS
+    BOOKINGHISTORY_POSTSTATUS,
     BOOKING_HISTORY.NORMAL BOOKINGHISTORY_NORMAL,
     BOOKING_HISTORY.CREATE_TIME
     BOOKINGHISTORY_CREATETIME,
     BOOKING_HISTORY.ENABLED BOOKINGHISTORY_ENABLED,
-    BOOKING_HISTORY.DELETED BOOKINGHISTORY_DELETED
+    BOOKING_HISTORY.DELETED
+    BOOKINGHISTORY_DELETED
   </sql>
   <!-- add -->
   <insert id="add" parameterType="BookingHistoryEntityExt">
@@ -182,8 +185,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -195,8 +197,7 @@
       <if test="entity.bookingId == null or entity.bookingId == 0">
         <if test="entity.bookingIdSet != null and entity.bookingIdSet.size() > 0">
           AND BOOKING_HISTORY.BOOKING_ID IN
-          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -212,8 +213,7 @@
       <if test="entity.optName == null or entity.optName == 0">
         <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND BOOKING_HISTORY.OPT_NAME IN
-          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -225,8 +225,7 @@
       <if test="entity.preStatus == null or entity.preStatus == 0">
         <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND BOOKING_HISTORY.PRE_STATUS IN
-          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -238,8 +237,7 @@
       <if test="entity.postStatus == null or entity.postStatus == 0">
         <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND BOOKING_HISTORY.POST_STATUS IN
-          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -251,8 +249,7 @@
       <if test="entity.normal == null or entity.normal == 0">
         <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND BOOKING_HISTORY.NORMAL IN
-          <foreach collection="entity.normalSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.normalSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -311,8 +308,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -324,8 +320,7 @@
       <if test="entity.bookingId == null or entity.bookingId == 0">
         <if test="entity.bookingIdSet != null and entity.bookingIdSet.size() > 0">
           AND BOOKING_HISTORY.BOOKING_ID IN
-          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.bookingIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -341,8 +336,7 @@
       <if test="entity.optName == null or entity.optName == 0">
         <if test="entity.optNameSet != null and entity.optNameSet.size() > 0">
           AND BOOKING_HISTORY.OPT_NAME IN
-          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.optNameSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -354,8 +348,7 @@
       <if test="entity.preStatus == null or entity.preStatus == 0">
         <if test="entity.preStatusSet != null and entity.preStatusSet.size() > 0">
           AND BOOKING_HISTORY.PRE_STATUS IN
-          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.preStatusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -367,8 +360,7 @@
       <if test="entity.postStatus == null or entity.postStatus == 0">
         <if test="entity.postStatusSet != null and entity.postStatusSet.size() > 0">
           AND BOOKING_HISTORY.POST_STATUS IN
-          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.postStatusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -380,8 +372,7 @@
       <if test="entity.normal == null or entity.normal == 0">
         <if test="entity.normalSet != null and entity.normalSet.size() > 0">
           AND BOOKING_HISTORY.NORMAL IN
-          <foreach collection="entity.normalSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.normalSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -405,5 +396,13 @@
       </if>
     </if>
     ) AS total
+  </select>
+  <select id="listByBookingId" parameterType="map" resultMap="BookingHistoryExtMap">
+    SELECT
+    <include refid="BookingHistory_Base_Column_List" />
+    from BOOKING_HISTORY where BOOKING_HISTORY.DELETED = 0
+  </select>
+  <select id="getListCountByBookingId" resultType="int">
+    select count(ID) from BOOKING_HISTORY where DELETED = 0
   </select>
 </mapper>

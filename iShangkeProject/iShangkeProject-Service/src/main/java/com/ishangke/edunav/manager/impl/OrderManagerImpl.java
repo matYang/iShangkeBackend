@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.enums.OrderEnums;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
-import com.ishangke.edunav.commoncontract.model.CommentOrderAcceptBo;
+import com.ishangke.edunav.commoncontract.model.CommentOrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -68,7 +68,7 @@ public class OrderManagerImpl implements OrderManager {
     }
 
     @Override
-    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderAcceptBo commentBookingAcceptBo, UserBo userBo) {
+    public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderBo commentOrderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
