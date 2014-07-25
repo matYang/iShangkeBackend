@@ -126,6 +126,11 @@ public class Constant {
         BOOKINGOPERATEMAP.put(21, "onlineRefund");
         BOOKINGOPERATEMAP.put(22, "onlineCashback");
         BOOKINGOPERATEMAP.put(23, "offlineCashback");
-
     }
+    
+    //班级类型
+    public static int COURSETYPEONEBYONE = 0;
+    public static int COURSETYPESMALL = 1;
+    public static int COURSETYPEMID = 2;
+    public static int COURSETYPEBIG = 3;
 }
