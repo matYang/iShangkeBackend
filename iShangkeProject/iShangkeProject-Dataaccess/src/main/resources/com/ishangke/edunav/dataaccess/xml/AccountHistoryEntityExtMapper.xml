@@ -142,8 +142,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND ACCOUNT_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -155,8 +154,7 @@
       <if test="entity.withdrawId == null or entity.withdrawId == 0">
         <if test="entity.withdrawIdSet != null and entity.withdrawIdSet.size() > 0">
           AND ACCOUNT_HISTORY.WITHDRAW_ID IN
-          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -240,8 +238,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND ACCOUNT_HISTORY.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -253,8 +250,7 @@
       <if test="entity.withdrawId == null or entity.withdrawId == 0">
         <if test="entity.withdrawIdSet != null and entity.withdrawIdSet.size() > 0">
           AND ACCOUNT_HISTORY.WITHDRAW_ID IN
-          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.withdrawIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -303,7 +299,7 @@
     </if>
     ) AS total
   </select>
-   <!-- getById -->
+  <!-- getById -->
   <select id="getById" parameterType="int" resultMap="AccountHistoryExtMap">
     SELECT
     <include refid="AccountHistory_Base_Column_List" />

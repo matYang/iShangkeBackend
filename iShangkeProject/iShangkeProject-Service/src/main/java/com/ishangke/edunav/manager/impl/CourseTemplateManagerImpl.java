@@ -1,5 +1,6 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -155,7 +156,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         throw new ManagerException("failed when query photo");
                     }
                     if (photoEntity == null) {
-                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(), photoEntity.getId()));
+                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(), photoEntity == null ? null : photoEntity.getId()));
                     }
                     if (photoEntity.getPartnerId() != partnerBo.getId()) {
                         LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] belong [%d]", userBo.getId(), photoEntity.getId(),
@@ -173,7 +174,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         throw new ManagerException("failed when query teacher");
                     }
                     if (teacherEntity == null) {
-                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity.getId()));
+                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null : teacherEntity.getId()));
                     }
                     if (teacherEntity.getPartnerId() != partnerBo.getId()) {
                         LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(),
@@ -262,7 +263,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         List<CourseTemplateEntityExt> courseTemplateList = null;
-        List<CourseTemplateBo> resultList = null;
+        List<CourseTemplateBo> resultList = new ArrayList<CourseTemplateBo>();
 
         try {
             courseTemplateList = courseTemplateMapper.list(courseTemplateEntity, pageEntity);
