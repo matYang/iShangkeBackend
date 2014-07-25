@@ -665,20 +665,407 @@
     </if>
     ) AS total
   </select>
-  <select id="listByUserId" parameterType="map" resultMap="BookingExtMap">
-    SELECT
-    <include refid="Booking_Base_Column_List" />
-    from BOOKING where BOOKING.DELETED = 0
-  </select>
-  <select id="getCountByUserId" resultType="map">
-    select count(ID) from BOOKING where DELETED = 0
-  </select>
   <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
-    from BOOKING where BOOKING.DELETED = 0
+    from BOOKING join COURSE on BOOKING.COURSE_ID = COURSE.ID
+    where BOOKING.DELETED = 0 and COURSE.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
+    <if test="entity != null">
+
+      <if test="entity.id != null and entity.id != 0">
+        AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND BOOKING.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
+        AND BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND BOOKING.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND BOOKING.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseId == null or entity.courseId == 0">
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
+          AND BOOKING.COURSE_ID IN
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
+            open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.courseTemplateId != null">
+        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId == null">
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
+          AND PARTNER.COURSE_TEMPLATE_ID IN
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.reference != null and !entity.reference.equals('') ">
+        AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.name != null and !entity.name.equals('') ">
+        AND BOOKING.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.phone != null and !entity.phone.equals('') ">
+        AND BOOKING.PHON LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.email != null and !entity.email.equals('') ">
+        AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.status != null">
+        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND PARTNER.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.scheduledTime != null">
+        AND BOOKING.SCHEDULED_TIME =
+        #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.scheduledTime == null">
+        <if test="entity.scheduledTimeStart != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.scheduledTimeEnd != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.noRefundDate != null">
+        AND BOOKING.NO_REFUND_DATE =
+        #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.noRefundDate == null">
+        <if test="entity.noRefundDateStart != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.noRefundDateEnd != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.cashbackDate != null">
+        AND BOOKING.CASHBACK_DATE =
+        #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.cashbackDate == null">
+        <if test="entity.cashbackDateStart != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.cashbackDateEnd != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.price != null">
+        AND BOOKING.PRICE = #{entity.price,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
+          <![CDATA[AND BOOKING.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+      <if test="entity.type != null">
+        AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
+      </if>
+      <if test="entity.type == null">
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND PARTNER.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.note != null and !entity.note.equals('')">
+        AND BOOKING.NOTE LIKE "%"#{entity.note,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.cashbackAmount != null">
+        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.cashbackAmount == null">
+        <if test="entity.cashbackAmountStart != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND BOOKING.LOST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND BOOKING.CREATE_TIME = #{entity.createTime,
+        typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        BOOKING.${listItem.columnKey}
+        ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page !=null and page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+
   </select>
-  <select id="getCountByPartnerId" resultType="map">
-    select count(ID) from BOOKING where DELETED = 0
+
+  <select id="getCountByPartnerId" parameterType="map" resultType="int">
+    select count(*) from (
+      SELECT
+    <include refid="Booking_Base_Column_List" />
+    from BOOKING join COURSE on BOOKING.COURSE_ID = COURSE.ID
+    where BOOKING.DELETED = 0 and COURSE.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
+    <if test="entity != null">
+
+      <if test="entity.id != null and entity.id != 0">
+        AND BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND BOOKING.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
+        AND BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND BOOKING.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND BOOKING.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseId == null or entity.courseId == 0">
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
+          AND BOOKING.COURSE_ID IN
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
+            open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.courseTemplateId != null">
+        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.courseTemplateId == null">
+        <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
+          AND PARTNER.COURSE_TEMPLATE_ID IN
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.reference != null and !entity.reference.equals('') ">
+        AND BOOKING.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.name != null and !entity.name.equals('') ">
+        AND BOOKING.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.phone != null and !entity.phone.equals('') ">
+        AND BOOKING.PHON LIKE "%"#{entity.phone,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="entity.email != null and !entity.email.equals('') ">
+        AND BOOKING.EMAIL LIKE "%"#{entity.email,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.status != null">
+        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND PARTNER.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.scheduledTime != null">
+        AND BOOKING.SCHEDULED_TIME =
+        #{entity.scheduledTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.scheduledTime == null">
+        <if test="entity.scheduledTimeStart != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME >= #{entity.scheduledTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.scheduledTimeEnd != null">
+          <![CDATA[AND BOOKING.SCHEDULED_TIME <= #{entity.scheduledTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.noRefundDate != null">
+        AND BOOKING.NO_REFUND_DATE =
+        #{entity.noRefundDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.noRefundDate == null">
+        <if test="entity.noRefundDateStart != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE >= #{entity.noRefundDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.noRefundDateEnd != null">
+          <![CDATA[AND BOOKING.NO_REFUND_DATE <= #{entity.noRefundDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.cashbackDate != null">
+        AND BOOKING.CASHBACK_DATE =
+        #{entity.cashbackDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.cashbackDate == null">
+        <if test="entity.cashbackDateStart != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE >= #{entity.cashbackDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.cashbackDateEnd != null">
+          <![CDATA[AND BOOKING.CASHBACK_DATE <= #{entity.cashbackDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.price != null">
+        AND BOOKING.PRICE = #{entity.price,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.price == null">
+        <if test="entity.priceStart != null">
+          <![CDATA[AND BOOKING.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+      <if test="entity.type != null">
+        AND BOOKING.TYPE = #{entity.type,jdbcType=INTEGER}
+      </if>
+      <if test="entity.type == null">
+        <if test="entity.typeSet != null and entity.typeSet.size() > 0">
+          AND PARTNER.TYPE IN
+          <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.note != null and !entity.note.equals('')">
+        AND BOOKING.NOTE LIKE "%"#{entity.note,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.cashbackAmount != null">
+        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.cashbackAmount == null">
+        <if test="entity.cashbackAmountStart != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
+        </if>
+        <if test="entity.cashbackAmountEnd != null">
+          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
+        </if>
+      </if>
+
+      <if test="entity.lastModifyTime != null">
+        AND BOOKING.LOST_MODIFY_TIME =
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+      </if>
+      <if test="entity.lastModifyTime == null">
+        <if test="entity.lastModifyTimeStart != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.lastModifyTimeEnd != null">
+          <![CDATA[AND BOOKING.LOST_MODIFY_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.createTime != null">
+        AND BOOKING.CREATE_TIME = #{entity.createTime,
+        typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND BOOKING.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+        </if>
+      </if>
+
+      <if test="entity.enabled != null and entity.enabled != 0">
+        AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+    </if>
+    ) as total
   </select>
 </mapper>

@@ -8,7 +8,7 @@ public class Constant {
     public static final int STATUSTRANSFORMEXPIRETIME = 29 * 24 * 60 * 60;
     public static final String STATUSTRANSFORMBOOKING = "booking";
     public static final String STATUSTRANSFORMCOURSE = "course";
-    public static final String STATUSTRANSFORMCOURSETEMPLATE = "coursetemplate";
+    public static final String STATUSTRANSFORMCOURSETEMPLATE = "courseTemplate";
     
     //默认Group分组
     //如果不是partner admin，默认的情况下，group中的partner id 都是1

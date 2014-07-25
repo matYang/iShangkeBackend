@@ -27,4 +27,5 @@ public interface CourseClassPhotoEntityExtMapper {
 
     public CourseClassPhotoEntityExt getById(int id);
 
+    public void deleteByCourseIdClassPhotoId(@Param("courseId") int courseId, @Param("classPhotoId") int classPhotoId);
 }

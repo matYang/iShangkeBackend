@@ -50,7 +50,7 @@ public class TransformManagerImplTest {
     @Test
     public void testGetOperation() throws IllegalArgumentException, IllegalAccessException {
         cache.del("transformoperationpartneradminbooking4");
-        ArrayList<Operation> list = (ArrayList<Operation>) transformManager.getOperationByRoleName("partneradmin", "booking", 4);
+        ArrayList<Operation> list = (ArrayList<Operation>) transformManager.getOperationByRoleName("partneradmin", "coursetempalte", 2);
         System.out.println("count: " + list.size());
         for (Operation a : list) {
             for (Field f : Operation.class.getDeclaredFields()) {

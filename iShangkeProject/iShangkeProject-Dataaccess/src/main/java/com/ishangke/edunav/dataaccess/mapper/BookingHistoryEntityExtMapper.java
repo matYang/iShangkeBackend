@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 
 public interface BookingHistoryEntityExtMapper {
@@ -27,9 +26,4 @@ public interface BookingHistoryEntityExtMapper {
     public int getCount();
 
     public BookingHistoryEntityExt getById(int id);
-    
-    public List<BookingHistoryEntityExt> listByBookingId(@Param("entity") BookingHistoryEntityExt bookingHistoryEntityExt, @Param("booking") BookingEntityExt booking,
-            @Param("page") PaginationEntity page);
-    
-    public int getListCountByBookingId(@Param("entity") BookingHistoryEntityExt bookingHistoryEntityExt, @Param("booking") BookingEntityExt booking);
 }
