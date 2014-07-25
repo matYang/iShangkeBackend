@@ -26,4 +26,6 @@ public interface CourseTemplateEntityExtMapper {
     public int getCount();
     
     public CourseTemplateEntityExt getInfoById(int id);
+    
+    public CourseTemplateEntityExt getById(int id);
 }

@@ -86,34 +86,33 @@ public class TransformManagerImpl implements TransformManager {
             return tempList;
         }
         LOGGER.warn(String.format("[getOperationByRoleName] has no cached for status transform [roleName: %s][entityName: %s][currentStatus: %d]", roleName, entityName, currentStatus));
+        ArrayList<Operation> operationsList = new ArrayList<>();
         String configurationJson = configurationManager.getByName(Constant.STATUSTRANSFORM).getConfigData();
         ObjectMapper mapper = new ObjectMapper();
         Transform transform;
         try {
             transform = mapper.readValue(configurationJson, Transform.class);
-        } catch (Exception e) {
-            LOGGER.error("[Transform] cannot read transform from configData");
-            throw new ManagerException("read configDara json to object failed");
-        }
-        ArrayList<Operation> operationsList = new ArrayList<>();
-        for (TransformRole t : transform.getTransformRoles()) {
-            if (t.getName().equals(roleName)) {
-                List<StatusEntity> statusEntitiesList = t.getEntitys();
-                for (StatusEntity se : statusEntitiesList) {
-                    if (se.getName().equals(entityName)) {
-                        List<CurrentStatus> currentStatusList = se.getCurrentStatuses();
-                        for (CurrentStatus s : currentStatusList) {
-                            if (s.getStatusCode() == currentStatus) {
-                                operationsList = (ArrayList<Operation>) s.getOperations();
+            for (TransformRole t : transform.getTransformRoles()) {
+                if (t.getName().equals(roleName)) {
+                    List<StatusEntity> statusEntitiesList = t.getEntitys();
+                    for (StatusEntity se : statusEntitiesList) {
+                        if (se.getName().equals(entityName)) {
+                            List<CurrentStatus> currentStatusList = se.getCurrentStatuses();
+                            for (CurrentStatus s : currentStatusList) {
+                                if (s.getStatusCode() == currentStatus) {
+                                    operationsList = (ArrayList<Operation>) s.getOperations();
+                                }
                             }
                         }
                     }
                 }
             }
+        } catch (Exception e) {
+            //发生异常不缓存结果
+            LOGGER.error("[Transform] cannot read transform from configData");
+            return operationsList;
         }
-
         cache.set(key, 0, operationsList);
-
         return operationsList;
     }
 
