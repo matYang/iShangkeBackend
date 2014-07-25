@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
-import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -86,9 +86,9 @@ public class BookingManagerImpl implements BookingManager {
             throw new ManagerException("course cannot be booed now");
         }
         // 查看课程现价与发过来的价格是否一致，如果不一致则不能创建booking
-//        if (course.getPrice() != bookingBo.get) {
-//
-//        }
+        if (course.getPrice() != bookingBo.getPrice()) {
+            throw new ManagerException("the price is no longer equal");
+        }
         // 传递过来的cashback必须小于等于course中定义的cashback
         if (bookingBo.getCashbackAmount() > course.getCashback()) {
             throw new ManagerException("cashback cannot more than cashback defined in course");
@@ -104,7 +104,7 @@ public class BookingManagerImpl implements BookingManager {
             // 线下支付订单
             bookingBo.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
-        } else if (true) {
+        } else if (false) {
             // todo 其他类型订单
         } else {
             throw new ManagerException("unknown booking type");
@@ -167,6 +167,7 @@ public class BookingManagerImpl implements BookingManager {
         if (!authManager.isAdmin(userBo.getId()) && !authManager.isSystemAdmin(userBo.getId())) {
             throw new ManagerException("current cannot do this !");
         }
+        String roleName = authManager.getRole(userBo.getId());
         List<BookingEntityExt> bookings = null;
         try {
             bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
@@ -178,7 +179,10 @@ public class BookingManagerImpl implements BookingManager {
         }
         ArrayList<BookingBo> convertedList = new ArrayList<>();
         for (BookingEntityExt result : bookings) {
-            convertedList.add(BookingConverter.toBo(result));
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
+            BookingBo booking = BookingConverter.toBo(result);
+            booking.setActionList(actions);
+            convertedList.add(booking);
         }
         return convertedList;
     }
@@ -210,16 +214,17 @@ public class BookingManagerImpl implements BookingManager {
             // 如果是普通用户
             // 用户修改自己的booking
             if (bookingEntityExt.getUserId() != userBo.getId()) {
-                throw new ManagerException("cannot modift other's booking");
+                throw new ManagerException("cannot modify other's booking");
             }
             // 按照业务流程修改订单
             if (op == null) {
-                throw new ManagerException("cannot modift current booking status");
+                throw new ManagerException("cannot modify current booking status");
             }
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             bookingEntityExt.setStatus(op.getNextStatus());
             bookingMapper.update(bookingEntityExt);
+            
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
             bookingHistory.setBookingId(bookingBo.getId());
             bookingHistory.setOptName(operation);
@@ -229,11 +234,16 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistoryMapper.add(bookingHistory);
-            return (BookingConverter.toBo(bookingMapper.getById(bookingBo.getId())));
+            
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
+            BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingBo.getId()));
+            booking.setActionList(actions);
+            
+            return booking;
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             // 如果是合作商管理员
             // 合作商只能修改自己本机构的booking
-            CourseEntityExt course = courseMapper.getInfoById(bookingBo.getCourseId());
+            CourseEntityExt course = courseMapper.getById(bookingBo.getCourseId());
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
                 throw new ManagerException("unlogin user");
@@ -246,11 +256,11 @@ public class BookingManagerImpl implements BookingManager {
                 }
             }
             if (!isSameGroup) {
-                throw new ManagerException("cannot modift other's booking");
+                throw new ManagerException("cannot modify other's booking");
             }
             // 按照业务流程修改booking
             if (op == null) {
-                throw new ManagerException("cannot modift current booking status");
+                throw new ManagerException("cannot modify current booking status");
             }
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
@@ -260,19 +270,22 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setBookingId(bookingBo.getId());
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setOptName(operation);
-            // just for test
-            bookingHistory.setEnabled(0);
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setPreStatus(preStatus);
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistoryMapper.add(bookingHistory);
-            return (BookingConverter.toBo(bookingMapper.getById(bookingBo.getId())));
+            
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
+            BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingBo.getId()));
+            booking.setActionList(actions);
+            return booking;
+            
         } else if (Constant.ROLEADMIN.equals(roleName)) {
             // 如果是管理员
             // 按照业务流程修改booking
             if (op == null) {
-                throw new ManagerException("cannot modift current booking status");
+                throw new ManagerException("cannot modify current booking status");
             }
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
@@ -285,11 +298,14 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setPreStatus(preStatus);
             bookingHistory.setPostStatus(op.getNextStatus());
-            // just for test
-            bookingHistory.setEnabled(0);
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistoryMapper.add(bookingHistory);
-            return (BookingConverter.toBo(bookingMapper.getById(bookingBo.getId())));
+            
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
+            BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingBo.getId()));
+            booking.setActionList(actions);
+            
+            return booking;
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 超级管理员可以进行任何操作
             // 系统会将本次操作标记为异常
@@ -333,7 +349,10 @@ public class BookingManagerImpl implements BookingManager {
         }
         ArrayList<BookingBo> convertedList = new ArrayList<>();
         for (BookingEntityExt result : bookings) {
-            convertedList.add(BookingConverter.toBo(result));
+            List<ActionBo> actions = transformManager.getActionByRoleName(Constant.ROLEUSER, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
+            BookingBo booking = BookingConverter.toBo(result);
+            booking.setActionList(actions);
+            convertedList.add(booking);
         }
         return convertedList;
     }
@@ -370,7 +389,10 @@ public class BookingManagerImpl implements BookingManager {
         }
         ArrayList<BookingBo> convertedList = new ArrayList<>();
         for (BookingEntityExt result : bookings) {
-            convertedList.add(BookingConverter.toBo(result));
+            List<ActionBo> actions = transformManager.getActionByRoleName(Constant.ROLEUSER, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
+            BookingBo booking = BookingConverter.toBo(result);
+            booking.setActionList(actions);
+            convertedList.add(booking);
         }
         return convertedList;
     }
@@ -442,5 +464,11 @@ public class BookingManagerImpl implements BookingManager {
             return convertedList;
         }
         return null;
+    }
+    
+    public static void main(String[] args) {
+        Double a = 0.1234560023;
+        double b = 0.123456002300000000000;
+        System.out.println(a.equals(b));
     }
 }

@@ -9,6 +9,16 @@ public class Constant {
     public static final String STATUSTRANSFORMBOOKING = "booking";
     public static final String STATUSTRANSFORMCOURSE = "course";
     public static final String STATUSTRANSFORMCOURSETEMPLATE = "coursetemplate";
+    
+    //默认Group分组
+    //如果不是partner admin，默认的情况下，group中的partner id 都是1
+    //也就是说，对于partner来说，partner的id从2开始
+    public static final int GROUPSYSTEMADMIN = 1;
+    public static final int GROUPADMIN = 2;
+    public static final int GROUPUSER = 3;
+    
+    
+    //用于状态转移
     public static final String ROLEPREFIX = "role";
     public static final String TRANSFORMACTION = "transformaction";
     public static final String TRANSFORMOPERATION = "transformoperation";
