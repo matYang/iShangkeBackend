@@ -96,6 +96,7 @@ public class ApplicationServer {
 
         ThriftServer server = new ThriftServer(setting.getPort(), ConfigurationService.Processor.class,
                 ConfigurationServiceImpl.class);
+        server.startServer();
     }
 
     /**
