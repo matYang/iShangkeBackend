@@ -16,3 +16,9 @@ struct ContactBo {
     13: i64 createTimeStart
     14: i64 createTimeEnd
 }
+struct ContactBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<ContactBo> data
+} 

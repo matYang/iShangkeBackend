@@ -21,3 +21,9 @@ struct WithdrawBo {
     14: i64 createTimeStart
     15: i64 createTimeEnd
 }
+struct WithdrawBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<WithdrawBo> data
+} 

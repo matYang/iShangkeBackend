@@ -13,3 +13,9 @@ struct CareerBo {
     10: i64 createTimeStart
     11: i64 createTimeEnd
 }
+struct CareerBoPageViewBo{
+    1: i32 start
+    2: i32 count
+    3: i32 total
+    4: list<CareerBo> data
+} 
