@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService.Iface {
                         "registerUser"));
                 throw new NoPermissionException();
             }
-            return userManager.registerUser(userBo);
+            return userManager.registerUser(userBo, sessionBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

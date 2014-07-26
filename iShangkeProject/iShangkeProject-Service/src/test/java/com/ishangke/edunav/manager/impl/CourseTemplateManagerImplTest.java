@@ -1,4 +1,4 @@
-package com.ishangke.edunav.service.impl;
+package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +91,7 @@ public class CourseTemplateManagerImplTest extends BaseTest {
         courseTemplate.setPartnerId(2);
         courseTemplate.setAddressId(1);
         courseTemplate.setStatus(2);
+        courseTemplate.setCourseName("");
         
         CourseTemplateEntityExt course = CourseTemplateConverter.fromBo(courseTemplate);
         int id = courseMapper.add(course);
