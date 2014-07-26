@@ -1,6 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,16 +10,31 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.dataaccess.common.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.mapper.AccountEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CouponHistoryEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CreditEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.UserGroupEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.UserLocationEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
+import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
+import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -36,15 +52,190 @@ public class UserManagerImpl implements UserManager {
     
     @Autowired
     private AuthManager authManager;
-
-
-    @Override
-    public UserBo registerUser(UserBo userBo) {
+    
+    @Autowired
+    private GroupEntityExtMapper groupMapper;
+    
+    @Autowired
+    private UserGroupEntityExtMapper userGroupMapper;
+    
+    @Autowired 
+    private AccountEntityExtMapper accountMapper;
+    
+    @Autowired
+    private CreditEntityExtMapper creditMapper;
+    
+    @Autowired
+    private CouponEntityExtMapper couponMapper;
+    
+    @Autowired
+    private CouponHistoryEntityExtMapper couponHistoryMapper;
+    @Autowired
+    
+    private PartnerEntityExtMapper partnerMapper;
+    
+    @Autowired
+    private UserLocationEntityExtMapper userLocationMapper;
+    
+    private String getReference() {
+        //TODO this is just a placeholder of reference factory, used to pass compilation
+        return null;
+    }
+    
+    
+    private UserBo initializeNormalUser(UserBo userBo, int groupId, String uniqueIdentifier) {
         // 参数验证
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
 
+        // 插入新的USER
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        try {
+            int result = userMapper.add(userEntity);
+            if (result <= 0) {
+                throw new ManagerException("InitializeNormalUser::addUser user with unique identifier: " + uniqueIdentifier + " failed");
+            }
+            
+            UserGroupEntityExt userGroupEntity = new UserGroupEntityExt();
+            userGroupEntity.setUserId(userEntity.getId());
+            userGroupEntity.setGroupId(groupId);
+            userGroupEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+            userGroupEntity.setDeleted(0);
+            result = userGroupMapper.add(userGroupEntity);
+            if (result <= 0) {
+                throw new ManagerException("InitializeNormalUser::addUserGroup user with unique identifier: " + uniqueIdentifier  + " failed");
+            }
+            
+            AccountEntityExt accountEntity = new AccountEntityExt();
+            accountEntity.setId(userEntity.getId());
+            accountEntity.setBalance(0.0);
+            accountEntity.setRealName(userEntity.getName());
+            accountEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+            accountEntity.setCreateTime(DateUtility.getCurTimeInstance());
+            accountEntity.setEnabled(0);
+            accountEntity.setDeleted(0);
+            accountEntity.setAccountNumber(getReference());
+            result = accountMapper.add(accountEntity);
+            if (result <= 0) {
+                throw new ManagerException("InitializeNormalUser::addAccount user with unique identifier: " + uniqueIdentifier  + " failed");
+            }
+            
+            CreditEntityExt creditEntity = new CreditEntityExt();
+            creditEntity.setId(userEntity.getId());
+            creditEntity.setCredit(0.0);
+            creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+            creditEntity.setCreateTime(DateUtility.getCurTimeInstance());
+            creditEntity.setEnabled(0);
+            creditEntity.setDeleted(0);
+            result = creditMapper.add(creditEntity);
+            if (result <= 0) {
+                throw new ManagerException("InitializeNormalUser::addCredit user with unique identifier: " + uniqueIdentifier  + " failed");
+            }
+            
+            UserLocationEntityExt userLocationEntity = new UserLocationEntityExt();
+            userLocationEntity.setUserId(userEntity.getId());
+            userLocationEntity.setLocationId(userBo.getLocationId());
+            userLocationEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+            userLocationEntity.setDeleted(0);
+            result = userLocationMapper.add(userLocationEntity);
+            if (result <= 0) {
+                throw new ManagerException("InitializeNormalUser::addUserLocation with unique identifier: " + uniqueIdentifier + " failed");
+            }
+            
+            
+            CouponEntityExt couponEntity = new CouponEntityExt();
+            couponEntity.setCode(getReference());
+            //TODO constants and enums
+            couponEntity.setBalance(50.0);
+            couponEntity.setBalance(50.0);
+            couponEntity.setOrigin(0);
+            Calendar expiry = DateUtility.getCurTimeInstance();
+            expiry.add(Calendar.YEAR, 1);
+            couponEntity.setExpiryTime(expiry);
+            couponEntity.setRemark("");
+            couponEntity.setUserId(userEntity.getId());
+            couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+            couponEntity.setCreateTime(DateUtility.getCurTimeInstance());
+            couponEntity.setEnabled(0);
+            couponEntity.setDeleted(0);
+            result = couponMapper.add(couponEntity);
+            if (result <= 0) {
+                throw new ManagerException("InitializeNormalUser::addCoupon with unique identifier: " + uniqueIdentifier + " failed");
+            }
+            
+            String appliedInvitationCode = userEntity.getAppliedInvitationCode();
+            if (appliedInvitationCode != null && appliedInvitationCode.length() > 0) {
+                //use used an invitation code
+                UserEntityExt inviterSearch = new UserEntityExt();
+                inviterSearch.setInvitationCode(appliedInvitationCode);
+                List<UserEntityExt> inviterSearchResult = userMapper.list(inviterSearch, null);
+                if (inviterSearchResult == null || inviterSearchResult.size() == 0) {
+                    throw new ManagerException("InitializeNormalUser::inviter not found with invitation code: " + appliedInvitationCode + " for unique identifier: " + uniqueIdentifier );
+                }
+                UserEntityExt inviterEntity = inviterSearchResult.get(0);
+                
+                
+                CouponEntityExt curUserCouponEntity = new CouponEntityExt();
+                curUserCouponEntity.setCode(getReference());
+                curUserCouponEntity.setBalance(20.0);
+                curUserCouponEntity.setBalance(20.0);
+                curUserCouponEntity.setOrigin(0);
+                curUserCouponEntity.setExpiryTime(expiry);
+                curUserCouponEntity.setRemark("");
+                curUserCouponEntity.setUserId(userEntity.getId());
+                curUserCouponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+                curUserCouponEntity.setCreateTime(DateUtility.getCurTimeInstance());
+                curUserCouponEntity.setEnabled(0);
+                curUserCouponEntity.setDeleted(0);
+                result = couponMapper.add(curUserCouponEntity);
+                if (result <= 0) {
+                    throw new ManagerException("InitializeNormalUser::addCoupon to invitee with unique identifier: " + uniqueIdentifier  + " failed");
+                }
+                
+                CouponEntityExt inviterCouponEntity = new CouponEntityExt();
+                inviterCouponEntity.setCode(getReference());
+                inviterCouponEntity.setBalance(20.0);
+                inviterCouponEntity.setBalance(20.0);
+                inviterCouponEntity.setOrigin(0);
+                inviterCouponEntity.setExpiryTime(expiry);
+                inviterCouponEntity.setRemark("");
+                inviterCouponEntity.setUserId(inviterEntity.getId());
+                inviterCouponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+                inviterCouponEntity.setCreateTime(DateUtility.getCurTimeInstance());
+                inviterCouponEntity.setEnabled(0);
+                inviterCouponEntity.setDeleted(0);
+                result = couponMapper.add(inviterCouponEntity);
+                if (result <= 0) {
+                    throw new ManagerException("InitializeNormalUser::addCoupon to inviter with unique identifier: " + uniqueIdentifier  + " failed");
+                }
+            }
+            
+            //lastly, read out the user...too many changes unable to maintain local copy
+            userEntity = userMapper.getById(userEntity.getId());
+            if (userEntity == null) {
+                throw new UserNotFoundException("InitializeNormalUser::lastFetch with unique identifier: " + uniqueIdentifier  + " failed");
+            }
+        } catch (Throwable t) {
+            throw new ManagerException("InitializeNormalUser user with unique identifier: " + uniqueIdentifier  + " failed", t);
+        }
+        
+        return UserConverter.toBo(userEntity);
+    }
+
+
+    @Override
+    public UserBo registerUser(UserBo userBo, SessionBo sessionBo) {
+        // 参数验证
+        if (userBo == null || sessionBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
+        boolean isValid = authManager.validateCellVerificationSession(sessionBo.getAccountIdentifier(), sessionBo.getAuthCode());
+        if (isValid) {
+            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed because authCode: " + sessionBo.getAuthCode() + "does not match");
+        }
+        
         // 判断是否存在手机号码一样的USER
         UserEntityExt entityInDb = new UserEntityExt();
         entityInDb.setPhone(userBo.getPhone());
@@ -53,23 +244,78 @@ public class UserManagerImpl implements UserManager {
         if (entityList != null && entityList.size() != 0) {
             throw new ManagerException(userBo.getPhone() + " is already in db");
         }
-
-        // 插入新的USER
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        try {
-            int result = userMapper.add(userEntity);
-         
-            if (result <= 0) {
-                throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed");
-            }
-            
-        } catch (Throwable t) {
-            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed", t);
-        }
         
-        return UserConverter.toBo(userEntity);
+        return initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone());
     }
 
+    @Override
+    public UserBo createUser(UserBo targetUser, UserBo currentUser) {
+        // Check Null
+        if (targetUser == null || currentUser == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
+        if (authManager.isAdmin(currentUser.getId()) || authManager.isSystemAdmin(currentUser.getId())) {
+            LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createUser at " + new Date(), currentUser.getName()));
+        }
+        else {
+            throw new AuthenticationException("Non-admin user trying createUser");
+        }
+        
+        // 判断是否存在手机号码一样的USER
+        UserEntityExt entityInDb = new UserEntityExt();
+        entityInDb.setPhone(targetUser.getPhone());
+
+        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
+        if (entityList != null && entityList.size() != 0) {
+            throw new ManagerException(targetUser.getPhone() + " is already in db");
+        }
+        
+        //act like a normal registration
+        return initializeNormalUser(targetUser, Constant.GROUPUSER, targetUser.getPhone());
+    }
+    
+    @Override
+    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser) {
+        if (targetUser == null || partner == null  || currentUser == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
+        // Check Null
+        if (authManager.isAdmin(currentUser.getId()) || authManager.isSystemAdmin(currentUser.getId())) {
+            LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createUser at " + new Date(), currentUser.getName()));
+        }
+        else {
+            throw new AuthenticationException("Non-admin user trying createPartnerUser");
+        }
+        if (partner.getId() <= 0) {
+            throw new AuthenticationException("Partner Id not specified at createPartneruser");
+        }
+        
+        UserBo response = null;
+        try {
+            GroupEntityExt group = new GroupEntityExt();
+            group.setName(partner.getWholeName() + Constant.GROUPPADMINSUFIX);
+            group.setRoleId(Constant.ROLEPARTNERADMINID);
+            group.setPartnerId(partner.getId());
+            group.setLastModifyTime(DateUtility.getCurTimeInstance());
+            group.setCreateTime(DateUtility.getCurTimeInstance());
+            group.setEnabled(0);
+            group.setDeleted(0);
+            int result = groupMapper.add(group);
+            if (result <= 0) {
+                throw new ManagerException("CreatePartnerUser::addGroup failed");
+            }
+            
+            response = initializeNormalUser(targetUser, group.getId(), targetUser.getReference());
+        } catch (Throwable t) {
+            throw new ManagerException("CreatePartnerUser failed", t);
+        }
+        
+        //act like a normal registration
+        return response; 
+    }
+    
     @Override
     public SessionBo openCellSession(UserBo userBo) {
         if (userBo == null || userBo.getPhone() == null || userBo.getPhone().length() == 0) {
@@ -290,89 +536,8 @@ public class UserManagerImpl implements UserManager {
         return UserConverter.toBo(curUser);
     }
 
-    @Override
-    public UserBo createUser(UserBo targetUser, UserBo currentUser) {
-        // Check Null
-        if (targetUser == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
-        }
-
-        // 判断是否存在手机号码一样的USER
-        UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setPhone(targetUser.getPhone());
-
-        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-        if (entityList != null && entityList.size() != 0) {
-            throw new ManagerException(targetUser.getPhone() + " is already in db");
-        }
-
-        // 插入新的USER
-        UserEntityExt targetUserEntity = UserConverter.fromBo(targetUser);
-        UserEntityExt currentUserEntity  = UserConverter.fromBo(currentUser);
-        
-        //only admins are allowed here
-        if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
-            LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createUser at " + new Date(), currentUserEntity.getName()));
-        }
-        else {
-            throw new AuthenticationException("Non-admin user creating user");
-        }
-        
-        int result = 0;
-        try {
-            result = userMapper.add(targetUserEntity);
-        } catch (Throwable t) {
-            throw new ManagerException("Create user with phone number: " + targetUserEntity.getPhone() + " failed for user: " + currentUserEntity.getId(), t);
-        }
-
-        if (result > 0) {
-            return UserConverter.toBo(targetUserEntity);
-        } else {
-            throw new ManagerException("Register user with phone number: " + targetUserEntity.getPhone() + " failed for user: " + currentUserEntity.getId());
-        }
-    }
     
-    @Override
-    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser) {
-        // Check Null
-        if (targetUser == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
-        }
-
-        // 判断是否存在手机号码一样的USER
-        UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setPhone(targetUser.getPhone());
-
-        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-        if (entityList != null && entityList.size() != 0) {
-            throw new ManagerException(targetUser.getPhone() + " is already in db");
-        }
-
-        // 插入新的USER
-        UserEntityExt targetUserEntity = UserConverter.fromBo(targetUser);
-        UserEntityExt currentUserEntity  = UserConverter.fromBo(currentUser);
-        
-        //only admins are allowed here
-        if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
-            LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createPartnerUser at " + new Date(), currentUserEntity.getName()));
-        }
-        else {
-            throw new AuthenticationException("Non-admin user creating partner user");
-        }
-        
-        int result = 0;
-        try {
-            result = userMapper.add(targetUserEntity);
-        } catch (Throwable t) {
-            throw new ManagerException("Create partner user failed for user: " + currentUserEntity.getId(), t);
-        }
-
-        if (result > 0) {
-            return UserConverter.toBo(targetUserEntity);
-        } else {
-            throw new ManagerException("Register partner user failed for user: " + currentUserEntity.getId());
-        }
-    }
+    
 
     @Override
     public UserBo deleteUser(UserBo targetUser, UserBo currentUser) {

@@ -17,6 +17,7 @@ public class Constant {
     public static final int GROUPADMIN = 2;
     public static final int GROUPUSER = 3;
     
+    public static final String GROUPPADMINSUFIX = "pAdmin";
     
     //用于状态转移
     public static final String ROLEPREFIX = "role";
@@ -26,6 +27,11 @@ public class Constant {
     public static final String ROLEPARTNERADMIN = "partneradmin";
     public static final String ROLEADMIN = "admin";
     public static final String ROLEUSER = "user";
+    public static final int ROLESYSTEMADMINID = 1;
+    public static final int ROLEADMINID = 2;
+    public static final int ROLEPARTNERADMINID = 3;
+    public static final int ROLEUSERID = 4;
+    
 
     // very important !! transform null by thrift
     public static final int DEFAULTNULL = -1;

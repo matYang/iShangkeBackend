@@ -41,7 +41,7 @@ public interface UserManager {
      * 
      * @param userBo
      */
-    UserBo registerUser(UserBo userBo);
+    UserBo registerUser(UserBo userBo, SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供手机验证。<br>
