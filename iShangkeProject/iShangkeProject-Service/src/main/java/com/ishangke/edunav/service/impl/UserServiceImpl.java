@@ -14,6 +14,7 @@ import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.MessageBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
+import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -28,8 +29,7 @@ import com.ishangke.edunav.manager.exception.authentication.NoPermissionExceptio
 
 @Component
 public class UserServiceImpl implements UserService.Iface {
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(UserServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserManager userManager;
@@ -45,40 +45,24 @@ public class UserServiceImpl implements UserService.Iface {
      * 关于用户账号的 User
      * 
      **********************************************************/
-    @Override
-    public UserBo authenticate(String sessionString, String permissionTag)
-            throws BusinessExceptionBo, TException {
-        try {
-            return userManager.authenticate(sessionString);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.USER_REGISTER_ERROR_KEY);
-            throw exception;
-        }
-    }
 
     @Override
-    public UserBo registerUser(UserBo userBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public UserBo registerUser(UserBo userBo, SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "registerUser"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "registerUser"));
                 throw new NoPermissionException();
             }
             return userManager.registerUser(userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_USER_REISTERUSER);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_REISTERUSER_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_REISTERUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_REISTERUSER_KEY);
             throw exception;
-        }catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
@@ -88,55 +72,73 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo loginByPhone(LoginBo loginBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public UserBo loginByPhone(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByPhone(loginBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_LOGINBYPHONE_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_LOGINBYPHONE_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.USER_LOGINBYPHONE_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo loginByReference(LoginBo loginBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public UserBo loginByReference(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByReference(loginBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, PartnerBo partnerBo,
-            UserBo currentUser, String permissionTag)
+    public UserBo createUser(UserBo targetUser, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        currentUser.getId(), permissionTag, "createUser"));
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "createUser"));
                 throw new NoPermissionException();
             }
 
-            return userManager.createUser(targetUser, partnerBo, currentUser);
+            return userManager.createUser(targetUser, currentUser);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CREATE);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATE_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATE_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.USER_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
+    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "createUser"));
+                throw new NoPermissionException();
+            }
+
+            return userManager.createPartnerUser(targetUser, partner, currentUser);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CREATE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATE_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -148,22 +150,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo deleteUser(UserBo targetUser, UserBo currentUser,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public UserBo deleteUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        currentUser.getId(), permissionTag, "deleteUser"));
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "deleteUser"));
                 throw new NoPermissionException();
             }
             return userManager.deleteUser(targetUser, currentUser);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_DELETEUSER);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_DELETEUSER_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_DELETEUSER_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -175,24 +175,22 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo updateUser(UserBo targetUser, UserBo currentUser,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public UserBo updateUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        currentUser.getId(), permissionTag, "updateUser"));
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "updateUser"));
                 throw new NoPermissionException();
             }
             return userManager.updateUser(targetUser, currentUser);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_UPDATEUSER);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_UPDATEUSER_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_UPDATEUSER_KEY);
             throw exception;
-        }  catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_UPDATE_ERROR);
@@ -202,24 +200,22 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        currentUser.getId(), permissionTag, "queryUserInfo"));
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "queryUserInfo"));
                 throw new NoPermissionException();
             }
             return userManager.queryUserInfo(queryUser, currentUser);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_QUERYUSERINFO);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYUSERINFO_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYUSERINFO_KEY);
             throw exception;
-        }  catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_QUERYINFO_ERROR);
@@ -229,26 +225,22 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo,
-            UserBo currentUser, PaginationBo pagnationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        currentUser.getId(), permissionTag, "queryUser"));
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "queryUser"));
                 throw new NoPermissionException();
             }
-            return userManager.queryUser(queryUser, partnerBo, currentUser,
-                    pagnationBo);
-        }catch (NoPermissionException e) {
+            return userManager.queryUser(queryUser, currentUser, pagnationBo);
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_QUERYUSER);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYUSER_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYUSER_KEY);
             throw exception;
-        }  catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_NOTFOUND_ERROR);
@@ -258,180 +250,141 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> querySession(UserBo userBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public UserBo authenticate(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "querySession"));
-                throw new NoPermissionException();
-            }
-            return userManager.querySession(userBo);
-        }catch (NoPermissionException e) {
+            return userManager.authenticate(sessionBo);
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_QUERYSESSION);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYSESSION_KEY);
-            throw exception;
-        }  catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.USER_QUERYSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_QUERYSESSION_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_REGISTER_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo disposeSession(UserBo userBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public void disposeSession(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "disposeSession"));
-                throw new NoPermissionException();
-            }
-            return userManager.disposeSession(userBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_DISPOSESESSION);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_DISPOSESESSION_KEY);
-            throw exception;
+            userManager.disposeSession(sessionBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_DISPOSESESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_DISPOSESESSION_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.USER_DISPOSESESSION_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo openCellSession(SessionBo sessionBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public SessionBo openCellSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            return userManager.openCellSession(sessionBo);
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "openCellSession"));
+                throw new NoPermissionException();
+            }
+            return userManager.openCellSession(userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_OPENCELLSESSION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_OPENCELLSESSION_KEY);
+            throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.USER_OPENCELLSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_OPENCELLSESSION_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.USER_OPENCELLSESSION_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo verifyCellSession(SessionBo sessionBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public SessionBo openForgetPasswordSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            return userManager.verifyCellSession(sessionBo);
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "openForgetPasswordSession"));
+                throw new NoPermissionException();
+            }
+            return userManager.openForgetPasswordSession(userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_OPENFORGETPASSWORDSESSION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_OPENFORGETPASSWORDSESSION_KEY);
+            throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.USER_VERIFYCELLSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_VERIFYCELLSESSION_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_OPENFORGETPASSWORDSESSION_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_OPENFORGETPASSWORDSESSION_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo openForgetPasswordSession(SessionBo sessionBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public UserBo recoverPassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            return userManager.openForgetPasswordSession(sessionBo);
+            return userManager.recoverPassword(passwordBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.USER_OPENFORGETPASSWORDSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_OPENFORGETPASSWORDSESSION_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_RECORVERPASSWORD_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_RECORVERPASSWORD_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public UserBo verifyForgetPasswordSession(SessionBo sessionBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public UserBo changePassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            return userManager.verifyForgetPasswordSession(sessionBo);
+            if (!permissionManager.hasPermissionByUser(passwordBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", passwordBo.getId(), permissionTag,
+                        "changePassword"));
+                throw new NoPermissionException();
+            }
+            return userManager.changePassword(passwordBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CHANGEPASSWORD);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CHANGEPASSWORD_KEY);
+            throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.USER_VERIFYFORGETPASSWORDSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_VERIFYFORGETPASSWORDSESSION_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_CHANGEPASSWORD_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_CHANGEPASSWORD_ERROR_KEY);
             throw exception;
         }
     }
 
-    @Override
-    public UserBo openChangePasswordSession(SessionBo sessionBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return userManager.openChangePasswordSession(sessionBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.USER_OPENCHANGEPASSWORDSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_OPENCHANGEPASSWORDSESSION_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public UserBo verifyChangePasswordSession(SessionBo sessionBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            return userManager.verifyChangePasswordSession(sessionBo);
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.USER_VERIFYCHANGEPASSWORDSESSION_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.USER_VERIFYCHANGEPASSWORDSESSION_ERROR_KEY);
-            throw exception;
-        }
-    }
-
+    
+    
     /**********************************************************
      * 
      * 关于用户之间传信的 Message
      * 
      **********************************************************/
     @Override
-    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public MessageBo sendMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "sendMessage"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "sendMessage"));
                 throw new NoPermissionException();
             }
             return messageManager.sendMessage(messageBo, userBo);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_SENDMESSAGE);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_SENDMESSAGE_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_SENDMESSAGE_KEY);
             throw exception;
-        }  catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.MESSAGE_SEND_ERROR);
@@ -441,13 +394,12 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "sendMessage"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "sendMessage"));
                 throw new NoPermissionException();
             }
             return messageManager.receiveMessage(messageBo, userBo);
@@ -455,10 +407,9 @@ public class UserServiceImpl implements UserService.Iface {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_RECEIVEMESSAGE);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_RECEIVEMESSAGE_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_RECEIVEMESSAGE_KEY);
             throw exception;
-        }catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.MESSAGE_RECEIVE_ERROR);
@@ -468,13 +419,12 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "sendMessage"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "sendMessage"));
                 throw new NoPermissionException();
             }
             return messageManager.deleteMessage(messageBo, userBo);
@@ -482,10 +432,9 @@ public class UserServiceImpl implements UserService.Iface {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_DELETEMESSAGE);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_DELETEMESSAGE_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_DELETEMESSAGE_KEY);
             throw exception;
-        }catch (ManagerException e) {
+        } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.MESSAGE_DELETE_ERROR);
@@ -495,30 +444,26 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<MessageBo> queryMessage(MessageBo messageBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<MessageBo> queryMessage(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "sendMessage"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "sendMessage"));
                 throw new NoPermissionException();
             }
             return messageManager.query(messageBo, userBo, paginationBo);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_QUERYMESSAGE);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYMESSAGE_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYMESSAGE_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }
@@ -529,14 +474,12 @@ public class UserServiceImpl implements UserService.Iface {
      * 
      **********************************************************/
     @Override
-    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo,
-            CourseBo courseBo, String permissionTag)
+    public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "generateCode"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "generateCode"));
                 throw new NoPermissionException();
             }
             return spreadManager.generateCode(userBo, partnerBo, courseBo);
@@ -544,28 +487,24 @@ public class UserServiceImpl implements UserService.Iface {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_GENERATECODE);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_GENERATECODE_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_GENERATECODE_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.SPREAD_GENERATECODE_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.SPREAD_GENERATECODE_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_GENERATECODE_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public List<SpreadBo> querySpread(SpreadBo spreadBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
+    public List<SpreadBo> querySpread(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "querySpread"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "querySpread"));
                 throw new NoPermissionException();
             }
             return spreadManager.query(spreadBo, userBo, paginationBo);
@@ -573,8 +512,7 @@ public class UserServiceImpl implements UserService.Iface {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_QUERYSPREAD);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYSPREAD_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYSPREAD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -586,24 +524,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo,
-            CourseBo courseBo, UserBo userBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "createSpread"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "createSpread"));
                 throw new NoPermissionException();
             }
-            return spreadManager.createSpread(spreadBo, partnerBo, courseBo,
-                    userBo);
-        }catch (NoPermissionException e) {
+            return spreadManager.createSpread(spreadBo, partnerBo, courseBo, userBo);
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CREATESPREAD);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATESPREAD_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CREATESPREAD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -615,22 +549,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "approveSpread"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "approveSpread"));
                 throw new NoPermissionException();
             }
             return spreadManager.approveSpread(spreadBo, userBo);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_APPROVESPREAD);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_APPROVESPREAD_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_APPROVESPREAD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -642,22 +574,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "rejectSpread"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "rejectSpread"));
                 throw new NoPermissionException();
             }
             return spreadManager.rejectSpread(spreadBo, userBo);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_REJECTSPREAD);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_REJECTSPREAD_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_REJECTSPREAD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -669,22 +599,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "cancelSpread"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "cancelSpread"));
                 throw new NoPermissionException();
             }
             return spreadManager.cancelSpread(spreadBo, userBo);
-        }catch (NoPermissionException e) {
+        } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_CANCELSPREAD);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_CANCELSPREAD_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_CANCELSPREAD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -696,13 +624,12 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "deleteSpread"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "deleteSpread"));
                 throw new NoPermissionException();
             }
             return spreadManager.deleteSpread(spreadBo, userBo);
@@ -710,8 +637,7 @@ public class UserServiceImpl implements UserService.Iface {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_DELETESPREAD);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_USER_DELETESPREAD_KEY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_DELETESPREAD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);

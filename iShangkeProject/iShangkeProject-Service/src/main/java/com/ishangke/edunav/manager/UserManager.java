@@ -5,21 +5,31 @@ import java.util.List;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
+import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface UserManager {
+    
+
+    /**
+     * 本方法为销毁用户session信息的功能<br>
+     * 
+     * @param sessionBo
+     *            需要被销毁session的用户信息
+     * @return
+     */
+    void disposeSession(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供自动识别的功能。<br>
      * API端读取用户前端存储的session string，调用该方法自动获得当前用户信息
      * 
-     * @param sessionString
+     * @param sessionBo
      * @return 用户实体 UserBo
      * 
-     * @param sessionString
      */
-    UserBo authenticate(String sessionString);
+    UserBo authenticate(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供注册的功能。<br>
@@ -43,19 +53,8 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    UserBo openCellSession(SessionBo sessionBo);
+    SessionBo openCellSession(UserBo userBo);
 
-    /**
-     * 本方法验证用户手机验证码。<br>
-     * 用户可以通过此方法验证手机,如果通过则关闭session
-     * 
-     * @param sessionBo
-     *            用户信息
-     * @return 用户实体 UserBo
-     * 
-     * @param sessionBo
-     */
-    UserBo verifyCellSession(SessionBo sessionBo);
 
     /**
      * 本方法为普通用户提供忘记密码时手机验证。<br>
@@ -67,43 +66,15 @@ public interface UserManager {
      * 
      * @param sessionBo
      */
-    UserBo openForgetPasswordSession(SessionBo sessionBo);
+    SessionBo openForgetPasswordSession(UserBo userBo);
+    
+    
+    UserBo recoverPassword(PasswordBo passwordBo);
+    
+    
+    UserBo changePassword(PasswordBo passwordBo);
 
-    /**
-     * 本方法验证用户手机验证忘记密码的验证码。<br>
-     * 用户可以通过此方法验证忘记密码,如果通过则关闭session
-     * 
-     * @param sessionBo
-     *            用户信息
-     * @return 用户实体 UserBo
-     * 
-     * @param sessionBo
-     */
-    UserBo verifyForgetPasswordSession(SessionBo sessionBo);
 
-    /**
-     * 本方法为普通用户提供修改密码时手机验证。<br>
-     * 用户可以通过此方法向用户发送验证短信。
-     * 
-     * @param sessionBo
-     *            用户信息
-     * @return 用户实体 UserBo
-     * 
-     * @param sessionBo
-     */
-    UserBo openChangePasswordSession(SessionBo sessionBo);
-
-    /**
-     * 本方法验证用户手机验证修改密码的验证码。<br>
-     * 用户可以通过此方法验证修改密码,如果通过则关闭session
-     * 
-     * @param sessionBo
-     *            用户信息
-     * @return 用户实体 UserBo
-     * 
-     * @param sessionBo
-     */
-    UserBo verifyChangePasswordSession(SessionBo sessionBo);
 
     /**
      * 本方法为所有用户提供用户使用手机号码登录的功能。<br>
@@ -139,8 +110,6 @@ public interface UserManager {
      * 
      * @param targetUser
      *            需要被创建的用户信息
-     * @param partnerBo
-     *            合作商信息
      * @param currentUser
      *            调用方法的用户的信息
      * 
@@ -148,10 +117,11 @@ public interface UserManager {
      * 
      * 
      * @param targetUser
-     * @param partnerBo
      * @param currentUser
      */
-    UserBo createUser(UserBo targetUser, PartnerBo partnerBo, UserBo currentUser);
+    UserBo createUser(UserBo targetUser,  UserBo currentUser);
+    
+    UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser);
 
     /**
      * 本方法为ishangke管理员删除用户<br>
@@ -202,7 +172,7 @@ public interface UserManager {
      * @param queryUser
      * @param currentUser
      */
-    List<UserBo> queryUserInfo(UserBo queryUser, UserBo currentUser);
+    UserBo queryUserInfo(UserBo queryUser, UserBo currentUser);
 
     /**
      * 本方法为查询用户信息的功能<br>
@@ -210,8 +180,6 @@ public interface UserManager {
      * 
      * @param queryUser
      *            需要检索和过滤的用户信息
-     * @param partnerBo
-     *            合作商的用户的信息
      * @param currentUser
      *            调用方法的用户的信息
      * @param paginationBo
@@ -221,36 +189,10 @@ public interface UserManager {
      * 
      * 
      * @param queryUser
-     * @param partnerBo
      * @param currentUser
      * @param pagnationBo
      */
-    List<UserBo> queryUser(UserBo queryUser, PartnerBo partnerBo, UserBo currentUser, PaginationBo pagnationBo);
+    List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo);
 
-    /**
-     * 本方法为查询用户session信息的功能<br>
-     * 
-     * @param userBo
-     *            需要被查询session的用户信息
-     * 
-     * @return 用户session相关信息s
-     * 
-     * 
-     * @param userBo
-     */
-    List<UserBo> querySession(UserBo userBo);
-
-    /**
-     * 本方法为销毁用户session信息的功能<br>
-     * 
-     * @param userBo
-     *            需要被销毁session的用户信息
-     * 
-     * @return
-     * 
-     * 
-     * @param userBo
-     */
-    UserBo disposeSession(UserBo userBo);
 
 }

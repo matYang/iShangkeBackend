@@ -5,7 +5,6 @@ public class ThriftServerSetting {
     private String host;
     private int port;
     private Class<?> clientClass;
-    private String processorClass;
 
     public String getName() {
         return name;
@@ -37,14 +36,6 @@ public class ThriftServerSetting {
 
     public void setClientClass(Class<?> clientClass) {
         this.clientClass = clientClass;
-    }
-
-    public String getProcessorClass() {
-        return processorClass;
-    }
-
-    public void setProcessorClass(String processorClass) {
-        this.processorClass = processorClass;
     }
 
 }

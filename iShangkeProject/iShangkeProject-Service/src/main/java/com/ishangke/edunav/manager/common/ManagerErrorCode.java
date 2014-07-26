@@ -29,14 +29,14 @@ public class ManagerErrorCode {
     public static final String USER_OPENCELLSESSION_ERROR_KEY = "user_opencellsession_error";
     public static final int USER_VERIFYCELLSESSION_ERROR = 0X0001000B;
     public static final String USER_VERIFYCELLSESSION_ERROR_KEY = "user_verifycellsession_error";
-    public static final int USER_OPENCHANGEPASSWORDSESSION_ERROR = 0X0001000C;
-    public static final String USER_OPENCHANGEPASSWORDSESSION_ERROR_KEY = "user_openchangepasswordsession_error";
+    public static final int USER_CHANGEPASSWORD_ERROR = 0X0001000C;
+    public static final String USER_CHANGEPASSWORD_ERROR_KEY = "user_changePassword_error";
     public static final int USER_VERIFYCHANGEPASSWORDSESSION_ERROR = 0X0001000D;
     public static final String USER_VERIFYCHANGEPASSWORDSESSION_ERROR_KEY = "user_verifychangepasswordsession_error";
     public static final int USER_OPENFORGETPASSWORDSESSION_ERROR = 0X0001000E;
     public static final String USER_OPENFORGETPASSWORDSESSION_ERROR_KEY = "user_openforgetpasswordsession_error";
-    public static final int USER_VERIFYFORGETPASSWORDSESSION_ERROR = 0X0001000F;
-    public static final String USER_VERIFYFORGETPASSWORDSESSION_ERROR_KEY = "user_verifyforgetpasswordsession_error";
+    public static final int USER_RECORVERPASSWORD_ERROR = 0X0001000F;
+    public static final String USER_RECORVERPASSWORD_ERROR_KEY = "user_recorverpassword_error";
     public static final int USER_NOTFOUND_ERROR = 0x00010404;
     public static final String USER_NOTFOUND_ERROR_KEY = "user_notfound_error";
 
@@ -485,6 +485,13 @@ public class ManagerErrorCode {
     public static final String PERMISSION_USER_CANCELSPREAD_KEY = "permission_user_cancelSpread";
     public static final int PERMISSION_USER_DELETESPREAD = 0x0100005B;
     public static final String PERMISSION_USER_DELETESPREAD_KEY = "permission_user_deleteSpread";
+    public static final int PERMISSION_USER_OPENCELLSESSION = 0x0100005C;
+    public static final String PERMISSION_USER_OPENCELLSESSION_KEY = "permission_user_openCellSession";
+    public static final int PERMISSION_USER_OPENFORGETPASSWORDSESSION = 0x0100005E;
+    public static final String PERMISSION_USER_OPENFORGETPASSWORDSESSION_KEY = "permission_user_forgetPasswordSession";
+    public static final int PERMISSION_USER_CHANGEPASSWORD = 0x0100005F;
+    public static final String PERMISSION_USER_CHANGEPASSWORD_KEY = "permission_user_changePassword";
+    
     
 
 }
