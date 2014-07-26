@@ -22,5 +22,10 @@
 			<artifactId>iShangkeProject-CommonContract</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ishangke</groupId>
+			<artifactId>iShangkeProject-WebCommon</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

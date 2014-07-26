@@ -4,13 +4,13 @@ import org.apache.thrift.TException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.common.PermissionCache;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService.Client;
 import com.ishangke.edunav.thrift.ThriftServerFactory;
 import com.ishangke.edunav.thrift.ThriftServerSetting;
+import com.ishangke.edunav.web.common.PermissionCache;
 
 @Component
 @Scope(value = "singleton")

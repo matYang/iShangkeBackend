@@ -35,8 +35,6 @@ import com.ishangke.edunav.manager.TransformManager;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.BookingHistoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
-import com.ishangke.edunav.manager.converter.PartnerConverter;
-import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.transform.Operation;
 
@@ -99,7 +97,7 @@ public class BookingManagerImpl implements BookingManager {
             // 在线支付订单
             bookingBo.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
             bookingOpt = Constant.BOOKINGOPERATIONONLINESUBMITBOOKING;
-            
+
         } else if (bookingBo.getType() == Constant.BOOKINGTYPEONLINE) {
             // 线下支付订单
             bookingBo.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
@@ -109,6 +107,9 @@ public class BookingManagerImpl implements BookingManager {
         } else {
             throw new ManagerException("unknown booking type");
         }
+        // 设置bookingBo中的course template id
+        // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
+        bookingBo.setCourseTemplateId(course.getCourseTemplateId());
         // 插入booking
         int result = 0;
         try {
@@ -205,9 +206,11 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         List<Operation> operationList = transformManager.getOperationByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, bookingEntityExt.getStatus());
         Operation op = null;
-        for (Operation o : operationList) {
-            if (o.getOperateCode() == operation) {
-                op = o;
+        if (operationList != null) {
+            for (Operation o : operationList) {
+                if (o.getOperateCode() == operation) {
+                    op = o;
+                }
             }
         }
         if (Constant.ROLEUSER.equals(roleName)) {
@@ -224,7 +227,7 @@ public class BookingManagerImpl implements BookingManager {
             int preStatus = bookingEntityExt.getStatus();
             bookingEntityExt.setStatus(op.getNextStatus());
             bookingMapper.update(bookingEntityExt);
-            
+
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
             bookingHistory.setBookingId(bookingBo.getId());
             bookingHistory.setOptName(operation);
@@ -234,11 +237,11 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistoryMapper.add(bookingHistory);
-            
+
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
             BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingBo.getId()));
             booking.setActionList(actions);
-            
+
             return booking;
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             // 如果是合作商管理员
@@ -275,12 +278,12 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistoryMapper.add(bookingHistory);
-            
+
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
             BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingBo.getId()));
             booking.setActionList(actions);
             return booking;
-            
+
         } else if (Constant.ROLEADMIN.equals(roleName)) {
             // 如果是管理员
             // 按照业务流程修改booking
@@ -300,11 +303,11 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistoryMapper.add(bookingHistory);
-            
+
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
             BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingBo.getId()));
             booking.setActionList(actions);
-            
+
             return booking;
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 超级管理员可以进行任何操作
@@ -312,10 +315,12 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             List<Operation> allOperation = transformManager.listAll(Constant.STATUSTRANSFORMBOOKING);
-            for (Operation o : allOperation) {
-                if (o.getOperateCode() == operation) {
-                    op = o;
-                    break;
+            if (allOperation != null) {
+                for (Operation o : allOperation) {
+                    if (o.getOperateCode() == operation) {
+                        op = o;
+                        break;
+                    }
                 }
             }
             bookingEntityExt.setStatus(op.getNextStatus());
@@ -339,8 +344,9 @@ public class BookingManagerImpl implements BookingManager {
     @Override
     public List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         List<BookingEntityExt> bookings = null;
+        bookingBo.setUserId(userBo.getId());
         try {
-            bookings = bookingMapper.listByUserId(BookingConverter.fromBo(bookingBo), UserConverter.fromBo(userBo), PaginationConverter.fromBo(paginationBo));
+            bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
         } catch (Exception e) {
             throw new ManagerException("query booking failed for user " + userBo.getId());
         }
@@ -380,7 +386,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         List<BookingEntityExt> bookings = null;
         try {
-            bookings = bookingMapper.listByPartnerId(BookingConverter.fromBo(bookingBo), PartnerConverter.fromBo(partnerBo), PaginationConverter.fromBo(paginationBo));
+            bookings = bookingMapper.listByPartnerId(BookingConverter.fromBo(bookingBo), partnerBo.getId(), PaginationConverter.fromBo(paginationBo));
         } catch (Exception e) {
             throw new ManagerException("query booking by partnerid failed for user " + userBo.getId());
         }
@@ -409,8 +415,9 @@ public class BookingManagerImpl implements BookingManager {
             if (!bookingEntityExt.getUserId().equals(userBo.getId())) {
                 throw new ManagerException("cannot query other's booking history");
             }
+            bookingHistoryBo.setBookingId(bookingBo.getId());
             try {
-                bookingHistorys = bookingHistoryMapper.listByBookingId(BookingHistoryConverter.fromBo(bookingHistoryBo), BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
+                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
                 throw new ManagerException("query booking history failed");
             }
@@ -435,8 +442,9 @@ public class BookingManagerImpl implements BookingManager {
             if (isSameGroup == false) {
                 throw new ManagerException("cannot query other partner's booking history");
             }
+            bookingHistoryBo.setBookingId(bookingBo.getId());
             try {
-                bookingHistorys = bookingHistoryMapper.listByBookingId(BookingHistoryConverter.fromBo(bookingHistoryBo), BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
+                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
                 throw new ManagerException("query booking history failed");
             }
@@ -449,8 +457,9 @@ public class BookingManagerImpl implements BookingManager {
             }
             return convertedList;
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
+            bookingHistoryBo.setBookingId(bookingBo.getId());
             try {
-                bookingHistorys = bookingHistoryMapper.listByBookingId(BookingHistoryConverter.fromBo(bookingHistoryBo), BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
+                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
                 throw new ManagerException("query booking history failed");
             }
@@ -465,7 +474,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
         Double a = 0.1234560023;
         double b = 0.123456002300000000000;

@@ -146,4 +146,14 @@ public class CourseTemplateClassPhotoEntityExtTest extends BaseTest {
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
+    
+    @Test
+    public void testDeleteByCourseTemplateIdClassPhotoId() {
+        int a = courseTemplateClassPhotoEntityExtMapper.getCount();
+        courseTemplateClassPhotoEntityExtMapper.deleteByCourseTemplateIdClassPhotoId(1, 4);
+        Assert.assertSame(a, courseTemplateClassPhotoEntityExtMapper.getCount());
+        courseTemplateClassPhotoEntityExtMapper.deleteByCourseTemplateIdClassPhotoId(2, 5);
+        Assert.assertSame(a - 1, courseTemplateClassPhotoEntityExtMapper.getCount());
+    }
+    
 }

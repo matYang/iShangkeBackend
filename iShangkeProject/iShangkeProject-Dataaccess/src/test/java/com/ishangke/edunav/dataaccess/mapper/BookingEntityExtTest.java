@@ -151,4 +151,12 @@ public class BookingEntityExtTest {
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime())); 
     }
+    
+    @Test
+    public void testListByPartnerId() {
+        BookingEntityExt bookingEntityExt = new BookingEntityExt();
+        List<BookingEntityExt> result = bookingEntityExtMapper.listByPartnerId(bookingEntityExt, 2, null);
+        System.out.println("xxxx" + result.size());
+        System.out.println("oooo" + bookingEntityExtMapper.getCountByPartnerId(bookingEntityExt, 2));
+    }
 }

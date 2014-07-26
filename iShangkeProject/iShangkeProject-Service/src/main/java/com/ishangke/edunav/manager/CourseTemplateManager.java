@@ -58,7 +58,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param paginationBo
      */
-    List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PartnerBo partnerBo, PaginationBo paginationBo);
+    List<CourseTemplateBo> queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法返回课程模版详情<br>
@@ -75,6 +75,6 @@ public interface CourseTemplateManager {
      * @param courseTemplateBo
      * @param userBo
      */
-    List<CourseTemplateBo> queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo);
+    CourseTemplateBo queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo);
 
 }

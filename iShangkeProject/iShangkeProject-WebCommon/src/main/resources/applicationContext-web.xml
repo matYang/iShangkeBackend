@@ -4,6 +4,16 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+    <bean class="com.ishangke.edunav.web.common.ApplicationContextUtil"></bean>
+    <bean id="configurationClientSetting" class="com.ishangke.edunav.common.ConfigurationClientSetting">
+        <constructor-arg index="0" value="${server.thrift.configuration.host}" />
+        <constructor-arg index="1" value="${server.thrift.configuration.port}" />
+        <constructor-arg index="2" value="${server.thrift.configuration.clientClass}" />
+    </bean>
+    <bean id="configurationClientSettingCache" class="com.ishangke.edunav.common.ConfigurationClientSetting">
+        <property name="setting" ref="configurationClientSetting"></property>
+    </bean>
+    <bean id="thriftClientSettingManager" class="com.ishangke.edunav.web.common.ThriftClientSettingManager" init-method="start"/>
 
     <mvc:annotation-driven />
 

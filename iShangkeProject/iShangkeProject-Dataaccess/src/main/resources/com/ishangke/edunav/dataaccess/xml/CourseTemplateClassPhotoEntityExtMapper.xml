@@ -53,6 +53,10 @@
     where
     ID = #{id,jdbcType=INTEGER}
   </update>
+  <!-- deleteByCourseTemplateIdClassPhotoId -->
+  <delete id="deleteByCourseTemplateIdClassPhotoId" parameterType="map">
+    delete from COURSE_TEMPLATE_CLASS_PHOTO where COURSE_TEMPLATE_ID = #{courseTemplateId, jdbcType=INTEGER} and CLASS_PHOTO_ID = #{classPhotoId, jdbcType=INTEGER}
+  </delete>
   <!-- update -->
   <update id="update" parameterType="CourseTemplateClassPhotoEntityExt">
     update COURSE_TEMPLATE_CLASS_PHOTO
