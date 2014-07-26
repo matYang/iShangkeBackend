@@ -148,38 +148,39 @@ public class BookingManagerImpl implements BookingManager {
     @Override
     public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo) {
         String roleName = authManager.getRole(userBo.getId());
+        BookingEntityExt bookingEntity = BookingConverter.fromBo(bookingBo);
         if (!Constant.ROLEUSER.equals(roleName)) {
             throw new ManagerException("only user can create booking");
         }
-        if (bookingBo.getUserId() != userBo.getId()) {
+        if (bookingEntity.getUserId() != userBo.getId()) {
             throw new ManagerException("cannot create booking for others");
         }
-        if (bookingBo.getName() == null || "".equals(bookingBo.getName()) || bookingBo.getPhone() == null || "".equals(bookingBo.getPhone())) {
+        if (bookingEntity.getName() == null || "".equals(bookingEntity.getName()) || bookingEntity.getPhone() == null || "".equals(bookingEntity.getPhone())) {
             throw new ManagerException("information is bad");
         }
         // 查看此课程是否属于上架状态
-        CourseEntityExt course = courseMapper.getById(bookingBo.getCourseId());
+        CourseEntityExt course = courseMapper.getById(bookingEntity.getCourseId());
         if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
             throw new ManagerException("course cannot be booed now");
         }
         // 查看课程现价与发过来的价格是否一致，如果不一致则不能创建booking
-        if (course.getPrice() != bookingBo.getPrice()) {
+        if (course.getPrice() != bookingEntity.getPrice()) {
             throw new ManagerException("the price is no longer equal");
         }
         // 传递过来的cashback必须小于等于course中定义的cashback
-        if (bookingBo.getCashbackAmount() > course.getCashback()) {
+        if (bookingEntity.getCashbackAmount() > course.getCashback()) {
             throw new ManagerException("cashback cannot more than cashback defined in course");
         }
         // booking不同的type（支付方式）决定了booking的初始化状态
         int bookingOpt = 0;
-        if (bookingBo.getType() == Constant.BOOKINGTYPEOFFLINE) {
+        if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
             // 在线支付订单
-            bookingBo.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
+            bookingEntity.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
             bookingOpt = Constant.BOOKINGOPERATIONONLINESUBMITBOOKING;
 
-        } else if (bookingBo.getType() == Constant.BOOKINGTYPEONLINE) {
+        } else if (bookingEntity.getType() == Constant.BOOKINGTYPEONLINE) {
             // 线下支付订单
-            bookingBo.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
+            bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
         } else if (false) {
             // todo 其他类型订单
@@ -199,14 +200,16 @@ public class BookingManagerImpl implements BookingManager {
         // 插入booking
         int result = 0;
         try {
-            result = bookingMapper.add(BookingConverter.fromBo(bookingBo));
+            bookingEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+            bookingEntity.setCreateTime((DateUtility.getCurTimeInstance()));
+            result = bookingMapper.add(bookingEntity);
         } catch (Exception e) {
             throw new ManagerException("add booking failed");
         }
         if (result > 0) {
-            bookingBo.setId(result);
+            bookingBo.setId(bookingEntity.getId());
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
-            bookingHistory.setBookingId(result);
+            bookingHistory.setBookingId(bookingEntity.getId());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setOptName(bookingOpt);
@@ -225,9 +228,9 @@ public class BookingManagerImpl implements BookingManager {
         if (contacts == null || contacts.size() == 0) {
             contact.setCreateTime(DateUtility.getCurTimeInstance());
             contact.setLastModifyTime(DateUtility.getCurTimeInstance());
-            contact.setName(bookingBo.getName());
-            contact.setPhone(bookingBo.getPhone());
-            contact.setEmail(bookingBo.getEmail());
+            contact.setName(bookingEntity.getName());
+            contact.setPhone(bookingEntity.getPhone());
+            contact.setEmail(bookingEntity.getEmail());
             contactMapper.add(contact);
         } else {
             boolean hasContact = false;
@@ -240,13 +243,18 @@ public class BookingManagerImpl implements BookingManager {
             if (!hasContact) {
                 contact.setCreateTime(DateUtility.getCurTimeInstance());
                 contact.setLastModifyTime(DateUtility.getCurTimeInstance());
-                contact.setName(bookingBo.getName());
-                contact.setPhone(bookingBo.getPhone());
-                contact.setEmail(bookingBo.getEmail());
+                contact.setName(bookingEntity.getName());
+                contact.setPhone(bookingEntity.getPhone());
+                contact.setEmail(bookingEntity.getEmail());
                 contactMapper.add(contact);
             }
         }
-        return bookingBo;
+        
+        List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, bookingEntity.getStatus());
+        BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingEntity.getId()));
+        booking.setActionList(actions);
+        
+        return booking;
     }
 
     @Override
@@ -309,6 +317,7 @@ public class BookingManagerImpl implements BookingManager {
             if (op == null) {
                 throw new ManagerException("cannot modify current booking status");
             }
+            //修改lastmodifytime
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             bookingEntityExt.setStatus(op.getNextStatus());
@@ -351,6 +360,7 @@ public class BookingManagerImpl implements BookingManager {
             if (op == null) {
                 throw new ManagerException("cannot modify current booking status");
             }
+            //修改lastmodifytoime
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             bookingEntityExt.setStatus(op.getNextStatus());
@@ -409,6 +419,7 @@ public class BookingManagerImpl implements BookingManager {
                     }
                 }
             }
+            bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             bookingEntityExt.setStatus(op.getNextStatus());
             bookingMapper.update(bookingEntityExt);
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
