@@ -1,6 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -21,11 +23,14 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.BookingHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
+import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
@@ -34,6 +39,7 @@ import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.TransformManager;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.BookingHistoryConverter;
+import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.transform.Operation;
@@ -65,6 +71,79 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
+    
+    @Autowired
+    private UserEntityExtMapper userMapper;
+    
+    @Autowired
+    private CouponEntityExtMapper couponMapper;
+    
+    private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
+        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || bookingBo.getUserId() <= 0) {
+            return 0.0;
+        }
+        
+        CouponEntityExt couponSearch = new CouponEntityExt();
+        couponSearch.setUserId(bookingBo.getUserId());
+        couponSearch.setEnabled(0);
+        
+        List<CouponEntityExt> couponResults = null;
+        try {
+            couponResults = couponMapper.list(couponSearch, null);
+        } catch (Throwable t) {
+            throw new ManagerException("consumeCoupons failed when searching for coupons");
+        }
+        if (couponResults == null || couponResults.size() == 0) {
+            return 0.0;
+        }
+        
+        //remove used coupons and expired coupons
+        for (int i = couponResults.size()-1; i >= 0 ; i--) {
+            if (couponResults.get(i).getBalance() < 0.01d || couponResults.get(i).getExpiryTime().before(DateUtility.getCurTime())) {
+                couponResults.remove(i);
+            }
+        }
+        if (couponResults.size() == 0) {
+            return 0.0;
+        }
+        
+        //first to expire are used first
+        Collections.sort(couponResults, new Comparator<CouponEntityExt>() {
+            @Override
+            public int compare(CouponEntityExt o1, CouponEntityExt o2) {
+                return o1.getExpiryTime().compareTo(o2.getExpiryTime());
+            }
+        });
+        
+        double currentTotal = 0.0;
+        double targetTotal = bookingBo.getCashbackAmount();
+        int tailIndex = 0;
+        for (int i = 0; i < couponResults.size() && currentTotal < (targetTotal-0.01d); i++) {
+            CouponEntityExt coupon = couponResults.get(i);
+            if (currentTotal +  coupon.getBalance() < (targetTotal-0.01d)) {
+                //not yet reached desired cashback total yet, using up entire coupon
+                currentTotal += coupon.getBalance();
+                coupon.setBalance(0.0);
+            }
+            else {
+                //total value has reach target total ,so simple use the target tatal, consume differential coupon
+                coupon.setBalance(coupon.getBalance() - (targetTotal - currentTotal));
+                currentTotal = targetTotal;
+            }
+            tailIndex++;
+        }
+        //remove all untouched coupons
+        for (int i = couponResults.size()-1; i >= tailIndex; i--) {
+            couponResults.remove(i);
+        }
+        
+        //updated all consumed or partially consumed coupons
+        for (CouponEntityExt coupon : couponResults) {
+            couponManager.updateCoupon(CouponConverter.toBo(coupon), userBo);
+        }
+        
+        return currentTotal;
+    }
 
     @Override
     public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo) {
@@ -110,6 +189,13 @@ public class BookingManagerImpl implements BookingManager {
         // 设置bookingBo中的course template id
         // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
         bookingBo.setCourseTemplateId(course.getCourseTemplateId());
+        
+        //Use coupons
+        double calculatedCachbask = consumeCoupons(bookingBo, userBo);
+        if (calculatedCachbask >= 0.1) {
+            bookingBo.setCashbackAmount(calculatedCachbask);
+        }
+        
         // 插入booking
         int result = 0;
         try {

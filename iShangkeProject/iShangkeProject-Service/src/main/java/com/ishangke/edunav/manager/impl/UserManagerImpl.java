@@ -36,7 +36,9 @@ import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
+import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.UserManager;
+import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -76,6 +78,9 @@ public class UserManagerImpl implements UserManager {
     
     @Autowired
     private UserLocationEntityExtMapper userLocationMapper;
+    
+    @Autowired
+    private CouponManager couponManager;
     
     private String getReference() {
         //TODO this is just a placeholder of reference factory, used to pass compilation
@@ -159,10 +164,7 @@ public class UserManagerImpl implements UserManager {
             couponEntity.setCreateTime(DateUtility.getCurTimeInstance());
             couponEntity.setEnabled(0);
             couponEntity.setDeleted(0);
-            result = couponMapper.add(couponEntity);
-            if (result <= 0) {
-                throw new ManagerException("InitializeNormalUser::addCoupon with unique identifier: " + uniqueIdentifier + " failed");
-            }
+            couponManager.createCoupon(CouponConverter.toBo(couponEntity), UserConverter.toBo(userEntity));
             
             String appliedInvitationCode = userEntity.getAppliedInvitationCode();
             if (appliedInvitationCode != null && appliedInvitationCode.length() > 0) {
@@ -188,10 +190,7 @@ public class UserManagerImpl implements UserManager {
                 curUserCouponEntity.setCreateTime(DateUtility.getCurTimeInstance());
                 curUserCouponEntity.setEnabled(0);
                 curUserCouponEntity.setDeleted(0);
-                result = couponMapper.add(curUserCouponEntity);
-                if (result <= 0) {
-                    throw new ManagerException("InitializeNormalUser::addCoupon to invitee with unique identifier: " + uniqueIdentifier  + " failed");
-                }
+                couponManager.createCoupon(CouponConverter.toBo(curUserCouponEntity), UserConverter.toBo(userEntity));
                 
                 CouponEntityExt inviterCouponEntity = new CouponEntityExt();
                 inviterCouponEntity.setCode(getReference());
@@ -205,10 +204,7 @@ public class UserManagerImpl implements UserManager {
                 inviterCouponEntity.setCreateTime(DateUtility.getCurTimeInstance());
                 inviterCouponEntity.setEnabled(0);
                 inviterCouponEntity.setDeleted(0);
-                result = couponMapper.add(inviterCouponEntity);
-                if (result <= 0) {
-                    throw new ManagerException("InitializeNormalUser::addCoupon to inviter with unique identifier: " + uniqueIdentifier  + " failed");
-                }
+                couponManager.createCoupon(CouponConverter.toBo(inviterCouponEntity), UserConverter.toBo(inviterEntity));
             }
             
             //lastly, read out the user...too many changes unable to maintain local copy
