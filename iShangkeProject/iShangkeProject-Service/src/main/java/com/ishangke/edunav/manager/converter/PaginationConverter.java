@@ -1,7 +1,9 @@
 package com.ishangke.edunav.manager.converter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.OrderByBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
@@ -10,21 +12,24 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 public class PaginationConverter {
 
     public static PaginationEntity fromBo(PaginationBo paginationBo) {
-        int size = paginationBo.getSize();
-        if (size < 0) {
+        if (paginationBo == null) {
+            return null;
+        }
+        Integer size = paginationBo.getSize();
+        if (size == Constant.DEFAULTNULL) {
             // To the last one
-            size = -1;
+            size = null;
         }
 
-        int offset = paginationBo.getOffset();
-        if (offset < 0) {
+        Integer offset = paginationBo.getOffset();
+        if (offset == Constant.DEFAULTNULL) {
             // Should start from the first column
-            offset = 0;
+            offset = null;
         }
 
         List<OrderByBo> orderByBos = paginationBo.getOrderByEntities();
 
-        List<OrderByEntity> orderByEntities = null;
+        List<OrderByEntity> orderByEntities = new ArrayList<>();
 
         for (OrderByBo orderBybo : orderByBos) {
             OrderByEntity orderByEntity = new OrderByEntity(orderBybo.getColumnKey(), orderBybo.getOrder());

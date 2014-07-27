@@ -12,14 +12,9 @@ import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
-import com.ishangke.edunav.commoncontract.model.CommentOrderBo;
-import com.ishangke.edunav.commoncontract.model.CourseBo;
-import com.ishangke.edunav.commoncontract.model.OrderBo;
-import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.OrderManager;
@@ -30,53 +25,212 @@ import com.ishangke.edunav.manager.exception.authentication.NoPermissionExceptio
 
 @Component
 public class BookingServiceImpl implements BookingService.Iface {
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(BookingServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookingServiceImpl.class);
 
     @Autowired
     private BookingManager bookingManager;
+
     @Autowired
     private OrderManager orderManager;
+
     @Autowired
     private PermissionManager permissionManager;
+
+    @Override
+    public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.createBookingByUser(bookingBo, commentBookingBo, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.transformBookingStatus(bookingBo, operation, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.queryBooking(bookingBo, userBo, paginationBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.queryHistory(bookingHistoryBo, partnerBo, userBo, paginationBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.queryHistoryByBookingId(bookingHistoryBo, bookingBo, userBo, paginationBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<BookingBo> queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.queryBookingByPartner(bookingBo, partnerBo, userBo, paginationBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                throw new NoPermissionException();
+            }
+            return bookingManager.queryBookingByUser(bookingBo, userBo, paginationBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
 
     /**********************************************************
      * 
      * 关于预约的 Booking
      * 
      **********************************************************/
-    @Override
-    public BookingBo createBookingByUser(CourseBo courseBo,
-            BookingBo bookingBo, CommentBookingBo commentBookingBo,
-            UserBo userBo, String permissionTag) throws BusinessExceptionBo,
-            TException {
-//        try {
-//            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-//                    permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-//                        userBo.getId(), permissionTag, "createBookingByUser"));
-//                throw new NoPermissionException();
-//            }
-//            return bookingManager.createBookingByUser(courseBo, bookingBo,
-//                    commentBookingBo, userBo);
-//        } catch (NoPermissionException e) {
-//            LOGGER.info(e.getMessage(), e);
-//            BusinessExceptionBo exception = new BusinessExceptionBo();
-//            exception
-//                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
-//            exception
-//                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
-//            throw exception;
-//        } catch (ManagerException e) {
-//            LOGGER.info(e.getMessage(), e);
-//            BusinessExceptionBo exception = new BusinessExceptionBo();
-//            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
-//            exception
-//                    .setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
-//            throw exception;
-//        }
-        return null;
-    }
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "createBookingByUser"));
+    // throw new NoPermissionException();
+    // }
+    // return bookingManager.createBookingByUser(courseBo, bookingBo,
+    // commentBookingBo, userBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+    // exception
+    // .setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+    // throw exception;
+    // }
+    // return null;
+    // }
 
     // @Override
     // public BookingBo acceptBookingByPartner(BookingBo bookingBo,
@@ -189,196 +343,197 @@ public class BookingServiceImpl implements BookingService.Iface {
     // throw exception;
     // }
     // }
-
-    @Override
-    public List<BookingBo> queryBooking(BookingBo bookingBo,
-            PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
-//        try {
-//            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-//                    permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-//                        userBo.getId(), permissionTag, "queryBooking"));
-//                throw new NoPermissionException();
-//            }
-//            return bookingManager.queryBooking(bookingBo, partnerBo, userBo,
-//                    paginationBo);
-//        } catch (NoPermissionException e) {
-//            LOGGER.info(e.getMessage(), e);
-//            BusinessExceptionBo exception = new BusinessExceptionBo();
-//            exception
-//                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKING);
-//            exception
-//                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKING_KEY);
-//            throw exception;
-//        } catch (ManagerException e) {
-//            LOGGER.info(e.getMessage(), e);
-//            BusinessExceptionBo exception = new BusinessExceptionBo();
-//            exception.setErrorCode(ManagerErrorCode.BOOKING_NOTFOUND_ERROR);
-//            exception
-//                    .setMessageKey(ManagerErrorCode.BOOKING_NOTFOUND_ERROR_KEy);
-//            throw exception;
-//        }
-        return null;
-    }
-
-    @Override
-    public List<BookingHistoryBo> queryBookingHistory(
-            BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo,
-            UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryBookingHistory"));
-                throw new NoPermissionException();
-            }
-            return bookingManager.queryHistory(bookingHistoryBo, partnerBo,
-                    userBo, paginationBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKINGHISTORY);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKINGHISTORY_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_QUERYHISTORY_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.BOOKING_QUERYHISTORY_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    /**********************************************************
-     * 
-     * 关于预订单的 Order
-     * 
-     **********************************************************/
-    @Override
-    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo,
-            UserBo userBo, WithdrawBo withdrawBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "createOrderByUser"));
-                throw new NoPermissionException();
-            }
-            return orderManager.createOrderByUser(orderBo, bookingBo, userBo,
-                    withdrawBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEORDERBYUSER);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEORDERBYUSER_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public OrderBo acceptOrderByAdmin(OrderBo orderBo,
-            CommentOrderBo commentOrderBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "acceptOrderByAdmin"));
-                throw new NoPermissionException();
-            }
-            return orderManager.acceptOrderByAdmin(orderBo,
-                    commentOrderBo, userBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_ACCEPTORDERBYADMIN);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_ACCEPTORDERBYADMIN_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.ORDER_ACCEPTBYADMIN_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.ORDER_ACCEPTBYADMIN_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public List<OrderBo> queryOrder(OrderBo orderBo, BookingBo bookingBo,
-            UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryOrder"));
-                throw new NoPermissionException();
-            }
-            return orderManager.query(orderBo, bookingBo, userBo, paginationBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDER);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDER_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.ORDER_NOTFOUND_ERROR);
-            exception.setMessageKey(ManagerErrorCode.ORDER_NOTFOUND_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public List<OrderHistoryBo> queryOrderHistory(OrderHistoryBo orderHistory,
-            BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryOrderHistory"));
-                throw new NoPermissionException();
-            }
-            return orderManager.queryHistory(orderHistory, bookingBo, userBo,
-                    paginationBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDERHISTORY);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDERHISTORY_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.ORDER_QUERYHISTORY_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.ORDER_QUERYHISTORY_ERROR_KEY);
-            throw exception;
-        }
-    }
+    //
+    // @Override
+    // public List<BookingBo> queryBooking(BookingBo bookingBo,
+    // PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo,
+    // String permissionTag) throws BusinessExceptionBo, TException {
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "queryBooking"));
+    // throw new NoPermissionException();
+    // }
+    // return bookingManager.queryBooking(bookingBo, partnerBo, userBo,
+    // paginationBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKING);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKING_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.BOOKING_NOTFOUND_ERROR);
+    // exception
+    // .setMessageKey(ManagerErrorCode.BOOKING_NOTFOUND_ERROR_KEy);
+    // throw exception;
+    // }
+    // return null;
+    // }
+    //
+    // @Override
+    // public List<BookingHistoryBo> queryBookingHistory(
+    // BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo,
+    // UserBo userBo, PaginationBo paginationBo, String permissionTag)
+    // throws BusinessExceptionBo, TException {
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "queryBookingHistory"));
+    // throw new NoPermissionException();
+    // }
+    // return bookingManager.queryHistory(bookingHistoryBo, partnerBo,
+    // userBo, paginationBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKINGHISTORY);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYBOOKINGHISTORY_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.BOOKING_QUERYHISTORY_ERROR);
+    // exception
+    // .setMessageKey(ManagerErrorCode.BOOKING_QUERYHISTORY_ERROR_KEY);
+    // throw exception;
+    // }
+    // }
+    //
+    // /**********************************************************
+    // *
+    // * 关于预订单的 Order
+    // *
+    // **********************************************************/
+    // @Override
+    // public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo,
+    // UserBo userBo, WithdrawBo withdrawBo, String permissionTag)
+    // throws BusinessExceptionBo, TException {
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "createOrderByUser"));
+    // throw new NoPermissionException();
+    // }
+    // return orderManager.createOrderByUser(orderBo, bookingBo, userBo,
+    // withdrawBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEORDERBYUSER);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEORDERBYUSER_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR);
+    // exception
+    // .setMessageKey(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR_KEY);
+    // throw exception;
+    // }
+    // }
+    //
+    // @Override
+    // public OrderBo acceptOrderByAdmin(OrderBo orderBo,
+    // CommentOrderBo commentOrderBo, UserBo userBo,
+    // String permissionTag) throws BusinessExceptionBo, TException {
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "acceptOrderByAdmin"));
+    // throw new NoPermissionException();
+    // }
+    // return orderManager.acceptOrderByAdmin(orderBo,
+    // commentOrderBo, userBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_ACCEPTORDERBYADMIN);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_ACCEPTORDERBYADMIN_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.ORDER_ACCEPTBYADMIN_ERROR);
+    // exception
+    // .setMessageKey(ManagerErrorCode.ORDER_ACCEPTBYADMIN_ERROR_KEY);
+    // throw exception;
+    // }
+    // }
+    //
+    // @Override
+    // public List<OrderBo> queryOrder(OrderBo orderBo, BookingBo bookingBo,
+    // UserBo userBo, PaginationBo paginationBo, String permissionTag)
+    // throws BusinessExceptionBo, TException {
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "queryOrder"));
+    // throw new NoPermissionException();
+    // }
+    // return orderManager.query(orderBo, bookingBo, userBo, paginationBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDER);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDER_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.ORDER_NOTFOUND_ERROR);
+    // exception.setMessageKey(ManagerErrorCode.ORDER_NOTFOUND_ERROR_KEY);
+    // throw exception;
+    // }
+    // }
+    //
+    // @Override
+    // public List<OrderHistoryBo> queryOrderHistory(OrderHistoryBo
+    // orderHistory,
+    // BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo,
+    // String permissionTag) throws BusinessExceptionBo, TException {
+    // try {
+    // if (!permissionManager.hasPermissionByUser(userBo.getId(),
+    // permissionTag)) {
+    // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+    // userBo.getId(), permissionTag, "queryOrderHistory"));
+    // throw new NoPermissionException();
+    // }
+    // return orderManager.queryHistory(orderHistory, bookingBo, userBo,
+    // paginationBo);
+    // } catch (NoPermissionException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception
+    // .setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDERHISTORY);
+    // exception
+    // .setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYORDERHISTORY_KEY);
+    // throw exception;
+    // } catch (ManagerException e) {
+    // LOGGER.info(e.getMessage(), e);
+    // BusinessExceptionBo exception = new BusinessExceptionBo();
+    // exception.setErrorCode(ManagerErrorCode.ORDER_QUERYHISTORY_ERROR);
+    // exception
+    // .setMessageKey(ManagerErrorCode.ORDER_QUERYHISTORY_ERROR_KEY);
+    // throw exception;
+    // }
+    // }
 
 }

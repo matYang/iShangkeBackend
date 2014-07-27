@@ -1,12 +1,12 @@
-package com.ishangke.edunav.dataaccess.common;
+package com.ishangke.edunav.web.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaginationEntity {
+public class PaginationVo {
     private Integer size;
     private Integer offset;
-    private List<OrderByEntity> orderByEntities = new ArrayList<>();
+    private List<OrderByVo> orderByEntities = new ArrayList<>();
 
     public Integer getSize() {
         return size;
@@ -24,15 +24,15 @@ public class PaginationEntity {
         this.offset = offset;
     }
 
-    public void addOrderByEntity(OrderByEntity orderByEntity) {
+    public void addOrderByEntity(OrderByVo orderByEntity) {
         this.orderByEntities.add(orderByEntity);
     }
 
-    public List<OrderByEntity> getOrderByEntities() {
+    public List<OrderByVo> getOrderByEntities() {
         return orderByEntities;
     }
 
-    public void setOrderByEntities(List<OrderByEntity> orderByEntities) {
+    public void setOrderByEntities(List<OrderByVo> orderByEntities) {
         this.orderByEntities = orderByEntities;
     }
 }

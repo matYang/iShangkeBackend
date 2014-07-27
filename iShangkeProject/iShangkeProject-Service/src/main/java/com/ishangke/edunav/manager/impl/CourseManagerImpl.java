@@ -417,7 +417,7 @@ public class CourseManagerImpl implements CourseManager {
                 }
             }
         } catch (Exception e) {
-            throw new ManagerException("query course failed");
+            throw new ManagerException("query course failed", e);
         }
         return convertered;
     }

@@ -37,7 +37,7 @@ public interface BookingManager {
      *              调用方法的用户信息
      * @return
      */
-    BookingBo transformBookingStatus(BookingBo bookingBo,int operation, UserBo userBo);
+    BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo);
 
     /**
      * 本方法为查询预定单预定单功能。<br>
