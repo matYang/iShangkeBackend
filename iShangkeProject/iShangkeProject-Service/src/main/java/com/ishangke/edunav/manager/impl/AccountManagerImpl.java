@@ -68,7 +68,7 @@ public class AccountManagerImpl implements AccountManager {
             throw new ManagerException("User Exchange Cash Failed: 用户id为null或0");
         }
         // Check whether the Account belongs to the User
-        if (accountEntity.getId() != userEntity.getId()) {
+        if (!accountEntity.getId().equals(userEntity.getId())) {
             throw new ManagerException("User Exchange Cash Failed: 该账户不属于此用户");
         }
         try {
