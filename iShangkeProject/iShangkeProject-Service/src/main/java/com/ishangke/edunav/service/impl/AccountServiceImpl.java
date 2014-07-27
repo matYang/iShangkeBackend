@@ -32,8 +32,7 @@ import com.ishangke.edunav.manager.exception.authentication.NoPermissionExceptio
 
 @Component
 public class AccountServiceImpl implements AccountService.Iface {
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(AccountServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Autowired
     private AccountManager accountManager;
@@ -54,93 +53,77 @@ public class AccountServiceImpl implements AccountService.Iface {
      * 
      **********************************************************/
     @Override
-    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "exchangeCash"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "exchangeCash"));
                 throw new NoPermissionException();
             }
             return null;
-            // TODO return accountManager.exchangeCash(accountBo, userBo);
+            // return accountManager.exchangeCash(accountBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECASH);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECASH_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECASH);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECASH_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.ACCOUNT_EXCHANGECASH_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.ACCOUNT_EXCHANGECASH_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.ACCOUNT_EXCHANGECASH_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public List<AccountBo> queryAccount(AccountBo accountBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<AccountBo> queryAccount(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryAccount"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryAccount"));
                 throw new NoPermissionException();
             }
             return accountManager.query(accountBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public List<AccountHistoryBo> queryAccountHistory(
-            AccountHistoryBo accountHistoryBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<AccountHistoryBo> queryAccountHistory(AccountHistoryBo accountHistoryBo, UserBo userBo,
+            PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryAccountHistory"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryAccountHistory"));
                 throw new NoPermissionException();
             }
-            return accountManager.queryHistory(accountHistoryBo, userBo,
-                    paginationBo);
+            return accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNTHISTORY);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNTHISTORY_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNTHISTORY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYACCOUNTHISTORY_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.ACCOUNT_QUERYHISTORY_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.ACCOUNT_QUERYHISTORY_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.ACCOUNT_QUERYHISTORY_ERROR_KEY);
             throw exception;
         }
     }
@@ -151,23 +134,20 @@ public class AccountServiceImpl implements AccountService.Iface {
      * 
      **********************************************************/
     @Override
-    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public CouponBo createCoupon(CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "createCoupon"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "createCoupon"));
                 throw new NoPermissionException();
             }
             return couponManager.createCoupon(couponBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECOUPON);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECOUPON_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECOUPON);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECOUPON_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -179,24 +159,45 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CouponBo> queryCoupon(CouponBo couponBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
+    public CouponBo activateCoupon(CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
+            TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "activateCoupon"));
+                throw new NoPermissionException();
+            }
+            return couponManager.activateCoupon(couponBo, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_ACTIVATECOUPON);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_ACTIVATECOUPON_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.COUPON_ACTIVATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COUPON_ACTIVATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<CouponBo> queryCoupon(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryCoupon"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryCoupon"));
                 throw new NoPermissionException();
             }
             return couponManager.query(couponBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPON);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPON_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPON);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPON_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -208,33 +209,26 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CouponHistoryBo> queryCouponHistory(
-            CouponHistoryBo couponHistoryBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<CouponHistoryBo> queryCouponHistory(CouponHistoryBo couponHistoryBo, UserBo userBo,
+            PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryCouponHistory"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryCouponHistory"));
                 throw new NoPermissionException();
             }
-            return couponManager.queryHistory(couponHistoryBo, userBo,
-                    paginationBo);
+            return couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPONHISTORY);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPONHISTORY_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPONHISTORY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCOUPONHISTORY_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR_KEY);
             throw exception;
         }
     }
@@ -245,24 +239,20 @@ public class AccountServiceImpl implements AccountService.Iface {
      * 
      **********************************************************/
     @Override
-    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo,
-            UserBo userBo, String permissionTag) throws BusinessExceptionBo,
-            TException {
+    public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "exchangeCoupon"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "exchangeCoupon"));
                 throw new NoPermissionException();
             }
             return creditManager.exchangeCoupon(creditBo, couponBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECOUPON);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECOUPON_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECOUPON);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGECOUPON_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -275,55 +265,45 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo,
-            UserBo userBo, String permissionTag) throws BusinessExceptionBo,
-            TException {
+    public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "exchangeAccount"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "exchangeAccount"));
                 throw new NoPermissionException();
             }
             return creditManager.exchangeAccount(creditBo, accountBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGEACCOUNT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGEACCOUNT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGEACCOUNT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_EXCHANGEACCOUNT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR_KEY);
             throw exception;
         }
     }
 
     @Override
-    public List<CreditBo> queryCredit(CreditBo creditBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
+    public List<CreditBo> queryCredit(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryCredit"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryCredit"));
                 throw new NoPermissionException();
             }
             return creditManager.query(creditBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDIT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDIT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDIT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDIT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -335,33 +315,26 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CreditHistoryBo> queryCreditHistory(
-            CreditHistoryBo creditHistoryBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<CreditHistoryBo> queryCreditHistory(CreditHistoryBo creditHistoryBo, UserBo userBo,
+            PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryCreditHistory"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryCreditHistory"));
                 throw new NoPermissionException();
             }
-            return creditManager.queryHistory(creditHistoryBo, userBo,
-                    paginationBo);
+            return creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDITHISTORY);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDITHISTORY_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDITHISTORY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCREDITHISTORY_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR_KEY);
             throw exception;
         }
     }
@@ -372,23 +345,20 @@ public class AccountServiceImpl implements AccountService.Iface {
      * 
      **********************************************************/
     @Override
-    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "createWithdraw"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "createWithdraw"));
                 throw new NoPermissionException();
             }
             return withdrawManager.createWithdraw(withdrawBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_CREATEWITHDRAW);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_CREATEWITHDRAW_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_CREATEWITHDRAW);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_CREATEWITHDRAW_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -400,23 +370,20 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "updateWithdraw"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "updateWithdraw"));
                 throw new NoPermissionException();
             }
             return withdrawManager.updateWithdraw(withdrawBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATEWITHDRAW);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATEWITHDRAW_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATEWITHDRAW);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATEWITHDRAW_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -428,23 +395,20 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "deleteWithdraw"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "deleteWithdraw"));
                 throw new NoPermissionException();
             }
             return withdrawManager.deleteWithdraw(withdrawBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_DELETEWITHDRAW);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_DELETEWITHDRAW_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_DELETEWITHDRAW);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_DELETEWITHDRAW_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -456,31 +420,26 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<WithdrawBo> queryWithdraw(WithdrawBo withdrawBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<WithdrawBo> queryWithdraw(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryWithdraw"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryWithdraw"));
                 throw new NoPermissionException();
             }
             return withdrawManager.query(withdrawBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYWITHDRAW);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYWITHDRAW_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYWITHDRAW);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYWITHDRAW_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.WITHDRAW_NOTFOUND_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.WITHDRAW_NOTFOUND_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.WITHDRAW_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }
@@ -491,23 +450,20 @@ public class AccountServiceImpl implements AccountService.Iface {
      * 
      **********************************************************/
     @Override
-    public ContactBo createContact(ContactBo contactBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public ContactBo createContact(ContactBo contactBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "createContact"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "createContact"));
                 throw new NoPermissionException();
             }
             return contactManager.createContact(contactBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECONTACT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECONTACT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECONTACT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_CREATECONTACT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -519,23 +475,20 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public ContactBo updateContact(ContactBo contactBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public ContactBo updateContact(ContactBo contactBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "updateContact"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "updateContact"));
                 throw new NoPermissionException();
             }
             return contactManager.updateContact(contactBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATECONTACT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATECONTACT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATECONTACT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_UPDATECONTACT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -547,23 +500,20 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public ContactBo deleteContact(ContactBo contactBo, UserBo userBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public ContactBo deleteContact(ContactBo contactBo, UserBo userBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "deleteContact"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "deleteContact"));
                 throw new NoPermissionException();
             }
             return contactManager.deleteContact(contactBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_DELETECONTACT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_DELETECONTACT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_DELETECONTACT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_DELETECONTACT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -575,31 +525,26 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<ContactBo> queryContact(ContactBo contactBo, UserBo userBo,
-            PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public List<ContactBo> queryContact(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(),
-                    permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-                        userBo.getId(), permissionTag, "queryContact"));
+            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryContact"));
                 throw new NoPermissionException();
             }
             return contactManager.query(contactBo, userBo, paginationBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception
-                    .setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT);
-            exception
-                    .setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.CONTACT_NOTFOUND_ERROR);
-            exception
-                    .setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
+            exception.setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
             throw exception;
         }
     }

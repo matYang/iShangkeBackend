@@ -96,7 +96,7 @@ public class CreditManagerImpl implements CreditManager {
             throw new ManagerException("Credit Modify Failed for user: " + userEntity.getId(), t);
         }
 
-        return CreditConverter.toBo(creditEntity);
+        return CreditConverter.toBo(creditMapper.getById(creditEntity.getId()));
     }
 
     @Override

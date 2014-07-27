@@ -70,7 +70,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new ManagerException("Contact creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            return ContactConverter.toBo(contactEntity);
+            return ContactConverter.toBo(contactMapper.getById(contactEntity.getId()));
         } else {
             throw new ManagerException("Contact creation failed for user: " + userEntity.getId());
         }
@@ -104,7 +104,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new ManagerException("Contact update failed for user: " + userEntity.getId(), t);
         }
         
-        return ContactConverter.toBo(contactEntity);
+        return ContactConverter.toBo(contactMapper.getById(contactEntity.getId()));
     }
 
     @Override
@@ -128,7 +128,6 @@ public class ContactManagerImpl implements ContactManager {
             }
         }
         
-        contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             contactEntity.setDeleted(1);
             contactMapper.deleteById(contactEntity.getId());

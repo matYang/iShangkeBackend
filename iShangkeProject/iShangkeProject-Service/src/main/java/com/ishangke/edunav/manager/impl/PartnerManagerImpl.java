@@ -129,7 +129,7 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("Partner update failed for user: " + userEntity.getId(), t);
         }
 
-        return PartnerConverter.toBo(partnerEntity);
+        return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
     }
 
     @Override
@@ -162,7 +162,7 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            return PartnerConverter.toBo(partnerEntity);
+            return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
         } else {
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId());
         }

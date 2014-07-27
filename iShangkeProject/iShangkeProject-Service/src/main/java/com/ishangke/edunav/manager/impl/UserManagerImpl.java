@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -83,11 +85,6 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private CouponManager couponManager;
     
-    private String getReference() {
-        //TODO this is just a placeholder of reference factory, used to pass compilation
-        return null;
-    }
-    
     
     private UserBo initializeNormalUser(UserBo userBo, int groupId, String uniqueIdentifier) {
         // 参数验证
@@ -122,13 +119,12 @@ public class UserManagerImpl implements UserManager {
             
             AccountEntityExt accountEntity = new AccountEntityExt();
             accountEntity.setId(userEntity.getId());
-            accountEntity.setBalance(0.0);
+            accountEntity.setBalance(0.0d);
             accountEntity.setRealName(userEntity.getName());
             accountEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
             accountEntity.setCreateTime(DateUtility.getCurTimeInstance());
             accountEntity.setEnabled(0);
             accountEntity.setDeleted(0);
-            accountEntity.setAccountNumber(getReference());
             result = accountMapper.add(accountEntity);
             if (result <= 0) {
                 throw new ManagerException("InitializeNormalUser::addAccount user with unique identifier: " + uniqueIdentifier  + " failed");
@@ -136,7 +132,7 @@ public class UserManagerImpl implements UserManager {
             
             CreditEntityExt creditEntity = new CreditEntityExt();
             creditEntity.setId(userEntity.getId());
-            creditEntity.setCredit(0.0);
+            creditEntity.setCredit(0.0d);
             creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
             creditEntity.setCreateTime(DateUtility.getCurTimeInstance());
             creditEntity.setEnabled(0);
@@ -158,11 +154,10 @@ public class UserManagerImpl implements UserManager {
             
             
             CouponEntityExt couponEntity = new CouponEntityExt();
-            couponEntity.setCode(getReference());
             //TODO constants and enums
-            couponEntity.setBalance(50.0);
-            couponEntity.setBalance(50.0);
-            couponEntity.setOrigin(0);
+            couponEntity.setBalance(DefaultValues.COUPONREGISTRATIONVALUE);
+            couponEntity.setTotal(DefaultValues.COUPONREGISTRATIONVALUE);
+            couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
             expiry.add(Calendar.YEAR, 1);
             couponEntity.setExpiryTime(expiry);
@@ -185,12 +180,10 @@ public class UserManagerImpl implements UserManager {
                 }
                 UserEntityExt inviterEntity = inviterSearchResult.get(0);
                 
-                
                 CouponEntityExt curUserCouponEntity = new CouponEntityExt();
-                curUserCouponEntity.setCode(getReference());
-                curUserCouponEntity.setBalance(20.0);
-                curUserCouponEntity.setBalance(20.0);
-                curUserCouponEntity.setOrigin(0);
+                curUserCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
+                curUserCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
+                curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
                 curUserCouponEntity.setExpiryTime(expiry);
                 curUserCouponEntity.setRemark("");
                 curUserCouponEntity.setUserId(userEntity.getId());
@@ -201,10 +194,9 @@ public class UserManagerImpl implements UserManager {
                 couponManager.createCoupon(CouponConverter.toBo(curUserCouponEntity), UserConverter.toBo(userEntity));
                 
                 CouponEntityExt inviterCouponEntity = new CouponEntityExt();
-                inviterCouponEntity.setCode(getReference());
-                inviterCouponEntity.setBalance(20.0);
-                inviterCouponEntity.setBalance(20.0);
-                inviterCouponEntity.setOrigin(0);
+                inviterCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
+                inviterCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
+                inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
                 inviterCouponEntity.setExpiryTime(expiry);
                 inviterCouponEntity.setRemark("");
                 inviterCouponEntity.setUserId(inviterEntity.getId());
@@ -224,7 +216,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("InitializeNormalUser user with unique identifier: " + uniqueIdentifier  + " failed", t);
         }
         
-        return UserConverter.toBo(userEntity);
+        return UserConverter.toBo(userMapper.getById(userEntity.getId()));
     }
 
 
@@ -405,6 +397,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
+        curUser.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -434,6 +427,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
+        curUser.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -560,7 +554,6 @@ public class UserManagerImpl implements UserManager {
             throw new AuthenticationException("Non-admin user trying deleting someone else's user");
         }
         
-        targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             targetUserEntity.setDeleted(1);
             userMapper.deleteById(targetUserEntity.getId());
@@ -597,7 +590,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("User update failed for user: " + currentUserEntity.getId(), t);
         }
         
-        return UserConverter.toBo(targetUserEntity);
+        return UserConverter.toBo(userMapper.getById(targetUserEntity.getId()));
     }
 
     @Override

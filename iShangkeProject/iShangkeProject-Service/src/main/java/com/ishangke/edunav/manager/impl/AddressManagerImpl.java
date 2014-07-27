@@ -84,7 +84,7 @@ public class AddressManagerImpl implements AddressManager {
             throw new ManagerException("Address creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            return AddressConverter.toBo(addressEntity);
+            return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
         } else
             throw new ManagerException("Address creation failed for user: " + userEntity.getId());
 
@@ -130,7 +130,7 @@ public class AddressManagerImpl implements AddressManager {
             throw new ManagerException("Address update failed for user: " + userEntity.getId(), t);
         }
         
-        return AddressConverter.toBo(addressEntity);
+        return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
     }
 
     @Override
@@ -167,7 +167,6 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             addressEntity.setDeleted(1);
             addressMapper.deleteById(addressEntity.getId());

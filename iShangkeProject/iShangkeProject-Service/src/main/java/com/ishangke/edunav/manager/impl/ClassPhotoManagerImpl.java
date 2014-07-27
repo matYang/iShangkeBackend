@@ -85,7 +85,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("ClassPhoto creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            return ClassPhotoConverter.toBo(classPhotoEntity);
+            return ClassPhotoConverter.toBo(classPhotoMapper.getById(classPhotoEntity.getId()));
         } else {
             throw new ManagerException("ClassPhoto creation failed for user: " + userEntity.getId());
         }
@@ -131,7 +131,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         } catch (Throwable t) {
             throw new ManagerException("ClassPhoto update failed for user: " + userEntity.getId(), t);
         }
-        return ClassPhotoConverter.toBo(classPhotoEntity);
+        return ClassPhotoConverter.toBo(classPhotoMapper.getById(classPhotoEntity.getId()));
     }
 
     @Override
@@ -169,7 +169,6 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             classPhotoEntity.setDeleted(1);;
             classPhotoMapper.deleteById(classPhotoEntity.getId());

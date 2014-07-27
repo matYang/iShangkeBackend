@@ -86,6 +86,7 @@ public class BookingManagerImpl implements BookingManager {
         CouponEntityExt couponSearch = new CouponEntityExt();
         couponSearch.setUserId(bookingBo.getUserId());
         couponSearch.setEnabled(0);
+        couponSearch.setDeleted(0);
         
         List<CouponEntityExt> couponResults = null;
         try {
@@ -569,7 +570,7 @@ public class BookingManagerImpl implements BookingManager {
             }
             return convertedList;
         }
-        return null;
+        return null; 
     }
 
     public static void main(String[] args) {
