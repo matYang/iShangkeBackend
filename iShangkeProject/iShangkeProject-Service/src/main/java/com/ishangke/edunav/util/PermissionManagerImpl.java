@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.impl;
+package com.ishangke.edunav.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,8 @@ public class PermissionManagerImpl implements PermissionManager {
     @Override
     public List<PermissionBo> listPermissionsByUserId(int userId) {
         try {
-            List<PermissionBo> resultList = new ArrayList<PermissionBo>();;
+            List<PermissionBo> resultList = new ArrayList<PermissionBo>();
+            ;
             List<PermissionEntityExt> permissionList = permissionMapper.listPermissionsByUserId(userId);
             for (PermissionEntityExt permissionPo : permissionList) {
                 resultList.add(PermissionConverter.toBo(permissionPo));
@@ -101,7 +102,8 @@ public class PermissionManagerImpl implements PermissionManager {
 
     @Override
     public boolean hasPermissionByRole(int roleId, String permissionTag) {
-        return cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId, permissionTag)) != null;
+        return cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId,
+                resolvePermissionTag(permissionTag))) != null;
     }
 
     @Override
@@ -119,4 +121,14 @@ public class PermissionManagerImpl implements PermissionManager {
         return false;
     }
 
+    private String resolvePermissionTag(String tag) {
+        String result = "";
+        if (tag != null
+                && (tag.startsWith("POST/") || tag.startsWith("GET/") || tag.startsWith("DELETE/") || tag
+                        .startsWith("PUT/"))) {
+            result = String.valueOf(cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_URL, tag)));
+        }
+
+        return result;
+    }
 }

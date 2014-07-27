@@ -10,14 +10,14 @@
     <context:component-scan base-package="com.ishangke.edunav.web.user" />
 
     <mvc:default-servlet-handler />
-<!-- 
+ 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/rest/**" />
-            <bean class="com.ishangke.edunav.web.user.interceptor.SecurityInterceptor"></bean>
+            <mvc:mapping path="/api/v2/**" />
+            <bean class="com.ishangke.edunav.web.interceptor.SecurityInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
--->
+
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="1000000"/>
     </bean>

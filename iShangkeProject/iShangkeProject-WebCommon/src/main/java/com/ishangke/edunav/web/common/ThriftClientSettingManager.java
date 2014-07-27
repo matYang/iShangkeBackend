@@ -20,6 +20,10 @@ public class ThriftClientSettingManager {
 
     public static final Map<String, ThriftClientSetting> settingMap = new HashMap<>();
 
+    public static final ThriftClientSetting getSetting(String name) {
+        return settingMap.get(name);
+    }
+
     public void start() throws TException {
         ConfigurationClientSetting configurationClientSetting = ConfigurationClientSetting.getSetting();
         ThriftClientSetting setting = new ThriftClientSetting();
