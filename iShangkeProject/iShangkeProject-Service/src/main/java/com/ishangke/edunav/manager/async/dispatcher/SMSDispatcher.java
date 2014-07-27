@@ -24,12 +24,6 @@ public class SMSDispatcher {
         ExecutorProvider.executeRelay(task);
     }
 
-    public static void sendUserChangePasswordSMS(final String cellNum, final String authCode) {
-        String payload = "尊敬的爱会员，您请求更改密码的验证码为：" + authCode + "。请妥善保管~";
-        SMSTask task = new SMSTask(Event.USER_CHANGEPASSWORD, cellNum, payload);
-        ExecutorProvider.executeRelay(task);
-    }
-
     public static void sendBookingAwaitingSMS(final BookingEntityExt booking, final CourseEntityExt course) {
         String payload = "您预订的" + course.getInstName() + "课程订单已提交，我们将尽量于半小时内通知您确认结果,请您耐心等待~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGAWAITING, booking.getPhone(), payload);
@@ -54,20 +48,23 @@ public class SMSDispatcher {
         ExecutorProvider.executeRelay(sms);
     }
 
-    public static void sendUserRegistraterSMS(final String cellNum, final int amount) {
-        String payload = "恭喜您成为爱上课会员，获得" + amount + "元现金抵扣券已到账，快去官网选课吧~";
+    public static void sendUserRegistraterSMS(final String cellNum, final double amount) {
+        DecimalFormat formatter = new DecimalFormat("#.##");
+        String payload = "恭喜您成为爱上课会员，获得" + formatter.format(amount) + "元现金抵扣券已到账，快去官网选课吧~";
         SMSTask sms = new SMSTask(Event.USER_REGISTER, cellNum, payload);
         ExecutorProvider.executeRelay(sms);
     }
 
-    public static void sendInviteeSMS(final String cellNum, final int amount) {
-        String payload = "您的邀请码验证成功，您和小伙伴额外获得的" + amount + "元现金抵扣券已到账，快去通知其他小伙伴吧~";
+    public static void sendInviteeSMS(final String cellNum, final double amount) {
+        DecimalFormat formatter = new DecimalFormat("#.##");
+        String payload = "您的邀请码验证成功，您和小伙伴额外获得的" + formatter.format(amount) + "元现金抵扣券已到账，快去通知其他小伙伴吧~";
         SMSTask sms = new SMSTask(Event.USER_INVITEE, cellNum, payload);
         ExecutorProvider.executeRelay(sms);
     }
 
-    public static void sendInviterSMS(final String cellNum, final int amount) {
-        String payload = "感谢您邀请好友成为会员，额外获得" + amount + "元现金抵扣券已到账，快去官网选课吧~";
+    public static void sendInviterSMS(final String cellNum, final double amount) {
+        DecimalFormat formatter = new DecimalFormat("#.##");
+        String payload = "感谢您邀请好友成为会员，额外获得" + formatter.format(amount) + "元现金抵扣券已到账，快去官网选课吧~";
         SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
         ExecutorProvider.executeRelay(sms);
     }
