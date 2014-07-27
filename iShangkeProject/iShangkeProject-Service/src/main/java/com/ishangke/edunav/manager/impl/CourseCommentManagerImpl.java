@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -61,7 +62,11 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
         if (courseCommentEntity.getCourseTemplateId() != courseTemplateEntity.getId()) {
             throw new ManagerException("Course Comment not match Course Template Id");
         }
-
+        
+        courseCommentEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        courseCommentEntity.setEnabled(0);
+        courseCommentEntity.setDeleted(0);
         int result = 0;
         try {
             result = courseCommentMapper.add(courseCommentEntity);
@@ -106,7 +111,7 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
             throw new ManagerException("CourseComment Delete Failed: 此课程模版id为null或0");
         }
 
-
+        courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             courseCommentEntity.setDeleted(1);
             courseCommentMapper.deleteById(courseCommentEntity.getId());

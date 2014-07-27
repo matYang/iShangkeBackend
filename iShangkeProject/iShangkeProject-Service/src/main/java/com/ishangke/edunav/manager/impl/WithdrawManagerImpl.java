@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
@@ -58,6 +59,13 @@ public class WithdrawManagerImpl implements WithdrawManager {
             }
         }
 
+        if (withdrawEntity.getUserId() == null) {
+            throw new ManagerException("Withdraw userId cannot be null");
+        }
+        withdrawEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        withdrawEntity.setDeleted(0);
+        withdrawEntity.setEnabled(0);
         int result = 0;
         try {
             result = withdrawMapper.add(withdrawEntity);
@@ -90,7 +98,8 @@ public class WithdrawManagerImpl implements WithdrawManager {
                 throw new AuthenticationException("User updating someone else's withdraw");
             }
         }
-
+        
+        withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             withdrawMapper.update(withdrawEntity);
         } catch (Throwable t) {
@@ -119,7 +128,8 @@ public class WithdrawManagerImpl implements WithdrawManager {
                 throw new AuthenticationException("User updating someone else's withdraw");
             }
         }
-
+        
+        withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             withdrawEntity.setDeleted(1);
             withdrawMapper.deleteById(withdrawEntity.getId());

@@ -78,6 +78,7 @@ public class CreditManagerImpl implements CreditManager {
             throw new ManagerException("Previous credit is null");
         }
         
+        creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         
         CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
         creditHistory.setUserId(creditEntity.getId());

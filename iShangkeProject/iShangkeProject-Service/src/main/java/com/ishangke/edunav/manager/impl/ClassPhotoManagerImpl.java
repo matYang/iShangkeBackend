@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -72,6 +73,11 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        
+        classPhotoEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        classPhotoEntity.setEnabled(0);
+        classPhotoEntity.setDeleted(0);
         int result = 0;
         try {
             result = classPhotoMapper.add(classPhotoEntity);
@@ -118,7 +124,8 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             classPhotoMapper.update(classPhotoEntity);
         } catch (Throwable t) {
@@ -162,6 +169,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
+        classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             classPhotoEntity.setDeleted(1);;
             classPhotoMapper.deleteById(classPhotoEntity.getId());

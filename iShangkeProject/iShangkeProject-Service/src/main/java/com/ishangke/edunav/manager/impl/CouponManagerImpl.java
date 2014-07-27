@@ -63,13 +63,18 @@ public class CouponManagerImpl implements CouponManager {
             }
         }
         
+        couponEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        couponEntity.setEnabled(0);
+        couponEntity.setDeleted(0);
+        
         // Create CouponHistory
-        CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
-        couponHistoryEntityExt.setCouponId(couponEntity.getId());
-        couponHistoryEntityExt.setCharge(0.0);
-        couponHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
-        couponHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-        couponHistoryEntityExt.setDeleted(0);
+        CouponHistoryEntityExt couponHistoryEntity = new CouponHistoryEntityExt();
+        couponHistoryEntity.setCouponId(couponEntity.getId());
+        couponHistoryEntity.setCharge(0.0);
+        couponHistoryEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntity.setDeleted(0);
 
         try {
             // Create Coupon
@@ -78,7 +83,7 @@ public class CouponManagerImpl implements CouponManager {
             if (couponResult <= 0) {
                 throw new ManagerException("Coupon Create Failed: add Coupon Failed");
             } else {
-                int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntityExt);
+                int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
                 if (couponHistoryResult <= 0) {
                     throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
                 } 
@@ -121,19 +126,19 @@ public class CouponManagerImpl implements CouponManager {
             throw new ManagerException("Previous coupon is null");
         }
         
-        
+        couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         // Create CouponHistory
-        CouponHistoryEntityExt couponHistoryEntityExt = new CouponHistoryEntityExt();
-        couponHistoryEntityExt.setCouponId(couponEntity.getId());
-        couponHistoryEntityExt.setCharge(previousCoupon.getBalance() - couponEntity.getBalance());
-        couponHistoryEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
-        couponHistoryEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-        couponHistoryEntityExt.setDeleted(0);
+        CouponHistoryEntityExt couponHistoryEntity = new CouponHistoryEntityExt();
+        couponHistoryEntity.setCouponId(couponEntity.getId());
+        couponHistoryEntity.setCharge(previousCoupon.getBalance() - couponEntity.getBalance());
+        couponHistoryEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntity.setDeleted(0);
 
         try {
             // update Coupon
             couponMapper.update(couponEntity);
-            int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntityExt);
+            int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
             if (couponHistoryResult <= 0) {
                 throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
             } 

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -120,7 +121,8 @@ public class PartnerManagerImpl implements PartnerManager {
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
- 
+        
+        partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             partnerMapper.update(partnerEntity);
         } catch (Throwable t) {
@@ -149,6 +151,10 @@ public class PartnerManagerImpl implements PartnerManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         int result = 0;
+        partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        partnerEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        partnerEntity.setEnabled(0);
+        partnerEntity.setDeleted(0);
         try {
             result = partnerMapper.add(partnerEntity);
         } catch (Throwable t) {

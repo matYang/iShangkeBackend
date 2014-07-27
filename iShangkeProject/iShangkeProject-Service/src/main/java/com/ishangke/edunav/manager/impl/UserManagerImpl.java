@@ -97,6 +97,11 @@ public class UserManagerImpl implements UserManager {
 
         // 插入新的USER
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        
+        userEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        userEntity.setLastLoginTime(DateUtility.getCurTimeInstance());
+        userEntity.setEnabled(0);
+        userEntity.setDeleted(0);
         try {
             //hash the password
             userEntity.setPassword(PasswordCrypto.createHash(userEntity.getPassword()));
@@ -555,6 +560,7 @@ public class UserManagerImpl implements UserManager {
             throw new AuthenticationException("Non-admin user trying deleting someone else's user");
         }
         
+        targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             targetUserEntity.setDeleted(1);
             userMapper.deleteById(targetUserEntity.getId());
@@ -584,6 +590,7 @@ public class UserManagerImpl implements UserManager {
             }
         }
         
+        targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(targetUserEntity);
         } catch (Throwable t) {

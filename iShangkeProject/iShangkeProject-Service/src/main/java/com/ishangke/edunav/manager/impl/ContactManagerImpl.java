@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ContactBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -57,7 +58,11 @@ public class ContactManagerImpl implements ContactManager {
                 throw new AuthenticationException("User creating someone else's contact");
             }
         }
-
+        
+        contactEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        contactEntity.setEnabled(0);
+        contactEntity.setDeleted(0);
         int result = 0;
         try {
             result = contactMapper.add(contactEntity);
@@ -91,7 +96,8 @@ public class ContactManagerImpl implements ContactManager {
                 throw new AuthenticationException("User updating someone else's contact");
             }
         }
-
+        
+        contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             contactMapper.update(contactEntity);
         } catch (Throwable t) {
@@ -121,7 +127,8 @@ public class ContactManagerImpl implements ContactManager {
                 throw new AuthenticationException("User deleting someone else's contact");
             }
         }
-
+        
+        contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             contactEntity.setDeleted(1);
             contactMapper.deleteById(contactEntity.getId());

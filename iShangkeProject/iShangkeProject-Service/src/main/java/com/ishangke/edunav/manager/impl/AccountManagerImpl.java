@@ -21,7 +21,6 @@ import com.ishangke.edunav.dataaccess.mapper.WithdrawEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
-import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AccountManager;
 import com.ishangke.edunav.manager.AuthManager;
@@ -73,48 +72,34 @@ public class AccountManagerImpl implements AccountManager {
             throw new ManagerException("User Exchange Cash Failed: 该账户不属于此用户");
         }
         try {
-            // Create Withdraw
-            WithdrawEntityExt withdraw = new WithdrawEntityExt();
-            withdraw.setCreateTime(DateUtility.getCurTimeInstance());
-            withdraw.setLastModifyTime(DateUtility.getCurTimeInstance());
-            withdraw.setEnabled(1);
-            withdraw.setDeleted(0);
-            withdraw.setUserId(userEntity.getId());
-            withdraw.setPayeeId(payee_Id);
-            withdraw.setPeyeeName(payee_Name);
-            withdraw.setType(type);
+            //TODO withdraw stands for 取款方式, not dynamically added here
+            //TODO to get the withdraw id, might need to change interface to pass a withdrawBo
+            
+            // Create AccountHistory
+            AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
+            accountHistory.setCharge(amount);
+            accountHistory.setUserId(userEntity.getId());
+            //accountHistory.setWithdrawId(withdraw.getId());
+            accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            //accountHistory.setType(withdraw.getType());
+            accountHistory.setDeleted(0);
 
-            int withdrawResult = 0;
-            withdrawResult = withdrawMapper.add(withdraw);
+            int accountHistoryResult = 0;
+            accountHistoryResult = accountHistoryMapper.add(accountHistory);
 
-            if (withdrawResult > 0) {
-                // Create AccountHistory
-                AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
-                accountHistory.setCharge(amount);
-                accountHistory.setUserId(userEntity.getId());
-                accountHistory.setWithdrawId(withdraw.getId());
-                accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
-                accountHistory.setType(withdraw.getType());
-                accountHistory.setDeleted(0);
-
-                int accountHistoryResult = 0;
-                accountHistoryResult = accountHistoryMapper.add(accountHistory);
-
-                if (accountHistoryResult > 0) {
-                    // Update Account
-                    try {
-                        AccountEntityExt oldAccount = accountMapper.getById(accountEntity.getId());
-                        oldAccount.setBalance(oldAccount.getBalance() - amount);
-                        accountMapper.update(oldAccount);
-                        return AccountConverter.toBo(oldAccount);
-                    } catch (Throwable t) {
-                        throw new ManagerException("User Exchange Cash Failed: Get accountEntity and Update the balance of it Failed", t);
-                    }
-                } else {
-                    throw new ManagerException("User Exchange Cash Failed: Add accountHistory Failed");
+            if (accountHistoryResult > 0) {
+                // Update Account
+                try {
+                    AccountEntityExt oldAccount = accountMapper.getById(accountEntity.getId());
+                    oldAccount.setBalance(oldAccount.getBalance() - amount);
+                    oldAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
+                    accountMapper.update(oldAccount);
+                    return AccountConverter.toBo(oldAccount);
+                } catch (Throwable t) {
+                    throw new ManagerException("User Exchange Cash Failed: Get accountEntity and Update the balance of it Failed", t);
                 }
             } else {
-                throw new ManagerException("User Exchange Cash Failed: Add withdraw Failed");
+                throw new ManagerException("User Exchange Cash Failed: Add accountHistory Failed");
             }
 
         } catch (Throwable t) {

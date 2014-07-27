@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -71,7 +72,11 @@ public class TeacherManagerImpl implements TeacherManager {
         // 插入新的teacher记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        teacherEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        teacherEntity.setEnabled(0);
+        teacherEntity.setDeleted(0);
         int result = 0;
         try {
             result = teacherMapper.add(teacherEntity);
@@ -119,6 +124,7 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
+        teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             teacherMapper.update(teacherEntity);
         } catch (Throwable t) {
@@ -161,7 +167,8 @@ public class TeacherManagerImpl implements TeacherManager {
         // 删除TEACHER记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             teacherEntity.setDeleted(1);
             teacherMapper.deleteById(teacherEntity.getId());

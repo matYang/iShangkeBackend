@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -70,7 +71,11 @@ public class AddressManagerImpl implements AddressManager {
         // Convert
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        addressEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        addressEntity.setEnabled(0);;
+        addressEntity.setDeleted(0);
         int result = 0;
         try {
             result = addressMapper.add(addressEntity);
@@ -117,7 +122,8 @@ public class AddressManagerImpl implements AddressManager {
         // Convert
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             addressMapper.update(addressEntity);
         } catch (Throwable t) {
@@ -160,7 +166,8 @@ public class AddressManagerImpl implements AddressManager {
         // Convert
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             addressEntity.setDeleted(1);
             addressMapper.deleteById(addressEntity.getId());
