@@ -72,6 +72,7 @@ public class SMSDispatcher {
         ExecutorProvider.executeRelay(sms);
     }
 
+    //TODO
     public static void sendInviterConsolidationSMS(final String cellNum, final int amount) {
         String payload = "您邀请的好友已通过爱上课报名课程，您额外获得的" + amount + "元现金已到账，不是券，是现金哦~";
         SMSTask sms = new SMSTask(Event.USER_INVITERCONSOLIDATION, cellNum, payload);

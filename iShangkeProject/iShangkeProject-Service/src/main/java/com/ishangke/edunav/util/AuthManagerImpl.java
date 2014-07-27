@@ -10,7 +10,6 @@ import net.spy.memcached.CASMutation;
 import net.spy.memcached.CASMutator;
 import net.spy.memcached.transcoders.SerializingTranscoder;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -213,7 +212,7 @@ public class AuthManagerImpl implements AuthManager {
     public String openAuthSession(int identifier) {
         try {
             final String key = AuthConfig.PREFIX + identifier;
-            final String authCode = RandomStringUtils.randomAlphanumeric(AuthConfig.AUTHCODELENGTH);
+            final String authCode = AuthCodeGenerator.alphaNumerical(AuthConfig.AUTHCODELENGTH);
             final long curTime = DateUtility.getCurTime();
 
             // 新建用以完成CAS操作的mutator
@@ -398,7 +397,7 @@ public class AuthManagerImpl implements AuthManager {
                 }
             }
             cvRecord = new CellVerificationConfigObj();
-            cvRecord.authCode = RandomStringUtils.randomAlphanumeric(CellVerificationConfig.AUTHCODELENGTH);
+            cvRecord.authCode = AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH);
             cvRecord.timeStamp = DateUtility.getCurTime();
 
             // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间缓存不过期的不稳定问题
@@ -472,7 +471,7 @@ public class AuthManagerImpl implements AuthManager {
                 }
             }
             fpRecord = new ForgetPasswordConfigObj();
-            fpRecord.authCode = RandomStringUtils.randomAlphanumeric(ForgetPasswordConfig.AUTHCODELENGTH);
+            fpRecord.authCode = AuthCodeGenerator.numerical(ForgetPasswordConfig.AUTHCODELENGTH);
             fpRecord.timeStamp = DateUtility.getCurTime();
 
             // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间不稳定的问题
