@@ -216,7 +216,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("InitializeNormalUser user with unique identifier: " + uniqueIdentifier  + " failed", t);
         }
         
-        return UserConverter.toBo(userEntity);
+        return UserConverter.toBo(userMapper.getById(userEntity.getId()));
     }
 
 
@@ -397,6 +397,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
+        curUser.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -426,6 +427,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
+        curUser.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -552,7 +554,6 @@ public class UserManagerImpl implements UserManager {
             throw new AuthenticationException("Non-admin user trying deleting someone else's user");
         }
         
-        targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             targetUserEntity.setDeleted(1);
             userMapper.deleteById(targetUserEntity.getId());
@@ -589,7 +590,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("User update failed for user: " + currentUserEntity.getId(), t);
         }
         
-        return UserConverter.toBo(targetUserEntity);
+        return UserConverter.toBo(userMapper.getById(targetUserEntity.getId()));
     }
 
     @Override

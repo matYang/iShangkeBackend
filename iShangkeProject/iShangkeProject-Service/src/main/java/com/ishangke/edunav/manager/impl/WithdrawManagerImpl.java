@@ -73,7 +73,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            return WithdrawConverter.toBo(withdrawEntity);
+            return WithdrawConverter.toBo(withdrawMapper.getById(withdrawEntity.getId()));
         } else {
             throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId());
         }
@@ -106,7 +106,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
             throw new ManagerException("Withdraw update failed for user: " + userEntity.getId(), t);
         }
 
-        return WithdrawConverter.toBo(withdrawEntity);
+        return WithdrawConverter.toBo(withdrawMapper.getById(withdrawEntity.getId()));
     }
 
     @Override
@@ -129,7 +129,6 @@ public class WithdrawManagerImpl implements WithdrawManager {
             }
         }
         
-        withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             withdrawEntity.setDeleted(1);
             withdrawMapper.deleteById(withdrawEntity.getId());

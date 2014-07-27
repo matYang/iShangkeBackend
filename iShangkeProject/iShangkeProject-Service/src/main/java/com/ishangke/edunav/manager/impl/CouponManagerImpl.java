@@ -93,7 +93,7 @@ public class CouponManagerImpl implements CouponManager {
             throw new ManagerException("Coupon create failed for user: " + userEntity.getId(), t);
         }
         
-        return CouponConverter.toBo(couponEntity);
+        return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
     }
     
     
@@ -138,7 +138,7 @@ public class CouponManagerImpl implements CouponManager {
             throw new ManagerException("Coupon activate failed for user: " + previousCoupon.getId(), t);
         }
         
-        return CouponConverter.toBo(previousCoupon);
+        return CouponConverter.toBo(couponMapper.getById(previousCoupon.getId()));
     }
 
     @Override
@@ -193,7 +193,7 @@ public class CouponManagerImpl implements CouponManager {
             throw new ManagerException("Coupon update failed for user: " + userEntity.getId(), t);
         }
         
-        return CouponConverter.toBo(couponEntity);
+        return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
     }
 
     @Override

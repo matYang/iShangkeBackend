@@ -84,7 +84,7 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Teacher creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            return TeacherConverter.toBo(teacherEntity);
+            return TeacherConverter.toBo(teacherMapper.getById(teacherEntity.getId()));
         } else {
             throw new ManagerException("Teacher creation failed for user: " + userEntity.getId());
         }
@@ -131,7 +131,7 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Teacher update failed for user: " + userEntity.getId(), t);
         }
 
-        return TeacherConverter.toBo(teacherEntity);
+        return TeacherConverter.toBo(teacherMapper.getById(teacherEntity.getId()));
     }
 
     @Override
@@ -168,7 +168,6 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             teacherEntity.setDeleted(1);
             teacherMapper.deleteById(teacherEntity.getId());
