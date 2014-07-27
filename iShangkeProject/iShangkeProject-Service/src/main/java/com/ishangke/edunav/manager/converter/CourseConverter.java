@@ -14,6 +14,9 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 public class CourseConverter {
     public static CourseBo toBo(CourseEntityExt e) {
+        if (e == null) {
+             return null;
+        }
         CourseBo courseBo = new CourseBo();
         if (e.getAddress() != null) {
             courseBo.setAddress(e.getAddress());
@@ -371,6 +374,9 @@ public class CourseConverter {
     }
 
     public static CourseEntityExt fromBo(CourseBo bo) {
+        if (bo ==null) {
+            return null;
+        }
         CourseEntityExt courseEntityExt = new CourseEntityExt();
         courseEntityExt.setAddress(bo.getAddress());
         courseEntityExt.setAddressId(bo.getAddressId());

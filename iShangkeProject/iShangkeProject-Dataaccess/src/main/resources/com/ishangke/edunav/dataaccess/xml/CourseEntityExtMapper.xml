@@ -1106,10 +1106,10 @@
         </if>
       </if>
 
-      <if test="entity.courseTemplateId != null">
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
         AND COURSE.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseTemplateId == null">
+      <if test="entity.courseTemplateId == null or entity.courseTemplateId != 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND COURSE.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
@@ -1463,10 +1463,10 @@
         </if>
       </if>
 
-      <if test="entity.courseTemplateId != null">
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId == 0">
         AND COURSE.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseTemplateId == null">
+      <if test="entity.courseTemplateId == null or entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND COURSE.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
