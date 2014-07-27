@@ -28,6 +28,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.manager.exception.notfound.CouponNotFoundException;
 
 @Component
 public class CouponManagerImpl implements CouponManager {
@@ -96,6 +97,49 @@ public class CouponManagerImpl implements CouponManager {
     }
     
     
+    @Override
+    public CouponBo activateCoupon(CouponBo couponBo, UserBo userBo) {
+        // Check Null
+        if (couponBo == null || userBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+
+        // Convert
+        CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        
+        
+        //admin and system admins can update user's coupons
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call activateCoupon at " + new Date(), userBo.getName()));
+        }
+        else {
+            //otherwise user can only modify their own, thus making an UserId necessary
+            if (couponEntity == null || couponEntity.getUserId() == null || !couponEntity.getUserId().equals(userEntity.getId())) {
+                throw new AuthenticationException("User activating someone else's coupon");
+            }
+        }
+        if (couponEntity.getId() == null) {
+            throw new ManagerException("CouponId null for activate coupon");
+        }
+        
+        CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
+        if (previousCoupon == null) {
+            throw new CouponNotFoundException("Coupon to activate is not found");
+        }
+        
+        //TODO set status to usable
+        previousCoupon.setLastModifyTime(DateUtility.getCurTimeInstance());
+       
+        try {
+            // update Coupon
+            couponMapper.update(previousCoupon);
+        } catch (Throwable t) {
+            throw new ManagerException("Coupon activate failed for user: " + previousCoupon.getId(), t);
+        }
+        
+        return CouponConverter.toBo(previousCoupon);
+    }
 
     @Override
     public CouponBo updateCoupon(CouponBo couponBo, UserBo userBo) {
@@ -111,7 +155,7 @@ public class CouponManagerImpl implements CouponManager {
         
         //admin and system admins can update user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call createCoupon at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call updateCoupon at " + new Date(), userBo.getName()));
         }
         else {
             //otherwise user can only modify their own, thus making an UserId necessary
@@ -119,11 +163,14 @@ public class CouponManagerImpl implements CouponManager {
                 throw new AuthenticationException("User updating someone else's coupon");
             }
         }
+        if (couponEntity.getId() == null) {
+            throw new ManagerException("CouponId null for update coupon");
+        }
         
-        //TODO we probably need a way to tell how much credit is used instead reading previous credit out
+        //TODO we probably need a way to tell how much coupon is used instead reading previous credit out
         CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
         if (previousCoupon == null) {
-            throw new ManagerException("Previous coupon is null");
+            throw new CouponNotFoundException("Previous coupon is not found");
         }
         
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());

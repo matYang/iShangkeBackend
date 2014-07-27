@@ -23,6 +23,13 @@ public interface CouponManager {
     CouponBo createCoupon(CouponBo couponBo, UserBo userBo);
     
     /**
+     * 本方法为激活优惠券功能。<br>
+     * 系统根据相关条件，激活优惠券
+     * @return 优惠券实体 CouponBo
+     */
+    CouponBo activateCoupon(CouponBo couponBo, UserBo userBo);
+    
+    /**
      * 本方法为修改优惠券功能。<br>
      * 根据用户使用情况，修改优惠券
      * 

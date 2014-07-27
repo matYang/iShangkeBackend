@@ -197,8 +197,11 @@ public class ManagerErrorCode {
     public static final String COUPON_EXCHANGE_ERROR_KEY = "coupon_exchange_error";
     public static final int COUPON_EXCHANGEACCOUNT_ERROR = 0x000E0004;
     public static final String COUPON_EXCHANGEACCOUNT_ERROR_KEY = "coupon_exchangeaccount_error";
+    public static final int COUPON_ACTIVATE_ERROR = 0x000E0005;
+    public static final String COUPON_ACTIVATE_ERROR_KEY = "coupon_activate_error";
     public static final int COUPON_NOTFOUND_ERROR = 0x000E0404;
     public static final String COUPON_NOTFOUND_ERROR_KEY = "coupon_notfound_error";
+    
 
     // credit
     public static final int CREDIT_CREATE_ERROR = 0x000E0001;
@@ -491,6 +494,8 @@ public class ManagerErrorCode {
     public static final String PERMISSION_USER_OPENFORGETPASSWORDSESSION_KEY = "permission_user_forgetPasswordSession";
     public static final int PERMISSION_USER_CHANGEPASSWORD = 0x0100005F;
     public static final String PERMISSION_USER_CHANGEPASSWORD_KEY = "permission_user_changePassword";
+    public static final int PERMISSION_ACCOUNT_ACTIVATECOUPON = 0x01000060;
+    public static final String PERMISSION_ACCOUNT_ACTIVATECOUPON_KEY = "permission_account_activateCoupon";
     
     
 
