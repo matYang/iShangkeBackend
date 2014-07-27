@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -38,6 +40,7 @@ import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.UserManager;
+import com.ishangke.edunav.manager.async.dispatcher.SMSDispatcher;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
@@ -83,13 +86,8 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private CouponManager couponManager;
     
-    private String getReference() {
-        //TODO this is just a placeholder of reference factory, used to pass compilation
-        return null;
-    }
     
-    
-    private UserBo initializeNormalUser(UserBo userBo, int groupId, String uniqueIdentifier) {
+    private UserBo initializeNormalUser(UserBo userBo, int groupId, String uniqueIdentifier, boolean notify) {
         // 参数验证
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -122,13 +120,12 @@ public class UserManagerImpl implements UserManager {
             
             AccountEntityExt accountEntity = new AccountEntityExt();
             accountEntity.setId(userEntity.getId());
-            accountEntity.setBalance(0.0);
+            accountEntity.setBalance(0.0d);
             accountEntity.setRealName(userEntity.getName());
             accountEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
             accountEntity.setCreateTime(DateUtility.getCurTimeInstance());
             accountEntity.setEnabled(0);
             accountEntity.setDeleted(0);
-            accountEntity.setAccountNumber(getReference());
             result = accountMapper.add(accountEntity);
             if (result <= 0) {
                 throw new ManagerException("InitializeNormalUser::addAccount user with unique identifier: " + uniqueIdentifier  + " failed");
@@ -136,7 +133,7 @@ public class UserManagerImpl implements UserManager {
             
             CreditEntityExt creditEntity = new CreditEntityExt();
             creditEntity.setId(userEntity.getId());
-            creditEntity.setCredit(0.0);
+            creditEntity.setCredit(0.0d);
             creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
             creditEntity.setCreateTime(DateUtility.getCurTimeInstance());
             creditEntity.setEnabled(0);
@@ -158,11 +155,10 @@ public class UserManagerImpl implements UserManager {
             
             
             CouponEntityExt couponEntity = new CouponEntityExt();
-            couponEntity.setCode(getReference());
             //TODO constants and enums
-            couponEntity.setBalance(50.0);
-            couponEntity.setBalance(50.0);
-            couponEntity.setOrigin(0);
+            couponEntity.setBalance(DefaultValues.COUPONREGISTRATIONVALUE);
+            couponEntity.setTotal(DefaultValues.COUPONREGISTRATIONVALUE);
+            couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
             expiry.add(Calendar.YEAR, 1);
             couponEntity.setExpiryTime(expiry);
@@ -175,6 +171,7 @@ public class UserManagerImpl implements UserManager {
             couponManager.createCoupon(CouponConverter.toBo(couponEntity), UserConverter.toBo(userEntity));
             
             String appliedInvitationCode = userEntity.getAppliedInvitationCode();
+            UserEntityExt inviterEntity = null;
             if (appliedInvitationCode != null && appliedInvitationCode.length() > 0) {
                 //use used an invitation code
                 UserEntityExt inviterSearch = new UserEntityExt();
@@ -183,14 +180,12 @@ public class UserManagerImpl implements UserManager {
                 if (inviterSearchResult == null || inviterSearchResult.size() == 0) {
                     throw new ManagerException("InitializeNormalUser::inviter not found with invitation code: " + appliedInvitationCode + " for unique identifier: " + uniqueIdentifier );
                 }
-                UserEntityExt inviterEntity = inviterSearchResult.get(0);
-                
+                inviterEntity = inviterSearchResult.get(0);
                 
                 CouponEntityExt curUserCouponEntity = new CouponEntityExt();
-                curUserCouponEntity.setCode(getReference());
-                curUserCouponEntity.setBalance(20.0);
-                curUserCouponEntity.setBalance(20.0);
-                curUserCouponEntity.setOrigin(0);
+                curUserCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
+                curUserCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
+                curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
                 curUserCouponEntity.setExpiryTime(expiry);
                 curUserCouponEntity.setRemark("");
                 curUserCouponEntity.setUserId(userEntity.getId());
@@ -201,10 +196,9 @@ public class UserManagerImpl implements UserManager {
                 couponManager.createCoupon(CouponConverter.toBo(curUserCouponEntity), UserConverter.toBo(userEntity));
                 
                 CouponEntityExt inviterCouponEntity = new CouponEntityExt();
-                inviterCouponEntity.setCode(getReference());
-                inviterCouponEntity.setBalance(20.0);
-                inviterCouponEntity.setBalance(20.0);
-                inviterCouponEntity.setOrigin(0);
+                inviterCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
+                inviterCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
+                inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
                 inviterCouponEntity.setExpiryTime(expiry);
                 inviterCouponEntity.setRemark("");
                 inviterCouponEntity.setUserId(inviterEntity.getId());
@@ -220,11 +214,20 @@ public class UserManagerImpl implements UserManager {
             if (userEntity == null) {
                 throw new UserNotFoundException("InitializeNormalUser::lastFetch with unique identifier: " + uniqueIdentifier  + " failed");
             }
+            
+            UserEntityExt returnEntity = userMapper.getById(userEntity.getId());
+            if (notify) {
+                SMSDispatcher.sendUserRegistraterSMS(userEntity.getPhone(), DefaultValues.COUPONREGISTRATIONVALUE);
+                if (inviterEntity != null) {
+                    SMSDispatcher.sendInviteeSMS(userEntity.getPhone(), DefaultValues.COUPONINVITATIONVALUE);
+                    SMSDispatcher.sendInviterSMS(inviterEntity.getPhone(), DefaultValues.COUPONINVITATIONVALUE);
+                }
+            }
+            return UserConverter.toBo(returnEntity);
         } catch (Throwable t) {
             throw new ManagerException("InitializeNormalUser user with unique identifier: " + uniqueIdentifier  + " failed", t);
         }
         
-        return UserConverter.toBo(userEntity);
     }
 
 
@@ -249,7 +252,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException(userBo.getPhone() + " is already in db");
         }
         
-        return initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone());
+        return initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
     }
 
     @Override
@@ -276,7 +279,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         //act like a normal registration
-        return initializeNormalUser(targetUser, Constant.GROUPUSER, targetUser.getPhone());
+        return initializeNormalUser(targetUser, Constant.GROUPUSER, targetUser.getPhone(), false);
     }
     
     @Override
@@ -311,7 +314,7 @@ public class UserManagerImpl implements UserManager {
                 throw new ManagerException("CreatePartnerUser::addGroup failed");
             }
             
-            response = initializeNormalUser(targetUser, group.getId(), targetUser.getReference());
+            response = initializeNormalUser(targetUser, group.getId(), targetUser.getReference(), false);
         } catch (Throwable t) {
             throw new ManagerException("CreatePartnerUser failed", t);
         }
@@ -346,6 +349,8 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setId(curUser.getId());
         sessionBo.setAccountIdentifier(curUser.getPhone());
         sessionBo.setAuthCode(authCode);
+        
+        SMSDispatcher.sendUserCellVerificationSMS(userBo.getPhone(), authCode);
         return sessionBo;
     }
 
@@ -374,6 +379,8 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setId(curUser.getId());
         sessionBo.setAccountIdentifier(curUser.getPhone());
         sessionBo.setAuthCode(authCode);
+        
+        SMSDispatcher.sendUserForgetPasswordSMS(userBo.getPhone(), authCode);
         return sessionBo;
     }
     
@@ -405,6 +412,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
+        curUser.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -434,6 +442,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
+        curUser.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -560,7 +569,6 @@ public class UserManagerImpl implements UserManager {
             throw new AuthenticationException("Non-admin user trying deleting someone else's user");
         }
         
-        targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             targetUserEntity.setDeleted(1);
             userMapper.deleteById(targetUserEntity.getId());
@@ -597,7 +605,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("User update failed for user: " + currentUserEntity.getId(), t);
         }
         
-        return UserConverter.toBo(targetUserEntity);
+        return UserConverter.toBo(userMapper.getById(targetUserEntity.getId()));
     }
 
     @Override

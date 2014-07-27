@@ -84,6 +84,18 @@ service AccountService{
      */
     coupon.CouponBo createCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+	/**
+     *  本方法为激活优惠券功能。<br>
+     *  用户优惠券
+     *
+     *  @param  couponBo       需要激活的优惠券信息
+     *  @param  userBo         调用方法的用户的信息
+     *
+     *  @return 激活后的优惠券实体 CouponBo 
+     */
+    coupon.CouponBo activateCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+
     /**
      *  本方法为查询优惠券功能。<br>
      *  用户可以查询自己拥有的优惠券，系统可以查看所有优惠券
@@ -177,7 +189,11 @@ service AccountService{
 
 
 
-
+    /**********************************************************
+    *
+    *   关于取款方式 Withdraw
+    *
+    **********************************************************/
 
     /**
      *  创建存取款信息。<br>

@@ -115,6 +115,6 @@ public class ApplicationServer {
 
         applicationContext.getBean(ApplicationServer.class).start();
 
-        LOGGER.info("[Server] Server finished startiing.");
+        LOGGER.info("[Server] Server finished starting.");
     }
 }

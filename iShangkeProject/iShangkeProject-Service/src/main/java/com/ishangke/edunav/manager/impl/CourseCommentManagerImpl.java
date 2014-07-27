@@ -75,7 +75,7 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
         }
         
         if (result > 0) {
-            return CourseCommentConverter.toBo(courseCommentEntity);
+            return CourseCommentConverter.toBo(courseCommentMapper.getById(courseCommentEntity.getId()));
         } else {
             throw new ManagerException("CourseComment creation failed for user: " + userEntity.getId());
         }
@@ -111,7 +111,6 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
             throw new ManagerException("CourseComment Delete Failed: 此课程模版id为null或0");
         }
 
-        courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             courseCommentEntity.setDeleted(1);
             courseCommentMapper.deleteById(courseCommentEntity.getId());
