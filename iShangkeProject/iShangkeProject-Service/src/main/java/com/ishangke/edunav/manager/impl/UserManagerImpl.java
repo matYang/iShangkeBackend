@@ -41,6 +41,7 @@ import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
+import com.ishangke.edunav.manager.crypto.PasswordCrypto;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.UserNotFoundException;
@@ -97,6 +98,8 @@ public class UserManagerImpl implements UserManager {
         // 插入新的USER
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         try {
+            //hash the password
+            userEntity.setPassword(PasswordCrypto.createHash(userEntity.getPassword()));
             int result = userMapper.add(userEntity);
             if (result <= 0) {
                 throw new ManagerException("InitializeNormalUser::addUser user with unique identifier: " + uniqueIdentifier + " failed");
@@ -396,7 +399,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("Authcode does not match");
         }
         
-        curUser.setPassword(passwordBo.getNewPassword());
+        curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -421,11 +424,11 @@ public class UserManagerImpl implements UserManager {
         if (curUser == null || curUser.getId() <= 0) {
             throw new UserNotFoundException("ChangePassword failed for user: " + passwordBo.getId());
         }
-        if (!curUser.getPassword().equals(passwordBo.getOldPassword())) {
+        if (!PasswordCrypto.validatePassword(passwordBo.getOldPassword(), curUser.getPassword())) {
             throw new AuthenticationException("Password not Match");
         }
         
-        curUser.setPassword(passwordBo.getNewPassword());
+        curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
@@ -487,7 +490,7 @@ public class UserManagerImpl implements UserManager {
             }
             
             curUser = results.get(0);
-            if (!curUser.getPassword().equals(loginBo.getPassword())) {
+            if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("Phone or password not match");
             }
             
@@ -518,7 +521,7 @@ public class UserManagerImpl implements UserManager {
             }
             
             curUser = results.get(0);
-            if (!curUser.getPassword().equals(loginBo.getPassword())) {
+            if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("Reference or password not match");
             }
             
