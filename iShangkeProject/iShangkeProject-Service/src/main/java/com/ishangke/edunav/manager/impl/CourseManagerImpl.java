@@ -587,7 +587,14 @@ public class CourseManagerImpl implements CourseManager {
             courseTee.setCourseTemplateId(oldCourseEntity.getCourseTemplateId());
             courseMapper.update(courseTee);
         } else {
-            //todo admin 操作
+            CourseEntityExt courseTee = CourseConverter.fromBo(courseBo);
+            //不能修改partner
+            courseTee.setPartnerId(oldCourseEntity.getPartnerId());
+            //修改lastmodifytime
+            courseTee.setLastModifyTime(DateUtility.getCurTimeInstance());
+            //状态直接设置为已上线            
+            courseTee.setStatus(Constant.COURSESTATUSONLINED);
+            courseMapper.update(courseTee);
         }
         return CourseConverter.toBo(courseMapper.getById(courseBo.getId()));
     }

@@ -355,6 +355,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             
         } else {
             CourseTemplateEntityExt courseTee = CourseTemplateConverter.fromBo(courseTemplateBo);
+            //不能修改partner
             courseTee.setPartnerId(oldCourseTemplateEntity.getPartnerId());
             //修改lastmodifytime
             courseTee.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -442,10 +443,6 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             result.setActionList(actions);
             return result;
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
-            if (courseTemplateBo.getPartnerId() != courseTemplate.getPartnerId()) {
-                LOGGER.warn(String.format("[transform course template status] system admin [%d] try to change course template's partner from [%d] to [%d]", userBo.getId(),
-                        courseTemplate.getPartnerId(), courseTemplateBo.getPartnerId()));
-            }
             List<Operation> allOperation = transformManager.listAll(Constant.STATUSTRANSFORMCOURSETEMPLATE);
             if (allOperation != null) {
                 for (Operation o : allOperation) {

@@ -62,8 +62,8 @@ public class ThriftClientSettingManager {
 //        System.out.println(settingMap);
     }
 //
-//    public static void main(String[] args) throws Exception {
-//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-//                "classpath*:applicationContext-*.xml");
-//    }
+    public static void main(String[] args) throws Exception {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+                "classpath*:applicationContext-*.xml");
+    }
 }
