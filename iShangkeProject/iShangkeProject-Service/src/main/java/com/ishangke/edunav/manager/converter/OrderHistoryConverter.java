@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 
 public class OrderHistoryConverter {
     public static OrderHistoryBo toBo(OrderHistoryEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         OrderHistoryBo orderHistoryBo = new OrderHistoryBo();
         if (e.getEnabled() != null) {
             orderHistoryBo.setEnabled(e.getEnabled());
@@ -74,6 +77,9 @@ public class OrderHistoryConverter {
     }
 
     public static OrderHistoryEntityExt fromBo(OrderHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         OrderHistoryEntityExt orderHistoryEntityExt = new OrderHistoryEntityExt();
         orderHistoryEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         orderHistoryEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.RolePermissionEntityExt;
 
 public class RolePermissionConverter {
     public static RolePermissionBo toBo(RolePermissionEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         RolePermissionBo rolePermissionBo = new RolePermissionBo();
         if (e.getId() != null) {
             rolePermissionBo.setId(e.getId());
@@ -26,13 +29,19 @@ public class RolePermissionConverter {
         if (e.getRoleIdSet() != null) {
             rolePermissionBo.setRoleIdSet(e.getRoleIdSet());
         }
-        rolePermissionBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        rolePermissionBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        rolePermissionBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        rolePermissionBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return rolePermissionBo;
     }
 
     public static RolePermissionEntityExt fromBo(RolePermissionBo bo) {
+        if (bo == null) {
+            return null;
+        }
         RolePermissionEntityExt rolePermissionEntityExt = new RolePermissionEntityExt();
         rolePermissionEntityExt.setId(bo.getId());
         rolePermissionEntityExt.setIdSet(bo.getIdSet());

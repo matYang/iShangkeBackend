@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.PermissionVo;
 
 public class PermissionConverter {
     public static PermissionBo fromModel(PermissionVo vo) {
+        if (vo == null) {
+            return null;
+        }
         PermissionBo permissionBo = new PermissionBo();
         if (vo.getEnabled() != null) {
             permissionBo.setEnabled(vo.getEnabled());
@@ -26,17 +29,26 @@ public class PermissionConverter {
         if (vo.getTag() != null) {
             permissionBo.setTag(vo.getTag());
         }
-        permissionBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        permissionBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        permissionBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        permissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        permissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        permissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        permissionBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        permissionBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        permissionBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
+        permissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        permissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        permissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return permissionBo;
     }
 
     public static PermissionVo toModel(PermissionBo bo) {
-        PermissionVo permissionVo =new PermissionVo();
+        if (bo == null) {
+            return null;
+        }
+        PermissionVo permissionVo = new PermissionVo();
         permissionVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         permissionVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         permissionVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));

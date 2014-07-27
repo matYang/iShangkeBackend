@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.CourseTemplateClassPhotoVo;
 
 public class CourseTemplateClassPhotoConverter {
     public static CourseTemplateClassPhotoBo fromModel(CourseTemplateClassPhotoVo vo) {
+        if (vo == null) {
+            return null;
+        }
         CourseTemplateClassPhotoBo courseTemplateClassPhotoBo = new CourseTemplateClassPhotoBo();
         if (vo.getClassPhotoId() != null) {
             courseTemplateClassPhotoBo.setClassPhotoId(vo.getClassPhotoId());
@@ -26,13 +29,19 @@ public class CourseTemplateClassPhotoConverter {
         if (vo.getIdSet() != null) {
             courseTemplateClassPhotoBo.setIdSet(vo.getIdSet());
         }
-        courseTemplateClassPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        courseTemplateClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        courseTemplateClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        courseTemplateClassPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        courseTemplateClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeEnd().getTimeInMillis());
+        courseTemplateClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
         return courseTemplateClassPhotoBo;
     }
 
     public static CourseTemplateClassPhotoVo toModel(CourseTemplateClassPhotoBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CourseTemplateClassPhotoVo courseTemplateClassPhotoVo = new CourseTemplateClassPhotoVo();
         courseTemplateClassPhotoVo.setClassPhotoId(bo.getClassPhotoId());
         courseTemplateClassPhotoVo.setClassPhotoIdSet(bo.getClassPhotoIdSet());

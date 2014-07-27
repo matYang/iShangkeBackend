@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
 public class GroupConverter {
     public static GroupBo toBo(GroupEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         GroupBo groupBo = new GroupBo();
         if (e.getEnabled() != null) {
             groupBo.setEnabled(e.getEnabled());
@@ -33,15 +36,23 @@ public class GroupConverter {
             groupBo.setRoleIdSet(e.getRoleIdSet());
         }
         groupBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        groupBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        groupBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        groupBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        groupBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        groupBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        groupBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        groupBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        groupBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        groupBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd()
+                .getTimeInMillis());
+        groupBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return groupBo;
     }
 
     public static GroupEntityExt fromBo(GroupBo bo) {
+        if (bo == null) {
+            return null;
+        }
         GroupEntityExt groupEntityExt = new GroupEntityExt();
         groupEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         groupEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

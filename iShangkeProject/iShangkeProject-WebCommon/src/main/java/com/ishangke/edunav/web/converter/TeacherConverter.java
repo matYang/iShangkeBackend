@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.TeacherVo;
 
 public class TeacherConverter {
     public static TeacherBo fromModel(TeacherVo vo) {
+        if (vo == null) {
+            return null;
+        }
         TeacherBo teacherBo = new TeacherBo();
         if (vo.getEnabled() != null) {
             teacherBo.setEnabled(vo.getEnabled());
@@ -34,28 +37,41 @@ public class TeacherConverter {
         }
         if (vo.getPopularity() != null) {
             teacherBo.setPopularity(vo.getPopularity());
-        }  else {
+        } else {
             teacherBo.setPopularity(Constant.DEFAULTNULL);
         }
         if (vo.getPopularityEnd() != null) {
             teacherBo.setPopularityEnd(vo.getPopularityEnd());
+        } else {
+            teacherBo.setPopularityEnd(Constant.DEFAULTNULL);
         }
         if (vo.getPopularitySet() != null) {
             teacherBo.setPopularitySet(vo.getPopularitySet());
         }
         if (vo.getPopularityStart() != null) {
             teacherBo.setPopularityStart(vo.getPopularityStart());
+        } else {
+            teacherBo.setPopularityStart(Constant.DEFAULTNULL);
         }
-        teacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        teacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        teacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        teacherBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        teacherBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        teacherBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        teacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        teacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        teacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        teacherBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        teacherBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        teacherBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return teacherBo;
     }
 
     public static TeacherVo toModel(TeacherBo bo) {
+        if (bo == null) {
+            return null;
+        }
         TeacherVo teacherVo = new TeacherVo();
         teacherVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         teacherVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -72,11 +88,15 @@ public class TeacherConverter {
         teacherVo.setPartnerId(bo.getPartnerId());
         teacherVo.setPartnerIdSet(bo.getPartnerIdSet());
         if (Constant.DEFAULTNULL != bo.getPopularity()) {
-        teacherVo.setPopularity(bo.getPopularity());
+            teacherVo.setPopularity(bo.getPopularity());
         }
-        teacherVo.setPopularityEnd(bo.getPopularityEnd());
+        if (Constant.DEFAULTNULL != bo.getPopularityEnd()) {
+            teacherVo.setPopularityEnd(bo.getPopularityEnd());
+        }
         teacherVo.setPopularitySet(bo.getPopularitySet());
-        teacherVo.setPopularityStart(bo.getPopularityStart());
+        if (Constant.DEFAULTNULL != bo.getPopularityStart()) {
+            teacherVo.setPopularityStart(bo.getPopularityStart());
+        }
         return teacherVo;
     }
 }

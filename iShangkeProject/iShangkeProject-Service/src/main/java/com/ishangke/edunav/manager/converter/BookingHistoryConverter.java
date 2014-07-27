@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 
 public class BookingHistoryConverter {
     public static BookingHistoryBo toBo(BookingHistoryEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         BookingHistoryBo bookingHistoryBo = new BookingHistoryBo();
         if (e.getBookingId() != null) {
             bookingHistoryBo.setBookingId(e.getBookingId());
@@ -74,6 +77,9 @@ public class BookingHistoryConverter {
     }
 
     public static BookingHistoryEntityExt fromBo(BookingHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         BookingHistoryEntityExt bookingHistoryEntityExt = new BookingHistoryEntityExt();
         bookingHistoryEntityExt.setBookingId(bo.getBookingId());
         bookingHistoryEntityExt.setBookingIdSet(bo.getBookingIdSet());

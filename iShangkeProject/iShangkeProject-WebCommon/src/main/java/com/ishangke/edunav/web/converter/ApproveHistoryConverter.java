@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.ApproveHistoryVo;
 
 public class ApproveHistoryConverter {
     public static ApproveHistoryBo fromModel(ApproveHistoryVo vo) {
+        if (vo == null) {
+            return null;
+        }
         ApproveHistoryBo approveHistoryBo = new ApproveHistoryBo();
         if (vo.getApproveUserId() != null) {
             approveHistoryBo.setApproveUserId(vo.getApproveUserId());
@@ -69,6 +72,9 @@ public class ApproveHistoryConverter {
     }
 
     public static ApproveHistoryVo toModel(ApproveHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ApproveHistoryVo approveHistoryVo = new ApproveHistoryVo();
         approveHistoryVo.setApproveUserId(bo.getApproveUserId());
         approveHistoryVo.setApproveUserIdSet(bo.getApproveUserIdSet());

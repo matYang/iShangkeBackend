@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.LocationEntityExt;
 
 public class LocationConverter {
     public static LocationBo toBo(LocationEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         LocationBo locationBo = new LocationBo();
         if (e.getEnabled() != null) {
             locationBo.setEnabled(e.getEnabled());
@@ -23,16 +26,25 @@ public class LocationConverter {
         if (e.getValue() != null) {
             locationBo.setValue(e.getValue());
         }
-        locationBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        locationBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        locationBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        locationBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        locationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        locationBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        locationBo
+                .setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        locationBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        locationBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        locationBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        locationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        locationBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return locationBo;
     }
 
     public static LocationEntityExt fromBo(LocationBo bo) {
+        if (bo == null) {
+            return null;
+        }
         LocationEntityExt locationEntityExt = new LocationEntityExt();
         locationEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         locationEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

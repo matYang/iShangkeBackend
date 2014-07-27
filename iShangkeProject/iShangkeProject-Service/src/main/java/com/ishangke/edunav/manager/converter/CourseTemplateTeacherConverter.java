@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateTeacherEntityExt;
 
 public class CourseTemplateTeacherConverter {
     public static CourseTemplateTeacherBo toBo(CourseTemplateTeacherEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         CourseTemplateTeacherBo courseTemplateTeacherBo = new CourseTemplateTeacherBo();
         if (e.getCourseTemplateId() != null) {
             courseTemplateTeacherBo.setCourseTemplateId(e.getCourseTemplateId());
@@ -26,13 +29,19 @@ public class CourseTemplateTeacherConverter {
         if (e.getTeacherIdSet() != null) {
             courseTemplateTeacherBo.setTeacherIdSet(e.getTeacherIdSet());
         }
-        courseTemplateTeacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        courseTemplateTeacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        courseTemplateTeacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        courseTemplateTeacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        courseTemplateTeacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeEnd().getTimeInMillis());
+        courseTemplateTeacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
         return courseTemplateTeacherBo;
     }
 
     public static CourseTemplateTeacherEntityExt fromBo(CourseTemplateTeacherBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt = new CourseTemplateTeacherEntityExt();
         courseTemplateTeacherEntityExt.setCourseTemplateId(bo.getCourseTemplateId());
         courseTemplateTeacherEntityExt.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());

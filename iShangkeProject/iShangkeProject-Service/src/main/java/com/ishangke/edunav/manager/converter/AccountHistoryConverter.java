@@ -7,15 +7,24 @@ import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 
 public class AccountHistoryConverter {
     public static AccountHistoryBo toBo(AccountHistoryEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         AccountHistoryBo accountHistoryBo = new AccountHistoryBo();
         if (e.getCharge() != null) {
             accountHistoryBo.setCharge(e.getCharge());
+        } else {
+            accountHistoryBo.setCharge(Constant.DEFAULTNULL);
         }
         if (e.getChargeEnd() != null) {
             accountHistoryBo.setChargeEnd(e.getChargeEnd());
+        } else {
+            accountHistoryBo.setChargeEnd(Constant.DEFAULTNULL);
         }
         if (e.getChargeStart() != null) {
             accountHistoryBo.setChargeStart(e.getChargeStart());
+        } else {
+            accountHistoryBo.setChargeStart(Constant.DEFAULTNULL);
         }
         if (e.getId() != null) {
             accountHistoryBo.setId(e.getId());
@@ -46,17 +55,29 @@ public class AccountHistoryConverter {
         if (e.getWithdrawIdSet() != null) {
             accountHistoryBo.setWithdrawIdSet(e.getWithdrawIdSet());
         }
-        accountHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        accountHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        accountHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        accountHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        accountHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        accountHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
         return accountHistoryBo;
     }
 
     public static AccountHistoryEntityExt fromBo(AccountHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         AccountHistoryEntityExt accountHistoryEntityExt = new AccountHistoryEntityExt();
-        accountHistoryEntityExt.setCharge(bo.getCharge());
-        accountHistoryEntityExt.setChargeEnd(bo.getChargeEnd());
-        accountHistoryEntityExt.setChargeStart(bo.getChargeStart());
+        if (bo.getCharge() != Constant.DEFAULTNULL) {
+            accountHistoryEntityExt.setCharge(bo.getCharge());
+        }
+        if (bo.getChargeEnd() != Constant.DEFAULTNULL) {
+            accountHistoryEntityExt.setChargeEnd(bo.getChargeEnd());
+        }
+        if (bo.getChargeStart() != Constant.DEFAULTNULL) {
+            accountHistoryEntityExt.setChargeStart(bo.getChargeStart());
+        }
         accountHistoryEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         accountHistoryEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         accountHistoryEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
@@ -65,7 +86,7 @@ public class AccountHistoryConverter {
         accountHistoryEntityExt.setRemark(bo.getRemark());
         if (bo.getType() != Constant.DEFAULTNULL) {
             accountHistoryEntityExt.setType(bo.getType());
-        } 
+        }
         accountHistoryEntityExt.setTypeSet(bo.getTypeSet());
         accountHistoryEntityExt.setUserId(bo.getUserId());
         accountHistoryEntityExt.setUserIdSet(bo.getUserIdSet());

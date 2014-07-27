@@ -7,15 +7,24 @@ import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 
 public class CouponConverter {
     public static CouponBo toBo(CouponEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         CouponBo couponBo = new CouponBo();
         if (e.getBalance() != null) {
             couponBo.setBalance(e.getBalance());
+        } else {
+            couponBo.setBalance(Constant.DEFAULTNULL);
         }
         if (e.getBalanceEnd() != null) {
             couponBo.setBalanceEnd(e.getBalanceEnd());
+        } else {
+            couponBo.setBalanceEnd(Constant.DEFAULTNULL);
         }
         if (e.getBalanceStart() != null) {
             couponBo.setBalanceStart(e.getBalanceStart());
+        } else {
+            couponBo.setBalanceStart(Constant.DEFAULTNULL);
         }
         if (e.getCode() != null) {
             couponBo.setCode(e.getCode());
@@ -42,12 +51,18 @@ public class CouponConverter {
         }
         if (e.getTotal() != null) {
             couponBo.setTotal(e.getTotal());
+        } else {
+            couponBo.setTotal(Constant.DEFAULTNULL);
         }
         if (e.getTotalEnd() != null) {
             couponBo.setTotalEnd(e.getTotalEnd());
+        } else {
+            couponBo.setTotalEnd(Constant.DEFAULTNULL);
         }
         if (e.getTotalStart() != null) {
             couponBo.setTotalStart(e.getTotalStart());
+        } else {
+            couponBo.setTotalStart(Constant.DEFAULTNULL);
         }
         if (e.getUserId() != null) {
             couponBo.setUserId(e.getUserId());
@@ -75,10 +90,19 @@ public class CouponConverter {
     }
 
     public static CouponEntityExt fromBo(CouponBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CouponEntityExt couponEntityExt = new CouponEntityExt();
-        couponEntityExt.setBalance(bo.getBalance());
-        couponEntityExt.setBalanceEnd(bo.getBalanceEnd());
-        couponEntityExt.setBalanceStart(bo.getBalanceStart());
+        if (bo.getBalance() != Constant.DEFAULTNULL) {
+            couponEntityExt.setBalance(bo.getBalance());
+        }
+        if (bo.getBalanceEnd() != Constant.DEFAULTNULL) {
+            couponEntityExt.setBalanceEnd(bo.getBalanceEnd());
+        }
+        if (bo.getBalanceStart() != Constant.DEFAULTNULL) {
+            couponEntityExt.setBalanceStart(bo.getBalanceStart());
+        }
         couponEntityExt.setCode(bo.getCode());
         couponEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         couponEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -97,9 +121,15 @@ public class CouponConverter {
         }
         couponEntityExt.setOriginSet(bo.getOriginSet());
         couponEntityExt.setRemark(bo.getRemark());
-        couponEntityExt.setTotal(bo.getTotal());
-        couponEntityExt.setTotalEnd(bo.getTotalEnd());
-        couponEntityExt.setTotalStart(bo.getTotalStart());
+        if (bo.getTotal() != Constant.DEFAULTNULL) {
+            couponEntityExt.setTotal(bo.getTotal());
+        }
+        if (bo.getTotalEnd() != Constant.DEFAULTNULL) {
+            couponEntityExt.setTotalEnd(bo.getTotalEnd());
+        }
+        if (bo.getTotalStart() != Constant.DEFAULTNULL) {
+            couponEntityExt.setTotalStart(bo.getTotalStart());
+        }
         couponEntityExt.setUserId(bo.getUserId());
         couponEntityExt.setUserIdSet(bo.getUserIdSet());
         return couponEntityExt;

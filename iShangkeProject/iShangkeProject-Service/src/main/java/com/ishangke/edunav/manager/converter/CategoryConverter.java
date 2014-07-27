@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 
 public class CategoryConverter {
     public static CategoryBo toBo(CategoryEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         CategoryBo categoryBo = new CategoryBo();
         if (e.getEnabled() != null) {
             categoryBo.setEnabled(e.getEnabled());
@@ -27,12 +30,16 @@ public class CategoryConverter {
         }
         if (e.getRankEnd() != null) {
             categoryBo.setRankEnd(e.getRankEnd());
+        } else {
+            categoryBo.setRankEnd(Constant.DEFAULTNULL);
         }
         if (e.getRankSet() != null) {
             categoryBo.setRankSet(e.getRankSet());
         }
         if (e.getRankStart() != null) {
             categoryBo.setRankStart(e.getRankStart());
+        } else {
+            categoryBo.setRankStart(Constant.DEFAULTNULL);
         }
         if (e.getValue() != null) {
             categoryBo.setValue(e.getValue());
@@ -53,6 +60,9 @@ public class CategoryConverter {
     }
 
     public static CategoryEntityExt fromBo(CategoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CategoryEntityExt categoryEntityExt = new CategoryEntityExt();
         categoryEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         categoryEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -67,9 +77,13 @@ public class CategoryConverter {
         if (bo.getRank() != Constant.DEFAULTNULL) {
             categoryEntityExt.setRank(bo.getRank());
         }
-        categoryEntityExt.setRankEnd(bo.getRankEnd());
+        if (bo.getRankEnd() != Constant.DEFAULTNULL) {
+            categoryEntityExt.setRankEnd(bo.getRankEnd());
+        }
         categoryEntityExt.setRankSet(bo.getRankSet());
-        categoryEntityExt.setRankStart(bo.getRankStart());
+        if (bo.getRankStart() != Constant.DEFAULTNULL) {
+            categoryEntityExt.setRankStart(bo.getRankStart());
+        }
         categoryEntityExt.setValue(bo.getValue());
         return categoryEntityExt;
     }

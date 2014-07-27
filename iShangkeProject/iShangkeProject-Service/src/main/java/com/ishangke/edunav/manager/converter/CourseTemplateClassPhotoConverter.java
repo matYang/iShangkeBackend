@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateClassPhotoEntityExt;
 
 public class CourseTemplateClassPhotoConverter {
     public static CourseTemplateClassPhotoBo toBo(CourseTemplateClassPhotoEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         CourseTemplateClassPhotoBo courseTemplateClassPhotoBo = new CourseTemplateClassPhotoBo();
         if (e.getClassPhotoId() != null) {
             courseTemplateClassPhotoBo.setClassPhotoId(e.getClassPhotoId());
@@ -26,13 +29,19 @@ public class CourseTemplateClassPhotoConverter {
         if (e.getIdSet() != null) {
             courseTemplateClassPhotoBo.setIdSet(e.getIdSet());
         }
-        courseTemplateClassPhotoBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        courseTemplateClassPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        courseTemplateClassPhotoBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        courseTemplateClassPhotoBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        courseTemplateClassPhotoBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeEnd().getTimeInMillis());
+        courseTemplateClassPhotoBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
         return courseTemplateClassPhotoBo;
     }
 
     public static CourseTemplateClassPhotoEntityExt fromBo(CourseTemplateClassPhotoBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();
         courseTemplateClassPhotoEntityExt.setClassPhotoId(bo.getClassPhotoId());
         courseTemplateClassPhotoEntityExt.setClassPhotoIdSet(bo.getClassPhotoIdSet());

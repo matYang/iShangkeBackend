@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.ActivityVo;
 
 public class ActivityConverter {
     public static ActivityBo fromModel(ActivityVo vo) {
+        if (vo == null) {
+            return null;
+        }
         ActivityBo activityBo = new ActivityBo();
         if (vo.getCourseId() != null) {
             activityBo.setCourseId(vo.getCourseId());
@@ -40,6 +43,9 @@ public class ActivityConverter {
     }
 
     public static ActivityVo toModel(ActivityBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ActivityVo activityVo = new ActivityVo();
         activityVo.setCourseId(bo.getCourseId());
         activityVo.setCourseIdSet(bo.getCourseIdSet());

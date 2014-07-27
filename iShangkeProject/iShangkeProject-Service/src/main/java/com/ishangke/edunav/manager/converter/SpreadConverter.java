@@ -7,7 +7,10 @@ import com.ishangke.edunav.dataaccess.model.SpreadEntityExt;
 
 public class SpreadConverter {
     public static SpreadBo toBo(SpreadEntityExt e) {
-        SpreadBo spreadBo =new SpreadBo();
+        if (e == null) {
+            return null;
+        }
+        SpreadBo spreadBo = new SpreadBo();
         if (e.getCourseId() != null) {
             spreadBo.setCourseId(e.getCourseId());
         }
@@ -50,16 +53,24 @@ public class SpreadConverter {
             spreadBo.setUserIdSet(e.getUserIdSet());
         }
         spreadBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        spreadBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        spreadBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        spreadBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        spreadBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        spreadBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        spreadBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        spreadBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        spreadBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        spreadBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        spreadBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return spreadBo;
     }
 
     public static SpreadEntityExt fromBo(SpreadBo bo) {
-        SpreadEntityExt spreadEntityExt =new SpreadEntityExt();
+        if (bo == null) {
+            return null;
+        }
+        SpreadEntityExt spreadEntityExt = new SpreadEntityExt();
         spreadEntityExt.setCourseId(bo.getCourseId());
         spreadEntityExt.setCourseIdSet(bo.getCourseIdSet());
         spreadEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
@@ -75,7 +86,7 @@ public class SpreadConverter {
         spreadEntityExt.setPartnerIdSet(bo.getPartnerIdSet());
         spreadEntityExt.setRemark(bo.getRemark());
         if (bo.getStatus() != Constant.DEFAULTNULL) {
-        spreadEntityExt.setStatus(bo.getStatus());
+            spreadEntityExt.setStatus(bo.getStatus());
         }
         spreadEntityExt.setStatusSet(bo.getStatusSet());
         spreadEntityExt.setUrl(bo.getUrl());

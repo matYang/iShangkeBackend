@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 
 public class OrderConverter {
     public static OrderBo toBo(OrderEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         OrderBo orderBo = new OrderBo();
         if (e.getBookingId() != null) {
             orderBo.setBookingId(e.getBookingId());
@@ -25,12 +28,18 @@ public class OrderConverter {
         }
         if (e.getPrice() != null) {
             orderBo.setPrice(e.getPrice());
+        } else {
+            orderBo.setPrice(Constant.DEFAULTNULL);
         }
         if (e.getPriceEnd() != null) {
             orderBo.setPriceEnd(e.getPriceEnd());
+        } else {
+            orderBo.setPriceEnd(Constant.DEFAULTNULL);
         }
         if (e.getPriceStart() != null) {
             orderBo.setPriceStart(e.getPriceStart());
+        } else {
+            orderBo.setPriceStart(Constant.DEFAULTNULL);
         }
         if (e.getRuningNumber() != null) {
             orderBo.setRuningNumber(e.getRuningNumber());
@@ -68,6 +77,9 @@ public class OrderConverter {
     }
 
     public static OrderEntityExt fromBo(OrderBo bo) {
+        if (bo == null) {
+            return null;
+        }
         OrderEntityExt orderEntityExt = new OrderEntityExt();
         orderEntityExt.setBookingId(bo.getBookingId());
         orderEntityExt.setBookingIdSet(bo.getBookingIdSet());
@@ -77,9 +89,15 @@ public class OrderConverter {
         orderEntityExt.setEnabled(bo.getEnabled());
         orderEntityExt.setId(bo.getId());
         orderEntityExt.setIdSet(bo.getIdSet());
-        orderEntityExt.setPrice(bo.getPrice());
-        orderEntityExt.setPriceEnd(bo.getPriceEnd());
-        orderEntityExt.setPriceStart(bo.getPriceStart());
+        if (bo.getPrice() != Constant.DEFAULTNULL) {
+            orderEntityExt.setPrice(bo.getPrice());
+        }
+        if (bo.getPriceEnd() != Constant.DEFAULTNULL) {
+            orderEntityExt.setPriceEnd(bo.getPriceEnd());
+        }
+        if (bo.getPriceStart() != Constant.DEFAULTNULL) {
+            orderEntityExt.setPriceStart(bo.getPriceStart());
+        }
         orderEntityExt.setRuningNumber(bo.getRuningNumber());
         if (bo.getStatus() != Constant.DEFAULTNULL) {
             orderEntityExt.setStatus(bo.getStatus());

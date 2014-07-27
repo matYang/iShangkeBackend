@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.SchoolEntityExt;
 
 public class SchoolConverter {
     public static SchoolBo toBo(SchoolEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         SchoolBo schoolBo = new SchoolBo();
         if (e.getEnabled() != null) {
             schoolBo.setEnabled(e.getEnabled());
@@ -24,15 +27,23 @@ public class SchoolConverter {
             schoolBo.setValue(e.getValue());
         }
         schoolBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        schoolBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        schoolBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        schoolBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        schoolBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        schoolBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        schoolBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        schoolBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        schoolBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        schoolBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        schoolBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return schoolBo;
     }
 
     public static SchoolEntityExt fromBo(SchoolBo bo) {
+        if (bo == null) {
+            return null;
+        }
         SchoolEntityExt schoolEntityExt = new SchoolEntityExt();
         schoolEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         schoolEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
