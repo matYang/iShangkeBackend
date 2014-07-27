@@ -125,7 +125,6 @@ public class UserManagerImpl implements UserManager {
             accountEntity.setCreateTime(DateUtility.getCurTimeInstance());
             accountEntity.setEnabled(0);
             accountEntity.setDeleted(0);
-            accountEntity.setAccountNumber(getReference());
             result = accountMapper.add(accountEntity);
             if (result <= 0) {
                 throw new ManagerException("InitializeNormalUser::addAccount user with unique identifier: " + uniqueIdentifier  + " failed");
@@ -155,7 +154,6 @@ public class UserManagerImpl implements UserManager {
             
             
             CouponEntityExt couponEntity = new CouponEntityExt();
-            couponEntity.setCode(getReference());
             //TODO constants and enums
             couponEntity.setBalance(DefaultValues.COUPONREGISTRATIONVALUE);
             couponEntity.setTotal(DefaultValues.COUPONREGISTRATIONVALUE);
@@ -183,7 +181,6 @@ public class UserManagerImpl implements UserManager {
                 UserEntityExt inviterEntity = inviterSearchResult.get(0);
                 
                 CouponEntityExt curUserCouponEntity = new CouponEntityExt();
-                curUserCouponEntity.setCode(getReference());
                 curUserCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
@@ -197,7 +194,6 @@ public class UserManagerImpl implements UserManager {
                 couponManager.createCoupon(CouponConverter.toBo(curUserCouponEntity), UserConverter.toBo(userEntity));
                 
                 CouponEntityExt inviterCouponEntity = new CouponEntityExt();
-                inviterCouponEntity.setCode(getReference());
                 inviterCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
