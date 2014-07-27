@@ -197,6 +197,7 @@ public class CouponManagerImpl implements CouponManager {
     }
 
     @Override
+    //note, for a normal user query history can only query the coupon history of a single coupon, specified by the coupon id field in coupon history
     public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -206,9 +207,27 @@ public class CouponManagerImpl implements CouponManager {
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
-        //TODO performance access control
-        //currently impossible as coupon history does not contain user id
-
+        //admin and system admins can query user's coupons
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
+        }
+        else {
+            //for a user, he/she can only query coupon history of a coupon that belongs to he/she
+            //this means that a couponId is absolutely necessary
+            if (couponHistoryEntity == null || couponHistoryEntity.getId() == null) {
+                throw new ManagerException("User query coupon history did not specify couponId");
+            }
+            CouponEntityExt correspondingCoupon = null;
+            try {
+                correspondingCoupon = couponMapper.getById(couponHistoryEntity.getId());
+            } catch (Throwable t) {
+                throw new ManagerException("Corresponding coupon not found when querying coupon history with coupnId: " + couponHistoryEntity.getCouponId());
+            }
+            //otherwise user can only query their own, thus making an UserId necessary
+            if (correspondingCoupon == null || correspondingCoupon.getUserId() != null || !correspondingCoupon.getUserId().equals(userEntity.getId())) {
+                throw new AuthenticationException("User querying someone else's coupon history");
+            }
+        }
         
         // Convert
         List<CouponHistoryEntityExt> results = null;
