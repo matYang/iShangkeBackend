@@ -58,11 +58,13 @@ public class ApplicationServer {
             }
 
             for (PermissionBo permissionBo : permissionList) {
-                LOGGER.info(String.format("[PermisionCache][Role: %d : %s][Tag: %s]", roleBo.getId(), roleBo.getName(),
-                        permissionBo.getTag()));
+                LOGGER.info(String.format("[PermisionCache][Role: %d : %s][Tag: %s][Url: %s]", roleBo.getId(), roleBo.getName(),
+                        permissionBo.getTag(), permissionBo.getPath()));
                 cacheManager.set(
                         String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleBo.getId(),
                                 permissionBo.getTag()), 0, permissionBo);
+                cacheManager.set(String.format(ServiceConstants.CACHE_PARTNER_URL, permissionBo.getPath()), 0,
+                        permissionBo.getTag());
                 count++;
             }
         }
@@ -87,6 +89,7 @@ public class ApplicationServer {
         for (ServiceEnum serverSetting : ServiceEnum.values()) {
             ThriftServer server = new ThriftServer(serverSetting.getPort(), serverSetting.getProcessorClass(),
                     serverSetting.getHandlerClass());
+            LOGGER.info("[Server] " + serverSetting.getName());
             server.startServer();
         }
     }
@@ -96,6 +99,7 @@ public class ApplicationServer {
 
         ThriftServer server = new ThriftServer(setting.getPort(), ConfigurationService.Processor.class,
                 ConfigurationServiceImpl.class);
+        LOGGER.info("[Server] Configuration");
         server.startServer();
     }
 
@@ -110,5 +114,7 @@ public class ApplicationServer {
         ThriftServer.setApplicationContext(applicationContext);
 
         applicationContext.getBean(ApplicationServer.class).start();
+
+        LOGGER.info("[Server] Server finished startiing.");
     }
 }

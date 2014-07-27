@@ -16,16 +16,16 @@ import com.ishangke.edunav.service.impl.PartnerServiceImpl;
 import com.ishangke.edunav.service.impl.UserServiceImpl;
 
 public enum ServiceEnum {
-    Account("127.0.0.1", 9001, AccountService.Processor.class, AccountServiceImpl.class),
-    Booking("127.0.0.1", 9002, BookingService.Processor.class, BookingServiceImpl.class),
-    Course("127.0.0.1", 9003, CourseService.Processor.class, CourseServiceImpl.class),
-    CourseTemplate("127.0.0.1", 9004, CourseTemplateService.Processor.class, CourseTemplateServiceImpl.class),
-    General("127.0.0.1", 9005, GeneralService.Processor.class, GeneralServiceImpl.class), 
-    Partner("127.0.0.1", 9006, PartnerService.Processor.class, PartnerServiceImpl.class), 
-    User("127.0.0.1", 9007, UserService.Processor.class, UserServiceImpl.class);
+    Account("Account", 9001, AccountService.Processor.class, AccountServiceImpl.class),
+    Booking("Booking", 9002, BookingService.Processor.class, BookingServiceImpl.class),
+    Course("Course", 9003, CourseService.Processor.class, CourseServiceImpl.class),
+    CourseTemplate("CourseTemplate", 9004, CourseTemplateService.Processor.class, CourseTemplateServiceImpl.class),
+    General("General", 9005, GeneralService.Processor.class, GeneralServiceImpl.class), 
+    Partner("Partner", 9006, PartnerService.Processor.class, PartnerServiceImpl.class), 
+    User("User", 9007, UserService.Processor.class, UserServiceImpl.class);
 
-    private ServiceEnum(String host, int port, Class<?> processorClass, Class<?> handlerClass) {
-        this.host = host;
+    private ServiceEnum(String name, int port, Class<?> processorClass, Class<?> handlerClass) {
+        this.name = name;
         this.port = port;
         this.processorClass = processorClass;
         this.handlerClass = handlerClass;
@@ -33,7 +33,7 @@ public enum ServiceEnum {
 
     private Class<?> processorClass;
     private Class<?> handlerClass;
-    private String host;
+    private String name;
     private int port;
 
     public Class<?> getProcessorClass() {
@@ -52,12 +52,12 @@ public enum ServiceEnum {
         this.handlerClass = handlerClass;
     }
 
-    public String getHost() {
-        return host;
+    public String getName() {
+        return name;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getPort() {
