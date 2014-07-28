@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -20,7 +19,6 @@ import com.ishangke.edunav.dataaccess.mapper.AccountHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.WithdrawEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AccountManager;
 import com.ishangke.edunav.manager.AuthManager;
@@ -193,6 +191,16 @@ public class AccountManagerImpl implements AccountManager {
             convertedResults.add(AccountHistoryConverter.toBo(result));
         }
         return convertedResults;
+    }
+
+    @Override
+    public int queryTotal(AccountBo accountBo, UserBo userBo) {
+        return accountMapper.getListCount(AccountConverter.fromBo(accountBo));
+    }
+
+    @Override
+    public int queryHistoryTotal(AccountHistoryBo accountHistoryBo, UserBo userBo) {
+        return accountHistoryMapper.getListCount(AccountHistoryConverter.fromBo(accountHistoryBo));
     }
 
 }

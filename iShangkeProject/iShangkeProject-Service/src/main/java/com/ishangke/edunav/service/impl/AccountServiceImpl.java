@@ -36,6 +36,7 @@ import com.ishangke.edunav.manager.CreditManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.WithdrawManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
+import com.ishangke.edunav.manager.common.PageDefaults;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
 
@@ -98,8 +99,14 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryAccount"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageDefaults.getPage(paginationBo);
             List<AccountBo> data = accountManager.query(accountBo, userBo, paginationBo);
+            int total = accountManager.queryTotal(accountBo, userBo);
+            
             AccountPageViewBo pageView = new AccountPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
         } catch (NoPermissionException e) {
@@ -126,11 +133,16 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryAccountHistory"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageDefaults.getPage(paginationBo);
             List<AccountHistoryBo> data = accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
+            int total = accountManager.queryHistoryTotal(accountHistoryBo, userBo);
+            
             AccountHistoryPageViewBo pageView = new AccountHistoryPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
-
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

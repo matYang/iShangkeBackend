@@ -41,6 +41,8 @@ public interface AccountManager {
      * 
      */
     List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo);
+    
+    int queryTotal(AccountBo accountBo, UserBo userBo);
 
     /**
      * 本方法为查询账户历史功能。<br>
@@ -57,5 +59,6 @@ public interface AccountManager {
      * 
      */
     List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo);
-
+    
+    int queryHistoryTotal(AccountHistoryBo accountHistoryBo, UserBo userBo);
 }
