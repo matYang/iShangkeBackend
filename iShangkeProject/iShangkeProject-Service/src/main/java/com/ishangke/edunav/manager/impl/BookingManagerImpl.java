@@ -502,8 +502,8 @@ public class BookingManagerImpl implements BookingManager {
     }
 
     @Override
-    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
-        BookingEntityExt bookingEntityExt = bookingMapper.getById(bookingBo.getId());
+    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+        BookingEntityExt bookingEntityExt = bookingMapper.getById(bookingHistoryBo.getBookingId());
         List<BookingHistoryEntityExt> bookingHistorys = null;
         if (bookingEntityExt == null) {
             throw new ManagerException("booking is nolonger exits");
@@ -513,7 +513,6 @@ public class BookingManagerImpl implements BookingManager {
             if (!bookingEntityExt.getUserId().equals(userBo.getId())) {
                 throw new ManagerException("cannot query other's booking history");
             }
-            bookingHistoryBo.setBookingId(bookingBo.getId());
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
@@ -529,7 +528,7 @@ public class BookingManagerImpl implements BookingManager {
             return convertedList;
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
-            CourseEntityExt course = courseMapper.getById(bookingBo.getCourseId());
+            CourseEntityExt course = courseMapper.getById(bookingEntityExt.getCourseId());
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
                 if (g.getPartnerId().equals(course.getPartnerId())) {
@@ -540,7 +539,6 @@ public class BookingManagerImpl implements BookingManager {
             if (isSameGroup == false) {
                 throw new ManagerException("cannot query other partner's booking history");
             }
-            bookingHistoryBo.setBookingId(bookingBo.getId());
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
@@ -555,7 +553,6 @@ public class BookingManagerImpl implements BookingManager {
             }
             return convertedList;
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
-            bookingHistoryBo.setBookingId(bookingBo.getId());
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {

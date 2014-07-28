@@ -28,14 +28,14 @@ import com.ishangke.edunav.web.common.ThriftClientSettingManager;
 @Component
 @Scope(value = "singleton")
 public class CourseFacade {
-    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, String url) {
+    public CourseBo createCourse(CourseBo courseBo, UserBo userBo, String url) {
         CourseBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.createCourse(courseTemplateBo, courseBo, partnerBo, userBo, PermissionCache.getTag(url));
+            result = serviceClient.createCourse(courseBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -46,14 +46,14 @@ public class CourseFacade {
         return result;
     }
 
-    public CourseCommentBo commentCourse(CourseBo courseBo, CourseCommentBo courseCommnet, UserBo userBo, String url) {
+    public CourseCommentBo commentCourse(CourseCommentBo courseCommnet, UserBo userBo, String url) {
         CourseCommentBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.commentCourse(courseBo, courseCommnet, userBo, PermissionCache.getTag(url));
+            result = serviceClient.commentCourse(courseCommnet, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -190,14 +190,14 @@ public class CourseFacade {
         return result;
     }
 
-    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, String url) {
+    public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, String url) {
         CourseTemplateBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.createCourseTemplate(courseTemplateBo, partnerBo, userBo, PermissionCache.getTag(url));
+            result = serviceClient.createCourseTemplate(courseTemplateBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

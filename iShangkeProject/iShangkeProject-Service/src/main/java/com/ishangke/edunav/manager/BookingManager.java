@@ -82,7 +82,7 @@ public interface BookingManager {
      * @param paginationBo
      * @return
      */
-    List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo);
     
     /**
      * 本方法为查询预定单预定单功能。<br>

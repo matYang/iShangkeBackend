@@ -97,14 +97,14 @@ public class BookingFacade {
         return result;
     }
 
-    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String url) {
+    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo, String url) {
         List<BookingHistoryBo> result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.queryHistoryByBookingId(bookingHistoryBo, bookingBo, userBo, paginationBo, PermissionCache.getTag(url));
+            result = serviceClient.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
