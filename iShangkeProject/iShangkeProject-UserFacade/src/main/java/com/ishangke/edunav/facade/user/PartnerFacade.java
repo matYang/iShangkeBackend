@@ -1,4 +1,4 @@
-package com.ishangke.edunav.facade.partner;
+package com.ishangke.edunav.facade.user;
 
 import org.apache.thrift.TException;
 

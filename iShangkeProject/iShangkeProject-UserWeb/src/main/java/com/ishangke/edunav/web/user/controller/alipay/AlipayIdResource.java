@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.encoding.UrlEncoding;
-import com.ishangke.edunav.facade.alipay.AlipayFacade;
-import com.ishangke.edunav.facade.booking.BookingFacade;
+import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 import com.ishangke.edunav.web.user.vo.AlipayVo;
 
