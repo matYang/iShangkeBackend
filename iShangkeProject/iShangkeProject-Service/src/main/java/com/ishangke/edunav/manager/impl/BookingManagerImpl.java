@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.enums.BookingEnums;
+import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
@@ -95,6 +96,7 @@ public class BookingManagerImpl implements BookingManager {
         
         CouponEntityExt couponSearch = new CouponEntityExt();
         couponSearch.setUserId(bookingBo.getUserId());
+        couponSearch.setStatus(CouponEnums.Status.USABLE.code);
         couponSearch.setEnabled(0);
         couponSearch.setDeleted(0);
         

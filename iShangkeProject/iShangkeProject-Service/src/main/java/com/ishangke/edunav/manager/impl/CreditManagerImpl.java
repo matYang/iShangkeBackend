@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.enums.CreditHistoryEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
@@ -80,9 +82,17 @@ public class CreditManagerImpl implements CreditManager {
         
         creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         
+        
+        double balanceDiff = previousCredit.getCredit() - creditEntity.getCredit();
+        int operation = CreditHistoryEnums.Operation.DEC.code;
+        if (balanceDiff < -DefaultValues.DOUBLEPRCISIONOFFSET) {
+            balanceDiff = -balanceDiff;
+            operation = CreditHistoryEnums.Operation.INC.code;
+        }
         CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
         creditHistory.setUserId(creditEntity.getId());
-        creditHistory.setCharge(previousCredit.getCredit() - creditEntity.getCredit());
+        creditHistory.setCharge(balanceDiff);
+        creditHistory.setOperation(operation);
         creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
         creditHistory.setDeleted(0);

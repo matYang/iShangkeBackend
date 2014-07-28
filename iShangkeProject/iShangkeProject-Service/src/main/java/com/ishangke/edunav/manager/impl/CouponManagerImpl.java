@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.enums.CouponEnums;
+import com.ishangke.edunav.common.enums.CouponHistoryEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
@@ -68,14 +71,6 @@ public class CouponManagerImpl implements CouponManager {
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntity.setEnabled(0);
         couponEntity.setDeleted(0);
-        
-        // Create CouponHistory
-        CouponHistoryEntityExt couponHistoryEntity = new CouponHistoryEntityExt();
-        couponHistoryEntity.setCouponId(couponEntity.getId());
-        couponHistoryEntity.setCharge(0.0);
-        couponHistoryEntity.setCreateTime(DateUtility.getCurTimeInstance());
-        couponHistoryEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
-        couponHistoryEntity.setDeleted(0);
 
         try {
             // Create Coupon
@@ -83,12 +78,7 @@ public class CouponManagerImpl implements CouponManager {
 
             if (couponResult <= 0) {
                 throw new ManagerException("Coupon Create Failed: add Coupon Failed");
-            } else {
-                int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
-                if (couponHistoryResult <= 0) {
-                    throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
-                } 
-            }
+            } 
         } catch (Throwable t) {
             throw new ManagerException("Coupon create failed for user: " + userEntity.getId(), t);
         }
@@ -128,7 +118,10 @@ public class CouponManagerImpl implements CouponManager {
             throw new CouponNotFoundException("Coupon to activate is not found");
         }
         
-        //TODO set status to usable
+        if (previousCoupon.getExpiryTime().before(DateUtility.getCurTime())) {
+            throw new ManagerException("Coupon has already expired");
+        }
+        previousCoupon.setStatus(CouponEnums.Status.USABLE.code);
         previousCoupon.setLastModifyTime(DateUtility.getCurTimeInstance());
        
         try {
@@ -172,12 +165,19 @@ public class CouponManagerImpl implements CouponManager {
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Previous coupon is not found");
         }
-        
+
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         // Create CouponHistory
+        double balanceDiff = previousCoupon.getBalance() - couponEntity.getBalance();
+        int operation = CouponHistoryEnums.Operation.DEC.code;
+        if (balanceDiff < -DefaultValues.DOUBLEPRCISIONOFFSET) {
+            balanceDiff = -balanceDiff;
+            operation = CouponHistoryEnums.Operation.INC.code;
+        }
         CouponHistoryEntityExt couponHistoryEntity = new CouponHistoryEntityExt();
         couponHistoryEntity.setCouponId(couponEntity.getId());
-        couponHistoryEntity.setCharge(previousCoupon.getBalance() - couponEntity.getBalance());
+        couponHistoryEntity.setCharge(balanceDiff);
+        couponHistoryEntity.setOperation(operation);
         couponHistoryEntity.setCreateTime(DateUtility.getCurTimeInstance());
         couponHistoryEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponHistoryEntity.setDeleted(0);

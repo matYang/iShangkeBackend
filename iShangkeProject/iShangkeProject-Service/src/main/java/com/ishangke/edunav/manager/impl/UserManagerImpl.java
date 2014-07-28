@@ -155,10 +155,10 @@ public class UserManagerImpl implements UserManager {
             
             
             CouponEntityExt couponEntity = new CouponEntityExt();
-            //TODO constants and enums
             couponEntity.setBalance(DefaultValues.COUPONREGISTRATIONVALUE);
             couponEntity.setTotal(DefaultValues.COUPONREGISTRATIONVALUE);
             couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
+            couponEntity.setStatus(CouponEnums.Status.USABLE.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
             expiry.add(Calendar.YEAR, 1);
             couponEntity.setExpiryTime(expiry);
@@ -186,6 +186,7 @@ public class UserManagerImpl implements UserManager {
                 curUserCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
+                curUserCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
                 curUserCouponEntity.setExpiryTime(expiry);
                 curUserCouponEntity.setRemark("");
                 curUserCouponEntity.setUserId(userEntity.getId());
@@ -199,6 +200,7 @@ public class UserManagerImpl implements UserManager {
                 inviterCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
+                inviterCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
                 inviterCouponEntity.setExpiryTime(expiry);
                 inviterCouponEntity.setRemark("");
                 inviterCouponEntity.setUserId(inviterEntity.getId());
