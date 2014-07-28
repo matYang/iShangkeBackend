@@ -14,7 +14,7 @@ struct CreditBo {
     11: i64 createTimeStart
     12: i64 createTimeEnd
 }
-struct CreditBoPageViewBo{
+struct CreditPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

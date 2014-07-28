@@ -29,7 +29,7 @@ service PartnerService{
      *  @return 合作商实体 PartnerBo 列表
      *
      */ 
-    list<partner.PartnerBo>  queryPartner(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
+    partner.PartnerPageViewBo  queryPartner(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
     /**
      *  查询合作商完整信息。<br>
@@ -126,7 +126,7 @@ service PartnerService{
      *  @return  Address 列表
      *
      */
-    list<address.AddressBo> queryAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    address.AddressPageViewBo queryAddress(1: address.AddressBo addressBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -189,7 +189,7 @@ service PartnerService{
      *  @return 推广信息实体 ClassPhoto 列表
      *
      */
-    list<classPhoto.ClassPhotoBo> queryClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    classPhoto.ClassPhotoPageViewBo queryClassPhoto(1: classPhoto.ClassPhotoBo classPhotoBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -252,7 +252,7 @@ service PartnerService{
      *  @return 推广信息实体 Teacher 列表
      *
      */
-    list<teacher.TeacherBo> queryTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    teacher.TeacherPageViewBo queryTeacher(1: teacher.TeacherBo teacherBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -360,5 +360,5 @@ service PartnerService{
      *  @return 推广信息实体 Activity 列表
      *
      */
-    list<activity.ActivityBo> queryActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    activity.ActivityPageViewBo queryActivity(1: activity.ActivityBo activityBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }

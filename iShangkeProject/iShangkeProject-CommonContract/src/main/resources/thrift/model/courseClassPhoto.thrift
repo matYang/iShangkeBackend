@@ -11,7 +11,7 @@ struct CourseClassPhotoBo {
     8: i64 createTimeStart;
     9: i64 createTimeEnd;
 }
-struct CourseClassPhotoBoPageViewBo{
+struct CourseClassPhotoPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

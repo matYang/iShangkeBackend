@@ -55,7 +55,7 @@ service BookingService {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    list<booking.BookingBo> queryBooking(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingPageViewBo queryBooking(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为查询订单历史操作。<br>
@@ -73,7 +73,7 @@ service BookingService {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    list<bookingHistory.BookingHistoryBo> queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    bookingHistory.BookingHistoryPageViewBo queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * admin可以通过此方法查看所有订单的详细信息
@@ -84,7 +84,7 @@ service BookingService {
      * @param paginationBo
      * @return
      */
-    list<bookingHistory.BookingHistoryBo> queryHistoryByBookingId(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    bookingHistory.BookingHistoryPageViewBo queryHistoryByBookingId(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * 本方法为查询预定单预定单功能。<br>
@@ -102,7 +102,7 @@ service BookingService {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    list<booking.BookingBo> queryBookingByPartner(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingPageViewBo queryBookingByPartner(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * 本方法为查询预定单预定单功能。<br>
@@ -118,7 +118,7 @@ service BookingService {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    list<booking.BookingBo> queryBookingByUser(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingPageViewBo queryBookingByUser(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     // /**********************************************************
     // *
@@ -152,7 +152,7 @@ service BookingService {
     //  *  @return 预定单实体 BookingBo 列表
     //  *
     //  */ 
-    // list<booking.BookingBo> queryBooking(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    // booking.BookingPageViewBo queryBooking(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     // /**
     //  *  本方法为查询订单历史操作。<br>
@@ -166,7 +166,7 @@ service BookingService {
     //  *  @return 预定单实体 bookingHistoryBo 列表
     //  *
     //  */ 
-    // list<bookingHistory.BookingHistoryBo> queryBookingHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    // bookingHistory.BookingHistoryPageViewBo queryBookingHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -221,7 +221,7 @@ service BookingService {
     //  *  @return OrderBo 列表
     //  *
     //  */ 
-    //  list<order.OrderBo> queryOrder(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    //  order.OrderPageViewBo queryOrder(1: order.OrderBo orderBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     // /**
     //  *  本方法为查询Order历史功能。<br>
@@ -235,7 +235,7 @@ service BookingService {
     //  *  @return OrderHistoryBo 列表
     //  *
     //  */ 
-    //  list<orderHistory.OrderHistoryBo> queryOrderHistory(1: orderHistory.OrderHistoryBo orderHistory, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    //  orderHistory.OrderHistoryPageViewBo queryOrderHistory(1: orderHistory.OrderHistoryBo orderHistory, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string changeBookingStatusToPayed(1: i32 id)throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string verify(1: string notify)throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForGet(1:string subject, 2: string out_trade_no, 3: string total_fee)throws (1: fault.BusinessExceptionBo businessExceptionBo)

@@ -11,7 +11,7 @@ struct RolePermissionBo {
     8: i64 lastModifyTimeStart
     9: i64 lastModifyTimeEnd
 }
-struct RolePermissionBoPageViewBo{
+struct RolePermissionPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

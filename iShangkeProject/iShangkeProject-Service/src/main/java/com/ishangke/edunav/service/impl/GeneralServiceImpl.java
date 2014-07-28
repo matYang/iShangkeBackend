@@ -10,11 +10,16 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CareerBo;
+import com.ishangke.edunav.commoncontract.model.CareerPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
+import com.ishangke.edunav.commoncontract.model.CategoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
+import com.ishangke.edunav.commoncontract.model.CirclePageViewBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
+import com.ishangke.edunav.commoncontract.model.LocationPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
+import com.ishangke.edunav.commoncontract.model.SchoolPageViewBo;
 import com.ishangke.edunav.commoncontract.service.GeneralService;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CareerManager;
@@ -43,15 +48,19 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     private AuthManager authManager;
 
     /**********************************************************
-     *
+     * 
      * Category
-     *
+     * 
      **********************************************************/
     @Override
-    public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag)
+    public CategoryPageViewBo queryCategory(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            return categoryManager.queryCategory(categoryBo, paginationBo);
+            List<CategoryBo> data = categoryManager.queryCategory(categoryBo, paginationBo);
+            CategoryPageViewBo pageView = new CategoryPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -62,15 +71,19 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     }
 
     /**********************************************************
-     *
+     * 
      * Location
-     *
+     * 
      **********************************************************/
     @Override
-    public List<LocationBo> queryLocation(LocationBo locationBo, PaginationBo paginationBo, String permissionTag)
+    public LocationPageViewBo queryLocation(LocationBo locationBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            return locationManager.query(locationBo, paginationBo);
+            List<LocationBo> data = locationManager.query(locationBo, paginationBo);
+            LocationPageViewBo pageView = new LocationPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -81,15 +94,19 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     }
 
     /**********************************************************
-     *
+     * 
      * Circle
-     *
+     * 
      **********************************************************/
     @Override
-    public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo, String permissionTag)
+    public CirclePageViewBo queryCircle(CircleBo circleBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            return circleManager.queryCircle(circleBo, paginationBo);
+            List<CircleBo> data = circleManager.queryCircle(circleBo, paginationBo);
+            CirclePageViewBo pageView = new CirclePageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -100,15 +117,19 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     }
 
     /**********************************************************
-     *
+     * 
      * School
-     *
+     * 
      **********************************************************/
     @Override
-    public List<SchoolBo> querySchool(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag)
+    public SchoolPageViewBo querySchool(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            return schoolManager.query(schoolBo, paginationBo);
+            List<SchoolBo> data = schoolManager.query(schoolBo, paginationBo);
+            SchoolPageViewBo pageView = new SchoolPageViewBo();
+            pageView.setData(data);
+            return pageView;
+           
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -119,15 +140,19 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     }
 
     /**********************************************************
-     *
+     * 
      * Career
-     *
+     * 
      **********************************************************/
     @Override
-    public List<CareerBo> queryCareer(CareerBo careerBo, PaginationBo paginationBo, String permissionTag)
+    public CareerPageViewBo queryCareer(CareerBo careerBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            return careerManager.query(careerBo, paginationBo);
+            List<CareerBo> data = careerManager.query(careerBo, paginationBo);
+            CareerPageViewBo pageView = new CareerPageViewBo();
+            pageView.setData(data);
+            return pageView;
+            
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

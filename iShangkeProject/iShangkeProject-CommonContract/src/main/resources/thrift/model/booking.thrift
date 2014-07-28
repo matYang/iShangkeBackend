@@ -53,7 +53,7 @@ struct BookingBo {
 struct CommentBookingBo {
   1: string comment
 }
-  struct BookingBoPageViewBo{
+  struct BookingPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

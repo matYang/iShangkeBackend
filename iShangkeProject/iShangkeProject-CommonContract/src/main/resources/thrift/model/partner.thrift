@@ -58,7 +58,7 @@ struct PartnerBo {
     48: list<classPhoto.ClassPhotoBo> classPhotoList;
     49: list<address.AddressBo> addressList;
 }
-struct PartnerBoPageViewBo{
+struct PartnerPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

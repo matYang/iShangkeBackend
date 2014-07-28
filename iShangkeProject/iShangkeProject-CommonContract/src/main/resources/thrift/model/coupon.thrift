@@ -31,7 +31,7 @@ struct CouponBo {
     25: i32 status
     26: set<i32> statusSet
 }
-struct CouponBoPageViewBo{
+struct CouponPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

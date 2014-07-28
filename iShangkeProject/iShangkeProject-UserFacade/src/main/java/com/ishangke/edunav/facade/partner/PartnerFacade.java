@@ -1,17 +1,20 @@
 package com.ishangke.edunav.facade.partner;
 
-import java.util.List;
-
 import org.apache.thrift.TException;
 
 import com.ishangke.edunav.commoncontract.model.ActivityBo;
+import com.ishangke.edunav.commoncontract.model.ActivityPageViewBo;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
+import com.ishangke.edunav.commoncontract.model.AddressPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
+import com.ishangke.edunav.commoncontract.model.ClassPhotoPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
+import com.ishangke.edunav.commoncontract.model.PartnerPageViewBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
+import com.ishangke.edunav.commoncontract.model.TeacherPageViewBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.PartnerService;
 import com.ishangke.edunav.commoncontract.service.PartnerService.Client;
@@ -22,8 +25,8 @@ import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
 
 public class PartnerFacade {
-    public List<PartnerBo> queryPartner(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo, String permissionTag) {
-        List<PartnerBo> result = null;
+    public PartnerPageViewBo queryPartner(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo, String permissionTag) {
+        PartnerPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
@@ -148,8 +151,8 @@ public class PartnerFacade {
         return result;
     }
 
-    public List<AddressBo> queryAddress(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<AddressBo> result = null;
+    public AddressPageViewBo queryAddress(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        AddressPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
@@ -220,8 +223,8 @@ public class PartnerFacade {
         return result;
     }
 
-    public List<ClassPhotoBo> queryClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<ClassPhotoBo> result = null;
+    public ClassPhotoPageViewBo queryClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        ClassPhotoPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
@@ -292,8 +295,8 @@ public class PartnerFacade {
         return result;
     }
 
-    public List<TeacherBo> queryTeacher(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<TeacherBo> result = null;
+    public TeacherPageViewBo queryTeacher(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        TeacherPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
@@ -418,8 +421,8 @@ public class PartnerFacade {
         return result;
     }
 
-    public List<ActivityBo> queryActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<ActivityBo> result = null;
+    public ActivityPageViewBo queryActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        ActivityPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 

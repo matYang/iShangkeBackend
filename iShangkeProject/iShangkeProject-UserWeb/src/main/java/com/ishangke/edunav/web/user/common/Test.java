@@ -1,14 +1,11 @@
 package com.ishangke.edunav.web.user.common;
 
-import java.util.Calendar;
-import java.util.List;
-
-import org.apache.log4j.DailyRollingFileAppender;
 import org.apache.thrift.TException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ishangke.edunav.commoncontract.model.CourseBo;
+import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
 import com.ishangke.edunav.facade.course.CourseFacade;
 import com.ishangke.edunav.web.common.OrderByVo;
 import com.ishangke.edunav.web.common.PaginationVo;
@@ -31,12 +28,12 @@ public class Test {
 //        Calendar ca = Calendar.getInstance();
 //        ca.set(2008, 0, 22);
 //        ccc.setCashbackDateStart(ca);
-        List<CourseBo> course = c.queryCourseByFilter(CourseConverter.fromModel(ccc), PaginationConverter.toBo(p), "");
+        CoursePageViewBo course = c.queryCourseByFilter(CourseConverter.fromModel(ccc), PaginationConverter.toBo(p), "");
         System.out.println(course);
-        System.out.println(course.size());
-        System.out.println(DateUtility.getTimeFromLong(course.get(0).getCashbackDateStart()).getTime());
+        System.out.println(course.getData().size());
+        System.out.println(DateUtility.getTimeFromLong(course.getData().get(0).getCashbackDateStart()).getTime());
         System.out.println("********************************");
-        for (CourseBo cc : course) {
+        for (CourseBo cc : course.getData()) {
             System.out.println(cc);
         }
     }

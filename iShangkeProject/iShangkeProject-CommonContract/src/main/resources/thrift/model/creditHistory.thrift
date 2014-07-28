@@ -17,7 +17,7 @@ struct CreditHistoryBo {
     14: i32 operation
     15: set<i32> operationSet
 }
-struct CreditHistoryBoPageViewBo{
+struct CreditHistoryPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

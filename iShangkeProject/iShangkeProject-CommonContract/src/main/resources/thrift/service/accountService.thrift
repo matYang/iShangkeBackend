@@ -46,7 +46,7 @@ service AccountService{
      *  @return AccountBo 列表
      *
      */ 
-    list<account.AccountBo> queryAccount(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     account.AccountPageViewBo queryAccount(1: account.AccountBo accountBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 	/**
      *  本方法为查询账户历史功能。<br>
@@ -59,7 +59,7 @@ service AccountService{
      *  @return AccountHistoryBo 列表
      *
      */ 
-     list<accountHistory.AccountHistoryBo> queryAccountHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+     accountHistory.AccountHistoryPageViewBo queryAccountHistory(1: accountHistory.AccountHistoryBo accountHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -107,7 +107,7 @@ service AccountService{
      *  @return 优惠券实体 CouponBo 列表
      *
      */ 
-    list<coupon.CouponBo> queryCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    coupon.CouponPageViewBo queryCoupon(1: coupon.CouponBo couponBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为查询优惠券历史功能。<br>
@@ -120,7 +120,7 @@ service AccountService{
      *  @return CouponHistoryBo 列表
      *
      */ 
-    list<couponHistory.CouponHistoryBo> queryCouponHistory(1: couponHistory.CouponHistoryBo couponHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    couponHistory.CouponHistoryPageViewBo queryCouponHistory(1: couponHistory.CouponHistoryBo couponHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -169,7 +169,7 @@ service AccountService{
      *  @return 积分实体 CreditBo 列表
      *
      */ 
-    list<credit.CreditBo> queryCredit(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    credit.CreditPageViewBo queryCredit(1: credit.CreditBo creditBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
         /**
      *  本方法为查询积分历史功能。<br>
@@ -182,7 +182,7 @@ service AccountService{
      *  @return 积分实体 CreditHistoryBo 列表
      *
      */ 
-    list<creditHistory.CreditHistoryBo> queryCreditHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    creditHistory.CreditHistoryPageViewBo queryCreditHistory(1: creditHistory.CreditHistoryBo creditHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
 
 
@@ -242,7 +242,7 @@ service AccountService{
      *  @return  Withdraw 列表
      *
      */
-    list<withdraw.WithdrawBo> queryWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+   withdraw.WithdrawPageViewBo queryWithdraw(1: withdraw.WithdrawBo withdrawBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
      
 
 
@@ -304,7 +304,7 @@ service AccountService{
      *  @return  Contact 列表
      *
      */
-    list<contact.ContactBo> queryContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    contact.ContactPageViewBo queryContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
      
 
 }

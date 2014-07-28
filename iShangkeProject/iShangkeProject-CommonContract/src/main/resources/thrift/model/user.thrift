@@ -67,7 +67,7 @@ struct PasswordBo {
 }
 
 
-struct UserBoPageViewBo{
+struct UserPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

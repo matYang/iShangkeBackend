@@ -8,16 +8,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
+import com.ishangke.edunav.commoncontract.model.AccountHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.MessageBo;
+import com.ishangke.edunav.commoncontract.model.MessagePageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.SpreadBo;
+import com.ishangke.edunav.commoncontract.model.SpreadPageViewBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.commoncontract.model.UserPageViewBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.MessageManager;
@@ -101,8 +106,8 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo createUser(UserBo targetUser, UserBo currentUser, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public UserBo createUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
@@ -125,7 +130,7 @@ public class UserServiceImpl implements UserService.Iface {
             throw exception;
         }
     }
-    
+
     @Override
     public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
@@ -203,8 +208,8 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
+            TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
@@ -228,15 +233,19 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
+    public UserPageViewBo queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
                         "queryUser"));
                 throw new NoPermissionException();
             }
-            return userManager.queryUser(queryUser, currentUser, pagnationBo);
+            List<UserBo> data = userManager.queryUser(queryUser, currentUser, pagnationBo);
+            UserPageViewBo pageView = new UserPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -364,8 +373,6 @@ public class UserServiceImpl implements UserService.Iface {
         }
     }
 
-    
-    
     /**********************************************************
      * 
      * 关于用户之间传信的 Message
@@ -447,7 +454,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<MessageBo> queryMessage(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo,
+    public MessagePageViewBo queryMessage(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -455,7 +462,11 @@ public class UserServiceImpl implements UserService.Iface {
                         "sendMessage"));
                 throw new NoPermissionException();
             }
-            return messageManager.query(messageBo, userBo, paginationBo);
+            List<MessageBo> data = messageManager.query(messageBo, userBo, paginationBo);
+            MessagePageViewBo pageView = new MessagePageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -502,15 +513,19 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public List<SpreadBo> querySpread(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public SpreadPageViewBo querySpread(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "querySpread"));
                 throw new NoPermissionException();
             }
-            return spreadManager.query(spreadBo, userBo, paginationBo);
+            List<SpreadBo> data = spreadManager.query(spreadBo, userBo, paginationBo);
+            SpreadPageViewBo pageView = new SpreadPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

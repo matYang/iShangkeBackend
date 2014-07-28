@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.ConfigurationBo;
+import com.ishangke.edunav.commoncontract.model.ConfigurationPageViewBo;
 import com.ishangke.edunav.commoncontract.service.ConfigurationService;
 import com.ishangke.edunav.manager.ConfigurationManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
@@ -41,9 +42,13 @@ public class ConfigurationServiceImpl implements ConfigurationService.Iface {
     }
 
     @Override
-    public List<ConfigurationBo> listAllConfiguration() throws BusinessExceptionBo, TException {
+    public ConfigurationPageViewBo listAllConfiguration() throws BusinessExceptionBo, TException {
         try {
-            return configManager.listAll();
+            List<ConfigurationBo> data = configManager.listAll();
+            ConfigurationPageViewBo pageView = new ConfigurationPageViewBo();
+            pageView.setData(data);
+            return pageView;
+           
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

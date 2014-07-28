@@ -1,22 +1,28 @@
 package com.ishangke.edunav.facade.account;
 
-import java.util.List;
-
 import org.apache.thrift.TException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
+import com.ishangke.edunav.commoncontract.model.AccountHistoryPageViewBo;
+import com.ishangke.edunav.commoncontract.model.AccountPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.ContactBo;
+import com.ishangke.edunav.commoncontract.model.ContactPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
+import com.ishangke.edunav.commoncontract.model.CouponHistoryPageViewBo;
+import com.ishangke.edunav.commoncontract.model.CouponPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CreditBo;
 import com.ishangke.edunav.commoncontract.model.CreditHistoryBo;
+import com.ishangke.edunav.commoncontract.model.CreditHistoryPageViewBo;
+import com.ishangke.edunav.commoncontract.model.CreditPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
+import com.ishangke.edunav.commoncontract.model.WithdrawPageViewBo;
 import com.ishangke.edunav.commoncontract.service.AccountService;
 import com.ishangke.edunav.commoncontract.service.AccountService.Client;
 import com.ishangke.edunav.thrift.ThriftClientFactory;
@@ -46,8 +52,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<AccountBo> queryAccount(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<AccountBo>  result = null;
+    public AccountPageViewBo queryAccount(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        AccountPageViewBo  result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -64,8 +70,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<AccountHistoryBo> queryAccountHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<AccountHistoryBo> result = null;
+    public AccountHistoryPageViewBo queryAccountHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        AccountHistoryPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -100,8 +106,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<CouponBo> queryCoupon(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<CouponBo> result = null;
+    public CouponPageViewBo queryCoupon(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        CouponPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -118,8 +124,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<CouponHistoryBo> queryCouponHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<CouponHistoryBo> result = null;
+    public CouponHistoryPageViewBo queryCouponHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        CouponHistoryPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -172,8 +178,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<CreditBo> queryCredit(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<CreditBo> result = null;
+    public CreditPageViewBo queryCredit(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        CreditPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -190,8 +196,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<CreditHistoryBo> queryCreditHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<CreditHistoryBo> result = null;
+    public CreditHistoryPageViewBo queryCreditHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        CreditHistoryPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -262,8 +268,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<WithdrawBo> queryWithdraw(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<WithdrawBo> result = null;
+    public WithdrawPageViewBo queryWithdraw(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        WithdrawPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 
@@ -334,8 +340,8 @@ public class AccountFacade {
         return result;
     }
 
-    public List<ContactBo> queryContact(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
-        List<ContactBo> result = null;
+    public ContactPageViewBo queryContact(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+        ContactPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
 

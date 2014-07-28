@@ -21,7 +21,7 @@ struct OrderHistoryBo {
     18: i64 createTimeStart
     19: i64 createTimeEnd
 }
-struct OrderHistoryBoPageViewBo{
+struct OrderHistoryPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total
