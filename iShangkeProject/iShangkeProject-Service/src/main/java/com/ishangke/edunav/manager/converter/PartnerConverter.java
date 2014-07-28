@@ -125,9 +125,7 @@ public class PartnerConverter {
         } else {
             partnerBo.setPartnerQualificationStart(Constant.DEFAULTNULL);
         }
-        if (e.getPassword() != null) {
-            partnerBo.setPassword(e.getPassword());
-        }
+       
         if (e.getRating() != null) {
             partnerBo.setRating(e.getRating());
         } else {
@@ -174,12 +172,7 @@ public class PartnerConverter {
                 .getTimeInMillis());
         partnerBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
                 .getTimeInMillis());
-        partnerBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime()
-                .getTimeInMillis());
-        partnerBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd()
-                .getTimeInMillis());
-        partnerBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e
-                .getLastLoginTimeStart().getTimeInMillis());
+       
         partnerBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
                 .getTimeInMillis());
         partnerBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
@@ -264,9 +257,7 @@ public class PartnerConverter {
         partnerEntityExt.setId(bo.getId());
         partnerEntityExt.setIdSet(bo.getIdSet());
         partnerEntityExt.setInstName(bo.getInstName());
-        partnerEntityExt.setLastLoginTime(DateUtility.getTimeFromLong(bo.getLastLoginTime()));
-        partnerEntityExt.setLastLoginTimeEnd(DateUtility.getTimeFromLong(bo.getLastLoginTimeEnd()));
-        partnerEntityExt.setLastLoginTimeStart(DateUtility.getTimeFromLong(bo.getLastLoginTimeStart()));
+       
         partnerEntityExt.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
         partnerEntityExt.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         partnerEntityExt.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
@@ -285,7 +276,7 @@ public class PartnerConverter {
         if (bo.getPartnerQualificationStart() != Constant.DEFAULTNULL) {
             partnerEntityExt.setPartnerQualificationStart(bo.getPartnerQualificationStart());
         }
-        partnerEntityExt.setPassword(bo.getPassword());
+     
         if (bo.getRating() != Constant.DEFAULTNULL) {
             partnerEntityExt.setRating(bo.getRating());
         }

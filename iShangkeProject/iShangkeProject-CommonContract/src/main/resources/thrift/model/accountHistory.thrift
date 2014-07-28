@@ -16,6 +16,8 @@ struct AccountHistoryBo {
     13: set<i32> typeSet
     14: i64 createTimeStart
     15: i64 createTimeEnd
+    16: i32 operation
+    17: set<i32> operationSet
 }
 
 struct AccountHistoryPageViewBo{

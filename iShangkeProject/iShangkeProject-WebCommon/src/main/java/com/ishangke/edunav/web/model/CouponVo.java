@@ -38,6 +38,8 @@ public class CouponVo {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Integer status;
+    private Set<Integer> statusSet;
     public Integer getId() {
         return id;
     }
@@ -181,6 +183,18 @@ public class CouponVo {
     }
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+    public Integer getStatus() {
+        return status;
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    public Set<Integer> getStatusSet() {
+        return statusSet;
+    }
+    public void setStatusSet(Set<Integer> statusSet) {
+        this.statusSet = statusSet;
     }
     
 }

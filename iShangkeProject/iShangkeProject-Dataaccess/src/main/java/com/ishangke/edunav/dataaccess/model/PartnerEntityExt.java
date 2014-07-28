@@ -12,8 +12,7 @@ public class PartnerEntityExt extends PartnerEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-    private Calendar lastLoginTimeStart;
-    private Calendar lastLoginTimeEnd;
+
     private Integer cutoffDayStart;
     private Integer cutoffDayEnd;
     private Set<Integer> cutoffDaySet;
@@ -84,22 +83,6 @@ public class PartnerEntityExt extends PartnerEntity {
 
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
-    }
-
-    public Calendar getLastLoginTimeStart() {
-        return lastLoginTimeStart;
-    }
-
-    public void setLastLoginTimeStart(Calendar lastLoginTimeStart) {
-        this.lastLoginTimeStart = lastLoginTimeStart;
-    }
-
-    public Calendar getLastLoginTimeEnd() {
-        return lastLoginTimeEnd;
-    }
-
-    public void setLastLoginTimeEnd(Calendar lastLoginTimeEnd) {
-        this.lastLoginTimeEnd = lastLoginTimeEnd;
     }
 
     public Integer getCutoffDayStart() {
