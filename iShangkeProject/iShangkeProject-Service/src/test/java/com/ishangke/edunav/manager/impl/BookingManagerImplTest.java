@@ -9,12 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
@@ -61,7 +58,7 @@ public class BookingManagerImplTest {
         booking.setStatus(0);
         bookingMapper.add(booking);
         System.out.println(booking.getId());
-        bookingManager.transformBookingStatus(BookingConverter.toBo(booking), 12, UserConverter.toBo(userMapper.getById(5)));
+        bookingManager.transformBookingStatus(BookingConverter.toBo(booking), null, 12, UserConverter.toBo(userMapper.getById(5)));
         
         List<Operation> list = transformManager.listAll("booking");
         for (Operation o : list) {

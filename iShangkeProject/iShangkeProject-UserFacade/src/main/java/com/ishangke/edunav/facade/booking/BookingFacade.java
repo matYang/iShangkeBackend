@@ -43,14 +43,14 @@ public class BookingFacade {
         return result;
     }
 
-    public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String url) {
+    public BookingBo transformBookingStatus(BookingBo bookingBo, CommentBookingBo commentBookingBo, int operation, UserBo userBo, String url) {
         BookingBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.transformBookingStatus(bookingBo, operation, userBo, PermissionCache.getTag(url));
+            result = serviceClient.transformBookingStatus(bookingBo, commentBookingBo, operation, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
