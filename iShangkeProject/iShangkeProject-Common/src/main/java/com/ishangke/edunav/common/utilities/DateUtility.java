@@ -1,8 +1,8 @@
 package com.ishangke.edunav.common.utilities;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class DateUtility {
@@ -42,6 +42,7 @@ public class DateUtility {
         cal.setTime(date);
         return cal;
     }
+    
 
     // format the calendar into a string that fits in SMS contents
     public static String smsFormat(final Calendar c) {

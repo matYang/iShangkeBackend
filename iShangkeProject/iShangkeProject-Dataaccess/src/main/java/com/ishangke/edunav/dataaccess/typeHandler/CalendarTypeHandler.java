@@ -9,7 +9,7 @@ import java.util.Calendar;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
-import com.ishangke.edunav.dataaccess.common.DateUtility;
+import com.ishangke.edunav.common.utilities.DateUtility;
 
 
 public class CalendarTypeHandler implements TypeHandler{
