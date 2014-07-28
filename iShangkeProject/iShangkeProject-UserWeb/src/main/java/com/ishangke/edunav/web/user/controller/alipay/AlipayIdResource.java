@@ -1,5 +1,6 @@
 package com.ishangke.edunav.web.user.controller.alipay;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 
@@ -17,18 +18,16 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.encoding.UrlEncoding;
 import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.vo.AlipayVo;
 
 @Controller
-@RequestMapping("/api/v2.0/alipay/alipay/return_Url")
+@RequestMapping("/api/v2/alipay/alipay/return_Url")
 public class AlipayIdResource extends AbstractController {
 
     @Autowired
     private AlipayFacade alipayFacade;
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    ModelAndView processUserAlipayFeedBack(@RequestBody AlipayVo alipayVo, HttpServletRequest request) {
+    public String processUserAlipayFeedBack(HttpServletRequest request) {
         String success = null;
         String notify_id = null;
         String tradeStatus = null;
@@ -38,33 +37,37 @@ public class AlipayIdResource extends AbstractController {
         now.add(Calendar.SECOND, 60);
         String max = DateUtility.toSQLDateTime(now);
 
-        success = alipayVo.getTrade_status();
+        success = request.getParameter("is_success");
         if (success.equals("T")) {
-            notify_id = alipayVo.getNotify_id();
+            notify_id = request.getParameter("notify_id");
             try {
-                notify_time = UrlEncoding.decodeURI(alipayVo.getNotify_time());
+                notify_time = UrlEncoding.decodeURI(request.getParameter("notify_time"));
             } catch (UnsupportedEncodingException e) {
-                return new ModelAndView("redirect:http://usertest.ishangke.cn/alipay/fail.html");
+                return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
+
+            }
+            if (notify_time == null) {
+                return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
             }
             if (max.compareTo(notify_time) <= 0) {
-                return new ModelAndView("redirect:http://usertest.ishangke.cn/alipay/fail.html");
+                return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
             }
 
             verified = alipayFacade.verify_notify_id(notify_id);
             if (verified.equals("true")) {
-                tradeStatus = alipayVo.getTrade_status();
+                tradeStatus = request.getParameter("trade_status");
                 if (tradeStatus.equals("TRADE_SUCCESS")) {
-                    alipayFacade.changeBookingStatusToPayed(Integer.parseInt(alipayVo.getOut_trade_no()));
-                    return new ModelAndView("redirect:http://usertest.ishangke.cn/alipay/success.html");
+                    alipayFacade.changeBookingStatusToPayed(Integer.parseInt(request.getParameter("out_trade_no")));
+                    return "redirect:http://usertest.ishangke.cn/alipay/alipay/success.html";
                 } else {
-                    return new ModelAndView("redirect:http://usertest.ishangke.cn/alipay/fail.html");
+                    return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
                 }
             } else {
-                return new ModelAndView("redirect:http://usertest.ishangke.cn/alipay/fail.html");
+                return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
             }
 
         } else {
-            return new ModelAndView("redirect:http://usertest.ishangke.cn/alipay/fail.html");
+            return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
         }
 
     }
