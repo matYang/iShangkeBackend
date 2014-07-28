@@ -55,9 +55,7 @@ public class CourseTemplateManagerImplTest extends BaseTest {
         
         UserEntityExt user = userMapper.getById(6);
         
-        PartnerEntityExt partner = partnerMapper.getById(2);
-        
-        courseTemplateManager.createCourseTemplate(courseTemplate, PartnerConverter.toBo(partner), UserConverter.toBo(user));
+        courseTemplateManager.createCourseTemplate(courseTemplate,  UserConverter.toBo(user));
     }
     
     @Test
@@ -79,7 +77,7 @@ public class CourseTemplateManagerImplTest extends BaseTest {
         
         PartnerEntityExt partner = partnerMapper.getById(2);
         
-        courseTemplateManager.createCourseTemplate(courseTemplate, PartnerConverter.toBo(partner), UserConverter.toBo(user));
+        courseTemplateManager.createCourseTemplate(courseTemplate, UserConverter.toBo(user));
     }
     
     @Test

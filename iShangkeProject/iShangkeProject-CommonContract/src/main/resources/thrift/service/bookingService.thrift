@@ -84,7 +84,7 @@ service BookingService {
      * @param paginationBo
      * @return
      */
-    list<bookingHistory.BookingHistoryBo> queryHistoryByBookingId(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    list<bookingHistory.BookingHistoryBo> queryHistoryByBookingId(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * 本方法为查询预定单预定单功能。<br>

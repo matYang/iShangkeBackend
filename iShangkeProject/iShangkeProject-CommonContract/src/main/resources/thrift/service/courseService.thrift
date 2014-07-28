@@ -17,16 +17,8 @@ service CourseService {
      * 本方法为创建新课程<br>
      * 合作商管理员可以通过此方法创建新课程
      * 
-     * @param courseTemplateBo
-     *            课程模版信息
      * @param courseBo
      *            需要被创建的课程信息
-     * @param list
-     *            <TeacherBo> 教师信息列表
-     * @param locationBo
-     *            地理位置信息
-     * @param partnerBo
-     *            合作商信息
      * @param userBo
      *            调用方法的用户的信息
      * 
@@ -38,14 +30,12 @@ service CourseService {
      * @param partnerBo
      * @param userBo
      */
-    course.CourseBo createCourse(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: course.CourseBo courseBo, 3: partner.PartnerBo partnerBo, 4: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    course.CourseBo createCourse(1: course.CourseBo courseBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为给课程评论<br>
      * 用户可以通过此方法给课程进行评论
      * 
-     * @param courseBo
-     *            需要被评论的课程信息
      * @param CourseCommentBo   $
      *            课程评论信息
      * @param userBo
@@ -59,7 +49,7 @@ service CourseService {
      * @param partnerBo
      * @param userBo
      */
-    courseComment.CourseCommentBo commentCourse(1: course.CourseBo courseBo, 2: courseComment.CourseCommentBo courseCommnet, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseComment.CourseCommentBo commentCourse(1: courseComment.CourseCommentBo courseCommnet, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 查询课程的评价
@@ -177,7 +167,7 @@ service CourseService {
      * @param partnerBo
      * @param userBo
      */
-    courseTemplate.CourseTemplateBo createCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplateBo createCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 

@@ -15,7 +15,6 @@ import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
-import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
@@ -29,7 +28,6 @@ import com.ishangke.edunav.dataaccess.mapper.CourseTeacherEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.TeacherEntityExtMapper;
-import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
@@ -41,7 +39,6 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseManager;
 import com.ishangke.edunav.manager.TransformManager;
-import com.ishangke.edunav.manager.converter.CategoryConverter;
 import com.ishangke.edunav.manager.converter.CourseCommentConverter;
 import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -91,16 +88,9 @@ public class CourseManagerImpl implements CourseManager {
     private CategoryEntityExtMapper categoryMapper;
 
     @Override
-    public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {
-        // Check Null
-        if (courseTemplateBo == null) {
-            throw new ManagerException("Course Create Failed: CourseTemplateBo is null");
-        }
+    public CourseBo createCourse(CourseBo courseBo, UserBo userBo) {
         if (courseBo == null) {
             throw new ManagerException("Course Create Failed: CourseBo is null");
-        }
-        if (partnerBo == null) {
-            throw new ManagerException("Course Create Failed: PartnerBo is null");
         }
         if (userBo == null) {
             throw new ManagerException("Course Create Failed: UserBo is null");
@@ -118,7 +108,7 @@ public class CourseManagerImpl implements CourseManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == partnerBo.getId()) {
+                if (g.getPartnerId() == courseBo.getPartnerId()) {
                     isSameGroup = true;
                     break;
                 }
@@ -127,11 +117,11 @@ public class CourseManagerImpl implements CourseManager {
                 throw new ManagerException("cannot create other partner's course");
             }
             // 判断courseTemplate是否属于此partner
-            CourseTemplateEntityExt courseTemplateEntity = courseTemplateMapper.getById(courseTemplateBo.getId());
+            CourseTemplateEntityExt courseTemplateEntity = courseTemplateMapper.getById(courseBo.getCourseTemplateId());
             if (courseTemplateEntity == null) {
                 throw new ManagerException("course template is not exits");
             }
-            if (courseTemplateEntity.getPartnerId() != partnerBo.getId()) {
+            if (courseTemplateEntity.getPartnerId() != course.getPartnerId()) {
                 throw new ManagerException("cannot user other partner's courseTemplate");
             }
             // 判断course template是否处于上线状态
@@ -154,7 +144,7 @@ public class CourseManagerImpl implements CourseManager {
                     } catch (Exception e) {
                         throw new ManagerException("failed when query photo in partner repository");
                     }
-                    if (photoEntity == null || photoEntity.getPartnerId() != partnerBo.getId()) {
+                    if (photoEntity == null || photoEntity.getPartnerId() != courseBo.getPartnerId()) {
                         throw new ManagerException("classphoto cannot found in partner photo repository");
                     }
                 }
@@ -168,15 +158,13 @@ public class CourseManagerImpl implements CourseManager {
                     } catch (Exception e) {
                         throw new ManagerException("failed when query teacher in partner repository");
                     }
-                    if (teacherEntity == null || teacherEntity.getPartnerId() != partnerBo.getId()) {
+                    if (teacherEntity == null || teacherEntity.getPartnerId() != courseBo.getPartnerId()) {
                         throw new ManagerException("teacher cannot found in partner teacher repository");
                     }
                 }
             }
             // 开始插入
             try {
-                // 强制使用传递过来的partnerId
-                course.setPartnerId(partnerBo.getId());
                 // 刚刚创建出来的course template状态属于待审核状态
                 course.setStatus(Constant.COURSESTATUSPENDINGREVIEW);
                 // 修改创建时间
@@ -239,7 +227,7 @@ public class CourseManagerImpl implements CourseManager {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(),
                                 photoEntity == null ? null : photoEntity.getId()));
                     }
-                    if (photoEntity.getPartnerId() != partnerBo.getId()) {
+                    if (photoEntity.getPartnerId() != courseBo.getPartnerId()) {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] belong [%d]", userBo.getId(), photoEntity.getId(), photo.getPartnerId()));
                     }
                 }
@@ -257,15 +245,13 @@ public class CourseManagerImpl implements CourseManager {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null
                                 : teacherEntity.getId()));
                     }
-                    if (teacherEntity.getPartnerId() != partnerBo.getId()) {
+                    if (teacherEntity.getPartnerId() != courseBo.getPartnerId()) {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(),
                                 teacherEntity.getPartnerId()));
                     }
                 }
             }
             try {
-                // 强制使用传递过来的partnerId
-                course.setPartnerId(partnerBo.getId());
                 // admin创建出来的course template 默认为已上线状态
                 course.setStatus(Constant.COURSESTATUSONLINED);
                 // 设置createtime
@@ -275,7 +261,7 @@ public class CourseManagerImpl implements CourseManager {
                 int result = 0;
                 result = courseMapper.add(course);
                 if (result > 0) {
-                    LOGGER.warn(String.format("[create course] ishangke admin or system admin [%d] crate course template for partner [%d], course id is [%d]", userBo.getId(), partnerBo.getId(),
+                    LOGGER.warn(String.format("[create course] ishangke admin or system admin [%d] crate course template for partner [%d], course id is [%d]", userBo.getId(), courseBo.getId(),
                             course.getId()));
                     return CourseConverter.toBo(courseMapper.getInfoById(course.getId()));
                 } else {
@@ -289,13 +275,12 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public CourseCommentBo commentCourse(CourseBo courseBo, CourseCommentBo courseCommentBo, UserBo userBo) {
+    public CourseCommentBo commentCourse(CourseCommentBo courseCommentBo, UserBo userBo) {
         if (courseCommentBo.getUserId() != userBo.getId()) {
             throw new ManagerException("must crate comment for self");
         }
-        CourseEntityExt courseEntity = courseMapper.getById(courseBo.getId());
         CourseCommentEntityExt courseCommentEntity = CourseCommentConverter.fromBo(courseCommentBo);
-        courseCommentEntity.setCourseTemplateId(courseEntity.getCourseTemplateId());
+        courseCommentEntity.setCourseTemplateId(courseCommentBo.getCourseTemplateId());
         courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         courseCommentEntity.setCreateTime(DateUtility.getCurTimeInstance());
         try {
@@ -318,7 +303,7 @@ public class CourseManagerImpl implements CourseManager {
         int courseTemplateId = course.getCourseTemplateId();
         CourseCommentEntityExt courseEntity = new CourseCommentEntityExt();
         courseEntity.setCourseTemplateId(courseTemplateId);
-        List<CourseCommentBo> convertered = new ArrayList();
+        List<CourseCommentBo> convertered = new ArrayList<>();
         try {
             List<CourseCommentEntityExt> result = courseCommentMapper.list(courseEntity, PaginationConverter.fromBo(paginationBo));
             if (result != null) {

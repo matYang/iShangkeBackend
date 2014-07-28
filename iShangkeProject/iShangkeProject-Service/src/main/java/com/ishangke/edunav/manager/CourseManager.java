@@ -3,10 +3,8 @@ package com.ishangke.edunav.manager;
 import java.util.List;
 
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
-import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
-import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -37,7 +35,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo);
+    CourseBo createCourse(CourseBo courseBo, UserBo userBo);
 
     /**
      * 本方法为给课程评论<br>
@@ -58,7 +56,7 @@ public interface CourseManager {
      * @param partnerBo
      * @param userBo
      */
-    CourseCommentBo commentCourse(CourseBo courseBo, CourseCommentBo courseCommnet, UserBo userBo);
+    CourseCommentBo commentCourse(CourseCommentBo courseCommnet, UserBo userBo);
 
     /**
      * 查询课程的评价

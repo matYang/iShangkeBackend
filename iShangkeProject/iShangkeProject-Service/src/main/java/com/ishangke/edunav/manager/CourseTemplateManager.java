@@ -26,7 +26,7 @@ public interface CourseTemplateManager {
      * @param partnerBo
      * @param userBo
      */
-    CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
+    CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo);
 
     /**
      * 
