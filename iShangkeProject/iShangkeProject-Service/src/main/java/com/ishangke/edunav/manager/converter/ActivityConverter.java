@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.ActivityEntityExt;
 
 public class ActivityConverter {
     public static ActivityBo toBo(ActivityEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         ActivityBo activityBo = new ActivityBo();
         if (e.getCourseId() != null) {
             activityBo.setCourseId(e.getCourseId());
@@ -19,22 +22,30 @@ public class ActivityConverter {
         }
         if (e.getStatus() != null) {
             activityBo.setStatus(e.getStatus());
-        }else {
+        } else {
             activityBo.setStatus(Constant.DEFAULTNULL);
         }
         if (e.getStatusSet() != null) {
             activityBo.setStatusSet(e.getStatusSet());
         }
-        activityBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        activityBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        activityBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        activityBo
+                .setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
+        activityBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        activityBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
         activityBo.setEndTime(e.getEndTime() == null ? Constant.DEFAULTNULL : e.getEndTime().getTimeInMillis());
-        activityBo.setEndTimeEnd(e.getEndTimeEnd() == null ? Constant.DEFAULTNULL : e.getEndTimeEnd().getTimeInMillis());
-        activityBo.setEndTimeStart(e.getEndTimeStart() == null ? Constant.DEFAULTNULL : e.getEndTimeStart().getTimeInMillis());
+        activityBo
+                .setEndTimeEnd(e.getEndTimeEnd() == null ? Constant.DEFAULTNULL : e.getEndTimeEnd().getTimeInMillis());
+        activityBo.setEndTimeStart(e.getEndTimeStart() == null ? Constant.DEFAULTNULL : e.getEndTimeStart()
+                .getTimeInMillis());
         return activityBo;
     }
 
     public static ActivityEntityExt fromBo(ActivityBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ActivityEntityExt activityEntityExt = new ActivityEntityExt();
         activityEntityExt.setCourseId(bo.getCourseId());
         activityEntityExt.setCourseIdSet(bo.getCourseIdSet());
@@ -46,7 +57,7 @@ public class ActivityConverter {
         activityEntityExt.setEndTimeEnd(DateUtility.getTimeFromLong(bo.getEndTimeEnd()));
         activityEntityExt.setEndTimeStart(DateUtility.getTimeFromLong(bo.getEndTimeStart()));
         if (bo.getStatus() != Constant.DEFAULTNULL) {
-        activityEntityExt.setStatus(bo.getStatus());
+            activityEntityExt.setStatus(bo.getStatus());
         }
         activityEntityExt.setStatusSet(bo.getStatusSet());
         return activityEntityExt;

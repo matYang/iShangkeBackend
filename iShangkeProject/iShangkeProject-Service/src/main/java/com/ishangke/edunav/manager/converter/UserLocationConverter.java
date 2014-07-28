@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 
 public class UserLocationConverter {
     public static UserLocationBo toBo(UserLocationEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         UserLocationBo userLocationBo = new UserLocationBo();
         if (e.getId() != null) {
             userLocationBo.setId(e.getId());
@@ -26,13 +29,19 @@ public class UserLocationConverter {
         if (e.getUserIdSet() != null) {
             userLocationBo.setUserIdSet(e.getUserIdSet());
         }
-        userLocationBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        userLocationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        userLocationBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        userLocationBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        userLocationBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        userLocationBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return userLocationBo;
     }
 
     public static UserLocationEntityExt fromBo(UserLocationBo bo) {
+        if (bo == null) {
+            return null;
+        }
         UserLocationEntityExt userLocationEntityExt = new UserLocationEntityExt();
         userLocationEntityExt.setId(bo.getId());
         userLocationEntityExt.setIdSet(bo.getIdSet());

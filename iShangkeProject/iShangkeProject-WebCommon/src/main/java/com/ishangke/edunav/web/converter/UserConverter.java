@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.UserVo;
 
 public class UserConverter {
     public static UserBo fromModel(UserVo vo) {
+        if (vo == null) {
+            return null;
+        }
         UserBo userBo = new UserBo();
         if (vo.getAppliedInvitationCode() != null) {
             userBo.setAppliedInvitationCode(vo.getAppliedInvitationCode());
@@ -22,7 +25,7 @@ public class UserConverter {
         }
         if (vo.getGender() != null) {
             userBo.setGender(vo.getGender());
-        }  else {
+        } else {
             userBo.setGender(Constant.DEFAULTNULL);
         }
         if (vo.getId() != null) {
@@ -68,21 +71,34 @@ public class UserConverter {
             userBo.setSchoolIdSet(vo.getSchoolIdSet());
         }
         userBo.setBirthday(vo.getBirthday() == null ? Constant.DEFAULTNULL : vo.getBirthday().getTimeInMillis());
-        userBo.setBirthdayEnd(vo.getBirthdayEnd() == null ? Constant.DEFAULTNULL : vo.getBirthdayEnd().getTimeInMillis());
-        userBo.setBirthdayStart(vo.getBirthdayStart() == null ? Constant.DEFAULTNULL : vo.getBirthdayStart().getTimeInMillis());
+        userBo.setBirthdayEnd(vo.getBirthdayEnd() == null ? Constant.DEFAULTNULL : vo.getBirthdayEnd()
+                .getTimeInMillis());
+        userBo.setBirthdayStart(vo.getBirthdayStart() == null ? Constant.DEFAULTNULL : vo.getBirthdayStart()
+                .getTimeInMillis());
         userBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        userBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        userBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        userBo.setLastLoginTime(vo.getLastLoginTime() == null ? Constant.DEFAULTNULL : vo.getLastLoginTime().getTimeInMillis());
-        userBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeEnd().getTimeInMillis());
-        userBo.setLastLoginTimeStart(vo.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeStart().getTimeInMillis());
-        userBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        userBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        userBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        userBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        userBo.setLastLoginTime(vo.getLastLoginTime() == null ? Constant.DEFAULTNULL : vo.getLastLoginTime()
+                .getTimeInMillis());
+        userBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeEnd()
+                .getTimeInMillis());
+        userBo.setLastLoginTimeStart(vo.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastLoginTimeStart().getTimeInMillis());
+        userBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        userBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return userBo;
     }
 
     public static UserVo toModel(UserBo bo) {
+        if (bo == null) {
+            return null;
+        }
         UserVo userVo = new UserVo();
         userVo.setAppliedInvitationCode(bo.getAppliedInvitationCode());
         userVo.setAvatarUrl(bo.getAvatarUrl());
@@ -95,7 +111,7 @@ public class UserConverter {
         userVo.setEmail(bo.getEmail());
         userVo.setEnabled(bo.getEnabled());
         if (Constant.DEFAULTNULL != bo.getGender()) {
-        userVo.setGender(bo.getGender());
+            userVo.setGender(bo.getGender());
         }
         userVo.setId(bo.getId());
         userVo.setIdSet(bo.getIdSet());

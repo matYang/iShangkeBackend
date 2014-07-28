@@ -7,32 +7,45 @@ import com.ishangke.edunav.web.model.LocationVo;
 
 public class LocationConverter {
     public static LocationBo fromModel(LocationVo vo) {
+        if (vo == null) {
+            return null;
+        }
         LocationBo locationBo = new LocationBo();
-        if (vo.getEnabled() != null){
+        if (vo.getEnabled() != null) {
             locationBo.setEnabled(vo.getEnabled());
         }
-        if (vo.getId() != null){
+        if (vo.getId() != null) {
             locationBo.setId(vo.getId());
         }
-        if (vo.getIdSet() != null){
+        if (vo.getIdSet() != null) {
             locationBo.setIdSet(vo.getIdSet());
         }
-        if (vo.getName() != null){
+        if (vo.getName() != null) {
             locationBo.setName(vo.getName());
         }
-        if (vo.getValue() != null){
+        if (vo.getValue() != null) {
             locationBo.setValue(vo.getValue());
         }
-        locationBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        locationBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        locationBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        locationBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        locationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        locationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        locationBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        locationBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        locationBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        locationBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        locationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        locationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return locationBo;
     }
 
     public static LocationVo toModel(LocationBo bo) {
+
+        if (bo == null) {
+            return null;
+        }
         LocationVo locationVo = new LocationVo();
         locationVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         locationVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

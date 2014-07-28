@@ -7,7 +7,10 @@ import com.ishangke.edunav.web.model.SpreadVo;
 
 public class SpreadConverter {
     public static SpreadBo fromModel(SpreadVo vo) {
-        SpreadBo spreadBo =new SpreadBo();
+        if (vo == null) {
+            return null;
+        }
+        SpreadBo spreadBo = new SpreadBo();
         if (vo.getCourseId() != null) {
             spreadBo.setCourseId(vo.getCourseId());
         }
@@ -34,7 +37,7 @@ public class SpreadConverter {
         }
         if (vo.getStatus() != null) {
             spreadBo.setStatus(vo.getStatus());
-        }  else {
+        } else {
             spreadBo.setStatus(Constant.DEFAULTNULL);
         }
         if (vo.getStatusSet() != null) {
@@ -50,16 +53,24 @@ public class SpreadConverter {
             spreadBo.setUserIdSet(vo.getUserIdSet());
         }
         spreadBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        spreadBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        spreadBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        spreadBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        spreadBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return spreadBo;
     }
 
     public static SpreadVo toModel(SpreadBo bo) {
-        SpreadVo spreadVo =new SpreadVo();
+        if (bo == null) {
+            return null;
+        }
+        SpreadVo spreadVo = new SpreadVo();
         spreadVo.setCourseId(bo.getCourseId());
         spreadVo.setCourseIdSet(bo.getCourseIdSet());
         spreadVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
@@ -75,7 +86,7 @@ public class SpreadConverter {
         spreadVo.setPartnerIdSet(bo.getPartnerIdSet());
         spreadVo.setRemark(bo.getRemark());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
-        spreadVo.setStatus(bo.getStatus());
+            spreadVo.setStatus(bo.getStatus());
         }
         spreadVo.setStatusSet(bo.getStatusSet());
         spreadVo.setUrl(bo.getUrl());

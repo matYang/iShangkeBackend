@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.CourseTeacherEntityExt;
 
 public class CourseTeacherConverter {
     public static CourseTeacherBo toBo(CourseTeacherEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         CourseTeacherBo courseTeacherBo = new CourseTeacherBo();
         if (e.getCourseId() != null) {
             courseTeacherBo.setCourseId(e.getCourseId());
@@ -26,13 +29,19 @@ public class CourseTeacherConverter {
         if (e.getTeacherIdSet() != null) {
             courseTeacherBo.setTeacherIdSet(e.getTeacherIdSet());
         }
-        courseTeacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        courseTeacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        courseTeacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        courseTeacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        courseTeacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        courseTeacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
         return courseTeacherBo;
     }
 
     public static CourseTeacherEntityExt fromBo(CourseTeacherBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
         courseTeacherEntityExt.setCourseId(bo.getCourseId());
         courseTeacherEntityExt.setCourseIdSet(bo.getCourseIdSet());

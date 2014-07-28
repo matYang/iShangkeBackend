@@ -30,8 +30,8 @@ public class PaginationConverter {
 
         List<OrderByBo> orderByBos = new ArrayList<>();
 
-        for (OrderByBo orderBybo : orderByBos) {
-            OrderByBo orderByBo = new OrderByBo(orderBybo.getColumnKey(), orderBybo.getOrder());
+        for (OrderByVo orderByVo : orderByVos) {
+            OrderByBo orderByBo = new OrderByBo(orderByVo.getColumnKey(), orderByVo.getOrder());
             orderByBos.add(orderByBo);
         }
 

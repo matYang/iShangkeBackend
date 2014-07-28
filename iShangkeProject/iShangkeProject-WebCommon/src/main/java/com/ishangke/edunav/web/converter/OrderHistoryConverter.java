@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.OrderHistoryVo;
 
 public class OrderHistoryConverter {
     public static OrderHistoryBo fromModel(OrderHistoryVo vo) {
+        if (vo == null) {
+            return null;
+        }
         OrderHistoryBo orderHistoryBo = new OrderHistoryBo();
         if (vo.getEnabled() != null) {
             orderHistoryBo.setEnabled(vo.getEnabled());
@@ -64,13 +67,20 @@ public class OrderHistoryConverter {
         if (vo.getUserIdSet() != null) {
             orderHistoryBo.setUserIdSet(vo.getUserIdSet());
         }
-        orderHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        orderHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        orderHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        orderHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        orderHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        orderHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
         return orderHistoryBo;
     }
 
     public static OrderHistoryVo toModel(OrderHistoryBo bo) {
+
+        if (bo == null) {
+            return null;
+        }
         OrderHistoryVo orderHistoryVo = new OrderHistoryVo();
         orderHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         orderHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -79,21 +89,21 @@ public class OrderHistoryConverter {
         orderHistoryVo.setId(bo.getId());
         orderHistoryVo.setIdSet(bo.getIdSet());
         if (Constant.DEFAULTNULL != bo.getNormal()) {
-        orderHistoryVo.setNormal(bo.getNormal());
+            orderHistoryVo.setNormal(bo.getNormal());
         }
         orderHistoryVo.setNormalSet(bo.getNormalSet());
         if (Constant.DEFAULTNULL != bo.getOptName()) {
-        orderHistoryVo.setOptName(bo.getOptName());
+            orderHistoryVo.setOptName(bo.getOptName());
         }
         orderHistoryVo.setOptNameSet(bo.getOptNameSet());
         orderHistoryVo.setOrderId(bo.getOrderId());
         orderHistoryVo.setOrderIdSet(bo.getOrderIdSet());
         if (Constant.DEFAULTNULL != bo.getPostStatus()) {
-        orderHistoryVo.setPostStatus(bo.getPostStatus());
+            orderHistoryVo.setPostStatus(bo.getPostStatus());
         }
         orderHistoryVo.setPostStatusSet(bo.getPostStatusSet());
         if (Constant.DEFAULTNULL != bo.getPreStatus()) {
-        orderHistoryVo.setPreStatus(bo.getPreStatus());
+            orderHistoryVo.setPreStatus(bo.getPreStatus());
         }
         orderHistoryVo.setPreStatusSet(bo.getPreStatusSet());
         orderHistoryVo.setRemark(bo.getRemark());

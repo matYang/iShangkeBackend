@@ -34,3 +34,5 @@ applicationContext-dataaccess.xml
 applicationContext-dataaccessUT.xml
 ~$ServiceApi.xlsx
 
+iShangkeProject/iShangkeProject-AdminWeb/.settings/org.eclipse.wst.common.component
+iShangkeProject/iShangkeProject-PartnerWeb/.settings/org.eclipse.wst.common.component

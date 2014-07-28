@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.CategoryVo;
 
 public class CategoryConverter {
     public static CategoryBo fromModel(CategoryVo vo) {
+        if (vo == null) {
+            return null;
+        }
         CategoryBo categoryBo = new CategoryBo();
         if (vo.getEnabled() != null) {
             categoryBo.setEnabled(vo.getEnabled());
@@ -22,32 +25,45 @@ public class CategoryConverter {
         }
         if (vo.getRank() != null) {
             categoryBo.setRank(vo.getRank());
-        }  else {
+        } else {
             categoryBo.setRank(Constant.DEFAULTNULL);
         }
 
         if (vo.getRankEnd() != null) {
             categoryBo.setRankEnd(vo.getRankEnd());
+        } else {
+            categoryBo.setRankEnd(Constant.DEFAULTNULL);
         }
         if (vo.getRankSet() != null) {
             categoryBo.setRankSet(vo.getRankSet());
         }
         if (vo.getRankStart() != null) {
             categoryBo.setRankStart(vo.getRankStart());
+        } else {
+            categoryBo.setRankStart(Constant.DEFAULTNULL);
         }
         if (vo.getValue() != null) {
             categoryBo.setValue(vo.getValue());
         }
-        categoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        categoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        categoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        categoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        categoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        categoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return categoryBo;
     }
 
     public static CategoryVo toModel(CategoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CategoryVo categoryVo = new CategoryVo();
         categoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         categoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -60,11 +76,15 @@ public class CategoryConverter {
         categoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         categoryVo.setName(bo.getName());
         if (Constant.DEFAULTNULL != bo.getRank()) {
-        categoryVo.setRank(bo.getRank());
+            categoryVo.setRank(bo.getRank());
         }
-        categoryVo.setRankEnd(bo.getRankEnd());
+        if (Constant.DEFAULTNULL != bo.getRankEnd()) {
+            categoryVo.setRankEnd(bo.getRankEnd());
+        }
         categoryVo.setRankSet(bo.getRankSet());
-        categoryVo.setRankStart(bo.getRankStart());
+        if (Constant.DEFAULTNULL != bo.getRankStart()) {
+            categoryVo.setRankStart(bo.getRankStart());
+        }
         categoryVo.setValue(bo.getValue());
         return categoryVo;
     }

@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 
 public class ContactConverter {
     public static ContactBo toBo(ContactEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         ContactBo contactBo = new ContactBo();
         if (e.getEmail() != null) {
             contactBo.setEmail(e.getEmail());
@@ -33,15 +36,23 @@ public class ContactConverter {
             contactBo.setUserIdSet(e.getUserIdSet());
         }
         contactBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        contactBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        contactBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        contactBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        contactBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        contactBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        contactBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        contactBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        contactBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        contactBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        contactBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return contactBo;
     }
 
     public static ContactEntityExt fromBo(ContactBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ContactEntityExt contactEntityExt = new ContactEntityExt();
         contactEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         contactEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

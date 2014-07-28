@@ -7,15 +7,24 @@ import com.ishangke.edunav.web.model.CouponHistoryVo;
 
 public class CouponHistoryConverter {
     public static CouponHistoryBo fromModel(CouponHistoryVo vo) {
+        if (vo == null) {
+            return null;
+        }
         CouponHistoryBo couponHistoryBo = new CouponHistoryBo();
         if (vo.getCharge() != null) {
             couponHistoryBo.setCharge(vo.getCharge());
+        } else {
+            couponHistoryBo.setCharge(Constant.DEFAULTNULL);
         }
         if (vo.getChargeEnd() != null) {
             couponHistoryBo.setChargeEnd(vo.getChargeEnd());
+        } else {
+            couponHistoryBo.setChargeEnd(Constant.DEFAULTNULL);
         }
         if (vo.getChargeStart() != null) {
             couponHistoryBo.setChargeStart(vo.getChargeStart());
+        } else {
+            couponHistoryBo.setChargeStart(Constant.DEFAULTNULL);
         }
         if (vo.getCouponId() != null) {
             couponHistoryBo.setCouponId(vo.getCouponId());
@@ -29,20 +38,35 @@ public class CouponHistoryConverter {
         if (vo.getIdSet() != null) {
             couponHistoryBo.setIdSet(vo.getIdSet());
         }
-        couponHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        couponHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        couponHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        couponHistoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        couponHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        couponHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        couponHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
+        couponHistoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTime().getTimeInMillis());
+        couponHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return couponHistoryBo;
     }
 
     public static CouponHistoryVo toModel(CouponHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CouponHistoryVo couponHistoryVo = new CouponHistoryVo();
-        couponHistoryVo.setCharge(bo.getCharge());
-        couponHistoryVo.setChargeEnd(bo.getChargeEnd());
-        couponHistoryVo.setChargeStart(bo.getChargeStart());
+        if (Constant.DEFAULTNULL != bo.getCharge()) {
+            couponHistoryVo.setCharge(bo.getCharge());
+        }
+        if (Constant.DEFAULTNULL != bo.getChargeEnd()) {
+            couponHistoryVo.setChargeEnd(bo.getChargeEnd());
+        }
+        if (Constant.DEFAULTNULL != bo.getChargeStart()) {
+            couponHistoryVo.setChargeStart(bo.getChargeStart());
+        }
         couponHistoryVo.setCouponId(bo.getCouponId());
         couponHistoryVo.setCouponIdSet(bo.getCouponIdSet());
         couponHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));

@@ -5,6 +5,9 @@ import com.ishangke.edunav.dataaccess.model.ConfigurationEntityExt;
 
 public class ConfigurationConverter {
     public static ConfigurationBo toBo(ConfigurationEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         ConfigurationBo ConfigurationBo = new ConfigurationBo();
         if (e.getConfigData() != null) {
             ConfigurationBo.setConfigData(e.getConfigData());
@@ -19,6 +22,9 @@ public class ConfigurationConverter {
     }
 
     public static ConfigurationEntityExt fromBo(ConfigurationBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ConfigurationEntityExt ConfigurationEntityExt = new ConfigurationEntityExt();
         ConfigurationEntityExt.setConfigData(bo.getConfigData());
         ConfigurationEntityExt.setId(bo.getId());

@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 
 public class RoleConverter {
     public static RoleBo toBo(RoleEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         RoleBo roleBo = new RoleBo();
         if (e.getEnabled() != null) {
             roleBo.setEnabled(e.getEnabled());
@@ -21,15 +24,23 @@ public class RoleConverter {
             roleBo.setName(e.getName());
         }
         roleBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        roleBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        roleBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        roleBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        roleBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        roleBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        roleBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        roleBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        roleBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        roleBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd()
+                .getTimeInMillis());
+        roleBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return roleBo;
     }
 
     public static RoleEntityExt fromBo(RoleBo bo) {
+        if (bo == null) {
+            return null;
+        }
         RoleEntityExt roleEntityExt = new RoleEntityExt();
         roleEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         roleEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

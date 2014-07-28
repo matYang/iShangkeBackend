@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.MessageVo;
 
 public class MessageConverter {
     public static MessageBo fromModel(MessageVo vo) {
+        if (vo == null) {
+            return null;
+        }
         MessageBo messageBo = new MessageBo();
         if (vo.getId() != null) {
             messageBo.setId(vo.getId());
@@ -52,6 +55,10 @@ public class MessageConverter {
     }
 
     public static MessageVo toModel(MessageBo bo) {
+
+        if (bo == null) {
+            return null;
+        }
         MessageVo messageVo = new MessageVo();
         messageVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         messageVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

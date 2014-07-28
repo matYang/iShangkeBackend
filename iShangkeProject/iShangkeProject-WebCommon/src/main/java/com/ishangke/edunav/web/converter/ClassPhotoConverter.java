@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.ClassPhotoVo;
 
 public class ClassPhotoConverter {
     public static ClassPhotoBo fromModel(ClassPhotoVo vo) {
+        if (vo == null) {
+            return null;
+        }
         ClassPhotoBo classPhotoBo = new ClassPhotoBo();
         if (vo.getDescription() != null) {
             classPhotoBo.setDescription(vo.getDescription());
@@ -35,16 +38,25 @@ public class ClassPhotoConverter {
         if (vo.getSnapshotUrl() != null) {
             classPhotoBo.setSnapshotUrl(vo.getSnapshotUrl());
         }
-        classPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        classPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        classPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        classPhotoBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        classPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        classPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        classPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
+        classPhotoBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        classPhotoBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        classPhotoBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return classPhotoBo;
     }
 
     public static ClassPhotoVo toModel(ClassPhotoBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();
         classPhotoVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         classPhotoVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

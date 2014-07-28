@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 
 public class UserConverter {
     public static UserBo toBo(UserEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         UserBo userBo = new UserBo();
         if (e.getAppliedInvitationCode() != null) {
             userBo.setAppliedInvitationCode(e.getAppliedInvitationCode());
@@ -69,20 +72,32 @@ public class UserConverter {
         }
         userBo.setBirthday(e.getBirthday() == null ? Constant.DEFAULTNULL : e.getBirthday().getTimeInMillis());
         userBo.setBirthdayEnd(e.getBirthdayEnd() == null ? Constant.DEFAULTNULL : e.getBirthdayEnd().getTimeInMillis());
-        userBo.setBirthdayStart(e.getBirthdayStart() == null ? Constant.DEFAULTNULL : e.getBirthdayStart().getTimeInMillis());
+        userBo.setBirthdayStart(e.getBirthdayStart() == null ? Constant.DEFAULTNULL : e.getBirthdayStart()
+                .getTimeInMillis());
         userBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        userBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        userBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        userBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime().getTimeInMillis());
-        userBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd().getTimeInMillis());
-        userBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeStart().getTimeInMillis());
-        userBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        userBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        userBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        userBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        userBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        userBo.setLastLoginTime(e.getLastLoginTime() == null ? Constant.DEFAULTNULL : e.getLastLoginTime()
+                .getTimeInMillis());
+        userBo.setLastLoginTimeEnd(e.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastLoginTimeEnd()
+                .getTimeInMillis());
+        userBo.setLastLoginTimeStart(e.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastLoginTimeStart().getTimeInMillis());
+        userBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        userBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd()
+                .getTimeInMillis());
+        userBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return userBo;
     }
 
     public static UserEntityExt fromBo(UserBo bo) {
+        if (bo == null) {
+            return null;
+        }
         UserEntityExt userEntityExt = new UserEntityExt();
         userEntityExt.setAppliedInvitationCode(bo.getAppliedInvitationCode());
         userEntityExt.setAvatarUrl(bo.getAvatarUrl());
@@ -95,7 +110,7 @@ public class UserConverter {
         userEntityExt.setEmail(bo.getEmail());
         userEntityExt.setEnabled(bo.getEnabled());
         if (bo.getGender() != Constant.DEFAULTNULL) {
-        userEntityExt.setGender(bo.getGender());
+            userEntityExt.setGender(bo.getGender());
         }
         userEntityExt.setId(bo.getId());
         userEntityExt.setIdSet(bo.getIdSet());

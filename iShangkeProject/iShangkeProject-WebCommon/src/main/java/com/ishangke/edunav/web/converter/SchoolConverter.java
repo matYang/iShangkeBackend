@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.SchoolVo;
 
 public class SchoolConverter {
     public static SchoolBo fromModel(SchoolVo vo) {
+        if (vo == null) {
+            return null;
+        }
         SchoolBo schoolBo = new SchoolBo();
         if (vo.getEnabled() != null) {
             schoolBo.setEnabled(vo.getEnabled());
@@ -24,15 +27,23 @@ public class SchoolConverter {
             schoolBo.setValue(vo.getValue());
         }
         schoolBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        schoolBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        schoolBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        schoolBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        schoolBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        schoolBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        schoolBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        schoolBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        schoolBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        schoolBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        schoolBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return schoolBo;
     }
 
     public static SchoolVo toModel(SchoolBo bo) {
+        if (bo == null) {
+            return null;
+        }
         SchoolVo schoolVo = new SchoolVo();
         schoolVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         schoolVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));

@@ -7,15 +7,24 @@ import com.ishangke.edunav.web.model.AccountHistoryVo;
 
 public class AccountHistoryConverter {
     public static AccountHistoryBo fromModel(AccountHistoryVo vo) {
+        if (vo == null) {
+            return null;
+        }
         AccountHistoryBo accountHistoryBo = new AccountHistoryBo();
         if (vo.getCharge() != null) {
             accountHistoryBo.setCharge(vo.getCharge());
+        } else {
+            accountHistoryBo.setCharge(Constant.DEFAULTNULL);
         }
         if (vo.getChargeEnd() != null) {
             accountHistoryBo.setChargeEnd(vo.getChargeEnd());
+        } else {
+            accountHistoryBo.setChargeEnd(Constant.DEFAULTNULL);
         }
         if (vo.getChargeStart() != null) {
             accountHistoryBo.setChargeStart(vo.getChargeStart());
+        } else {
+            accountHistoryBo.setChargeStart(Constant.DEFAULTNULL);
         }
         if (vo.getId() != null) {
             accountHistoryBo.setId(vo.getId());
@@ -46,17 +55,29 @@ public class AccountHistoryConverter {
         if (vo.getWithdrawIdSet() != null) {
             accountHistoryBo.setWithdrawIdSet(vo.getWithdrawIdSet());
         }
-        accountHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        accountHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        accountHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        accountHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        accountHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        accountHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
         return accountHistoryBo;
     }
 
     public static AccountHistoryVo toModel(AccountHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         AccountHistoryVo accountHistoryVo = new AccountHistoryVo();
-        accountHistoryVo.setCharge(bo.getCharge());
-        accountHistoryVo.setChargeEnd(bo.getChargeEnd());
-        accountHistoryVo.setChargeStart(bo.getChargeStart());
+        if (Constant.DEFAULTNULL != bo.getCharge()) {
+            accountHistoryVo.setCharge(bo.getCharge());
+        }
+        if (Constant.DEFAULTNULL != bo.getChargeEnd()) {
+            accountHistoryVo.setChargeEnd(bo.getChargeEnd());
+        }
+        if (Constant.DEFAULTNULL != bo.getChargeStart()) {
+            accountHistoryVo.setChargeStart(bo.getChargeStart());
+        }
         accountHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         accountHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         accountHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));

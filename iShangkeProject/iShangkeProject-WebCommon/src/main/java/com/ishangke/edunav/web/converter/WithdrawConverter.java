@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.WithdrawVo;
 
 public class WithdrawConverter {
     public static WithdrawBo fromModel(WithdrawVo vo) {
+        if (vo == null) {
+            return null;
+        }
         WithdrawBo withdrawBo = new WithdrawBo();
         if (vo.getEnabled() != null) {
             withdrawBo.setEnabled(vo.getEnabled());
@@ -34,17 +37,26 @@ public class WithdrawConverter {
         if (vo.getUserIdSet() != null) {
             withdrawBo.setUserIdSet(vo.getUserIdSet());
         }
-        withdrawBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        withdrawBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        withdrawBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
-        withdrawBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        withdrawBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        withdrawBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        withdrawBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        withdrawBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
+                .getTimeInMillis());
+        withdrawBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
+                .getTimeInMillis());
+        withdrawBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
+                .getTimeInMillis());
+        withdrawBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        withdrawBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return withdrawBo;
     }
 
     public static WithdrawVo toModel(WithdrawBo bo) {
-        WithdrawVo withdrawVo =new WithdrawVo();
+        if (bo == null) {
+            return null;
+        }
+        WithdrawVo withdrawVo = new WithdrawVo();
         withdrawVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         withdrawVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         withdrawVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
@@ -57,7 +69,7 @@ public class WithdrawConverter {
         withdrawVo.setPayeeId(bo.getPayeeId());
         withdrawVo.setPeyeeName(bo.getPeyeeName());
         if (Constant.DEFAULTNULL != bo.getType()) {
-        withdrawVo.setType(bo.getType());
+            withdrawVo.setType(bo.getType());
         }
         withdrawVo.setUserId(bo.getUserId());
         withdrawVo.setUserIdSet(bo.getUserIdSet());

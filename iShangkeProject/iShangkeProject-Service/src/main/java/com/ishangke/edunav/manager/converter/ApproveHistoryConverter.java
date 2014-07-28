@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.ApproveHistoryEntityExt;
 
 public class ApproveHistoryConverter {
     public static ApproveHistoryBo toBo(ApproveHistoryEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         ApproveHistoryBo approveHistoryBo = new ApproveHistoryBo();
         if (e.getApproveUserId() != null) {
             approveHistoryBo.setApproveUserId(e.getApproveUserId());
@@ -70,6 +73,9 @@ public class ApproveHistoryConverter {
     }
 
     public static ApproveHistoryEntityExt fromBo(ApproveHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         ApproveHistoryEntityExt approveHistoryEntityExt = new ApproveHistoryEntityExt();
         approveHistoryEntityExt.setApproveUserId(bo.getApproveUserId());
         approveHistoryEntityExt.setApproveUserIdSet(bo.getApproveUserIdSet());

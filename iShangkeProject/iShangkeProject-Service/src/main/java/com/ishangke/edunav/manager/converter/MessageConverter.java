@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.MessageEntityExt;
 
 public class MessageConverter {
     public static MessageBo toBo(MessageEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         MessageBo messageBo = new MessageBo();
         if (e.getId() != null) {
             messageBo.setId(e.getId());
@@ -38,15 +41,22 @@ public class MessageConverter {
             messageBo.setStatusSet(e.getStatusSet());
         }
         messageBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        messageBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        messageBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        messageBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        messageBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
         messageBo.setReadTime(e.getReadTime() == null ? Constant.DEFAULTNULL : e.getReadTime().getTimeInMillis());
-        messageBo.setReadTimeEnd(e.getReadTimeEnd() == null ? Constant.DEFAULTNULL : e.getReadTimeEnd().getTimeInMillis());
-        messageBo.setReadTimeStart(e.getReadTimeStart() == null ? Constant.DEFAULTNULL : e.getReadTimeStart().getTimeInMillis());
+        messageBo.setReadTimeEnd(e.getReadTimeEnd() == null ? Constant.DEFAULTNULL : e.getReadTimeEnd()
+                .getTimeInMillis());
+        messageBo.setReadTimeStart(e.getReadTimeStart() == null ? Constant.DEFAULTNULL : e.getReadTimeStart()
+                .getTimeInMillis());
         return messageBo;
     }
 
     public static MessageEntityExt fromBo(MessageBo bo) {
+        if (bo == null) {
+            return null;
+        }
         MessageEntityExt messageEntityExt = new MessageEntityExt();
         messageEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         messageEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -60,7 +70,7 @@ public class MessageConverter {
         messageEntityExt.setUserFromId(bo.getUserFromId());
         messageEntityExt.setUserToId(bo.getUserToId());
         if (bo.getStatus() != Constant.DEFAULTNULL) {
-        messageEntityExt.setStatus(bo.getStatus());
+            messageEntityExt.setStatus(bo.getStatus());
         }
         messageEntityExt.setUserFromIdSet(bo.getUserFromIdSet());
         messageEntityExt.setUserToIdSet(bo.getUserToIdSet());

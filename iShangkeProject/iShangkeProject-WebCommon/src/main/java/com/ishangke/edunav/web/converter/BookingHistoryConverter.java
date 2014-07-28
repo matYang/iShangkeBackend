@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.BookingHistoryVo;
 
 public class BookingHistoryConverter {
     public static BookingHistoryBo fromModel(BookingHistoryVo vo) {
+        if (vo == null) {
+            return null;
+        }
         BookingHistoryBo bookingHistoryBo = new BookingHistoryBo();
         if (vo.getBookingId() != null) {
             bookingHistoryBo.setBookingId(vo.getBookingId());
@@ -78,6 +81,9 @@ public class BookingHistoryConverter {
     }
 
     public static BookingHistoryVo toModel(BookingHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         BookingHistoryVo bookingHistoryVo = new BookingHistoryVo();
         bookingHistoryVo.setBookingId(bo.getBookingId());
         bookingHistoryVo.setBookingIdSet(bo.getBookingIdSet());

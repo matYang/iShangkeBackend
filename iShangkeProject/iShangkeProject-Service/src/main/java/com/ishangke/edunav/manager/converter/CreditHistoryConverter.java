@@ -7,16 +7,28 @@ import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 
 public class CreditHistoryConverter {
     public static CreditHistoryBo toBo(CreditHistoryEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         CreditHistoryBo creditHistoryBo = new CreditHistoryBo();
         if (e.getCharge() != null) {
             creditHistoryBo.setCharge(e.getCharge());
+        } else {
+            creditHistoryBo.setCharge(Constant.DEFAULTNULL);
         }
+
         if (e.getChargeEnd() != null) {
             creditHistoryBo.setChargeEnd(e.getChargeEnd());
+        } else {
+            creditHistoryBo.setChargeEnd(Constant.DEFAULTNULL);
         }
+
         if (e.getChargeStart() != null) {
             creditHistoryBo.setChargeStart(e.getChargeStart());
+        } else {
+            creditHistoryBo.setChargeStart(Constant.DEFAULTNULL);
         }
+
         if (e.getId() != null) {
             creditHistoryBo.setId(e.getId());
         }
@@ -29,20 +41,35 @@ public class CreditHistoryConverter {
         if (e.getUserIdSet() != null) {
             creditHistoryBo.setUserIdSet(e.getUserIdSet());
         }
-        creditHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        creditHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        creditHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        creditHistoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        creditHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        creditHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        creditHistoryBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        creditHistoryBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        creditHistoryBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getCreateTimeStart().getTimeInMillis());
+        creditHistoryBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        creditHistoryBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        creditHistoryBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return creditHistoryBo;
     }
 
     public static CreditHistoryEntityExt fromBo(CreditHistoryBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CreditHistoryEntityExt creditHistoryEntityExt = new CreditHistoryEntityExt();
-        creditHistoryEntityExt.setCharge(bo.getCharge());
-        creditHistoryEntityExt.setChargeEnd(bo.getChargeEnd());
-        creditHistoryEntityExt.setChargeStart(bo.getChargeStart());
+        if (bo.getCharge() != Constant.DEFAULTNULL) {
+            creditHistoryEntityExt.setCharge(bo.getCharge());
+        }
+        if (bo.getChargeEnd() != Constant.DEFAULTNULL) {
+            creditHistoryEntityExt.setChargeEnd(bo.getChargeEnd());
+        }
+        if (bo.getChargeStart() != Constant.DEFAULTNULL) {
+            creditHistoryEntityExt.setChargeStart(bo.getChargeStart());
+        }
         creditHistoryEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         creditHistoryEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         creditHistoryEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));

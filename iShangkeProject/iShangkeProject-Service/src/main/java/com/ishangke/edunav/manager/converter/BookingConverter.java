@@ -7,15 +7,24 @@ import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 
 public class BookingConverter {
     public static BookingBo toBo(BookingEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         BookingBo bookingBo = new BookingBo();
         if (e.getCashbackAmount() != null) {
             bookingBo.setCashbackAmount(e.getCashbackAmount());
+        } else {
+            bookingBo.setCashbackAmount(Constant.DEFAULTNULL);
         }
         if (e.getCashbackAmountEnd() != null) {
             bookingBo.setCashbackAmountEnd(e.getCashbackAmountEnd());
+        } else {
+            bookingBo.setCashbackAmountEnd(Constant.DEFAULTNULL);
         }
         if (e.getCashbackAmountStart() != null) {
             bookingBo.setCashbackAmountStart(e.getCashbackAmountStart());
+        } else {
+            bookingBo.setCashbackAmountStart(Constant.DEFAULTNULL);
         }
         if (e.getCourseId() != null) {
             bookingBo.setCourseId(e.getCourseId());
@@ -63,14 +72,20 @@ public class BookingConverter {
         }
         if (e.getPrice() != null) {
             bookingBo.setPrice(e.getPrice());
-        } 
+        } else {
+            bookingBo.setPrice(Constant.DEFAULTNULL);
+        }
         if (e.getPriceEnd() != null) {
             bookingBo.setPriceEnd(e.getPriceEnd());
+        } else {
+            bookingBo.setPriceEnd(Constant.DEFAULTNULL);
         }
         if (e.getPriceStart() != null) {
             bookingBo.setPriceStart(e.getPriceStart());
+        } else {
+            bookingBo.setPriceStart(Constant.DEFAULTNULL);
         }
-        
+
         if (e.getType() != null) {
             bookingBo.setType(e.getType());
         } else {
@@ -118,10 +133,19 @@ public class BookingConverter {
     }
 
     public static BookingEntityExt fromBo(BookingBo bo) {
+        if (bo == null) {
+            return null;
+        }
         BookingEntityExt bookingEntityExt = new BookingEntityExt();
-        bookingEntityExt.setCashbackAmount(bo.getCashbackAmount());
-        bookingEntityExt.setCashbackAmountEnd(bo.getCashbackAmountEnd());
-        bookingEntityExt.setCashbackAmountStart(bo.getCashbackAmountStart());
+        if (bo.getCashbackAmount() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setCashbackAmount(bo.getCashbackAmount());
+        }
+        if (bo.getCashbackAmountEnd() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setCashbackAmountEnd(bo.getCashbackAmountEnd());
+        }
+        if (bo.getCashbackAmountStart() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setCashbackAmountStart(bo.getCashbackAmountStart());
+        }
         bookingEntityExt.setCashbackDate(DateUtility.getTimeFromLong(bo.getCashbackDate()));
         bookingEntityExt.setCashbackDateEnd(DateUtility.getTimeFromLong(bo.getCashbackDateEnd()));
         bookingEntityExt.setCashbackDateStart(DateUtility.getTimeFromLong(bo.getCashbackDateStart()));
@@ -156,9 +180,15 @@ public class BookingConverter {
         if (bo.getType() != Constant.DEFAULTNULL) {
             bookingEntityExt.setType(bo.getType());
         }
-        bookingEntityExt.setPrice(bo.getPrice());
-        bookingEntityExt.setPriceEnd(bo.getPriceEnd());
-        bookingEntityExt.setPriceStart(bo.getPriceStart());
+        if (bo.getPrice() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setPrice(bo.getPrice());
+        }
+        if (bo.getPriceEnd() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setPriceEnd(bo.getPriceEnd());
+        }
+        if (bo.getPriceStart() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setPriceStart(bo.getPriceStart());
+        }
         bookingEntityExt.setTypeSet(bo.getTypeSet());
         bookingEntityExt.setUserId(bo.getUserId());
         bookingEntityExt.setUserIdSet(bo.getUserIdSet());

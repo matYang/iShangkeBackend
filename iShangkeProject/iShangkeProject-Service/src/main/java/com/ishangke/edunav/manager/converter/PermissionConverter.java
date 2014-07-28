@@ -7,36 +7,48 @@ import com.ishangke.edunav.dataaccess.model.PermissionEntityExt;
 
 public class PermissionConverter {
     public static PermissionBo toBo(PermissionEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         PermissionBo permissionBo = new PermissionBo();
-        if (e.getEnabled()!= null) {
+        if (e.getEnabled() != null) {
             permissionBo.setEnabled(e.getEnabled());
         }
-        if (e.getId()!= null) {
+        if (e.getId() != null) {
             permissionBo.setId(e.getId());
         }
-        if (e.getIdSet()!= null) {
+        if (e.getIdSet() != null) {
             permissionBo.setIdSet(e.getIdSet());
         }
-        if (e.getName()!= null) {
+        if (e.getName() != null) {
             permissionBo.setName(e.getName());
         }
-        if (e.getPath()!= null) {
+        if (e.getPath() != null) {
             permissionBo.setPath(e.getPath());
         }
-        if (e.getTag()!= null) {
+        if (e.getTag() != null) {
             permissionBo.setTag(e.getTag());
         }
-        permissionBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        permissionBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        permissionBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        permissionBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        permissionBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        permissionBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        permissionBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
+                .getTimeInMillis());
+        permissionBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        permissionBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        permissionBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        permissionBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        permissionBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return permissionBo;
     }
 
     public static PermissionEntityExt fromBo(PermissionBo bo) {
-        PermissionEntityExt permissionEntityExt =new PermissionEntityExt();
+        if (bo == null) {
+            return null;
+        }
+        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
         permissionEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         permissionEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         permissionEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));

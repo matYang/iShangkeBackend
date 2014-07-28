@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.RolePermissionVo;
 
 public class RolePermissionConverter {
     public static RolePermissionBo fromModel(RolePermissionVo vo) {
+        if (vo == null) {
+            return null;
+        }
         RolePermissionBo rolePermissionBo = new RolePermissionBo();
         if (vo.getId() != null) {
             rolePermissionBo.setId(vo.getId());
@@ -26,13 +29,19 @@ public class RolePermissionConverter {
         if (vo.getRoleIdSet() != null) {
             rolePermissionBo.setRoleIdSet(vo.getRoleIdSet());
         }
-        rolePermissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeEnd().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo.getLastModifyTimeStart().getTimeInMillis());
+        rolePermissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTime().getTimeInMillis());
+        rolePermissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeEnd().getTimeInMillis());
+        rolePermissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getLastModifyTimeStart().getTimeInMillis());
         return rolePermissionBo;
     }
 
     public static RolePermissionVo toModel(RolePermissionBo bo) {
+        if (bo == null) {
+            return null;
+        }
         RolePermissionVo rolePermissionVo = new RolePermissionVo();
         rolePermissionVo.setId(bo.getId());
         rolePermissionVo.setIdSet(bo.getIdSet());

@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.CourseClassPhotoVo;
 
 public class CourseClassPhotoConverter {
     public static CourseClassPhotoBo fromModel(CourseClassPhotoVo vo) {
+        if (vo == null) {
+            return null;
+        }
         CourseClassPhotoBo courseClassPhotoBo = new CourseClassPhotoBo();
         if (vo.getClassPhotoId() != null) {
             courseClassPhotoBo.setClassPhotoId(vo.getClassPhotoId());
@@ -26,13 +29,19 @@ public class CourseClassPhotoConverter {
         if (vo.getIdSet() != null) {
             courseClassPhotoBo.setIdSet(vo.getIdSet());
         }
-        courseClassPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        courseClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        courseClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        courseClassPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        courseClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeEnd().getTimeInMillis());
+        courseClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
         return courseClassPhotoBo;
     }
 
     public static CourseClassPhotoVo toModel(CourseClassPhotoBo bo) {
+        if (bo == null) {
+            return null;
+        }
         CourseClassPhotoVo courseClassPhotoVo = new CourseClassPhotoVo();
         courseClassPhotoVo.setClassPhotoId(bo.getClassPhotoId());
         courseClassPhotoVo.setClassPhotoIdSet(bo.getClassPhotoIdSet());

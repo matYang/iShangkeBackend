@@ -7,6 +7,9 @@ import com.ishangke.edunav.web.model.CourseTemplateTeacherVo;
 
 public class CourseTemplateTeacherConverter {
     public static CourseTemplateTeacherBo fromModel(CourseTemplateTeacherVo vo) {
+        if (vo == null) {
+            return null;
+        }
         CourseTemplateTeacherBo courseTemplateTeacherBo = new CourseTemplateTeacherBo();
         if (vo.getCourseTemplateId() != null) {
             courseTemplateTeacherBo.setCourseTemplateId(vo.getCourseTemplateId());
@@ -26,13 +29,20 @@ public class CourseTemplateTeacherConverter {
         if (vo.getTeacherIdSet() != null) {
             courseTemplateTeacherBo.setTeacherIdSet(vo.getTeacherIdSet());
         }
-        courseTemplateTeacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        courseTemplateTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd().getTimeInMillis());
-        courseTemplateTeacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart().getTimeInMillis());
+        courseTemplateTeacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
+                .getTimeInMillis());
+        courseTemplateTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeEnd().getTimeInMillis());
+        courseTemplateTeacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
+                .getCreateTimeStart().getTimeInMillis());
         return courseTemplateTeacherBo;
     }
 
     public static CourseTemplateTeacherVo toModel(CourseTemplateTeacherBo bo) {
+
+        if (bo == null) {
+            return null;
+        }
         CourseTemplateTeacherVo courseTemplateTeacherVo = new CourseTemplateTeacherVo();
         courseTemplateTeacherVo.setCourseTemplateId(bo.getCourseTemplateId());
         courseTemplateTeacherVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());

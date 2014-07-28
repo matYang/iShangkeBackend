@@ -7,6 +7,9 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 public class TeacherConverter {
     public static TeacherBo toBo(TeacherEntityExt e) {
+        if (e == null) {
+            return null;
+        }
         TeacherBo teacherBo = new TeacherBo();
         if (e.getEnabled() != null) {
             teacherBo.setEnabled(e.getEnabled());
@@ -34,28 +37,40 @@ public class TeacherConverter {
         }
         if (e.getPopularity() != null) {
             teacherBo.setPopularity(e.getPopularity());
-        }else {
+        } else {
             teacherBo.setPopularity(Constant.DEFAULTNULL);
         }
         if (e.getPopularityEnd() != null) {
             teacherBo.setPopularityEnd(e.getPopularityEnd());
+        } else {
+            teacherBo.setPopularityEnd(Constant.DEFAULTNULL);
         }
         if (e.getPopularitySet() != null) {
             teacherBo.setPopularitySet(e.getPopularitySet());
         }
         if (e.getPopularityStart() != null) {
             teacherBo.setPopularityStart(e.getPopularityStart());
+        } else {
+            teacherBo.setPopularityStart(Constant.DEFAULTNULL);
         }
         teacherBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
-        teacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
-        teacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
-        teacherBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime().getTimeInMillis());
-        teacherBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeEnd().getTimeInMillis());
-        teacherBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e.getLastModifyTimeStart().getTimeInMillis());
+        teacherBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
+                .getTimeInMillis());
+        teacherBo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart()
+                .getTimeInMillis());
+        teacherBo.setLastModifyTime(e.getLastModifyTime() == null ? Constant.DEFAULTNULL : e.getLastModifyTime()
+                .getTimeInMillis());
+        teacherBo.setLastModifyTimeEnd(e.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeEnd().getTimeInMillis());
+        teacherBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
+                .getLastModifyTimeStart().getTimeInMillis());
         return teacherBo;
     }
 
     public static TeacherEntityExt fromBo(TeacherBo bo) {
+        if (bo == null) {
+            return null;
+        }
         TeacherEntityExt teacherEntityExt = new TeacherEntityExt();
         teacherEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         teacherEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
@@ -72,11 +87,15 @@ public class TeacherConverter {
         teacherEntityExt.setPartnerId(bo.getPartnerId());
         teacherEntityExt.setPartnerIdSet(bo.getPartnerIdSet());
         if (bo.getPopularity() != Constant.DEFAULTNULL) {
-        teacherEntityExt.setPopularity(bo.getPopularity());
+            teacherEntityExt.setPopularity(bo.getPopularity());
         }
-        teacherEntityExt.setPopularityEnd(bo.getPopularityEnd());
+        if (bo.getPopularityEnd() != Constant.DEFAULTNULL) {
+            teacherEntityExt.setPopularityEnd(bo.getPopularityEnd());
+        }
         teacherEntityExt.setPopularitySet(bo.getPopularitySet());
-        teacherEntityExt.setPopularityStart(bo.getPopularityStart());
+        if (bo.getPopularityStart() != Constant.DEFAULTNULL) {
+            teacherEntityExt.setPopularityStart(bo.getPopularityStart());
+        }
         return teacherEntityExt;
     }
 }
