@@ -273,7 +273,7 @@ public class CourseFacade {
         p.setOffset(-1);
         CourseBo ccc= new CourseBo();
         ccc.setCategoryValue("00");
-        List<CourseBo> course = c.queryCourseByFilter(ccc, p, "");
+        List<CourseBo> course = c.queryCourseByFilter(null, null, "");
         System.out.println(course);
         System.out.println(course.size());
         System.out.println("********************************");
