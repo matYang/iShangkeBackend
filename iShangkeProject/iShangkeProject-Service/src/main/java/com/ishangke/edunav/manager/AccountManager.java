@@ -18,12 +18,9 @@ public interface AccountManager {
      *            调用方法的用户的信息
      * @param amount
      *            需要提取的现金
-     * @param payee_Id
-     *            账户ID
-     * @param payee_Name
-     *            账户名字
-     * @param type
-     *            提取方式
+     * @param withdraw
+     *            取款方式
+     *                 
      * @return
      * 
      */

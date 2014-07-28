@@ -575,4 +575,5 @@ public class BookingManagerImpl implements BookingManager {
         double b = 0.123456002300000000000;
         System.out.println(a.equals(b));
     }
+   
 }

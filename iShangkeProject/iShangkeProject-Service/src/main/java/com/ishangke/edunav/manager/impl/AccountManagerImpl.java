@@ -45,66 +45,75 @@ public class AccountManagerImpl implements AccountManager {
     private AuthManager authManager;
 
     @Override
-    //TODO left for harry
+    // TODO left for harry
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type) {
-        // Check whether parameters are null
-        if (userBo == null) {
-            throw new ManagerException("User Exchange Cash Failed: UserBo is null");
-        }
-        if (accountBo == null) {
-            throw new ManagerException("User Exchange Cash Failed: AccountBo is null");
-        }
-
-        // Convert
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
-
-        // Check the Account's id
-        if (accountEntity.getId() == null || accountEntity.getId() == 0) {
-            throw new ManagerException("User Exchange Cash Failed: 账户id为null或0");
-        }
-        // Check the User's id
-        if (userEntity.getId() == null || userEntity.getId() == 0) {
-            throw new ManagerException("User Exchange Cash Failed: 用户id为null或0");
-        }
-        // Check whether the Account belongs to the User
-        if (!accountEntity.getId().equals(userEntity.getId())) {
-            throw new ManagerException("User Exchange Cash Failed: 该账户不属于此用户");
-        }
-        try {
-            //TODO withdraw stands for 取款方式, not dynamically added here
-            //TODO to get the withdraw id, might need to change interface to pass a withdrawBo
-            
-            // Create AccountHistory
-            AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
-            accountHistory.setCharge(amount);
-            accountHistory.setUserId(userEntity.getId());
-            //accountHistory.setWithdrawId(withdraw.getId());
-            accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
-            //accountHistory.setType(withdraw.getType());
-            accountHistory.setDeleted(0);
-
-            int accountHistoryResult = 0;
-            accountHistoryResult = accountHistoryMapper.add(accountHistory);
-
-            if (accountHistoryResult > 0) {
-                // Update Account
-                try {
-                    AccountEntityExt oldAccount = accountMapper.getById(accountEntity.getId());
-                    oldAccount.setBalance(oldAccount.getBalance() - amount);
-                    oldAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
-                    accountMapper.update(oldAccount);
-                    return AccountConverter.toBo(oldAccount);
-                } catch (Throwable t) {
-                    throw new ManagerException("User Exchange Cash Failed: Get accountEntity and Update the balance of it Failed", t);
-                }
-            } else {
-                throw new ManagerException("User Exchange Cash Failed: Add accountHistory Failed");
-            }
-
-        } catch (Throwable t) {
-            throw new ManagerException("User Exchange Cash Failed", t);
-        }
+        // // Check whether parameters are null
+        // if (userBo == null) {
+        // throw new
+        // ManagerException("User Exchange Cash Failed: UserBo is null");
+        // }
+        // if (accountBo == null) {
+        // throw new
+        // ManagerException("User Exchange Cash Failed: AccountBo is null");
+        // }
+        //
+        // // Convert
+        // UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        // AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
+        //
+        // // Check the Account's id
+        // if (accountEntity.getId() == null || accountEntity.getId() == 0) {
+        // throw new ManagerException("User Exchange Cash Failed: 账户id为null或0");
+        // }
+        // // Check the User's id
+        // if (userEntity.getId() == null || userEntity.getId() == 0) {
+        // throw new ManagerException("User Exchange Cash Failed: 用户id为null或0");
+        // }
+        // // Check whether the Account belongs to the User
+        // if (!accountEntity.getId().equals(userEntity.getId())) {
+        // throw new ManagerException("User Exchange Cash Failed: 该账户不属于此用户");
+        // }
+        // try {
+        // //TODO withdraw stands for 取款方式, not dynamically added here
+        // //TODO to get the withdraw id, might need to change interface to pass
+        // a withdrawBo
+        //
+        // // Create AccountHistory
+        // AccountHistoryEntityExt accountHistory = new
+        // AccountHistoryEntityExt();
+        // accountHistory.setCharge(amount);
+        // accountHistory.setUserId(userEntity.getId());
+        // //accountHistory.setWithdrawId(withdraw.getId());
+        // accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+        // //accountHistory.setType(withdraw.getType());
+        // accountHistory.setDeleted(0);
+        //
+        // int accountHistoryResult = 0;
+        // accountHistoryResult = accountHistoryMapper.add(accountHistory);
+        //
+        // if (accountHistoryResult > 0) {
+        // // Update Account
+        // try {
+        // AccountEntityExt oldAccount =
+        // accountMapper.getById(accountEntity.getId());
+        // oldAccount.setBalance(oldAccount.getBalance() - amount);
+        // oldAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
+        // accountMapper.update(oldAccount);
+        // return AccountConverter.toBo(oldAccount);
+        // } catch (Throwable t) {
+        // throw new
+        // ManagerException("User Exchange Cash Failed: Get accountEntity and Update the balance of it Failed",
+        // t);
+        // }
+        // } else {
+        // throw new
+        // ManagerException("User Exchange Cash Failed: Add accountHistory Failed");
+        // }
+        //
+        // } catch (Throwable t) {
+        // throw new ManagerException("User Exchange Cash Failed", t);
+        // }
+        return null;
 
     }
 
@@ -113,17 +122,17 @@ public class AccountManagerImpl implements AccountManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         AccountEntityExt accountEntity = accountBo == null ? null : AccountConverter.fromBo(accountBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        //admin and system admins can query user's accounts
+        // admin and system admins can query user's accounts
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[AccountManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
             if (accountEntity == null || accountEntity.getId() == null || !accountEntity.getId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's account");
             }
@@ -135,7 +144,7 @@ public class AccountManagerImpl implements AccountManager {
         } catch (Throwable t) {
             throw new ManagerException("Account query failed for user: " + userEntity.getId(), t);
         }
-        
+
         if (results == null) {
             return new ArrayList<AccountBo>();
         }
@@ -157,24 +166,25 @@ public class AccountManagerImpl implements AccountManager {
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        //admin and system admins can query user's accountHistorys
+        // admin and system admins can query user's accountHistorys
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[AccountHistoryManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
-            if (accountHistoryEntity == null || accountHistoryEntity.getUserId() == null || !accountHistoryEntity.getUserId().equals(userEntity.getId())) {
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
+            if (accountHistoryEntity == null || accountHistoryEntity.getUserId() == null
+                    || !accountHistoryEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's accountHistory");
             }
         }
-        
+
         List<AccountHistoryEntityExt> results = null;
         try {
             results = accountHistoryMapper.list(accountHistoryEntity, page);
         } catch (Throwable t) {
             throw new ManagerException("Account queryHistory failed for user: " + userEntity.getId(), t);
         }
-        
+
         if (results == null) {
             return new ArrayList<AccountHistoryBo>();
         }
@@ -184,5 +194,5 @@ public class AccountManagerImpl implements AccountManager {
         }
         return convertedResults;
     }
-    
+
 }

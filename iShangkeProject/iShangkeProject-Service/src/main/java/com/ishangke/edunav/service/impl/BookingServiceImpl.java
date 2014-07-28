@@ -203,6 +203,12 @@ public class BookingServiceImpl implements BookingService.Iface {
         }
     }
 
+    @Override
+    public String changeBookingStatusToPayed(int id) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /**********************************************************
      * 
      * 关于预约的 Booking
