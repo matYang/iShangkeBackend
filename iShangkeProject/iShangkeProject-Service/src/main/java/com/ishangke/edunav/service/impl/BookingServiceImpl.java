@@ -209,21 +209,42 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public String changeBookingStatusToPayed(int id) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+    public String changeBookingStatusToPayed(int orderId) throws BusinessExceptionBo, TException {
+        try {
+            return bookingManager.changeBookingStatusToPayed(orderId);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CHANGE_STATUS_TO_PAYED_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CHANGE_STATUS_TO_PAYED_ERROR_KEY);
+            throw exception;
+        }
     }
 
     @Override
-    public String verify(String notify) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+    public String verify(String notify_id) throws BusinessExceptionBo, TException {
+        try {
+            return bookingManager.verify(notify_id);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ALIPAY_VERIFY_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ALIPAY_VERIFY_ERROR_KEY);
+            throw exception;
+        }
     }
 
     @Override
     public String buildFormForGet(String subject, String out_trade_no, String total_fee) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return bookingManager.buildFormForGet(subject, out_trade_no, total_fee);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR_KEY);
+            throw exception;
+        }
     }
 
     /**********************************************************

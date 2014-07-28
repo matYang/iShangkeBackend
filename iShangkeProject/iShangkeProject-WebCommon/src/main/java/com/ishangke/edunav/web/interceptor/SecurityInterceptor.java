@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.ServletException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
+import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 import com.ishangke.edunav.web.common.WebConstants;
 
 /**
@@ -25,15 +25,21 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws IOException {
+            throws IOException,ServletException {
 
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        String classUri = handlerMethod.getBean().getClass().getAnnotation(RequestMapping.class).value()[0];
-        String methodUri = handlerMethod.getMethodAnnotation(RequestMapping.class).value()[0];
-        String requestType = handlerMethod.getMethodAnnotation(RequestMapping.class).method()[0].toString();
-        String restfulServiceUri = requestType + classUri + methodUri;
-        LOGGER.debug(restfulServiceUri);
-        request.setAttribute(WebConstants.REQUEST_URL, restfulServiceUri);
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            String classUri = handlerMethod.getBean().getClass().getAnnotation(RequestMapping.class).value()[0];
+            String methodUri = handlerMethod.getMethodAnnotation(RequestMapping.class).value()[0];
+            String requestType = handlerMethod.getMethodAnnotation(RequestMapping.class).method()[0].toString();
+            String restfulServiceUri = requestType + classUri + methodUri;
+            LOGGER.debug(restfulServiceUri);
+            request.setAttribute(WebConstants.REQUEST_URL, restfulServiceUri);
+        } else {
+            DefaultServletHttpRequestHandler handlerMethod = (DefaultServletHttpRequestHandler) handler;
+            handlerMethod.handleRequest(request, response);
+        }        
+        
         return true;
     }
 

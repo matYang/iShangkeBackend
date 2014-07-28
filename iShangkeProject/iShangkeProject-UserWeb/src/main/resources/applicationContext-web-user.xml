@@ -11,7 +11,7 @@
 
     <mvc:default-servlet-handler />
  
-    <mvc:interceptors>
+    <mvc:interceptors>        
         <mvc:interceptor>
             <mvc:mapping path="/api/v2/**" />
             <bean class="com.ishangke.edunav.web.interceptor.SecurityInterceptor"></bean>

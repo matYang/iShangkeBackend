@@ -20,8 +20,7 @@ import com.ishangke.edunav.web.user.vo.QueryVo;
 @RequestMapping("/api/v2/welcome")
 public class WelcomeController extends AbstractController {
     @Autowired
-    private UserFacade userFacade;
-
+    private UserFacade userFacade;    
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse<String> welcomePost(@RequestBody QueryVo queryVo, HttpServletRequest request) {
         String url = String.valueOf(request.getAttribute(WebConstants.REQUEST_URL));
