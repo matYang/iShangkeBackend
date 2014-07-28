@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import com.ishangke.edunav.common.enums.SMSEnums.Event;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
-import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.manager.async.ExecutorProvider;
 import com.ishangke.edunav.manager.async.task.SMSTask;
@@ -42,8 +41,8 @@ public class SMSDispatcher {
     }
 
     public static void sendBookingFailedSMS(final BookingEntityExt booking,
-            final BookingHistoryEntityExt bookingHisotry, final CourseEntityExt course) {
-        String payload = "很抱歉，您预订的" + course.getInstName() + "课程由于" + bookingHisotry.getRemark() + "被拒绝，请前往官网查看其他课程吧~";
+            final String comment, final CourseEntityExt course) {
+        String payload = "很抱歉，您预订的" + course.getInstName() + "课程由于" + comment + "被拒绝，请前往官网查看其他课程吧~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGFAILED, booking.getPhone(), payload);
         ExecutorProvider.executeRelay(sms);
     }
