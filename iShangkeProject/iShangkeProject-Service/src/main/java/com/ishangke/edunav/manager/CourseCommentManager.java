@@ -14,26 +14,24 @@ public interface CourseCommentManager {
      *  用户可以创建课程评论
      *
      *  @param  courseCommentBo    需要创建的课程评论
-     *  @param  courseTemplateBo   评论相关的课程模板
      *  @param  userBo             发起创建的用户信息
      *
      *  @return 创建完成的课程评论
      *
      */
-    CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo);
+    CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, UserBo userBo);
     
     /**
      *  删除课程评论。<br>
      *  用户可以删除课程评论
      *
      *  @param  courseCommentBo    需要删除的课程评论
-     *  @param  courseTemplateBo   评论相关的课程模板
      *  @param  userBo             发起删除的用户信息
      *
      *  @return 
      *
      */
-    CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo);
+    CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, UserBo userBo);
     
     /**
      *  查询课程评论。<br>

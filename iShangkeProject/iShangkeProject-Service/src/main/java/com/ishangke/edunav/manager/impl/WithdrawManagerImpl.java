@@ -59,9 +59,6 @@ public class WithdrawManagerImpl implements WithdrawManager {
             }
         }
 
-        if (withdrawEntity.getUserId() == null) {
-            throw new ManagerException("Withdraw userId cannot be null");
-        }
         withdrawEntity.setCreateTime(DateUtility.getCurTimeInstance());
         withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         withdrawEntity.setDeleted(0);
@@ -99,7 +96,10 @@ public class WithdrawManagerImpl implements WithdrawManager {
             }
         }
         
+        withdrawEntity.setUserId(null);
         withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        withdrawEntity.setCreateTime(null);
+        withdrawEntity.setDeleted(null);
         try {
             withdrawMapper.update(withdrawEntity);
         } catch (Throwable t) {
@@ -129,6 +129,9 @@ public class WithdrawManagerImpl implements WithdrawManager {
             }
         }
         
+        if (withdrawEntity.getId() == null) {
+            throw new ManagerException("Withdraw deletion must specify id");
+        }
         try {
             withdrawEntity.setDeleted(1);
             withdrawMapper.deleteById(withdrawEntity.getId());

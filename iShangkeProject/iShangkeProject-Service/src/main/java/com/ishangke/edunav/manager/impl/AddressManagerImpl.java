@@ -72,6 +72,9 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        if (addressEntity.getPartnerId() == null) {
+            throw new ManagerException("Address creation must specify partner");
+        }
         addressEntity.setCreateTime(DateUtility.getCurTimeInstance());
         addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         addressEntity.setEnabled(0);;
@@ -123,7 +126,13 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        if (addressEntity.getId() == null) {
+            throw new ManagerException("Address update must specify id");
+        }
+        addressEntity.setPartnerId(null);
         addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        addressEntity.setCreateTime(null);
+        addressEntity.setEnabled(null);
         try {
             addressMapper.update(addressEntity);
         } catch (Throwable t) {
@@ -167,6 +176,9 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        if (addressEntity.getId() == null) {
+            throw new ManagerException("Address deletion must specify id");
+        }
         try {
             addressEntity.setDeleted(1);
             addressMapper.deleteById(addressEntity.getId());

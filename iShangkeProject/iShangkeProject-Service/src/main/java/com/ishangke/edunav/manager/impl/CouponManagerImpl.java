@@ -71,7 +71,6 @@ public class CouponManagerImpl implements CouponManager {
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntity.setEnabled(0);
         couponEntity.setDeleted(0);
-
         try {
             // Create Coupon
             int couponResult = couponMapper.add(couponEntity);
@@ -109,10 +108,10 @@ public class CouponManagerImpl implements CouponManager {
                 throw new AuthenticationException("User activating someone else's coupon");
             }
         }
-        if (couponEntity.getId() == null) {
-            throw new ManagerException("CouponId null for activate coupon");
-        }
         
+        if (couponEntity.getId() == null) {
+            throw new ManagerException("Coupon activation must specify id");
+        }
         CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Coupon to activate is not found");
@@ -156,8 +155,9 @@ public class CouponManagerImpl implements CouponManager {
                 throw new AuthenticationException("User updating someone else's coupon");
             }
         }
+        
         if (couponEntity.getId() == null) {
-            throw new ManagerException("CouponId null for update coupon");
+            throw new ManagerException("Coupon update must specify id");
         }
         
         //TODO we probably need a way to tell how much coupon is used instead reading previous credit out
@@ -165,8 +165,7 @@ public class CouponManagerImpl implements CouponManager {
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Previous coupon is not found");
         }
-
-        couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        
         // Create CouponHistory
         double balanceDiff = previousCoupon.getBalance() - couponEntity.getBalance();
         int operation = CouponHistoryEnums.Operation.DEC.code;
@@ -182,6 +181,10 @@ public class CouponManagerImpl implements CouponManager {
         couponHistoryEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponHistoryEntity.setDeleted(0);
 
+        couponEntity.setUserId(null);
+        couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        couponEntity.setCreateTime(null);
+        couponEntity.setEnabled(null);
         try {
             // update Coupon
             couponMapper.update(couponEntity);

@@ -72,7 +72,9 @@ public class TeacherManagerImpl implements TeacherManager {
         // 插入新的teacher记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
+        if (teacherEntity.getPartnerId() == null) {
+            throw new ManagerException("Teacher creation must specify partner");
+        }
         teacherEntity.setCreateTime(DateUtility.getCurTimeInstance());
         teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         teacherEntity.setEnabled(0);
@@ -123,8 +125,14 @@ public class TeacherManagerImpl implements TeacherManager {
         // 更新TEACHER记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        
+        if (teacherEntity.getId() == null) {
+            throw new ManagerException("Teacher update must specify id");
+        }
+        teacherEntity.setPartnerId(null);
         teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        teacherEntity.setCreateTime(null);
+        teacherEntity.setDeleted(null);
         try {
             teacherMapper.update(teacherEntity);
         } catch (Throwable t) {
@@ -168,6 +176,9 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        if (teacherEntity.getId() == null) {
+            throw new ManagerException("Teacher deletion must specify id");
+        }
         try {
             teacherEntity.setDeleted(1);
             teacherMapper.deleteById(teacherEntity.getId());
