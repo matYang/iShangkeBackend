@@ -238,9 +238,9 @@ public class CourseConverter {
             courseBo.setPriceEnd(Constant.DEFAULTNULL);
         }
         if (vo.getPriceStart() != null) {
-            courseBo.setOriginalPriceStart(vo.getPriceStart());
+            courseBo.setPriceStart(vo.getPriceStart());
         } else {
-            courseBo.setOriginalPriceStart(Constant.DEFAULTNULL);
+            courseBo.setPriceStart(Constant.DEFAULTNULL);
         }
         if (vo.getOriginalPrice() != null) {
             courseBo.setOriginalPrice(vo.getOriginalPrice());
