@@ -73,7 +73,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        
+        if (classPhotoEntity.getPartnerId() == null) {
+            throw new ManagerException("ClassPhoto creation must specify partner");
+        }
         classPhotoEntity.setCreateTime(DateUtility.getCurTimeInstance());
         classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         classPhotoEntity.setEnabled(0);
@@ -125,7 +127,13 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        if (classPhotoEntity.getId() == null) {
+            throw new ManagerException("ClassPhoto update must specify id");
+        }
+        classPhotoEntity.setPartnerId(null);
         classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        classPhotoEntity.setCreateTime(null);
+        classPhotoEntity.setEnabled(null);
         try {
             classPhotoMapper.update(classPhotoEntity);
         } catch (Throwable t) {
@@ -168,7 +176,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
+        if (classPhotoEntity.getId() == null) {
+            throw new ManagerException("ClassPhoto deletion must specify id");
+        }
         try {
             classPhotoEntity.setDeleted(1);;
             classPhotoMapper.deleteById(classPhotoEntity.getId());

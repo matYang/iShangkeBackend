@@ -5,7 +5,7 @@ struct ConfigurationBo {
   2: string name
   3: string configData
 }
-struct ConfigurationBoPageViewBo{
+struct ConfigurationPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

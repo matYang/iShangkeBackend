@@ -155,10 +155,10 @@ public class UserManagerImpl implements UserManager {
             
             
             CouponEntityExt couponEntity = new CouponEntityExt();
-            //TODO constants and enums
             couponEntity.setBalance(DefaultValues.COUPONREGISTRATIONVALUE);
             couponEntity.setTotal(DefaultValues.COUPONREGISTRATIONVALUE);
             couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
+            couponEntity.setStatus(CouponEnums.Status.USABLE.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
             expiry.add(Calendar.YEAR, 1);
             couponEntity.setExpiryTime(expiry);
@@ -186,6 +186,7 @@ public class UserManagerImpl implements UserManager {
                 curUserCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
+                curUserCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
                 curUserCouponEntity.setExpiryTime(expiry);
                 curUserCouponEntity.setRemark("");
                 curUserCouponEntity.setUserId(userEntity.getId());
@@ -199,6 +200,7 @@ public class UserManagerImpl implements UserManager {
                 inviterCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
+                inviterCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
                 inviterCouponEntity.setExpiryTime(expiry);
                 inviterCouponEntity.setRemark("");
                 inviterCouponEntity.setUserId(inviterEntity.getId());
@@ -242,6 +244,12 @@ public class UserManagerImpl implements UserManager {
         if (isValid) {
             throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed because authCode: " + sessionBo.getAuthCode() + "does not match");
         }
+        if (userBo.getPhone() == null) {
+            throw new ManagerException("User registration must specify phone");
+        }
+        if (userBo.getPassword() == null) {
+            throw new ManagerException("User registration must specify password");
+        }
         
         // 判断是否存在手机号码一样的USER
         UserEntityExt entityInDb = new UserEntityExt();
@@ -267,6 +275,13 @@ public class UserManagerImpl implements UserManager {
         }
         else {
             throw new AuthenticationException("Non-admin user trying createUser");
+        }
+        
+        if (targetUser.getPhone() == null) {
+            throw new ManagerException("User creation must specify phone");
+        }
+        if (targetUser.getPassword() == null) {
+            throw new ManagerException("User creation must specify password");
         }
         
         // 判断是否存在手机号码一样的USER
@@ -298,6 +313,24 @@ public class UserManagerImpl implements UserManager {
         if (partner.getId() <= 0) {
             throw new AuthenticationException("Partner Id not specified at createPartneruser");
         }
+        if (targetUser.getReference() == null) {
+            throw new ManagerException("PartnerUser creation must specify reference");
+        }
+        if (targetUser.getPassword() == null) {
+            throw new ManagerException("PartnerUser creation must specify password");
+        }
+        
+        
+        if (targetUser.getPhone() != null) {
+           // 判断是否存在手机号码一样的USER
+           UserEntityExt entityInDb = new UserEntityExt();
+           entityInDb.setPhone(targetUser.getPhone());
+
+           List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
+           if (entityList != null && entityList.size() != 0) {
+               throw new ManagerException(targetUser.getPhone() + " is already in db");
+           }
+       }
         
         UserBo response = null;
         try {
@@ -339,7 +372,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("OpenCellSession with phone number: " + userBo.getPhone() + " failed", t);
         }
         
-        if (result != null && result.size() >= 0) {
+        if (result != null && result.size() > 0) {
             throw new ManagerException("Account already registered");
         }
         
@@ -495,6 +528,9 @@ public class UserManagerImpl implements UserManager {
         
         UserEntityExt curUser = null;
         try {
+            if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
+                throw new ManagerException("User cannot login, please wait for a minute");
+            }
             UserEntityExt search = new UserEntityExt();
             search.setPhone(loginBo.getAccountIdentifier());
             
@@ -512,9 +548,11 @@ public class UserManagerImpl implements UserManager {
             userMapper.update(curUser);
             
         } catch (Throwable t) {
+            authManager.fail(loginBo.getAccountIdentifier());
             throw new ManagerException("LoginByPhone failed for user: " + loginBo.getAccountIdentifier(), t);
         }
         
+        authManager.success(loginBo.getAccountIdentifier());
         return UserConverter.toBo(curUser);
     }
 
@@ -526,6 +564,9 @@ public class UserManagerImpl implements UserManager {
         
         UserEntityExt curUser = null;
         try {
+            if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
+                throw new ManagerException("User cannot login, please wait for a minute");
+            }
             UserEntityExt search = new UserEntityExt();
             search.setReference(loginBo.getAccountIdentifier());
             
@@ -543,9 +584,11 @@ public class UserManagerImpl implements UserManager {
             userMapper.update(curUser);
             
         } catch (Throwable t) {
+            authManager.fail(loginBo.getAccountIdentifier());
             throw new ManagerException("LoginByReference failed for user: " + loginBo.getAccountIdentifier(), t);
         }
         
+        authManager.success(loginBo.getAccountIdentifier());
         return UserConverter.toBo(curUser);
     }
 
@@ -568,7 +611,9 @@ public class UserManagerImpl implements UserManager {
         else {
             throw new AuthenticationException("Non-admin user trying deleting someone else's user");
         }
-        
+        if (targetUserEntity.getId() == null) {
+            throw new ManagerException("User deletion must specify id");
+        }
         try {
             targetUserEntity.setDeleted(1);
             userMapper.deleteById(targetUserEntity.getId());
@@ -598,7 +643,12 @@ public class UserManagerImpl implements UserManager {
             }
         }
         
+        if (targetUserEntity.getId() == null) {
+            throw new ManagerException("User udpate must specify id");
+        }
         targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        targetUserEntity.setCreateTime(null);
+        targetUserEntity.setDeleted(null);
         try {
             userMapper.update(targetUserEntity);
         } catch (Throwable t) {

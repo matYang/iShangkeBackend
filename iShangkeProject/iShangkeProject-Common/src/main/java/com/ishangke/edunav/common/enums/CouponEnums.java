@@ -35,10 +35,11 @@ public class CouponEnums {
             this.code = code;
         }
         
-        private final static Status[] map = Status.values();
+        private final static Origin[] map = Origin.values();
         
-        public static Status fromInt(int n) {
+        public static Origin fromInt(int n) {
             return map[n];
         }
     }
+
 }

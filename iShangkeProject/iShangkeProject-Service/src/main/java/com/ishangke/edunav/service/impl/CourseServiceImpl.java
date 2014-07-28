@@ -10,9 +10,13 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
+import com.ishangke.edunav.commoncontract.model.CategoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
+import com.ishangke.edunav.commoncontract.model.CourseCommentPageViewBo;
+import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
+import com.ishangke.edunav.commoncontract.model.CourseTemplatePageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -88,10 +92,14 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseCommentBo> queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CourseCommentPageViewBo queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要权限
-            return courseManager.queryCommentBuCourseId(courseBo, paginationBo);
+            List<CourseCommentBo> data = courseManager.queryCommentBuCourseId(courseBo, paginationBo);
+            CourseCommentPageViewBo pageView = new CourseCommentPageViewBo();
+            pageView.setData(data);
+            return pageView;
+           
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -131,10 +139,14 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CategoryBo> queryCategoryByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
+    public CategoryPageViewBo queryCategoryByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要进行权限控制
-            return courseManager.queryByKeyword(keyword);
+            List<CategoryBo> data =  courseManager.queryByKeyword(keyword);
+            CategoryPageViewBo pageView = new CategoryPageViewBo();
+            pageView.setData(data);
+            return pageView;
+           
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -151,13 +163,18 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
-            return courseManager.queryByPartner(courseBo, partnerBo, userBo, paginationBo);
+            
+            List<CourseBo> data = courseManager.queryByPartner(courseBo, partnerBo, userBo, paginationBo);
+            CoursePageViewBo pageView = new CoursePageViewBo();
+            pageView.setData(data);
+            return pageView;
+      
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -174,10 +191,15 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseBo> queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CoursePageViewBo queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要进行权限控制
-            return courseManager.queryByFilter(courseBo, paginationBo);
+            
+            List<CourseBo> data =courseManager.queryByFilter(courseBo, paginationBo);
+            CoursePageViewBo pageView = new CoursePageViewBo();
+            pageView.setData(data);
+            return pageView;
+           
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -286,14 +308,18 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public List<CourseTemplateBo> queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
+    public CourseTemplatePageViewBo queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
-            return courseTemplateManager.queryCourseTemplateByPartnerId(courseTemplateBo, partnerBo, userBo, paginationBo);
+            List<CourseTemplateBo> data =  courseTemplateManager.queryCourseTemplateByPartnerId(courseTemplateBo, partnerBo, userBo, paginationBo);
+            CourseTemplatePageViewBo pageView = new CourseTemplatePageViewBo();
+            pageView.setData(data);
+            return pageView;
+         
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

@@ -97,7 +97,13 @@ public class ContactManagerImpl implements ContactManager {
             }
         }
         
+        if (contactEntity.getId() == null) {
+            throw new ManagerException("Contact update must specify id");
+        }
+        contactEntity.setUserId(null);
         contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        contactEntity.setCreateTime(null);
+        contactEntity.setEnabled(null);
         try {
             contactMapper.update(contactEntity);
         } catch (Throwable t) {
@@ -128,6 +134,9 @@ public class ContactManagerImpl implements ContactManager {
             }
         }
         
+        if(contactEntity.getId() == null) {
+            throw new ManagerException("Contact deletion must specify id");
+        }
         try {
             contactEntity.setDeleted(1);
             contactMapper.deleteById(contactEntity.getId());

@@ -125,9 +125,7 @@ public class PartnerConverter {
         } else {
             partnerBo.setPartnerQualificationStart(Constant.DEFAULTNULL);
         }
-        if (vo.getPassword() != null) {
-            partnerBo.setPassword(vo.getPassword());
-        }
+        
         if (vo.getRating() != null) {
             partnerBo.setRating(vo.getRating());
         } else {
@@ -169,12 +167,7 @@ public class PartnerConverter {
         if (vo.getWholeName() != null) {
             partnerBo.setWholeName(vo.getWholeName());
         }
-        partnerBo.setLastLoginTime(vo.getLastLoginTime() == null ? Constant.DEFAULTNULL : vo.getLastLoginTime()
-                .getTimeInMillis());
-        partnerBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastLoginTimeEnd().getTimeInMillis());
-        partnerBo.setLastLoginTimeStart(vo.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastLoginTimeStart().getTimeInMillis());
+      
         partnerBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
                 .getTimeInMillis());
         partnerBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
@@ -265,9 +258,7 @@ public class PartnerConverter {
         partnerVo.setId(bo.getId());
         partnerVo.setIdSet(bo.getIdSet());
         partnerVo.setInstName(bo.getInstName());
-        partnerVo.setLastLoginTime(DateUtility.getTimeFromLong(bo.getLastLoginTime()));
-        partnerVo.setLastLoginTimeEnd(DateUtility.getTimeFromLong(bo.getLastLoginTimeEnd()));
-        partnerVo.setLastLoginTimeStart(DateUtility.getTimeFromLong(bo.getLastLoginTimeStart()));
+        
         partnerVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
         partnerVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         partnerVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
@@ -286,7 +277,7 @@ public class PartnerConverter {
         if (Constant.DEFAULTNULL != bo.getPartnerQualificationStart()) {
             partnerVo.setPartnerQualificationStart(bo.getPartnerQualificationStart());
         }
-        partnerVo.setPassword(bo.getPassword());
+       
         if (Constant.DEFAULTNULL != bo.getRating()) {
             partnerVo.setRating(bo.getRating());
         }

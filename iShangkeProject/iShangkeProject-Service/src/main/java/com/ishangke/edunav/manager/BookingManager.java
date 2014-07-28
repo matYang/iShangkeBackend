@@ -5,7 +5,6 @@ import java.util.List;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
-import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -37,7 +36,7 @@ public interface BookingManager {
      *              调用方法的用户信息
      * @return
      */
-    BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo);
+    BookingBo transformBookingStatus(BookingBo bookingBo, CommentBookingBo commentBookingBo, int operation, UserBo userBo);
 
     /**
      * 本方法为查询预定单预定单功能。<br>

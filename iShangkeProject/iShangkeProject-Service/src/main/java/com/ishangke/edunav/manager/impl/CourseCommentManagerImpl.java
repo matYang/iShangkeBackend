@@ -17,12 +17,10 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CourseCommentEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
-import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseCommentManager;
 import com.ishangke.edunav.manager.converter.CourseCommentConverter;
-import com.ishangke.edunav.manager.converter.CourseTemplateConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -39,15 +37,15 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
     private AuthManager authManager;
 
     @Override
-    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {
+    //TODO
+    public CourseCommentBo createCourseComment(CourseCommentBo courseCommentBo, UserBo userBo) {
         // Check Null
-        if (courseCommentBo == null || courseTemplateBo == null || userBo == null) {
+        if (courseCommentBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
 
         // Convert
         CourseCommentEntityExt courseCommentEntity = CourseCommentConverter.fromBo(courseCommentBo);
-        CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
         
@@ -59,10 +57,9 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
                 throw new AuthenticationException("User creating someone else's courseComment");
             }
         }
-        if (courseCommentEntity.getCourseTemplateId() != courseTemplateEntity.getId()) {
-            throw new ManagerException("Course Comment not match Course Template Id");
+        if (courseCommentEntity.getCourseTemplateId() == null) {
+            throw new ManagerException("Course Comment's templateId can not be null");
         }
-        
         courseCommentEntity.setCreateTime(DateUtility.getCurTimeInstance());
         courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         courseCommentEntity.setEnabled(0);
@@ -82,15 +79,15 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
     }
 
     @Override
-    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, CourseTemplateBo courseTemplateBo, UserBo userBo) {
+    //TODO
+    public CourseCommentBo deleteCourseComment(CourseCommentBo courseCommentBo, UserBo userBo) {
         // Check Null
-        if (courseCommentBo == null || courseTemplateBo == null || userBo == null) {
+        if (courseCommentBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
 
         // Convert
         CourseCommentEntityExt courseCommentEntity = CourseCommentConverter.fromBo(courseCommentBo);
-        CourseTemplateEntityExt courseTemplateEntity = CourseTemplateConverter.fromBo(courseTemplateBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -101,14 +98,10 @@ public class CourseCommentManagerImpl implements CourseCommentManager {
                 throw new AuthenticationException("User deleting someone else's courseComment");
             }
         }
-        
-        // Check whether the courseComment belongs to the courseTemplate
-        if (courseCommentEntity.getCourseTemplateId() != courseTemplateEntity.getId()) {
-            throw new ManagerException("CourseComment Delete Failed: 此评论不属于此课程模版");
-        }
+
         // Check Ids
-        if (courseTemplateEntity.getId() == null || courseTemplateEntity.getId() == 0) {
-            throw new ManagerException("CourseComment Delete Failed: 此课程模版id为null或0");
+        if (courseCommentEntity.getId() == null) {
+            throw new ManagerException("CourseComment Delete must specify id");
         }
 
         try {

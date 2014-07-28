@@ -10,15 +10,23 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
+import com.ishangke.edunav.commoncontract.model.AccountHistoryPageViewBo;
+import com.ishangke.edunav.commoncontract.model.AccountPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.ContactBo;
+import com.ishangke.edunav.commoncontract.model.ContactPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
+import com.ishangke.edunav.commoncontract.model.CouponHistoryPageViewBo;
+import com.ishangke.edunav.commoncontract.model.CouponPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CreditBo;
 import com.ishangke.edunav.commoncontract.model.CreditHistoryBo;
+import com.ishangke.edunav.commoncontract.model.CreditHistoryPageViewBo;
+import com.ishangke.edunav.commoncontract.model.CreditPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
+import com.ishangke.edunav.commoncontract.model.WithdrawPageViewBo;
 import com.ishangke.edunav.commoncontract.service.AccountService;
 import com.ishangke.edunav.manager.AccountManager;
 import com.ishangke.edunav.manager.AuthManager;
@@ -82,7 +90,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<AccountBo> queryAccount(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo,
+    public AccountPageViewBo queryAccount(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -90,7 +98,10 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryAccount"));
                 throw new NoPermissionException();
             }
-            return accountManager.query(accountBo, userBo, paginationBo);
+            List<AccountBo> data = accountManager.query(accountBo, userBo, paginationBo);
+            AccountPageViewBo pageView = new AccountPageViewBo();
+            pageView.setData(data);
+            return pageView;
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -107,7 +118,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<AccountHistoryBo> queryAccountHistory(AccountHistoryBo accountHistoryBo, UserBo userBo,
+    public AccountHistoryPageViewBo queryAccountHistory(AccountHistoryBo accountHistoryBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -115,7 +126,11 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryAccountHistory"));
                 throw new NoPermissionException();
             }
-            return accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
+            List<AccountHistoryBo> data = accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
+            AccountHistoryPageViewBo pageView = new AccountHistoryPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -187,15 +202,19 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CouponBo> queryCoupon(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public CouponPageViewBo queryCoupon(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "queryCoupon"));
                 throw new NoPermissionException();
             }
-            return couponManager.query(couponBo, userBo, paginationBo);
+            List<CouponBo> data = couponManager.query(couponBo, userBo, paginationBo);
+            CouponPageViewBo pageView = new CouponPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -212,7 +231,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CouponHistoryBo> queryCouponHistory(CouponHistoryBo couponHistoryBo, UserBo userBo,
+    public CouponHistoryPageViewBo queryCouponHistory(CouponHistoryBo couponHistoryBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -220,7 +239,11 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryCouponHistory"));
                 throw new NoPermissionException();
             }
-            return couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
+            List<CouponHistoryBo> data = couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
+            CouponHistoryPageViewBo pageView = new CouponHistoryPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -293,15 +316,19 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CreditBo> queryCredit(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public CreditPageViewBo queryCredit(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo,
+            String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "queryCredit"));
                 throw new NoPermissionException();
             }
-            return creditManager.query(creditBo, userBo, paginationBo);
+            List<CreditBo> data = creditManager.query(creditBo, userBo, paginationBo);
+            CreditPageViewBo pageView = new CreditPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -318,7 +345,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<CreditHistoryBo> queryCreditHistory(CreditHistoryBo creditHistoryBo, UserBo userBo,
+    public CreditHistoryPageViewBo queryCreditHistory(CreditHistoryBo creditHistoryBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -326,7 +353,11 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryCreditHistory"));
                 throw new NoPermissionException();
             }
-            return creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
+            List<CreditHistoryBo> data = creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
+            CreditHistoryPageViewBo pageView = new CreditHistoryPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -423,7 +454,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<WithdrawBo> queryWithdraw(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo,
+    public WithdrawPageViewBo queryWithdraw(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -431,7 +462,11 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryWithdraw"));
                 throw new NoPermissionException();
             }
-            return withdrawManager.query(withdrawBo, userBo, paginationBo);
+            List<WithdrawBo> data = withdrawManager.query(withdrawBo, userBo, paginationBo);
+            WithdrawPageViewBo pageView = new WithdrawPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -528,7 +563,7 @@ public class AccountServiceImpl implements AccountService.Iface {
     }
 
     @Override
-    public List<ContactBo> queryContact(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo,
+    public ContactPageViewBo queryContact(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
@@ -536,7 +571,11 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryContact"));
                 throw new NoPermissionException();
             }
-            return contactManager.query(contactBo, userBo, paginationBo);
+            List<ContactBo> data = contactManager.query(contactBo, userBo, paginationBo);
+            ContactPageViewBo pageView = new ContactPageViewBo();
+            pageView.setData(data);
+            return pageView;
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

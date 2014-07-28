@@ -17,6 +17,7 @@ import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.ConfigurationManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.RoleManager;
+import com.ishangke.edunav.manager.common.Flag;
 import com.ishangke.edunav.manager.common.ServiceConstants;
 import com.ishangke.edunav.manager.common.ServiceEnum;
 import com.ishangke.edunav.service.impl.ConfigurationServiceImpl;
@@ -114,7 +115,8 @@ public class ApplicationServer {
         ThriftServer.setApplicationContext(applicationContext);
 
         applicationContext.getBean(ApplicationServer.class).start();
-
+        Flag.setSMS(true);
+        
         LOGGER.info("[Server] Server finished starting.");
     }
 }

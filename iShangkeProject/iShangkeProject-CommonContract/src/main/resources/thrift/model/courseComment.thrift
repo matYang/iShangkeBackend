@@ -30,7 +30,7 @@ struct CourseCommentBo {
     27: i64 createTimeEnd
 }
 
-struct CourseCommentBoPageViewBo{
+struct CourseCommentPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

@@ -156,7 +156,7 @@ service UserService {
      *  @return 用户实体 UserBo 列表
      *
      */
-    list<user.UserBo> queryUser(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: common.PaginationBo pagnationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserPageViewBo queryUser(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: common.PaginationBo pagnationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -214,7 +214,7 @@ service UserService {
      *  @return  Message 列表
      *
      */
-    list<message.MessageBo> queryMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    message.MessagePageViewBo queryMessage(1: message.MessageBo messageBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -253,7 +253,7 @@ service UserService {
      *  @return 推广信息实体 SpreadBo 列表
      *
      */ 
-    list<spread.SpreadBo> querySpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    spread.SpreadPageViewBo querySpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      *  创建推广信息。<br>

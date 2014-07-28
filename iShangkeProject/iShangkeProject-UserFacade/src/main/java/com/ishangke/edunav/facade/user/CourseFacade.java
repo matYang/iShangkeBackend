@@ -1,6 +1,4 @@
-package com.ishangke.edunav.facade.course;
-
-import java.util.List;
+package com.ishangke.edunav.facade.user;
 
 import org.apache.thrift.TException;
 import org.springframework.context.ApplicationContext;
@@ -9,10 +7,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
-import com.ishangke.edunav.commoncontract.model.CategoryBo;
+import com.ishangke.edunav.commoncontract.model.CategoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
+import com.ishangke.edunav.commoncontract.model.CourseCommentPageViewBo;
+import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
+import com.ishangke.edunav.commoncontract.model.CourseTemplatePageViewBo;
 import com.ishangke.edunav.commoncontract.model.OrderByBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -64,8 +65,8 @@ public class CourseFacade {
         return result;
     }
 
-    public List<CourseCommentBo> queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo, String url) {
-        List<CourseCommentBo> result = null;
+    public CourseCommentPageViewBo queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo, String url) {
+        CourseCommentPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
@@ -100,8 +101,8 @@ public class CourseFacade {
         return result;
     }
 
-    public List<CategoryBo> queryCategoryByKeyword(String keyword, String url) {
-        List<CategoryBo> result = null;
+    public CategoryPageViewBo queryCategoryByKeyword(String keyword, String url) {
+        CategoryPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
@@ -118,8 +119,8 @@ public class CourseFacade {
         return result;
     }
 
-    public List<CourseBo> queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url) {
-        List<CourseBo> result = null;
+    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url) {
+        CoursePageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
@@ -136,8 +137,8 @@ public class CourseFacade {
         return result;
     }
 
-    public List<CourseBo> queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo, String url) {
-        List<CourseBo> result = null;
+    public CoursePageViewBo queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo, String url) {
+        CoursePageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
@@ -226,9 +227,9 @@ public class CourseFacade {
         return result;
     }
 
-    public List<CourseTemplateBo> queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url)
+    public CourseTemplatePageViewBo queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url)
             {
-        List<CourseTemplateBo> result = null;
+        CourseTemplatePageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
@@ -273,11 +274,11 @@ public class CourseFacade {
         p.setOffset(-1);
         CourseBo ccc= new CourseBo();
         ccc.setCategoryValue("00");
-        List<CourseBo> course = c.queryCourseByFilter(null, null, "");
+        CoursePageViewBo course = c.queryCourseByFilter(null, null, "");
         System.out.println(course);
-        System.out.println(course.size());
+        System.out.println(course.getData().size());
         System.out.println("********************************");
-        for (CourseBo cc : course) {
+        for (CourseBo cc : course.getData()) {
             System.out.println(cc);
         }
     }

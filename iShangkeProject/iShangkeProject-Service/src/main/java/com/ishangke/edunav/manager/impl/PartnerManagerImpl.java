@@ -122,7 +122,12 @@ public class PartnerManagerImpl implements PartnerManager {
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
+        if (partnerEntity.getId() == null) {
+            throw new ManagerException("Partner update must specify id");
+        }
         partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        partnerEntity.setCreateTime(null);
+        partnerEntity.setDeleted(null);
         try {
             partnerMapper.update(partnerEntity);
         } catch (Throwable t) {

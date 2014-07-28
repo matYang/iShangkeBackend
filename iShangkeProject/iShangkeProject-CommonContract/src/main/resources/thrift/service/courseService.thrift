@@ -56,7 +56,7 @@ service CourseService {
      * @param courseBo
      * @return
      */
-    list<courseComment.CourseCommentBo> queryCommentBuCourseId(1: course.CourseBo courseBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseComment.CourseCommentPageViewBo queryCommentBuCourseId(1: course.CourseBo courseBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * 删除课程的评价
@@ -80,7 +80,7 @@ service CourseService {
      * 
      * @param keyword
      */
-    list<category.CategoryBo> queryCategoryByKeyword(1: string keyword, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    category.CategoryPageViewBo queryCategoryByKeyword(1: string keyword, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为合作商提供查询课程的功能。<br>
@@ -103,7 +103,7 @@ service CourseService {
      * @param userBo
      * @param paginationBo
      */
-    list<course.CourseBo> queryCourseByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    course.CoursePageViewBo queryCourseByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为用户查询课程的功能。<br>
@@ -121,7 +121,7 @@ service CourseService {
      * @param courseBo
      * @param paginationBo
      */
-    list<course.CourseBo> queryCourseByFilter(1: course.CourseBo courseBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    course.CoursePageViewBo queryCourseByFilter(1: course.CourseBo courseBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法返回课程详情<br>
@@ -199,7 +199,7 @@ service CourseService {
      * @param partnerBo
      * @param paginationBo
      */
-    list<courseTemplate.CourseTemplateBo> queryCourseTemplateByPartnerId(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplatePageViewBo queryCourseTemplateByPartnerId(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法返回课程模版详情<br>
@@ -356,7 +356,7 @@ service CourseService {
     //  *  @return  课程实体 CourseBo 列表
     //  *
     //  */
-    // list<course.CourseBo> queryCourseByKeyword(1: string keyword, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    // course.CoursePageViewBo queryCourseByKeyword(1: string keyword, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     // /**
     //  *  本方法为合作商提供查询课程的功能。<br>
@@ -370,7 +370,7 @@ service CourseService {
     //  *  @return 课程实体 CourseBo 列表
     //  *
     //  */
-    // list<course.CourseBo> queryCourseByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    // course.CoursePageViewBo queryCourseByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     //  /**
     //  *  本方法为用户查询课程的功能。<br>
@@ -385,7 +385,7 @@ service CourseService {
     //  *  @return 课程实体 CourseBo 列表
     //  *
     //  */ 
-    // list<course.CourseBo> queryCourseByFilter(1: course.CourseBo courseBo, 2: category.CategoryBo categoryBo, 3: location.LocationBo locationBo, 4: circle.CircleBo circleBo,5: common.PaginationBo paginationBo, 6: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    // course.CoursePageViewBo queryCourseByFilter(1: course.CourseBo courseBo, 2: category.CategoryBo categoryBo, 3: location.LocationBo locationBo, 4: circle.CircleBo circleBo,5: common.PaginationBo paginationBo, 6: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
     // /**

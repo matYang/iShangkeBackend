@@ -16,7 +16,7 @@ public class PartnerVo {
 
     private Double rating;
 
-    private Calendar lastLoginTime;
+   
 
     private Calendar lastModifyTime;
 
@@ -32,7 +32,7 @@ public class PartnerVo {
 
     private String reference;
 
-    private String password;
+ 
 
     private String partnerIntro;
 
@@ -76,8 +76,7 @@ public class PartnerVo {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-    private Calendar lastLoginTimeStart;
-    private Calendar lastLoginTimeEnd;
+   
     private Integer cutoffDayStart;
     private Integer cutoffDayEnd;
     private Set<Integer> cutoffDaySet;
@@ -121,12 +120,7 @@ public class PartnerVo {
     public void setRating(Double rating) {
         this.rating = rating;
     }
-    public Calendar getLastLoginTime() {
-        return lastLoginTime;
-    }
-    public void setLastLoginTime(Calendar lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
+   
     public Calendar getLastModifyTime() {
         return lastModifyTime;
     }
@@ -169,12 +163,7 @@ public class PartnerVo {
     public void setReference(String reference) {
         this.reference = reference;
     }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+   
     public String getPartnerIntro() {
         return partnerIntro;
     }
@@ -319,18 +308,7 @@ public class PartnerVo {
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
-    public Calendar getLastLoginTimeStart() {
-        return lastLoginTimeStart;
-    }
-    public void setLastLoginTimeStart(Calendar lastLoginTimeStart) {
-        this.lastLoginTimeStart = lastLoginTimeStart;
-    }
-    public Calendar getLastLoginTimeEnd() {
-        return lastLoginTimeEnd;
-    }
-    public void setLastLoginTimeEnd(Calendar lastLoginTimeEnd) {
-        this.lastLoginTimeEnd = lastLoginTimeEnd;
-    }
+   
     public Integer getCutoffDayStart() {
         return cutoffDayStart;
     }

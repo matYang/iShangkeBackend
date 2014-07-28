@@ -1,6 +1,4 @@
-package com.ishangke.edunav.facade.general;
-
-import java.util.List;
+package com.ishangke.edunav.facade.user;
 
 import org.apache.thrift.TException;
 import org.springframework.context.annotation.Scope;
@@ -8,11 +6,16 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CareerBo;
+import com.ishangke.edunav.commoncontract.model.CareerPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
+import com.ishangke.edunav.commoncontract.model.CategoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
+import com.ishangke.edunav.commoncontract.model.CirclePageViewBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
+import com.ishangke.edunav.commoncontract.model.LocationPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
+import com.ishangke.edunav.commoncontract.model.SchoolPageViewBo;
 import com.ishangke.edunav.commoncontract.service.GeneralService;
 import com.ishangke.edunav.commoncontract.service.GeneralService.Client;
 import com.ishangke.edunav.thrift.ThriftClientFactory;
@@ -25,8 +28,8 @@ import com.ishangke.edunav.web.common.ThriftClientSettingManager;
 @Scope(value = "singleton")
 public class GeneralFacade {
 
-    public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag) {
-        List<CategoryBo> result = null;
+    public CategoryPageViewBo queryCategory(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag) {
+        CategoryPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
@@ -43,8 +46,8 @@ public class GeneralFacade {
         return result;
     }
 
-    public List<LocationBo> queryLocation(LocationBo locationBo, PaginationBo paginationBo, String permissionTag) {
-        List<LocationBo> result = null;
+    public LocationPageViewBo queryLocation(LocationBo locationBo, PaginationBo paginationBo, String permissionTag) {
+        LocationPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
@@ -61,8 +64,8 @@ public class GeneralFacade {
         return result;
     }
 
-    public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo, String permissionTag) {
-        List<CircleBo> result = null;
+    public CirclePageViewBo queryCircle(CircleBo circleBo, PaginationBo paginationBo, String permissionTag) {
+        CirclePageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
@@ -79,8 +82,8 @@ public class GeneralFacade {
         return result;
     }
 
-    public List<SchoolBo> querySchool(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag) {
-        List<SchoolBo> result = null;
+    public SchoolPageViewBo querySchool(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag) {
+        SchoolPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
@@ -97,8 +100,8 @@ public class GeneralFacade {
         return result;
     }
 
-    public List<CareerBo> queryCareer(CareerBo careerBo, PaginationBo paginationBo, String permissionTag) {
-        List<CareerBo> result = null;
+    public CareerPageViewBo queryCareer(CareerBo careerBo, PaginationBo paginationBo, String permissionTag) {
+        CareerPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 

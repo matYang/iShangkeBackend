@@ -20,7 +20,7 @@ struct AddressBo {
     17: i64 createTimeStart
     18: i64 createTimeEnd
 }
-struct AddressBoPageViewBo{
+struct AddressPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

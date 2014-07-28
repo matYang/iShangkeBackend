@@ -34,7 +34,7 @@ struct CommentOrderBo {
   1: i32 id
   2: string comment
 }
-struct OrderBoPageViewBo{
+struct OrderPageViewBo{
     1: i32 start
     2: i32 count
     3: i32 total

@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.enums.CreditHistoryEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.CouponBo;
@@ -34,6 +36,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.manager.exception.notfound.CreditNotFoundException;
 
 @Component
 public class CreditManagerImpl implements CreditManager {
@@ -72,20 +75,33 @@ public class CreditManagerImpl implements CreditManager {
             }
         }
         
+        if (creditEntity.getId() == null) {
+            throw new ManagerException("Credit modification must specify corresponding user");
+        }
+        
         //TODO we probably need a way to tell how much credit is used instead reading previous credit out
         CreditEntityExt previousCredit = creditMapper.getById(creditEntity.getId());
         if (previousCredit == null) {
-            throw new ManagerException("Previous credit is null");
+            throw new CreditNotFoundException("Previous credit is not found");
         }
         
-        creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
-        
+        double balanceDiff = previousCredit.getCredit() - creditEntity.getCredit();
+        int operation = CreditHistoryEnums.Operation.DEC.code;
+        if (balanceDiff < -DefaultValues.DOUBLEPRCISIONOFFSET) {
+            balanceDiff = -balanceDiff;
+            operation = CreditHistoryEnums.Operation.INC.code;
+        }
         CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
         creditHistory.setUserId(creditEntity.getId());
-        creditHistory.setCharge(previousCredit.getCredit() - creditEntity.getCredit());
+        creditHistory.setCharge(balanceDiff);
+        creditHistory.setOperation(operation);
         creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
         creditHistory.setDeleted(0);
+        
+        creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        creditEntity.setCreateTime(null);
+        creditEntity.setDeleted(null);
         try {
             creditMapper.update(creditEntity);
             int historyResult = creditHistoryMapper.add(creditHistory);

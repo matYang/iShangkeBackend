@@ -1,4 +1,4 @@
-package com.ishangke.edunav.facade.alipay;
+package com.ishangke.edunav.facade.user;
 
 import org.apache.thrift.TException;
 import org.springframework.context.annotation.Scope;

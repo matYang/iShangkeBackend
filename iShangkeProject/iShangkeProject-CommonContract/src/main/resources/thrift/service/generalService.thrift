@@ -18,7 +18,7 @@ service GeneralService{
     *   Category
     *
     **********************************************************/
-    list<category.CategoryBo> queryCategory(1: category.CategoryBo categoryBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    category.CategoryPageViewBo queryCategory(1: category.CategoryBo categoryBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -28,7 +28,7 @@ service GeneralService{
     *   Location
     *
     **********************************************************/
-    list<location.LocationBo> queryLocation(1: location.LocationBo locationBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    location.LocationPageViewBo queryLocation(1: location.LocationBo locationBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -38,7 +38,7 @@ service GeneralService{
     *   Circle
     *
     **********************************************************/
-    list<circle.CircleBo> queryCircle(1: circle.CircleBo circleBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    circle.CirclePageViewBo queryCircle(1: circle.CircleBo circleBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -48,7 +48,7 @@ service GeneralService{
     *   School
     *
     **********************************************************/
-    list<school.SchoolBo> querySchool(1: school.SchoolBo schoolBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    school.SchoolPageViewBo querySchool(1: school.SchoolBo schoolBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -58,5 +58,5 @@ service GeneralService{
     *   Career
     *
     **********************************************************/
-    list<career.CareerBo> queryCareer(1: career.CareerBo careerBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    career.CareerPageViewBo queryCareer(1: career.CareerBo careerBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }

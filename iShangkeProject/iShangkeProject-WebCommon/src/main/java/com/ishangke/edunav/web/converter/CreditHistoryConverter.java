@@ -53,6 +53,16 @@ public class CreditHistoryConverter {
                 .getLastModifyTimeEnd().getTimeInMillis());
         creditHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
                 .getLastModifyTimeStart().getTimeInMillis());
+
+        if (vo.getOperation() != null) {
+            creditHistoryBo.setOperation(vo.getOperation());
+        } else {
+            creditHistoryBo.setOperation(Constant.DEFAULTNULL);
+        }
+        if (vo.getOperationSet() != null) {
+            creditHistoryBo.setOperationSet(vo.getOperationSet());
+        }
+
         return creditHistoryBo;
     }
 
@@ -81,6 +91,12 @@ public class CreditHistoryConverter {
         creditHistoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         creditHistoryVo.setUserId(bo.getUserId());
         creditHistoryVo.setUserIdSet(bo.getUserIdSet());
+
+        if (Constant.DEFAULTNULL != bo.getOperation()) {
+            creditHistoryVo.setOperation(bo.getOperation());
+        }
+        creditHistoryVo.setOperationSet(bo.getOperationSet());
+
         return creditHistoryVo;
     }
 }
