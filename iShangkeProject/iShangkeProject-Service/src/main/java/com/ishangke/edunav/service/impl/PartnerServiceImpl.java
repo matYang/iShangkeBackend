@@ -20,6 +20,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.PartnerService;
 import com.ishangke.edunav.manager.ActivityManager;
 import com.ishangke.edunav.manager.AddressManager;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.ClassPhotoManager;
 import com.ishangke.edunav.manager.PartnerManager;
 import com.ishangke.edunav.manager.PermissionManager;
@@ -44,7 +45,8 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     private ActivityManager activityManager;
     @Autowired
     private PermissionManager permissionManager;
-
+    @Autowired
+    private AuthManager authManager;
     
     
     
@@ -58,7 +60,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
             throws BusinessExceptionBo, TException {
         
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryPartner"));
                 throw new NoPermissionException();
             }
@@ -82,7 +84,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public PartnerBo queryPartnerById(PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryPartnerById"));
                 throw new NoPermissionException();
             }
@@ -106,7 +108,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updatePartner"));
                 throw new NoPermissionException();
             }
@@ -130,7 +132,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createPartner"));
                 throw new NoPermissionException();
             }
@@ -162,7 +164,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public AddressBo createAddress(AddressBo addressBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createAddress"));
                 throw new NoPermissionException();
             }
@@ -185,7 +187,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public AddressBo updateAddress(AddressBo addressBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updateAddress"));
                 throw new NoPermissionException();
             }
@@ -208,7 +210,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteAddress"));
                 throw new NoPermissionException();
             }
@@ -231,7 +233,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public List<AddressBo> queryAddress(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryAddress"));
                 throw new NoPermissionException();
             }
@@ -262,7 +264,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createClassPhoto"));
                 throw new NoPermissionException();
             }
@@ -285,7 +287,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updateClassPhoto"));
                 throw new NoPermissionException();
             }
@@ -308,7 +310,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteClassPhoto"));
                 throw new NoPermissionException();
             }
@@ -331,7 +333,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public List<ClassPhotoBo> queryClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryClassPhoto"));
                 throw new NoPermissionException();
             }
@@ -363,7 +365,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createTeacher"));
                 throw new NoPermissionException();
             }
@@ -386,7 +388,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updateTeacher"));
                 throw new NoPermissionException();
             }
@@ -409,7 +411,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteTeacher"));
                 throw new NoPermissionException();
             }
@@ -433,7 +435,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public List<TeacherBo> queryTeacher(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryTeacher"));
                 throw new NoPermissionException();
             }
@@ -465,7 +467,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createActivity"));
                 throw new NoPermissionException();
             }
@@ -488,7 +490,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "submitActivity"));
                 throw new NoPermissionException();
             }
@@ -512,7 +514,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException { 
         
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "approveActivity"));
                 throw new NoPermissionException();
             }
@@ -535,7 +537,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ActivityBo rejectActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "rejectActivity"));
                 throw new NoPermissionException();
             }
@@ -558,7 +560,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "cancelActivity"));
                 throw new NoPermissionException();
             }
@@ -581,7 +583,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public ActivityBo deleteActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteActivity"));
                 throw new NoPermissionException();
             }
@@ -604,7 +606,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     @Override
     public List<ActivityBo> queryActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryActivity"));
                 throw new NoPermissionException();
             }

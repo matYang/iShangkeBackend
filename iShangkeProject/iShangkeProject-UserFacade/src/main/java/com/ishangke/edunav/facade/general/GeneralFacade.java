@@ -28,7 +28,7 @@ public class GeneralFacade {
     public List<CategoryBo> queryCategory(CategoryBo categoryBo, PaginationBo paginationBo, String permissionTag) {
         List<CategoryBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
         try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -46,7 +46,7 @@ public class GeneralFacade {
     public List<LocationBo> queryLocation(LocationBo locationBo, PaginationBo paginationBo, String permissionTag) {
         List<LocationBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
         try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -64,7 +64,7 @@ public class GeneralFacade {
     public List<CircleBo> queryCircle(CircleBo circleBo, PaginationBo paginationBo, String permissionTag) {
         List<CircleBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
         try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -82,7 +82,7 @@ public class GeneralFacade {
     public List<SchoolBo> querySchool(SchoolBo schoolBo, PaginationBo paginationBo, String permissionTag) {
         List<SchoolBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
         try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -100,7 +100,7 @@ public class GeneralFacade {
     public List<CareerBo> queryCareer(CareerBo careerBo, PaginationBo paginationBo, String permissionTag) {
         List<CareerBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
 
         try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();

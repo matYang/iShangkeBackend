@@ -21,6 +21,8 @@ public class Constant {
     
     //用于状态转移
     public static final String ROLEPREFIX = "role";
+    //用于权限控制
+    public static final String ROLEIDPREFIX = "roleid";
     public static final String TRANSFORMACTION = "transformaction";
     public static final String TRANSFORMOPERATION = "transformoperation";
     public static final String ROLESYSTEMADMIN = "systemadmin";
