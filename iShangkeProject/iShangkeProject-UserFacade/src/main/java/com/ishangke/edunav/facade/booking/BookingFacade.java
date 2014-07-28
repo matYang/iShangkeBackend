@@ -27,7 +27,7 @@ public class BookingFacade {
 
     public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo, String url) {
         BookingBo result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -45,7 +45,7 @@ public class BookingFacade {
 
     public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String url) {
         BookingBo result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -63,7 +63,7 @@ public class BookingFacade {
 
     public List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String url) {
         List<BookingBo> result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -79,9 +79,10 @@ public class BookingFacade {
         return result;
     }
 
-    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url) {
+    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo,
+            String url) {
         List<BookingHistoryBo> result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -97,9 +98,10 @@ public class BookingFacade {
         return result;
     }
 
-    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String url) {
+    public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo,
+            PaginationBo paginationBo, String url) {
         List<BookingHistoryBo> result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -117,7 +119,7 @@ public class BookingFacade {
 
     public List<BookingBo> queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url) {
         List<BookingBo> result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -135,7 +137,7 @@ public class BookingFacade {
 
     public List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String url) {
         List<BookingBo> result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {

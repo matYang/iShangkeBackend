@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.enums.BookingEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
@@ -26,6 +27,7 @@ import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
@@ -33,10 +35,13 @@ import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
+import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.TransformManager;
+import com.ishangke.edunav.manager.caiwu.alipay.AlipayNotify;
+import com.ishangke.edunav.manager.caiwu.alipay.AlipaySubmit;
 import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.BookingHistoryConverter;
 import com.ishangke.edunav.manager.converter.CouponConverter;
@@ -77,6 +82,9 @@ public class BookingManagerImpl implements BookingManager {
     
     @Autowired
     private CouponEntityExtMapper couponMapper;
+    
+    @Autowired
+    private OrderEntityExtMapper orderMapper;
     
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || bookingBo.getUserId() <= 0) {
@@ -577,6 +585,25 @@ public class BookingManagerImpl implements BookingManager {
         Double a = 0.1234560023;
         double b = 0.123456002300000000000;
         System.out.println(a.equals(b));
+    }
+
+    @Override
+    public String changeBookingStatusToPayed(int orderId) {
+        OrderEntityExt order = orderMapper.getById(orderId);
+        BookingEntityExt booking = bookingMapper.getById(order.getBookingId());
+        booking.setStatus(BookingEnums.Status.ONLINEPAYED.code);
+        bookingMapper.update(booking);
+        return "success";
+    }
+
+    @Override
+    public String verify(String notify_id) {
+        return AlipayNotify.Verify(notify_id);
+    }
+
+    @Override
+    public String buildFormForGet(String subject, String out_trade_no, String total_fee) {
+        return AlipaySubmit.buildFormForGet(out_trade_no, subject, total_fee);
     }
    
 }
