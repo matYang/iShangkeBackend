@@ -122,7 +122,7 @@ public class PermissionManagerImpl implements PermissionManager {
     }
 
     private String resolvePermissionTag(String tag) {
-        String result = "";
+        String result = tag;
         if (tag != null
                 && (tag.startsWith("POST/") || tag.startsWith("GET/") || tag.startsWith("DELETE/") || tag
                         .startsWith("PUT/"))) {
