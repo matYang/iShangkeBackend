@@ -236,6 +236,6 @@ service BookingService {
     //  *
     //  */ 
     //  list<orderHistory.OrderHistoryBo> queryOrderHistory(1: orderHistory.OrderHistoryBo orderHistory, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-
+	string changeBookingStatusToPayed(1: i32 id)throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 } 

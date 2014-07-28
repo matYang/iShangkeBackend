@@ -201,7 +201,6 @@ public class ManagerErrorCode {
     public static final String COUPON_ACTIVATE_ERROR_KEY = "coupon_activate_error";
     public static final int COUPON_NOTFOUND_ERROR = 0x000E0404;
     public static final String COUPON_NOTFOUND_ERROR_KEY = "coupon_notfound_error";
-    
 
     // credit
     public static final int CREDIT_CREATE_ERROR = 0x000E0001;
@@ -496,7 +495,11 @@ public class ManagerErrorCode {
     public static final String PERMISSION_USER_CHANGEPASSWORD_KEY = "permission_user_changePassword";
     public static final int PERMISSION_ACCOUNT_ACTIVATECOUPON = 0x01000060;
     public static final String PERMISSION_ACCOUNT_ACTIVATECOUPON_KEY = "permission_account_activateCoupon";
-    
-    
+
+    // alipay
+    public static final int ALIPAY_VERIFY_ERROR = 0x001C0001;
+    public static final String ALIPAY_VERIFY_ERROR_KEY = "alipay_verify_error";
+    public static final int ALIPAY_GET_SUBMIT_ERROR = 0x001C0002;
+    public static final String ALIPAY_GET_SUBMIT_ERROR_KEY = "alipay_get_submit_error";
 
 }

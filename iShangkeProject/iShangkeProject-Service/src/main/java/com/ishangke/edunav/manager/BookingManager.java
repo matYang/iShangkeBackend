@@ -117,4 +117,6 @@ public interface BookingManager {
      *
      */
     List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    
+    String changeBookingToPayed(int orderId);
 }
