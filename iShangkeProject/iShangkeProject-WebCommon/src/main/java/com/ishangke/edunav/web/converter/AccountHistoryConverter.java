@@ -61,6 +61,16 @@ public class AccountHistoryConverter {
                 .getTimeInMillis());
         accountHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
                 .getCreateTimeStart().getTimeInMillis());
+        
+        if (vo.getOperation() != null) {
+            accountHistoryBo.setOperation(vo.getOperation());
+        } else {
+            accountHistoryBo.setOperation(Constant.DEFAULTNULL);
+        }
+        if (vo.getOperationSet() != null) {
+            accountHistoryBo.setOperationSet(vo.getOperationSet());
+        }
+        
         return accountHistoryBo;
     }
 
@@ -92,6 +102,12 @@ public class AccountHistoryConverter {
         accountHistoryVo.setUserIdSet(bo.getUserIdSet());
         accountHistoryVo.setWithdrawId(bo.getWithdrawId());
         accountHistoryVo.setWithdrawIdSet(bo.getWithdrawIdSet());
+        
+        if (Constant.DEFAULTNULL != bo.getOperation()) {
+            accountHistoryVo.setOperation(bo.getOperation());
+        }
+        accountHistoryVo.setOperationSet(bo.getOperationSet());
+        
         return accountHistoryVo;
     }
 }

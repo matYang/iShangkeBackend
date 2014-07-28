@@ -19,6 +19,8 @@ public class AccountHistoryVo {
     private Set<Integer> typeSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Integer operation;
+    private Set<Integer> operationSet;
     public Integer getId() {
         return id;
     }
@@ -108,6 +110,18 @@ public class AccountHistoryVo {
     }
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+    public Integer getOperation() {
+        return operation;
+    }
+    public void setOperation(Integer operation) {
+        this.operation = operation;
+    }
+    public Set<Integer> getOperationSet() {
+        return operationSet;
+    }
+    public void setOperationSet(Set<Integer> operationSet) {
+        this.operationSet = operationSet;
     }
     
 

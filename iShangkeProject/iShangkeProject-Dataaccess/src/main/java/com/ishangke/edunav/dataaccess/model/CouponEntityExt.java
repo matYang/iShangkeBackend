@@ -19,7 +19,7 @@ public class CouponEntityExt extends CouponEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-
+    private Set<Integer> statusSet;
     public Set<Integer> getIdSet() {
         return idSet;
     }
@@ -122,6 +122,14 @@ public class CouponEntityExt extends CouponEntity {
 
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+
+    public Set<Integer> getStatusSet() {
+        return statusSet;
+    }
+
+    public void setStatusSet(Set<Integer> statusSet) {
+        this.statusSet = statusSet;
     }
 
 }

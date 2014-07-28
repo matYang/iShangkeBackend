@@ -14,7 +14,7 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
-
+    private Set<Integer> operationSet;
     public Set<Integer> getIdSet() {
         return idSet;
     }
@@ -77,6 +77,14 @@ public class CreditHistoryEntityExt extends CreditHistoryEntity {
 
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+
+    public Set<Integer> getOperationSet() {
+        return operationSet;
+    }
+
+    public void setOperationSet(Set<Integer> operationSet) {
+        this.operationSet = operationSet;
     }
 
 }

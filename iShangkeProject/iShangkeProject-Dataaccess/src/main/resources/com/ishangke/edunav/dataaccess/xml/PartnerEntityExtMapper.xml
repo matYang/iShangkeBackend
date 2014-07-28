@@ -6,8 +6,8 @@
     <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
     <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_CONTRACT" property="contract" jdbcType="VARCHAR" />
-    <result column="PARTNER_LASTLOGINTIME" property="lastLoginTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+
+
     <result column="PARTNER_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="PARTNER_CREATETIME" property="createTime"
@@ -18,7 +18,7 @@
     <result column="PARTNER_LICENCE" property="licence" jdbcType="VARCHAR" />
     <result column="PARTNER_ORGANIZATIONNUM" property="organizationNum" jdbcType="VARCHAR" />
     <result column="PARTNER_REFERENCE" property="reference" jdbcType="VARCHAR" />
-    <result column="PARTNER_PASSWORD" property="password" jdbcType="VARCHAR" />
+
     <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
     <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
     <result column="PARTNER_LICENCEIMGURL" property="licenceImgUrl" jdbcType="VARCHAR" />
@@ -89,7 +89,7 @@
     PARTNER_LOGOURL,
     PARTNER.CONTRACT
     PARTNER_CONTRACT,
-    PARTNER.LAST_LOGIN_TIME PARTNER_LASTLOGINTIME,
+
     PARTNER.LAST_MODIFY_TIME
     PARTNER_LASTMODIFYTIME,
     PARTNER.CREATE_TIME PARTNER_CREATETIME,
@@ -103,7 +103,7 @@
     PARTNER_ORGANIZATIONNUM,
     PARTNER.REFERENCE
     PARTNER_REFERENCE,
-    PARTNER.PASSWORD PARTNER_PASSWORD,
+
     PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
     PARTNER.PARTNER_DISTINCTION
     PARTNER_PARTNERDISTINCTION,
@@ -191,9 +191,7 @@
       <if test="contract != null">
         CONTRACT,
       </if>
-      <if test="lastLoginTime != null">
-        LAST_LOGIN_TIME,
-      </if>
+
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
       </if>
@@ -215,9 +213,7 @@
       <if test="reference != null">
         REFERENCE,
       </if>
-      <if test="password != null">
-        PASSWORD,
-      </if>
+
       <if test="partnerIntro != null">
         PARTNER_INTRO,
       </if>
@@ -290,9 +286,7 @@
       <if test="contract != null">
         #{contract,jdbcType=VARCHAR},
       </if>
-      <if test="lastLoginTime != null">
-        #{lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
+
       <if test="lastModifyTime != null">
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
@@ -314,9 +308,7 @@
       <if test="reference != null">
         #{reference,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
+
       <if test="partnerIntro != null">
         #{partnerIntro,jdbcType=VARCHAR},
       </if>
@@ -402,10 +394,7 @@
       <if test="contract != null">
         CONTRACT = #{contract,jdbcType=VARCHAR},
       </if>
-      <if test="lastLoginTime != null">
-        LAST_LOGIN_TIME =
-        #{lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-      </if>
+
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME =
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -429,9 +418,7 @@
       <if test="reference != null">
         REFERENCE = #{reference,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
+
       <if test="partnerIntro != null">
         PARTNER_INTRO = #{partnerIntro,jdbcType=VARCHAR},
       </if>
@@ -532,7 +519,7 @@
     <include refid="Partner_Base_Column_List" />
     from PARTNER where PARTNER.DELETED = 0
   </select>
-   <!-- getById -->
+  <!-- getById -->
   <select id="getById" parameterType="int" resultMap="PartnerExtMap">
     SELECT
     <include refid="Partner_Base_Column_List" />
@@ -593,10 +580,6 @@
 
       <if test="entity.reference != null and entity.reference != ''">
         AND PARTNER.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
-      </if>
-
-      <if test="entity.password != null and entity.password != ''">
-        AND PARTNER.PASSWORD LIKE "%"#{entity.password,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.partnerIntro != null and entity.partnerIntro != ''">
@@ -746,18 +729,6 @@
         AND PARTNER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.lastLoginTime != null">
-        AND PARTNER.LAST_LOGIN_TIME =
-        #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.lastLoginTime == null">
-        <if test="entity.lastLoginTimeStart != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME >= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.lastLoginTimeEnd != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      </if>
       <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
         ORDER BY
         <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -827,10 +798,6 @@
         AND PARTNER.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.password != null and entity.password != ''">
-        AND PARTNER.PASSWORD LIKE "%"#{entity.password,jdbcType=VARCHAR}"%"
-      </if>
-
       <if test="entity.partnerIntro != null and entity.partnerIntro != ''">
         AND PARTNER.PARTNER_INTRO LIKE "%"#{entity.partnerIntro,jdbcType=VARCHAR}"%"
       </if>
@@ -978,18 +945,7 @@
         AND PARTNER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.lastLoginTime != null">
-        AND PARTNER.LAST_LOGIN_TIME =
-        #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.lastLoginTime == null">
-        <if test="entity.lastLoginTimeStart != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME >= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-        <if test="entity.lastLoginTimeEnd != null">
-          <![CDATA[AND PARTNER.LAST_LOGIN_TIME <= #{entity.lastLoginTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-        </if>
-      </if>
+
     </if>
     ) AS
     total

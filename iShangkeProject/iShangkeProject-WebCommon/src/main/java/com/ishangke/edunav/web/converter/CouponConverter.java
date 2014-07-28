@@ -87,6 +87,17 @@ public class CouponConverter {
                 .getLastModifyTimeEnd().getTimeInMillis());
         couponBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
                 .getLastModifyTimeStart().getTimeInMillis());
+
+        if (vo.getStatus() != null) {
+            couponBo.setStatus(vo.getStatus());
+        } else {
+            couponBo.setStatus(Constant.DEFAULTNULL);
+        }
+
+        if (vo.getStatusSet() != null) {
+            couponBo.setStatusSet(vo.getStatusSet());
+        }
+
         return couponBo;
     }
 
@@ -133,6 +144,12 @@ public class CouponConverter {
         }
         couponVo.setUserId(bo.getUserId());
         couponVo.setUserIdSet(bo.getUserIdSet());
+
+        if (Constant.DEFAULTNULL != bo.getStatus()) {
+            couponVo.setStatus(bo.getStatus());
+        }
+        couponVo.setStatusSet(bo.getStatusSet());
+
         return couponVo;
     }
 }

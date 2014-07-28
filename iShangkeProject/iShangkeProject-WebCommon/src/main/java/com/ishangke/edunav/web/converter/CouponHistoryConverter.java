@@ -50,6 +50,16 @@ public class CouponHistoryConverter {
                 .getLastModifyTimeEnd().getTimeInMillis());
         couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
                 .getLastModifyTimeStart().getTimeInMillis());
+        
+        if (vo.getOperation() != null) {
+            couponHistoryBo.setOperation(vo.getOperation());
+        } else {
+            couponHistoryBo.setOperation(Constant.DEFAULTNULL);
+        }
+        if (vo.getOperationSet() != null) {
+            couponHistoryBo.setOperationSet(vo.getOperationSet());
+        }
+        
         return couponHistoryBo;
     }
 
@@ -77,6 +87,12 @@ public class CouponHistoryConverter {
         couponHistoryVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
         couponHistoryVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         couponHistoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        
+        if (Constant.DEFAULTNULL != bo.getOperation()) {
+            couponHistoryVo.setOperation(bo.getOperation());
+        }
+        couponHistoryVo.setOperationSet(bo.getOperationSet());
+        
         return couponHistoryVo;
     }
 }
