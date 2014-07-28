@@ -116,7 +116,6 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
-    
-    String changeBookingToPayed(int orderId);
+    List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);    
+   
 }
