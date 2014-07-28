@@ -527,4 +527,21 @@ public class AuthManagerImpl implements AuthManager {
         }
     }
 
+    @Override
+    public Integer getRoleId(int userId) {
+        Integer roleId = (Integer)cache.get(Constant.ROLEIDPREFIX + userId);
+        if (roleId != null) {
+            return roleId;
+        } else {
+            List<RoleEntityExt> roleList = roleMapper.listRolesByUserId(userId);
+            if (roleList == null || roleList.size() == 0) {
+                LOGGER.warn(String.format("[AuthManager] user [id = %d] cannot find role!", userId));
+                return null;
+            }
+            int role = roleList.get(0).getId();
+            cache.set(Constant.ROLEIDPREFIX + userId, Constant.STATUSTRANSFORMEXPIRETIME, role);
+            LOGGER.info(String.format("[AuthManagerImpl] add role into memcached [user id: %d] [role id: %d]", userId, role));
+            return role;
+        }
+    }
 }

@@ -51,4 +51,5 @@ public interface AuthManager {
     
     String getRole(final int userId);
 
+    Integer getRoleId(final int userId);
 }

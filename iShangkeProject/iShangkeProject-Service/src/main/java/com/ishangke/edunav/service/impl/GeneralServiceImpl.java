@@ -16,6 +16,7 @@ import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
 import com.ishangke.edunav.commoncontract.service.GeneralService;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CareerManager;
 import com.ishangke.edunav.manager.CategoryManager;
 import com.ishangke.edunav.manager.CircleManager;
@@ -38,6 +39,8 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     private SchoolManager schoolManager;
     @Autowired
     private CareerManager careerManager;
+    @Autowired
+    private AuthManager authManager;
 
     /**********************************************************
      *

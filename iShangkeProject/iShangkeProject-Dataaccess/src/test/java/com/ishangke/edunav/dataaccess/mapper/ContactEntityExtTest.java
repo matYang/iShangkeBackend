@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
-import com.ishangke.edunav.dataaccess.common.DateUtility;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;

@@ -20,6 +20,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.mapper.CategoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseClassPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseCommentEntityExtMapper;
@@ -28,6 +29,7 @@ import com.ishangke.edunav.dataaccess.mapper.CourseTeacherEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.TeacherEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
@@ -39,6 +41,7 @@ import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseManager;
 import com.ishangke.edunav.manager.TransformManager;
+import com.ishangke.edunav.manager.converter.CategoryConverter;
 import com.ishangke.edunav.manager.converter.CourseCommentConverter;
 import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -83,6 +86,9 @@ public class CourseManagerImpl implements CourseManager {
 
     @Autowired
     private CourseCommentEntityExtMapper courseCommentMapper;
+    
+    @Autowired
+    private CategoryEntityExtMapper categoryMapper;
 
     @Override
     public CourseBo createCourse(CourseTemplateBo courseTemplateBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {
@@ -343,7 +349,8 @@ public class CourseManagerImpl implements CourseManager {
 
     @Override
     public List<CategoryBo> queryByKeyword(String keyword) {
-        // TODO Auto-generated method stub
+        //todo 搜索功能，根据用户输入的关键词，跳转到相应的三级目录的功能
+        //需要提前录入
         return null;
     }
 

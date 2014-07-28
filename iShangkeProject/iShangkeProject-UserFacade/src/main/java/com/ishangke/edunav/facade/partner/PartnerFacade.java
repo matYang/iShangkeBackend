@@ -25,7 +25,7 @@ public class PartnerFacade {
     public List<PartnerBo> queryPartner(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo, String permissionTag) {
         List<PartnerBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -43,7 +43,7 @@ public class PartnerFacade {
     public PartnerBo queryPartnerById(PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         PartnerBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -61,7 +61,7 @@ public class PartnerFacade {
     public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         PartnerBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -79,7 +79,7 @@ public class PartnerFacade {
     public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         PartnerBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -97,7 +97,7 @@ public class PartnerFacade {
     public AddressBo createAddress(AddressBo addressBo, UserBo userBo, String permissionTag) {
         AddressBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -115,7 +115,7 @@ public class PartnerFacade {
     public AddressBo updateAddress(AddressBo addressBo, UserBo userBo, String permissionTag) {
         AddressBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -133,7 +133,7 @@ public class PartnerFacade {
     public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo, String permissionTag) {
         AddressBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -151,7 +151,7 @@ public class PartnerFacade {
     public List<AddressBo> queryAddress(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         List<AddressBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -169,7 +169,7 @@ public class PartnerFacade {
     public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) {
         ClassPhotoBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -187,7 +187,7 @@ public class PartnerFacade {
     public ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) {
         ClassPhotoBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -205,7 +205,7 @@ public class PartnerFacade {
     public ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, String permissionTag) {
         ClassPhotoBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -223,7 +223,7 @@ public class PartnerFacade {
     public List<ClassPhotoBo> queryClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         List<ClassPhotoBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -241,7 +241,7 @@ public class PartnerFacade {
     public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) {
         TeacherBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -259,7 +259,7 @@ public class PartnerFacade {
     public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) {
         TeacherBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -277,7 +277,7 @@ public class PartnerFacade {
     public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag) {
         TeacherBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -295,7 +295,7 @@ public class PartnerFacade {
     public List<TeacherBo> queryTeacher(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         List<TeacherBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -313,7 +313,7 @@ public class PartnerFacade {
     public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         ActivityBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -331,7 +331,7 @@ public class PartnerFacade {
     public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo, String permissionTag) {
         ActivityBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -349,7 +349,7 @@ public class PartnerFacade {
     public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo, String permissionTag) {
         ActivityBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -367,7 +367,7 @@ public class PartnerFacade {
     public ActivityBo rejectActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         ActivityBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -385,7 +385,7 @@ public class PartnerFacade {
     public ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         ActivityBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -403,7 +403,7 @@ public class PartnerFacade {
     public ActivityBo deleteActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         ActivityBo result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
@@ -421,7 +421,7 @@ public class PartnerFacade {
     public List<ActivityBo> queryActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         List<ActivityBo> result = null;
         
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
 
         try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();

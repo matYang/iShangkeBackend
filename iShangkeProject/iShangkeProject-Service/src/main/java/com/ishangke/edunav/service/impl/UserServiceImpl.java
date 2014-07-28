@@ -19,6 +19,7 @@ import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.UserService;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.MessageManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.SpreadManager;
@@ -39,6 +40,8 @@ public class UserServiceImpl implements UserService.Iface {
     private SpreadManager spreadManager;
     @Autowired
     private PermissionManager permissionManager;
+    @Autowired
+    private AuthManager authManager;
 
     /**********************************************************
      * 
@@ -50,7 +53,7 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo registerUser(UserBo userBo, SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "registerUser"));
                 throw new NoPermissionException();
@@ -278,7 +281,7 @@ public class UserServiceImpl implements UserService.Iface {
     @Override
     public SessionBo openCellSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "openCellSession"));
                 throw new NoPermissionException();
@@ -303,7 +306,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SessionBo openForgetPasswordSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "openForgetPasswordSession"));
                 throw new NoPermissionException();
@@ -372,7 +375,7 @@ public class UserServiceImpl implements UserService.Iface {
     public MessageBo sendMessage(MessageBo messageBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "sendMessage"));
                 throw new NoPermissionException();
@@ -397,7 +400,7 @@ public class UserServiceImpl implements UserService.Iface {
     public MessageBo receiveMessage(MessageBo messageBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "sendMessage"));
                 throw new NoPermissionException();
@@ -422,7 +425,7 @@ public class UserServiceImpl implements UserService.Iface {
     public MessageBo deleteMessage(MessageBo messageBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "sendMessage"));
                 throw new NoPermissionException();
@@ -447,7 +450,7 @@ public class UserServiceImpl implements UserService.Iface {
     public List<MessageBo> queryMessage(MessageBo messageBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "sendMessage"));
                 throw new NoPermissionException();
@@ -477,7 +480,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SpreadBo generateCode(UserBo userBo, PartnerBo partnerBo, CourseBo courseBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "generateCode"));
                 throw new NoPermissionException();
@@ -502,7 +505,7 @@ public class UserServiceImpl implements UserService.Iface {
     public List<SpreadBo> querySpread(SpreadBo spreadBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "querySpread"));
                 throw new NoPermissionException();
@@ -527,7 +530,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SpreadBo createSpread(SpreadBo spreadBo, PartnerBo partnerBo, CourseBo courseBo, UserBo userBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "createSpread"));
                 throw new NoPermissionException();
@@ -552,7 +555,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SpreadBo approveSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "approveSpread"));
                 throw new NoPermissionException();
@@ -577,7 +580,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SpreadBo rejectSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "rejectSpread"));
                 throw new NoPermissionException();
@@ -602,7 +605,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SpreadBo cancelSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "cancelSpread"));
                 throw new NoPermissionException();
@@ -627,7 +630,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SpreadBo deleteSpread(SpreadBo spreadBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
                         "deleteSpread"));
                 throw new NoPermissionException();

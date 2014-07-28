@@ -16,6 +16,7 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.OrderManager;
 import com.ishangke.edunav.manager.PermissionManager;
@@ -35,11 +36,14 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     @Autowired
     private PermissionManager permissionManager;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Override
     public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
@@ -62,7 +66,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
@@ -85,7 +89,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
@@ -109,7 +113,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
@@ -133,7 +137,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     public List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
@@ -156,7 +160,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public List<BookingBo> queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
@@ -179,7 +183,7 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
                 throw new NoPermissionException();
             }
