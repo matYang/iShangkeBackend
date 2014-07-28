@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ishangke.edunav.facade.alipay.AlipayFacade;
+import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.web.common.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
