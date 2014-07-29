@@ -119,14 +119,14 @@ public class CourseFacade {
         return result;
     }
 
-    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url) {
+    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String url) {
         CoursePageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.queryCourseByPartner(courseBo, partnerBo, userBo, paginationBo, PermissionCache.getTag(url));
+            result = serviceClient.queryCourseByPartner(courseBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

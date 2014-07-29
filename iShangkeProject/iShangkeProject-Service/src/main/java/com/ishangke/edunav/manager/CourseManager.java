@@ -6,7 +6,6 @@ import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface CourseManager {
@@ -95,8 +94,6 @@ public interface CourseManager {
      * 
      * @param courseBo
      *            需要检索和过滤的课程信息
-     * @param partnerBo
-     *            合作商信息
      * @param userBo
      *            调用方法的用户的信息
      * @param paginationBo
@@ -110,7 +107,7 @@ public interface CourseManager {
      * @param userBo
      * @param paginationBo
      */
-    List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<CourseBo> queryByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo);
 
     /**
      * 本方法为用户查询课程的功能。<br>
