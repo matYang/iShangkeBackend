@@ -163,14 +163,14 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
             
-            List<CourseBo> data = courseManager.queryByPartner(courseBo, partnerBo, userBo, paginationBo);
+            List<CourseBo> data = courseManager.queryByPartner(courseBo, userBo, paginationBo);
             CoursePageViewBo pageView = new CoursePageViewBo();
             pageView.setData(data);
             return pageView;

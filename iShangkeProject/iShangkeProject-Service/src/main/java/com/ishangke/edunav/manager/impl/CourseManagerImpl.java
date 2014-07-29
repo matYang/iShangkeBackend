@@ -16,7 +16,6 @@ import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.CategoryEntityExtMapper;
@@ -340,7 +339,7 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public List<CourseBo> queryByPartner(CourseBo courseBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<CourseBo> queryByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo) {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             // 如果是合作商管理员
@@ -351,7 +350,7 @@ public class CourseManagerImpl implements CourseManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == partnerBo.getId()) {
+                if (g.getPartnerId() == courseBo.getPartnerId()) {
                     isSameGroup = true;
                     break;
                 }
@@ -362,8 +361,6 @@ public class CourseManagerImpl implements CourseManager {
             CourseEntityExt course = CourseConverter.fromBo(courseBo);
             List<CourseBo> convertered = new ArrayList<>();
             try {
-                // 强制使用传递进来的partner id
-                course.setPartnerId(partnerBo.getId());
                 List<CourseEntityExt> result = courseMapper.list(course, PaginationConverter.fromBo(paginationBo));
                 if (result != null) {
                     for (CourseEntityExt c : result) {
@@ -378,8 +375,6 @@ public class CourseManagerImpl implements CourseManager {
             CourseEntityExt course = CourseConverter.fromBo(courseBo);
             List<CourseBo> convertered = new ArrayList<>();
             try {
-                // 强制使用传递进来的partner id
-                course.setPartnerId(partnerBo.getId());
                 List<CourseEntityExt> result = courseMapper.list(course, PaginationConverter.fromBo(paginationBo));
                 if (result != null) {
                     for (CourseEntityExt c : result) {

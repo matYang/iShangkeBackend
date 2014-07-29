@@ -88,8 +88,6 @@ service CourseService {
      * 
      * @param courseBo
      *            需要检索和过滤的课程信息
-     * @param partnerBo
-     *            合作商信息
      * @param userBo
      *            调用方法的用户的信息
      * @param paginationBo
@@ -103,7 +101,7 @@ service CourseService {
      * @param userBo
      * @param paginationBo
      */
-    course.CoursePageViewBo queryCourseByPartner(1: course.CourseBo courseBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    course.CoursePageViewBo queryCourseByPartner(1: course.CourseBo courseBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为用户查询课程的功能。<br>
