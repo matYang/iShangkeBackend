@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
+import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -75,20 +77,16 @@ public class CourseEntityExtTest extends BaseTest {
     }
 
     @Test
-    public void testQuery() {
+    public void testQuery() throws IllegalArgumentException, IllegalAccessException {
         PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
 
-        page.addOrderByEntity(new OrderByEntity("LAST_MODIFY_TIME",
-                DataaccessConstants.ORDER_DESC));
-        page.addOrderByEntity(new OrderByEntity("CUTOFF_DATE",
+        page.addOrderByEntity(new OrderByEntity("ID",
                 DataaccessConstants.ORDER_ASC));
 
         CourseEntityExt courseEntityExt = new CourseEntityExt();
         courseEntityExt.setCategoryValue("0001");
         List<CourseEntityExt> result = courseEntityExtMapper.list(
-                courseEntityExt, null);
+                null, null);
         System.out.println("count:" + result.size());
         for (CourseEntityExt c : result) {
             System.out.println(c.getCourseName() + "===>"
@@ -96,8 +94,9 @@ public class CourseEntityExtTest extends BaseTest {
         }
         Assert.assertSame(courseEntityExtMapper.getListCount(courseEntityExt),
                 result.size());
-        // Assert.assertEquals(5, result.size());
-        // Assert.assertEquals("雅思05", result.get(0).getCourseName());
+        
+       
+       System.out.println("%%%");
     }
 
     @Test
@@ -198,6 +197,15 @@ public class CourseEntityExtTest extends BaseTest {
         Assert.assertEquals("test_ishangke", upDate.getAssignments());
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime()));
+    }
+    
+    @Test
+    public void testGetInfoById() throws IllegalArgumentException, IllegalAccessException {
+        CourseEntityExt c = courseEntityExtMapper.getInfoById(1);
+        for (Field f : c.getClass().getDeclaredFields()) {
+            f.setAccessible(true);
+            System.out.println(f.getName() + "===>" + f.get(c));
+        }
     }
 
 }
