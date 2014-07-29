@@ -621,9 +621,34 @@ public class BookingManagerImpl implements BookingManager {
     public String changeBookingStatusToPayed(int orderId) {
         OrderEntityExt order = orderMapper.getById(orderId);
         BookingEntityExt booking = bookingMapper.getById(order.getBookingId());
+        BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
+        int preStatus = booking.getStatus();
+        if (BookingEnums.Status.ONLINEPENDINGPAYMENT.code != preStatus) {
+            bookingHistory.setNormal(Constant.BOOKINGUNNORMAL);
+            LOGGER.warn(String.format("[pay booking]booking [%d] is no need to pay, but order [%d] pay it", booking.getId(), order.getId()));
+        } else {
+            bookingHistory.setNormal(Constant.BOOKINGNORMAL);
+        }
         booking.setStatus(BookingEnums.Status.ONLINEPAYED.code);
-        bookingMapper.update(booking);
-        return "success";
+        try {
+            booking.setLastModifyTime(DateUtility.getCurTimeInstance());
+            bookingMapper.update(booking);
+        } catch (Exception e) {
+            throw new ManagerException("change booking status failed");
+        } finally {
+            LOGGER.error(String.format("[pay booking]order [%d] try to pay booking [%d] but failed", order.getId(), booking.getId()));
+        }
+        bookingHistory.setBookingId(booking.getId());
+        bookingHistory.setUserId(booking.getUserId());
+        bookingHistory.setPreStatus(preStatus);
+        bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
+        bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+        try {
+            bookingHistoryMapper.add(bookingHistory);
+        } catch (Exception e) {
+            throw new ManagerException("create booking history failed");
+        }
+        return Constant.SUCCESS;
     }
 
     @Override
