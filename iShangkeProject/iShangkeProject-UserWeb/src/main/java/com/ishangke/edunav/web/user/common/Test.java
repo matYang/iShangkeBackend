@@ -4,6 +4,7 @@ import org.apache.thrift.TException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
 import com.ishangke.edunav.facade.user.CourseFacade;
