@@ -179,4 +179,9 @@ public class WithdrawManagerImpl implements WithdrawManager {
         }
         return convertedResults;
     }
+
+    @Override
+    public int queryTotal(WithdrawBo withdrawBo, UserBo userBo) {
+        return withdrawMapper.getListCount(WithdrawConverter.fromBo(withdrawBo));
+    }
 }

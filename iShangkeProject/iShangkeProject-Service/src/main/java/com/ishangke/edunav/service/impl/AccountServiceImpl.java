@@ -222,9 +222,14 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryCoupon"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CouponBo> data = couponManager.query(couponBo, userBo, paginationBo);
+            int total = couponManager.queryTotal(couponBo, userBo);
             CouponPageViewBo pageView = new CouponPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -251,10 +256,16 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryCouponHistory"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CouponHistoryBo> data = couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
+            int total = couponManager.queryHistoryTotal(couponHistoryBo, userBo);
             CouponHistoryPageViewBo pageView = new CouponHistoryPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
+
 
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -336,9 +347,14 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryCredit"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CreditBo> data = creditManager.query(creditBo, userBo, paginationBo);
+            int total = creditManager.queryTotal(creditBo, userBo);
             CreditPageViewBo pageView = new CreditPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -365,10 +381,16 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryCreditHistory"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CreditHistoryBo> data = creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
+            int total = creditManager.queryHistoryTotal(creditHistoryBo, userBo);
             CreditHistoryPageViewBo pageView = new CreditHistoryPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
+
 
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -474,9 +496,14 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryWithdraw"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<WithdrawBo> data = withdrawManager.query(withdrawBo, userBo, paginationBo);
+            int total = withdrawManager.queryTotal(withdrawBo, userBo);
             WithdrawPageViewBo pageView = new WithdrawPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -583,9 +610,15 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryContact"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<ContactBo> data = contactManager.query(contactBo, userBo, paginationBo);
+            int total = contactManager.queryTotal(contactBo, userBo);
+            
             ContactPageViewBo pageView = new ContactPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {

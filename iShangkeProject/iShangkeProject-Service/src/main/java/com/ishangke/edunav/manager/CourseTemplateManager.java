@@ -59,7 +59,7 @@ public interface CourseTemplateManager {
      * @param paginationBo
      */
     List<CourseTemplateBo> queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
-
+//    int queryCourseTemplateByPartnerIdTotal(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo);
     /**
      * 本方法返回课程模版详情<br>
      * 合作商/管理员可以通过此方法调取

@@ -582,4 +582,20 @@ public class CourseManagerImpl implements CourseManager {
         return CourseConverter.toBo(courseMapper.getById(courseBo.getId()));
     }
 
+    @Override
+    public int queryCommentByCourseIdTotal(CourseBo courseBo) {
+        return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
+    }
+
+    
+    @Override
+    public int queryByPartnerTotal(CourseBo courseBo, UserBo userBo) {
+        return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
+    }
+
+    @Override
+    public int queryByFilterTotal(CourseBo courseBo) {
+        return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
+    }
+
 }

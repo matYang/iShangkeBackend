@@ -78,5 +78,5 @@ public interface WithdrawManager {
      * @param paginationBo
      */
     List<WithdrawBo> query(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryTotal(WithdrawBo withdrawBo, UserBo userBo);
 }

@@ -28,6 +28,7 @@ import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
+import com.ishangke.edunav.util.PageUtil;
 
 @Component
 public class CourseServiceImpl implements CourseService.Iface {
@@ -95,9 +96,13 @@ public class CourseServiceImpl implements CourseService.Iface {
     public CourseCommentPageViewBo queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要权限
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CourseCommentBo> data = courseManager.queryCommentBuCourseId(courseBo, paginationBo);
+            int total = courseManager.queryCommentByCourseIdTotal(courseBo);
             CourseCommentPageViewBo pageView = new CourseCommentPageViewBo();
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
            
         } catch (NoPermissionException e) {
@@ -169,10 +174,14 @@ public class CourseServiceImpl implements CourseService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
-            
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CourseBo> data = courseManager.queryByPartner(courseBo, userBo, paginationBo);
+            int total = courseManager.queryByPartnerTotal(courseBo, userBo);
             CoursePageViewBo pageView = new CoursePageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
       
         } catch (NoPermissionException e) {
@@ -194,11 +203,16 @@ public class CourseServiceImpl implements CourseService.Iface {
     public CoursePageViewBo queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要进行权限控制
-            
+            paginationBo = PageUtil.getPage(paginationBo);
             List<CourseBo> data =courseManager.queryByFilter(courseBo, paginationBo);
+            int total = courseManager.queryByFilterTotal(courseBo);
             CoursePageViewBo pageView = new CoursePageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
+
            
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -315,6 +329,7 @@ public class CourseServiceImpl implements CourseService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
+            
             List<CourseTemplateBo> data =  courseTemplateManager.queryCourseTemplateByPartnerId(courseTemplateBo, partnerBo, userBo, paginationBo);
             CourseTemplatePageViewBo pageView = new CourseTemplatePageViewBo();
             pageView.setData(data);

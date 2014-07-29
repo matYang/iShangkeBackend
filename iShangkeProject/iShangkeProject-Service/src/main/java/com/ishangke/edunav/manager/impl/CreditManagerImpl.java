@@ -250,4 +250,14 @@ public class CreditManagerImpl implements CreditManager {
         return convertedResults;
     }
 
+    @Override
+    public int queryTotal(CreditBo creditBo, UserBo userBo) {
+        return creditMapper.getListCount(CreditConverter.fromBo(creditBo));
+    }
+
+    @Override
+    public int queryHistoryTotal(CreditHistoryBo creditHistoryBo, UserBo userBo) {
+        return creditHistoryMapper.getListCount(CreditHistoryConverter.fromBo(creditHistoryBo));
+    }
+
 }

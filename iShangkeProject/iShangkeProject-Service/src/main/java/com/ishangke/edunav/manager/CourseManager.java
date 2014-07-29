@@ -63,7 +63,7 @@ public interface CourseManager {
      * @return
      */
     List<CourseCommentBo> queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo);
-    
+    int queryCommentByCourseIdTotal(CourseBo courseBo);
     /**
      * 删除课程的评价
      * @param CourseCommentBo
@@ -87,7 +87,7 @@ public interface CourseManager {
      * @param keyword
      */
     List<CategoryBo> queryByKeyword(String keyword);
-
+   
     /**
      * 本方法为合作商提供查询课程的功能。<br>
      * 合作商可以查询本机构已经提交过的课程，包括新建、正在审批、已上架、已下架的所有课程。
@@ -108,7 +108,7 @@ public interface CourseManager {
      * @param paginationBo
      */
     List<CourseBo> queryByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryByPartnerTotal(CourseBo courseBo, UserBo userBo);
     /**
      * 本方法为用户查询课程的功能。<br>
      * 用户可以按照category，location，courseFilter查询所有课程
@@ -126,7 +126,7 @@ public interface CourseManager {
      * @param paginationBo
      */
     List<CourseBo> queryByFilter(CourseBo courseBo, PaginationBo paginationBo);
-
+    int queryByFilterTotal(CourseBo courseBo);
     /**
      * 本方法返回课程详情<br>
      * 合作商/管理员可以通过此方法调取课程详情

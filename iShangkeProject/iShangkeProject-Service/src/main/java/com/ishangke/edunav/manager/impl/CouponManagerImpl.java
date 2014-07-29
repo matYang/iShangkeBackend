@@ -297,4 +297,16 @@ public class CouponManagerImpl implements CouponManager {
         return convertedResults;
     }
 
+
+    @Override
+    public int queryTotal(CouponBo couponBo, UserBo userBo) {
+        return couponMapper.getListCount(CouponConverter.fromBo(couponBo));
+    }
+
+
+    @Override
+    public int queryHistoryTotal(CouponHistoryBo couponHistoryBo, UserBo userBo) {
+        return couponHistoryMapper.getListCount(CouponHistoryConverter.fromBo(couponHistoryBo));
+    }
+
 }
