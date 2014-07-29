@@ -151,4 +151,7 @@ public class Constant {
     public static int COURSETYPESMALL = 1;
     public static int COURSETYPEMID = 2;
     public static int COURSETYPEBIG = 3;
+    
+    //标记成功
+    public static final String SUCCESS = "success";
 }
