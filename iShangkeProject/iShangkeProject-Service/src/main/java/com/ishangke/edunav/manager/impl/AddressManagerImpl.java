@@ -244,4 +244,9 @@ public class AddressManagerImpl implements AddressManager {
         return convertedResults;
     }
 
+    @Override
+    public int queryTotal(AddressBo addressBo, UserBo userBo) {
+        return addressMapper.getListCount(AddressConverter.fromBo(addressBo));
+    }
+
 }

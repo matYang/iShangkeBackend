@@ -80,7 +80,7 @@ public interface TeacherManager {
      * @param paginationBo
      */
     List<TeacherBo> query(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryTotal(TeacherBo teacherBo, UserBo userBo);
     List<TeacherBo> listByCourseId(int courseId);
 
     List<TeacherBo> listByCourseTemplateId(int courseTemplateId);

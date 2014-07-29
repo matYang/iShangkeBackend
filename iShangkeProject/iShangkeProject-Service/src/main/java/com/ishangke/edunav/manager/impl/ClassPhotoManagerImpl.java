@@ -35,7 +35,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
-    
+
     @Autowired
     private AuthManager authManager;
 
@@ -54,9 +54,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin  || admin [%s] call createClassPhoto at " + new Date(), userBo.getName()));
-        }
-        else {
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin  || admin [%s] call createClassPhoto at "
+                    + new Date(), userBo.getName()));
+        } else {
             for (GroupEntityExt g : groupList) {
                 if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
                     isSameGroup = true;
@@ -72,7 +72,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
+
         if (classPhotoEntity.getPartnerId() == null) {
             throw new ManagerException("ClassPhoto creation must specify partner");
         }
@@ -108,9 +108,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call updateClassPhoto at " + new Date(), userBo.getName()));
-        }
-        else {
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call updateClassPhoto at "
+                    + new Date(), userBo.getName()));
+        } else {
             for (GroupEntityExt g : groupList) {
                 if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
                     isSameGroup = true;
@@ -126,7 +126,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
+
         if (classPhotoEntity.getId() == null) {
             throw new ManagerException("ClassPhoto update must specify id");
         }
@@ -157,9 +157,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at " + new Date(), userBo.getName()));
-        }
-        else {
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at "
+                    + new Date(), userBo.getName()));
+        } else {
             for (GroupEntityExt g : groupList) {
                 if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
                     isSameGroup = true;
@@ -180,7 +180,8 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("ClassPhoto deletion must specify id");
         }
         try {
-            classPhotoEntity.setDeleted(1);;
+            classPhotoEntity.setDeleted(1);
+            ;
             classPhotoMapper.deleteById(classPhotoEntity.getId());
         } catch (Throwable t) {
             throw new ManagerException("ClassPhoto deletion failed for user: " + userEntity.getId(), t);
@@ -202,12 +203,12 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(),
+                    userBo.getName()));
+        } else {
             if (classPhotoBo == null) {
-                throw new ManagerException("ClassPhotoBo null for non-admin user at query"); 
-             }
+                throw new ManagerException("ClassPhotoBo null for non-admin user at query");
+            }
             for (GroupEntityExt g : groupList) {
                 if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
                     isSameGroup = true;
@@ -268,7 +269,8 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     public List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId) {
         try {
             List<ClassPhotoBo> resultList = new ArrayList<ClassPhotoBo>();
-            List<ClassPhotoEntityExt> classPhotoList = classPhotoMapper.listClassPhotoByCourseTempleteId(courseTemplateId);
+            List<ClassPhotoEntityExt> classPhotoList = classPhotoMapper
+                    .listClassPhotoByCourseTempleteId(courseTemplateId);
             if (classPhotoList == null) {
                 return resultList;
             }
@@ -280,13 +282,13 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             throw new ManagerException("ClassPhoto listByCourseTemplateId Failed", t);
         }
     }
-    
+
     @Override
     public List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 机构管理员只能查询本机构的图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
@@ -295,9 +297,9 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
-        }
-        else {
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call listByPartnerId at "
+                    + new Date(), userBo.getName()));
+        } else {
             for (GroupEntityExt g : groupList) {
                 if (g.getPartnerId() == partnerId) {
                     isSameGroup = true;
@@ -323,6 +325,11 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         } catch (Throwable t) {
             throw new ManagerException("ClassPhoto listByPartnerId Failed", t);
         }
+    }
+
+    @Override
+    public int queryTotal(ClassPhotoBo classPhotoBo, UserBo userBo) {
+        return classPhotoMapper.getListCount(ClassPhotoConverter.fromBo(classPhotoBo));
     }
 
 }

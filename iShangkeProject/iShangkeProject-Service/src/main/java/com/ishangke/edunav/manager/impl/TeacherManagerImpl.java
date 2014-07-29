@@ -327,4 +327,9 @@ public class TeacherManagerImpl implements TeacherManager {
         }
     }
 
+    @Override
+    public int queryTotal(TeacherBo teacherBo, UserBo userBo) {
+        return teacherMapper.getListCount(TeacherConverter.fromBo(teacherBo));
+    }
+
 }

@@ -27,6 +27,7 @@ public interface PartnerManager {
      * @param userBo
      */
     List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo);
+    int queryTotal(PartnerBo partnerBo, UserBo userBo);
 
     /**
      * 查询合作商完整信息。<br>

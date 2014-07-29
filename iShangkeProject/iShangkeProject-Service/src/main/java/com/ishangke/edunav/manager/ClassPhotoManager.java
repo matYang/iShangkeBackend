@@ -68,6 +68,8 @@ public interface ClassPhotoManager {
      */
     List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo);
 
+    int queryTotal(ClassPhotoBo classPhotoBo, UserBo userBo);
+
     /**
      * 查询教师信息。<br>
      * 管理员与合作商可以查询教师信息
@@ -103,4 +105,5 @@ public interface ClassPhotoManager {
      * 
      */
     List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId);
+
 }

@@ -55,4 +55,6 @@ public interface AddressManager {
 	 *
 	 */
     List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo);
+    
+    int queryTotal(AddressBo addressBo, UserBo userBo);
 }

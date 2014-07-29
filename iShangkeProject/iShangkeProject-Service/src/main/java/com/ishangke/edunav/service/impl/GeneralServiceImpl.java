@@ -60,7 +60,6 @@ public class GeneralServiceImpl implements GeneralService.Iface {
             CategoryPageViewBo pageView = new CategoryPageViewBo();
             pageView.setData(data);
             return pageView;
-
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

@@ -33,6 +33,7 @@ import com.ishangke.edunav.manager.TeacherManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
+import com.ishangke.edunav.util.PageUtil;
 
 @Component
 public class PartnerServiceImpl implements PartnerService.Iface {
@@ -68,9 +69,15 @@ public class PartnerServiceImpl implements PartnerService.Iface {
                         "queryPartner"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<PartnerBo> data = partnerManager.query(partnerBo, paginationBo, userBo);
+            int total = partnerManager.queryTotal(partnerBo, userBo);
+            
             PartnerPageViewBo pageView = new PartnerPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -255,9 +262,16 @@ public class PartnerServiceImpl implements PartnerService.Iface {
                         "queryAddress"));
                 throw new NoPermissionException();
             }
+            
+            paginationBo = PageUtil.getPage(paginationBo);
             List<AddressBo> data = addressManager.query(addressBo, userBo, paginationBo);
+            int total = addressManager.queryTotal(addressBo, userBo);
+            
             AddressPageViewBo pageView = new AddressPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -364,9 +378,15 @@ public class PartnerServiceImpl implements PartnerService.Iface {
                         "queryClassPhoto"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<ClassPhotoBo> data = classPhotoManager.query(classPhotoBo, userBo, paginationBo);
+            int total = classPhotoManager.queryTotal(classPhotoBo, userBo);
+            
             ClassPhotoPageViewBo pageView = new ClassPhotoPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -473,9 +493,15 @@ public class PartnerServiceImpl implements PartnerService.Iface {
                         "queryTeacher"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<TeacherBo> data = teacherManager.query(teacherBo, userBo, paginationBo);
+            int total = teacherManager.queryTotal(teacherBo, userBo);
+            
             TeacherPageViewBo pageView = new TeacherPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {

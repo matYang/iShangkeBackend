@@ -173,4 +173,9 @@ public class PartnerManagerImpl implements PartnerManager {
         }
     }
 
+    @Override
+    public int queryTotal(PartnerBo partnerBo, UserBo userBo) {
+        return partnerMapper.getListCount(PartnerConverter.fromBo(partnerBo));
+    }
+
 }

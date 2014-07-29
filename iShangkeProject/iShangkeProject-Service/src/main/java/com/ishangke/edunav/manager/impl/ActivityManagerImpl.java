@@ -285,4 +285,9 @@ public class ActivityManagerImpl implements ActivityManager {
 //        }
     }
 
+    @Override
+    public int queryTotal(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) {
+        return 0;
+    }
+
 }

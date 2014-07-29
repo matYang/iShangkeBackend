@@ -23,6 +23,12 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
         // TODO Auto-generated method stub
         return null;
     }
+    
+    @Override
+    public int getListTotal() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
     @Override
     public ConfigurationBo getByName(String name) {

@@ -102,4 +102,6 @@ public interface ActivityManager {
 	 *
 	 */
     List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    
+    int queryTotal(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo);
 }

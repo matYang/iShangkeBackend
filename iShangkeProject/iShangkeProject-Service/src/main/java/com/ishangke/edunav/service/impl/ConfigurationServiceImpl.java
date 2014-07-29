@@ -45,8 +45,13 @@ public class ConfigurationServiceImpl implements ConfigurationService.Iface {
     public ConfigurationPageViewBo listAllConfiguration() throws BusinessExceptionBo, TException {
         try {
             List<ConfigurationBo> data = configManager.listAll();
+            int total = configManager.getListTotal();
+            
             ConfigurationPageViewBo pageView = new ConfigurationPageViewBo();
+            pageView.setStart(0);
+            pageView.setCount(total);
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
            
         } catch (ManagerException e) {
