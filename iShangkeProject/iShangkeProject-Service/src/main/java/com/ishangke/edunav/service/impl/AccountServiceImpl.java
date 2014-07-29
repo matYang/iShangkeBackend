@@ -36,9 +36,9 @@ import com.ishangke.edunav.manager.CreditManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.WithdrawManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
-import com.ishangke.edunav.manager.common.PageDefaults;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
+import com.ishangke.edunav.util.PageUtil;
 
 @Component
 public class AccountServiceImpl implements AccountService.Iface {
@@ -99,7 +99,7 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryAccount"));
                 throw new NoPermissionException();
             }
-            paginationBo = PageDefaults.getPage(paginationBo);
+            paginationBo = PageUtil.getPage(paginationBo);
             List<AccountBo> data = accountManager.query(accountBo, userBo, paginationBo);
             int total = accountManager.queryTotal(accountBo, userBo);
             
@@ -133,7 +133,7 @@ public class AccountServiceImpl implements AccountService.Iface {
                         "queryAccountHistory"));
                 throw new NoPermissionException();
             }
-            paginationBo = PageDefaults.getPage(paginationBo);
+            paginationBo = PageUtil.getPage(paginationBo);
             List<AccountHistoryBo> data = accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
             int total = accountManager.queryHistoryTotal(accountHistoryBo, userBo);
             
