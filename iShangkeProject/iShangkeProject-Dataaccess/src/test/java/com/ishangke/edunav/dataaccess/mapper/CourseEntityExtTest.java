@@ -86,7 +86,7 @@ public class CourseEntityExtTest extends BaseTest {
         CourseEntityExt courseEntityExt = new CourseEntityExt();
         courseEntityExt.setCategoryValue("0001");
         List<CourseEntityExt> result = courseEntityExtMapper.list(
-                null, null);
+                courseEntityExt, null);
         System.out.println("count:" + result.size());
         for (CourseEntityExt c : result) {
             System.out.println(c.getCourseName() + "===>"

@@ -86,39 +86,6 @@ service BookingService {
      */
     bookingHistory.BookingHistoryPageViewBo queryHistoryByBookingId(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
-    /**
-     * 本方法为查询预定单预定单功能。<br>
-     * 合作商管理员和ishangke管理员可以通过此方法进行booking的查询
-     *
-     * @param bookingBo
-     *            需要检索和过滤的预定单信息
-     * @param partnerBo
-     *            合作商信息
-     * @param userBo
-     *            调用方法的用户的信息
-     * @param paginationBo
-     *            分页信息
-     *
-     * @return 预定单实体 BookingBo 列表
-     *
-     */
-    booking.BookingPageViewBo queryBookingByPartner(1: booking.BookingBo bookingBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    
-    /**
-     * 本方法为查询预定单预定单功能。<br>
-     * ishangke管理员可以按条件查找所有合作商的预定单
-     *
-     * @param bookingBo
-     *            需要检索和过滤的预定单信息
-     * @param userBo
-     *            调用方法的用户的信息
-     * @param paginationBo
-     *            分页信息
-     *
-     * @return 预定单实体 BookingBo 列表
-     *
-     */
-    booking.BookingPageViewBo queryBookingByUser(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     // /**********************************************************
     // *

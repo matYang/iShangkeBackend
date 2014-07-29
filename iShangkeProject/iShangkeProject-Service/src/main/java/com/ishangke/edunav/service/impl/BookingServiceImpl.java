@@ -71,7 +71,7 @@ public class BookingServiceImpl implements BookingService.Iface {
             TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "transformBookingStatus"));
                 throw new NoPermissionException();
             }
             return bookingManager.transformBookingStatus(bookingBo, commentBookingBo, operation, userBo);
@@ -95,7 +95,7 @@ public class BookingServiceImpl implements BookingService.Iface {
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryBooking"));
                 throw new NoPermissionException();
             }
             List<BookingBo> data = bookingManager.queryBooking(bookingBo, userBo, paginationBo);
@@ -123,7 +123,7 @@ public class BookingServiceImpl implements BookingService.Iface {
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistory"));
                 throw new NoPermissionException();
             }
             List<BookingHistoryBo> data = bookingManager.queryHistory(bookingHistoryBo, partnerBo, userBo, paginationBo);
@@ -151,7 +151,7 @@ public class BookingServiceImpl implements BookingService.Iface {
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistoryByBookingId"));
                 throw new NoPermissionException();
             }
             List<BookingHistoryBo> data = bookingManager.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo);
@@ -174,61 +174,61 @@ public class BookingServiceImpl implements BookingService.Iface {
         }
     }
 
-    @Override
-    public BookingPageViewBo queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo,
-            String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
-                throw new NoPermissionException();
-            }
-            List<BookingBo> data = bookingManager.queryBookingByPartner(bookingBo, partnerBo, userBo, paginationBo);
-            BookingPageViewBo pageView = new BookingPageViewBo();
-            pageView.setData(data);
-            return pageView;
-            
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
-            throw exception;
-        }
-    }
-
-    @Override
-    public BookingPageViewBo queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
-                throw new NoPermissionException();
-            }
-            List<BookingBo> data = bookingManager.queryBookingByUser(bookingBo, userBo, paginationBo);
-            BookingPageViewBo pageView = new BookingPageViewBo();
-            pageView.setData(data);
-            return pageView;
-           
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
-            throw exception;
-        }
-    }
+//    @Override
+//    public BookingPageViewBo queryBookingByPartner(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo,
+//            String permissionTag) throws BusinessExceptionBo, TException {
+//        try {
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+//                throw new NoPermissionException();
+//            }
+//            List<BookingBo> data = bookingManager.queryBookingByPartner(bookingBo, userBo, paginationBo);
+//            BookingPageViewBo pageView = new BookingPageViewBo();
+//            pageView.setData(data);
+//            return pageView;
+//            
+//        } catch (NoPermissionException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+//            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+//            throw exception;
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
+//
+//    @Override
+//    public BookingPageViewBo queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
+//            throws BusinessExceptionBo, TException {
+//        try {
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+//                throw new NoPermissionException();
+//            }
+//            List<BookingBo> data = bookingManager.queryBookingByUser(bookingBo, userBo, paginationBo);
+//            BookingPageViewBo pageView = new BookingPageViewBo();
+//            pageView.setData(data);
+//            return pageView;
+//           
+//        } catch (NoPermissionException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+//            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+//            throw exception;
+//        } catch (ManagerException e) {
+//            LOGGER.info(e.getMessage(), e);
+//            BusinessExceptionBo exception = new BusinessExceptionBo();
+//            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+//            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+//            throw exception;
+//        }
+//    }
 
     @Override
     public String changeBookingStatusToPayed(int orderId) throws BusinessExceptionBo, TException {

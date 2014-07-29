@@ -291,7 +291,7 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public List<CourseCommentBo> queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo) {
+    public List<CourseCommentBo> queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo) {
         CourseEntityExt course = courseMapper.getById(courseBo.getId());
         if (course == null) {
             throw new ManagerException("course is noty exits");

@@ -97,7 +97,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         try {
             //不需要权限
             paginationBo = PageUtil.getPage(paginationBo);
-            List<CourseCommentBo> data = courseManager.queryCommentBuCourseId(courseBo, paginationBo);
+            List<CourseCommentBo> data = courseManager.queryCommentByCourseId(courseBo, paginationBo);
             int total = courseManager.queryCommentByCourseIdTotal(courseBo);
             CourseCommentPageViewBo pageView = new CourseCommentPageViewBo();
             pageView.setCount(paginationBo.getSize());
