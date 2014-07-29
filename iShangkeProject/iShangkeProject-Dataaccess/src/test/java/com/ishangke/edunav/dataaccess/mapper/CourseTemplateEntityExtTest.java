@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,6 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateEntityExtTest.class })
@@ -153,5 +153,14 @@ public class CourseTemplateEntityExtTest extends BaseTest {
         Assert.assertEquals("test_ishangke", upDate.getAssignments());
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime()));
+    }
+    
+    @Test
+    public void testGetInfoById() throws IllegalArgumentException, IllegalAccessException {
+        CourseTemplateEntityExt c = courseTemplateEntityExtMapper.getInfoById(1);
+        for (Field f : c.getClass().getDeclaredFields()) {
+            f.setAccessible(true);
+            System.out.println(f.getName() + "===>" + f.get(c));
+        }
     }
 }

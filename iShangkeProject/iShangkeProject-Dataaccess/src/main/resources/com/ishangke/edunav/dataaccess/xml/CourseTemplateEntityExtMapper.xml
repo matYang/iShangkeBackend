@@ -87,6 +87,9 @@
     <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
     <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
     <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+    <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+    <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+    <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
     <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
     <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
     <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
@@ -241,6 +244,17 @@
     ADDRESS.DETAIL ADDRESS_DETAIL,
     ADDRESS.LAT ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG
+  </sql>
+  <sql id="Reg_Address_Base_Column_List">
+    ADDRESS.DETAIL REG_ADDRESS_DETAIL,
+    ADDRESS.LAT REG_ADDRESS_LAT,
+    ADDRESS.LNG REG_ADDRESS_LNG
+  </sql>
+  <sql id="Reg_Address_Temp_Column_List">
+    temp.REG_ADDRESS_DETAIL REG_ADDRESS_DETAIL,
+    temp.REG_ADDRESS_LAT REG_ADDRESS_LAT,
+    temp.REG_ADDRESS_LNG
+    REG_ADDRESS_LNG
   </sql>
   <sql id="Category_Base_Column_List">
     CATEGORY.VALUE CATEGORY_VALUE,
@@ -937,12 +951,13 @@
     ,
     <include refid="Address_Base_Column_List"></include>
     ,
+    <include refid="Reg_Address_Temp_Column_List"></include>
+    ,
     <include refid="Category_Base_Column_List"></include>
     ,
     <include refid="Location_Base_Column_List"></include>
     ,
     <include refid="Circle_Base_Column_List"></include>
-
     from COURSE_TEMPLATE COURSE_TEMPLATE
     join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER
     ON
@@ -973,7 +988,10 @@
     join ADDRESS ADDRESS
     ON ADDRESS.ID =
     COURSE_TEMPLATE.ADDRESS_ID
-
+    join (select COURSE_TEMPLATE.ID COURSETEMPLATE_ID,
+    <include refid="Reg_Address_Base_Column_List"></include>
+    from COURSE_TEMPLATE join ADDRESS ADDRESS ON ADDRESS.ID = COURSE_TEMPLATE.ADDRESS_ID) temp on COURSE_TEMPLATE.ID =
+    temp.COURSETEMPLATE_ID
     where COURSE_TEMPLATE.DELETED = 0 AND COURSE_TEMPLATE.ID =
     #{id}
   </select>
