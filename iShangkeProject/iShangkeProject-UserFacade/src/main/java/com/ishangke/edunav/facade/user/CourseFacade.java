@@ -72,7 +72,7 @@ public class CourseFacade {
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.queryCommentBuCourseId(courseBo, paginationBo, PermissionCache.getTag(url));
+            result = serviceClient.queryCommentByCourseId(courseBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

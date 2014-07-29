@@ -56,8 +56,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_CREATECOURSE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_CREATECOURSE_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -79,8 +79,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_COMMENTCOURSE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_COMMENTCOURSE_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -92,7 +92,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseCommentPageViewBo queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CourseCommentPageViewBo queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要权限
             List<CourseCommentBo> data = courseManager.queryCommentBuCourseId(courseBo, paginationBo);
@@ -103,8 +103,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOMMENTBYCOURSEID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOMMENTBYCOURSEID_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -126,8 +126,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_DELETECOMMENTBYCOURSEID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_DELETECOMMENTBYCOURSEID_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -150,8 +150,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCATEGORYKEYWORD);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCATEGORYKEYWORD_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -178,8 +178,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSEBYPARTNER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSEBYPARTNER_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -203,8 +203,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSEBYFILTER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSEBYFILTER_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -226,8 +226,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSEBYID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSEBYID_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -249,8 +249,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_TRANSFORMCOURSESTATUS);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_TRANSFORMCOURSESTATUS_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -272,8 +272,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_CREATECOURSETEMPLATE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_CREATECOURSETEMPLATE_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -295,8 +295,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_TRANSFORMCOURSETMEPLATESTATUS);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_TRANSFORMCOURSETMEPLATESTATUS_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -323,8 +323,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSETEMPLATEBYPARTNERID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSETEMPLATEBYPARTNERID_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
@@ -346,8 +346,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATECOURSE_KEY);
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSETEMPLATEBYID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSETEMPLATEBYID_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
