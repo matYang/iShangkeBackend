@@ -77,6 +77,12 @@ public class BookingHistoryConverter {
                 .getTimeInMillis());
         bookingHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
                 .getCreateTimeStart().getTimeInMillis());
+        if (vo.getPartnerId() != null) {
+            bookingHistoryBo.setPartnerId(vo.getPartnerId());
+        }
+        if (vo.getPartnerIdSet() != null) {
+            bookingHistoryBo.setPartnerIdSet(vo.getPartnerIdSet());
+        }
         return bookingHistoryBo;
     }
 
@@ -112,6 +118,8 @@ public class BookingHistoryConverter {
         bookingHistoryVo.setRemark(bo.getRemark());
         bookingHistoryVo.setUserId(bo.getUserId());
         bookingHistoryVo.setUserIdSet(bo.getUserIdSet());
+        bookingHistoryVo.setPartnerId(bo.getPartnerId());
+        bookingHistoryVo.setPartnerIdSet(bo.getPartnerIdSet());
         return bookingHistoryVo;
     }
 }

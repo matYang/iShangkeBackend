@@ -367,7 +367,7 @@ INSERT INTO `course` (`ID`, `COURSE_NAME`, `COURSE_TEMPLATE_ID`, `CATEGORY_ID`, 
 
 INSERT INTO `course_comment` VALUES (1, 1, 1,'1', '1',1,1,1,1, '2014-7-11 13:38:57', '2014-7-11 13:39:00', 1, 0);
 INSERT INTO `approve_history` VALUES (1, 1, 1, 1, 1, 1, 1, '1', '2014-7-11 13:39:25', 0);
-INSERT INTO `booking` VALUES (1, 1,1, 1, '1', '1', '1', '1', 1, '2014-7-11 13:40:25', '2014-7-11 13:40:22', '2014-7-11 13:40:19', '1', '1','1', '1', '2014-7-11 13:40:09', '2014-7-11 13:40:07', 1, 0);
+INSERT INTO `booking` VALUES (1, 1,1, 1, '1', '1', '1', '1', 1, '2014-7-11 13:40:25', '2014-7-11 13:40:22', '2014-7-11 13:40:19', '1', '1','1', '1', '2014-7-11 13:40:09', '2014-7-11 13:40:07', 1, 0,1);
 INSERT INTO `coupon` VALUES (1, '1', 1, 1,1,'2014-7-11 13:40:43', '1', 1, '2014-7-11 13:40:47', '2014-7-11 13:40:49', 1, 0, 0);
 INSERT INTO `coupon_history` VALUES (1, 1, NULL, '2014-7-11 13:41:08', '2014-7-11 13:41:11', 0,0);
 INSERT INTO `credit` VALUES (1, 1, '2014-7-11 13:41:39', '2014-7-11 13:41:41', 1, 0);
@@ -386,7 +386,7 @@ INSERT INTO `class_photo` VALUES (1, 1, '1', '1', '1', '2014-7-11 13:46:45', '20
 INSERT INTO `course_class_photo` VALUES (1, 1, 1, '2014-7-11 13:47:18', 0);
 INSERT INTO `course_template_class_photo` VALUES (1, 1, 1, '2014-7-11 13:47:38', 0);
 INSERT INTO `user_location` VALUES (1, 1, 1, '2014-7-11 13:47:58', 0);
-INSERT INTO `booking_history` VALUES (1, 1, 1, 1, '1', 1, 1, 1, '2014-7-11 13:48:28', 1, 0);
+INSERT INTO `booking_history` VALUES (1, 1, 1, 1, '1', 1, 1, 1, '2014-7-11 13:48:28', 1, 0, 1);
 INSERT INTO `order` VALUES (1, 1, '2014-7-11 13:48:59', '1', 1, '1', 0, 1, 0,'1','1','2014-5-11 13:48:59');
 INSERT INTO `order_history` VALUES (1, 1, 1, 1, '1', 1, 1, 1, '2014-7-11 13:49:15', 1, 0);
 INSERT INTO `contact`  VALUES (1, 1, '1', '1', '1', '2014-7-15 15:20:53', '2014-7-15 15:20:56', 0, 1);

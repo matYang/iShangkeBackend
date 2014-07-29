@@ -147,6 +147,12 @@ public class BookingConverter {
             }
             bookingBo.setActionList(list);
         }
+        if (vo.getPartnerId() != null) {
+            bookingBo.setPartnerId(vo.getPartnerId());
+        }
+        if (vo.getPartnerIdSet() != null) {
+            bookingBo.setPartnerIdSet(vo.getPartnerIdSet());
+        }
         return bookingBo;
     }
 
@@ -217,6 +223,8 @@ public class BookingConverter {
             }
             bookingVo.setActionList(list);
         }
+        bookingVo.setPartnerId(bo.getPartnerId());
+        bookingVo.setPartnerIdSet(bo.getPartnerIdSet());
         return bookingVo;
     }
 }

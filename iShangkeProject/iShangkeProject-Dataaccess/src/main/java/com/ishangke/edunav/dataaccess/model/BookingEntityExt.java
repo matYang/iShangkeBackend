@@ -26,8 +26,16 @@ public class BookingEntityExt extends BookingEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Set<Integer> partnerIdSet;
     
-    
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
+
     public Set<Integer> getIdSet() {
         return idSet;
     }

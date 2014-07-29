@@ -23,6 +23,21 @@ public class BookingHistoryVo {
     private Set<Integer> normalSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Integer partnerId;
+    private Set<Integer> partnerIdSet;
+    
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
     public Integer getId() {
         return id;
     }

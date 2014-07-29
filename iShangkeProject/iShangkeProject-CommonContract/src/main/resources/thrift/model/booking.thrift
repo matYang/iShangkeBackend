@@ -45,6 +45,8 @@ struct BookingBo {
     38: double price
     39: double priceStart
     40: double priceEnd
+    41: i32 partnerId
+    42: set<i32> partnerIdSet
 }
 
 /**
