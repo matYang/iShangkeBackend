@@ -10,6 +10,7 @@
     <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
     <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
+    <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
     <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
     <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
     <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
@@ -50,7 +51,6 @@
     <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
     <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
     <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
-    <result column="COURSE_REGLOCATION" property="regLocation" jdbcType="VARCHAR" />
     <result column="COURSE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
     <result column="COURSE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
     <result column="COURSE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
@@ -83,6 +83,9 @@
     <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
     <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
     <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+    <result column="REG_ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+    <result column="REG_ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+    <result column="REG_ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
     <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
     <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
     <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
@@ -185,7 +188,7 @@
     COURSE.COURSE_INTRO
     COURSE_COURSEINTRO,
     COURSE.REFERENCE COURSE_REFERENCE,
-    COURSE.REG_LOCATION COURSE_REGLOCATION,
+    COURSE.REG_ADDRESS_ID COURSE_REGADDRESSID,
     COURSE.FINISH_TIME2
     COURSE_FINISHTIME2,
     COURSE.START_TIME2 COURSE_STARTTIME2,
@@ -420,8 +423,8 @@
       <if test="reference != null">
         REFERENCE,
       </if>
-      <if test="regLocation != null">
-        REG_LOCATION,
+      <if test="regAddressId != null and regAddressId != 0">
+        REG_ADDRESS_ID,
       </if>
       <if test="finishTime2 != null">
         FINISH_TIME2,
@@ -615,8 +618,8 @@
       <if test="reference != null">
         #{reference,jdbcType=VARCHAR},
       </if>
-      <if test="regLocation != null">
-        #{regLocation,jdbcType=VARCHAR},
+      <if test="regAddressId != null and regAddressId != 0">
+        #{regAddressId,jdbcType=INTEGER},
       </if>
       <if test="finishTime2 != null">
         #{finishTime2,jdbcType=INTEGER},
@@ -834,8 +837,8 @@
       <if test="reference != null">
         REFERENCE = #{reference,jdbcType=VARCHAR},
       </if>
-      <if test="regLocation != null">
-        REG_LOCATION = #{regLocation,jdbcType=VARCHAR},
+      <if test="regAddressId != null and regAddressId != 0">
+        REG_ADDRESS_ID = #{regAddressId,jdbcType=INTEGER},
       </if>
       <if test="finishTime2 != null">
         FINISH_TIME2 = #{finishTime2,jdbcType=INTEGER},

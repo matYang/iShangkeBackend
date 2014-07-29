@@ -1,8 +1,8 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
-import com.ishangke.edunav.web.common.DateUtility;
 import com.ishangke.edunav.web.model.WithdrawVo;
 
 public class WithdrawConverter {

@@ -21,8 +21,6 @@ public class CourseVo {
 
     private Integer partnerId;
 
-    private Integer addressId;
-
     private Double price;
 
     private Double originalPrice;
@@ -98,8 +96,6 @@ public class CourseVo {
     private String courseIntro;
 
     private String reference;
-
-    private String regLocation;
 
     private Integer finishTime2;
 
@@ -190,9 +186,18 @@ public class CourseVo {
     private String partnerDistinction;
     private Double partnerRating;
 
+    private Integer addressId;
     private String address;
     private Double addressLat;
     private Double addressLng;
+    private Set<Integer> addressIdSet;
+
+    private Integer regAddressId;
+    private String regAddress;
+    private Double regAddressLat;
+    private Double regAddressLng;
+    private Set<Integer> regAddressIdSet;
+
     private String categoryValue;
     private String categoryName;
     private Integer categoryRank;
@@ -483,12 +488,6 @@ public class CourseVo {
     }
     public void setReference(String reference) {
         this.reference = reference;
-    }
-    public String getRegLocation() {
-        return regLocation;
-    }
-    public void setRegLocation(String regLocation) {
-        this.regLocation = regLocation;
     }
     public Integer getFinishTime2() {
         return finishTime2;
@@ -951,6 +950,42 @@ public class CourseVo {
     }
     public void setCircleName(String circleName) {
         this.circleName = circleName;
+    }
+    public Set<Integer> getAddressIdSet() {
+        return addressIdSet;
+    }
+    public void setAddressIdSet(Set<Integer> addressIdSet) {
+        this.addressIdSet = addressIdSet;
+    }
+    public Integer getRegAddressId() {
+        return regAddressId;
+    }
+    public void setRegAddressId(Integer regAddressId) {
+        this.regAddressId = regAddressId;
+    }
+    public String getRegAddress() {
+        return regAddress;
+    }
+    public void setRegAddress(String regAddress) {
+        this.regAddress = regAddress;
+    }
+    public Double getRegAddressLat() {
+        return regAddressLat;
+    }
+    public void setRegAddressLat(Double regAddressLat) {
+        this.regAddressLat = regAddressLat;
+    }
+    public Double getRegAddressLng() {
+        return regAddressLng;
+    }
+    public void setRegAddressLng(Double regAddressLng) {
+        this.regAddressLng = regAddressLng;
+    }
+    public Set<Integer> getRegAddressIdSet() {
+        return regAddressIdSet;
+    }
+    public void setRegAddressIdSet(Set<Integer> regAddressIdSet) {
+        this.regAddressIdSet = regAddressIdSet;
     }
     
 }
