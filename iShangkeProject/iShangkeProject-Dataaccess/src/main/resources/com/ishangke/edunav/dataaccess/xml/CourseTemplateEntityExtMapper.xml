@@ -9,6 +9,7 @@
     <result column="COURSETEMPLATE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
+    <result column="COURSETEMPLATE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_PRICE" property="price" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
     <result column="COURSETEMPLATE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
@@ -41,7 +42,6 @@
     <result column="COURSETEMPLATE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
     <result column="COURSETEMPLATE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
-    <result column="COURSETEMPLATE_REGLOCATION" property="regLocation" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_REFERENCE" property="reference" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUIZ" property="quiz" jdbcType="VARCHAR" />
@@ -169,8 +169,8 @@
     COURSE_TEMPLATE.START_TIME2
     COURSETEMPLATE_STARTTIME2,
     COURSE_TEMPLATE.FINISH_TIME2 COURSETEMPLATE_FINISHTIME2,
-    COURSE_TEMPLATE.REG_LOCATION
-    COURSETEMPLATE_REGLOCATION,
+    COURSE_TEMPLATE.REG_ADDRESS_ID
+    COURSETEMPLATE_REGADDRESSID,
     COURSE_TEMPLATE.REFERENCE
     COURSETEMPLATE_REFERENCE,
     COURSE_TEMPLATE.COURSE_INTRO
@@ -384,8 +384,8 @@
       <if test="finishTime2 != null">
         FINISH_TIME2,
       </if>
-      <if test="regLocation != null">
-        REG_LOCATION,
+      <if test="regAddressId != null and regAddressId != 0">
+        REG_ADDRESS_ID,
       </if>
       <if test="reference != null">
         REFERENCE,
@@ -582,8 +582,8 @@
       <if test="finishTime2 != null">
         #{finishTime2,jdbcType=INTEGER},
       </if>
-      <if test="regLocation != null">
-        #{regLocation,jdbcType=VARCHAR},
+      <if test="regAddressId != null and regAddressId != 0">
+        #{regAddressId,jdbcType=INTEGER},
       </if>
       <if test="reference != null">
         #{reference,jdbcType=VARCHAR},
@@ -804,8 +804,8 @@
       <if test="finishTime2 != null">
         FINISH_TIME2 = #{finishTime2,jdbcType=INTEGER},
       </if>
-      <if test="regLocation != null">
-        REG_LOCATION = #{regLocation,jdbcType=VARCHAR},
+      <if test="regAddressId != null and regAddressId != 0">
+        REG_ADDRESS_ID = #{regAddressId,jdbcType=VARCHAR},
       </if>
       <if test="reference != null">
         REFERENCE = #{reference,jdbcType=VARCHAR},

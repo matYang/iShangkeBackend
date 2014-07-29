@@ -29,11 +29,26 @@ public class CourseTemplateConverter {
         if (vo.getAddressLat() != null) {
             courseTemplateBo.setAddressLat(vo.getAddressLat());
         }
-        if (vo.getAddressLat() != null) {
-            courseTemplateBo.setAddressLat(vo.getAddressLat());
-        }
         if (vo.getAddressLng() != null) {
             courseTemplateBo.setAddressLng(vo.getAddressLng());
+        }
+        if (vo.getAddressIdSet() != null) {
+            courseTemplateBo.setAddressIdSet(vo.getAddressIdSet());
+        }
+        if (vo.getRegAddress() != null) {
+            courseTemplateBo.setRegAddress(vo.getRegAddress());
+        }
+        if (vo.getRegAddressId() != null) {
+            courseTemplateBo.setRegAddressId(vo.getRegAddressId());
+        }
+        if (vo.getRegAddressLat() != null) {
+            courseTemplateBo.setRegAddressLat(vo.getRegAddressLat());
+        }
+        if (vo.getRegAddressLng() != null) {
+            courseTemplateBo.setRegAddressLng(vo.getRegAddressLng());
+        }
+        if (vo.getRegAddressIdSet() != null) {
+            courseTemplateBo.setRegAddressIdSet(vo.getRegAddressIdSet());
         }
         if (vo.getAssignments() != null) {
             courseTemplateBo.setAssignments(vo.getAssignments());
@@ -345,9 +360,6 @@ public class CourseTemplateConverter {
         if (vo.getReference() != null) {
             courseTemplateBo.setReference(vo.getReference());
         }
-        if (vo.getRegLocation() != null) {
-            courseTemplateBo.setRegLocation(vo.getRegLocation());
-        }
         if (vo.getRegPhone() != null) {
             courseTemplateBo.setRegPhone(vo.getRegPhone());
         }
@@ -495,8 +507,15 @@ public class CourseTemplateConverter {
         courseTemplateVo.setAddress(bo.getAddress());
         courseTemplateVo.setAddressId(bo.getAddressId());
         courseTemplateVo.setAddressLat(bo.getAddressLat());
-        courseTemplateVo.setAddressLat(bo.getAddressLat());
         courseTemplateVo.setAddressLng(bo.getAddressLng());
+        courseTemplateVo.setAddressIdSet(bo.getAddressIdSet());
+        courseTemplateVo.setRegAddress(bo.getRegAddress());
+        courseTemplateVo.setRegAddressId(bo.getRegAddressId());
+        courseTemplateVo.setRegAddressLat(bo.getRegAddressLat());
+        courseTemplateVo.setRegAddressLng(bo.getRegAddressLng());
+        courseTemplateVo.setRegAddressIdSet(bo.getRegAddressIdSet());
+        courseTemplateVo.setAssignments(bo.getAssignments());
+        courseTemplateVo.setBonusService(bo.getBonusService());
         courseTemplateVo.setAssignments(bo.getAssignments());
         courseTemplateVo.setBonusService(bo.getBonusService());
         if (Constant.DEFAULTNULL != bo.getBookingTotal()) {
@@ -662,7 +681,6 @@ public class CourseTemplateConverter {
             courseTemplateVo.setRatingStart(bo.getRatingStart());
         }
         courseTemplateVo.setReference(bo.getReference());
-        courseTemplateVo.setRegLocation(bo.getRegLocation());
         courseTemplateVo.setRegPhone(bo.getRegPhone());
         if (Constant.DEFAULTNULL != bo.getSchooltimeDay()) {
             courseTemplateVo.setSchooltimeDay(bo.getSchooltimeDay());

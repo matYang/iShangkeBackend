@@ -47,7 +47,7 @@ public class SMSDispatcher {
         String payload = "确认：" + booking.getName() + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前完成"
                 + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice())
                 + "(原价￥" + formatter.format(course.getOriginalPrice()) + ", 优惠"
-                + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegLocation()
+                + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegAddress()
                 + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课用户名（注册手机号）才能享受折扣哦~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGCONFIRMED, booking.getPhone(), payload);
         ExecutorProvider.executeRelay(sms);

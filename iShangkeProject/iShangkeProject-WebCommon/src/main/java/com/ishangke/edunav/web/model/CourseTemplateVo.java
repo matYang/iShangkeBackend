@@ -19,8 +19,6 @@ public class CourseTemplateVo {
 
     private Integer partnerId;
 
-    private Integer addressId;
-
     private Double price;
 
     private Double originalPrice;
@@ -194,9 +192,18 @@ public class CourseTemplateVo {
     private String partnerDistinction;
     private Double partnerRating;
 
+    private Integer addressId;
     private String address;
     private Double addressLat;
     private Double addressLng;
+    private Set<Integer> addressIdSet;
+
+    private Integer regAddressId;
+    private String regAddress;
+    private Double regAddressLat;
+    private Double regAddressLng;
+    private Set<Integer> regAddressIdSet;
+    
     private String categoryValue;
     private String categoryName;
     private Integer categoryRank;
@@ -973,6 +980,42 @@ public class CourseTemplateVo {
     }
     public void setCircleName(String circleName) {
         this.circleName = circleName;
+    }
+    public Set<Integer> getAddressIdSet() {
+        return addressIdSet;
+    }
+    public void setAddressIdSet(Set<Integer> addressIdSet) {
+        this.addressIdSet = addressIdSet;
+    }
+    public Integer getRegAddressId() {
+        return regAddressId;
+    }
+    public void setRegAddressId(Integer regAddressId) {
+        this.regAddressId = regAddressId;
+    }
+    public String getRegAddress() {
+        return regAddress;
+    }
+    public void setRegAddress(String regAddress) {
+        this.regAddress = regAddress;
+    }
+    public Double getRegAddressLat() {
+        return regAddressLat;
+    }
+    public void setRegAddressLat(Double regAddressLat) {
+        this.regAddressLat = regAddressLat;
+    }
+    public Double getRegAddressLng() {
+        return regAddressLng;
+    }
+    public void setRegAddressLng(Double regAddressLng) {
+        this.regAddressLng = regAddressLng;
+    }
+    public Set<Integer> getRegAddressIdSet() {
+        return regAddressIdSet;
+    }
+    public void setRegAddressIdSet(Set<Integer> regAddressIdSet) {
+        this.regAddressIdSet = regAddressIdSet;
     }
     
 }

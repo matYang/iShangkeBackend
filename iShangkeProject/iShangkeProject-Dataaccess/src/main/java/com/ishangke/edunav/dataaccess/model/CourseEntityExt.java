@@ -63,9 +63,16 @@ public class CourseEntityExt extends CourseEntity {
     private String partnerDistinction;
     private Double partnerRating;
 
+    private Set<Integer> addressIdSet; 
     private String address;
     private Double addressLat;
     private Double addressLng;
+
+    private Set<Integer> regAddressIdSet; 
+    private String regAddress;
+    private Double regAddressLat;
+    private Double regAddressLng;
+
     private String categoryValue;
     private String categoryName;
     private Integer categoryRank;
@@ -73,6 +80,47 @@ public class CourseEntityExt extends CourseEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+    
+    public Set<Integer> getRegAddressIdSet() {
+        return regAddressIdSet;
+    }
+
+    public void setRegAddressIdSet(Set<Integer> regAddressIdSet) {
+        this.regAddressIdSet = regAddressIdSet;
+    }
+
+    public String getRegAddress() {
+        return regAddress;
+    }
+
+    public void setRegAddress(String regAddress) {
+        this.regAddress = regAddress;
+    }
+
+    public Double getRegAddressLat() {
+        return regAddressLat;
+    }
+
+    public void setRegAddressLat(Double regAddressLat) {
+        this.regAddressLat = regAddressLat;
+    }
+
+    public Double getRegAddressLng() {
+        return regAddressLng;
+    }
+
+    public void setRegAddressLng(Double regAddressLng) {
+        this.regAddressLng = regAddressLng;
+    }
+
+    public Set<Integer> getAddressIdSet() {
+        return addressIdSet;
+    }
+
+    public void setAddressIdSet(Set<Integer> addressIdSet) {
+        this.addressIdSet = addressIdSet;
+    }
+
     public Calendar getCashbackDateStart() {
         return cashbackDateStart;
     }
