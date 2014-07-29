@@ -1,8 +1,8 @@
-package com.ishangke.edunav.manager.common;
+package com.ishangke.edunav.util;
 
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 
-public class PageDefaults {
+public class PageUtil {
     
     private static final int OFFSET = 0;
     private static final int SIZE = 10;
