@@ -27,11 +27,26 @@ public class CourseTemplateConverter {
         if (e.getAddressLat() != null) {
             courseTemplateBo.setAddressLat(e.getAddressLat());
         }
-        if (e.getAddressLat() != null) {
-            courseTemplateBo.setAddressLat(e.getAddressLat());
-        }
         if (e.getAddressLng() != null) {
             courseTemplateBo.setAddressLng(e.getAddressLng());
+        }
+        if (e.getAddressIdSet() != null) {
+            courseTemplateBo.setAddressIdSet(e.getAddressIdSet());
+        }
+        if (e.getRegAddress() != null) {
+            courseTemplateBo.setRegAddress(e.getRegAddress());
+        }
+        if (e.getRegAddressId() != null) {
+            courseTemplateBo.setRegAddressId(e.getRegAddressId());
+        }
+        if (e.getRegAddressLat() != null) {
+            courseTemplateBo.setRegAddressLat(e.getRegAddressLat());
+        }
+        if (e.getRegAddressLng() != null) {
+            courseTemplateBo.setRegAddressLng(e.getRegAddressLng());
+        }
+        if (e.getRegAddressIdSet() != null) {
+            courseTemplateBo.setRegAddressIdSet(e.getRegAddressIdSet());
         }
         if (e.getAssignments() != null) {
             courseTemplateBo.setAssignments(e.getAssignments());
@@ -333,9 +348,6 @@ public class CourseTemplateConverter {
         if (e.getReference() != null) {
             courseTemplateBo.setReference(e.getReference());
         }
-        if (e.getRegLocation() != null) {
-            courseTemplateBo.setRegLocation(e.getRegLocation());
-        }
         if (e.getRegPhone() != null) {
             courseTemplateBo.setRegPhone(e.getRegPhone());
         }
@@ -474,8 +486,13 @@ public class CourseTemplateConverter {
         courseTemplateEntityExt.setAddress(bo.getAddress());
         courseTemplateEntityExt.setAddressId(bo.getAddressId());
         courseTemplateEntityExt.setAddressLat(bo.getAddressLat());
-        courseTemplateEntityExt.setAddressLat(bo.getAddressLat());
         courseTemplateEntityExt.setAddressLng(bo.getAddressLng());
+        courseTemplateEntityExt.setAddressIdSet(bo.getAddressIdSet());
+        courseTemplateEntityExt.setRegAddress(bo.getRegAddress());
+        courseTemplateEntityExt.setRegAddressId(bo.getRegAddressId());
+        courseTemplateEntityExt.setRegAddressLat(bo.getRegAddressLat());
+        courseTemplateEntityExt.setRegAddressLng(bo.getRegAddressLng());
+        courseTemplateEntityExt.setRegAddressIdSet(bo.getRegAddressIdSet());
         courseTemplateEntityExt.setAssignments(bo.getAssignments());
         courseTemplateEntityExt.setBonusService(bo.getBonusService());
         if (bo.getBookingTotal() != Constant.DEFAULTNULL) {
@@ -641,7 +658,6 @@ public class CourseTemplateConverter {
             courseTemplateEntityExt.setRatingStart(bo.getRatingStart());
         }
         courseTemplateEntityExt.setReference(bo.getReference());
-        courseTemplateEntityExt.setRegLocation(bo.getRegLocation());
         courseTemplateEntityExt.setRegPhone(bo.getRegPhone());
         if (bo.getSchooltimeDay() != Constant.DEFAULTNULL) {
             courseTemplateEntityExt.setSchooltimeDay(bo.getSchooltimeDay());

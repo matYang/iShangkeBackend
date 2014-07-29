@@ -32,6 +32,24 @@ public class CourseConverter {
         if (vo.getAddressLng() != null) {
             courseBo.setAddressLng(vo.getAddressLng());
         }
+        if (vo.getAddressIdSet() != null) {
+            courseBo.setAddressIdSet(vo.getAddressIdSet());
+        }
+        if (vo.getRegAddress() != null) {
+            courseBo.setRegAddress(vo.getRegAddress());
+        }
+        if (vo.getRegAddressId() != null) {
+            courseBo.setRegAddressId(vo.getRegAddressId());
+        }
+        if (vo.getRegAddressLat() != null) {
+            courseBo.setRegAddressLat(vo.getRegAddressLat());
+        }
+        if (vo.getRegAddressLng() != null) {
+            courseBo.setRegAddressLng(vo.getRegAddressLng());
+        }
+        if (vo.getRegAddressIdSet() != null) {
+            courseBo.setRegAddressIdSet(vo.getRegAddressIdSet());
+        }
         if (vo.getAssignments() != null) {
             courseBo.setAssignments(vo.getAssignments());
         }
@@ -318,9 +336,6 @@ public class CourseConverter {
         if (vo.getReference() != null) {
             courseBo.setReference(vo.getReference());
         }
-        if (vo.getRegLocation() != null) {
-            courseBo.setRegLocation(vo.getRegLocation());
-        }
         if (vo.getRegPhone() != null) {
             courseBo.setRegPhone(vo.getRegPhone());
         }
@@ -468,6 +483,12 @@ public class CourseConverter {
         courseVo.setAddressId(bo.getAddressId());
         courseVo.setAddressLat(bo.getAddressLat());
         courseVo.setAddressLng(bo.getAddressLng());
+        courseVo.setAddressIdSet(bo.getAddressIdSet());
+        courseVo.setRegAddress(bo.getRegAddress());
+        courseVo.setRegAddressId(bo.getRegAddressId());
+        courseVo.setRegAddressLat(bo.getRegAddressLat());
+        courseVo.setRegAddressLng(bo.getRegAddressLng());
+        courseVo.setRegAddressIdSet(bo.getRegAddressIdSet());
         courseVo.setAssignments(bo.getAssignments());
         courseVo.setBonusService(bo.getBonusService());
         courseVo.setBookingTotal(bo.getBookingTotal());
@@ -617,7 +638,6 @@ public class CourseConverter {
         courseVo.setQuiz(bo.getQuiz());
         courseVo.setRating(bo.getRating());
         courseVo.setReference(bo.getReference());
-        courseVo.setRegLocation(bo.getRegLocation());
         courseVo.setRegPhone(bo.getRegPhone());
         if (Constant.DEFAULTNULL != bo.getSchooltimeDay()) {
             courseVo.setSchooltimeDay(bo.getSchooltimeDay());

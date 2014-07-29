@@ -51,7 +51,7 @@ struct CourseBo {
     44: string quiz
     45: string courseIntro
     46: string reference
-    47: string regLocation
+    47: i32 regAddressId
     48: i32 finishTime2
     49: i32 startTime2
     50: i32 finishTime1
@@ -120,7 +120,7 @@ struct CourseBo {
     113: string address
     114: double addressLat
     115: double addressLng
-    116: string categoryValue
+    116: set<i32> addressIdSet;    
     117: string categoryName
     118: i32 categoryRank
     119: string locationValue
@@ -135,6 +135,11 @@ struct CourseBo {
     128: i64 cashbackDateEnd
     129: set<i32> courseTemplateIdSet
     130: list<action.ActionBo> actionList
+    131: set<i32> regAddressIdSet
+    132: string regAddress
+    133: double regAddressLat
+    134: double regAddressLng
+    135: string categoryValue
 }
 
 struct CommentCourseApproveBo {
