@@ -20,6 +20,8 @@ struct BookingHistoryBo {
     17: set<i32> normalSet
     18: i64 createTimeStart
     19: i64 createTimeEnd
+    20: i32 partnerId
+    21: set<i32> partnerIdSet
     }
     struct BookingHistoryPageViewBo{
     1: i32 start

@@ -90,7 +90,7 @@ public interface CreditManager {
      * @param paginationBo
      */
     List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryTotal(CreditBo creditBo, UserBo userBo);
     /**
      * 本方法为查询积分历史功能。<br>
      * 用户可以查询自己的使用积分历史，系统可以查看所有积分历史
@@ -110,5 +110,5 @@ public interface CreditManager {
      * @param paginationBo
      */
     List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryHistoryTotal(CreditHistoryBo creditHistoryBo, UserBo userBo);
 }

@@ -6,7 +6,6 @@ import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface BookingManager {
@@ -53,7 +52,7 @@ public interface BookingManager {
      *
      */
     List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryBookingTotal(BookingBo bookingBo, UserBo userBo);
     /**
      * 本方法为查询订单历史操作。<br>
      * 合作商可以按条件查询自己的所有预定单历史操作，ishangke管理员可以按条件查找所有合作商的预定单历史操作
@@ -70,8 +69,8 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
-    
+    List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo);
+    int queryHistoryTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo);
     /**
      * admin可以通过此方法查看所有订单的详细信息
      * partner管理员可以通过此方法，查看本机构的booking详情
@@ -82,40 +81,7 @@ public interface BookingManager {
      * @return
      */
     List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo);
-    
-    /**
-     * 本方法为查询预定单预定单功能。<br>
-     * 合作商管理员和ishangke管理员可以通过此方法进行booking的查询
-     *
-     * @param bookingBo
-     *            需要检索和过滤的预定单信息
-     * @param partnerBo
-     *            合作商信息
-     * @param userBo
-     *            调用方法的用户的信息
-     * @param paginationBo
-     *            分页信息
-     *
-     * @return 预定单实体 BookingBo 列表
-     *
-     */
-    List<BookingBo> queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
-    
-    /**
-     * 本方法为查询预定单预定单功能。<br>
-     * ishangke管理员可以按条件查找所有合作商的预定单
-     *
-     * @param bookingBo
-     *            需要检索和过滤的预定单信息
-     * @param userBo
-     *            调用方法的用户的信息
-     * @param paginationBo
-     *            分页信息
-     *
-     * @return 预定单实体 BookingBo 列表
-     *
-     */
-    List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    int queryHistoryByBookingIdTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo);
     String changeBookingStatusToPayed(int orderId);
     String verify(String notify_id);
     String buildFormForGet(String subject,String out_trade_no, String total_fee);

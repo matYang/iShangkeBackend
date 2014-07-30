@@ -70,7 +70,7 @@ public interface CouponManager {
      * 
      */
     List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryTotal(CouponBo couponBo, UserBo userBo);
     /**
      * 本方法为查询优惠券历史功能。<br>
      * 用户可以查询自己拥有的优惠券历史，系统可以查看所有优惠券历史
@@ -86,5 +86,5 @@ public interface CouponManager {
      * 
      */
     List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo);
-
+    int queryHistoryTotal(CouponHistoryBo couponHistoryBo, UserBo userBo);
 }

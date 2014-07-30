@@ -539,4 +539,9 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         return null;
     }
 
+//    @Override
+//    public int queryCourseTemplateByPartnerIdTotal(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo) {
+//        return courseTemplateMapper.getListCount(CourseTemplateConverter.fromBo(courseTemplateBo));
+//    }
+
 }

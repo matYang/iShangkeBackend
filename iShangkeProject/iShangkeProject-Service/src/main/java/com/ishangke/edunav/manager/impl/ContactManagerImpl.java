@@ -35,7 +35,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
-    
+
     @Autowired
     private AuthManager authManager;
 
@@ -49,16 +49,17 @@ public class ContactManagerImpl implements ContactManager {
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
+
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at "
+                    + new Date(), userBo.getName()));
+        } else {
+            if (contactEntity == null || contactEntity.getUserId() == null
+                    || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User creating someone else's contact");
             }
         }
-        
+
         contactEntity.setCreateTime(DateUtility.getCurTimeInstance());
         contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         contactEntity.setEnabled(0);
@@ -82,21 +83,21 @@ public class ContactManagerImpl implements ContactManager {
         if (contactBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at "
+                    + new Date(), userBo.getName()));
+        } else {
+            if (contactEntity == null || contactEntity.getUserId() == null
+                    || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's contact");
             }
         }
-        
+
         if (contactEntity.getId() == null) {
             throw new ManagerException("Contact update must specify id");
         }
@@ -109,7 +110,7 @@ public class ContactManagerImpl implements ContactManager {
         } catch (Throwable t) {
             throw new ManagerException("Contact update failed for user: " + userEntity.getId(), t);
         }
-        
+
         return ContactConverter.toBo(contactMapper.getById(contactEntity.getId()));
     }
 
@@ -119,22 +120,22 @@ public class ContactManagerImpl implements ContactManager {
         if (contactBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at "
+                    + new Date(), userBo.getName()));
+        } else {
+            if (contactEntity == null || contactEntity.getUserId() == null
+                    || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User deleting someone else's contact");
             }
         }
-        
-        if(contactEntity.getId() == null) {
+
+        if (contactEntity.getId() == null) {
             throw new ManagerException("Contact deletion must specify id");
         }
         try {
@@ -143,7 +144,7 @@ public class ContactManagerImpl implements ContactManager {
         } catch (Throwable t) {
             throw new ManagerException("Contact deletion failed for user: " + userEntity.getId(), t);
         }
-        
+
         return ContactConverter.toBo(contactEntity);
     }
 
@@ -157,24 +158,25 @@ public class ContactManagerImpl implements ContactManager {
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
-            if (contactEntity == null || contactEntity.getUserId() == null || !contactEntity.getUserId().equals(userEntity.getId())) {
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call query at " + new Date(),
+                    userBo.getName()));
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
+            if (contactEntity == null || contactEntity.getUserId() == null
+                    || !contactEntity.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's contact");
             }
         }
-        
+
         List<ContactEntityExt> results = null;
         try {
             results = contactMapper.list(contactEntity, page);
         } catch (Throwable t) {
             throw new ManagerException("Contact query failed for user: " + userEntity.getId(), t);
         }
-        
+
         if (results == null) {
             return new ArrayList<ContactBo>();
         }
@@ -183,5 +185,10 @@ public class ContactManagerImpl implements ContactManager {
             convertedResults.add(ContactConverter.toBo(contactPo));
         }
         return convertedResults;
+    }
+
+    @Override
+    public int queryTotal(ContactBo contactBo, UserBo userBo) {
+        return contactMapper.getListCount(ContactConverter.fromBo(contactBo));
     }
 }

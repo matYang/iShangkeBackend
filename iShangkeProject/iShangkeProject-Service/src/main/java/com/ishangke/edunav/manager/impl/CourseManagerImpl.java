@@ -291,7 +291,7 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public List<CourseCommentBo> queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo) {
+    public List<CourseCommentBo> queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo) {
         CourseEntityExt course = courseMapper.getById(courseBo.getId());
         if (course == null) {
             throw new ManagerException("course is noty exits");
@@ -580,6 +580,22 @@ public class CourseManagerImpl implements CourseManager {
             courseMapper.update(courseTee);
         }
         return CourseConverter.toBo(courseMapper.getById(courseBo.getId()));
+    }
+
+    @Override
+    public int queryCommentByCourseIdTotal(CourseBo courseBo) {
+        return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
+    }
+
+    
+    @Override
+    public int queryByPartnerTotal(CourseBo courseBo, UserBo userBo) {
+        return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
+    }
+
+    @Override
+    public int queryByFilterTotal(CourseBo courseBo) {
+        return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
     }
 
 }

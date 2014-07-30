@@ -33,7 +33,7 @@ public class WelcomeController extends AbstractController {
         LoginBo loginBo = new LoginBo();
         loginBo.setPassword("123");
         loginBo.setAccountIdentifier("abc");
-        userFacade.loginByPhone(loginBo, url);
+        //userFacade.loginByPhone(loginBo, url);
 
         return result;
     }

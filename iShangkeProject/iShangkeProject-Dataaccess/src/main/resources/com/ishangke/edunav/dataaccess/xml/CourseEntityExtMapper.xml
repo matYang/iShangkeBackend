@@ -83,9 +83,9 @@
     <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
     <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
     <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
-    <result column="REG_ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
-    <result column="REG_ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
-    <result column="REG_ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+    <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+    <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+    <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
     <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
     <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
     <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
@@ -232,6 +232,17 @@
     ADDRESS.DETAIL ADDRESS_DETAIL,
     ADDRESS.LAT ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG
+  </sql>
+  <sql id="Reg_Address_Base_Column_List">
+    ADDRESS.DETAIL REG_ADDRESS_DETAIL,
+    ADDRESS.LAT REG_ADDRESS_LAT,
+    ADDRESS.LNG REG_ADDRESS_LNG
+  </sql>
+  <sql id="Reg_Address_Temp_Column_List">
+    temp.REG_ADDRESS_DETAIL REG_ADDRESS_DETAIL,
+    temp.REG_ADDRESS_LAT REG_ADDRESS_LAT,
+    temp.REG_ADDRESS_LNG
+    REG_ADDRESS_LNG
   </sql>
   <sql id="Category_Base_Column_List">
     CATEGORY.VALUE CATEGORY_VALUE,
@@ -922,6 +933,8 @@
     ,
     <include refid="Address_Base_Column_List"></include>
     ,
+    <include refid="Reg_Address_Temp_Column_List"></include>
+    ,
     <include refid="Category_Base_Column_List"></include>
     ,
     <include refid="Location_Base_Column_List"></include>
@@ -962,7 +975,10 @@
     join COURSE_TEMPLATE COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
-
+    join
+    (select COURSE.ID COURSE_ID,
+    <include refid="Reg_Address_Base_Column_List"></include>
+    from COURSE join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where
     COURSE.DELETED = 0 AND COURSE.ID = #{id}
   </select>
@@ -1012,7 +1028,6 @@
     join COURSE_TEMPLATE COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
-
     WHERE
     COURSE.DELETED = 0
     <if test="entity != null">
@@ -1694,10 +1709,6 @@
     </if>
     ) AS total
   </select>
-<!--   <select id="getById" parameterType="int" resultMap="CourseExtMap">
-    select
-    <include refid="Course_Base_Column_List"></include>
-    from COURSE COURSE
-    where COURSE.DELETED = 0 AND COURSE.ID = #{id}
-  </select> -->
+  <!-- <select id="getById" parameterType="int" resultMap="CourseExtMap"> select <include refid="Course_Base_Column_List"></include> 
+    from COURSE COURSE where COURSE.DELETED = 0 AND COURSE.ID = #{id} </select> -->
 </mapper>

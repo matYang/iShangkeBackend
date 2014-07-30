@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.model;
 
 import com.ishangke.edunav.dataaccess.model.gen.BookingHistoryEntity;
+
 import java.util.Calendar;
 import java.util.Set;
 
@@ -14,6 +15,14 @@ public class BookingHistoryEntityExt extends BookingHistoryEntity {
     private Set<Integer> normalSet;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Set<Integer> partnerIdSet;
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
 
     public Set<Integer> getOptNameSet() {
         return optNameSet;

@@ -63,6 +63,21 @@ public class BookingVo {
     private List<ActionVo> actionList;
     private Double priceStart;
     private Double priceEnd;
+    private Integer partnerId;
+    private Set<Integer> partnerIdSet;
+    
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
+    }
+    public Set<Integer> getPartnerIdSet() {
+        return partnerIdSet;
+    }
+    public void setPartnerIdSet(Set<Integer> partnerIdSet) {
+        this.partnerIdSet = partnerIdSet;
+    }
     public List<ActionVo> getActionList() {
         return actionList;
     }

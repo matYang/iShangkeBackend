@@ -56,4 +56,5 @@ public interface ContactManager {
      *
      */
     List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo);
+    int queryTotal(ContactBo contactBo, UserBo userBo);
 }

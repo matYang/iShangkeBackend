@@ -27,6 +27,8 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
+     <result column="BOOKING_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+    
   </resultMap>
   <sql id="Booking_Base_Column_List">
     BOOKING.ID BOOKING_ID,
@@ -59,7 +61,8 @@
     BOOKING.ENABLED
     BOOKING_ENABLED,
     BOOKING.DELETED
-    BOOKING_DELETED
+    BOOKING_DELETED,
+    BOOKING.PARTNER_ID BOOKING_PARTNERID
   </sql>
   <!-- add -->
   <insert id="add" parameterType="BookingEntityExt">
@@ -119,6 +122,9 @@
       <if test="enabled != null">
         ENABLED,
       </if>
+      <if test="partnerId != null and partnerId != 0">
+        PARTNER_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null and userId != 0 ">
@@ -174,6 +180,9 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
+      </if>
+        <if test="partnerId != null and partnerId != 0">
+        #{partnerId,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -249,6 +258,9 @@
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+       <if test="partnerId != null and partnerId != 0">
+        PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -462,6 +474,20 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+      
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND BOOKING.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND BOOKING.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
     </if>
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
@@ -662,6 +688,20 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
+      
+       <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND BOOKING.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId == null or entity.partnerId == 0">
+        <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
+          AND BOOKING.PARTNER_ID IN
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
+            separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
     </if>
     ) AS total
   </select>

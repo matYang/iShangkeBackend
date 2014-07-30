@@ -79,27 +79,27 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
-    
+
     @Autowired
     private UserEntityExtMapper userMapper;
-    
+
     @Autowired
     private CouponEntityExtMapper couponMapper;
-    
+
     @Autowired
     private OrderEntityExtMapper orderMapper;
-    
+
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || bookingBo.getUserId() <= 0) {
             return 0.0;
         }
-        
+
         CouponEntityExt couponSearch = new CouponEntityExt();
         couponSearch.setUserId(bookingBo.getUserId());
         couponSearch.setStatus(CouponEnums.Status.USABLE.code);
         couponSearch.setEnabled(0);
         couponSearch.setDeleted(0);
-        
+
         List<CouponEntityExt> couponResults = null;
         try {
             couponResults = couponMapper.list(couponSearch, null);
@@ -109,9 +109,9 @@ public class BookingManagerImpl implements BookingManager {
         if (couponResults == null || couponResults.size() == 0) {
             return 0.0;
         }
-        
-        //remove used coupons and expired coupons
-        for (int i = couponResults.size()-1; i >= 0 ; i--) {
+
+        // remove used coupons and expired coupons
+        for (int i = couponResults.size() - 1; i >= 0; i--) {
             if (couponResults.get(i).getBalance() < 0.01d || couponResults.get(i).getExpiryTime().before(DateUtility.getCurTime())) {
                 couponResults.remove(i);
             }
@@ -119,42 +119,43 @@ public class BookingManagerImpl implements BookingManager {
         if (couponResults.size() == 0) {
             return 0.0;
         }
-        
-        //first to expire are used first
+
+        // first to expire are used first
         Collections.sort(couponResults, new Comparator<CouponEntityExt>() {
             @Override
             public int compare(CouponEntityExt o1, CouponEntityExt o2) {
                 return o1.getExpiryTime().compareTo(o2.getExpiryTime());
             }
         });
-        
+
         double currentTotal = 0.0;
         double targetTotal = bookingBo.getCashbackAmount();
         int tailIndex = 0;
-        for (int i = 0; i < couponResults.size() && currentTotal < (targetTotal-0.01d); i++) {
+        for (int i = 0; i < couponResults.size() && currentTotal < (targetTotal - 0.01d); i++) {
             CouponEntityExt coupon = couponResults.get(i);
-            if (currentTotal +  coupon.getBalance() < (targetTotal-0.01d)) {
-                //not yet reached desired cashback total yet, using up entire coupon
+            if (currentTotal + coupon.getBalance() < (targetTotal - 0.01d)) {
+                // not yet reached desired cashback total yet, using up entire
+                // coupon
                 currentTotal += coupon.getBalance();
                 coupon.setBalance(0.0);
-            }
-            else {
-                //total value has reach target total ,so simple use the target tatal, consume differential coupon
+            } else {
+                // total value has reach target total ,so simple use the target
+                // tatal, consume differential coupon
                 coupon.setBalance(coupon.getBalance() - (targetTotal - currentTotal));
                 currentTotal = targetTotal;
             }
             tailIndex++;
         }
-        //remove all untouched coupons
-        for (int i = couponResults.size()-1; i >= tailIndex; i--) {
+        // remove all untouched coupons
+        for (int i = couponResults.size() - 1; i >= tailIndex; i--) {
             couponResults.remove(i);
         }
-        
-        //updated all consumed or partially consumed coupons
+
+        // updated all consumed or partially consumed coupons
         for (CouponEntityExt coupon : couponResults) {
             couponManager.updateCoupon(CouponConverter.toBo(coupon), userBo);
         }
-        
+
         return currentTotal;
     }
 
@@ -162,6 +163,7 @@ public class BookingManagerImpl implements BookingManager {
     public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo) {
         String roleName = authManager.getRole(userBo.getId());
         BookingEntityExt bookingEntity = BookingConverter.fromBo(bookingBo);
+        CourseEntityExt course = courseMapper.getById(bookingEntity.getCourseId());
         if (!Constant.ROLEUSER.equals(roleName)) {
             throw new ManagerException("only user can create booking");
         }
@@ -172,7 +174,6 @@ public class BookingManagerImpl implements BookingManager {
             throw new ManagerException("information is bad");
         }
         // 查看此课程是否属于上架状态
-        CourseEntityExt course = courseMapper.getById(bookingEntity.getCourseId());
         if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
             throw new ManagerException("course cannot be booed now");
         }
@@ -200,16 +201,19 @@ public class BookingManagerImpl implements BookingManager {
         } else {
             throw new ManagerException("unknown booking type");
         }
+        // 设置booking的partner id
+        bookingEntity.setPartnerId(course.getPartnerId());
+        // bookingBo.setPartnerId(course.getPartnerId());
         // 设置bookingBo中的course template id
         // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
         bookingBo.setCourseTemplateId(course.getCourseTemplateId());
-        
-        //Use coupons
+
+        // Use coupons
         double calculatedCachbask = consumeCoupons(bookingBo, userBo);
         if (calculatedCachbask >= 0.1) {
             bookingBo.setCashbackAmount(calculatedCachbask);
         }
-        
+
         // 插入booking
         int result = 0;
         try {
@@ -262,42 +266,161 @@ public class BookingManagerImpl implements BookingManager {
                 contactMapper.add(contact);
             }
         }
-        
+
         List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, bookingEntity.getStatus());
         BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingEntity.getId()));
         booking.setActionList(actions);
-        
+
         return booking;
     }
 
     @Override
     public List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
-        if (!authManager.isAdmin(userBo.getId()) && !authManager.isSystemAdmin(userBo.getId())) {
-            throw new ManagerException("current cannot do this !");
-        }
         String roleName = authManager.getRole(userBo.getId());
-        List<BookingEntityExt> bookings = null;
-        try {
-            bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
-        } catch (Exception e) {
-            throw new ManagerException("query booking failed for user " + userBo.getId());
+        if (Constant.ROLEUSER.equals(roleName)) {
+            if (bookingBo.getUserId() != userBo.getId()) {
+                throw new ManagerException("cannot query other's booking");
+            }
+            List<BookingEntityExt> bookings = null;
+            try {
+                bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
+            } catch (Exception e) {
+                throw new ManagerException("query booking failed for user " + userBo.getId());
+            }
+            if (bookings == null) {
+                return new ArrayList<BookingBo>();
+            }
+            ArrayList<BookingBo> convertedList = new ArrayList<>();
+            for (BookingEntityExt result : bookings) {
+                List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
+                BookingBo booking = BookingConverter.toBo(result);
+                booking.setActionList(actions);
+                convertedList.add(booking);
+            }
+            return convertedList;
+        } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+            List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+            if (groupList == null) {
+                throw new ManagerException("unlogin user");
+            }
+            boolean isSameGroup = false;
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId().equals(bookingBo.getPartnerId())) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+            if (!isSameGroup) {
+                throw new ManagerException("cannot query other partner's booking");
+            }
+            List<BookingEntityExt> bookings = null;
+            try {
+                bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
+            } catch (Exception e) {
+                throw new ManagerException("query booking failed for user " + userBo.getId());
+            }
+            if (bookings == null) {
+                return new ArrayList<BookingBo>();
+            }
+            ArrayList<BookingBo> convertedList = new ArrayList<>();
+            for (BookingEntityExt result : bookings) {
+                List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
+                BookingBo booking = BookingConverter.toBo(result);
+                booking.setActionList(actions);
+                convertedList.add(booking);
+            }
+            return convertedList;
+        } else if (Constant.ROLESYSTEMADMIN.equals(roleName) || Constant.ROLEADMIN.equals(roleName)) {
+            List<BookingEntityExt> bookings = null;
+            try {
+                bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
+            } catch (Exception e) {
+                throw new ManagerException("query booking failed for user " + userBo.getId());
+            }
+            if (bookings == null) {
+                return new ArrayList<BookingBo>();
+            }
+            ArrayList<BookingBo> convertedList = new ArrayList<>();
+            for (BookingEntityExt result : bookings) {
+                List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
+                BookingBo booking = BookingConverter.toBo(result);
+                booking.setActionList(actions);
+                convertedList.add(booking);
+            }
+            return convertedList;
         }
-        if (bookings == null) {
-            return new ArrayList<BookingBo>();
-        }
-        ArrayList<BookingBo> convertedList = new ArrayList<>();
-        for (BookingEntityExt result : bookings) {
-            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, result.getStatus());
-            BookingBo booking = BookingConverter.toBo(result);
-            booking.setActionList(actions);
-            convertedList.add(booking);
-        }
-        return convertedList;
+        return null;
     }
 
     @Override
-    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
-        // TODO Auto-generated method stub
+    public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo) {
+        String roleName = authManager.getRole(userBo.getId());
+        if (Constant.ROLEUSER.equals(roleName)) {
+            if (bookingHistoryBo.getUserId() != userBo.getId()) {
+                throw new ManagerException("cannot query other's booking");
+            }
+            List<BookingHistoryEntityExt> bookingHistorys = null;
+            try {
+                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
+            } catch (Exception e) {
+                throw new ManagerException("query booking history failed for user " + userBo.getId());
+            }
+            if (bookingHistorys == null) {
+                return new ArrayList<BookingHistoryBo>();
+            }
+            ArrayList<BookingHistoryBo> convertedList = new ArrayList<>();
+            for (BookingHistoryEntityExt result : bookingHistorys) {
+                BookingHistoryBo bookingHistory = BookingHistoryConverter.toBo(result);
+                convertedList.add(bookingHistory);
+            }
+            return convertedList;
+        } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+            List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+            if (groupList == null) {
+                throw new ManagerException("unlogin user");
+            }
+            boolean isSameGroup = false;
+            for (GroupEntityExt g : groupList) {
+                if (g.getPartnerId().equals(bookingHistoryBo.getPartnerId())) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+            if (!isSameGroup) {
+                throw new ManagerException("cannot query other partner's booking history");
+            }
+            List<BookingHistoryEntityExt> bookingHistorys = null;
+            try {
+                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
+            } catch (Exception e) {
+                throw new ManagerException("query booking history failed for user " + userBo.getId());
+            }
+            if (bookingHistorys == null) {
+                return new ArrayList<BookingHistoryBo>();
+            }
+            ArrayList<BookingHistoryBo> convertedList = new ArrayList<>();
+            for (BookingHistoryEntityExt result : bookingHistorys) {
+                BookingHistoryBo bookingHistory = BookingHistoryConverter.toBo(result);
+                convertedList.add(bookingHistory);
+            }
+            return convertedList;
+        } else if (Constant.ROLESYSTEMADMIN.equals(roleName) || Constant.ROLEADMIN.equals(roleName)) {
+            List<BookingHistoryEntityExt> bookingHistorys = null;
+            try {
+                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
+            } catch (Exception e) {
+                throw new ManagerException("query booking history failed for user " + userBo.getId());
+            }
+            if (bookingHistorys == null) {
+                return new ArrayList<BookingHistoryBo>();
+            }
+            ArrayList<BookingHistoryBo> convertedList = new ArrayList<>();
+            for (BookingHistoryEntityExt result : bookingHistorys) {
+                BookingHistoryBo bookingHistory = BookingHistoryConverter.toBo(result);
+                convertedList.add(bookingHistory);
+            }
+            return convertedList;
+        }
         return null;
     }
 
@@ -333,7 +456,7 @@ public class BookingManagerImpl implements BookingManager {
             if (op == null) {
                 throw new ManagerException("cannot modify current booking status");
             }
-            //修改lastmodifytime
+            // 修改lastmodifytime
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             bookingEntityExt.setStatus(op.getNextStatus());
@@ -347,13 +470,14 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
-            
+
             CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
@@ -382,7 +506,7 @@ public class BookingManagerImpl implements BookingManager {
             if (op == null) {
                 throw new ManagerException("cannot modify current booking status");
             }
-            //修改lastmodifytoime
+            // 修改lastmodifytoime
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             bookingEntityExt.setStatus(op.getNextStatus());
@@ -395,14 +519,15 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPreStatus(preStatus);
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
-            
+
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
-            
+
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, commentBookingBo, course);
             return booking;
 
@@ -424,14 +549,15 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPreStatus(preStatus);
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
-            
+
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
-            
+
             CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
@@ -462,14 +588,15 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPreStatus(preStatus);
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
             // just for test
             bookingHistory.setEnabled(0);
             bookingHistoryMapper.add(bookingHistory);
             LOGGER.warn(String.format("[Booking]system admin [%d] [%s] booking status from [%d] to [%d] at" + new Date(), userBo.getId(), op.getName(), preStatus, op.getNextStatus()));
-            
+
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo responseBo = BookingConverter.toBo(resultBooking);
-            
+
             CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
@@ -480,7 +607,7 @@ public class BookingManagerImpl implements BookingManager {
         return null;
     }
 
-    @Override
+    // @Override
     public List<BookingBo> queryBookingByUser(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         List<BookingEntityExt> bookings = null;
         bookingBo.setUserId(userBo.getId());
@@ -502,7 +629,7 @@ public class BookingManagerImpl implements BookingManager {
         return convertedList;
     }
 
-    @Override
+    // @Override
     public List<BookingBo> queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
@@ -608,7 +735,7 @@ public class BookingManagerImpl implements BookingManager {
             }
             return convertedList;
         }
-        return null; 
+        return null;
     }
 
     public static void main(String[] args) {
@@ -643,6 +770,7 @@ public class BookingManagerImpl implements BookingManager {
         bookingHistory.setPreStatus(preStatus);
         bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
         bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+        bookingHistory.setPartnerId(booking.getPartnerId());
         try {
             bookingHistoryMapper.add(bookingHistory);
         } catch (Exception e) {
@@ -660,5 +788,20 @@ public class BookingManagerImpl implements BookingManager {
     public String buildFormForGet(String subject, String out_trade_no, String total_fee) {
         return AlipaySubmit.buildFormForGet(out_trade_no, subject, total_fee);
     }
-   
+
+    @Override
+    public int queryBookingTotal(BookingBo bookingBo, UserBo userBo) {
+        return bookingMapper.getListCount(BookingConverter.fromBo(bookingBo));
+    }
+
+    @Override
+    public int queryHistoryTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo) {
+        return bookingHistoryMapper.getListCount(BookingHistoryConverter.fromBo(bookingHistoryBo));
+    }
+
+    @Override
+    public int queryHistoryByBookingIdTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo) {
+        return bookingHistoryMapper.getListCount(BookingHistoryConverter.fromBo(bookingHistoryBo));
+    }
+
 }
