@@ -408,12 +408,16 @@ public class CourseManagerImpl implements CourseManager {
     @Override
     public CourseBo queryById(CourseBo courseBo, UserBo userBo) {
         CourseBo convertered = new CourseBo();
+        CourseEntityExt result = null;
         try {
-            CourseEntityExt result = courseMapper.getInfoById(courseBo.getId());
-            convertered = CourseConverter.toBo(result);
+            result = courseMapper.getInfoById(courseBo.getId());
         } catch (Exception e) {
             throw new ManagerException("query course failed");
         }
+        if (result == null) {
+            throw new ManagerException("cannot found");
+        }
+        convertered = CourseConverter.toBo(result);
         return convertered;
     }
 

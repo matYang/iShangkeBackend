@@ -65,7 +65,7 @@ public class CourseFacade {
         return result;
     }
 
-    public CourseCommentPageViewBo queryCommentBuCourseId(CourseBo courseBo, PaginationBo paginationBo, String url) {
+    public CourseCommentPageViewBo queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo, String url) {
         CourseCommentPageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
