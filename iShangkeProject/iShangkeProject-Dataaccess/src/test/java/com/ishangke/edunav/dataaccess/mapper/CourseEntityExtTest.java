@@ -179,6 +179,7 @@ public class CourseEntityExtTest extends BaseTest {
         CourseEntityExt getbyid1 = courseEntityExtMapper.getInfoById(2);
         CourseEntityExt getbyid2 = courseEntityExtMapper.getInfoById(3);
         CourseEntityExt getbyid3 = courseEntityExtMapper.getInfoById(4);
+        System.out.println(getbyid1.getAddress());
         Assert.assertEquals("雅思02", getbyid1.getCourseName());
         Assert.assertEquals("雅思03", getbyid2.getCourseName());
         Assert.assertEquals("雅思04", getbyid3.getCourseName());
