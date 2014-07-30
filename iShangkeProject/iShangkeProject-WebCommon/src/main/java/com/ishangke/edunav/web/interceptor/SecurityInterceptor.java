@@ -27,7 +27,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws IOException,ServletException {
 
-        if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             String classUri = handlerMethod.getBean().getClass().getAnnotation(RequestMapping.class).value()[0];
             String methodUri = handlerMethod.getMethodAnnotation(RequestMapping.class).value()[0];
@@ -35,12 +34,8 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
             String restfulServiceUri = requestType + classUri + methodUri;
             LOGGER.debug(restfulServiceUri);
             request.setAttribute(WebConstants.REQUEST_URL, restfulServiceUri);
-        } else {
-            DefaultServletHttpRequestHandler handlerMethod = (DefaultServletHttpRequestHandler) handler;
-            handlerMethod.handleRequest(request, response);
-        }        
         
-        return true;
+            return true;
     }
 
 }
