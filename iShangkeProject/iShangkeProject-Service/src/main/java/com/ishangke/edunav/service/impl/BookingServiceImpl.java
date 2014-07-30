@@ -15,7 +15,6 @@ import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.manager.AuthManager;
@@ -25,6 +24,7 @@ import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
+import com.ishangke.edunav.util.PageUtil;
 
 @Component
 public class BookingServiceImpl implements BookingService.Iface {
@@ -98,8 +98,13 @@ public class BookingServiceImpl implements BookingService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryBooking"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<BookingBo> data = bookingManager.queryBooking(bookingBo, userBo, paginationBo);
+            int total = bookingManager.queryBookingTotal(bookingBo, userBo);
             BookingPageViewBo pageView = new BookingPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
            
@@ -126,8 +131,13 @@ public class BookingServiceImpl implements BookingService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistory"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<BookingHistoryBo> data = bookingManager.queryHistory(bookingHistoryBo, userBo, paginationBo);
+            int total = bookingManager.queryHistoryTotal(bookingHistoryBo, userBo);
             BookingHistoryPageViewBo pageView = new BookingHistoryPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
 
@@ -154,8 +164,13 @@ public class BookingServiceImpl implements BookingService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistoryByBookingId"));
                 throw new NoPermissionException();
             }
+            paginationBo = PageUtil.getPage(paginationBo);
             List<BookingHistoryBo> data = bookingManager.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo);
+            int total = bookingManager.queryHistoryByBookingIdTotal(bookingHistoryBo, userBo);
             BookingHistoryPageViewBo pageView = new BookingHistoryPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
            

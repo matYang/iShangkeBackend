@@ -789,4 +789,19 @@ public class BookingManagerImpl implements BookingManager {
         return AlipaySubmit.buildFormForGet(out_trade_no, subject, total_fee);
     }
 
+    @Override
+    public int queryBookingTotal(BookingBo bookingBo, UserBo userBo) {
+        return bookingMapper.getListCount(BookingConverter.fromBo(bookingBo));
+    }
+
+    @Override
+    public int queryHistoryTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo) {
+        return bookingHistoryMapper.getListCount(BookingHistoryConverter.fromBo(bookingHistoryBo));
+    }
+
+    @Override
+    public int queryHistoryByBookingIdTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo) {
+        return bookingHistoryMapper.getListCount(BookingHistoryConverter.fromBo(bookingHistoryBo));
+    }
+
 }
