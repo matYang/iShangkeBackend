@@ -738,12 +738,6 @@ public class BookingManagerImpl implements BookingManager {
         return null;
     }
 
-    public static void main(String[] args) {
-        Double a = 0.1234560023;
-        double b = 0.123456002300000000000;
-        System.out.println(a.equals(b));
-    }
-
     @Override
     public String changeBookingStatusToPayed(int orderId) {
         OrderEntityExt order = orderMapper.getById(orderId);
