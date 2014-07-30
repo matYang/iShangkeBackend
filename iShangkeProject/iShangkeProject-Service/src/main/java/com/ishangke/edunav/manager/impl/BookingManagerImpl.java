@@ -598,9 +598,13 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistoryMapper.add(bookingHistory);
             LOGGER.warn(String.format("[Booking]system admin [%d] [%s] booking status from [%d] to [%d] at" + new Date(), userBo.getId(), op.getName(), preStatus, op.getNextStatus()));
 
+            //添加systemadmin能够进行的后续操作
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
+
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo responseBo = BookingConverter.toBo(resultBooking);
-
+            responseBo.setActionList(actions);
+            
             CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");

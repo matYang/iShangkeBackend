@@ -114,7 +114,7 @@ public interface CourseManager {
      * @param userBo
      * @param paginationBo
      */
-    List<CourseBo> queryByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo);
+    List<CourseBo> queryCourse(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo);
     
     /**
      * 
@@ -122,7 +122,7 @@ public interface CourseManager {
      * @param userBo
      * @return
      */
-    int queryByPartnerTotal(CourseBo courseBo, UserBo userBo);
+    int queryCourseTotal(CourseBo courseBo, UserBo userBo);
     
     /**
      * 本方法为用户查询课程的功能。<br>
@@ -140,14 +140,14 @@ public interface CourseManager {
      * @param courseBo
      * @param paginationBo
      */
-    List<CourseBo> queryByFilter(CourseBo courseBo, PaginationBo paginationBo);
+    List<CourseBo> queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo);
     
     /**
      * 
      * @param courseBo
      * @return
      */
-    int queryByFilterTotal(CourseBo courseBo);
+    int queryCourseByFilterTotal(CourseBo courseBo);
     
     /**
      * 本方法返回课程详情<br>
