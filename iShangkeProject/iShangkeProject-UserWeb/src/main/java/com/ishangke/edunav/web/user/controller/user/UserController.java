@@ -17,6 +17,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.converter.LoginConverter;
 import com.ishangke.edunav.web.converter.PasswordConverter;
+import com.ishangke.edunav.web.converter.SessionConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.model.LoginVo;
 import com.ishangke.edunav.web.model.PasswordVo;
@@ -116,8 +117,10 @@ public class UserController extends AbstractController{
         }
         
         UserBo userBo = UserConverter.fromModel(userVo);
+        
         cellSessionVo.setAccountIdentifier(userBo.getPhone());
         cellSessionVo.setAuthCode(cellSessionVo.getAuthCode());
+        SessionBo cellSessionBo = SessionConverter.fromMode(cellSessionVo);
 
         UserBo result = userFacade.registerUser(userBo, cellSessionBo, permissionTag);
         responseVo = UserConverter.toModel(result);
@@ -129,9 +132,9 @@ public class UserController extends AbstractController{
     public @ResponseBody EmptyResponse fp(@RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
-        UserBo userBo = new UserBo();
-        userBo.setPhone(phone);
-        userFacade.openForgetPasswordSession(userBo, permissionTag);
+        UserVo userVo = new UserVo();
+        userVo.setPhone(phone);
+        userFacade.openForgetPasswordSession(UserConverter.fromModel(userVo), permissionTag);
         
         return new EmptyResponse();
     }
@@ -207,9 +210,9 @@ public class UserController extends AbstractController{
             throw new ControllerException("对不起，您没有权限查看其他用户资料");
         }
         
-        UserBo queryUser = new UserBo();
+        UserVo queryUser = new UserVo();
         queryUser.setId(curId);
-        UserBo responseUser = userFacade.queryUserInfo(queryUser, currentUser, permissionTag);
+        UserBo responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), currentUser, permissionTag);
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }

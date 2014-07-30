@@ -13,12 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.commoncontract.model.CareerPageViewBo;
-import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CategoryPageViewBo;
-import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.CirclePageViewBo;
 import com.ishangke.edunav.commoncontract.model.LocationPageViewBo;
-import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolPageViewBo;
 import com.ishangke.edunav.facade.user.CourseFacade;
 import com.ishangke.edunav.facade.user.GeneralFacade;
@@ -58,7 +55,7 @@ public class GeneralController extends AbstractController{
     CourseFacade courseFacade;
     
     @RequestMapping(value = "/category", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CategoryPageViewVo  category(@RequestParam(value="keyword") String keyword, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody CategoryPageViewVo  category(@RequestParam(value="keyword", defaultValue="") String keyword, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         CategoryVo categoryVo = new CategoryVo();
