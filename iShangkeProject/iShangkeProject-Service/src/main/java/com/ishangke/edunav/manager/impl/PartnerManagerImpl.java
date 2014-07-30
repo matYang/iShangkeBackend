@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -20,8 +21,10 @@ import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
+import com.ishangke.edunav.manager.AddressManager;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.PartnerManager;
+import com.ishangke.edunav.manager.converter.AddressConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
@@ -41,6 +44,9 @@ public class PartnerManagerImpl implements PartnerManager {
     
     @Autowired
     private AuthManager authManager;
+    
+    @Autowired
+    private AddressManager addressManager;
 
     @Override
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
@@ -162,15 +168,22 @@ public class PartnerManagerImpl implements PartnerManager {
         partnerEntity.setDeleted(0);
         try {
             result = partnerMapper.add(partnerEntity);
+            if (result <= 0) {
+                throw new ManagerException("Partner creation failed for user: " + userEntity.getId());
+            }
+            for (int i = 0; i < partnerEntity.getAddressList().size(); i++) {
+                AddressBo toStore = AddressConverter.toBo(partnerEntity.getAddressList().get(i));
+                AddressBo stored = addressManager.createAddress(toStore, userBo);
+                //store the one with the id
+                partnerEntity.getAddressList().set(i, AddressConverter.fromBo(stored));
+            }
+
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId(), t);
         }
-        if (result > 0) {
-            return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
-        } else {
-            throw new ManagerException("Partner creation failed for user: " + userEntity.getId());
-        }
+        
+        return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
     }
 
     @Override
