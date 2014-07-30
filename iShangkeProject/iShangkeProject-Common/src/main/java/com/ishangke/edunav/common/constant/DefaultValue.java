@@ -1,6 +1,6 @@
 package com.ishangke.edunav.common.constant;
 
-public class DefaultValues {
+public class DefaultValue {
 
         public static final double DOUBLEPRCISIONOFFSET = 0.001d;
         

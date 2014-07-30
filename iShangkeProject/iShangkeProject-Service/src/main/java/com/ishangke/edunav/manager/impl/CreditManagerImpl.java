@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.CreditHistoryEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
@@ -87,7 +87,7 @@ public class CreditManagerImpl implements CreditManager {
         
         double balanceDiff = previousCredit.getCredit() - creditEntity.getCredit();
         int operation = CreditHistoryEnums.Operation.DEC.code;
-        if (balanceDiff < -DefaultValues.DOUBLEPRCISIONOFFSET) {
+        if (balanceDiff < -DefaultValue.DOUBLEPRCISIONOFFSET) {
             balanceDiff = -balanceDiff;
             operation = CreditHistoryEnums.Operation.INC.code;
         }

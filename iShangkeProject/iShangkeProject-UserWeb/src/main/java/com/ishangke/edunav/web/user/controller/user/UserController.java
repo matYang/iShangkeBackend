@@ -1,4 +1,7 @@
-package com.ishangke.edunav.web.user.controller;
+package com.ishangke.edunav.web.user.controller.user;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.user.common.JsonResponse;
+import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/user")
@@ -21,7 +25,7 @@ public class UserController extends AbstractController{
     UserFacade userFacade;
     
     @RequestMapping(value = "registration", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody UserVo registUser(@RequestBody UserVo UserVo) {
+    public @ResponseBody UserVo registUser(@RequestBody UserVo UserVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         
