@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.BookingEnums;
 import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
@@ -210,7 +211,7 @@ public class BookingManagerImpl implements BookingManager {
 
         // Use coupons
         double calculatedCachbask = consumeCoupons(bookingBo, userBo);
-        if (calculatedCachbask >= 0.1) {
+        if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
             bookingBo.setCashbackAmount(calculatedCachbask);
         }
 
@@ -268,9 +269,12 @@ public class BookingManagerImpl implements BookingManager {
         }
 
         List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, bookingEntity.getStatus());
-        BookingBo booking = BookingConverter.toBo(bookingMapper.getById(bookingEntity.getId()));
+        
+        BookingEntityExt resultBooking = bookingMapper.getById(bookingEntity.getId());
+        BookingBo booking = BookingConverter.toBo(resultBooking);
         booking.setActionList(actions);
 
+        BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(resultBooking.getStatus()), resultBooking, commentBookingBo, course);
         return booking;
     }
 
