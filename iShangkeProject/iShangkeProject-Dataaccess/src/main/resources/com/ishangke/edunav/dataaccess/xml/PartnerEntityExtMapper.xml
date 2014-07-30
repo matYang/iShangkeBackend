@@ -502,12 +502,12 @@
     ,
     <include refid="Address_Base_Column_List"></include>
     from PARNTER PARNTER
-    join TEACHER TEACHER
+    left join TEACHER TEACHER
     ON TEACHER.PARTNER_ID = PARNTER.ID
-    join CLASS_PHOTO
+    left join CLASS_PHOTO
     CLASS_PHOTO
     ON CLASS_PHOTO.PARTNER_ID = PARNTER.ID
-    join ADDRESS ADDRESS
+    left join ADDRESS ADDRESS
     ON ADDRESS.PARTNER_ID =
     PARTNER.ID
     where PARNTER.DELETED = 0 AND PARNTER.ID = #{id}
