@@ -4,6 +4,7 @@ public class LoginVo {
     private Integer id;
     private String accountIdentifier;
     private String password;
+    private Integer remmember;
     public Integer getId() {
         return id;
     }
@@ -21,5 +22,11 @@ public class LoginVo {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public Integer getRemember() {
+        return this.remmember;
+    }
+    public void setRemember(Integer remember) {
+        this.remmember = remember;
     }
 }

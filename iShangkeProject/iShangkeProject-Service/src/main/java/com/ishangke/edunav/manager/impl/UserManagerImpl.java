@@ -521,12 +521,13 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserBo loginByPhone(LoginBo loginBo) {
+    public SessionBo loginByPhone(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
         
         UserEntityExt curUser = null;
+        String authCode = null;
         try {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
@@ -546,7 +547,7 @@ public class UserManagerImpl implements UserManager {
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
             userMapper.update(curUser);
-            authManager.openAuthSession(curUser.getId());
+            authCode = authManager.openAuthSession(curUser.getId());
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
@@ -554,16 +555,22 @@ public class UserManagerImpl implements UserManager {
         }
         
         authManager.success(loginBo.getAccountIdentifier());
-        return UserConverter.toBo(curUser);
+        
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier(loginBo.getAccountIdentifier());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
     }
 
     @Override
-    public UserBo loginByReference(LoginBo loginBo) {
+    public SessionBo loginByReference(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
         
         UserEntityExt curUser = null;
+        String authCode = null;
         try {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
@@ -583,7 +590,7 @@ public class UserManagerImpl implements UserManager {
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
             userMapper.update(curUser);
-            authManager.openAuthSession(curUser.getId());
+            authCode = authManager.openAuthSession(curUser.getId());
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
@@ -591,7 +598,12 @@ public class UserManagerImpl implements UserManager {
         }
         
         authManager.success(loginBo.getAccountIdentifier());
-        return UserConverter.toBo(curUser);
+        
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier(loginBo.getAccountIdentifier());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
     }
 
     
