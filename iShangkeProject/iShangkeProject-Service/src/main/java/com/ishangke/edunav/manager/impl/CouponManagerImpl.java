@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.enums.CouponHistoryEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
@@ -169,7 +169,7 @@ public class CouponManagerImpl implements CouponManager {
         // Create CouponHistory
         double balanceDiff = previousCoupon.getBalance() - couponEntity.getBalance();
         int operation = CouponHistoryEnums.Operation.DEC.code;
-        if (balanceDiff < -DefaultValues.DOUBLEPRCISIONOFFSET) {
+        if (balanceDiff < -DefaultValue.DOUBLEPRCISIONOFFSET) {
             balanceDiff = -balanceDiff;
             operation = CouponHistoryEnums.Operation.INC.code;
         }
