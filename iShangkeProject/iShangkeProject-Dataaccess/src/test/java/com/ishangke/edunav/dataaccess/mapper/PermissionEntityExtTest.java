@@ -43,7 +43,7 @@ public class PermissionEntityExtTest extends BaseTest {
         permissionEntityExt.setPath("ishangke");
         int oldcount = permissionEntityExtMapper.getCount();
         permissionEntityExtMapper.add(permissionEntityExt);
-        Assert.assertSame(permissionEntityExtMapper.getCount(), oldcount + 1);
+      Assert.assertEquals(permissionEntityExtMapper.getCount(), oldcount + 1);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class PermissionEntityExtTest extends BaseTest {
         permissionEntityExtMapper.add(permissionEntityExt);
         int oldcount = permissionEntityExtMapper.getCount();
         permissionEntityExtMapper.deleteById(permissionEntityExt.getId());
-        Assert.assertSame(permissionEntityExtMapper.getCount(), oldcount - 1);
+        Assert.assertEquals(permissionEntityExtMapper.getCount(), oldcount - 1);
     }
 
     // @Test
@@ -150,11 +150,11 @@ public class PermissionEntityExtTest extends BaseTest {
                 DataaccessConstants.ORDER_DESC));
 
         PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setName("_test_");
+        permissionEntityExt.setName("Login");
         List<PermissionEntityExt> result = permissionEntityExtMapper.list(
                 permissionEntityExt, page);
-        Assert.assertEquals(4, result.size());
-        Assert.assertEquals("_test_name_3_爱上课", result.get(0).getName());
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("Login_N", result.get(0).getName());
     }
 
     @Test
@@ -181,8 +181,8 @@ public class PermissionEntityExtTest extends BaseTest {
         List<PermissionEntityExt> result = permissionEntityExtMapper
                 .listPermissionByRoleId(2);
         Assert.assertEquals(2, result.size());
-        Assert.assertEquals("_test_path_1_爱上课", result.get(0).getPath());
-        Assert.assertEquals("_test_path_1_爱上课", result.get(1).getPath());
+        Assert.assertEquals("POST/p-api/v2/user/login/reference", result.get(0).getPath());
+        Assert.assertEquals("POST/p-api/v2/user/login/reference", result.get(1).getPath());
     }
 
     @Test
@@ -207,7 +207,7 @@ public class PermissionEntityExtTest extends BaseTest {
         List<PermissionEntityExt> result = permissionEntityExtMapper
                 .listPermissionsByGroupId(2);
         Assert.assertEquals(2, result.size());
-        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
+        Assert.assertEquals("Login_P", result.get(0).getName());
     }
 
     @Test
@@ -215,7 +215,7 @@ public class PermissionEntityExtTest extends BaseTest {
         PermissionEntityExt PermissionCount = permissionEntityExtMapper
                 .getById(2);
 
-        Assert.assertEquals("_test_name_1_爱上课", PermissionCount.getName());
+        Assert.assertEquals("Login_P", PermissionCount.getName());
 
     }
 
@@ -224,9 +224,9 @@ public class PermissionEntityExtTest extends BaseTest {
         PermissionEntityExt getbyid1 = permissionEntityExtMapper.getById(2);
         PermissionEntityExt getbyid2 = permissionEntityExtMapper.getById(3);
         PermissionEntityExt getbyid3 = permissionEntityExtMapper.getById(4);
-        Assert.assertEquals("_test_name_1_爱上课", getbyid1.getName());
-        Assert.assertEquals("_test_name_2_爱上课", getbyid2.getName());
-        Assert.assertEquals("_test_name_3_爱上课", getbyid3.getName());
+        Assert.assertEquals("Login_P", getbyid1.getName());
+        Assert.assertEquals("Login_A", getbyid2.getName());
+        Assert.assertEquals("Logout_N", getbyid3.getName());
     }
 
     @Test
