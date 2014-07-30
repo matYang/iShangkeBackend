@@ -31,9 +31,11 @@ public class PaginationConverter {
 
         List<OrderByEntity> orderByEntities = new ArrayList<>();
 
-        for (OrderByBo orderBybo : orderByBos) {
-            OrderByEntity orderByEntity = new OrderByEntity(orderBybo.getColumnKey(), orderBybo.getOrder());
-            orderByEntities.add(orderByEntity);
+        if (orderByBos != null) {
+            for (OrderByBo orderBybo : orderByBos) {
+                OrderByEntity orderByEntity = new OrderByEntity(orderBybo.getColumnKey(), orderBybo.getOrder());
+                orderByEntities.add(orderByEntity);
+            }
         }
 
         PaginationEntity pageEntity = new PaginationEntity();
