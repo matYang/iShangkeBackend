@@ -70,7 +70,7 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo);
+    List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo);
     
     /**
      * admin可以通过此方法查看所有订单的详细信息

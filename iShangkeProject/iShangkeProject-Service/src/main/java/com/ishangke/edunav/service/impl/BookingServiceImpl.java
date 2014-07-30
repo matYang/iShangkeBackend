@@ -119,14 +119,14 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public BookingHistoryPageViewBo queryHistory(BookingHistoryBo bookingHistoryBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo,
+    public BookingHistoryPageViewBo queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistory"));
                 throw new NoPermissionException();
             }
-            List<BookingHistoryBo> data = bookingManager.queryHistory(bookingHistoryBo, partnerBo, userBo, paginationBo);
+            List<BookingHistoryBo> data = bookingManager.queryHistory(bookingHistoryBo, userBo, paginationBo);
             BookingHistoryPageViewBo pageView = new BookingHistoryPageViewBo();
             pageView.setData(data);
             return pageView;
