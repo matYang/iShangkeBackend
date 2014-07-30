@@ -1,6 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -82,7 +83,7 @@ public class CourseManagerImpl implements CourseManager {
 
     @Autowired
     private CourseCommentEntityExtMapper courseCommentMapper;
-    
+
     @Autowired
     private CategoryEntityExtMapper categoryMapper;
 
@@ -333,13 +334,13 @@ public class CourseManagerImpl implements CourseManager {
 
     @Override
     public List<CategoryBo> queryByKeyword(String keyword) {
-        //todo 搜索功能，根据用户输入的关键词，跳转到相应的三级目录的功能
-        //需要提前录入
+        // todo 搜索功能，根据用户输入的关键词，跳转到相应的三级目录的功能
+        // 需要提前录入
         return null;
     }
 
     @Override
-    public List<CourseBo> queryByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo) {
+    public List<CourseBo> queryCourse(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo) {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             // 如果是合作商管理员
@@ -364,21 +365,27 @@ public class CourseManagerImpl implements CourseManager {
                 List<CourseEntityExt> result = courseMapper.list(course, PaginationConverter.fromBo(paginationBo));
                 if (result != null) {
                     for (CourseEntityExt c : result) {
-                        convertered.add(CourseConverter.toBo(c));
+                        CourseBo b = CourseConverter.toBo(c);
+                        List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, b.getStatus());
+                        b.setActionList(actions);
+                        convertered.add(b);
                     }
                 }
             } catch (Exception e) {
                 throw new ManagerException("query course failed");
             }
             return convertered;
-        } else {
+        } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
             CourseEntityExt course = CourseConverter.fromBo(courseBo);
             List<CourseBo> convertered = new ArrayList<>();
             try {
                 List<CourseEntityExt> result = courseMapper.list(course, PaginationConverter.fromBo(paginationBo));
                 if (result != null) {
                     for (CourseEntityExt c : result) {
-                        convertered.add(CourseConverter.toBo(c));
+                        CourseBo b = CourseConverter.toBo(c);
+                        List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, b.getStatus());
+                        b.setActionList(actions);
+                        convertered.add(b);
                     }
                 }
             } catch (Exception e) {
@@ -386,12 +393,15 @@ public class CourseManagerImpl implements CourseManager {
             }
             return convertered;
         }
+        return null;
     }
 
     @Override
-    public List<CourseBo> queryByFilter(CourseBo courseBo, PaginationBo paginationBo) {
+    public List<CourseBo> queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo) {
         // to do use memcached
         List<CourseBo> convertered = new ArrayList<>();
+        // 只能搜索已上线的课程
+        courseBo.setStatus(Constant.COURSESTATUSONLINED);
         try {
             List<CourseEntityExt> result = courseMapper.list(CourseConverter.fromBo(courseBo), PaginationConverter.fromBo(paginationBo));
             if (result != null) {
@@ -408,16 +418,42 @@ public class CourseManagerImpl implements CourseManager {
     @Override
     public CourseBo queryById(CourseBo courseBo, UserBo userBo) {
         CourseBo convertered = new CourseBo();
-        CourseEntityExt result = null;
+        CourseEntityExt course = null;
         try {
-            result = courseMapper.getInfoById(courseBo.getId());
+            course = courseMapper.getInfoById(courseBo.getId());
         } catch (Exception e) {
             throw new ManagerException("query course failed");
         }
-        if (result == null) {
+        if (course == null) {
             throw new ManagerException("cannot found");
         }
-        convertered = CourseConverter.toBo(result);
+        convertered = CourseConverter.toBo(course);
+        if (userBo != null) {
+            String roleName = authManager.getRole(userBo.getId());
+            if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
+                // 判断此coursetemplate是否属于此user所在的partner
+                List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
+                if (groupList == null) {
+                    throw new ManagerException("unlogin user");
+                }
+                boolean isSameGroup = false;
+                for (GroupEntityExt g : groupList) {
+                    if (g.getPartnerId().equals(convertered.getPartnerId())) {
+                        isSameGroup = true;
+                        break;
+                    }
+                    if (isSameGroup) {
+                        //如果属于此partner，则此展示可以对课程进行的操作
+                        List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, convertered.getStatus());
+                        convertered.setActionList(actions);
+                    }
+                }
+            } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLEPARTNERADMIN.equals(roleName)) {
+                //展示可以对课程进行的操作
+                List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, convertered.getStatus());
+                convertered.setActionList(actions);
+            }
+        }
         return convertered;
     }
 
@@ -477,8 +513,42 @@ public class CourseManagerImpl implements CourseManager {
             courseEntity.setStatus(op.getNextStatus());
             courseMapper.update(courseEntity);
             // 插入可以进行的下一步操作
-            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSETEMPLATE, op.getNextStatus());
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
             CourseBo result = CourseConverter.toBo(courseMapper.getById(courseEntity.getId()));
+            result.setActionList(actions);
+            return result;
+        } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
+            if (op == null) {
+                throw new ManagerException("cannot modify current course tempalte status");
+            }
+            courseEntity.setStatus(op.getNextStatus());
+            courseMapper.update(courseEntity);
+
+            // 如果是更新操作,则直接上线
+            if (op.getOperateCode() == Constant.COURSEOPERATIONSUBMITUPDATED) {
+                CourseBo result = this.updateCourse(courseBo, courseEntity, true);
+                LOGGER.warn(String.format("[transform course status] ishangke admin [%d] edit course and online [%d]", userBo.getId(), courseEntity.getId()));
+                List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
+                result.setActionList(actions);
+                return result;
+            }
+
+            // 如果是删除操作
+            if (op.getOperateCode() == Constant.COURSEOPERATIONDELETE) {
+                LOGGER.warn(String.format("[transform course status] ishangke admin [%d] is deleteing course [%d]", userBo.getId(), courseEntity.getId()));
+                courseEntity.setStatus(Constant.COURSESTATUSOFFLINED);
+                try {
+                    courseMapper.deleteById(courseEntity.getId());
+                    return new CourseBo();
+                } catch (Exception e) {
+                    throw new ManagerException("delete failed");
+                }
+            }
+            courseEntity.setStatus(op.getNextStatus());
+            courseMapper.update(courseEntity);
+            LOGGER.warn(String.format("[Booking]system admin [%d] [%s] course status to [%d] at" + new Date(), userBo.getId(), op.getName(), op.getNextStatus()));
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
+            CourseBo result = CourseConverter.toBo(courseMapper.getById(courseBo.getId()));
             result.setActionList(actions);
             return result;
         }
@@ -568,18 +638,62 @@ public class CourseManagerImpl implements CourseManager {
             courseTee.setLastModifyTime(DateUtility.getCurTimeInstance());
             // 状态设置为待审核
             courseTee.setStatus(Constant.COURSESTATUSPENDINGREVIEW);
-            //不能修改partner id
+            // 不能修改partner id
             courseTee.setPartnerId(oldCourseEntity.getPartnerId());
-            //不能修改course template id
+            // 不能修改course template id
             courseTee.setCourseTemplateId(oldCourseEntity.getCourseTemplateId());
             courseMapper.update(courseTee);
         } else {
+            List<ClassPhotoBo> classPhotos = courseBo.getClassPhotoList();
+            List<TeacherBo> teachers = courseBo.getTeacherList();
+            // 删除原有的教师信息/classphoto与classtemplate的关联
+            List<TeacherEntityExt> oldTeachers = teacherMapper.listTeacherByCourseId(courseBo.getId());
+            if (oldTeachers != null && oldTeachers.size() != 0) {
+                for (TeacherEntityExt t : oldTeachers) {
+                    courseTeacherMapper.deleteByCourseIdTeacherId(courseBo.getId(), t.getId());
+                }
+            }
+            List<ClassPhotoEntityExt> oldPhotos = photoMapper.listClassPhotoByCourseTempleteId(courseBo.getId());
+            if (oldPhotos != null && oldPhotos.size() != 0) {
+                for (ClassPhotoEntityExt p : oldPhotos) {
+                    coursePhotoMapper.deleteByCourseIdClassPhotoId(courseBo.getId(), p.getId());
+                }
+            }
+            // 建立新的教师信息/classphoto与classtemplate的关联
+            // 插入classphoto关联
+            if (classPhotos != null) {
+                for (ClassPhotoBo photo : classPhotos) {
+                    try {
+                        CourseClassPhotoEntityExt courseClassPhotoEntityExt = new CourseClassPhotoEntityExt();
+                        courseClassPhotoEntityExt.setClassPhotoId(photo.getId());
+                        courseClassPhotoEntityExt.setCourseId(courseBo.getId());
+                        courseClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                        coursePhotoMapper.add(courseClassPhotoEntityExt);
+                    } catch (Exception e) {
+                        throw new ManagerException("failed when add photo course template relationship");
+                    }
+                }
+            }
+            // 插入teacher关联
+            if (teachers != null) {
+                for (TeacherBo teacher : teachers) {
+                    try {
+                        CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
+                        courseTeacherEntityExt.setTeacherId(teacher.getId());
+                        courseTeacherEntityExt.setCourseId(courseBo.getId());
+                        courseTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                        courseTeacherMapper.add(courseTeacherEntityExt);
+                    } catch (Exception e) {
+                        throw new ManagerException("failed when add teacher course tempalte relationship");
+                    }
+                }
+            }
             CourseEntityExt courseTee = CourseConverter.fromBo(courseBo);
-            //不能修改partner
+            // 不能修改partner
             courseTee.setPartnerId(oldCourseEntity.getPartnerId());
-            //修改lastmodifytime
+            // 修改lastmodifytime
             courseTee.setLastModifyTime(DateUtility.getCurTimeInstance());
-            //状态直接设置为已上线            
+            // 状态直接设置为已上线
             courseTee.setStatus(Constant.COURSESTATUSONLINED);
             courseMapper.update(courseTee);
         }
@@ -591,14 +705,13 @@ public class CourseManagerImpl implements CourseManager {
         return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
     }
 
-    
     @Override
-    public int queryByPartnerTotal(CourseBo courseBo, UserBo userBo) {
+    public int queryCourseTotal(CourseBo courseBo, UserBo userBo) {
         return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
     }
 
     @Override
-    public int queryByFilterTotal(CourseBo courseBo) {
+    public int queryCourseByFilterTotal(CourseBo courseBo) {
         return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
     }
 

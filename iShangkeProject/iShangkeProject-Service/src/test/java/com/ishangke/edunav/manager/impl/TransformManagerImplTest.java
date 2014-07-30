@@ -34,7 +34,7 @@ public class TransformManagerImplTest {
 
     @Test
     public void testGetAction() throws IllegalArgumentException, IllegalAccessException{
-        ArrayList<ActionBo> list = (ArrayList<ActionBo>) transformManager.getActionByRoleName("user", "course", 100);
+        ArrayList<ActionBo> list = (ArrayList<ActionBo>) transformManager.getActionByRoleName("systemadmin", "course", 0);
         System.out.println("count: " + list.size());
         for (ActionBo a : list) {
             for (Field f : ActionBo.class.getFields()) {
@@ -43,14 +43,22 @@ public class TransformManagerImplTest {
             System.out.println("========");
         }
         System.out.println();
-        ArrayList<ActionBo> a = (ArrayList<ActionBo>)cache.get("transformactionusercourse100");
+        ArrayList<ActionBo> a = (ArrayList<ActionBo>)cache.get("transformactionsystemadmincourse0");
+        if (a != null) {
+            for (ActionBo b : a) {
+                for (Field f : ActionBo.class.getFields()) {
+                    System.out.println(f.getName() + "===>" + f.get(b).toString());
+                }
+                System.out.println("========");
+            }
+        }
         System.out.println("end~");
     }
     
     @Test
     public void testGetOperation() throws IllegalArgumentException, IllegalAccessException {
         cache.del("transformoperationpartneradminbooking4");
-        ArrayList<Operation> list = (ArrayList<Operation>) transformManager.getOperationByRoleName("partneradmin", "booking", 4);
+        ArrayList<Operation> list = (ArrayList<Operation>) transformManager.getOperationByRoleName("systemadmin", "booking", 4);
         System.out.println("count: " + list.size());
         for (Operation a : list) {
             for (Field f : Operation.class.getDeclaredFields()) {
@@ -60,15 +68,15 @@ public class TransformManagerImplTest {
             System.out.println("========");
         }
         System.out.println();
-        ArrayList<Operation> qqq = (ArrayList<Operation>)cache.get("transformoperationpartneradminbooking4");
-        
-        for (Operation a : qqq) {
-            for (Field f : Operation.class.getDeclaredFields()) {
-                f.setAccessible(true);
-                System.out.println(f.getName() + "===>" + f.get(a).toString());
-            }
-            System.out.println("========");
-        }
-        System.out.println("end~");
+//        ArrayList<Operation> qqq = (ArrayList<Operation>)cache.get("transformoperationpartneradminbooking4");
+//        
+//        for (Operation a : qqq) {
+//            for (Field f : Operation.class.getDeclaredFields()) {
+//                f.setAccessible(true);
+//                System.out.println(f.getName() + "===>" + f.get(a).toString());
+//            }
+//            System.out.println("========");
+//        }
+//        System.out.println("end~");
     }
 }

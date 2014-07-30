@@ -16,7 +16,6 @@ import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplatePageViewBo;
 import com.ishangke.edunav.commoncontract.model.OrderByBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.CourseService;
 import com.ishangke.edunav.commoncontract.service.CourseService.Client;
@@ -119,14 +118,14 @@ public class CourseFacade {
         return result;
     }
 
-    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String url) {
+    public CoursePageViewBo queryCourse(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String url) {
         CoursePageViewBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.queryCourseByPartner(courseBo, userBo, paginationBo, PermissionCache.getTag(url));
+            result = serviceClient.queryCourse(courseBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -227,7 +226,7 @@ public class CourseFacade {
         return result;
     }
 
-    public CourseTemplatePageViewBo queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String url)
+    public CourseTemplatePageViewBo queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String url)
             {
         CourseTemplatePageViewBo result = null;
         
@@ -235,7 +234,7 @@ public class CourseFacade {
 
         try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.queryCourseTemplateByPartnerId(courseTemplateBo, partnerBo, userBo, paginationBo, PermissionCache.getTag(url));
+            result = serviceClient.queryCourseTemplate(courseTemplateBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

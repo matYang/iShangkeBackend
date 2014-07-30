@@ -101,7 +101,7 @@ service CourseService {
      * @param userBo
      * @param paginationBo
      */
-    course.CoursePageViewBo queryCourseByPartner(1: course.CourseBo courseBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    course.CoursePageViewBo queryCourse(1: course.CourseBo courseBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为用户查询课程的功能。<br>
@@ -197,7 +197,7 @@ service CourseService {
      * @param partnerBo
      * @param paginationBo
      */
-    courseTemplate.CourseTemplatePageViewBo queryCourseTemplateByPartnerId(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    courseTemplate.CourseTemplatePageViewBo queryCourseTemplate(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法返回课程模版详情<br>
