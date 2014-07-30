@@ -68,7 +68,7 @@
       <if test="enabled != null">
         ENABLED,
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID,
       </if>
     </trim>
@@ -101,7 +101,7 @@
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         #{partnerId,jdbcType=INTEGER},
       </if>
     </trim>
@@ -148,7 +148,7 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-      <if test="partnerId != null">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
     </set>

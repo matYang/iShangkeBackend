@@ -73,7 +73,7 @@ service BookingService {
      * @return 预定单实体 BookingBo 列表
      *
      */
-    bookingHistory.BookingHistoryPageViewBo queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: partner.PartnerBo partnerBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    bookingHistory.BookingHistoryPageViewBo queryHistory(1: bookingHistory.BookingHistoryBo bookingHistoryBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * admin可以通过此方法查看所有订单的详细信息
