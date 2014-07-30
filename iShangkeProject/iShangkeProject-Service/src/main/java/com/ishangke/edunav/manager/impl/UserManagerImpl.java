@@ -546,6 +546,7 @@ public class UserManagerImpl implements UserManager {
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
             userMapper.update(curUser);
+            authManager.openAuthSession(curUser.getId());
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
@@ -582,6 +583,7 @@ public class UserManagerImpl implements UserManager {
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
             userMapper.update(curUser);
+            authManager.openAuthSession(curUser.getId());
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
