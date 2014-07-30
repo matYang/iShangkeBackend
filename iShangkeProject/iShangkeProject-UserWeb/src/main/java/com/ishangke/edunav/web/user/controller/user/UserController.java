@@ -93,9 +93,9 @@ public class UserController extends AbstractController{
     public @ResponseBody EmptyResponse cv( @RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
-        UserBo userBo = new UserBo();
-        userBo.setPhone(phone);
-        userFacade.openCellSession(userBo, permissionTag);
+        UserVo userVo = new UserVo();
+        userVo.setPhone(phone);
+        userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
         
         return new EmptyResponse();
     }
@@ -116,9 +116,8 @@ public class UserController extends AbstractController{
         }
         
         UserBo userBo = UserConverter.fromModel(userVo);
-        SessionBo cellSessionBo = new SessionBo();
-        cellSessionBo.setAccountIdentifier(userBo.getPhone());
-        cellSessionBo.setAuthCode(cellSessionVo.getAuthCode());
+        cellSessionVo.setAccountIdentifier(userBo.getPhone());
+        cellSessionVo.setAuthCode(cellSessionVo.getAuthCode());
 
         UserBo result = userFacade.registerUser(userBo, cellSessionBo, permissionTag);
         responseVo = UserConverter.toModel(result);
