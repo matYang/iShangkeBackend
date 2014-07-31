@@ -533,12 +533,11 @@ public class UserManagerImpl implements UserManager {
             UserEntityExt search = new UserEntityExt();
             search.setPhone(loginBo.getAccountIdentifier());
             
-            List<UserEntityExt> results = userMapper.list(search, null);
-            if (results == null || results.size() == 0) {
+            curUser = userMapper.getByPhone(search);
+            if (curUser == null) {
                 throw new UserNotFoundException("LoginByPhone failed for user: " + loginBo.getAccountIdentifier());
             }
-            
-            curUser = results.get(0);
+
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("Phone or password not match");
             }
@@ -574,16 +573,14 @@ public class UserManagerImpl implements UserManager {
                 throw new ManagerException("User cannot login, please wait for a minute");
             }
             
-            
             UserEntityExt search = new UserEntityExt();
             search.setReference(loginBo.getAccountIdentifier());
             
-            List<UserEntityExt> results = userMapper.list(search, null);
-            if (results == null || results.size() == 0) {
+            curUser = userMapper.getByReference(search);
+            if (curUser == null) {
                 throw new UserNotFoundException("LoginByReference failed for user: " + loginBo.getAccountIdentifier());
             }
-            
-            curUser = results.get(0);
+
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("Reference or password not match");
             }
