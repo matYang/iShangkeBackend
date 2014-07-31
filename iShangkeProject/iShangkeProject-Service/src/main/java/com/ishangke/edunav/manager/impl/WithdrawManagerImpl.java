@@ -125,7 +125,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         }
         else {
             if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userEntity.getId())) {
-                throw new AuthenticationException("User updating someone else's withdraw");
+                throw new AuthenticationException("User deleting someone else's withdraw");
             }
         }
         

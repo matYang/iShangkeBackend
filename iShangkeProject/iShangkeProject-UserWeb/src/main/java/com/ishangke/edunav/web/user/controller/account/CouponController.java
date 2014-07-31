@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.commoncontract.model.CouponBo;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CouponPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
@@ -86,42 +88,42 @@ public class CouponController extends AbstractController{
     }
     
     
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-//    public @ResponseBody CouponVo  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-//        String permissionTag = this.getUrl(req);
-//        
-//        CouponVo couponVo = new CouponVo();
-//        couponVo.setId(id);
-//        CouponBo responseBo = null;
-//        CouponVo responseVo = null;
-//        
-//        
-//        responseBo = accountFacade.q    queryCouponById(CouponConverter.fromModel(couponVo), new UserBo(), permissionTag);
-//        responseVo = CouponConverter.toModel(responseBo);
-//        
-//        return responseVo;
-//    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody CouponVo  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        
+        CouponVo couponVo = new CouponVo();
+        couponVo.setId(id);
+        CouponBo responseBo = null;
+        CouponVo responseVo = null;
+        
+        
+        responseBo = accountFacade.queryCouponById(CouponConverter.fromModel(couponVo), new UserBo(), permissionTag);
+        responseVo = CouponConverter.toModel(responseBo);
+        
+        return responseVo;
+    }
     
-//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
-//    public @ResponseBody CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-//        CouponVo responseVo = null;
-//        
-//        String permissionTag = this.getUrl(req);
-//        SessionBo authSessionBo = this.getSession(req);
-//        
-//        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
-//        int curId = curUser.getId();
-//        boolean loggedIn =  curId > 0;
-//        if (!loggedIn) {
-//            throw new ControllerException("对不起，您尚未登录");
-//        }
-//        
-//        
-//        CouponVo couponVo = new CouponVo();
-//        couponVo.setId(id);
-//        
-//        CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
-//        responseVo = CouponConverter.toModel(resultCoupon);
-//        return responseVo;
-//    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
+    public @ResponseBody CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+        CouponVo responseVo = null;
+        
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
+        
+
+        CouponVo couponVo = new CouponVo();
+        couponVo.setId(id);
+        
+        CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
+        responseVo = CouponConverter.toModel(resultCoupon);
+        return responseVo;
+    }
 }
