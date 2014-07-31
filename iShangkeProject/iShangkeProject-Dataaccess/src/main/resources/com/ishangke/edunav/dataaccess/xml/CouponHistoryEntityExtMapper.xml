@@ -232,7 +232,7 @@
       </if>
       <if test="entity.couponId == null or entity.couponId == 0">
 
-        <if test="entity.couponIdSet != nul entity.couponIdSet.size() > 0">
+        <if test="entity.couponIdSet != null and entity.couponIdSet.size() > 0">
           AND COUPON_HISTORY.COUPON_ID IN
           <foreach collection="entity.couponIdSet" item="listItem" open="(" close=")"
             separator=",">

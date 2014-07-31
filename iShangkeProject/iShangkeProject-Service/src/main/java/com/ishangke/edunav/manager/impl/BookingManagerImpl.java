@@ -269,7 +269,7 @@ public class BookingManagerImpl implements BookingManager {
         }
 
         List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, bookingEntity.getStatus());
-        
+
         BookingEntityExt resultBooking = bookingMapper.getById(bookingEntity.getId());
         BookingBo booking = BookingConverter.toBo(resultBooking);
         booking.setActionList(actions);
@@ -475,7 +475,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
-            //使用载体bo传递过来的note作为remark
+            // 使用载体bo传递过来的note作为remark
             bookingHistory.setRemark(bookingBo.getNote());
             bookingHistoryMapper.add(bookingHistory);
 
@@ -526,14 +526,14 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
-          //使用载体bo传递过来的note作为remark
+            // 使用载体bo传递过来的note作为remark
             bookingHistory.setRemark(bookingBo.getNote());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
 
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
-            //因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            // 因为note不会被保存，是临时放入bo中的，所以需要设置一下
             resultBooking.setNote(bookingBo.getNote());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
@@ -560,7 +560,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
-          //使用载体bo传递过来的note作为remark
+            // 使用载体bo传递过来的note作为remark
             bookingHistory.setRemark(bookingBo.getNote());
             bookingHistoryMapper.add(bookingHistory);
 
@@ -569,8 +569,8 @@ public class BookingManagerImpl implements BookingManager {
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
-            
-          //因为note不会被保存，是临时放入bo中的，所以需要设置一下
+
+            // 因为note不会被保存，是临时放入bo中的，所以需要设置一下
             resultBooking.setNote(bookingBo.getNote());
 
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
@@ -609,16 +609,16 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistoryMapper.add(bookingHistory);
             LOGGER.warn(String.format("[Booking]system admin [%d] [%s] booking status from [%d] to [%d] at" + new Date(), userBo.getId(), op.getName(), preStatus, op.getNextStatus()));
 
-            //添加systemadmin能够进行的后续操作
+            // 添加systemadmin能够进行的后续操作
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
 
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo responseBo = BookingConverter.toBo(resultBooking);
             responseBo.setActionList(actions);
-            
-          //因为note不会被保存，是临时放入bo中的，所以需要设置一下
+
+            // 因为note不会被保存，是临时放入bo中的，所以需要设置一下
             resultBooking.setNote(bookingBo.getNote());
-            
+
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");

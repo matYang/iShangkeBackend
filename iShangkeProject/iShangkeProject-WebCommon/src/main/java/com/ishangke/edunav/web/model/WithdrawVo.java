@@ -10,7 +10,7 @@ public class WithdrawVo {
 
     private String payeeId;
 
-    private String peyeeName;
+    private String payeeName;
 
     private Integer type;
 
@@ -44,11 +44,11 @@ public class WithdrawVo {
     public void setPayeeId(String payeeId) {
         this.payeeId = payeeId;
     }
-    public String getPeyeeName() {
-        return peyeeName;
+    public String getPayeeName() {
+        return payeeName;
     }
-    public void setPeyeeName(String peyeeName) {
-        this.peyeeName = peyeeName;
+    public void setPayeeName(String peyeeName) {
+        this.payeeName = peyeeName;
     }
     public Integer getType() {
         return type;
