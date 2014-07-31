@@ -154,4 +154,9 @@ public class Constant {
     
     //标记成功
     public static final String SUCCESS = "success";
+    
+    //category
+    public static final String CATEGORYCACHE = "CATEGORYCACHE";
+    public static final int CATEGORYCACHETIME = 29 * 24 * 60 * 60;
+    public static final int CATEGORYCACHEMAXLENGTH = 6;
 }

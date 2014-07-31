@@ -3,7 +3,7 @@ package com.ishangke.edunav.web.tree;
 /**
  * This exception is used for tree parser to indication violation of hierarchical structure
  */
-public class HierarchyException extends Exception{
+public class HierarchyException extends RuntimeException{
     private static final long serialVersionUID = 1L;
     private String msg;
     public HierarchyException(String message) {

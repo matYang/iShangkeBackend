@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.crypto;
+package com.ishangke.edunav.manager.common;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;

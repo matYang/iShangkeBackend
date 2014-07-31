@@ -23,7 +23,7 @@ public interface BookingManager {
      * @return 预定单实体 BookingBo
      *
      */
-    BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo);
+    BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo);
     
     /**
      * 
@@ -35,7 +35,7 @@ public interface BookingManager {
      *              调用方法的用户信息
      * @return
      */
-    BookingBo transformBookingStatus(BookingBo bookingBo, CommentBookingBo commentBookingBo, int operation, UserBo userBo);
+    BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo);
 
     /**
      * 本方法为查询预定单预定单功能。<br>

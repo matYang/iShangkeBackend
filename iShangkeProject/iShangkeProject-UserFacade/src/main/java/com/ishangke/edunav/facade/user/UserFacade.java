@@ -47,8 +47,8 @@ public class UserFacade {
         return result;
     }
 
-    public UserBo loginByPhone(LoginBo loginBo, String permissionTag) {
-        UserBo result = null;
+    public SessionBo loginByPhone(LoginBo loginBo, String permissionTag) {
+        SessionBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 
@@ -66,8 +66,8 @@ public class UserFacade {
         return result;
     }
 
-    public UserBo loginByReference(LoginBo loginBo, String permissionTag) {
-        UserBo result = null;
+    public SessionBo loginByReference(LoginBo loginBo, String permissionTag) {
+        SessionBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 

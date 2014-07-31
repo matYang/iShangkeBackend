@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.constant.DefaultValues;
+import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
@@ -41,10 +41,10 @@ import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.async.dispatcher.SMSDispatcher;
+import com.ishangke.edunav.manager.common.PasswordCrypto;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
-import com.ishangke.edunav.manager.crypto.PasswordCrypto;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.UserNotFoundException;
@@ -155,8 +155,8 @@ public class UserManagerImpl implements UserManager {
             
             
             CouponEntityExt couponEntity = new CouponEntityExt();
-            couponEntity.setBalance(DefaultValues.COUPONREGISTRATIONVALUE);
-            couponEntity.setTotal(DefaultValues.COUPONREGISTRATIONVALUE);
+            couponEntity.setBalance(DefaultValue.COUPONREGISTRATIONVALUE);
+            couponEntity.setTotal(DefaultValue.COUPONREGISTRATIONVALUE);
             couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
             couponEntity.setStatus(CouponEnums.Status.USABLE.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
@@ -183,8 +183,8 @@ public class UserManagerImpl implements UserManager {
                 inviterEntity = inviterSearchResult.get(0);
                 
                 CouponEntityExt curUserCouponEntity = new CouponEntityExt();
-                curUserCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
-                curUserCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
+                curUserCouponEntity.setBalance(DefaultValue.COUPONINVITATIONVALUE);
+                curUserCouponEntity.setTotal(DefaultValue.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
                 curUserCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
                 curUserCouponEntity.setExpiryTime(expiry);
@@ -197,8 +197,8 @@ public class UserManagerImpl implements UserManager {
                 couponManager.createCoupon(CouponConverter.toBo(curUserCouponEntity), UserConverter.toBo(userEntity));
                 
                 CouponEntityExt inviterCouponEntity = new CouponEntityExt();
-                inviterCouponEntity.setBalance(DefaultValues.COUPONINVITATIONVALUE);
-                inviterCouponEntity.setTotal(DefaultValues.COUPONINVITATIONVALUE);
+                inviterCouponEntity.setBalance(DefaultValue.COUPONINVITATIONVALUE);
+                inviterCouponEntity.setTotal(DefaultValue.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
                 inviterCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
                 inviterCouponEntity.setExpiryTime(expiry);
@@ -219,10 +219,10 @@ public class UserManagerImpl implements UserManager {
             
             UserEntityExt returnEntity = userMapper.getById(userEntity.getId());
             if (notify) {
-                SMSDispatcher.sendUserRegistraterSMS(userEntity.getPhone(), DefaultValues.COUPONREGISTRATIONVALUE);
+                SMSDispatcher.sendUserRegistraterSMS(userEntity.getPhone(), DefaultValue.COUPONREGISTRATIONVALUE);
                 if (inviterEntity != null) {
-                    SMSDispatcher.sendInviteeSMS(userEntity.getPhone(), DefaultValues.COUPONINVITATIONVALUE);
-                    SMSDispatcher.sendInviterSMS(inviterEntity.getPhone(), DefaultValues.COUPONINVITATIONVALUE);
+                    SMSDispatcher.sendInviteeSMS(userEntity.getPhone(), DefaultValue.COUPONINVITATIONVALUE);
+                    SMSDispatcher.sendInviterSMS(inviterEntity.getPhone(), DefaultValue.COUPONINVITATIONVALUE);
                 }
             }
             return UserConverter.toBo(returnEntity);
@@ -521,12 +521,13 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserBo loginByPhone(LoginBo loginBo) {
+    public SessionBo loginByPhone(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
         
         UserEntityExt curUser = null;
+        String authCode = null;
         try {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
@@ -546,7 +547,7 @@ public class UserManagerImpl implements UserManager {
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
             userMapper.update(curUser);
-            authManager.openAuthSession(curUser.getId());
+            authCode = authManager.openAuthSession(curUser.getId());
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
@@ -554,16 +555,22 @@ public class UserManagerImpl implements UserManager {
         }
         
         authManager.success(loginBo.getAccountIdentifier());
-        return UserConverter.toBo(curUser);
+        
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier(loginBo.getAccountIdentifier());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
     }
 
     @Override
-    public UserBo loginByReference(LoginBo loginBo) {
+    public SessionBo loginByReference(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
         
         UserEntityExt curUser = null;
+        String authCode = null;
         try {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
@@ -583,7 +590,7 @@ public class UserManagerImpl implements UserManager {
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
             userMapper.update(curUser);
-            authManager.openAuthSession(curUser.getId());
+            authCode = authManager.openAuthSession(curUser.getId());
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
@@ -591,7 +598,12 @@ public class UserManagerImpl implements UserManager {
         }
         
         authManager.success(loginBo.getAccountIdentifier());
-        return UserConverter.toBo(curUser);
+        
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier(loginBo.getAccountIdentifier());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
     }
 
     

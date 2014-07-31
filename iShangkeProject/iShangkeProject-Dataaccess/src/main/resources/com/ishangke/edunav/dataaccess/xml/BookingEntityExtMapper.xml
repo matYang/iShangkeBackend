@@ -708,7 +708,7 @@
   <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
-    from BOOKING join COURSE on BOOKING.COURSE_ID = COURSE.ID
+    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
     where BOOKING.DELETED = 0 and COURSE.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
     <if test="entity != null">
 
@@ -916,7 +916,7 @@
     select count(*) from (
       SELECT
     <include refid="Booking_Base_Column_List" />
-    from BOOKING join COURSE on BOOKING.COURSE_ID = COURSE.ID
+    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
     where BOOKING.DELETED = 0 and COURSE.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
     <if test="entity != null">
 

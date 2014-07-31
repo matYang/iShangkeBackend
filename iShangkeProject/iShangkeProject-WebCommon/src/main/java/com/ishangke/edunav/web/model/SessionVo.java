@@ -2,7 +2,7 @@ package com.ishangke.edunav.web.model;
 
 public class SessionVo {
     private Integer id;
-    private Integer accountIdentifier;
+    private String accountIdentifier;
     private String authCode;
     public Integer getId() {
         return id;
@@ -10,10 +10,10 @@ public class SessionVo {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getAccountIdentifier() {
+    public String getAccountIdentifier() {
         return accountIdentifier;
     }
-    public void setAccountIdentifier(Integer accountIdentifier) {
+    public void setAccountIdentifier(String accountIdentifier) {
         this.accountIdentifier = accountIdentifier;
     }
     public String getAuthCode() {

@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
-import com.ishangke.edunav.commoncontract.model.AccountHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
@@ -80,7 +78,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo loginByPhone(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public SessionBo loginByPhone(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByPhone(loginBo);
         } catch (ManagerException e) {
@@ -93,7 +91,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo loginByReference(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public SessionBo loginByReference(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByReference(loginBo);
         } catch (ManagerException e) {

@@ -147,7 +147,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     public CategoryPageViewBo queryCategoryByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要进行权限控制
-            List<CategoryBo> data =  courseManager.queryByKeyword(keyword);
+            List<CategoryBo> data =  courseManager.queryCategoryByKeyword(keyword);
             CategoryPageViewBo pageView = new CategoryPageViewBo();
             pageView.setData(data);
             return pageView;
@@ -168,15 +168,15 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CoursePageViewBo queryCourseByPartner(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CoursePageViewBo queryCourse(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
             paginationBo = PageUtil.getPage(paginationBo);
-            List<CourseBo> data = courseManager.queryByPartner(courseBo, userBo, paginationBo);
-            int total = courseManager.queryByPartnerTotal(courseBo, userBo);
+            List<CourseBo> data = courseManager.queryCourse(courseBo, userBo, paginationBo);
+            int total = courseManager.queryCourseTotal(courseBo, userBo);
             CoursePageViewBo pageView = new CoursePageViewBo();
             pageView.setStart(paginationBo.getOffset());
             pageView.setCount(paginationBo.getSize());
@@ -204,8 +204,8 @@ public class CourseServiceImpl implements CourseService.Iface {
         try {
             //不需要进行权限控制
             paginationBo = PageUtil.getPage(paginationBo);
-            List<CourseBo> data =courseManager.queryByFilter(courseBo, paginationBo);
-            int total = courseManager.queryByFilterTotal(courseBo);
+            List<CourseBo> data =courseManager.queryCourseByFilter(courseBo, paginationBo);
+            int total = courseManager.queryCourseByFilterTotal(courseBo);
             CoursePageViewBo pageView = new CoursePageViewBo();
             pageView.setStart(paginationBo.getOffset());
             pageView.setCount(paginationBo.getSize());
@@ -232,10 +232,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseBo queryCourseById(CourseBo courseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCourseById"));
-                throw new NoPermissionException();
-            }
+            //不需要进行权限控制
             return courseManager.queryById(courseBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -322,16 +319,19 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseTemplatePageViewBo queryCourseTemplateByPartnerId(CourseTemplateBo courseTemplateBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
+    public CourseTemplatePageViewBo queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
                 throw new NoPermissionException();
             }
-            
-            List<CourseTemplateBo> data =  courseTemplateManager.queryCourseTemplateByPartnerId(courseTemplateBo, partnerBo, userBo, paginationBo);
+            paginationBo = PageUtil.getPage(paginationBo);
+            List<CourseTemplateBo> data =  courseTemplateManager.queryCourseTemplate(courseTemplateBo, userBo, paginationBo);
             CourseTemplatePageViewBo pageView = new CourseTemplatePageViewBo();
+            int total = courseTemplateManager.queryCourseTemplateTotal(courseTemplateBo, userBo);
+            pageView.setCount(paginationBo.getSize());
+            pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
          

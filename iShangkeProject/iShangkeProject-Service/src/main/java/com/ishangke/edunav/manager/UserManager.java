@@ -83,12 +83,12 @@ public interface UserManager {
      * @param loginBo
      *            用户登录信息
      * 
-     * @return 用户实体 UserBo
+     * @return SessionBo
      * 
      * 
      * @param loginBo
      */
-    UserBo loginByPhone(LoginBo loginBo);
+    SessionBo loginByPhone(LoginBo loginBo);
 
     /**
      * 本方法为所有用户提供使用识别码登录的功能。<br>
@@ -97,12 +97,12 @@ public interface UserManager {
      * @param loginBo
      *            用户登录信息
      * 
-     * @return 用户实体 UserBo
+     * @return SessionBo
      * 
      * 
      * @param loginBo
      */
-    UserBo loginByReference(LoginBo loginBo);
+    SessionBo loginByReference(LoginBo loginBo);
 
     /**
      * 本方法为ishangke管理员创建新用户<br>
