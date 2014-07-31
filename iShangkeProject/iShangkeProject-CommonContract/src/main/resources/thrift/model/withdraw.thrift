@@ -8,7 +8,7 @@ struct WithdrawBo {
     1: i32 id
     2: i32 userId
     3: string payeeId
-    4: string peyeeName
+    4: string payeeName
     5: i32 type
     6: i64 lastModifyTime
     7: i64 createTime

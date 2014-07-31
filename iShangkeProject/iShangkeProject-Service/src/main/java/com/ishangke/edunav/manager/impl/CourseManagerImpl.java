@@ -299,7 +299,7 @@ public class CourseManagerImpl implements CourseManager {
     public List<CourseCommentBo> queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo) {
         CourseEntityExt course = courseMapper.getById(courseBo.getId());
         if (course == null) {
-            throw new ManagerException("course is noty exits");
+            throw new ManagerException("course is not exits");
         }
         if (Constant.COURSESTATUSONLINED != course.getStatus()) {
             throw new ManagerException("course is not online");
@@ -324,7 +324,7 @@ public class CourseManagerImpl implements CourseManager {
     @Override
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo) {
         String roleName = authManager.getRole(userBo.getId());
-        if (Constant.ROLEADMIN != roleName || Constant.ROLESYSTEMADMIN != roleName) {
+        if (Constant.ROLEADMIN.equals(roleName) && Constant.ROLESYSTEMADMIN.equals(roleName)) {
             throw new ManagerException("cannot delete comment current user");
         }
         try {

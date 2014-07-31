@@ -272,7 +272,7 @@
         PARTNER_QUALIFICATION,
       </if>
       <if test="rating != null">
-        PARTNER_RATING,
+        RATING,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -482,7 +482,7 @@
         #{partnerQualification,jdbcType=INTEGER},
       </if>
       <if test="rating != null">
-        PARTNER_RATING = #{rating,jdbcType=DOUBLE},
+       RATING = #{rating,jdbcType=DOUBLE},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -504,11 +504,13 @@
     from PARNTER PARNTER
     left join TEACHER TEACHER
     ON TEACHER.PARTNER_ID = PARNTER.ID
-    left join CLASS_PHOTO
+    left join
+    CLASS_PHOTO
     CLASS_PHOTO
     ON CLASS_PHOTO.PARTNER_ID = PARNTER.ID
     left join ADDRESS ADDRESS
-    ON ADDRESS.PARTNER_ID =
+    ON
+    ADDRESS.PARTNER_ID =
     PARTNER.ID
     where PARNTER.DELETED = 0 AND PARNTER.ID = #{id}
   </select>
@@ -529,20 +531,14 @@
   <select id="list" parameterType="map" resultMap="PartnerExtMap">
     select
     <include refid="Partner_Base_Column_List"></include>
-    from PARTNER
+    from PARTNER 
     where PARTNER.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
         AND PARTNER.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND PARTNER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND PARTNER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND PARTNER.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -550,15 +546,15 @@
         </if>
       </if>
 
-      <if test="entity.instName != null and entity.instName != ''">
+      <if test="entity.instName != null and !entity.instName.equals('')">
         AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.logoUrl != null and entity.logoUrl != ''">
+      <if test="entity.logoUrl != null and !entity.logoUrl.equals('')">
         AND PARTNER.LOGO_URL LIKE "%"#{entity.logoUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.contract != null and entity.contract != ''">
+      <if test="entity.contract != null and !entity.contract.equals('')">
         AND PARTNER.CONTRACT LIKE "%"#{entity.contract,jdbcType=VARCHAR}"%"
       </if>
 
@@ -566,45 +562,45 @@
         AND PARTNER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.wholeName != null and entity.wholeName != ''">
+      <if test="entity.wholeName != null and !entity.wholeName.equals('')">
         AND PARTNER.WHOLE_NAME LIKE "%"#{entity.wholeName,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.licence != null and entity.licence != ''">
+      <if test="entity.licence != null and !entity.licence.equals('')">
         AND PARTNER.LICENCE LIKE "%"#{entity.licence,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.organizationNum != null and entity.organizationNum != ''">
+      <if test="entity.organizationNum != null and !entity.organizationNum.equals('')">
         AND PARTNER.ORGANIZATION_NUM LIKE "%"#{entity.organizationNum,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.reference != null and entity.reference != ''">
+      <if test="entity.reference != null and !entity.reference.equals('')">
         AND PARTNER.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.partnerIntro != null and entity.partnerIntro != ''">
+      <if test="entity.partnerIntro != null and !entity.partnerIntro.equals('')">
         AND PARTNER.PARTNER_INTRO LIKE "%"#{entity.partnerIntro,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.partnerDistinction != null and entity.partnerDistinction != ''">
+      <if test="entity.partnerDistinction != null and !entity.partnerDistinction.equals('')">
         AND PARTNER.PARTNER_DISTINCTION LIKE
         "%"#{entity.partnerDistinction,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.licenceImgUrl != null and entity.licenceImgUrl != ''">
+      <if test="entity.licenceImgUrl != null and !entity.licenceImgUrl.equals('')">
         AND PARTNER.LICENCE_IMG_URL LIKE "%"#{entity.licenceImgUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.taxRegImgUrl != null and entity.taxRegImgUrl != ''">
+      <if test="entity.taxRegImgUrl != null and !entity.taxRegImgUrl.equals('')">
         AND PARTNER.TAX_REG_IMG_URL LIKE "%"#{entity.taxRegImgUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.eduQualificationImgUrl != null and entity.eduQualificationImgUrl != ''">
+      <if test="entity.eduQualificationImgUrl != null and !entity.eduQualificationImgUrl.equals('')">
         AND PARTNER.EDU_QUALIFICATION_IMG_URL LIKE
         "%"#{entity.eduQualificationImgUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.hqLocation != null and entity.hqLocation != ''">
+      <if test="entity.hqLocation != null and !entity.hqLocation.equals('')">
         AND PARTNER.HQ_LOCATION LIKE "%"#{entity.hqLocation,jdbcType=VARCHAR}"%"
       </if>
 
@@ -612,43 +608,43 @@
         AND PARTNER.UNI_REG_LOCATION = #{entity.uniRegLocation,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.hqContact != null and entity.hqContact != ''">
+      <if test="entity.hqContact != null and !entity.hqContact.equals('')">
         AND PARTNER.HQ_CONTACT LIKE "%"#{entity.hqContact,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.hqContactPhone != null and entity.hqContactPhone != ''">
+      <if test="entity.hqContactPhone != null and !entity.hqContactPhone.equals('')">
         AND PARTNER.HQ_CONTACT_PHONE LIKE "%"#{entity.hqContactPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.hqContactSecopt != null and entity.hqContactSecopt != ''">
+      <if test="entity.hqContactSecopt != null and !entity.hqContactSecopt.equals('')">
         AND PARTNER.HQ_CONTACT_SECOPT LIKE
         "%"#{entity.hqContactSecopt,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.courseContact != null and entity.courseContact != ''">
+      <if test="entity.courseContact != null and !entity.courseContact.equals('')">
         AND PARTNER.COURSE_CONTACT LIKE "%"#{entity.courseContact,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.courseContactPhone != null and entity.courseContactPhone != ''">
+      <if test="entity.courseContactPhone != null and !entity.courseContactPhone.equals('')">
         AND PARTNER.COURSE_CONTACT_PHONE LIKE
         "%"#{entity.courseContactPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.studentInqueryPhone != null and entity.studentInqueryPhone != ''">
+      <if test="entity.studentInqueryPhone != null and !entity.studentInqueryPhone.equals('')">
         AND PARTNER.STUDENT_INQUERY_PHONE LIKE
         "%"#{entity.studentInqueryPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.regContact != null and entity.regContact != ''">
+      <if test="entity.regContact != null and !entity.regContact.equals('')">
         AND PARTNER.REG_CONTACT LIKE "%"#{entity.regContact,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.regContactPhone != null and entity.regContactPhone != ''">
+      <if test="entity.regContactPhone != null and !entity.regContactPhone.equals('')">
         AND PARTNER.REG_CONTACT_PHONE LIKE
         "%"#{entity.regContactPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.regContactFax != null and entity.regContactFax != ''">
+      <if test="entity.regContactFax != null and !entity.regContactFax.equals('')">
         AND PARTNER.REG_CONTACT_FAX LIKE "%"#{entity.regContactFax,jdbcType=VARCHAR}"%"
       </if>
 
@@ -752,13 +748,7 @@
         AND PARTNER.ID = #{entity.id,jdbcType=INTEGER}
       </if>
       <if test="entity.id == null or entity.id == 0">
-        <if test="entity.idStart != null and entity.idStart != 0">
-          <![CDATA[AND PARTNER.ID >= #{entity.idStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idEnd != null and entity.idEnd != 0">
-          <![CDATA[AND PARTNER.ID <= #{entity.idEnd,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.idSet.size() > 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND PARTNER.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
@@ -766,15 +756,15 @@
         </if>
       </if>
 
-      <if test="entity.instName != null and entity.instName != ''">
+      <if test="entity.instName != null and !entity.instName.equals('')">
         AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.logoUrl != null and entity.logoUrl != ''">
+      <if test="entity.logoUrl != null and !entity.logoUrl.equals('')">
         AND PARTNER.LOGO_URL LIKE "%"#{entity.logoUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.contract != null and entity.contract != ''">
+      <if test="entity.contract != null and !entity.contract.equals('')">
         AND PARTNER.CONTRACT LIKE "%"#{entity.contract,jdbcType=VARCHAR}"%"
       </if>
 
@@ -782,45 +772,45 @@
         AND PARTNER.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.wholeName != null and entity.wholeName != ''">
+      <if test="entity.wholeName != null and !entity.wholeName.equals('')">
         AND PARTNER.WHOLE_NAME LIKE "%"#{entity.wholeName,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.licence != null and entity.licence != ''">
+      <if test="entity.licence != null and !entity.licence.equals('')">
         AND PARTNER.LICENCE LIKE "%"#{entity.licence,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.organizationNum != null and entity.organizationNum != ''">
+      <if test="entity.organizationNum != null and !entity.organizationNum.equals('')">
         AND PARTNER.ORGANIZATION_NUM LIKE "%"#{entity.organizationNum,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.reference != null and entity.reference != ''">
+      <if test="entity.reference != null and !entity.reference.equals('')">
         AND PARTNER.REFERENCE LIKE "%"#{entity.reference,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.partnerIntro != null and entity.partnerIntro != ''">
+      <if test="entity.partnerIntro != null and !entity.partnerIntro.equals('')">
         AND PARTNER.PARTNER_INTRO LIKE "%"#{entity.partnerIntro,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.partnerDistinction != null and entity.partnerDistinction != ''">
+      <if test="entity.partnerDistinction != null and !entity.partnerDistinction.equals('')">
         AND PARTNER.PARTNER_DISTINCTION LIKE
         "%"#{entity.partnerDistinction,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.licenceImgUrl != null and entity.licenceImgUrl != ''">
+      <if test="entity.licenceImgUrl != null and !entity.licenceImgUrl.equals('')">
         AND PARTNER.LICENCE_IMG_URL LIKE "%"#{entity.licenceImgUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.taxRegImgUrl != null and entity.taxRegImgUrl != ''">
+      <if test="entity.taxRegImgUrl != null and !entity.taxRegImgUrl.equals('')">
         AND PARTNER.TAX_REG_IMG_URL LIKE "%"#{entity.taxRegImgUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.eduQualificationImgUrl != null and entity.eduQualificationImgUrl != ''">
+      <if test="entity.eduQualificationImgUrl != null and entity.eduQualificationImgUrl.equals('')">
         AND PARTNER.EDU_QUALIFICATION_IMG_URL LIKE
         "%"#{entity.eduQualificationImgUrl,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.hqLocation != null and entity.hqLocation != ''">
+      <if test="entity.hqLocation != null and entity.hqLocation.equals('')">
         AND PARTNER.HQ_LOCATION LIKE "%"#{entity.hqLocation,jdbcType=VARCHAR}"%"
       </if>
 
@@ -828,43 +818,43 @@
         AND PARTNER.UNI_REG_LOCATION = #{entity.uniRegLocation,jdbcType=INTEGER}
       </if>
 
-      <if test="entity.hqContact != null and entity.hqContact != ''">
+      <if test="entity.hqContact != null and !entity.hqContact.equals('')">
         AND PARTNER.HQ_CONTACT LIKE "%"#{entity.hqContact,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.hqContactPhone != null and entity.hqContactPhone != ''">
+      <if test="entity.hqContactPhone != null and !entity.hqContactPhone.equals('')">
         AND PARTNER.HQ_CONTACT_PHONE LIKE "%"#{entity.hqContactPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.hqContactSecopt != null and entity.hqContactSecopt != ''">
+      <if test="entity.hqContactSecopt != null and !entity.hqContactSecopt.equals('')">
         AND PARTNER.HQ_CONTACT_SECOPT LIKE
         "%"#{entity.hqContactSecopt,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.courseContact != null and entity.courseContact != ''">
+      <if test="entity.courseContact != null and !entity.courseContact.equals('')">
         AND PARTNER.COURSE_CONTACT LIKE "%"#{entity.courseContact,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.courseContactPhone != null and entity.courseContactPhone != ''">
+      <if test="entity.courseContactPhone != null and !entity.courseContactPhone.equals('')">
         AND PARTNER.COURSE_CONTACT_PHONE LIKE
         "%"#{entity.courseContactPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.studentInqueryPhone != null and entity.studentInqueryPhone != ''">
+      <if test="entity.studentInqueryPhone != null and !entity.studentInqueryPhone.equals('')">
         AND PARTNER.STUDENT_INQUERY_PHONE LIKE
         "%"#{entity.studentInqueryPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.regContact != null and entity.regContact != ''">
+      <if test="entity.regContact != null and !entity.regContact.equals('')">
         AND PARTNER.REG_CONTACT LIKE "%"#{entity.regContact,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.regContactPhone != null and entity.regContactPhone != ''">
+      <if test="entity.regContactPhone != null and !entity.regContactPhone.equals('')">
         AND PARTNER.REG_CONTACT_PHONE LIKE
         "%"#{entity.regContactPhone,jdbcType=VARCHAR}"%"
       </if>
 
-      <if test="entity.regContactFax != null and entity.regContactFax != ''">
+      <if test="entity.regContactFax != null and !entity.regContactFax.equals('')">
         AND PARTNER.REG_CONTACT_FAX LIKE "%"#{entity.regContactFax,jdbcType=VARCHAR}"%"
       </if>
 
