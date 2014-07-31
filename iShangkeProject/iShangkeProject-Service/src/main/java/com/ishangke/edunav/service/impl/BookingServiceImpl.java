@@ -46,10 +46,10 @@ public class BookingServiceImpl implements BookingService.Iface {
     public BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createBookingByUser"));
+//                throw new NoPermissionException();
+//            }
             return bookingManager.createBookingByUser(bookingBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -127,10 +127,10 @@ public class BookingServiceImpl implements BookingService.Iface {
     public BookingHistoryPageViewBo queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistory"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistory"));
+//                throw new NoPermissionException();
+//            }
             paginationBo = PageUtil.getPage(paginationBo);
             List<BookingHistoryBo> data = bookingManager.queryHistory(bookingHistoryBo, userBo, paginationBo);
             int total = bookingManager.queryHistoryTotal(bookingHistoryBo, userBo);
