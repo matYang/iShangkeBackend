@@ -9,7 +9,7 @@ import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
-@RequestMapping("/api/v2/withdraw")
+@RequestMapping("/api/v2/order")
 
 public class OrderController extends AbstractController{
 
@@ -18,4 +18,7 @@ public class OrderController extends AbstractController{
     
     @Autowired
     BookingFacade  bookingFacade;
+    
+    //saving for alipay
+    
 }

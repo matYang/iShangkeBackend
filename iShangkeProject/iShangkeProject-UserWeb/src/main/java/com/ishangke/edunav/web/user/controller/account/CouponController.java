@@ -91,14 +91,11 @@ public class CouponController extends AbstractController{
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody CouponVo  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
-        CouponVo couponVo = new CouponVo();
-        couponVo.setId(id);
+     
         CouponBo responseBo = null;
         CouponVo responseVo = null;
         
-        
-        responseBo = accountFacade.queryCouponById(CouponConverter.fromModel(couponVo), new UserBo(), permissionTag);
+        responseBo = accountFacade.queryCouponById(id, new UserBo(), permissionTag);
         responseVo = CouponConverter.toModel(responseBo);
         
         return responseVo;
