@@ -11,9 +11,12 @@ import com.ishangke.edunav.web.model.pageview.BookingHistoryPageViewVo;
 
 public class BookingHistoryPageViewConverter {
     public static BookingHistoryPageViewVo toModel(BookingHistoryPageViewBo bo) {
+        if (bo == null) {
+            return null;
+        }
         BookingHistoryPageViewVo vo = new BookingHistoryPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<BookingHistoryVo> result = new ArrayList<>();

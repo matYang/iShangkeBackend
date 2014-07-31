@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
+import com.ishangke.edunav.commoncontract.model.BookingHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -21,9 +22,13 @@ import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.common.OrderByVo;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.BookingConverter;
+import com.ishangke.edunav.web.converter.BookingHistoryConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
+import com.ishangke.edunav.web.converter.pageview.BookingHistoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.BookingPageViewConverter;
+import com.ishangke.edunav.web.model.BookingHistoryVo;
 import com.ishangke.edunav.web.model.BookingVo;
+import com.ishangke.edunav.web.model.pageview.BookingHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.BookingPageViewVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
@@ -80,5 +85,16 @@ public class BookingController  extends AbstractController {
         BookingPageViewBo bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         BookingPageViewVo bookingVos = BookingPageViewConverter.toModel(bookingBos);
         return bookingVos;
+    }
+    
+    @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody BookingHistoryPageViewVo getBookingHistory(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingHistoryVo bookingHistoryVo, OrderByVo orderByVo) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        pageVo.addOrderByEntity(orderByVo);
+        BookingHistoryPageViewBo bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
+        BookingHistoryPageViewVo bookingHistoryVos = BookingHistoryPageViewConverter.toModel(bookingHistoryBos);
+        return bookingHistoryVos;
     }
 }
