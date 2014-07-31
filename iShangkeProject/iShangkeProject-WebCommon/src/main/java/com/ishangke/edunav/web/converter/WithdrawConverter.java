@@ -23,8 +23,8 @@ public class WithdrawConverter {
         if (vo.getPayeeId() != null) {
             withdrawBo.setPayeeId(vo.getPayeeId());
         }
-        if (vo.getPeyeeName() != null) {
-            withdrawBo.setPeyeeName(vo.getPeyeeName());
+        if (vo.getPayeeName() != null) {
+            withdrawBo.setPayeeName(vo.getPayeeName());
         }
         if (vo.getType() != null) {
             withdrawBo.setType(vo.getType());
@@ -67,7 +67,7 @@ public class WithdrawConverter {
         withdrawVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
         withdrawVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         withdrawVo.setPayeeId(bo.getPayeeId());
-        withdrawVo.setPeyeeName(bo.getPeyeeName());
+        withdrawVo.setPayeeName(bo.getPayeeName());
         if (Constant.DEFAULTNULL != bo.getType()) {
             withdrawVo.setType(bo.getType());
         }

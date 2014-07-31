@@ -5,7 +5,7 @@
     <id column="WITHDRAW_ID" property="id" jdbcType="INTEGER" />
     <result column="WITHDRAW_USERID" property="userId" jdbcType="INTEGER" />
     <result column="WITHDRAW_PAYEEID" property="payeeId" jdbcType="VARCHAR" />
-    <result column="WITHDRAW_PEYEENAME" property="peyeeName" jdbcType="VARCHAR" />
+    <result column="WITHDRAW_PAYEENAME" property="payeeName" jdbcType="VARCHAR" />
     <result column="WITHDRAW_TYPE" property="type" jdbcType="INTEGER" />
     <result column="WITHDRAW_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
@@ -19,7 +19,7 @@
     WITHDRAW.USER_ID WITHDRAW_USERID,
     WITHDRAW.PAYEE_ID
     WITHDRAW_PAYEEID,
-    WITHDRAW.PEYEE_NAME WITHDRAW_PEYEENAME,
+    WITHDRAW.PAYEE_NAME WITHDRAW_PAYEENAME,
     WITHDRAW.TYPE WITHDRAW_TYPE,
     WITHDRAW.LAST_MODIFY_TIME WITHDRAW_LASTMODIFYTIME,
     WITHDRAW.ENABLED WITHDRAW_ENABLED,
@@ -35,8 +35,8 @@
       <if test="payeeId != null and payeeId != 0">
         PAYEE_ID,
       </if>
-      <if test="peyeeName != null">
-        PEYEE_NAME,
+      <if test="payeeName != null">
+        PAYEE_NAME,
       </if>
       <if test="type != null">
         TYPE,
@@ -58,8 +58,8 @@
       <if test="payeeId != null and payeeId != 0">
         #{payeeId,jdbcType=VARCHAR},
       </if>
-      <if test="peyeeName != null">
-        #{peyeeName,jdbcType=VARCHAR},
+      <if test="payeeName != null">
+        #{payeeName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -95,8 +95,8 @@
       <if test="payeeId != null and payeeId != 0">
         PAYEE_ID = #{payeeId,jdbcType=VARCHAR},
       </if>
-      <if test="peyeeName != null">
-        PEYEE_NAME = #{peyeeName,jdbcType=VARCHAR},
+      <if test="payeeName != null">
+        PAYEE_NAME = #{payeeName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         TYPE = #{type,jdbcType=INTEGER},
@@ -166,11 +166,11 @@
         </if>
       </if>
 
-      <if test="entity.peyeeId != null and !entity.peyeeId.equals('')">
-        AND WITHDRAW.PEYEE_ID LIKE "%"#{entity.peyeeId,jdbcType=VARCHAR}"%"
+      <if test="entity.payeeId != null and !entity.payeeId.equals('')">
+        AND WITHDRAW.PAYEE_ID LIKE "%"#{entity.payeeId,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
-        AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
+      <if test="entity.payeeName != null and !entity.payeeName.equals('')">
+        AND WITHDRAW.PAYEE_NAME LIKE "%"#{entity.payeeName,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.type != null ">
         AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}
@@ -257,11 +257,11 @@
         </if>
       </if>
 
-      <if test="entity.peyeeId != null and !entity.peyeeId.equals('')">
-        AND WITHDRAW.PEYEE_ID LIKE "%"#{entity.peyeeId,jdbcType=VARCHAR}"%"
+      <if test="entity.payeeId != null and !entity.payeeId.equals('')">
+        AND WITHDRAW.PAYEE_ID LIKE "%"#{entity.payeeId,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.peyeeName != null and !entity.peyeeName.equals('')">
-        AND WITHDRAW.PEYEE_NAME LIKE "%"#{entity.peyeeName,jdbcType=VARCHAR}"%"
+      <if test="entity.payeeName != null and !entity.payeeName.equals('')">
+        AND WITHDRAW.PAYEE_NAME LIKE "%"#{entity.payeeName,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.type != null ">
         AND WITHDRAW.TYPE = #{entity.type,jdbcType=INTEGER}

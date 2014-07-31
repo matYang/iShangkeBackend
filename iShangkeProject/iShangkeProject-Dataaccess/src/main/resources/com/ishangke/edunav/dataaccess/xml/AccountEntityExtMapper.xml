@@ -145,14 +145,14 @@
 
       <!-- balance -->
       <if test="entity.balance != null and entity.balance != 0">
-        AND ACCOUNT.CRETITY = #{entity.balance,jdbcType=DOUBLE}
+        AND ACCOUNT.BALANCE = #{entity.balance,jdbcType=DOUBLE}
       </if>
       <if test="entity.balance == null or entity.balance == 0">
         <if test="entity.balanceStart != null and entity.balanceStart != 0">
-          <![CDATA[AND ACCOUNT.CRETITY >= #{entity.balanceStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND ACCOUNT.BALANCE >= #{entity.balanceStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.balanceEnd != null and entity.balanceEnd != 0">
-          <![CDATA[AND ACCOUNT.CRETITY <= #{entity.balanceEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND ACCOUNT.BALANCE <= #{entity.balanceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
       <!--realName -->
@@ -225,14 +225,14 @@
       </if>
 
       <if test="entity.balance != null and entity.balance != 0">
-        AND ACCOUNT.CRETITY = #{entity.balance,jdbcType=DOUBLE}
+        AND ACCOUNT.BALANCE = #{entity.balance,jdbcType=DOUBLE}
       </if>
       <if test="entity.balance == null or entity.balance == 0">
         <if test="entity.balanceStart != null and entity.balanceStart != 0">
-          <![CDATA[AND ACCOUNT.CRETITY >= #{entity.balanceStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND ACCOUNT.BALANCE >= #{entity.balanceStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.balanceEnd != null and entity.balanceEnd != 0">
-          <![CDATA[AND ACCOUNT.CRETITY <= #{entity.balanceEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND ACCOUNT.BALANCE <= #{entity.balanceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
