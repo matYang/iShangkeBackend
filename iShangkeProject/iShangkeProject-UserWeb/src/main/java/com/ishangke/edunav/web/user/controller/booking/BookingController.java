@@ -5,11 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -36,6 +38,17 @@ public class BookingController  extends AbstractController {
         
         BookingBo bookingBo = bookingFacade.createBookingByUser(BookingConverter.fromModel(booking), currentUser, permissionTag);
         BookingVo bookingVo = BookingConverter.toModel(bookingBo); 
+        return bookingVo;
+    }
+    
+    @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public @ResponseBody BookingVo transformBooking(@RequestBody BookingVo booking, HttpServletRequest req, HttpServletResponse resp, @PathVariable String operate) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int operation = Constant.BOOKINGOPERATEMAP.get(operate);
+        BookingBo bookingBo = bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser, permissionTag);
+        BookingVo bookingVo = BookingConverter.toModel(bookingBo);
         return bookingVo;
     }
 }
