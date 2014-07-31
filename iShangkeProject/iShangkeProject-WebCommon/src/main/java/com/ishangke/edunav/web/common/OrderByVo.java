@@ -4,6 +4,10 @@ public class OrderByVo {
     private String columnKey;
     private String order;
 
+    public OrderByVo() {
+        
+    }
+    
     public OrderByVo(String columnKey, String order) {
         super();
         this.columnKey = columnKey;

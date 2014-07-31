@@ -515,8 +515,11 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                 throw new ManagerException("unlogin user");
             }
             boolean isSameGroup = false;
+            CourseTemplateEntityExt courseTemplateEntity = courseTemplateMapper.getById(courseTemplateBo.getId());
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == courseTemplateBo.getPartnerId()) {
+                // //因为我们有特殊情况 api中需要提供/coursetemplate/{id} 在这种情况下coursetemplate
+                // bo id明确为一个id值
+                if ((g.getPartnerId() == courseTemplateBo.getPartnerId()) || (courseTemplateBo.getId() > 0 && g.getPartnerId().equals(courseTemplateEntity.getPartnerId()))) {
                     isSameGroup = true;
                     break;
                 }
@@ -533,7 +536,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSETEMPLATE, b.getStatus());
                         b.setActionList(actions);
                         convertered.add(b);
-                        
+
                     }
                 }
             } catch (Exception e) {
@@ -550,7 +553,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSETEMPLATE, b.getStatus());
                         b.setActionList(actions);
                         convertered.add(b);
-                        
+
                     }
                 }
             } catch (Exception e) {

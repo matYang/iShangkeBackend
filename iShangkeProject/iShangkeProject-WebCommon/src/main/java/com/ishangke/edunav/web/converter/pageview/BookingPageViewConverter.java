@@ -11,6 +11,9 @@ import com.ishangke.edunav.web.model.pageview.BookingPageViewVo;
 
 public class BookingPageViewConverter {
     public static BookingPageViewVo toModel(BookingPageViewBo bo) {
+        if (bo == null) {
+            return null;
+        }
         BookingPageViewVo vo = new BookingPageViewVo();
         vo.setCount(bo.getCount());
         vo.setStart(bo.getCount());
