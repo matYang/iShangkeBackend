@@ -102,4 +102,26 @@ public class CouponController extends AbstractController{
 //        return responseVo;
 //    }
     
+//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
+//    public @ResponseBody CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+//        CouponVo responseVo = null;
+//        
+//        String permissionTag = this.getUrl(req);
+//        SessionBo authSessionBo = this.getSession(req);
+//        
+//        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+//        int curId = curUser.getId();
+//        boolean loggedIn =  curId > 0;
+//        if (!loggedIn) {
+//            throw new ControllerException("对不起，您尚未登录");
+//        }
+//        
+//        
+//        CouponVo couponVo = new CouponVo();
+//        couponVo.setId(id);
+//        
+//        CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
+//        responseVo = CouponConverter.toModel(resultCoupon);
+//        return responseVo;
+//    }
 }
