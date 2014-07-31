@@ -288,11 +288,7 @@ public class UserServiceImpl implements UserService.Iface {
     @Override
     public SessionBo openCellSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "openCellSession"));
-                throw new NoPermissionException();
-            }
+            //不需要进行权限控制
             return userManager.openCellSession(userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
