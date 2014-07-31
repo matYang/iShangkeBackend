@@ -27,7 +27,7 @@ service BookingService {
      * @return 预定单实体 BookingBo
      *
      */
-    booking.BookingBo createBookingByUser(1: booking.BookingBo bookingBo, 2: booking.CommentBookingBo commentBookingBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo createBookingByUser(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     /**
      * 
@@ -39,7 +39,7 @@ service BookingService {
      *              调用方法的用户信息
      * @return
      */
-    booking.BookingBo transformBookingStatus(1: booking.BookingBo bookingBo, 2: booking.CommentBookingBo commentBookingBo, 3: i32 operation, 4: user.UserBo userBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    booking.BookingBo transformBookingStatus(1: booking.BookingBo bookingBo, 2: i32 operation, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      * 本方法为查询预定单预定单功能。<br>

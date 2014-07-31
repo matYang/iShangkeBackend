@@ -93,7 +93,7 @@ public interface CourseManager {
      * 
      * @param keyword
      */
-    List<CategoryBo> queryByKeyword(String keyword);
+    List<CategoryBo> queryCategoryByKeyword(String keyword);
    
     /**
      * 本方法为合作商提供查询课程的功能。<br>

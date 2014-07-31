@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 import com.ishangke.edunav.common.enums.BookingEnums;
-import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 
@@ -44,12 +43,13 @@ public class BookingNotificationDispatcher {
         map = Collections.unmodifiableMap(tempMap);
     }
     
-    public static final Future<Boolean> sendNotification(BookingEnums.Status status, BookingEntityExt booking, CommentBookingBo commentBookingBo, CourseEntityExt course) {
+
+    public static final Future<Boolean> sendNotification(BookingEnums.Status status, BookingEntityExt booking, CourseEntityExt course) {
         Command cmd = map.get(status);
         if (cmd != null) {
             String comment = null;
-            if (commentBookingBo != null) {
-                comment = commentBookingBo.getComment();
+            if (booking.getNote() != null && !"".equals(booking.getNote())) {
+                comment = booking.getNote();
             }
             return cmd.sendNotification(booking, comment, course);
         }

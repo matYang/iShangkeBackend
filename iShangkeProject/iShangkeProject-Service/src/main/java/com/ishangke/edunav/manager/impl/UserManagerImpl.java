@@ -376,11 +376,9 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("Account already registered");
         }
         
-        UserEntityExt curUser = result.get(0);
         String authCode = authManager.openCellVerificationSession(userBo.getPhone());
         SessionBo sessionBo = new SessionBo();
-        sessionBo.setId(curUser.getId());
-        sessionBo.setAccountIdentifier(curUser.getPhone());
+        sessionBo.setAccountIdentifier(userBo.getPhone());
         sessionBo.setAuthCode(authCode);
         
         SMSDispatcher.sendUserCellVerificationSMS(userBo.getPhone(), authCode);

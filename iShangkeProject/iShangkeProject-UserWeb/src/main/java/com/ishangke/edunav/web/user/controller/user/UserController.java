@@ -29,7 +29,6 @@ import com.ishangke.edunav.web.user.exception.ControllerException;
 
 @Controller
 @RequestMapping("/api/v2/user")
-
 public class UserController extends AbstractController{
     
     @Autowired
@@ -97,7 +96,6 @@ public class UserController extends AbstractController{
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
         userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
-        
         return new EmptyResponse();
     }
     

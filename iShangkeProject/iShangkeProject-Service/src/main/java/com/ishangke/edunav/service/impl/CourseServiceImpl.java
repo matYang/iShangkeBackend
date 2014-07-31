@@ -147,7 +147,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     public CategoryPageViewBo queryCategoryByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //不需要进行权限控制
-            List<CategoryBo> data =  courseManager.queryByKeyword(keyword);
+            List<CategoryBo> data =  courseManager.queryCategoryByKeyword(keyword);
             CategoryPageViewBo pageView = new CategoryPageViewBo();
             pageView.setData(data);
             return pageView;

@@ -1,6 +1,8 @@
 package com.ishangke.edunav.facade.user;
 
 import org.apache.thrift.TException;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.ActivityBo;
 import com.ishangke.edunav.commoncontract.model.ActivityPageViewBo;
@@ -24,6 +26,8 @@ import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
 
+@Component
+@Scope(value = "singleton")
 public class PartnerFacade {
     public PartnerPageViewBo queryPartner(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo, String permissionTag) {
         PartnerPageViewBo result = null;

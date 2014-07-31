@@ -161,7 +161,7 @@ public class BookingManagerImpl implements BookingManager {
     }
 
     @Override
-    public BookingBo createBookingByUser(BookingBo bookingBo, CommentBookingBo commentBookingBo, UserBo userBo) {
+    public BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo) {
         String roleName = authManager.getRole(userBo.getId());
         BookingEntityExt bookingEntity = BookingConverter.fromBo(bookingBo);
         CourseEntityExt course = courseMapper.getById(bookingEntity.getCourseId());
@@ -233,8 +233,9 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setOptName(bookingOpt);
             bookingHistory.setPostStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
             bookingHistory.setPreStatus(null);
-            bookingHistory.setRemark(commentBookingBo.getComment());
+            bookingHistory.setRemark(bookingBo.getNote());
             bookingHistory.setUserId(userBo.getId());
+            bookingHistory.setRemark(bookingEntity.getNote());
             bookingHistoryMapper.add(bookingHistory);
         } else {
             throw new ManagerException("add booking failed");
@@ -274,7 +275,7 @@ public class BookingManagerImpl implements BookingManager {
         BookingBo booking = BookingConverter.toBo(resultBooking);
         booking.setActionList(actions);
 
-        BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(resultBooking.getStatus()), resultBooking, commentBookingBo, course);
+        BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(resultBooking.getStatus()), resultBooking, course);
         return booking;
     }
 
@@ -432,7 +433,7 @@ public class BookingManagerImpl implements BookingManager {
      * 所有的关于booking的状态的转移都是通过此入口实现的 不再提供除创建、删除之外的特定方法
      */
     @Override
-    public BookingBo transformBookingStatus(BookingBo bookingBo, CommentBookingBo commentBookingBo, int operation, UserBo userBo) {
+    public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo) {
         BookingEntityExt bookingEntityExt = bookingMapper.getById(bookingBo.getId());
         if (bookingEntityExt == null) {
             throw new ManagerException("booking is nolonger exits");
@@ -475,6 +476,8 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
+            //使用载体bo传递过来的note作为remark
+            bookingHistory.setRemark(bookingBo.getNote());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
@@ -486,7 +489,7 @@ public class BookingManagerImpl implements BookingManager {
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
             }
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, commentBookingBo, course);
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             // 如果是合作商管理员
@@ -524,15 +527,19 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
+          //使用载体bo传递过来的note作为remark
+            bookingHistory.setRemark(bookingBo.getNote());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
 
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
+            //因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            resultBooking.setNote(bookingBo.getNote());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
 
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, commentBookingBo, course);
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
 
         } else if (Constant.ROLEADMIN.equals(roleName)) {
@@ -554,6 +561,8 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
+          //使用载体bo传递过来的note作为remark
+            bookingHistory.setRemark(bookingBo.getNote());
             bookingHistoryMapper.add(bookingHistory);
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
@@ -561,12 +570,15 @@ public class BookingManagerImpl implements BookingManager {
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
+            
+          //因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            resultBooking.setNote(bookingBo.getNote());
 
             CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
             }
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, commentBookingBo, course);
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 超级管理员可以进行任何操作
@@ -605,11 +617,14 @@ public class BookingManagerImpl implements BookingManager {
             BookingBo responseBo = BookingConverter.toBo(resultBooking);
             responseBo.setActionList(actions);
             
+          //因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            resultBooking.setNote(bookingBo.getNote());
+            
             CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
             }
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, commentBookingBo, course);
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return responseBo;
         }
         return null;
