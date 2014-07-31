@@ -28,6 +28,7 @@ import com.ishangke.edunav.dataaccess.mapper.CourseTeacherEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.TeacherEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
@@ -37,8 +38,10 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
+import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.CourseManager;
 import com.ishangke.edunav.manager.TransformManager;
+import com.ishangke.edunav.manager.converter.CategoryConverter;
 import com.ishangke.edunav.manager.converter.CourseCommentConverter;
 import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -86,6 +89,9 @@ public class CourseManagerImpl implements CourseManager {
 
     @Autowired
     private CategoryEntityExtMapper categoryMapper;
+    
+    @Autowired
+    private CacheManager cacheManager;
 
     @Override
     public CourseBo createCourse(CourseBo courseBo, UserBo userBo) {
@@ -333,10 +339,18 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public List<CategoryBo> queryByKeyword(String keyword) {
+    public List<CategoryBo> queryCategoryByKeyword(String keyword) {
         // todo 搜索功能，根据用户输入的关键词，跳转到相应的三级目录的功能
         // 需要提前录入
-        return null;
+        if (keyword.length() >= Constant.CATEGORYCACHEMAXLENGTH) {
+            keyword.substring(0, Constant.CATEGORYCACHEMAXLENGTH);
+        }
+        ArrayList<CategoryBo> result = (ArrayList<CategoryBo>)cacheManager.get(Constant.CATEGORYCACHE + keyword);
+        if (result == null) {
+            LOGGER.error("[query category] cannot find category cache " + Constant.CATEGORYCACHE + keyword);
+            result = new ArrayList<>();
+        } 
+        return result;
     }
 
     @Override
@@ -503,7 +517,7 @@ public class CourseManagerImpl implements CourseManager {
                 courseEntity.setStatus(Constant.COURSESTATUSOFFLINED);
                 try {
                     courseTemplateMapper.deleteById(courseEntity.getId());
-                    return new CourseBo();
+                    return CourseConverter.toBo(courseEntity);
                 } catch (Exception e) {
                     throw new ManagerException("delete failed");
                 }
@@ -539,7 +553,7 @@ public class CourseManagerImpl implements CourseManager {
                 courseEntity.setStatus(Constant.COURSESTATUSOFFLINED);
                 try {
                     courseMapper.deleteById(courseEntity.getId());
-                    return new CourseBo();
+                    return CourseConverter.toBo(courseEntity);
                 } catch (Exception e) {
                     throw new ManagerException("delete failed");
                 }

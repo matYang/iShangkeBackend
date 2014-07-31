@@ -58,7 +58,7 @@ public class BookingManagerImplTest {
         booking.setStatus(0);
         bookingMapper.add(booking);
         System.out.println(booking.getId());
-        bookingManager.transformBookingStatus(BookingConverter.toBo(booking), null, 12, UserConverter.toBo(userMapper.getById(5)));
+        bookingManager.transformBookingStatus(BookingConverter.toBo(booking), 12, UserConverter.toBo(userMapper.getById(5)));
         
         List<Operation> list = transformManager.listAll("booking");
         for (Operation o : list) {

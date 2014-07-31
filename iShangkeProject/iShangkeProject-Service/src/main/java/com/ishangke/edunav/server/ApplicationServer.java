@@ -2,6 +2,7 @@ package com.ishangke.edunav.server;
 
 import java.util.List;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.ConfigurationClientSetting;
+import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.commoncontract.model.ConfigurationBo;
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
 import com.ishangke.edunav.commoncontract.model.RoleBo;
 import com.ishangke.edunav.commoncontract.service.ConfigurationService;
@@ -20,6 +23,8 @@ import com.ishangke.edunav.manager.RoleManager;
 import com.ishangke.edunav.manager.common.Flag;
 import com.ishangke.edunav.manager.common.ServiceConstants;
 import com.ishangke.edunav.manager.common.ServiceEnum;
+import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.transform.Transform;
 import com.ishangke.edunav.service.impl.ConfigurationServiceImpl;
 import com.ishangke.edunav.util.ThriftServer;
 
@@ -72,9 +77,24 @@ public class ApplicationServer {
 
         LOGGER.info("Load permissions to cache finished. Size: " + count);
     }
+    
+    public void loadCategoryCache() {
+        ConfigurationBo configurationBo = configManager.getByName(Constant.CATEGORYCACHE);
+        String configurationJson = configurationBo.getConfigData();
+        ObjectMapper mapper = new ObjectMapper();
+        //Transform transform;
+        try {
+            //transform = mapper.readValue(configurationJson, Transform.class);
+        } catch (Exception e) {
+            LOGGER.error("[Transform] cannot read transform from configData");
+            throw new ManagerException("read configDara json to object failed");
+        }
+        
+    }
 
     public void start() {
         loadPermissionCache();
+        //loadCategoryCache();
         startConfigurationService();
 
         /**
