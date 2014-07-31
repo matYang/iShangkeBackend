@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
+import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.BookingFacade;
@@ -50,5 +51,18 @@ public class BookingController  extends AbstractController {
         BookingBo bookingBo = bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser, permissionTag);
         BookingVo bookingVo = BookingConverter.toModel(bookingBo);
         return bookingVo;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody BookingVo getBookingById(HttpServletRequest req, HttpServletResponse resp, @PathVariable int id) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        BookingVo bookingVo = new BookingVo();
+        bookingVo.setId(id);
+        BookingPageViewBo bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, null, permissionTag);
+        BookingBo bookingBo = bookingBos.getData().get(0);
+        BookingVo booking = BookingConverter.toModel(bookingBo);
+        return booking;
     }
 }
