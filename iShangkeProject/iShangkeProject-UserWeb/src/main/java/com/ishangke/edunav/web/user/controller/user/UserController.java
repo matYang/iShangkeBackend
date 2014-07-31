@@ -230,7 +230,7 @@ public class UserController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         if (curId != id) {
-            throw new ControllerException("对不起，您只能查看自己的用户信息");
+            throw new ControllerException("对不起，您只能更新自己的用户信息");
         }
         
         
