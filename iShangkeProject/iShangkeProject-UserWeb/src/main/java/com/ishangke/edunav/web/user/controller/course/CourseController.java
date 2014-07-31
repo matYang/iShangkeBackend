@@ -27,17 +27,16 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 @Controller
 @RequestMapping("/api/v2/course")
 
-public class CourseController  extends AbstractController{
+public class CourseController extends AbstractController{
     
     @Autowired
     CourseFacade courseFacade;
     
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CoursePageViewVo  queryCourse(CourseVo courseVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody CoursePageViewVo  queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
-        PaginationVo paginationVo = new PaginationVo();
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
         

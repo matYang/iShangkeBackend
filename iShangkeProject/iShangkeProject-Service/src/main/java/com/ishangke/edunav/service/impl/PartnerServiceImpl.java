@@ -104,7 +104,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
                         "queryPartnerById"));
                 throw new NoPermissionException();
             }
-
+            
             return partnerManager.queryById(partnerBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
