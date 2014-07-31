@@ -4,7 +4,7 @@
   <resultMap id="BookingExtMap" type="BookingEntityExt">
     <id column="BOOKING_ID" property="id" jdbcType="INTEGER" />
     <result column="BOOKING_USERID" property="userId" jdbcType="INTEGER" />
-    <result column="BOOKING_COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="BOOKING_COURSEID" property="courseId" jdbcType="INTEGER" />
     <result column="BOOKING_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="BOOKING_REFERENCE" property="reference" jdbcType="VARCHAR" />
     <result column="BOOKING_NAME" property="name" jdbcType="VARCHAR" />

@@ -486,7 +486,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserBo authenticate(SessionBo sessionBo) {
-        if (sessionBo == null || sessionBo.getId() <= 0 || sessionBo.getAuthCode() == null || sessionBo.getAuthCode().length() == 0) {
+        if (sessionBo == null || sessionBo.getAuthCode() == null) {
             throw new ManagerException("Invalid parameter");
         }
         

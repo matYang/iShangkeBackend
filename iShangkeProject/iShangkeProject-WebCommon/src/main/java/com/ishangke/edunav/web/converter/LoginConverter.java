@@ -9,9 +9,15 @@ public class LoginConverter {
             return null;
         }
         LoginBo bo = new LoginBo();
-        bo.setId(vo.getId());
-        bo.setAccountIdentifier(vo.getAccountIdentifier());
-        bo.setPassword(vo.getPassword());
+        if (vo.getId() != null) {
+            bo.setId(vo.getId());
+        }
+        if (vo.getAccountIdentifier() != null) {
+            bo.setAccountIdentifier(vo.getAccountIdentifier());
+        }
+        if (vo.getPassword() != null) {
+            bo.setPassword(vo.getPassword());
+        }
         return bo;
     }
 }

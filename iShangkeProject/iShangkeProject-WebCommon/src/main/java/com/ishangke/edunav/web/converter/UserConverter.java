@@ -124,7 +124,6 @@ public class UserConverter {
         userVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         userVo.setMajor(bo.getMajor());
         userVo.setName(bo.getName());
-        userVo.setPassword(bo.getPassword());
         userVo.setPhone(bo.getPhone());
         userVo.setReference(bo.getReference());
         userVo.setSchool(bo.getSchool());
