@@ -102,7 +102,7 @@ public class CouponManagerImpl implements CouponManager {
         }
         CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
         if (previousCoupon == null) {
-            throw new CouponNotFoundException("Coupon to activate is not found");
+            throw new CouponNotFoundException("Coupon to activate is not found with id:" + couponEntity.getId());
         }
         
         //admin and system admins can update user's coupons
@@ -321,7 +321,6 @@ public class CouponManagerImpl implements CouponManager {
             throw new CouponNotFoundException("Coupn does not exist");
         }
         
-        //admin and system admins can update user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call queryById at " + new Date(), userBo.getName()));
         }
