@@ -96,7 +96,6 @@ public class UserController extends AbstractController{
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
         userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
-        System.out.println("OOXX@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         return new EmptyResponse();
     }
     
