@@ -281,6 +281,7 @@ public class BookingManagerImpl implements BookingManager {
     @Override
     public List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         String roleName = authManager.getRole(userBo.getId());
+        BookingEntityExt bookingEntity = bookingMapper.getById(bookingBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (bookingBo.getUserId() != userBo.getId()) {
                 throw new ManagerException("cannot query other's booking");
@@ -309,7 +310,8 @@ public class BookingManagerImpl implements BookingManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(bookingBo.getPartnerId())) {
+                // 因为我们有特殊情况 api中需要提供/booking/{id} 在这种情况下booking bo id明确为一个id值
+                if (g.getPartnerId().equals(bookingBo.getPartnerId()) || (bookingBo.getId() > 0 && g.getPartnerId().equals(bookingEntity.getPartnerId()))) {
                     isSameGroup = true;
                     break;
                 }

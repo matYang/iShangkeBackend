@@ -171,11 +171,14 @@ public class PartnerManagerImpl implements PartnerManager {
             if (result <= 0) {
                 throw new ManagerException("Partner creation failed for user: " + userEntity.getId());
             }
-            for (int i = 0; i < partnerEntity.getAddressList().size(); i++) {
-                AddressBo toStore = AddressConverter.toBo(partnerEntity.getAddressList().get(i));
-                AddressBo stored = addressManager.createAddress(toStore, userBo);
-                //store the one with the id
-                partnerEntity.getAddressList().set(i, AddressConverter.fromBo(stored));
+            //判断不为空
+            if (partnerEntity.getAddressList() != null) {
+                for (int i = 0; i < partnerEntity.getAddressList().size(); i++) {
+                    AddressBo toStore = AddressConverter.toBo(partnerEntity.getAddressList().get(i));
+                    AddressBo stored = addressManager.createAddress(toStore, userBo);
+                    //store the one with the id
+                    partnerEntity.getAddressList().set(i, AddressConverter.fromBo(stored));
+                }
             }
 
         } catch (Throwable t) {

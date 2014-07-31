@@ -327,12 +327,12 @@
         </if>
       </if>
 
-      <if test="entity.courseTemplateId != null">
-        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND BOOKING.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseTemplateId == null">
+      <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
-          AND PARTNER.COURSE_TEMPLATE_ID IN
+          AND BOOKING.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -354,11 +354,11 @@
       </if>
 
       <if test="entity.status != null">
-        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+        AND BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
-          AND PARTNER.STATUS IN
+          AND BOOKING.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -412,7 +412,7 @@
         <if test="entity.priceStart != null">
           <![CDATA[AND BOOKING.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
         </if>
-        <if test="entity.cashbackAmountEnd != null">
+        <if test="entity.priceEnd != null">
           <![CDATA[AND BOOKING.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
@@ -422,7 +422,7 @@
       </if>
       <if test="entity.type == null">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
-          AND PARTNER.TYPE IN
+          AND BOOKING.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -434,14 +434,14 @@
       </if>
 
       <if test="entity.cashbackAmount != null">
-        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
+        AND BOOKING.CASHBACK_AMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashbackAmount == null">
         <if test="entity.cashbackAmountStart != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackAmountEnd != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
@@ -547,18 +547,12 @@
         </if>
       </if>
 
-      <if test="entity.courseTemplateId != null">
-        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND BOOKING.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseTemplateId == null">
-        <if test="entity.courseTemplateIdStart != null">
-          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID >= #{entity.courseTemplateIdStart,jdbcType=INTEGER}]]>
-        </if>
-        <if test="entity.courseTemplateIdEnd != null">
-          <![CDATA[AND PARTNER.COURSE_TEMPLATE_ID <= #{entity.courseTemplateIdEnd,jdbcType=INTEGER}]]>
-        </if>
+      <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
-          AND PARTNER.COURSE_TEMPLATE_ID IN
+          AND BOOKING.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -580,11 +574,11 @@
       </if>
 
       <if test="entity.status != null">
-        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+        AND BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
-          AND PARTNER.STATUS IN
+          AND BOOKING.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -636,7 +630,7 @@
       </if>
       <if test="entity.type == null">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
-          AND PARTNER.TYPE IN
+          AND BOOKING.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -648,14 +642,14 @@
       </if>
 
       <if test="entity.cashbackAmount != null">
-        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
+        AND BOOKING.CASHBACK_AMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashbackAmount == null">
         <if test="entity.cashbackAmountStart != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackAmountEnd != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
@@ -750,12 +744,12 @@
         </if>
       </if>
 
-      <if test="entity.courseTemplateId != null">
-        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND BOOKING.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseTemplateId == null">
+      <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
-          AND PARTNER.COURSE_TEMPLATE_ID IN
+          AND BOOKING.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -777,11 +771,11 @@
       </if>
 
       <if test="entity.status != null">
-        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+        AND BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
-          AND PARTNER.STATUS IN
+          AND BOOKING.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -845,7 +839,7 @@
       </if>
       <if test="entity.type == null">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
-          AND PARTNER.TYPE IN
+          AND BOOKING.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -857,14 +851,14 @@
       </if>
 
       <if test="entity.cashbackAmount != null">
-        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
+        AND BOOKING.CASHBACK_AMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashbackAmount == null">
         <if test="entity.cashbackAmountStart != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackAmountEnd != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
@@ -958,12 +952,12 @@
         </if>
       </if>
 
-      <if test="entity.courseTemplateId != null">
-        AND PARTNER.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
+      <if test="entity.courseTemplateId != null and entity.courseTemplateId != 0">
+        AND BOOKING.COURSE_TEMPLATE_ID = #{entity.courseTemplateId,jdbcType=INTEGER}
       </if>
-      <if test="entity.courseTemplateId == null">
+      <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
-          AND PARTNER.COURSE_TEMPLATE_ID IN
+          AND BOOKING.COURSE_TEMPLATE_ID IN
           <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -985,11 +979,11 @@
       </if>
 
       <if test="entity.status != null">
-        AND PARTNER.STATUS = #{entity.status,jdbcType=INTEGER}
+        AND BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
       </if>
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
-          AND PARTNER.STATUS IN
+          AND BOOKING.STATUS IN
           <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
             separator=",">
             #{listItem}
@@ -1053,7 +1047,7 @@
       </if>
       <if test="entity.type == null">
         <if test="entity.typeSet != null and entity.typeSet.size() > 0">
-          AND PARTNER.TYPE IN
+          AND BOOKING.TYPE IN
           <foreach collection="entity.typeSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -1065,14 +1059,14 @@
       </if>
 
       <if test="entity.cashbackAmount != null">
-        AND BOOKING.CASHBACKAMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
+        AND BOOKING.CASHBACK_AMOUNT = #{entity.cashbackAmount,jdbcType=DOUBLE}
       </if>
       <if test="entity.cashbackAmount == null">
         <if test="entity.cashbackAmountStart != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT >= #{entity.cashbackAmountStart,jdbcType=DOUBLE}]]>
         </if>
         <if test="entity.cashbackAmountEnd != null">
-          <![CDATA[AND BOOKING.CASHBACKAMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
 
