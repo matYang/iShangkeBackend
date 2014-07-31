@@ -309,4 +309,10 @@ public class CouponManagerImpl implements CouponManager {
         return couponHistoryMapper.getListCount(CouponHistoryConverter.fromBo(couponHistoryBo));
     }
 
+
+    @Override
+    public CouponBo queryById(int id, UserBo userBo) {
+        return CouponConverter.toBo(couponMapper.getById(id));
+    }
+
 }

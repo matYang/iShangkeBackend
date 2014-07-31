@@ -87,4 +87,6 @@ public interface CouponManager {
      */
     List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo);
     int queryHistoryTotal(CouponHistoryBo couponHistoryBo, UserBo userBo);
+    
+    CouponBo queryById(int id, UserBo userBo);
 }

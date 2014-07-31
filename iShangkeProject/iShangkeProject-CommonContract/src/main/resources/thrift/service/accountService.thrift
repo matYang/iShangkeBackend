@@ -306,5 +306,6 @@ service AccountService{
      */
     contact.ContactPageViewBo queryContact(1: contact.ContactBo contactBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
      
+   coupon.CouponBo queryCouponById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 }
