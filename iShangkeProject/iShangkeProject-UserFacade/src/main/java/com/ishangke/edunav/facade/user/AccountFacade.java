@@ -357,4 +357,22 @@ public class AccountFacade {
         }
         return result;
     }
+    
+    public CouponBo activateCoupon(CouponBo couponBo, UserBo userBo, String permissionTag) {
+        CouponBo result = null;
+        
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Account.getName());
+
+        try (ThriftClientFactory<AccountService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.activateCoupon(couponBo, userBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (TException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
