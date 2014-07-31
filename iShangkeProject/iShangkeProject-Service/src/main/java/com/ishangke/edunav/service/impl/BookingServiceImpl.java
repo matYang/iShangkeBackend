@@ -70,10 +70,10 @@ public class BookingServiceImpl implements BookingService.Iface {
     public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "transformBookingStatus"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "transformBookingStatus"));
+//                throw new NoPermissionException();
+//            }
             return bookingManager.transformBookingStatus(bookingBo, operation, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
