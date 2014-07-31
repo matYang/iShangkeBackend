@@ -573,6 +573,8 @@ public class UserManagerImpl implements UserManager {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
             }
+            
+            
             UserEntityExt search = new UserEntityExt();
             search.setReference(loginBo.getAccountIdentifier());
             
