@@ -117,33 +117,33 @@ public class Constant {
     public static final int BOOKINGOPERATIONONLINECASHBACK = 22;
     public static final int BOOKINGOPERATIONOFFLINECASHBACK = 23;
 
-    public static Map<Integer, String> BOOKINGOPERATEMAP;
+    public static Map<String, Integer> BOOKINGOPERATEMAP;
     static {
-        BOOKINGOPERATEMAP = new HashMap<Integer, String>();
-        BOOKINGOPERATEMAP.put(0, "onlineSubmitBooking");
-        BOOKINGOPERATEMAP.put(1, "onlineCancel");
-        BOOKINGOPERATEMAP.put(2, "offlineSubmitBooking");
-        BOOKINGOPERATEMAP.put(3, "offlineCancel");
-        BOOKINGOPERATEMAP.put(4, "offlineUserDelay");
-        BOOKINGOPERATEMAP.put(5, "onlineConfirm");
-        BOOKINGOPERATEMAP.put(6, "onlineReject");
-        BOOKINGOPERATEMAP.put(7, "onlineNoShow");
-        BOOKINGOPERATEMAP.put(8, "onlineQuit");
-        BOOKINGOPERATEMAP.put(9, "onlineStartSchool");
-        BOOKINGOPERATEMAP.put(10, "onlineEnroll");
-        BOOKINGOPERATEMAP.put(11, "offlineConfirm");
-        BOOKINGOPERATEMAP.put(12, "offlineReject");
-        BOOKINGOPERATEMAP.put(13, "offlinePartnerDelay");
-        BOOKINGOPERATEMAP.put(14, "offlineNoShow");
-        BOOKINGOPERATEMAP.put(15, "offlineRegister");
-        BOOKINGOPERATEMAP.put(16, "offlinePay");
-        BOOKINGOPERATEMAP.put(17, "offlineNoPay");
-        BOOKINGOPERATEMAP.put(18, "offlineQuit");
-        BOOKINGOPERATEMAP.put(19, "offlineStartSchool");
-        BOOKINGOPERATEMAP.put(20, "offlineEnroll");
-        BOOKINGOPERATEMAP.put(21, "onlineRefund");
-        BOOKINGOPERATEMAP.put(22, "onlineCashback");
-        BOOKINGOPERATEMAP.put(23, "offlineCashback");
+        BOOKINGOPERATEMAP = new HashMap<String, Integer>();
+        BOOKINGOPERATEMAP.put("onlineSubmitBooking", 0);
+        BOOKINGOPERATEMAP.put("onlineCancel", 1);
+        BOOKINGOPERATEMAP.put("offlineSubmitBooking", 2);
+        BOOKINGOPERATEMAP.put("offlineCancel", 3);
+        BOOKINGOPERATEMAP.put("offlineUserDelay", 4);
+        BOOKINGOPERATEMAP.put("onlineConfirm", 5);
+        BOOKINGOPERATEMAP.put("onlineReject", 6);
+        BOOKINGOPERATEMAP.put("onlineNoShow", 7);
+        BOOKINGOPERATEMAP.put("onlineQuit", 8);
+        BOOKINGOPERATEMAP.put("onlineStartSchool", 9);
+        BOOKINGOPERATEMAP.put("onlineEnroll", 10);
+        BOOKINGOPERATEMAP.put("offlineConfirm", 11);
+        BOOKINGOPERATEMAP.put("offlineReject", 12);
+        BOOKINGOPERATEMAP.put("offlinePartnerDelay", 13);
+        BOOKINGOPERATEMAP.put("offlineNoShow", 14);
+        BOOKINGOPERATEMAP.put("offlineRegister", 15);
+        BOOKINGOPERATEMAP.put("offlinePay", 16);
+        BOOKINGOPERATEMAP.put("offlineNoPay", 17);
+        BOOKINGOPERATEMAP.put("offlineQuit", 18);
+        BOOKINGOPERATEMAP.put("offlineStartSchool", 19);
+        BOOKINGOPERATEMAP.put("offlineEnroll", 20);
+        BOOKINGOPERATEMAP.put("onlineRefund", 21);
+        BOOKINGOPERATEMAP.put("onlineCashback", 22);
+        BOOKINGOPERATEMAP.put("offlineCashback", 23);
     }
     
     //班级类型

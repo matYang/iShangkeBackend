@@ -26,4 +26,8 @@ public interface UserEntityExtMapper {
     public int getCount();
 
     public UserEntityExt getById(int id);
+    
+    public UserEntityExt getByPhone(@Param("entity") UserEntityExt userEntityExt);
+    
+    public UserEntityExt getByReference(@Param("entity") UserEntityExt userEntityExt);
 }
