@@ -323,7 +323,12 @@ public class CourseManagerImpl implements CourseManager {
 
     @Override
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo) {
+        if (courseCommentBo == null || userBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
         String roleName = authManager.getRole(userBo.getId());
+        //TODO  urr, should here be an or instead of an and?
         if (Constant.ROLEADMIN.equals(roleName) && Constant.ROLESYSTEMADMIN.equals(roleName)) {
             throw new ManagerException("cannot delete comment current user");
         }
