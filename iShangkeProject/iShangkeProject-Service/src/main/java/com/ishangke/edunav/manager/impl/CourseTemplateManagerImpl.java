@@ -516,6 +516,9 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public CourseTemplateBo queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo) {
         String roleName = authManager.getRole(userBo.getId());
         CourseTemplateEntityExt courseEntity = courseTemplateMapper.getInfoById(courseTemplateBo.getId());
+        if (courseEntity == null) {
+            throw new ManagerException("course template is not exits");
+        }
         if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             //判断此coursetemplate是否属于此user所在的partner
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
@@ -534,7 +537,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             }
             return CourseTemplateConverter.toBo(courseEntity);
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
-            
+            return CourseTemplateConverter.toBo(courseEntity);
         }
         return null;
     }
