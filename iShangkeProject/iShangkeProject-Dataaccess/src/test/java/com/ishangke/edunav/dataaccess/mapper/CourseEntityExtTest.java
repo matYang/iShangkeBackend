@@ -19,10 +19,7 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
-import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
-import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseEntityExtTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
