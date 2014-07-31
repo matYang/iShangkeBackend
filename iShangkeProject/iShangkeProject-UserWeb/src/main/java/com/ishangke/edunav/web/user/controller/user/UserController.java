@@ -62,6 +62,10 @@ public class UserController extends AbstractController{
     public @ResponseBody EmptyResponse logout(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
+        if (authSessionBo.getId() <= 0) {
+            //already logged out
+            return new EmptyResponse();
+        }
         userFacade.disposeSession(authSessionBo, permissionTag);
         this.closeSession(req, resp);
         

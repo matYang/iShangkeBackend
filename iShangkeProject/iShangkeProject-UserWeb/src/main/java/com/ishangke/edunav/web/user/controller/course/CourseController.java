@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.CourseFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.CourseConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
+import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.converter.pageview.CoursePageViewConverter;
 import com.ishangke.edunav.web.model.CourseVo;
+import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.CoursePageViewVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
@@ -57,7 +58,7 @@ public class CourseController extends AbstractController{
         CourseVo responseVo = null;
         
         
-        responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), new UserBo(), permissionTag);
+        responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
         responseVo = CourseConverter.toModel(responseBo);
         
         return responseVo;

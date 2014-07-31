@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.PartnerFacade;
 import com.ishangke.edunav.web.converter.PartnerConverter;
+import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.model.PartnerVo;
+import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 
@@ -26,6 +27,7 @@ public class PartnerController extends AbstractController{
     @Autowired
     PartnerFacade partnerFacade;
     
+    //get partner by id is open data
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody PartnerVo  queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
@@ -35,8 +37,7 @@ public class PartnerController extends AbstractController{
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
         
-        
-        responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), new UserBo(), permissionTag);
+        responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
         responseVo = PartnerConverter.toModel(responseBo);
         
         return responseVo;

@@ -99,12 +99,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public PartnerBo queryPartnerById(PartnerBo partnerBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryPartnerById"));
-                throw new NoPermissionException();
-            }
-            
+            //不用进行权限认证
             return partnerManager.queryById(partnerBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);

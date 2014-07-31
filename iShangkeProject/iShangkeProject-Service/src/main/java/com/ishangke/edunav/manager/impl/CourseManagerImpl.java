@@ -440,7 +440,7 @@ public class CourseManagerImpl implements CourseManager {
             throw new ManagerException("cannot found");
         }
         convertered = CourseConverter.toBo(course);
-        if (userBo != null) {
+        if (userBo != null && userBo.getId() > 0) {
             String roleName = authManager.getRole(userBo.getId());
             if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
                 // 判断此coursetemplate是否属于此user所在的partner

@@ -75,18 +75,17 @@ public class PartnerManagerImpl implements PartnerManager {
     }
 
     @Override
+    //not really using the id here
     public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) {
-        if (partnerBo == null || userBo == null) {
+        if (partnerBo == null) {
             throw new ManagerException("Invalid parameter");
         }
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-
         PartnerEntityExt result = null;
         try {
             result = partnerMapper.getById(partnerEntity.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Partner queryById failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("Partner queryById failed with id: " + partnerEntity.getId(), t);
         }
 
         if (result == null) {
