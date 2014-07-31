@@ -65,7 +65,7 @@
         PARTNER_ID,
       </if>
       <if test="imgUrl != null">
-        IMGURL,
+        IMG_URL,
       </if>
       <if test="name != null">
         NAME,
