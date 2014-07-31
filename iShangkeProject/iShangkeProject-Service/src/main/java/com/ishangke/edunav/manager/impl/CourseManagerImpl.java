@@ -28,7 +28,6 @@ import com.ishangke.edunav.dataaccess.mapper.CourseTeacherEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.TeacherEntityExtMapper;
-import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseCommentEntityExt;
@@ -41,7 +40,6 @@ import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.CourseManager;
 import com.ishangke.edunav.manager.TransformManager;
-import com.ishangke.edunav.manager.converter.CategoryConverter;
 import com.ishangke.edunav.manager.converter.CourseCommentConverter;
 import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -473,7 +471,7 @@ public class CourseManagerImpl implements CourseManager {
 
     @Override
     public CourseBo transformCourseStatus(CourseBo courseBo, int operation, UserBo userBo) {
-        CourseEntityExt courseEntity = courseMapper.getById(courseBo.getId());
+        CourseEntityExt courseEntity = courseMapper.getInfoById(courseBo.getId());
         String roleName = authManager.getRole(userBo.getId());
         List<Operation> operationList = transformManager.getOperationByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, courseEntity.getStatus());
         Operation op = null;
@@ -528,7 +526,7 @@ public class CourseManagerImpl implements CourseManager {
             courseMapper.update(courseEntity);
             // 插入可以进行的下一步操作
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
-            CourseBo result = CourseConverter.toBo(courseMapper.getById(courseEntity.getId()));
+            CourseBo result = CourseConverter.toBo(courseMapper.getInfoById(courseEntity.getId()));
             result.setActionList(actions);
             return result;
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
@@ -562,7 +560,7 @@ public class CourseManagerImpl implements CourseManager {
             courseMapper.update(courseEntity);
             LOGGER.warn(String.format("[Booking]system admin [%d] [%s] course status to [%d] at" + new Date(), userBo.getId(), op.getName(), op.getNextStatus()));
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
-            CourseBo result = CourseConverter.toBo(courseMapper.getById(courseBo.getId()));
+            CourseBo result = CourseConverter.toBo(courseMapper.getInfoById(courseBo.getId()));
             result.setActionList(actions);
             return result;
         }
@@ -711,7 +709,7 @@ public class CourseManagerImpl implements CourseManager {
             courseTee.setStatus(Constant.COURSESTATUSONLINED);
             courseMapper.update(courseTee);
         }
-        return CourseConverter.toBo(courseMapper.getById(courseBo.getId()));
+        return CourseConverter.toBo(courseMapper.getInfoById(courseBo.getId()));
     }
 
     @Override

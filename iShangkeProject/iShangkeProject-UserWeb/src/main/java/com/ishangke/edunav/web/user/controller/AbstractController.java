@@ -32,7 +32,7 @@ public class AbstractController {
             
             if (sessionString == null) {
                 Cookie[] cookies = req.getCookies();
-                boolean found = true;
+                boolean found = false;
                 
                 if (cookies != null) {
                     for (int i = 0; i < cookies.length; i++) {

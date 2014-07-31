@@ -1011,21 +1011,21 @@
     ,
     <include refid="CourseTemplate_Base_Column_List"></include>
     from COURSE COURSE
-     left join  PARTNER PARTNER
+    left join  PARTNER PARTNER
     ON PARTNER.ID = COURSE.PARTNER_ID
-     left join  CATEGORY CATEGORY
+    left join  CATEGORY CATEGORY
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-     left join  CIRCLE CIRCLE
+    left join  CIRCLE CIRCLE
     ON CIRCLE.ID = COURSE.CIRCLE_ID
-     left join  LOCATION
+    left join  LOCATION
     LOCATION
     ON LOCATION.ID =
     COURSE.LOCATION_ID
-     left join  ADDRESS ADDRESS
+    left join  ADDRESS ADDRESS
     ON ADDRESS.ID = COURSE.ADDRESS_ID
-     left join  COURSE_TEMPLATE COURSE_TEMPLATE
+    left join  COURSE_TEMPLATE COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
     WHERE

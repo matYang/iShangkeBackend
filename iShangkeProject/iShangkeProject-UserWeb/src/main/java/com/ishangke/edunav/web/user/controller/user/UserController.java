@@ -29,7 +29,6 @@ import com.ishangke.edunav.web.user.exception.ControllerException;
 
 @Controller
 @RequestMapping("/api/v2/user")
-
 public class UserController extends AbstractController{
     
     @Autowired
@@ -97,7 +96,6 @@ public class UserController extends AbstractController{
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
         userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
-        
         return new EmptyResponse();
     }
     
@@ -199,8 +197,8 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
-        int curId = currentUser.getId();
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
@@ -212,7 +210,7 @@ public class UserController extends AbstractController{
         
         UserVo queryUser = new UserVo();
         queryUser.setId(curId);
-        UserBo responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), currentUser, permissionTag);
+        UserBo responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), curUser, permissionTag);
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }
@@ -225,21 +223,21 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
-        int curId = currentUser.getId();
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
         if (curId != id) {
-            throw new ControllerException("对不起，您没有权限查看其他用户资料");
+            throw new ControllerException("对不起，您只能查看自己的用户信息");
         }
         
         
         UserBo targetUser = UserConverter.fromModel(userVo);
         targetUser.setId(curId);
         
-        UserBo responseUser = userFacade.updateUser(targetUser, currentUser, permissionTag);
+        UserBo responseUser = userFacade.updateUser(targetUser, curUser, permissionTag);
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }

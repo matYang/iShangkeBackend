@@ -376,11 +376,9 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("Account already registered");
         }
         
-        UserEntityExt curUser = result.get(0);
         String authCode = authManager.openCellVerificationSession(userBo.getPhone());
         SessionBo sessionBo = new SessionBo();
-        sessionBo.setId(curUser.getId());
-        sessionBo.setAccountIdentifier(curUser.getPhone());
+        sessionBo.setAccountIdentifier(userBo.getPhone());
         sessionBo.setAuthCode(authCode);
         
         SMSDispatcher.sendUserCellVerificationSMS(userBo.getPhone(), authCode);
@@ -488,7 +486,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserBo authenticate(SessionBo sessionBo) {
-        if (sessionBo == null || sessionBo.getId() <= 0 || sessionBo.getAuthCode() == null || sessionBo.getAuthCode().length() == 0) {
+        if (sessionBo == null || sessionBo.getAuthCode() == null) {
             throw new ManagerException("Invalid parameter");
         }
         
@@ -535,12 +533,11 @@ public class UserManagerImpl implements UserManager {
             UserEntityExt search = new UserEntityExt();
             search.setPhone(loginBo.getAccountIdentifier());
             
-            List<UserEntityExt> results = userMapper.list(search, null);
-            if (results == null || results.size() == 0) {
+            curUser = userMapper.getByPhone(search);
+            if (curUser == null) {
                 throw new UserNotFoundException("LoginByPhone failed for user: " + loginBo.getAccountIdentifier());
             }
-            
-            curUser = results.get(0);
+
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("Phone or password not match");
             }
@@ -575,15 +572,15 @@ public class UserManagerImpl implements UserManager {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
             }
+            
             UserEntityExt search = new UserEntityExt();
             search.setReference(loginBo.getAccountIdentifier());
             
-            List<UserEntityExt> results = userMapper.list(search, null);
-            if (results == null || results.size() == 0) {
+            curUser = userMapper.getByReference(search);
+            if (curUser == null) {
                 throw new UserNotFoundException("LoginByReference failed for user: " + loginBo.getAccountIdentifier());
             }
-            
-            curUser = results.get(0);
+
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("Reference or password not match");
             }

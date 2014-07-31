@@ -19,7 +19,6 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
-import com.ishangke.edunav.commoncontract.model.CommentBookingBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -164,7 +163,7 @@ public class BookingManagerImpl implements BookingManager {
     public BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo) {
         String roleName = authManager.getRole(userBo.getId());
         BookingEntityExt bookingEntity = BookingConverter.fromBo(bookingBo);
-        CourseEntityExt course = courseMapper.getById(bookingEntity.getCourseId());
+        CourseEntityExt course = courseMapper.getInfoById(bookingEntity.getCourseId());
         if (!Constant.ROLEUSER.equals(roleName)) {
             throw new ManagerException("only user can create booking");
         }
@@ -179,21 +178,21 @@ public class BookingManagerImpl implements BookingManager {
             throw new ManagerException("course cannot be booed now");
         }
         // 查看课程现价与发过来的价格是否一致，如果不一致则不能创建booking
-        if (course.getPrice() != bookingEntity.getPrice()) {
+        if (!course.getPrice().equals(bookingEntity.getPrice())) {
             throw new ManagerException("the price is no longer equal");
         }
         // 传递过来的cashback必须小于等于course中定义的cashback
-        if (bookingEntity.getCashbackAmount() > course.getCashback()) {
+        if (bookingBo.getCashbackAmount() > course.getCashback()) {
             throw new ManagerException("cashback cannot more than cashback defined in course");
         }
         // booking不同的type（支付方式）决定了booking的初始化状态
-        int bookingOpt = 0;
-        if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
+        int bookingOpt;
+        if (bookingEntity.getType() == Constant.BOOKINGTYPEONLINE) {
             // 在线支付订单
             bookingEntity.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
             bookingOpt = Constant.BOOKINGOPERATIONONLINESUBMITBOOKING;
 
-        } else if (bookingEntity.getType() == Constant.BOOKINGTYPEONLINE) {
+        } else if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
             // 线下支付订单
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
@@ -207,7 +206,7 @@ public class BookingManagerImpl implements BookingManager {
         // bookingBo.setPartnerId(course.getPartnerId());
         // 设置bookingBo中的course template id
         // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
-        bookingBo.setCourseTemplateId(course.getCourseTemplateId());
+        bookingEntity.setCourseTemplateId(course.getCourseTemplateId());
 
         // Use coupons
         double calculatedCachbask = consumeCoupons(bookingBo, userBo);
@@ -232,7 +231,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setOptName(bookingOpt);
             bookingHistory.setPostStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
-            bookingHistory.setPreStatus(null);
+            bookingHistory.setPreStatus(Constant.DEFAULTNULL);
             bookingHistory.setRemark(bookingBo.getNote());
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setRemark(bookingEntity.getNote());
@@ -254,7 +253,7 @@ public class BookingManagerImpl implements BookingManager {
         } else {
             boolean hasContact = false;
             for (ContactEntityExt c : contacts) {
-                if (c.getName().equals(userBo.getName()) && c.getPhone().equals(userBo.getPhone())) {
+                if (c.getName().equals(bookingEntity.getName()) && c.getPhone().equals(bookingEntity.getPhone())) {
                     hasContact = true;
                     break;
                 }
@@ -485,7 +484,7 @@ public class BookingManagerImpl implements BookingManager {
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
 
-            CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
+            CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
             }
@@ -494,7 +493,7 @@ public class BookingManagerImpl implements BookingManager {
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             // 如果是合作商管理员
             // 合作商只能修改自己本机构的booking
-            CourseEntityExt course = courseMapper.getById(bookingBo.getCourseId());
+            CourseEntityExt course = courseMapper.getInfoById(bookingBo.getCourseId());
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
                 throw new ManagerException("unlogin user");
@@ -574,7 +573,7 @@ public class BookingManagerImpl implements BookingManager {
           //因为note不会被保存，是临时放入bo中的，所以需要设置一下
             resultBooking.setNote(bookingBo.getNote());
 
-            CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
+            CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
             }
@@ -620,7 +619,7 @@ public class BookingManagerImpl implements BookingManager {
           //因为note不会被保存，是临时放入bo中的，所以需要设置一下
             resultBooking.setNote(bookingBo.getNote());
             
-            CourseEntityExt course = courseMapper.getById(resultBooking.getCourseId());
+            CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
                 throw new CourseNotFoundException("Course not found for booking");
             }
