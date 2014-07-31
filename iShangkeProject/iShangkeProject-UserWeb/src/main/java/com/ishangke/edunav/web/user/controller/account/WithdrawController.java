@@ -136,6 +136,6 @@ public class WithdrawController extends AbstractController{
         
         accountFacade.deleteWithdraw(targetWithdraw, curUser, permissionTag);
         return new EmptyResponse();
-     }
+    }
     
 }
