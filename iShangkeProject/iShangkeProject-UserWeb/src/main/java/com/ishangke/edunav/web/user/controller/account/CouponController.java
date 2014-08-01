@@ -23,15 +23,15 @@ import com.ishangke.edunav.web.converter.CouponHistoryConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.CouponHistoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.CouponPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CouponHistoryVo;
 import com.ishangke.edunav.web.model.CouponVo;
 import com.ishangke.edunav.web.model.pageview.CouponHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CouponPageViewVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 @Controller
-@RequestMapping("/coupon")
+@RequestMapping("/api/v2/coupon")
 
 public class CouponController extends AbstractController{
 
@@ -53,7 +53,7 @@ public class CouponController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         //user module specific, also need to perform null check
-        if (couponVo.getId() == null || couponVo.getId() != curId) {
+        if (couponVo.getUserId() == null || couponVo.getUserId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
         
@@ -124,7 +124,6 @@ public class CouponController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-
         CouponVo couponVo = new CouponVo();
         couponVo.setId(id);
         couponVo.setUserId(curId);

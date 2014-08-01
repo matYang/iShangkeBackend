@@ -14,16 +14,16 @@ public class PaginationConverter {
         if (vo == null) {
             return null;
         }
-        Integer size = vo.getSize();
-        if (size == null) {
+        Integer count = vo.getCount();
+        if (count == null) {
             // To the last one
-            size = Constant.DEFAULTNULL;
+            count = Constant.DEFAULTNULL;
         }
 
-        Integer offset = vo.getOffset();
-        if (offset == null) {
+        Integer start = vo.getStart();
+        if (start == null) {
             // Should start from the first column
-            offset = Constant.DEFAULTNULL;
+            start = Constant.DEFAULTNULL;
         }
 
         List<OrderByVo> orderByVos = vo.getOrderByEntities();
@@ -39,8 +39,8 @@ public class PaginationConverter {
         }
 
         PaginationBo pageBo = new PaginationBo();
-        pageBo.setSize(size);
-        pageBo.setOffset(offset);
+        pageBo.setSize(count);
+        pageBo.setOffset(start);
         pageBo.setOrderByEntities(orderByBos);
 
         return pageBo;

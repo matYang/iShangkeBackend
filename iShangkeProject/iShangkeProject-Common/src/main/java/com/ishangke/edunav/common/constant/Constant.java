@@ -49,6 +49,17 @@ public class Constant {
     public static final int COURSEOPERATIONSUBMITUPDATED = 3;
     public static final int COURSEOPERATIONDELETE = 4;
     public static final int COURSEOPERATIONTAKEOFFLINE = 5;
+    
+    public static Map<String, Integer> COURSEOPERATEMAP;
+    static {
+        COURSEOPERATEMAP = new HashMap<String, Integer>();
+        COURSEOPERATEMAP.put("submitNew", 0);
+        COURSEOPERATEMAP.put("reject", 1);
+        COURSEOPERATEMAP.put("approve", 2);
+        COURSEOPERATEMAP.put("submitUpdated", 3);
+        COURSEOPERATEMAP.put("delete", 4);
+        COURSEOPERATEMAP.put("takeOffline", 5);
+    }
 
     // course状态
     public static final int COURSESTATUSPENDINGREVIEW = 0;

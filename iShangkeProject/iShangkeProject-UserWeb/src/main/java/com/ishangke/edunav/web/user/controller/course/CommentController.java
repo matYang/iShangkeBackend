@@ -23,12 +23,12 @@ import com.ishangke.edunav.web.converter.CourseCommentConverter;
 import com.ishangke.edunav.web.converter.CourseConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.CourseCommentPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CourseCommentVo;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.pageview.CourseCommentPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 
 @Controller

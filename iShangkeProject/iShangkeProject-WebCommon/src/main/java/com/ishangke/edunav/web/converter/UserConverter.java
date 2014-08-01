@@ -105,6 +105,7 @@ public class UserConverter {
         if (bo == null) {
             return null;
         }
+        //password不会出现到vo中
         UserVo userVo = new UserVo();
         userVo.setAppliedInvitationCode(bo.getAppliedInvitationCode());
         userVo.setAvatarUrl(bo.getAvatarUrl());

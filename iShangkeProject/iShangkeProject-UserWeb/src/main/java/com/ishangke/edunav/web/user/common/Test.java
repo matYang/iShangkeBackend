@@ -20,7 +20,7 @@ public class Test {
         CourseFacade c = new CourseFacade();
         PaginationVo p = new PaginationVo();
         OrderByVo ov = new OrderByVo("ID", "ASC");
-        p.addOrderByEntity(ov);
+        //p.addOrderByEntity(ov);
         CourseVo ccc = new CourseVo();
          ccc.setCategoryValue("0100");
         // ccc.setLocationValue("00");
