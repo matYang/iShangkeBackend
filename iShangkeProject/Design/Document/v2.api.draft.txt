@@ -1,0 +1,287 @@
+
+public class PageView<T>{
+    int start;
+    int count;
+    int total
+    List<T> data;
+}
+
+public class Pagination{
+    int offset;
+    int size;
+    List<String> orderBy;
+}
+
+public class Hierarchy{
+    //more data fields
+    List<Hierarchy> children;
+}
+typedef List<Hierarchy> Tree<Hierarchy>;
+
+
+//All APIs return ErrorMsg if error 00
+public class ErrorMsg{
+    String errorCode;
+    String msg;
+}
+
+
+
+N.Normal  User        ../api/v2/
+P.Partner User        ../p-api/v2/
+A.Admin   User        ../a-api/v2/
+
+
+Category:
+N, P, A   general/category            @Get()()                           @Res(JSON)(PageView<Tree<Category>>)
+
+Query Category by keyword
+N, P, A   general/category            @Get(Query)(keyword)               @Res(JSON)(PageView<Tree<Category>>)
+
+Location:
+N, P, A   general/location            @Get()()                           @Res(JSON)(PageView<Tree<Location>>)
+
+Circle:
+N, P, A   general/circle              @Get()()                           @Res(JSON)(PageView<Tree<Circle>>)
+
+School:
+N, P, A   general/school              @Get()()                           @Res(JSON)(PageView<Tree<School>>)
+
+Career:
+N, P, A   general/career              @Get()()                           @Res(JSON)(PageView<Tree<Career>>)
+
+
+
+Login:
+N         user/login/phone            @Post(JSON)(phone, password, remember)           @Res(JSON)(UserVo[nopassword])
+P, A      user/login/reference        @Post(JSON)(reference, password, remember)       @Res(JSON)(UserVo[nopassword])
+
+Logout:
+N, P, A   user/{id}/logout            @Put(Path)(id)                                   @Res(JSON)({})
+
+FindSession:
+N, P, A   user/findSession            @Get()()                                         @Res(JSON)(UserVo)
+
+Send Sms Verification
+N         user/smsVerification        @Get(Query)(phone)                               @Res(JSON)({})
+
+Register
+N         user/registration           @Post(JSON)(UserVo)                              @Res(JSON)(UserVo)
+
+Send ForgetPassword Sms
+N         user/forgetPassword         @Get(Query)(phone)                               @Res(JSON)({})
+
+Recover Password
+N         user/forgetPassword         @Post(JSON)(phone, newPassword, authCode)        @Res(JSON)(UserVo)
+
+Change Password
+N, P, A   user/{id}/changePassword    @Put(JSON)(oldPassword, newPassword)             @Res(JSON)({})
+
+Get User By Id:
+N, P, A   user/{id}                   @Get(Path)(id)                                   @Res(JSON)(UserVo) 
+
+Create User
+A         user                        @Post(JSON)(UserVo)                              @Res(JSON)(UserVo)
+
+Update User
+N, P, A   user/{id}                   @Put(JSON)(UserVo)                               @Res(JSON)(UserVo)
+
+Query User
+P ,A      user                        @Get(Query)(UserVo, Pagination)                  @Res(JSON)(PageView<UserVo>)
+
+
+
+
+
+Search Course:
+N, P, A   /course                     @Get(Query)(CourseVo, Pagination)                @Res(JSON)(PageView<Course>)
+
+Get Course By Id:
+N, P, A   /course/{id}                @Get(Path)(id)                                   @Res(JSON)(CourseVo)
+
+Create Course:
+P, A      /course                     @Post(JSON)(CourseVo)                            @Res(JSON)(CourseVo)
+
+Transform Course:
+P, A      /course/{id}/{operate}      @Put(JSON)(CourseVo)                             @Res(JSON)(CourseVo)
+
+
+
+
+Search CourseTemplate:
+P, A      /courseTemplate             @Get(Query)(CourseTemplateVo, Pagination)        @Res(JSON)(PageView<CourseTemplate>)
+
+Get CourseTemplate By Id:
+P, A      /courseTemplate/{id}        @Get(Path)(id)                                   @Res(JSON)(CourseTemplateVo)
+
+Create CourseTemplate:
+P, A      /courseTemplate/            @Post(JSON)(CourseTemplateVo)                    @Res(JSON)(CourseTemplateVo)
+
+Transform CourseTemplate:
+P, A      /courseTemplate/{id}/{operate}  @Put(JSON)(CourseTemplateVo)                 @Res(JSON)(CourseTemplateVo)
+
+
+
+
+Create Booking:
+N         /booking                    @Post(JSON)(BookingVo)                           @Res(JSON)(BookingVo)
+
+Transform Booking:
+N, P, A   /booking/{id}/{operate}     @Put(JSON)(BookingVo)                            @Res(JSON)(BookingVo)
+
+Get Booking By Id:
+N, P, A   /booking/{id}               @Get(Path)(id)                                   @Res(JSON)(BookingVo)
+
+Query Booking:
+N, P, A   /booking                    @Get(Query)(BookingVo, Pagination)               @Res(JSON)(PageView<BookingVo>)
+
+Query Booking History
+N, P, A   /booking/history            @Get(Query)(BookinghistoryVo, Pagination)        @Res(JSON)(PageView<BookinghistoryVo>)
+
+
+Create Partner:
+A         /partner                    @Post(JSON)(PartnerVo)                           @Res(JSON)(PartnerVo)
+
+Update Partner
+P, A      /partner/{id}               @Put(JSON)(PartnerVo)                            @Res(JSON)(PartnerVo) 
+
+Get Partner By Id
+N, P, A   /partner/{id}               @Get(Path)(id)                                   @Res(JSON)(PartnerVo)
+
+Create/Change Logo
+P, A      /partner/{partnerId}/logo   @Put(Multi-Form)(ImgFile)                        @Res(JSON)(PartnerVo)
+
+Query Parnter
+P, A      /partner                    @Get(Query)(PartnerVo, Pagination)               @Res(JSON)(PageView<PartnerVo>)
+
+
+Upload ClassPhoto Img
+P, A      /classPhoto/upload          @Post(Multi-Form)(ImgFile)(Query)(partnerId)     @Res(JSON)(imgUrl, snapshotUrl)
+
+Finish ClassPhoto Creation
+P, A      /classPhoto                 @Post(JSON)(ClassPhotoVo)                        @Res(JSON)(ClassPhotoVo)
+
+Update ClassPhoto:
+P, A      /classPhoto/{id}            @Put(JSON)(ClassPhotoVo)                         @Res(JSON)(ClassPhotoVo)
+
+Delete ClassPhoto:
+P, A      /classPhoto/{id}            @Delete(Path)(id)                                @Res(JSON)({})
+
+Query ClassPhoto:
+P, A      /classPhoto                 @Get(Query)(ClassPhotoVo, Pagination)            @Res(JSON)(PageView<ClassPhotoVo>)
+
+
+Upload Teacher Img
+P, A      /teacher/upload             @Post(Multi-Form)(ImgFile)(Query)(partnerId)     @Res(JSON)(imgUrl)
+
+Finish Teacher Creation:
+P, A      /teacher                    @Post(JSON)(TeacherVo)                           @Res(JSON)(TeacherVo)
+
+Update Teacher:
+P, A      /teacher/{id}               @Put(JSON)(TeacherVo)                            @Res(JSON)(TeacherVo)
+
+Delete Teacher:
+P, A      /teacher/{id}               @Delete(Path)(id)                                @Res(JSON)({})
+
+Query Teacher:
+P, A      /teacher                    @Get(Query)(TeacherVo, Pagination)               @Res(JSON)(PageView<TeacherVo>)
+
+
+Create Address
+P, A      /address                    @Post(Query)(AddressVo)                          @Res(JSON)(AddressVo)
+
+Update Address:
+P, A      /address/{id}               @Put(JSON)(AddressVo)                            @Res(JSON)(AddressVo)
+
+Delete Address:
+P, A      /address/{id}               @Delete(Path)(id)                                @Res(JSON)({})
+
+Query Address:
+P, A      /address                    @Get(Query)(AddressVo, Pagination)               @Res(JSON)(PageView<AddressVo>)
+
+
+
+
+Query Account
+N, A      /account                    @Get(Query)(AccountVo, Pagination)               @Res(JSON)(PageView<AccountVo>)
+
+Query Account History
+N, A      /account/history            @Get(Query)(AccountHistoryVo, Pagination)        @Res(JSON)(PageView<AccountHistoryVo>)
+
+
+Query Credit
+N, A      /credit                     @Get(Query)(CreditVo, Pagination)                @Res(JSON)(PageView<CreditVo>)
+
+Query Credit History
+N, A      /credit/history             @Get(Query)(CreditHistoryVo, Pagination)         @Res(JSON)(PageView<CreditHistoryVo>)
+
+
+Query Coupon
+N, A      /coupon                     @Get(Query)(CouponVo, Pagination)                @Res(JSON)(PageView<CouponVo>)
+
+Query Coupon History
+N, A      /coupon/history             @Get(Query)(CouponHistory, Pagination)           @Res(JSON)(PageView<CouponHistoryVo>)
+
+Get Coupon By Id
+N, A      /coupon/{id}                @Get(Path)(id)                                   @Res(JSON)(CouponVo)
+
+Activate Coupon
+N, A      /coupon/{id}/activate       @Get(Path)(id)                                   @Res(JSON)(CouponVo)
+
+Create Coupon
+A         /coupon                     @Post(JSON)(CouponVo)                            @Res(JSON)(CouponVo)
+
+Update Coupon
+A         /coupon/{id}                @Put(JSON)(CouponVo)                             @Res(JSON)(CouponVo)
+
+
+
+Query Withdraw
+N, A      /withdraw                   @Get(Query)(WithdrawVo, Pagination)              @Res(JSON)(PageView<Withdraw>)
+
+Create Withdraw
+N, A      /withdraw                   @Post(Query)(WithdrawVo)                         @Res(JSON)(WithdrawVo)
+
+Update Withdraw:
+N, A      /withdraw/{id}              @Put(JSON)(WithdrawVo)                           @Res(JSON)(WithdrawVo)
+
+Delete Withdraw:
+N, A      /withdraw/{id}              @Delete(Path)(id)                                @Res(JSON)({})
+
+
+
+Query Contact
+N, A      /contact                    @Get(Query)(ContactVo, Pagination)               @Res(JSON)(PageView<Contact>)
+
+Create Contact
+N, A      /contact                    @Post(Query)(ContactVo)                          @Res(JSON)(ContactVo)
+
+Update Contact:
+N, A      /contact/{id}               @Put(JSON)(ContactVo)                            @Res(JSON)(ContactVo)
+
+Delete Contact:
+N, A      /contact/{id}               @Delete(Path)(id)                                @Res(JSON)({})
+
+
+Create Order
+N         /order                      @Post(JSON)(OrderVo)                             @Res(JSON)(OrderVo)
+
+Accept Order
+A         /order/{id}/accept          @Put(JSON)(OrderVo)                              @Res(JSON)(OrderVo)
+
+Query Order
+N, A      /order                      @Get(Query)(OrderVo)                             @Res(JSON)(PageView<OrderVo>)
+
+Query Order History
+N, A      /order/history              @Get(Query)(OrderHistoryVo)                      @Res(JSON)(PageView<OrderHistoryVo)
+
+
+Comment Course
+N, A      /comment                    @Post(JSON)(CourseCommentVo)                     @Res(JSON)(CourseCommentVo)
+
+Delete Course Comment
+N, A      /comment/{id}               @Delete(Path)(id)                                @Res(JSON)({})
+
+Query Course Comment
+N, P, A   /comment                    @Get(Query)(CourseCommentVo)                     @Res(JSON)(PageView<CourseCommentVo>)
+
