@@ -25,6 +25,7 @@ import com.ishangke.edunav.manager.converter.ClassPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.notfound.ClassPhotoNotFoundException;
 
 @Component
 public class ClassPhotoManagerImpl implements ClassPhotoManager {
@@ -148,6 +149,17 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         if (classPhotoBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // Convert
+        ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+        if (classPhotoEntity.getId() == null) {
+            throw new ManagerException("ClassPhoto deletion must specify id");
+        }
+        ClassPhotoEntityExt previousClassPhoto = classPhotoMapper.getById(classPhotoEntity.getId());
+        if (previousClassPhoto == null) {
+            throw new ClassPhotoNotFoundException("ClassPhoto to delete is not found with id:" + classPhotoEntity.getId());
+        }
 
         // 机构管理员只能删除本机构图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
@@ -157,36 +169,28 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                if (g.getPartnerId().equals(previousClassPhoto.getPartnerId())){
                     isSameGroup = true;
                     break;
                 }
             }
 
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
 
-        // Convert
-        ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
-        if (classPhotoEntity.getId() == null) {
-            throw new ManagerException("ClassPhoto deletion must specify id");
-        }
+
         try {
-            classPhotoEntity.setDeleted(1);
-            ;
-            classPhotoMapper.deleteById(classPhotoEntity.getId());
+            previousClassPhoto.setDeleted(1);
+            classPhotoMapper.deleteById(previousClassPhoto.getId());
         } catch (Throwable t) {
             throw new ManagerException("ClassPhoto deletion failed for user: " + userEntity.getId(), t);
         }
-        return ClassPhotoConverter.toBo(classPhotoEntity);
+        return ClassPhotoConverter.toBo(previousClassPhoto);
     }
 
     @Override

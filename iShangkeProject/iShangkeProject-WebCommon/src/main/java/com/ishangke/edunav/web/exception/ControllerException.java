@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.user.exception;
+package com.ishangke.edunav.web.exception;
 
 public class ControllerException extends RuntimeException {
     private static final long serialVersionUID = -7704479922870911157L;

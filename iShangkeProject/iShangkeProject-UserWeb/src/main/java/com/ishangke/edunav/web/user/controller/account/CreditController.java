@@ -21,15 +21,15 @@ import com.ishangke.edunav.web.converter.CreditHistoryConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.CreditHistoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.CreditPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CreditHistoryVo;
 import com.ishangke.edunav.web.model.CreditVo;
 import com.ishangke.edunav.web.model.pageview.CreditHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CreditPageViewVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 @Controller
-@RequestMapping("/credit")
+@RequestMapping("/api/v2/credit")
 
 public class CreditController extends AbstractController{
     @Autowired
