@@ -19,13 +19,13 @@ import com.ishangke.edunav.web.converter.LoginConverter;
 import com.ishangke.edunav.web.converter.PasswordConverter;
 import com.ishangke.edunav.web.converter.SessionConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.LoginVo;
 import com.ishangke.edunav.web.model.PasswordVo;
 import com.ishangke.edunav.web.model.SessionVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 @Controller
 @RequestMapping("/api/v2/user")

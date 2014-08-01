@@ -21,14 +21,14 @@ import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.ContactConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.ContactPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.ContactVo;
 import com.ishangke.edunav.web.model.pageview.ContactPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 @Controller
-@RequestMapping("/contact")
+@RequestMapping("/api/v2/contact")
 
 public class ContactController extends AbstractController{
 
@@ -50,7 +50,7 @@ public class ContactController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         //user module specific, also need to perform null check
-        if (contactVo.getId() == null || contactVo.getId() != curId) {
+        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
         

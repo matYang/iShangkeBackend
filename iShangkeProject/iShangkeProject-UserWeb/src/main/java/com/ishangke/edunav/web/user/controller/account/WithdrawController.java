@@ -21,11 +21,11 @@ import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.WithdrawConverter;
 import com.ishangke.edunav.web.converter.pageview.WithdrawPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.WithdrawVo;
 import com.ishangke.edunav.web.model.pageview.WithdrawPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 
 @Controller
@@ -51,7 +51,7 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         //user module specific, also need to perform null check
-        if (withdrawVo.getId() == null || withdrawVo.getId() != curId) {
+        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
         

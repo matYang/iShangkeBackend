@@ -21,16 +21,16 @@ import com.ishangke.edunav.web.converter.AccountHistoryConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.AccountHistoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.AccountPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.AccountHistoryVo;
 import com.ishangke.edunav.web.model.AccountVo;
 import com.ishangke.edunav.web.model.pageview.AccountHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.AccountPageViewVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
-import com.ishangke.edunav.web.user.exception.ControllerException;
 
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/api/v2/account")
 
 public class AccountController extends AbstractController{
     
