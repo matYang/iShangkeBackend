@@ -18,7 +18,7 @@ import com.ishangke.edunav.common.utilities.file.AliyunMain;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
 
 @Controller
-@RequestMapping("/api/v2/teacher/Upload")
+@RequestMapping("/p-api/v2/teacher/Upload")
 public class TeacherPhotoUploadController extends AbstractController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public @ResponseBody
