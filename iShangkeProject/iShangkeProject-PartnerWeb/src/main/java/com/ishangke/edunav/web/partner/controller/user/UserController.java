@@ -27,7 +27,6 @@ import com.ishangke.edunav.web.response.EmptyResponse;
 
 @Controller
 @RequestMapping("/p-api/v2/user")
-
 public class UserController extends AbstractController{
     
     @Autowired
