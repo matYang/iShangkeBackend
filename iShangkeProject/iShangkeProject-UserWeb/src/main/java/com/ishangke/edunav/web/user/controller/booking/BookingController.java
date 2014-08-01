@@ -77,22 +77,20 @@ public class BookingController  extends AbstractController {
     }
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody BookingPageViewVo getBooking(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingVo bookingVo, OrderByVo orderByVo) {
+    public @ResponseBody BookingPageViewVo getBooking(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingVo bookingVo) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
-        pageVo.addOrderByEntity(orderByVo);
         BookingPageViewBo bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         BookingPageViewVo bookingVos = BookingPageViewConverter.toModel(bookingBos);
         return bookingVos;
     }
     
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody BookingHistoryPageViewVo getBookingHistory(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingHistoryVo bookingHistoryVo, OrderByVo orderByVo) {
+    public @ResponseBody BookingHistoryPageViewVo getBookingHistory(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingHistoryVo bookingHistoryVo) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
-        pageVo.addOrderByEntity(orderByVo);
         BookingHistoryPageViewBo bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         BookingHistoryPageViewVo bookingHistoryVos = BookingHistoryPageViewConverter.toModel(bookingHistoryBos);
         return bookingHistoryVos;

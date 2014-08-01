@@ -6,7 +6,25 @@ import java.util.List;
 public class PaginationVo {
     private Integer size;
     private Integer offset;
+    private String columnKey;
+    private String order;
     private List<OrderByVo> orderByEntities = new ArrayList<>();
+
+    public String getColumnKey() {
+        return columnKey;
+    }
+
+    public void setColumnKey(String columnKey) {
+        this.columnKey = columnKey;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
 
     public Integer getSize() {
         return size;
