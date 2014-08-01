@@ -115,13 +115,13 @@
       <if test="avatarUrl != null">
         AVATAR_URL,
       </if>
-      <if test="schoolId != null">
+      <if test="schoolId != null and classPhotoId = 0">
         SCHOOL_ID,
       </if>
-      <if test="locationId != null">
+      <if test="locationId != null and locationId != 0">
         CAREER_ID,
       </if>
-      <if test="careerId != null">
+      <if test="careerId != null and careerId != 0">
         LOCATION_ID,
       </if>
     </trim>
@@ -177,13 +177,13 @@
       <if test="avatarUrl != null">
         #{avatarUrl,jdbcType=VARCHAR},
       </if>
-      <if test="schoolId != null">
+      <if test="schoolId != null and schoolId != 0">
         #{schoolId,jdbcType=INTEGER},
       </if>
-      <if test="careerId != null">
+      <if test="careerId != null and careerId != 0">
         #{careerId,jdbcType=INTEGER},
       </if>
-      <if test="locationId != null">
+      <if test="locationId != null and locationId != 0">
         #{locationId,jdbcType=INTEGER},
       </if>
     </trim>
