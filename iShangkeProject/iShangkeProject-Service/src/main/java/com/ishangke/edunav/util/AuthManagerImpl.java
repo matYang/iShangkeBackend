@@ -536,7 +536,7 @@ public class AuthManagerImpl implements AuthManager {
             List<RoleEntityExt> roleList = roleMapper.listRolesByUserId(userId);
             if (roleList == null || roleList.size() == 0) {
                 LOGGER.warn(String.format("[AuthManager] user [id = %d] cannot find role!", userId));
-                return null;
+                return Constant.DEFAULTNULL;
             }
             int role = roleList.get(0).getId();
             cache.set(Constant.ROLEIDPREFIX + userId, Constant.STATUSTRANSFORMEXPIRETIME, role);

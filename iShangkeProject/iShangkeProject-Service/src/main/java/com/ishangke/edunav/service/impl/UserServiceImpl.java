@@ -288,7 +288,7 @@ public class UserServiceImpl implements UserService.Iface {
     @Override
     public SessionBo openCellSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            //不需要进行权限控制
+            // 不需要进行权限控制
             return userManager.openCellSession(userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -309,11 +309,7 @@ public class UserServiceImpl implements UserService.Iface {
     public SessionBo openForgetPasswordSession(UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "openForgetPasswordSession"));
-                throw new NoPermissionException();
-            }
+            // 不需要你进行权限控制，因为忘记密码的时候根本金牛不能登录
             return userManager.openForgetPasswordSession(userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);

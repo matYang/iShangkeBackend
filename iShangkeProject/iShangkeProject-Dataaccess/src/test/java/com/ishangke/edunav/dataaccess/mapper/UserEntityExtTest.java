@@ -99,12 +99,15 @@ public class UserEntityExtTest extends BaseTest {
     
     @Test
     public void testGet() {
+        UserEntityExt getbyid0 = userEntityExtMapper
+                .getById(1);
         UserEntityExt getbyid1 = userEntityExtMapper
                 .getById(2);
         UserEntityExt getbyid2 = userEntityExtMapper
                 .getById(3);
         UserEntityExt getbyid3 = userEntityExtMapper
                 .getById(4);
+        Assert.assertEquals("李清", getbyid0.getName());
         Assert.assertEquals("陈睿", getbyid1.getName());
         Assert.assertEquals("mat", getbyid2.getName());
         Assert.assertEquals("harry", getbyid3.getName());
