@@ -13,11 +13,9 @@ import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
-import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.CategoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.ClassPhotoEntityExtMapper;
@@ -476,6 +474,7 @@ public class CourseManagerImpl implements CourseManager {
     @Override
     public CourseBo transformCourseStatus(CourseBo courseBo, int operation, UserBo userBo) {
         CourseEntityExt courseEntity = courseMapper.getInfoById(courseBo.getId());
+        CourseEntityExt courseEntityModify = CourseConverter.fromBo(courseBo);
         String roleName = authManager.getRole(userBo.getId());
         List<Operation> operationList = transformManager.getOperationByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, courseEntity.getStatus());
         Operation op = null;
@@ -508,7 +507,7 @@ public class CourseManagerImpl implements CourseManager {
             // 如果是更新操作转，调用update方法
             if (op.getOperateCode() == Constant.COURSEOPERATIONSUBMITUPDATED) {
                 // 不会被立刻上线
-                CourseBo result = this.updateCourse(courseBo, courseEntity, false);
+                CourseBo result = this.updateCourse(courseEntityModify, courseEntity, false);
                 List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
                 result.setActionList(actions);
                 return result;
@@ -542,7 +541,7 @@ public class CourseManagerImpl implements CourseManager {
 
             // 如果是更新操作,则直接上线
             if (op.getOperateCode() == Constant.COURSEOPERATIONSUBMITUPDATED) {
-                CourseBo result = this.updateCourse(courseBo, courseEntity, true);
+                CourseBo result = this.updateCourse(courseEntityModify, courseEntity, true);
                 LOGGER.warn(String.format("[transform course status] ishangke admin [%d] edit course and online [%d]", userBo.getId(), courseEntity.getId()));
                 List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, op.getNextStatus());
                 result.setActionList(actions);
@@ -571,63 +570,68 @@ public class CourseManagerImpl implements CourseManager {
         return null;
     }
 
-    private CourseBo updateCourse(CourseBo courseBo, CourseEntityExt oldCourseEntity, boolean isOnline) {
+    private CourseBo updateCourse(CourseEntityExt courseEntityModify, CourseEntityExt oldCourseEntity, boolean isOnline) {
         if (!isOnline) {
-            // partner不能修改course template的课程名／价格
-            if (!courseBo.getCourseName().equals(oldCourseEntity.getCourseName()) || courseBo.getPrice() != oldCourseEntity.getPrice()
-                    || courseBo.getOriginalPrice() != oldCourseEntity.getOriginalPrice()) {
+            if ((courseEntityModify.getPrice() != null && !courseEntityModify.getPrice().equals(oldCourseEntity.getPrice())) || (courseEntityModify.getCourseName() != null && !courseEntityModify.getCourseName().equals(oldCourseEntity.getCourseName())) || (courseEntityModify.getOriginalPrice() != null && !courseEntityModify.getOriginalPrice().equals(oldCourseEntity.getOriginalPrice()))) {
                 throw new ManagerException("cannot modify price , name , origin price");
             }
+            List<ClassPhotoEntityExt> classPhotos = null;
+            List<TeacherEntityExt> teachers = null;
             // 验证教师信息和classphoto信息是否属于本机构
-            List<ClassPhotoBo> classPhotos = courseBo.getClassPhotoList();
-            if (classPhotos != null) {
-                for (ClassPhotoBo photo : classPhotos) {
-                    ClassPhotoEntityExt photoEntity = null;
-                    try {
-                        photoEntity = photoMapper.getById(photo.getId());
-                    } catch (Exception e) {
-                        throw new ManagerException("failed when query photo in partner repository");
-                    }
-                    if (photoEntity == null || photoEntity.getPartnerId() != oldCourseEntity.getPartnerId()) {
-                        throw new ManagerException("classphoto cannot found in partner photo repository");
+            if (courseEntityModify.getClassPhotoList() != null) {
+                classPhotos = courseEntityModify.getClassPhotoList();
+                if (classPhotos != null) {
+                    for (ClassPhotoEntityExt photo : classPhotos) {
+                        ClassPhotoEntityExt photoEntity = null;
+                        try {
+                            photoEntity = photoMapper.getById(photo.getId());
+                        } catch (Exception e) {
+                            throw new ManagerException("failed when query photo in partner repository");
+                        }
+                        if (photoEntity == null || photoEntity.getPartnerId() != oldCourseEntity.getPartnerId()) {
+                            throw new ManagerException("classphoto cannot found in partner photo repository");
+                        }
                     }
                 }
             }
-            List<TeacherBo> teachers = courseBo.getTeacherList();
-            if (teachers != null) {
-                for (TeacherBo teacher : teachers) {
-                    TeacherEntityExt teacherEntity = null;
-                    try {
-                        teacherEntity = teacherMapper.getById(teacher.getId());
-                    } catch (Exception e) {
-                        throw new ManagerException("failed when query teacher in partner repository");
-                    }
-                    if (teacherEntity == null || teacherEntity.getPartnerId() != oldCourseEntity.getPartnerId()) {
-                        throw new ManagerException("teacher cannot found in partner teacher repository");
+            
+            if (courseEntityModify.getTeacherList() != null) {
+                teachers = courseEntityModify.getTeacherList();
+                if (teachers != null) {
+                    for (TeacherEntityExt teacher : teachers) {
+                        TeacherEntityExt teacherEntity = null;
+                        try {
+                            teacherEntity = teacherMapper.getById(teacher.getId());
+                        } catch (Exception e) {
+                            throw new ManagerException("failed when query teacher in partner repository");
+                        }
+                        if (teacherEntity == null || teacherEntity.getPartnerId() != oldCourseEntity.getPartnerId()) {
+                            throw new ManagerException("teacher cannot found in partner teacher repository");
+                        }
                     }
                 }
             }
             // 删除原有的教师信息/classphoto与classtemplate的关联
-            List<TeacherEntityExt> oldTeachers = teacherMapper.listTeacherByCourseId(courseBo.getId());
+            List<TeacherEntityExt> oldTeachers = teacherMapper.listTeacherByCourseId(courseEntityModify.getId());
             if (oldTeachers != null && oldTeachers.size() != 0) {
                 for (TeacherEntityExt t : oldTeachers) {
-                    courseTeacherMapper.deleteByCourseIdTeacherId(courseBo.getId(), t.getId());
+                    courseTeacherMapper.deleteByCourseIdTeacherId(courseEntityModify.getId(), t.getId());
                 }
             }
-            List<ClassPhotoEntityExt> oldPhotos = photoMapper.listClassPhotoByCourseTempleteId(courseBo.getId());
+            List<ClassPhotoEntityExt> oldPhotos = photoMapper.listClassPhotoByCourseTempleteId(courseEntityModify.getId());
             if (oldPhotos != null && oldPhotos.size() != 0) {
                 for (ClassPhotoEntityExt p : oldPhotos) {
-                    coursePhotoMapper.deleteByCourseIdClassPhotoId(courseBo.getId(), p.getId());
+                    coursePhotoMapper.deleteByCourseIdClassPhotoId(courseEntityModify.getId(), p.getId());
                 }
             }
             // 建立新的教师信息/classphoto与classtemplate的关联
             // 插入classphoto关联
             if (classPhotos != null) {
-                for (ClassPhotoBo photo : classPhotos) {
+                for (ClassPhotoEntityExt photo : classPhotos) {
                     try {
                         CourseClassPhotoEntityExt courseClassPhotoEntityExt = new CourseClassPhotoEntityExt();
                         courseClassPhotoEntityExt.setClassPhotoId(photo.getId());
-                        courseClassPhotoEntityExt.setCourseId(courseBo.getId());
+                        courseClassPhotoEntityExt.setCourseId(courseEntityModify.getId());
                         courseClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         coursePhotoMapper.add(courseClassPhotoEntityExt);
                     } catch (Exception e) {
@@ -637,11 +641,11 @@ public class CourseManagerImpl implements CourseManager {
             }
             // 插入teacher关联
             if (teachers != null) {
-                for (TeacherBo teacher : teachers) {
+                for (TeacherEntityExt teacher : teachers) {
                     try {
                         CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
                         courseTeacherEntityExt.setTeacherId(teacher.getId());
-                        courseTeacherEntityExt.setCourseId(courseBo.getId());
+                        courseTeacherEntityExt.setCourseId(courseEntityModify.getId());
                         courseTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         courseTeacherMapper.add(courseTeacherEntityExt);
                     } catch (Exception e) {
@@ -649,40 +653,45 @@ public class CourseManagerImpl implements CourseManager {
                     }
                 }
             }
-            CourseEntityExt courseTee = CourseConverter.fromBo(courseBo);
             // 修改lastmodifytime
-            courseTee.setLastModifyTime(DateUtility.getCurTimeInstance());
+            courseEntityModify.setLastModifyTime(DateUtility.getCurTimeInstance());
             // 状态设置为待审核
-            courseTee.setStatus(Constant.COURSESTATUSPENDINGREVIEW);
+            courseEntityModify.setStatus(Constant.COURSESTATUSPENDINGREVIEW);
             // 不能修改partner id
-            courseTee.setPartnerId(oldCourseEntity.getPartnerId());
+            courseEntityModify.setPartnerId(oldCourseEntity.getPartnerId());
             // 不能修改course template id
-            courseTee.setCourseTemplateId(oldCourseEntity.getCourseTemplateId());
-            courseMapper.update(courseTee);
+            courseEntityModify.setCourseTemplateId(oldCourseEntity.getCourseTemplateId());
+            courseMapper.update(courseEntityModify);
         } else {
-            List<ClassPhotoBo> classPhotos = courseBo.getClassPhotoList();
-            List<TeacherBo> teachers = courseBo.getTeacherList();
-            // 删除原有的教师信息/classphoto与classtemplate的关联
-            List<TeacherEntityExt> oldTeachers = teacherMapper.listTeacherByCourseId(courseBo.getId());
-            if (oldTeachers != null && oldTeachers.size() != 0) {
-                for (TeacherEntityExt t : oldTeachers) {
-                    courseTeacherMapper.deleteByCourseIdTeacherId(courseBo.getId(), t.getId());
+            List<ClassPhotoEntityExt> classPhotos = courseEntityModify.getClassPhotoList();
+            List<TeacherEntityExt> teachers = courseEntityModify.getTeacherList();
+            if (classPhotos != null) {
+                List<ClassPhotoEntityExt> oldPhotos = photoMapper.listClassPhotoByCourseTempleteId(courseEntityModify.getId());
+                if (oldPhotos != null && oldPhotos.size() != 0) {
+                    for (ClassPhotoEntityExt p : oldPhotos) {
+                        coursePhotoMapper.deleteByCourseIdClassPhotoId(courseEntityModify.getId(), p.getId());
+                    }
                 }
             }
-            List<ClassPhotoEntityExt> oldPhotos = photoMapper.listClassPhotoByCourseTempleteId(courseBo.getId());
-            if (oldPhotos != null && oldPhotos.size() != 0) {
-                for (ClassPhotoEntityExt p : oldPhotos) {
-                    coursePhotoMapper.deleteByCourseIdClassPhotoId(courseBo.getId(), p.getId());
+            if (teachers != null) {
+             // 删除原有的教师信息/classphoto与classtemplate的关联
+                List<TeacherEntityExt> oldTeachers = teacherMapper.listTeacherByCourseId(courseEntityModify.getId());
+                if (oldTeachers != null && oldTeachers.size() != 0) {
+                    for (TeacherEntityExt t : oldTeachers) {
+                        courseTeacherMapper.deleteByCourseIdTeacherId(courseEntityModify.getId(), t.getId());
+                    }
                 }
             }
+            
+            
             // 建立新的教师信息/classphoto与classtemplate的关联
             // 插入classphoto关联
             if (classPhotos != null) {
-                for (ClassPhotoBo photo : classPhotos) {
+                for (ClassPhotoEntityExt photo : classPhotos) {
                     try {
                         CourseClassPhotoEntityExt courseClassPhotoEntityExt = new CourseClassPhotoEntityExt();
                         courseClassPhotoEntityExt.setClassPhotoId(photo.getId());
-                        courseClassPhotoEntityExt.setCourseId(courseBo.getId());
+                        courseClassPhotoEntityExt.setCourseId(courseEntityModify.getId());
                         courseClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         coursePhotoMapper.add(courseClassPhotoEntityExt);
                     } catch (Exception e) {
@@ -692,11 +701,11 @@ public class CourseManagerImpl implements CourseManager {
             }
             // 插入teacher关联
             if (teachers != null) {
-                for (TeacherBo teacher : teachers) {
+                for (TeacherEntityExt teacher : teachers) {
                     try {
                         CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
                         courseTeacherEntityExt.setTeacherId(teacher.getId());
-                        courseTeacherEntityExt.setCourseId(courseBo.getId());
+                        courseTeacherEntityExt.setCourseId(courseEntityModify.getId());
                         courseTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         courseTeacherMapper.add(courseTeacherEntityExt);
                     } catch (Exception e) {
@@ -704,16 +713,15 @@ public class CourseManagerImpl implements CourseManager {
                     }
                 }
             }
-            CourseEntityExt courseTee = CourseConverter.fromBo(courseBo);
             // 不能修改partner
-            courseTee.setPartnerId(oldCourseEntity.getPartnerId());
+            courseEntityModify.setPartnerId(oldCourseEntity.getPartnerId());
             // 修改lastmodifytime
-            courseTee.setLastModifyTime(DateUtility.getCurTimeInstance());
+            courseEntityModify.setLastModifyTime(DateUtility.getCurTimeInstance());
             // 状态直接设置为已上线
-            courseTee.setStatus(Constant.COURSESTATUSONLINED);
-            courseMapper.update(courseTee);
+            courseEntityModify.setStatus(Constant.COURSESTATUSONLINED);
+            courseMapper.update(courseEntityModify);
         }
-        return CourseConverter.toBo(courseMapper.getInfoById(courseBo.getId()));
+        return CourseConverter.toBo(courseMapper.getInfoById(courseEntityModify.getId()));
     }
 
     @Override
