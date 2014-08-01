@@ -23,7 +23,7 @@ import com.ishangke.edunav.web.model.LoginVo;
 import com.ishangke.edunav.web.model.PasswordVo;
 import com.ishangke.edunav.web.model.SessionVo;
 import com.ishangke.edunav.web.model.UserVo;
-import com.ishangke.edunav.web.user.common.EmptyResponse;
+import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 import com.ishangke.edunav.web.user.exception.ControllerException;
 

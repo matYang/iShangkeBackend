@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.user.common;
+package com.ishangke.edunav.web.response;
 
 public class JsonResponse<T> {
     private int status;

@@ -328,8 +328,7 @@ public class CourseManagerImpl implements CourseManager {
         }
         
         String roleName = authManager.getRole(userBo.getId());
-        //TODO  urr, should here be an or instead of an and?
-        if (Constant.ROLEADMIN.equals(roleName) && Constant.ROLESYSTEMADMIN.equals(roleName)) {
+        if (!(Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName))) {
             throw new ManagerException("cannot delete comment current user");
         }
         try {

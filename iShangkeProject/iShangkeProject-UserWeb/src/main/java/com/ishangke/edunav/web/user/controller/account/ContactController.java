@@ -23,7 +23,7 @@ import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.ContactPageViewConverter;
 import com.ishangke.edunav.web.model.ContactVo;
 import com.ishangke.edunav.web.model.pageview.ContactPageViewVo;
-import com.ishangke.edunav.web.user.common.EmptyResponse;
+import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 import com.ishangke.edunav.web.user.exception.ControllerException;
 
