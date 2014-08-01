@@ -245,11 +245,7 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
-    <table tableName="USER_LOCATION" domainObjectName="UserLocationEntity">
-      <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
-    </table>
+   
     <table tableName="ADDRESS" domainObjectName="AddressEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"

@@ -14,13 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.common.constant.DefaultValue;
+import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
-import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml" })
@@ -149,5 +149,23 @@ public class CouponEntityExtTest extends BaseTest{
         Assert.assertEquals("2.4", upDate.getBalance().toString());
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime()));
+    }
+    @Test
+    public void testAdd1() {
+    CouponEntityExt couponEntity = new CouponEntityExt();
+    couponEntity.setBalance(DefaultValue.COUPONREGISTRATIONVALUE);
+    couponEntity.setTotal(DefaultValue.COUPONREGISTRATIONVALUE);
+    couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
+    couponEntity.setStatus(CouponEnums.Status.USABLE.code);
+    Calendar expiry = DateUtility.getCurTimeInstance();
+    expiry.add(Calendar.YEAR, 1);
+    couponEntity.setExpiryTime(expiry);
+    couponEntity.setRemark("");
+    couponEntity.setUserId(1);
+    couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+    couponEntity.setCreateTime(DateUtility.getCurTimeInstance());
+    couponEntity.setEnabled(0);
+    couponEntity.setDeleted(0);
+    couponEntityExtMapper.add(couponEntity);
     }
 }

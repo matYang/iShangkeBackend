@@ -29,14 +29,12 @@ import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserGroupEntityExtMapper;
-import com.ishangke.edunav.dataaccess.mapper.UserLocationEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserLocationEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.UserManager;
@@ -76,12 +74,9 @@ public class UserManagerImpl implements UserManager {
     
     @Autowired
     private CouponHistoryEntityExtMapper couponHistoryMapper;
+   
     @Autowired
-    
     private PartnerEntityExtMapper partnerMapper;
-    
-    @Autowired
-    private UserLocationEntityExtMapper userLocationMapper;
     
     @Autowired
     private CouponManager couponManager;
@@ -142,17 +137,6 @@ public class UserManagerImpl implements UserManager {
             if (result <= 0) {
                 throw new ManagerException("InitializeNormalUser::addCredit user with unique identifier: " + uniqueIdentifier  + " failed");
             }
-            
-            UserLocationEntityExt userLocationEntity = new UserLocationEntityExt();
-            userLocationEntity.setUserId(userEntity.getId());
-            userLocationEntity.setLocationId(userBo.getLocationId());
-            userLocationEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
-            userLocationEntity.setDeleted(0);
-            result = userLocationMapper.add(userLocationEntity);
-            if (result <= 0) {
-                throw new ManagerException("InitializeNormalUser::addUserLocation with unique identifier: " + uniqueIdentifier + " failed");
-            }
-            
             
             CouponEntityExt couponEntity = new CouponEntityExt();
             couponEntity.setBalance(DefaultValue.COUPONREGISTRATIONVALUE);

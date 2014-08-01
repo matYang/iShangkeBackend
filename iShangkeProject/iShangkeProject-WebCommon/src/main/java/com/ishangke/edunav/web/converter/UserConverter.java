@@ -92,6 +92,12 @@ public class UserConverter {
                 .getLastModifyTimeEnd().getTimeInMillis());
         userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
                 .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getLocationId() != null) {
+            userBo.setLocationId(vo.getLocationId());
+        }
+        if (vo.getSchoolIdSet() != null) {
+            userBo.setLocationIdSet(vo.getLocationIdSet());
+        }
         return userBo;
     }
 
@@ -132,6 +138,8 @@ public class UserConverter {
         userVo.setCareerIdSet(bo.getCareerIdSet());
         userVo.setSchoolId(bo.getSchoolId());
         userVo.setSchoolIdSet(bo.getSchoolIdSet());
+        userVo.setLocationId(bo.getLocationId());
+        userVo.setLocationIdSet(bo.getLocationIdSet());
         return userVo;
     }
 }
