@@ -27,6 +27,9 @@ public class PaginationConverter {
         }
 
         List<OrderByVo> orderByVos = vo.getOrderByEntities();
+        if (vo.getColumnKey() != null && vo.getOrder() != null) {
+            orderByVos.add(new OrderByVo(vo.getColumnKey(), vo.getOrder()));
+        }
 
         List<OrderByBo> orderByBos = new ArrayList<>();
 
