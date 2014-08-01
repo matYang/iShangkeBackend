@@ -26,7 +26,7 @@ import com.ishangke.edunav.web.converter.pageview.CourseCommentPageViewConverter
 import com.ishangke.edunav.web.model.CourseCommentVo;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.pageview.CourseCommentPageViewVo;
-import com.ishangke.edunav.web.user.common.EmptyResponse;
+import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 import com.ishangke.edunav.web.user.exception.ControllerException;
 

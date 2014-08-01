@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.common.WebConstants;
 import com.ishangke.edunav.web.model.UserVo;
-import com.ishangke.edunav.web.user.common.JsonResponse;
+import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
 @RequestMapping("/api/v2/welcome")

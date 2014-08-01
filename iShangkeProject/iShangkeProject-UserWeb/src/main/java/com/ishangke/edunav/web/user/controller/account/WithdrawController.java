@@ -23,7 +23,7 @@ import com.ishangke.edunav.web.converter.WithdrawConverter;
 import com.ishangke.edunav.web.converter.pageview.WithdrawPageViewConverter;
 import com.ishangke.edunav.web.model.WithdrawVo;
 import com.ishangke.edunav.web.model.pageview.WithdrawPageViewVo;
-import com.ishangke.edunav.web.user.common.EmptyResponse;
+import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 import com.ishangke.edunav.web.user.exception.ControllerException;
 
