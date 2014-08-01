@@ -208,7 +208,7 @@ public class CourseFacade {
         return result;
     }
 
-    public CourseTemplateBo transformCourseTmeplateStatus(CourseTemplateBo courseTemplateBo, int operation, UserBo userBo, String url) {
+    public CourseTemplateBo transformCourseTemplateStatus(CourseTemplateBo courseTemplateBo, int operation, UserBo userBo, String url) {
         CourseTemplateBo result = null;
         
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());

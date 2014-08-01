@@ -44,11 +44,19 @@ public class CourseController extends AbstractController{
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody CoursePageViewVo  queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
         
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
         
-        pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        pageViewBo = courseFacade.queryCourse (CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
@@ -58,12 +66,19 @@ public class CourseController extends AbstractController{
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody CourseVo  queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
         
         CourseVo courseVo = new CourseVo();
         courseVo.setId(id);
         CourseBo responseBo = null;
         CourseVo responseVo = null;
-        
         
         responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
         responseVo = CourseConverter.toModel(responseBo);
