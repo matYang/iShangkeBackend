@@ -105,7 +105,7 @@ public class PartnerController extends AbstractController{
     
     
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.PUT)
-    public @ResponseBody PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, HttpServletRequest req) {
+    public @ResponseBody PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
         //TODO receive the image file, process it, upload to OCS, update partner with url, return the latest partner
         return new PartnerVo();
     }

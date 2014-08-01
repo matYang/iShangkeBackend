@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.user.controller.account;
+package com.ishangke.edunav.web.partner.controller.partner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,38 +9,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
+import com.ishangke.edunav.commoncontract.model.ClassPhotoPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawPageViewBo;
-import com.ishangke.edunav.facade.user.AccountFacade;
-import com.ishangke.edunav.facade.user.UserFacade;
+import com.ishangke.edunav.facade.partner.PartnerFacade;
+import com.ishangke.edunav.facade.partner.UserFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
+import com.ishangke.edunav.web.converter.ClassPhotoConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
-import com.ishangke.edunav.web.converter.WithdrawConverter;
-import com.ishangke.edunav.web.converter.pageview.WithdrawPageViewConverter;
+import com.ishangke.edunav.web.converter.pageview.ClassPhotoPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
-import com.ishangke.edunav.web.model.WithdrawVo;
-import com.ishangke.edunav.web.model.pageview.WithdrawPageViewVo;
+import com.ishangke.edunav.web.model.ClassPhotoVo;
+import com.ishangke.edunav.web.model.pageview.ClassPhotoPageViewVo;
+import com.ishangke.edunav.web.partner.controller.AbstractController;
 import com.ishangke.edunav.web.response.EmptyResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
-
 
 @Controller
-@RequestMapping("/api/v2/withdraw")
+@RequestMapping("/p-api/v2/classPhoto")
 
-public class WithdrawController extends AbstractController{
-
+public class ClassPhotoController extends AbstractController{
+    @Autowired
+    PartnerFacade partnerFacade;
+    
     @Autowired
     UserFacade userFacade;
     
-    @Autowired
-    AccountFacade accountFacade;
-    
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody WithdrawPageViewVo  queryWithdraw(WithdrawVo withdrawVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody ClassPhotoPageViewVo  queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -50,24 +50,28 @@ public class WithdrawController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
-        }
+
         
-        WithdrawPageViewBo pageViewBo = null;
-        WithdrawPageViewVo pageViewVo = null;
+        ClassPhotoPageViewBo pageViewBo = null;
+        ClassPhotoPageViewVo pageViewVo = null;
         
-        pageViewBo = accountFacade.queryWithdraw(WithdrawConverter.fromModel(withdrawVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
-        pageViewVo = WithdrawPageViewConverter.toModel(pageViewBo);
+        pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        pageViewVo = ClassPhotoPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
     }
     
+    //return the ClassPhotoVo with img url in it
+    @RequestMapping(value = "/upload", method = RequestMethod.PUT)
+    public @ResponseBody ClassPhotoVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value="partnerId") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
+        
+        return new ClassPhotoVo();
+    }
+    
     
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody WithdrawVo create(@RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
-        WithdrawVo responseVo = null;
+    public @ResponseBody ClassPhotoVo create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+        ClassPhotoVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -79,21 +83,17 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
-        }
         
+        ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
         
-        WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
-        
-        WithdrawBo responseWithdraw = accountFacade.createWithdraw(targetWithdraw, curUser, permissionTag);
-        responseVo = WithdrawConverter.toModel(responseWithdraw);
+        ClassPhotoBo responseClassPhoto = partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
+        responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody WithdrawVo update(@RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
-        WithdrawVo responseVo = null;
+    public @ResponseBody ClassPhotoVo update(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+        ClassPhotoVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -105,14 +105,11 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
-        }
         
+        ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
         
-        WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
-        WithdrawBo responseWithdraw = accountFacade.updateWithdraw(targetWithdraw, curUser, permissionTag);
-        responseVo = WithdrawConverter.toModel(responseWithdraw);
+        ClassPhotoBo responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
+        responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
     
@@ -129,11 +126,11 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        WithdrawVo withdrawVo = new WithdrawVo();
-        withdrawVo.setId(id);
-        WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
+        ClassPhotoVo classPhotoVo = new ClassPhotoVo();
+        classPhotoVo.setId(id);
+        ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
         
-        accountFacade.deleteWithdraw(targetWithdraw, curUser, permissionTag);
+        partnerFacade.deleteClassPhoto(targetClassPhoto, curUser, permissionTag);
         return new EmptyResponse();
     }
     

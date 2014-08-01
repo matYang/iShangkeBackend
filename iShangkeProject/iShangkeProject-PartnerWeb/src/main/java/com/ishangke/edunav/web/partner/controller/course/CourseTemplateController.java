@@ -30,7 +30,7 @@ import com.ishangke.edunav.web.model.pageview.CourseTemplatePageViewVo;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
 
 @Controller
-@RequestMapping("/p-api/v2/courseTemplateTemplate")
+@RequestMapping("/p-api/v2/courseTemplate")
 
 public class CourseTemplateController extends AbstractController{
     
@@ -123,6 +123,7 @@ public class CourseTemplateController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
+        //course template operation is same as course opration
         Integer operationObj = Constant.COURSEOPERATEMAP.get(operate);
         if (operationObj == null) {
             throw new ControllerException("This courseTemplate operation is not defined!");

@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.user.controller.account;
+package com.ishangke.edunav.web.partner.controller.partner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,36 +11,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.commoncontract.model.AddressBo;
+import com.ishangke.edunav.commoncontract.model.AddressPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawPageViewBo;
-import com.ishangke.edunav.facade.user.AccountFacade;
-import com.ishangke.edunav.facade.user.UserFacade;
+import com.ishangke.edunav.facade.partner.PartnerFacade;
+import com.ishangke.edunav.facade.partner.UserFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
+import com.ishangke.edunav.web.converter.AddressConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
-import com.ishangke.edunav.web.converter.WithdrawConverter;
-import com.ishangke.edunav.web.converter.pageview.WithdrawPageViewConverter;
+import com.ishangke.edunav.web.converter.pageview.AddressPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
-import com.ishangke.edunav.web.model.WithdrawVo;
-import com.ishangke.edunav.web.model.pageview.WithdrawPageViewVo;
+import com.ishangke.edunav.web.model.AddressVo;
+import com.ishangke.edunav.web.model.pageview.AddressPageViewVo;
+import com.ishangke.edunav.web.partner.controller.AbstractController;
 import com.ishangke.edunav.web.response.EmptyResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
-
 
 @Controller
-@RequestMapping("/api/v2/withdraw")
+@RequestMapping("/p-api/v2/address")
 
-public class WithdrawController extends AbstractController{
-
+public class AddressController extends AbstractController{
+    @Autowired
+    PartnerFacade partnerFacade;
+    
     @Autowired
     UserFacade userFacade;
     
-    @Autowired
-    AccountFacade accountFacade;
-    
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody WithdrawPageViewVo  queryWithdraw(WithdrawVo withdrawVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody AddressPageViewVo  queryAddress(AddressVo addressVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -50,24 +48,21 @@ public class WithdrawController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
-        }
+
         
-        WithdrawPageViewBo pageViewBo = null;
-        WithdrawPageViewVo pageViewVo = null;
+        AddressPageViewBo pageViewBo = null;
+        AddressPageViewVo pageViewVo = null;
         
-        pageViewBo = accountFacade.queryWithdraw(WithdrawConverter.fromModel(withdrawVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
-        pageViewVo = WithdrawPageViewConverter.toModel(pageViewBo);
+        pageViewBo = partnerFacade.queryAddress(AddressConverter.fromModel(addressVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        pageViewVo = AddressPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
     }
     
     
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody WithdrawVo create(@RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
-        WithdrawVo responseVo = null;
+    public @ResponseBody AddressVo create(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
+        AddressVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -79,21 +74,17 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
-        }
         
+        AddressBo targetAddress = AddressConverter.fromModel(addressVo);
         
-        WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
-        
-        WithdrawBo responseWithdraw = accountFacade.createWithdraw(targetWithdraw, curUser, permissionTag);
-        responseVo = WithdrawConverter.toModel(responseWithdraw);
+        AddressBo responseAddress = partnerFacade.createAddress(targetAddress, curUser, permissionTag);
+        responseVo = AddressConverter.toModel(responseAddress);
         return responseVo;
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody WithdrawVo update(@RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
-        WithdrawVo responseVo = null;
+    public @ResponseBody AddressVo update(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
+        AddressVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -105,14 +96,11 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
-        }
         
+        AddressBo targetAddress = AddressConverter.fromModel(addressVo);
         
-        WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
-        WithdrawBo responseWithdraw = accountFacade.updateWithdraw(targetWithdraw, curUser, permissionTag);
-        responseVo = WithdrawConverter.toModel(responseWithdraw);
+        AddressBo responseAddress = partnerFacade.updateAddress(targetAddress, curUser, permissionTag);
+        responseVo = AddressConverter.toModel(responseAddress);
         return responseVo;
     }
     
@@ -129,11 +117,11 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        WithdrawVo withdrawVo = new WithdrawVo();
-        withdrawVo.setId(id);
-        WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
+        AddressVo addressVo = new AddressVo();
+        addressVo.setId(id);
+        AddressBo targetAddress = AddressConverter.fromModel(addressVo);
         
-        accountFacade.deleteWithdraw(targetWithdraw, curUser, permissionTag);
+        partnerFacade.deleteAddress(targetAddress, curUser, permissionTag);
         return new EmptyResponse();
     }
     

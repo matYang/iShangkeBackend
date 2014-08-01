@@ -25,6 +25,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.TeacherConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.notfound.TeacherNotFoundException;
 
 @Component
 public class TeacherManagerImpl implements TeacherManager {
@@ -148,6 +149,17 @@ public class TeacherManagerImpl implements TeacherManager {
         if (teacherBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // 删除TEACHER记录
+        TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+        if (teacherEntity.getId() == null) {
+            throw new ManagerException("Teacher deletion must specify id");
+        }
+        TeacherEntityExt previousTeacher = teacherMapper.getById(teacherEntity.getId());
+        if (previousTeacher == null) {
+            throw new TeacherNotFoundException("Teacher to delete is not found with id:" + teacherEntity.getId());
+        }
 
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
@@ -161,32 +173,25 @@ public class TeacherManagerImpl implements TeacherManager {
         }
         else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                if (g.getPartnerId().equals(previousTeacher.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
 
-        // 删除TEACHER记录
-        TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        if (teacherEntity.getId() == null) {
-            throw new ManagerException("Teacher deletion must specify id");
-        }
         try {
-            teacherEntity.setDeleted(1);
-            teacherMapper.deleteById(teacherEntity.getId());
+            previousTeacher.setDeleted(1);
+            teacherMapper.deleteById(previousTeacher.getId());
         } catch (Throwable t) {
             throw new ManagerException("Teacher deletion failed for user: " + userEntity.getId(), t);
         }
 
-        return TeacherConverter.toBo(teacherEntity);
+        return TeacherConverter.toBo(previousTeacher);
     }
 
     @Override

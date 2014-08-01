@@ -25,6 +25,7 @@ import com.ishangke.edunav.manager.converter.AddressConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.notfound.AddressNotFoundException;
 
 @Component
 public class AddressManagerImpl implements AddressManager {
@@ -148,7 +149,17 @@ public class AddressManagerImpl implements AddressManager {
         if (userBo == null || addressBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
+        // Convert
+        AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+        if (addressEntity.getId() == null) {
+            throw new ManagerException("Address deletion must specify id");
+        }
+        AddressEntityExt previousAddress = addressMapper.getById(addressEntity.getId());
+        if (previousAddress == null) {
+            throw new AddressNotFoundException("Address to delete is not found with id:" + addressEntity.getId());
+        }
         
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
@@ -161,32 +172,25 @@ public class AddressManagerImpl implements AddressManager {
         }
         else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                if (g.getPartnerId().equals(previousAddress.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
-
-        // Convert
-        AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        if (addressEntity.getId() == null) {
-            throw new ManagerException("Address deletion must specify id");
-        }
+
         try {
-            addressEntity.setDeleted(1);
-            addressMapper.deleteById(addressEntity.getId());
+            previousAddress.setDeleted(1);
+            addressMapper.deleteById(previousAddress.getId());
         } catch (Throwable t) {
             throw new ManagerException("Address deletion failed for user: " + userEntity.getId(), t);
         }
         
-        return AddressConverter.toBo(addressEntity);
+        return AddressConverter.toBo(previousAddress);
     }
 
     @Override
