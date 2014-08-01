@@ -52,6 +52,8 @@ public class UserVo {
     private Integer schoolId;
     private Set<Integer> careerIdSet;
     private Set<Integer> schoolIdSet;
+    private Integer locationId;
+    private Set<Integer> locationIdSet;
     public Integer getId() {
         return id;
     }
@@ -237,6 +239,18 @@ public class UserVo {
     }
     public void setSchoolIdSet(Set<Integer> schoolIdSet) {
         this.schoolIdSet = schoolIdSet;
+    }
+    public Integer getLocationId() {
+        return locationId;
+    }
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
+    }
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
     }
     
 }
