@@ -323,7 +323,12 @@ public class CourseManagerImpl implements CourseManager {
 
     @Override
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo) {
+        if (courseCommentBo == null || userBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
         String roleName = authManager.getRole(userBo.getId());
+        //TODO  urr, should here be an or instead of an and?
         if (Constant.ROLEADMIN.equals(roleName) && Constant.ROLESYSTEMADMIN.equals(roleName)) {
             throw new ManagerException("cannot delete comment current user");
         }
@@ -440,7 +445,7 @@ public class CourseManagerImpl implements CourseManager {
             throw new ManagerException("cannot found");
         }
         convertered = CourseConverter.toBo(course);
-        if (userBo != null) {
+        if (userBo != null && userBo.getId() > 0) {
             String roleName = authManager.getRole(userBo.getId());
             if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
                 // 判断此coursetemplate是否属于此user所在的partner

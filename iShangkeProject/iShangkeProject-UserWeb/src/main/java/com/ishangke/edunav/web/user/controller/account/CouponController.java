@@ -90,12 +90,21 @@ public class CouponController extends AbstractController{
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody CouponVo  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-     
-        CouponBo responseBo = null;
-        CouponVo responseVo = null;
         
-        responseBo = accountFacade.queryCouponById(id, new UserBo(), permissionTag);
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
+        
+        CouponVo responseVo = null;
+        CouponBo responseBo = null;
+        
+        responseBo = accountFacade.queryCouponById(id, curUser, permissionTag);
         responseVo = CouponConverter.toModel(responseBo);
         
         return responseVo;
@@ -118,6 +127,7 @@ public class CouponController extends AbstractController{
 
         CouponVo couponVo = new CouponVo();
         couponVo.setId(id);
+        couponVo.setUserId(curId);
         
         CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
         responseVo = CouponConverter.toModel(resultCoupon);

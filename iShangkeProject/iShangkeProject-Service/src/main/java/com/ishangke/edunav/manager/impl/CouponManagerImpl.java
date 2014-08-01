@@ -97,6 +97,13 @@ public class CouponManagerImpl implements CouponManager {
         CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
+        if (couponEntity.getId() == null) {
+            throw new ManagerException("Coupon activation must specify id");
+        }
+        CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
+        if (previousCoupon == null) {
+            throw new CouponNotFoundException("Coupon to activate is not found with id:" + couponEntity.getId());
+        }
         
         //admin and system admins can update user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -104,17 +111,9 @@ public class CouponManagerImpl implements CouponManager {
         }
         else {
             //otherwise user can only modify their own, thus making an UserId necessary
-            if (couponEntity == null || couponEntity.getUserId() == null || !couponEntity.getUserId().equals(userEntity.getId())) {
+            if (!previousCoupon.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User activating someone else's coupon");
             }
-        }
-        
-        if (couponEntity.getId() == null) {
-            throw new ManagerException("Coupon activation must specify id");
-        }
-        CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
-        if (previousCoupon == null) {
-            throw new CouponNotFoundException("Coupon to activate is not found");
         }
         
         if (previousCoupon.getExpiryTime().before(DateUtility.getCurTime())) {
@@ -312,7 +311,27 @@ public class CouponManagerImpl implements CouponManager {
 
     @Override
     public CouponBo queryById(int id, UserBo userBo) {
-        return CouponConverter.toBo(couponMapper.getById(id));
+        if (id <= 0 || userBo == null) {
+            throw new ManagerException("Invalid parameter");
+        }
+        
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        CouponEntityExt couponEntity = couponMapper.getById(id);
+        if (couponEntity == null) {
+            throw new CouponNotFoundException("Coupn does not exist");
+        }
+        
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call queryById at " + new Date(), userBo.getName()));
+        }
+        else {
+            //otherwise user can only query their own
+            if (!couponEntity.getUserId().equals(userEntity.getId())) {
+                throw new AuthenticationException("User querying someone else's coupon");
+            }
+        }
+        
+        return CouponConverter.toBo(couponEntity);
     }
 
 }

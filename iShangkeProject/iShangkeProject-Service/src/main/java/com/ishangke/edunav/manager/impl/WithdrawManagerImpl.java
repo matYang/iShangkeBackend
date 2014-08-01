@@ -25,6 +25,7 @@ import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.converter.WithdrawConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.manager.exception.notfound.WithdrawNotFoundException;
 
 @Component
 public class WithdrawManagerImpl implements WithdrawManager {
@@ -119,27 +120,31 @@ public class WithdrawManagerImpl implements WithdrawManager {
         // 删除WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-
+        if (withdrawEntity.getId() == null) {
+            throw new ManagerException("Withdraw deletion must specify id");
+        }
+        WithdrawEntityExt previousWithdraw = withdrawMapper.getById(withdrawEntity.getId());
+        if (previousWithdraw == null) {
+            throw new WithdrawNotFoundException("Withdraw to delete is not found with id:" + withdrawEntity.getId());
+        }
+        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
         }
         else {
-            if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userEntity.getId())) {
+            if (!previousWithdraw.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User deleting someone else's withdraw");
             }
         }
         
-        if (withdrawEntity.getId() == null) {
-            throw new ManagerException("Withdraw deletion must specify id");
-        }
         try {
-            withdrawEntity.setDeleted(1);
-            withdrawMapper.deleteById(withdrawEntity.getId());
+            previousWithdraw.setDeleted(1);
+            withdrawMapper.deleteById(previousWithdraw.getId());
         } catch (Throwable t) {
             throw new ManagerException("Withdraw deletion failed for user: " + userEntity.getId(), t);
         }
 
-        return WithdrawConverter.toBo(withdrawEntity);
+        return WithdrawConverter.toBo(previousWithdraw);
     }
 
     @Override

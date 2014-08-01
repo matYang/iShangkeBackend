@@ -5,7 +5,7 @@ public class OrderByVo {
     private String order;
 
     public OrderByVo() {
-        
+        //spring mvc帮助我们自动封装GET请求中的参数的时候需要用到默认的构造函数，否则无法进行init
     }
     
     public OrderByVo(String columnKey, String order) {

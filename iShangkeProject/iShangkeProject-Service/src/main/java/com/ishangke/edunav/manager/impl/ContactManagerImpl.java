@@ -25,6 +25,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.manager.exception.notfound.ContactNotFoundException;
 
 @Component
 public class ContactManagerImpl implements ContactManager {
@@ -124,28 +125,30 @@ public class ContactManagerImpl implements ContactManager {
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-
+        if (contactEntity.getId() == null) {
+            throw new ManagerException("Contact deletion must specify id");
+        }
+        ContactEntityExt previousContact = contactMapper.getById(contactEntity.getId());
+        if (previousContact == null) {
+            throw new ContactNotFoundException("Contact to delete is not found with id:" + contactEntity.getId());
+        }
+        
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at " + new Date(), userBo.getName()));
         } else {
-            if (contactEntity == null || contactEntity.getUserId() == null
-                    || !contactEntity.getUserId().equals(userEntity.getId())) {
+            if (!previousContact.getUserId().equals(userEntity.getId())) {
                 throw new AuthenticationException("User deleting someone else's contact");
             }
         }
 
-        if (contactEntity.getId() == null) {
-            throw new ManagerException("Contact deletion must specify id");
-        }
         try {
-            contactEntity.setDeleted(1);
-            contactMapper.deleteById(contactEntity.getId());
+            previousContact.setDeleted(1);
+            contactMapper.deleteById(previousContact.getId());
         } catch (Throwable t) {
             throw new ManagerException("Contact deletion failed for user: " + userEntity.getId(), t);
         }
 
-        return ContactConverter.toBo(contactEntity);
+        return ContactConverter.toBo(previousContact);
     }
 
     @Override
