@@ -21,10 +21,10 @@
   <insert id="add" parameterType="CourseTemplateClassPhotoEntityExt">
     insert into COURSE_TEMPLATE_CLASS_PHOTO
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="courseTemplateId != null">
+      <if test="courseTemplateId != null and courseTemplateId != 0 ">
         COURSE_TEMPLATE_ID,
       </if>
-      <if test="classPhotoId != null">
+      <if test="classPhotoId != null and classPhotoId != 0">
         CLASS_PHOTO_ID,
       </if>
       <if test="createTime != null">
