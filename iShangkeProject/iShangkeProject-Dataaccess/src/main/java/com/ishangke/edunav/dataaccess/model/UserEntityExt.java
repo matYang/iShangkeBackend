@@ -17,6 +17,7 @@ public class UserEntityExt extends UserEntity {
     private Calendar birthdayEnd;
     private Set<Integer> careerIdSet;
     private Set<Integer> schoolIdSet;
+    private Set<Integer> locationIdSet;
 
     public Set<Integer> getCareerIdSet() {
         return careerIdSet;
@@ -104,6 +105,14 @@ public class UserEntityExt extends UserEntity {
 
     public void setBirthdayEnd(Calendar birthdayEnd) {
         this.birthdayEnd = birthdayEnd;
+    }
+
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
     }
 
 }
