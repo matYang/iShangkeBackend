@@ -354,8 +354,9 @@ public class BookingManagerImpl implements BookingManager {
                 convertedList.add(booking);
             }
             return convertedList;
+        } else {
+            throw new ManagerException("current user cannot query booking");
         }
-        return null;
     }
 
     @Override

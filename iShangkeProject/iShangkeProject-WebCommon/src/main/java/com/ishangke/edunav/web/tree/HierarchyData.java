@@ -3,18 +3,24 @@ package com.ishangke.edunav.web.tree;
 import java.util.ArrayList;
 
 public class HierarchyData {
+    protected String name;
     
     protected String value;
     
     protected ArrayList<HierarchyData> children;
     
     protected HierarchyData() {
+        this.name = "";
         this.value = "";
         this.children = new ArrayList<HierarchyData>();
     }
     
     public String getValue() {
         return this.value;
+    }
+    
+    public String getName() {
+        return this.name;
     }
     
     public ArrayList<HierarchyData> getChildren() {
