@@ -27,6 +27,7 @@ import com.ishangke.edunav.dataaccess.mapper.BookingHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
@@ -35,6 +36,7 @@ import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
@@ -76,6 +78,9 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private CourseEntityExtMapper courseMapper;
+    
+    @Autowired
+    private CourseTemplateEntityExtMapper courseTemplateMapper;
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
@@ -236,6 +241,11 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setRemark(bookingEntity.getNote());
             bookingHistoryMapper.add(bookingHistory);
+            //课程预定数量统计
+            CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
+            int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
+            courseTemplate.setBookingTotal((total++));
+            courseTemplateMapper.update(courseTemplate);
         } else {
             throw new ManagerException("add booking failed");
         }
