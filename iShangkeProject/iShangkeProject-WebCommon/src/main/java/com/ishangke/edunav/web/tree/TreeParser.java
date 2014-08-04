@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Matthew A static tree parset that produces a list of hierarchy data
+ * @author Matthew A static tree parser, that produces a list of hierarchy data
  *         ready for JSON to consume Benchmark results are not entirely
  *         safisfactory 200 element parsing require an average around 5-6ms
  *         however, the redundancy that slowed the process down helps to catch
