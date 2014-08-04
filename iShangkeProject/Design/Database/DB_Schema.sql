@@ -1,13 +1,13 @@
-DROP database edunav;
-CREATE database edunav;
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema EduNav
--- -----------------------------------------------------
+--DROP database edunav;
+--CREATE database edunav;
+--
+--SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+--SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+--SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+--
+---- -----------------------------------------------------
+---- Schema EduNav
+---- -----------------------------------------------------
 --CREATE SCHEMA IF NOT EXISTS `EduNav` DEFAULT CHARACTER SET utf8 ;
 USE `EduNav` ;
 
