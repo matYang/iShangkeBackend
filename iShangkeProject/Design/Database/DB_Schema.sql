@@ -8,7 +8,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema EduNav
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `EduNav` DEFAULT CHARACTER SET utf8 ;
+--CREATE SCHEMA IF NOT EXISTS `EduNav` DEFAULT CHARACTER SET utf8 ;
 USE `EduNav` ;
 
 -- -----------------------------------------------------
