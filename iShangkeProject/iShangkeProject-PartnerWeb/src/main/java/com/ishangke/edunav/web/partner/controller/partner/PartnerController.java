@@ -105,7 +105,6 @@ public class PartnerController extends AbstractController {
         Map<Integer, String> fmap = new HashMap<Integer, String>();
         Map<String, String> kvmap = new HashMap<String, String>();
         ReflectionService rs = null;
-        // NOTE: The information should be stored as following order
         Cell c = sheet.getCell(col, row);
         if (c != null && !c.equals("")) {
             PartnerBo partner = new PartnerBo();
@@ -144,8 +143,7 @@ public class PartnerController extends AbstractController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    PartnerPageViewVo queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req,
-            HttpServletResponse resp) {
+    PartnerPageViewVo queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -164,8 +162,8 @@ public class PartnerController extends AbstractController {
         PartnerPageViewBo pageViewBo = null;
         PartnerPageViewVo pageViewVo = null;
 
-        pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo),
-                PaginationConverter.toBo(paginationVo), curUser, permissionTag);
+        pageViewBo = partnerFacade
+                .queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
         pageViewVo = PartnerPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
@@ -184,8 +182,7 @@ public class PartnerController extends AbstractController {
 
         responseBo = null;
         try {
-            partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo),
-                    UserConverter.fromModel(new UserVo()), permissionTag);
+            partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
             return (PartnerVo) this.handleWebException(c, resp);
         }
@@ -196,8 +193,7 @@ public class PartnerController extends AbstractController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    PartnerVo update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req,
-            HttpServletResponse resp) {
+    PartnerVo update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -230,8 +226,7 @@ public class PartnerController extends AbstractController {
 
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.POST)
     public @ResponseBody
-    PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId,
-            HttpServletRequest req, HttpServletResponse resp) {
+    PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {

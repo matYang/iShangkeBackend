@@ -102,7 +102,6 @@ public class CourseController extends AbstractController {
         Map<Integer, String> fmap = new HashMap<Integer, String>();
         Map<String, String> kvmap = new HashMap<String, String>();
         ReflectionService rs = null;
-        // NOTE: The information should be stored as following order
         Cell c = sheet.getCell(col, row);
         if (c != null && !c.equals("")) {
             CourseBo course = new CourseBo();
