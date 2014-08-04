@@ -59,8 +59,8 @@ public class CourseController extends AbstractController {
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
-    JsonResponse<String> importCourses(@RequestParam("file") MultipartFile file) throws ControllerException {
-        JsonResponse<String> result = new JsonResponse<>();
+    JsonResponse importCourses(@RequestParam("file") MultipartFile file) throws ControllerException {
+        JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
             throw new ControllerException("上传文件为空");
         }
@@ -135,7 +135,7 @@ public class CourseController extends AbstractController {
         }
 
         serverFile.delete();
-        result.setResponse("successfully imported " + count + " courses");
+        result.setMessage("successfully imported " + count + " courses");
         return result;
     }
 

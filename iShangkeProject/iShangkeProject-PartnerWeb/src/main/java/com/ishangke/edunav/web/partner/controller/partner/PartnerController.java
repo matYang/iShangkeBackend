@@ -62,8 +62,8 @@ public class PartnerController extends AbstractController {
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
-    JsonResponse<String> importPartners(@RequestParam("file") MultipartFile file) throws ControllerException {
-        JsonResponse<String> result = new JsonResponse<>();
+    JsonResponse importPartners(@RequestParam("file") MultipartFile file) throws ControllerException {
+        JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
             throw new ControllerException("上传文件为空");
         }
@@ -138,7 +138,7 @@ public class PartnerController extends AbstractController {
         }
 
         serverFile.delete();
-        result.setResponse("successfully imported " + count + " partners");
+        result.setMessage("successfully imported " + count + " partners");
         return result;
     }
 
