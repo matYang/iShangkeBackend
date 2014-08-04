@@ -37,10 +37,5 @@
       <version>2.4</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.ishangke</groupId>
-      <artifactId>iShangkeProject-UserFacade</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
 </project>
