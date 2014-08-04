@@ -25,6 +25,7 @@ import com.ishangke.edunav.thrift.ThriftClientSetting;
 import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
+import com.ishangke.edunav.web.exception.ControllerException;
 
 @Component
 @Scope(value = "singleton")
@@ -38,10 +39,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryPartner(partnerBo, paginationBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -56,10 +56,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryPartnerById(partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -74,10 +73,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.updatePartner(partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -92,10 +90,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createPartner(partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -110,10 +107,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createAddress(addressBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -128,10 +124,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.updateAddress(addressBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -146,10 +141,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteAddress(addressBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -164,10 +158,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryAddress(addressBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -182,10 +175,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createClassPhoto(classPhotoBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -200,10 +192,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.updateClassPhoto(classPhotoBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -218,10 +209,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteClassPhoto(classPhotoBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -236,10 +226,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryClassPhoto(classPhotoBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -254,10 +243,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createTeacher(teacherBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -272,10 +260,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.updateTeacher(teacherBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -290,10 +277,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteTeacher(teacherBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -308,10 +294,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryTeacher(teacherBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -326,10 +311,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createActivity(activityBo, courseBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -344,10 +328,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.submitActivity(activityBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -362,10 +345,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.approveActivity(activityBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -380,10 +362,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.rejectActivity(activityBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -398,10 +379,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.cancelActivity(activityBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -416,10 +396,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteActivity(activityBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -434,10 +413,9 @@ public class PartnerFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryActivity(activityBo, partnerBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
