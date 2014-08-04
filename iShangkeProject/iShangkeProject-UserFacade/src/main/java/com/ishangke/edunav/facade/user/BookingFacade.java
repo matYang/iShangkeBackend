@@ -18,6 +18,7 @@ import com.ishangke.edunav.thrift.ThriftClientSetting;
 import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
+import com.ishangke.edunav.web.exception.ControllerException;
 
 @Component
 @Scope(value = "singleton")
@@ -31,10 +32,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createBookingByUser(bookingBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -49,10 +49,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.transformBookingStatus(bookingBo, operation, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -67,10 +66,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryBooking(bookingBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -85,10 +83,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryHistory(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -103,10 +100,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -121,10 +117,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.changeBookingStatusToPayed(orderId);
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -139,10 +134,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.verify(notify_id);
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -157,10 +151,9 @@ public class BookingFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee);
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

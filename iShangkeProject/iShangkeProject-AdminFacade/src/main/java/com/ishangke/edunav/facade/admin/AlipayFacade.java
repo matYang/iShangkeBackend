@@ -1,4 +1,4 @@
-package com.ishangke.edunav.facade.user;
+package com.ishangke.edunav.facade.admin;
 
 import org.apache.thrift.TException;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +11,6 @@ import com.ishangke.edunav.thrift.ThriftClientFactory;
 import com.ishangke.edunav.thrift.ThriftClientSetting;
 import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
-import com.ishangke.edunav.web.exception.ControllerException;
 
 @Component
 @Scope(value = "singleton")
@@ -26,9 +25,10 @@ public class AlipayFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.verify(notify_id);
         } catch (BusinessExceptionBo e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -43,9 +43,10 @@ public class AlipayFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee);
         } catch (BusinessExceptionBo e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -60,9 +61,10 @@ public class AlipayFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.changeBookingStatusToPayed(orderId);
         } catch (BusinessExceptionBo e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

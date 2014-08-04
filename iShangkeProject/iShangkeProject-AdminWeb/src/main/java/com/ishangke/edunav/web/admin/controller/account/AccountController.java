@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.user.controller.account;
+package com.ishangke.edunav.web.admin.controller.account;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +13,9 @@ import com.ishangke.edunav.commoncontract.model.AccountHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.AccountPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.facade.user.AccountFacade;
-import com.ishangke.edunav.facade.user.UserFacade;
+import com.ishangke.edunav.facade.admin.AccountFacade;
+import com.ishangke.edunav.facade.admin.UserFacade;
+import com.ishangke.edunav.web.admin.controller.AbstractController;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.AccountConverter;
 import com.ishangke.edunav.web.converter.AccountHistoryConverter;
@@ -26,11 +27,10 @@ import com.ishangke.edunav.web.model.AccountHistoryVo;
 import com.ishangke.edunav.web.model.AccountVo;
 import com.ishangke.edunav.web.model.pageview.AccountHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.AccountPageViewVo;
-import com.ishangke.edunav.web.user.controller.AbstractController;
 
 
 @Controller
-@RequestMapping("/api/v2/account")
+@RequestMapping("/a-api/v2/account")
 
 public class AccountController extends AbstractController{
     
@@ -45,12 +45,7 @@ public class AccountController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = null; 
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (AccountPageViewVo) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {

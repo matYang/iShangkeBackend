@@ -24,6 +24,7 @@ import com.ishangke.edunav.thrift.ThriftClientSetting;
 import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
+import com.ishangke.edunav.web.exception.ControllerException;
 
 @Component
 @Scope(value = "singleton")
@@ -37,10 +38,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.registerUser(userBo, sessionBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -56,10 +56,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.loginByPhone(loginBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -75,10 +74,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.loginByReference(loginBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -94,10 +92,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createUser(targetUser, currentUser, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -113,10 +110,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createPartnerUser(targetUser, partner, currentUser, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -132,10 +128,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteUser(targetUser, currentUser, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -151,10 +146,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.updateUser(targetUser, currentUser, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -170,10 +164,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryUserInfo(queryUser, currentUser, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -189,10 +182,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryUser(queryUser, currentUser, pagnationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -208,10 +200,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.authenticate(sessionBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -225,10 +216,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             serviceClient.disposeSession(sessionBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -242,10 +232,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.openCellSession(userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -261,10 +250,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.openForgetPasswordSession(userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -280,10 +268,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.recoverPassword(passwordBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -299,10 +286,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.changePassword(passwordBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -318,10 +304,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.sendMessage(messageBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -337,10 +322,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.receiveMessage(messageBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -356,10 +340,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteMessage(messageBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -375,10 +358,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryMessage(messageBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -394,10 +376,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.generateCode(userBo, partnerBo, courseBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -413,10 +394,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.querySpread(spreadBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -432,10 +412,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createSpread(spreadBo, partnerBo, courseBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -451,10 +430,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.approveSpread(spreadBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -470,10 +448,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.rejectSpread(spreadBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -489,10 +466,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.cancelSpread(spreadBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -508,10 +484,9 @@ public class UserFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteSpread(spreadBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

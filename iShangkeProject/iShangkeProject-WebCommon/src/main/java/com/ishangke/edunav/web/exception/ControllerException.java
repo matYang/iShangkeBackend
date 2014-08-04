@@ -6,14 +6,31 @@ public class ControllerException extends RuntimeException {
     private String errorMessage;
     //controller excetions by default all have 400 responses
     private int errorCode = 400;
-
+    
+    private int msgKey;
 
     public ControllerException(String message) {
         super(message);
         this.errorMessage = message;
     }
 
+    public int getMsgKey() {
+        return msgKey;
+    }
 
+    public void setMsgKey(int msgKey) {
+        this.msgKey = msgKey;
+    }
+
+    public ControllerException(int msgKey) {
+        this.msgKey = msgKey;
+    }
+    
+    public ControllerException(int msgKey, Throwable cause) {
+        super(cause);
+        this.msgKey = msgKey;
+    }
+    
     public ControllerException(String message, Throwable cause) {
         super(message, cause);
         this.errorMessage = message;
