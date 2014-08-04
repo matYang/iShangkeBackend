@@ -7,6 +7,8 @@
   
   <import resource="classpath*:applicationContext-facade-user.xml" />
   
+  <import resource="classpath*:applicationContext-web.xml" />
+  
   <mvc:annotation-driven />
 
   <context:component-scan base-package="com.ishangke.edunav.web.user" />
