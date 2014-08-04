@@ -48,11 +48,17 @@ public class PartnerController extends AbstractController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    PartnerPageViewVo queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    PartnerPageViewVo queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req,
+            HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (PartnerPageViewVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -62,8 +68,8 @@ public class PartnerController extends AbstractController {
         PartnerPageViewBo pageViewBo = null;
         PartnerPageViewVo pageViewVo = null;
 
-        pageViewBo = partnerFacade
-                .queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
+        pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo),
+                PaginationConverter.toBo(paginationVo), curUser, permissionTag);
         pageViewVo = PartnerPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
@@ -80,7 +86,13 @@ public class PartnerController extends AbstractController {
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
 
-        responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
+        responseBo = null;
+        try {
+            partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo),
+                    UserConverter.fromModel(new UserVo()), permissionTag);
+        } catch (ControllerException c) {
+            return (PartnerVo) this.handleWebException(c, resp);
+        }
         responseVo = PartnerConverter.toModel(responseBo);
 
         return responseVo;
@@ -88,13 +100,19 @@ public class PartnerController extends AbstractController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    PartnerVo update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
+    PartnerVo update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req,
+            HttpServletResponse resp) {
         PartnerVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (PartnerVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -104,14 +122,20 @@ public class PartnerController extends AbstractController {
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
         targetPartner.setId(partnerId);
 
-        PartnerBo responsePartner = partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
+        PartnerBo responsePartner = null;
+        try {
+            partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (PartnerVo) this.handleWebException(c, resp);
+        }
         responseVo = PartnerConverter.toModel(responsePartner);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.POST)
     public @ResponseBody
-    PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
+    PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId,
+            HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {

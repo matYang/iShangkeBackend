@@ -31,6 +31,7 @@ import com.ishangke.edunav.web.converter.pageview.CategoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.CirclePageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.LocationPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.SchoolPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CareerVo;
 import com.ishangke.edunav.web.model.CategoryVo;
 import com.ishangke.edunav.web.model.CircleVo;
@@ -46,116 +47,153 @@ import com.ishangke.edunav.web.tree.TreeParser;
 
 @Controller
 @RequestMapping("/api/v2/general")
-public class GeneralController extends AbstractController{
-    
+public class GeneralController extends AbstractController {
+
     @Autowired
     GeneralFacade generalFacade;
-    
+
     @Autowired
     CourseFacade courseFacade;
-    
+
     @RequestMapping(value = "/category", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CategoryPageViewVo  category(@RequestParam(value="keyword", defaultValue="") String keyword, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CategoryPageViewVo category(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+            HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         CategoryVo categoryVo = new CategoryVo();
         PaginationVo paginationVo = new PaginationVo();
         CategoryPageViewBo pageViewBo = null;
         CategoryPageViewVo pageViewVo = null;
-        
+
         if (keyword == null || keyword.length() == 0) {
-            pageViewBo = generalFacade.queryCategory(CategoryConverter.fromModel(categoryVo), PaginationConverter.toBo(paginationVo), permissionTag);
+            pageViewBo = null;
+            try {
+                generalFacade.queryCategory(CategoryConverter.fromModel(categoryVo),
+                        PaginationConverter.toBo(paginationVo), permissionTag);
+            } catch (ControllerException c) {
+                return (CategoryPageViewVo) this.handleWebException(c, resp);
+            }
             pageViewVo = CategoryPageViewConverter.toModel(pageViewBo);
             if (pageViewVo.getData() != null) {
                 ArrayList<CategoryVo> treeList = (ArrayList<CategoryVo>) TreeParser.parse(pageViewVo.getData());
                 pageViewVo.setData(treeList);
             }
         } else {
-            pageViewBo = courseFacade.queryCategoryByKeyword(keyword, permissionTag);
+            pageViewBo = null;
+            try {
+                courseFacade.queryCategoryByKeyword(keyword, permissionTag);
+            } catch (ControllerException c) {
+                return (CategoryPageViewVo) this.handleWebException(c, resp);
+            }
             pageViewVo = CategoryPageViewConverter.toModel(pageViewBo);
         }
-        
+
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "/location", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody LocationPageViewVo  location(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    LocationPageViewVo location(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         LocationVo locationVo = new LocationVo();
         PaginationVo paginationVo = new PaginationVo();
         LocationPageViewBo pageViewBo = null;
         LocationPageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.queryLocation(LocationConverter.fromModel(locationVo), PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = null;
+        try {
+            generalFacade.queryLocation(LocationConverter.fromModel(locationVo),
+                    PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return (LocationPageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = LocationPageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<LocationVo> treeList = (ArrayList<LocationVo>) TreeParser.parse(pageViewVo.getData());
             pageViewVo.setData(treeList);
         }
-        
+
         return pageViewVo;
     }
-    
+
     @RequestMapping(value = "/circle", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CirclePageViewVo  circle(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CirclePageViewVo circle(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         CircleVo circleVo = new CircleVo();
         PaginationVo paginationVo = new PaginationVo();
         CirclePageViewBo pageViewBo = null;
         CirclePageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.queryCircle(CircleConverter.fromModel(circleVo), PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = null;
+        try {
+            generalFacade.queryCircle(CircleConverter.fromModel(circleVo), PaginationConverter.toBo(paginationVo),
+                    permissionTag);
+        } catch (ControllerException c) {
+            return (CirclePageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = CirclePageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<CircleVo> treeList = (ArrayList<CircleVo>) TreeParser.parse(pageViewVo.getData());
             pageViewVo.setData(treeList);
         }
-        
+
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "/school", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody SchoolPageViewVo  school(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    SchoolPageViewVo school(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         SchoolVo schoolVo = new SchoolVo();
         PaginationVo paginationVo = new PaginationVo();
         SchoolPageViewBo pageViewBo = null;
         SchoolPageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.querySchool(SchoolConverter.fromModel(schoolVo),PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = null;
+        try {
+            generalFacade.querySchool(SchoolConverter.fromModel(schoolVo), PaginationConverter.toBo(paginationVo),
+                    permissionTag);
+        } catch (ControllerException c) {
+            return (SchoolPageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = SchoolPageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<SchoolVo> treeList = (ArrayList<SchoolVo>) TreeParser.parse(pageViewVo.getData());
             pageViewVo.setData(treeList);
         }
-        
+
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "/career", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CareerPageViewVo  career(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CareerPageViewVo career(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         CareerVo careerVo = new CareerVo();
         PaginationVo paginationVo = new PaginationVo();
         CareerPageViewBo pageViewBo = null;
         CareerPageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.queryCareer(CareerConverter.fromModel(careerVo), PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = null;
+        try {
+            generalFacade.queryCareer(CareerConverter.fromModel(careerVo), PaginationConverter.toBo(paginationVo),
+                    permissionTag);
+        } catch (ControllerException c) {
+            return (CareerPageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = CareerPageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<CareerVo> treeList = (ArrayList<CareerVo>) TreeParser.parse(pageViewVo.getData());
             pageViewVo.setData(treeList);
         }
-        
+
         return pageViewVo;
     }
-    
-    
+
 }

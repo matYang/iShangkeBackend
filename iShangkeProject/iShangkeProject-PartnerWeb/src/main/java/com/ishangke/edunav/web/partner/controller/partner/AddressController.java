@@ -29,100 +29,135 @@ import com.ishangke.edunav.web.response.EmptyResponse;
 
 @Controller
 @RequestMapping("/p-api/v2/address")
-
-public class AddressController extends AbstractController{
+public class AddressController extends AbstractController {
     @Autowired
     PartnerFacade partnerFacade;
-    
+
     @Autowired
     UserFacade userFacade;
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody AddressPageViewVo  queryAddress(AddressVo addressVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    AddressPageViewVo queryAddress(AddressVo addressVo, PaginationVo paginationVo, HttpServletRequest req,
+            HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (AddressPageViewVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
 
-        
         AddressPageViewBo pageViewBo = null;
         AddressPageViewVo pageViewVo = null;
-        
-        pageViewBo = partnerFacade.queryAddress(AddressConverter.fromModel(addressVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = null;
+        try {
+            partnerFacade.queryAddress(AddressConverter.fromModel(addressVo), curUser,
+                    PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return (AddressPageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = AddressPageViewConverter.toModel(pageViewBo);
-        
+
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody AddressVo create(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    AddressVo create(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
         AddressVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (AddressVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
-        
+
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
-        AddressBo responseAddress = partnerFacade.createAddress(targetAddress, curUser, permissionTag);
+
+        AddressBo responseAddress = null;
+        try {
+            partnerFacade.createAddress(targetAddress, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (AddressVo) this.handleWebException(c, resp);
+        }
         responseVo = AddressConverter.toModel(responseAddress);
         return responseVo;
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody AddressVo update(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    AddressVo update(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
         AddressVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (AddressVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
-        
+
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
-        AddressBo responseAddress = partnerFacade.updateAddress(targetAddress, curUser, permissionTag);
+
+        AddressBo responseAddress = null;
+        try {
+            partnerFacade.updateAddress(targetAddress, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (AddressVo) this.handleWebException(c, resp);
+        }
         responseVo = AddressConverter.toModel(responseAddress);
         return responseVo;
     }
-    
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,  produces = "application/json")
-    public @ResponseBody EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public @ResponseBody
+    EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-          
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (EmptyResponse) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
+
         AddressVo addressVo = new AddressVo();
         addressVo.setId(id);
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
+
         partnerFacade.deleteAddress(targetAddress, curUser, permissionTag);
         return new EmptyResponse();
     }
-    
+
 }

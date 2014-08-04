@@ -46,11 +46,17 @@ public class ClassPhotoController extends AbstractController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    ClassPhotoPageViewVo queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    ClassPhotoPageViewVo queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req,
+            HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (ClassPhotoPageViewVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -60,8 +66,13 @@ public class ClassPhotoController extends AbstractController {
         ClassPhotoPageViewBo pageViewBo = null;
         ClassPhotoPageViewVo pageViewVo = null;
 
-        pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo),
-                permissionTag);
+        pageViewBo = null;
+        try {
+            partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser,
+                    PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return (ClassPhotoPageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = ClassPhotoPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
@@ -70,10 +81,10 @@ public class ClassPhotoController extends AbstractController {
     // return the ClassPhotoVo with img url in it
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody
-    ClassPhotoVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
-            HttpServletResponse resp) throws ControllerException {
+    ClassPhotoVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId,
+            HttpServletRequest req, HttpServletResponse resp) throws ControllerException {
         ClassPhotoVo classPhoto = new ClassPhotoVo();
-        
+
         if (!file.isEmpty()) {
             try {
                 String imgUrl = "";
@@ -89,7 +100,7 @@ public class ClassPhotoController extends AbstractController {
                 ImageIO.write(bufferedImage, "png", serverFile);
 
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunClassroomImgBucket);
-                classPhoto.setImgUrl(imgUrl);               
+                classPhoto.setImgUrl(imgUrl);
 
             } catch (Exception e) {
                 throw new ControllerException("ClassPhoto 上传失败");
@@ -97,7 +108,7 @@ public class ClassPhotoController extends AbstractController {
         } else {
             throw new ControllerException("ClassPhoto file 为空");
         }
-        
+
         return classPhoto;
     }
 
@@ -109,7 +120,12 @@ public class ClassPhotoController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (ClassPhotoVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -118,7 +134,12 @@ public class ClassPhotoController extends AbstractController {
 
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
 
-        ClassPhotoBo responseClassPhoto = partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
+        ClassPhotoBo responseClassPhoto = null;
+        try {
+            partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (ClassPhotoVo) this.handleWebException(c, resp);
+        }
         responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
@@ -131,7 +152,12 @@ public class ClassPhotoController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (ClassPhotoVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -140,7 +166,12 @@ public class ClassPhotoController extends AbstractController {
 
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
 
-        ClassPhotoBo responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
+        ClassPhotoBo responseClassPhoto = null;
+        try {
+            partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (ClassPhotoVo) this.handleWebException(c, resp);
+        }
         responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
@@ -151,7 +182,12 @@ public class ClassPhotoController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (EmptyResponse) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {

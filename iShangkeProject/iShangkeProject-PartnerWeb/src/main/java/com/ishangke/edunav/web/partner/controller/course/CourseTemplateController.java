@@ -31,108 +31,154 @@ import com.ishangke.edunav.web.partner.controller.AbstractController;
 
 @Controller
 @RequestMapping("/p-api/v2/courseTemplate")
+public class CourseTemplateController extends AbstractController {
 
-public class CourseTemplateController extends AbstractController{
-    
     @Autowired
     CourseFacade courseFacade;
-    
+
     @Autowired
     UserFacade userFacade;
-    
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CourseTemplatePageViewVo  queryCourseTemplate(CourseTemplateVo courseTemplateVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CourseTemplatePageViewVo queryCourseTemplate(CourseTemplateVo courseTemplateVo, PaginationVo paginationVo,
+            HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplatePageViewVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
+
         CourseTemplatePageViewBo pageViewBo = null;
         CourseTemplatePageViewVo pageViewVo = null;
-        
-        pageViewBo = courseFacade.queryCourseTemplate (CourseTemplateConverter.fromModel(courseTemplateVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = null;
+        try {
+            courseFacade.queryCourseTemplate(CourseTemplateConverter.fromModel(courseTemplateVo), curUser,
+                    PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplatePageViewVo) this.handleWebException(c, resp);
+        }
         pageViewVo = CourseTemplatePageViewConverter.toModel(pageViewBo);
-        
+
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CourseTemplateVo  queryCourseTemplateById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CourseTemplateVo queryCourseTemplateById(@PathVariable("id") int id, HttpServletRequest req,
+            HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplateVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
+
         CourseTemplateVo courseTemplateVo = new CourseTemplateVo();
         courseTemplateVo.setId(id);
         CourseTemplateBo responseBo = null;
         CourseTemplateVo responseVo = null;
-        
-        responseBo = courseFacade.queryCourseTemplateById(CourseTemplateConverter.fromModel(courseTemplateVo), UserConverter.fromModel(new UserVo()), permissionTag);
+
+        responseBo = null;
+        try {
+            courseFacade.queryCourseTemplateById(CourseTemplateConverter.fromModel(courseTemplateVo),
+                    UserConverter.fromModel(new UserVo()), permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplateVo) this.handleWebException(c, resp);
+        }
         responseVo = CourseTemplateConverter.toModel(responseBo);
-        
+
         return responseVo;
     }
-    
-    
+
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody CourseTemplateVo create(@RequestBody CourseTemplateVo courseTemplateVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CourseTemplateVo create(@RequestBody CourseTemplateVo courseTemplateVo, HttpServletRequest req,
+            HttpServletResponse resp) {
         CourseTemplateVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplateVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
-        
+
         CourseTemplateBo targetCourseTemplate = CourseTemplateConverter.fromModel(courseTemplateVo);
-        
-        CourseTemplateBo responseCourseTemplate = courseFacade.createCourseTemplate(targetCourseTemplate, curUser, permissionTag);
+
+        CourseTemplateBo responseCourseTemplate = null;
+        try {
+            courseFacade.createCourseTemplate(targetCourseTemplate, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplateVo) this.handleWebException(c, resp);
+        }
         responseVo = CourseTemplateConverter.toModel(responseCourseTemplate);
         return responseVo;
     }
-    
+
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody CourseTemplateVo transformCourseTemplate(@RequestBody CourseTemplateVo courseTemplate, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    CourseTemplateVo transformCourseTemplate(@RequestBody CourseTemplateVo courseTemplate,
+            @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
         CourseTemplateVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+
+        UserBo curUser = null;
+        try {
+            userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplateVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
-        //course template operation is same as course opration
+
+        // course template operation is same as course opration
         Integer operationObj = Constant.COURSEOPERATEMAP.get(operate);
         if (operationObj == null) {
             throw new ControllerException("This courseTemplate operation is not defined!");
         }
 
         int operation = operationObj;
-        CourseTemplateBo courseTemplateBo = courseFacade.transformCourseTemplateStatus(CourseTemplateConverter.fromModel(courseTemplate), operation, curUser, permissionTag);
+        CourseTemplateBo courseTemplateBo = null;
+        try {
+            courseFacade.transformCourseTemplateStatus(CourseTemplateConverter.fromModel(courseTemplate), operation,
+                    curUser, permissionTag);
+        } catch (ControllerException c) {
+            return (CourseTemplateVo) this.handleWebException(c, resp);
+        }
         responseVo = CourseTemplateConverter.toModel(courseTemplateBo);
         return responseVo;
     }
-    
+
 }

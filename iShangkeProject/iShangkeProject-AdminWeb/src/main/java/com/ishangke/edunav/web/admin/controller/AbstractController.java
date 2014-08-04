@@ -1,9 +1,12 @@
 package com.ishangke.edunav.web.admin.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.web.controller.PseudoController;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
@@ -19,13 +22,13 @@ public class AbstractController extends PseudoController{
      *            controller logger
      * @return json result
      */
-    public JsonResponse handleWebException(Exception exception) {
+    public JsonResponse handleWebException(Exception exception, HttpServletResponse resp) {
 
-        if (exception instanceof BusinessExceptionBo) {
-            BusinessExceptionBo faultException = (BusinessExceptionBo) exception;
-            int errorCode = faultException.getErrorCode();
-            String msgKey = faultException.getMessageKey();
-
+        if (exception instanceof ControllerException) {
+            ControllerException faultException = (ControllerException) exception;
+            String errorMessage = faultException.getErrorMessage();
+            int msgKey = faultException.getMsgKey();
+            resp.setStatus(400);
             return new JsonResponse();
         } else {
             return new JsonResponse();
