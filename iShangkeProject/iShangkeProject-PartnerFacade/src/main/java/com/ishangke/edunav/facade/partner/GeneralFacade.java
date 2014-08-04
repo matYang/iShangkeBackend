@@ -23,6 +23,7 @@ import com.ishangke.edunav.thrift.ThriftClientSetting;
 import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
+import com.ishangke.edunav.web.exception.ControllerException;
 
 @Component
 @Scope(value = "singleton")
@@ -37,10 +38,9 @@ public class GeneralFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCategory(categoryBo, paginationBo, PermissionCache.getTag(permissionTag));  
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -55,10 +55,9 @@ public class GeneralFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryLocation(locationBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -73,10 +72,9 @@ public class GeneralFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCircle(circleBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -91,10 +89,9 @@ public class GeneralFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.querySchool(schoolBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -109,10 +106,9 @@ public class GeneralFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCareer(careerBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

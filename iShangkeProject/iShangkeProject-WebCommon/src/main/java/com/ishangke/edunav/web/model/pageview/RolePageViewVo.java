@@ -3,8 +3,9 @@ package com.ishangke.edunav.web.model.pageview;
 import java.util.List;
 
 import com.ishangke.edunav.web.model.RoleVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 
-public class RolePageViewVo {
+public class RolePageViewVo extends JsonResponse{
     private Integer start;
     private Integer count;
     private Integer total;

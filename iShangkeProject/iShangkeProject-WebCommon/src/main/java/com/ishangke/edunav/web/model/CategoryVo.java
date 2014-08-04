@@ -8,7 +8,7 @@ import com.ishangke.edunav.web.tree.HierarchyData;
 public class CategoryVo extends HierarchyData{
     private Integer id;
 
-    private String name;
+//    private String name;
 
     private Integer rank;
 
@@ -38,6 +38,7 @@ public class CategoryVo extends HierarchyData{
     public void setValue(String value) {
         this.value = value;
     }
+    @Override
     public String getName() {
         return name;
     }

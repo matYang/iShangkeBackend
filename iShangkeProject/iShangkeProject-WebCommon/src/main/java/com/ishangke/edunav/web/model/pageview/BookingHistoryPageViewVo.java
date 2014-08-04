@@ -3,8 +3,9 @@ package com.ishangke.edunav.web.model.pageview;
 import java.util.List;
 
 import com.ishangke.edunav.web.model.BookingHistoryVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 
-public class BookingHistoryPageViewVo {
+public class BookingHistoryPageViewVo extends JsonResponse{
     private Integer start;
     private Integer count;
     private Integer total;

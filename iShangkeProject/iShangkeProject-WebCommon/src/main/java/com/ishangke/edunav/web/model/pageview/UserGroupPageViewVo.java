@@ -3,8 +3,9 @@ package com.ishangke.edunav.web.model.pageview;
 import java.util.List;
 
 import com.ishangke.edunav.web.model.UserGroupVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 
-public class UserGroupPageViewVo {
+public class UserGroupPageViewVo extends JsonResponse{
     private Integer start;
     private Integer count;
     private Integer total;

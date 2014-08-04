@@ -1,16 +1,15 @@
 package com.ishangke.edunav.web.response;
 
-public class JsonResponse<T> {
-    private int status;
+public class JsonResponse {
+    private int msgKey;
     private String message;
-    private T response;
 
-    public int getStatus() {
-        return status;
+    public int getMsgKey() {
+        return msgKey;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setMsgKey(int msgKey) {
+        this.msgKey = msgKey;
     }
 
     public String getMessage() {
@@ -19,14 +18,6 @@ public class JsonResponse<T> {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public T getResponse() {
-        return response;
-    }
-
-    public void setResponse(T response) {
-        this.response = response;
     }
 
 }
