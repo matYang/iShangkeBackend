@@ -19,16 +19,16 @@ public class AbstractController extends PseudoController{
      *            controller logger
      * @return json result
      */
-    public <T> JsonResponse<T> handleWebException(Exception exception) {
+    public JsonResponse handleWebException(Exception exception) {
 
         if (exception instanceof BusinessExceptionBo) {
             BusinessExceptionBo faultException = (BusinessExceptionBo) exception;
             int errorCode = faultException.getErrorCode();
             String msgKey = faultException.getMessageKey();
 
-            return new JsonResponse<T>();
+            return new JsonResponse();
         } else {
-            return new JsonResponse<T>();
+            return new JsonResponse();
         }
     }
 }
