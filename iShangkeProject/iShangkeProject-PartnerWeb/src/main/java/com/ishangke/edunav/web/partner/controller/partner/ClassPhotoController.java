@@ -1,5 +1,9 @@
 package com.ishangke.edunav.web.partner.controller.partner;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ishangke.edunav.common.Config;
+import com.ishangke.edunav.common.utilities.file.AliyunMain;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
@@ -31,107 +37,133 @@ import com.ishangke.edunav.web.response.EmptyResponse;
 
 @Controller
 @RequestMapping("/p-api/v2/classPhoto")
-
-public class ClassPhotoController extends AbstractController{
+public class ClassPhotoController extends AbstractController {
     @Autowired
     PartnerFacade partnerFacade;
-    
+
     @Autowired
     UserFacade userFacade;
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody ClassPhotoPageViewVo  queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    ClassPhotoPageViewVo queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
 
-        
         ClassPhotoPageViewBo pageViewBo = null;
         ClassPhotoPageViewVo pageViewVo = null;
-        
-        pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+
+        pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo),
+                permissionTag);
         pageViewVo = ClassPhotoPageViewConverter.toModel(pageViewBo);
-        
+
         return pageViewVo;
     }
-    
-    //return the ClassPhotoVo with img url in it
-    @RequestMapping(value = "/upload", method = RequestMethod.PUT)
-    public @ResponseBody ClassPhotoVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value="partnerId") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
+
+    // return the ClassPhotoVo with img url in it
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody
+    ClassPhotoVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
+            HttpServletResponse resp) throws ControllerException {
+        ClassPhotoVo classPhoto = new ClassPhotoVo();
         
-        return new ClassPhotoVo();
+        if (!file.isEmpty()) {
+            try {
+                String imgUrl = "";
+
+                File dir = new File("tmp");
+
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
+                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
+                ImageIO.write(bufferedImage, "png", serverFile);
+
+                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunClassroomImgBucket);
+                classPhoto.setImgUrl(imgUrl);               
+
+            } catch (Exception e) {
+                throw new ControllerException("ClassPhoto 上传失败");
+            }
+        } else {
+            throw new ControllerException("ClassPhoto file 为空");
+        }
+        
+        return classPhoto;
     }
-    
-    
+
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody ClassPhotoVo create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    ClassPhotoVo create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
-        
+
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-        
+
         ClassPhotoBo responseClassPhoto = partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
         responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody ClassPhotoVo update(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    ClassPhotoVo update(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
-        
+
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-        
+
         ClassPhotoBo responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
         responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
-    
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,  produces = "application/json")
-    public @ResponseBody EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public @ResponseBody
+    EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-          
+
         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        
+
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();
         classPhotoVo.setId(id);
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-        
+
         partnerFacade.deleteClassPhoto(targetClassPhoto, curUser, permissionTag);
         return new EmptyResponse();
     }
-    
+
 }
