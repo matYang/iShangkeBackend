@@ -36,3 +36,5 @@ applicationContext-dataaccessUT.xml
 
 iShangkeProject/iShangkeProject-AdminWeb/.settings/org.eclipse.wst.common.component
 iShangkeProject/iShangkeProject-PartnerWeb/.settings/org.eclipse.wst.common.component
+iShangkeProject/iShangkeProject-PartnerFacade/.settings/org.eclipse.wst.common.component
+.gitignore

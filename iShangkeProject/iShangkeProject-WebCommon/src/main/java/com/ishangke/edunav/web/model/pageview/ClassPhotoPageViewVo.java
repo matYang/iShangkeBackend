@@ -3,8 +3,9 @@ package com.ishangke.edunav.web.model.pageview;
 import java.util.List;
 
 import com.ishangke.edunav.web.model.ClassPhotoVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 
-public class ClassPhotoPageViewVo {
+public class ClassPhotoPageViewVo extends JsonResponse{
     private Integer start;
     private Integer count;
     private Integer total;
