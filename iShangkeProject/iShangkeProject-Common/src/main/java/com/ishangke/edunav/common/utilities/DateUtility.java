@@ -1,5 +1,6 @@
 package com.ishangke.edunav.common.utilities;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class DateUtility {
     }
 
     public static Calendar getTimeFromLong(final long mili) {
-        if (mili < 0){
+        if (mili < 0) {
             return null;
         }
         Calendar c = getCurTimeInstance();
@@ -42,7 +43,6 @@ public class DateUtility {
         cal.setTime(date);
         return cal;
     }
-    
 
     // format the calendar into a string that fits in SMS contents
     public static String smsFormat(final Calendar c) {
@@ -62,11 +62,9 @@ public class DateUtility {
     public static int compareday(final Calendar cal1, final Calendar cal2) {
         if (cal1.get(Calendar.YEAR) < cal2.get(Calendar.YEAR)) {
             return -1;
-        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
-                && cal1.get(Calendar.DAY_OF_YEAR) < cal2.get(Calendar.DAY_OF_YEAR)) {
+        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) < cal2.get(Calendar.DAY_OF_YEAR)) {
             return -1;
-        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
-                && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)) {
+        } else if (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)) {
             return 0;
         } else {
             return 1;
@@ -100,6 +98,20 @@ public class DateUtility {
             dateStr = dateStr.substring(1, dateStr.length());
         }
         return dateStr;
+    }
+
+    public static long parseDateTimeFromExcelFile(String time) throws ParseException {        
+        String parseStr = time.substring(1);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = sdf.parse(parseStr);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+//            System.out.println("time is: " + calendar.getTime().toString());
+            return calendar.getTimeInMillis();
+        } catch (ParseException e) {
+            throw e;
+        }
     }
 
 }

@@ -50,7 +50,13 @@ public class UserController extends AbstractController{
         if (authSessionBo.getId() > 0) {
             this.openSession(authSessionBo, remember, req, resp);
         }
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+     
+        UserBo curUser = null;
+        try{
+        userFacade.authenticate(authSessionBo, permissionTag);
+        }catch (ControllerException c) {
+            return (UserVo) this.handleWebException(c, resp);
+        }
         responseVo = UserConverter.toModel(curUser);
         
         return responseVo;
@@ -78,7 +84,12 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo userBo = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo userBo = null;
+        try{
+        userFacade.authenticate(authSessionBo, permissionTag);
+        }catch (ControllerException c) {
+            return (UserVo) this.handleWebException(c, resp);
+        }
         if (userBo.getId() <= 0) {
             responseVo = new UserVo();
             responseVo.setId(-1);
@@ -124,7 +135,12 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try{
+        userFacade.authenticate(authSessionBo, permissionTag);
+        }catch (ControllerException c) {
+            return (UserVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
@@ -137,7 +153,13 @@ public class UserController extends AbstractController{
         
         UserVo queryUser = new UserVo();
         queryUser.setId(curId);
-        UserBo responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), curUser, permissionTag);
+        
+        UserBo responseUser =null;
+        try{
+        userFacade.queryUserInfo(UserConverter.fromModel(queryUser), curUser, permissionTag);
+        }catch (ControllerException c) {
+            return (UserVo) this.handleWebException(c, resp);
+        }
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }
@@ -150,7 +172,12 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser =null;
+        try{
+        userFacade.authenticate(authSessionBo, permissionTag);
+        }catch (ControllerException c) {
+            return (UserVo) this.handleWebException(c, resp);
+        }
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
@@ -164,7 +191,12 @@ public class UserController extends AbstractController{
         UserBo targetUser = UserConverter.fromModel(userVo);
         targetUser.setId(curId);
         
-        UserBo responseUser = userFacade.updateUser(targetUser, curUser, permissionTag);
+        UserBo responseUser = null;
+        try{
+        userFacade.updateUser(targetUser, curUser, permissionTag);
+        }catch (ControllerException c) {
+            return (UserVo) this.handleWebException(c, resp);
+        }
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }

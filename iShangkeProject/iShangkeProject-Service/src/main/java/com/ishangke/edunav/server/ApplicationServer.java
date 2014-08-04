@@ -131,10 +131,11 @@ public class ApplicationServer {
      */
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-                "classpath*:applicationContext-*.xml");
+                "classpath*:applicationContext-service.xml");
         ThriftServer.setApplicationContext(applicationContext);
 
-        applicationContext.getBean(ApplicationServer.class).start();
+        ApplicationServer app = (ApplicationServer) applicationContext.getBean("applicationServer");
+        app.start();
         Flag.setSMS(true);
         
         LOGGER.info("[Server] Server finished starting.");

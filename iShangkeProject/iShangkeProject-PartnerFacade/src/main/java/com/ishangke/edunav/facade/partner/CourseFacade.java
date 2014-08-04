@@ -24,6 +24,7 @@ import com.ishangke.edunav.thrift.ThriftClientSetting;
 import com.ishangke.edunav.web.common.ClientEnum;
 import com.ishangke.edunav.web.common.PermissionCache;
 import com.ishangke.edunav.web.common.ThriftClientSettingManager;
+import com.ishangke.edunav.web.exception.ControllerException;
 
 @Component
 @Scope(value = "singleton")
@@ -37,10 +38,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createCourse(courseBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -55,10 +55,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.commentCourse(courseCommnet, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -73,10 +72,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCommentByCourseId(courseBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -91,10 +89,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteCommentByCommentId(courseCommentBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -109,10 +106,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCategoryByKeyword(keyword, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -127,10 +123,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCourse(courseBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -145,10 +140,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCourseByFilter(courseBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -163,10 +157,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCourseById(courseBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -181,10 +174,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.transformCourseStatus(courseBo, operation, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -199,10 +191,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.createCourseTemplate(courseTemplateBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -217,10 +208,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.transformCourseTmeplateStatus(courseTemplateBo, operation, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -236,10 +226,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCourseTemplate(courseTemplateBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -254,10 +243,9 @@ public class CourseFacade {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.queryCourseTemplateById(courseTemplateBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new ControllerException(e.getMessageKey());
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

@@ -3,7 +3,9 @@ package com.ishangke.edunav.web.model;
 import java.util.Calendar;
 import java.util.Set;
 
-public class ActivityVo {
+import com.ishangke.edunav.web.response.JsonResponse;
+
+public class ActivityVo extends JsonResponse {
     private Integer id;
     private String name;
     private Integer partnerId;
