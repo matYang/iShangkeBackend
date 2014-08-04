@@ -8,9 +8,11 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 import net.spy.memcached.AddrUtil;
-import net.spy.memcached.DefaultConnectionFactory;
-import net.spy.memcached.DefaultHashAlgorithm;
+import net.spy.memcached.ConnectionFactoryBuilder;
+import net.spy.memcached.ConnectionFactoryBuilder.Protocol;
 import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.auth.AuthDescriptor;
+import net.spy.memcached.auth.PlainCallbackHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +29,8 @@ public class CacheManagerImpl implements CacheManager {
     static {
         //建立本地连接，仅供测试 
         try {
-            DefaultConnectionFactory connectionFactory = new DefaultConnectionFactory(DefaultConnectionFactory.DEFAULT_OP_QUEUE_LEN, DefaultConnectionFactory.DEFAULT_READ_BUFFER_SIZE, DefaultHashAlgorithm.KETAMA_HASH);
-            memcached = new MemcachedClient(connectionFactory, AddrUtil.getAddresses("localhost:11211"));
+            AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, new PlainCallbackHandler("c258548f011211e4", "53Jjd_3KOd_m3DIs"));
+            memcached = new MemcachedClient(new ConnectionFactoryBuilder().setProtocol(Protocol.BINARY).setOpTimeout(500).setAuthDescriptor(ad).build(), AddrUtil.getAddresses("c258548f011211e4.m.cnhzalicm10pub001.ocs.aliyuncs.com:11211"));
         } catch (IOException e) {
             e.printStackTrace();
         }
