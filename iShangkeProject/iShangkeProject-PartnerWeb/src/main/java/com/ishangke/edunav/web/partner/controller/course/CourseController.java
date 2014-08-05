@@ -58,11 +58,10 @@ public class CourseController extends AbstractController {
     UserFacade userFacade;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse importCourses(@RequestParam("file") MultipartFile file) throws ControllerException {
+    public @ResponseBody JsonResponse importCourses(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
         JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
-            throw new ControllerException("上传文件为空");
+            return this.handleWebException(new ControllerException("上传文件为空"), resp);
         }
 
         File dir = new File("tmp");
@@ -80,7 +79,7 @@ public class CourseController extends AbstractController {
             fos.flush();
             fos.close();
         } catch (IOException e) {
-            throw new ControllerException("读取或写入本地文件出错");
+            return this.handleWebException(new ControllerException("读取或写入本地文件出错"), resp);
         }
 
         Workbook book;
@@ -91,7 +90,7 @@ public class CourseController extends AbstractController {
             book = Workbook.getWorkbook(fis);
             sheet = book.getSheet(0);
         } catch (BiffException | IOException e) {
-            throw new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx");
+            return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
         }
 
         int row = 0;
@@ -127,7 +126,7 @@ public class CourseController extends AbstractController {
                         // TODO Add course to DB
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
-                        throw new ControllerException("导入出错");
+                        return this.handleWebException(new ControllerException("导入出错"), resp);
                     }
                 }
             }
@@ -139,8 +138,7 @@ public class CourseController extends AbstractController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CoursePageViewVo queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -148,21 +146,24 @@ public class CourseController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
 
-        pageViewBo = courseFacade.queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = courseFacade.queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CourseVo queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -170,7 +171,7 @@ public class CourseController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         CourseVo courseVo = new CourseVo();
@@ -178,15 +179,18 @@ public class CourseController extends AbstractController {
         CourseBo responseBo = null;
         CourseVo responseVo = null;
 
-        responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
+        try {
+            responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         responseVo = CourseConverter.toModel(responseBo);
 
         return responseVo;
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    CourseVo create(@RequestBody CourseVo courseVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse create(@RequestBody CourseVo courseVo, HttpServletRequest req, HttpServletResponse resp) {
         CourseVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -196,19 +200,23 @@ public class CourseController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         CourseBo targetCourse = CourseConverter.fromModel(courseVo);
 
-        CourseBo responseCourse = courseFacade.createCourse(targetCourse, curUser, permissionTag);
+        CourseBo responseCourse = null;
+        try {
+            responseCourse = courseFacade.createCourse(targetCourse, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         responseVo = CourseConverter.toModel(responseCourse);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    CourseVo transformCourse(@RequestBody CourseVo course, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse transformCourse(@RequestBody CourseVo course, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
         CourseVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -218,16 +226,21 @@ public class CourseController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         Integer operationObj = Constant.COURSEOPERATEMAP.get(operate);
         if (operationObj == null) {
-            throw new ControllerException("This course operation is not defined!");
+            return this.handleWebException(new ControllerException("This course operation is not defined!"), resp);
         }
 
         int operation = operationObj;
-        CourseBo courseBo = courseFacade.transformCourseStatus(CourseConverter.fromModel(course), operation, curUser, permissionTag);
+        CourseBo courseBo = null;
+        try {
+            courseBo = courseFacade.transformCourseStatus(CourseConverter.fromModel(course), operation, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         responseVo = CourseConverter.toModel(courseBo);
         return responseVo;
     }

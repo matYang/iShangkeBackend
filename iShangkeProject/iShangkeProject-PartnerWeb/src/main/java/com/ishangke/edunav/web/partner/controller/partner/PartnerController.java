@@ -61,11 +61,10 @@ public class PartnerController extends AbstractController {
     PartnerFacade partnerFacade;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse importPartners(@RequestParam("file") MultipartFile file) throws ControllerException {
+    public @ResponseBody JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
         JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
-            throw new ControllerException("上传文件为空");
+            return this.handleWebException(new ControllerException("上传文件为空"), resp);
         }
 
         File dir = new File("tmp");
@@ -83,7 +82,7 @@ public class PartnerController extends AbstractController {
             fos.flush();
             fos.close();
         } catch (IOException e) {
-            throw new ControllerException("读取或写入本地文件出错");
+            return this.handleWebException(new ControllerException("读取或写入本地文件出错"), resp);
         }
 
         Workbook book;
@@ -94,7 +93,7 @@ public class PartnerController extends AbstractController {
             book = Workbook.getWorkbook(fis);
             sheet = book.getSheet(0);
         } catch (BiffException | IOException e) {
-            throw new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx");
+            return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
         }
 
         int row = 0;
@@ -130,7 +129,7 @@ public class PartnerController extends AbstractController {
                         // TODO Add partner to DB
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
-                        throw new ControllerException("导入出错");
+                        return this.handleWebException(new ControllerException("导入出错"), resp);
                     }
                 }
             }
@@ -142,8 +141,7 @@ public class PartnerController extends AbstractController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    PartnerPageViewVo queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -151,14 +149,17 @@ public class PartnerController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         PartnerPageViewBo pageViewBo = null;
         PartnerPageViewVo pageViewVo = null;
 
-        pageViewBo = partnerFacade
-                .queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
+        try {
+            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = PartnerPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
@@ -166,24 +167,25 @@ public class PartnerController extends AbstractController {
 
     // get partner by id is open data, no authentication
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    PartnerVo queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-
+        
         PartnerVo partnerVo = new PartnerVo();
         partnerVo.setId(id);
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
-
-        responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
+        try {
+            responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);            
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         responseVo = PartnerConverter.toModel(responseBo);
-
+        
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    PartnerVo update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -193,20 +195,24 @@ public class PartnerController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
         targetPartner.setId(partnerId);
 
-        PartnerBo responsePartner = partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
+        PartnerBo responsePartner  = null;
+        try {
+            responsePartner = partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         responseVo = PartnerConverter.toModel(responsePartner);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.POST)
-    public @ResponseBody
-    PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {
@@ -227,10 +233,10 @@ public class PartnerController extends AbstractController {
                 partnerVo.setLogoUrl(imgUrl);
 
             } catch (Exception e) {
-                throw new ControllerException("PartnerLogo 上传失败");
+                return this.handleWebException(new ControllerException("PartnerLogo 上传失败"), resp);
             }
         } else {
-            throw new ControllerException("PartnerLogo file 为空");
+            return this.handleWebException(new ControllerException("PartnerLogo file 为空"), resp);
         }
         return partnerVo;
     }
