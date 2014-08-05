@@ -8,7 +8,6 @@ import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 
 public interface OrderManager {
 
@@ -18,12 +17,8 @@ public interface OrderManager {
      * 
      * @param orderBo
      *            被预定的课程信息
-     * @param bookingBo
-     *            预定单信息
      * @param userBo
      *            调用方法的用户的信息
-     * @param withdrawBo
-     *            用户支付方式
      * 
      * @return 预定单实体 OrderBo
      * 
@@ -33,7 +28,9 @@ public interface OrderManager {
      * @param userBo
      * @param withdrawBo
      */
-    OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo);
+    OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo);
+    
+    OrderBo queryOrderById(OrderBo orderBo, UserBo userBo);
 
     /**
      * 本方法为合作商受理一个预定单功能。<br>

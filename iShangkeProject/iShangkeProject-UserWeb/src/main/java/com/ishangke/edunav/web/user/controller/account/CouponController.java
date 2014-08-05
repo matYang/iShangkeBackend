@@ -28,6 +28,7 @@ import com.ishangke.edunav.web.model.CouponHistoryVo;
 import com.ishangke.edunav.web.model.CouponVo;
 import com.ishangke.edunav.web.model.pageview.CouponHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CouponPageViewVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
@@ -42,7 +43,7 @@ public class CouponController extends AbstractController{
     AccountFacade accountFacade;
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CouponPageViewVo  queryCoupon(CouponVo couponVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryCoupon(CouponVo couponVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -67,7 +68,7 @@ public class CouponController extends AbstractController{
     }
     
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CouponHistoryPageViewVo  queryCouponHistory(CouponHistoryVo couponHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryCouponHistory(CouponHistoryVo couponHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -89,7 +90,7 @@ public class CouponController extends AbstractController{
     
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CouponVo  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -111,7 +112,7 @@ public class CouponController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
-    public @ResponseBody CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         CouponVo responseVo = null;
         
         String permissionTag = this.getUrl(req);

@@ -8,15 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.enums.BookingEnums;
 import com.ishangke.edunav.common.enums.OrderEnums;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.CommentOrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
+import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
@@ -42,9 +44,11 @@ public class OrderManagerImpl implements OrderManager {
     private OrderHistoryEntityExtMapper orderHistoryMapper;
     @Autowired
     private AuthManager authManager;
+    @Autowired
+    private BookingEntityExtMapper bookingMapper;
 
     @Override
-    public OrderBo createOrderByUser(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, WithdrawBo withdrawBo) {
+    public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -52,6 +56,12 @@ public class OrderManagerImpl implements OrderManager {
         // 插入新的order记录
         OrderEntityExt orderEntity = OrderConverter.fromBo(orderBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
+        
+        BookingEntityExt bookingEntity = bookingMapper.getById(orderEntity.getBookingId());
+        if (bookingEntity == null || bookingEntity.getStatus() != BookingEnums.Status.ONLINEPENDINGPAYMENT.code) {
+            LOGGER.error(String.format("[create order] cannot create order for booking current status [%d]", bookingEntity  == null ? null : bookingEntity.getStatus()));
+            throw new ManagerException("cannot create order");
+        }
 
         int result = 0;
         try {
@@ -61,6 +71,16 @@ public class OrderManagerImpl implements OrderManager {
             throw new ManagerException("Order creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
+            //a little bug 没有定义orderhistory 的其他属性 所以只有order id, user id, create time是必须的
+            OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
+            orderHistory.setOrderId(orderEntity.getId());
+            orderHistory.setUserId(userEntity.getId());
+            orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            try {
+                orderHistoryMapper.add(orderHistory);
+            } catch (Exception e) {
+                throw new ManagerException("cannot create order history");
+            }
             return OrderConverter.toBo(orderEntity);
         } else {
             throw new ManagerException("Order creation failed for user: " + userEntity.getId());
@@ -163,6 +183,20 @@ public class OrderManagerImpl implements OrderManager {
             convertedResults.add(OrderHistoryConverter.toBo(result));
         }
         return convertedResults;
+    }
+
+    @Override
+    public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo) {
+        if(orderBo == null || userBo == null) {
+            throw new ManagerException("cannot query order current user");
+        }
+        OrderEntityExt order = null;
+        try {
+            order = orderMapper.getById(orderBo.getId());
+        } catch (Exception e) {
+            throw new ManagerException("query order failed");
+        }
+        return OrderConverter.toBo(order);
     }
 
 }

@@ -12,14 +12,23 @@ import com.ishangke.edunav.web.response.JsonResponse;
 public class AbstractController extends PseudoController{
     //general controller utilitiy functioanlities are implemented in PseudoController
     //module specific functionalities can be added here
+    /**
+     * Handles web exception and return json result.
+     * 
+     * @param exception
+     *            web exception
+     * @param logger
+     *            controller logger
+     * @return json result
+     */
     public JsonResponse handleWebException(Exception exception, HttpServletResponse resp) {
 
         if (exception instanceof ControllerException) {
             ControllerException faultException = (ControllerException) exception;
-            String errorMessage = faultException.getErrorMessage();
-            int msgKey = faultException.getMsgKey();
+            int errorCode = faultException.getErrorCode();
+            String msgKey = faultException.getMsgKey();
             resp.setStatus(400);
-            return new JsonResponse();
+            return new JsonResponse(errorCode, msgKey);
         } else {
             return new JsonResponse();
         }

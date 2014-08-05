@@ -9,6 +9,7 @@ import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
+import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
@@ -33,7 +34,7 @@ public class BookingFacade {
             result = serviceClient.createBookingByUser(bookingBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -50,7 +51,7 @@ public class BookingFacade {
             result = serviceClient.transformBookingStatus(bookingBo, operation, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -67,7 +68,7 @@ public class BookingFacade {
             result = serviceClient.queryBooking(bookingBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -84,7 +85,7 @@ public class BookingFacade {
             result = serviceClient.queryHistory(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -101,7 +102,7 @@ public class BookingFacade {
             result = serviceClient.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -118,7 +119,7 @@ public class BookingFacade {
             result = serviceClient.changeBookingStatusToPayed(orderId);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -135,7 +136,7 @@ public class BookingFacade {
             result = serviceClient.verify(notify_id);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -152,11 +153,44 @@ public class BookingFacade {
             result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+   public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo, String permissionTag) {
+       OrderBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.createOrderByUser(orderBo, userBo, PermissionCache.getTag(permissionTag));
+       } catch (BusinessExceptionBo e) {
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+       } catch (TException e) {
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo, String permissionTag) {
+       OrderBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryOrderById(orderBo, userBo, PermissionCache.getTag(permissionTag));
+       } catch (BusinessExceptionBo e) {
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+       } catch (TException e) {
+           e.printStackTrace();
+       }
+       return result;
+   }
 }

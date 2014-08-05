@@ -41,6 +41,7 @@ import com.ishangke.edunav.web.model.pageview.CategoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CirclePageViewVo;
 import com.ishangke.edunav.web.model.pageview.LocationPageViewVo;
 import com.ishangke.edunav.web.model.pageview.SchoolPageViewVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.tree.TreeParser;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
@@ -55,7 +56,7 @@ public class GeneralController extends AbstractController{
     CourseFacade courseFacade;
     
     @RequestMapping(value = "/category", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CategoryPageViewVo  category(@RequestParam(value="keyword", defaultValue="") String keyword, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  category(@RequestParam(value="keyword", defaultValue="") String keyword, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         CategoryVo categoryVo = new CategoryVo();
@@ -80,7 +81,7 @@ public class GeneralController extends AbstractController{
     
     
     @RequestMapping(value = "/location", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody LocationPageViewVo  location(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  location(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         LocationVo locationVo = new LocationVo();
@@ -99,7 +100,7 @@ public class GeneralController extends AbstractController{
     }
     
     @RequestMapping(value = "/circle", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CirclePageViewVo  circle(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  circle(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         CircleVo circleVo = new CircleVo();
@@ -119,7 +120,7 @@ public class GeneralController extends AbstractController{
     
     
     @RequestMapping(value = "/school", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody SchoolPageViewVo  school(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  school(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         SchoolVo schoolVo = new SchoolVo();
@@ -139,7 +140,7 @@ public class GeneralController extends AbstractController{
     
     
     @RequestMapping(value = "/career", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CareerPageViewVo  career(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  career(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         CareerVo careerVo = new CareerVo();

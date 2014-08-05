@@ -40,7 +40,7 @@ public class PartnerFacade {
             result = serviceClient.queryPartner(partnerBo, paginationBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class PartnerFacade {
             result = serviceClient.queryPartnerById(partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class PartnerFacade {
             result = serviceClient.updatePartner(partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -91,7 +91,7 @@ public class PartnerFacade {
             result = serviceClient.createPartner(partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -108,7 +108,7 @@ public class PartnerFacade {
             result = serviceClient.createAddress(addressBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -125,7 +125,7 @@ public class PartnerFacade {
             result = serviceClient.updateAddress(addressBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -142,7 +142,7 @@ public class PartnerFacade {
             result = serviceClient.deleteAddress(addressBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -159,7 +159,7 @@ public class PartnerFacade {
             result = serviceClient.queryAddress(addressBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -176,7 +176,7 @@ public class PartnerFacade {
             result = serviceClient.createClassPhoto(classPhotoBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -193,7 +193,7 @@ public class PartnerFacade {
             result = serviceClient.updateClassPhoto(classPhotoBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -210,7 +210,7 @@ public class PartnerFacade {
             result = serviceClient.deleteClassPhoto(classPhotoBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -227,7 +227,7 @@ public class PartnerFacade {
             result = serviceClient.queryClassPhoto(classPhotoBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -244,7 +244,7 @@ public class PartnerFacade {
             result = serviceClient.createTeacher(teacherBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -261,7 +261,7 @@ public class PartnerFacade {
             result = serviceClient.updateTeacher(teacherBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -278,7 +278,7 @@ public class PartnerFacade {
             result = serviceClient.deleteTeacher(teacherBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -295,7 +295,7 @@ public class PartnerFacade {
             result = serviceClient.queryTeacher(teacherBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -312,7 +312,7 @@ public class PartnerFacade {
             result = serviceClient.createActivity(activityBo, courseBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -329,7 +329,7 @@ public class PartnerFacade {
             result = serviceClient.submitActivity(activityBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -346,7 +346,7 @@ public class PartnerFacade {
             result = serviceClient.approveActivity(activityBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -363,7 +363,7 @@ public class PartnerFacade {
             result = serviceClient.rejectActivity(activityBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -380,7 +380,7 @@ public class PartnerFacade {
             result = serviceClient.cancelActivity(activityBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -397,7 +397,7 @@ public class PartnerFacade {
             result = serviceClient.deleteActivity(activityBo, partnerBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -414,7 +414,7 @@ public class PartnerFacade {
             result = serviceClient.queryActivity(activityBo, partnerBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
