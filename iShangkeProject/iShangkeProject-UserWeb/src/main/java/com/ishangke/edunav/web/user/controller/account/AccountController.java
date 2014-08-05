@@ -28,81 +28,67 @@ import com.ishangke.edunav.web.model.pageview.AccountHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.AccountPageViewVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
+
 @Controller
 @RequestMapping("/api/v2/account")
-public class AccountController extends AbstractController {
 
+public class AccountController extends AbstractController{
+    
     @Autowired
     UserFacade userFacade;
-
+    
     @Autowired
     AccountFacade accountFacade;
-
+    
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    AccountPageViewVo queryAccount(AccountVo accountVo, PaginationVo paginationVo, HttpServletRequest req,
-            HttpServletResponse resp) {
+    public @ResponseBody AccountPageViewVo  queryAccount(AccountVo accountVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (AccountPageViewVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        // user module specific, also need to perform null check
+        //user module specific, also need to perform null check
         if (accountVo.getId() == null || accountVo.getId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的账户信息");
         }
-
+        
         AccountPageViewBo pageViewBo = null;
         AccountPageViewVo pageViewVo = null;
-
-        pageViewBo = accountFacade.queryAccount(AccountConverter.fromModel(accountVo), curUser,
-                PaginationConverter.toBo(paginationVo), permissionTag);
+        
+        pageViewBo = accountFacade.queryAccount(AccountConverter.fromModel(accountVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = AccountPageViewConverter.toModel(pageViewBo);
-
+        
         return pageViewVo;
     }
-
+    
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    AccountHistoryPageViewVo queryAccountHistory(AccountHistoryVo accountHistoryVo, PaginationVo paginationVo,
-            HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody AccountHistoryPageViewVo  queryAccountHistory(AccountHistoryVo accountHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-
-        } catch (ControllerException c) {
-            return (AccountHistoryPageViewVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        // user module specific, also need to perform null check
+        //user module specific, also need to perform null check
         if (accountHistoryVo.getUserId() == null || accountHistoryVo.getUserId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的账户信息");
         }
-
+        
         AccountHistoryPageViewBo pageViewBo = null;
         AccountHistoryPageViewVo pageViewVo = null;
-
-        pageViewBo = accountFacade.queryAccountHistory(AccountHistoryConverter.fromModel(accountHistoryVo), curUser,
-                PaginationConverter.toBo(paginationVo), permissionTag);
+        
+        pageViewBo = accountFacade.queryAccountHistory(AccountHistoryConverter.fromModel(accountHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = AccountHistoryPageViewConverter.toModel(pageViewBo);
-
+        
         return pageViewVo;
     }
+    
 
 }

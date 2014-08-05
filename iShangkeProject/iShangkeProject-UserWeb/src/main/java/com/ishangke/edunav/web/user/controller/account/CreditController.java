@@ -30,77 +30,63 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/credit")
-public class CreditController extends AbstractController {
+
+public class CreditController extends AbstractController{
     @Autowired
     UserFacade userFacade;
-
+    
     @Autowired
     AccountFacade accountFacade;
-
+    
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CreditPageViewVo queryCredit(CreditVo creditVo, PaginationVo paginationVo, HttpServletRequest req,
-            HttpServletResponse resp) {
+    public @ResponseBody CreditPageViewVo  queryCredit(CreditVo creditVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (CreditPageViewVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        // user module specific, also need to perform null check
+        //user module specific, also need to perform null check
         if (creditVo.getId() == null || creditVo.getId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
-
+        
         CreditPageViewBo pageViewBo = null;
         CreditPageViewVo pageViewVo = null;
-
-        pageViewBo = accountFacade.queryCredit(CreditConverter.fromModel(creditVo), curUser,
-                PaginationConverter.toBo(paginationVo), permissionTag);
+        
+        pageViewBo = accountFacade.queryCredit(CreditConverter.fromModel(creditVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CreditPageViewConverter.toModel(pageViewBo);
-
+        
         return pageViewVo;
     }
-
+    
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CreditHistoryPageViewVo queryCreditHistory(CreditHistoryVo creditHistoryVo, PaginationVo paginationVo,
-            HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody CreditHistoryPageViewVo  queryCreditHistory(CreditHistoryVo creditHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (CreditHistoryPageViewVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        // user module specific, also need to perform null check
+        //user module specific, also need to perform null check
         if (creditHistoryVo.getUserId() == null || creditHistoryVo.getUserId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
-
+        
         CreditHistoryPageViewBo pageViewBo = null;
         CreditHistoryPageViewVo pageViewVo = null;
-
-        pageViewBo = accountFacade.queryCreditHistory(CreditHistoryConverter.fromModel(creditHistoryVo), curUser,
-                PaginationConverter.toBo(paginationVo), permissionTag);
+        
+        pageViewBo = accountFacade.queryCreditHistory(CreditHistoryConverter.fromModel(creditHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CreditHistoryPageViewConverter.toModel(pageViewBo);
-
+        
         return pageViewVo;
     }
+    
 
 }
