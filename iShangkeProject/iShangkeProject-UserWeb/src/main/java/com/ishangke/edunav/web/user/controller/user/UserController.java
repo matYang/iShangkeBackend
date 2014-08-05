@@ -25,6 +25,7 @@ import com.ishangke.edunav.web.model.PasswordVo;
 import com.ishangke.edunav.web.model.SessionVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
@@ -35,7 +36,7 @@ public class UserController extends AbstractController{
     UserFacade userFacade;
     
     @RequestMapping(value = "/login/phone", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody UserVo login(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse login(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -59,7 +60,7 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "/{id}/logout", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody EmptyResponse logout(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse logout(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         if (authSessionBo.getId() <= 0) {
@@ -74,7 +75,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/findSession", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody UserVo  findSession(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  findSession(HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -94,7 +95,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/smsVerification", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody EmptyResponse cv( @RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse cv( @RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         UserVo userVo = new UserVo();
@@ -105,7 +106,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/registration", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody UserVo register(@RequestBody UserVo userVo, @RequestBody SessionVo cellSessionVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse register(@RequestBody UserVo userVo, @RequestBody SessionVo cellSessionVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -131,7 +132,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody EmptyResponse fp(@RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse fp(@RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         UserVo userVo = new UserVo();
@@ -143,7 +144,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody UserVo recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -169,7 +170,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/{id}/changePassword", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody EmptyResponse changePassword(@PathVariable("id") int id, @RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse changePassword(@PathVariable("id") int id, @RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         int curId = userFacade.authenticate(authSessionBo, permissionTag).getId();
@@ -195,7 +196,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody UserVo getById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse getById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -221,7 +222,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody UserVo update(@PathVariable("id") int id, @RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);

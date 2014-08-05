@@ -26,6 +26,7 @@ import com.ishangke.edunav.web.model.CreditHistoryVo;
 import com.ishangke.edunav.web.model.CreditVo;
 import com.ishangke.edunav.web.model.pageview.CreditHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CreditPageViewVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
@@ -39,7 +40,7 @@ public class CreditController extends AbstractController{
     AccountFacade accountFacade;
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CreditPageViewVo  queryCredit(CreditVo creditVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryCredit(CreditVo creditVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -64,7 +65,7 @@ public class CreditController extends AbstractController{
     }
     
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody CreditHistoryPageViewVo  queryCreditHistory(CreditHistoryVo creditHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryCreditHistory(CreditHistoryVo creditHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         

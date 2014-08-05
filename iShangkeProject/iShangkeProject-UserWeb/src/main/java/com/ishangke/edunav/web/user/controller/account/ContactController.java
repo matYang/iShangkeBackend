@@ -25,6 +25,7 @@ import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.ContactVo;
 import com.ishangke.edunav.web.model.pageview.ContactPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
@@ -39,7 +40,7 @@ public class ContactController extends AbstractController{
     AccountFacade accountFacade;
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody ContactPageViewVo  queryContact(ContactVo contactVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryContact(ContactVo contactVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -65,7 +66,7 @@ public class ContactController extends AbstractController{
     
     
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody ContactVo create(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse create(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
         ContactVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -91,7 +92,7 @@ public class ContactController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody ContactVo update(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
         ContactVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -118,7 +119,7 @@ public class ContactController extends AbstractController{
     
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,  produces = "application/json")
-    public @ResponseBody EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
           

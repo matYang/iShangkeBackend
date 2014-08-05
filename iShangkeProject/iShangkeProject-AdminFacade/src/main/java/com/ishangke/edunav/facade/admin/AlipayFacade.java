@@ -27,7 +27,7 @@ public class AlipayFacade {
             result = serviceClient.verify(notify_id);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class AlipayFacade {
             result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -61,7 +61,7 @@ public class AlipayFacade {
             result = serviceClient.changeBookingStatusToPayed(orderId);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
         } catch (TException e) {
             e.printStackTrace();
         }

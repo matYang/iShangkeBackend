@@ -26,6 +26,7 @@ import com.ishangke.edunav.web.model.AccountHistoryVo;
 import com.ishangke.edunav.web.model.AccountVo;
 import com.ishangke.edunav.web.model.pageview.AccountHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.AccountPageViewVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 
@@ -41,7 +42,7 @@ public class AccountController extends AbstractController{
     AccountFacade accountFacade;
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody AccountPageViewVo  queryAccount(AccountVo accountVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryAccount(AccountVo accountVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
@@ -66,7 +67,7 @@ public class AccountController extends AbstractController{
     }
     
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody AccountHistoryPageViewVo  queryAccountHistory(AccountHistoryVo accountHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryAccountHistory(AccountHistoryVo accountHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         

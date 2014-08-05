@@ -16,6 +16,7 @@ import com.ishangke.edunav.web.converter.PartnerConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.model.PartnerVo;
 import com.ishangke.edunav.web.model.UserVo;
+import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 
@@ -29,7 +30,7 @@ public class PartnerController extends AbstractController{
     
     //get partner by id is open data
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody PartnerVo  queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse  queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         
         PartnerVo partnerVo = new PartnerVo();
