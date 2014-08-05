@@ -44,21 +44,30 @@ public class ContactController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
         }
         
         ContactPageViewBo pageViewBo = null;
         ContactPageViewVo pageViewVo = null;
+        try {
+            pageViewBo = accountFacade.queryContact(ContactConverter.fromModel(contactVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         
-        pageViewBo = accountFacade.queryContact(ContactConverter.fromModel(contactVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = ContactPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
@@ -72,21 +81,31 @@ public class ContactController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null; 
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的联系人信息");
+            return this.handleWebException(new ControllerException("对不起，您只能创建自己的联系人信息"), resp);
         }
         
         
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
         
-        ContactBo responseContact = accountFacade.createContact(targetContact, curUser, permissionTag);
+        ContactBo responseContact = null;
+        try {
+            responseContact = accountFacade.createContact(targetContact, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         responseVo = ContactConverter.toModel(responseContact);
         return responseVo;
     }
@@ -98,21 +117,31 @@ public class ContactController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的联系人信息");
+            return this.handleWebException(new ControllerException("对不起，您只能创建自己的联系人信息"), resp);
         }
         
         
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
         
-        ContactBo responseContact = accountFacade.updateContact(targetContact, curUser, permissionTag);
+        ContactBo responseContact = null;
+        try {
+            responseContact = accountFacade.updateContact(targetContact, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         responseVo = ContactConverter.toModel(responseContact);
         return responseVo;
     }
@@ -123,18 +152,26 @@ public class ContactController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
           
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         ContactVo contactVo = new ContactVo();
         contactVo.setId(id);
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
-        
-        accountFacade.deleteContact(targetContact, curUser, permissionTag);
+        try {
+            accountFacade.deleteContact(targetContact, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         return new EmptyResponse();
      }
     

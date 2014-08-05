@@ -31,6 +31,7 @@ import com.ishangke.edunav.web.converter.pageview.CategoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.CirclePageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.LocationPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.SchoolPageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CareerVo;
 import com.ishangke.edunav.web.model.CategoryVo;
 import com.ishangke.edunav.web.model.CircleVo;
@@ -65,14 +66,22 @@ public class GeneralController extends AbstractController{
         CategoryPageViewVo pageViewVo = null;
         
         if (keyword == null || keyword.length() == 0) {
-            pageViewBo = generalFacade.queryCategory(CategoryConverter.fromModel(categoryVo), PaginationConverter.toBo(paginationVo), permissionTag);
+            try {
+                pageViewBo = generalFacade.queryCategory(CategoryConverter.fromModel(categoryVo), PaginationConverter.toBo(paginationVo), permissionTag);                
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            }  
             pageViewVo = CategoryPageViewConverter.toModel(pageViewBo);
             if (pageViewVo.getData() != null) {
                 ArrayList<CategoryVo> treeList = (ArrayList<CategoryVo>) TreeParser.parse(pageViewVo.getData());
                 pageViewVo.setData(treeList);
             }
         } else {
-            pageViewBo = courseFacade.queryCategoryByKeyword(keyword, permissionTag);
+            try {
+                pageViewBo = courseFacade.queryCategoryByKeyword(keyword, permissionTag);    
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            }
             pageViewVo = CategoryPageViewConverter.toModel(pageViewBo);
         }
         
@@ -88,8 +97,11 @@ public class GeneralController extends AbstractController{
         PaginationVo paginationVo = new PaginationVo();
         LocationPageViewBo pageViewBo = null;
         LocationPageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.queryLocation(LocationConverter.fromModel(locationVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = generalFacade.queryLocation(LocationConverter.fromModel(locationVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = LocationPageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<LocationVo> treeList = (ArrayList<LocationVo>) TreeParser.parse(pageViewVo.getData());
@@ -107,8 +119,11 @@ public class GeneralController extends AbstractController{
         PaginationVo paginationVo = new PaginationVo();
         CirclePageViewBo pageViewBo = null;
         CirclePageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.queryCircle(CircleConverter.fromModel(circleVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = generalFacade.queryCircle(CircleConverter.fromModel(circleVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = CirclePageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<CircleVo> treeList = (ArrayList<CircleVo>) TreeParser.parse(pageViewVo.getData());
@@ -127,8 +142,11 @@ public class GeneralController extends AbstractController{
         PaginationVo paginationVo = new PaginationVo();
         SchoolPageViewBo pageViewBo = null;
         SchoolPageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.querySchool(SchoolConverter.fromModel(schoolVo),PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = generalFacade.querySchool(SchoolConverter.fromModel(schoolVo),PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = SchoolPageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<SchoolVo> treeList = (ArrayList<SchoolVo>) TreeParser.parse(pageViewVo.getData());
@@ -147,8 +165,11 @@ public class GeneralController extends AbstractController{
         PaginationVo paginationVo = new PaginationVo();
         CareerPageViewBo pageViewBo = null;
         CareerPageViewVo pageViewVo = null;
-        
-        pageViewBo = generalFacade.queryCareer(CareerConverter.fromModel(careerVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = generalFacade.queryCareer(CareerConverter.fromModel(careerVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = CareerPageViewConverter.toModel(pageViewBo);
         if (pageViewVo.getData() != null) {
             ArrayList<CareerVo> treeList = (ArrayList<CareerVo>) TreeParser.parse(pageViewVo.getData());

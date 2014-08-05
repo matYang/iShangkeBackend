@@ -54,17 +54,22 @@ public class CommentController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的课程评论");
+            return this.handleWebException(new ControllerException("对不起，您只能创建自己的课程评论"), resp);
         }
         
         
         CourseCommentBo targetCourseComment = CourseCommentConverter.fromModel(courseCommentVo);
         
-        CourseCommentBo responseCourseComment = courseFacade.commentCourse(targetCourseComment, curUser, permissionTag);
+        CourseCommentBo responseCourseComment = null;
+        try {
+            responseCourseComment = courseFacade.commentCourse(targetCourseComment, curUser, permissionTag); 
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         responseVo = CourseCommentConverter.toModel(responseCourseComment);
         return responseVo;
     }
@@ -78,14 +83,17 @@ public class CommentController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         CourseCommentVo courseCommentVo = new CourseCommentVo();
         courseCommentVo.setId(id);
         CourseCommentBo targetCourseComment = CourseCommentConverter.fromModel(courseCommentVo);
-        
-        courseFacade.deleteCommentByCommentId(targetCourseComment, curUser, permissionTag);
+        try {
+            courseFacade.deleteCommentByCommentId(targetCourseComment, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         return new EmptyResponse();
     }
     
@@ -99,11 +107,11 @@ public class CommentController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的课程评分信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的课程评分信息"), resp);
         }
         
         CourseCommentPageViewBo pageViewBo = null;
@@ -112,8 +120,11 @@ public class CommentController extends AbstractController{
         CourseVo courseVo = new CourseVo();
         courseVo.setCourseTemplateId(courseCommentVo.getCourseTemplateId());
         CourseBo targetCourse = CourseConverter.fromModel(courseVo);
-        
-        pageViewBo = courseFacade.queryCommentByCourseId(targetCourse, PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = courseFacade.queryCommentByCourseId(targetCourse, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = CourseCommentPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
