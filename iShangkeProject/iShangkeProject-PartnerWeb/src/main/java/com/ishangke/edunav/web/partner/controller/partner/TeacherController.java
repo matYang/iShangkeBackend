@@ -50,12 +50,7 @@ public class TeacherController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = null;
-        try{
-        userFacade.authenticate(authSessionBo, permissionTag);
-        }catch (ControllerException c) {
-            return (TeacherPageViewVo) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -114,12 +109,7 @@ public class TeacherController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = null;
-        try{
-        userFacade.authenticate(authSessionBo, permissionTag);
-        }catch (ControllerException c) {
-            return (TeacherVo) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -128,12 +118,7 @@ public class TeacherController extends AbstractController {
 
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
 
-        TeacherBo responseTeacher = null;
-        try{
-        partnerFacade.createTeacher(targetTeacher, curUser, permissionTag);
-        }catch (ControllerException c) {
-            return (TeacherVo) this.handleWebException(c, resp);
-        }
+        TeacherBo responseTeacher = partnerFacade.createTeacher(targetTeacher, curUser, permissionTag);
         responseVo = TeacherConverter.toModel(responseTeacher);
         return responseVo;
     }
@@ -146,12 +131,7 @@ public class TeacherController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser =null;
-        try{
-        userFacade.authenticate(authSessionBo, permissionTag);
-        }catch (ControllerException c) {
-            return (TeacherVo) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -160,12 +140,7 @@ public class TeacherController extends AbstractController {
 
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
 
-        TeacherBo responseTeacher = null;
-        try{
-        partnerFacade.updateTeacher(targetTeacher, curUser, permissionTag);
-        }catch (ControllerException c) {
-            return (TeacherVo) this.handleWebException(c, resp);
-        }
+        TeacherBo responseTeacher = partnerFacade.updateTeacher(targetTeacher, curUser, permissionTag);
         responseVo = TeacherConverter.toModel(responseTeacher);
         return responseVo;
     }
@@ -176,12 +151,7 @@ public class TeacherController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = null;
-        try{
-        userFacade.authenticate(authSessionBo, permissionTag);
-        }catch (ControllerException c) {
-            return (EmptyResponse) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {

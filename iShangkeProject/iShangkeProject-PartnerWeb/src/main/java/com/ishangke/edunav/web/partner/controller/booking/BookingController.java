@@ -25,7 +25,6 @@ import com.ishangke.edunav.web.converter.BookingHistoryConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.BookingHistoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.BookingPageViewConverter;
-import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.BookingHistoryVo;
 import com.ishangke.edunav.web.model.BookingVo;
 import com.ishangke.edunav.web.model.pageview.BookingHistoryPageViewVo;
@@ -43,95 +42,45 @@ public class BookingController extends AbstractController {
 
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    BookingVo transformBooking(@RequestBody BookingVo booking, HttpServletRequest req, HttpServletResponse resp,
-            @PathVariable String operate) {
+    BookingVo transformBooking(@RequestBody BookingVo booking, HttpServletRequest req, HttpServletResponse resp, @PathVariable String operate) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo currentUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (BookingVo) this.handleWebException(c, resp);
-        }
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         int operation = Constant.BOOKINGOPERATEMAP.get(operate);
-        BookingBo bookingBo = null;
-        try {
-            bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser,
-                    permissionTag);
-        } catch (ControllerException c) {
-            return (BookingVo) this.handleWebException(c, resp);
-        }
+        BookingBo bookingBo = bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser, permissionTag);
         BookingVo bookingVo = BookingConverter.toModel(bookingBo);
         return bookingVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    BookingVo getBookingById(HttpServletRequest req, HttpServletResponse resp, @PathVariable int id) {
+    public @ResponseBody BookingVo getBookingById(HttpServletRequest req, HttpServletResponse resp, @PathVariable int id) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        UserBo currentUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (BookingVo) this.handleWebException(c, resp);
-        }
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         BookingVo bookingVo = new BookingVo();
         bookingVo.setId(id);
-        BookingPageViewBo bookingBos = null;
-        try {
-            bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, null, permissionTag);
-        } catch (ControllerException c) {
-            return (BookingVo) this.handleWebException(c, resp);
-        }
+        BookingPageViewBo bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, null, permissionTag);
         BookingBo bookingBo = bookingBos.getData().get(0);
         BookingVo booking = BookingConverter.toModel(bookingBo);
         return booking;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    BookingPageViewVo getBooking(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo,
-            BookingVo bookingVo) {
+    public @ResponseBody BookingPageViewVo getBooking(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingVo bookingVo) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        UserBo currentUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (BookingPageViewVo) this.handleWebException(c, resp);
-        }
-        BookingPageViewBo bookingBos = null;
-        try {
-            bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser,
-                    PaginationConverter.toBo(pageVo), permissionTag);
-        } catch (ControllerException c) {
-            return (BookingPageViewVo) this.handleWebException(c, resp);
-        }
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        BookingPageViewBo bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         BookingPageViewVo bookingVos = BookingPageViewConverter.toModel(bookingBos);
         return bookingVos;
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    BookingHistoryPageViewVo getBookingHistory(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo,
-            BookingHistoryVo bookingHistoryVo) {
+    public @ResponseBody BookingHistoryPageViewVo getBookingHistory(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingHistoryVo bookingHistoryVo) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        UserBo currentUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (BookingHistoryPageViewVo) this.handleWebException(c, resp);
-        }
-        BookingHistoryPageViewBo bookingHistoryBos = null;
-        try {
-            bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser,
-                    PaginationConverter.toBo(pageVo), permissionTag);
-        } catch (ControllerException c) {
-            return (BookingHistoryPageViewVo) this.handleWebException(c, resp);
-        }
+        UserBo currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        BookingHistoryPageViewBo bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         BookingHistoryPageViewVo bookingHistoryVos = BookingHistoryPageViewConverter.toModel(bookingHistoryBos);
         return bookingHistoryVos;
     }
