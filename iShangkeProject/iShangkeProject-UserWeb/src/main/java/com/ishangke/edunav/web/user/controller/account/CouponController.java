@@ -51,17 +51,21 @@ public class CouponController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (couponVo.getUserId() == null || couponVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
         }
         
         CouponPageViewBo pageViewBo = null;
         CouponPageViewVo pageViewVo = null;
+        try {
+            pageViewBo = accountFacade.queryCoupon(CouponConverter.fromModel(couponVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         
-        pageViewBo = accountFacade.queryCoupon(CouponConverter.fromModel(couponVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CouponPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
@@ -76,13 +80,16 @@ public class CouponController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         CouponHistoryPageViewBo pageViewBo = null;
         CouponHistoryPageViewVo pageViewVo = null;
-        
-        pageViewBo = accountFacade.queryCouponHistory(CouponHistoryConverter.fromModel(couponHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = accountFacade.queryCouponHistory(CouponHistoryConverter.fromModel(couponHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         pageViewVo = CouponHistoryPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
@@ -99,13 +106,17 @@ public class CouponController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         CouponVo responseVo = null;
         CouponBo responseBo = null;
+        try {
+            responseBo = accountFacade.queryCouponById(id, curUser, permissionTag);   
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         
-        responseBo = accountFacade.queryCouponById(id, curUser, permissionTag);
         responseVo = CouponConverter.toModel(responseBo);
         
         return responseVo;
@@ -122,14 +133,19 @@ public class CouponController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         CouponVo couponVo = new CouponVo();
         couponVo.setId(id);
         couponVo.setUserId(curId);
+        CouponBo resultCoupon  = null;
+        try {
+            resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         
-        CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
         responseVo = CouponConverter.toModel(resultCoupon);
         return responseVo;
     }

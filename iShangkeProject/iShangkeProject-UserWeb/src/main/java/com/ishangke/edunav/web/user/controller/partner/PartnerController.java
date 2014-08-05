@@ -14,6 +14,7 @@ import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.facade.user.PartnerFacade;
 import com.ishangke.edunav.web.converter.PartnerConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.PartnerVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -37,8 +38,11 @@ public class PartnerController extends AbstractController{
         partnerVo.setId(id);
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
-        
-        responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
+        try {
+            responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);            
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         responseVo = PartnerConverter.toModel(responseBo);
         
         return responseVo;

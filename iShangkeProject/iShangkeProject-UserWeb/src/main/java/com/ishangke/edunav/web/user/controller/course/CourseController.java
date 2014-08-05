@@ -18,6 +18,7 @@ import com.ishangke.edunav.web.converter.CourseConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.converter.pageview.CoursePageViewConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.CoursePageViewVo;
@@ -41,10 +42,12 @@ public class CourseController extends AbstractController{
         
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
-        
-        pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
-        
         return pageViewVo;
     }
     
@@ -57,11 +60,12 @@ public class CourseController extends AbstractController{
         courseVo.setId(id);
         CourseBo responseBo = null;
         CourseVo responseVo = null;
-        
-        
-        responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
+        try {
+            responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);            
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         responseVo = CourseConverter.toModel(responseBo);
-        
         return responseVo;
     }
     
