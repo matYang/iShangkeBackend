@@ -57,7 +57,11 @@ public class OrderController extends AbstractController {
         OrderBo order = new OrderBo();
         order.setBookingId(booking.getId());
         order = bookingFacade.createOrderByUser(order, userBo, "GET/api/v2/course");
-        return alipayFacade.buildFormForGet("NANJINGAISHANGKETEST", order.getId() + "", price + "");
+        
+        String out_trade_no = String.valueOf(order.getId());
+        String total_fee = String.valueOf(price);
+        
+        return alipayFacade.buildFormForGet("NANJINGAISHANGKETEST", out_trade_no,  total_fee);
     }
 
 }
