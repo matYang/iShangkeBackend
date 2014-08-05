@@ -22,12 +22,16 @@ public class AlipayController extends AbstractController {
         String notifyId = null;
         String tradeStatus = null;
         String verified = null;
-
+        String total_fee = null;
+        
         notifyId = request.getParameter("notify_id");
         verified = alipayFacade.verify_notify_id(notifyId);
+        total_fee = request.getParameter("total_fee");
+        // Check Sign
         if (verified.equals("true")) {
             tradeStatus = request.getParameter("trade_status");
             if (tradeStatus.equals("TRADE_SUCCESS")) {
+                
                 int orderId = Integer.parseInt(request.getParameter("out_trade_no"));
                 alipayFacade.changeBookingStatusToPayed(orderId);
                 return "success";
