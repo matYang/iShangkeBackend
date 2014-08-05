@@ -147,12 +147,7 @@ public class PartnerController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (PartnerPageViewVo) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -180,12 +175,7 @@ public class PartnerController extends AbstractController {
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
 
-        responseBo = null;
-        try {
-            partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
-        } catch (ControllerException c) {
-            return (PartnerVo) this.handleWebException(c, resp);
-        }
+        responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
         responseVo = PartnerConverter.toModel(responseBo);
 
         return responseVo;
@@ -199,12 +189,7 @@ public class PartnerController extends AbstractController {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (PartnerVo) this.handleWebException(c, resp);
-        }
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -214,12 +199,7 @@ public class PartnerController extends AbstractController {
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
         targetPartner.setId(partnerId);
 
-        PartnerBo responsePartner = null;
-        try {
-            partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
-        } catch (ControllerException c) {
-            return (PartnerVo) this.handleWebException(c, resp);
-        }
+        PartnerBo responsePartner = partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
         responseVo = PartnerConverter.toModel(responsePartner);
         return responseVo;
     }

@@ -32,130 +32,103 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/coupon")
-public class CouponController extends AbstractController {
+
+public class CouponController extends AbstractController{
 
     @Autowired
     UserFacade userFacade;
-
+    
     @Autowired
     AccountFacade accountFacade;
-
+    
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CouponPageViewVo queryCoupon(CouponVo couponVo, PaginationVo paginationVo, HttpServletRequest req,
-            HttpServletResponse resp) {
+    public @ResponseBody CouponPageViewVo  queryCoupon(CouponVo couponVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (CouponPageViewVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        // user module specific, also need to perform null check
+        //user module specific, also need to perform null check
         if (couponVo.getUserId() == null || couponVo.getUserId() != curId) {
             throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
-
+        
         CouponPageViewBo pageViewBo = null;
         CouponPageViewVo pageViewVo = null;
-
-        pageViewBo = accountFacade.queryCoupon(CouponConverter.fromModel(couponVo), curUser,
-                PaginationConverter.toBo(paginationVo), permissionTag);
+        
+        pageViewBo = accountFacade.queryCoupon(CouponConverter.fromModel(couponVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CouponPageViewConverter.toModel(pageViewBo);
-
+        
         return pageViewVo;
     }
-
+    
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CouponHistoryPageViewVo queryCouponHistory(CouponHistoryVo couponHistoryVo, PaginationVo paginationVo,
-            HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody CouponHistoryPageViewVo  queryCouponHistory(CouponHistoryVo couponHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (CouponHistoryPageViewVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-
+        
         CouponHistoryPageViewBo pageViewBo = null;
         CouponHistoryPageViewVo pageViewVo = null;
-
-        pageViewBo = accountFacade.queryCouponHistory(CouponHistoryConverter.fromModel(couponHistoryVo), curUser,
-                PaginationConverter.toBo(paginationVo), permissionTag);
+        
+        pageViewBo = accountFacade.queryCouponHistory(CouponHistoryConverter.fromModel(couponHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CouponHistoryPageViewConverter.toModel(pageViewBo);
-
+        
         return pageViewVo;
     }
-
+    
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    CouponVo queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-
+    public @ResponseBody CouponVo  queryCouponById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+        
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (CouponVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-
+        
         CouponVo responseVo = null;
         CouponBo responseBo = null;
-
+        
         responseBo = accountFacade.queryCouponById(id, curUser, permissionTag);
         responseVo = CouponConverter.toModel(responseBo);
-
+        
         return responseVo;
     }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
-    public @ResponseBody
-    CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
+    public @ResponseBody CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         CouponVo responseVo = null;
-
+        
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return (CouponVo) this.handleWebException(c, resp);
-        }
+        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
+        boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-
+        
         CouponVo couponVo = new CouponVo();
         couponVo.setId(id);
         couponVo.setUserId(curId);
-
-        CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser,
-                permissionTag);
+        
+        CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
         responseVo = CouponConverter.toModel(resultCoupon);
         return responseVo;
     }
