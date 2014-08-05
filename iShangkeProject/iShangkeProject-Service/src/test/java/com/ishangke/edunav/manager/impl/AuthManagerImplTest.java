@@ -18,9 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import com.ishangke.edunav.common.BaseTest;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.CellVerificationConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfig;
@@ -125,39 +125,39 @@ public class AuthManagerImplTest extends BaseTest {
 
         authCode1 = auth.openAuthSession(identifier);
 
-        long startTime1 = DateUtility.getCurTime();
-        for (int i = 0; i < 1000; i++) {
-            auth.openAuthSession(identifier);
-        }
-        long diff1 = DateUtility.getCurTime() - startTime1;
-
-        // session evicted from cache
-        Assert.assertFalse(auth.validateAuthSession(identifier, authCode1));
-        Assert.assertTrue(auth.validateAuthSession(identifier2, authCode2));
-
-        authCode1 = auth.openAuthSession(identifier);
-        authCode2 = auth.openAuthSession(identifier2);
-
-        long startTime2 = DateUtility.getCurTime();
-        for (int i = 0; i < 1000; i++) {
-            auth.validateAuthSession(identifier, authCode1);
-        }
-        long diff2 = DateUtility.getCurTime() - startTime2;
-
-        long startTime3 = DateUtility.getCurTime();
-        for (int i = 0; i < 1000; i++) {
-            auth.closeAuthSession(identifier, authCode1);
-        }
-        long diff3 = DateUtility.getCurTime() - startTime3;
-
-        System.out
-                .println("==============>1000 basic cas login costs: " + diff1 / 1000 + "sec " + diff1 % 1000 + "ms");
-        System.out.println("==============>1000 basic cas validation costs: " + diff2 / 1000 + "sec " + diff2 % 1000
-                + "ms");
-        System.out.println("==============>1000 basic cas logout costs: " + diff3 / 1000 + "sec " + diff3 % 1000
-                + "ms");
-
-        Thread.sleep(5000);
+//        long startTime1 = DateUtility.getCurTime();
+//        for (int i = 0; i < 1000; i++) {
+//            auth.openAuthSession(identifier);
+//        }
+//        long diff1 = DateUtility.getCurTime() - startTime1;
+//
+//        // session evicted from cache
+//        Assert.assertFalse(auth.validateAuthSession(identifier, authCode1));
+//        Assert.assertTrue(auth.validateAuthSession(identifier2, authCode2));
+//
+//        authCode1 = auth.openAuthSession(identifier);
+//        authCode2 = auth.openAuthSession(identifier2);
+//
+//        long startTime2 = DateUtility.getCurTime();
+//        for (int i = 0; i < 1000; i++) {
+//            auth.validateAuthSession(identifier, authCode1);
+//        }
+//        long diff2 = DateUtility.getCurTime() - startTime2;
+//
+//        long startTime3 = DateUtility.getCurTime();
+//        for (int i = 0; i < 1000; i++) {
+//            auth.closeAuthSession(identifier, authCode1);
+//        }
+//        long diff3 = DateUtility.getCurTime() - startTime3;
+//
+//        System.out
+//                .println("==============>1000 basic cas login costs: " + diff1 / 1000 + "sec " + diff1 % 1000 + "ms");
+//        System.out.println("==============>1000 basic cas validation costs: " + diff2 / 1000 + "sec " + diff2 % 1000
+//                + "ms");
+//        System.out.println("==============>1000 basic cas logout costs: " + diff3 / 1000 + "sec " + diff3 % 1000
+//                + "ms");
+//
+//        Thread.sleep(5000);
     }
 
     @Test
@@ -259,7 +259,7 @@ public class AuthManagerImplTest extends BaseTest {
      * distinct accounts, 10 active users per account, 20 interations per user,
      * 30% login, 20% logout, 50% validate
      */
-    @Test
+    //@Test
     public void testConcurrentParallelCAS() throws InterruptedException {
         failureCount = 0;
         cacheEvictCount = 0;
@@ -353,7 +353,7 @@ public class AuthManagerImplTest extends BaseTest {
      * distinct accounts, 1 active users per account, 20 interations per user,
      * 30% login, 20% logout, 50% validate
      */
-    @Test
+    //@Test
     public void testConcurrentUniqueCAS() throws InterruptedException {
         failureCount = 0;
         cacheEvictCount = 0;
@@ -441,7 +441,7 @@ public class AuthManagerImplTest extends BaseTest {
 
     }
     
-    @Test
+    //@Test
     public void TestIsSystemAdmin() {
         auth.isSystemAdmin(10);
     }
