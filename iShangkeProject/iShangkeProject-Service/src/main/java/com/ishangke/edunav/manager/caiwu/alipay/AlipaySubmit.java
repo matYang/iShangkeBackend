@@ -44,7 +44,7 @@ public class AlipaySubmit {
         sbHtml.append("<input type=\"hidden\" name=\"sign_type\" value=\"" + AlipayConfig.sign_type + "\"/>");
 
         // submit按钮控件请不要含有name属性
-        sbHtml.append("<input type=\"submit\" value=\"支付宝GET\"></form>");
+        sbHtml.append("<input type=\"Submit\" value=\"submit\"></form>");
 
         sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
 
@@ -82,7 +82,7 @@ public class AlipaySubmit {
         sbHtml.append("<input type=\"hidden\" name=\"sign_type\" value=\"" + AlipayConfig.sign_type + "\"/>");
 
         // submit按钮控件请不要含有name属性
-        sbHtml.append("<input type=\"submit\" value=\"支付宝POST\"></form>");
+        sbHtml.append("<input type=\"Submit\" value=\"submit\"></form>");
 
         sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
 
