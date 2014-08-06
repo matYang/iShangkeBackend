@@ -244,6 +244,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException(userBo.getPhone() + " is already in db");
         }
         
+        authManager.closeCellVerificationSession(sessionBo.getAccountIdentifier());
         return initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
     }
 
@@ -433,7 +434,7 @@ public class UserManagerImpl implements UserManager {
         } catch (Throwable t) {
             throw new ManagerException("RecoverPassword failed for user: " + curUser.getId(), t);
         }
-        
+        authManager.closeForgetPasswordSession(curUser.getId());
         return UserConverter.toBo(curUser);
     }
 

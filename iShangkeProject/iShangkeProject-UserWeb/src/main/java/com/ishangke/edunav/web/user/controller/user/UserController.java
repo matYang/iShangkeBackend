@@ -113,7 +113,7 @@ public class UserController extends AbstractController{
     
     
     @RequestMapping(value = "/registration", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse register(@RequestBody UserVo userVo, @RequestBody SessionVo cellSessionVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse register(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -122,14 +122,16 @@ public class UserController extends AbstractController{
         if (loggedIn) {
             return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
         }
-        if (cellSessionVo.getAuthCode() == null) {
+
+        if (userVo.getAuthCode() == null) {
             return this.handleWebException(new ControllerException("验证码不能为空"), resp);
         }
         
-        UserBo userBo = UserConverter.fromModel(userVo);
+        SessionVo cellSessionVo = new SessionVo();
+        cellSessionVo.setAccountIdentifier(userVo.getPhone());
+        cellSessionVo.setAuthCode(userVo.getAuthCode());
         
-        cellSessionVo.setAccountIdentifier(userBo.getPhone());
-        cellSessionVo.setAuthCode(cellSessionVo.getAuthCode());
+        UserBo userBo = UserConverter.fromModel(userVo);
         SessionBo cellSessionBo = SessionConverter.fromMode(cellSessionVo);
 
         UserBo result = null;
