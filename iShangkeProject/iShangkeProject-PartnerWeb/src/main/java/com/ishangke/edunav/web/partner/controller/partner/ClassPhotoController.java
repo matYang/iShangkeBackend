@@ -77,15 +77,16 @@ public class ClassPhotoController extends AbstractController {
     public @ResponseBody
     JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) throws ControllerException {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
-        if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
-        }
+        // String permissionTag = this.getUrl(req);
+        // SessionBo authSessionBo = this.getSession(req);
+        //
+        // UserBo curUser = userFacade.authenticate(authSessionBo,
+        // permissionTag);
+        // int curId = curUser.getId();
+        // boolean loggedIn = curId > 0;
+        // if (!loggedIn) {
+        // throw new ControllerException("对不起，您尚未登录");
+        // }
 
         ClassPhotoVo classPhoto = new ClassPhotoVo();
 
