@@ -139,7 +139,16 @@ public class UserController extends AbstractController{
             result = userFacade.registerUser(userBo, cellSessionBo, permissionTag); 
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        if (result.getAuthCode() == null) {
+            throw new ControllerException("Session创建失败");
+        }
+        SessionBo newSession = new SessionBo();
+        newSession.setId(result.getId());
+        newSession.setAccountIdentifier(result.getPhone());
+        newSession.setAuthCode(result.getAuthCode());
+        this.openSession(newSession, false, req, resp);
+        
         responseVo = UserConverter.toModel(result);
         return responseVo;
     }

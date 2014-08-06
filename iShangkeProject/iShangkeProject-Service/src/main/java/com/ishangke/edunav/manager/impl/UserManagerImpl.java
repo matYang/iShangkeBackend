@@ -92,6 +92,7 @@ public class UserManagerImpl implements UserManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
         userEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        userEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         userEntity.setLastLoginTime(DateUtility.getCurTimeInstance());
         userEntity.setEnabled(0);
         userEntity.setDeleted(0);
@@ -244,8 +245,11 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException(userBo.getPhone() + " is already in db");
         }
         
+        UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
         authManager.closeCellVerificationSession(sessionBo.getAccountIdentifier());
-        return initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
+        String authCode = authManager.openAuthSession(resultUser.getId());
+        resultUser.setAuthCode(authCode);
+        return resultUser;
     }
 
     @Override
