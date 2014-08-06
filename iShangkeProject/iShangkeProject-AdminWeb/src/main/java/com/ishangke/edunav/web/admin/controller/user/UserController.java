@@ -26,6 +26,7 @@ import com.ishangke.edunav.web.model.PasswordVo;
 import com.ishangke.edunav.web.model.SessionVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
+import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
 @RequestMapping("/a-api/v2/user")
@@ -34,8 +35,8 @@ public class UserController extends AbstractController{
     @Autowired
     UserFacade userFacade;
     
-    @RequestMapping(value = "/login/phone", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody UserVo login(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
+    @RequestMapping(value = "/login/reference", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody JsonResponse login(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -45,10 +46,10 @@ public class UserController extends AbstractController{
         boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
         
         if (loggedIn) {
-            throw new ControllerException("请先登出之前的账号");
+            this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
         }
         
-        authSessionBo = userFacade.loginByPhone(LoginConverter.fromModel(loginVo), permissionTag);
+        authSessionBo = userFacade.loginByReference(LoginConverter.fromModel(loginVo), permissionTag);
         if (authSessionBo.getId() > 0) {
             this.openSession(authSessionBo, remember, req, resp);
         }
