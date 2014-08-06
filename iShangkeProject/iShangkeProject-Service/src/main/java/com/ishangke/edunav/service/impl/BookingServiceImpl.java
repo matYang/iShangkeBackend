@@ -61,6 +61,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
             throw exception;
@@ -85,6 +86,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
             throw exception;
@@ -118,6 +120,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
             throw exception;
@@ -151,6 +154,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
             throw exception;
@@ -184,6 +188,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
             throw exception;
@@ -253,6 +258,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.BOOKING_CHANGE_STATUS_TO_PAYED_ERROR);
             exception.setMessageKey(ManagerErrorCode.BOOKING_CHANGE_STATUS_TO_PAYED_ERROR_KEY);
             throw exception;
@@ -266,6 +272,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ALIPAY_VERIFY_ERROR);
             exception.setMessageKey(ManagerErrorCode.ALIPAY_VERIFY_ERROR_KEY);
             throw exception;
@@ -279,6 +286,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR);
             exception.setMessageKey(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR_KEY);
             throw exception;
@@ -516,6 +524,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR_KEY);
             throw exception;
@@ -539,6 +548,7 @@ public class BookingServiceImpl implements BookingService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR);
             exception.setMessageKey(ManagerErrorCode.ORDER_CREATEBYUSER_ERROR_KEY);
             throw exception;

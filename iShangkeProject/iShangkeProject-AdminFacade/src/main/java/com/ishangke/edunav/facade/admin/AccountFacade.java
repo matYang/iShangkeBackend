@@ -45,7 +45,7 @@ public class AccountFacade {
             result = serviceClient.exchangeCash(accountBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class AccountFacade {
             result = serviceClient.queryAccount(accountBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -79,7 +79,7 @@ public class AccountFacade {
             result = serviceClient.queryAccountHistory(accountHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -96,7 +96,7 @@ public class AccountFacade {
             result = serviceClient.createCoupon(couponBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -113,7 +113,7 @@ public class AccountFacade {
             result = serviceClient.queryCoupon(couponBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -130,7 +130,7 @@ public class AccountFacade {
             result = serviceClient.queryCouponHistory(couponHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -147,7 +147,7 @@ public class AccountFacade {
             result = serviceClient.exchangeCoupon(creditBo, couponBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class AccountFacade {
             result = serviceClient.exchangeAccount(creditBo, accountBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -181,7 +181,7 @@ public class AccountFacade {
             result = serviceClient.queryCredit(creditBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -198,7 +198,7 @@ public class AccountFacade {
             result = serviceClient.queryCreditHistory(creditHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -215,7 +215,7 @@ public class AccountFacade {
             result = serviceClient.createWithdraw(withdrawBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -232,7 +232,7 @@ public class AccountFacade {
             result = serviceClient.updateWithdraw(withdrawBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -249,7 +249,7 @@ public class AccountFacade {
             result = serviceClient.deleteWithdraw(withdrawBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -266,7 +266,7 @@ public class AccountFacade {
             result = serviceClient.queryWithdraw(withdrawBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -283,7 +283,7 @@ public class AccountFacade {
             result = serviceClient.createContact(contactBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -300,7 +300,7 @@ public class AccountFacade {
             result = serviceClient.updateContact(contactBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -317,7 +317,7 @@ public class AccountFacade {
             result = serviceClient.deleteContact(contactBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -334,7 +334,7 @@ public class AccountFacade {
             result = serviceClient.queryContact(contactBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -351,7 +351,7 @@ public class AccountFacade {
             result = serviceClient.queryCouponById(id, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -368,7 +368,7 @@ public class AccountFacade {
             result = serviceClient.activateCoupon(couponBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }

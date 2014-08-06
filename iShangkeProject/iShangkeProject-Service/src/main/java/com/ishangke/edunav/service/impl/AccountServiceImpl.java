@@ -84,6 +84,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACCOUNT_EXCHANGECASH_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACCOUNT_EXCHANGECASH_ERROR_KEY);
             throw exception;
@@ -118,6 +119,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACCOUONT_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -152,6 +154,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACCOUNT_QUERYHISTORY_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACCOUNT_QUERYHISTORY_ERROR_KEY);
             throw exception;
@@ -182,6 +185,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COUPON_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_CREATE_ERROR_KEY);
             throw exception;
@@ -207,6 +211,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COUPON_ACTIVATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_ACTIVATE_ERROR_KEY);
             throw exception;
@@ -241,6 +246,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COUPON_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -276,6 +282,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR);
             exception.setMessageKey(ManagerErrorCode.COUPON_QUERYHISTORY_ERROR_KEY);
             throw exception;
@@ -306,6 +313,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CREDIT_EXCHANGE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CREDIT_EXCHANGE_ERROR_KEY);
             throw exception;
@@ -332,6 +340,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR);
             exception.setMessageKey(ManagerErrorCode.CREDIT_EXCHANGEACCOUNT_ERROR_KEY);
             throw exception;
@@ -366,6 +375,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CREDIT_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CREDIT_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -401,6 +411,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR);
             exception.setMessageKey(ManagerErrorCode.CREDIT_QUERYHISTORY_ERROR_KEY);
             throw exception;
@@ -431,6 +442,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.WITHDRAW_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.WITHDRAW_CREATE_ERROR_KEY);
             throw exception;
@@ -456,6 +468,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.WITHDRAW_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.WITHDRAW_UPDATE_ERROR_KEY);
             throw exception;
@@ -481,6 +494,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.WITHDRAW_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.WITHDRAW_DELETE_ERROR_KEY);
             throw exception;
@@ -515,6 +529,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.WITHDRAW_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.WITHDRAW_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -545,6 +560,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONTACT_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONTACT_CREATE_ERROR_KEY);
             throw exception;
@@ -570,6 +586,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONTACT_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONTACT_UPDATE_ERROR_KEY);
             throw exception;
@@ -595,6 +612,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONTACT_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONTACT_DELETE_ERROR_KEY);
             throw exception;
@@ -630,6 +648,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONTACT_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -654,6 +673,7 @@ public class AccountServiceImpl implements AccountService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONTACT_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
             throw exception;

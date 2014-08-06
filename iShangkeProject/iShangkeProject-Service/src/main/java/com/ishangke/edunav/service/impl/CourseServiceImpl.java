@@ -63,6 +63,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -86,6 +87,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -114,6 +116,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -137,6 +140,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -161,6 +165,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -193,6 +198,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -223,6 +229,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -243,6 +250,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -266,6 +274,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -289,6 +298,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -312,6 +322,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -344,6 +355,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;
@@ -367,6 +379,7 @@ public class CourseServiceImpl implements CourseService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
             throw exception;

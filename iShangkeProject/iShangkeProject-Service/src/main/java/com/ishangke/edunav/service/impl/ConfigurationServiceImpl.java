@@ -35,6 +35,7 @@ public class ConfigurationServiceImpl implements ConfigurationService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONFIGURATION_GETBYNAME_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONFIGURATION_GETBYNAME_ERROR_KEY);
             throw exception;
@@ -57,6 +58,7 @@ public class ConfigurationServiceImpl implements ConfigurationService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CONFIGURATION_LISTALL_ERROR);
             exception.setMessageKey(ManagerErrorCode.CONFIGURATION_LISTALL_ERROR_KEY);
             throw exception;

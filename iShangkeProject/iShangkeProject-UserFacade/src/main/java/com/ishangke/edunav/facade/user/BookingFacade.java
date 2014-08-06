@@ -34,7 +34,7 @@ public class BookingFacade {
             result = serviceClient.createBookingByUser(bookingBo, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ public class BookingFacade {
             result = serviceClient.transformBookingStatus(bookingBo, operation, userBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class BookingFacade {
             result = serviceClient.queryBooking(bookingBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -85,7 +85,7 @@ public class BookingFacade {
             result = serviceClient.queryHistory(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -102,7 +102,7 @@ public class BookingFacade {
             result = serviceClient.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -119,7 +119,7 @@ public class BookingFacade {
             result = serviceClient.changeBookingStatusToPayed(orderId);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -136,7 +136,7 @@ public class BookingFacade {
             result = serviceClient.verify(notify_id);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -153,7 +153,7 @@ public class BookingFacade {
             result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -170,7 +170,7 @@ public class BookingFacade {
            result = serviceClient.createOrderByUser(orderBo, userBo, PermissionCache.getTag(permissionTag));
        } catch (BusinessExceptionBo e) {
            e.printStackTrace();
-           throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
        } catch (TException e) {
            e.printStackTrace();
        }
@@ -187,7 +187,7 @@ public class BookingFacade {
            result = serviceClient.queryOrderById(orderBo, userBo, PermissionCache.getTag(permissionTag));
        } catch (BusinessExceptionBo e) {
            e.printStackTrace();
-           throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
        } catch (TException e) {
            e.printStackTrace();
        }

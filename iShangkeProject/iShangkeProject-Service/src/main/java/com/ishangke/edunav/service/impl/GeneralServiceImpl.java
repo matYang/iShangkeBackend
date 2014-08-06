@@ -63,6 +63,7 @@ public class GeneralServiceImpl implements GeneralService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CATEGORY_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CATEGORY_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -86,6 +87,7 @@ public class GeneralServiceImpl implements GeneralService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.LOCATION_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.LOCATION_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -109,6 +111,7 @@ public class GeneralServiceImpl implements GeneralService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CIRCLE_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CIRCLE_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -132,6 +135,7 @@ public class GeneralServiceImpl implements GeneralService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SCHOOL_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.SCHOOL_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -155,6 +159,7 @@ public class GeneralServiceImpl implements GeneralService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CAREER_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CAREER_NOTFOUND_ERROR_KEY);
             throw exception;
