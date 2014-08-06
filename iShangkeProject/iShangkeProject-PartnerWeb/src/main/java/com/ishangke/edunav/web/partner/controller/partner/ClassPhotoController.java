@@ -34,6 +34,7 @@ import com.ishangke.edunav.web.model.ClassPhotoVo;
 import com.ishangke.edunav.web.model.pageview.ClassPhotoPageViewVo;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
 import com.ishangke.edunav.web.response.EmptyResponse;
+import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
 @RequestMapping("/p-api/v2/classPhoto")
@@ -46,7 +47,7 @@ public class ClassPhotoController extends AbstractController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    ClassPhotoPageViewVo queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    JsonResponse queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -54,14 +55,18 @@ public class ClassPhotoController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         ClassPhotoPageViewBo pageViewBo = null;
         ClassPhotoPageViewVo pageViewVo = null;
 
-        pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo),
-                permissionTag);
+        try {
+            pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo),
+                    permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         pageViewVo = ClassPhotoPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
@@ -70,7 +75,7 @@ public class ClassPhotoController extends AbstractController {
     // return the ClassPhotoVo with img url in it
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody
-    ClassPhotoVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
+    JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) throws ControllerException {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -103,14 +108,15 @@ public class ClassPhotoController extends AbstractController {
                 classPhoto.setImgUrl(imgUrl);
 
             } catch (Exception e) {
-                throw new ControllerException("ClassPhoto 上传失败");
+
+                return this.handleWebException(new ControllerException("ClassPhoto 上传失败"), resp);
             } finally {
                 if (serverFile != null) {
                     serverFile.delete();
                 }
             }
         } else {
-            throw new ControllerException("ClassPhoto file 为空");
+            return this.handleWebException(new ControllerException("ClassPhoto file 为空"), resp);
         }
 
         return classPhoto;
@@ -118,7 +124,7 @@ public class ClassPhotoController extends AbstractController {
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    ClassPhotoVo create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    JsonResponse create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -128,19 +134,24 @@ public class ClassPhotoController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
 
-        ClassPhotoBo responseClassPhoto = partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
+        ClassPhotoBo responseClassPhoto = null;
+        try {
+            responseClassPhoto = partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    ClassPhotoVo update(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    JsonResponse update(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -150,19 +161,24 @@ public class ClassPhotoController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
 
-        ClassPhotoBo responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
+        ClassPhotoBo responseClassPhoto = null;
+        try {
+            responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         responseVo = ClassPhotoConverter.toModel(responseClassPhoto);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public @ResponseBody
-    EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -170,7 +186,7 @@ public class ClassPhotoController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();

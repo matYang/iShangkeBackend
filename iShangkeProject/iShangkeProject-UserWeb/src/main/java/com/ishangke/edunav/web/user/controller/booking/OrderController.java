@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +37,7 @@ public class OrderController extends AbstractController {
     String test(HttpServletRequest request) {
         int userId = 3;
         int courseId = 1;
-        double price = 0.01;
+        double price = 0.02;
 
         UserVo user = new UserVo();
         user.setId(userId);
@@ -57,7 +56,12 @@ public class OrderController extends AbstractController {
         OrderBo order = new OrderBo();
         order.setBookingId(booking.getId());
         order = bookingFacade.createOrderByUser(order, userBo, "GET/api/v2/course");
-        return alipayFacade.buildFormForGet("NANJINGAISHANGKETEST", order.getId() + "", price + "");
+        
+        String out_trade_no = String.valueOf(order.getId());
+        String total_fee = String.valueOf(price);
+        
+        return alipayFacade.buildFormForGet("NANJINGAISHANGKETEST", out_trade_no,  total_fee);
+
     }
 
 }

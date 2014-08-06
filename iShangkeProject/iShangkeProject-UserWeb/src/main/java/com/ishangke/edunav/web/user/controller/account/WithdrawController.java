@@ -49,11 +49,11 @@ public class WithdrawController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
         }
         
         WithdrawPageViewBo pageViewBo = null;
@@ -77,11 +77,11 @@ public class WithdrawController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
+            return this.handleWebException(new ControllerException("对不起，您只能创建自己的提款信息"), resp);
         }
         
         
@@ -103,11 +103,11 @@ public class WithdrawController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
+            return this.handleWebException(new ControllerException("对不起，您只能创建自己的提款信息"), resp);
         }
         
         
@@ -127,7 +127,7 @@ public class WithdrawController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
         WithdrawVo withdrawVo = new WithdrawVo();

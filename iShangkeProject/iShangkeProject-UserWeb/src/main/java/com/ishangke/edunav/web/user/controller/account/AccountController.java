@@ -50,17 +50,20 @@ public class AccountController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (accountVo.getId() == null || accountVo.getId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的账户信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的账户信息"), resp);
         }
         
         AccountPageViewBo pageViewBo = null;
         AccountPageViewVo pageViewVo = null;
-        
-        pageViewBo = accountFacade.queryAccount(AccountConverter.fromModel(accountVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = accountFacade.queryAccount(AccountConverter.fromModel(accountVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);            
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         pageViewVo = AccountPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
@@ -75,17 +78,20 @@ public class AccountController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (accountHistoryVo.getUserId() == null || accountHistoryVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的账户信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的账户信息"), resp);
         }
         
         AccountHistoryPageViewBo pageViewBo = null;
         AccountHistoryPageViewVo pageViewVo = null;
-        
-        pageViewBo = accountFacade.queryAccountHistory(AccountHistoryConverter.fromModel(accountHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = accountFacade.queryAccountHistory(AccountHistoryConverter.fromModel(accountHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);            
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         pageViewVo = AccountHistoryPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;

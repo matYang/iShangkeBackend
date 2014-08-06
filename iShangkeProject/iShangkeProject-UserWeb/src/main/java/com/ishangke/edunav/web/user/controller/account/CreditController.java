@@ -48,17 +48,21 @@ public class CreditController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (creditVo.getId() == null || creditVo.getId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
         }
         
         CreditPageViewBo pageViewBo = null;
         CreditPageViewVo pageViewVo = null;
+        try {
+            pageViewBo = accountFacade.queryCredit(CreditConverter.fromModel(creditVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         
-        pageViewBo = accountFacade.queryCredit(CreditConverter.fromModel(creditVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CreditPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
@@ -73,17 +77,21 @@ public class CreditController extends AbstractController{
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
         if (creditHistoryVo.getUserId() == null || creditHistoryVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
         }
         
         CreditHistoryPageViewBo pageViewBo = null;
         CreditHistoryPageViewVo pageViewVo = null;
+        try {
+            pageViewBo = accountFacade.queryCreditHistory(CreditHistoryConverter.fromModel(creditHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         
-        pageViewBo = accountFacade.queryCreditHistory(CreditHistoryConverter.fromModel(creditHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CreditHistoryPageViewConverter.toModel(pageViewBo);
         
         return pageViewVo;
