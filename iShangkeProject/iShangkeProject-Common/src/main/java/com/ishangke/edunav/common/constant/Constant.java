@@ -170,4 +170,10 @@ public class Constant {
     public static final String CATEGORYCACHE = "CATEGORYCACHE";
     public static final int CATEGORYCACHETIME = 29 * 24 * 60 * 60;
     public static final int CATEGORYCACHEMAXLENGTH = 6;
+    
+    //order相关
+    public static final int ORDERUNPAYED = 0;
+    public static final int ORDERPAYEDSUCCESS = 1;
+    public static final int ORDERPAYEDFAILED = 2;
+    public static final int ORDEROPTPAY = 0;
 }
