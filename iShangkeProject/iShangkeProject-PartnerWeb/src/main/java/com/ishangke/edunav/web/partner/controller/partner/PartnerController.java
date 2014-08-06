@@ -275,6 +275,7 @@ public class PartnerController extends AbstractController {
 
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
+                partnerVo.setId(partnerId);
                 PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
                 partnerFacade.updatePartner(partnerBo, userBo, permissionTag);
 

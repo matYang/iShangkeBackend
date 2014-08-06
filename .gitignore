@@ -38,3 +38,4 @@ iShangkeProject/iShangkeProject-AdminWeb/.settings/org.eclipse.wst.common.compon
 iShangkeProject/iShangkeProject-PartnerWeb/.settings/org.eclipse.wst.common.component
 iShangkeProject/iShangkeProject-PartnerFacade/.settings/org.eclipse.wst.common.component
 .gitignore
+log
