@@ -258,27 +258,9 @@ public class UserFacade {
 
         return result;
     }
-
-    public UserBo recoverPassword(PasswordBo passwordBo, String permissionTag) {
-        UserBo result = null;
-
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
-
-        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
-            Client serviceClient = factory.getServiceClient();
-            result = serviceClient.recoverPassword(passwordBo, PermissionCache.getTag(permissionTag));
-        } catch (BusinessExceptionBo e) {
-            e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
-        } catch (TException e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
-    public UserBo changePassword(PasswordBo passwordBo, String permissionTag) {
-        UserBo result = null;
+    
+    public SessionBo changePassword(PasswordBo passwordBo, String permissionTag) {
+        SessionBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 

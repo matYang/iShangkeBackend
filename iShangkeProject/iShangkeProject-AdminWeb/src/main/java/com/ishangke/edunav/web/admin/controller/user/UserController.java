@@ -140,32 +140,7 @@ public class UserController extends AbstractController{
         
         return new EmptyResponse();
     }
-    
-    
-    @RequestMapping(value = "/forgetPassword", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody UserVo recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
-        UserVo responseVo = null;
-        
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-        boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
-        if (loggedIn) {
-            throw new ControllerException("对不起，您已经登录了");
-        }
-        if (passwordVo.getAccountIdentifier() == null) {
-            throw new ControllerException("手机号码不能为空");
-        }
-        if (passwordVo.getNewPassword() == null) {
-            throw new ControllerException("新密码不能为空");
-        }
-        if (passwordVo.getAuthCode() == null) {
-            throw new ControllerException("验证码不能为空");
-        }
-        
-        UserBo result = userFacade.recoverPassword(PasswordConverter.fromModel(passwordVo), permissionTag);
-        responseVo = UserConverter.toModel(result);
-        return responseVo;
-    }
+
     
     
     @RequestMapping(value = "/{id}/changePassword", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
@@ -189,7 +164,8 @@ public class UserController extends AbstractController{
         }
 
         
-        userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        SessionBo newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        this.openSession(newSession, false, req, resp);
         return new EmptyResponse();
     }
     

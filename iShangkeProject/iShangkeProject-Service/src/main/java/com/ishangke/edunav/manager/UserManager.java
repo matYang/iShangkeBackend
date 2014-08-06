@@ -69,10 +69,10 @@ public interface UserManager {
     SessionBo openForgetPasswordSession(UserBo userBo);
     
     
-    UserBo recoverPassword(PasswordBo passwordBo);
+    SessionBo recoverPassword(PasswordBo passwordBo);
     
     
-    UserBo changePassword(PasswordBo passwordBo);
+    SessionBo changePassword(PasswordBo passwordBo);
 
 
 

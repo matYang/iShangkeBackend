@@ -177,9 +177,17 @@ public class UserController extends AbstractController{
             return this.handleWebException(new ControllerException("验证码不能为空"), resp);
         }
         
+        SessionBo newSession = null;
         UserBo result = null;
         try {
-            result = userFacade.recoverPassword(PasswordConverter.fromModel(passwordVo), permissionTag); 
+            newSession = userFacade.recoverPassword(PasswordConverter.fromModel(passwordVo), permissionTag); 
+            if (newSession != null && newSession.getId() > 0) {
+                result = userFacade.authenticate(newSession, permissionTag);
+                this.openSession(newSession, false, req, resp);
+            }
+            else {
+                throw new ControllerException("找回密码出现错误，创建新Session时失败");
+            }
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }  
@@ -209,7 +217,8 @@ public class UserController extends AbstractController{
         }
 
         
-        userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        SessionBo newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        this.openSession(newSession, false, req, resp);
         return new EmptyResponse();
     }
     

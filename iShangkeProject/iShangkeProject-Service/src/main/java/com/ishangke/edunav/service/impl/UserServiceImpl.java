@@ -327,7 +327,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo recoverPassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public SessionBo recoverPassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.recoverPassword(passwordBo);
         } catch (ManagerException e) {
@@ -340,7 +340,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo changePassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public SessionBo changePassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(passwordBo.getId(), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", passwordBo.getId(), permissionTag,

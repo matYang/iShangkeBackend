@@ -54,12 +54,12 @@ service UserService {
     /**
      *  本方法找回用户密码。<br>
      */
-    user.UserBo recoverPassword(1: user.PasswordBo passwordBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.SessionBo recoverPassword(1: user.PasswordBo passwordBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 	/**
      *  本方法更改用户密码。<br>
      */
-    user.UserBo changePassword(1: user.PasswordBo passwordBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.SessionBo changePassword(1: user.PasswordBo passwordBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
 
 

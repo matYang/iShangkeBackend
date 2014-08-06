@@ -259,8 +259,8 @@ public class UserFacade {
         return result;
     }
 
-    public UserBo recoverPassword(PasswordBo passwordBo, String permissionTag) {
-        UserBo result = null;
+    public SessionBo recoverPassword(PasswordBo passwordBo, String permissionTag) {
+        SessionBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 
@@ -277,8 +277,8 @@ public class UserFacade {
         return result;
     }
 
-    public UserBo changePassword(PasswordBo passwordBo, String permissionTag) {
-        UserBo result = null;
+    public SessionBo changePassword(PasswordBo passwordBo, String permissionTag) {
+        SessionBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 

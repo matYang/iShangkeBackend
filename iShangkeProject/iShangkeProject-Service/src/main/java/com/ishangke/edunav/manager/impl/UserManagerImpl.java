@@ -402,7 +402,7 @@ public class UserManagerImpl implements UserManager {
     
 
     @Override
-    public UserBo recoverPassword(PasswordBo passwordBo) {
+    public SessionBo recoverPassword(PasswordBo passwordBo) {
         if (passwordBo == null ||  passwordBo.getAccountIdentifier() == null || passwordBo.getAuthCode() == null || passwordBo.getNewPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -434,12 +434,27 @@ public class UserManagerImpl implements UserManager {
         } catch (Throwable t) {
             throw new ManagerException("RecoverPassword failed for user: " + curUser.getId(), t);
         }
+        
+        //close the forget password session
         authManager.closeForgetPasswordSession(curUser.getId());
-        return UserConverter.toBo(curUser);
+        //log all clients out for security
+        authManager.closeAllAuthSession(curUser.getId());
+        //clear AC so that user may login again, should he/she has to
+        authManager.success(curUser.getPhone());
+        
+        //log user in with a brand new session
+        //return sessionBo here so cookie can be set with new authCode
+        String authCode = authManager.openAuthSession(curUser.getId());
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier(curUser.getPhone());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
+        
     }
 
     @Override
-    public UserBo changePassword(PasswordBo passwordBo) {
+    public SessionBo changePassword(PasswordBo passwordBo) {
         if (passwordBo == null ||  passwordBo.getId() <= 0 || passwordBo.getNewPassword() == null || passwordBo.getOldPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -465,7 +480,17 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("ChangePassword failed for user: " + curUser.getId(), t);
         }
         
-        return UserConverter.toBo(curUser);
+        //log all clients out for security
+        authManager.closeAllAuthSession(curUser.getId());
+        
+        //log user in with a brand new session
+        //return sessionBo here so cookie can be set with new authCode
+        String authCode = authManager.openAuthSession(curUser.getId());
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setId(curUser.getId());
+        sessionBo.setAccountIdentifier(curUser.getPhone());
+        sessionBo.setAuthCode(authCode);
+        return sessionBo;
     }
 
 

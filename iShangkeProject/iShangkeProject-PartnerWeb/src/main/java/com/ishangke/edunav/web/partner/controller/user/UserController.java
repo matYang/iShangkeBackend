@@ -113,7 +113,8 @@ public class UserController extends AbstractController{
         }
 
         
-        userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        SessionBo newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        this.openSession(newSession, false, req, resp);
         return new EmptyResponse();
     }
     

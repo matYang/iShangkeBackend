@@ -113,9 +113,9 @@ public class PseudoController {
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
                 if (SessionSetting.COOKIE_KEY.equals(cookies[i].getName())) {
-                    cookies[i].setValue("");
                     cookies[i].setPath("/");
                     cookies[i].setMaxAge(0);
+                    cookies[i].setValue("");
                     resp.addCookie(cookies[i]);
                 }
             }
