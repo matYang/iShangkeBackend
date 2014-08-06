@@ -27,8 +27,9 @@ public class AbstractController extends PseudoController{
             ControllerException faultException = (ControllerException) exception;
             int errorCode = faultException.getErrorCode();
             String msgKey = faultException.getMsgKey();
+            String message = faultException.getMessage();
             resp.setStatus(400);
-            return new JsonResponse(errorCode, msgKey);
+            return new JsonResponse(errorCode, msgKey, message);
         } else {
             return new JsonResponse();
         }
