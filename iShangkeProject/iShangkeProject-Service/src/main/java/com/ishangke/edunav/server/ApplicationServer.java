@@ -24,7 +24,6 @@ import com.ishangke.edunav.manager.common.Flag;
 import com.ishangke.edunav.manager.common.ServiceConstants;
 import com.ishangke.edunav.manager.common.ServiceEnum;
 import com.ishangke.edunav.manager.exception.ManagerException;
-import com.ishangke.edunav.manager.transform.Transform;
 import com.ishangke.edunav.service.impl.ConfigurationServiceImpl;
 import com.ishangke.edunav.util.ThriftServer;
 
@@ -45,7 +44,7 @@ public class ApplicationServer {
 
     @Autowired
     private ConfigurationManager configManager;
-
+    
     public void loadPermissionCache() {
         LOGGER.info("Load permissions to cache.");
 
@@ -93,6 +92,13 @@ public class ApplicationServer {
     }
 
     public void start() {
+        //test the memcached
+        try {
+            cacheManager.set("TestCache", 10, "TestTest").get();
+        } catch (Exception e) {
+            throw new RuntimeException("Memcached failed", e);
+        }
+        
         loadPermissionCache();
         //loadCategoryCache();
         startConfigurationService();
