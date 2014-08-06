@@ -58,7 +58,15 @@ public class CourseController extends AbstractController {
     UserFacade userFacade;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody JsonResponse importCourses(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
+    public @ResponseBody
+    JsonResponse importCourses(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
+        // Need a User
+        int userId = 3;
+        UserVo user = new UserVo();
+        user.setId(userId);
+        UserBo userBo = UserConverter.fromModel(user);
+        String permissionTag = "GET/api/v2/course";
+
         JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
             return this.handleWebException(new ControllerException("上传文件为空"), resp);
@@ -123,7 +131,7 @@ public class CourseController extends AbstractController {
                         course = (CourseBo) rs.getBoFromMap(kvmap);
                         course.setLastModifyTime(DateUtility.getCurTime());
                         course.setCreateTime(DateUtility.getCurTime());
-                        // TODO Add course to DB
+                        courseFacade.createCourse(course, userBo, permissionTag);
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
                         return this.handleWebException(new ControllerException("导入出错"), resp);
@@ -138,7 +146,8 @@ public class CourseController extends AbstractController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -153,17 +162,19 @@ public class CourseController extends AbstractController {
         CoursePageViewVo pageViewVo = null;
 
         try {
-            pageViewBo = courseFacade.queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+            pageViewBo = courseFacade
+                    .queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -183,14 +194,15 @@ public class CourseController extends AbstractController {
             responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = CourseConverter.toModel(responseBo);
 
         return responseVo;
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse create(@RequestBody CourseVo courseVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse create(@RequestBody CourseVo courseVo, HttpServletRequest req, HttpServletResponse resp) {
         CourseVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -210,13 +222,14 @@ public class CourseController extends AbstractController {
             responseCourse = courseFacade.createCourse(targetCourse, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = CourseConverter.toModel(responseCourse);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse transformCourse(@RequestBody CourseVo course, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse transformCourse(@RequestBody CourseVo course, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
         CourseVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -240,7 +253,7 @@ public class CourseController extends AbstractController {
             courseBo = courseFacade.transformCourseStatus(CourseConverter.fromModel(course), operation, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = CourseConverter.toModel(courseBo);
         return responseVo;
     }

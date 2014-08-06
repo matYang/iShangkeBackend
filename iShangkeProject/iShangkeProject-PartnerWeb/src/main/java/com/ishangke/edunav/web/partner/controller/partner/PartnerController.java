@@ -61,7 +61,15 @@ public class PartnerController extends AbstractController {
     PartnerFacade partnerFacade;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
+    public @ResponseBody
+    JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
+        // Need a User
+        int userId = 3;
+        UserVo user = new UserVo();
+        user.setId(userId);
+        UserBo userBo = UserConverter.fromModel(user);
+        String permissionTag = "GET/api/v2/course";
+
         JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
             return this.handleWebException(new ControllerException("上传文件为空"), resp);
@@ -126,7 +134,7 @@ public class PartnerController extends AbstractController {
                         partner = (PartnerBo) rs.getBoFromMap(kvmap);
                         partner.setLastModifyTime(DateUtility.getCurTime());
                         partner.setCreateTime(DateUtility.getCurTime());
-                        // TODO Add partner to DB
+                        partnerFacade.createPartner(partner, userBo, permissionTag);
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
                         return this.handleWebException(new ControllerException("导入出错"), resp);
@@ -141,7 +149,8 @@ public class PartnerController extends AbstractController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -156,7 +165,8 @@ public class PartnerController extends AbstractController {
         PartnerPageViewVo pageViewVo = null;
 
         try {
-            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
+            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser,
+                    permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -167,25 +177,27 @@ public class PartnerController extends AbstractController {
 
     // get partner by id is open data, no authentication
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         PartnerVo partnerVo = new PartnerVo();
         partnerVo.setId(id);
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
         try {
-            responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);            
+            responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         responseVo = PartnerConverter.toModel(responseBo);
-        
+
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -201,7 +213,7 @@ public class PartnerController extends AbstractController {
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
         targetPartner.setId(partnerId);
 
-        PartnerBo responsePartner  = null;
+        PartnerBo responsePartner = null;
         try {
             responsePartner = partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
         } catch (ControllerException c) {
@@ -212,10 +224,24 @@ public class PartnerController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.POST)
-    public @ResponseBody JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req,
+            HttpServletResponse resp) {
+
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
+
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {
+            File serverFile = null;
             try {
                 String imgUrl = "";
 
@@ -225,20 +251,26 @@ public class PartnerController extends AbstractController {
                     dir.mkdirs();
                 }
 
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
                 BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
                 ImageIO.write(bufferedImage, "png", serverFile);
 
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
+                PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
+                partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
 
             } catch (Exception e) {
+
                 return this.handleWebException(new ControllerException("PartnerLogo 上传失败"), resp);
+            } finally {
+                if (serverFile != null) {
+                    serverFile.delete();
+                }
             }
         } else {
             return this.handleWebException(new ControllerException("PartnerLogo file 为空"), resp);
         }
         return partnerVo;
     }
-
 }
