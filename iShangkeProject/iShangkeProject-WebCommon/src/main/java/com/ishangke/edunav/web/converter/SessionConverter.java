@@ -4,14 +4,16 @@ import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.web.model.SessionVo;
 
 public class SessionConverter {
-    public static SessionBo fromMode(SessionVo vo) {
+    public static SessionBo fromModel(SessionVo vo) {
         SessionBo bo = new SessionBo();
         if (vo == null) {
             return null;
         }
         bo.setAccountIdentifier(vo.getAccountIdentifier());
         bo.setAuthCode(vo.getAuthCode());
-        bo.setId(vo.getId());
+        if (vo.getId() != null) {
+            bo.setId(vo.getId());
+        }
         return bo;
     }
     
