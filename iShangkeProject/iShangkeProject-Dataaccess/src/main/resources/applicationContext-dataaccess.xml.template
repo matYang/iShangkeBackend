@@ -17,7 +17,7 @@
     <property name="poolName" value="SQLPool" />
     <property name="maxLifetime" value="1800000" />
     <property name="autoCommit" value="true" />
-    <property name="maximumPoolSize" value="10" />
+    <property name="maximumPoolSize" value="50" />
     <property name="connectionTimeout" value="100000" />
     <!-- <property name="useUnicode" value="yes" /> -->
     <!-- <property name="characterEncoding" value="utf8" /> -->
