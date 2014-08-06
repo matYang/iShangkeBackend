@@ -66,6 +66,7 @@ public class AlipayIdController extends AbstractController {
                     
                     int orderId = Integer.parseInt(request.getParameter("out_trade_no"));
                     alipayFacade.changeBookingStatusToPayed(orderId);
+                 // Change the status of the order
                     return "redirect:http://usertest.ishangke.cn/alipay/alipay/success.html";
                 } else {
                     return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";
