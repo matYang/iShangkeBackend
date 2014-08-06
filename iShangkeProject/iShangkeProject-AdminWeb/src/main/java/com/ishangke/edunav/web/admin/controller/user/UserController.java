@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.commoncontract.model.UserPageViewBo;
 import com.ishangke.edunav.facade.admin.UserFacade;
 import com.ishangke.edunav.web.admin.controller.AbstractController;
+import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.LoginConverter;
+import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.PasswordConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
+import com.ishangke.edunav.web.converter.pageview.UserPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.LoginVo;
 import com.ishangke.edunav.web.model.PasswordVo;
 import com.ishangke.edunav.web.model.UserVo;
+import com.ishangke.edunav.web.model.pageview.UserPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
 
@@ -146,9 +151,10 @@ public class UserController extends AbstractController {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         // user module specific (and maybe partner?)
-        if (curId != id) {
-            return this.handleWebException(new ControllerException("对不起，您没有权限查看其他用户资料"), resp);
-        }
+        //admin 可以查看任何人的信息
+//        if (curId != id) {
+//            return this.handleWebException(new ControllerException("对不起，您没有权限查看其他用户资料"), resp);
+//        }
 
         UserVo queryUser = new UserVo();
         queryUser.setId(curId);
@@ -175,9 +181,10 @@ public class UserController extends AbstractController {
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        if (curId != id) {
-            return this.handleWebException(new ControllerException("对不起，您只能更新自己的用户信息"), resp);
-        }
+        //admin可以更新任何人的信息
+//        if (curId != id) {
+//            return this.handleWebException(new ControllerException("对不起，您只能更新自己的用户信息"), resp);
+//        }
 
         UserBo targetUser = UserConverter.fromModel(userVo);
         targetUser.setId(curId);
@@ -192,4 +199,51 @@ public class UserController extends AbstractController {
         return responseVo;
     }
 
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody JsonResponse createUser(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
+        UserVo responseVo = null;
+
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        UserBo responseUser = null;
+        try {
+            responseUser = userFacade.createUser(UserConverter.fromModel(userVo), curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
+        responseVo = UserConverter.toModel(responseUser);
+        return responseVo;
+    }
+    
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody JsonResponse queryUser(UserVo userVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+        UserPageViewVo responseVo = null;
+
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        UserPageViewBo responseUser = null;
+        try {
+            responseUser = userFacade.queryUser(UserConverter.fromModel(userVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
+        responseVo = UserPageViewConverter.toModel(responseUser);
+        return responseVo;
+    }
 }
