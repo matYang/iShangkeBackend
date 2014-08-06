@@ -84,7 +84,7 @@ public class UserController extends AbstractController{
             responseVo = new UserVo();
             responseVo.setId(-1);
         }
-        else {
+        else { 
             responseVo = UserConverter.toModel(userBo);
         }
         
