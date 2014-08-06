@@ -34,6 +34,7 @@ import com.ishangke.edunav.web.model.TeacherVo;
 import com.ishangke.edunav.web.model.pageview.TeacherPageViewVo;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
 import com.ishangke.edunav.web.response.EmptyResponse;
+import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
 @RequestMapping("/p-api/v2/teacher")
@@ -45,8 +46,7 @@ public class TeacherController extends AbstractController {
     UserFacade userFacade;
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    TeacherPageViewVo queryTeacher(TeacherVo teacherVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryTeacher(TeacherVo teacherVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -54,14 +54,17 @@ public class TeacherController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         TeacherPageViewBo pageViewBo = null;
         TeacherPageViewVo pageViewVo = null;
 
-        pageViewBo = partnerFacade
-                .queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        try {
+            pageViewBo = partnerFacade.queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         pageViewVo = TeacherPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
@@ -69,8 +72,7 @@ public class TeacherController extends AbstractController {
 
     // return the TeacherVo with img url in it
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody
-    TeacherVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
+    public @ResponseBody JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) {
         TeacherVo teacherVo = new TeacherVo();
 
@@ -92,18 +94,17 @@ public class TeacherController extends AbstractController {
                 teacherVo.setImgUrl(imgUrl);
 
             } catch (Exception e) {
-                throw new ControllerException("TeacherPhoto 上传失败");
+                return this.handleWebException(new ControllerException("TeacherPhoto 上传失败"), resp);
             }
         } else {
-            throw new ControllerException("TeacherPhoto file 为空");
+            return this.handleWebException(new ControllerException("TeacherPhoto file 为空"), resp);
         }
 
         return teacherVo;
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    TeacherVo create(@RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse create(@RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
         TeacherVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -113,19 +114,23 @@ public class TeacherController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
 
-        TeacherBo responseTeacher = partnerFacade.createTeacher(targetTeacher, curUser, permissionTag);
+        TeacherBo responseTeacher = null;
+        try {
+            responseTeacher = partnerFacade.createTeacher(targetTeacher, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         responseVo = TeacherConverter.toModel(responseTeacher);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    TeacherVo update(@RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
         TeacherVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -135,19 +140,23 @@ public class TeacherController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
 
-        TeacherBo responseTeacher = partnerFacade.updateTeacher(targetTeacher, curUser, permissionTag);
+        TeacherBo responseTeacher = null;
+        try {
+            responseTeacher = partnerFacade.updateTeacher(targetTeacher, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         responseVo = TeacherConverter.toModel(responseTeacher);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public @ResponseBody
-    EmptyResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -155,7 +164,7 @@ public class TeacherController extends AbstractController {
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
         TeacherVo teacherVo = new TeacherVo();

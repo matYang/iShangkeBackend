@@ -49,6 +49,7 @@ public class AlipayConfig {
     // return_url的域名不能写成http://localhost/js_jsp_utf8/return_url.jsp，否则会导致return_url执行无效
     //public static String return_url ="http://usertest.ishangke.cn/api/v2/alipay/alipay/return_Url";
     public static String return_url = "";
+
     // payment_type 默认为1
     public static String payment_type = "1";
 

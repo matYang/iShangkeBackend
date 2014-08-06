@@ -61,6 +61,7 @@ public class OrderController extends AbstractController {
         String total_fee = String.valueOf(price);
         
         return alipayFacade.buildFormForGet("NANJINGAISHANGKETEST", out_trade_no,  total_fee);
+
     }
 
 }
