@@ -72,9 +72,21 @@ public class TeacherController extends AbstractController {
     public @ResponseBody
     TeacherVo uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) {
+
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
+
         TeacherVo teacherVo = new TeacherVo();
 
         if (!file.isEmpty()) {
+            File serverFile = null;
             try {
                 String imgUrl = "";
 
@@ -84,7 +96,7 @@ public class TeacherController extends AbstractController {
                     dir.mkdirs();
                 }
 
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
                 BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
                 ImageIO.write(bufferedImage, "png", serverFile);
 
@@ -93,6 +105,10 @@ public class TeacherController extends AbstractController {
 
             } catch (Exception e) {
                 throw new ControllerException("TeacherPhoto 上传失败");
+            } finally {
+                if (serverFile != null) {
+                    serverFile.delete();
+                }
             }
         } else {
             throw new ControllerException("TeacherPhoto file 为空");

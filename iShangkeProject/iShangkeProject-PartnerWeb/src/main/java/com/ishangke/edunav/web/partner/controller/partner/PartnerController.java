@@ -63,6 +63,13 @@ public class PartnerController extends AbstractController {
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     JsonResponse importPartners(@RequestParam("file") MultipartFile file) throws ControllerException {
+        // Need a User
+        int userId = 3;
+        UserVo user = new UserVo();
+        user.setId(userId);
+        UserBo userBo = UserConverter.fromModel(user);
+        String permissionTag = "GET/api/v2/course";
+
         JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
             throw new ControllerException("上传文件为空");
@@ -127,7 +134,7 @@ public class PartnerController extends AbstractController {
                         partner = (PartnerBo) rs.getBoFromMap(kvmap);
                         partner.setLastModifyTime(DateUtility.getCurTime());
                         partner.setCreateTime(DateUtility.getCurTime());
-                        // TODO Add partner to DB
+                        partnerFacade.createPartner(partner, userBo, permissionTag);
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
                         throw new ControllerException("导入出错");
@@ -207,9 +214,21 @@ public class PartnerController extends AbstractController {
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.POST)
     public @ResponseBody
     PartnerVo uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
+
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
+
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {
+            File serverFile = null;
             try {
                 String imgUrl = "";
 
@@ -219,20 +238,25 @@ public class PartnerController extends AbstractController {
                     dir.mkdirs();
                 }
 
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
                 BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
                 ImageIO.write(bufferedImage, "png", serverFile);
 
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
+                PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
+                partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
 
             } catch (Exception e) {
                 throw new ControllerException("PartnerLogo 上传失败");
+            } finally {
+                if (serverFile != null) {
+                    serverFile.delete();
+                }
             }
         } else {
             throw new ControllerException("PartnerLogo file 为空");
         }
         return partnerVo;
     }
-
 }

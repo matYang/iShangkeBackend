@@ -60,6 +60,13 @@ public class CourseController extends AbstractController {
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     JsonResponse importCourses(@RequestParam("file") MultipartFile file) throws ControllerException {
+        // Need a User
+        int userId = 3;
+        UserVo user = new UserVo();
+        user.setId(userId);
+        UserBo userBo = UserConverter.fromModel(user);
+        String permissionTag = "GET/api/v2/course";
+
         JsonResponse result = new JsonResponse();
         if (file.isEmpty()) {
             throw new ControllerException("上传文件为空");
@@ -124,7 +131,7 @@ public class CourseController extends AbstractController {
                         course = (CourseBo) rs.getBoFromMap(kvmap);
                         course.setLastModifyTime(DateUtility.getCurTime());
                         course.setCreateTime(DateUtility.getCurTime());
-                        // TODO Add course to DB
+                        courseFacade.createCourse(course, userBo, permissionTag);
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
                         throw new ControllerException("导入出错");
