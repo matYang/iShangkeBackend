@@ -64,7 +64,7 @@ public class PartnerController extends AbstractController {
     public @ResponseBody
     JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
         // Need a User
-        int userId = 3;
+        int userId = 1;
         UserVo user = new UserVo();
         user.setId(userId);
         UserBo userBo = UserConverter.fromModel(user);
@@ -91,6 +91,8 @@ public class PartnerController extends AbstractController {
             fos.close();
         } catch (IOException e) {
             return this.handleWebException(new ControllerException("读取或写入本地文件出错"), resp);
+        } finally {
+            serverFile.delete();
         }
 
         Workbook book;
@@ -102,6 +104,8 @@ public class PartnerController extends AbstractController {
             sheet = book.getSheet(0);
         } catch (BiffException | IOException e) {
             return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
+        } finally {
+            serverFile.delete();
         }
 
         int row = 0;
@@ -138,12 +142,16 @@ public class PartnerController extends AbstractController {
                         count++;
                     } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
                         return this.handleWebException(new ControllerException("导入出错"), resp);
+                    } finally {
+                        serverFile.delete();
                     }
                 }
             }
         }
 
-        serverFile.delete();
+        if (serverFile.exists()) {
+            serverFile.delete();
+        }
         result.setMessage("successfully imported " + count + " partners");
         return result;
     }
