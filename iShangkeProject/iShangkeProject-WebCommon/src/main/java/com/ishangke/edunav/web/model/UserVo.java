@@ -56,6 +56,8 @@ public class UserVo extends JsonResponse {
     private Set<Integer> schoolIdSet;
     private Integer locationId;
     private Set<Integer> locationIdSet;
+    
+    private String authCode;
 
     public Integer getId() {
         return id;
@@ -321,4 +323,12 @@ public class UserVo extends JsonResponse {
         this.locationIdSet = locationIdSet;
     }
 
+    public String getAuthCode() {
+        return authCode;
+    }
+
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
+    }
+    
 }
