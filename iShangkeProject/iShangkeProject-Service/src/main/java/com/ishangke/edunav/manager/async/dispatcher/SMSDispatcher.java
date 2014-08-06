@@ -16,6 +16,7 @@ import com.ishangke.edunav.manager.common.Flag;
 
 public class SMSDispatcher {
     
+    
     // user sms
     public static Future<Boolean> sendUserCellVerificationSMS(final String cellNum, final String authCode) {
         if (!Flag.shouldSMS()) {
