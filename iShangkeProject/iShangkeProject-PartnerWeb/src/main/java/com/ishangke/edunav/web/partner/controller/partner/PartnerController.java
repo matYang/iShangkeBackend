@@ -236,15 +236,25 @@ public class PartnerController extends AbstractController {
     JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) {
 
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
+        // String permissionTag = this.getUrl(req);
+        // SessionBo authSessionBo = this.getSession(req);
+        //
+        // UserBo curUser = userFacade.authenticate(authSessionBo,
+        // permissionTag);
+        // int curId = curUser.getId();
+        // boolean loggedIn = curId > 0;
+        // if (!loggedIn) {
+        // throw new ControllerException("对不起，您尚未登录");
+        // }
 
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
-        if (!loggedIn) {
-            throw new ControllerException("对不起，您尚未登录");
-        }
+        // This can be deleted later
+        // Need a User
+        int userId = 1;
+        UserVo user = new UserVo();
+        user.setId(userId);
+        UserBo userBo = UserConverter.fromModel(user);
+        String permissionTag = "GET/api/v2/course";
+        // This can be deleted later
 
         PartnerVo partnerVo = new PartnerVo();
 
@@ -266,7 +276,7 @@ public class PartnerController extends AbstractController {
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
                 PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
-                partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
+                partnerFacade.updatePartner(partnerBo, userBo, permissionTag);
 
             } catch (Exception e) {
 
