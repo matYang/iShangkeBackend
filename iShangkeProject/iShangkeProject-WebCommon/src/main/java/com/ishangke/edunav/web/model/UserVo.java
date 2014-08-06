@@ -11,6 +11,8 @@ public class UserVo extends JsonResponse {
     private String name;
 
     private String password;
+    
+    private String confirmPassword;
 
     private String phone;
 
@@ -329,6 +331,14 @@ public class UserVo extends JsonResponse {
 
     public void setAuthCode(String authCode) {
         this.authCode = authCode;
+    }
+    
+    public String getConfirmPassword() {
+        return this.confirmPassword;
+    }
+    
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
     
 }
