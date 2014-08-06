@@ -39,7 +39,7 @@ public class CourseFacade {
             result = serviceClient.createCourse(courseBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class CourseFacade {
             result = serviceClient.commentCourse(courseCommnet, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -73,7 +73,7 @@ public class CourseFacade {
             result = serviceClient.queryCommentByCourseId(courseBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -90,7 +90,7 @@ public class CourseFacade {
             result = serviceClient.deleteCommentByCommentId(courseCommentBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -107,7 +107,7 @@ public class CourseFacade {
             result = serviceClient.queryCategoryByKeyword(keyword, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class CourseFacade {
             result = serviceClient.queryCourse(courseBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -141,7 +141,7 @@ public class CourseFacade {
             result = serviceClient.queryCourseByFilter(courseBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -158,7 +158,7 @@ public class CourseFacade {
             result = serviceClient.queryCourseById(courseBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class CourseFacade {
             result = serviceClient.transformCourseStatus(courseBo, operation, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -192,7 +192,7 @@ public class CourseFacade {
             result = serviceClient.createCourseTemplate(courseTemplateBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -209,7 +209,7 @@ public class CourseFacade {
             result = serviceClient.transformCourseTmeplateStatus(courseTemplateBo, operation, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -227,7 +227,7 @@ public class CourseFacade {
             result = serviceClient.queryCourseTemplate(courseTemplateBo, userBo, paginationBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -244,7 +244,7 @@ public class CourseFacade {
             result = serviceClient.queryCourseTemplateById(courseTemplateBo, userBo, PermissionCache.getTag(url));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey());
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
         } catch (TException e) {
             e.printStackTrace();
         }
