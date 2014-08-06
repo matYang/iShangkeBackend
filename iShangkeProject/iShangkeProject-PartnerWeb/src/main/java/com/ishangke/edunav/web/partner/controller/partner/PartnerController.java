@@ -103,10 +103,12 @@ public class PartnerController extends AbstractController {
             book = Workbook.getWorkbook(fis);
             sheet = book.getSheet(0);
         } catch (BiffException | IOException e) {
-            return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
-        } finally {
-            serverFile.delete();
-        }
+            //return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
+            return this.handleWebException(new ControllerException("tmp is at: " + dir.getAbsolutePath() + " fileName is: " + file.getName()), resp);
+        } 
+//        finally {
+//            serverFile.delete();
+//        }
 
         int row = 0;
         int col = 0;

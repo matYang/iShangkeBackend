@@ -132,7 +132,7 @@ public class UserController extends AbstractController{
         cellSessionVo.setAuthCode(userVo.getAuthCode());
         
         UserBo userBo = UserConverter.fromModel(userVo);
-        SessionBo cellSessionBo = SessionConverter.fromMode(cellSessionVo);
+        SessionBo cellSessionBo = SessionConverter.fromModel(cellSessionVo);
 
         UserBo result = null;
         try {
