@@ -300,7 +300,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
       <if test="courseName != null">
-        COURSENAME,
+        COURSE_NAME,
       </if>
       <if test="courseTemplateId != null and courseTemplateId != 0">
         COURSE_TEMPLATE_ID,
@@ -324,7 +324,7 @@
         PRICE,
       </if>
       <if test="originalPrice != null">
-        ORIGINALPRICE,
+        ORIGINAL_PRICE,
       </if>
       <if test="cashback != null">
         CASHBACK,
@@ -333,7 +333,7 @@
         COMMISSION,
       </if>
       <if test="serviceCharge != null">
-        SERVICECHARGE,
+        SERVICE_CHARGE,
       </if>
       <if test="status != null">
         STATUS,
