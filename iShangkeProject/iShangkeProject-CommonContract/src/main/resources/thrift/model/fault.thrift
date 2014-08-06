@@ -8,5 +8,6 @@ namespace java com.ishangke.edunav.commoncontract.model
 exception BusinessExceptionBo {
   1: i32 errorCode
   2: string messageKey
+  3: string message
 }
 

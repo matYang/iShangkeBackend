@@ -89,6 +89,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.PARTNER_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.PARTNER_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -110,6 +111,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.PARTNER_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.PARTNER_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -136,6 +138,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.PARTNER_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.PARTNER_UPDATE_ERROR_KEY);
             throw exception;
@@ -162,6 +165,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.PARTNER_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.PARTNER_CREATE_ERROR_KEY);
             throw exception;
@@ -192,6 +196,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ADDRESS_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.ADDRESS_CREATE_ERROR_KEY);
             throw exception;
@@ -217,6 +222,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ADDRESS_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.ADDRESS_UPDATE_ERROR_KEY);
             throw exception;
@@ -242,6 +248,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ADDRESS_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.ADDRESS_DELETE_ERROR_KEY);
             throw exception;
@@ -278,6 +285,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ADDRESS_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.ADDRESS_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -308,6 +316,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CLASSPHOTO_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CLASSPHOTO_CREATE_ERROR_KEY);
             throw exception;
@@ -333,6 +342,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CLASSPHOTO_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CLASSPHOTO_UPDATE_ERROR_KEY);
             throw exception;
@@ -358,6 +368,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CLASSPHOTO_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.CLASSPHOTO_DELETE_ERROR_KEY);
             throw exception;
@@ -393,6 +404,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.CLASSPHOTO_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.CLASSPHOTO_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -423,6 +435,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.TEACHER_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.TEACHER_CREATE_ERROR_KEY);
             throw exception;
@@ -448,6 +461,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.TEACHER_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.TEACHER_UPDATE_ERROR_KEY);
             throw exception;
@@ -473,6 +487,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.TEACHER_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.TEACHER_DELETE_ERROR_KEY);
             throw exception;
@@ -508,6 +523,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.TEACHER_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.TEACHER_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -538,6 +554,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_CREATE_ERROR_KEY);
             throw exception;
@@ -563,6 +580,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_SUBMIT_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_SUBMIT_ERROR_KEY);
             throw exception;
@@ -589,6 +607,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_APPROVE_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_APPROVE_ERROR_KEY);
             throw exception;
@@ -614,6 +633,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_REJECT_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_REJECT_ERROR_KEY);
             throw exception;
@@ -639,6 +659,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_CANCEL_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_CANCEL_ERROR_KEY);
             throw exception;
@@ -664,6 +685,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_DELETE_ERROR_KEY);
             throw exception;
@@ -693,6 +715,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.ACTIVITY_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.ACTIVITY_NOTFOUND_ERROR_KEY);
             throw exception;

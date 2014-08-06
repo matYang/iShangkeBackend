@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_REGISTER_ERROR_KEY);
             throw exception;
@@ -73,6 +74,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_LOGINBYPHONE_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_LOGINBYPHONE_ERROR_KEY);
             throw exception;
@@ -86,6 +88,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_LOGINBYREFERENCE_ERROR_KEY);
             throw exception;
@@ -112,6 +115,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_CREATE_ERROR_KEY);
             throw exception;
@@ -138,6 +142,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_CREATE_ERROR_KEY);
             throw exception;
@@ -163,6 +168,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_DELETE_ERROR_KEY);
             throw exception;
@@ -188,6 +194,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_UPDATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_UPDATE_ERROR_KEY);
             throw exception;
@@ -213,6 +220,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_QUERYINFO_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_QUERYINFO_ERROR_KEY);
             throw exception;
@@ -242,6 +250,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -255,6 +264,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_REGISTER_ERROR_KEY);
             throw exception;
@@ -268,6 +278,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_DISPOSESESSION_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_DISPOSESESSION_ERROR_KEY);
             throw exception;
@@ -288,6 +299,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_OPENCELLSESSION_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_OPENCELLSESSION_ERROR_KEY);
             throw exception;
@@ -309,6 +321,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_OPENFORGETPASSWORDSESSION_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_OPENFORGETPASSWORDSESSION_ERROR_KEY);
             throw exception;
@@ -322,6 +335,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_RECORVERPASSWORD_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_RECORVERPASSWORD_ERROR_KEY);
             throw exception;
@@ -346,6 +360,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.USER_CHANGEPASSWORD_ERROR);
             exception.setMessageKey(ManagerErrorCode.USER_CHANGEPASSWORD_ERROR_KEY);
             throw exception;
@@ -376,6 +391,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.MESSAGE_SEND_ERROR);
             exception.setMessageKey(ManagerErrorCode.MESSAGE_SEND_ERROR_KEY);
             throw exception;
@@ -401,6 +417,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.MESSAGE_RECEIVE_ERROR);
             exception.setMessageKey(ManagerErrorCode.MESSAGE_RECEIVE_ERROR_KEY);
             throw exception;
@@ -426,6 +443,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.MESSAGE_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.MESSAGE_DELETE_ERROR_KEY);
             throw exception;
@@ -455,6 +473,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.MESSAGE_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -485,6 +504,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_GENERATECODE_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_GENERATECODE_ERROR_KEY);
             throw exception;
@@ -514,6 +534,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_NOTFOUND_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_NOTFOUND_ERROR_KEY);
             throw exception;
@@ -539,6 +560,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_CREATE_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_CREATE_ERROR_KEY);
             throw exception;
@@ -564,6 +586,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_APPROVE_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_APPROVE_ERROR_KEY);
             throw exception;
@@ -589,6 +612,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_REJECT_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_REJECT_ERROR_KEY);
             throw exception;
@@ -614,6 +638,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_CANCEL_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_CANCEL_ERROR_KEY);
             throw exception;
@@ -639,6 +664,7 @@ public class UserServiceImpl implements UserService.Iface {
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.SPREAD_DELETE_ERROR);
             exception.setMessageKey(ManagerErrorCode.SPREAD_DELETE_ERROR_KEY);
             throw exception;
