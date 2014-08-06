@@ -43,24 +43,25 @@ public class UserController extends AbstractController{
         boolean remember = (loginVo.getRemember() == null || loginVo.getRemember() == 1);
         
         SessionBo authSessionBo = this.getSession(req);
-        boolean loggedIn;
-        UserBo curUser = null;
+        boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
         
+        if (loggedIn) {
+            return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
+        }
         try {
-             loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
-             if (loggedIn) {
-                 return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
-             }
-             authSessionBo = userFacade.loginByPhone(LoginConverter.fromModel(loginVo), permissionTag);
-             if (authSessionBo.getId() > 0) {
-                 this.openSession(authSessionBo, remember, req, resp);
-             }
-            
-             curUser = userFacade.authenticate(authSessionBo, permissionTag);    
+            authSessionBo = userFacade.loginByPhone(LoginConverter.fromModel(loginVo), permissionTag);            
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
+        }  
+        if (authSessionBo.getId() > 0) {
+            this.openSession(authSessionBo, remember, req, resp);
         }
-        
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         responseVo = UserConverter.toModel(curUser);
         return responseVo;
     }
@@ -73,11 +74,7 @@ public class UserController extends AbstractController{
             //already logged out
             return new EmptyResponse();
         }
-        try {
-            userFacade.disposeSession(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
+        userFacade.disposeSession(authSessionBo, permissionTag);
         this.closeSession(req, resp);
         
         return new EmptyResponse();
@@ -91,13 +88,7 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo userBo = null;
-        try {
-             userBo = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        UserBo userBo = userFacade.authenticate(authSessionBo, permissionTag);
         if (userBo.getId() <= 0) {
             responseVo = new UserVo();
             responseVo.setId(-1);
@@ -116,11 +107,7 @@ public class UserController extends AbstractController{
         
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
-        try {
-            userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
+        userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
         return new EmptyResponse();
     }
     
@@ -131,14 +118,7 @@ public class UserController extends AbstractController{
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        boolean loggedIn;
-        try {
-            loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
         if (loggedIn) {
             return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
         }
@@ -180,13 +160,7 @@ public class UserController extends AbstractController{
         
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
-        
-        try {
-            userFacade.openForgetPasswordSession(UserConverter.fromModel(userVo), permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        userFacade.openForgetPasswordSession(UserConverter.fromModel(userVo), permissionTag);
         
         return new EmptyResponse();
     }
@@ -198,14 +172,7 @@ public class UserController extends AbstractController{
         
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        boolean loggedIn;
-        try {
-            loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
         if (loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您已经登录了"), resp);
         }
@@ -242,14 +209,7 @@ public class UserController extends AbstractController{
     public @ResponseBody JsonResponse changePassword(@PathVariable("id") int id, @RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        int curId;
-        try {
-            curId = userFacade.authenticate(authSessionBo, permissionTag).getId();
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        int curId = userFacade.authenticate(authSessionBo, permissionTag).getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
@@ -264,14 +224,9 @@ public class UserController extends AbstractController{
         if (passwordVo.getNewPassword() == null) {
             return this.handleWebException(new ControllerException("新密码不能为空"), resp);
         }
+
         
-        SessionBo newSession = null;
-        try {
-            newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        SessionBo newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
         this.openSession(newSession, false, req, resp);
         return new EmptyResponse();
     }
@@ -284,14 +239,7 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
-        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
@@ -322,13 +270,7 @@ public class UserController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
