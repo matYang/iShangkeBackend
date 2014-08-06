@@ -31,4 +31,10 @@ public class JsonResponse {
         this.errorCode = errorCode;
         this.msgKey = msgKey;
     }
+    
+    public JsonResponse(int errorCode, String msgKey, String message) {
+        this.errorCode = errorCode;
+        this.msgKey = msgKey;
+        this.message = message;
+    }
 }
