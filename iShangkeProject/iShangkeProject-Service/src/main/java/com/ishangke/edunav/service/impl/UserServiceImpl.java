@@ -56,18 +56,7 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo registerUser(UserBo userBo, SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "registerUser"));
-                throw new NoPermissionException();
-            }
             return userManager.registerUser(userBo, sessionBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_REISTERUSER);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_REISTERUSER_KEY);
-            throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
