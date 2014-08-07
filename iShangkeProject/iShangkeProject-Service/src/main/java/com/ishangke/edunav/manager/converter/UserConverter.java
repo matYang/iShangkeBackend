@@ -97,6 +97,17 @@ public class UserConverter {
         if (e.getLocationIdSet() != null) {
             userBo.setLocationIdSet(e.getLocationIdSet());
         }
+        if (e.getCouponTotal() != null) {
+            userBo.setCouponTotal(e.getCouponTotal());
+        } else {
+            userBo.setCouponTotal(Constant.DEFAULTNULL);
+        }
+        if (e.getAccount() != null) {
+            userBo.setAccount(AccountConverter.toBo(e.getAccount()));
+        }
+        if (e.getCredit() != null) {
+            userBo.setCredit(CreditConverter.toBo(e.getCredit()));
+        }
         return userBo;
     }
 

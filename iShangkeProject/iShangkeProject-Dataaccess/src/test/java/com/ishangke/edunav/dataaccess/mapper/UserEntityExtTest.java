@@ -125,4 +125,10 @@ public class UserEntityExtTest extends BaseTest {
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getLastModifyTime()));
     }
+    
+    @Test
+    public void testGetById() {
+        UserEntityExt user = userEntityExtMapper.getById(1);
+        System.out.println(user.getCouponTotal());
+    }
 }

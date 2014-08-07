@@ -15,20 +15,40 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="USERS_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="USERS_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="USERS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="USERS_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="USERS_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="USERS_GENDER" property="gender" jdbcType="INTEGER" />
-    <result column="USERS_BIRTHDAY" property="birthday"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="USERS_BIRTHDAY" property="birthday" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="USERS_SCHOOL" property="school" jdbcType="VARCHAR" />
     <result column="USERS_MAJOR" property="major" jdbcType="VARCHAR" />
     <result column="USERS_AVATARURL" property="avatarUrl" jdbcType="VARCHAR" />
     <result column="USERS_SCHOOLID" property="schoolId" jdbcType="INTEGER" />
     <result column="USERS_CAREERID" property="careerId" jdbcType="INTEGER" />
     <result column="USERS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-
+    <result column="USERS_COUPONTOTAL" property="couponTotal" jdbcType="DOUBLE" />
+    <collection property="account" ofType="AccountEntityExt">
+      <result column="ACCOUNT_ID" property="id" jdbcType="INTEGER" />
+      <result column="ACCOUNT_BALANCE" property="balance" jdbcType="INTEGER" />
+      <result column="ACCOUNT_REALNAME" property="realName" jdbcType="VARCHAR" />
+      <result column="ACCOUNT_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="ACCOUNT_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="ACCOUNT_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="ACCOUNT_DELETED" property="deleted" jdbcType="INTEGER" />
+      <result column="ACCOUNT_ACCOUNT_NUMBER" property="deleted" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="credit" ofType="CreditEntityExt">
+      <result column="CREDIT_ID" property="id" jdbcType="INTEGER" />
+      <result column="CREDIT_CREDIT" property="credit" jdbcType="DOUBLE" />
+      <result column="CREDIT_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="CREDIT_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="CREDIT_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="CREDIT_DELETED" property="deleted" jdbcType="INTEGER" />
+    </collection>
   </resultMap>
 
   <sql id="User_Base_Column_List">
@@ -42,7 +62,8 @@
     USERS.EMAIL USERS_EMAIL,
     USERS.INVITATION_CODE
     USERS_INVITATIONCODE,
-    USERS.APPLIED_INVITATION_CODE USERS_APPLIEDINVITATIONCODE,
+    USERS.APPLIED_INVITATION_CODE
+    USERS_APPLIEDINVITATIONCODE,
     USERS.REFERENCE
     USERS_REFERENCE,
     USERS.LAST_LOGIN_TIME USERS_LASTLOGINTIME,
@@ -57,8 +78,31 @@
     USERS.MAJOR USERS_MAJOR,
     USERS.AVATAR_URL USERS_AVATARURL,
     USERS.CAREER_ID USERS_CAREERID,
-    USERS.SCHOOL_ID USERS_SCHOOLID,
+    USERS.SCHOOL_ID
+    USERS_SCHOOLID,
     USERS.LOCATION_ID USERS_LOCATIONID
+  </sql>
+  <sql id="Account_Base_Column_List">
+    ACCOUNT.ID ACCOUNT_ID,
+    ACCOUNT.BALANCE ACCOUNT_BALANCE,
+    ACCOUNT.REAL_NAME
+    ACCOUNT_REALNAME,
+    ACCOUNT.LAST_MODIFY_TIME ACCOUNT_LASTMODIFYTIME,
+    ACCOUNT.CREATE_TIME
+    ACCOUNT_CREATETIME,
+    ACCOUNT.ENABLED
+    ACCOUNT_ENABLED,
+    ACCOUNT.DELETED ACCOUNT_DELETED,
+    ACCOUNT.ACCOUNT_NUMBER ACCOUNT_ACCOUNTNUMBER
+  </sql>
+  <sql id="Credit_Base_Column_List">
+    CREDIT.ID CREDIT_ID,
+    CREDIT.CREDIT CREDIT_CREDIT,
+    CREDIT.LAST_MODIFY_TIME
+    CREDIT_LASTMODIFYTIME,
+    CREDIT.CREATE_TIME CREDIT_CREATETIME,
+    CREDIT.ENABLED CREDIT_ENABLED,
+    CREDIT.DELETED CREDIT_DELETED
   </sql>
   <!-- add -->
   <insert id="add" parameterType="UserEntityExt">
@@ -283,9 +327,14 @@
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="UserExtMap">
     SELECT
-    <include refid="User_Base_Column_List" />
-    from USERS where USERS.DELETED = 0 and USERS.ID =
-    #{id,jdbcType=INTEGER}
+    <include refid="User_Base_Column_List" />,
+    <include refid="Account_Base_Column_List" />,
+    <include refid="Credit_Base_Column_List" />,
+    SUM(COUPON.BALANCE) USERS_COUPONTOTAL
+    from USERS join ACCOUNT on ACCOUNT.ID = USERS.ID
+    join CREDIT on CREDIT.ID = USERS.ID
+    left join COUPON on USERS.ID = COUPON.USER_ID and (COUPON.STATUS = 0 or COUPON.STATUS = 2) 
+    where USERS.DELETED = 0 and USERS.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- getByPhone -->
   <select id="getByPhone" parameterType="map" resultMap="UserExtMap">
@@ -330,8 +379,7 @@
       <if test="entity.careerId == null or entity.careerId == 0">
         <if test="entity.careerIdSet != null and entity.careerIdSet.size() > 0">
           AND USERS.CAREER_ID IN
-          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -343,8 +391,7 @@
       <if test="entity.schoolId == null or entity.schoolId == 0">
         <if test="entity.schoolIdSet != null and entity.schoolIdSet.size() > 0">
           AND USERS.SCHOOL_ID IN
-          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -452,8 +499,7 @@
       <if test="entity.locationId == null or entity.locationId == 0">
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND USERS.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -463,7 +509,8 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        USERS.${listItem.columnKey} ${listItem.order}
+        USERS.${listItem.columnKey}
+        ${listItem.order}
       </foreach>
     </if>
 
@@ -497,8 +544,7 @@
       <if test="entity.careerId == null or entity.careerId == 0">
         <if test="entity.careerIdSet != null and entity.careerIdSet.size() > 0">
           AND USERS.CAREER_ID IN
-          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -510,8 +556,7 @@
       <if test="entity.schoolId == null or entity.schoolId == 0">
         <if test="entity.schoolIdSet != null and entity.schoolIdSet.size() > 0">
           AND USERS.SCHOOL_ID IN
-          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -619,8 +664,7 @@
       <if test="entity.locationId == null or entity.locationId == 0">
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
           AND USERS.LOCATION_ID IN
-          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
