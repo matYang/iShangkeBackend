@@ -104,7 +104,7 @@ public class PartnerController extends AbstractController {
             sheet = book.getSheet(0);
         } catch (BiffException | IOException e) {
             //return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
-            return this.handleWebException(new ControllerException("fileName is: " + serverFile.getName()), resp);
+            return this.handleWebException(e, resp);
         } 
 //        finally {
 //            serverFile.delete();
