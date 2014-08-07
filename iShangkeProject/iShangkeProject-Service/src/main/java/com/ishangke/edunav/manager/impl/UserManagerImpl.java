@@ -227,7 +227,7 @@ public class UserManagerImpl implements UserManager {
         
         boolean isValid = authManager.validateCellVerificationSession(sessionBo.getAccountIdentifier(), sessionBo.getAuthCode());
         if (!isValid) {
-            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed because authCode: " + sessionBo.getAuthCode() + "does not match");
+            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed because authCode: " + sessionBo.getAuthCode() + " does not match");
         }
         if (userBo.getPhone() == null) {
             throw new ManagerException("User registration must specify phone");
