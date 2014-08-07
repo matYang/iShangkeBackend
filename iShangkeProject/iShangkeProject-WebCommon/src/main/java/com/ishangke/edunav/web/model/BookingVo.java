@@ -67,6 +67,7 @@ public class BookingVo extends JsonResponse {
     private Integer partnerId;
     private Set<Integer> partnerIdSet;
 
+    private CourseVo course;
     public Integer getPartnerId() {
         return partnerId;
     }
@@ -401,6 +402,14 @@ public class BookingVo extends JsonResponse {
 
     public void setCreateTimeEnd(Calendar createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
+    }
+
+    public CourseVo getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseVo course) {
+        this.course = course;
     }
 
 }

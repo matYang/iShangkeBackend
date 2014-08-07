@@ -159,4 +159,10 @@ public class BookingEntityExtTest {
         System.out.println("xxxx" + result.size());
         System.out.println("oooo" + bookingEntityExtMapper.getCountByPartnerId(bookingEntityExt, 2));
     }
+    
+    @Test 
+    public void testGetById() {
+        BookingEntityExt booking = bookingEntityExtMapper.getById(1);
+        System.out.println(booking.getCourse().getId());
+    }
 }
