@@ -47,14 +47,14 @@ public class UserFacade {
         return result;
     }
 
-    public SessionBo loginByPhone(LoginBo loginBo, String permissionTag) {
+    public SessionBo loginByUser(LoginBo loginBo, String permissionTag) {
         SessionBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 
         try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.loginByPhone(loginBo, PermissionCache.getTag(permissionTag));
+            result = serviceClient.loginByUser(loginBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
             throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());

@@ -72,7 +72,7 @@ service UserService {
      *  @return SessionBo
      *
      */
-    user.SessionBo loginByPhone(1: user.LoginBo loginBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.SessionBo loginByUser(1: user.LoginBo loginBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为所有用户提供使用识别号登录的功能。<br>

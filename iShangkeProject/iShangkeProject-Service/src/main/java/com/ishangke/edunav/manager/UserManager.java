@@ -88,7 +88,7 @@ public interface UserManager {
      * 
      * @param loginBo
      */
-    SessionBo loginByPhone(LoginBo loginBo);
+    SessionBo loginByUser(LoginBo loginBo);
 
     /**
      * 本方法为所有用户提供使用识别码登录的功能。<br>

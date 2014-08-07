@@ -58,7 +58,7 @@ public class UserController extends AbstractController{
             if (loggedIn) {
                 return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
             }
-            authSessionBo = userFacade.loginByPhone(LoginConverter.fromModel(loginVo), permissionTag);
+            authSessionBo = userFacade.loginByUser(LoginConverter.fromModel(loginVo), permissionTag);
             if (authSessionBo.getId() > 0) {
                 this.openSession(authSessionBo, remember, req, resp);
             }

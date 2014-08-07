@@ -68,9 +68,9 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public SessionBo loginByPhone(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public SessionBo loginByUser(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            return userManager.loginByPhone(loginBo);
+            return userManager.loginByUser(loginBo);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
