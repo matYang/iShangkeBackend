@@ -37,6 +37,7 @@ struct UserBo {
     31: set<i32> careerIdSet
     32: set<i32> schoolIdSet
     34: set<i32> locationIdSet
+    35: string authCode
     }
     
 /**

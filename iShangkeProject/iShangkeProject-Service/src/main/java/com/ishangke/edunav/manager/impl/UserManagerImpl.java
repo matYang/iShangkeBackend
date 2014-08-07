@@ -92,6 +92,7 @@ public class UserManagerImpl implements UserManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
         userEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        userEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         userEntity.setLastLoginTime(DateUtility.getCurTimeInstance());
         userEntity.setEnabled(0);
         userEntity.setDeleted(0);
@@ -225,7 +226,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         boolean isValid = authManager.validateCellVerificationSession(sessionBo.getAccountIdentifier(), sessionBo.getAuthCode());
-        if (isValid) {
+        if (!isValid) {
             throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed because authCode: " + sessionBo.getAuthCode() + "does not match");
         }
         if (userBo.getPhone() == null) {
@@ -244,8 +245,11 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException(userBo.getPhone() + " is already in db");
         }
         
+        UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
         authManager.closeCellVerificationSession(sessionBo.getAccountIdentifier());
-        return initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
+        String authCode = authManager.openAuthSession(resultUser.getId());
+        resultUser.setAuthCode(authCode);
+        return resultUser;
     }
 
     @Override
