@@ -434,18 +434,18 @@ public class UserManagerImpl implements UserManager {
         
         UserEntityExt searchEntity = new UserEntityExt();
         searchEntity.setPhone(passwordBo.getAccountIdentifier());
-        List<UserEntityExt> result = null;
+        UserEntityExt result = null;
         try {
-            result = userMapper.list(searchEntity, null);
+            result = userMapper.getByPhone(searchEntity);
         } catch (Throwable t) {
             throw new ManagerException("RecoverPassword with phone number: " + passwordBo.getAccountIdentifier()  + " failed", t);
         }
         
-        if (result == null || result.size() == 0) {
+        if (result == null || result.getId() == null || result.getId() <= 0) {
             throw new ManagerException("Account is not registered");
         }
         
-        UserEntityExt curUser = result.get(0);
+        UserEntityExt curUser = result;
         boolean isValid = authManager.validateForgetPasswordSession(curUser.getId(), passwordBo.getAuthCode());
         
         if (!isValid) {
