@@ -60,6 +60,11 @@ public class UserVo extends JsonResponse {
     private Set<Integer> locationIdSet;
     
     private String authCode;
+    
+    private AccountVo account;
+    private CreditVo credit;
+    
+    private Double CouponTotal;
 
     public Integer getId() {
         return id;
@@ -339,6 +344,30 @@ public class UserVo extends JsonResponse {
     
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public AccountVo getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountVo account) {
+        this.account = account;
+    }
+
+    public CreditVo getCredit() {
+        return credit;
+    }
+
+    public void setCredit(CreditVo credit) {
+        this.credit = credit;
+    }
+
+    public Double getCouponTotal() {
+        return CouponTotal;
+    }
+
+    public void setCouponTotal(Double couponTotal) {
+        CouponTotal = couponTotal;
     }
     
 }

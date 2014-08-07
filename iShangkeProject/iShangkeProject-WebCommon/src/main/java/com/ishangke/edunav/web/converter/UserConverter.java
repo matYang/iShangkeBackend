@@ -141,6 +141,11 @@ public class UserConverter {
         userVo.setSchoolIdSet(bo.getSchoolIdSet());
         userVo.setLocationId(bo.getLocationId());
         userVo.setLocationIdSet(bo.getLocationIdSet());
+        if (Constant.DEFAULTNULL != bo.getCouponTotal()) {
+            userVo.setCouponTotal(bo.getCouponTotal());
+        }
+        userVo.setAccount(AccountConverter.toModel(bo.getAccount()));
+        userVo.setCredit(CreditConverter.toModel(bo.getCredit()));
         return userVo;
     }
 }

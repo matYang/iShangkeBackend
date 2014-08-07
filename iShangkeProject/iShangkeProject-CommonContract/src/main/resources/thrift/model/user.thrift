@@ -1,3 +1,5 @@
+include "account.thrift"
+include "credit.thrift"
 namespace java com.ishangke.edunav.commoncontract.model
 
 /**
@@ -38,6 +40,9 @@ struct UserBo {
     32: set<i32> schoolIdSet
     34: set<i32> locationIdSet
     35: string authCode
+    36: account.AccountBo account
+    37: credit.CreditBo credit
+    38: double couponTotal
     }
     
 /**
