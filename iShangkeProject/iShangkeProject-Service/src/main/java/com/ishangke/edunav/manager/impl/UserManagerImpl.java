@@ -433,21 +433,32 @@ public class UserManagerImpl implements UserManager {
         }
         
         UserEntityExt searchEntity = new UserEntityExt();
-        searchEntity.setPhone(passwordBo.getAccountIdentifier());
-        UserEntityExt result = null;
-        try {
-            result = userMapper.getByPhone(searchEntity);
-        } catch (Throwable t) {
-            throw new ManagerException("RecoverPassword with phone number: " + passwordBo.getAccountIdentifier()  + " failed", t);
+        UserEntityExt curUser = null;
+        
+        LoginEnums.IdentifierType identifierType = LoginDeterminer.exam(passwordBo.getAccountIdentifier());
+        if (identifierType == LoginEnums.IdentifierType.PHONE) {
+            searchEntity.setPhone(passwordBo.getAccountIdentifier());
+            curUser = userMapper.getByPhone(searchEntity);
+            if (curUser == null) {
+                throw new UserNotFoundException("RecoverPassword failed for user with Phone: " + passwordBo.getAccountIdentifier() + " because corresponding user is not found");
+            }
+        }
+        else if (identifierType == LoginEnums.IdentifierType.INVITATIONCODE){
+            searchEntity.setInvitationCode(passwordBo.getAccountIdentifier());
+            curUser = userMapper.getByInvitationCode(searchEntity);
+            if (curUser == null) {
+                throw new UserNotFoundException("RecoverPassword failed for user with InvitationCode: " + passwordBo.getAccountIdentifier() + " because corresponding user is not found");
+            }
+        }
+        else if (identifierType == LoginEnums.IdentifierType.EMAIL) {
+            throw new ManagerException("邮箱找回密码功能尚未开启，请使用 手机号或者用户名 登陆");
+        }
+        else {
+            throw new ManagerException("无法识别账号类型，请遵照 手机号码/用户名/邮箱 格式");
         }
         
-        if (result == null || result.getId() == null || result.getId() <= 0) {
-            throw new ManagerException("Account is not registered");
-        }
         
-        UserEntityExt curUser = result;
         boolean isValid = authManager.validateForgetPasswordSession(curUser.getId(), passwordBo.getAuthCode());
-        
         if (!isValid) {
             throw new ManagerException("Authcode does not match");
         }
