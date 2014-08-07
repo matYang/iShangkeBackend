@@ -207,6 +207,9 @@ public class CourseVo extends JsonResponse {
     private String circleValue;
     private String circleName;
     private List<ActionVo> actionList;
+    
+    //用于idSet的接收
+    private String ids;
 
     public List<ActionVo> getActionList() {
         return actionList;
@@ -1248,4 +1251,11 @@ public class CourseVo extends JsonResponse {
         this.regAddressIdSet = regAddressIdSet;
     }
 
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
 }
