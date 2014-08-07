@@ -180,7 +180,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         // 查看此课程是否属于上架状态
         if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
-            throw new ManagerException("course cannot be booed now");
+            throw new ManagerException("course cannot be booked now");
         }
         // 查看课程现价与发过来的价格是否一致，如果不一致则不能创建booking
         if (!course.getPrice().equals(bookingEntity.getPrice())) {
