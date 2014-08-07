@@ -176,4 +176,9 @@ public class Constant {
     public static final int ORDERPAYEDSUCCESS = 1;
     public static final int ORDERPAYEDFAILED = 2;
     public static final int ORDEROPTPAY = 0;
+    
+    //course booking type
+    public static final int COURSETYPEONLINEONLIY = 0;
+    public static final int COURSETYPEOFFLINEONLY = 1;
+    public static final int COURSETYPEBOTHONLINEOFFLINE = 2;
 }
