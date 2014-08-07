@@ -1,3 +1,4 @@
+include "course.thrift"
 namespace java com.ishangke.edunav.commoncontract.model
 include "action.thrift"
 
@@ -47,6 +48,7 @@ struct BookingBo {
     40: double priceEnd
     41: i32 partnerId
     42: set<i32> partnerIdSet
+    43: course.CourseBo course
 }
 
 /**

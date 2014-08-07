@@ -28,6 +28,8 @@ public class BookingEntityExt extends BookingEntity {
     private Calendar createTimeEnd;
     private Set<Integer> partnerIdSet;
     
+    private CourseEntityExt course;
+    
     public Set<Integer> getPartnerIdSet() {
         return partnerIdSet;
     }
@@ -194,6 +196,14 @@ public class BookingEntityExt extends BookingEntity {
 
     public void setTypeSet(Set<Integer> typeSet) {
         this.typeSet = typeSet;
+    }
+
+    public CourseEntityExt getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntityExt course) {
+        this.course = course;
     }
 
 }

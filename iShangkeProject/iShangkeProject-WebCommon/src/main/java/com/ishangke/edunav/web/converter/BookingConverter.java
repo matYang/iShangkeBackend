@@ -225,6 +225,9 @@ public class BookingConverter {
         }
         bookingVo.setPartnerId(bo.getPartnerId());
         bookingVo.setPartnerIdSet(bo.getPartnerIdSet());
+        if (bo.getCourse() != null) {
+            bookingVo.setCourse(CourseConverter.toModel(bo.getCourse()));
+        }
         return bookingVo;
     }
 }

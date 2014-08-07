@@ -23,12 +23,84 @@
     <result column="BOOKING_CASHBACKAMOUNT" property="cashbackAmount" jdbcType="DOUBLE" />
     <result column="BOOKING_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="BOOKING_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="BOOKING_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
-     <result column="BOOKING_PARTNERID" property="partnerId" jdbcType="INTEGER" />
-    
+    <result column="BOOKING_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+    <collection property="course" ofType="CourseEntityExt">
+      <id column="COURSE_ID" property="id" jdbcType="INTEGER" />
+      <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
+      <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
+      <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+      <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
+      <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
+      <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
+      <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
+      <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
+      <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
+      <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
+      <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
+      <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
+      <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
+      <result column="COURSE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
+      <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
+      <result column="COURSE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
+      <result column="COURSE_MARKING" property="marking" jdbcType="VARCHAR" />
+      <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
+      <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" />
+      <result column="COURSE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
+      <result column="COURSE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
+      <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" />
+      <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" />
+      <result column="COURSE_REGPHONE" property="regPhone" jdbcType="VARCHAR" />
+      <result column="COURSE_CONTACT" property="contact" jdbcType="VARCHAR" />
+      <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
+      <result column="COURSE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
+      <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
+      <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
+      <result column="COURSE_STUDYDAYNOTE" property="studyDayNote" jdbcType="VARCHAR" />
+      <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
+      <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
+      <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
+      <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
+      <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
+      <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
+      <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
+      <result column="COURSE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
+      <result column="COURSE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
+      <result column="COURSE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
+      <result column="COURSE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
+      <result column="COURSE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
+      <result column="COURSE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
+      <result column="COURSE_CASHBACKDATE" property="cashbackDate"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_NOREFUNDDATE" property="noRefundDate"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_CUTOFFDATE" property="cutoffDate"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_FINISHDATE" property="finishDate"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
+      <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+      <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
+      <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
+      <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
+      <result column="COURSE_SCHOOLTIMEWEEK" property="schooltimeWeek" jdbcType="INTEGER" />
+    </collection>
   </resultMap>
   <sql id="Booking_Base_Column_List">
     BOOKING.ID BOOKING_ID,
@@ -63,6 +135,103 @@
     BOOKING.DELETED
     BOOKING_DELETED,
     BOOKING.PARTNER_ID BOOKING_PARTNERID
+  </sql>
+  <sql id="Course_Base_Column_List">
+    COURSE.ID COURSE_ID,
+    COURSE.COURSE_NAME COURSE_COURSENAME,
+    COURSE.COURSE_TEMPLATE_ID
+    COURSE_COURSETEMPLATEID,
+    COURSE.CATEGORY_ID COURSE_CATEGORYID,
+    COURSE.LOCATION_ID
+    COURSE_LOCATIONID,
+    COURSE.CIRCLE_ID
+    COURSE_CIRCLEID,
+    COURSE.PARTNER_ID COURSE_PARTNERID,
+    COURSE.ADDRESS_ID COURSE_ADDRESSID,
+    COURSE.PRICE COURSE_PRICE,
+    COURSE.ORIGINAL_PRICE
+    COURSE_ORIGINALPRICE,
+    COURSE.CASHBACK COURSE_CASHBACK,
+    COURSE.COMMISSION COURSE_COMMISSION,
+    COURSE.SERVICE_CHARGE COURSE_SERVICECHARGE,
+    COURSE.STATUS COURSE_STATUS,
+    COURSE.LAST_MODIFY_TIME
+    COURSE_LASTMODIFYTIME,
+    COURSE.CREATE_TIME COURSE_CREATETIME,
+    COURSE.ENABLED COURSE_ENABLED,
+    COURSE.DELETED
+    COURSE_DELETED,
+    COURSE.COURSE_HOUR_LENGTH COURSE_COURSEHOURLENGTH,
+    COURSE.TEACHING_METHOD COURSE_TEACHINGMETHOD,
+    COURSE.TEACHING_MATERIAL_FEE
+    COURSE_TEACHINGMATERIALFEE,
+    COURSE.DOWNLOAD_MATERIALS COURSE_DOWNLOADMATERIALS,
+    COURSE.BONUS_SERVICE COURSE_BONUSSERVICE,
+    COURSE.MARKING COURSE_MARKING,
+    COURSE.ASSIGNMENTS
+    COURSE_ASSIGNMENTS,
+    COURSE.TRAIL COURSE_TRAIL,
+    COURSE.QUESTION_SESSION COURSE_QUESTIONSESSION,
+    COURSE.TEACHING_AND_EXERCISE
+    COURSE_TEACHINGANDEXERCISE,
+    COURSE.CLASS_TEACHER
+    COURSE_CLASSTEACHER,
+    COURSE.GOAL COURSE_GOAL,
+    COURSE.OUTLINE
+    COURSE_OUTLINE,
+    COURSE.REG_PHONE
+    COURSE_REGPHONE,
+    COURSE.CONTACT COURSE_CONTACT,
+    COURSE.EXTRACURRICULAR
+    COURSE_EXTRACURRICULAR,
+    COURSE.PASS_AGREEMENT COURSE_PASSAGREEMENT,
+    COURSE.QUALITY_ASSURANCE COURSE_QUALITYASSURANCE,
+    COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
+    COURSE.TEACHING_MATERIAL_INTRO
+    COURSE_TEACHINGMATERIALINTRO,
+    COURSE.STUDY_DAY_NOTE COURSE_STUDYDAYNOTE,
+    COURSE.HIGH_SCORE_REWARD
+    COURSE_HIGHSCOREREWARD,
+    COURSE.PREREQUEST
+    COURSE_PREREQUEST,
+    COURSE.SUITABLE_STUDENT
+    COURSE_SUITABLESTUDENT,
+    COURSE.OPEN_COURSE_REQUIREMENT
+    COURSE_OPENCOURSEREQUIREMENT,
+    COURSE.CERTIFICATION COURSE_CERTIFICATION,
+    COURSE.QUIZ COURSE_QUIZ,
+    COURSE.COURSE_INTRO
+    COURSE_COURSEINTRO,
+    COURSE.REFERENCE COURSE_REFERENCE,
+    COURSE.REG_ADDRESS_ID COURSE_REGADDRESSID,
+    COURSE.FINISH_TIME2
+    COURSE_FINISHTIME2,
+    COURSE.START_TIME2 COURSE_STARTTIME2,
+    COURSE.FINISH_TIME1
+    COURSE_FINISHTIME1,
+    COURSE.START_TIME1
+    COURSE_STARTTIME1,
+    COURSE.START_UPON_ARRIVAL
+    COURSE_STARTUPONARRIVAL,
+    COURSE.BOOKING_TYPE COURSE_BOOKINGTYPE,
+    COURSE.CASHBACK_DATE
+    COURSE_CASHBACKDATE,
+    COURSE.NO_REFUND_DATE COURSE_NOREFUNDDATE,
+    COURSE.CUTOFF_DATE
+    COURSE_CUTOFFDATE,
+    COURSE.FINISH_DATE COURSE_FINISHDATE,
+    COURSE.START_DATE COURSE_STARTDATE,
+    COURSE.POPULARITY
+    COURSE_POPULARITY,
+    COURSE.CLASS_SIZE COURSE_CLASSSIZE,
+    COURSE.COURSE_HOUR_NUM
+    COURSE_COURSEHOURNUM,
+    COURSE.CLASS_TYPE
+    COURSE_CLASSTYPE,
+    COURSE.DISCOUNT COURSE_DISCOUNT,
+    COURSE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
+    COURSE.SCHOOLTIME_WEEK
+    COURSE_SCHOOLTIMEWEEK
   </sql>
   <!-- add -->
   <insert id="add" parameterType="BookingEntityExt">
@@ -181,7 +350,7 @@
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
       </if>
-        <if test="partnerId != null and partnerId != 0">
+      <if test="partnerId != null and partnerId != 0">
         #{partnerId,jdbcType=INTEGER},
       </if>
     </trim>
@@ -259,7 +428,7 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
-       <if test="partnerId != null and partnerId != 0">
+      <if test="partnerId != null and partnerId != 0">
         PARTNER_ID = #{partnerId,jdbcType=INTEGER},
       </if>
     </set>
@@ -279,14 +448,18 @@
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="BookingExtMap">
     SELECT
-    <include refid="Booking_Base_Column_List" />
-    from BOOKING where BOOKING.DELETED = 0 and BOOKING.ID = #{id,jdbcType=INTEGER}
+    <include refid="Booking_Base_Column_List" />,
+    <include refid="Course_Base_Column_List" />
+    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID 
+    where BOOKING.DELETED = 0 and BOOKING.ID = #{id,jdbcType=INTEGER}
   </select>
   <!--list -->
   <select id="list" parameterType="map" resultMap="BookingExtMap">
     SELECT
-    <include refid="Booking_Base_Column_List" />
-    from BOOKING where BOOKING.DELETED = 0
+    <include refid="Booking_Base_Column_List" />,
+    <include refid="Course_Base_Column_List" />
+    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID 
+    where BOOKING.DELETED = 0
     <if test="entity != null">
 
       <if test="entity.id != null and entity.id != 0">
@@ -307,8 +480,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -320,8 +492,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
+            close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -333,8 +505,7 @@
       <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND BOOKING.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -359,8 +530,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND BOOKING.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -474,20 +644,19 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND BOOKING.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND BOOKING.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
     </if>
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
@@ -527,8 +696,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -540,8 +708,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
+            close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -553,8 +721,7 @@
       <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND BOOKING.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -579,8 +746,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND BOOKING.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -682,20 +848,19 @@
       <if test="entity.enabled != null and entity.enabled != 0">
         AND BOOKING.ENABLED = #{entity.enabled,jdbcType=INTEGER}
       </if>
-      
-       <if test="entity.partnerId != null and entity.partnerId != 0">
+
+      <if test="entity.partnerId != null and entity.partnerId != 0">
         AND BOOKING.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
       <if test="entity.partnerId == null or entity.partnerId == 0">
         <if test="entity.partnerIdSet != null and entity.partnerIdSet.size() > 0">
           AND BOOKING.PARTNER_ID IN
-          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.partnerIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
       </if>
-      
+
     </if>
     ) AS total
   </select>
@@ -703,7 +868,8 @@
     SELECT
     <include refid="Booking_Base_Column_List" />
     from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
-    where BOOKING.DELETED = 0 and COURSE.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
+    where BOOKING.DELETED = 0 and COURSE.PARTNER_ID =
+    #{partnerId,jdbcType=INTEGER}
     <if test="entity != null">
 
       <if test="entity.id != null and entity.id != 0">
@@ -724,8 +890,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -737,8 +902,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
+            close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -750,8 +915,7 @@
       <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND BOOKING.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -776,8 +940,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND BOOKING.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -908,10 +1071,11 @@
 
   <select id="getCountByPartnerId" parameterType="map" resultType="int">
     select count(*) from (
-      SELECT
+    SELECT
     <include refid="Booking_Base_Column_List" />
     from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
-    where BOOKING.DELETED = 0 and COURSE.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
+    where BOOKING.DELETED = 0 and COURSE.PARTNER_ID =
+    #{partnerId,jdbcType=INTEGER}
     <if test="entity != null">
 
       <if test="entity.id != null and entity.id != 0">
@@ -932,8 +1096,7 @@
       <if test="entity.userId == null or entity.userId == 0">
         <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
           AND BOOKING.USER_ID IN
-          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -945,8 +1108,8 @@
       <if test="entity.courseId == null or entity.courseId == 0">
         <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND BOOKING.COURSE_ID IN
-          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet != null and entity.courseIdSet" item="listItem" open="("
+            close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -958,8 +1121,7 @@
       <if test="entity.courseTemplateId == null || entity.courseTemplateId == 0">
         <if test="entity.courseTemplateIdSet != null and entity.courseTemplateIdSet.size() > 0">
           AND BOOKING.COURSE_TEMPLATE_ID IN
-          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.courseTemplateIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -984,8 +1146,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND BOOKING.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem" open="(" close=")"
-            separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
