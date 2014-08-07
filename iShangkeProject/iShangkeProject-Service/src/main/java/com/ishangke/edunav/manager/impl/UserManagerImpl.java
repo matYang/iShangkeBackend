@@ -375,14 +375,14 @@ public class UserManagerImpl implements UserManager {
         UserEntityExt searchEntity = new UserEntityExt();
         searchEntity.setPhone(userBo.getPhone());
         
-        List<UserEntityExt> result = null;
+        UserEntityExt result = null;
         try {
-            result = userMapper.list(searchEntity, null);
+            result = userMapper.getByPhone(searchEntity);
         } catch (Throwable t) {
             throw new ManagerException("OpenCellSession with phone number: " + userBo.getPhone() + " failed", t);
         }
         
-        if (result != null && result.size() > 0) {
+        if (result != null && result.getId() != null && result.getId() > 0) {
             throw new ManagerException("Account already registered");
         }
         
@@ -403,18 +403,18 @@ public class UserManagerImpl implements UserManager {
         
         UserEntityExt searchEntity = new UserEntityExt();
         searchEntity.setPhone(userBo.getPhone());
-        List<UserEntityExt> result = null;
+        UserEntityExt result = null;
         try {
-            result = userMapper.list(searchEntity, null);
+            result = userMapper.getByPhone(searchEntity);
         } catch (Throwable t) {
             throw new ManagerException("OpenForgetPasswordSession with phone number: " + userBo.getPhone() + " failed", t);
         }
         
-        if (result == null || result.size() == 0) {
+        if (result == null || result.getId() == null || result.getId() <= 0) {
             throw new ManagerException("Account is not registered");
         }
         
-        UserEntityExt curUser = result.get(0);
+        UserEntityExt curUser = result;
         String authCode = authManager.openForgetPasswordSession(curUser.getId());
         SessionBo sessionBo = new SessionBo();
         sessionBo.setId(curUser.getId());
@@ -571,10 +571,16 @@ public class UserManagerImpl implements UserManager {
             if (loginType == LoginEnums.IdentifierType.PHONE) {
                 search.setPhone(loginBo.getAccountIdentifier());
                 curUser = userMapper.getByPhone(search);
+                if (curUser == null) {
+                    throw new UserNotFoundException("LoginByUser failed for user with Phone: " + loginBo.getAccountIdentifier() + " because corresponding user is not found");
+                }
             }
             else if (loginType == LoginEnums.IdentifierType.INVITATIONCODE){
                 search.setInvitationCode(loginBo.getAccountIdentifier());
                 curUser = userMapper.getByInvitationCode(search);
+                if (curUser == null) {
+                    throw new UserNotFoundException("LoginByUser failed for user with InvitationCode: " + loginBo.getAccountIdentifier() + " because corresponding user is not found");
+                }
             }
             else if (loginType == LoginEnums.IdentifierType.EMAIL) {
                 throw new ManagerException("邮箱登陆功能尚未开启，请使用 手机号或者用户名 登陆");
@@ -583,9 +589,6 @@ public class UserManagerImpl implements UserManager {
                 throw new ManagerException("无法识别账号类型，请遵照 手机号码/用户名/邮箱 格式");
             }
             
-            if (curUser == null) {
-                throw new UserNotFoundException("LoginByUser failed for user: " + loginBo.getAccountIdentifier());
-            }
 
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
                 throw new AuthenticationException("AccountIdentifier or password not match");
