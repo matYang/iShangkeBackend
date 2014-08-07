@@ -249,7 +249,7 @@
         AND CATEGORY.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
       </if>
       <if test="entity.value != null and !entity.value.equals('') ">
-        AND CATEGORY.VALUE LIKE "%"#{entity.value,jdbcType=VARCHAR}"%"
+        AND CATEGORY.VALUE LIKE #{entity.value,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lastModifyTime != null">

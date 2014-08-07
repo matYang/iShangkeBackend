@@ -66,7 +66,7 @@
     <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
     <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
-    <result column="COURSE_COURS_HOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+    <result column="COURSE_COURSHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
     <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
     <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
     <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
