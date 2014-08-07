@@ -29,6 +29,14 @@ public class CouponConverter {
         if (e.getCode() != null) {
             couponBo.setCode(e.getCode());
         }
+        if (e.getStatus() != null) {
+            couponBo.setStatus(e.getStatus());
+        } else {
+            couponBo.setStatus(Constant.DEFAULTNULL);
+        }
+        if (e.getStatusSet() != null) {
+            couponBo.setStatusSet(e.getStatusSet());
+        }
         if (e.getEnabled() != null) {
             couponBo.setEnabled(e.getEnabled());
         }
@@ -130,6 +138,10 @@ public class CouponConverter {
         if (bo.getTotalStart() != Constant.DEFAULTNULL) {
             couponEntityExt.setTotalStart(bo.getTotalStart());
         }
+        if (bo.getStatus() != Constant.DEFAULTNULL) {
+            couponEntityExt.setStatus(bo.getStatus());
+        }
+        couponEntityExt.setStatusSet(bo.getStatusSet());
         couponEntityExt.setUserId(bo.getUserId());
         couponEntityExt.setUserIdSet(bo.getUserIdSet());
         return couponEntityExt;
