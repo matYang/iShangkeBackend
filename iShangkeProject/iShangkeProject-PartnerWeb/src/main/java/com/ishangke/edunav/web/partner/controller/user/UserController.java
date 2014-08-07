@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.partner.UserFacade;
@@ -124,8 +125,9 @@ public class UserController extends AbstractController{
             return this.handleWebException(new ControllerException("新密码不能为空"), resp);
         }
 
-        
-        SessionBo newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+        PasswordBo passwordBo = PasswordConverter.fromModel(passwordVo);
+        passwordBo.setId(id);
+        SessionBo newSession = userFacade.changePassword(passwordBo, permissionTag);
         this.openSession(newSession, false, req, resp);
         return new EmptyResponse();
     }
