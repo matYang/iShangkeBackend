@@ -141,6 +141,14 @@ public class UserConverter {
         userVo.setSchoolIdSet(bo.getSchoolIdSet());
         userVo.setLocationId(bo.getLocationId());
         userVo.setLocationIdSet(bo.getLocationIdSet());
+        if (Constant.DEFAULTNULL != bo.getCouponTotal()) {
+            userVo.setCouponTotal(bo.getCouponTotal());
+        } else {
+            //不能显示null给用户看
+            userVo.setCouponTotal(0.0);
+        }
+        userVo.setAccount(AccountConverter.toModel(bo.getAccount()));
+        userVo.setCredit(CreditConverter.toModel(bo.getCredit()));
         return userVo;
     }
 }

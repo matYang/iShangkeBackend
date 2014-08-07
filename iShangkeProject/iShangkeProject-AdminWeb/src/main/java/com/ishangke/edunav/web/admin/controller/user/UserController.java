@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.UserPageViewBo;
@@ -131,7 +132,9 @@ public class UserController extends AbstractController {
 
         SessionBo newSession = null;
         try {
-            newSession = userFacade.changePassword(PasswordConverter.fromModel(passwordVo), permissionTag);
+            PasswordBo passwordBo = PasswordConverter.fromModel(passwordVo);
+            passwordBo.setId(id);
+            newSession = userFacade.changePassword(passwordBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         } 
