@@ -44,19 +44,26 @@ public class UserController extends AbstractController{
         
         SessionBo authSessionBo = this.getSession(req);
         boolean loggedIn;
-        UserBo curUser = null;
         
+        if (loginVo.getAccountIdentifier() == null || loginVo.getAccountIdentifier().length() == 0) {
+            return this.handleWebException(new ControllerException("请输入账号"), resp);
+        }
+        if (loginVo.getPassword() == null || loginVo.getPassword().length() == 0) {
+            return this.handleWebException(new ControllerException("请输入密码"), resp);
+        }
+        
+        UserBo curUser = null;
         try {
-             loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
-             if (loggedIn) {
-                 return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
-             }
-             authSessionBo = userFacade.loginByPhone(LoginConverter.fromModel(loginVo), permissionTag);
-             if (authSessionBo.getId() > 0) {
-                 this.openSession(authSessionBo, remember, req, resp);
-             }
-            
-             curUser = userFacade.authenticate(authSessionBo, permissionTag);    
+            loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
+            if (loggedIn) {
+                return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
+            }
+            authSessionBo = userFacade.loginByPhone(LoginConverter.fromModel(loginVo), permissionTag);
+            if (authSessionBo.getId() > 0) {
+                this.openSession(authSessionBo, remember, req, resp);
+            }
+
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);    
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -143,7 +150,21 @@ public class UserController extends AbstractController{
             return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
         }
 
-        if (userVo.getAuthCode() == null) {
+
+        if (userVo.getPhone() == null || userVo.getPhone().length() == 0) {
+            return this.handleWebException(new ControllerException("手机号码不能为空"), resp);
+        }
+        if (userVo.getPassword() == null || userVo.getPassword().length() == 0) {
+            return this.handleWebException(new ControllerException("密码不能为空"), resp);
+        }
+        if (!userVo.getPassword().equals(userVo.getConfirmPassword())) {
+            return this.handleWebException(new ControllerException("两次输入密码不匹配"), resp);
+        }
+        //invitation code actually stands for userName, where name is the real name to be filled after registration
+        if (userVo.getInvitationCode() == null || userVo.getInvitationCode().length() == 0) {
+            return this.handleWebException(new ControllerException("用户名不能为空"), resp);
+        }
+        if (userVo.getAuthCode() == null || userVo.getAuthCode().length() == 0) {
             return this.handleWebException(new ControllerException("验证码不能为空"), resp);
         }
         
@@ -163,6 +184,7 @@ public class UserController extends AbstractController{
         if (result.getAuthCode() == null) {
             throw new ControllerException("Session创建失败");
         }
+
         SessionBo newSession = new SessionBo();
         newSession.setId(result.getId());
         newSession.setAccountIdentifier(result.getPhone());

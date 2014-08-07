@@ -232,17 +232,27 @@ public class UserManagerImpl implements UserManager {
         if (userBo.getPhone() == null) {
             throw new ManagerException("User registration must specify phone");
         }
+        if (userBo.getInvitationCode() == null) {
+            throw new ManagerException("User registration must specify invitationCode");
+        }
         if (userBo.getPassword() == null) {
             throw new ManagerException("User registration must specify password");
         }
         
         // 判断是否存在手机号码一样的USER
-        UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setPhone(userBo.getPhone());
-
-        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-        if (entityList != null && entityList.size() != 0) {
-            throw new ManagerException(userBo.getPhone() + " is already in db");
+        UserEntityExt entityPhoneInDb = new UserEntityExt();
+        entityPhoneInDb.setPhone(userBo.getPhone());
+        entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
+        if (entityPhoneInDb != null && entityPhoneInDb.getId() != null && entityPhoneInDb.getId() > 0) {
+            throw new ManagerException("Phone number: " + userBo.getPhone() + " is already in db");
+        }
+        
+        //判断InvitationCode是否已经存在
+        UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
+        entityInvitationCodeInDb.setInvitationCode(userBo.getInvitationCode());
+        entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
+        if (entityInvitationCodeInDb != null && entityInvitationCodeInDb.getId() != null && entityInvitationCodeInDb.getId() > 0) {
+            throw new ManagerException("Invitation code:" + userBo.getInvitationCode() + " is already in db");
         }
         
         UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
@@ -265,21 +275,25 @@ public class UserManagerImpl implements UserManager {
         else {
             throw new AuthenticationException("Non-admin user trying createUser");
         }
-        
-        if (targetUser.getPhone() == null) {
-            throw new ManagerException("User creation must specify phone");
-        }
         if (targetUser.getPassword() == null) {
             throw new ManagerException("User creation must specify password");
         }
         
-        // 判断是否存在手机号码一样的USER
-        UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setPhone(targetUser.getPhone());
-
-        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-        if (entityList != null && entityList.size() != 0) {
-            throw new ManagerException(targetUser.getPhone() + " is already in db");
+        if (targetUser.getPhone() != null) {
+            UserEntityExt entityPhoneInDb = new UserEntityExt();
+            entityPhoneInDb.setPhone(targetUser.getPhone());
+            entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
+            if (entityPhoneInDb != null && entityPhoneInDb.getId() != null && entityPhoneInDb.getId() > 0) {
+                throw new ManagerException("Phone number: " + targetUser.getPhone() + " is already in db");
+            }
+        }
+        if (targetUser.getInvitationCode() != null) {
+            UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
+            entityInvitationCodeInDb.setInvitationCode(targetUser.getInvitationCode());
+            entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
+            if (entityInvitationCodeInDb != null && entityInvitationCodeInDb.getId() != null && entityInvitationCodeInDb.getId() > 0) {
+                throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+            }
         }
         
         //act like a normal registration
@@ -311,15 +325,21 @@ public class UserManagerImpl implements UserManager {
         
         
         if (targetUser.getPhone() != null) {
-           // 判断是否存在手机号码一样的USER
-           UserEntityExt entityInDb = new UserEntityExt();
-           entityInDb.setPhone(targetUser.getPhone());
-
-           List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-           if (entityList != null && entityList.size() != 0) {
-               throw new ManagerException(targetUser.getPhone() + " is already in db");
-           }
-       }
+            UserEntityExt entityPhoneInDb = new UserEntityExt();
+            entityPhoneInDb.setPhone(targetUser.getPhone());
+            entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
+            if (entityPhoneInDb != null && entityPhoneInDb.getId() != null && entityPhoneInDb.getId() > 0) {
+                throw new ManagerException("Phone number: " + targetUser.getPhone() + " is already in db");
+            }
+        }
+        if (targetUser.getInvitationCode() != null) {
+            UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
+            entityInvitationCodeInDb.setInvitationCode(targetUser.getInvitationCode());
+            entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
+            if (entityInvitationCodeInDb != null && entityInvitationCodeInDb.getId() != null && entityInvitationCodeInDb.getId() > 0) {
+                throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+            }
+        }
         
         UserBo response = null;
         try {
