@@ -38,22 +38,34 @@ public class UserController extends AbstractController{
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
-        boolean remember = (loginVo.getRemember() == null || loginVo.getRemember() == 1);
-        
+        boolean remember = (loginVo.getRemember() != null && loginVo.getRemember() == 1);
         SessionBo authSessionBo = this.getSession(req);
-        boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
         
-        if (loggedIn) {
-            this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
+        if (loginVo.getAccountIdentifier() == null || loginVo.getAccountIdentifier().length() == 0) {
+            return this.handleWebException(new ControllerException("请输入账号"), resp);
+        }
+        if (loginVo.getPassword() == null || loginVo.getPassword().length() == 0) {
+            return this.handleWebException(new ControllerException("请输入密码"), resp);
         }
         
-        authSessionBo = userFacade.loginByReference(LoginConverter.fromModel(loginVo), permissionTag);
-        if (authSessionBo.getId() > 0) {
-            this.openSession(authSessionBo, remember, req, resp);
+        UserBo curUser = null;
+        try {
+            boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
+            if (loggedIn) {
+                this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
+            }
+            
+            authSessionBo = userFacade.loginByReference(LoginConverter.fromModel(loginVo), permissionTag);
+            if (authSessionBo.getId() > 0) {
+                this.openSession(authSessionBo, remember, req, resp);
+            }
+            
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
         }
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        
         responseVo = UserConverter.toModel(curUser);
-        
         return responseVo;
     }
 

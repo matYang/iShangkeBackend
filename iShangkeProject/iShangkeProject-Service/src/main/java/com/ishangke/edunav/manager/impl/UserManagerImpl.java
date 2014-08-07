@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.CouponEnums;
+import com.ishangke.edunav.common.enums.LoginEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.LoginDeterminer;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -161,11 +163,10 @@ public class UserManagerImpl implements UserManager {
                 //use used an invitation code
                 UserEntityExt inviterSearch = new UserEntityExt();
                 inviterSearch.setInvitationCode(appliedInvitationCode);
-                List<UserEntityExt> inviterSearchResult = userMapper.list(inviterSearch, null);
-                if (inviterSearchResult == null || inviterSearchResult.size() == 0) {
+                inviterEntity = userMapper.getByInvitationCode(inviterSearch);
+                if (inviterEntity == null || inviterEntity.getId() == null || inviterEntity.getId() <= 0) {
                     throw new ManagerException("InitializeNormalUser::inviter not found with invitation code: " + appliedInvitationCode + " for unique identifier: " + uniqueIdentifier );
                 }
-                inviterEntity = inviterSearchResult.get(0);
                 
                 CouponEntityExt curUserCouponEntity = new CouponEntityExt();
                 curUserCouponEntity.setBalance(DefaultValue.COUPONINVITATIONVALUE);
@@ -232,17 +233,27 @@ public class UserManagerImpl implements UserManager {
         if (userBo.getPhone() == null) {
             throw new ManagerException("User registration must specify phone");
         }
+        if (userBo.getInvitationCode() == null) {
+            throw new ManagerException("User registration must specify invitationCode");
+        }
         if (userBo.getPassword() == null) {
             throw new ManagerException("User registration must specify password");
         }
         
         // 判断是否存在手机号码一样的USER
-        UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setPhone(userBo.getPhone());
-
-        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-        if (entityList != null && entityList.size() != 0) {
-            throw new ManagerException(userBo.getPhone() + " is already in db");
+        UserEntityExt entityPhoneInDb = new UserEntityExt();
+        entityPhoneInDb.setPhone(userBo.getPhone());
+        entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
+        if (entityPhoneInDb != null && entityPhoneInDb.getId() != null && entityPhoneInDb.getId() > 0) {
+            throw new ManagerException("Phone number: " + userBo.getPhone() + " is already in db");
+        }
+        
+        //判断InvitationCode是否已经存在
+        UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
+        entityInvitationCodeInDb.setInvitationCode(userBo.getInvitationCode());
+        entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
+        if (entityInvitationCodeInDb != null && entityInvitationCodeInDb.getId() != null && entityInvitationCodeInDb.getId() > 0) {
+            throw new ManagerException("Invitation code:" + userBo.getInvitationCode() + " is already in db");
         }
         
         UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
@@ -265,21 +276,25 @@ public class UserManagerImpl implements UserManager {
         else {
             throw new AuthenticationException("Non-admin user trying createUser");
         }
-        
-        if (targetUser.getPhone() == null) {
-            throw new ManagerException("User creation must specify phone");
-        }
         if (targetUser.getPassword() == null) {
             throw new ManagerException("User creation must specify password");
         }
         
-        // 判断是否存在手机号码一样的USER
-        UserEntityExt entityInDb = new UserEntityExt();
-        entityInDb.setPhone(targetUser.getPhone());
-
-        List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-        if (entityList != null && entityList.size() != 0) {
-            throw new ManagerException(targetUser.getPhone() + " is already in db");
+        if (targetUser.getPhone() != null) {
+            UserEntityExt entityPhoneInDb = new UserEntityExt();
+            entityPhoneInDb.setPhone(targetUser.getPhone());
+            entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
+            if (entityPhoneInDb != null && entityPhoneInDb.getId() != null && entityPhoneInDb.getId() > 0) {
+                throw new ManagerException("Phone number: " + targetUser.getPhone() + " is already in db");
+            }
+        }
+        if (targetUser.getInvitationCode() != null) {
+            UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
+            entityInvitationCodeInDb.setInvitationCode(targetUser.getInvitationCode());
+            entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
+            if (entityInvitationCodeInDb != null && entityInvitationCodeInDb.getId() != null && entityInvitationCodeInDb.getId() > 0) {
+                throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+            }
         }
         
         //act like a normal registration
@@ -311,15 +326,21 @@ public class UserManagerImpl implements UserManager {
         
         
         if (targetUser.getPhone() != null) {
-           // 判断是否存在手机号码一样的USER
-           UserEntityExt entityInDb = new UserEntityExt();
-           entityInDb.setPhone(targetUser.getPhone());
-
-           List<UserEntityExt> entityList = userMapper.list(entityInDb, null);
-           if (entityList != null && entityList.size() != 0) {
-               throw new ManagerException(targetUser.getPhone() + " is already in db");
-           }
-       }
+            UserEntityExt entityPhoneInDb = new UserEntityExt();
+            entityPhoneInDb.setPhone(targetUser.getPhone());
+            entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
+            if (entityPhoneInDb != null && entityPhoneInDb.getId() != null && entityPhoneInDb.getId() > 0) {
+                throw new ManagerException("Phone number: " + targetUser.getPhone() + " is already in db");
+            }
+        }
+        if (targetUser.getInvitationCode() != null) {
+            UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
+            entityInvitationCodeInDb.setInvitationCode(targetUser.getInvitationCode());
+            entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
+            if (entityInvitationCodeInDb != null && entityInvitationCodeInDb.getId() != null && entityInvitationCodeInDb.getId() > 0) {
+                throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+            }
+        }
         
         UserBo response = null;
         try {
@@ -533,7 +554,7 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public SessionBo loginByPhone(LoginBo loginBo) {
+    public SessionBo loginByUser(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -544,16 +565,30 @@ public class UserManagerImpl implements UserManager {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
                 throw new ManagerException("User cannot login, please wait for a minute");
             }
-            UserEntityExt search = new UserEntityExt();
-            search.setPhone(loginBo.getAccountIdentifier());
             
-            curUser = userMapper.getByPhone(search);
+            UserEntityExt search = new UserEntityExt();
+            LoginEnums.IdentifierType loginType = LoginDeterminer.exam(loginBo.getAccountIdentifier());
+            if (loginType == LoginEnums.IdentifierType.PHONE) {
+                search.setPhone(loginBo.getAccountIdentifier());
+                curUser = userMapper.getByPhone(search);
+            }
+            else if (loginType == LoginEnums.IdentifierType.INVITATIONCODE){
+                search.setInvitationCode(loginBo.getAccountIdentifier());
+                curUser = userMapper.getByInvitationCode(search);
+            }
+            else if (loginType == LoginEnums.IdentifierType.EMAIL) {
+                throw new ManagerException("邮箱登陆功能尚未开启，请使用 手机号或者用户名 登陆");
+            }
+            else {
+                throw new ManagerException("无法识别账号类型，请遵照 手机号码/用户名/邮箱 格式");
+            }
+            
             if (curUser == null) {
-                throw new UserNotFoundException("LoginByPhone failed for user: " + loginBo.getAccountIdentifier());
+                throw new UserNotFoundException("LoginByUser failed for user: " + loginBo.getAccountIdentifier());
             }
 
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
-                throw new AuthenticationException("Phone or password not match");
+                throw new AuthenticationException("AccountIdentifier or password not match");
             }
             
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
@@ -562,7 +597,7 @@ public class UserManagerImpl implements UserManager {
             
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
-            throw new ManagerException("LoginByPhone failed for user: " + loginBo.getAccountIdentifier(), t);
+            throw new ManagerException("LoginByUser failed for user: " + loginBo.getAccountIdentifier(), t);
         }
         
         authManager.success(loginBo.getAccountIdentifier());
@@ -575,6 +610,7 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    //reference is reference only
     public SessionBo loginByReference(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
             throw new ManagerException("Invalid parameter");
