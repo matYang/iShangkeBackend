@@ -18,6 +18,11 @@ public class UserEntityExt extends UserEntity {
     private Set<Integer> careerIdSet;
     private Set<Integer> schoolIdSet;
     private Set<Integer> locationIdSet;
+    
+    private AccountEntityExt account;
+    private CreditEntityExt credit;
+    
+    private Double couponTotal;
 
     public Set<Integer> getCareerIdSet() {
         return careerIdSet;
@@ -113,6 +118,30 @@ public class UserEntityExt extends UserEntity {
 
     public void setLocationIdSet(Set<Integer> locationIdSet) {
         this.locationIdSet = locationIdSet;
+    }
+
+    public AccountEntityExt getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountEntityExt account) {
+        this.account = account;
+    }
+
+    public CreditEntityExt getCredit() {
+        return credit;
+    }
+
+    public void setCredit(CreditEntityExt credit) {
+        this.credit = credit;
+    }
+
+    public Double getCouponTotal() {
+        return couponTotal;
+    }
+
+    public void setCouponTotal(Double couponTotal) {
+        this.couponTotal = couponTotal;
     }
 
 }
