@@ -9,7 +9,9 @@ public class PasswordConverter {
             return null;
         }
         PasswordBo bo = new PasswordBo();
-        bo.setId(vo.getId());
+        if (vo.getId() != null) {
+            bo.setId(vo.getId());
+        }
         bo.setAccountIdentifier(vo.getAccountIdentifier());
         bo.setAuthCode(vo.getAuthCode());
         bo.setNewPassword(vo.getNewPassword());
