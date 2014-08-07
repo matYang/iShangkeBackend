@@ -38,7 +38,7 @@ public class UserController extends AbstractController{
         UserVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
-        boolean remember = (loginVo.getRemember() == null || loginVo.getRemember() == 1);
+        boolean remember = (loginVo.getRemember() != null && loginVo.getRemember() == 1);
         
         SessionBo authSessionBo = this.getSession(req);
         boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
