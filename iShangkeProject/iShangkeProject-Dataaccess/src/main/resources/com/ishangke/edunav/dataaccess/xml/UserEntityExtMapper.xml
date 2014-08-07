@@ -287,17 +287,23 @@
     from USERS where USERS.DELETED = 0 and USERS.ID =
     #{id,jdbcType=INTEGER}
   </select>
-  <!-- getById -->
+  <!-- getByPhone -->
   <select id="getByPhone" parameterType="map" resultMap="UserExtMap">
     SELECT
     <include refid="User_Base_Column_List" />
     from USERS where USERS.DELETED = 0 and USERS.PHONE = #{entity.phone, jdbcType=VARCHAR}
   </select>
-  <!-- getById -->
+  <!-- getByReference -->
   <select id="getByReference" parameterType="map" resultMap="UserExtMap">
     SELECT
     <include refid="User_Base_Column_List" />
     from USERS where USERS.DELETED = 0 and USERS.REFERENCE = #{entity.reference, jdbcType=VARCHAR}
+  </select>
+  <!-- getByInvitationCode -->
+  <select id="getByInvitationCode" parameterType="map" resultMap="UserExtMap">
+    SELECT
+    <include refid="User_Base_Column_List" />
+    from USERS where USERS.DELETED = 0 and USERS.INVITATION_CODE = #{entity.invitationCode, jdbcType=VARCHAR}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="UserExtMap">
