@@ -511,10 +511,10 @@ public class BookingServiceImpl implements BookingService.Iface {
     public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             //只有普通用户可以创建支付order
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createOrderByUser"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createOrderByUser"));
+//                throw new NoPermissionException();
+//            }
             return orderManager.createOrderByUser(orderBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
