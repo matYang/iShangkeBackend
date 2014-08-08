@@ -49,10 +49,6 @@ public class CreditController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (creditVo.getId() == null || creditVo.getId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
-        }
         
         CreditPageViewBo pageViewBo = null;
         CreditPageViewVo pageViewVo = null;
@@ -73,10 +69,6 @@ public class CreditController extends AbstractController{
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
-        }
-        //user module specific, also need to perform null check
-        if (creditHistoryVo.getUserId() == null || creditHistoryVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
         }
         
         CreditHistoryPageViewBo pageViewBo = null;
