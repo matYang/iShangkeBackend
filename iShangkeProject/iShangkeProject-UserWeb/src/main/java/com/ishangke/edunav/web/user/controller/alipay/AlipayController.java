@@ -21,37 +21,28 @@ public class AlipayController extends AbstractController {
     @Autowired
     private AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public @ResponseBody
     String processAlipayFeedback(HttpServletRequest request) {
-        LOGGER.error("1@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         String notifyId = null;
         String tradeStatus = null;
         String verified = null;
         String total_fee = null;
-        LOGGER.error("2@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         notifyId = request.getParameter("notify_id");
-        LOGGER.error("3@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         verified = alipayFacade.verify_notify_id(notifyId);
-        LOGGER.error("4@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         total_fee = request.getParameter("total_fee");
-        LOGGER.error("5@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         // Check Sign
         if (verified.equals("true")) {
-            LOGGER.error("6@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             tradeStatus = request.getParameter("trade_status");
-            LOGGER.error("7@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             if (tradeStatus.equals("TRADE_SUCCESS")) {
-                LOGGER.error("8@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                int orderId = Integer.parseInt(request.getParameter("out_trade_no"));
-                LOGGER.error("9@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                String out_trade_no = request.getParameter("out_trade_no");
+                String[] nos = out_trade_no.split("-");
+                int orderId = Integer.parseInt(nos[nos.length - 1]);
                 alipayFacade.changeBookingStatusToPayed(orderId);
-                LOGGER.error("10@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 // Change the status of the order
                 return "success";
             }
         }
-        LOGGER.error("11@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         return "fail";
 
     }
