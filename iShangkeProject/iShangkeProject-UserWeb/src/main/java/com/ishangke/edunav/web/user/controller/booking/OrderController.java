@@ -59,7 +59,7 @@ public class OrderController extends AbstractController {
         order.setPrice(booking.getPrice());
         OrderBo orderBo = OrderConverter.fromModel(order);
         try {
-            bookingFacade.createOrderByUser(orderBo, currentUser, permissionTag);
+            orderBo = bookingFacade.createOrderByUser(orderBo, currentUser, permissionTag);
         } catch (ControllerException c) {
             resp.setStatus(511);
             return "服务器发生异常";
@@ -70,5 +70,5 @@ public class OrderController extends AbstractController {
         //return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
         return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
     }
-
+    
 }
