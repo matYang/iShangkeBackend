@@ -57,6 +57,8 @@ service BookingService {
      */
     booking.BookingPageViewBo queryBooking(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+    booking.BookingBo queryBookingById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
     /**
      * 本方法为查询订单历史操作。<br>
      * 合作商可以按条件查询自己的所有预定单历史操作，ishangke管理员可以按条件查找所有合作商的预定单历史操作

@@ -1,22 +1,27 @@
 package com.ishangke.edunav.web.user.controller.booking;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
-import com.ishangke.edunav.commoncontract.model.OrderBo;
+import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.facade.user.BookingFacade;
 import com.ishangke.edunav.facade.user.UserFacade;
-import com.ishangke.edunav.web.converter.UserConverter;
-import com.ishangke.edunav.web.model.UserVo;
+import com.ishangke.edunav.web.converter.OrderConverter;
+import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.model.OrderVo;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
@@ -32,35 +37,34 @@ public class OrderController extends AbstractController {
     @Autowired
     AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET)
     public @ResponseBody
-    String test(HttpServletRequest request) {
-        int userId = 3;
-        int courseId = 1;
-        double price = 0.02;
+    String buildForm(@PathVariable int bookingId, @RequestParam("alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo currentUser = null;
+        try {
+            currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            resp.setStatus(511);
+            return "服务器发生异常，不能验证当前用户的身份。。。";
+        }
+        BookingBo booking = bookingFacade.queryBookingById(bookingId, currentUser, permissionTag);
 
-        UserVo user = new UserVo();
-        user.setId(userId);
-        UserBo userBo = UserConverter.fromModel(user);
-
-        BookingBo booking = new BookingBo();
-        booking.setUserId(userId);
-        booking.setCourseId(courseId);
-        booking.setPrice(price);
-        booking.setCashbackAmount(0);
-        booking.setStatus(Constant.BOOKINGOPERATIONONLINESUBMITBOOKING);
-        booking.setName("bookingTest");
-        booking.setPhone("18502877744");
-        booking = bookingFacade.createBookingByUser(booking, userBo, "GET/api/v2/course");
-
-        OrderBo order = new OrderBo();
+        OrderVo order = new OrderVo();
         order.setBookingId(booking.getId());
-        order = bookingFacade.createOrderByUser(order, userBo, "GET/api/v2/course");
-        
-        String out_trade_no = String.valueOf(order.getId());
-        String total_fee = String.valueOf(price);
-        
-        return alipayFacade.buildFormForGet("NANJINGAISHANGKETEST", out_trade_no,  total_fee);
+        order.setCreateTime(DateUtility.getCurTimeInstance());
+        order.setType(type);
+        order.setPrice(booking.getPrice());
+        try {
+            bookingFacade.createOrderByUser(OrderConverter.fromModel(order), currentUser, permissionTag);
+        } catch (ControllerException c) {
+            resp.setStatus(511);
+            return "服务器发生异常";
+        }
+
+        //我们的订单号ISK + booking id + order id
+        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + order.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
 
     }
 

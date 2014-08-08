@@ -52,6 +52,13 @@ public interface BookingManager {
      *
      */
     List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo);
+    
+    /**
+     * 
+     * @return
+     */
+    BookingBo queryBookingById(int id, UserBo userBo);
+    
     int queryBookingTotal(BookingBo bookingBo, UserBo userBo);
     /**
      * 本方法为查询订单历史操作。<br>
