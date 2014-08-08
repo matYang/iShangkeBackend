@@ -20,10 +20,7 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.DataaccessConstants;
 import com.ishangke.edunav.dataaccess.common.OrderByEntity;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
-import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserGroupEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, UserEntityExtTest.class })
@@ -97,21 +94,21 @@ public class UserEntityExtTest extends BaseTest {
         Assert.assertEquals(3, result.size());
     }
     
-    @Test
-    public void testGet() {
-        UserEntityExt getbyid0 = userEntityExtMapper
-                .getById(1);
-        UserEntityExt getbyid1 = userEntityExtMapper
-                .getById(2);
-        UserEntityExt getbyid2 = userEntityExtMapper
-                .getById(3);
-        UserEntityExt getbyid3 = userEntityExtMapper
-                .getById(4);
-        Assert.assertEquals("李清", getbyid0.getName());
-        Assert.assertEquals("陈睿", getbyid1.getName());
-        Assert.assertEquals("mat", getbyid2.getName());
-        Assert.assertEquals("harry", getbyid3.getName());
-    }
+//    @Test
+//    public void testGet() {
+//        UserEntityExt getbyid0 = userEntityExtMapper
+//                .getById(1);
+//        UserEntityExt getbyid1 = userEntityExtMapper
+//                .getById(2);
+//        UserEntityExt getbyid2 = userEntityExtMapper
+//                .getById(3);
+//        UserEntityExt getbyid3 = userEntityExtMapper
+//                .getById(4);
+//        Assert.assertEquals("李清", getbyid0.getName());
+//        Assert.assertEquals("陈睿", getbyid1.getName());
+//        Assert.assertEquals("mat", getbyid2.getName());
+//        Assert.assertEquals("harry", getbyid3.getName());
+//    }
     @Test
     public void testUpdate() {
         UserEntityExt upDate = userEntityExtMapper
