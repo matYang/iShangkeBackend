@@ -50,7 +50,8 @@
     <result column="COURSETEMPLATE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
-    <result column="COURSETEMPLATE_STUDYDAYNOTE" property="studyDayNote" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
+    <result column="COURSETEMPLATE_STUDYDAYS" property="studyDays" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
     <result column="COURSETEMPLATE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
@@ -187,8 +188,10 @@
     COURSETEMPLATE_SUITABLESTUDENT,
     COURSE_TEMPLATE.PREREQUEST COURSETEMPLATE_PREREQUEST,
     COURSE_TEMPLATE.HIGH_SCORE_REWARD COURSETEMPLATE_HIGHSCOREREWARD,
-    COURSE_TEMPLATE.STUDY_DAY_NOTE
-    COURSETEMPLATE_STUDYDAYNOTE,
+    COURSE_TEMPLATE.STUDY_DAYS_NOTE
+    COURSETEMPLATE_STUDYDAYSNOTE,
+    COURSE_TEMPLATE.STUDY_DAYS
+    COURSETEMPLATE_STUDYDAYS,
     COURSE_TEMPLATE.TEACHING_MATERIAL_INTRO
     COURSETEMPLATE_TEACHINGMATERIALINTRO,
     COURSE_TEMPLATE.QUESTION_BANK COURSETEMPLATE_QUESTIONBANK,
@@ -425,8 +428,11 @@
       <if test="highScoreReward != null">
         HIGH_SCORE_REWARD,
       </if>
-      <if test="studyDayNote != null">
-        STUDY_DAY_NOTE,
+      <if test="studyDaysNote != null">
+        STUDY_DAYS_NOTE,
+      </if>
+      <if test="studyDays != null">
+        STUDY_DAYS,
       </if>
       <if test="teachingMaterialIntro != null">
         TEACHING_MATERIAL_INTRO,
@@ -623,8 +629,11 @@
       <if test="highScoreReward != null">
         #{highScoreReward,jdbcType=VARCHAR},
       </if>
-      <if test="studyDayNote != null">
-        #{studyDayNote,jdbcType=VARCHAR},
+      <if test="studyDaysNote != null">
+        #{studyDaysNote,jdbcType=VARCHAR},
+      </if>
+      <if test="studyDays != null">
+        #{studyDays,jdbcType=VARCHAR},
       </if>
       <if test="teachingMaterialIntro != null">
         #{teachingMaterialIntro,jdbcType=VARCHAR},
@@ -846,8 +855,11 @@
       <if test="highScoreReward != null">
         HIGH_SCORE_REWARD = #{highScoreReward,jdbcType=VARCHAR},
       </if>
-      <if test="studyDayNote != null">
-        STUDY_DAY_NOTE = #{studyDayNote,jdbcType=VARCHAR},
+      <if test="studyDaysNote != null">
+        STUDY_DAYS_NOTE = #{studyDaysNote,jdbcType=VARCHAR},
+      </if>
+      <if test="studyDays != null">
+        STUDY_DAYS = #{studyDays,jdbcType=VARCHAR},
       </if>
       <if test="teachingMaterialIntro != null">
         TEACHING_MATERIAL_INTRO =

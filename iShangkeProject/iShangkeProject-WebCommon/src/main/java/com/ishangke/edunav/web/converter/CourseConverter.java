@@ -390,8 +390,8 @@ public class CourseConverter {
         if (vo.getStatusSet() != null) {
             courseBo.setStatusSet(vo.getStatusSet());
         }
-        if (vo.getStudyDayNote() != null) {
-            courseBo.setStudyDayNote(vo.getStudyDayNote());
+        if (vo.getStudyDaysNote() != null) {
+            courseBo.setStudyDaysNote(vo.getStudyDaysNote());
         }
         if (vo.getSuitableStudent() != null) {
             courseBo.setSuitableStudent(vo.getSuitableStudent());
@@ -483,6 +483,14 @@ public class CourseConverter {
                 }
                 courseBo.setIdSet(set);
             }
+        }
+        //存储周一～周日上课时间的信息
+        if (vo.getStudyDays() != null && vo.getStudyDays().size() > 0) {
+            String studyDays = "";
+            for (Integer i : vo.getStudyDays()) {
+                studyDays = studyDays + i;
+            }
+            courseBo.setStudyDays(studyDays);
         }
         return courseBo;
     }
@@ -679,7 +687,7 @@ public class CourseConverter {
             courseVo.setStatus(bo.getStatus());
         }
         courseVo.setStatusSet(bo.getStatusSet());
-        courseVo.setStudyDayNote(bo.getStudyDayNote());
+        courseVo.setStudyDaysNote(bo.getStudyDaysNote());
         courseVo.setSuitableStudent(bo.getSuitableStudent());
         if (bo.getTeacherList() != null) {
             List<TeacherVo> list = new ArrayList<>();
@@ -700,6 +708,14 @@ public class CourseConverter {
                 list.add(ActionConverter.toModel(a));
             }
             courseVo.setActionList(list);
+        }
+        if (bo.getStudyDays() != null && !"".equals(bo.getStudyDays())) {
+            char[] days = bo.getStudyDays().toCharArray();
+            List<Integer> studyDays = new ArrayList<>();
+            for (char day : days) {
+                studyDays.add(Integer.parseInt("" + day));
+            }
+            courseVo.setStudyDays(studyDays);
         }
         return courseVo;
     }

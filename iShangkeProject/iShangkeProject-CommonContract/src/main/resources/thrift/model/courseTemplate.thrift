@@ -44,7 +44,7 @@ struct CourseTemplateBo {
     37: string suitableStudent
     38: string prerequest
     39: string highScoreReward
-    40: string studyDayNote
+    40: string studyDaysNote
     41: string teachingMaterialIntro
     42: string questionBank
     43: string qualityAssurance
@@ -138,6 +138,7 @@ struct CourseTemplateBo {
     131: double regAddressLat
     132: double regAddressLng
     133: string categoryValue
+    134: string studyDays
 }
 
 struct CommentCourseTemplateApproveBo {

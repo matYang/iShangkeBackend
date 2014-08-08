@@ -395,8 +395,11 @@ public class CourseTemplateConverter {
         if (e.getStatusSet() != null) {
             courseTemplateBo.setStatusSet(e.getStatusSet());
         }
-        if (e.getStudyDayNote() != null) {
-            courseTemplateBo.setStudyDayNote(e.getStudyDayNote());
+        if (e.getStudyDaysNote() != null) {
+            courseTemplateBo.setStudyDaysNote(e.getStudyDaysNote());
+        }
+        if (e.getStudyDays() != null) {
+            courseTemplateBo.setStudyDays(e.getStudyDays());
         }
         if (e.getSuitableStudent() != null) {
             courseTemplateBo.setSuitableStudent(e.getSuitableStudent());
@@ -686,7 +689,8 @@ public class CourseTemplateConverter {
             courseTemplateEntityExt.setStatus(bo.getStatus());
         }
         courseTemplateEntityExt.setStatusSet(bo.getStatusSet());
-        courseTemplateEntityExt.setStudyDayNote(bo.getStudyDayNote());
+        courseTemplateEntityExt.setStudyDaysNote(bo.getStudyDaysNote());
+        courseTemplateEntityExt.setStudyDays(bo.getStudyDays());
         courseTemplateEntityExt.setSuitableStudent(bo.getSuitableStudent());
         if (bo.getTeacherList() != null) {
             List<TeacherEntityExt> list = new ArrayList<>();
