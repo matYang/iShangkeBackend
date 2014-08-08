@@ -290,7 +290,8 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         BookingEntityExt bookingEntity = bookingMapper.getById(bookingBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
-            if (bookingBo.getUserId() != userBo.getId()) {
+            // 因为我们有特殊情况 api中需要提供/booking/{id} 在这种情况下booking bo id明确为一个id值
+            if (!(bookingBo.getUserId() == userBo.getId() || (bookingBo.getId() > 0 && userBo.getId() == bookingEntity.getUserId()))) {
                 throw new ManagerException("cannot query other's booking");
             }
             List<BookingEntityExt> bookings = null;
