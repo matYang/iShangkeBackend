@@ -119,9 +119,6 @@ public class UserController extends AbstractController {
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        if (curId != id) {
-            return this.handleWebException(new ControllerException("不可更改他人密码"), resp);
-        }
         if (passwordVo.getOldPassword() == null) {
             return this.handleWebException(new ControllerException("旧密码不能为空"), resp);
         }
@@ -155,11 +152,6 @@ public class UserController extends AbstractController {
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        // user module specific (and maybe partner?)
-        //admin 可以查看任何人的信息
-//        if (curId != id) {
-//            return this.handleWebException(new ControllerException("对不起，您没有权限查看其他用户资料"), resp);
-//        }
 
         UserVo queryUser = new UserVo();
         queryUser.setId(curId);
@@ -186,10 +178,7 @@ public class UserController extends AbstractController {
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        //admin可以更新任何人的信息
-//        if (curId != id) {
-//            return this.handleWebException(new ControllerException("对不起，您只能更新自己的用户信息"), resp);
-//        }
+
 
         UserBo targetUser = UserConverter.fromModel(userVo);
         targetUser.setId(curId);

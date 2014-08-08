@@ -50,10 +50,6 @@ public class WithdrawController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
-        }
         
         WithdrawPageViewBo pageViewBo = null;
         WithdrawPageViewVo pageViewVo = null;
@@ -79,10 +75,6 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
-        }
-        
         
         WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
         
@@ -103,10 +95,6 @@ public class WithdrawController extends AbstractController{
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
-        }
-        
-        if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的提款信息");
         }
         
         
