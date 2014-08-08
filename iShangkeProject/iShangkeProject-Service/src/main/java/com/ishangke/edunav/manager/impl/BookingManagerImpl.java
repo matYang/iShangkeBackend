@@ -813,7 +813,7 @@ public class BookingManagerImpl implements BookingManager {
     }
 
     @Override
-    public String buildFormForGet(String subject, String out_trade_no, String total_fee) {
+    public String buildFormForGet(String out_trade_no, String subject, String total_fee) {
         return AlipaySubmit.buildFormForGet(out_trade_no, subject, total_fee);
     }
 
