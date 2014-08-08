@@ -21,7 +21,7 @@ public class AlipayController extends AbstractController {
     @Autowired
     private AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/*")
+    @RequestMapping(value = "", method = RequestMethod.GET, consumes = "application/*")
     public @ResponseBody
     String processAlipayFeedback(HttpServletRequest request) {
         LOGGER.error("1@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
