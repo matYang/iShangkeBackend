@@ -842,7 +842,7 @@ public class BookingManagerImpl implements BookingManager {
             throw new ManagerException("query booking failed for user " + userBo.getId());
         }
         if (booking == null) {
-            throw new ManagerException("cannot find booking of id" + id);
+            throw new ManagerException("cannot find booking of id " + id);
         }
         if (Constant.ROLEUSER.equals(roleName)) {
             if (booking.getUserId() != userBo.getId()) {
