@@ -82,16 +82,15 @@ public class ClassPhotoController extends AbstractController {
     public @ResponseBody
     JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) throws ControllerException {
-        // String permissionTag = this.getUrl(req);
-        // SessionBo authSessionBo = this.getSession(req);
-        //
-        // UserBo curUser = userFacade.authenticate(authSessionBo,
-        // permissionTag);
-        // int curId = curUser.getId();
-        // boolean loggedIn = curId > 0;
-        // if (!loggedIn) {
-        // throw new ControllerException("对不起，您尚未登录");
-        // }
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
+        }
 
         ClassPhotoVo classPhoto = new ClassPhotoVo();
 
@@ -162,7 +161,7 @@ public class ClassPhotoController extends AbstractController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    JsonResponse update(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    JsonResponse update(@PathVariable("id") int id, @RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -179,9 +178,9 @@ public class ClassPhotoController extends AbstractController {
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-
+        
+        classPhotoVo.setId(id);
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-
         ClassPhotoBo responseClassPhoto = null;
         try {
             responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);

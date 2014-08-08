@@ -106,7 +106,7 @@ public class CouponController extends AbstractController{
         return responseVo;
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
+    @RequestMapping(value = "/{id}/activate", method = RequestMethod.GET,  produces = "application/json")
     public @ResponseBody CouponVo activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         CouponVo responseVo = null;
         
@@ -122,7 +122,6 @@ public class CouponController extends AbstractController{
         
         CouponVo couponVo = new CouponVo();
         couponVo.setId(id);
-        couponVo.setUserId(curId);
         
         CouponBo resultCoupon = accountFacade.activateCoupon(CouponConverter.fromModel(couponVo), curUser, permissionTag);
         responseVo = CouponConverter.toModel(resultCoupon);

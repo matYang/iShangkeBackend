@@ -83,7 +83,7 @@ public class ContactController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody ContactVo update(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody ContactVo update(@PathVariable("id") int id, @RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
         ContactVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -96,11 +96,12 @@ public class ContactController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
+        contactVo.setId(id);
         
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
-        
         ContactBo responseContact = accountFacade.updateContact(targetContact, curUser, permissionTag);
         responseVo = ContactConverter.toModel(responseContact);
+
         return responseVo;
     }
     

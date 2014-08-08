@@ -139,7 +139,7 @@ public class CourseTemplateController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse transformCourseTemplate(@RequestBody CourseTemplateVo courseTemplate, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse transformCourseTemplate(@PathVariable("id") int id, @RequestBody CourseTemplateVo courseTemplate, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
         CourseTemplateVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -163,6 +163,7 @@ public class CourseTemplateController extends AbstractController{
             return this.handleWebException(new ControllerException("This courseTemplate operation is not defined!"), resp);
         }
 
+        courseTemplate.setId(id);
         int operation = operationObj;
         CourseTemplateBo courseTemplateBo = null;
         try {
