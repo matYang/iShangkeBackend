@@ -78,7 +78,7 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private CourseEntityExtMapper courseMapper;
-    
+
     @Autowired
     private CourseTemplateEntityExtMapper courseTemplateMapper;
 
@@ -238,7 +238,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setRemark(bookingEntity.getNote());
             bookingHistoryMapper.add(bookingHistory);
-            //课程预定数量统计
+            // 课程预定数量统计
             CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
             int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
             courseTemplate.setBookingTotal((total++));
@@ -778,7 +778,7 @@ public class BookingManagerImpl implements BookingManager {
         int preStatus = booking.getStatus();
         if (BookingEnums.Status.ONLINEPENDINGPAYMENT.code != preStatus) {
             bookingHistory.setNormal(Constant.BOOKINGUNNORMAL);
-            LOGGER.warn(String.format("[pay booking]booking [%d] is no need to pay, but order [%d] pay it", booking.getId(), order.getId()));
+            LOGGER.error(String.format("[pay booking]booking [%d] is no need to pay, but order [%d] pay it", booking.getId(), order.getId()));
         } else {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
         }
@@ -787,9 +787,10 @@ public class BookingManagerImpl implements BookingManager {
             booking.setLastModifyTime(DateUtility.getCurTimeInstance());
             bookingMapper.update(booking);
         } catch (Exception e) {
+            LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
             throw new ManagerException("change booking status failed");
         } finally {
-            LOGGER.error(String.format("[pay booking]order [%d] try to pay booking [%d] but failed", order.getId(), booking.getId()));
+            LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
         }
         bookingHistory.setBookingId(booking.getId());
         bookingHistory.setUserId(booking.getUserId());
@@ -800,7 +801,10 @@ public class BookingManagerImpl implements BookingManager {
         try {
             bookingHistoryMapper.add(bookingHistory);
         } catch (Exception e) {
+            LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
             throw new ManagerException("create booking history failed");
+        } finally {
+            LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
         }
         return Constant.SUCCESS;
     }
@@ -828,6 +832,75 @@ public class BookingManagerImpl implements BookingManager {
     @Override
     public int queryHistoryByBookingIdTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo) {
         return bookingHistoryMapper.getListCount(BookingHistoryConverter.fromBo(bookingHistoryBo));
+    }
+
+    @Override
+    public BookingBo queryBookingById(int id, UserBo userBo) {
+        String roleName = authManager.getRole(userBo.getId());
+        BookingEntityExt bookingEntity = bookingMapper.getById(id);
+        if (Constant.ROLEUSER.equals(roleName)) {
+            if (id != userBo.getId()) {
+                throw new ManagerException("cannot query other's booking");
+            }
+            BookingEntityExt booking = null;
+            try {
+                booking = bookingMapper.getById(id);
+            } catch (Exception e) {
+                throw new ManagerException("query booking failed for user " + userBo.getId());
+            }
+            if (booking == null) {
+                throw new ManagerException("cannot find booking of id" + id);
+            }
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, booking.getStatus());
+            BookingBo bookingBo = BookingConverter.toBo(booking);
+            bookingBo.setActionList(actions);
+            return bookingBo;
+        } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+            List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
+            if (groupList == null) {
+                throw new ManagerException("unlogin user");
+            }
+            boolean isSameGroup = false;
+            for (GroupEntityExt g : groupList) {
+                // 因为我们有特殊情况 api中需要提供/booking/{id} 在这种情况下booking bo id明确为一个id值
+                if (g.getPartnerId().equals(bookingEntity.getPartnerId())) {
+                    isSameGroup = true;
+                    break;
+                }
+            }
+            if (!isSameGroup) {
+                throw new ManagerException("cannot query other partner's booking");
+            }
+            BookingEntityExt booking = null;
+            try {
+                booking = bookingMapper.getById(id);
+            } catch (Exception e) {
+                throw new ManagerException("query booking failed for user " + userBo.getId());
+            }
+            if (booking == null) {
+                throw new ManagerException("cannot find booking of id" + id);
+            }
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, booking.getStatus());
+            BookingBo bookingBo = BookingConverter.toBo(booking);
+            bookingBo.setActionList(actions);
+            return bookingBo;
+        } else if (Constant.ROLESYSTEMADMIN.equals(roleName) || Constant.ROLEADMIN.equals(roleName)) {
+            BookingEntityExt booking = null;
+            try {
+                booking = bookingMapper.getById(id);
+            } catch (Exception e) {
+                throw new ManagerException("query booking failed for user " + userBo.getId());
+            }
+            if (booking == null) {
+                throw new ManagerException("cannot find booking of id" + id);
+            }
+            List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, booking.getStatus());
+            BookingBo bookingBo = BookingConverter.toBo(booking);
+            bookingBo.setActionList(actions);
+            return bookingBo;
+        } else {
+            throw new ManagerException("current user cannot query booking");
+        }
     }
 
 }

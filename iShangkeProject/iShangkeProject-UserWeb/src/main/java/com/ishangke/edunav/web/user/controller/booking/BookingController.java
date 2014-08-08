@@ -93,15 +93,12 @@ public class BookingController  extends AbstractController {
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }  
-        BookingVo bookingVo = new BookingVo();
-        bookingVo.setId(id);
-        BookingPageViewBo bookingBos = null;
+        BookingBo bookingBo = null;
         try {
-            bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, null, permissionTag);
+            bookingBo = bookingFacade.queryBookingById(id, currentUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }  
-        BookingBo bookingBo = bookingBos.getData().get(0);
         BookingVo booking = BookingConverter.toModel(bookingBo);
         return booking;
     }

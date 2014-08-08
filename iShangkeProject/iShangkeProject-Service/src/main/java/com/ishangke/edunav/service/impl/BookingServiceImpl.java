@@ -647,4 +647,29 @@ public class BookingServiceImpl implements BookingService.Iface {
     // }
     // }
 
+    @Override
+    public BookingBo queryBookingById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+//          if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//              LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryBooking"));
+//              throw new NoPermissionException();
+//          }
+          BookingBo data = bookingManager.queryBookingById(id, userBo);
+          return data;
+      } catch (NoPermissionException e) {
+          LOGGER.info(e.getMessage(), e);
+          BusinessExceptionBo exception = new BusinessExceptionBo();
+          exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+          exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+          throw exception;
+      } catch (ManagerException e) {
+          LOGGER.info(e.getMessage(), e);
+          BusinessExceptionBo exception = new BusinessExceptionBo();
+          exception.setMessage(e.getMessage());
+          exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+          exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+          throw exception;
+      }
+    }
+
 }
