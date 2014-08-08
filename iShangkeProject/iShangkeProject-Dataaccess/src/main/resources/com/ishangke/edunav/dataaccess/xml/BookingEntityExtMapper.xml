@@ -69,7 +69,7 @@
       <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
       <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
       <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
-      <result column="COURSE_STUDYDAYNOTE" property="studyDayNote" jdbcType="VARCHAR" />
+      <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
       <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
       <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
       <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
@@ -189,7 +189,7 @@
     COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
     COURSE.TEACHING_MATERIAL_INTRO
     COURSE_TEACHINGMATERIALINTRO,
-    COURSE.STUDY_DAY_NOTE COURSE_STUDYDAYNOTE,
+    COURSE.STUDY_DAYS_NOTE COURSE_STUDYDAYSNOTE,
     COURSE.HIGH_SCORE_REWARD
     COURSE_HIGHSCOREREWARD,
     COURSE.PREREQUEST

@@ -408,8 +408,8 @@ public class CourseTemplateConverter {
         if (vo.getStatusSet() != null) {
             courseTemplateBo.setStatusSet(vo.getStatusSet());
         }
-        if (vo.getStudyDayNote() != null) {
-            courseTemplateBo.setStudyDayNote(vo.getStudyDayNote());
+        if (vo.getStudyDaysNote() != null) {
+            courseTemplateBo.setStudyDaysNote(vo.getStudyDaysNote());
         }
         if (vo.getSuitableStudent() != null) {
             courseTemplateBo.setSuitableStudent(vo.getSuitableStudent());
@@ -494,6 +494,14 @@ public class CourseTemplateConverter {
                 list.add(ActionConverter.fromModel(a));
             }
             courseTemplateBo.setActionList(list);
+        }
+      //存储周一～周日上课时间的信息
+        if (vo.getStudyDays() != null && vo.getStudyDays().size() > 0) {
+            String studyDays = "";
+            for (Integer i : vo.getStudyDays()) {
+                studyDays = studyDays + i;
+            }
+            courseTemplateBo.setStudyDays(studyDays);
         }
         return courseTemplateBo;
     }
@@ -709,7 +717,7 @@ public class CourseTemplateConverter {
             courseTemplateVo.setStatus(bo.getStatus());
         }
         courseTemplateVo.setStatusSet(bo.getStatusSet());
-        courseTemplateVo.setStudyDayNote(bo.getStudyDayNote());
+        courseTemplateVo.setStudyDaysNote(bo.getStudyDaysNote());
         courseTemplateVo.setSuitableStudent(bo.getSuitableStudent());
         if (bo.getTeacherList() != null) {
             List<TeacherVo> list = new ArrayList<>();
@@ -730,6 +738,14 @@ public class CourseTemplateConverter {
                 list.add(ActionConverter.toModel(a));
             }
             courseTemplateVo.setActionList(list);
+        }
+        if (bo.getStudyDays() != null && !"".equals(bo.getStudyDays())) {
+            char[] days = bo.getStudyDays().toCharArray();
+            List<Integer> studyDays = new ArrayList<>();
+            for (char day : days) {
+                studyDays.add(Integer.parseInt("" + day));
+            }
+            courseTemplateVo.setStudyDays(studyDays);
         }
         return courseTemplateVo;
     }

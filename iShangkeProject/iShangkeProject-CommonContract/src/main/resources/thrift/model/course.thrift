@@ -42,7 +42,7 @@ struct CourseBo {
     35: string qualityAssurance
     36: string questionBank
     37: string teachingMaterialIntro
-    38: string studyDayNote
+    38: string studyDaysNote
     39: string highScoreReward
     40: string prerequest
     41: string suitableStudent
@@ -140,6 +140,7 @@ struct CourseBo {
     133: double regAddressLat
     134: double regAddressLng
     135: string categoryValue
+    136: string studyDays
 }
 
 struct CommentCourseApproveBo {

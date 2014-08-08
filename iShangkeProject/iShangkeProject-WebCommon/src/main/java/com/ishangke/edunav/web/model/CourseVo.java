@@ -80,7 +80,9 @@ public class CourseVo extends JsonResponse {
 
     private String teachingMaterialIntro;
 
-    private String studyDayNote;
+    private String studyDaysNote;
+    
+    private List<Integer> studyDays;
 
     private String highScoreReward;
 
@@ -515,12 +517,12 @@ public class CourseVo extends JsonResponse {
         this.teachingMaterialIntro = teachingMaterialIntro;
     }
 
-    public String getStudyDayNote() {
-        return studyDayNote;
+    public String getStudyDaysNote() {
+        return studyDaysNote;
     }
 
-    public void setStudyDayNote(String studyDayNote) {
-        this.studyDayNote = studyDayNote;
+    public void setStudyDaysNote(String studyDaysNote) {
+        this.studyDaysNote = studyDaysNote;
     }
 
     public String getHighScoreReward() {
@@ -1258,4 +1260,13 @@ public class CourseVo extends JsonResponse {
     public void setIds(String ids) {
         this.ids = ids;
     }
+
+    public List<Integer> getStudyDays() {
+        return studyDays;
+    }
+
+    public void setStudyDays(List<Integer> studyDays) {
+        this.studyDays = studyDays;
+    }
+
 }
