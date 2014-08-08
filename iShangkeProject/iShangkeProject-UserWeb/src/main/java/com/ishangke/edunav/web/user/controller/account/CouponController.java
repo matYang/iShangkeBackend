@@ -137,7 +137,7 @@ public class CouponController extends AbstractController{
         return responseVo;
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT,  produces = "application/json")
+    @RequestMapping(value = "/{id}/activate", method = RequestMethod.GET,  produces = "application/json")
     public @ResponseBody JsonResponse activate(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         CouponVo responseVo = null;
         

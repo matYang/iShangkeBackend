@@ -103,7 +103,7 @@ public class WithdrawController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse update(@RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
         WithdrawVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -121,10 +121,10 @@ public class WithdrawController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
+        withdrawVo.setId(id);
         if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
             return this.handleWebException(new ControllerException("对不起，您只能创建自己的提款信息"), resp);
         }
-        
         
         WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
         WithdrawBo responseWithdraw = accountFacade.updateWithdraw(targetWithdraw, curUser, permissionTag);

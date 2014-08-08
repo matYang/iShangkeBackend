@@ -251,7 +251,7 @@ public class CourseController extends AbstractController {
 
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    JsonResponse transformCourse(@RequestBody CourseVo course, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
+    JsonResponse transformCourse(@PathVariable("id") int id, @RequestBody CourseVo course, @PathVariable String operate, HttpServletRequest req, HttpServletResponse resp) {
         CourseVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -273,7 +273,8 @@ public class CourseController extends AbstractController {
         if (operationObj == null) {
             return this.handleWebException(new ControllerException("This course operation is not defined!"), resp);
         }
-
+        
+        course.setId(id);
         int operation = operationObj;
         CourseBo courseBo = null;
         try {

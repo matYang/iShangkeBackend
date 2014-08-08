@@ -9,14 +9,14 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +37,6 @@ import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.partner.PartnerFacade;
 import com.ishangke.edunav.facade.partner.UserFacade;
-import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.PartnerConverter;
@@ -49,6 +48,7 @@ import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.PartnerPageViewVo;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
 import com.ishangke.edunav.web.partner.reflection.ReflectionService;
+import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
 @RequestMapping("/p-api/v2/partner")
@@ -228,9 +228,8 @@ public class PartnerController extends AbstractController {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
+        partnerVo.setId(partnerId);
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
-        targetPartner.setId(partnerId);
-
         PartnerBo responsePartner = null;
         try {
             responsePartner = partnerFacade.updatePartner(targetPartner, curUser, permissionTag);
@@ -246,26 +245,17 @@ public class PartnerController extends AbstractController {
     JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) {
 
-        // String permissionTag = this.getUrl(req);
-        // SessionBo authSessionBo = this.getSession(req);
-        //
-        // UserBo curUser = userFacade.authenticate(authSessionBo,
-        // permissionTag);
-        // int curId = curUser.getId();
-        // boolean loggedIn = curId > 0;
-        // if (!loggedIn) {
-        // throw new ControllerException("对不起，您尚未登录");
-        // }
+         String permissionTag = this.getUrl(req);
+         SessionBo authSessionBo = this.getSession(req);
+        
+         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+         int curId = curUser.getId();
+         boolean loggedIn = curId > 0;
+         if (!loggedIn) {
+             throw new ControllerException("对不起，您尚未登录");
+         }
 
-        // This can be deleted later
-        // Need a User
-        int userId = 1;
-        UserVo user = new UserVo();
-        user.setId(userId);
-        UserBo userBo = UserConverter.fromModel(user);
-        String permissionTag = "GET/api/v2/course";
-        // This can be deleted later
-
+        
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {
@@ -287,7 +277,7 @@ public class PartnerController extends AbstractController {
                 partnerVo.setLogoUrl(imgUrl);
                 partnerVo.setId(partnerId);
                 PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
-                partnerFacade.updatePartner(partnerBo, userBo, permissionTag);
+                partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
 
             } catch (Exception e) {
 
