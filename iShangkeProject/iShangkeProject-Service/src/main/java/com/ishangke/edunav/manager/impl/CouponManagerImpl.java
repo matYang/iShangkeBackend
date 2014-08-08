@@ -263,12 +263,12 @@ public class CouponManagerImpl implements CouponManager {
         else {
             //for a user, he/she can only query coupon history of a coupon that belongs to he/she
             //this means that a couponId is absolutely necessary
-            if (couponHistoryEntity == null || couponHistoryEntity.getId() == null) {
+            if (couponHistoryEntity == null || couponHistoryEntity.getCouponId() == null || couponHistoryEntity.getCouponId() <= 0) {
                 throw new ManagerException("User query coupon history did not specify couponId");
             }
             CouponEntityExt correspondingCoupon = null;
             try {
-                correspondingCoupon = couponMapper.getById(couponHistoryEntity.getId());
+                correspondingCoupon = couponMapper.getById(couponHistoryEntity.getCouponId());
             } catch (Throwable t) {
                 throw new ManagerException("Corresponding coupon not found when querying coupon history with coupnId: " + couponHistoryEntity.getCouponId());
             }
