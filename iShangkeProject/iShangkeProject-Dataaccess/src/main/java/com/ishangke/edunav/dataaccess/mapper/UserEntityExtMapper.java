@@ -27,6 +27,8 @@ public interface UserEntityExtMapper {
 
     public UserEntityExt getById(int id);
     
+    public UserEntityExt getSimpleById(int id);
+    
     public UserEntityExt getByInvitationCode(@Param("entity") UserEntityExt userEntityExt);
     
     public UserEntityExt getByPhone(@Param("entity") UserEntityExt userEntityExt);

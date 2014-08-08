@@ -86,9 +86,6 @@ public class BookingManagerImpl implements BookingManager {
     private GroupEntityExtMapper groupMapper;
 
     @Autowired
-    private UserEntityExtMapper userMapper;
-
-    @Autowired
     private CouponEntityExtMapper couponMapper;
 
     @Autowired

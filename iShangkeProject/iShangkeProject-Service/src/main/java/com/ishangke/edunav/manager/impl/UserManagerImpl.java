@@ -544,7 +544,7 @@ public class UserManagerImpl implements UserManager {
         }
         
         try {
-            response = userMapper.getById(sessionBo.getId());
+            response = userMapper.getSimpleById(sessionBo.getId());
         } catch (Throwable t) {
             throw new ManagerException("Authentication failed for user: " + sessionBo.getId(), t);
         }
