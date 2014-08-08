@@ -100,6 +100,12 @@
       <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
       <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
       <result column="COURSE_SCHOOLTIMEWEEK" property="schooltimeWeek" jdbcType="INTEGER" />
+      <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+      <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+      <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
     </collection>
   </resultMap>
   <sql id="Booking_Base_Column_List">
@@ -232,6 +238,16 @@
     COURSE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
     COURSE.SCHOOLTIME_WEEK
     COURSE_SCHOOLTIMEWEEK
+  </sql>
+  <sql id="Partner_Base_Column_List">
+    PARTNER.LOGO_URL PARTNER_LOGOURL,
+    PARTNER.WHOLE_NAME PARTNER_WHOLENAME,
+    PARTNER.INST_NAME PARTNER_INSTNAME,
+    PARTNER.PARTNER_INTRO PARTNER_INTRO,
+    PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION,
+    PARTNER.RATING PARTNER_RATING
   </sql>
   <!-- add -->
   <insert id="add" parameterType="BookingEntityExt">
@@ -448,17 +464,20 @@
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="BookingExtMap">
     SELECT
-    <include refid="Booking_Base_Column_List" />,
+    <include refid="Booking_Base_Column_List" />
+    ,
     <include refid="Course_Base_Column_List" />
-    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID 
+    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
     where BOOKING.DELETED = 0 and BOOKING.ID = #{id,jdbcType=INTEGER}
   </select>
   <!--list -->
   <select id="list" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />,
-    <include refid="Course_Base_Column_List" />
-    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID 
+    <include refid="Course_Base_Column_List" />,
+    <include refid="Partner_Base_Column_List" />
+    from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
+    left join PARTNER ON COURSE.PARTNER_ID = PARTNER.ID
     where BOOKING.DELETED = 0
     <if test="entity != null">
 
@@ -670,6 +689,7 @@
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
+  
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
@@ -864,6 +884,7 @@
     </if>
     ) AS total
   </select>
+  
   <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
