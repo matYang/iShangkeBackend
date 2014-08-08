@@ -336,6 +336,13 @@
     left join COUPON on USERS.ID = COUPON.USER_ID and (COUPON.STATUS = 0 or COUPON.STATUS = 2) 
     where USERS.DELETED = 0 and USERS.ID = #{id,jdbcType=INTEGER}
   </select>
+  <!-- getSimpleById -->
+  <select id="getSimpleById" parameterType="int" resultMap="UserExtMap">
+    SELECT
+    <include refid="User_Base_Column_List" />
+    from USERS where USERS.DELETED = 0 and USERS.ID =
+    #{id,jdbcType=INTEGER}
+  </select>
   <!-- getByPhone -->
   <select id="getByPhone" parameterType="map" resultMap="UserExtMap">
     SELECT

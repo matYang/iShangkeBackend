@@ -47,7 +47,12 @@ public class CourseTemplateController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
@@ -73,7 +78,12 @@ public class CourseTemplateController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
@@ -103,7 +113,12 @@ public class CourseTemplateController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
@@ -130,7 +145,12 @@ public class CourseTemplateController extends AbstractController{
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         
-        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
         int curId = curUser.getId();
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
