@@ -140,22 +140,22 @@ public class PermissionEntityExtTest extends BaseTest {
     // //Passed;
     // }else fail();
     // }
-    @Test
-    public void testQuery() {
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
-        // 排序，先按照第一个排序，再按照第二个排序，依次排列
-        page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
-                DataaccessConstants.ORDER_DESC));
-
-        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
-        permissionEntityExt.setName("Login");
-        List<PermissionEntityExt> result = permissionEntityExtMapper.list(
-                permissionEntityExt, page);
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals("Login_N", result.get(0).getName());
-    }
+//    @Test
+//    public void testQuery() {
+//        PaginationEntity page = new PaginationEntity();
+//        page.setOffset(0);
+//        page.setSize(10);
+//        // 排序，先按照第一个排序，再按照第二个排序，依次排列
+//        page.addOrderByEntity(new OrderByEntity("CREATE_TIME",
+//                DataaccessConstants.ORDER_DESC));
+//
+//        PermissionEntityExt permissionEntityExt = new PermissionEntityExt();
+//        permissionEntityExt.setName("Login");
+//        List<PermissionEntityExt> result = permissionEntityExtMapper.list(
+//                permissionEntityExt, page);
+//        Assert.assertEquals(3, result.size());
+//        Assert.assertEquals("Login_N", result.get(0).getName());
+//    }
 
     @Test
     public void testQuery2() {

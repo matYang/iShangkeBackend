@@ -181,4 +181,8 @@ public class Constant {
     public static final int COURSETYPEONLINEONLIY = 0;
     public static final int COURSETYPEOFFLINEONLY = 1;
     public static final int COURSETYPEBOTHONLINEOFFLINE = 2;
+    
+    //order
+    public static final String ORDERPREFIX = "ISK-";
+    public static final String ORDERSUBJECTPREFIX = "购买课程: ";
 }

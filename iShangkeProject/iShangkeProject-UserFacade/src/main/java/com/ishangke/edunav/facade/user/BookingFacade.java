@@ -193,4 +193,21 @@ public class BookingFacade {
        }
        return result;
    }
+   
+   public BookingBo queryBookingById(int id, UserBo userBo, String permissionTag) {
+       BookingBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryBookingById(id, userBo, PermissionCache.getTag(permissionTag));
+       } catch (BusinessExceptionBo e) {
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+       } catch (TException e) {
+           e.printStackTrace();
+       }
+       return result;
+   }
 }
