@@ -49,10 +49,6 @@ public class ContactController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
-        }
         
         ContactPageViewBo pageViewBo = null;
         ContactPageViewVo pageViewVo = null;
@@ -78,10 +74,6 @@ public class ContactController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的联系人信息");
-        }
-        
         
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
         
@@ -102,10 +94,6 @@ public class ContactController extends AbstractController{
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
-        }
-        
-        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的联系人信息");
         }
         
         

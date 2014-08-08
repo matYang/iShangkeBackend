@@ -57,7 +57,7 @@ public class ContactController extends AbstractController{
         }
         //user module specific, also need to perform null check
         if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的联系人信息"), resp);
         }
         
         ContactPageViewBo pageViewBo = null;

@@ -56,11 +56,6 @@ public class CommentController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
-        if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能创建自己的课程评论");
-        }
-        
-        
         CourseCommentBo targetCourseComment = CourseCommentConverter.fromModel(courseCommentVo);
         
         CourseCommentBo responseCourseComment = courseFacade.commentCourse(targetCourseComment, curUser, permissionTag);
@@ -99,10 +94,6 @@ public class CommentController extends AbstractController{
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
-        }
-        //user module specific, also need to perform null check
-        if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的课程评分信息");
         }
         
         CourseCommentPageViewBo pageViewBo = null;

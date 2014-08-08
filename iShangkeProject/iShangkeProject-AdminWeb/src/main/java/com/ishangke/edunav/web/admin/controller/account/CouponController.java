@@ -52,10 +52,6 @@ public class CouponController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (couponVo.getUserId() == null || couponVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的积分信息");
-        }
         
         CouponPageViewBo pageViewBo = null;
         CouponPageViewVo pageViewVo = null;

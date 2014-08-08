@@ -58,7 +58,7 @@ public class WithdrawController extends AbstractController{
         }
         //user module specific, also need to perform null check
         if (withdrawVo.getUserId() == null || withdrawVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
+            return this.handleWebException(new ControllerException("对不起，您只能查看自己的提款信息"), resp);
         }
         
         WithdrawPageViewBo pageViewBo = null;

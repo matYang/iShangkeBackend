@@ -51,10 +51,6 @@ public class AccountController extends AbstractController{
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
         }
-        //user module specific, also need to perform null check
-        if (accountVo.getId() == null || accountVo.getId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的账户信息");
-        }
         
         AccountPageViewBo pageViewBo = null;
         AccountPageViewVo pageViewVo = null;
@@ -75,10 +71,6 @@ public class AccountController extends AbstractController{
         boolean loggedIn =  curId > 0;
         if (!loggedIn) {
             throw new ControllerException("对不起，您尚未登录");
-        }
-        //user module specific, also need to perform null check
-        if (accountHistoryVo.getUserId() == null || accountHistoryVo.getUserId() != curId) {
-            throw new ControllerException("对不起，您只能查看自己的账户信息");
         }
         
         AccountHistoryPageViewBo pageViewBo = null;
