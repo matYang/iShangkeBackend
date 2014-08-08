@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +26,6 @@ import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.CourseCommentVo;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.pageview.CourseCommentPageViewVo;
-import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
@@ -68,7 +66,6 @@ public class CommentController extends AbstractController{
         
         
         CourseCommentBo targetCourseComment = CourseCommentConverter.fromModel(courseCommentVo);
-        
         CourseCommentBo responseCourseComment = null;
         try {
             responseCourseComment = courseFacade.commentCourse(targetCourseComment, curUser, permissionTag); 
@@ -79,33 +76,6 @@ public class CommentController extends AbstractController{
         return responseVo;
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,  produces = "application/json")
-    public @ResponseBody JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-          
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
-        if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
-        
-        CourseCommentVo courseCommentVo = new CourseCommentVo();
-        courseCommentVo.setId(id);
-        CourseCommentBo targetCourseComment = CourseCommentConverter.fromModel(courseCommentVo);
-        try {
-            courseFacade.deleteCommentByCommentId(targetCourseComment, curUser, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
-        return new EmptyResponse();
-    }
     
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")

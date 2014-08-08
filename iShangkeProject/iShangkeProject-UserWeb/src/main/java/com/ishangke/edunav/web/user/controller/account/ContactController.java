@@ -111,7 +111,7 @@ public class ContactController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse update(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
         ContactVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -129,6 +129,7 @@ public class ContactController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
+        contactVo.setId(id);
         if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
             return this.handleWebException(new ControllerException("对不起，您只能创建自己的联系人信息"), resp);
         }

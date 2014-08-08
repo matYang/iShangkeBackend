@@ -84,7 +84,7 @@ public class WithdrawController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody WithdrawVo update(@RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody WithdrawVo update(@PathVariable("id") int id, @RequestBody WithdrawVo withdrawVo, HttpServletRequest req, HttpServletResponse resp) {
         WithdrawVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -97,10 +97,12 @@ public class WithdrawController extends AbstractController{
             throw new ControllerException("对不起，您尚未登录");
         }
         
+        withdrawVo.setId(id);
         
         WithdrawBo targetWithdraw = WithdrawConverter.fromModel(withdrawVo);
         WithdrawBo responseWithdraw = accountFacade.updateWithdraw(targetWithdraw, curUser, permissionTag);
         responseVo = WithdrawConverter.toModel(responseWithdraw);
+        
         return responseVo;
     }
     

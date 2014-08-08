@@ -102,7 +102,7 @@ public class AddressController extends AbstractController{
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse update(@RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody AddressVo addressVo, HttpServletRequest req, HttpServletResponse resp) {
         AddressVo responseVo = null;
         
         String permissionTag = this.getUrl(req);
@@ -120,9 +120,8 @@ public class AddressController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
-        
+        addressVo.setId(id);
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
         AddressBo responseAddress = null;
         try {
             responseAddress = partnerFacade.updateAddress(targetAddress, curUser, permissionTag);
