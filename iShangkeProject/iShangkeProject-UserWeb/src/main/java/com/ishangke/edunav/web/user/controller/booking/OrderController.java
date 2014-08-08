@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
+import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.AlipayFacade;
@@ -56,16 +57,18 @@ public class OrderController extends AbstractController {
         order.setCreateTime(DateUtility.getCurTimeInstance());
         order.setType(type);
         order.setPrice(booking.getPrice());
+        OrderBo orderBo = OrderConverter.fromModel(order);
         try {
-            bookingFacade.createOrderByUser(OrderConverter.fromModel(order), currentUser, permissionTag);
+            bookingFacade.createOrderByUser(orderBo, currentUser, permissionTag);
         } catch (ControllerException c) {
             resp.setStatus(511);
             return "服务器发生异常";
         }
 
         //我们的订单号ISK + booking id + order id
-        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + order.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
-
+        //有问题 不能有中文 不然返回之后会乱码
+        //return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
     }
 
 }
