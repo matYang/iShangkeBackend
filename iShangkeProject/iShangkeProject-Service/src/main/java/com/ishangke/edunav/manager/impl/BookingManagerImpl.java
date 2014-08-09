@@ -92,7 +92,7 @@ public class BookingManagerImpl implements BookingManager {
     private OrderEntityExtMapper orderMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
-        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || IdChecker.isNull(bookingBo.getUserId())) {
+        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.001d || IdChecker.isNull(bookingBo.getUserId())) {
             return 0.0;
         }
 
@@ -133,9 +133,9 @@ public class BookingManagerImpl implements BookingManager {
         double currentTotal = 0.0;
         double targetTotal = bookingBo.getCashbackAmount();
         int tailIndex = 0;
-        for (int i = 0; i < couponResults.size() && currentTotal < (targetTotal - 0.01d); i++) {
+        for (int i = 0; i < couponResults.size() && currentTotal < (targetTotal - 0.001d); i++) {
             CouponEntityExt coupon = couponResults.get(i);
-            if (currentTotal + coupon.getBalance() < (targetTotal - 0.01d)) {
+            if (currentTotal + coupon.getBalance() < (targetTotal - 0.001d)) {
                 // not yet reached desired cashback total yet, using up entire
                 // coupon
                 currentTotal += coupon.getBalance();

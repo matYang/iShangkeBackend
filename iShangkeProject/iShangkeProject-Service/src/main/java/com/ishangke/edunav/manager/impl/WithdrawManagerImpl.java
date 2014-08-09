@@ -119,7 +119,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         // 删除WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        if (IdChecker.notNull(withdrawEntity.getId())) {
+        if (IdChecker.isNull(withdrawEntity.getId())) {
             throw new ManagerException("Withdraw deletion must specify id");
         }
         WithdrawEntityExt previousWithdraw = withdrawMapper.getById(withdrawEntity.getId());
