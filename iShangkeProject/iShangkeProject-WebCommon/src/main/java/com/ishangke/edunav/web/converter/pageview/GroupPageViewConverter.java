@@ -13,7 +13,7 @@ public class GroupPageViewConverter {
     public static GroupPageViewVo toModel(GroupPageViewBo bo) {
         GroupPageViewVo vo = new GroupPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<GroupVo> result = new ArrayList<>();

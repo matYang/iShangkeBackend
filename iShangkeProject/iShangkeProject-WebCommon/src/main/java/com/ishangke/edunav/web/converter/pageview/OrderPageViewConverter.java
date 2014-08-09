@@ -13,7 +13,7 @@ public class OrderPageViewConverter {
     public static OrderPageViewVo toModel(OrderPageViewBo bo) {
         OrderPageViewVo vo = new OrderPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<OrderVo> result = new ArrayList<>();

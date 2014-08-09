@@ -13,7 +13,7 @@ public class MessagePageViewConverter {
     public static MessagePageViewVo toModel(MessagePageViewBo bo) {
         MessagePageViewVo vo = new MessagePageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<MessageVo> result = new ArrayList<>();

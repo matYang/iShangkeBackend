@@ -13,7 +13,7 @@ public class CouponHistoryPageViewConverter {
     public static CouponHistoryPageViewVo toModel(CouponHistoryPageViewBo bo) {
         CouponHistoryPageViewVo vo = new CouponHistoryPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CouponHistoryVo> result = new ArrayList<>();

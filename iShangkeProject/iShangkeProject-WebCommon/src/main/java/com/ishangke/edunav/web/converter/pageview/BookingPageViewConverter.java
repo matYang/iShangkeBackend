@@ -16,7 +16,7 @@ public class BookingPageViewConverter {
         }
         BookingPageViewVo vo = new BookingPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<BookingVo> result = new ArrayList<>();

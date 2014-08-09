@@ -13,7 +13,7 @@ public class AccountHistoryPageViewConverter {
     public static AccountHistoryPageViewVo toModel(AccountHistoryPageViewBo bo) {
         AccountHistoryPageViewVo vo = new AccountHistoryPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<AccountHistoryVo> result = new ArrayList<>();

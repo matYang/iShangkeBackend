@@ -13,7 +13,7 @@ public class ContactPageViewConverter {
     public static ContactPageViewVo toModel(ContactPageViewBo bo) {
         ContactPageViewVo vo = new ContactPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<ContactVo> result = new ArrayList<>();

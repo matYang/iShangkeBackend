@@ -13,7 +13,7 @@ public class UserPageViewConverter {
     public static UserPageViewVo toModel(UserPageViewBo bo) {
         UserPageViewVo vo = new UserPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<UserVo> result = new ArrayList<>();

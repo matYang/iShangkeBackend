@@ -13,7 +13,7 @@ public class AddressPageViewConverter {
     public static AddressPageViewVo toModel(AddressPageViewBo bo) {
         AddressPageViewVo vo = new AddressPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<AddressVo> result = new ArrayList<>();

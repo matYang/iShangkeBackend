@@ -13,7 +13,7 @@ public class WithdrawPageViewConverter {
     public static WithdrawPageViewVo toModel(WithdrawPageViewBo bo) {
         WithdrawPageViewVo vo = new WithdrawPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<WithdrawVo> result = new ArrayList<>();
