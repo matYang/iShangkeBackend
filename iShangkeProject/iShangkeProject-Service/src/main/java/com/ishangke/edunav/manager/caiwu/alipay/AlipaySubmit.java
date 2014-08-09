@@ -30,9 +30,9 @@ public class AlipaySubmit {
         StringBuffer sbHtml = new StringBuffer();
         List keys = new ArrayList(sParaNew.keySet());
         Collections.sort(keys);
-        String gateway = "https://mapi.alipay.com/gateway.do?";
+        String gateway = "https://mapi.alipay.com/gateway.do";
 
-        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + " method=\"get\" style=\"display:none\">");
+        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "\" method=\"get\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
@@ -71,9 +71,9 @@ public class AlipaySubmit {
         StringBuffer sbHtml = new StringBuffer();
         List keys = new ArrayList(sParaNew.keySet());
         Collections.sort(keys);
-        String gateway = "https://mapi.alipay.com/gateway.do?";
+        String gateway = "https://mapi.alipay.com/gateway.do";
 
-        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + " method=\"post\" style=\"display:none\">");
+        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "\" method=\"post\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
