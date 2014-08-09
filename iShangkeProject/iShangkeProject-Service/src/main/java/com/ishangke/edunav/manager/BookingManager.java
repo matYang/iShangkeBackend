@@ -92,4 +92,5 @@ public interface BookingManager {
     String changeBookingStatusToPayed(int orderId);
     String verify(String notify_id);
     String buildFormForGet(String subject,String out_trade_no, String total_fee);
+    String buildFormForPost(String subject,String out_trade_no, String total_fee);
 }
