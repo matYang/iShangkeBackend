@@ -32,7 +32,7 @@ public class AlipaySubmit {
         Collections.sort(keys);
         String gateway = "https://mapi.alipay.com/gateway.do?";
 
-        sbHtml.append("<meta http-equiv=\"content-type\" content=\"text/html;charset=GBK\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
+        sbHtml.append("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
                 + "\" method=\"get\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
@@ -73,7 +73,7 @@ public class AlipaySubmit {
         Collections.sort(keys);
         String gateway = "https://mapi.alipay.com/gateway.do?";
 
-        sbHtml.append("<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
+        sbHtml.append("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
                 + "\" method=\"post\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
