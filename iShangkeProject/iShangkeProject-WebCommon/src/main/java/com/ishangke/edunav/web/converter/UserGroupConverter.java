@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserGroupBo;
 import com.ishangke.edunav.web.model.UserGroupVo;
 
@@ -29,12 +28,21 @@ public class UserGroupConverter {
         if (vo.getUserIdSet() != null) {
             userGroupBo.setUserIdSet(vo.getUserIdSet());
         }
-        userGroupBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        userGroupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        userGroupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getLastModifyTime() != null) {
+            userGroupBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            userGroupBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            userGroupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            userGroupBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            userGroupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            userGroupBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return userGroupBo;
     }
 
@@ -47,9 +55,9 @@ public class UserGroupConverter {
         userGroupVo.setGroupIdSet(bo.getGroupIdSet());
         userGroupVo.setId(bo.getId());
         userGroupVo.setIdSet(bo.getIdSet());
-        userGroupVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        userGroupVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        userGroupVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        userGroupVo.setLastModifyTime(bo.getLastModifyTime());
+        userGroupVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        userGroupVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         userGroupVo.setUserId(bo.getUserId());
         userGroupVo.setUserIdSet(bo.getUserIdSet());
         return userGroupVo;

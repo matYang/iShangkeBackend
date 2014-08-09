@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
 import com.ishangke.edunav.web.model.PermissionVo;
 
@@ -29,18 +28,36 @@ public class PermissionConverter {
         if (vo.getTag() != null) {
             permissionBo.setTag(vo.getTag());
         }
-        permissionBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        permissionBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        permissionBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
-        permissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        permissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        permissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            permissionBo.setCreateTime(vo.getCreateTime());
+        } else {
+            permissionBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            permissionBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            permissionBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            permissionBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            permissionBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            permissionBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            permissionBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            permissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            permissionBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            permissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            permissionBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return permissionBo;
     }
 
@@ -49,15 +66,15 @@ public class PermissionConverter {
             return null;
         }
         PermissionVo permissionVo = new PermissionVo();
-        permissionVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        permissionVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        permissionVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        permissionVo.setCreateTime(bo.getCreateTime());
+        permissionVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        permissionVo.setCreateTimeStart(bo.getCreateTimeStart());
         permissionVo.setEnabled(bo.getEnabled());
         permissionVo.setId(bo.getId());
         permissionVo.setIdSet(bo.getIdSet());
-        permissionVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        permissionVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        permissionVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        permissionVo.setLastModifyTime(bo.getLastModifyTime());
+        permissionVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        permissionVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         permissionVo.setName(bo.getName());
         permissionVo.setPath(bo.getPath());
         permissionVo.setTag(bo.getTag());

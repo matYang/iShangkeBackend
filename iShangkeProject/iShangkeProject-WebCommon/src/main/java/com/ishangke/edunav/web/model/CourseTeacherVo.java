@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -12,12 +11,12 @@ public class CourseTeacherVo extends JsonResponse {
 
     private Integer teacherId;
 
-    private Calendar createTime;
+    private Long createTime;
     private Set<Integer> idSet;
     private Set<Integer> courseIdSet;
     private Set<Integer> teacherIdSet;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
 
     public Integer getId() {
         return id;
@@ -43,11 +42,11 @@ public class CourseTeacherVo extends JsonResponse {
         this.teacherId = teacherId;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -75,19 +74,19 @@ public class CourseTeacherVo extends JsonResponse {
         this.teacherIdSet = teacherIdSet;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 

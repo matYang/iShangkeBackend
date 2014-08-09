@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -26,11 +25,11 @@ public class BookingVo extends JsonResponse {
 
     private Integer status;
 
-    private Calendar scheduledTime;
+    private Long scheduledTime;
 
-    private Calendar noRefundDate;
+    private Long noRefundDate;
 
-    private Calendar cashbackDate;
+    private Long cashbackDate;
     private Double price;
     private Integer type;
 
@@ -38,9 +37,9 @@ public class BookingVo extends JsonResponse {
 
     private Double cashbackAmount;
 
-    private Calendar lastModifyTime;
+    private Long lastModifyTime;
 
-    private Calendar createTime;
+    private Long createTime;
 
     private Integer enabled;
     private Set<Integer> idSet;
@@ -48,19 +47,19 @@ public class BookingVo extends JsonResponse {
     private Set<Integer> courseTemplateIdSet;
     private Set<Integer> userIdSet;
     private Set<Integer> statusSet;
-    private Calendar scheduledTimeStart;
-    private Calendar scheduledTimeEnd;
-    private Calendar noRefundDateStart;
-    private Calendar noRefundDateEnd;
-    private Calendar cashbackDateStart;
-    private Calendar cashbackDateEnd;
+    private Long scheduledTimeStart;
+    private Long scheduledTimeEnd;
+    private Long noRefundDateStart;
+    private Long noRefundDateEnd;
+    private Long cashbackDateStart;
+    private Long cashbackDateEnd;
     private Set<Integer> typeSet;
     private Double cashbackAmountStart;
     private Double cashbackAmountEnd;
-    private Calendar lastModifyTimeStart;
-    private Calendar lastModifyTimeEnd;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long lastModifyTimeStart;
+    private Long lastModifyTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     private List<ActionVo> actionList;
     private Double priceStart;
     private Double priceEnd;
@@ -191,27 +190,27 @@ public class BookingVo extends JsonResponse {
         this.status = status;
     }
 
-    public Calendar getScheduledTime() {
+    public Long getScheduledTime() {
         return scheduledTime;
     }
 
-    public void setScheduledTime(Calendar scheduledTime) {
+    public void setScheduledTime(Long scheduledTime) {
         this.scheduledTime = scheduledTime;
     }
 
-    public Calendar getNoRefundDate() {
+    public Long getNoRefundDate() {
         return noRefundDate;
     }
 
-    public void setNoRefundDate(Calendar noRefundDate) {
+    public void setNoRefundDate(Long noRefundDate) {
         this.noRefundDate = noRefundDate;
     }
 
-    public Calendar getCashbackDate() {
+    public Long getCashbackDate() {
         return cashbackDate;
     }
 
-    public void setCashbackDate(Calendar cashbackDate) {
+    public void setCashbackDate(Long cashbackDate) {
         this.cashbackDate = cashbackDate;
     }
 
@@ -239,19 +238,19 @@ public class BookingVo extends JsonResponse {
         this.cashbackAmount = cashbackAmount;
     }
 
-    public Calendar getLastModifyTime() {
+    public Long getLastModifyTime() {
         return lastModifyTime;
     }
 
-    public void setLastModifyTime(Calendar lastModifyTime) {
+    public void setLastModifyTime(Long lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -303,51 +302,51 @@ public class BookingVo extends JsonResponse {
         this.statusSet = statusSet;
     }
 
-    public Calendar getScheduledTimeStart() {
+    public Long getScheduledTimeStart() {
         return scheduledTimeStart;
     }
 
-    public void setScheduledTimeStart(Calendar scheduledTimeStart) {
+    public void setScheduledTimeStart(Long scheduledTimeStart) {
         this.scheduledTimeStart = scheduledTimeStart;
     }
 
-    public Calendar getScheduledTimeEnd() {
+    public Long getScheduledTimeEnd() {
         return scheduledTimeEnd;
     }
 
-    public void setScheduledTimeEnd(Calendar scheduledTimeEnd) {
+    public void setScheduledTimeEnd(Long scheduledTimeEnd) {
         this.scheduledTimeEnd = scheduledTimeEnd;
     }
 
-    public Calendar getNoRefundDateStart() {
+    public Long getNoRefundDateStart() {
         return noRefundDateStart;
     }
 
-    public void setNoRefundDateStart(Calendar noRefundDateStart) {
+    public void setNoRefundDateStart(Long noRefundDateStart) {
         this.noRefundDateStart = noRefundDateStart;
     }
 
-    public Calendar getNoRefundDateEnd() {
+    public Long getNoRefundDateEnd() {
         return noRefundDateEnd;
     }
 
-    public void setNoRefundDateEnd(Calendar noRefundDateEnd) {
+    public void setNoRefundDateEnd(Long noRefundDateEnd) {
         this.noRefundDateEnd = noRefundDateEnd;
     }
 
-    public Calendar getCashbackDateStart() {
+    public Long getCashbackDateStart() {
         return cashbackDateStart;
     }
 
-    public void setCashbackDateStart(Calendar cashbackDateStart) {
+    public void setCashbackDateStart(Long cashbackDateStart) {
         this.cashbackDateStart = cashbackDateStart;
     }
 
-    public Calendar getCashbackDateEnd() {
+    public Long getCashbackDateEnd() {
         return cashbackDateEnd;
     }
 
-    public void setCashbackDateEnd(Calendar cashbackDateEnd) {
+    public void setCashbackDateEnd(Long cashbackDateEnd) {
         this.cashbackDateEnd = cashbackDateEnd;
     }
 
@@ -375,35 +374,35 @@ public class BookingVo extends JsonResponse {
         this.cashbackAmountEnd = cashbackAmountEnd;
     }
 
-    public Calendar getLastModifyTimeStart() {
+    public Long getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Long lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Calendar getLastModifyTimeEnd() {
+    public Long getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Long lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 

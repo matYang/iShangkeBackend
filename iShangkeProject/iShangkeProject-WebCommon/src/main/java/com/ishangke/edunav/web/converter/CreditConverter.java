@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CreditBo;
 import com.ishangke.edunav.web.model.CreditVo;
 
@@ -35,17 +34,36 @@ public class CreditConverter {
         if (vo.getIdSet() != null) {
             creditBo.setIdSet(vo.getIdSet());
         }
-        creditBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        creditBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        creditBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        creditBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        creditBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        creditBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            creditBo.setCreateTime(vo.getCreateTime());
+        } else {
+            creditBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            creditBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            creditBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            creditBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            creditBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            creditBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            creditBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            creditBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            creditBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            creditBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            creditBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return creditBo;
     }
 
@@ -55,9 +73,9 @@ public class CreditConverter {
             return null;
         }
         CreditVo creditVo = new CreditVo();
-        creditVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        creditVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        creditVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        creditVo.setCreateTime(bo.getCreateTime());
+        creditVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        creditVo.setCreateTimeStart(bo.getCreateTimeStart());
         if (Constant.DEFAULTNULL != bo.getCredit()) {
             creditVo.setCredit(bo.getCredit());
         }
@@ -70,9 +88,9 @@ public class CreditConverter {
         creditVo.setEnabled(bo.getEnabled());
         creditVo.setId(bo.getId());
         creditVo.setIdSet(bo.getIdSet());
-        creditVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        creditVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        creditVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        creditVo.setLastModifyTime(bo.getLastModifyTime());
+        creditVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        creditVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         return creditVo;
     }
 }

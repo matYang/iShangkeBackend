@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
 import com.ishangke.edunav.web.model.AccountHistoryVo;
 
@@ -55,13 +54,22 @@ public class AccountHistoryConverter {
         if (vo.getWithdrawIdSet() != null) {
             accountHistoryBo.setWithdrawIdSet(vo.getWithdrawIdSet());
         }
-        accountHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        accountHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        accountHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
-        
+        if (vo.getCreateTime() != null) {
+            accountHistoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            accountHistoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            accountHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            accountHistoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            accountHistoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            accountHistoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+
         if (vo.getOperation() != null) {
             accountHistoryBo.setOperation(vo.getOperation());
         } else {
@@ -70,7 +78,7 @@ public class AccountHistoryConverter {
         if (vo.getOperationSet() != null) {
             accountHistoryBo.setOperationSet(vo.getOperationSet());
         }
-        
+
         return accountHistoryBo;
     }
 
@@ -88,9 +96,9 @@ public class AccountHistoryConverter {
         if (Constant.DEFAULTNULL != bo.getChargeStart()) {
             accountHistoryVo.setChargeStart(bo.getChargeStart());
         }
-        accountHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        accountHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        accountHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        accountHistoryVo.setCreateTime(bo.getCreateTime());
+        accountHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        accountHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         accountHistoryVo.setId(bo.getId());
         accountHistoryVo.setIdSet(bo.getIdSet());
         accountHistoryVo.setRemark(bo.getRemark());
@@ -102,12 +110,12 @@ public class AccountHistoryConverter {
         accountHistoryVo.setUserIdSet(bo.getUserIdSet());
         accountHistoryVo.setWithdrawId(bo.getWithdrawId());
         accountHistoryVo.setWithdrawIdSet(bo.getWithdrawIdSet());
-        
+
         if (Constant.DEFAULTNULL != bo.getOperation()) {
             accountHistoryVo.setOperation(bo.getOperation());
         }
         accountHistoryVo.setOperationSet(bo.getOperationSet());
-        
+
         return accountHistoryVo;
     }
 }

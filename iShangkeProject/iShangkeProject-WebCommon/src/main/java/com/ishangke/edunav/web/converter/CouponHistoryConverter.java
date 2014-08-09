@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CouponHistoryBo;
 import com.ishangke.edunav.web.model.CouponHistoryVo;
 
@@ -38,19 +37,37 @@ public class CouponHistoryConverter {
         if (vo.getIdSet() != null) {
             couponHistoryBo.setIdSet(vo.getIdSet());
         }
-        couponHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        couponHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        couponHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
-        couponHistoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTime().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
-        
+        if (vo.getCreateTime() != null) {
+            couponHistoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            couponHistoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            couponHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            couponHistoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            couponHistoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            couponHistoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            couponHistoryBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            couponHistoryBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            couponHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            couponHistoryBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            couponHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            couponHistoryBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
+
         if (vo.getOperation() != null) {
             couponHistoryBo.setOperation(vo.getOperation());
         } else {
@@ -59,7 +76,7 @@ public class CouponHistoryConverter {
         if (vo.getOperationSet() != null) {
             couponHistoryBo.setOperationSet(vo.getOperationSet());
         }
-        
+
         return couponHistoryBo;
     }
 
@@ -79,20 +96,20 @@ public class CouponHistoryConverter {
         }
         couponHistoryVo.setCouponId(bo.getCouponId());
         couponHistoryVo.setCouponIdSet(bo.getCouponIdSet());
-        couponHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        couponHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        couponHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        couponHistoryVo.setCreateTime(bo.getCreateTime());
+        couponHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        couponHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         couponHistoryVo.setId(bo.getId());
         couponHistoryVo.setIdSet(bo.getIdSet());
-        couponHistoryVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        couponHistoryVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        couponHistoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
-        
+        couponHistoryVo.setLastModifyTime(bo.getLastModifyTime());
+        couponHistoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        couponHistoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+
         if (Constant.DEFAULTNULL != bo.getOperation()) {
             couponHistoryVo.setOperation(bo.getOperation());
         }
         couponHistoryVo.setOperationSet(bo.getOperationSet());
-        
+
         return couponHistoryVo;
     }
 }

@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -28,30 +27,30 @@ public class UserVo extends JsonResponse {
 
     private String reference;
 
-    private Calendar lastLoginTime;
+    private Long lastLoginTime;
 
-    private Calendar lastModifyTime;
+    private Long lastModifyTime;
 
-    private Calendar createTime;
+    private Long createTime;
 
     private Integer enabled;
 
     private Integer gender;
 
-    private Calendar birthday;
+    private Long birthday;
 
     private String school;
 
     private String major;
     private Set<Integer> idSet;
-    private Calendar lastModifyTimeStart;
-    private Calendar lastModifyTimeEnd;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
-    private Calendar lastLoginTimeStart;
-    private Calendar lastLoginTimeEnd;
-    private Calendar birthdayStart;
-    private Calendar birthdayEnd;
+    private Long lastModifyTimeStart;
+    private Long lastModifyTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
+    private Long lastLoginTimeStart;
+    private Long lastLoginTimeEnd;
+    private Long birthdayStart;
+    private Long birthdayEnd;
     private Integer careerId;
     private Integer schoolId;
     private Set<Integer> careerIdSet;
@@ -146,27 +145,27 @@ public class UserVo extends JsonResponse {
         this.reference = reference;
     }
 
-    public Calendar getLastLoginTime() {
+    public Long getLastLoginTime() {
         return lastLoginTime;
     }
 
-    public void setLastLoginTime(Calendar lastLoginTime) {
+    public void setLastLoginTime(Long lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public Calendar getLastModifyTime() {
+    public Long getLastModifyTime() {
         return lastModifyTime;
     }
 
-    public void setLastModifyTime(Calendar lastModifyTime) {
+    public void setLastModifyTime(Long lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -186,11 +185,11 @@ public class UserVo extends JsonResponse {
         this.gender = gender;
     }
 
-    public Calendar getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(Long birthday) {
         this.birthday = birthday;
     }
 
@@ -218,67 +217,67 @@ public class UserVo extends JsonResponse {
         this.idSet = idSet;
     }
 
-    public Calendar getLastModifyTimeStart() {
+    public Long getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Long lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Calendar getLastModifyTimeEnd() {
+    public Long getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Long lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 
-    public Calendar getLastLoginTimeStart() {
+    public Long getLastLoginTimeStart() {
         return lastLoginTimeStart;
     }
 
-    public void setLastLoginTimeStart(Calendar lastLoginTimeStart) {
+    public void setLastLoginTimeStart(Long lastLoginTimeStart) {
         this.lastLoginTimeStart = lastLoginTimeStart;
     }
 
-    public Calendar getLastLoginTimeEnd() {
+    public Long getLastLoginTimeEnd() {
         return lastLoginTimeEnd;
     }
 
-    public void setLastLoginTimeEnd(Calendar lastLoginTimeEnd) {
+    public void setLastLoginTimeEnd(Long lastLoginTimeEnd) {
         this.lastLoginTimeEnd = lastLoginTimeEnd;
     }
 
-    public Calendar getBirthdayStart() {
+    public Long getBirthdayStart() {
         return birthdayStart;
     }
 
-    public void setBirthdayStart(Calendar birthdayStart) {
+    public void setBirthdayStart(Long birthdayStart) {
         this.birthdayStart = birthdayStart;
     }
 
-    public Calendar getBirthdayEnd() {
+    public Long getBirthdayEnd() {
         return birthdayEnd;
     }
 
-    public void setBirthdayEnd(Calendar birthdayEnd) {
+    public void setBirthdayEnd(Long birthdayEnd) {
         this.birthdayEnd = birthdayEnd;
     }
 

@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.GroupBo;
 import com.ishangke.edunav.web.model.GroupVo;
 
@@ -35,17 +34,36 @@ public class GroupConverter {
         if (vo.getRoleIdSet() != null) {
             groupBo.setRoleIdSet(vo.getRoleIdSet());
         }
-        groupBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        groupBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        groupBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        groupBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        groupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        groupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            groupBo.setCreateTime(vo.getCreateTime());
+        } else {
+            groupBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            groupBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            groupBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            groupBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            groupBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            groupBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            groupBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            groupBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            groupBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            groupBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            groupBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return groupBo;
     }
 
@@ -55,15 +73,15 @@ public class GroupConverter {
             return null;
         }
         GroupVo groupVo = new GroupVo();
-        groupVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        groupVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        groupVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        groupVo.setCreateTime(bo.getCreateTime());
+        groupVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        groupVo.setCreateTimeStart(bo.getCreateTimeStart());
         groupVo.setEnabled(bo.getEnabled());
         groupVo.setId(bo.getId());
         groupVo.setIdSet(bo.getIdSet());
-        groupVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        groupVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        groupVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        groupVo.setLastModifyTime(bo.getLastModifyTime());
+        groupVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        groupVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         groupVo.setName(bo.getName());
         groupVo.setPartnerId(bo.getPartnerId());
         groupVo.setPartnerIdSet(bo.getPartnerIdSet());

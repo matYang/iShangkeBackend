@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.web.common.ActionVo;
@@ -112,36 +111,81 @@ public class BookingConverter {
         if (vo.getUserIdSet() != null) {
             bookingBo.setUserIdSet(vo.getUserIdSet());
         }
-        bookingBo.setCashbackDate(vo.getCashbackDate() == null ? Constant.DEFAULTNULL : vo.getCashbackDate()
-                .getTimeInMillis());
-        bookingBo.setCashbackDateEnd(vo.getCashbackDateEnd() == null ? Constant.DEFAULTNULL : vo.getCashbackDateEnd()
-                .getTimeInMillis());
-        bookingBo.setCashbackDateStart(vo.getCashbackDateStart() == null ? Constant.DEFAULTNULL : vo
-                .getCashbackDateStart().getTimeInMillis());
-        bookingBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        bookingBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        bookingBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        bookingBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        bookingBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        bookingBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
-        bookingBo.setNoRefundDate(vo.getNoRefundDate() == null ? Constant.DEFAULTNULL : vo.getNoRefundDate()
-                .getTimeInMillis());
-        bookingBo.setNoRefundDateEnd(vo.getNoRefundDateEnd() == null ? Constant.DEFAULTNULL : vo.getNoRefundDateEnd()
-                .getTimeInMillis());
-        bookingBo.setNoRefundDateStart(vo.getNoRefundDateStart() == null ? Constant.DEFAULTNULL : vo
-                .getNoRefundDateStart().getTimeInMillis());
-        bookingBo.setScheduledTime(vo.getScheduledTime() == null ? Constant.DEFAULTNULL : vo.getScheduledTime()
-                .getTimeInMillis());
-        bookingBo.setScheduledTimeEnd(vo.getScheduledTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getScheduledTimeEnd().getTimeInMillis());
-        bookingBo.setScheduledTimeStart(vo.getScheduledTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getScheduledTimeStart().getTimeInMillis());
+        if (vo.getCashbackDate() != null) {
+            bookingBo.setCashbackDate(vo.getCashbackDate());
+        } else {
+            bookingBo.setCashbackDate(Constant.DEFAULTNULL);
+        }
+        if (vo.getCashbackDateEnd() != null) {
+            bookingBo.setCashbackDateEnd(vo.getCashbackDateEnd());
+        } else {
+            bookingBo.setCashbackDateEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCashbackDateStart() != null) {
+            bookingBo.setCashbackDateStart(vo.getCashbackDateStart());
+        } else {
+            bookingBo.setCashbackDateStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTime() != null) {
+            bookingBo.setCreateTime(vo.getCreateTime());
+        } else {
+            bookingBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            bookingBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            bookingBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            bookingBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            bookingBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            bookingBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            bookingBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            bookingBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            bookingBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            bookingBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            bookingBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getNoRefundDate() != null) {
+            bookingBo.setNoRefundDate(vo.getNoRefundDate());
+        } else {
+            bookingBo.setNoRefundDate(Constant.DEFAULTNULL);
+        }
+        if (vo.getNoRefundDateEnd() != null) {
+            bookingBo.setNoRefundDateEnd(vo.getNoRefundDateEnd());
+        } else {
+            bookingBo.setNoRefundDateEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getNoRefundDateStart() != null) {
+            bookingBo.setNoRefundDateStart(vo.getNoRefundDateStart());
+        } else {
+            bookingBo.setNoRefundDateStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getScheduledTime() != null) {
+            bookingBo.setScheduledTime(vo.getScheduledTime());
+        } else {
+            bookingBo.setScheduledTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getScheduledTimeEnd() != null) {
+            bookingBo.setScheduledTimeEnd(vo.getScheduledTimeEnd());
+        } else {
+            bookingBo.setScheduledTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getScheduledTimeStart() != null) {
+            bookingBo.setScheduledTimeStart(vo.getScheduledTimeStart());
+        } else {
+            bookingBo.setScheduledTimeStart(Constant.DEFAULTNULL);
+        }
         if (vo.getActionList() != null) {
             List<ActionBo> list = new ArrayList<>();
             for (ActionVo a : vo.getActionList()) {
@@ -156,8 +200,8 @@ public class BookingConverter {
             bookingBo.setPartnerIdSet(vo.getPartnerIdSet());
         }
         if (vo.getStatuses() != null) {
-            //约定 前段必须使用,分隔id
-            String[] statuses = vo.getStatuses().split(","); 
+            // 约定 前段必须使用,分隔id
+            String[] statuses = vo.getStatuses().split(",");
             if (statuses.length > 0) {
                 Set<Integer> set = new HashSet<>();
                 for (String id : statuses) {
@@ -183,33 +227,33 @@ public class BookingConverter {
         if (Constant.DEFAULTNULL != bo.getCashbackAmountStart()) {
             bookingVo.setCashbackAmountStart(bo.getCashbackAmountStart());
         }
-        bookingVo.setCashbackDate(DateUtility.getTimeFromLong(bo.getCashbackDate()));
-        bookingVo.setCashbackDateEnd(DateUtility.getTimeFromLong(bo.getCashbackDateEnd()));
-        bookingVo.setCashbackDateStart(DateUtility.getTimeFromLong(bo.getCashbackDateStart()));
+        bookingVo.setCashbackDate(bo.getCashbackDate());
+        bookingVo.setCashbackDateEnd(bo.getCashbackDateEnd());
+        bookingVo.setCashbackDateStart(bo.getCashbackDateStart());
         bookingVo.setCourseId(bo.getCourseId());
         bookingVo.setCourseIdSet(bo.getCourseIdSet());
         bookingVo.setCourseTemplateId(bo.getCourseTemplateId());
         bookingVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
-        bookingVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        bookingVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        bookingVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        bookingVo.setCreateTime(bo.getCreateTime());
+        bookingVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        bookingVo.setCreateTimeStart(bo.getCreateTimeStart());
         bookingVo.setEmail(bo.getEmail());
         bookingVo.setEnabled(bo.getEnabled());
         bookingVo.setId(bo.getId());
         bookingVo.setIdSet(bo.getIdSet());
-        bookingVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        bookingVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        bookingVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        bookingVo.setLastModifyTime(bo.getLastModifyTime());
+        bookingVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        bookingVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         bookingVo.setName(bo.getName());
-        bookingVo.setNoRefundDate(DateUtility.getTimeFromLong(bo.getNoRefundDate()));
-        bookingVo.setNoRefundDateEnd(DateUtility.getTimeFromLong(bo.getNoRefundDateEnd()));
-        bookingVo.setNoRefundDateStart(DateUtility.getTimeFromLong(bo.getNoRefundDateStart()));
+        bookingVo.setNoRefundDate(bo.getNoRefundDate());
+        bookingVo.setNoRefundDateEnd(bo.getNoRefundDateEnd());
+        bookingVo.setNoRefundDateStart(bo.getNoRefundDateStart());
         bookingVo.setNote(bo.getNote());
         bookingVo.setPhone(bo.getPhone());
         bookingVo.setReference(bo.getReference());
-        bookingVo.setScheduledTime(DateUtility.getTimeFromLong(bo.getScheduledTime()));
-        bookingVo.setScheduledTimeEnd(DateUtility.getTimeFromLong(bo.getScheduledTimeEnd()));
-        bookingVo.setScheduledTimeStart(DateUtility.getTimeFromLong(bo.getScheduledTimeStart()));
+        bookingVo.setScheduledTime(bo.getScheduledTime());
+        bookingVo.setScheduledTimeEnd(bo.getScheduledTimeEnd());
+        bookingVo.setScheduledTimeStart(bo.getScheduledTimeStart());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             bookingVo.setStatus(bo.getStatus());
         }

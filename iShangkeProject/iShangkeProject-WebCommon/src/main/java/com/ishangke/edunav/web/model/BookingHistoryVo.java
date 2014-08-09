@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -14,7 +13,7 @@ public class BookingHistoryVo extends JsonResponse {
     private Integer preStatus;
     private Integer postStatus;
     private Integer normal;
-    private Calendar createTime;
+    private Long createTime;
     private Integer enabled;
     private Set<Integer> idSet;
     private Set<Integer> bookingIdSet;
@@ -23,8 +22,8 @@ public class BookingHistoryVo extends JsonResponse {
     private Set<Integer> preStatusSet;
     private Set<Integer> postStatusSet;
     private Set<Integer> normalSet;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     private Integer partnerId;
     private Set<Integer> partnerIdSet;
 
@@ -108,11 +107,11 @@ public class BookingHistoryVo extends JsonResponse {
         this.normal = normal;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -180,19 +179,19 @@ public class BookingHistoryVo extends JsonResponse {
         this.normalSet = normalSet;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 

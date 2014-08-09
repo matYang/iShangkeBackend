@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -16,15 +15,15 @@ public class CouponVo extends JsonResponse {
 
     private Integer origin;
 
-    private Calendar expiryTime;
+    private Long expiryTime;
 
     private String remark;
 
     private Integer userId;
 
-    private Calendar lastModifyTime;
+    private Long lastModifyTime;
 
-    private Calendar createTime;
+    private Long createTime;
 
     private Integer enabled;
     private Set<Integer> idSet;
@@ -33,13 +32,13 @@ public class CouponVo extends JsonResponse {
     private Double balanceStart;
     private Double balanceEnd;
     private Set<Integer> originSet;
-    private Calendar expiryTimeStart;
-    private Calendar expiryTimeEnd;
+    private Long expiryTimeStart;
+    private Long expiryTimeEnd;
     private Set<Integer> userIdSet;
-    private Calendar lastModifyTimeStart;
-    private Calendar lastModifyTimeEnd;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long lastModifyTimeStart;
+    private Long lastModifyTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     private Integer status;
     private Set<Integer> statusSet;
 
@@ -83,11 +82,11 @@ public class CouponVo extends JsonResponse {
         this.origin = origin;
     }
 
-    public Calendar getExpiryTime() {
+    public Long getExpiryTime() {
         return expiryTime;
     }
 
-    public void setExpiryTime(Calendar expiryTime) {
+    public void setExpiryTime(Long expiryTime) {
         this.expiryTime = expiryTime;
     }
 
@@ -107,19 +106,19 @@ public class CouponVo extends JsonResponse {
         this.userId = userId;
     }
 
-    public Calendar getLastModifyTime() {
+    public Long getLastModifyTime() {
         return lastModifyTime;
     }
 
-    public void setLastModifyTime(Calendar lastModifyTime) {
+    public void setLastModifyTime(Long lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -179,19 +178,19 @@ public class CouponVo extends JsonResponse {
         this.originSet = originSet;
     }
 
-    public Calendar getExpiryTimeStart() {
+    public Long getExpiryTimeStart() {
         return expiryTimeStart;
     }
 
-    public void setExpiryTimeStart(Calendar expiryTimeStart) {
+    public void setExpiryTimeStart(Long expiryTimeStart) {
         this.expiryTimeStart = expiryTimeStart;
     }
 
-    public Calendar getExpiryTimeEnd() {
+    public Long getExpiryTimeEnd() {
         return expiryTimeEnd;
     }
 
-    public void setExpiryTimeEnd(Calendar expiryTimeEnd) {
+    public void setExpiryTimeEnd(Long expiryTimeEnd) {
         this.expiryTimeEnd = expiryTimeEnd;
     }
 
@@ -203,35 +202,35 @@ public class CouponVo extends JsonResponse {
         this.userIdSet = userIdSet;
     }
 
-    public Calendar getLastModifyTimeStart() {
+    public Long getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Long lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Calendar getLastModifyTimeEnd() {
+    public Long getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Long lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 

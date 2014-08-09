@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.web.model.BookingHistoryVo;
 
@@ -71,12 +70,21 @@ public class BookingHistoryConverter {
         if (vo.getUserIdSet() != null) {
             bookingHistoryBo.setUserIdSet(vo.getUserIdSet());
         }
-        bookingHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        bookingHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        bookingHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            bookingHistoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            bookingHistoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            bookingHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            bookingHistoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            bookingHistoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            bookingHistoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         if (vo.getPartnerId() != null) {
             bookingHistoryBo.setPartnerId(vo.getPartnerId());
         }
@@ -93,9 +101,9 @@ public class BookingHistoryConverter {
         BookingHistoryVo bookingHistoryVo = new BookingHistoryVo();
         bookingHistoryVo.setBookingId(bo.getBookingId());
         bookingHistoryVo.setBookingIdSet(bo.getBookingIdSet());
-        bookingHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        bookingHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        bookingHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        bookingHistoryVo.setCreateTime(bo.getCreateTime());
+        bookingHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        bookingHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         bookingHistoryVo.setEnabled(bo.getEnabled());
         bookingHistoryVo.setId(bo.getId());
         bookingHistoryVo.setIdSet(bo.getIdSet());

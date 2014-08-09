@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -11,24 +10,24 @@ public class ActivityVo extends JsonResponse {
     private Integer partnerId;
     private Integer courseId;
     private String remark;
-    private Calendar startTime;
-    private Calendar endTime;
+    private Long startTime;
+    private Long endTime;
     private Integer status;
-    private Calendar lastModifyTime;
-    private Calendar createTime;
+    private Long lastModifyTime;
+    private Long createTime;
     private Integer enabled;
     private Set<Integer> idSet;
     private Set<Integer> partnerIdSet;
     private Set<Integer> courseIdSet;
-    private Calendar startTimeStart;
-    private Calendar startTimeEnd;
-    private Calendar endTimeStart;
-    private Calendar endTimeEnd;
+    private Long startTimeStart;
+    private Long startTimeEnd;
+    private Long endTimeStart;
+    private Long endTimeEnd;
     private Set<Integer> statusSet;
-    private Calendar lastModifyTimeStart;
-    private Calendar lastModifyTimeEnd;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long lastModifyTimeStart;
+    private Long lastModifyTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     public Integer getId() {
         return id;
     }
@@ -59,16 +58,16 @@ public class ActivityVo extends JsonResponse {
     public void setRemark(String remark) {
         this.remark = remark;
     }
-    public Calendar getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
-    public void setStartTime(Calendar startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
-    public Calendar getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
-    public void setEndTime(Calendar endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
     public Integer getStatus() {
@@ -77,16 +76,16 @@ public class ActivityVo extends JsonResponse {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Calendar getLastModifyTime() {
+    public Long getLastModifyTime() {
         return lastModifyTime;
     }
-    public void setLastModifyTime(Calendar lastModifyTime) {
+    public void setLastModifyTime(Long lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
     }
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
     public Integer getEnabled() {
@@ -113,28 +112,28 @@ public class ActivityVo extends JsonResponse {
     public void setCourseIdSet(Set<Integer> courseIdSet) {
         this.courseIdSet = courseIdSet;
     }
-    public Calendar getStartTimeStart() {
+    public Long getStartTimeStart() {
         return startTimeStart;
     }
-    public void setStartTimeStart(Calendar startTimeStart) {
+    public void setStartTimeStart(Long startTimeStart) {
         this.startTimeStart = startTimeStart;
     }
-    public Calendar getStartTimeEnd() {
+    public Long getStartTimeEnd() {
         return startTimeEnd;
     }
-    public void setStartTimeEnd(Calendar startTimeEnd) {
+    public void setStartTimeEnd(Long startTimeEnd) {
         this.startTimeEnd = startTimeEnd;
     }
-    public Calendar getEndTimeStart() {
+    public Long getEndTimeStart() {
         return endTimeStart;
     }
-    public void setEndTimeStart(Calendar endTimeStart) {
+    public void setEndTimeStart(Long endTimeStart) {
         this.endTimeStart = endTimeStart;
     }
-    public Calendar getEndTimeEnd() {
+    public Long getEndTimeEnd() {
         return endTimeEnd;
     }
-    public void setEndTimeEnd(Calendar endTimeEnd) {
+    public void setEndTimeEnd(Long endTimeEnd) {
         this.endTimeEnd = endTimeEnd;
     }
     public Set<Integer> getStatusSet() {
@@ -143,28 +142,28 @@ public class ActivityVo extends JsonResponse {
     public void setStatusSet(Set<Integer> statusSet) {
         this.statusSet = statusSet;
     }
-    public Calendar getLastModifyTimeStart() {
+    public Long getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
-    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Long lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
-    public Calendar getLastModifyTimeEnd() {
+    public Long getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
-    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Long lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
     

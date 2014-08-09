@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.web.model.UserVo;
 
@@ -70,28 +69,66 @@ public class UserConverter {
         if (vo.getSchoolIdSet() != null) {
             userBo.setSchoolIdSet(vo.getSchoolIdSet());
         }
-        userBo.setBirthday(vo.getBirthday() == null ? Constant.DEFAULTNULL : vo.getBirthday().getTimeInMillis());
-        userBo.setBirthdayEnd(vo.getBirthdayEnd() == null ? Constant.DEFAULTNULL : vo.getBirthdayEnd()
-                .getTimeInMillis());
-        userBo.setBirthdayStart(vo.getBirthdayStart() == null ? Constant.DEFAULTNULL : vo.getBirthdayStart()
-                .getTimeInMillis());
-        userBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        userBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        userBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        userBo.setLastLoginTime(vo.getLastLoginTime() == null ? Constant.DEFAULTNULL : vo.getLastLoginTime()
-                .getTimeInMillis());
-        userBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd() == null ? Constant.DEFAULTNULL : vo.getLastLoginTimeEnd()
-                .getTimeInMillis());
-        userBo.setLastLoginTimeStart(vo.getLastLoginTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastLoginTimeStart().getTimeInMillis());
-        userBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        userBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getBirthday() != null) {
+            userBo.setBirthday(vo.getBirthday());
+        } else {
+            userBo.setBirthday(Constant.DEFAULTNULL);
+        }
+        if (vo.getBirthdayEnd() != null) {
+            userBo.setBirthdayEnd(vo.getBirthdayEnd());
+        } else {
+            userBo.setBirthdayEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getBirthdayStart() != null) {
+            userBo.setBirthdayStart(vo.getBirthdayStart());
+        } else {
+            userBo.setBirthdayStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTime() != null) {
+            userBo.setCreateTime(vo.getCreateTime());
+        } else {
+            userBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            userBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            userBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            userBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            userBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastLoginTime() != null) {
+            userBo.setLastLoginTime(vo.getLastLoginTime());
+        } else {
+            userBo.setLastLoginTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastLoginTimeEnd() != null) {
+            userBo.setLastLoginTimeEnd(vo.getLastLoginTimeEnd());
+        } else {
+            userBo.setLastLoginTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastLoginTimeStart() != null) {
+            userBo.setLastLoginTimeStart(vo.getLastLoginTimeStart());
+        } else {
+            userBo.setLastLoginTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            userBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            userBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            userBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            userBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            userBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            userBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         if (vo.getLocationId() != null) {
             userBo.setLocationId(vo.getLocationId());
         }
@@ -105,16 +142,16 @@ public class UserConverter {
         if (bo == null) {
             return null;
         }
-        //password不会出现到vo中
+        // password不会出现到vo中
         UserVo userVo = new UserVo();
         userVo.setAppliedInvitationCode(bo.getAppliedInvitationCode());
         userVo.setAvatarUrl(bo.getAvatarUrl());
-        userVo.setBirthday(DateUtility.getTimeFromLong(bo.getBirthday()));
-        userVo.setBirthdayEnd(DateUtility.getTimeFromLong(bo.getBirthdayEnd()));
-        userVo.setBirthdayStart(DateUtility.getTimeFromLong(bo.getBirthdayStart()));
-        userVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        userVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        userVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        userVo.setBirthday(bo.getBirthday());
+        userVo.setBirthdayEnd(bo.getBirthdayEnd());
+        userVo.setBirthdayStart(bo.getBirthdayStart());
+        userVo.setCreateTime(bo.getCreateTime());
+        userVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        userVo.setCreateTimeStart(bo.getCreateTimeStart());
         userVo.setEmail(bo.getEmail());
         userVo.setEnabled(bo.getEnabled());
         if (Constant.DEFAULTNULL != bo.getGender()) {
@@ -123,12 +160,12 @@ public class UserConverter {
         userVo.setId(bo.getId());
         userVo.setIdSet(bo.getIdSet());
         userVo.setInvitationCode(bo.getInvitationCode());
-        userVo.setLastLoginTime(DateUtility.getTimeFromLong(bo.getLastLoginTime()));
-        userVo.setLastLoginTimeEnd(DateUtility.getTimeFromLong(bo.getLastLoginTimeEnd()));
-        userVo.setLastLoginTimeStart(DateUtility.getTimeFromLong(bo.getLastLoginTimeStart()));
-        userVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        userVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        userVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        userVo.setLastLoginTime(bo.getLastLoginTime());
+        userVo.setLastLoginTimeEnd(bo.getLastLoginTimeEnd());
+        userVo.setLastLoginTimeStart(bo.getLastLoginTimeStart());
+        userVo.setLastModifyTime(bo.getLastModifyTime());
+        userVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        userVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         userVo.setMajor(bo.getMajor());
         userVo.setName(bo.getName());
         userVo.setPhone(bo.getPhone());
@@ -144,7 +181,7 @@ public class UserConverter {
         if (Constant.DEFAULTNULL != bo.getCouponTotal()) {
             userVo.setCouponTotal(bo.getCouponTotal());
         } else {
-            //不能显示null给用户看
+            // 不能显示null给用户看
             userVo.setCouponTotal(0.0);
         }
         userVo.setAccount(AccountConverter.toModel(bo.getAccount()));
