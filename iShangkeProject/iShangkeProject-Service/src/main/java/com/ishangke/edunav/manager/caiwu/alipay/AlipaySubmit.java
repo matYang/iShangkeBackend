@@ -69,7 +69,7 @@ public class AlipaySubmit {
 
         String gateway =  AlipayConfig.notify_url + "?";
 
-        sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
+        sbHtml.append("<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\"><form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
                 + "\" method=\"post\">");
 
         for (int i = 0; i < keys.size(); i++) {
