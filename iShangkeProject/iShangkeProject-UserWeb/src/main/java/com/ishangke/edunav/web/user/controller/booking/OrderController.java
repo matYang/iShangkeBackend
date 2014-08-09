@@ -3,6 +3,8 @@ package com.ishangke.edunav.web.user.controller.booking;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,7 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 @Controller
 @RequestMapping("/api/v2/order")
 public class OrderController extends AbstractController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     UserFacade userFacade;
@@ -67,8 +70,10 @@ public class OrderController extends AbstractController {
 
         //我们的订单号ISK + booking id + order id
         //中文乱码解决了 但是中文检测会失败
-        //return alipayFacade.buildFormForPost(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
-        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
+        String result = alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        LOGGER.error("build form: " + result);
+        return result;
+        //return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
     }
     
 }

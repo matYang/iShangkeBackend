@@ -31,6 +31,8 @@ public class AlipayController extends AbstractController {
         notifyId = request.getParameter("notify_id");
         verified = alipayFacade.verify_notify_id(notifyId);
         total_fee = request.getParameter("total_fee");
+        LOGGER.error("verified: " + verified);
+        LOGGER.error("notifyId: " + notifyId);
         // Check Sign
         if (verified.equals("true")) {
             tradeStatus = request.getParameter("trade_status");
