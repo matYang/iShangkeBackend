@@ -292,6 +292,20 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
+    
+    @Override
+    public String buildFormForPost(String subject, String out_trade_no, String total_fee) throws BusinessExceptionBo, TException {
+        try {
+            return bookingManager.buildFormForPost(subject, out_trade_no, total_fee);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR_KEY);
+            throw exception;
+        }
+    }
 
     /**********************************************************
      * 
@@ -510,10 +524,11 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createOrderByUser"));
-                throw new NoPermissionException();
-            }
+            //只有普通用户可以创建支付order
+//            if (!permissionManager.hasPermissionByUser(userBo.getId(), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createOrderByUser"));
+//                throw new NoPermissionException();
+//            }
             return orderManager.createOrderByUser(orderBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);

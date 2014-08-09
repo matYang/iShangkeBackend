@@ -50,6 +50,23 @@ public class AlipayFacade {
         }
         return result;
     }
+    
+    public String buildFormForPost(String subject, String out_trade_no, String total_fee) {
+        String result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.buildFormForPost(subject, out_trade_no, total_fee);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public String changeBookingStatusToPayed(int orderId) {
         String result = null;
