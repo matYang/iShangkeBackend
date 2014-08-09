@@ -86,7 +86,7 @@ public class CourseManagerImpl implements CourseManager {
 
     @Autowired
     private CategoryEntityExtMapper categoryMapper;
-    
+
     @Autowired
     private CacheManager cacheManager;
 
@@ -325,7 +325,7 @@ public class CourseManagerImpl implements CourseManager {
         if (courseCommentBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         String roleName = authManager.getRole(userBo.getId());
         if (!(Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName))) {
             throw new ManagerException("cannot delete comment current user");
@@ -346,11 +346,11 @@ public class CourseManagerImpl implements CourseManager {
         if (keyword.length() >= Constant.CATEGORYCACHEMAXLENGTH) {
             keyword.substring(0, Constant.CATEGORYCACHEMAXLENGTH);
         }
-        ArrayList<CategoryBo> result = (ArrayList<CategoryBo>)cacheManager.get(Constant.CATEGORYCACHE + keyword);
+        ArrayList<CategoryBo> result = (ArrayList<CategoryBo>) cacheManager.get(Constant.CATEGORYCACHE + keyword);
         if (result == null) {
             LOGGER.error("[query category] cannot find category cache " + Constant.CATEGORYCACHE + keyword);
             result = new ArrayList<>();
-        } 
+        }
         return result;
     }
 
@@ -443,7 +443,7 @@ public class CourseManagerImpl implements CourseManager {
             throw new ManagerException("cannot found");
         }
         convertered = CourseConverter.toBo(course);
-        if ( userBo != null &&  IdChecker.notNull(userBo.getId())) {
+        if (userBo != null && IdChecker.notNull(userBo.getId())) {
             String roleName = authManager.getRole(userBo.getId());
             if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
                 // 判断此coursetemplate是否属于此user所在的partner
@@ -458,13 +458,13 @@ public class CourseManagerImpl implements CourseManager {
                         break;
                     }
                     if (isSameGroup) {
-                        //如果属于此partner，则此展示可以对课程进行的操作
+                        // 如果属于此partner，则此展示可以对课程进行的操作
                         List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, convertered.getStatus());
                         convertered.setActionList(actions);
                     }
                 }
             } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLEPARTNERADMIN.equals(roleName)) {
-                //展示可以对课程进行的操作
+                // 展示可以对课程进行的操作
                 List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, convertered.getStatus());
                 convertered.setActionList(actions);
             }
@@ -573,7 +573,9 @@ public class CourseManagerImpl implements CourseManager {
 
     private CourseBo updateCourse(CourseEntityExt courseEntityModify, CourseEntityExt oldCourseEntity, boolean isOnline) {
         if (!isOnline) {
-            if ((courseEntityModify.getPrice() != null && !courseEntityModify.getPrice().equals(oldCourseEntity.getPrice())) || (courseEntityModify.getCourseName() != null && !courseEntityModify.getCourseName().equals(oldCourseEntity.getCourseName())) || (courseEntityModify.getOriginalPrice() != null && !courseEntityModify.getOriginalPrice().equals(oldCourseEntity.getOriginalPrice()))) {
+            if ((courseEntityModify.getPrice() != null && !courseEntityModify.getPrice().equals(oldCourseEntity.getPrice()))
+                    || (courseEntityModify.getCourseName() != null && !courseEntityModify.getCourseName().equals(oldCourseEntity.getCourseName()))
+                    || (courseEntityModify.getOriginalPrice() != null && !courseEntityModify.getOriginalPrice().equals(oldCourseEntity.getOriginalPrice()))) {
                 throw new ManagerException("cannot modify price , name , origin price");
             }
             List<ClassPhotoEntityExt> classPhotos = null;
@@ -595,7 +597,7 @@ public class CourseManagerImpl implements CourseManager {
                     }
                 }
             }
-            
+
             if (courseEntityModify.getTeacherList() != null) {
                 teachers = courseEntityModify.getTeacherList();
                 if (teachers != null) {
@@ -675,7 +677,7 @@ public class CourseManagerImpl implements CourseManager {
                 }
             }
             if (teachers != null) {
-             // 删除原有的教师信息/classphoto与classtemplate的关联
+                // 删除原有的教师信息/classphoto与classtemplate的关联
                 List<TeacherEntityExt> oldTeachers = teacherMapper.listTeacherByCourseId(courseEntityModify.getId());
                 if (oldTeachers != null && oldTeachers.size() != 0) {
                     for (TeacherEntityExt t : oldTeachers) {
@@ -683,8 +685,7 @@ public class CourseManagerImpl implements CourseManager {
                     }
                 }
             }
-            
-            
+
             // 建立新的教师信息/classphoto与classtemplate的关联
             // 插入classphoto关联
             if (classPhotos != null) {

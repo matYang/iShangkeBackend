@@ -92,7 +92,7 @@ public class ContactManagerImpl implements ContactManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at " + new Date(), userBo.getName()));
         } else {
-            if (contactEntity == null || IdChecker.isEqual(contactEntity.getUserId(), userEntity.getId())) {
+            if (contactEntity == null || IdChecker.notEqual(contactEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's contact");
             }
         }
