@@ -51,14 +51,18 @@ public class AlipaySubmit {
         return sbHtml.toString();
     }
 
-    public static String buildFormForPost(String out_trade_no, String notify_id, String total_fee) {
+    public static String buildFormForPost(String out_trade_no, String subject, String total_fee) {
         Map sPara = new HashMap();
-        sPara.put("exterface", "create_direct_pay_by_user");
-        sPara.put("notify_time", DateUtility.toSQLDateTime(DateUtility.getCurTimeInstance()));
-        sPara.put("notify_type", "trade_status_async");
-        sPara.put("notify_id", notify_id);
+        sPara.put("service", "create_direct_pay_by_user");
+        sPara.put("partner", AlipayConfig.partner);
+        sPara.put("sign_type", AlipayConfig.sign_type);
+        sPara.put("notify_url", AlipayConfig.notify_url);
+        sPara.put("return_url", AlipayConfig.return_url);
         sPara.put("out_trade_no", out_trade_no);
-        sPara.put("trade_status", "TRADE_SUCCESS");
+        sPara.put("subject", subject);
+        sPara.put("payment_type", AlipayConfig.payment_type);
+        sPara.put("total_fee", total_fee);
+        sPara.put("seller_id", AlipayConfig.seller_id);
 
         Map sParaNew = AlipayCore.ParaFilter(sPara); // 除去数组中的空值和签名参数
         String mysign = AlipayCore.BuildMysign(sParaNew);// 生成签名结果
@@ -66,12 +70,10 @@ public class AlipaySubmit {
         StringBuffer sbHtml = new StringBuffer();
         List keys = new ArrayList(sParaNew.keySet());
         Collections.sort(keys);
+        String gateway = "https://mapi.alipay.com/gateway.do?";
 
-        String gateway =  AlipayConfig.notify_url + "?";
-
-        //set utf-8
         sbHtml.append("<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
-                + "\" method=\"post\">");
+                + "\" method=\"post\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
@@ -83,7 +85,7 @@ public class AlipaySubmit {
         sbHtml.append("<input type=\"hidden\" name=\"sign_type\" value=\"" + AlipayConfig.sign_type + "\"/>");
 
         // submit按钮控件请不要含有name属性
-        sbHtml.append("<input type=\"Submit\" value=\"submit\"></form>");
+        sbHtml.append("<input type=\"Submit\" value=\"submit\"/></form>");
 
         sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
 
