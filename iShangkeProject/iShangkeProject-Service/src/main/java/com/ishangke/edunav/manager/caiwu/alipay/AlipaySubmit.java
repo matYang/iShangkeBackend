@@ -59,6 +59,7 @@ public class AlipaySubmit {
         sPara.put("notify_id", notify_id);
         sPara.put("out_trade_no", out_trade_no);
         sPara.put("trade_status", "TRADE_SUCCESS");
+        sPara.put("input_charset", "utf-8");
 
         Map sParaNew = AlipayCore.ParaFilter(sPara); // 除去数组中的空值和签名参数
         String mysign = AlipayCore.BuildMysign(sParaNew);// 生成签名结果
