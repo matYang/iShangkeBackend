@@ -38,7 +38,7 @@ public class OrderController extends AbstractController {
     @Autowired
     AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     public @ResponseBody
     String buildForm(@PathVariable int bookingId, @RequestParam(defaultValue="alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
