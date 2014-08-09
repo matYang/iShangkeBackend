@@ -67,8 +67,8 @@ public class OrderController extends AbstractController {
 
         //我们的订单号ISK + booking id + order id
         //中文乱码解决了 但是中文检测会失败
-        return alipayFacade.buildFormForPost(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
-        //return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
+        //return alipayFacade.buildFormForPost(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
     }
     
 }
