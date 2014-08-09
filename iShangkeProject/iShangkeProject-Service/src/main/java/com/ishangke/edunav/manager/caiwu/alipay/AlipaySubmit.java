@@ -22,6 +22,7 @@ public class AlipaySubmit {
         sPara.put("payment_type", AlipayConfig.payment_type);
         sPara.put("total_fee", total_fee);
         sPara.put("seller_id", AlipayConfig.seller_id);
+        sPara.put("input_charset", AlipayConfig.input_charset);
 
         Map sParaNew = AlipayCore.ParaFilter(sPara); // 除去数组中的空值和签名参数
         String mysign = AlipayCore.BuildMysign(sParaNew);// 生成签名结果
@@ -31,8 +32,7 @@ public class AlipaySubmit {
         Collections.sort(keys);
         String gateway = "https://mapi.alipay.com/gateway.do?";
 
-        sbHtml.append("<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
-                + "\" method=\"get\" style=\"display:none\">");
+        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + " method=\"get\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
@@ -63,6 +63,7 @@ public class AlipaySubmit {
         sPara.put("payment_type", AlipayConfig.payment_type);
         sPara.put("total_fee", total_fee);
         sPara.put("seller_id", AlipayConfig.seller_id);
+        sPara.put("input_charset", AlipayConfig.input_charset);
 
         Map sParaNew = AlipayCore.ParaFilter(sPara); // 除去数组中的空值和签名参数
         String mysign = AlipayCore.BuildMysign(sParaNew);// 生成签名结果
@@ -72,8 +73,7 @@ public class AlipaySubmit {
         Collections.sort(keys);
         String gateway = "https://mapi.alipay.com/gateway.do?";
 
-        sbHtml.append("<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
-                + "\" method=\"post\" style=\"display:none\">");
+        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + " method=\"post\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
