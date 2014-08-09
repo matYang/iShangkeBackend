@@ -21,7 +21,7 @@ public class AlipayController extends AbstractController {
     @Autowired
     private AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = "charset=utf-8")
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     String processAlipayFeedback(HttpServletRequest request) {
         String notifyId = null;
