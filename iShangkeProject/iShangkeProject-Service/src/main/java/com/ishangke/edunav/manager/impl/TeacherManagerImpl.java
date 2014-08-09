@@ -26,6 +26,7 @@ import com.ishangke.edunav.manager.converter.TeacherConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.TeacherNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class TeacherManagerImpl implements TeacherManager {
@@ -56,10 +57,9 @@ public class TeacherManagerImpl implements TeacherManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call createTeacher at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), teacherBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -73,7 +73,7 @@ public class TeacherManagerImpl implements TeacherManager {
         // 插入新的teacher记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        if (teacherEntity.getPartnerId() == null) {
+        if (IdChecker.isNull(teacherEntity.getPartnerId())) {
             throw new ManagerException("Teacher creation must specify partner");
         }
         teacherEntity.setCreateTime(DateUtility.getCurTimeInstance());
@@ -109,10 +109,9 @@ public class TeacherManagerImpl implements TeacherManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call updateTeacher at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), teacherBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -126,8 +125,8 @@ public class TeacherManagerImpl implements TeacherManager {
         // 更新TEACHER记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
-        if (teacherEntity.getId() == null) {
+
+        if (IdChecker.isNull(teacherEntity.getId())) {
             throw new ManagerException("Teacher update must specify id");
         }
         teacherEntity.setPartnerId(null);
@@ -149,11 +148,11 @@ public class TeacherManagerImpl implements TeacherManager {
         if (teacherBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 删除TEACHER记录
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        if (teacherEntity.getId() == null) {
+        if (IdChecker.isNull(teacherEntity.getId())) {
             throw new ManagerException("Teacher deletion must specify id");
         }
         TeacherEntityExt previousTeacher = teacherMapper.getById(teacherEntity.getId());
@@ -170,10 +169,9 @@ public class TeacherManagerImpl implements TeacherManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call deleteTeacher at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(previousTeacher.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), previousTeacher.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -183,7 +181,6 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Invalid user");
         }
 
-        
         try {
             previousTeacher.setDeleted(1);
             teacherMapper.deleteById(previousTeacher.getId());
@@ -209,13 +206,12 @@ public class TeacherManagerImpl implements TeacherManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             if (teacherBo == null) {
-               throw new ManagerException("TeacherBo null for non-admin user at query"); 
+                throw new ManagerException("TeacherBo null for non-admin user at query");
             }
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == teacherBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), teacherBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -229,7 +225,6 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = teacherBo == null ? null : TeacherConverter.fromBo(teacherBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-
 
         List<TeacherEntityExt> results = null;
         try {
@@ -293,7 +288,7 @@ public class TeacherManagerImpl implements TeacherManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 验证userBo是否是否属于同一家机构
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
@@ -303,10 +298,9 @@ public class TeacherManagerImpl implements TeacherManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == partnerId) {
+                if (IdChecker.isEqual(g.getPartnerId(), partnerId)) {
                     isSameGroup = true;
                     break;
                 }
@@ -316,7 +310,7 @@ public class TeacherManagerImpl implements TeacherManager {
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
-        
+
         try {
             List<TeacherBo> resultList = new ArrayList<TeacherBo>();
             List<TeacherEntityExt> teacherList = teacherMapper.listTeacherByPartnerId(partnerId);

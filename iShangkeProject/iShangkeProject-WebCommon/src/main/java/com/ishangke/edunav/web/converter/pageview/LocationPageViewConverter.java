@@ -13,7 +13,7 @@ public class LocationPageViewConverter {
     public static LocationPageViewVo toModel(LocationPageViewBo bo) {
         LocationPageViewVo vo = new LocationPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<LocationVo> result = new ArrayList<>();

@@ -33,6 +33,7 @@ import com.ishangke.edunav.manager.converter.OrderHistoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class OrderManagerImpl implements OrderManager {
@@ -56,10 +57,10 @@ public class OrderManagerImpl implements OrderManager {
         // 插入新的order记录
         OrderEntityExt orderEntity = OrderConverter.fromBo(orderBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
+
         BookingEntityExt bookingEntity = bookingMapper.getById(orderEntity.getBookingId());
         if (bookingEntity == null || bookingEntity.getStatus() != BookingEnums.Status.ONLINEPENDINGPAYMENT.code) {
-            LOGGER.error(String.format("[create order] cannot create order for booking current status [%d]", bookingEntity  == null ? null : bookingEntity.getStatus()));
+            LOGGER.error(String.format("[create order] cannot create order for booking current status [%d]", bookingEntity == null ? null : bookingEntity.getStatus()));
             throw new ManagerException("cannot create order");
         }
 
@@ -71,7 +72,8 @@ public class OrderManagerImpl implements OrderManager {
             throw new ManagerException("Order creation failed for user: " + userEntity.getId(), t);
         }
         if (result > 0) {
-            //a little bug 没有定义orderhistory 的其他属性 所以只有order id, user id, create time是必须的
+            // a little bug 没有定义orderhistory 的其他属性 所以只有order id, user id, create
+            // time是必须的
             OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
             orderHistory.setOrderId(orderEntity.getId());
             orderHistory.setUserId(userEntity.getId());
@@ -126,8 +128,7 @@ public class OrderManagerImpl implements OrderManager {
             orderEntity.setBookingId(bookingEntity.getId());
         }
 
-        if (bookingEntity != null && bookingEntity.getUserId() != null && bookingEntity.getUserId() != 0
-                && bookingEntity.getUserId() != userEntity.getId()) {
+        if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
             throw new ManagerException("此预定不属于该用户");
         }
 
@@ -159,8 +160,7 @@ public class OrderManagerImpl implements OrderManager {
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        if (bookingEntity != null && bookingEntity.getUserId() != null && bookingEntity.getUserId() != 0
-                && bookingEntity.getUserId() != userEntity.getId()) {
+        if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
             throw new ManagerException("此预定不属于该用户");
         }
 
@@ -177,7 +177,7 @@ public class OrderManagerImpl implements OrderManager {
         }
         List<OrderHistoryBo> convertedResults = new ArrayList<OrderHistoryBo>();
         for (OrderHistoryEntityExt result : results) {
-            if (result.getUserId() != userEntity.getId()) {
+            if (IdChecker.notEqual(result.getUserId(), userEntity.getId())) {
                 throw new ManagerException("此订单历史不属于这个用户");
             }
             convertedResults.add(OrderHistoryConverter.toBo(result));
@@ -187,7 +187,7 @@ public class OrderManagerImpl implements OrderManager {
 
     @Override
     public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo) {
-        if(orderBo == null || userBo == null) {
+        if (orderBo == null || userBo == null) {
             throw new ManagerException("cannot query order current user");
         }
         OrderEntityExt order = null;

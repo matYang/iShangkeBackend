@@ -13,7 +13,7 @@ public class TeacherPageViewConverter {
     public static TeacherPageViewVo toModel(TeacherPageViewBo bo) {
         TeacherPageViewVo vo = new TeacherPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<TeacherVo> result = new ArrayList<>();

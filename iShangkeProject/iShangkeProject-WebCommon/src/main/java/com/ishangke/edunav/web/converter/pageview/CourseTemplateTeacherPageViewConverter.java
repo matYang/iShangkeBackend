@@ -13,7 +13,7 @@ public class CourseTemplateTeacherPageViewConverter {
     public static CourseTemplateTeacherPageViewVo toModel(CourseTemplateTeacherPageViewBo bo) {
         CourseTemplateTeacherPageViewVo vo = new CourseTemplateTeacherPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CourseTemplateTeacherVo> result = new ArrayList<>();

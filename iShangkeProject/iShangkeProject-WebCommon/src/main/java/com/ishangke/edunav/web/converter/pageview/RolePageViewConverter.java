@@ -13,7 +13,7 @@ public class RolePageViewConverter {
     public static RolePageViewVo toModel(RolePageViewBo bo) {
         RolePageViewVo vo = new RolePageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<RoleVo> result = new ArrayList<>();

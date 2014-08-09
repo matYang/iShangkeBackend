@@ -13,7 +13,7 @@ public class CirclePageViewConverter {
     public static CirclePageViewVo toModel(CirclePageViewBo bo) {
         CirclePageViewVo vo = new CirclePageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CircleVo> result = new ArrayList<>();

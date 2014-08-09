@@ -13,7 +13,7 @@ public class PermissionPageViewConverter {
     public static PermissionPageViewVo toModel(PermissionPageViewBo bo) {
         PermissionPageViewVo vo = new PermissionPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<PermissionVo> result = new ArrayList<>();

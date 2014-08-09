@@ -13,7 +13,7 @@ public class SpreadPageViewConverter {
     public static SpreadPageViewVo toModel(SpreadPageViewBo bo) {
         SpreadPageViewVo vo = new SpreadPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<SpreadVo> result = new ArrayList<>();

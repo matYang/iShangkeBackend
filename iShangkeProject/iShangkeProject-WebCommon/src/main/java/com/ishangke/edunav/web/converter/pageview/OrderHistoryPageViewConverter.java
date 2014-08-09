@@ -13,7 +13,7 @@ public class OrderHistoryPageViewConverter {
     public static OrderHistoryPageViewVo toModel(OrderHistoryPageViewBo bo) {
         OrderHistoryPageViewVo vo = new OrderHistoryPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<OrderHistoryVo> result = new ArrayList<>();

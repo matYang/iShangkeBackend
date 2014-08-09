@@ -13,7 +13,7 @@ public class ActivityPageViewConverter {
     public static ActivityPageViewVo toModel(ActivityPageViewBo bo) {
         ActivityPageViewVo vo = new ActivityPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<ActivityVo> result = new ArrayList<>();

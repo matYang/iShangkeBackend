@@ -43,6 +43,7 @@ import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.transform.Operation;
+import com.ishangke.edunav.util.IdChecker;
 
 //todo
 //关于权限的控制，状态的转移，需要再考虑一下
@@ -110,7 +111,7 @@ public class CourseManagerImpl implements CourseManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == courseBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), courseBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -123,7 +124,7 @@ public class CourseManagerImpl implements CourseManager {
             if (courseTemplateEntity == null) {
                 throw new ManagerException("course template is not exits");
             }
-            if (courseTemplateEntity.getPartnerId() != course.getPartnerId()) {
+            if (IdChecker.notEqual(courseTemplateEntity.getPartnerId(), course.getPartnerId())) {
                 throw new ManagerException("cannot user other partner's courseTemplate");
             }
             // 判断course template是否处于上线状态
@@ -146,7 +147,7 @@ public class CourseManagerImpl implements CourseManager {
                     } catch (Exception e) {
                         throw new ManagerException("failed when query photo in partner repository");
                     }
-                    if (photoEntity == null || photoEntity.getPartnerId() != courseBo.getPartnerId()) {
+                    if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId(), courseBo.getPartnerId())) {
                         throw new ManagerException("classphoto cannot found in partner photo repository");
                     }
                 }
@@ -160,7 +161,7 @@ public class CourseManagerImpl implements CourseManager {
                     } catch (Exception e) {
                         throw new ManagerException("failed when query teacher in partner repository");
                     }
-                    if (teacherEntity == null || teacherEntity.getPartnerId() != courseBo.getPartnerId()) {
+                    if (teacherEntity == null || IdChecker.notEqual(teacherEntity.getPartnerId(), courseBo.getPartnerId())) {
                         throw new ManagerException("teacher cannot found in partner teacher repository");
                     }
                 }
@@ -229,7 +230,7 @@ public class CourseManagerImpl implements CourseManager {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(),
                                 photoEntity == null ? null : photoEntity.getId()));
                     }
-                    if (photoEntity.getPartnerId() != courseBo.getPartnerId()) {
+                    if (IdChecker.notEqual(photoEntity.getPartnerId(), courseBo.getPartnerId())) {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] belong [%d]", userBo.getId(), photoEntity.getId(), photo.getPartnerId()));
                     }
                 }
@@ -247,7 +248,7 @@ public class CourseManagerImpl implements CourseManager {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null
                                 : teacherEntity.getId()));
                     }
-                    if (teacherEntity.getPartnerId() != courseBo.getPartnerId()) {
+                    if (IdChecker.notEqual(teacherEntity.getPartnerId(), courseBo.getPartnerId())) {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(),
                                 teacherEntity.getPartnerId()));
                     }
@@ -278,7 +279,7 @@ public class CourseManagerImpl implements CourseManager {
 
     @Override
     public CourseCommentBo commentCourse(CourseCommentBo courseCommentBo, UserBo userBo) {
-        if (courseCommentBo.getUserId() != userBo.getId()) {
+        if (IdChecker.notEqual(courseCommentBo.getUserId(), userBo.getId())) {
             throw new ManagerException("must crate comment for self");
         }
         CourseCommentEntityExt courseCommentEntity = CourseCommentConverter.fromBo(courseCommentBo);
@@ -365,7 +366,7 @@ public class CourseManagerImpl implements CourseManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == courseBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), courseBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -442,7 +443,7 @@ public class CourseManagerImpl implements CourseManager {
             throw new ManagerException("cannot found");
         }
         convertered = CourseConverter.toBo(course);
-        if (userBo != null && userBo.getId() > 0) {
+        if ( userBo != null &&  IdChecker.notNull(userBo.getId())) {
             String roleName = authManager.getRole(userBo.getId());
             if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
                 // 判断此coursetemplate是否属于此user所在的partner
@@ -452,7 +453,7 @@ public class CourseManagerImpl implements CourseManager {
                 }
                 boolean isSameGroup = false;
                 for (GroupEntityExt g : groupList) {
-                    if (g.getPartnerId().equals(convertered.getPartnerId())) {
+                    if (IdChecker.isEqual(g.getPartnerId(), convertered.getPartnerId())) {
                         isSameGroup = true;
                         break;
                     }
@@ -492,7 +493,7 @@ public class CourseManagerImpl implements CourseManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(courseEntity.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), courseEntity.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -588,7 +589,7 @@ public class CourseManagerImpl implements CourseManager {
                         } catch (Exception e) {
                             throw new ManagerException("failed when query photo in partner repository");
                         }
-                        if (photoEntity == null || photoEntity.getPartnerId() != oldCourseEntity.getPartnerId()) {
+                        if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId(), oldCourseEntity.getPartnerId())) {
                             throw new ManagerException("classphoto cannot found in partner photo repository");
                         }
                     }
@@ -605,7 +606,7 @@ public class CourseManagerImpl implements CourseManager {
                         } catch (Exception e) {
                             throw new ManagerException("failed when query teacher in partner repository");
                         }
-                        if (teacherEntity == null || teacherEntity.getPartnerId() != oldCourseEntity.getPartnerId()) {
+                        if (teacherEntity == null || IdChecker.notEqual(teacherEntity.getPartnerId(), oldCourseEntity.getPartnerId())) {
                             throw new ManagerException("teacher cannot found in partner teacher repository");
                         }
                     }

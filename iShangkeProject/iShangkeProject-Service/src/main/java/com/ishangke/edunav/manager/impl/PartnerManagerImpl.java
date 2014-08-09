@@ -31,6 +31,7 @@ import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.PartnerNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class PartnerManagerImpl implements PartnerManager {
@@ -38,13 +39,13 @@ public class PartnerManagerImpl implements PartnerManager {
 
     @Autowired
     private PartnerEntityExtMapper partnerMapper;
-    
+
     @Autowired
     private GroupEntityExtMapper groupMapper;
-    
+
     @Autowired
     private AuthManager authManager;
-    
+
     @Autowired
     private AddressManager addressManager;
 
@@ -75,7 +76,7 @@ public class PartnerManagerImpl implements PartnerManager {
     }
 
     @Override
-    //not really using the id here
+    // not really using the id here
     public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -99,7 +100,7 @@ public class PartnerManagerImpl implements PartnerManager {
         if (partnerBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
@@ -109,16 +110,15 @@ public class PartnerManagerImpl implements PartnerManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin[%s] call updatePartner at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == partnerBo.getId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), partnerBo.getId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-        
+
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
@@ -126,8 +126,8 @@ public class PartnerManagerImpl implements PartnerManager {
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
-        if (partnerEntity.getId() == null) {
+
+        if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("Partner update must specify id");
         }
         partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -147,12 +147,11 @@ public class PartnerManagerImpl implements PartnerManager {
         if (partnerBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 验证用户是否为admin
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin [%s] call createPartner at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             throw new AuthenticationException("Only admins can create partners");
         }
 
@@ -170,12 +169,12 @@ public class PartnerManagerImpl implements PartnerManager {
             if (result <= 0) {
                 throw new ManagerException("Partner creation failed for user: " + userEntity.getId());
             }
-            //判断不为空
+            // 判断不为空
             if (partnerEntity.getAddressList() != null) {
                 for (int i = 0; i < partnerEntity.getAddressList().size(); i++) {
                     AddressBo toStore = AddressConverter.toBo(partnerEntity.getAddressList().get(i));
                     AddressBo stored = addressManager.createAddress(toStore, userBo);
-                    //store the one with the id
+                    // store the one with the id
                     partnerEntity.getAddressList().set(i, AddressConverter.fromBo(stored));
                 }
             }
@@ -184,7 +183,7 @@ public class PartnerManagerImpl implements PartnerManager {
             LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId(), t);
         }
-        
+
         return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
     }
 

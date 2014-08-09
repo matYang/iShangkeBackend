@@ -13,7 +13,7 @@ public class RolePermissionPageViewConverter {
     public static RolePermissionPageViewVo toModel(RolePermissionPageViewBo bo) {
         RolePermissionPageViewVo vo = new RolePermissionPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<RolePermissionVo> result = new ArrayList<>();

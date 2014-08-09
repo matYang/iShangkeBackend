@@ -52,6 +52,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.CourseNotFoundException;
 import com.ishangke.edunav.manager.transform.Operation;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class BookingManagerImpl implements BookingManager {
@@ -91,7 +92,7 @@ public class BookingManagerImpl implements BookingManager {
     private OrderEntityExtMapper orderMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
-        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || bookingBo.getUserId() <= 0) {
+        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || IdChecker.isNull(bookingBo.getUserId())) {
             return 0.0;
         }
 
@@ -168,7 +169,7 @@ public class BookingManagerImpl implements BookingManager {
         if (!Constant.ROLEUSER.equals(roleName)) {
             throw new ManagerException("only user can create booking");
         }
-        if (bookingEntity.getUserId() != userBo.getId()) {
+        if (IdChecker.notEqual(bookingEntity.getUserId(), userBo.getId())) {
             throw new ManagerException("cannot create booking for others");
         }
         if (bookingEntity.getName() == null || "".equals(bookingEntity.getName()) || bookingEntity.getPhone() == null || "".equals(bookingEntity.getPhone())) {
@@ -288,7 +289,7 @@ public class BookingManagerImpl implements BookingManager {
     public List<BookingBo> queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
-            if (bookingBo.getUserId() != userBo.getId()) {
+            if (IdChecker.notEqual(bookingBo.getUserId(), userBo.getId())) {
                 throw new ManagerException("cannot query other's booking");
             }
             List<BookingEntityExt> bookings = null;
@@ -316,7 +317,7 @@ public class BookingManagerImpl implements BookingManager {
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
                 // 因为我们有特殊情况 api中需要提供/booking/{id} 在这种情况下booking bo id明确为一个id值
-                if (g.getPartnerId().equals(bookingBo.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), bookingBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -368,7 +369,7 @@ public class BookingManagerImpl implements BookingManager {
     public List<BookingHistoryBo> queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
-            if (bookingHistoryBo.getUserId() != userBo.getId()) {
+            if (IdChecker.notEqual(bookingHistoryBo.getUserId(), userBo.getId())) {
                 throw new ManagerException("cannot query other's booking");
             }
             List<BookingHistoryEntityExt> bookingHistorys = null;
@@ -393,7 +394,7 @@ public class BookingManagerImpl implements BookingManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(bookingHistoryBo.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), bookingHistoryBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -461,7 +462,7 @@ public class BookingManagerImpl implements BookingManager {
         if (Constant.ROLEUSER.equals(roleName)) {
             // 如果是普通用户
             // 用户修改自己的booking
-            if (bookingEntityExt.getUserId() != userBo.getId()) {
+            if (IdChecker.notEqual(bookingEntityExt.getUserId(), userBo.getId())) {
                 throw new ManagerException("cannot modify other's booking");
             }
             // 按照业务流程修改订单
@@ -508,7 +509,7 @@ public class BookingManagerImpl implements BookingManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(course.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), course.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -671,7 +672,7 @@ public class BookingManagerImpl implements BookingManager {
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call createTeacher at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(partnerBo.getId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), partnerBo.getId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -708,7 +709,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
-            if (!bookingEntityExt.getUserId().equals(userBo.getId())) {
+            if (IdChecker.notEqual(bookingEntityExt.getUserId(), userBo.getId())) {
                 throw new ManagerException("cannot query other's booking history");
             }
             try {
@@ -729,7 +730,7 @@ public class BookingManagerImpl implements BookingManager {
             CourseEntityExt course = courseMapper.getById(bookingEntityExt.getCourseId());
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(course.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), course.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -850,7 +851,7 @@ public class BookingManagerImpl implements BookingManager {
             throw new ManagerException("cannot find booking of id " + id);
         }
         if (Constant.ROLEUSER.equals(roleName)) {
-            if (booking.getUserId() != userBo.getId()) {
+            if (IdChecker.notEqual(booking.getUserId(), userBo.getId())) {
                 throw new ManagerException("cannot query other's booking");
             }
             
@@ -866,7 +867,7 @@ public class BookingManagerImpl implements BookingManager {
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
                 // 因为我们有特殊情况 api中需要提供/booking/{id} 在这种情况下booking bo id明确为一个id值
-                if (g.getPartnerId().equals(booking.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), booking.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }

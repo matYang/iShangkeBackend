@@ -13,7 +13,7 @@ public class CareerPageViewConverter {
     public static CareerPageViewVo toModel(CareerPageViewBo bo) {
         CareerPageViewVo vo = new CareerPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CareerVo> result = new ArrayList<>();

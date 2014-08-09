@@ -13,7 +13,7 @@ public class AccountPageViewConverter {
     public static AccountPageViewVo toModel(AccountPageViewBo bo) {
         AccountPageViewVo vo = new AccountPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<AccountVo> result = new ArrayList<>();

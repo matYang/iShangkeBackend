@@ -13,7 +13,7 @@ public class CategoryPageViewConverter {
     public static CategoryPageViewVo toModel(CategoryPageViewBo bo) {
         CategoryPageViewVo vo = new CategoryPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CategoryVo> result = new ArrayList<>();

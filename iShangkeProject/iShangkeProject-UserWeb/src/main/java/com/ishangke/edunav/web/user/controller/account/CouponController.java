@@ -83,7 +83,8 @@ public class CouponController extends AbstractController{
         
         UserBo curUser = null;
         try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+            curUser = userFacade.authenticate(authSessionBo, permissionTag); 
+            
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         } 

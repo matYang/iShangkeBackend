@@ -13,7 +13,7 @@ public class CourseCommentPageViewConverter {
     public static CourseCommentPageViewVo toModel(CourseCommentPageViewBo bo) {
         CourseCommentPageViewVo vo = new CourseCommentPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CourseCommentVo> result = new ArrayList<>();

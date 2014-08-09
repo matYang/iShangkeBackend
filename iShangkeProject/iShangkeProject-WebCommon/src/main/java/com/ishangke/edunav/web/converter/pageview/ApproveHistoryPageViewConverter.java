@@ -13,7 +13,7 @@ public class ApproveHistoryPageViewConverter {
     public static ApproveHistoryPageViewVo toModel(ApproveHistoryPageViewBo bo) {
         ApproveHistoryPageViewVo vo = new ApproveHistoryPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<ApproveHistoryVo> result = new ArrayList<>();

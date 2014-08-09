@@ -13,7 +13,7 @@ public class CreditPageViewConverter {
     public static CreditPageViewVo toModel(CreditPageViewBo bo) {
         CreditPageViewVo vo = new CreditPageViewVo();
         vo.setCount(bo.getCount());
-        vo.setStart(bo.getCount());
+        vo.setStart(bo.getStart());
         vo.setTotal(bo.getTotal());
         if (bo.getData() != null) {
             List<CreditVo> result = new ArrayList<>();
