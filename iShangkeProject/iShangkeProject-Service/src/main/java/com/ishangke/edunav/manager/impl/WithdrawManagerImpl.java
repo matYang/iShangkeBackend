@@ -26,6 +26,7 @@ import com.ishangke.edunav.manager.converter.WithdrawConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.WithdrawNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class WithdrawManagerImpl implements WithdrawManager {
@@ -33,10 +34,10 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
     @Autowired
     private WithdrawEntityExtMapper withdrawMapper;
-    
+
     @Autowired
     private GroupEntityExtMapper groupMapper;
-    
+
     @Autowired
     private AuthManager authManager;
 
@@ -46,16 +47,15 @@ public class WithdrawManagerImpl implements WithdrawManager {
         if (withdrawBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 插入新的WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
+
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin[%s] call createWithdraw at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userEntity.getId())) {
+        } else {
+            if (withdrawEntity == null || IdChecker.notEqual(withdrawEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User creating someone else's withdraw");
             }
         }
@@ -90,13 +90,12 @@ public class WithdrawManagerImpl implements WithdrawManager {
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call updateWithdraw at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userEntity.getId())) {
+        } else {
+            if (withdrawEntity == null || IdChecker.notEqual(withdrawEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's withdraw");
             }
         }
-        
+
         withdrawEntity.setUserId(null);
         withdrawEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         withdrawEntity.setCreateTime(null);
@@ -120,23 +119,22 @@ public class WithdrawManagerImpl implements WithdrawManager {
         // 删除WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        if (withdrawEntity.getId() == null) {
+        if (IdChecker.notNull(withdrawEntity.getId())) {
             throw new ManagerException("Withdraw deletion must specify id");
         }
         WithdrawEntityExt previousWithdraw = withdrawMapper.getById(withdrawEntity.getId());
         if (previousWithdraw == null) {
             throw new WithdrawNotFoundException("Withdraw to delete is not found with id:" + withdrawEntity.getId());
         }
-        
+
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
-        }
-        else {
-            if (!previousWithdraw.getUserId().equals(userEntity.getId())) {
+        } else {
+            if (IdChecker.notEqual(previousWithdraw.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User deleting someone else's withdraw");
             }
         }
-        
+
         try {
             previousWithdraw.setDeleted(1);
             withdrawMapper.deleteById(previousWithdraw.getId());
@@ -152,22 +150,22 @@ public class WithdrawManagerImpl implements WithdrawManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         WithdrawEntityExt withdrawEntity = withdrawBo == null ? null : WithdrawConverter.fromBo(withdrawBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
-        //admin and system admins can query user's withdraws
+
+        // admin and system admins can query user's withdraws
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
-            if (withdrawEntity == null || withdrawEntity.getUserId() == null || !withdrawEntity.getUserId().equals(userEntity.getId())) {
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
+            if (withdrawEntity == null || IdChecker.notEqual(withdrawEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's withdraw");
             }
         }
-        
+
         List<WithdrawEntityExt> results = null;
         try {
             results = withdrawMapper.list(withdrawEntity, page);

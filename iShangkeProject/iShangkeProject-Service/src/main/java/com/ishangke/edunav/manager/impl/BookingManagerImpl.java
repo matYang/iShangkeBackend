@@ -92,7 +92,7 @@ public class BookingManagerImpl implements BookingManager {
     private OrderEntityExtMapper orderMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
-        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || bookingBo.getUserId() <= 0) {
+        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.1d || IdChecker.isNull(bookingBo.getUserId())) {
             return 0.0;
         }
 

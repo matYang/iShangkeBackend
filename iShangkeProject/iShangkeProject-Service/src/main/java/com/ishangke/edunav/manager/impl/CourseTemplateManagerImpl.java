@@ -107,7 +107,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     } catch (Exception e) {
                         throw new ManagerException("failed when query photo in partner repository");
                     }
-                    if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId() , courseTemplateBo.getPartnerId())) {
+                    if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId(), courseTemplateBo.getPartnerId())) {
                         throw new ManagerException("classphoto cannot found in partner photo repository");
                     }
                 }
@@ -257,7 +257,9 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
      */
     public CourseTemplateBo updateCourseTemplate(CourseTemplateEntityExt courseTemplateEntityModify, CourseTemplateEntityExt oldCourseTemplateEntity, boolean isOnlineNow) {
         if (!isOnlineNow) {
-            if ((courseTemplateEntityModify.getPrice() != null && !courseTemplateEntityModify.getPrice().equals(oldCourseTemplateEntity.getPrice())) || (courseTemplateEntityModify.getCourseName() != null && !courseTemplateEntityModify.getCourseName().equals(oldCourseTemplateEntity.getCourseName())) || (courseTemplateEntityModify.getOriginalPrice() != null && !courseTemplateEntityModify.getOriginalPrice().equals(oldCourseTemplateEntity.getOriginalPrice()))) {
+            if ((courseTemplateEntityModify.getPrice() != null && !courseTemplateEntityModify.getPrice().equals(oldCourseTemplateEntity.getPrice()))
+                    || (courseTemplateEntityModify.getCourseName() != null && !courseTemplateEntityModify.getCourseName().equals(oldCourseTemplateEntity.getCourseName()))
+                    || (courseTemplateEntityModify.getOriginalPrice() != null && !courseTemplateEntityModify.getOriginalPrice().equals(oldCourseTemplateEntity.getOriginalPrice()))) {
                 throw new ManagerException("cannot modify price , name , origin price");
             }
             List<ClassPhotoEntityExt> classPhotos = null;
@@ -279,7 +281,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     }
                 }
             }
-            
+
             if (courseTemplateEntityModify.getTeacherList() != null) {
                 teachers = courseTemplateEntityModify.getTeacherList();
                 if (teachers != null) {
@@ -290,7 +292,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         } catch (Exception e) {
                             throw new ManagerException("failed when query teacher in partner repository");
                         }
-                        if (teacherEntity == null || IdChecker.notEqual(teacherEntity.getPartnerId() , oldCourseTemplateEntity.getPartnerId())) {
+                        if (teacherEntity == null || IdChecker.notEqual(teacherEntity.getPartnerId(), oldCourseTemplateEntity.getPartnerId())) {
                             throw new ManagerException("teacher cannot found in partner teacher repository");
                         }
                     }
@@ -427,7 +429,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(courseTemplate.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), courseTemplate.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -517,15 +519,21 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                 throw new ManagerException("unlogin user");
             }
             boolean isSameGroup = false;
-            CourseTemplateEntityExt courseTemplateEntity = courseTemplateMapper.getById(courseTemplateBo.getId());
-            for (GroupEntityExt g : groupList) {
-                // //因为我们有特殊情况 api中需要提供/coursetemplate/{id} 在这种情况下coursetemplate
-                // bo id明确为一个id值
-                if (IdChecker.isEqual(g.getPartnerId(), courseTemplateBo.getPartnerId()) || (IdChecker.notNull(courseTemplateBo.getId()) && IdChecker.isEqual(g.getPartnerId(), courseTemplateEntity.getPartnerId()) )) {
-                    isSameGroup = true;
-                    break;
+            if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+                isSameGroup = true;
+                LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call createTeacher at " + new Date(), userBo.getName()));
+            }
+            else {
+                for (GroupEntityExt g : groupList) {
+                    // //因为我们有特殊情况 api中需要提供/coursetemplate/{id} 在这种情况下coursetemplate
+                    // bo id明确为一个id值
+                    if (IdChecker.isEqual(g.getPartnerId(), courseTemplateBo.getPartnerId())) {
+                        isSameGroup = true;
+                        break;
+                    }
                 }
             }
+            
             if (isSameGroup == false) {
                 throw new ManagerException("cannot query other partner's template");
             }
@@ -581,7 +589,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(courseEntity.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), courseEntity.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }

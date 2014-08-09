@@ -37,6 +37,7 @@ import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.CreditNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class CreditManagerImpl implements CreditManager {
@@ -64,27 +65,28 @@ public class CreditManagerImpl implements CreditManager {
         CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
-        //admin and system admins can query user's credits
+        // admin and system admins can query user's credits
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CreditManagerImpl]system admin || admin [%s] call modifyCredit at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only modify their own, thus making an UserId necessary
-            if (creditEntity == null || creditEntity.getId() == null || !creditEntity.getId().equals(userEntity.getId())) {
+        } else {
+            // otherwise user can only modify their own, thus making an UserId
+            // necessary
+            if (creditEntity == null || IdChecker.notEqual(creditEntity.getId(), userEntity.getId())) {
                 throw new AuthenticationException("User modifying someone else's credit");
             }
         }
-        
-        if (creditEntity.getId() == null) {
+
+        if (IdChecker.isNull(creditEntity.getId())) {
             throw new ManagerException("Credit modification must specify corresponding user");
         }
-        
-        //TODO we probably need a way to tell how much credit is used instead reading previous credit out
+
+        // TODO we probably need a way to tell how much credit is used instead
+        // reading previous credit out
         CreditEntityExt previousCredit = creditMapper.getById(creditEntity.getId());
         if (previousCredit == null) {
             throw new CreditNotFoundException("Previous credit is not found");
         }
-        
+
         double balanceDiff = previousCredit.getCredit() - creditEntity.getCredit();
         int operation = CreditHistoryEnums.Operation.DEC.code;
         if (balanceDiff < -DefaultValue.DOUBLEPRCISIONOFFSET) {
@@ -98,7 +100,7 @@ public class CreditManagerImpl implements CreditManager {
         creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
         creditHistory.setDeleted(0);
-        
+
         creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditEntity.setCreateTime(null);
         creditEntity.setDeleted(null);
@@ -118,60 +120,62 @@ public class CreditManagerImpl implements CreditManager {
     @Override
     public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo) {
         return null;
-        //TODO
-//        if (creditBo == null || couponBo != null || userBo == null) {
-//            throw new ManagerException("Invalid parameter");
-//        }
-//
-//        CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
-//
-//        // Check Ids
-//        if (creditEntity.getId() == null || creditEntity.getId() == 0) {
-//            throw new ManagerException("积分id为null或0");
-//        }
-//        if (couponEntity.getId() == null || couponEntity.getId() == 0) {
-//            throw new ManagerException("优惠劵id为null或0");
-//        }
-//
-//        // Check whether this credit or coupon belongs to the user
-//        if (creditEntity.getId() != userEntity.getId()) {
-//            throw new ManagerException("此积分不是该用户的");
-//        }
-//        if (couponEntity.getUserId() != userEntity.getId()) {
-//            throw new ManagerException("此优惠劵不是该用户的");
-//        }
-//
-//        try {
-//            creditMapper.update(creditEntity);
-//        } catch (Throwable t) {
-//            LOGGER.warn(t.getMessage(), t);
-//            throw new ManagerException("Credit ExchangeCoupon Failed for user: " + userEntity.getId(), t);
-//        }
-//
-//        return CreditConverter.toBo(creditEntity);
+        // TODO
+        // if (creditBo == null || couponBo != null || userBo == null) {
+        // throw new ManagerException("Invalid parameter");
+        // }
+        //
+        // CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
+        // UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        // CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
+        //
+        // // Check Ids
+        // if (creditEntity.getId() == null || creditEntity.getId() == 0) {
+        // throw new ManagerException("积分id为null或0");
+        // }
+        // if (couponEntity.getId() == null || couponEntity.getId() == 0) {
+        // throw new ManagerException("优惠劵id为null或0");
+        // }
+        //
+        // // Check whether this credit or coupon belongs to the user
+        // if (creditEntity.getId() != userEntity.getId()) {
+        // throw new ManagerException("此积分不是该用户的");
+        // }
+        // if (couponEntity.getUserId() != userEntity.getId()) {
+        // throw new ManagerException("此优惠劵不是该用户的");
+        // }
+        //
+        // try {
+        // creditMapper.update(creditEntity);
+        // } catch (Throwable t) {
+        // LOGGER.warn(t.getMessage(), t);
+        // throw new ManagerException("Credit ExchangeCoupon Failed for user: "
+        // + userEntity.getId(), t);
+        // }
+        //
+        // return CreditConverter.toBo(creditEntity);
     }
 
     @Override
     public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo) {
         return null;
-        //TODO
-//        if (creditBo == null || accountBo != null || userBo == null) {
-//            throw new ManagerException("Invalid parameter");
-//        }
-//
-//        CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//
-//        try {
-//            creditMapper.update(creditEntity);
-//        } catch (Throwable t) {
-//            LOGGER.warn(t.getMessage(), t);
-//            throw new ManagerException("Credit update failed for user: " + userEntity.getId(), t);
-//        }
-//
-//        return CreditConverter.toBo(creditEntity);
+        // TODO
+        // if (creditBo == null || accountBo != null || userBo == null) {
+        // throw new ManagerException("Invalid parameter");
+        // }
+        //
+        // CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
+        // UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        //
+        // try {
+        // creditMapper.update(creditEntity);
+        // } catch (Throwable t) {
+        // LOGGER.warn(t.getMessage(), t);
+        // throw new ManagerException("Credit update failed for user: " +
+        // userEntity.getId(), t);
+        // }
+        //
+        // return CreditConverter.toBo(creditEntity);
     }
 
     @Override
@@ -179,22 +183,22 @@ public class CreditManagerImpl implements CreditManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         CreditEntityExt creditEntity = creditBo == null ? null : CreditConverter.fromBo(creditBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        //admin and system admins can query user's credits
+        // admin and system admins can query user's credits
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CreditManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
-            if (creditEntity == null || creditEntity.getId() == null || !creditEntity.getId().equals(userEntity.getId())) {
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
+            if (creditEntity == null || IdChecker.notEqual(creditEntity.getId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's credit");
             }
         }
-        
+
         List<CreditEntityExt> results = null;
         try {
             results = creditMapper.list(creditEntity, page);
@@ -221,18 +225,17 @@ public class CreditManagerImpl implements CreditManager {
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        //admin and system admins can query user's credits
+        // admin and system admins can query user's credits
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CreditManagerImpl]system admin || admin [%s] call queryHistory at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
-            if (creditHistoryEntity == null || creditHistoryEntity.getUserId() == null || !creditHistoryEntity.getUserId().equals(userEntity.getId())) {
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
+            if (creditHistoryEntity == null || IdChecker.notEqual(creditHistoryEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's creditHistory");
             }
         }
-        
-        
+
         List<CreditHistoryEntityExt> results = null;
         try {
             results = creditHistoryMapper.list(creditHistoryEntity, page);
