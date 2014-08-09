@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -125,7 +124,7 @@ public class PartnerConverter {
         } else {
             partnerBo.setPartnerQualificationStart(Constant.DEFAULTNULL);
         }
-        
+
         if (vo.getRating() != null) {
             partnerBo.setRating(vo.getRating());
         } else {
@@ -167,19 +166,37 @@ public class PartnerConverter {
         if (vo.getWholeName() != null) {
             partnerBo.setWholeName(vo.getWholeName());
         }
-      
-        partnerBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        partnerBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        partnerBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
-        partnerBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        partnerBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        partnerBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
+
+        if (vo.getLastModifyTime() != null) {
+            partnerBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            partnerBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            partnerBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            partnerBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            partnerBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            partnerBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTime() != null) {
+            partnerBo.setCreateTime(vo.getCreateTime());
+        } else {
+            partnerBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            partnerBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            partnerBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            partnerBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            partnerBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         if (vo.getAddressList() != null) {
             List<AddressBo> list = new ArrayList<>();
             for (AddressVo a : vo.getAddressList()) {
@@ -226,9 +243,9 @@ public class PartnerConverter {
         partnerVo.setContract(bo.getContract());
         partnerVo.setCourseContact(bo.getCourseContact());
         partnerVo.setCourseContactPhone(bo.getCourseContactPhone());
-        partnerVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        partnerVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        partnerVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        partnerVo.setCreateTime(bo.getCreateTime());
+        partnerVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        partnerVo.setCreateTimeStart(bo.getCreateTimeStart());
         if (Constant.DEFAULTNULL != bo.getCutoffDay()) {
             partnerVo.setCutoffDay(bo.getCutoffDay());
         }
@@ -258,10 +275,10 @@ public class PartnerConverter {
         partnerVo.setId(bo.getId());
         partnerVo.setIdSet(bo.getIdSet());
         partnerVo.setInstName(bo.getInstName());
-        
-        partnerVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        partnerVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        partnerVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+
+        partnerVo.setLastModifyTime(bo.getLastModifyTime());
+        partnerVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        partnerVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         partnerVo.setLicence(bo.getLicence());
         partnerVo.setLicenceImgUrl(bo.getLicenceImgUrl());
         partnerVo.setLogoUrl(bo.getLogoUrl());
@@ -277,7 +294,7 @@ public class PartnerConverter {
         if (Constant.DEFAULTNULL != bo.getPartnerQualificationStart()) {
             partnerVo.setPartnerQualificationStart(bo.getPartnerQualificationStart());
         }
-       
+
         if (Constant.DEFAULTNULL != bo.getRating()) {
             partnerVo.setRating(bo.getRating());
         }

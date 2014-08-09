@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.web.model.TeacherVo;
 
@@ -53,18 +52,36 @@ public class TeacherConverter {
         } else {
             teacherBo.setPopularityStart(Constant.DEFAULTNULL);
         }
-        teacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        teacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        teacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        teacherBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        teacherBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        teacherBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            teacherBo.setCreateTime(vo.getCreateTime());
+        } else {
+            teacherBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            teacherBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            teacherBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            teacherBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            teacherBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            teacherBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            teacherBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            teacherBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            teacherBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            teacherBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            teacherBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return teacherBo;
     }
 
@@ -73,17 +90,17 @@ public class TeacherConverter {
             return null;
         }
         TeacherVo teacherVo = new TeacherVo();
-        teacherVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        teacherVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        teacherVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        teacherVo.setCreateTime(bo.getCreateTime());
+        teacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        teacherVo.setCreateTimeStart(bo.getCreateTimeStart());
         teacherVo.setEnabled(bo.getEnabled());
         teacherVo.setId(bo.getId());
         teacherVo.setIdSet(bo.getIdSet());
         teacherVo.setImgUrl(bo.getImgUrl());
         teacherVo.setIntro(bo.getIntro());
-        teacherVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        teacherVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        teacherVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        teacherVo.setLastModifyTime(bo.getLastModifyTime());
+        teacherVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        teacherVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         teacherVo.setName(bo.getName());
         teacherVo.setPartnerId(bo.getPartnerId());
         teacherVo.setPartnerIdSet(bo.getPartnerIdSet());

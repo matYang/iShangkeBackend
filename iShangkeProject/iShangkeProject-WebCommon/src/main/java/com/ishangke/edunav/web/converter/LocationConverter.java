@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.web.model.LocationVo;
 
@@ -26,18 +25,36 @@ public class LocationConverter {
         if (vo.getValue() != null) {
             locationBo.setValue(vo.getValue());
         }
-        locationBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        locationBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        locationBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        locationBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        locationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        locationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            locationBo.setCreateTime(vo.getCreateTime());
+        } else {
+            locationBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            locationBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            locationBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            locationBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            locationBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            locationBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            locationBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            locationBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            locationBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            locationBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            locationBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return locationBo;
     }
 
@@ -47,15 +64,15 @@ public class LocationConverter {
             return null;
         }
         LocationVo locationVo = new LocationVo();
-        locationVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        locationVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        locationVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        locationVo.setCreateTime(bo.getCreateTime());
+        locationVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        locationVo.setCreateTimeStart(bo.getCreateTimeStart());
         locationVo.setEnabled(bo.getEnabled());
         locationVo.setId(bo.getId());
         locationVo.setIdSet(bo.getIdSet());
-        locationVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        locationVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        locationVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        locationVo.setLastModifyTime(bo.getLastModifyTime());
+        locationVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        locationVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         locationVo.setName(bo.getName());
         locationVo.setValue(bo.getValue());
         return locationVo;

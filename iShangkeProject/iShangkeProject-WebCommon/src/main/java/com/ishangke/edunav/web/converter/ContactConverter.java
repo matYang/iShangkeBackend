@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ContactBo;
 import com.ishangke.edunav.web.model.ContactVo;
 
@@ -35,18 +34,36 @@ public class ContactConverter {
         if (vo.getUserIdSet() != null) {
             contactBo.setUserIdSet(vo.getUserIdSet());
         }
-        contactBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        contactBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        contactBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        contactBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        contactBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        contactBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            contactBo.setCreateTime(vo.getCreateTime());
+        } else {
+            contactBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            contactBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            contactBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            contactBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            contactBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            contactBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            contactBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            contactBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            contactBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            contactBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            contactBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return contactBo;
     }
 
@@ -55,16 +72,16 @@ public class ContactConverter {
             return null;
         }
         ContactVo contactVo = new ContactVo();
-        contactVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        contactVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        contactVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        contactVo.setCreateTime(bo.getCreateTime());
+        contactVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        contactVo.setCreateTimeStart(bo.getCreateTimeStart());
         contactVo.setEmail(bo.getEmail());
         contactVo.setEnabled(bo.getEnabled());
         contactVo.setId(bo.getId());
         contactVo.setIdSet(bo.getIdSet());
-        contactVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        contactVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        contactVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        contactVo.setLastModifyTime(bo.getLastModifyTime());
+        contactVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        contactVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         contactVo.setName(bo.getName());
         contactVo.setPhone(bo.getPhone());
         contactVo.setUserId(bo.getUserId());

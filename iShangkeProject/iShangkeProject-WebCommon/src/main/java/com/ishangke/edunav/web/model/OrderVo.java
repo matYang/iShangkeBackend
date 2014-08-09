@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -10,7 +9,7 @@ public class OrderVo extends JsonResponse {
 
     private Integer bookingId;
 
-    private Calendar createTime;
+    private Long createTime;
 
     private String type;
 
@@ -23,16 +22,16 @@ public class OrderVo extends JsonResponse {
     private Integer enabled;
     private String reference;
     private String sign;
-    private Calendar confirmedTime;
+    private Long confirmedTime;
     private Set<Integer> idSet;
     private Set<Integer> bookingIdSet;
     private Set<Integer> statusSet;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     private Double priceStart;
     private Double priceEnd;
-    private Calendar confirmedTimeStart;
-    private Calendar confirmedTimeEnd;
+    private Long confirmedTimeStart;
+    private Long confirmedTimeEnd;
 
     public Integer getId() {
         return id;
@@ -50,11 +49,11 @@ public class OrderVo extends JsonResponse {
         this.bookingId = bookingId;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -114,11 +113,11 @@ public class OrderVo extends JsonResponse {
         this.sign = sign;
     }
 
-    public Calendar getConfirmedTime() {
+    public Long getConfirmedTime() {
         return confirmedTime;
     }
 
-    public void setConfirmedTime(Calendar confirmedTime) {
+    public void setConfirmedTime(Long confirmedTime) {
         this.confirmedTime = confirmedTime;
     }
 
@@ -146,19 +145,19 @@ public class OrderVo extends JsonResponse {
         this.statusSet = statusSet;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 
@@ -178,19 +177,19 @@ public class OrderVo extends JsonResponse {
         this.priceEnd = priceEnd;
     }
 
-    public Calendar getConfirmedTimeStart() {
+    public Long getConfirmedTimeStart() {
         return confirmedTimeStart;
     }
 
-    public void setConfirmedTimeStart(Calendar confirmedTimeStart) {
+    public void setConfirmedTimeStart(Long confirmedTimeStart) {
         this.confirmedTimeStart = confirmedTimeStart;
     }
 
-    public Calendar getConfirmedTimeEnd() {
+    public Long getConfirmedTimeEnd() {
         return confirmedTimeEnd;
     }
 
-    public void setConfirmedTimeEnd(Calendar confirmedTimeEnd) {
+    public void setConfirmedTimeEnd(Long confirmedTimeEnd) {
         this.confirmedTimeEnd = confirmedTimeEnd;
     }
 

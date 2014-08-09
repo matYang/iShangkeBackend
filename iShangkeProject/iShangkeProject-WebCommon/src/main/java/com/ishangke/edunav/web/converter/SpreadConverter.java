@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.SpreadBo;
 import com.ishangke.edunav.web.model.SpreadVo;
 
@@ -52,17 +51,36 @@ public class SpreadConverter {
         if (vo.getUserIdSet() != null) {
             spreadBo.setUserIdSet(vo.getUserIdSet());
         }
-        spreadBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        spreadBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        spreadBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            spreadBo.setCreateTime(vo.getCreateTime());
+        } else {
+            spreadBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            spreadBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            spreadBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            spreadBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            spreadBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            spreadBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            spreadBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            spreadBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            spreadBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            spreadBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            spreadBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return spreadBo;
     }
 
@@ -73,15 +91,15 @@ public class SpreadConverter {
         SpreadVo spreadVo = new SpreadVo();
         spreadVo.setCourseId(bo.getCourseId());
         spreadVo.setCourseIdSet(bo.getCourseIdSet());
-        spreadVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        spreadVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        spreadVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        spreadVo.setCreateTime(bo.getCreateTime());
+        spreadVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        spreadVo.setCreateTimeStart(bo.getCreateTimeStart());
         spreadVo.setEnabled(bo.getEnabled());
         spreadVo.setId(bo.getId());
         spreadVo.setIdSet(bo.getIdSet());
-        spreadVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        spreadVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        spreadVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        spreadVo.setLastModifyTime(bo.getLastModifyTime());
+        spreadVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        spreadVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         spreadVo.setPartnerId(bo.getPartnerId());
         spreadVo.setPartnerIdSet(bo.getPartnerIdSet());
         spreadVo.setRemark(bo.getRemark());

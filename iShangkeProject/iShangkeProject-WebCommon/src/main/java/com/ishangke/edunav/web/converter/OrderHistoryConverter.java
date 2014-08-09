@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.OrderHistoryBo;
 import com.ishangke.edunav.web.model.OrderHistoryVo;
 
@@ -67,12 +66,21 @@ public class OrderHistoryConverter {
         if (vo.getUserIdSet() != null) {
             orderHistoryBo.setUserIdSet(vo.getUserIdSet());
         }
-        orderHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        orderHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        orderHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            orderHistoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            orderHistoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            orderHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            orderHistoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            orderHistoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            orderHistoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         return orderHistoryBo;
     }
 
@@ -82,9 +90,9 @@ public class OrderHistoryConverter {
             return null;
         }
         OrderHistoryVo orderHistoryVo = new OrderHistoryVo();
-        orderHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        orderHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        orderHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        orderHistoryVo.setCreateTime(bo.getCreateTime());
+        orderHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        orderHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         orderHistoryVo.setEnabled(bo.getEnabled());
         orderHistoryVo.setId(bo.getId());
         orderHistoryVo.setIdSet(bo.getIdSet());

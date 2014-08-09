@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.web.model.OrderVo;
 
@@ -64,17 +63,36 @@ public class OrderConverter {
         if (vo.getSign() != null) {
             orderBo.setSign(vo.getSign());
         }
-        orderBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        orderBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        orderBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        orderBo.setConfirmedTime(vo.getConfirmedTime() == null ? Constant.DEFAULTNULL : vo.getConfirmedTime()
-                .getTimeInMillis());
-        orderBo.setConfirmedTimeEnd(vo.getConfirmedTimeEnd() == null ? Constant.DEFAULTNULL : vo.getConfirmedTimeEnd()
-                .getTimeInMillis());
-        orderBo.setConfirmedTimeStart(vo.getConfirmedTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getConfirmedTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            orderBo.setCreateTime(vo.getCreateTime());
+        } else {
+            orderBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            orderBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            orderBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            orderBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            orderBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getConfirmedTime() != null) {
+            orderBo.setConfirmedTime(vo.getConfirmedTime());
+        } else {
+            orderBo.setConfirmedTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getConfirmedTimeEnd() != null) {
+            orderBo.setConfirmedTimeEnd(vo.getConfirmedTimeEnd());
+        } else {
+            orderBo.setConfirmedTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getConfirmedTimeStart() != null) {
+            orderBo.setConfirmedTimeStart(vo.getConfirmedTimeStart());
+        } else {
+            orderBo.setConfirmedTimeStart(Constant.DEFAULTNULL);
+        }
         return orderBo;
     }
 
@@ -86,9 +104,9 @@ public class OrderConverter {
         OrderVo orderVo = new OrderVo();
         orderVo.setBookingId(bo.getBookingId());
         orderVo.setBookingIdSet(bo.getBookingIdSet());
-        orderVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        orderVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        orderVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        orderVo.setCreateTime(bo.getCreateTime());
+        orderVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        orderVo.setCreateTimeStart(bo.getCreateTimeStart());
         orderVo.setEnabled(bo.getEnabled());
         orderVo.setId(bo.getId());
         orderVo.setIdSet(bo.getIdSet());
@@ -109,9 +127,9 @@ public class OrderConverter {
         orderVo.setType(bo.getType());
         orderVo.setReference(bo.getReference());
         orderVo.setSign(bo.getSign());
-        orderVo.setConfirmedTime(DateUtility.getTimeFromLong(bo.getConfirmedTime()));
-        orderVo.setConfirmedTimeEnd(DateUtility.getTimeFromLong(bo.getConfirmedTimeEnd()));
-        orderVo.setConfirmedTimeStart(DateUtility.getTimeFromLong(bo.getConfirmedTimeStart()));
+        orderVo.setConfirmedTime(bo.getConfirmedTime());
+        orderVo.setConfirmedTimeEnd(bo.getConfirmedTimeEnd());
+        orderVo.setConfirmedTimeStart(bo.getConfirmedTimeStart());
         return orderVo;
     }
 }

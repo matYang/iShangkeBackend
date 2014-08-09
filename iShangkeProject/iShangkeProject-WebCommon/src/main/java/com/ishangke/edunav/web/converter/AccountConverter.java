@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.web.model.AccountVo;
 
@@ -41,18 +40,36 @@ public class AccountConverter {
         if (vo.getAccountNumber() != null) {
             accountBo.setAccountNumber(vo.getAccountNumber());
         }
-        accountBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        accountBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        accountBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        accountBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        accountBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        accountBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            accountBo.setCreateTime(vo.getCreateTime());
+        } else {
+            accountBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            accountBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            accountBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            accountBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            accountBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            accountBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            accountBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            accountBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            accountBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            accountBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            accountBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return accountBo;
     }
 
@@ -70,15 +87,15 @@ public class AccountConverter {
         if (Constant.DEFAULTNULL != bo.getBalanceStart()) {
             accountVo.setBalanceStart(bo.getBalanceStart());
         }
-        accountVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        accountVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        accountVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
         accountVo.setEnabled(bo.getEnabled());
         accountVo.setId(bo.getId());
         accountVo.setIdSet(bo.getIdSet());
-        accountVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        accountVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        accountVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        accountVo.setCreateTime(bo.getCreateTime());
+        accountVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        accountVo.setCreateTimeStart(bo.getCreateTimeStart());
+        accountVo.setLastModifyTime(bo.getLastModifyTime());
+        accountVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        accountVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         accountVo.setRealName(bo.getRealName());
         accountVo.setAccountNumber(bo.getAccountNumber());
         return accountVo;

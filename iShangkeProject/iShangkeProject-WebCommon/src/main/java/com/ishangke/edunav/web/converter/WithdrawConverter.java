@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.web.model.WithdrawVo;
 
@@ -37,18 +36,36 @@ public class WithdrawConverter {
         if (vo.getUserIdSet() != null) {
             withdrawBo.setUserIdSet(vo.getUserIdSet());
         }
-        withdrawBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        withdrawBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        withdrawBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        withdrawBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        withdrawBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        withdrawBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            withdrawBo.setCreateTime(vo.getCreateTime());
+        } else {
+            withdrawBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            withdrawBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            withdrawBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            withdrawBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            withdrawBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            withdrawBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            withdrawBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            withdrawBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            withdrawBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            withdrawBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            withdrawBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return withdrawBo;
     }
 
@@ -57,15 +74,15 @@ public class WithdrawConverter {
             return null;
         }
         WithdrawVo withdrawVo = new WithdrawVo();
-        withdrawVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        withdrawVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        withdrawVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        withdrawVo.setCreateTime(bo.getCreateTime());
+        withdrawVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        withdrawVo.setCreateTimeStart(bo.getCreateTimeStart());
         withdrawVo.setEnabled(bo.getEnabled());
         withdrawVo.setId(bo.getId());
         withdrawVo.setIdSet(bo.getIdSet());
-        withdrawVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        withdrawVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        withdrawVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        withdrawVo.setLastModifyTime(bo.getLastModifyTime());
+        withdrawVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        withdrawVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         withdrawVo.setPayeeId(bo.getPayeeId());
         withdrawVo.setPayeeName(bo.getPayeeName());
         if (Constant.DEFAULTNULL != bo.getType()) {

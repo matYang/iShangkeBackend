@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -12,12 +11,12 @@ public class UserGroupVo extends JsonResponse {
 
     private Integer groupId;
 
-    private Calendar lastModifyTime;
+    private Long lastModifyTime;
     private Set<Integer> idSet;
     private Set<Integer> userIdSet;
     private Set<Integer> groupIdSet;
-    private Calendar lastModifyTimeStart;
-    private Calendar lastModifyTimeEnd;
+    private Long lastModifyTimeStart;
+    private Long lastModifyTimeEnd;
 
     public Integer getId() {
         return id;
@@ -43,11 +42,11 @@ public class UserGroupVo extends JsonResponse {
         this.groupId = groupId;
     }
 
-    public Calendar getLastModifyTime() {
+    public Long getLastModifyTime() {
         return lastModifyTime;
     }
 
-    public void setLastModifyTime(Calendar lastModifyTime) {
+    public void setLastModifyTime(Long lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
     }
 
@@ -75,19 +74,19 @@ public class UserGroupVo extends JsonResponse {
         this.groupIdSet = groupIdSet;
     }
 
-    public Calendar getLastModifyTimeStart() {
+    public Long getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Long lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Calendar getLastModifyTimeEnd() {
+    public Long getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Long lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 

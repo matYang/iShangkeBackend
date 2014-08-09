@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
 import com.ishangke.edunav.web.model.SchoolVo;
 
@@ -26,17 +25,36 @@ public class SchoolConverter {
         if (vo.getValue() != null) {
             schoolBo.setValue(vo.getValue());
         }
-        schoolBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        schoolBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        schoolBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        schoolBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        schoolBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        schoolBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            schoolBo.setCreateTime(vo.getCreateTime());
+        } else {
+            schoolBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            schoolBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            schoolBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            schoolBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            schoolBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            schoolBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            schoolBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            schoolBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            schoolBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            schoolBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            schoolBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return schoolBo;
     }
 
@@ -45,15 +63,15 @@ public class SchoolConverter {
             return null;
         }
         SchoolVo schoolVo = new SchoolVo();
-        schoolVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        schoolVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        schoolVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        schoolVo.setCreateTime(bo.getCreateTime());
+        schoolVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        schoolVo.setCreateTimeStart(bo.getCreateTimeStart());
         schoolVo.setEnabled(bo.getEnabled());
         schoolVo.setId(bo.getId());
         schoolVo.setIdSet(bo.getIdSet());
-        schoolVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        schoolVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        schoolVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        schoolVo.setLastModifyTime(bo.getLastModifyTime());
+        schoolVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        schoolVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         schoolVo.setName(bo.getName());
         schoolVo.setValue(bo.getValue());
         return schoolVo;

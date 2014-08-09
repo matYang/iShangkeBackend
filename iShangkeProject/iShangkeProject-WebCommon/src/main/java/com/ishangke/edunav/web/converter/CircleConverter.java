@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.web.model.CircleVo;
 
@@ -26,17 +25,36 @@ public class CircleConverter {
         if (vo.getValue() != null) {
             circleBo.setValue(vo.getValue());
         }
-        circleBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime().getTimeInMillis());
-        circleBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        circleBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        circleBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        circleBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        circleBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            circleBo.setCreateTime(vo.getCreateTime());
+        } else {
+            circleBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            circleBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            circleBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            circleBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            circleBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            circleBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            circleBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            circleBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            circleBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            circleBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            circleBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return circleBo;
     }
 
@@ -45,15 +63,15 @@ public class CircleConverter {
             return null;
         }
         CircleVo circleVo = new CircleVo();
-        circleVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        circleVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        circleVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        circleVo.setCreateTime(bo.getCreateTime());
+        circleVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        circleVo.setCreateTimeStart(bo.getCreateTimeStart());
         circleVo.setEnabled(bo.getEnabled());
         circleVo.setId(bo.getId());
         circleVo.setIdSet(bo.getIdSet());
-        circleVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        circleVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        circleVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        circleVo.setLastModifyTime(bo.getLastModifyTime());
+        circleVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        circleVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         circleVo.setName(bo.getName());
         circleVo.setValue(bo.getValue());
         return circleVo;

@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -34,9 +33,9 @@ public class CourseVo extends JsonResponse {
 
     private Integer status;
 
-    private Calendar lastModifyTime;
+    private Long lastModifyTime;
 
-    private Calendar createTime;
+    private Long createTime;
 
     private Integer enabled;
 
@@ -112,15 +111,15 @@ public class CourseVo extends JsonResponse {
 
     private Integer bookingType;
 
-    private Calendar cashbackDate;
+    private Long cashbackDate;
 
-    private Calendar noRefundDate;
+    private Long noRefundDate;
 
-    private Calendar cutoffDate;
+    private Long cutoffDate;
 
-    private Calendar finishDate;
+    private Long finishDate;
 
-    private Calendar startDate;
+    private Long startDate;
 
     private Integer popularity;
 
@@ -136,10 +135,10 @@ public class CourseVo extends JsonResponse {
 
     private Integer schooltimeWeek;
     private Set<Integer> idSet;
-    private Calendar lastModifyTimeStart;
-    private Calendar lastModifyTimeEnd;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long lastModifyTimeStart;
+    private Long lastModifyTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     private Set<Integer> categoryIdSet;
     private Set<Integer> locationIdSet;
     private Set<Integer> circleIdSet;
@@ -158,21 +157,21 @@ public class CourseVo extends JsonResponse {
     private Integer courseHourNumStart;
     private Integer courseHourNumEnd;
     private Set<Integer> courseHourNumSet;
-    private Calendar startDateStart;
-    private Calendar startDateEnd;
-    private Calendar finishDateStart;
-    private Calendar finishDateEnd;
-    private Calendar cutoffDateStart;
-    private Calendar cutoffDateEnd;
-    private Calendar noRefundDateStart;
-    private Calendar noRefundDateEnd;
+    private Long startDateStart;
+    private Long startDateEnd;
+    private Long finishDateStart;
+    private Long finishDateEnd;
+    private Long cutoffDateStart;
+    private Long cutoffDateEnd;
+    private Long noRefundDateStart;
+    private Long noRefundDateEnd;
     private Set<Integer> classTypeSet;
     private Double discountStart;
     private Double discountEnd;
     private Set<Integer> schooltimeDaySet;
     private Set<Integer> schooltimeWeekSet;
-    private Calendar cashbackDateStart;
-    private Calendar cashbackDateEnd;
+    private Long cashbackDateStart;
+    private Long cashbackDateEnd;
     private Double rating;
     private Integer bookingTotal;
 
@@ -333,19 +332,19 @@ public class CourseVo extends JsonResponse {
         this.status = status;
     }
 
-    public Calendar getLastModifyTime() {
+    public Long getLastModifyTime() {
         return lastModifyTime;
     }
 
-    public void setLastModifyTime(Calendar lastModifyTime) {
+    public void setLastModifyTime(Long lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -637,43 +636,43 @@ public class CourseVo extends JsonResponse {
         this.bookingType = bookingType;
     }
 
-    public Calendar getCashbackDate() {
+    public Long getCashbackDate() {
         return cashbackDate;
     }
 
-    public void setCashbackDate(Calendar cashbackDate) {
+    public void setCashbackDate(Long cashbackDate) {
         this.cashbackDate = cashbackDate;
     }
 
-    public Calendar getNoRefundDate() {
+    public Long getNoRefundDate() {
         return noRefundDate;
     }
 
-    public void setNoRefundDate(Calendar noRefundDate) {
+    public void setNoRefundDate(Long noRefundDate) {
         this.noRefundDate = noRefundDate;
     }
 
-    public Calendar getCutoffDate() {
+    public Long getCutoffDate() {
         return cutoffDate;
     }
 
-    public void setCutoffDate(Calendar cutoffDate) {
+    public void setCutoffDate(Long cutoffDate) {
         this.cutoffDate = cutoffDate;
     }
 
-    public Calendar getFinishDate() {
+    public Long getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(Calendar finishDate) {
+    public void setFinishDate(Long finishDate) {
         this.finishDate = finishDate;
     }
 
-    public Calendar getStartDate() {
+    public Long getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Calendar startDate) {
+    public void setStartDate(Long startDate) {
         this.startDate = startDate;
     }
 
@@ -741,35 +740,35 @@ public class CourseVo extends JsonResponse {
         this.idSet = idSet;
     }
 
-    public Calendar getLastModifyTimeStart() {
+    public Long getLastModifyTimeStart() {
         return lastModifyTimeStart;
     }
 
-    public void setLastModifyTimeStart(Calendar lastModifyTimeStart) {
+    public void setLastModifyTimeStart(Long lastModifyTimeStart) {
         this.lastModifyTimeStart = lastModifyTimeStart;
     }
 
-    public Calendar getLastModifyTimeEnd() {
+    public Long getLastModifyTimeEnd() {
         return lastModifyTimeEnd;
     }
 
-    public void setLastModifyTimeEnd(Calendar lastModifyTimeEnd) {
+    public void setLastModifyTimeEnd(Long lastModifyTimeEnd) {
         this.lastModifyTimeEnd = lastModifyTimeEnd;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 
@@ -917,67 +916,67 @@ public class CourseVo extends JsonResponse {
         this.courseHourNumSet = courseHourNumSet;
     }
 
-    public Calendar getStartDateStart() {
+    public Long getStartDateStart() {
         return startDateStart;
     }
 
-    public void setStartDateStart(Calendar startDateStart) {
+    public void setStartDateStart(Long startDateStart) {
         this.startDateStart = startDateStart;
     }
 
-    public Calendar getStartDateEnd() {
+    public Long getStartDateEnd() {
         return startDateEnd;
     }
 
-    public void setStartDateEnd(Calendar startDateEnd) {
+    public void setStartDateEnd(Long startDateEnd) {
         this.startDateEnd = startDateEnd;
     }
 
-    public Calendar getFinishDateStart() {
+    public Long getFinishDateStart() {
         return finishDateStart;
     }
 
-    public void setFinishDateStart(Calendar finishDateStart) {
+    public void setFinishDateStart(Long finishDateStart) {
         this.finishDateStart = finishDateStart;
     }
 
-    public Calendar getFinishDateEnd() {
+    public Long getFinishDateEnd() {
         return finishDateEnd;
     }
 
-    public void setFinishDateEnd(Calendar finishDateEnd) {
+    public void setFinishDateEnd(Long finishDateEnd) {
         this.finishDateEnd = finishDateEnd;
     }
 
-    public Calendar getCutoffDateStart() {
+    public Long getCutoffDateStart() {
         return cutoffDateStart;
     }
 
-    public void setCutoffDateStart(Calendar cutoffDateStart) {
+    public void setCutoffDateStart(Long cutoffDateStart) {
         this.cutoffDateStart = cutoffDateStart;
     }
 
-    public Calendar getCutoffDateEnd() {
+    public Long getCutoffDateEnd() {
         return cutoffDateEnd;
     }
 
-    public void setCutoffDateEnd(Calendar cutoffDateEnd) {
+    public void setCutoffDateEnd(Long cutoffDateEnd) {
         this.cutoffDateEnd = cutoffDateEnd;
     }
 
-    public Calendar getNoRefundDateStart() {
+    public Long getNoRefundDateStart() {
         return noRefundDateStart;
     }
 
-    public void setNoRefundDateStart(Calendar noRefundDateStart) {
+    public void setNoRefundDateStart(Long noRefundDateStart) {
         this.noRefundDateStart = noRefundDateStart;
     }
 
-    public Calendar getNoRefundDateEnd() {
+    public Long getNoRefundDateEnd() {
         return noRefundDateEnd;
     }
 
-    public void setNoRefundDateEnd(Calendar noRefundDateEnd) {
+    public void setNoRefundDateEnd(Long noRefundDateEnd) {
         this.noRefundDateEnd = noRefundDateEnd;
     }
 
@@ -1021,19 +1020,19 @@ public class CourseVo extends JsonResponse {
         this.schooltimeWeekSet = schooltimeWeekSet;
     }
 
-    public Calendar getCashbackDateStart() {
+    public Long getCashbackDateStart() {
         return cashbackDateStart;
     }
 
-    public void setCashbackDateStart(Calendar cashbackDateStart) {
+    public void setCashbackDateStart(Long cashbackDateStart) {
         this.cashbackDateStart = cashbackDateStart;
     }
 
-    public Calendar getCashbackDateEnd() {
+    public Long getCashbackDateEnd() {
         return cashbackDateEnd;
     }
 
-    public void setCashbackDateEnd(Calendar cashbackDateEnd) {
+    public void setCashbackDateEnd(Long cashbackDateEnd) {
         this.cashbackDateEnd = cashbackDateEnd;
     }
 

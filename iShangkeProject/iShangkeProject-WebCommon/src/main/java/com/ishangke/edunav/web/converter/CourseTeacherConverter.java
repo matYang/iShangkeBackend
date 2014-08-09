@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseTeacherBo;
 import com.ishangke.edunav.web.model.CourseTeacherVo;
 
@@ -29,12 +28,21 @@ public class CourseTeacherConverter {
         if (vo.getTeacherIdSet() != null) {
             courseTeacherBo.setTeacherIdSet(vo.getTeacherIdSet());
         }
-        courseTeacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        courseTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        courseTeacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            courseTeacherBo.setCreateTime(vo.getCreateTime());
+        } else {
+            courseTeacherBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            courseTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            courseTeacherBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            courseTeacherBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            courseTeacherBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         return courseTeacherBo;
     }
 
@@ -45,9 +53,9 @@ public class CourseTeacherConverter {
         CourseTeacherVo courseTeacherVo = new CourseTeacherVo();
         courseTeacherVo.setCourseId(bo.getCourseId());
         courseTeacherVo.setCourseIdSet(bo.getCourseIdSet());
-        courseTeacherVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        courseTeacherVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        courseTeacherVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        courseTeacherVo.setCreateTime(bo.getCreateTime());
+        courseTeacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        courseTeacherVo.setCreateTimeStart(bo.getCreateTimeStart());
         courseTeacherVo.setId(bo.getId());
         courseTeacherVo.setIdSet(bo.getIdSet());
         courseTeacherVo.setTeacherId(bo.getTeacherId());

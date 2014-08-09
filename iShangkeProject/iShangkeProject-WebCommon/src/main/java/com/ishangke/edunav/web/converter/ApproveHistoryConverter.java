@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ApproveHistoryBo;
 import com.ishangke.edunav.web.model.ApproveHistoryVo;
 
@@ -62,12 +61,21 @@ public class ApproveHistoryConverter {
         if (vo.getTypeSet() != null) {
             approveHistoryBo.setTypeSet(vo.getTypeSet());
         }
-        approveHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        approveHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        approveHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            approveHistoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            approveHistoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            approveHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            approveHistoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            approveHistoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            approveHistoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         return approveHistoryBo;
     }
 
@@ -81,9 +89,9 @@ public class ApproveHistoryConverter {
         approveHistoryVo.setAttachedId(bo.getAttachedId());
         approveHistoryVo.setAttachedIdSet(bo.getAttachedIdSet());
         approveHistoryVo.setComment(bo.getComment());
-        approveHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        approveHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        approveHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        approveHistoryVo.setCreateTime(bo.getCreateTime());
+        approveHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        approveHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         approveHistoryVo.setId(bo.getId());
         approveHistoryVo.setIdSet(bo.getIdSet());
         if (Constant.DEFAULTNULL != bo.getPostStatus()) {
