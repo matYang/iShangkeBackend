@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -11,7 +10,7 @@ public class AccountHistoryVo extends JsonResponse {
     private Integer withdrawId;
     private Double charge;
     private Integer type;
-    private Calendar createTime;
+    private Long createTime;
     private String remark;
     private Set<Integer> idSet;
     private Set<Integer> userIdSet;
@@ -19,8 +18,8 @@ public class AccountHistoryVo extends JsonResponse {
     private Double chargeStart;
     private Double chargeEnd;
     private Set<Integer> typeSet;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
     private Integer operation;
     private Set<Integer> operationSet;
 
@@ -64,11 +63,11 @@ public class AccountHistoryVo extends JsonResponse {
         this.type = type;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -128,19 +127,19 @@ public class AccountHistoryVo extends JsonResponse {
         this.typeSet = typeSet;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 

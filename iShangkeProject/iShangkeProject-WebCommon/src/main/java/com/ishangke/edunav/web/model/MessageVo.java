@@ -1,6 +1,5 @@
 package com.ishangke.edunav.web.model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import com.ishangke.edunav.web.response.JsonResponse;
@@ -16,17 +15,17 @@ public class MessageVo extends JsonResponse {
 
     private Integer status;
 
-    private Calendar readTime;
+    private Long readTime;
 
-    private Calendar createTime;
+    private Long createTime;
     private Set<Integer> idSet;
     private Set<Integer> userFromIdSet;
     private Set<Integer> userToIdSet;
     private Set<Integer> statusSet;
-    private Calendar readTimeStart;
-    private Calendar readTimeEnd;
-    private Calendar createTimeStart;
-    private Calendar createTimeEnd;
+    private Long readTimeStart;
+    private Long readTimeEnd;
+    private Long createTimeStart;
+    private Long createTimeEnd;
 
     public Integer getId() {
         return id;
@@ -68,19 +67,19 @@ public class MessageVo extends JsonResponse {
         this.status = status;
     }
 
-    public Calendar getReadTime() {
+    public Long getReadTime() {
         return readTime;
     }
 
-    public void setReadTime(Calendar readTime) {
+    public void setReadTime(Long readTime) {
         this.readTime = readTime;
     }
 
-    public Calendar getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Calendar createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -116,35 +115,35 @@ public class MessageVo extends JsonResponse {
         this.statusSet = statusSet;
     }
 
-    public Calendar getReadTimeStart() {
+    public Long getReadTimeStart() {
         return readTimeStart;
     }
 
-    public void setReadTimeStart(Calendar readTimeStart) {
+    public void setReadTimeStart(Long readTimeStart) {
         this.readTimeStart = readTimeStart;
     }
 
-    public Calendar getReadTimeEnd() {
+    public Long getReadTimeEnd() {
         return readTimeEnd;
     }
 
-    public void setReadTimeEnd(Calendar readTimeEnd) {
+    public void setReadTimeEnd(Long readTimeEnd) {
         this.readTimeEnd = readTimeEnd;
     }
 
-    public Calendar getCreateTimeStart() {
+    public Long getCreateTimeStart() {
         return createTimeStart;
     }
 
-    public void setCreateTimeStart(Calendar createTimeStart) {
+    public void setCreateTimeStart(Long createTimeStart) {
         this.createTimeStart = createTimeStart;
     }
 
-    public Calendar getCreateTimeEnd() {
+    public Long getCreateTimeEnd() {
         return createTimeEnd;
     }
 
-    public void setCreateTimeEnd(Calendar createTimeEnd) {
+    public void setCreateTimeEnd(Long createTimeEnd) {
         this.createTimeEnd = createTimeEnd;
     }
 

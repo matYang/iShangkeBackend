@@ -199,8 +199,8 @@ public class TreeTest {
         for (int i = 0; i < catList.size(); i++) {
             catList.get(i).setId(i);
             catList.get(i).setRank(i);
-            catList.get(i).setCreateTime(DateUtility.getCurTimeInstance());
-            catList.get(i).setLastModifyTime(DateUtility.getCurTimeInstance());
+            catList.get(i).setCreateTime(DateUtility.getCurTime());
+            catList.get(i).setLastModifyTime(DateUtility.getCurTime());
             catList.get(i).setEnabled(1);
         }
 

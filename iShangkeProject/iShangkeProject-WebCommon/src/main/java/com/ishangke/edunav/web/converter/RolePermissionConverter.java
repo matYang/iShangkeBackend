@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.RolePermissionBo;
 import com.ishangke.edunav.web.model.RolePermissionVo;
 
@@ -29,12 +28,21 @@ public class RolePermissionConverter {
         if (vo.getRoleIdSet() != null) {
             rolePermissionBo.setRoleIdSet(vo.getRoleIdSet());
         }
-        rolePermissionBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTime().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        rolePermissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getLastModifyTime() != null) {
+            rolePermissionBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            rolePermissionBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            rolePermissionBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            rolePermissionBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            rolePermissionBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            rolePermissionBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return rolePermissionBo;
     }
 
@@ -45,9 +53,9 @@ public class RolePermissionConverter {
         RolePermissionVo rolePermissionVo = new RolePermissionVo();
         rolePermissionVo.setId(bo.getId());
         rolePermissionVo.setIdSet(bo.getIdSet());
-        rolePermissionVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        rolePermissionVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        rolePermissionVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        rolePermissionVo.setLastModifyTime(bo.getLastModifyTime());
+        rolePermissionVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        rolePermissionVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         rolePermissionVo.setPermissionId(bo.getPermissionId());
         rolePermissionVo.setPermissionIdSet(bo.getPermissionIdSet());
         rolePermissionVo.setRoleId(bo.getRoleId());

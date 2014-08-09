@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CreditHistoryBo;
 import com.ishangke.edunav.web.model.CreditHistoryVo;
 
@@ -41,18 +40,36 @@ public class CreditHistoryConverter {
         if (vo.getUserIdSet() != null) {
             creditHistoryBo.setUserIdSet(vo.getUserIdSet());
         }
-        creditHistoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        creditHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        creditHistoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
-        creditHistoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTime().getTimeInMillis());
-        creditHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        creditHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            creditHistoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            creditHistoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            creditHistoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            creditHistoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            creditHistoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            creditHistoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            creditHistoryBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            creditHistoryBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            creditHistoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            creditHistoryBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            creditHistoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            creditHistoryBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
 
         if (vo.getOperation() != null) {
             creditHistoryBo.setOperation(vo.getOperation());
@@ -81,14 +98,14 @@ public class CreditHistoryConverter {
         if (Constant.DEFAULTNULL != bo.getChargeStart()) {
             creditHistoryVo.setChargeStart(bo.getChargeStart());
         }
-        creditHistoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        creditHistoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        creditHistoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        creditHistoryVo.setCreateTime(bo.getCreateTime());
+        creditHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        creditHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         creditHistoryVo.setId(bo.getId());
         creditHistoryVo.setIdSet(bo.getIdSet());
-        creditHistoryVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        creditHistoryVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        creditHistoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        creditHistoryVo.setLastModifyTime(bo.getLastModifyTime());
+        creditHistoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        creditHistoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         creditHistoryVo.setUserId(bo.getUserId());
         creditHistoryVo.setUserIdSet(bo.getUserIdSet());
 

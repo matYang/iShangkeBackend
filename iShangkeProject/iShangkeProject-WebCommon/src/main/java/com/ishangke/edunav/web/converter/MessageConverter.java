@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.MessageBo;
 import com.ishangke.edunav.web.model.MessageVo;
 
@@ -40,17 +39,36 @@ public class MessageConverter {
         if (vo.getStatusSet() != null) {
             messageBo.setStatusSet(vo.getStatusSet());
         }
-        messageBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        messageBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        messageBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        messageBo.setReadTime(vo.getReadTime() == null ? Constant.DEFAULTNULL : vo.getReadTime().getTimeInMillis());
-        messageBo.setReadTimeEnd(vo.getReadTimeEnd() == null ? Constant.DEFAULTNULL : vo.getReadTimeEnd()
-                .getTimeInMillis());
-        messageBo.setReadTimeStart(vo.getReadTimeStart() == null ? Constant.DEFAULTNULL : vo.getReadTimeStart()
-                .getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            messageBo.setCreateTime(vo.getCreateTime());
+        } else {
+            messageBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            messageBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            messageBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            messageBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            messageBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getReadTime() != null) {
+            messageBo.setReadTime(vo.getReadTime());
+        } else {
+            messageBo.setReadTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getReadTimeEnd() != null) {
+            messageBo.setReadTimeEnd(vo.getReadTimeEnd());
+        } else {
+            messageBo.setReadTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getReadTimeStart() != null) {
+            messageBo.setReadTimeStart(vo.getReadTimeStart());
+        } else {
+            messageBo.setReadTimeStart(Constant.DEFAULTNULL);
+        }
         return messageBo;
     }
 
@@ -60,12 +78,12 @@ public class MessageConverter {
             return null;
         }
         MessageVo messageVo = new MessageVo();
-        messageVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        messageVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        messageVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
-        messageVo.setReadTime(DateUtility.getTimeFromLong(bo.getReadTime()));
-        messageVo.setReadTimeEnd(DateUtility.getTimeFromLong(bo.getReadTimeEnd()));
-        messageVo.setReadTimeStart(DateUtility.getTimeFromLong(bo.getReadTimeStart()));
+        messageVo.setCreateTime(bo.getCreateTime());
+        messageVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        messageVo.setCreateTimeStart(bo.getCreateTimeStart());
+        messageVo.setReadTime(bo.getReadTime());
+        messageVo.setReadTimeEnd(bo.getReadTimeEnd());
+        messageVo.setReadTimeStart(bo.getReadTimeStart());
         messageVo.setId(bo.getId());
         messageVo.setIdSet(bo.getIdSet());
         messageVo.setMessageText(bo.getMessageText());

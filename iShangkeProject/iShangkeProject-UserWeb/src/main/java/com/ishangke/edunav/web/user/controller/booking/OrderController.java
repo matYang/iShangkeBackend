@@ -57,7 +57,7 @@ public class OrderController extends AbstractController {
 
         OrderVo order = new OrderVo();
         order.setBookingId(booking.getId());
-        order.setCreateTime(DateUtility.getCurTimeInstance());
+        order.setCreateTime(DateUtility.getCurTime());
         order.setType(type);
         order.setPrice(booking.getPrice());
         OrderBo orderBo = OrderConverter.fromModel(order);

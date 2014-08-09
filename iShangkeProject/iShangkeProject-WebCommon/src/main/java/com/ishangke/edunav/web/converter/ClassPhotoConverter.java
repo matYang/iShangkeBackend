@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.web.model.ClassPhotoVo;
 
@@ -38,18 +37,36 @@ public class ClassPhotoConverter {
         if (vo.getSnapshotUrl() != null) {
             classPhotoBo.setSnapshotUrl(vo.getSnapshotUrl());
         }
-        classPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        classPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        classPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
-        classPhotoBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        classPhotoBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        classPhotoBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            classPhotoBo.setCreateTime(vo.getCreateTime());
+        } else {
+            classPhotoBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            classPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            classPhotoBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            classPhotoBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            classPhotoBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            classPhotoBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            classPhotoBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            classPhotoBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            classPhotoBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            classPhotoBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            classPhotoBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return classPhotoBo;
     }
 
@@ -58,17 +75,17 @@ public class ClassPhotoConverter {
             return null;
         }
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();
-        classPhotoVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        classPhotoVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        classPhotoVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        classPhotoVo.setCreateTime(bo.getCreateTime());
+        classPhotoVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        classPhotoVo.setCreateTimeStart(bo.getCreateTimeStart());
         classPhotoVo.setDescription(bo.getDescription());
         classPhotoVo.setEnabled(bo.getEnabled());
         classPhotoVo.setId(bo.getId());
         classPhotoVo.setIdSet(bo.getIdSet());
         classPhotoVo.setImgUrl(bo.getImgUrl());
-        classPhotoVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        classPhotoVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        classPhotoVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        classPhotoVo.setLastModifyTime(bo.getLastModifyTime());
+        classPhotoVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        classPhotoVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         classPhotoVo.setPartnerId(bo.getPartnerId());
         classPhotoVo.setPartnerIdSet(bo.getPartnerIdSet());
         classPhotoVo.setTitle(bo.getTitle());

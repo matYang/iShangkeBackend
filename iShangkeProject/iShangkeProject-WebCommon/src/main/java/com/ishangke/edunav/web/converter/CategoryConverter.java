@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.web.model.CategoryVo;
 
@@ -45,18 +44,36 @@ public class CategoryConverter {
         if (vo.getValue() != null) {
             categoryBo.setValue(vo.getValue());
         }
-        categoryBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        categoryBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        categoryBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            categoryBo.setCreateTime(vo.getCreateTime());
+        } else {
+            categoryBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            categoryBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            categoryBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            categoryBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            categoryBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            categoryBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            categoryBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            categoryBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            categoryBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            categoryBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            categoryBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return categoryBo;
     }
 
@@ -65,15 +82,15 @@ public class CategoryConverter {
             return null;
         }
         CategoryVo categoryVo = new CategoryVo();
-        categoryVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        categoryVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        categoryVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        categoryVo.setCreateTime(bo.getCreateTime());
+        categoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        categoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         categoryVo.setEnabled(bo.getEnabled());
         categoryVo.setId(bo.getId());
         categoryVo.setIdSet(bo.getIdSet());
-        categoryVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        categoryVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        categoryVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        categoryVo.setLastModifyTime(bo.getLastModifyTime());
+        categoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        categoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         categoryVo.setName(bo.getName());
         if (Constant.DEFAULTNULL != bo.getRank()) {
             categoryVo.setRank(bo.getRank());

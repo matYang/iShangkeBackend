@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.web.model.AddressVo;
 
@@ -59,18 +58,36 @@ public class AddressConverter {
         if (vo.getPartnerIdSet() != null) {
             addressBo.setPartnerIdSet(vo.getPartnerIdSet());
         }
-        addressBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        addressBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo.getCreateTimeEnd()
-                .getTimeInMillis());
-        addressBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo.getCreateTimeStart()
-                .getTimeInMillis());
-        addressBo.setLastModifyTime(vo.getLastModifyTime() == null ? Constant.DEFAULTNULL : vo.getLastModifyTime()
-                .getTimeInMillis());
-        addressBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeEnd().getTimeInMillis());
-        addressBo.setLastModifyTimeStart(vo.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getLastModifyTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            addressBo.setCreateTime(vo.getCreateTime());
+        } else {
+            addressBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            addressBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            addressBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            addressBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            addressBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTime() != null) {
+            addressBo.setLastModifyTime(vo.getLastModifyTime());
+        } else {
+            addressBo.setLastModifyTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeEnd() != null) {
+            addressBo.setLastModifyTimeEnd(vo.getLastModifyTimeEnd());
+        } else {
+            addressBo.setLastModifyTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getLastModifyTimeStart() != null) {
+            addressBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
+        } else {
+            addressBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
         return addressBo;
     }
 
@@ -79,16 +96,16 @@ public class AddressConverter {
             return null;
         }
         AddressVo addressVo = new AddressVo();
-        addressVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        addressVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        addressVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        addressVo.setCreateTime(bo.getCreateTime());
+        addressVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        addressVo.setCreateTimeStart(bo.getCreateTimeStart());
         addressVo.setDetail(bo.getDetail());
         addressVo.setEnabled(bo.getEnabled());
         addressVo.setId(bo.getId());
         addressVo.setIdSet(bo.getIdSet());
-        addressVo.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
-        addressVo.setLastModifyTimeEnd(DateUtility.getTimeFromLong(bo.getLastModifyTimeEnd()));
-        addressVo.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
+        addressVo.setLastModifyTime(bo.getLastModifyTime());
+        addressVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        addressVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         if (Constant.DEFAULTNULL != bo.getLat()) {
             addressVo.setLat(bo.getLat());
         }

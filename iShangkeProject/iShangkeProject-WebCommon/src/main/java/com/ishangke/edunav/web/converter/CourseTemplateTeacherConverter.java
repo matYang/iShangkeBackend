@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateTeacherBo;
 import com.ishangke.edunav.web.model.CourseTemplateTeacherVo;
 
@@ -29,12 +28,21 @@ public class CourseTemplateTeacherConverter {
         if (vo.getTeacherIdSet() != null) {
             courseTemplateTeacherBo.setTeacherIdSet(vo.getTeacherIdSet());
         }
-        courseTemplateTeacherBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        courseTemplateTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeEnd().getTimeInMillis());
-        courseTemplateTeacherBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            courseTemplateTeacherBo.setCreateTime(vo.getCreateTime());
+        } else {
+            courseTemplateTeacherBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            courseTemplateTeacherBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            courseTemplateTeacherBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            courseTemplateTeacherBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            courseTemplateTeacherBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         return courseTemplateTeacherBo;
     }
 
@@ -46,9 +54,9 @@ public class CourseTemplateTeacherConverter {
         CourseTemplateTeacherVo courseTemplateTeacherVo = new CourseTemplateTeacherVo();
         courseTemplateTeacherVo.setCourseTemplateId(bo.getCourseTemplateId());
         courseTemplateTeacherVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
-        courseTemplateTeacherVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        courseTemplateTeacherVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        courseTemplateTeacherVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        courseTemplateTeacherVo.setCreateTime(bo.getCreateTime());
+        courseTemplateTeacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        courseTemplateTeacherVo.setCreateTimeStart(bo.getCreateTimeStart());
         courseTemplateTeacherVo.setId(bo.getId());
         courseTemplateTeacherVo.setIdSet(bo.getIdSet());
         courseTemplateTeacherVo.setTeacherId(bo.getTeacherId());

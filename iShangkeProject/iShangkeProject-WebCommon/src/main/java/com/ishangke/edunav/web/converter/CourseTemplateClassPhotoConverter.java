@@ -1,7 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateClassPhotoBo;
 import com.ishangke.edunav.web.model.CourseTemplateClassPhotoVo;
 
@@ -29,12 +28,21 @@ public class CourseTemplateClassPhotoConverter {
         if (vo.getIdSet() != null) {
             courseTemplateClassPhotoBo.setIdSet(vo.getIdSet());
         }
-        courseTemplateClassPhotoBo.setCreateTime(vo.getCreateTime() == null ? Constant.DEFAULTNULL : vo.getCreateTime()
-                .getTimeInMillis());
-        courseTemplateClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeEnd().getTimeInMillis());
-        courseTemplateClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart() == null ? Constant.DEFAULTNULL : vo
-                .getCreateTimeStart().getTimeInMillis());
+        if (vo.getCreateTime() != null) {
+            courseTemplateClassPhotoBo.setCreateTime(vo.getCreateTime());
+        } else {
+            courseTemplateClassPhotoBo.setCreateTime(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeEnd() != null) {
+            courseTemplateClassPhotoBo.setCreateTimeEnd(vo.getCreateTimeEnd());
+        } else {
+            courseTemplateClassPhotoBo.setCreateTimeEnd(Constant.DEFAULTNULL);
+        }
+        if (vo.getCreateTimeStart() != null) {
+            courseTemplateClassPhotoBo.setCreateTimeStart(vo.getCreateTimeStart());
+        } else {
+            courseTemplateClassPhotoBo.setCreateTimeStart(Constant.DEFAULTNULL);
+        }
         return courseTemplateClassPhotoBo;
     }
 
@@ -47,9 +55,9 @@ public class CourseTemplateClassPhotoConverter {
         courseTemplateClassPhotoVo.setClassPhotoIdSet(bo.getClassPhotoIdSet());
         courseTemplateClassPhotoVo.setCourseTemplateId(bo.getCourseTemplateId());
         courseTemplateClassPhotoVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
-        courseTemplateClassPhotoVo.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
-        courseTemplateClassPhotoVo.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
-        courseTemplateClassPhotoVo.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        courseTemplateClassPhotoVo.setCreateTime(bo.getCreateTime());
+        courseTemplateClassPhotoVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        courseTemplateClassPhotoVo.setCreateTimeStart(bo.getCreateTimeStart());
         courseTemplateClassPhotoVo.setId(bo.getId());
         courseTemplateClassPhotoVo.setIdSet(bo.getIdSet());
         return courseTemplateClassPhotoVo;
