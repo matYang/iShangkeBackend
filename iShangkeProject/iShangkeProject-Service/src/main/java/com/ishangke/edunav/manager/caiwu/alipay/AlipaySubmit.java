@@ -32,7 +32,7 @@ public class AlipaySubmit {
         String gateway = "https://mapi.alipay.com/gateway.do?";
 
         sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
-                + "\" method=\"get\">");
+                + "\" method=\"get\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
