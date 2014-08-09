@@ -184,5 +184,5 @@ public class Constant {
     
     //order
     public static final String ORDERPREFIX = "ISK-";
-    public static final String ORDERSUBJECTPREFIX = "购买课程: ";
+    public static final String ORDERSUBJECTPREFIX = "购买课程:";
 }
