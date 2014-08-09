@@ -44,7 +44,7 @@ import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.CoursePageViewVo;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
-import com.ishangke.edunav.web.partner.reflection.ReflectionService;
+import com.ishangke.edunav.web.reflection.ReflectionService;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller

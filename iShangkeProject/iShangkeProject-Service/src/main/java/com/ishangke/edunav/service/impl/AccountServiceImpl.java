@@ -288,6 +288,31 @@ public class AccountServiceImpl implements AccountService.Iface {
             throw exception;
         }
     }
+    
+    @Override
+    public CouponBo queryCouponById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "queryContact"));
+                throw new NoPermissionException();
+            }
+            return couponManager.queryById(id, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.CONTACT_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }
 
     /**********************************************************
      * 
@@ -655,28 +680,4 @@ public class AccountServiceImpl implements AccountService.Iface {
         }
     }
 
-    @Override
-    public CouponBo queryCouponById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryContact"));
-                throw new NoPermissionException();
-            }
-            return couponManager.queryById(id, userBo);
-        } catch (NoPermissionException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setErrorCode(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT);
-            exception.setMessageKey(ManagerErrorCode.PERMISSION_ACCOUNT_QUERYCONTACT_KEY);
-            throw exception;
-        } catch (ManagerException e) {
-            LOGGER.info(e.getMessage(), e);
-            BusinessExceptionBo exception = new BusinessExceptionBo();
-            exception.setMessage(e.getMessage());
-            exception.setErrorCode(ManagerErrorCode.CONTACT_NOTFOUND_ERROR);
-            exception.setMessageKey(ManagerErrorCode.CONTACT_NOTFOUND_ERROR_KEY);
-            throw exception;
-        }
-    }
 }
