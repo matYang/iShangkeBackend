@@ -70,9 +70,9 @@ public class AlipayTest extends BaseTest {
         }
     }
 
-    @Test
-    public void testPost() {
-        System.out.println();
-        System.out.println(AlipaySubmit.buildFormForPost(out_trade_no, notify_id));
-    }
+//    @Test
+//    public void testPost() {
+//        System.out.println();
+//        System.out.println(AlipaySubmit.buildFormForPost(out_trade_no, notify_id));
+//    }
 }
