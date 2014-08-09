@@ -38,7 +38,7 @@ public class OrderController extends AbstractController {
     @Autowired
     AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET, produces = "charset=utf-8")
     public @ResponseBody
     String buildForm(@PathVariable int bookingId, @RequestParam(defaultValue="alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
@@ -67,8 +67,8 @@ public class OrderController extends AbstractController {
 
         //我们的订单号ISK + booking id + order id
         //有问题 不能有中文 不然返回之后会乱码
-        //return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
-        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
+        return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        //return alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + orderBo.getId(), "pay course", String.valueOf(booking.getPrice()));
     }
     
 }
