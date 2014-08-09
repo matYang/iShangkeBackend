@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.partner.reflection;
+package com.ishangke.edunav.web.reflection;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
