@@ -206,4 +206,5 @@ service BookingService {
 	string changeBookingStatusToPayed(1: i32 id)throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string verify(1: string notify)throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForGet(1:string subject, 2: string out_trade_no, 3: string total_fee)throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	string buildFormForPost(1:string subject, 2: string out_trade_no, 3: string total_fee)throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 

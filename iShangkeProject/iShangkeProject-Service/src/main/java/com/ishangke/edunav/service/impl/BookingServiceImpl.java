@@ -292,6 +292,20 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
+    
+    @Override
+    public String buildFormForPost(String subject, String out_trade_no, String total_fee) throws BusinessExceptionBo, TException {
+        try {
+            return bookingManager.buildFormForPost(subject, out_trade_no, total_fee);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR);
+            exception.setMessageKey(ManagerErrorCode.ALIPAY_GET_SUBMIT_ERROR_KEY);
+            throw exception;
+        }
+    }
 
     /**********************************************************
      * 
