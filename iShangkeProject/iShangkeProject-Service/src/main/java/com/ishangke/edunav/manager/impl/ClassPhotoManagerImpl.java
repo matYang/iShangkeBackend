@@ -26,6 +26,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.ClassPhotoNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class ClassPhotoManagerImpl implements ClassPhotoManager {
@@ -59,7 +60,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                     + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), classPhotoBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -74,7 +75,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        if (classPhotoEntity.getPartnerId() == null) {
+        if (IdChecker.isNull(classPhotoEntity.getPartnerId())) {
             throw new ManagerException("ClassPhoto creation must specify partner");
         }
         classPhotoEntity.setCreateTime(DateUtility.getCurTimeInstance());
@@ -113,7 +114,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                     + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), classPhotoBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -128,7 +129,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        if (classPhotoEntity.getId() == null) {
+        if (IdChecker.isNull(classPhotoEntity.getId())) {
             throw new ManagerException("ClassPhoto update must specify id");
         }
         classPhotoEntity.setPartnerId(null);
@@ -149,11 +150,11 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         if (classPhotoBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // Convert
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        if (classPhotoEntity.getId() == null) {
+        if (IdChecker.isNull(classPhotoEntity.getId())) {
             throw new ManagerException("ClassPhoto deletion must specify id");
         }
         ClassPhotoEntityExt previousClassPhoto = classPhotoMapper.getById(classPhotoEntity.getId());
@@ -169,10 +170,11 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at " + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at "
+                    + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(previousClassPhoto.getPartnerId())){
+                if (IdChecker.isEqual(g.getPartnerId(), previousClassPhoto.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -182,7 +184,6 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
-
 
         try {
             previousClassPhoto.setDeleted(1);
@@ -214,7 +215,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                 throw new ManagerException("ClassPhotoBo null for non-admin user at query");
             }
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == classPhotoBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), classPhotoBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -305,7 +306,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
                     + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == partnerId) {
+                if (IdChecker.isEqual(g.getPartnerId(), partnerId)) {
                     isSameGroup = true;
                     break;
                 }

@@ -32,6 +32,7 @@ import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.CouponNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class CouponManagerImpl implements CouponManager {
@@ -62,7 +63,7 @@ public class CouponManagerImpl implements CouponManager {
         }
         else {
             //otherwise user can only modify their own, thus making an UserId necessary
-            if (couponEntity == null || couponEntity.getUserId() == null || !couponEntity.getUserId().equals(userEntity.getId())) {
+            if (couponEntity == null || IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User creating someone else's coupon");
             }
         }
@@ -97,7 +98,7 @@ public class CouponManagerImpl implements CouponManager {
         CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
-        if (couponEntity.getId() == null) {
+        if (IdChecker.isNull(couponEntity.getId())) {
             throw new ManagerException("Coupon activation must specify id");
         }
         CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
@@ -111,7 +112,7 @@ public class CouponManagerImpl implements CouponManager {
         }
         else {
             //otherwise user can only modify their own, thus making an UserId necessary
-            if (!previousCoupon.getUserId().equals(userEntity.getId())) {
+            if (IdChecker.notEqual(previousCoupon.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User activating someone else's coupon");
             }
         }
@@ -150,16 +151,15 @@ public class CouponManagerImpl implements CouponManager {
         }
         else {
             //otherwise user can only modify their own, thus making an UserId necessary
-            if (couponEntity == null || couponEntity.getUserId() == null || !couponEntity.getUserId().equals(userEntity.getId())) {
+            if (couponEntity == null || IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's coupon");
             }
         }
         
-        if (couponEntity.getId() == null) {
+        if (IdChecker.isNull(couponEntity.getId())) {
             throw new ManagerException("Coupon update must specify id");
         }
         
-        //TODO we probably need a way to tell how much coupon is used instead reading previous credit out
         CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Previous coupon is not found");
@@ -222,7 +222,7 @@ public class CouponManagerImpl implements CouponManager {
         }
         else {
             //otherwise user can only query their own, thus making an UserId necessary
-            if (couponEntity == null || couponEntity.getUserId() == null || !couponEntity.getUserId().equals(userEntity.getId())) {
+            if (couponEntity == null || IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's coupon");
             }
         }
@@ -263,7 +263,7 @@ public class CouponManagerImpl implements CouponManager {
         else {
             //for a user, he/she can only query coupon history of a coupon that belongs to he/she
             //this means that a couponId is absolutely necessary
-            if (couponHistoryEntity == null || couponHistoryEntity.getCouponId() == null || couponHistoryEntity.getCouponId() <= 0) {
+            if (couponHistoryEntity == null || IdChecker.isNull(couponHistoryEntity.getCouponId())) {
                 throw new ManagerException("User query coupon history did not specify couponId");
             }
             CouponEntityExt correspondingCoupon = null;
@@ -273,7 +273,7 @@ public class CouponManagerImpl implements CouponManager {
                 throw new ManagerException("Corresponding coupon not found when querying coupon history with coupnId: " + couponHistoryEntity.getCouponId());
             }
             //otherwise user can only query their own, thus making an UserId necessary
-            if (correspondingCoupon == null || correspondingCoupon.getUserId() != null || !correspondingCoupon.getUserId().equals(userEntity.getId())) {
+            if (correspondingCoupon == null || IdChecker.notEqual(correspondingCoupon.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's coupon history");
             }
         }
@@ -326,7 +326,7 @@ public class CouponManagerImpl implements CouponManager {
         }
         else {
             //otherwise user can only query their own
-            if (!couponEntity.getUserId().equals(userEntity.getId())) {
+            if (IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's coupon");
             }
         }

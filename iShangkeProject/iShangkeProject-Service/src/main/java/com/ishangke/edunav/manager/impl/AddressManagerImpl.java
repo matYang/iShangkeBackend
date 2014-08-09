@@ -26,6 +26,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.AddressNotFoundException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class AddressManagerImpl implements AddressManager {
@@ -58,7 +59,7 @@ public class AddressManagerImpl implements AddressManager {
         }
         else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -73,7 +74,7 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        if (addressEntity.getPartnerId() == null) {
+        if (IdChecker.isNull(addressEntity.getPartnerId())) {
             throw new ManagerException("Address creation must specify partner");
         }
         addressEntity.setCreateTime(DateUtility.getCurTimeInstance());
@@ -112,7 +113,7 @@ public class AddressManagerImpl implements AddressManager {
         }
         else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -127,7 +128,7 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         
-        if (addressEntity.getId() == null) {
+        if (IdChecker.isNull(addressEntity.getId())) {
             throw new ManagerException("Address update must specify id");
         }
         addressEntity.setPartnerId(null);
@@ -153,7 +154,7 @@ public class AddressManagerImpl implements AddressManager {
         // Convert
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        if (addressEntity.getId() == null) {
+        if (IdChecker.isNull(addressEntity.getId())) {
             throw new ManagerException("Address deletion must specify id");
         }
         AddressEntityExt previousAddress = addressMapper.getById(addressEntity.getId());
@@ -172,7 +173,7 @@ public class AddressManagerImpl implements AddressManager {
         }
         else {
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId().equals(previousAddress.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), previousAddress.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
@@ -214,7 +215,7 @@ public class AddressManagerImpl implements AddressManager {
                 throw new ManagerException("AddressBo null for non-admin user at query"); 
             }
             for (GroupEntityExt g : groupList) {
-                if (g.getPartnerId() == addressBo.getPartnerId()) {
+                if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }

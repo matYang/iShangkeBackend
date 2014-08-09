@@ -28,6 +28,7 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class AccountManagerImpl implements AccountManager {
@@ -131,7 +132,7 @@ public class AccountManagerImpl implements AccountManager {
         } else {
             // otherwise user can only query their own, thus making an UserId
             // necessary
-            if (accountEntity == null || accountEntity.getId() == null || !accountEntity.getId().equals(userEntity.getId())) {
+            if (accountEntity == null || IdChecker.notEqual(accountEntity.getId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's account");
             }
         }
@@ -170,8 +171,7 @@ public class AccountManagerImpl implements AccountManager {
         } else {
             // otherwise user can only query their own, thus making an UserId
             // necessary
-            if (accountHistoryEntity == null || accountHistoryEntity.getUserId() == null
-                    || !accountHistoryEntity.getUserId().equals(userEntity.getId())) {
+            if (accountHistoryEntity == null || IdChecker.notEqual(accountHistoryEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's accountHistory");
             }
         }
