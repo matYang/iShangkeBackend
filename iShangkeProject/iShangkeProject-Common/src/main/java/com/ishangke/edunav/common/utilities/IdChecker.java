@@ -1,4 +1,4 @@
-package com.ishangke.edunav.util;
+package com.ishangke.edunav.common.utilities;
 
 /**
  *  why on earth do we NOT set id to null in converters!!

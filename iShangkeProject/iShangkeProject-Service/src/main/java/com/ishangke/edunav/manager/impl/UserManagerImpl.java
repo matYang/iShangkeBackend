@@ -15,6 +15,7 @@ import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.enums.LoginEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.common.utilities.LoginDeterminer;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -48,7 +49,6 @@ import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.UserNotFoundException;
-import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class UserManagerImpl implements UserManager {
@@ -779,6 +779,18 @@ public class UserManagerImpl implements UserManager {
             convertedResults.add(UserConverter.toBo(userPo));
         }
         return convertedResults;
+    }
+
+    @Override
+    public int getPartnerIdByUserId(int userId) {
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userId);
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        for (GroupEntityExt g : groupList) {
+            return g.getPartnerId();
+        }
+        return Constant.DEFAULTNULL;
     }
 
 }

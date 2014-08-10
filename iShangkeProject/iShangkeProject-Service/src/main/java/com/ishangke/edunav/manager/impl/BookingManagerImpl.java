@@ -16,6 +16,7 @@ import com.ishangke.edunav.common.constant.DefaultValue;
 import com.ishangke.edunav.common.enums.BookingEnums;
 import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
@@ -52,7 +53,6 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.CourseNotFoundException;
 import com.ishangke.edunav.manager.transform.Operation;
-import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class BookingManagerImpl implements BookingManager {

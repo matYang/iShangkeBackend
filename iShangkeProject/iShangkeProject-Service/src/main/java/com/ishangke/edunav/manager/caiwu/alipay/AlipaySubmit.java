@@ -32,7 +32,7 @@ public class AlipaySubmit {
         Collections.sort(keys);
         String gateway = "https://mapi.alipay.com/gateway.do?";
 
-        sbHtml.append("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
+        sbHtml.append("支付跳转中...<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway + "_input_charset=" + AlipayConfig.input_charset
                 + "\" method=\"get\" style=\"display:none\">");
 
         for (int i = 0; i < keys.size(); i++) {
@@ -95,7 +95,6 @@ public class AlipaySubmit {
     }
     
     public static void main(String[] args) throws UnsupportedEncodingException {
-        System.out.println(AlipaySubmit.buildFormForGet("1", "好 啊", "2.0"));
-        String test = "290782b52c53916dfc2ffce84352580d";
+        System.out.println(AlipaySubmit.buildFormForGet("1221", "好 啊", "2.0"));
     }
 }

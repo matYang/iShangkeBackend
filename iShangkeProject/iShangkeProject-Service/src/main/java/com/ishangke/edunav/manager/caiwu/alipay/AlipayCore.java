@@ -33,21 +33,22 @@ public class AlipayCore {
      * @return 去掉空值与签名参数后的新签名参数组
      */
     public static Map<String, String> ParaFilter(Map<String, String> sArray) {
-        List keys = new ArrayList(sArray.keySet());
-        Map<String, String> sArrayNew = new HashMap<String, String>();
+        Map<String, String> result = new HashMap<String, String>();
 
-        for (int i = 0; i < keys.size(); i++) {
-            String key = (String) keys.get(i);
-            String value = (String) sArray.get(key);
-
-            if (value == null || value.equals("") || key.equalsIgnoreCase("sign") || key.equalsIgnoreCase("sign_type")) {
-                continue;
-            }
-
-            sArrayNew.put(key, value);
+        if (sArray == null || sArray.size() <= 0) {
+            return result;
         }
 
-        return sArrayNew;
+        for (String key : sArray.keySet()) {
+            String value = sArray.get(key);
+            if (value == null || value.equals("") || key.equalsIgnoreCase("sign")
+                || key.equalsIgnoreCase("sign_type")) {
+                continue;
+            }
+            result.put(key, value);
+        }
+
+        return result;
     }
 
     /**

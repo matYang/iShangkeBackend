@@ -194,5 +194,7 @@ public interface UserManager {
      */
     List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo);
 
+    int getPartnerIdByUserId(int userId);
+
 
 }

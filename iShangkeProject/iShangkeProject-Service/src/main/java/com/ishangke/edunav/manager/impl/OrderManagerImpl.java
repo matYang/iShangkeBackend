@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.common.enums.BookingEnums;
 import com.ishangke.edunav.common.enums.OrderEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.CommentOrderBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
@@ -33,7 +34,6 @@ import com.ishangke.edunav.manager.converter.OrderHistoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
-import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class OrderManagerImpl implements OrderManager {
