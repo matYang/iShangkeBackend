@@ -178,10 +178,10 @@ public class PartnerController extends AbstractController {
 
         PartnerPageViewBo pageViewBo = null;
         PartnerPageViewVo pageViewVo = null;
-
+        
+        //partner is public info, no need to fill in partnerId when query
         try {
-            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser,
-                    permissionTag);
+            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -190,16 +190,31 @@ public class PartnerController extends AbstractController {
         return pageViewVo;
     }
 
-    // get partner by id is open data, no authentication
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
 
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }  
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        
+        
         PartnerVo partnerVo = new PartnerVo();
         partnerVo.setId(id);
         PartnerBo responseBo = null;
         PartnerVo responseVo = null;
+        //partner is public info, no need to fill in partnerId when query
         try {
             responseBo = partnerFacade.queryPartnerById(PartnerConverter.fromModel(partnerVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
@@ -230,7 +245,12 @@ public class PartnerController extends AbstractController {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
-        partnerVo.setId(partnerId);
+        int sessionPartnerId = userFacade.getPartnerIdByUserId(curId);
+//        if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
+//            throw new ControllerException("不可更改其他合作商的信息");
+//        }
+        
+        partnerVo.setId(sessionPartnerId);
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
         PartnerBo responsePartner = null;
         try {
@@ -256,6 +276,11 @@ public class PartnerController extends AbstractController {
          if (!loggedIn) {
              throw new ControllerException("对不起，您尚未登录");
          }
+         
+         int sessionPartnerId = userFacade.getPartnerIdByUserId(curId);
+//         if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
+//             throw new ControllerException("不可更改其他合作商的信息");
+//         }
 
         
         PartnerVo partnerVo = new PartnerVo();
@@ -275,9 +300,9 @@ public class PartnerController extends AbstractController {
                 BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
                 ImageIO.write(bufferedImage, "png", serverFile);
 
-                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
+                imgUrl = AliyunMain.uploadImg(sessionPartnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
-                partnerVo.setId(partnerId);
+                partnerVo.setId(sessionPartnerId);
                 PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
                 partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
 

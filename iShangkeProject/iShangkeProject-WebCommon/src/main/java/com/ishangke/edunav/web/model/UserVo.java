@@ -63,7 +63,9 @@ public class UserVo extends JsonResponse {
     private AccountVo account;
     private CreditVo credit;
     
-    private Double CouponTotal;
+    private Double couponTotal;
+    
+    private Integer partnerId;
 
     public Integer getId() {
         return id;
@@ -362,11 +364,20 @@ public class UserVo extends JsonResponse {
     }
 
     public Double getCouponTotal() {
-        return CouponTotal;
+        return couponTotal;
     }
 
     public void setCouponTotal(Double couponTotal) {
-        CouponTotal = couponTotal;
+        this.couponTotal = couponTotal;
     }
+
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
+    }
+    
     
 }
