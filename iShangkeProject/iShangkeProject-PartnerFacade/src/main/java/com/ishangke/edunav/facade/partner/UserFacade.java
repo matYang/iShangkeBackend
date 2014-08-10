@@ -4,6 +4,7 @@ import org.apache.thrift.TException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.LoginBo;
@@ -457,4 +458,21 @@ public class UserFacade {
         return result;
     }
 
+    public int getPartnerIdByUserId(int userId) {
+        int result = Constant.DEFAULTNULL;
+        
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.getPartnerIdByUserId(userId);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
 }

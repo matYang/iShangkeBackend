@@ -671,4 +671,18 @@ public class UserServiceImpl implements UserService.Iface {
         }
     }
 
+    @Override
+    public int getPartnerIdByUserId(int userId) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.getPartnerIdByUserId(userId);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.SPREAD_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_DELETE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
 }
