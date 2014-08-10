@@ -231,23 +231,23 @@
       </if>
       <if test="entity.startTime == null">
         <if test="entity.startTimeStart != null">
-          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.startTimeEnd != null">
-          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.endTime != null">
         AND ACTIVITY.END_TIME =
-        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.endTime == null">
         <if test="entity.endTimeStart != null">
-          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.endTimeEnd != null">
-          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -266,27 +266,27 @@
 
       <if test="entity.lastModifyTime != null">
         AND ACTIVITY.LAST_MODIFY_TIME =
-        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
         AND ACTIVITY.CREATE_TIME =
-        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -362,27 +362,27 @@
 
       <if test="entity.startTime != null">
         AND ACTIVITY.START_TIME =
-        #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.startTime == null">
         <if test="entity.startTimeStart != null">
-          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.startTimeEnd != null">
-          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.endTime != null">
         AND ACTIVITY.END_TIME =
-        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.endTime == null">
         <if test="entity.endTimeStart != null">
-          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.endTimeEnd != null">
-          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -401,27 +401,27 @@
 
       <if test="entity.lastModifyTime != null">
         AND ACTIVITY.LAST_MODIFY_TIME =
-        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.lastModifyTime == null">
         <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
       <if test="entity.createTime != null">
         AND ACTIVITY.CREATE_TIME =
-        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
       <if test="entity.createTime == null">
         <if test="entity.createTimeStart != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.createTimeEnd != null">
-          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}}]]>
+          <![CDATA[AND ACTIVITY.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
     </if>
