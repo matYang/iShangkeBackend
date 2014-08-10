@@ -51,7 +51,14 @@ public class BookingController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        
+        
         int operation = Constant.BOOKINGOPERATEMAP.get(operate);
         BookingBo bookingBo = null;
         try {
@@ -72,7 +79,13 @@ public class BookingController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        
         BookingVo bookingVo = new BookingVo();
         bookingVo.setId(id);
         BookingPageViewBo bookingBos = null;
@@ -95,7 +108,14 @@ public class BookingController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        
+        
         BookingPageViewBo bookingBos = null;
         try {
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
@@ -114,6 +134,13 @@ public class BookingController extends AbstractController {
         BookingHistoryPageViewBo bookingHistoryBos = null;
         try {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+            int curId = currentUser.getId();
+            boolean loggedIn =  curId > 0;
+            if (!loggedIn) {
+                return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+            }
+            
+            
             bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);

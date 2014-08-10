@@ -56,9 +56,10 @@ public class CreditController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
-        if (creditVo.getId() == null || creditVo.getId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
-        }
+//        if (creditVo.getId() == null || creditVo.getId() != curId) {
+//            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
+//        }
+        creditVo.setId(curId);
         
         CreditPageViewBo pageViewBo = null;
         CreditPageViewVo pageViewVo = null;
@@ -90,9 +91,10 @@ public class CreditController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
-        if (creditHistoryVo.getUserId() == null || creditHistoryVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
-        }
+//        if (creditHistoryVo.getUserId() == null || creditHistoryVo.getUserId() != curId) {
+//            return this.handleWebException(new ControllerException("对不起，您只能查看自己的积分信息"), resp);
+//        }
+        creditHistoryVo.setUserId(curId);
         
         CreditHistoryPageViewBo pageViewBo = null;
         CreditHistoryPageViewVo pageViewVo = null;
@@ -106,6 +108,5 @@ public class CreditController extends AbstractController{
         
         return pageViewVo;
     }
-    
 
 }
