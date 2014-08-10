@@ -94,10 +94,7 @@ public class CommentController extends AbstractController{
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        //user module specific, also need to perform null check
-        if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的课程评分信息"), resp);
-        }
+
         
         CourseCommentPageViewBo pageViewBo = null;
         CourseCommentPageViewVo pageViewVo = null;
