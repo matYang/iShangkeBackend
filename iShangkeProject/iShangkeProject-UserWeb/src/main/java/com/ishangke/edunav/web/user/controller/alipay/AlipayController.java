@@ -14,7 +14,7 @@ import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
-@RequestMapping("/api/v2/alipay/alipay/notify_Url")
+@RequestMapping("/api/v2/alipay/notify_Url")
 public class AlipayController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AlipayController.class);
 
@@ -28,11 +28,12 @@ public class AlipayController extends AbstractController {
         String tradeStatus = null;
         String verified = null;
         String total_fee = null;
+        String trade_no = null;
         notifyId = request.getParameter("notify_id");
         verified = alipayFacade.verify_notify_id(notifyId);
         total_fee = request.getParameter("total_fee");
-        LOGGER.error("verified: " + verified);
-        LOGGER.error("notifyId: " + notifyId);
+        // 支付宝交易流水号 因为支付宝历史中 已经展示了此信息 所以暂时不需要我们自己额外的存储貌似
+        trade_no = request.getParameter("trade_no");
         // Check Sign
         if (verified.equals("true")) {
             tradeStatus = request.getParameter("trade_status");
