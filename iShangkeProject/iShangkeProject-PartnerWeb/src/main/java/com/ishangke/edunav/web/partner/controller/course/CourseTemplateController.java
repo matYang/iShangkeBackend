@@ -63,6 +63,8 @@ public class CourseTemplateController extends AbstractController{
         CourseTemplatePageViewVo pageViewVo = null;
         
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            courseTemplateVo.setPartnerId(partnerId);
             pageViewBo = courseFacade.queryCourseTemplate (CourseTemplateConverter.fromModel(courseTemplateVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -96,6 +98,8 @@ public class CourseTemplateController extends AbstractController{
         CourseTemplateVo responseVo = null;
         
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            courseTemplateVo.setPartnerId(partnerId);
             responseBo = courseFacade.queryCourseTemplateById(CourseTemplateConverter.fromModel(courseTemplateVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -127,9 +131,10 @@ public class CourseTemplateController extends AbstractController{
         
         
         CourseTemplateBo targetCourseTemplate = CourseTemplateConverter.fromModel(courseTemplateVo);
-        
         CourseTemplateBo responseCourseTemplate = null; 
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetCourseTemplate.setPartnerId(partnerId);
             responseCourseTemplate = courseFacade.createCourseTemplate(targetCourseTemplate, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -167,6 +172,8 @@ public class CourseTemplateController extends AbstractController{
         int operation = operationObj;
         CourseTemplateBo courseTemplateBo = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            courseTemplate.setPartnerId(partnerId);
             courseTemplateBo = courseFacade.transformCourseTemplateStatus(CourseTemplateConverter.fromModel(courseTemplate), operation, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);

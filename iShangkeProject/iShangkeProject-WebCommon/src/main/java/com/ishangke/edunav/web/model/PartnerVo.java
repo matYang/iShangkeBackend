@@ -86,6 +86,8 @@ public class PartnerVo extends JsonResponse {
     private List<TeacherVo> teacherList;
     private List<ClassPhotoVo> classPhotoList;
     private List<AddressVo> addressList;
+    
+    private Integer partnerId;
 
     public Integer getId() {
         return id;
@@ -477,6 +479,14 @@ public class PartnerVo extends JsonResponse {
 
     public void setAddressList(List<AddressVo> addressList) {
         this.addressList = addressList;
+    }
+
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
     }
 
 }

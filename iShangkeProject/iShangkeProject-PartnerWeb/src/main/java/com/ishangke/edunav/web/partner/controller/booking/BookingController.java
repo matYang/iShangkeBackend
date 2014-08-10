@@ -62,6 +62,8 @@ public class BookingController extends AbstractController {
         int operation = Constant.BOOKINGOPERATEMAP.get(operate);
         BookingBo bookingBo = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            booking.setPartnerId(partnerId);
             bookingBo = bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -90,6 +92,8 @@ public class BookingController extends AbstractController {
         bookingVo.setId(id);
         BookingPageViewBo bookingBos = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            bookingVo.setPartnerId(partnerId);
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, null, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -118,6 +122,8 @@ public class BookingController extends AbstractController {
         
         BookingPageViewBo bookingBos = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            bookingVo.setPartnerId(partnerId);
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -140,7 +146,8 @@ public class BookingController extends AbstractController {
                 return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
             }
             
-            
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            bookingHistoryVo.setPartnerId(partnerId);
             bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);

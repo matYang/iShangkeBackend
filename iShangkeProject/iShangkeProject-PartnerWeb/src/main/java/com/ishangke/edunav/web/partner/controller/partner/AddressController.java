@@ -59,6 +59,8 @@ public class AddressController extends AbstractController{
         AddressPageViewVo pageViewVo = null;
         
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            addressVo.setPartnerId(partnerId);
             pageViewBo = partnerFacade.queryAddress(AddressConverter.fromModel(addressVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -154,7 +156,11 @@ public class AddressController extends AbstractController{
         addressVo.setId(id);
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
         
-        partnerFacade.deleteAddress(targetAddress, curUser, permissionTag);
+        try {
+            partnerFacade.deleteAddress(targetAddress, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         return new EmptyResponse();
     }
     
