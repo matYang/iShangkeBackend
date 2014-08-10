@@ -34,7 +34,7 @@ import com.ishangke.edunav.web.model.pageview.BookingPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
-@RequestMapping("/p-api/v2/booking")
+@RequestMapping("/a-api/v2/booking")
 public class BookingController extends AbstractController {
     @Autowired
     private BookingFacade bookingFacade;

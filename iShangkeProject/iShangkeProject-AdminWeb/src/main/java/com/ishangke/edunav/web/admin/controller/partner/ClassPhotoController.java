@@ -37,7 +37,7 @@ import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
-@RequestMapping("/p-api/v2/classPhoto")
+@RequestMapping("/a-api/v2/classPhoto")
 public class ClassPhotoController extends AbstractController {
     @Autowired
     PartnerFacade partnerFacade;
