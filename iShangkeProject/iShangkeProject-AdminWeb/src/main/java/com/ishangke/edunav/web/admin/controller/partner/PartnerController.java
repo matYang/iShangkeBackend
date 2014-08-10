@@ -51,7 +51,7 @@ import com.ishangke.edunav.web.reflection.ReflectionService;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
-@RequestMapping("/p-api/v2/partner")
+@RequestMapping("/a-api/v2/partner")
 public class PartnerController extends AbstractController {
 
     @Autowired

@@ -31,7 +31,7 @@ import com.ishangke.edunav.web.model.pageview.CourseTemplatePageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
-@RequestMapping("/p-api/v2/courseTemplate")
+@RequestMapping("/a-api/v2/courseTemplate")
 
 public class CourseTemplateController extends AbstractController{
     

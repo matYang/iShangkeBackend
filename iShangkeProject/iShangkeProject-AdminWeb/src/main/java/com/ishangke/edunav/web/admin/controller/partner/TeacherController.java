@@ -37,7 +37,7 @@ import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
-@RequestMapping("/p-api/v2/teacher")
+@RequestMapping("/a-api/v2/teacher")
 public class TeacherController extends AbstractController {
     @Autowired
     PartnerFacade partnerFacade;

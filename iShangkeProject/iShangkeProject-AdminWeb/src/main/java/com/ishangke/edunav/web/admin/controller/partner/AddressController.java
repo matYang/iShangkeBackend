@@ -29,7 +29,7 @@ import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
-@RequestMapping("/p-api/v2/address")
+@RequestMapping("/a-api/v2/address")
 
 public class AddressController extends AbstractController{
     @Autowired
