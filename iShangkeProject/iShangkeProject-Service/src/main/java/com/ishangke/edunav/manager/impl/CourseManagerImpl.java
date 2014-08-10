@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
 import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
@@ -43,7 +44,6 @@ import com.ishangke.edunav.manager.converter.CourseConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.transform.Operation;
-import com.ishangke.edunav.util.IdChecker;
 
 //todo
 //关于权限的控制，状态的转移，需要再考虑一下
