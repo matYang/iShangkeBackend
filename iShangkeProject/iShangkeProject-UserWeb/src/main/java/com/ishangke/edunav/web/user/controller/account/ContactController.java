@@ -30,141 +30,141 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/contact")
-
-public class ContactController extends AbstractController{
+public class ContactController extends AbstractController {
 
     @Autowired
     UserFacade userFacade;
-    
+
     @Autowired
     AccountFacade accountFacade;
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse  queryContact(ContactVo contactVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryContact(ContactVo contactVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = null;
         try {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        //user module specific, also need to perform null check
-        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的联系人信息"), resp);
-        }
-        
+        // user module specific, also need to perform null check
+        // if (contactVo.getUserId() == null || contactVo.getUserId() != curId)
+        // {
+        // return this.handleWebException(new
+        // ControllerException("对不起，您只能查看自己的联系人信息"), resp);
+        // }
+        contactVo.setUserId(curId);
+
         ContactPageViewBo pageViewBo = null;
         ContactPageViewVo pageViewVo = null;
         try {
-            pageViewBo = accountFacade.queryContact(ContactConverter.fromModel(contactVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);    
+            pageViewBo = accountFacade.queryContact(ContactConverter.fromModel(contactVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
-        
+        }
+
         pageViewVo = ContactPageViewConverter.toModel(pageViewBo);
-        
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse create(@RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
         ContactVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = null; 
+
+        UserBo curUser = null;
         try {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        
-        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能创建自己的联系人信息"), resp);
-        }
-        
-        
+
+        // if (contactVo.getUserId() == null || contactVo.getUserId() != curId)
+        // {
+        // return this.handleWebException(new
+        // ControllerException("对不起，您只能创建自己的联系人信息"), resp);
+        // }
+        contactVo.setUserId(curId);
+
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
-        
         ContactBo responseContact = null;
         try {
             responseContact = accountFacade.createContact(targetContact, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         responseVo = ContactConverter.toModel(responseContact);
         return responseVo;
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody ContactVo contactVo, HttpServletRequest req, HttpServletResponse resp) {
         ContactVo responseVo = null;
-        
+
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = null;
         try {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
+
         
+//        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
+//            return this.handleWebException(new ControllerException("对不起，您只能创建自己的联系人信息"), resp);
+//        }
+        contactVo.setUserId(curId);
         contactVo.setId(id);
-        if (contactVo.getUserId() == null || contactVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能创建自己的联系人信息"), resp);
-        }
-        
-        
+
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
-        
         ContactBo responseContact = null;
         try {
             responseContact = accountFacade.updateContact(targetContact, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         responseVo = ContactConverter.toModel(responseContact);
         return responseVo;
     }
-    
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,  produces = "application/json")
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public @ResponseBody JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-          
+
         UserBo curUser = null;
         try {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        
+
         ContactVo contactVo = new ContactVo();
         contactVo.setId(id);
         ContactBo targetContact = ContactConverter.fromModel(contactVo);
@@ -172,8 +172,8 @@ public class ContactController extends AbstractController{
             accountFacade.deleteContact(targetContact, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         return new EmptyResponse();
-     }
-    
+    }
+
 }

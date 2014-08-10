@@ -53,6 +53,12 @@ public class OrderController extends AbstractController {
             resp.setStatus(511);
             return "服务器发生异常，不能验证当前用户的身份。。。";
         }
+        int curId = currentUser.getId();
+        boolean loggedIn =  curId > 0;
+        if (!loggedIn) {
+            return "对不起，您尚未登录";
+        }
+        
         BookingBo booking = bookingFacade.queryBookingById(bookingId, currentUser, permissionTag);
 
         OrderVo order = new OrderVo();
