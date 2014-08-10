@@ -35,13 +35,13 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/booking")
-public class BookingController  extends AbstractController {
+public class BookingController extends AbstractController {
     @Autowired
     private BookingFacade bookingFacade;
-    
+
     @Autowired
     private UserFacade userFacade;
-    
+
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse createBooking(@RequestBody BookingVo booking, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
@@ -51,17 +51,24 @@ public class BookingController  extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        booking.setUserId(curId);
         BookingBo bookingBo = null;
         try {
-            bookingBo = bookingFacade.createBookingByUser(BookingConverter.fromModel(booking), currentUser, permissionTag);    
+            bookingBo = bookingFacade.createBookingByUser(BookingConverter.fromModel(booking), currentUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }       
-        BookingVo bookingVo = BookingConverter.toModel(bookingBo); 
+        }
+        BookingVo bookingVo = BookingConverter.toModel(bookingBo);
         return bookingVo;
     }
-    
+
     @RequestMapping(value = "/{id}/{operate}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse transformBooking(@RequestBody BookingVo booking, HttpServletRequest req, HttpServletResponse resp, @PathVariable String operate) {
         String permissionTag = this.getUrl(req);
@@ -71,18 +78,25 @@ public class BookingController  extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
         int operation = Constant.BOOKINGOPERATEMAP.get(operate);
+        booking.setUserId(curId);
         BookingBo bookingBo = null;
         try {
             bookingBo = bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         BookingVo bookingVo = BookingConverter.toModel(bookingBo);
         return bookingVo;
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse getBookingById(HttpServletRequest req, HttpServletResponse resp, @PathVariable int id) {
         String permissionTag = this.getUrl(req);
@@ -92,17 +106,23 @@ public class BookingController  extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
         BookingBo bookingBo = null;
         try {
             bookingBo = bookingFacade.queryBookingById(id, currentUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         BookingVo booking = BookingConverter.toModel(bookingBo);
         return booking;
     }
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse getBooking(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingVo bookingVo) {
         String permissionTag = this.getUrl(req);
@@ -112,7 +132,14 @@ public class BookingController  extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        
+        bookingVo.setUserId(curId);
         BookingPageViewBo bookingBos = null;
         try {
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
@@ -122,7 +149,7 @@ public class BookingController  extends AbstractController {
         BookingPageViewVo bookingVos = BookingPageViewConverter.toModel(bookingBos);
         return bookingVos;
     }
-    
+
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse getBookingHistory(HttpServletRequest req, HttpServletResponse resp, PaginationVo pageVo, BookingHistoryVo bookingHistoryVo) {
         String permissionTag = this.getUrl(req);
@@ -131,10 +158,17 @@ public class BookingController  extends AbstractController {
         BookingHistoryPageViewBo bookingHistoryBos = null;
         try {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+            int curId = currentUser.getId();
+            boolean loggedIn = curId > 0;
+            if (!loggedIn) {
+                return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+            }
+            
+            bookingHistoryVo.setUserId(curId);
             bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         BookingHistoryPageViewVo bookingHistoryVos = BookingHistoryPageViewConverter.toModel(bookingHistoryBos);
         return bookingHistoryVos;
     }

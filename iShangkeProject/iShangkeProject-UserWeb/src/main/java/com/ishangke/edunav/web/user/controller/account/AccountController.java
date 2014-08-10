@@ -29,83 +29,85 @@ import com.ishangke.edunav.web.model.pageview.AccountPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
-
 @Controller
 @RequestMapping("/api/v2/account")
+public class AccountController extends AbstractController {
 
-public class AccountController extends AbstractController{
-    
     @Autowired
     UserFacade userFacade;
-    
+
     @Autowired
     AccountFacade accountFacade;
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse  queryAccount(AccountVo accountVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryAccount(AccountVo accountVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = null;
         try {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        //user module specific, also need to perform null check
-        if (accountVo.getId() == null || accountVo.getId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的账户信息"), resp);
-        }
-        
+        // user module specific, also need to perform null check
+        // if (accountVo.getId() == null || accountVo.getId() != curId) {
+        // return this.handleWebException(new
+        // ControllerException("对不起，您只能查看自己的账户信息"), resp);
+        // }
+        accountVo.setId(curId);
+
         AccountPageViewBo pageViewBo = null;
         AccountPageViewVo pageViewVo = null;
         try {
-            pageViewBo = accountFacade.queryAccount(AccountConverter.fromModel(accountVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);            
+            pageViewBo = accountFacade.queryAccount(AccountConverter.fromModel(accountVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         pageViewVo = AccountPageViewConverter.toModel(pageViewBo);
-        
+
         return pageViewVo;
     }
-    
+
     @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse  queryAccountHistory(AccountHistoryVo accountHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryAccountHistory(AccountHistoryVo accountHistoryVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         UserBo curUser = null;
         try {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        //user module specific, also need to perform null check
-        if (accountHistoryVo.getUserId() == null || accountHistoryVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的账户信息"), resp);
-        }
-        
+        // user module specific, also need to perform null check
+        // if (accountHistoryVo.getUserId() == null ||
+        // accountHistoryVo.getUserId() != curId) {
+        // return this.handleWebException(new
+        // ControllerException("对不起，您只能查看自己的账户信息"), resp);
+        // }
+        accountHistoryVo.setUserId(curId);
+
         AccountHistoryPageViewBo pageViewBo = null;
         AccountHistoryPageViewVo pageViewVo = null;
         try {
-            pageViewBo = accountFacade.queryAccountHistory(AccountHistoryConverter.fromModel(accountHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);            
+            pageViewBo = accountFacade.queryAccountHistory(AccountHistoryConverter.fromModel(accountHistoryVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         pageViewVo = AccountHistoryPageViewConverter.toModel(pageViewBo);
-        
+
         return pageViewVo;
     }
-    
 
 }

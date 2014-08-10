@@ -154,7 +154,7 @@ public class UserController extends AbstractController {
         }
 
         UserVo queryUser = new UserVo();
-        queryUser.setId(curId);
+        queryUser.setId(id);
         UserBo responseUser = null;
         try {
             responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), curUser, permissionTag);
@@ -181,7 +181,7 @@ public class UserController extends AbstractController {
 
 
         UserBo targetUser = UserConverter.fromModel(userVo);
-        targetUser.setId(curId);
+        targetUser.setId(id);
 
         UserBo responseUser = null;
         try {

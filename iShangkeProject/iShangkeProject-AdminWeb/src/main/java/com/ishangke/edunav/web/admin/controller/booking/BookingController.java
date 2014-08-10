@@ -51,14 +51,20 @@ public class BookingController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
         int operation = Constant.BOOKINGOPERATEMAP.get(operate);
         BookingBo bookingBo = null;
         try {
             bookingBo = bookingFacade.transformBookingStatus(BookingConverter.fromModel(booking), operation, currentUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         BookingVo bookingVo = BookingConverter.toModel(bookingBo);
         return bookingVo;
     }
@@ -72,7 +78,13 @@ public class BookingController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
         BookingVo bookingVo = new BookingVo();
         bookingVo.setId(id);
         BookingPageViewBo bookingBos = null;
@@ -80,7 +92,7 @@ public class BookingController extends AbstractController {
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, null, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         BookingBo bookingBo = bookingBos.getData().get(0);
         BookingVo booking = BookingConverter.toModel(bookingBo);
         return booking;
@@ -95,7 +107,13 @@ public class BookingController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
         BookingPageViewBo bookingBos = null;
         try {
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
@@ -114,10 +132,16 @@ public class BookingController extends AbstractController {
         BookingHistoryPageViewBo bookingHistoryBos = null;
         try {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+            int curId = currentUser.getId();
+            boolean loggedIn = curId > 0;
+            if (!loggedIn) {
+                return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+            }
+
             bookingHistoryBos = bookingFacade.queryHistory(BookingHistoryConverter.fromModel(bookingHistoryVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         BookingHistoryPageViewVo bookingHistoryVos = BookingHistoryPageViewConverter.toModel(bookingHistoryBos);
         return bookingHistoryVos;
     }

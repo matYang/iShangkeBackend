@@ -59,9 +59,10 @@ public class CouponController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         //user module specific, also need to perform null check
-        if (couponVo.getUserId() == null || couponVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能查看自己的消费券信息"), resp);
-        }
+//        if (couponVo.getUserId() == null || couponVo.getUserId() != curId) {
+//            return this.handleWebException(new ControllerException("对不起，您只能查看自己的消费券信息"), resp);
+//        }
+        couponVo.setUserId(curId);
         
         CouponPageViewBo pageViewBo = null;
         CouponPageViewVo pageViewVo = null;

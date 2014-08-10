@@ -60,10 +60,11 @@ public class CommentController extends AbstractController{
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
         
-        if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
-            return this.handleWebException(new ControllerException("对不起，您只能创建自己的课程评论"), resp);
-        }
-        
+//        if (courseCommentVo.getUserId() == null || courseCommentVo.getUserId() != curId) {
+//            return this.handleWebException(new ControllerException("对不起，您只能创建自己的课程评论"), resp);
+//        }
+        //no longer force such checks, userId will be automatically injected
+        courseCommentVo.setUserId(curId);
         
         CourseCommentBo targetCourseComment = CourseCommentConverter.fromModel(courseCommentVo);
         CourseCommentBo responseCourseComment = null;
