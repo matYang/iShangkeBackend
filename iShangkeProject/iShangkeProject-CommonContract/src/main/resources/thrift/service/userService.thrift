@@ -318,5 +318,6 @@ service UserService {
      */
     spread.SpreadBo deleteSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+    i32 getPartnerIdByUserId(1: i32 userId) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }
 

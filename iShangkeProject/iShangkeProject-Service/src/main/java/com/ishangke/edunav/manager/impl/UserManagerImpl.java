@@ -781,4 +781,16 @@ public class UserManagerImpl implements UserManager {
         return convertedResults;
     }
 
+    @Override
+    public int getPartnerIdByUserId(int userId) {
+        List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userId);
+        if (groupList == null) {
+            throw new ManagerException("unlogin user");
+        }
+        for (GroupEntityExt g : groupList) {
+            return g.getPartnerId();
+        }
+        return Constant.DEFAULTNULL;
+    }
+
 }
