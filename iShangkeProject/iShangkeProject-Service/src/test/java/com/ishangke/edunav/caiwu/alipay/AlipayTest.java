@@ -14,10 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import com.ishangke.edunav.common.BaseTest;
-import com.ishangke.edunav.manager.caiwu.alipay.AlipayConfig;
-import com.ishangke.edunav.manager.caiwu.alipay.AlipayCore;
-import com.ishangke.edunav.manager.caiwu.alipay.AlipayNotify;
-import com.ishangke.edunav.manager.caiwu.alipay.AlipaySubmit;
+import com.ishangke.edunav.manager.alipay.AlipayConfig;
+import com.ishangke.edunav.manager.alipay.AlipayCore;
+import com.ishangke.edunav.manager.alipay.AlipayNotify;
+import com.ishangke.edunav.manager.alipay.AlipaySubmit;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, AlipayTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.caiwu.alipay;
+package com.ishangke.edunav.manager.alipay;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -87,7 +87,7 @@ public class AlipayNotify {
     public static String Verify(String notify_id) {
         // 获取远程服务器ATN结果，验证是否是支付宝服务器发来的请求        
         String partner = AlipayConfig.partner;
-        String veryfy_url = "https://mapi.alipay.com/gateway.do?service=notify_verify";        
+        String veryfy_url = "https://mapi.alipay.com/gateway.do?service=notify_verify";
         veryfy_url = veryfy_url + "&partner=" + partner + "&notify_id=" + notify_id;
         String responseTxt = CheckUrl(veryfy_url);
         return responseTxt;

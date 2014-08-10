@@ -293,6 +293,9 @@ public class BookingServiceImpl implements BookingService.Iface {
         }
     }
     
+    /**
+     * 根本永不到了其实。。。
+     */
     @Override
     public String buildFormForPost(String subject, String out_trade_no, String total_fee) throws BusinessExceptionBo, TException {
         try {

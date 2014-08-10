@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.caiwu.alipay;
+package com.ishangke.edunav.manager.alipay;
 
 /* *
  *类名：AlipayConfig
@@ -44,7 +44,7 @@ public class AlipayConfig {
     public static String it_b_pay = "1h";
     // notify_url 交易过程中服务器通知的页面 要用 http://格式的完整路径，不允许加?id=123这类自定义参数
     //正式上线之后需要修改
-    public static String notify_url = "http://usertest.ishangke.cn/api/v2/alipay/alipay/notify_Url";
+    public static String notify_url = "http://usertest.ishangke.cn/api/v2/alipay/notify_Url";
 
     // 付完款后跳转的页面 要用 http://格式的完整路径，不允许加?id=123这类自定义参数
     // return_url的域名不能写成http://localhost/js_jsp_utf8/return_url.jsp，否则会导致return_url执行无效
