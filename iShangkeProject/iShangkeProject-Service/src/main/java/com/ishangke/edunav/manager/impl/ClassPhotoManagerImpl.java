@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -26,7 +27,6 @@ import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.ClassPhotoNotFoundException;
-import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class ClassPhotoManagerImpl implements ClassPhotoManager {

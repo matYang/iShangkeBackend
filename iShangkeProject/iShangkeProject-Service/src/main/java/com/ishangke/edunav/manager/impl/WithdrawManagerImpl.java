@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.model.WithdrawBo;
@@ -26,7 +27,6 @@ import com.ishangke.edunav.manager.converter.WithdrawConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.WithdrawNotFoundException;
-import com.ishangke.edunav.util.IdChecker;
 
 @Component
 public class WithdrawManagerImpl implements WithdrawManager {
