@@ -174,8 +174,7 @@ public class CourseController extends AbstractController {
         CoursePageViewVo pageViewVo = null;
 
         try {
-            pageViewBo = courseFacade
-                    .queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+            pageViewBo = courseFacade.queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }

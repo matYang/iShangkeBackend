@@ -65,8 +65,9 @@ public class ClassPhotoController extends AbstractController {
 
         ClassPhotoPageViewBo pageViewBo = null;
         ClassPhotoPageViewVo pageViewVo = null;
-
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            classPhotoVo.setPartnerId(partnerId);
             pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo),
                     permissionTag);
         } catch (ControllerException c) {
@@ -148,9 +149,10 @@ public class ClassPhotoController extends AbstractController {
         }
 
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-
         ClassPhotoBo responseClassPhoto = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetClassPhoto.setPartnerId(partnerId);
             responseClassPhoto = partnerFacade.createClassPhoto(targetClassPhoto, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -183,6 +185,8 @@ public class ClassPhotoController extends AbstractController {
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
         ClassPhotoBo responseClassPhoto = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetClassPhoto.setPartnerId(partnerId);
             responseClassPhoto = partnerFacade.updateClassPhoto(targetClassPhoto, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -212,8 +216,14 @@ public class ClassPhotoController extends AbstractController {
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();
         classPhotoVo.setId(id);
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-
-        partnerFacade.deleteClassPhoto(targetClassPhoto, curUser, permissionTag);
+        
+        try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetClassPhoto.setPartnerId(partnerId);
+            partnerFacade.deleteClassPhoto(targetClassPhoto, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
         return new EmptyResponse();
     }
 

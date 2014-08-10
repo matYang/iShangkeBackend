@@ -65,8 +65,9 @@ public class TeacherController extends AbstractController {
 
         TeacherPageViewBo pageViewBo = null;
         TeacherPageViewVo pageViewVo = null;
-
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            teacherVo.setPartnerId(partnerId);
             pageViewBo = partnerFacade.queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo),
                     permissionTag);
         } catch (ControllerException c) {
@@ -149,9 +150,10 @@ public class TeacherController extends AbstractController {
         }
 
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
-
         TeacherBo responseTeacher = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetTeacher.setPartnerId(partnerId);
             responseTeacher = partnerFacade.createTeacher(targetTeacher, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -184,6 +186,8 @@ public class TeacherController extends AbstractController {
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
         TeacherBo responseTeacher = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetTeacher.setPartnerId(partnerId);
             responseTeacher = partnerFacade.updateTeacher(targetTeacher, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -213,8 +217,15 @@ public class TeacherController extends AbstractController {
         TeacherVo teacherVo = new TeacherVo();
         teacherVo.setId(id);
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
+        
+        try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetTeacher.setPartnerId(partnerId);
+            partnerFacade.deleteTeacher(targetTeacher, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
 
-        partnerFacade.deleteTeacher(targetTeacher, curUser, permissionTag);
         return new EmptyResponse();
     }
 
