@@ -122,11 +122,11 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "updatePartner"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+//                        "updatePartner"));
+//                throw new NoPermissionException();
+//            }
 
             return partnerManager.updatePartner(partnerBo, userBo);
         } catch (NoPermissionException e) {

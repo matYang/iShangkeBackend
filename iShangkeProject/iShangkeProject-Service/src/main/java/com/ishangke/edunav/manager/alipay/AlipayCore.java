@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.caiwu.alipay;
+package com.ishangke.edunav.manager.alipay;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
