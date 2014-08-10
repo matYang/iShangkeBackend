@@ -63,9 +63,8 @@ public class CommentController extends AbstractController{
         CourseVo courseVo = new CourseVo();
         courseVo.setCourseTemplateId(courseCommentVo.getCourseTemplateId());
         CourseBo targetCourse = CourseConverter.fromModel(courseVo);
+        //partner id not added here as comment can be considered public data
         try {
-            int partnerId = userFacade.getPartnerIdByUserId(curId);
-            targetCourse.setPartnerId(partnerId);
             pageViewBo = courseFacade.queryCommentByCourseId(targetCourse, PaginationConverter.toBo(paginationVo), permissionTag);    
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);

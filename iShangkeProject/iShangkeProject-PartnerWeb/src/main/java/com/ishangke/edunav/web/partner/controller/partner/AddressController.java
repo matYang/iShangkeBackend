@@ -158,7 +158,6 @@ public class AddressController extends AbstractController{
         AddressVo addressVo = new AddressVo();
         addressVo.setId(id);
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
         try {
             int partnerId = userFacade.getPartnerIdByUserId(curId);
             targetAddress.setPartnerId(partnerId);

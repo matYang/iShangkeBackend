@@ -68,8 +68,7 @@ public class TeacherController extends AbstractController {
         try {
             int partnerId = userFacade.getPartnerIdByUserId(curId);
             teacherVo.setPartnerId(partnerId);
-            pageViewBo = partnerFacade.queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo),
-                    permissionTag);
+            pageViewBo = partnerFacade.queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -217,7 +216,6 @@ public class TeacherController extends AbstractController {
         TeacherVo teacherVo = new TeacherVo();
         teacherVo.setId(id);
         TeacherBo targetTeacher = TeacherConverter.fromModel(teacherVo);
-        
         try {
             int partnerId = userFacade.getPartnerIdByUserId(curId);
             targetTeacher.setPartnerId(partnerId);

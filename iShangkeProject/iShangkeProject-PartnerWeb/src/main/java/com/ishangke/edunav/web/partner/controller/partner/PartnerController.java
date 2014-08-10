@@ -30,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ishangke.edunav.common.Config;
 import com.ishangke.edunav.common.utilities.DateUtility;
-import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.common.utilities.file.AliyunMain;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PartnerPageViewBo;
@@ -245,11 +244,11 @@ public class PartnerController extends AbstractController {
         }
 
         int sessionPartnerId = userFacade.getPartnerIdByUserId(curId);
-        if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
-            throw new ControllerException("不可更改其他合作商的信息");
-        }
+//        if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
+//            throw new ControllerException("不可更改其他合作商的信息");
+//        }
         
-        partnerVo.setId(partnerId);
+        partnerVo.setId(sessionPartnerId);
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
         PartnerBo responsePartner = null;
         try {
@@ -277,9 +276,9 @@ public class PartnerController extends AbstractController {
          }
          
          int sessionPartnerId = userFacade.getPartnerIdByUserId(curId);
-         if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
-             throw new ControllerException("不可更改其他合作商的信息");
-         }
+//         if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
+//             throw new ControllerException("不可更改其他合作商的信息");
+//         }
 
         
         PartnerVo partnerVo = new PartnerVo();
@@ -299,9 +298,9 @@ public class PartnerController extends AbstractController {
                 BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
                 ImageIO.write(bufferedImage, "png", serverFile);
 
-                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
+                imgUrl = AliyunMain.uploadImg(sessionPartnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
-                partnerVo.setId(partnerId);
+                partnerVo.setId(sessionPartnerId);
                 PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
                 partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
 
