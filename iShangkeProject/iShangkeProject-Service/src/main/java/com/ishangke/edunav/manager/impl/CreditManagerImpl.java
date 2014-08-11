@@ -65,6 +65,14 @@ public class CreditManagerImpl implements CreditManager {
         CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
+        if (IdChecker.isNull(creditEntity.getId())) {
+            throw new ManagerException("Credit modification must specify corresponding user");
+        }
+        CreditEntityExt previousCredit = creditMapper.getById(creditEntity.getId());
+        if (previousCredit == null) {
+            throw new CreditNotFoundException("Previous credit is not found");
+        }
+
         // admin and system admins can query user's credits
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CreditManagerImpl]system admin || admin [%s] call modifyCredit at " + new Date(), userBo.getName()));
@@ -76,17 +84,8 @@ public class CreditManagerImpl implements CreditManager {
             }
         }
 
-        if (IdChecker.isNull(creditEntity.getId())) {
-            throw new ManagerException("Credit modification must specify corresponding user");
-        }
-
         // TODO we probably need a way to tell how much credit is used instead
         // reading previous credit out
-        CreditEntityExt previousCredit = creditMapper.getById(creditEntity.getId());
-        if (previousCredit == null) {
-            throw new CreditNotFoundException("Previous credit is not found");
-        }
-
         double balanceDiff = previousCredit.getCredit() - creditEntity.getCredit();
         int operation = CreditHistoryEnums.Operation.DEC.code;
         if (balanceDiff < -DefaultValue.DOUBLEPRCISIONOFFSET) {

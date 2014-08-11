@@ -30,7 +30,7 @@ public interface OrderManager {
      */
     OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo);
     
-    OrderBo queryOrderById(OrderBo orderBo, UserBo userBo);
+    OrderBo queryById(OrderBo orderBo, UserBo userBo);
 
     /**
      * 本方法为合作商受理一个预定单功能。<br>

@@ -55,19 +55,18 @@ public class CouponManagerImpl implements CouponManager {
         // Convert
         CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
-        
-        //admin and system admins can create user's coupons
+
+        // admin and system admins can create user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call createCoupon at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only modify their own, thus making an UserId necessary
+        } else {
+            // otherwise user can only modify their own, thus making an UserId
+            // necessary
             if (couponEntity == null || IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User creating someone else's coupon");
             }
         }
-        
+
         couponEntity.setCreateTime(DateUtility.getCurTimeInstance());
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntity.setEnabled(0);
@@ -78,15 +77,14 @@ public class CouponManagerImpl implements CouponManager {
 
             if (couponResult <= 0) {
                 throw new ManagerException("Coupon Create Failed: add Coupon Failed");
-            } 
+            }
         } catch (Throwable t) {
             throw new ManagerException("Coupon create failed for user: " + userEntity.getId(), t);
         }
-        
+
         return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
     }
-    
-    
+
     @Override
     public CouponBo activateCoupon(CouponBo couponBo, UserBo userBo) {
         // Check Null
@@ -97,7 +95,7 @@ public class CouponManagerImpl implements CouponManager {
         // Convert
         CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
+
         if (IdChecker.isNull(couponEntity.getId())) {
             throw new ManagerException("Coupon activation must specify id");
         }
@@ -105,31 +103,43 @@ public class CouponManagerImpl implements CouponManager {
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Coupon to activate is not found with id:" + couponEntity.getId());
         }
-        
-        //admin and system admins can update user's coupons
+
+        // admin and system admins can update user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call activateCoupon at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only modify their own, thus making an UserId necessary
+        } else {
+            // otherwise user can only modify their own, thus making an UserId
+            // necessary
             if (IdChecker.notEqual(previousCoupon.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User activating someone else's coupon");
             }
         }
-        
+
         if (previousCoupon.getExpiryTime().before(DateUtility.getCurTime())) {
+            // update the coupon to be expired, and return
+            previousCoupon.setStatus(CouponEnums.Status.EXPIRED.code);
+            previousCoupon.setLastModifyTime(DateUtility.getCurTimeInstance());
+
+            try {
+                // update Coupon
+                couponMapper.update(previousCoupon);
+            } catch (Throwable t) {
+                throw new ManagerException("Coupon activate failed for user: " + previousCoupon.getId(), t);
+            }
+
             throw new ManagerException("Coupon has already expired");
+        } else {
+            previousCoupon.setStatus(CouponEnums.Status.USABLE.code);
+            previousCoupon.setLastModifyTime(DateUtility.getCurTimeInstance());
+
+            try {
+                // update Coupon
+                couponMapper.update(previousCoupon);
+            } catch (Throwable t) {
+                throw new ManagerException("Coupon activate failed for user: " + previousCoupon.getId(), t);
+            }
         }
-        previousCoupon.setStatus(CouponEnums.Status.USABLE.code);
-        previousCoupon.setLastModifyTime(DateUtility.getCurTimeInstance());
-       
-        try {
-            // update Coupon
-            couponMapper.update(previousCoupon);
-        } catch (Throwable t) {
-            throw new ManagerException("Coupon activate failed for user: " + previousCoupon.getId(), t);
-        }
-        
+
         return CouponConverter.toBo(couponMapper.getById(previousCoupon.getId()));
     }
 
@@ -143,28 +153,26 @@ public class CouponManagerImpl implements CouponManager {
         // Convert
         CouponEntityExt couponEntity = CouponConverter.fromBo(couponBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
-        
-        //admin and system admins can update user's coupons
-        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call updateCoupon at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only modify their own, thus making an UserId necessary
-            if (couponEntity == null || IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User updating someone else's coupon");
-            }
-        }
-        
+
         if (IdChecker.isNull(couponEntity.getId())) {
             throw new ManagerException("Coupon update must specify id");
         }
-        
         CouponEntityExt previousCoupon = couponMapper.getById(couponEntity.getId());
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Previous coupon is not found");
         }
         
+        // admin and system admins can update user's coupons
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call updateCoupon at " + new Date(), userBo.getName()));
+        } else {
+            // otherwise user can only modify their own, thus making an UserId
+            // necessary
+            if (IdChecker.notEqual(previousCoupon.getUserId(), userEntity.getId())) {
+                throw new AuthenticationException("User updating someone else's coupon");
+            }
+        }
+
         // Create CouponHistory
         double balanceDiff = previousCoupon.getBalance() - couponEntity.getBalance();
         int operation = CouponHistoryEnums.Operation.DEC.code;
@@ -190,11 +198,11 @@ public class CouponManagerImpl implements CouponManager {
             int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
             if (couponHistoryResult <= 0) {
                 throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
-            } 
+            }
         } catch (Throwable t) {
             throw new ManagerException("Coupon update failed for user: " + userEntity.getId(), t);
         }
-        
+
         return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
     }
 
@@ -215,18 +223,18 @@ public class CouponManagerImpl implements CouponManager {
         CouponEntityExt couponEntity = couponBo == null ? null : CouponConverter.fromBo(couponBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
-        //admin and system admins can query user's coupons
+
+        // admin and system admins can query user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own, thus making an UserId necessary
+        } else {
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
             if (couponEntity == null || IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's coupon");
             }
         }
-        
+
         // Convert
         List<CouponEntityExt> results = null;
         try {
@@ -234,7 +242,7 @@ public class CouponManagerImpl implements CouponManager {
         } catch (Throwable t) {
             throw new ManagerException("Coupon query failed for user: " + userEntity.getId(), t);
         }
-        
+
         if (results == null) {
             return new ArrayList<CouponBo>();
         }
@@ -246,7 +254,8 @@ public class CouponManagerImpl implements CouponManager {
     }
 
     @Override
-    //note, for a normal user query history can only query the coupon history of a single coupon, specified by the coupon id field in coupon history
+    // note, for a normal user query history can only query the coupon history
+    // of a single coupon, specified by the coupon id field in coupon history
     public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -255,14 +264,14 @@ public class CouponManagerImpl implements CouponManager {
         CouponHistoryEntityExt couponHistoryEntity = couponHistoryBo == null ? null : CouponHistoryConverter.fromBo(couponHistoryBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        
-        //admin and system admins can query user's coupons
+
+        // admin and system admins can query user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
-            //for a user, he/she can only query coupon history of a coupon that belongs to he/she
-            //this means that a couponId is absolutely necessary
+        } else {
+            // for a user, he/she can only query coupon history of a coupon that
+            // belongs to he/she
+            // this means that a couponId is absolutely necessary
             if (couponHistoryEntity == null || IdChecker.isNull(couponHistoryEntity.getCouponId())) {
                 throw new ManagerException("User query coupon history did not specify couponId");
             }
@@ -272,12 +281,13 @@ public class CouponManagerImpl implements CouponManager {
             } catch (Throwable t) {
                 throw new ManagerException("Corresponding coupon not found when querying coupon history with coupnId: " + couponHistoryEntity.getCouponId());
             }
-            //otherwise user can only query their own, thus making an UserId necessary
+            // otherwise user can only query their own, thus making an UserId
+            // necessary
             if (correspondingCoupon == null || IdChecker.notEqual(correspondingCoupon.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's coupon history");
             }
         }
-        
+
         // Convert
         List<CouponHistoryEntityExt> results = null;
         try {
@@ -285,7 +295,7 @@ public class CouponManagerImpl implements CouponManager {
         } catch (Throwable t) {
             throw new ManagerException("CouponHistory query failed for user: " + userEntity.getId(), t);
         }
-        
+
         if (results == null) {
             return new ArrayList<CouponHistoryBo>();
         }
@@ -296,41 +306,37 @@ public class CouponManagerImpl implements CouponManager {
         return convertedResults;
     }
 
-
     @Override
     public int queryTotal(CouponBo couponBo, UserBo userBo) {
         return couponMapper.getListCount(CouponConverter.fromBo(couponBo));
     }
-
 
     @Override
     public int queryHistoryTotal(CouponHistoryBo couponHistoryBo, UserBo userBo) {
         return couponHistoryMapper.getListCount(CouponHistoryConverter.fromBo(couponHistoryBo));
     }
 
-
     @Override
     public CouponBo queryById(int id, UserBo userBo) {
         if (id <= 0 || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         CouponEntityExt couponEntity = couponMapper.getById(id);
         if (couponEntity == null) {
             throw new CouponNotFoundException("Coupn does not exist");
         }
-        
+
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call queryById at " + new Date(), userBo.getName()));
-        }
-        else {
-            //otherwise user can only query their own
+        } else {
+            // otherwise user can only query their own
             if (IdChecker.notEqual(couponEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's coupon");
             }
         }
-        
+
         return CouponConverter.toBo(couponEntity);
     }
 

@@ -556,7 +556,7 @@ public class BookingServiceImpl implements BookingService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createOrderByUser"));
                 throw new NoPermissionException();
             }
-            return orderManager.queryOrderById(orderBo, userBo);
+            return orderManager.queryById(orderBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
