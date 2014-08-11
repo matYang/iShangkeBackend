@@ -501,18 +501,18 @@
     <include refid="ClassPhoto_Base_Column_List"></include>
     ,
     <include refid="Address_Base_Column_List"></include>
-    from PARNTER PARNTER
+    from PARTNER PARTNER
     left join TEACHER TEACHER
-    ON TEACHER.PARTNER_ID = PARNTER.ID
+    ON TEACHER.PARTNER_ID = PARTNER.ID
     left join
     CLASS_PHOTO
     CLASS_PHOTO
-    ON CLASS_PHOTO.PARTNER_ID = PARNTER.ID
+    ON CLASS_PHOTO.PARTNER_ID = PARTNER.ID
     left join ADDRESS ADDRESS
     ON
     ADDRESS.PARTNER_ID =
     PARTNER.ID
-    where PARNTER.DELETED = 0 AND PARNTER.ID = #{id}
+    where PARTNER.DELETED = 0 AND PARTNER.ID = #{id}
   </select>
 
   <!-- listAll -->
