@@ -273,7 +273,7 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUser.getId()) || authManager.isSystemAdmin(currentUser.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createUser at " + new Date(), currentUser.getName()));
         } else {
-            throw new AuthenticationException("Non-admin user trying createUser");
+            throw new AuthenticationException("Non-admin user trying to create user");
         }
         if (targetUser.getPassword() == null) {
             throw new ManagerException("User creation must specify password");
@@ -312,6 +312,7 @@ public class UserManagerImpl implements UserManager {
         } else {
             throw new AuthenticationException("Non-admin user trying createPartnerUser");
         }
+        
         if (IdChecker.isNull(partner.getId())) {
             throw new AuthenticationException("Partner Id not specified at createPartneruser");
         }
@@ -486,7 +487,8 @@ public class UserManagerImpl implements UserManager {
         if (passwordBo == null || IdChecker.isNull(passwordBo.getId()) || passwordBo.getNewPassword() == null || passwordBo.getOldPassword() == null) {
             throw new ManagerException("Invalid parameter");
         }
-
+        //public function, no permission check
+        
         UserEntityExt curUser = null;
         try {
             curUser = userMapper.getById(passwordBo.getId());
@@ -701,6 +703,7 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call updateUser at " + new Date(), currentUserEntity.getName()));
         } else {
+            //this include both partner user and normal user
             if (targetUserEntity == null || IdChecker.notEqual(targetUserEntity.getId(), currentUserEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's user");
             }
@@ -724,6 +727,7 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    //by id
     public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser) {
         // Check Null
         if (queryUser == null || currentUser == null) {
@@ -736,6 +740,7 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call queryUserInfo at " + new Date(), currentUserEntity.getName()));
         } else {
+            //this include both partner user and normal user
             if (queryUserEntity == null || IdChecker.notEqual(queryUserEntity.getId(), currentUserEntity.getId())) {
                 throw new AuthenticationException("User queryingInfo someone else's user");
             }
