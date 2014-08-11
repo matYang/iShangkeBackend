@@ -96,7 +96,7 @@ public class CourseTemplateController extends AbstractController{
         CourseTemplateVo responseVo = null;
         
         try {
-            responseBo = courseFacade.queryCourseTemplateById(CourseTemplateConverter.fromModel(courseTemplateVo), UserConverter.fromModel(new UserVo()), permissionTag);
+            responseBo = courseFacade.queryCourseTemplateById(CourseTemplateConverter.fromModel(courseTemplateVo), curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }  
