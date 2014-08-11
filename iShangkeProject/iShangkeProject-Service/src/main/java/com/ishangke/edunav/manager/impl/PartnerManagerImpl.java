@@ -50,6 +50,7 @@ public class PartnerManagerImpl implements PartnerManager {
     private AddressManager addressManager;
 
     @Override
+    //public data, does not check permission
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -76,6 +77,7 @@ public class PartnerManagerImpl implements PartnerManager {
     }
 
     @Override
+    //public data, does not check permission
     public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null) {
             throw new ManagerException("Invalid parameter");
