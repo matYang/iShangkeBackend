@@ -712,9 +712,13 @@ public class UserManagerImpl implements UserManager {
         if (IdChecker.isNull(targetUserEntity.getId())) {
             throw new ManagerException("User udpate must specify id");
         }
+        
+        //lets just say there are things that are not meant to be changed
         targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         targetUserEntity.setPhone(null);
         targetUserEntity.setInvitationCode(null);
+        targetUserEntity.setAppliedInvitationCode(null);
+        targetUserEntity.setReference(null);
         targetUserEntity.setCreateTime(null);
         targetUserEntity.setDeleted(null);
         try {
