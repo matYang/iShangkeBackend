@@ -133,14 +133,6 @@
       <if test="entity.schoolId != null and entity.schoolId != 0">
         AND MAJOR.SCHOOL_ID = #{entity.schoolId,jdbcType=INTEGER}
       </if>
-      <if test="entity.schoolId == null or entity.schoolId == 0">
-        <if test="entity.schoolIdSet != null and entity.schoolIdSet.size() > 0">
-          AND MAJOR.SCHOOL_ID IN
-          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
 
       <if test="entity.name != null and !entity.name.equals('')">
         AND MAJOR.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
@@ -153,22 +145,10 @@
         AND MAJOR.CREATE_TIME =
         #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
-      <if test="entity.createTimeStart != null">
-          <![CDATA[AND MAJOR.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
-      <if test="entity.createTimeEnd != null">
-          <![CDATA[AND MAJOR.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
 
       <if test="entity.lastModifyTime != null">
         AND MAJOR.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND MAJOR.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
-      <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND MAJOR.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
       </if>
 
       <if test="entity.enabled != null">
@@ -203,14 +183,6 @@
       <if test="entity.schoolId != null and entity.schoolId != 0">
         AND MAJOR.SCHOOL_ID = #{entity.schoolId,jdbcType=INTEGER}
       </if>
-      <if test="entity.schoolId == null or entity.schoolId == 0">
-        <if test="entity.schoolIdSet != null and entity.schoolIdSet.size() > 0">
-          AND MAJOR.SCHOOL_ID IN
-          <foreach collection="entity.schoolIdSet" item="listItem" open="(" close=")" separator=",">
-            #{listItem}
-          </foreach>
-        </if>
-      </if>
 
       <if test="entity.name != null and !entity.name.equals('')">
         AND MAJOR.NAME LIKE "%"#{entity.name,jdbcType=VARCHAR}"%"
@@ -223,22 +195,10 @@
         AND MAJOR.CREATE_TIME =
         #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
       </if>
-      <if test="entity.createTimeStart != null">
-          <![CDATA[AND MAJOR.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
-      <if test="entity.createTimeEnd != null">
-          <![CDATA[AND MAJOR.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
 
       <if test="entity.lastModifyTime != null">
         AND MAJOR.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
-      <if test="entity.lastModifyTimeStart != null">
-          <![CDATA[AND MAJOR.LAST_MODIFY_TIME >= #{entity.lastModifyTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-      </if>
-      <if test="entity.lastModifyTimeEnd != null">
-          <![CDATA[AND MAJOR.LAST_MODIFY_TIME <= #{entity.lastModifyTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
       </if>
 
       <if test="entity.enabled != null">
