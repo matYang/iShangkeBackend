@@ -76,7 +76,6 @@ public class PartnerManagerImpl implements PartnerManager {
     }
 
     @Override
-    // not really using the id here
     public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -100,6 +99,17 @@ public class PartnerManagerImpl implements PartnerManager {
         if (partnerBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // 更新partner记录
+        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+        if (IdChecker.isNull(partnerEntity.getId())) {
+            throw new ManagerException("Partner update must specify id");
+        }
+        PartnerEntityExt previousPartner = partnerMapper.getById(partnerEntity.getId());
+        if (previousPartner == null) {
+            throw new PartnerNotFoundException("Partner to update is not found with id:" + partnerEntity.getId());
+        }
 
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
@@ -112,20 +122,15 @@ public class PartnerManagerImpl implements PartnerManager {
             LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin[%s] call updatePartner at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (IdChecker.isEqual(g.getPartnerId(), partnerBo.getId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), previousPartner.getId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
-
-        // 更新partner记录
-        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("Partner update must specify id");

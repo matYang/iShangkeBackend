@@ -87,11 +87,18 @@ public class WithdrawManagerImpl implements WithdrawManager {
         // 更新WITHDRAW记录
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        if (IdChecker.isNull(withdrawEntity.getId())) {
+            throw new ManagerException("Withdraw update must specify id");
+        }
+        WithdrawEntityExt previousWithdraw = withdrawMapper.getById(withdrawEntity.getId());
+        if (previousWithdraw == null) {
+            throw new WithdrawNotFoundException("Withdraw to update is not found with id:" + withdrawEntity.getId());
+        }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call updateWithdraw at " + new Date(), userBo.getName()));
         } else {
-            if (withdrawEntity == null || IdChecker.notEqual(withdrawEntity.getUserId(), userEntity.getId())) {
+            if (IdChecker.notEqual(previousWithdraw.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's withdraw");
             }
         }
