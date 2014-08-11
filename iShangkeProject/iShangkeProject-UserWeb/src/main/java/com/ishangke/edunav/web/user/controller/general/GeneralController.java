@@ -157,6 +157,34 @@ public class GeneralController extends AbstractController{
     }
     
     
+    
+    @RequestMapping(value = "/major", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse  major(@RequestParam(value="schoolId", defaultValue="0") String schoolId, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        int id = 0;
+        try {
+            id = Integer.parseInt(schoolId);
+        } catch (Exception c) {
+            return this.handleWebException(new ControllerException("不合法schoolId格式"), resp);
+        }
+        
+        PaginationVo paginationVo = new PaginationVo();
+        //TODO
+//        MajorVo categoryVo = new MajorVo();
+//        MajorPageViewBo pageViewBo = null;
+//        MajorPageViewVo pageViewVo = null;
+//        try {
+//            pageViewBo = generalFacade.queryMajorBySchoolId(id, permissionTag);    
+//        } catch (ControllerException c) {
+//            return this.handleWebException(c, resp);
+//        }
+//        pageViewVo = MajorPageViewConverter.toModel(pageViewBo);
+//        return pageViewVo;
+        
+        return null;
+    }
+    
+    
     @RequestMapping(value = "/career", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse  career(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
@@ -178,6 +206,5 @@ public class GeneralController extends AbstractController{
         
         return pageViewVo;
     }
-    
-    
+
 }
