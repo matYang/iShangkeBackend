@@ -106,6 +106,12 @@
       <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
       <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
       <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+      <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+      <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+      <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+      <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+      <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
     </collection>
   </resultMap>
   <sql id="Booking_Base_Column_List">
@@ -248,6 +254,22 @@
     PARTNER.PARTNER_DISTINCTION
     PARTNER_PARTNERDISTINCTION,
     PARTNER.RATING PARTNER_RATING
+  </sql>
+  <sql id="Address_Base_Column_List">
+    ADDRESS.DETAIL ADDRESS_DETAIL,
+    ADDRESS.LAT ADDRESS_LAT,
+    ADDRESS.LNG ADDRESS_LNG
+  </sql>
+  <sql id="Reg_Address_Base_Column_List">
+    ADDRESS.DETAIL REG_ADDRESS_DETAIL,
+    ADDRESS.LAT REG_ADDRESS_LAT,
+    ADDRESS.LNG REG_ADDRESS_LNG
+  </sql>
+  <sql id="Reg_Address_Temp_Column_List">
+    temp.REG_ADDRESS_DETAIL REG_ADDRESS_DETAIL,
+    temp.REG_ADDRESS_LAT REG_ADDRESS_LAT,
+    temp.REG_ADDRESS_LNG
+    REG_ADDRESS_LNG
   </sql>
   <!-- add -->
   <insert id="add" parameterType="BookingEntityExt">
@@ -464,20 +486,31 @@
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="BookingExtMap">
     SELECT
-    <include refid="Booking_Base_Column_List" />
-    ,
-    <include refid="Course_Base_Column_List" />
+    <include refid="Booking_Base_Column_List" />,
+    <include refid="Partner_Base_Column_List" />,
+    <include refid="Course_Base_Column_List" />,
+    <include refid="Address_Base_Column_List" />,
+    <include refid="Reg_Address_Temp_Column_List" />
     from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
+    left join PARTNER ON COURSE.PARTNER_ID = PARTNER.ID
+    left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID
+    left join (select COURSE.ID COURSE_ID, <include refid="Reg_Address_Base_Column_List"></include> from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where BOOKING.DELETED = 0 and BOOKING.ID = #{id,jdbcType=INTEGER}
   </select>
   <!--list -->
   <select id="list" parameterType="map" resultMap="BookingExtMap">
     SELECT
-    <include refid="Booking_Base_Column_List" />,
-    <include refid="Course_Base_Column_List" />,
-    <include refid="Partner_Base_Column_List" />
+    <include refid="Booking_Base_Column_List" />
+    ,
+    <include refid="Course_Base_Column_List" />
+    ,
+    <include refid="Partner_Base_Column_List" />,
+    <include refid="Address_Base_Column_List" />,
+    <include refid="Reg_Address_Temp_Column_List" />
     from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
     left join PARTNER ON COURSE.PARTNER_ID = PARTNER.ID
+    left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID
+    left join (select COURSE.ID COURSE_ID, <include refid="Reg_Address_Base_Column_List"></include> from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where BOOKING.DELETED = 0
     <if test="entity != null">
 
@@ -689,7 +722,7 @@
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-  
+
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
@@ -884,7 +917,7 @@
     </if>
     ) AS total
   </select>
-  
+
   <select id="listByPartnerId" parameterType="map" resultMap="BookingExtMap">
     SELECT
     <include refid="Booking_Base_Column_List" />
