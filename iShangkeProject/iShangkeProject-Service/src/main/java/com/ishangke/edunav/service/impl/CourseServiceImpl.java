@@ -49,10 +49,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseBo createCourse(CourseBo courseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
+//                throw new NoPermissionException();
+//            }
             return courseManager.createCourse(courseBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -73,10 +73,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseCommentBo commentCourse(CourseCommentBo courseCommnet, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "commentCourse"));
+//                throw new NoPermissionException();
+//            }
             return courseManager.commentCourse(courseCommnet, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -126,10 +126,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteCommentByCommentId"));
+//                throw new NoPermissionException();
+//            }
             return courseManager.deleteCommentByCommentId(courseCommentBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -175,10 +175,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CoursePageViewBo queryCourse(CourseBo courseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCourse"));
+//                throw new NoPermissionException();
+//            }
             paginationBo = PageUtil.getPage(paginationBo);
             List<CourseBo> data = courseManager.queryCourse(courseBo, userBo, paginationBo);
             int total = courseManager.queryCourseTotal(courseBo, userBo);
@@ -260,10 +260,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseBo transformCourseStatus(CourseBo courseBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "transformCourseStatus"));
+//                throw new NoPermissionException();
+//            }
             return courseManager.transformCourseStatus(courseBo, operation, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -284,10 +284,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourseTemplate"));
+//                throw new NoPermissionException();
+//            }
             return courseTemplateManager.createCourseTemplate(courseTemplateBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -308,10 +308,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseTemplateBo transformCourseTmeplateStatus(CourseTemplateBo courseTemplateBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "transformCourseTmeplateStatus"));
+//                throw new NoPermissionException();
+//            }
             return courseTemplateManager.transformCourseTmeplateStatus(courseTemplateBo, operation, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -333,10 +333,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     public CourseTemplatePageViewBo queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCourseTemplate"));
+//                throw new NoPermissionException();
+//            }
             paginationBo = PageUtil.getPage(paginationBo);
             List<CourseTemplateBo> data =  courseTemplateManager.queryCourseTemplate(courseTemplateBo, userBo, paginationBo);
             CourseTemplatePageViewBo pageView = new CourseTemplatePageViewBo();
@@ -365,10 +365,10 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseTemplateBo queryCourseTemplateById(CourseTemplateBo courseTemplateBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createCourse"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCourseTemplateById"));
+//                throw new NoPermissionException();
+//            }
             return courseTemplateManager.queryCourseTemplateById(courseTemplateBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);

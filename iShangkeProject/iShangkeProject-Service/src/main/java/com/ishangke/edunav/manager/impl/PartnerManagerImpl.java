@@ -85,7 +85,7 @@ public class PartnerManagerImpl implements PartnerManager {
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         PartnerEntityExt result = null;
         try {
-            result = partnerMapper.getById(partnerEntity.getId());
+            result = partnerMapper.getInfoById(partnerEntity.getId());
         } catch (Throwable t) {
             throw new ManagerException("Partner queryById failed with id: " + partnerEntity.getId(), t);
         }
