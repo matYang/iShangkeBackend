@@ -53,8 +53,10 @@ public class UserVo extends JsonResponse {
     private Long birthdayEnd;
     private Integer careerId;
     private Integer schoolId;
+    private Integer majorId;
     private Set<Integer> careerIdSet;
     private Set<Integer> schoolIdSet;
+    private Set<Integer> majorIdSet;
     private Integer locationId;
     private Set<Integer> locationIdSet;
     
@@ -66,6 +68,22 @@ public class UserVo extends JsonResponse {
     private Double couponTotal;
     
     private Integer partnerId;
+
+    public Integer getMajorId() {
+        return majorId;
+    }
+
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
+    }
+
+    public Set<Integer> getMajorIdSet() {
+        return majorIdSet;
+    }
+
+    public void setMajorIdSet(Set<Integer> majorIdSet) {
+        this.majorIdSet = majorIdSet;
+    }
 
     public Integer getId() {
         return id;

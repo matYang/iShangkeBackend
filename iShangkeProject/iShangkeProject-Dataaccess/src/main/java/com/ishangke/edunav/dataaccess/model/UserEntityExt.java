@@ -16,6 +16,7 @@ public class UserEntityExt extends UserEntity {
     private Calendar birthdayStart;
     private Calendar birthdayEnd;
     private Set<Integer> careerIdSet;
+    private Set<Integer> majorIdSet;
     private Set<Integer> schoolIdSet;
     private Set<Integer> locationIdSet;
     
@@ -23,6 +24,14 @@ public class UserEntityExt extends UserEntity {
     private CreditEntityExt credit;
     
     private Double couponTotal;
+
+    public Set<Integer> getMajorIdSet() {
+        return majorIdSet;
+    }
+
+    public void setMajorIdSet(Set<Integer> majorIdSet) {
+        this.majorIdSet = majorIdSet;
+    }
 
     public Set<Integer> getCareerIdSet() {
         return careerIdSet;
