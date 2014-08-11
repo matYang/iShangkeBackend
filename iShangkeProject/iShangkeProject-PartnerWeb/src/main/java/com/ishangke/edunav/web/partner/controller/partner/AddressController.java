@@ -59,6 +59,8 @@ public class AddressController extends AbstractController{
         AddressPageViewVo pageViewVo = null;
         
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            addressVo.setPartnerId(partnerId);
             pageViewBo = partnerFacade.queryAddress(AddressConverter.fromModel(addressVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -90,9 +92,10 @@ public class AddressController extends AbstractController{
         
         
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
         AddressBo responseAddress = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetAddress.setPartnerId(partnerId);
             responseAddress = partnerFacade.createAddress(targetAddress, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -124,6 +127,8 @@ public class AddressController extends AbstractController{
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
         AddressBo responseAddress = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetAddress.setPartnerId(partnerId);
             responseAddress = partnerFacade.updateAddress(targetAddress, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -153,8 +158,13 @@ public class AddressController extends AbstractController{
         AddressVo addressVo = new AddressVo();
         addressVo.setId(id);
         AddressBo targetAddress = AddressConverter.fromModel(addressVo);
-        
-        partnerFacade.deleteAddress(targetAddress, curUser, permissionTag);
+        try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetAddress.setPartnerId(partnerId);
+            partnerFacade.deleteAddress(targetAddress, curUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        } 
         return new EmptyResponse();
     }
     

@@ -174,8 +174,7 @@ public class CourseController extends AbstractController {
         CoursePageViewVo pageViewVo = null;
 
         try {
-            pageViewBo = courseFacade
-                    .queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+            pageViewBo = courseFacade.queryCourse(CourseConverter.fromModel(courseVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -238,9 +237,10 @@ public class CourseController extends AbstractController {
         }
 
         CourseBo targetCourse = CourseConverter.fromModel(courseVo);
-
         CourseBo responseCourse = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            targetCourse.setPartnerId(partnerId);
             responseCourse = courseFacade.createCourse(targetCourse, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -278,6 +278,8 @@ public class CourseController extends AbstractController {
         int operation = operationObj;
         CourseBo courseBo = null;
         try {
+            int partnerId = userFacade.getPartnerIdByUserId(curId);
+            course.setPartnerId(partnerId);
             courseBo = courseFacade.transformCourseStatus(CourseConverter.fromModel(course), operation, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
