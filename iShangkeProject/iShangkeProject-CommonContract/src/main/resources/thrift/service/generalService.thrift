@@ -4,6 +4,7 @@ include "model/circle.thrift"
 include "model/category.thrift"
 include "model/location.thrift"
 include "model/school.thrift"
+include "model/major.thrift"
 include "model/career.thrift"
 
 
@@ -50,6 +51,14 @@ service GeneralService{
     **********************************************************/
     school.SchoolPageViewBo querySchool(1: school.SchoolBo schoolBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+
+
+    /**********************************************************
+    *
+    *   Major
+    *
+    **********************************************************/
+    major.MajorPageViewBo queryMajor(1: major.MajorBo majorBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
