@@ -100,6 +100,17 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("Invalid parameter");
         }
 
+        // 更新TEACHER记录
+        TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+        if (IdChecker.isNull(teacherEntity.getId())) {
+            throw new ManagerException("Teacher update must specify id");
+        }
+        TeacherEntityExt previousTeacher = teacherMapper.getById(teacherEntity.getId());
+        if (previousTeacher == null) {
+            throw new TeacherNotFoundException("Teacher to update is not found with id:" + teacherEntity.getId());
+        }
+
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
@@ -111,24 +122,16 @@ public class TeacherManagerImpl implements TeacherManager {
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin [%s] call updateTeacher at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (IdChecker.isEqual(g.getPartnerId(), teacherBo.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), previousTeacher.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
 
-        // 更新TEACHER记录
-        TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
-
-        if (IdChecker.isNull(teacherEntity.getId())) {
-            throw new ManagerException("Teacher update must specify id");
-        }
         teacherEntity.setPartnerId(null);
         teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         teacherEntity.setCreateTime(null);

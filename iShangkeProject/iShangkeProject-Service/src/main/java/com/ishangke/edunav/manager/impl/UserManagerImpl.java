@@ -494,7 +494,7 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("ChangePassword getById failed for user: " + passwordBo.getId(), t);
         }
         if (curUser == null || IdChecker.isNull(curUser.getId())) {
-            throw new UserNotFoundException("ChangePassword failed for user: " + passwordBo.getId());
+            throw new UserNotFoundException("ChangePassword failed for user: " + passwordBo.getId() + "because user not found");
         }
         if (!PasswordCrypto.validatePassword(passwordBo.getOldPassword(), curUser.getPassword())) {
             throw new AuthenticationException("Password not Match");
@@ -539,7 +539,7 @@ public class UserManagerImpl implements UserManager {
         } catch (Throwable t) {
             throw new ManagerException("Authentication failed for user: " + sessionBo.getId(), t);
         }
-        if (response == null) {
+        if (response == null || IdChecker.isNull(response.getId())) {
             throw new UserNotFoundException("Authentication failed for user: " + sessionBo.getId());
         }
 
@@ -551,8 +551,13 @@ public class UserManagerImpl implements UserManager {
         if (sessionBo == null || IdChecker.isNull(sessionBo.getId()) || sessionBo.getAuthCode() == null || sessionBo.getAuthCode().length() == 0) {
             throw new ManagerException("Invalid parameter");
         }
-
-        authManager.closeAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
+        
+        try {
+            authManager.closeAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
+        } catch (Throwable t) {
+            throw new ManagerException("DisposeSession failed for user: " + sessionBo.getId(), t);
+        }
+        
     }
 
     @Override
@@ -667,8 +672,9 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call deleteUser at " + new Date(), currentUserEntity.getName()));
         } else {
-            throw new AuthenticationException("Non-admin user trying deleting someone else's user");
+            throw new AuthenticationException("Non-admin user trying deleting other user");
         }
+        
         if (IdChecker.isNull(targetUserEntity.getId())) {
             throw new ManagerException("User deletion must specify id");
         }
@@ -704,6 +710,8 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("User udpate must specify id");
         }
         targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        targetUserEntity.setPhone(null);
+        targetUserEntity.setInvitationCode(null);
         targetUserEntity.setCreateTime(null);
         targetUserEntity.setDeleted(null);
         try {
