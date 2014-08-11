@@ -109,7 +109,7 @@ public class PartnerManagerImpl implements PartnerManager {
         if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("Partner update must specify id");
         }
-        PartnerEntityExt previousPartner = partnerMapper.getById(partnerEntity.getId());
+        PartnerEntityExt previousPartner = partnerMapper.getInfoById(partnerEntity.getId());
         if (previousPartner == null) {
             throw new PartnerNotFoundException("Partner to update is not found with id:" + partnerEntity.getId());
         }
