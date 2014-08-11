@@ -74,8 +74,9 @@ public class OrderController extends AbstractController {
             return "服务器发生异常";
         }
 
+        String partnerName = (booking.getCourse() != null && booking.getCourse().getInstName() != null) ? "[" + booking.getCourse().getInstName() + "]" : "";
         //我们的订单号ISK + booking id + order id
-        String result = alipayFacade.buildFormForGet(Constant.ORDERPREFIX + DateUtility.milisecInDay + "-" + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + ((booking.getCourse() != null && booking.getCourse().getInstName() != null) ? ("[" + booking.getCourse().getInstName() + "]") : "") + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        String result = alipayFacade.buildFormForGet(Constant.ORDERPREFIX + DateUtility.milisecInDay + "-" + booking.getId() + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
         return result;
     }
     
