@@ -37,7 +37,7 @@ public class AddressManagerImpl implements AddressManager {
 
     @Autowired
     private GroupEntityExtMapper groupMapper;
-    
+
     @Autowired
     private AuthManager authManager;
 
@@ -47,7 +47,7 @@ public class AddressManagerImpl implements AddressManager {
         if (userBo == null || addressBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
@@ -56,8 +56,7 @@ public class AddressManagerImpl implements AddressManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call createAddress at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
                     isSameGroup = true;
@@ -73,18 +72,19 @@ public class AddressManagerImpl implements AddressManager {
         // Convert
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
+
         if (IdChecker.isNull(addressEntity.getPartnerId())) {
             throw new ManagerException("Address creation must specify partner");
         }
         addressEntity.setCreateTime(DateUtility.getCurTimeInstance());
         addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
-        addressEntity.setEnabled(0);;
+        addressEntity.setEnabled(0);
+        ;
         addressEntity.setDeleted(0);
         int result = 0;
         try {
             result = addressMapper.add(addressEntity);
-            
+
         } catch (Throwable t) {
             throw new ManagerException("Address creation failed for user: " + userEntity.getId(), t);
         }
@@ -101,7 +101,19 @@ public class AddressManagerImpl implements AddressManager {
         if (userBo == null || addressBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
+        // Convert
+        AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+
+        if (IdChecker.isNull(addressEntity.getId())) {
+            throw new ManagerException("Address update must specify id");
+        }
+        AddressEntityExt previousAddress = addressMapper.getById(addressEntity.getId());
+        if (previousAddress == null) {
+            throw new AddressNotFoundException("Address to update is not found with id:" + addressEntity.getId());
+        }
+
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
@@ -110,27 +122,18 @@ public class AddressManagerImpl implements AddressManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call updateAddress at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
-                if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), previousAddress.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
 
-        // Convert
-        AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
-        
-        if (IdChecker.isNull(addressEntity.getId())) {
-            throw new ManagerException("Address update must specify id");
-        }
         addressEntity.setPartnerId(null);
         addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         addressEntity.setCreateTime(null);
@@ -140,7 +143,7 @@ public class AddressManagerImpl implements AddressManager {
         } catch (Throwable t) {
             throw new ManagerException("Address update failed for user: " + userEntity.getId(), t);
         }
-        
+
         return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
     }
 
@@ -161,7 +164,7 @@ public class AddressManagerImpl implements AddressManager {
         if (previousAddress == null) {
             throw new AddressNotFoundException("Address to delete is not found with id:" + addressEntity.getId());
         }
-        
+
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
@@ -170,8 +173,7 @@ public class AddressManagerImpl implements AddressManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call deleteAddress at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), previousAddress.getPartnerId())) {
                     isSameGroup = true;
@@ -182,7 +184,6 @@ public class AddressManagerImpl implements AddressManager {
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
-        
 
         try {
             previousAddress.setDeleted(1);
@@ -190,7 +191,7 @@ public class AddressManagerImpl implements AddressManager {
         } catch (Throwable t) {
             throw new ManagerException("Address deletion failed for user: " + userEntity.getId(), t);
         }
-        
+
         return AddressConverter.toBo(previousAddress);
     }
 
@@ -199,8 +200,8 @@ public class AddressManagerImpl implements AddressManager {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
-     // 验证用户是否属于此partner
+
+        // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("unlogin user");
@@ -209,10 +210,9 @@ public class AddressManagerImpl implements AddressManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
-        }
-        else {
+        } else {
             if (addressBo == null) {
-                throw new ManagerException("AddressBo null for non-admin user at query"); 
+                throw new ManagerException("AddressBo null for non-admin user at query");
             }
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
@@ -230,15 +230,14 @@ public class AddressManagerImpl implements AddressManager {
         AddressEntityExt addressEntity = addressBo == null ? null : AddressConverter.fromBo(addressBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
-        
+
         List<AddressEntityExt> results = null;
         try {
             results = addressMapper.list(addressEntity, page);
         } catch (Throwable t) {
             throw new ManagerException("Address query failed for user: " + userEntity.getId(), t);
         }
-        
+
         if (results == null) {
             return new ArrayList<AddressBo>();
         }
