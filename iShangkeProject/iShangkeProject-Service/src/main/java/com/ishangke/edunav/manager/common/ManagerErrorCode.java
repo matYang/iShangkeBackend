@@ -298,7 +298,8 @@ public class ManagerErrorCode {
     public static final int SCHOOL_NOTFOUND_ERROR = 0x001A0404;
     public static final String SCHOOL_NOTFOUND_ERROR_KEY = "school_notfound_error";
 
-    // school
+    
+    // configuration
     public static final int CONFIGURATION_GETBYNAME_ERROR = 0x001B0001;
     public static final String CONFIGURATION_GETBYNAME_ERROR_KEY = "configuration_getByName_error";
     public static final int CONFIGURATION_LISTALL_ERROR = 0x001B0002;
@@ -518,4 +519,8 @@ public class ManagerErrorCode {
     public static final int ALIPAY_GET_SUBMIT_ERROR = 0x001C0002;
     public static final String ALIPAY_GET_SUBMIT_ERROR_KEY = "alipay_get_submit_error";
 
+    
+    //major
+    public static final int MAJOR_NOTFOUND_ERROR = 0x001D0404;
+    public static final String MAJOR_NOTFOUND_ERROR_KEY = "major_notfound_error";
 }
