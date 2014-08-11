@@ -210,7 +210,7 @@ public class OrderManagerImpl implements OrderManager {
     }
 
     @Override
-    public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo) {
+    public OrderBo queryById(OrderBo orderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
             throw new ManagerException("invalid parameter");
         }

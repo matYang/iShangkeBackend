@@ -105,6 +105,7 @@ public class PartnerManagerImpl implements PartnerManager {
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
+        
         if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("Partner update must specify id");
         }
