@@ -1,6 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
+import com.ishangke.edunav.dataaccess.model.gen.BookingEntity;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.OrderManager;
@@ -34,6 +36,9 @@ import com.ishangke.edunav.manager.converter.OrderHistoryConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
+import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.manager.exception.notfound.BookingNotFoundException;
+import com.ishangke.edunav.manager.exception.notfound.OrderNotFoundException;
 
 @Component
 public class OrderManagerImpl implements OrderManager {
@@ -61,7 +66,12 @@ public class OrderManagerImpl implements OrderManager {
         BookingEntityExt bookingEntity = bookingMapper.getById(orderEntity.getBookingId());
         if (bookingEntity == null || bookingEntity.getStatus() != BookingEnums.Status.ONLINEPENDINGPAYMENT.code) {
             LOGGER.error(String.format("[create order] cannot create order for booking current status [%d]", bookingEntity == null ? null : bookingEntity.getStatus()));
-            throw new ManagerException("cannot create order");
+            throw new ManagerException("cannot create order for booking current status [%d]", bookingEntity == null ? null : bookingEntity.getStatus());
+        }
+
+        // only normal user can call this method
+        if (IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
+            throw new AuthenticationException("User creating someone else's booking's order");
         }
 
         int result = 0;
@@ -98,6 +108,12 @@ public class OrderManagerImpl implements OrderManager {
         OrderEntityExt orderEntity = OrderConverter.fromBo(orderBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call acceptOrderByAdmin at " + new Date(), userBo.getName()));
+        } else {
+            throw new AuthenticationException("Only Admin can accept orders");
+        }
+
         if (orderEntity.getStatus() == OrderEnums.Status.NAIVE.code) {
             orderEntity.setStatus(OrderEnums.Status.ACCEPTED.code);
         } else {
@@ -128,8 +144,12 @@ public class OrderManagerImpl implements OrderManager {
             orderEntity.setBookingId(bookingEntity.getId());
         }
 
-        if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
-            throw new ManagerException("此预定不属于该用户");
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call createOrder at " + new Date(), userBo.getName()));
+        } else {
+            if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
+                throw new ManagerException("此预定不属于该用户");
+            }
         }
 
         List<OrderEntityExt> results = null;
@@ -160,8 +180,12 @@ public class OrderManagerImpl implements OrderManager {
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
-        if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
-            throw new ManagerException("此预定不属于该用户");
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call createOrder at " + new Date(), userBo.getName()));
+        } else {
+            if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
+                throw new ManagerException("此预定不属于该用户");
+            }
         }
 
         List<OrderHistoryEntityExt> results = null;
@@ -188,11 +212,30 @@ public class OrderManagerImpl implements OrderManager {
     @Override
     public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
-            throw new ManagerException("cannot query order current user");
+            throw new ManagerException("invalid parameter");
         }
         OrderEntityExt order = null;
         try {
             order = orderMapper.getById(orderBo.getId());
+            if (order == null || IdChecker.isNull(order.getId())) {
+                throw new OrderNotFoundException("Order is not found");
+            }
+
+            if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+                LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call queryOrderById at " + new Date(), userBo.getName()));
+            } else {
+                if (IdChecker.isNull(order.getBookingId())) {
+                    throw new ManagerException("Order with id: " + order.getId() + " has invalid booking id: " + order.getBookingId());
+                }
+                BookingEntity booking = bookingMapper.getById(order.getBookingId());
+                if (booking == null || IdChecker.isNull(booking.getId())) {
+                    throw new BookingNotFoundException("Order with id: " + order.getId() + " can not find corresponding booking with id: " + order.getBookingId());
+                }
+                if (IdChecker.notEqual(booking.getUserId(), userBo.getId())) {
+                    throw new AuthenticationException("User querying someone else's booking's order by id");
+                }
+            }
+
         } catch (Exception e) {
             throw new ManagerException("query order failed");
         }
