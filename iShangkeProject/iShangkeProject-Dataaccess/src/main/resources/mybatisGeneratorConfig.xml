@@ -282,6 +282,12 @@
         jdbcType="TIMESTAMP" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
+    <table tableName="MAJOR" domainObjectName="MajorEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
+        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
   </context>
 
 </generatorConfiguration>

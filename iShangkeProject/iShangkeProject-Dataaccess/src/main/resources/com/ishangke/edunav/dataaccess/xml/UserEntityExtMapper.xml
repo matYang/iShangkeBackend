@@ -25,6 +25,7 @@
     <result column="USERS_AVATARURL" property="avatarUrl" jdbcType="VARCHAR" />
     <result column="USERS_SCHOOLID" property="schoolId" jdbcType="INTEGER" />
     <result column="USERS_CAREERID" property="careerId" jdbcType="INTEGER" />
+    <result column="USERS_MAJORID" property="majorId" jdbcType="INTEGER" />
     <result column="USERS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="USERS_COUPONTOTAL" property="couponTotal" jdbcType="DOUBLE" />
     <collection property="account" ofType="AccountEntityExt">
@@ -78,6 +79,7 @@
     USERS.MAJOR USERS_MAJOR,
     USERS.AVATAR_URL USERS_AVATARURL,
     USERS.CAREER_ID USERS_CAREERID,
+    USERS.MAJOR_ID USERS_MAJORID,
     USERS.SCHOOL_ID
     USERS_SCHOOLID,
     USERS.LOCATION_ID USERS_LOCATIONID
@@ -163,10 +165,13 @@
         SCHOOL_ID,
       </if>
       <if test="locationId != null and locationId != 0">
-        CAREER_ID,
+        LOCATION_ID,
       </if>
       <if test="careerId != null and careerId != 0">
-        LOCATION_ID,
+        CAREER_ID,
+      </if>
+      <if test="majorId != null and majorId != 0">
+        MAJOR_ID,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -229,6 +234,9 @@
       </if>
       <if test="locationId != null and locationId != 0">
         #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="majorId != null and majorId != 0">
+        #{majorId,jdbcType=INTEGER},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -305,6 +313,9 @@
       <if test="careerId != null and careerId != 0">
         CAREER_ID = #{careerId,jdbcType=INTEGER},
       </if>
+      <if test="majorId != null and majorId != 0">
+        MAJOR_ID = #{majorId,jdbcType=INTEGER},
+      </if>
       <if test="schoolId != null and schoolId != 0">
         SCHOOL_ID = #{schoolId,jdbcType=INTEGER},
       </if>
@@ -380,13 +391,25 @@
         </if>
       </if>
 
-      <if test="entity.careerId != null and entity.careerId != 0">
+      <if test="entity.majorId != null and entity.careerId != 0">
         AND USERS.CAREER_ID = #{entity.careerId,jdbcType=INTEGER}
       </if>
       <if test="entity.careerId == null or entity.careerId == 0">
         <if test="entity.careerIdSet != null and entity.careerIdSet.size() > 0">
           AND USERS.CAREER_ID IN
           <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.majorId != null and entity.majorId != 0">
+        AND USERS.MAJOR_ID = #{entity.majorId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.majorId == null or entity.majorId == 0">
+        <if test="entity.majorIdSet != null and entity.majorIdSet.size() > 0">
+          AND USERS.MAJOR_ID IN
+          <foreach collection="entity.majorIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -552,6 +575,18 @@
         <if test="entity.careerIdSet != null and entity.careerIdSet.size() > 0">
           AND USERS.CAREER_ID IN
           <foreach collection="entity.careerIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.majorId != null and entity.majorId != 0">
+        AND USERS.MAJOR_ID = #{entity.majorId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.majorId == null or entity.majorId == 0">
+        <if test="entity.majorIdSet != null and entity.majorIdSet.size() > 0">
+          AND USERS.MAJOR_ID IN
+          <foreach collection="entity.majorIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>

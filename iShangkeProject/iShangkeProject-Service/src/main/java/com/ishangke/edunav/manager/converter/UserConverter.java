@@ -67,8 +67,14 @@ public class UserConverter {
         if (e.getSchoolId() != null) {
             userBo.setSchoolId(e.getSchoolId());
         }
+        if (e.getMajorId() != null) {
+            userBo.setMajorId(e.getMajorId());
+        }
         if (e.getSchoolIdSet() != null) {
             userBo.setSchoolIdSet(e.getSchoolIdSet());
+        }
+        if (e.getMajorIdSet() != null) {
+            userBo.setMajorIdSet(e.getMajorIdSet());
         }
         userBo.setBirthday(e.getBirthday() == null ? Constant.DEFAULTNULL : e.getBirthday().getTimeInMillis());
         userBo.setBirthdayEnd(e.getBirthdayEnd() == null ? Constant.DEFAULTNULL : e.getBirthdayEnd().getTimeInMillis());
@@ -147,6 +153,8 @@ public class UserConverter {
         userEntityExt.setWechat(bo.getWechat());
         userEntityExt.setCareerId(bo.getCareerId());
         userEntityExt.setCareerIdSet(bo.getCareerIdSet());
+        userEntityExt.setMajorId(bo.getMajorId());
+        userEntityExt.setMajorIdSet(bo.getMajorIdSet());
         userEntityExt.setSchoolId(bo.getSchoolId());
         userEntityExt.setSchoolIdSet(bo.getSchoolIdSet());
         userEntityExt.setLocationId(bo.getLocationId());

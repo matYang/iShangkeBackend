@@ -69,6 +69,12 @@ public class UserConverter {
         if (vo.getSchoolIdSet() != null) {
             userBo.setSchoolIdSet(vo.getSchoolIdSet());
         }
+        if (vo.getMajorId() != null) {
+            userBo.setMajorId(vo.getMajorId());
+        }
+        if (vo.getMajorIdSet() != null) {
+            userBo.setMajorIdSet(vo.getMajorIdSet());
+        }
         if (vo.getBirthday() != null) {
             userBo.setBirthday(vo.getBirthday());
         } else {
@@ -176,6 +182,8 @@ public class UserConverter {
         userVo.setCareerIdSet(bo.getCareerIdSet());
         userVo.setSchoolId(bo.getSchoolId());
         userVo.setSchoolIdSet(bo.getSchoolIdSet());
+        userVo.setMajorId(bo.getMajorId());
+        userVo.setMajorIdSet(bo.getMajorIdSet());
         userVo.setLocationId(bo.getLocationId());
         userVo.setLocationIdSet(bo.getLocationIdSet());
         if (Constant.DEFAULTNULL != bo.getCouponTotal()) {

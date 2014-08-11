@@ -43,6 +43,8 @@ struct UserBo {
     36: account.AccountBo account
     37: credit.CreditBo credit
     38: double couponTotal
+    39: i32 majorId
+    40: set<i32> majorIdSet
     }
     
 /**
