@@ -13,6 +13,8 @@ import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.CirclePageViewBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.LocationPageViewBo;
+import com.ishangke.edunav.commoncontract.model.MajorBo;
+import com.ishangke.edunav.commoncontract.model.MajorPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
 import com.ishangke.edunav.commoncontract.model.SchoolPageViewBo;
@@ -88,6 +90,23 @@ public class GeneralFacade {
         try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.querySchool(schoolBo, paginationBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public MajorPageViewBo queryMajor(MajorBo majorBo, PaginationBo paginationBo, String permissionTag) {
+        MajorPageViewBo result = null;
+        
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.General.getName());
+
+        try (ThriftClientFactory<GeneralService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryMajor(majorBo, paginationBo, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
             throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());

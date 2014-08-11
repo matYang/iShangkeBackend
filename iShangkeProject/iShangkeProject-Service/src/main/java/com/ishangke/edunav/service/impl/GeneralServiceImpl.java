@@ -17,6 +17,8 @@ import com.ishangke.edunav.commoncontract.model.CircleBo;
 import com.ishangke.edunav.commoncontract.model.CirclePageViewBo;
 import com.ishangke.edunav.commoncontract.model.LocationBo;
 import com.ishangke.edunav.commoncontract.model.LocationPageViewBo;
+import com.ishangke.edunav.commoncontract.model.MajorBo;
+import com.ishangke.edunav.commoncontract.model.MajorPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.SchoolBo;
 import com.ishangke.edunav.commoncontract.model.SchoolPageViewBo;
@@ -26,6 +28,7 @@ import com.ishangke.edunav.manager.CareerManager;
 import com.ishangke.edunav.manager.CategoryManager;
 import com.ishangke.edunav.manager.CircleManager;
 import com.ishangke.edunav.manager.LocationManager;
+import com.ishangke.edunav.manager.MajorManager;
 import com.ishangke.edunav.manager.SchoolManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
@@ -46,6 +49,8 @@ public class GeneralServiceImpl implements GeneralService.Iface {
     private CareerManager careerManager;
     @Autowired
     private AuthManager authManager;
+    @Autowired
+    private MajorManager majorManager;
 
     /**********************************************************
      * 
@@ -141,6 +146,31 @@ public class GeneralServiceImpl implements GeneralService.Iface {
             throw exception;
         }
     }
+    
+    
+    /**********************************************************
+     * 
+     * Major
+     * 
+     **********************************************************/
+    @Override
+    public MajorPageViewBo queryMajor(MajorBo majorBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            List<MajorBo> data = majorManager.query(majorBo, paginationBo);
+            MajorPageViewBo pageView = new MajorPageViewBo();
+            pageView.setData(data);
+
+            return pageView;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.MAJOR_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.MAJOR_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
 
     /**********************************************************
      * 
@@ -165,5 +195,6 @@ public class GeneralServiceImpl implements GeneralService.Iface {
             throw exception;
         }
     }
+
 
 }
