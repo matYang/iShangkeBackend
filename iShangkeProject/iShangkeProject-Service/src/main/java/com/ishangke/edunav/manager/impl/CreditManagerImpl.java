@@ -79,7 +79,7 @@ public class CreditManagerImpl implements CreditManager {
         } else {
             // otherwise user can only modify their own, thus making an UserId
             // necessary
-            if (creditEntity == null || IdChecker.notEqual(creditEntity.getId(), userEntity.getId())) {
+            if (IdChecker.notEqual(previousCredit.getId(), userEntity.getId())) {
                 throw new AuthenticationException("User modifying someone else's credit");
             }
         }
