@@ -27,262 +27,36 @@ public class ActivityManagerImpl implements ActivityManager {
     @Override
     public ActivityBo createActivity(ActivityBo activityBo, CourseBo courseBo, PartnerBo partnerBo, UserBo userBo) {
         return null;
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("Activity Create Failed: ActivityBo is null");
-//        }
-//        if (courseBo == null) {
-//            throw new ManagerException("Activity Create Failed: CourseBo is null");
-//        }
-//        if (partnerBo == null) {
-//            throw new ManagerException("Activity Create Failed: PartnerBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("Activity Create Failed: UserBo is null");
-//        }
-//
-//        // Convert
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//        CourseEntityExt courseEntity = CourseConverter.fromBo(courseBo);
-//        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-//
-//        try {
-//            // Set properties
-//            activityEntity.setCourseId(courseEntity.getId());
-//            activityEntity.setPartnerId(partnerEntity.getId());
-//
-//            // Create Activity
-//            int result = 0;
-//            result = activityMapper.add(activityEntity);
-//            if (result > 0) {
-//                return ActivityConverter.toBo(activityEntity);
-//            } else {
-//                throw new ManagerException("Activity Create Failed");
-//            }
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Create Failed", t);
-//        }
     }
 
     @Override
     public ActivityBo submitActivity(ActivityBo activityBo, UserBo userBo) {
         return null;
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("Activity Submit Failed: ActivityBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("Activity Submit Failed: UserBo is null");
-//        }
-//
-//        // Convert
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//
-//        try {
-//            // TODO status
-//            int status = 0;
-//            activityEntity.setStatus(status);
-//            activityMapper.update(activityEntity);
-//            return ActivityConverter.toBo(activityEntity);
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Submit Failed", t);
-//        }
-
     }
 
     @Override
     public ActivityBo approveActivity(ActivityBo activityBo, UserBo userBo) {
         return null;
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("Activity Approve Failed: ActivityBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("Activity Approve Failed UserBo is null");
-//        }
-//
-//        // Convert
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//
-//        try {
-//            // TODO status
-//            int status = 0;
-//            activityEntity.setStatus(status);
-//            activityMapper.update(activityEntity);
-//            return ActivityConverter.toBo(activityEntity);
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Approve Failed", t);
-//        }
     }
 
     @Override
     public ActivityBo rejectActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) {
         return null;
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("ActivityBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("Activity Reject Failed: UserBo is null");
-//        }
-//        if (partnerBo == null) {
-//            throw new ManagerException("Activity Reject Failed: Partner is null");
-//        }
-//
-//        // Convert
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-//
-//        // Check Ids
-//        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
-//            throw new ManagerException("Activity Reject Failed: 合作商id为null或0");
-//        }
-//        if (activityEntity.getPartnerId() == null || activityEntity.getPartnerId() == 0) {
-//            throw new ManagerException("Activity Reject Failed: 活动的partnerId为null或0");
-//        }
-//        // Check whether the activity belongs to the partner
-//        if (activityEntity.getPartnerId() != partnerEntity.getId()) {
-//            throw new ManagerException("Activity Reject Failed: 该活动不属于此合作商");
-//        }
-//
-//        try {
-//            // TODO status
-//            int status = 0;
-//            activityEntity.setStatus(status);
-//            activityMapper.update(activityEntity);
-//            return ActivityConverter.toBo(activityEntity);
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Reject Failed", t);
-//        }
     }
 
     @Override
     public ActivityBo cancelActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) {
         return null;
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("ActivityBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("UserBo is null");
-//        }
-//        if (partnerBo == null) {
-//            throw new ManagerException("Partner is null");
-//        }
-//
-//        // Convert
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-//
-//        // Check Ids
-//        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
-//            throw new ManagerException("Activity Cancel Failed: 合作商id为null或0");
-//        }
-//        if (activityEntity.getPartnerId() == null || activityEntity.getPartnerId() == 0) {
-//            throw new ManagerException("Activity Cancel Failed: 活动的partnerId为null或0");
-//        }
-//        // Check whether the activity belongs to the partner
-//        if (activityEntity.getPartnerId() != partnerEntity.getId()) {
-//            throw new ManagerException("Activity Cancel Failed: 该活动不属于此合作商");
-//        }
-//
-//        try {
-//            // TODO status
-//            int status = 0;
-//            activityEntity.setStatus(status);
-//            activityMapper.update(activityEntity);
-//            return ActivityConverter.toBo(activityEntity);
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Cancel Failed", t);
-//        }
     }
 
     @Override
     public ActivityBo deleteActivity(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo) {
         return null;
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("ActivityBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("UserBo is null");
-//        }
-//        if (partnerBo == null) {
-//            throw new ManagerException("Partner is null");
-//        }
-//
-//        // Convert
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-//
-//        // Check Ids
-//        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
-//            throw new ManagerException("Activity Delete Failed: 合作商id为null或0");
-//        }
-//        if (activityEntity.getPartnerId() == null || activityEntity.getPartnerId() == 0) {
-//            throw new ManagerException("Activity Delete Failed: 活动的partnerId为null或0");
-//        }
-//        // Check whether the activity belongs to the partner
-//        if (activityEntity.getPartnerId() != partnerEntity.getId()) {
-//            throw new ManagerException("Activity Delete Failed: 该活动不属于此合作商");
-//        }
-//
-//        try {
-//            activityMapper.deleteById(activityEntity.getId());
-//            return ActivityConverter.toBo(activityEntity);
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Delete Failed", t);
-//        }
     }
 
     @Override
     public List<ActivityBo> query(ActivityBo activityBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
         return null;
-//        PaginationEntity pageEntity = null;
-//
-//        // Check Null
-//        if (activityBo == null) {
-//            throw new ManagerException("ActivityBo is null");
-//        }
-//        if (userBo == null) {
-//            throw new ManagerException("UserBo is null");
-//        }
-//        if (partnerBo == null) {
-//            throw new ManagerException("Partner is null");
-//        }
-//        if (paginationBo != null) {
-//            pageEntity = PaginationConverter.fromBo(paginationBo);
-//        }
-//
-//        // Convert
-//        UserEntityExt userEntity = UserConverter.fromBo(userBo);
-//        ActivityEntityExt activityEntity = ActivityConverter.fromBo(activityBo);
-//        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-//        List<ActivityEntityExt> activityList = null;
-//        List<ActivityBo> resultList = null;
-//
-//        // Check Ids
-//        if (partnerEntity.getId() == null || partnerEntity.getId() == 0) {
-//            throw new ManagerException("Activity Query Failed: 合作商id为null或0");
-//        }
-//
-//        try {
-//            activityList = activityMapper.list(activityEntity, pageEntity);
-//            for (ActivityEntityExt activityPo : activityList) {
-//                if (activityPo.getPartnerId() != partnerEntity.getId()) {
-//                    throw new ManagerException("Activity Query Failed: 该活动不属于此合作商");
-//                }
-//                resultList.add(ActivityConverter.toBo(activityPo));
-//            }
-//            return resultList;
-//        } catch (Throwable t) {
-//            throw new ManagerException("Activity Query Failed", t);
-//        }
     }
 
     @Override

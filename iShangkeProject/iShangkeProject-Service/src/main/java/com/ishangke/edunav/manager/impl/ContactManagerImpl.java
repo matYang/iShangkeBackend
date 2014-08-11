@@ -53,8 +53,7 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at " + new Date(), userBo.getName()));
         } else {
             if (contactEntity == null || IdChecker.notEqual(contactEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User creating someone else's contact");
@@ -88,18 +87,24 @@ public class ContactManagerImpl implements ContactManager {
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        
+        if (IdChecker.isNull(contactEntity.getId())) {
+            throw new ManagerException("Contact update must specify id");
+        }
+        ContactEntityExt previousContact = contactMapper.getById(contactEntity.getId());
+        if (previousContact == null) {
+            throw new ContactNotFoundException("Contact to update is not found with id:" + contactEntity.getId());
+        }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at " + new Date(), userBo.getName()));
         } else {
-            if (contactEntity == null || IdChecker.notEqual(contactEntity.getUserId(), userEntity.getId())) {
+            if (IdChecker.notEqual(previousContact.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User updating someone else's contact");
             }
         }
 
-        if (IdChecker.isNull(contactEntity.getId())) {
-            throw new ManagerException("Contact update must specify id");
-        }
+        
         contactEntity.setUserId(null);
         contactEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         contactEntity.setCreateTime(null);
@@ -123,6 +128,7 @@ public class ContactManagerImpl implements ContactManager {
         // Convert
         ContactEntityExt contactEntity = ContactConverter.fromBo(contactBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        
         if (IdChecker.isNull(contactEntity.getId())) {
             throw new ManagerException("Contact deletion must specify id");
         }
@@ -130,7 +136,7 @@ public class ContactManagerImpl implements ContactManager {
         if (previousContact == null) {
             throw new ContactNotFoundException("Contact to delete is not found with id:" + contactEntity.getId());
         }
-        
+
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at " + new Date(), userBo.getName()));
         } else {
@@ -160,11 +166,9 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call query at " + new Date(),
-                    userBo.getName()));
+            LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         } else {
-            // otherwise user can only query their own, thus making an UserId
-            // necessary
+            // otherwise user can only query their own, thus making an UserId necessary
             if (contactEntity == null || IdChecker.notEqual(contactEntity.getUserId(), userEntity.getId())) {
                 throw new AuthenticationException("User querying someone else's contact");
             }

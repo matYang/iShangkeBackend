@@ -56,8 +56,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin  || admin [%s] call createClassPhoto at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin  || admin [%s] call createClassPhoto at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), classPhotoBo.getPartnerId())) {
@@ -101,6 +100,18 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         if (classPhotoBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
+        
+        // Convert
+        ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
+        UserEntity userEntity = UserConverter.fromBo(userBo);
+
+        if (IdChecker.isNull(classPhotoEntity.getId())) {
+            throw new ManagerException("ClassPhoto update must specify id");
+        }
+        ClassPhotoEntityExt previousClassPhoto = classPhotoMapper.getById(classPhotoEntity.getId());
+        if (previousClassPhoto == null) {
+            throw new ClassPhotoNotFoundException("ClassPhoto to update is not found with id:" + classPhotoEntity.getId());
+        }
 
         // 机构管理员只能给本机构上传图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
@@ -110,28 +121,19 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call updateClassPhoto at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call updateClassPhoto at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
-                if (IdChecker.isEqual(g.getPartnerId(), classPhotoBo.getPartnerId())) {
+                if (IdChecker.isEqual(g.getPartnerId(), previousClassPhoto.getPartnerId())) {
                     isSameGroup = true;
                     break;
                 }
             }
         }
-
         if (isSameGroup == false) {
             throw new ManagerException("Invalid user");
         }
 
-        // Convert
-        ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
-
-        if (IdChecker.isNull(classPhotoEntity.getId())) {
-            throw new ManagerException("ClassPhoto update must specify id");
-        }
         classPhotoEntity.setPartnerId(null);
         classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         classPhotoEntity.setCreateTime(null);
@@ -170,8 +172,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call deleteClassPhoto at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), previousClassPhoto.getPartnerId())) {
@@ -208,8 +209,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(),
-                    userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         } else {
             if (classPhotoBo == null) {
                 throw new ManagerException("ClassPhotoBo null for non-admin user at query");
@@ -274,8 +274,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     public List<ClassPhotoBo> listByCourseTemplateId(int courseTemplateId) {
         try {
             List<ClassPhotoBo> resultList = new ArrayList<ClassPhotoBo>();
-            List<ClassPhotoEntityExt> classPhotoList = classPhotoMapper
-                    .listClassPhotoByCourseTempleteId(courseTemplateId);
+            List<ClassPhotoEntityExt> classPhotoList = classPhotoMapper.listClassPhotoByCourseTempleteId(courseTemplateId);
             if (classPhotoList == null) {
                 return resultList;
             }
@@ -302,8 +301,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             isSameGroup = true;
-            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call listByPartnerId at "
-                    + new Date(), userBo.getName()));
+            LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call listByPartnerId at " + new Date(), userBo.getName()));
         } else {
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), partnerId)) {
