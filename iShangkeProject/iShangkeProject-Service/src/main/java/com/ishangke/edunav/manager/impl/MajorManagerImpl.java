@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ishangke.edunav.commoncontract.model.MajorBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -15,6 +16,7 @@ import com.ishangke.edunav.manager.converter.MajorConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
+@Component
 public class MajorManagerImpl implements MajorManager {
 
     @Autowired
