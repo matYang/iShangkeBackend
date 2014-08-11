@@ -250,7 +250,8 @@ public class BookingConverter {
         bookingVo.setNoRefundDateStart(bo.getNoRefundDateStart());
         bookingVo.setNote(bo.getNote());
         bookingVo.setPhone(bo.getPhone());
-        bookingVo.setReference(bo.getReference());
+        //用来生成更漂亮的订单号
+        bookingVo.setReference(Constant.ORDERPREFIX + bo.getId());
         bookingVo.setScheduledTime(bo.getScheduledTime());
         bookingVo.setScheduledTimeEnd(bo.getScheduledTimeEnd());
         bookingVo.setScheduledTimeStart(bo.getScheduledTimeStart());
