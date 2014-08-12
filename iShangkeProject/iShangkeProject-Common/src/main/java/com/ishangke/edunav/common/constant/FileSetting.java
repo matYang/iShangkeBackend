@@ -27,6 +27,6 @@ public final class FileSetting {
     }
 
     public static final String assembleName(String prefix, int partnerId, int initiatorId, String checkSum) {
-        return prefix + SEPERATOR + "p" + partnerId + SEPERATOR + "i" + initiatorId + SEPERATOR + checkSum + SEPERATOR + DateUtility.getCurTime();
+        return prefix + "p" + partnerId + "i" + initiatorId + "t" + DateUtility.getCurTime() + SEPERATOR + checkSum;
     }
 }
