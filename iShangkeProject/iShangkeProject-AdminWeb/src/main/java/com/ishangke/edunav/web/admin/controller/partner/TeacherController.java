@@ -2,6 +2,7 @@ package com.ishangke.edunav.web.admin.controller.partner;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,8 +52,7 @@ public class TeacherController extends AbstractController {
     UserFacade userFacade;
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse queryTeacher(TeacherVo teacherVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryTeacher(TeacherVo teacherVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -60,7 +61,7 @@ public class TeacherController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -71,8 +72,7 @@ public class TeacherController extends AbstractController {
         TeacherPageViewVo pageViewVo = null;
 
         try {
-            pageViewBo = partnerFacade.queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo),
-                    permissionTag);
+            pageViewBo = partnerFacade.queryTeacher(TeacherConverter.fromModel(teacherVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -83,9 +83,7 @@ public class TeacherController extends AbstractController {
 
     // return the TeacherVo with img url in it
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody
-    JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
-            HttpServletResponse resp) {
+    public @ResponseBody JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
 
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -109,25 +107,45 @@ public class TeacherController extends AbstractController {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                
+
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "." + FileSetting.IMGFILEFORMAT);
                 is = file.getInputStream();
                 dis = new DigestInputStream(is, md);
-                
+
                 // using Scalr to resize the image
                 BufferedImage bufferedImage = ImageIO.read(dis);
-                
-                
+                bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 400, 400, Scalr.OP_ANTIALIAS);
                 ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
 
-                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunTeacherImgBucket);
+                // calculate the MD5 checksum and use it as part of the file
+                // name to make it unique
+                byte[] digest = md.digest();
+                String checkSumString = FileSetting.getCheckSumString(digest);
+                String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.TEACHER, partnerId, curId, checkSumString);
+
+                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, fullQualifiedName, Config.AliyunTeacherImgBucket);
+                teacherVo.setPartnerId(partnerId);
                 teacherVo.setImgUrl(imgUrl);
 
             } catch (Exception e) {
-
+                e.printStackTrace();
                 return this.handleWebException(new ControllerException("TeacherPhoto 上传失败"), resp);
             } finally {
+                if (dis != null) {
+                    try {
+                        dis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if (serverFile != null) {
                     serverFile.delete();
                 }
@@ -140,8 +158,7 @@ public class TeacherController extends AbstractController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    JsonResponse create(@RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse create(@RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
         TeacherVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -152,7 +169,7 @@ public class TeacherController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -172,8 +189,7 @@ public class TeacherController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    JsonResponse update(@PathVariable("id") int id, @RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody TeacherVo teacherVo, HttpServletRequest req, HttpServletResponse resp) {
         TeacherVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -184,7 +200,7 @@ public class TeacherController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -204,8 +220,7 @@ public class TeacherController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public @ResponseBody
-    JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -214,7 +229,7 @@ public class TeacherController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
