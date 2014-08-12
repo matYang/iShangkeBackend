@@ -301,7 +301,7 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser) {
+    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser) {
         if (targetUser == null || partner == null || currentUser == null) {
             throw new ManagerException("Invalid parameter");
         }
@@ -343,19 +343,13 @@ public class UserManagerImpl implements UserManager {
         UserBo response = null;
         try {
             GroupEntityExt group = new GroupEntityExt();
-            group.setName(partner.getWholeName() + Constant.GROUPPADMINSUFIX);
-            group.setRoleId(Constant.ROLEPARTNERADMINID);
+            group.setRoleId(roleId);
             group.setPartnerId(partner.getId());
-            group.setLastModifyTime(DateUtility.getCurTimeInstance());
-            group.setCreateTime(DateUtility.getCurTimeInstance());
-            group.setEnabled(0);
-            group.setDeleted(0);
-            int result = groupMapper.add(group);
-            if (result <= 0) {
-                throw new ManagerException("CreatePartnerUser::addGroup failed");
+            List<GroupEntityExt> listGroups = groupMapper.list(group, null);
+            if (listGroups == null || listGroups.size() <= 0) {
+                throw new ManagerException("cannot find group with role id: " + roleId + " for partner " + partner.getId());
             }
-
-            response = initializeNormalUser(targetUser, group.getId(), targetUser.getReference(), false);
+            response = initializeNormalUser(targetUser, listGroups.get(0).getId(), targetUser.getReference(), false);
         } catch (Throwable t) {
             throw new ManagerException("CreatePartnerUser failed", t);
         }

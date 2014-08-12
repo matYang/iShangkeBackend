@@ -121,7 +121,7 @@ public interface UserManager {
      */
     UserBo createUser(UserBo targetUser,  UserBo currentUser);
     
-    UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser);
+    UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser);
 
     /**
      * 本方法为ishangke管理员删除用户<br>

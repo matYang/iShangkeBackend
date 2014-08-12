@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -193,8 +195,9 @@ public class UserController extends AbstractController {
         return responseVo;
     }
 
+    //此入口除了可以创建普通用户之外， 还可以创建partner 管理员 之类的角色
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse createUser(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse createUser(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp, @RequestParam(value = "roleId", defaultValue = "") String roleId) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -208,6 +211,18 @@ public class UserController extends AbstractController {
         }
 
         UserBo responseUser = null;
+        if (userVo.getPartnerId() > 0 && !"".equals(roleId)) {
+            int role = Integer.valueOf(roleId);
+            if (role > 0) {
+                try {
+                    PartnerBo partner = new PartnerBo();
+                    partner.setId(userVo.getPartnerId());
+                    responseUser = userFacade.createPartnerUser(UserConverter.fromModel(userVo), partner, role, curUser, permissionTag);
+                } catch (ControllerException c) {
+                    return this.handleWebException(c, resp);
+                } 
+            }
+        }
         try {
             responseUser = userFacade.createUser(UserConverter.fromModel(userVo), curUser, permissionTag);
         } catch (ControllerException c) {

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
@@ -50,7 +51,7 @@ public class PartnerManagerImpl implements PartnerManager {
     private AddressManager addressManager;
 
     @Override
-    //public data, does not check permission
+    // public data, does not check permission
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
         if (userBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -77,7 +78,7 @@ public class PartnerManagerImpl implements PartnerManager {
     }
 
     @Override
-    //public data, does not check permission
+    // public data, does not check permission
     public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null) {
             throw new ManagerException("Invalid parameter");
@@ -101,11 +102,11 @@ public class PartnerManagerImpl implements PartnerManager {
         if (partnerBo == null || userBo == null) {
             throw new ManagerException("Invalid parameter");
         }
-        
+
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
-        
+
         if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("Partner update must specify id");
         }
@@ -191,7 +192,26 @@ public class PartnerManagerImpl implements PartnerManager {
             LOGGER.warn(t.getMessage(), t);
             throw new ManagerException("Partner creation failed for user: " + userEntity.getId(), t);
         }
-
+        // 创建关于此partner的两个group 分别对应 partner admin 和 partner wenyuan
+        GroupEntityExt group = new GroupEntityExt();
+        group.setPartnerId(partnerEntity.getId());
+        group.setCreateTime(DateUtility.getCurTimeInstance());
+        group.setLastModifyTime(DateUtility.getCurTimeInstance());
+        //插两种不同的group
+        group.setName((partnerEntity.getWholeName() != null ? partnerEntity.getWholeName() : "") + Constant.ROLEPARTNERADMIN);
+        group.setRoleId(Constant.ROLEPARTNERADMINID);
+        int i = 0;
+        i = groupMapper.add(group);
+        if (i <= 0) {
+            throw new ManagerException("create group " + Constant.ROLEPARTNERADMIN + " for partner " + partnerEntity.getId() + " failed");
+        }
+        group.setName((partnerEntity.getInstName() != null ? partnerEntity.getInstName() : "") + Constant.ROLEPARTNERWENYUAN);
+        group.setRoleId(Constant.ROLEPARTNERWENYUANID);
+        int j = 0;
+        j = groupMapper.add(group);
+        if (j <= 0) {
+            throw new ManagerException("create group " + Constant.ROLEPARTNERADMIN + " for partner " + partnerEntity.getId() + " failed");
+        }
         return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
     }
 
