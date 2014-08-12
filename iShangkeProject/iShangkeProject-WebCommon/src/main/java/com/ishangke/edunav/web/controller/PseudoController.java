@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 
 import com.ishangke.edunav.common.constant.SessionSetting;
+import com.ishangke.edunav.common.crypto.SessionCrypto;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
-import com.ishangke.edunav.manager.crypto.SessionCrypto;
 import com.ishangke.edunav.web.common.WebConstants;
 
 @Controller

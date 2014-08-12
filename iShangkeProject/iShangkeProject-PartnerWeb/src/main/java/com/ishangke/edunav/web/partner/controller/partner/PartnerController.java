@@ -2,22 +2,16 @@ package com.ishangke.edunav.web.partner.controller.partner;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
-
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ishangke.edunav.common.Config;
-import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.common.constant.FileSetting;
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.common.utilities.file.AliyunMain;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PartnerPageViewBo;
@@ -47,7 +42,6 @@ import com.ishangke.edunav.web.model.PartnerVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.PartnerPageViewVo;
 import com.ishangke.edunav.web.partner.controller.AbstractController;
-import com.ishangke.edunav.web.reflection.ReflectionService;
 import com.ishangke.edunav.web.response.JsonResponse;
 
 @Controller
@@ -60,101 +54,6 @@ public class PartnerController extends AbstractController {
     @Autowired
     PartnerFacade partnerFacade;
 
-    @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
-        // Need a User
-        int userId = 1;
-        UserVo user = new UserVo();
-        user.setId(userId);
-        UserBo userBo = UserConverter.fromModel(user);
-        String permissionTag = "GET/api/v2/course";
-
-        JsonResponse result = new JsonResponse();
-        if (file.isEmpty()) {
-            return this.handleWebException(new ControllerException("上传文件为空"), resp);
-        }
-
-        File dir = new File("tmp");
-
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-
-        File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".xls");
-
-        try {
-            byte[] contentInBytes = file.getBytes();
-            FileOutputStream fos = new FileOutputStream(serverFile);
-            fos.write(contentInBytes);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            return this.handleWebException(new ControllerException("读取或写入本地文件出错"), resp);
-        } finally {
-            serverFile.delete();
-        }
-
-        Workbook book;
-        Sheet sheet;
-        FileInputStream fis;
-        try {
-            fis = new FileInputStream(new File(serverFile.getAbsolutePath()));
-            book = Workbook.getWorkbook(fis);
-            sheet = book.getSheet(0);
-        } catch (BiffException | IOException e) {
-            return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
-        } finally {
-            serverFile.delete();
-        }
-
-        int row = 0;
-        int col = 0;
-        int totalRow = sheet.getRows();
-        int totalCol = sheet.getColumns();
-        int count = 0;
-        Map<Integer, String> fmap = new HashMap<Integer, String>();
-        Map<String, String> kvmap = new HashMap<String, String>();
-        ReflectionService rs = null;
-        Cell c = sheet.getCell(col, row);
-        if (c != null && !c.equals("")) {
-            PartnerBo partner = new PartnerBo();
-            for (row = 0; row < totalRow; row++) {
-                for (col = 0; col < totalCol; col++) {
-                    c = sheet.getCell(col, row);
-                    if (row == 0) {
-                        String field = c.getContents();
-                        kvmap.put(field, null);
-                        fmap.put(col, field);
-                    } else {
-                        String value = c.getContents();
-                        kvmap.put(fmap.get(col), value);
-                    }
-                }
-                if (row == 0) {
-                    rs = new ReflectionService(partner);
-                } else {
-                    try {
-                        partner = (PartnerBo) rs.getBoFromMap(kvmap);
-                        partner.setLastModifyTime(DateUtility.getCurTime());
-                        partner.setCreateTime(DateUtility.getCurTime());
-                        partnerFacade.createPartner(partner, userBo, permissionTag);
-                        count++;
-                    } catch (IllegalArgumentException | IllegalAccessException | ParseException e) {
-                        return this.handleWebException(new ControllerException("导入出错"), resp);
-                    } finally {
-                        serverFile.delete();
-                    }
-                }
-            }
-        }
-
-        if (serverFile.exists()) {
-            serverFile.delete();
-        }
-        result.setMessage("successfully imported " + count + " partners");
-        return result;
-    }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
@@ -244,9 +143,9 @@ public class PartnerController extends AbstractController {
         }
 
         int sessionPartnerId = userFacade.getPartnerIdByUserId(curId);
-//        if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
-//            throw new ControllerException("不可更改其他合作商的信息");
-//        }
+        if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
+            throw new ControllerException("不可更改其他合作商的信息");
+        }
         
         partnerVo.setId(sessionPartnerId);
         PartnerBo targetPartner = PartnerConverter.fromModel(partnerVo);
@@ -276,15 +175,17 @@ public class PartnerController extends AbstractController {
          }
          
          int sessionPartnerId = userFacade.getPartnerIdByUserId(curId);
-//         if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
-//             throw new ControllerException("不可更改其他合作商的信息");
-//         }
+         if (IdChecker.notEqual(partnerId, sessionPartnerId)) {
+             throw new ControllerException("不可更改其他合作商的Logo");
+         }
 
         
         PartnerVo partnerVo = new PartnerVo();
 
         if (!file.isEmpty()) {
             File serverFile = null;
+            InputStream is = null;
+            DigestInputStream dis = null;
             try {
                 String imgUrl = "";
 
@@ -293,27 +194,52 @@ public class PartnerController extends AbstractController {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-
-                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
-                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-                ImageIO.write(bufferedImage, "png", serverFile);
-
-                imgUrl = AliyunMain.uploadImg(sessionPartnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
+                
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "."+FileSetting.IMGFILEFORMAT);
+                is = file.getInputStream();
+                dis = new DigestInputStream(is, md);
+                
+                //using Scalr to resize the image
+                BufferedImage bufferedImage = ImageIO.read(dis);
+                bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.BALANCED, Scalr.Mode.FIT_TO_HEIGHT, 120, 120, Scalr.OP_ANTIALIAS);
+                ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
+                
+                //calculate the MD5 checksum and use it as part of the file name to make it unique
+                byte[] digest = md.digest();
+                String checkSumString = FileSetting.getCheckSumString(digest);
+                String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.LOGO, sessionPartnerId, curId, checkSumString);
+                
+                imgUrl = AliyunMain.uploadImg(sessionPartnerId, serverFile, fullQualifiedName, Config.AliyunLogoBucket);
                 partnerVo.setLogoUrl(imgUrl);
                 partnerVo.setId(sessionPartnerId);
                 PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
                 partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
 
             } catch (Exception e) {
-
-                return this.handleWebException(new ControllerException("PartnerLogo 上传失败"), resp);
+                e.printStackTrace();
+                return this.handleWebException(new ControllerException("Logo处理失败"), resp);
             } finally {
+                if (dis != null) {
+                    try {
+                        dis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if (serverFile != null) {
                     serverFile.delete();
                 }
             }
         } else {
-            return this.handleWebException(new ControllerException("PartnerLogo file 为空"), resp);
+            return this.handleWebException(new ControllerException("Logo文件为空"), resp);
         }
         return partnerVo;
     }
