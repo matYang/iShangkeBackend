@@ -16,7 +16,6 @@ import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;

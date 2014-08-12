@@ -1,4 +1,4 @@
-package com.ishangke.edunav.manager.crypto;
+package com.ishangke.edunav.common.crypto;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
