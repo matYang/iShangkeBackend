@@ -66,8 +66,7 @@ public class PartnerController extends AbstractController {
     PartnerFacade partnerFacade;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
+    public @ResponseBody JsonResponse importPartners(@RequestParam("file") MultipartFile file, HttpServletResponse resp) throws ControllerException {
         // Need a User
         int userId = 1;
         UserVo user = new UserVo();
@@ -108,12 +107,14 @@ public class PartnerController extends AbstractController {
             book = Workbook.getWorkbook(fis);
             sheet = book.getSheet(0);
         } catch (BiffException | IOException e) {
-            //return this.handleWebException(new ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"), resp);
+            // return this.handleWebException(new
+            // ControllerException("读取xml的时候挂掉了,make sure 你的file 是 .xls 不是 .xlsx"),
+            // resp);
             return this.handleWebException(e, resp);
-        } 
-//        finally {
-//            serverFile.delete();
-//        }
+        }
+        // finally {
+        // serverFile.delete();
+        // }
 
         int row = 0;
         int col = 0;
@@ -156,16 +157,15 @@ public class PartnerController extends AbstractController {
             }
         }
 
-//        if (serverFile.exists()) {
-//            serverFile.delete();
-//        }
+        // if (serverFile.exists()) {
+        // serverFile.delete();
+        // }
         result.setMessage("successfully imported " + count + " partners");
         return result;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -174,7 +174,7 @@ public class PartnerController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -185,8 +185,7 @@ public class PartnerController extends AbstractController {
         PartnerPageViewVo pageViewVo = null;
 
         try {
-            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser,
-                    permissionTag);
+            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -197,8 +196,7 @@ public class PartnerController extends AbstractController {
 
     // get partner by id is open data, no authentication
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryPartnerById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
 
         PartnerVo partnerVo = new PartnerVo();
@@ -214,10 +212,9 @@ public class PartnerController extends AbstractController {
 
         return responseVo;
     }
-    
+
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    JsonResponse create(@RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse create(@RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -228,7 +225,7 @@ public class PartnerController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -247,8 +244,7 @@ public class PartnerController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    JsonResponse update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int partnerId, @RequestBody PartnerVo partnerVo, HttpServletRequest req, HttpServletResponse resp) {
         PartnerVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -259,7 +255,7 @@ public class PartnerController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -279,13 +275,11 @@ public class PartnerController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}/logo", method = RequestMethod.POST)
-    public @ResponseBody
-    JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req,
-            HttpServletResponse resp) {
+    public @ResponseBody JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req, HttpServletResponse resp) {
 
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
-       
+
         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
@@ -293,68 +287,66 @@ public class PartnerController extends AbstractController {
             throw new ControllerException("对不起，您尚未登录");
         }
 
-       
-       PartnerVo partnerVo = new PartnerVo();
+        PartnerVo partnerVo = new PartnerVo();
 
-       if (!file.isEmpty()) {
-           File serverFile = null;
-           InputStream is = null;
-           DigestInputStream dis = null;
-           try {
-               String imgUrl = "";
+        if (!file.isEmpty()) {
+            File serverFile = null;
+            InputStream is = null;
+            DigestInputStream dis = null;
+            try {
+                String imgUrl = "";
+                File dir = new File("tmp");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
 
-               File dir = new File("tmp");
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "." + FileSetting.IMGFILEFORMAT);
+                is = file.getInputStream();
+                dis = new DigestInputStream(is, md);
 
-               if (!dir.exists()) {
-                   dir.mkdirs();
-               }
-               
-               MessageDigest md = MessageDigest.getInstance("MD5");
-               serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "."+FileSetting.IMGFILEFORMAT);
-               is = file.getInputStream();
-               dis = new DigestInputStream(is, md);
-               
-               //using Scalr to resize the image
-               BufferedImage bufferedImage = ImageIO.read(dis);
-               bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 160, 160, Scalr.OP_ANTIALIAS);
-               ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
-               
-               //calculate the MD5 checksum and use it as part of the file name to make it unique
-               byte[] digest = md.digest();
-               String checkSumString = FileSetting.getCheckSumString(digest);
-               String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.LOGO, partnerId, curId, checkSumString);
-               
-               imgUrl = AliyunMain.uploadImg(partnerId, serverFile, fullQualifiedName, Config.AliyunLogoBucket);
-               partnerVo.setLogoUrl(imgUrl);
-               partnerVo.setId(partnerId);
-               PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
-               partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
+                // using Scalr to resize the image
+                BufferedImage bufferedImage = ImageIO.read(dis);
+                bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 160, 160, Scalr.OP_ANTIALIAS);
+                ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
 
-           } catch (Exception e) {
-               e.printStackTrace();
-               return this.handleWebException(new ControllerException("Logo处理失败"), resp);
-           } finally {
-               if (dis != null) {
-                   try {
-                       dis.close();
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-               }
-               if (is != null) {
-                   try {
-                       is.close();
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-               }
-               if (serverFile != null) {
-                   serverFile.delete();
-               }
-           }
-       } else {
-           return this.handleWebException(new ControllerException("Logo文件为空"), resp);
-       }
-       return partnerVo;
+                // calculate the MD5 checksum and use it as part of the file
+                // name to make it unique
+                byte[] digest = md.digest();
+                String checkSumString = FileSetting.getCheckSumString(digest);
+                String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.LOGO, partnerId, curId, checkSumString);
+
+                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, fullQualifiedName, Config.AliyunLogoBucket);
+                partnerVo.setLogoUrl(imgUrl);
+                partnerVo.setId(partnerId);
+                PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
+                partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return this.handleWebException(new ControllerException("Logo处理失败"), resp);
+            } finally {
+                if (dis != null) {
+                    try {
+                        dis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (serverFile != null) {
+                    serverFile.delete();
+                }
+            }
+        } else {
+            return this.handleWebException(new ControllerException("Logo文件为空"), resp);
+        }
+        return partnerVo;
     }
 }

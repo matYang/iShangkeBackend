@@ -2,6 +2,9 @@ package com.ishangke.edunav.web.admin.controller.partner;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ishangke.edunav.common.Config;
+import com.ishangke.edunav.common.constant.FileSetting;
 import com.ishangke.edunav.common.utilities.file.AliyunMain;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
@@ -97,18 +101,25 @@ public class TeacherController extends AbstractController {
 
         if (!file.isEmpty()) {
             File serverFile = null;
+            InputStream is = null;
+            DigestInputStream dis = null;
             try {
                 String imgUrl = "";
-
                 File dir = new File("tmp");
-
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-
-                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
-                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-                ImageIO.write(bufferedImage, "png", serverFile);
+                
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "." + FileSetting.IMGFILEFORMAT);
+                is = file.getInputStream();
+                dis = new DigestInputStream(is, md);
+                
+                // using Scalr to resize the image
+                BufferedImage bufferedImage = ImageIO.read(dis);
+                
+                
+                ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
 
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunTeacherImgBucket);
                 teacherVo.setImgUrl(imgUrl);
