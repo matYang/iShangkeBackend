@@ -6,7 +6,7 @@ public final class FileSetting {
 
     public static final String SEPERATOR = "-";
     
-    public static final String IMGFILEFORMAT = "jpg";
+    public static final String IMGFILEFORMAT = "jpeg";
 
     public static class Prefix {
 
@@ -15,6 +15,8 @@ public final class FileSetting {
         public static final String TEACHER = "teacher";
 
         public static final String CLASSPHOTO = "classPhoto";
+        
+        public static final String CLASSPHOTO_SNAPSHOT = "classPhotoSnapShot";
     }
 
     public static final String getCheckSumString(byte[] b) {
