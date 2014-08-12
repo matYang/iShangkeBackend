@@ -101,14 +101,14 @@ public class UserFacade {
         return result;
     }
 
-    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser, String permissionTag) {
+    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser, String permissionTag) {
         UserBo result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
 
         try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.createPartnerUser(targetUser, partner, currentUser, PermissionCache.getTag(permissionTag));
+            result = serviceClient.createPartnerUser(targetUser, partner, roleId, currentUser, PermissionCache.getTag(permissionTag));
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
             throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());

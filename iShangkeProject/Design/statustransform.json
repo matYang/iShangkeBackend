@@ -1573,6 +1573,303 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "partnerwenyuan",
+            "roleCode": 5,
+            "entitys": [
+                {
+                    "name": "booking",
+                    "entityCode": 0,
+                    "currentStatuses": [
+                        {
+                            "name": "offlineBooked",
+                            "statusCode": 0,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineRejected",
+                            "statusCode": 1,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineCancelled",
+                            "statusCode": 2,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineConfirmed",
+                            "statusCode": 3,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineDelayed",
+                            "statusCode": 4,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineNoShow",
+                            "statusCode": 5,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineRegistered",
+                            "statusCode": 6,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlinePayed",
+                            "statusCode": 7,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineSchoolStarted",
+                            "statusCode": 8,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineQuited",
+                            "statusCode": 9,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineEnrolled",
+                            "statusCode": 10,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePendingPayment",
+                            "statusCode": 11,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlineCancelled",
+                            "statusCode": 12,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePayed",
+                            "statusCode": 13,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePendingRefund",
+                            "statusCode": 14,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlineRefunded",
+                            "statusCode": 15,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePartnerConfirmed",
+                            "statusCode": 16,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlineSchoolStarted",
+                            "statusCode": 17,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlineEnrolled",
+                            "statusCode": 18,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlineCashbacked",
+                            "statusCode": 19,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePaymentExpired",
+                            "statusCode": 20,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePaymenFailed",
+                            "statusCode": 21,
+                            "operations": []
+                        },
+                        {
+                            "name": "onlinePaymentSucceeded",
+                            "statusCode": 22,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineNoPayed",
+                            "statusCode": 23,
+                            "operations": []
+                        },
+                        {
+                            "name": "offlineCashbacked",
+                            "statusCode": 24,
+                            "operations": []
+                        }
+                    ]
+                },
+                {
+                    "name": "course",
+                    "entityCode": 1,
+                    "currentStatuses": [
+                        {
+                            "name": "pendingReview",
+                            "statusCode": 0,
+                            "operations": []
+                        },
+                        {
+                            "name": "failed",
+                            "statusCode": 1,
+                            "operations": [
+                                {
+                                    "name": "submitUpdated",
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "takeOffline",
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "onlined",
+                            "statusCode": 2,
+                            "operations": [
+                                {
+                                    "name": "takeOffline",
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "submitUpdated",
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "offlined",
+                            "statusCode": 3,
+                            "operations": [
+                                {
+                                    "name": "submitUpdated",
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "delete",
+                                    "operateCode": 4,
+                                    "nextStatus": 4,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleted",
+                            "statusCode": 4,
+                            "operations": []
+                        },
+                        {
+                            "name": "new",
+                            "statusCode": 5,
+                            "operations": []
+                        },
+                        {
+                            "name": "updated",
+                            "statusCode": 6,
+                            "operations": []
+                        }
+                    ]
+                },
+                {
+                    "name": "courseTemplate",
+                    "entityCode": 2,
+                    "currentStatuses": [
+                        {
+                            "name": "pendingReview",
+                            "statusCode": 0,
+                            "operations": []
+                        },
+                        {
+                            "name": "failed",
+                            "statusCode": 1,
+                            "operations": [
+                                {
+                                    "name": "submitUpdated",
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "takeOffline",
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "onlined",
+                            "statusCode": 2,
+                            "operations": [
+                                {
+                                    "name": "takeOffline",
+                                    "operateCode": 5,
+                                    "nextStatus": 3,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "submitUpdated",
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "offlined",
+                            "statusCode": 3,
+                            "operations": [
+                                {
+                                    "name": "submitUpdated",
+                                    "operateCode": 3,
+                                    "nextStatus": 0,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "delete",
+                                    "operateCode": 4,
+                                    "nextStatus": 4,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleted",
+                            "statusCode": 4,
+                            "operations": []
+                        },
+                        {
+                            "name": "new",
+                            "statusCode": 5,
+                            "operations": []
+                        },
+                        {
+                            "name": "updated",
+                            "statusCode": 6,
+                            "operations": []
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -80,7 +80,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         }
         // 获取当前用户橘色
         String roleName = authManager.getRole(userBo.getId());
-        if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+        if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             // 如果是合作商管理员
             // 验证userBo是否是否属于同一家机构
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
@@ -422,7 +422,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         }
         if (Constant.ROLEUSER.equals(roleName)) {
             throw new ManagerException("user cannot transform course template status");
-        } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+        } else if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
                 throw new ManagerException("unlogin user");
@@ -512,7 +512,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     @Override
     public List<CourseTemplateBo> queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo) {
         String roleName = authManager.getRole(userBo.getId());
-        if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+        if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             // 判断用户是否属于此partner
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
@@ -581,7 +581,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         if (courseEntity == null) {
             throw new ManagerException("course template is not exits");
         }
-        if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
+        if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             // 判断此coursetemplate是否属于此user所在的partner
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {

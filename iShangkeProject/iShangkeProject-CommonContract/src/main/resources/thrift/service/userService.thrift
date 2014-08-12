@@ -104,7 +104,7 @@ service UserService {
      *  @return 用户实体 UserBo 
      *
      */
-    user.UserBo createPartnerUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: user.UserBo currentUser, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    user.UserBo createPartnerUser(1: user.UserBo targetUser, 2: partner.PartnerBo partnerBo, 3: i32 roleId, 4: user.UserBo currentUser, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
      
     user.UserBo createUser(1: user.UserBo targetUser, 2: user.UserBo currentUser, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 

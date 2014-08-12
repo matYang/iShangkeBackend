@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, UserBo currentUser, String permissionTag)
+    public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService.Iface {
                 throw new NoPermissionException();
             }
 
-            return userManager.createPartnerUser(targetUser, partner, currentUser);
+            return userManager.createPartnerUser(targetUser, partner, roleId, currentUser);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

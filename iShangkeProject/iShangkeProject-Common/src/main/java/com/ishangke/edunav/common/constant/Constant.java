@@ -29,10 +29,12 @@ public class Constant {
     public static final String ROLEPARTNERADMIN = "partneradmin";
     public static final String ROLEADMIN = "admin";
     public static final String ROLEUSER = "user";
+    public static final String ROLEPARTNERWENYUAN = "partnerwenyuan";
     public static final int ROLESYSTEMADMINID = 1;
     public static final int ROLEADMINID = 2;
     public static final int ROLEPARTNERADMINID = 3;
     public static final int ROLEUSERID = 4;
+    public static final int ROLEPARTNERWENYUANID = 5;
     
 
     // very important !! transform null by thrift
