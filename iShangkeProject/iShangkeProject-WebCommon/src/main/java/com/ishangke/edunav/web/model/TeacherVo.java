@@ -2,9 +2,9 @@ package com.ishangke.edunav.web.model;
 
 import java.util.Set;
 
-import com.ishangke.edunav.web.tree.HierarchyData;
+import com.ishangke.edunav.web.response.JsonResponse;
 
-public class TeacherVo extends HierarchyData{
+public class TeacherVo extends JsonResponse{
     private Integer id;
 
     private Integer partnerId;
