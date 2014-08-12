@@ -316,7 +316,7 @@ public class PartnerController extends AbstractController {
                
                //using Scalr to resize the image
                BufferedImage bufferedImage = ImageIO.read(dis);
-               bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.BALANCED, Scalr.Mode.FIT_TO_HEIGHT, 120, 120, Scalr.OP_ANTIALIAS);
+               bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, 160, 160, Scalr.OP_ANTIALIAS);
                ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
                
                //calculate the MD5 checksum and use it as part of the file name to make it unique
