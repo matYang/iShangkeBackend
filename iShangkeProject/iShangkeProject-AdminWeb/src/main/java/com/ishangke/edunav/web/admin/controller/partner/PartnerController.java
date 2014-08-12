@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +21,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ishangke.edunav.common.Config;
+import com.ishangke.edunav.common.constant.FileSetting;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.file.AliyunMain;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
@@ -278,51 +283,78 @@ public class PartnerController extends AbstractController {
     JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @PathVariable("id") int partnerId, HttpServletRequest req,
             HttpServletResponse resp) {
 
-         String permissionTag = this.getUrl(req);
-         SessionBo authSessionBo = this.getSession(req);
-        
-         UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
-         int curId = curUser.getId();
-         boolean loggedIn = curId > 0;
-         if (!loggedIn) {
-             throw new ControllerException("对不起，您尚未登录");
-         }
-
-        
-        PartnerVo partnerVo = new PartnerVo();
-
-        if (!file.isEmpty()) {
-            File serverFile = null;
-            try {
-                String imgUrl = "";
-
-                File dir = new File("tmp");
-
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-
-                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".png");
-                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-                ImageIO.write(bufferedImage, "png", serverFile);
-
-                imgUrl = AliyunMain.uploadImg(partnerId, serverFile, file.getName(), Config.AliyunLogoBucket);
-                partnerVo.setLogoUrl(imgUrl);
-                partnerVo.setId(partnerId);
-                PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
-                partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
-
-            } catch (Exception e) {
-
-                return this.handleWebException(new ControllerException("PartnerLogo 上传失败"), resp);
-            } finally {
-                if (serverFile != null) {
-                    serverFile.delete();
-                }
-            }
-        } else {
-            return this.handleWebException(new ControllerException("PartnerLogo file 为空"), resp);
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+       
+        UserBo curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            throw new ControllerException("对不起，您尚未登录");
         }
-        return partnerVo;
+
+       
+       PartnerVo partnerVo = new PartnerVo();
+
+       if (!file.isEmpty()) {
+           File serverFile = null;
+           InputStream is = null;
+           DigestInputStream dis = null;
+           try {
+               String imgUrl = "";
+
+               File dir = new File("tmp");
+
+               if (!dir.exists()) {
+                   dir.mkdirs();
+               }
+               
+               MessageDigest md = MessageDigest.getInstance("MD5");
+               serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "."+FileSetting.IMGFILEFORMAT);
+               is = file.getInputStream();
+               dis = new DigestInputStream(is, md);
+               
+               //using Scalr to resize the image
+               BufferedImage bufferedImage = ImageIO.read(dis);
+               bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.BALANCED, Scalr.Mode.FIT_TO_HEIGHT, 120, 120, Scalr.OP_ANTIALIAS);
+               ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
+               
+               //calculate the MD5 checksum and use it as part of the file name to make it unique
+               byte[] digest = md.digest();
+               String checkSumString = FileSetting.getCheckSumString(digest);
+               String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.LOGO, partnerId, curId, checkSumString);
+               
+               imgUrl = AliyunMain.uploadImg(partnerId, serverFile, fullQualifiedName, Config.AliyunLogoBucket);
+               partnerVo.setLogoUrl(imgUrl);
+               partnerVo.setId(partnerId);
+               PartnerBo partnerBo = PartnerConverter.fromModel(partnerVo);
+               partnerFacade.updatePartner(partnerBo, curUser, permissionTag);
+
+           } catch (Exception e) {
+               e.printStackTrace();
+               return this.handleWebException(new ControllerException("Logo处理失败"), resp);
+           } finally {
+               if (dis != null) {
+                   try {
+                       dis.close();
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+               if (is != null) {
+                   try {
+                       is.close();
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+               if (serverFile != null) {
+                   serverFile.delete();
+               }
+           }
+       } else {
+           return this.handleWebException(new ControllerException("Logo文件为空"), resp);
+       }
+       return partnerVo;
     }
 }
