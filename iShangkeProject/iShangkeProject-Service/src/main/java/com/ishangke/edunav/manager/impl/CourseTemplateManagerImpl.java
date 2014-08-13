@@ -192,12 +192,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         throw new ManagerException("failed when query photo");
                     }
                     if (photoEntity == null) {
-                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(), photoEntity == null ? null
-                                : photoEntity.getId()));
+                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(), photoEntity == null ? null : photoEntity.getId()));
                     }
                     if (IdChecker.notEqual(photoEntity.getPartnerId(), courseTemplateBo.getPartnerId())) {
-                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] belong [%d]", userBo.getId(), photoEntity.getId(),
-                                photo.getPartnerId()));
+                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] belong [%d]", userBo.getId(), photoEntity.getId(), photo.getPartnerId()));
                     }
                 }
             }
@@ -211,12 +209,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         throw new ManagerException("failed when query teacher");
                     }
                     if (teacherEntity == null) {
-                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null
-                                : teacherEntity.getId()));
+                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null : teacherEntity.getId()));
                     }
                     if (IdChecker.notEqual(teacherEntity.getPartnerId(), courseTemplateBo.getPartnerId())) {
-                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(),
-                                teacherEntity.getPartnerId()));
+                        LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(), teacherEntity.getPartnerId()));
                     }
                 }
             }
@@ -224,12 +220,43 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             try {
                 // admin创建出来的course template 默认为已上线状态
                 courseTemplateEntity.setStatus(Constant.COURSESTATUSONLINED);
+                // 修改创建时间
+                courseTemplateEntity.setCreateTime(DateUtility.getCurTimeInstance());
+                // 修来lastmodifytime
+                courseTemplateEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
                 int result = 0;
                 result = courseTemplateMapper.add(courseTemplateEntity);
                 if (result > 0) {
-                    LOGGER.warn(String.format("[create course template] ishangke admin or system admin [%d] crate course template for partner [%d], course template id is [%d]", userBo.getId(),
-                            courseTemplateBo.getPartnerId(), courseTemplateEntity.getId()));
-
+                    LOGGER.warn(String.format("[create course template] ishangke admin or system admin [%d] crate course template for partner [%d], course template id is [%d]", userBo.getId(), courseTemplateBo.getPartnerId(),
+                            courseTemplateEntity.getId()));
+                    // 插入classphoto关联
+                    if (classPhotos != null) {
+                        for (ClassPhotoBo photo : classPhotos) {
+                            try {
+                                CourseTemplateClassPhotoEntityExt courseTemplateClassPhotoEntityExt = new CourseTemplateClassPhotoEntityExt();
+                                courseTemplateClassPhotoEntityExt.setClassPhotoId(photo.getId());
+                                courseTemplateClassPhotoEntityExt.setCourseTemplateId(courseTemplateEntity.getId());
+                                courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                                courseTemplatePhotoMapper.add(courseTemplateClassPhotoEntityExt);
+                            } catch (Exception e) {
+                                throw new ManagerException("failed when add photo course template relationship");
+                            }
+                        }
+                    }
+                    // 插入teacher关联
+                    if (teachers != null) {
+                        for (TeacherBo teacher : teachers) {
+                            try {
+                                CourseTemplateTeacherEntityExt courseTemplateTeacherEntityExt = new CourseTemplateTeacherEntityExt();
+                                courseTemplateTeacherEntityExt.setTeacherId(teacher.getId());
+                                courseTemplateTeacherEntityExt.setCourseTemplateId(courseTemplateEntity.getId());
+                                courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                                courseTemplateTeacherMapper.add(courseTemplateTeacherEntityExt);
+                            } catch (Exception e) {
+                                throw new ManagerException("failed when add teacher course tempalte relationship");
+                            }
+                        }
+                    }
                     List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSETEMPLATE, courseTemplateEntity.getStatus());
                     CourseTemplateBo courseTemplate = CourseTemplateConverter.toBo(courseTemplateMapper.getById(courseTemplateEntity.getId()));
                     courseTemplate.setActionList(actions);
@@ -522,10 +549,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
                 isSameGroup = true;
                 LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call createTeacher at " + new Date(), userBo.getName()));
-            }
-            else {
+            } else {
                 for (GroupEntityExt g : groupList) {
-                    // //因为我们有特殊情况 api中需要提供/coursetemplate/{id} 在这种情况下coursetemplate
+                    // //因为我们有特殊情况 api中需要提供/coursetemplate/{id}
+                    // 在这种情况下coursetemplate
                     // bo id明确为一个id值
                     if (IdChecker.isEqual(g.getPartnerId(), courseTemplateBo.getPartnerId())) {
                         isSameGroup = true;
@@ -533,7 +560,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     }
                 }
             }
-            
+
             if (isSameGroup == false) {
                 throw new ManagerException("cannot query other partner's template");
             }
