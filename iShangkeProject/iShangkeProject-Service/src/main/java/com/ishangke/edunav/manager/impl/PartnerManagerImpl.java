@@ -64,7 +64,7 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             results = partnerMapper.list(partnerEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Partner query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -88,11 +88,11 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             result = partnerMapper.getInfoById(partnerEntity.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Partner queryById failed with id: " + partnerEntity.getId(), t);
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
 
         if (result == null) {
-            throw new PartnerNotFoundException();
+            throw new PartnerNotFoundException("对不起，无法找到ID为" + partnerEntity.getId() + "的合作机构");
         }
         return PartnerConverter.toBo(result);
     }
@@ -108,11 +108,11 @@ public class PartnerManagerImpl implements PartnerManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(partnerEntity.getId())) {
-            throw new ManagerException("Partner update must specify id");
+            throw new ManagerException("更新合作机构时必须标注合作机构ID");
         }
         PartnerEntityExt previousPartner = partnerMapper.getById(partnerEntity.getId());
         if (previousPartner == null) {
-            throw new PartnerNotFoundException("Partner to update is not found with id:" + partnerEntity.getId());
+            throw new PartnerNotFoundException("对不起，无法找到ID为" + partnerEntity.getId() + "的合作机构");
         }
 
         // 验证用户是否属于此partner
@@ -136,16 +136,13 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("对不起，您无权执行该请求");
         }
 
-        if (IdChecker.isNull(partnerEntity.getId())) {
-            throw new ManagerException("Partner update must specify id");
-        }
         partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         partnerEntity.setCreateTime(null);
         partnerEntity.setDeleted(null);
         try {
             partnerMapper.update(partnerEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Partner update failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，合作机构更新失败，请稍后再试", t);
         }
 
         return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
@@ -161,7 +158,7 @@ public class PartnerManagerImpl implements PartnerManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[PartnerManagerImpl]system admin || admin [%s] call createPartner at " + new Date(), userBo.getName()));
         } else {
-            throw new AuthenticationException("Only admins can create partners");
+            throw new AuthenticationException("对不起，您无权创建合作机构");
         }
 
         // 插入新的partner记录
@@ -176,7 +173,7 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             result = partnerMapper.add(partnerEntity);
             if (result <= 0) {
-                throw new ManagerException("Partner creation failed for user: " + userEntity.getId());
+                throw new ManagerException("对不起，合作机构创建失败，请稍后再试");
             }
             // 判断不为空
             if (partnerEntity.getAddressList() != null) {
@@ -190,7 +187,7 @@ public class PartnerManagerImpl implements PartnerManager {
 
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Partner creation failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，合作机构创建失败，请稍后再试", t);
         }
         // 创建关于此partner的两个group 分别对应 partner admin 和 partner wenyuan
         GroupEntityExt group = new GroupEntityExt();
@@ -203,14 +200,14 @@ public class PartnerManagerImpl implements PartnerManager {
         int i = 0;
         i = groupMapper.add(group);
         if (i <= 0) {
-            throw new ManagerException("create group " + Constant.ROLEPARTNERADMIN + " for partner " + partnerEntity.getId() + " failed");
+            throw new ManagerException("对不起, 为ID为" + partnerEntity.getId() + "的合作机构创建管理员用户组失败, 请稍后再试");
         }
         group.setName((partnerEntity.getInstName() != null ? partnerEntity.getInstName() : "") + Constant.ROLEPARTNERWENYUAN);
         group.setRoleId(Constant.ROLEPARTNERWENYUANID);
         int j = 0;
         j = groupMapper.add(group);
         if (j <= 0) {
-            throw new ManagerException("create group " + Constant.ROLEPARTNERADMIN + " for partner " + partnerEntity.getId() + " failed");
+            throw new ManagerException("对不起, 为ID为" + partnerEntity.getId() + "的合作机构创建文员用户组失败, 请稍后再试");
         }
         return PartnerConverter.toBo(partnerMapper.getById(partnerEntity.getId()));
     }

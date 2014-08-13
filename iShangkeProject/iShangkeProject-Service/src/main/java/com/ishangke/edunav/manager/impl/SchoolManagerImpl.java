@@ -31,7 +31,7 @@ public class SchoolManagerImpl implements SchoolManager {
         try {
             results = schoolMapper.list(schoolEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("School query failed", t);
+            throw new ManagerException("对不起，院校信息获取失败，请稍后再试", t);
         }
 
         if (results == null) {

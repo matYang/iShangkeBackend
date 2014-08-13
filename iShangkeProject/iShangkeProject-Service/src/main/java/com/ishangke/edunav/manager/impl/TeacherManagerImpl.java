@@ -48,7 +48,7 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("无效请求参数");
         }
 
-        // 验证userBo是否是否属于同一家机构
+        // 验证userBo是否是否属于同一家教师
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
             throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
@@ -74,7 +74,7 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(teacherEntity.getPartnerId())) {
-            throw new ManagerException("Teacher creation must specify partner");
+            throw new ManagerException("创建教师图片时必须标注合作机构");
         }
         teacherEntity.setCreateTime(DateUtility.getCurTimeInstance());
         teacherEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -84,12 +84,12 @@ public class TeacherManagerImpl implements TeacherManager {
         try {
             result = teacherMapper.add(teacherEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Teacher creation failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，教师图片创建失败，请稍后再试", t);
         }
         if (result > 0) {
             return TeacherConverter.toBo(teacherMapper.getById(teacherEntity.getId()));
         } else {
-            throw new ManagerException("Teacher creation failed for user: " + userEntity.getId());
+            throw new ManagerException("对不起，教师图片获取失败，请稍后再试");
         }
     }
 
@@ -104,11 +104,11 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(teacherEntity.getId())) {
-            throw new ManagerException("Teacher update must specify id");
+            throw new ManagerException("更新教师图片时必须标注教师图片ID");
         }
         TeacherEntityExt previousTeacher = teacherMapper.getById(teacherEntity.getId());
         if (previousTeacher == null) {
-            throw new TeacherNotFoundException("Teacher to update is not found with id:" + teacherEntity.getId());
+            throw new TeacherNotFoundException("对不起，没有找到ID为" +  teacherEntity.getId() + "的教师图片");
         }
 
         // 验证用户是否属于此partner
@@ -139,7 +139,7 @@ public class TeacherManagerImpl implements TeacherManager {
         try {
             teacherMapper.update(teacherEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Teacher update failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，教师图片更新失败，请稍后再试", t);
         }
 
         return TeacherConverter.toBo(teacherMapper.getById(teacherEntity.getId()));
@@ -156,11 +156,11 @@ public class TeacherManagerImpl implements TeacherManager {
         TeacherEntityExt teacherEntity = TeacherConverter.fromBo(teacherBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(teacherEntity.getId())) {
-            throw new ManagerException("Teacher deletion must specify id");
+            throw new ManagerException("删除教师图片时必须标注教师图片ID");
         }
         TeacherEntityExt previousTeacher = teacherMapper.getById(teacherEntity.getId());
         if (previousTeacher == null) {
-            throw new TeacherNotFoundException("Teacher to delete is not found with id:" + teacherEntity.getId());
+            throw new TeacherNotFoundException("对不起，无法找到ID为" + teacherEntity.getId() + "的教师图片");
         }
 
         // 验证用户是否属于此partner
@@ -188,7 +188,7 @@ public class TeacherManagerImpl implements TeacherManager {
             previousTeacher.setDeleted(1);
             teacherMapper.deleteById(previousTeacher.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Teacher deletion failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，教师图片删除失败，请稍后再试", t);
         }
 
         return TeacherConverter.toBo(previousTeacher);
@@ -211,7 +211,7 @@ public class TeacherManagerImpl implements TeacherManager {
             LOGGER.warn(String.format("[TeacherManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
         } else {
             if (teacherBo == null) {
-                throw new ManagerException("TeacherBo null for non-admin user at query");
+                throw new ManagerException("非管理员用户无权查询全部课程图片");
             }
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), teacherBo.getPartnerId())) {
@@ -233,7 +233,7 @@ public class TeacherManagerImpl implements TeacherManager {
         try {
             results = teacherMapper.list(teacherEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Teacher query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，课程图片查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -262,7 +262,7 @@ public class TeacherManagerImpl implements TeacherManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Teacher listByCourseId Failed", t);
+            throw new ManagerException("对不起，按照课程查询教师图片失败，请稍后再试", t);
         }
     }
 
@@ -282,7 +282,7 @@ public class TeacherManagerImpl implements TeacherManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Teacher listByCourseTemplateId Failed", t);
+            throw new ManagerException("对不起，按照课程模板查询教师图片失败，请稍后再试", t);
         }
     }
 
@@ -292,7 +292,7 @@ public class TeacherManagerImpl implements TeacherManager {
             throw new ManagerException("无效请求参数");
         }
 
-        // 验证userBo是否是否属于同一家机构
+        // 验证userBo是否是否属于同一家教师
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
             throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
@@ -325,7 +325,7 @@ public class TeacherManagerImpl implements TeacherManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("Teacher listByPartnerId Failed", t);
+            throw new ManagerException("对不起，按照合作教师查询教师图片失败，请稍后再试", t);
         }
     }
 
