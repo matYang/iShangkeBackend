@@ -613,7 +613,7 @@ public class CourseManagerImpl implements CourseManager {
                             throw new ManagerException("对不起，搜索对应机构图片失败，请稍后再试");
                         }
                         if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId(), oldCourseEntity.getPartnerId())) {
-                            throw new ManagerException("对不清，无法找到对应的机构图片");
+                            throw new ManagerException("对不起，无法找到对应的机构图片");
                         }
                     }
                 }

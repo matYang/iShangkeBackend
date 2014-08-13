@@ -71,13 +71,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
 
     @Override
     public CourseTemplateBo createCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo) {
-        // Check Null
-        if (courseTemplateBo == null) {
-            throw new ManagerException("CourseTemplate Create Failed: CourseTemplateBo is null");
+        if (courseTemplateBo == null || userBo == null) {
+            throw new ManagerException("无效请求参数");
         }
-        if (userBo == null) {
-            throw new ManagerException("CourseTemplate Create Failed: UserBo is null");
-        }
+
         // 获取当前用户橘色
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
@@ -95,7 +92,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                 }
             }
             if (isSameGroup == false) {
-                throw new ManagerException("cannot create other partner's template");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             // 验证教师信息和classphoto信息是否属于本机构
             List<ClassPhotoBo> classPhotos = courseTemplateBo.getClassPhotoList();
@@ -105,10 +102,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     try {
                         photoEntity = photoMapper.getById(photo.getId());
                     } catch (Exception e) {
-                        throw new ManagerException("failed when query photo in partner repository");
+                        throw new ManagerException("对不起，搜索对应机构图片失败，请稍后再试");
                     }
                     if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId(), courseTemplateBo.getPartnerId())) {
-                        throw new ManagerException("classphoto cannot found in partner photo repository");
+                        throw new ManagerException("对不起，无法找到对应的机构图片");
                     }
                 }
             }
@@ -119,10 +116,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     try {
                         teacherEntity = teacherMapper.getById(teacher.getId());
                     } catch (Exception e) {
-                        throw new ManagerException("failed when query teacher in partner repository");
+                        throw new ManagerException("对不起，搜索对应教师图片失败，请稍后再试");
                     }
                     if (teacherEntity == null || IdChecker.notEqual(teacherEntity.getPartnerId(), courseTemplateBo.getPartnerId())) {
-                        throw new ManagerException("teacher cannot found in partner teacher repository");
+                        throw new ManagerException("对不起，无法找到对应的教师图片");
                     }
                 }
             }
@@ -148,7 +145,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                                 courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                                 courseTemplatePhotoMapper.add(courseTemplateClassPhotoEntityExt);
                             } catch (Exception e) {
-                                throw new ManagerException("failed when add photo course template relationship");
+                                throw new ManagerException("对不起，连接课程模板对应的机构照片失败，请稍后再试");
                             }
                         }
                     }
@@ -162,7 +159,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                                 courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                                 courseTemplateTeacherMapper.add(courseTemplateTeacherEntityExt);
                             } catch (Exception e) {
-                                throw new ManagerException("failed when add teacher course tempalte relationship");
+                                throw new ManagerException("对不起，连接课程模板对应的教师图片失败，请稍后再试");
                             }
                         }
                     }
@@ -172,10 +169,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
 
                     return courseTemplate;
                 } else {
-                    throw new ManagerException("CourseTemplate Create Failed");
+                    throw new ManagerException("对不起，课程模板创建失败，请稍后再试");
                 }
             } catch (Throwable t) {
-                throw new ManagerException("CourseTemplate Create Failed", t);
+                throw new ManagerException("对不起，课程模板创建失败，请稍后再试", t);
             }
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 如果是ishangke管理员
@@ -189,7 +186,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     try {
                         photoEntity = photoMapper.getById(photo.getId());
                     } catch (Exception e) {
-                        throw new ManagerException("failed when query photo");
+                        throw new ManagerException("对不起，查询机构图片失败，请稍后再试");
                     }
                     if (photoEntity == null) {
                         LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(), photoEntity == null ? null : photoEntity.getId()));
@@ -206,7 +203,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     try {
                         teacherEntity = teacherMapper.getById(teacher.getId());
                     } catch (Exception e) {
-                        throw new ManagerException("failed when query teacher");
+                        throw new ManagerException("对不起，查询教师图片失败，请稍后再试");
                     }
                     if (teacherEntity == null) {
                         LOGGER.warn(String.format("[create course template] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null : teacherEntity.getId()));
@@ -239,7 +236,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                                 courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                                 courseTemplatePhotoMapper.add(courseTemplateClassPhotoEntityExt);
                             } catch (Exception e) {
-                                throw new ManagerException("failed when add photo course template relationship");
+                                throw new ManagerException("对不起，连接课程模板对应的机构照片失败，请稍后再试");
                             }
                         }
                     }
@@ -253,7 +250,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                                 courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                                 courseTemplateTeacherMapper.add(courseTemplateTeacherEntityExt);
                             } catch (Exception e) {
-                                throw new ManagerException("failed when add teacher course tempalte relationship");
+                                throw new ManagerException("对不起，连接课程模板对应的教师图片失败，请稍后再试");
                             }
                         }
                     }
@@ -263,15 +260,15 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
 
                     return courseTemplate;
                 } else {
-                    throw new ManagerException("CourseTemplate Create Failed");
+                    throw new ManagerException("对不起，课程模板创建失败，请稍后再试");
                 }
             } catch (Throwable t) {
-                throw new ManagerException("CourseTemplate Create Failed", t);
+                throw new ManagerException("对不起，课程模板创建失败，请稍后再试", t);
             }
 
         } else {
             // 如果是别的角色的用户，则不能创建课程模版
-            throw new ManagerException("cannot create coursetemplate current role");
+            throw new ManagerException("对不起，您无权创建课程模板");
         }
     }
 
@@ -287,7 +284,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             if ((courseTemplateEntityModify.getPrice() != null && !courseTemplateEntityModify.getPrice().equals(oldCourseTemplateEntity.getPrice()))
                     || (courseTemplateEntityModify.getCourseName() != null && !courseTemplateEntityModify.getCourseName().equals(oldCourseTemplateEntity.getCourseName()))
                     || (courseTemplateEntityModify.getOriginalPrice() != null && !courseTemplateEntityModify.getOriginalPrice().equals(oldCourseTemplateEntity.getOriginalPrice()))) {
-                throw new ManagerException("cannot modify price , name , origin price");
+                throw new ManagerException("对不起，无法更改课程名、爱上课价格或课程原价");
             }
             List<ClassPhotoEntityExt> classPhotos = null;
             List<TeacherEntityExt> teachers = null;
@@ -300,10 +297,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         try {
                             photoEntity = photoMapper.getById(photo.getId());
                         } catch (Exception e) {
-                            throw new ManagerException("failed when query photo in partner repository");
+                            throw new ManagerException("对不起，搜索对应机构图片失败，请稍后再试");
                         }
                         if (photoEntity == null || IdChecker.notEqual(photoEntity.getPartnerId(), oldCourseTemplateEntity.getPartnerId())) {
-                            throw new ManagerException("classphoto cannot found in partner photo repository");
+                            throw new ManagerException("对不起，无法找到对应的机构图片");
                         }
                     }
                 }
@@ -317,10 +314,10 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         try {
                             teacherEntity = teacherMapper.getById(teacher.getId());
                         } catch (Exception e) {
-                            throw new ManagerException("failed when query teacher in partner repository");
+                            throw new ManagerException("对不起，搜索对应教师图片失败，请稍后再试");
                         }
                         if (teacherEntity == null || IdChecker.notEqual(teacherEntity.getPartnerId(), oldCourseTemplateEntity.getPartnerId())) {
-                            throw new ManagerException("teacher cannot found in partner teacher repository");
+                            throw new ManagerException("对不起，无法找到对应的教师图片");
                         }
                     }
                 }
@@ -349,7 +346,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         courseTemplatePhotoMapper.add(courseTemplateClassPhotoEntityExt);
                     } catch (Exception e) {
-                        throw new ManagerException("failed when add photo course template relationship");
+                        throw new ManagerException("对不起，连接课程模板对应的机构图片失败，请稍后再试");
                     }
                 }
             }
@@ -363,7 +360,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         courseTemplateTeacherMapper.add(courseTemplateTeacherEntityExt);
                     } catch (Exception e) {
-                        throw new ManagerException("failed when add teacher course tempalte relationship");
+                        throw new ManagerException("对不起，连接课程模板对应的教师图片失败，请稍后再试");
                     }
                 }
             }
@@ -402,7 +399,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         courseTemplateClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         courseTemplatePhotoMapper.add(courseTemplateClassPhotoEntityExt);
                     } catch (Exception e) {
-                        throw new ManagerException("failed when add photo course template relationship");
+                        throw new ManagerException("对不起，连接课程模板对应的机构图片失败，请稍后再试");
                     }
                 }
             }
@@ -416,7 +413,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                         courseTemplateTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
                         courseTemplateTeacherMapper.add(courseTemplateTeacherEntityExt);
                     } catch (Exception e) {
-                        throw new ManagerException("failed when add teacher course tempalte relationship");
+                        throw new ManagerException("对不起，连接课程模板对应的教师图片失败，请稍后再试");
                     }
                 }
             }
@@ -435,7 +432,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
     public CourseTemplateBo transformCourseTmeplateStatus(CourseTemplateBo courseTemplateBo, int operation, UserBo userBo) {
         CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(courseTemplateBo.getId());
         if (courseTemplate == null) {
-            throw new ManagerException("course template is not exits");
+            throw new ManagerException("对不起，无法找到ID为" + courseTemplateBo.getId() + "的课程模板");
         }
         String roleName = authManager.getRole(userBo.getId());
         List<Operation> operationList = transformManager.getOperationByRoleName(roleName, Constant.STATUSTRANSFORMCOURSETEMPLATE, courseTemplate.getStatus());
@@ -448,7 +445,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             }
         }
         if (Constant.ROLEUSER.equals(roleName)) {
-            throw new ManagerException("user cannot transform course template status");
+            throw new ManagerException("对不起，您无权更改课程模板状态");
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
@@ -462,11 +459,11 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                 }
             }
             if (!isSameGroup) {
-                throw new ManagerException("cannot modify other's course template");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             // 按照业务流程修改courseTemplate
             if (op == null) {
-                throw new ManagerException("cannot modify current course template status");
+                throw new ManagerException("对不起，无法改变当前课程模板状态");
             }
             // 如果是更新操作转，调用update方法
             if (op.getOperateCode() == Constant.COURSEOPERATIONSUBMITUPDATED) {
@@ -485,7 +482,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     courseTemplateMapper.deleteById(courseTemplate.getId());
                     return new CourseTemplateBo();
                 } catch (Exception e) {
-                    throw new ManagerException("delete failed");
+                    throw new ManagerException("对不起，课程模板删除失败，请稍后再试");
                 }
             }
             // 修改lastmodifytime
@@ -499,7 +496,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             return result;
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
             if (op == null) {
-                throw new ManagerException("cannot modify current course tempalte status");
+                throw new ManagerException("对不起，无法改变当前课程模板状态");
             }
             courseTemplate.setStatus(op.getNextStatus());
             courseTemplateMapper.update(courseTemplate);
@@ -522,7 +519,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     courseTemplateMapper.deleteById(courseTemplate.getId());
                     return new CourseTemplateBo();
                 } catch (Exception e) {
-                    throw new ManagerException("delete failed");
+                    throw new ManagerException("对不起，课程模板删除失败，请稍后再试");
                 }
             }
             courseTemplate.setStatus(op.getNextStatus());
@@ -562,7 +559,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             }
 
             if (isSameGroup == false) {
-                throw new ManagerException("cannot query other partner's template");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             ArrayList<CourseTemplateBo> convertered = new ArrayList<>();
             try {
@@ -577,7 +574,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     }
                 }
             } catch (Exception e) {
-                throw new ManagerException("query course template failed");
+                throw new ManagerException("对不起，课程模板查询失败，请稍后再试");
             }
             return convertered;
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
@@ -594,7 +591,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     }
                 }
             } catch (Exception e) {
-                throw new ManagerException("query course template failed");
+                throw new ManagerException("对不起，课程模板查询失败，请稍后再试");
             }
             return convertered;
         }
@@ -606,7 +603,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         String roleName = authManager.getRole(userBo.getId());
         CourseTemplateEntityExt courseEntity = courseTemplateMapper.getInfoById(courseTemplateBo.getId());
         if (courseEntity == null) {
-            throw new ManagerException("course template is not exits");
+            throw new ManagerException("对不起，课程模板获取失败，请稍后再试");
         }
         if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             // 判断此coursetemplate是否属于此user所在的partner
@@ -622,7 +619,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                 }
             }
             if (isSameGroup == false) {
-                throw new ManagerException("cannot query other partner's template");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMCOURSE, courseEntity.getStatus());
             CourseTemplateBo b = CourseTemplateConverter.toBo(courseEntity);
