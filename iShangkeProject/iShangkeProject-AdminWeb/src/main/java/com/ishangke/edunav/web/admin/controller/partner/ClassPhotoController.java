@@ -137,7 +137,7 @@ public class ClassPhotoController extends AbstractController {
                 snapShotBufferedImage = Scalr.resize(snapShotBufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 200, 200, Scalr.OP_ANTIALIAS);
                 ImageIO.write(snapShotBufferedImage, FileSetting.IMGFILEFORMAT, snapshotFile);
                 String snapShotFullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.CLASSPHOTO_SNAPSHOT, partnerId, curId, checkSumString);
-                snapShotUrl = AliyunMain.uploadImg(partnerId, serverFile, snapShotFullQualifiedName, Config.AliyunClassroomImgBucket);
+                snapShotUrl = AliyunMain.uploadImg(partnerId, snapshotFile , snapShotFullQualifiedName, Config.AliyunClassroomImgBucket);
 
                 classPhoto.setPartnerId(partnerId);
                 classPhoto.setImgUrl(imgUrl);
