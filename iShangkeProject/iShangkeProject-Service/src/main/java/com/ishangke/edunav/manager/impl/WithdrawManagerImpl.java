@@ -56,7 +56,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin[%s] call createWithdraw at " + new Date(), userBo.getName()));
         } else {
             if (withdrawEntity == null || IdChecker.notEqual(withdrawEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User creating someone else's withdraw");
+                throw new AuthenticationException("对不起，您无权创建他人的取款账户");
             }
         }
 
@@ -68,12 +68,12 @@ public class WithdrawManagerImpl implements WithdrawManager {
         try {
             result = withdrawMapper.add(withdrawEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，取款账户创建失败，请稍后再试", t);
         }
         if (result > 0) {
             return WithdrawConverter.toBo(withdrawMapper.getById(withdrawEntity.getId()));
         } else {
-            throw new ManagerException("Withdraw creation failed for user: " + userEntity.getId());
+            throw new ManagerException("对不起，取款账户获取失败，请稍后再试");
         }
     }
 
@@ -88,18 +88,18 @@ public class WithdrawManagerImpl implements WithdrawManager {
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(withdrawEntity.getId())) {
-            throw new ManagerException("Withdraw update must specify id");
+            throw new ManagerException("更新取款账户时必须标注取款账户ID");
         }
         WithdrawEntityExt previousWithdraw = withdrawMapper.getById(withdrawEntity.getId());
         if (previousWithdraw == null) {
-            throw new WithdrawNotFoundException("Withdraw to update is not found with id:" + withdrawEntity.getId());
+            throw new WithdrawNotFoundException("对不起，无法找到ID为" + withdrawEntity.getId() + "的取款账户");
         }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call updateWithdraw at " + new Date(), userBo.getName()));
         } else {
             if (IdChecker.notEqual(previousWithdraw.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User updating someone else's withdraw");
+                throw new AuthenticationException("对不起，您无权更改他人的取款账户");
             }
         }
 
@@ -110,7 +110,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         try {
             withdrawMapper.update(withdrawEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Withdraw update failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，取款账户更新失败，请稍后再试", t);
         }
 
         return WithdrawConverter.toBo(withdrawMapper.getById(withdrawEntity.getId()));
@@ -127,18 +127,18 @@ public class WithdrawManagerImpl implements WithdrawManager {
         WithdrawEntityExt withdrawEntity = WithdrawConverter.fromBo(withdrawBo);
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(withdrawEntity.getId())) {
-            throw new ManagerException("Withdraw deletion must specify id");
+            throw new ManagerException("删除取款账户时必须标注取款账户ID");
         }
         WithdrawEntityExt previousWithdraw = withdrawMapper.getById(withdrawEntity.getId());
         if (previousWithdraw == null) {
-            throw new WithdrawNotFoundException("Withdraw to delete is not found with id:" + withdrawEntity.getId());
+            throw new WithdrawNotFoundException("对不起，无法找到ID为" + withdrawEntity.getId() + "的取款账户");
         }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[WithdrawManagerImpl]system admin || admin [%s] call deleteWithdraw at " + new Date(), userBo.getName()));
         } else {
             if (IdChecker.notEqual(previousWithdraw.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User deleting someone else's withdraw");
+                throw new AuthenticationException("对不起，您无权删除他人的取款账户");
             }
         }
 
@@ -146,7 +146,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
             previousWithdraw.setDeleted(1);
             withdrawMapper.deleteById(previousWithdraw.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Withdraw deletion failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，取款账户删除失败，请稍后再试", t);
         }
 
         return WithdrawConverter.toBo(previousWithdraw);
@@ -169,7 +169,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (withdrawEntity == null || IdChecker.notEqual(withdrawEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User querying someone else's withdraw");
+                throw new AuthenticationException("对不起，您无权查询他人的取款账户");
             }
         }
 
@@ -177,7 +177,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
         try {
             results = withdrawMapper.list(withdrawEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Withdraw query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，取款账户查询失败，请稍后再试", t);
         }
 
         if (results == null) {
