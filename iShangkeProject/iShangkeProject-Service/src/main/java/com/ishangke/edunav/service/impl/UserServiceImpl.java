@@ -99,11 +99,11 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo createUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
-                        "createUser"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+//                        "createUser"));
+//                throw new NoPermissionException();
+//            }
 
             return userManager.createUser(targetUser, currentUser);
         } catch (NoPermissionException e) {
@@ -126,11 +126,11 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
-                        "createUser"));
-                throw new NoPermissionException();
-            }
+//            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+//                        "createUser"));
+//                throw new NoPermissionException();
+//            }
 
             return userManager.createPartnerUser(targetUser, partner, roleId, currentUser);
         } catch (NoPermissionException e) {
