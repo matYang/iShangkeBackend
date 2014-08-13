@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
@@ -211,7 +212,7 @@ public class UserController extends AbstractController {
         }
 
         UserBo responseUser = null;
-        if (userVo.getPartnerId() > 0 && !"".equals(roleId)) {
+        if (IdChecker.notNull(userVo.getPartnerId()) && !"".equals(roleId)) {
             int role = Integer.valueOf(roleId);
             if (role > 0) {
                 try {
