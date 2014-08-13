@@ -10,7 +10,7 @@ public final class FileSetting {
 
     public static final String SEPERATOR = "-";
 
-    public static final String IMGFILEFORMAT = "jpg";
+    public static final String IMGFILEFORMAT = "png";
 
     public static class Prefix {
 
