@@ -42,13 +42,14 @@ public class UserController extends AbstractController {
     UserFacade userFacade;
 
     @RequestMapping(value = "/login/reference", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse login(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse login(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
         boolean remember = (loginVo.getRemember() != null && loginVo.getRemember() == 1);
         SessionBo authSessionBo = this.getSession(req);
-        
+
         if (loginVo.getAccountIdentifier() == null || loginVo.getAccountIdentifier().length() == 0) {
             return this.handleWebException(new ControllerException("请输入账号"), resp);
         }
@@ -66,18 +67,19 @@ public class UserController extends AbstractController {
             if (authSessionBo.getId() > 0) {
                 this.openSession(authSessionBo, remember, req, resp);
             }
-            
+
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
-        
+        }
+
         responseVo = UserConverter.toModel(curUser);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}/logout", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse logout(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse logout(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         if (authSessionBo.getId() <= 0) {
@@ -91,7 +93,8 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/findSession", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse findSession(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse findSession(HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -102,7 +105,7 @@ public class UserController extends AbstractController {
             userBo = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         if (userBo.getId() <= 0) {
             responseVo = new UserVo();
             responseVo.setId(-1);
@@ -114,7 +117,8 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}/changePassword", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse changePassword(@PathVariable("id") int id, @RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse changePassword(@PathVariable("id") int id, @RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         int curId = userFacade.authenticate(authSessionBo, permissionTag).getId();
@@ -137,13 +141,14 @@ public class UserController extends AbstractController {
             newSession = userFacade.changePassword(passwordBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         this.openSession(newSession, false, req, resp);
         return new EmptyResponse();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse getById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse getById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -163,13 +168,14 @@ public class UserController extends AbstractController {
             responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse update(@PathVariable("id") int id, @RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -182,7 +188,6 @@ public class UserController extends AbstractController {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
 
-
         UserBo targetUser = UserConverter.fromModel(userVo);
         targetUser.setId(id);
 
@@ -191,14 +196,15 @@ public class UserController extends AbstractController {
             responseUser = userFacade.updateUser(targetUser, curUser, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }
 
-    //此入口除了可以创建普通用户之外， 还可以创建partner 管理员 之类的角色
+    // 此入口除了可以创建普通用户之外， 还可以创建partner 管理员 之类的角色
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse createUser(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp, @RequestParam(value = "roleId", defaultValue = "") String roleId) {
+    public @ResponseBody
+    JsonResponse createUser(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp, @RequestParam(value = "roleId", defaultValue = "") String roleId) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -221,20 +227,23 @@ public class UserController extends AbstractController {
                     responseUser = userFacade.createPartnerUser(UserConverter.fromModel(userVo), partner, role, curUser, permissionTag);
                 } catch (ControllerException c) {
                     return this.handleWebException(c, resp);
-                } 
+                }
             }
+        } else {
+            try {
+                responseUser = userFacade.createUser(UserConverter.fromModel(userVo), curUser, permissionTag);
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            }
+
         }
-        try {
-            responseUser = userFacade.createUser(UserConverter.fromModel(userVo), curUser, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
         responseVo = UserConverter.toModel(responseUser);
         return responseVo;
     }
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse queryUser(UserVo userVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryUser(UserVo userVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         UserPageViewVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -252,7 +261,7 @@ public class UserController extends AbstractController {
             responseUser = userFacade.queryUser(UserConverter.fromModel(userVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = UserPageViewConverter.toModel(responseUser);
         return responseVo;
     }
