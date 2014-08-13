@@ -85,7 +85,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             // 验证userBo是否是否属于同一家机构
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -425,7 +425,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -516,7 +516,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             // 判断用户是否属于此partner
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -585,7 +585,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
             // 判断此coursetemplate是否属于此user所在的partner
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {

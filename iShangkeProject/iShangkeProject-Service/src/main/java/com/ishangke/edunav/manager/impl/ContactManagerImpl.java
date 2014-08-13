@@ -45,7 +45,7 @@ public class ContactManagerImpl implements ContactManager {
     public ContactBo createContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
         if (contactBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -81,7 +81,7 @@ public class ContactManagerImpl implements ContactManager {
     public ContactBo updateContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
         if (contactBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -122,7 +122,7 @@ public class ContactManagerImpl implements ContactManager {
     public ContactBo deleteContact(ContactBo contactBo, UserBo userBo) {
         // Check Null
         if (contactBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -158,7 +158,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public List<ContactBo> query(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         ContactEntityExt contactEntity = contactBo == null ? null : ContactConverter.fromBo(contactBo);

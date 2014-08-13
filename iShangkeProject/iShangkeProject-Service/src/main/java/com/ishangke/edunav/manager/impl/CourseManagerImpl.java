@@ -107,7 +107,7 @@ public class CourseManagerImpl implements CourseManager {
             // 验证userBo是否是否属于同一家机构
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -323,7 +323,7 @@ public class CourseManagerImpl implements CourseManager {
     @Override
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo) {
         if (courseCommentBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         String roleName = authManager.getRole(userBo.getId());
@@ -362,7 +362,7 @@ public class CourseManagerImpl implements CourseManager {
             // 验证userBo是否是否属于同一家机构
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -449,7 +449,7 @@ public class CourseManagerImpl implements CourseManager {
                 // 判断此coursetemplate是否属于此user所在的partner
                 List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
                 if (groupList == null) {
-                    throw new ManagerException("unlogin user");
+                    throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
                 }
                 boolean isSameGroup = false;
                 for (GroupEntityExt g : groupList) {
@@ -489,7 +489,7 @@ public class CourseManagerImpl implements CourseManager {
         if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {

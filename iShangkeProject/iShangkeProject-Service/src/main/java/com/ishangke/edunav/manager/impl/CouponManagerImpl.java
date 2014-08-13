@@ -49,7 +49,7 @@ public class CouponManagerImpl implements CouponManager {
     public CouponBo createCoupon(CouponBo couponBo, UserBo userBo) {
         // Check Null
         if (couponBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -89,7 +89,7 @@ public class CouponManagerImpl implements CouponManager {
     public CouponBo activateCoupon(CouponBo couponBo, UserBo userBo) {
         // Check Null
         if (couponBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -147,7 +147,7 @@ public class CouponManagerImpl implements CouponManager {
     public CouponBo updateCoupon(CouponBo couponBo, UserBo userBo) {
         // Check Null
         if (couponBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -217,7 +217,7 @@ public class CouponManagerImpl implements CouponManager {
     @Override
     public List<CouponBo> query(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         CouponEntityExt couponEntity = couponBo == null ? null : CouponConverter.fromBo(couponBo);
@@ -258,7 +258,7 @@ public class CouponManagerImpl implements CouponManager {
     // of a single coupon, specified by the coupon id field in coupon history
     public List<CouponHistoryBo> queryHistory(CouponHistoryBo couponHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         CouponHistoryEntityExt couponHistoryEntity = couponHistoryBo == null ? null : CouponHistoryConverter.fromBo(couponHistoryBo);
@@ -319,7 +319,7 @@ public class CouponManagerImpl implements CouponManager {
     @Override
     public CouponBo queryById(int id, UserBo userBo) {
         if (id <= 0 || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt userEntity = UserConverter.fromBo(userBo);

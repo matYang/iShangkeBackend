@@ -45,13 +45,13 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     public ClassPhotoBo createClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) {
         // Check Null
         if (classPhotoBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 机构管理员只能给本机构上传图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -67,7 +67,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         // Convert
@@ -98,7 +98,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     public ClassPhotoBo updateClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) {
         // Check Null
         if (classPhotoBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         
         // Convert
@@ -116,7 +116,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         // 机构管理员只能给本机构上传图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -131,7 +131,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         classPhotoEntity.setPartnerId(null);
@@ -150,7 +150,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     public ClassPhotoBo deleteClassPhoto(ClassPhotoBo classPhotoBo, UserBo userBo) {
         // Check Null
         if (classPhotoBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -167,7 +167,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         // 机构管理员只能删除本机构图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -183,7 +183,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
 
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         try {
@@ -198,13 +198,13 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     @Override
     public List<ClassPhotoBo> query(ClassPhotoBo classPhotoBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 机构管理员只能查询本机构的图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -223,7 +223,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         // Convert
@@ -290,13 +290,13 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
     @Override
     public List<ClassPhotoBo> listByPartnerId(int partnerId, UserBo userBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 机构管理员只能查询本机构的图片
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -312,7 +312,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         try {
