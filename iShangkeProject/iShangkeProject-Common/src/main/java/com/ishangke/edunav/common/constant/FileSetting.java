@@ -1,12 +1,16 @@
 package com.ishangke.edunav.common.constant;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+
 import com.ishangke.edunav.common.utilities.DateUtility;
 
 public final class FileSetting {
 
     public static final String SEPERATOR = "-";
-    
-    public static final String IMGFILEFORMAT = "jpeg";
+
+    public static final String IMGFILEFORMAT = "jpg";
 
     public static class Prefix {
 
@@ -15,7 +19,7 @@ public final class FileSetting {
         public static final String TEACHER = "teacher";
 
         public static final String CLASSPHOTO = "classPhoto";
-        
+
         public static final String CLASSPHOTO_SNAPSHOT = "classPhotoSnapShot";
     }
 
@@ -31,4 +35,12 @@ public final class FileSetting {
     public static final String assembleName(String prefix, int partnerId, int initiatorId, String checkSum) {
         return prefix + "p" + partnerId + "i" + initiatorId + "t" + DateUtility.getCurTime() + SEPERATOR + checkSum;
     }
+
+    public static BufferedImage bufferDeepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
+
 }

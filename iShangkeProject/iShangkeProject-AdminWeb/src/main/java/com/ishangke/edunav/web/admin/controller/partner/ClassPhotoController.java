@@ -102,9 +102,7 @@ public class ClassPhotoController extends AbstractController {
             File snapshotFile = null;
             InputStream is = null;
             DigestInputStream dis = null;
-            
-            InputStream snapShotIs = null;
-            
+
             try {
                 String imgUrl = "";
                 String snapShotUrl = "";
@@ -112,15 +110,19 @@ public class ClassPhotoController extends AbstractController {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                
+
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "." + FileSetting.IMGFILEFORMAT);
+                snapshotFile = new File(dir.getAbsolutePath() + File.separator + "snapshot" + file.getName() + "." + FileSetting.IMGFILEFORMAT);
                 is = file.getInputStream();
                 dis = new DigestInputStream(is, md);
-                
-                
-                // using Scalr to resize the image
+
+                // creating the buffered images that will be used
                 BufferedImage bufferedImage = ImageIO.read(dis);
+                // deep copying the buffered image so to be used for thumbnail
+                BufferedImage snapShotBufferedImage = FileSetting.bufferDeepCopy(bufferedImage);
+
+                // using Scalr to resize the image
                 bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 600, 600, Scalr.OP_ANTIALIAS);
                 ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
 
@@ -130,20 +132,13 @@ public class ClassPhotoController extends AbstractController {
                 String checkSumString = FileSetting.getCheckSumString(digest);
                 String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.CLASSPHOTO, partnerId, curId, checkSumString);
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, fullQualifiedName, Config.AliyunClassroomImgBucket);
-                
-                
-                snapshotFile =  new File(dir.getAbsolutePath() + File.separator + "snapshot" + file.getName() + "." + FileSetting.IMGFILEFORMAT);
-                snapShotIs = file.getInputStream();
 
                 // using Scalr to resize the image
-                BufferedImage snapShotBufferedImage = ImageIO.read(snapShotIs);
                 snapShotBufferedImage = Scalr.resize(snapShotBufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 200, 200, Scalr.OP_ANTIALIAS);
                 ImageIO.write(snapShotBufferedImage, FileSetting.IMGFILEFORMAT, snapshotFile);
-                
                 String snapShotFullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.CLASSPHOTO_SNAPSHOT, partnerId, curId, checkSumString);
                 snapShotUrl = AliyunMain.uploadImg(partnerId, serverFile, snapShotFullQualifiedName, Config.AliyunClassroomImgBucket);
 
-                
                 classPhoto.setPartnerId(partnerId);
                 classPhoto.setImgUrl(imgUrl);
                 classPhoto.setSnapshotUrl(snapShotUrl);
@@ -162,13 +157,6 @@ public class ClassPhotoController extends AbstractController {
                 if (is != null) {
                     try {
                         is.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (snapShotIs != null) {
-                    try {
-                        snapShotIs.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
