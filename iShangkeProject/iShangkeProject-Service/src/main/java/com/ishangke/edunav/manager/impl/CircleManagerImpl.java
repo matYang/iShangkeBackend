@@ -31,7 +31,7 @@ public class CircleManagerImpl implements CircleManager {
         try {
             results = circleMapper.list(circleEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Circle query failed", t);
+            throw new ManagerException("对不起，商圈信息获取失败，请稍后再试", t);
         }
 
         if (results == null) {

@@ -92,7 +92,7 @@ public class BookingManagerImpl implements BookingManager {
     private OrderEntityExtMapper orderMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
-        if (bookingBo == null || bookingBo.getCashbackAmount() < 0.001d || IdChecker.isNull(bookingBo.getUserId())) {
+        if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
             return 0.0;
         }
 
@@ -106,7 +106,7 @@ public class BookingManagerImpl implements BookingManager {
         try {
             couponResults = couponMapper.list(couponSearch, null);
         } catch (Throwable t) {
-            throw new ManagerException("consumeCoupons failed when searching for coupons");
+            throw new ManagerException("对不起，可用消费券搜索失败，请稍后再试");
         }
         if (couponResults == null || couponResults.size() == 0) {
             return 0.0;
@@ -114,7 +114,7 @@ public class BookingManagerImpl implements BookingManager {
 
         // remove used coupons and expired coupons
         for (int i = couponResults.size() - 1; i >= 0; i--) {
-            if (couponResults.get(i).getBalance() < 0.01d || couponResults.get(i).getExpiryTime().before(DateUtility.getCurTime())) {
+            if (couponResults.get(i).getBalance() < DefaultValue.DOUBLEPRCISIONOFFSET || couponResults.get(i).getExpiryTime().before(DateUtility.getCurTime())) {
                 couponResults.remove(i);
             }
         }
@@ -167,41 +167,44 @@ public class BookingManagerImpl implements BookingManager {
         BookingEntityExt bookingEntity = BookingConverter.fromBo(bookingBo);
         CourseEntityExt course = courseMapper.getInfoById(bookingEntity.getCourseId());
         if (!Constant.ROLEUSER.equals(roleName)) {
-            throw new ManagerException("only user can create booking");
+            throw new ManagerException("对不起，只有普通用户有权创建预订");
         }
         if (IdChecker.notEqual(bookingEntity.getUserId(), userBo.getId())) {
-            throw new ManagerException("cannot create booking for others");
+            throw new ManagerException("对不起，用户无权为他人创建预订");
         }
-        if (bookingEntity.getName() == null || "".equals(bookingEntity.getName()) || bookingEntity.getPhone() == null || "".equals(bookingEntity.getPhone())) {
-            throw new ManagerException("information is bad");
+        if (bookingEntity.getName() == null || "".equals(bookingEntity.getName())) {
+            throw new ManagerException("请填写姓名");
+        }
+        if (bookingEntity.getPhone() == null || "".equals(bookingEntity.getPhone())) {
+            throw new ManagerException("请填写电话");
         }
         // 查看此课程是否属于上架状态
         if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
-            throw new ManagerException("course cannot be booked now");
+            throw new ManagerException("课程已经被删除或者下架，目前无法接受预订");
         }
         // 查看课程现价与发过来的价格是否一致，如果不一致则不能创建booking
         if (!course.getPrice().equals(bookingEntity.getPrice())) {
-            throw new ManagerException("the price is no longer equal");
+            throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
         }
         // 传递过来的cashback必须小于等于course中定义的cashback
         if (bookingBo.getCashbackAmount() > course.getCashback()) {
-            throw new ManagerException("cashback cannot more than cashback defined in course");
+            throw new ManagerException("返利金额不能超过课程返利金额，请刷新页面");
         }
         // booking不同的type（支付方式）决定了booking的初始化状态
         int bookingOpt;
         if (bookingEntity.getType() == Constant.BOOKINGTYPEONLINE) {
-            // 在线支付订单
+            // 在线支付预订
             bookingEntity.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
             bookingOpt = Constant.BOOKINGOPERATIONONLINESUBMITBOOKING;
 
         } else if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
-            // 线下支付订单
+            // 线下支付预订
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
         } else if (false) {
-            // todo 其他类型订单
+            // todo 其他类型预订
         } else {
-            throw new ManagerException("unknown booking type");
+            throw new ManagerException("对不起，预订类型识别错误，请刷新页面或稍后再试");
         }
         // 设置booking的partner id
         bookingEntity.setPartnerId(course.getPartnerId());
@@ -223,7 +226,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntity.setCreateTime((DateUtility.getCurTimeInstance()));
             result = bookingMapper.add(bookingEntity);
         } catch (Exception e) {
-            throw new ManagerException("add booking failed");
+            throw new ManagerException("对不起，创建预订失败，请稍后再试");
         }
         if (result > 0) {
             bookingBo.setId(bookingEntity.getId());
@@ -238,13 +241,13 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setRemark(bookingEntity.getNote());
             bookingHistoryMapper.add(bookingHistory);
-            // 课程预定数量统计
+            // 课程预订数量统计
             CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
             int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
             courseTemplate.setBookingTotal((total++));
             courseTemplateMapper.update(courseTemplate);
         } else {
-            throw new ManagerException("add booking failed");
+            throw new ManagerException("对不起，创建预订失败，请稍后再试");
         }
         // 如果没有此可联系人信息，则保存此联系人信息
         ContactEntityExt contact = new ContactEntityExt();
@@ -290,13 +293,13 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingBo.getUserId(), userBo.getId())) {
-                throw new ManagerException("cannot query other's booking");
+                throw new ManagerException("对不起，您无权查看他人预订");
             }
             List<BookingEntityExt> bookings = null;
             try {
                 bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking failed for user " + userBo.getId());
+                throw new ManagerException("对不起，预订查询失败，请稍后再试");
             }
             if (bookings == null) {
                 return new ArrayList<BookingBo>();
@@ -312,7 +315,7 @@ public class BookingManagerImpl implements BookingManager {
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -323,13 +326,13 @@ public class BookingManagerImpl implements BookingManager {
                 }
             }
             if (!isSameGroup) {
-                throw new ManagerException("cannot query other partner's booking");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             List<BookingEntityExt> bookings = null;
             try {
                 bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking failed for user " + userBo.getId());
+                throw new ManagerException("对不起，预订查询失败，请稍后再试");
             }
             if (bookings == null) {
                 return new ArrayList<BookingBo>();
@@ -347,7 +350,7 @@ public class BookingManagerImpl implements BookingManager {
             try {
                 bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking failed for user " + userBo.getId());
+                throw new ManagerException("对不起，预订查询失败，请稍后再试");
             }
             if (bookings == null) {
                 return new ArrayList<BookingBo>();
@@ -361,7 +364,7 @@ public class BookingManagerImpl implements BookingManager {
             }
             return convertedList;
         } else {
-            throw new ManagerException("current user cannot query booking");
+            throw new ManagerException("对不起，您无权查询预订");
         }
     }
 
@@ -370,13 +373,13 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingHistoryBo.getUserId(), userBo.getId())) {
-                throw new ManagerException("cannot query other's booking");
+                throw new ManagerException("对不起，您无权查看他人的预订历史");
             }
             List<BookingHistoryEntityExt> bookingHistorys = null;
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking history failed for user " + userBo.getId());
+                throw new ManagerException("对不起，预定历史查询失败，请稍后再试");
             }
             if (bookingHistorys == null) {
                 return new ArrayList<BookingHistoryBo>();
@@ -390,7 +393,7 @@ public class BookingManagerImpl implements BookingManager {
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -400,13 +403,13 @@ public class BookingManagerImpl implements BookingManager {
                 }
             }
             if (!isSameGroup) {
-                throw new ManagerException("cannot query other partner's booking history");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             List<BookingHistoryEntityExt> bookingHistorys = null;
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking history failed for user " + userBo.getId());
+                throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
             if (bookingHistorys == null) {
                 return new ArrayList<BookingHistoryBo>();
@@ -422,7 +425,7 @@ public class BookingManagerImpl implements BookingManager {
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking history failed for user " + userBo.getId());
+                throw new ManagerException("对不起，预订历史查询失败，请稍后再试", e);
             }
             if (bookingHistorys == null) {
                 return new ArrayList<BookingHistoryBo>();
@@ -444,10 +447,10 @@ public class BookingManagerImpl implements BookingManager {
     public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo) {
         BookingEntityExt bookingEntityExt = bookingMapper.getById(bookingBo.getId());
         if (bookingEntityExt == null) {
-            throw new ManagerException("booking is nolonger exits");
+            throw new ManagerException("无效请求参数");
         }
         if (userBo == null) {
-            throw new ManagerException("User not specified");
+            throw new ManagerException("无效请求参数");
         }
         String roleName = authManager.getRole(userBo.getId());
         List<Operation> operationList = transformManager.getOperationByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, bookingEntityExt.getStatus());
@@ -463,11 +466,11 @@ public class BookingManagerImpl implements BookingManager {
             // 如果是普通用户
             // 用户修改自己的booking
             if (IdChecker.notEqual(bookingEntityExt.getUserId(), userBo.getId())) {
-                throw new ManagerException("cannot modify other's booking");
+                throw new ManagerException("对不起，您无权更新他人预订");
             }
-            // 按照业务流程修改订单
+            // 按照业务流程修改预订
             if (op == null) {
-                throw new ManagerException("cannot modify current booking status");
+                throw new ManagerException("对不起，您无法更改当前预订状态");
             }
             // 修改lastmodifytime
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -495,7 +498,7 @@ public class BookingManagerImpl implements BookingManager {
 
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
-                throw new CourseNotFoundException("Course not found for booking");
+                throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
@@ -505,7 +508,7 @@ public class BookingManagerImpl implements BookingManager {
             CourseEntityExt course = courseMapper.getInfoById(bookingBo.getCourseId());
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -515,11 +518,11 @@ public class BookingManagerImpl implements BookingManager {
                 }
             }
             if (!isSameGroup) {
-                throw new ManagerException("cannot modify other's booking");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             // 按照业务流程修改booking
             if (op == null) {
-                throw new ManagerException("cannot modify current booking status");
+                throw new ManagerException("对不起，您无法更改当前预订状态");
             }
             // 修改lastmodifytoime
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -554,7 +557,7 @@ public class BookingManagerImpl implements BookingManager {
             // 如果是管理员
             // 按照业务流程修改booking
             if (op == null) {
-                throw new ManagerException("cannot modify current booking status");
+                throw new ManagerException("对不起，您无法更改当前预订状态");
             }
             bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
@@ -584,7 +587,7 @@ public class BookingManagerImpl implements BookingManager {
 
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
-                throw new CourseNotFoundException("Course not found for booking");
+                throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
@@ -630,7 +633,7 @@ public class BookingManagerImpl implements BookingManager {
 
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
             if (course == null) {
-                throw new CourseNotFoundException("Course not found for booking");
+                throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return responseBo;
@@ -645,7 +648,7 @@ public class BookingManagerImpl implements BookingManager {
         try {
             bookings = bookingMapper.list(BookingConverter.fromBo(bookingBo), PaginationConverter.fromBo(paginationBo));
         } catch (Exception e) {
-            throw new ManagerException("query booking failed for user " + userBo.getId());
+            throw new ManagerException("对不起，预订查询失败，请稍后再试");
         }
         if (bookings == null) {
             return new ArrayList<BookingBo>();
@@ -664,7 +667,7 @@ public class BookingManagerImpl implements BookingManager {
     public List<BookingBo> queryBookingByPartner(BookingBo bookingBo, PartnerBo partnerBo, UserBo userBo, PaginationBo paginationBo) {
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -679,13 +682,13 @@ public class BookingManagerImpl implements BookingManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
         List<BookingEntityExt> bookings = null;
         try {
             bookings = bookingMapper.listByPartnerId(BookingConverter.fromBo(bookingBo), partnerBo.getId(), PaginationConverter.fromBo(paginationBo));
         } catch (Exception e) {
-            throw new ManagerException("query booking by partnerid failed for user " + userBo.getId());
+            throw new ManagerException("对不起，按合作商查询预订失败，请稍后再试");
         }
         if (bookings == null) {
             return new ArrayList<BookingBo>();
@@ -705,17 +708,17 @@ public class BookingManagerImpl implements BookingManager {
         BookingEntityExt bookingEntityExt = bookingMapper.getById(bookingHistoryBo.getBookingId());
         List<BookingHistoryEntityExt> bookingHistorys = null;
         if (bookingEntityExt == null) {
-            throw new ManagerException("booking is nolonger exits");
+            throw new ManagerException("对不起，无法找到对应预订");
         }
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingEntityExt.getUserId(), userBo.getId())) {
-                throw new ManagerException("cannot query other's booking history");
+                throw new ManagerException("对不起，您无权查看他人预订历史");
             }
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking history failed");
+                throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
             if (bookingHistorys == null) {
                 return new ArrayList<BookingHistoryBo>();
@@ -736,12 +739,12 @@ public class BookingManagerImpl implements BookingManager {
                 }
             }
             if (isSameGroup == false) {
-                throw new ManagerException("cannot query other partner's booking history");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking history failed");
+                throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
             if (bookingHistorys == null) {
                 return new ArrayList<BookingHistoryBo>();
@@ -755,7 +758,7 @@ public class BookingManagerImpl implements BookingManager {
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
-                throw new ManagerException("query booking history failed");
+                throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
             if (bookingHistorys == null) {
                 return new ArrayList<BookingHistoryBo>();
@@ -787,7 +790,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingMapper.update(booking);
         } catch (Exception e) {
             LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
-            throw new ManagerException("change booking status failed");
+            throw new ManagerException("对不起，预订状态更改失败，请稍后再试");
         } finally {
             LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
         }
@@ -801,7 +804,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistoryMapper.add(bookingHistory);
         } catch (Exception e) {
             LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
-            throw new ManagerException("create booking history failed");
+            throw new ManagerException("对不起，预订历史记录创建失败，请稍后再试");
         } finally {
             LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
         }
@@ -822,7 +825,7 @@ public class BookingManagerImpl implements BookingManager {
     public String buildFormForPost(String out_trade_no, String subject, String total_fee) {
         return AlipaySubmit.buildFormForPost(out_trade_no, subject, total_fee);
     }
-    
+
     @Override
     public int queryBookingTotal(BookingBo bookingBo, UserBo userBo) {
         return bookingMapper.getListCount(BookingConverter.fromBo(bookingBo));
@@ -845,16 +848,16 @@ public class BookingManagerImpl implements BookingManager {
         try {
             booking = bookingMapper.getById(id);
         } catch (Exception e) {
-            throw new ManagerException("query booking failed for user " + userBo.getId());
+            throw new ManagerException("对不起，预订查询失败，请稍后再试");
         }
         if (booking == null) {
-            throw new ManagerException("cannot find booking of id " + id);
+            throw new ManagerException("对不起，无法找到ID为" + id + "的预订");
         }
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(booking.getUserId(), userBo.getId())) {
-                throw new ManagerException("cannot query other's booking");
+                throw new ManagerException("对不起，您无权查看他人的预订");
             }
-            
+
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, booking.getStatus());
             BookingBo bookingBo = BookingConverter.toBo(booking);
             bookingBo.setActionList(actions);
@@ -862,7 +865,7 @@ public class BookingManagerImpl implements BookingManager {
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
-                throw new ManagerException("unlogin user");
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             boolean isSameGroup = false;
             for (GroupEntityExt g : groupList) {
@@ -873,7 +876,7 @@ public class BookingManagerImpl implements BookingManager {
                 }
             }
             if (!isSameGroup) {
-                throw new ManagerException("cannot query other partner's booking");
+                throw new ManagerException("对不起，您无权执行该请求");
             }
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, booking.getStatus());
             BookingBo bookingBo = BookingConverter.toBo(booking);
@@ -885,7 +888,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingBo.setActionList(actions);
             return bookingBo;
         } else {
-            throw new ManagerException("current user cannot query booking");
+            throw new ManagerException("对不起，当前用户无权查询预订");
         }
     }
 

@@ -59,7 +59,7 @@ public class CreditManagerImpl implements CreditManager {
     @Override
     public CreditBo modifyCredit(CreditBo creditBo, UserBo userBo) {
         if (creditBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
@@ -121,7 +121,7 @@ public class CreditManagerImpl implements CreditManager {
         return null;
         // TODO
         // if (creditBo == null || couponBo != null || userBo == null) {
-        // throw new ManagerException("Invalid parameter");
+        // throw new ManagerException("无效请求参数");
         // }
         //
         // CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
@@ -160,7 +160,7 @@ public class CreditManagerImpl implements CreditManager {
         return null;
         // TODO
         // if (creditBo == null || accountBo != null || userBo == null) {
-        // throw new ManagerException("Invalid parameter");
+        // throw new ManagerException("无效请求参数");
         // }
         //
         // CreditEntityExt creditEntity = CreditConverter.fromBo(creditBo);
@@ -180,7 +180,7 @@ public class CreditManagerImpl implements CreditManager {
     @Override
     public List<CreditBo> query(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         CreditEntityExt creditEntity = creditBo == null ? null : CreditConverter.fromBo(creditBo);
@@ -218,7 +218,7 @@ public class CreditManagerImpl implements CreditManager {
     @Override
     public List<CreditHistoryBo> queryHistory(CreditHistoryBo creditHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         CreditHistoryEntityExt creditHistoryEntity = creditHistoryBo == null ? null : CreditHistoryConverter.fromBo(creditHistoryBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);

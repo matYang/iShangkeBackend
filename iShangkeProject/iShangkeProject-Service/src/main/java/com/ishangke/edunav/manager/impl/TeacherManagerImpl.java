@@ -45,13 +45,13 @@ public class TeacherManagerImpl implements TeacherManager {
     public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo) {
         // 参数验证
         if (teacherBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 验证userBo是否是否属于同一家机构
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -67,7 +67,7 @@ public class TeacherManagerImpl implements TeacherManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         // 插入新的teacher记录
@@ -97,7 +97,7 @@ public class TeacherManagerImpl implements TeacherManager {
     public TeacherBo updateTeacher(TeacherBo teacherBo, UserBo userBo) {
         // 参数验证
         if (teacherBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 更新TEACHER记录
@@ -114,7 +114,7 @@ public class TeacherManagerImpl implements TeacherManager {
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -129,7 +129,7 @@ public class TeacherManagerImpl implements TeacherManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         teacherEntity.setPartnerId(null);
@@ -149,7 +149,7 @@ public class TeacherManagerImpl implements TeacherManager {
     public TeacherBo deleteTeacher(TeacherBo teacherBo, UserBo userBo) {
         // 参数验证
         if (teacherBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 删除TEACHER记录
@@ -166,7 +166,7 @@ public class TeacherManagerImpl implements TeacherManager {
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -181,7 +181,7 @@ public class TeacherManagerImpl implements TeacherManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         try {
@@ -197,13 +197,13 @@ public class TeacherManagerImpl implements TeacherManager {
     @Override
     public List<TeacherBo> query(TeacherBo teacherBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -222,7 +222,7 @@ public class TeacherManagerImpl implements TeacherManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         TeacherEntityExt teacherEntity = teacherBo == null ? null : TeacherConverter.fromBo(teacherBo);
@@ -289,13 +289,13 @@ public class TeacherManagerImpl implements TeacherManager {
     @Override
     public List<TeacherBo> listByPartnerId(int partnerId, UserBo userBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 验证userBo是否是否属于同一家机构
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -311,7 +311,7 @@ public class TeacherManagerImpl implements TeacherManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         try {

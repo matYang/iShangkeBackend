@@ -119,7 +119,7 @@ public class AccountManagerImpl implements AccountManager {
     @Override
     public List<AccountBo> query(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         AccountEntityExt accountEntity = accountBo == null ? null : AccountConverter.fromBo(accountBo);
@@ -133,7 +133,7 @@ public class AccountManagerImpl implements AccountManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (accountEntity == null || IdChecker.notEqual(accountEntity.getId(), userEntity.getId())) {
-                throw new AuthenticationException("User querying someone else's account");
+                throw new AuthenticationException("对不起，您无权查看他人的账户");
             }
         }
 
@@ -141,7 +141,7 @@ public class AccountManagerImpl implements AccountManager {
         try {
             results = accountMapper.list(accountEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Account query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，账户查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -158,7 +158,7 @@ public class AccountManagerImpl implements AccountManager {
     @Override
     public List<AccountHistoryBo> queryHistory(AccountHistoryBo accountHistoryBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         AccountHistoryEntityExt accountHistoryEntity = accountHistoryBo == null ? null : AccountHistoryConverter.fromBo(accountHistoryBo);
@@ -172,7 +172,7 @@ public class AccountManagerImpl implements AccountManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (accountHistoryEntity == null || IdChecker.notEqual(accountHistoryEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User querying someone else's accountHistory");
+                throw new AuthenticationException("对不起，您无权查看他人的账户历史记录");
             }
         }
 
@@ -180,7 +180,7 @@ public class AccountManagerImpl implements AccountManager {
         try {
             results = accountHistoryMapper.list(accountHistoryEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Account queryHistory failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，账户历史记录查询失败，请稍后再试", t);
         }
 
         if (results == null) {

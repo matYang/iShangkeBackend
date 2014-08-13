@@ -31,7 +31,7 @@ public class CareerManagerImpl implements CareerManager {
         try {
             results = careerMapper.list(careerEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Career query failed", t);
+            throw new ManagerException("对不起，职业信息获取失败，请稍后再试", t);
         }
 
         if (results == null) {
