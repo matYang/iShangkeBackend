@@ -31,7 +31,7 @@ public class LocationManagerImpl implements LocationManager {
         try {
             results = locationMapper.list(locationEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Location query failed", t);
+            throw new ManagerException("对不起，位置信息获取失败，请稍后再试", t);
         }
 
         if (results == null) {

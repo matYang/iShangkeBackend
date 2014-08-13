@@ -66,12 +66,12 @@ public class OrderManagerImpl implements OrderManager {
         BookingEntityExt bookingEntity = bookingMapper.getById(orderEntity.getBookingId());
         if (bookingEntity == null || bookingEntity.getStatus() != BookingEnums.Status.ONLINEPENDINGPAYMENT.code) {
             LOGGER.error(String.format("[create order] cannot create order for booking current status [%d]", bookingEntity == null ? null : bookingEntity.getStatus()));
-            throw new ManagerException("cannot create order for booking current status [%d]", bookingEntity == null ? null : bookingEntity.getStatus());
+            throw new ManagerException("对不起，当前预订状态下无法创建订单");
         }
 
         // only normal user can call this method
         if (IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
-            throw new AuthenticationException("User creating someone else's booking's order");
+            throw new AuthenticationException("对不起，您无权为他人的预订创建订单");
         }
 
         int result = 0;
@@ -79,7 +79,7 @@ public class OrderManagerImpl implements OrderManager {
             result = orderMapper.add(orderEntity);
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Order creation failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，订单创建失败，请稍后再试", t);
         }
         if (result > 0) {
             // a little bug 没有定义orderhistory 的其他属性 所以只有order id, user id, create
@@ -91,11 +91,11 @@ public class OrderManagerImpl implements OrderManager {
             try {
                 orderHistoryMapper.add(orderHistory);
             } catch (Exception e) {
-                throw new ManagerException("cannot create order history");
+                throw new ManagerException("对不起，订单历史记录创建失败，请稍后再试");
             }
             return OrderConverter.toBo(orderEntity);
         } else {
-            throw new ManagerException("Order creation failed for user: " + userEntity.getId());
+            throw new ManagerException("对不起，订单创建失败，请稍后再试");
         }
     }
 
@@ -111,20 +111,20 @@ public class OrderManagerImpl implements OrderManager {
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call acceptOrderByAdmin at " + new Date(), userBo.getName()));
         } else {
-            throw new AuthenticationException("Only Admin can accept orders");
+            throw new AuthenticationException("对不起，您无权接受订单");
         }
 
         if (orderEntity.getStatus() == OrderEnums.Status.NAIVE.code) {
             orderEntity.setStatus(OrderEnums.Status.ACCEPTED.code);
         } else {
-            throw new ManagerException("Order approval failed for user: " + userEntity.getId());
+            throw new ManagerException("对不起，订单当前状态不允许接受");
         }
 
         try {
             orderMapper.update(orderEntity);
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Order approval failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，订单接受失败，请稍后再试", t);
         }
 
         return OrderConverter.toBo(orderEntity);
@@ -148,7 +148,7 @@ public class OrderManagerImpl implements OrderManager {
             LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call createOrder at " + new Date(), userBo.getName()));
         } else {
             if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
-                throw new ManagerException("此预定不属于该用户");
+                throw new ManagerException("对不起，您无权查看与他人预订相关的订单历史");
             }
         }
 
@@ -157,7 +157,7 @@ public class OrderManagerImpl implements OrderManager {
             results = orderMapper.list(orderEntity, page);
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("Order query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，订单查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -184,7 +184,7 @@ public class OrderManagerImpl implements OrderManager {
             LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call createOrder at " + new Date(), userBo.getName()));
         } else {
             if (bookingEntity != null && IdChecker.notNull(userEntity.getId()) && IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
-                throw new ManagerException("此预定不属于该用户");
+                throw new ManagerException("对不起，您无权查看与他人预订相关的订单历史");
             }
         }
 
@@ -193,7 +193,7 @@ public class OrderManagerImpl implements OrderManager {
             results = orderHistoryMapper.list(orderHistoryEntity, page);
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
-            throw new ManagerException("OrderHistory query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，订单历史查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -202,7 +202,7 @@ public class OrderManagerImpl implements OrderManager {
         List<OrderHistoryBo> convertedResults = new ArrayList<OrderHistoryBo>();
         for (OrderHistoryEntityExt result : results) {
             if (IdChecker.notEqual(result.getUserId(), userEntity.getId())) {
-                throw new ManagerException("此订单历史不属于这个用户");
+                throw new ManagerException("对不起，您无权查看他人的订单历史");
             }
             convertedResults.add(OrderHistoryConverter.toBo(result));
         }
@@ -218,26 +218,26 @@ public class OrderManagerImpl implements OrderManager {
         try {
             order = orderMapper.getById(orderBo.getId());
             if (order == null || IdChecker.isNull(order.getId())) {
-                throw new OrderNotFoundException("Order is not found");
+                throw new OrderNotFoundException("对不起，无法找到ID为" + orderBo.getId() + "的订单");
             }
 
             if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
                 LOGGER.warn(String.format("[OrderManagerImpl]system admin || admin[%s] call queryOrderById at " + new Date(), userBo.getName()));
             } else {
                 if (IdChecker.isNull(order.getBookingId())) {
-                    throw new ManagerException("Order with id: " + order.getId() + " has invalid booking id: " + order.getBookingId());
+                    throw new ManagerException("对不起，改订单ID无效，请联系客服");
                 }
                 BookingEntity booking = bookingMapper.getById(order.getBookingId());
                 if (booking == null || IdChecker.isNull(booking.getId())) {
-                    throw new BookingNotFoundException("Order with id: " + order.getId() + " can not find corresponding booking with id: " + order.getBookingId());
+                    throw new BookingNotFoundException("对不起，无法找到当前订单对应ID为" + order.getBookingId() + "的预订");
                 }
                 if (IdChecker.notEqual(booking.getUserId(), userBo.getId())) {
-                    throw new AuthenticationException("User querying someone else's booking's order by id");
+                    throw new AuthenticationException("对不起，您无法查询他人预订的订单");
                 }
             }
 
         } catch (Exception e) {
-            throw new ManagerException("query order failed");
+            throw new ManagerException("对不起，订单查询失败，请稍后再试");
         }
         return OrderConverter.toBo(order);
     }

@@ -133,7 +133,7 @@ public class AccountManagerImpl implements AccountManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (accountEntity == null || IdChecker.notEqual(accountEntity.getId(), userEntity.getId())) {
-                throw new AuthenticationException("对不起，您无权查看他人的账户");
+                throw new AuthenticationException("对不起，您无权查询他人的账户");
             }
         }
 
@@ -172,7 +172,7 @@ public class AccountManagerImpl implements AccountManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (accountHistoryEntity == null || IdChecker.notEqual(accountHistoryEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("对不起，您无权查看他人的账户历史记录");
+                throw new AuthenticationException("对不起，您无权查询他人的账户历史记录");
             }
         }
 
