@@ -133,8 +133,7 @@ public class CourseManagerImpl implements CourseManager {
                 throw new ManagerException("course template is not online");
             }
             // 判断course/原价/ishangke价格是否与模版一致
-            if (!courseTemplateEntity.getCourseName().equals(course.getCourseName()) || !courseTemplateEntity.getPrice().equals(course.getPrice())
-                    || !courseTemplateEntity.getOriginalPrice().equals(course.getOriginalPrice())) {
+            if (!courseTemplateEntity.getCourseName().equals(course.getCourseName()) || !courseTemplateEntity.getPrice().equals(course.getPrice()) || !courseTemplateEntity.getOriginalPrice().equals(course.getOriginalPrice())) {
                 throw new ManagerException("cannot modify course name or price or origin price, must equal course template");
             }
             // 验证教师信息和classphoto信息是否属于本机构
@@ -227,8 +226,7 @@ public class CourseManagerImpl implements CourseManager {
                         throw new ManagerException("failed when query photo");
                     }
                     if (photoEntity == null) {
-                        LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(),
-                                photoEntity == null ? null : photoEntity.getId()));
+                        LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] cannot found", userBo.getId(), photoEntity == null ? null : photoEntity.getId()));
                     }
                     if (IdChecker.notEqual(photoEntity.getPartnerId(), courseBo.getPartnerId())) {
                         LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal photo, photo [%d] belong [%d]", userBo.getId(), photoEntity.getId(), photo.getPartnerId()));
@@ -245,12 +243,10 @@ public class CourseManagerImpl implements CourseManager {
                         throw new ManagerException("failed when query teacher");
                     }
                     if (teacherEntity == null) {
-                        LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null
-                                : teacherEntity.getId()));
+                        LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] cannot found", userBo.getId(), teacherEntity == null ? null : teacherEntity.getId()));
                     }
                     if (IdChecker.notEqual(teacherEntity.getPartnerId(), courseBo.getPartnerId())) {
-                        LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(),
-                                teacherEntity.getPartnerId()));
+                        LOGGER.warn(String.format("[create course] ishangke admin [%d] try to use illegal teacher, teacher [%d] belong [%d]", userBo.getId(), teacherEntity.getId(), teacherEntity.getPartnerId()));
                     }
                 }
             }
@@ -264,8 +260,35 @@ public class CourseManagerImpl implements CourseManager {
                 int result = 0;
                 result = courseMapper.add(course);
                 if (result > 0) {
-                    LOGGER.warn(String.format("[create course] ishangke admin or system admin [%d] crate course template for partner [%d], course id is [%d]", userBo.getId(), courseBo.getId(),
-                            course.getId()));
+                    LOGGER.warn(String.format("[create course] ishangke admin or system admin [%d] crate course template for partner [%d], course id is [%d]", userBo.getId(), courseBo.getId(), course.getId()));
+                    // 插入classphoto关联
+                    if (classPhotos != null) {
+                        for (ClassPhotoEntityExt photo : classPhotos) {
+                            try {
+                                CourseClassPhotoEntityExt courseClassPhotoEntityExt = new CourseClassPhotoEntityExt();
+                                courseClassPhotoEntityExt.setClassPhotoId(photo.getId());
+                                courseClassPhotoEntityExt.setCourseId(course.getId());
+                                courseClassPhotoEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                                coursePhotoMapper.add(courseClassPhotoEntityExt);
+                            } catch (Exception e) {
+                                throw new ManagerException("failed when add photo course relationship");
+                            }
+                        }
+                    }
+                    // 插入teacher关联
+                    if (teachers != null) {
+                        for (TeacherEntityExt teacher : teachers) {
+                            try {
+                                CourseTeacherEntityExt courseTeacherEntityExt = new CourseTeacherEntityExt();
+                                courseTeacherEntityExt.setTeacherId(teacher.getId());
+                                courseTeacherEntityExt.setCourseId(course.getId());
+                                courseTeacherEntityExt.setCreateTime(DateUtility.getCurTimeInstance());
+                                courseTeacherMapper.add(courseTeacherEntityExt);
+                            } catch (Exception e) {
+                                throw new ManagerException("failed when add teacher course relationship");
+                            }
+                        }
+                    }
                     return CourseConverter.toBo(courseMapper.getInfoById(course.getId()));
                 } else {
                     throw new ManagerException("Course Create Failed");
