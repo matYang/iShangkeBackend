@@ -54,7 +54,7 @@ public class PartnerManagerImpl implements PartnerManager {
     // public data, does not check permission
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
@@ -81,7 +81,7 @@ public class PartnerManagerImpl implements PartnerManager {
     // public data, does not check permission
     public PartnerBo queryById(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
         PartnerEntityExt result = null;
@@ -100,7 +100,7 @@ public class PartnerManagerImpl implements PartnerManager {
     @Override
     public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 更新partner记录
@@ -118,7 +118,7 @@ public class PartnerManagerImpl implements PartnerManager {
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -133,7 +133,7 @@ public class PartnerManagerImpl implements PartnerManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         if (IdChecker.isNull(partnerEntity.getId())) {
@@ -154,7 +154,7 @@ public class PartnerManagerImpl implements PartnerManager {
     @Override
     public PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo) {
         if (partnerBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 验证用户是否为admin

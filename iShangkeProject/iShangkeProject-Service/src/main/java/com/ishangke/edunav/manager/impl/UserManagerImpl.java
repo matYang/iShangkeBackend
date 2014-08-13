@@ -87,7 +87,7 @@ public class UserManagerImpl implements UserManager {
     private UserBo initializeNormalUser(UserBo userBo, int groupId, String uniqueIdentifier, boolean notify) {
         // 参数验证
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 插入新的USER
@@ -223,7 +223,7 @@ public class UserManagerImpl implements UserManager {
     public UserBo registerUser(UserBo userBo, SessionBo sessionBo) {
         // 参数验证
         if (userBo == null || sessionBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         boolean isValid = authManager.validateCellVerificationSession(sessionBo.getAccountIdentifier(), sessionBo.getAuthCode());
@@ -277,7 +277,7 @@ public class UserManagerImpl implements UserManager {
     public UserBo createUser(UserBo targetUser, UserBo currentUser) {
         // Check Null
         if (targetUser == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         if (authManager.isAdmin(currentUser.getId()) || authManager.isSystemAdmin(currentUser.getId())) {
@@ -324,7 +324,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser) {
         if (targetUser == null || partner == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Check Null
@@ -390,7 +390,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public SessionBo openCellSession(UserBo userBo) {
         if (userBo == null || userBo.getPhone() == null || userBo.getPhone().length() == 0) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt searchEntity = new UserEntityExt();
@@ -419,7 +419,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public SessionBo openForgetPasswordSession(UserBo userBo) {
         if (userBo == null || userBo.getPhone() == null || userBo.getPhone().length() == 0) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt searchEntity = new UserEntityExt();
@@ -449,7 +449,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public SessionBo recoverPassword(PasswordBo passwordBo) {
         if (passwordBo == null || passwordBo.getAccountIdentifier() == null || passwordBo.getAuthCode() == null || passwordBo.getNewPassword() == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt searchEntity = new UserEntityExt();
@@ -508,7 +508,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public SessionBo changePassword(PasswordBo passwordBo) {
         if (passwordBo == null || IdChecker.isNull(passwordBo.getId()) || passwordBo.getNewPassword() == null || passwordBo.getOldPassword() == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         //public function, no permission check
         
@@ -549,7 +549,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public UserBo authenticate(SessionBo sessionBo) {
         if (sessionBo == null || sessionBo.getAuthCode() == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         boolean isValid = authManager.validateAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
@@ -574,7 +574,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public void disposeSession(SessionBo sessionBo) {
         if (sessionBo == null || IdChecker.isNull(sessionBo.getId()) || sessionBo.getAuthCode() == null || sessionBo.getAuthCode().length() == 0) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         
         try {
@@ -588,7 +588,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public SessionBo loginByUser(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt curUser = null;
@@ -644,7 +644,7 @@ public class UserManagerImpl implements UserManager {
     // reference is reference only
     public SessionBo loginByReference(LoginBo loginBo) {
         if (loginBo == null || loginBo.getAccountIdentifier() == null || loginBo.getPassword() == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt curUser = null;
@@ -688,7 +688,7 @@ public class UserManagerImpl implements UserManager {
     public UserBo deleteUser(UserBo targetUser, UserBo currentUser) {
         // Check Null
         if (targetUser == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt targetUserEntity = UserConverter.fromBo(targetUser);
@@ -717,7 +717,7 @@ public class UserManagerImpl implements UserManager {
     public UserBo updateUser(UserBo targetUser, UserBo currentUser) {
         // Check Null
         if (targetUser == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt targetUserEntity = UserConverter.fromBo(targetUser);
@@ -758,7 +758,7 @@ public class UserManagerImpl implements UserManager {
     public UserBo queryUserInfo(UserBo queryUser, UserBo currentUser) {
         // Check Null
         if (queryUser == null || currentUser == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt queryUserEntity = UserConverter.fromBo(queryUser);
@@ -790,7 +790,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public List<UserBo> queryUser(UserBo queryUser, UserBo currentUser, PaginationBo paginationBo) {
         if (currentUser == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         UserEntityExt queryUserEntity = queryUser == null ? null : UserConverter.fromBo(queryUser);
@@ -825,7 +825,7 @@ public class UserManagerImpl implements UserManager {
     public int getPartnerIdByUserId(int userId) {
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userId);
         if (groupList == null) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         for (GroupEntityExt g : groupList) {
             return g.getPartnerId();

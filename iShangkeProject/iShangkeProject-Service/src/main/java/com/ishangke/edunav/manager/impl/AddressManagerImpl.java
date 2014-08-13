@@ -45,12 +45,12 @@ public class AddressManagerImpl implements AddressManager {
     public AddressBo createAddress(AddressBo addressBo, UserBo userBo) {
         // Check Null
         if (userBo == null || addressBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -64,9 +64,8 @@ public class AddressManagerImpl implements AddressManager {
                 }
             }
         }
-
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         // Convert
@@ -74,7 +73,7 @@ public class AddressManagerImpl implements AddressManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(addressEntity.getPartnerId())) {
-            throw new ManagerException("Address creation must specify partner");
+            throw new ManagerException("创建校区地址时必须标注合作商ID");
         }
         addressEntity.setCreateTime(DateUtility.getCurTimeInstance());
         addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -84,14 +83,15 @@ public class AddressManagerImpl implements AddressManager {
         int result = 0;
         try {
             result = addressMapper.add(addressEntity);
-
         } catch (Throwable t) {
-            throw new ManagerException("Address creation failed for user: " + userEntity.getId(), t);
+            LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
+            throw new ManagerException("对不起，创建校区地址失败，请稍后再试", t);
         }
         if (result > 0) {
             return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
         } else
-            throw new ManagerException("Address creation failed for user: " + userEntity.getId());
+            LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
+            throw new ManagerException("对不起，创建校区地址失败，请稍后再试");
 
     }
 
@@ -99,7 +99,7 @@ public class AddressManagerImpl implements AddressManager {
     public AddressBo updateAddress(AddressBo addressBo, UserBo userBo) {
         // Check Null
         if (userBo == null || addressBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
@@ -107,16 +107,16 @@ public class AddressManagerImpl implements AddressManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(addressEntity.getId())) {
-            throw new ManagerException("Address update must specify id");
+            throw new ManagerException("更新校区地址时必须标注校区地址ID");
         }
         AddressEntityExt previousAddress = addressMapper.getById(addressEntity.getId());
         if (previousAddress == null) {
-            throw new AddressNotFoundException("Address to update is not found with id:" + addressEntity.getId());
+            throw new AddressNotFoundException("对不起，没有找到ID为" + addressEntity.getId() + "的校区地址");
         }
 
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -131,7 +131,7 @@ public class AddressManagerImpl implements AddressManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         addressEntity.setPartnerId(null);
@@ -141,7 +141,8 @@ public class AddressManagerImpl implements AddressManager {
         try {
             addressMapper.update(addressEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Address update failed for user: " + userEntity.getId(), t);
+            LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
+            throw new ManagerException("对不起，更新校区地址失败，请稍后再试", t);
         }
 
         return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
@@ -151,23 +152,23 @@ public class AddressManagerImpl implements AddressManager {
     public AddressBo deleteAddress(AddressBo addressBo, UserBo userBo) {
         // Check Null
         if (userBo == null || addressBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // Convert
         AddressEntityExt addressEntity = AddressConverter.fromBo(addressBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(addressEntity.getId())) {
-            throw new ManagerException("Address deletion must specify id");
+            throw new ManagerException("删除校区地址时必须标注校区地址ID");
         }
         AddressEntityExt previousAddress = addressMapper.getById(addressEntity.getId());
         if (previousAddress == null) {
-            throw new AddressNotFoundException("Address to delete is not found with id:" + addressEntity.getId());
+            throw new AddressNotFoundException("对不起，没有找到ID为" + addressEntity.getId() + "的校区地址");
         }
 
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -182,14 +183,15 @@ public class AddressManagerImpl implements AddressManager {
             }
         }
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         try {
             previousAddress.setDeleted(1);
             addressMapper.deleteById(previousAddress.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Address deletion failed for user: " + userEntity.getId(), t);
+            LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
+            throw new ManagerException("对不起，删除校区地址失败，请稍后再试", t);
         }
 
         return AddressConverter.toBo(previousAddress);
@@ -198,13 +200,13 @@ public class AddressManagerImpl implements AddressManager {
     @Override
     public List<AddressBo> query(AddressBo addressBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 验证用户是否属于此partner
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
         if (groupList == null || groupList.size() == 0) {
-            throw new ManagerException("unlogin user");
+            throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
         }
         boolean isSameGroup = false;
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -212,7 +214,7 @@ public class AddressManagerImpl implements AddressManager {
             LOGGER.warn(String.format("[AddressManagerImpl]system admin || admin[%s] call query at " + new Date(), userBo.getName()));
         } else {
             if (addressBo == null) {
-                throw new ManagerException("AddressBo null for non-admin user at query");
+                throw new ManagerException("非管理员用户无权查询全部校区地址");
             }
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), addressBo.getPartnerId())) {
@@ -223,7 +225,7 @@ public class AddressManagerImpl implements AddressManager {
         }
 
         if (isSameGroup == false) {
-            throw new ManagerException("Invalid user");
+            throw new ManagerException("对不起，您无权执行该请求");
         }
 
         // Convert
@@ -235,7 +237,8 @@ public class AddressManagerImpl implements AddressManager {
         try {
             results = addressMapper.list(addressEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Address query failed for user: " + userEntity.getId(), t);
+            LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
+            throw new ManagerException("对不起，校区地址查询失败，请稍后再试", t);
         }
 
         if (results == null) {

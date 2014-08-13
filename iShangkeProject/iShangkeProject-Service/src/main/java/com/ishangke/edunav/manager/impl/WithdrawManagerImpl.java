@@ -45,7 +45,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
     public WithdrawBo createWithdraw(WithdrawBo withdrawBo, final UserBo userBo) {
         // 参数验证
         if (withdrawBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 插入新的WITHDRAW记录
@@ -81,7 +81,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
     public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, final UserBo userBo) {
         // 参数验证
         if (withdrawBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 更新WITHDRAW记录
@@ -120,7 +120,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
     public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, final UserBo userBo) {
         // 参数验证
         if (withdrawBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 删除WITHDRAW记录
@@ -155,7 +155,7 @@ public class WithdrawManagerImpl implements WithdrawManager {
     @Override
     public List<WithdrawBo> query(final WithdrawBo withdrawBo, final UserBo userBo, final PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         WithdrawEntityExt withdrawEntity = withdrawBo == null ? null : WithdrawConverter.fromBo(withdrawBo);

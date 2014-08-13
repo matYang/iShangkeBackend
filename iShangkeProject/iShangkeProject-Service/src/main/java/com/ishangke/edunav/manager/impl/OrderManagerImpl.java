@@ -56,7 +56,7 @@ public class OrderManagerImpl implements OrderManager {
     @Override
     public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         // 插入新的order记录
@@ -102,7 +102,7 @@ public class OrderManagerImpl implements OrderManager {
     @Override
     public OrderBo acceptOrderByAdmin(OrderBo orderBo, CommentOrderBo commentOrderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
 
         OrderEntityExt orderEntity = OrderConverter.fromBo(orderBo);
@@ -133,7 +133,7 @@ public class OrderManagerImpl implements OrderManager {
     @Override
     public List<OrderBo> query(OrderBo orderBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         OrderEntityExt orderEntity = orderBo == null ? null : OrderConverter.fromBo(orderBo);
         BookingEntityExt bookingEntity = bookingBo == null ? null : BookingConverter.fromBo(bookingBo);
@@ -173,7 +173,7 @@ public class OrderManagerImpl implements OrderManager {
     @Override
     public List<OrderHistoryBo> queryHistory(OrderHistoryBo orderHistoryBo, BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo) {
         if (userBo == null) {
-            throw new ManagerException("Invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         OrderHistoryEntityExt orderHistoryEntity = orderHistoryBo == null ? null : OrderHistoryConverter.fromBo(orderHistoryBo);
         BookingEntityExt bookingEntity = bookingBo == null ? null : BookingConverter.fromBo(bookingBo);
@@ -212,7 +212,7 @@ public class OrderManagerImpl implements OrderManager {
     @Override
     public OrderBo queryById(OrderBo orderBo, UserBo userBo) {
         if (orderBo == null || userBo == null) {
-            throw new ManagerException("invalid parameter");
+            throw new ManagerException("无效请求参数");
         }
         OrderEntityExt order = null;
         try {
