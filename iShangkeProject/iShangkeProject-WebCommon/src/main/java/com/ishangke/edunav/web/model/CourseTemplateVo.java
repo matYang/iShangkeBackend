@@ -65,8 +65,6 @@ public class CourseTemplateVo extends JsonResponse {
 
     private Integer finishTime2;
 
-    private String regLocation;
-
     private String reference;
 
     private String courseIntro;
@@ -461,14 +459,6 @@ public class CourseTemplateVo extends JsonResponse {
 
     public void setFinishTime2(Integer finishTime2) {
         this.finishTime2 = finishTime2;
-    }
-
-    public String getRegLocation() {
-        return regLocation;
-    }
-
-    public void setRegLocation(String regLocation) {
-        this.regLocation = regLocation;
     }
 
     public String getReference() {
