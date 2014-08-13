@@ -198,7 +198,7 @@ public class PartnerManagerImpl implements PartnerManager {
         group.setCreateTime(DateUtility.getCurTimeInstance());
         group.setLastModifyTime(DateUtility.getCurTimeInstance());
         //插两种不同的group
-        group.setName((partnerEntity.getWholeName() != null ? partnerEntity.getWholeName() : "") + Constant.ROLEPARTNERADMIN);
+        group.setName((partnerEntity.getInstName() != null ? partnerEntity.getInstName() : "") + Constant.ROLEPARTNERADMIN);
         group.setRoleId(Constant.ROLEPARTNERADMINID);
         int i = 0;
         i = groupMapper.add(group);
