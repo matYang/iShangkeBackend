@@ -85,13 +85,13 @@ public class AddressManagerImpl implements AddressManager {
             result = addressMapper.add(addressEntity);
         } catch (Throwable t) {
             LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
-            throw new ManagerException("对不起，创建校区地址失败，请稍后再试", t);
+            throw new ManagerException("对不起，校区地址创建失败，请稍后再试", t);
         }
         if (result > 0) {
             return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
         } else
             LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
-            throw new ManagerException("对不起，创建校区地址失败，请稍后再试");
+            throw new ManagerException("对不起，校区地址获取失败，请稍后再试");
 
     }
 
@@ -142,7 +142,7 @@ public class AddressManagerImpl implements AddressManager {
             addressMapper.update(addressEntity);
         } catch (Throwable t) {
             LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
-            throw new ManagerException("对不起，更新校区地址失败，请稍后再试", t);
+            throw new ManagerException("对不起，校区地址更新失败，请稍后再试", t);
         }
 
         return AddressConverter.toBo(addressMapper.getById(addressEntity.getId()));
@@ -191,7 +191,7 @@ public class AddressManagerImpl implements AddressManager {
             addressMapper.deleteById(previousAddress.getId());
         } catch (Throwable t) {
             LOGGER.warn("[AddressManagerImpl] error for user " + userEntity.getId() + "at" + new Date());
-            throw new ManagerException("对不起，删除校区地址失败，请稍后再试", t);
+            throw new ManagerException("对不起，校区地址删除失败，请稍后再试", t);
         }
 
         return AddressConverter.toBo(previousAddress);

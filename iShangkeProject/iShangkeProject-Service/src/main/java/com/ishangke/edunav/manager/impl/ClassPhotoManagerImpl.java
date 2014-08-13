@@ -75,7 +75,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(classPhotoEntity.getPartnerId())) {
-            throw new ManagerException("ClassPhoto creation must specify partner");
+            throw new ManagerException("创建机构图片时必须标注合作商");
         }
         classPhotoEntity.setCreateTime(DateUtility.getCurTimeInstance());
         classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -85,12 +85,12 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         try {
             result = classPhotoMapper.add(classPhotoEntity);
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto creation failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，机构图片创建失败，请稍后再试", t);
         }
         if (result > 0) {
             return ClassPhotoConverter.toBo(classPhotoMapper.getById(classPhotoEntity.getId()));
         } else {
-            throw new ManagerException("ClassPhoto creation failed for user: " + userEntity.getId());
+            throw new ManagerException("对不起，机构图片获取失败，请稍后再试");
         }
     }
 
@@ -106,11 +106,11 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(classPhotoEntity.getId())) {
-            throw new ManagerException("ClassPhoto update must specify id");
+            throw new ManagerException("更新机构图片时必须标注机构图片ID");
         }
         ClassPhotoEntityExt previousClassPhoto = classPhotoMapper.getById(classPhotoEntity.getId());
         if (previousClassPhoto == null) {
-            throw new ClassPhotoNotFoundException("ClassPhoto to update is not found with id:" + classPhotoEntity.getId());
+            throw new ClassPhotoNotFoundException("对不起，没有找到ID为" +  classPhotoEntity.getId() + "的机构图片");
         }
 
         // 机构管理员只能给本机构上传图片
@@ -141,7 +141,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         try {
             classPhotoMapper.update(classPhotoEntity);
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto update failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，机构图片更新失败，请稍后再试", t);
         }
         return ClassPhotoConverter.toBo(classPhotoMapper.getById(classPhotoEntity.getId()));
     }
@@ -157,11 +157,11 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         ClassPhotoEntityExt classPhotoEntity = ClassPhotoConverter.fromBo(classPhotoBo);
         UserEntity userEntity = UserConverter.fromBo(userBo);
         if (IdChecker.isNull(classPhotoEntity.getId())) {
-            throw new ManagerException("ClassPhoto deletion must specify id");
+            throw new ManagerException("删除机构图片时必须标注机构图片ID");
         }
         ClassPhotoEntityExt previousClassPhoto = classPhotoMapper.getById(classPhotoEntity.getId());
         if (previousClassPhoto == null) {
-            throw new ClassPhotoNotFoundException("ClassPhoto to delete is not found with id:" + classPhotoEntity.getId());
+            throw new ClassPhotoNotFoundException("对不起，无法找到ID为" + classPhotoEntity.getId() + "的机构图片");
         }
 
         // 机构管理员只能删除本机构图片
@@ -190,7 +190,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             previousClassPhoto.setDeleted(1);
             classPhotoMapper.deleteById(previousClassPhoto.getId());
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto deletion failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，机构图片删除失败，请稍后再试", t);
         }
         return ClassPhotoConverter.toBo(previousClassPhoto);
     }
@@ -212,7 +212,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             LOGGER.warn(String.format("[ClassPhotoManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
         } else {
             if (classPhotoBo == null) {
-                throw new ManagerException("ClassPhotoBo null for non-admin user at query");
+                throw new ManagerException("非管理员用户无权查询全部课程图片");
             }
             for (GroupEntityExt g : groupList) {
                 if (IdChecker.isEqual(g.getPartnerId(), classPhotoBo.getPartnerId())) {
@@ -235,7 +235,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         try {
             results = classPhotoMapper.list(classPhotoEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，课程图片查询失败，请稍后再试", t);
         }
         if (results == null) {
             return new ArrayList<ClassPhotoBo>();
@@ -263,7 +263,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto listByCourseId Failed", t);
+            throw new ManagerException("对不起，按照课程查询机构图片失败，请稍后再试", t);
         }
     }
 
@@ -283,7 +283,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto listByCourseTemplateId Failed", t);
+            throw new ManagerException("对不起，按照课程模板查询机构图片失败，请稍后再试", t);
         }
     }
 
@@ -326,7 +326,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("ClassPhoto listByPartnerId Failed", t);
+            throw new ManagerException("对不起，按照合作商查询机构图片失败，请稍后再试", t);
         }
     }
 

@@ -31,7 +31,7 @@ public class CategoryManagerImpl implements CategoryManager {
         try {
             results = categoryMapper.list(categoryEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Category query failed", t);
+            throw new ManagerException("对不起，类目信息获取失败，请稍后再试", t);
         }
 
         if (results == null) {

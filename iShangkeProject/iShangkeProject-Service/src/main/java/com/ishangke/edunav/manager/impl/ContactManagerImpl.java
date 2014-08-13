@@ -56,7 +56,7 @@ public class ContactManagerImpl implements ContactManager {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call createContact at " + new Date(), userBo.getName()));
         } else {
             if (contactEntity == null || IdChecker.notEqual(contactEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User creating someone else's contact");
+                throw new AuthenticationException("对不起，您无权创建他人的常用学员");
             }
         }
 
@@ -68,12 +68,12 @@ public class ContactManagerImpl implements ContactManager {
         try {
             result = contactMapper.add(contactEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Contact creation failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，常用学员创建失败，请稍后再试", t);
         }
         if (result > 0) {
             return ContactConverter.toBo(contactMapper.getById(contactEntity.getId()));
         } else {
-            throw new ManagerException("Contact creation failed for user: " + userEntity.getId());
+            throw new ManagerException("对不起，常用学员获取失败，请稍后再试");
         }
     }
 
@@ -89,18 +89,18 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
         if (IdChecker.isNull(contactEntity.getId())) {
-            throw new ManagerException("Contact update must specify id");
+            throw new ManagerException("更新常用学员时必须标注常用学员ID");
         }
         ContactEntityExt previousContact = contactMapper.getById(contactEntity.getId());
         if (previousContact == null) {
-            throw new ContactNotFoundException("Contact to update is not found with id:" + contactEntity.getId());
+            throw new ContactNotFoundException("对不起，无法找到ID为" + contactEntity.getId() + "的常用学员");
         }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call updateContact at " + new Date(), userBo.getName()));
         } else {
             if (IdChecker.notEqual(previousContact.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User updating someone else's contact");
+                throw new AuthenticationException("对不起，您无权更改他人的常用学员");
             }
         }
 
@@ -112,7 +112,7 @@ public class ContactManagerImpl implements ContactManager {
         try {
             contactMapper.update(contactEntity);
         } catch (Throwable t) {
-            throw new ManagerException("Contact update failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，常用学员更新失败，请稍后再试", t);
         }
 
         return ContactConverter.toBo(contactMapper.getById(contactEntity.getId()));
@@ -130,18 +130,18 @@ public class ContactManagerImpl implements ContactManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         
         if (IdChecker.isNull(contactEntity.getId())) {
-            throw new ManagerException("Contact deletion must specify id");
+            throw new ManagerException("删除常用学员时必须标注常用学员ID");
         }
         ContactEntityExt previousContact = contactMapper.getById(contactEntity.getId());
         if (previousContact == null) {
-            throw new ContactNotFoundException("Contact to delete is not found with id:" + contactEntity.getId());
+            throw new ContactNotFoundException("对不起，无法找到ID为" + contactEntity.getId() + "的常用学员");
         }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[ContactManagerImpl]system admin || admin [%s] call deleteContact at " + new Date(), userBo.getName()));
         } else {
             if (IdChecker.notEqual(previousContact.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User deleting someone else's contact");
+                throw new AuthenticationException("对不起，您无权删除他人的常用学员");
             }
         }
 
@@ -149,7 +149,7 @@ public class ContactManagerImpl implements ContactManager {
             previousContact.setDeleted(1);
             contactMapper.deleteById(previousContact.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Contact deletion failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，常用学员删除失败，请稍后再试", t);
         }
 
         return ContactConverter.toBo(previousContact);
@@ -170,7 +170,7 @@ public class ContactManagerImpl implements ContactManager {
         } else {
             // otherwise user can only query their own, thus making an UserId necessary
             if (contactEntity == null || IdChecker.notEqual(contactEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User querying someone else's contact");
+                throw new AuthenticationException("对不起，您无权查询他人的常用学员");
             }
         }
 
@@ -178,7 +178,7 @@ public class ContactManagerImpl implements ContactManager {
         try {
             results = contactMapper.list(contactEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Contact query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，常用学员查询失败，请稍后再试", t);
         }
 
         if (results == null) {
