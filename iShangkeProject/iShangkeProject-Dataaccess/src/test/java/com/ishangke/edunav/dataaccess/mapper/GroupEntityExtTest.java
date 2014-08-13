@@ -208,4 +208,10 @@ public class GroupEntityExtTest extends BaseTest {
         Assert.assertEquals(DateUtility.toSQLDateTime(time),
                 DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
+    
+    @Test
+    public void testGetByPartnerAndRole() {
+        GroupEntityExt group = groupEntityExtMapper.getByPartnerIdAndRoleId(9, 3);
+//        System.out.println(group.getId());
+    }
 }

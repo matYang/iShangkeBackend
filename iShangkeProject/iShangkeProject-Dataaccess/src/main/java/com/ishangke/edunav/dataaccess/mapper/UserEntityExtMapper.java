@@ -34,4 +34,8 @@ public interface UserEntityExtMapper {
     public UserEntityExt getByPhone(@Param("entity") UserEntityExt userEntityExt);
     
     public UserEntityExt getByReference(@Param("entity") UserEntityExt userEntityExt);
+    
+    public List<UserEntityExt> listByPartnerIdAndRoleId(@Param("partnerId")int partnerId, @Param("roleId")int roleId, @Param("page") PaginationEntity page);
+    
+    public int getCountByPartnerIdAndRoleId(@Param("partnerId")int partnerId, @Param("roleId")int roleId);
 }
