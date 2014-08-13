@@ -237,6 +237,9 @@ public class OrderManagerImpl implements OrderManager {
             }
 
         } catch (Exception e) {
+            if (e instanceof ManagerException) {
+                throw e;
+            }
             throw new ManagerException("对不起，订单查询失败，请稍后再试");
         }
         return OrderConverter.toBo(order);

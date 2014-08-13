@@ -103,14 +103,16 @@ public class CreditManagerImpl implements CreditManager {
         creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditEntity.setCreateTime(null);
         creditEntity.setDeleted(null);
+        
+        int historyResult = 0;
         try {
             creditMapper.update(creditEntity);
-            int historyResult = creditHistoryMapper.add(creditHistory);
-            if (historyResult <= 0) {
-                throw new ManagerException("对不起，积分历史记录创建失败，请稍后再试");
-            }
+            historyResult = creditHistoryMapper.add(creditHistory);
         } catch (Throwable t) {
             throw new ManagerException("对不起，积分更改失败，请稍后再试", t);
+        }
+        if (historyResult <= 0) {
+            throw new ManagerException("对不起，积分历史记录创建失败，请稍后再试");
         }
 
         return CreditConverter.toBo(creditMapper.getById(creditEntity.getId()));

@@ -187,6 +187,9 @@ public class PartnerManagerImpl implements PartnerManager {
 
         } catch (Throwable t) {
             LOGGER.warn(t.getMessage(), t);
+            if (t instanceof ManagerException) {
+                throw t;
+            }
             throw new ManagerException("对不起，合作机构创建失败，请稍后再试", t);
         }
         // 创建关于此partner的两个group 分别对应 partner admin 和 partner wenyuan
