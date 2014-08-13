@@ -247,13 +247,23 @@ public class UserManagerImpl implements UserManager {
         if (entityPhoneInDb != null && IdChecker.notNull(entityPhoneInDb.getId())) {
             throw new ManagerException("Phone number: " + userBo.getPhone() + " is already in db");
         }
-
+        
         // 判断InvitationCode是否已经存在
         UserEntityExt entityInvitationCodeInDb = new UserEntityExt();
         entityInvitationCodeInDb.setInvitationCode(userBo.getInvitationCode());
         entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
         if (entityInvitationCodeInDb != null && IdChecker.notNull(entityInvitationCodeInDb.getId())) {
             throw new ManagerException("Invitation code:" + userBo.getInvitationCode() + " is already in db");
+        }
+        
+        
+        if (userBo.getReference() != null) {
+            UserEntityExt entityReferenceInDb = new UserEntityExt();
+            entityReferenceInDb.setReference(userBo.getReference());
+            entityReferenceInDb = userMapper.getByReference(entityReferenceInDb);
+            if (entityReferenceInDb != null && IdChecker.notNull(entityReferenceInDb.getId())) {
+                throw new ManagerException("Reference:" + userBo.getReference() + " is already in db");
+            }
         }
 
         UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
@@ -275,6 +285,9 @@ public class UserManagerImpl implements UserManager {
         } else {
             throw new AuthenticationException("Non-admin user trying to create user");
         }
+        if (targetUser.getPhone() == null && targetUser.getInvitationCode() == null && targetUser.getReference() == null) {
+            throw new ManagerException("User creation must specify at least one of phone, invitationCode, and reference");
+        }
         if (targetUser.getPassword() == null) {
             throw new ManagerException("User creation must specify password");
         }
@@ -293,6 +306,14 @@ public class UserManagerImpl implements UserManager {
             entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
             if (entityInvitationCodeInDb != null && IdChecker.notNull(entityInvitationCodeInDb.getId())) {
                 throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+            }
+        }
+        if (targetUser.getReference() != null) {
+            UserEntityExt entityReferenceInDb = new UserEntityExt();
+            entityReferenceInDb.setReference(targetUser.getReference());
+            entityReferenceInDb = userMapper.getByReference(entityReferenceInDb);
+            if (entityReferenceInDb != null && IdChecker.notNull(entityReferenceInDb.getId())) {
+                throw new ManagerException("Reference:" + targetUser.getReference() + " is already in db");
             }
         }
 
@@ -337,6 +358,14 @@ public class UserManagerImpl implements UserManager {
             entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
             if (entityInvitationCodeInDb != null && IdChecker.notNull(entityInvitationCodeInDb.getId())) {
                 throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+            }
+        }
+        if (targetUser.getReference() != null) {
+            UserEntityExt entityReferenceInDb = new UserEntityExt();
+            entityReferenceInDb.setReference(targetUser.getReference());
+            entityReferenceInDb = userMapper.getByReference(entityReferenceInDb);
+            if (entityReferenceInDb != null && IdChecker.notNull(entityReferenceInDb.getId())) {
+                throw new ManagerException("Reference:" + targetUser.getReference() + " is already in db");
             }
         }
 
