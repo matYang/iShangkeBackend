@@ -64,7 +64,7 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             results = partnerMapper.list(partnerEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Partner query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -88,11 +88,11 @@ public class PartnerManagerImpl implements PartnerManager {
         try {
             result = partnerMapper.getInfoById(partnerEntity.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Partner queryById failed with id: " + partnerEntity.getId(), t);
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
 
         if (result == null) {
-            throw new PartnerNotFoundException();
+            throw new PartnerNotFoundException("对不起，无法找到ID为" + partnerEntity.getId() + "的合作机构");
         }
         return PartnerConverter.toBo(result);
     }

@@ -73,7 +73,7 @@ public class AddressManagerImpl implements AddressManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(addressEntity.getPartnerId())) {
-            throw new ManagerException("创建校区地址时必须标注合作商ID");
+            throw new ManagerException("创建校区地址时必须标注合作机构ID");
         }
         addressEntity.setCreateTime(DateUtility.getCurTimeInstance());
         addressEntity.setLastModifyTime(DateUtility.getCurTimeInstance());

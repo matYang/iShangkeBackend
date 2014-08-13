@@ -78,7 +78,7 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         // 获取当前用户橘色
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEPARTNERADMIN.equals(roleName) || Constant.ROLEPARTNERWENYUAN.equals(roleName)) {
-            // 如果是合作商管理员
+            // 如果是合作机构管理员
             // 验证userBo是否是否属于同一家机构
             List<GroupEntityExt> groupList = groupEntityExtMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {

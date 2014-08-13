@@ -503,8 +503,8 @@ public class BookingManagerImpl implements BookingManager {
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
-            // 如果是合作商管理员
-            // 合作商只能修改自己本机构的booking
+            // 如果是合作机构管理员
+            // 合作机构只能修改自己本机构的booking
             CourseEntityExt course = courseMapper.getInfoById(bookingBo.getCourseId());
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
@@ -688,7 +688,7 @@ public class BookingManagerImpl implements BookingManager {
         try {
             bookings = bookingMapper.listByPartnerId(BookingConverter.fromBo(bookingBo), partnerBo.getId(), PaginationConverter.fromBo(paginationBo));
         } catch (Exception e) {
-            throw new ManagerException("对不起，按合作商查询预订失败，请稍后再试");
+            throw new ManagerException("对不起，按合作机构查询预订失败，请稍后再试");
         }
         if (bookings == null) {
             return new ArrayList<BookingBo>();
