@@ -28,6 +28,12 @@ public class CoursePromotionConverter {
         bo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         bo.setEndTime(e.getEndTime() == null ? Constant.DEFAULTNULL : e.getEndTime().getTimeInMillis());
         bo.setStartTime(e.getStartTime() == null ? Constant.DEFAULTNULL : e.getStartTime().getTimeInMillis());
+        bo.setCreateTimeStart(e.getCreateTimeStart() == null ? Constant.DEFAULTNULL : e.getCreateTimeStart().getTimeInMillis());
+        bo.setEndTimeStart(e.getEndTimeStart() == null ? Constant.DEFAULTNULL : e.getEndTimeStart().getTimeInMillis());
+        bo.setStartTimeStart(e.getStartTimeStart() == null ? Constant.DEFAULTNULL : e.getStartTimeStart().getTimeInMillis());
+        bo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
+        bo.setEndTimeEnd(e.getEndTimeEnd() == null ? Constant.DEFAULTNULL : e.getEndTimeEnd().getTimeInMillis());
+        bo.setStartTimeEnd(e.getStartTimeEnd() == null ? Constant.DEFAULTNULL : e.getStartTimeEnd().getTimeInMillis());
         return bo;
     }
     
@@ -45,6 +51,12 @@ public class CoursePromotionConverter {
         e.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         e.setEndTime(DateUtility.getTimeFromLong(bo.getEndTime()));
         e.setStartTime(DateUtility.getTimeFromLong(bo.getStartTime()));
+        e.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
+        e.setEndTimeStart(DateUtility.getTimeFromLong(bo.getEndTimeStart()));
+        e.setStartTimeStart(DateUtility.getTimeFromLong(bo.getStartTimeStart()));
+        e.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
+        e.setEndTimeEnd(DateUtility.getTimeFromLong(bo.getEndTimeEnd()));
+        e.setStartTimeEnd(DateUtility.getTimeFromLong(bo.getStartTimeEnd()));
         return e;
     }
 }
