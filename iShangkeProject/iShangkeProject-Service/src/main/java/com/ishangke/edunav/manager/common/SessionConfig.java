@@ -3,6 +3,9 @@ package com.ishangke.edunav.manager.common;
 import java.io.Serializable;
 
 public final class SessionConfig {
+    
+    //cannot expire auth sessions, because auth sessions are chained in an arrayList, and while some can be expired, some cannot, too hard to determine
+    public static int NON_AUTH_MEMCACHED_SESSION_EXPIRE = 60 * 60 * 24;  //let a non-auth session-related memcached entry expire 1 day after its creation, eg cell, forget password
 
     /*
      * config data for session control
@@ -24,7 +27,7 @@ public final class SessionConfig {
 
         public static final int CLIENT_WEB = 0;
         public static final int CLIENT_MOBILE = 1;
-        public static final int CLIENT_WECHAR = 2;
+        public static final int CLIENT_WECHAT = 2;
 
     }
 

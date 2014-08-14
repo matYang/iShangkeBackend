@@ -68,7 +68,7 @@ public class UserController extends AbstractController {
                 this.openSession(authSessionBo, remember, req, resp);
             }
 
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+            curUser = userFacade.getCurrentUser(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -110,6 +110,7 @@ public class UserController extends AbstractController {
             responseVo = new UserVo();
             responseVo.setId(-1);
         } else {
+            userBo = userFacade.getCurrentUser(authSessionBo, permissionTag);
             responseVo = UserConverter.toModel(userBo);
         }
 

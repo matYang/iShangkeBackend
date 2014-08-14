@@ -11,6 +11,16 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface UserManager {
     
+    
+    /**
+     * 本方法为快速获取当前用户的功能。<br>
+     * API端读取用户前端存储的session string，调用该方法自动获得当前具体用户信息
+     * 
+     * @param sessionBo
+     * @return 用户具体实体 UserBo
+     * 
+     */
+    UserBo getCurrentUser(SessionBo sessionBo); 
 
     /**
      * 本方法为销毁用户session信息的功能<br>
@@ -23,10 +33,10 @@ public interface UserManager {
 
     /**
      * 本方法为普通用户提供自动识别的功能。<br>
-     * API端读取用户前端存储的session string，调用该方法自动获得当前用户信息
+     * API端读取用户前端存储的session string，调用该方法自动获得当前简略用户信息
      * 
      * @param sessionBo
-     * @return 用户实体 UserBo
+     * @return 用户简略实体 UserBo
      * 
      */
     UserBo authenticate(SessionBo sessionBo);

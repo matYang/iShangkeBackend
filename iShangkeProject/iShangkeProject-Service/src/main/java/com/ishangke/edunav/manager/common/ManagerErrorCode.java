@@ -37,6 +37,12 @@ public class ManagerErrorCode {
     public static final String USER_OPENFORGETPASSWORDSESSION_ERROR_KEY = "user_openforgetpasswordsession_error";
     public static final int USER_RECORVERPASSWORD_ERROR = 0X0001000F;
     public static final String USER_RECORVERPASSWORD_ERROR_KEY = "user_recorverpassword_error";
+    public static final int USER_AUTHENTICATE_ERROR = 0X00010010;
+    public static final String USER_AUTHENTICATE_ERROR_KEY = "user_authenticate_error";
+    public static final int USER_GETCURRENTUSER_ERROR = 0X00010011;
+    public static final String USER_GETCURRENTUSER_ERROR_KEY = "user_getcurrentuser_error";
+    
+    
     public static final int USER_NOTFOUND_ERROR = 0x00010404;
     public static final String USER_NOTFOUND_ERROR_KEY = "user_notfound_error";
 
