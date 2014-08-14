@@ -288,6 +288,14 @@
         jdbcType="TIMESTAMP" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
+    <table tableName="COURSE_PROMOTION" domainObjectName="CoursePromotionEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="START_TIME" property="startTime" javaType="java.util.Calendar"
+        jdbcType="TIMESTAMP" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar"
+        jdbcType="TIMESTAMP" />
+    </table>
   </context>
 
 </generatorConfiguration>

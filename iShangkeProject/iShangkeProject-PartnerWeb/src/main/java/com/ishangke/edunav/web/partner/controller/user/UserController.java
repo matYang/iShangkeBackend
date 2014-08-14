@@ -77,7 +77,7 @@ public class UserController extends AbstractController {
 
         responseVo = UserConverter.toModel(curUser);
         responseVo.setPartnerId(partnerId);
-        responseVo.setRole(roleId);
+        responseVo.setRoleId(roleId);
         return responseVo;
     }
 
@@ -182,7 +182,7 @@ public class UserController extends AbstractController {
         }
         responseVo = UserConverter.toModel(responseUser);
         responseVo.setPartnerId(partnerId);
-        responseVo.setRole(roleId);;
+        responseVo.setRoleId(roleId);;
         return responseVo;
     }
 

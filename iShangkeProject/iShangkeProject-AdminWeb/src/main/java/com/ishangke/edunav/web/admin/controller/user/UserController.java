@@ -258,11 +258,22 @@ public class UserController extends AbstractController {
         }
 
         UserPageViewBo responseUser = null;
-        try {
-            responseUser = userFacade.queryUser(UserConverter.fromModel(userVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
+        
+        //加入对query时对role & partner 的过滤
+        if (userVo.getRoleId() != null && userVo.getPartnerId() != null && userVo.getRoleId() > 0 && userVo.getPartnerId() > 0) {
+            try {
+                responseUser = userFacade.queryUserByPartnerIdAndRoleId(userVo.getPartnerId(), userVo.getRoleId(), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            }
+        } else {
+            try {
+                responseUser = userFacade.queryUser(UserConverter.fromModel(userVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            }
         }
+        
         responseVo = UserPageViewConverter.toModel(responseUser);
         return responseVo;
     }
