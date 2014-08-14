@@ -16,15 +16,48 @@
   <import resource="classpath*:applicationContext-commoncontract.xml" />
   <!-- Application context autoware -->
   <bean class="com.ishangke.edunav.util.ApplicationContextUtil" />
+
+  <!-- Quartz trigger configuration -->
+  <bean name="startQuertz" lazy-init="false" autowire="no"
+    class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="cleanEventTrigger"/>
+      </list>
+    </property>
+  </bean>
+  <!-- Quartz 2 configuration, fire at 00:15:00 every day -->
+  <bean id="cleanEventTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail">
+      <ref bean="cleanEventDetail" />
+    </property>
+    <property name="cronExpression">
+      <value>0 15 0 * * ? *</value>
+    </property>
+  </bean>
+  <!-- Quartz job configuration -->
+  <bean id="cleanEventDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject">
+      <ref bean="CleanEventJob" />
+    </property>
+    <property name="targetMethod">
+      <value>clean</value>
+    </property>
+  </bean>
+  <!-- Job execution class -->
+  <bean id="CleanEventJob" class="com.ishangke.edunav.clean.CleanEventJob" /> 
+
   <!-- Scans all manager class -->
-  <context:component-scan base-package="com.ishangke.edunav.manager, com.ishangke.edunav.service, com.ishangke.edunav.util" />
+  <context:component-scan
+    base-package="com.ishangke.edunav.manager, com.ishangke.edunav.service, com.ishangke.edunav.util" />
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
   </bean>
   <bean id="applicationServer" class="com.ishangke.edunav.server.ApplicationServer" />
   <tx:advice id="managerAdvice" transaction-manager="transactionManager">
     <tx:attributes>
-      <tx:method name="*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="java.lang.Exception" />
+      <tx:method name="*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED"
+        rollback-for="java.lang.Exception" />
     </tx:attributes>
   </tx:advice>
   <aop:config>
