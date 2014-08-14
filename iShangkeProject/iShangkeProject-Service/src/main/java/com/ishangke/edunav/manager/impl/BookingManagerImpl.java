@@ -243,9 +243,13 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistoryMapper.add(bookingHistory);
             // 课程预订数量统计
             CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
-            int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
-            courseTemplate.setBookingTotal((total++));
-            courseTemplateMapper.update(courseTemplate);
+            if (courseTemplate != null) {
+                int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();    
+                courseTemplate.setBookingTotal((total++));
+                courseTemplateMapper.update(courseTemplate);
+            } else {
+                LOGGER.warn(String.format("[create booking]course template for course [%d] is no longer exits", course.getId()));
+            }
         } else {
             throw new ManagerException("对不起，创建预订失败，请稍后再试");
         }
