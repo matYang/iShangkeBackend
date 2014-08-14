@@ -256,6 +256,21 @@ public class UserServiceImpl implements UserService.Iface {
             throw exception;
         }
     }
+    
+
+    @Override
+    public UserBo getCurrentUser(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.getCurrentUser(sessionBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.USER_GETCURRENTUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_GETCURRENTUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
 
     @Override
     public UserBo authenticate(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
@@ -265,8 +280,8 @@ public class UserServiceImpl implements UserService.Iface {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setMessage(e.getMessage());
-            exception.setErrorCode(ManagerErrorCode.USER_REGISTER_ERROR);
-            exception.setMessageKey(ManagerErrorCode.USER_REGISTER_ERROR_KEY);
+            exception.setErrorCode(ManagerErrorCode.USER_AUTHENTICATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_AUTHENTICATE_ERROR_KEY);
             throw exception;
         }
     }
@@ -684,5 +699,6 @@ public class UserServiceImpl implements UserService.Iface {
             throw exception;
         }
     }
+
 
 }
