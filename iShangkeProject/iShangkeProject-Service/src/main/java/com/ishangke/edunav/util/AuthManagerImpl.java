@@ -21,6 +21,7 @@ import com.ishangke.edunav.dataaccess.mapper.RoleEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.RoleEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
+import com.ishangke.edunav.manager.common.SessionConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ACConfigObj;
 import com.ishangke.edunav.manager.common.SessionConfig.AuthConfig;
@@ -401,7 +402,7 @@ public class AuthManagerImpl implements AuthManager {
             cvRecord.timeStamp = DateUtility.getCurTime();
 
             // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间缓存不过期的不稳定问题
-            cache.set(key, 0, cvRecord).get();
+            cache.set(key, SessionConfig.NON_AUTH_MEMCACHED_SESSION_EXPIRE, cvRecord).get();
             return cvRecord.authCode;
         } catch (ManagerException e) {
             LOGGER.debug("OpenCellVerificationSession", e);
@@ -475,7 +476,7 @@ public class AuthManagerImpl implements AuthManager {
             fpRecord.timeStamp = DateUtility.getCurTime();
 
             // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间不稳定的问题
-            cache.set(key, 0, fpRecord).get();
+            cache.set(key, SessionConfig.NON_AUTH_MEMCACHED_SESSION_EXPIRE, fpRecord).get();
             return fpRecord.authCode;
         } catch (ManagerException e) {
             LOGGER.debug("OpenForgetPasswordSession", e);
