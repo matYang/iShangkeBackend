@@ -551,32 +551,6 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setAuthCode(authCode);
         return sessionBo;
     }
-    
-
-    @Override
-    public UserBo getCurrentUser(SessionBo sessionBo) {
-        if (sessionBo == null || sessionBo.getAuthCode() == null) {
-            throw new ManagerException("无效请求参数");
-        }
-
-        boolean isValid = authManager.validateAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
-        UserEntityExt response = new UserEntityExt();
-        if (!isValid) {
-            response.setId(-1);
-            return UserConverter.toBo(response);
-        }
-
-        try {
-            response = userMapper.getById(sessionBo.getId());
-        } catch (Throwable t) {
-            throw new ManagerException("对不起，用户详情获取失败，请稍后再试", t);
-        }
-        if (response == null || IdChecker.isNull(response.getId())) {
-            throw new UserNotFoundException("对不起，无法找到对应用户详情");
-        }
-
-        return UserConverter.toBo(response);
-    }
 
     @Override
     public UserBo authenticate(SessionBo sessionBo) {
@@ -860,6 +834,16 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    public int queryUserTotal(UserBo queryUser) {
+        return userMapper.getListCount(UserConverter.fromBo(queryUser));
+    }
+    
+    @Override
+    public int queryUserByPartnerIdAndRoleIdTotal(int partnerId, int roleId) {
+        return userMapper.getCountByPartnerIdAndRoleId(partnerId, roleId);
+    }
+    
+    @Override
     public int getPartnerIdByUserId(int userId) {
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userId);
         if (groupList == null) {
@@ -871,5 +855,36 @@ public class UserManagerImpl implements UserManager {
         return Constant.DEFAULTNULL;
     }
 
+    @Override
+    public List<UserBo> queryUserByPartnerIdAndRoleId(int partnerId, int roleId, UserBo currentUser, PaginationBo paginationBo) {
+        if (currentUser == null) {
+            throw new ManagerException("无效请求参数");
+        }
 
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
+        UserEntityExt currentUserEntity = UserConverter.fromBo(currentUser);
+
+        // only admins are allowed here
+        if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
+            LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call queryUserByPartnerIdAndRoleId at " + new Date(), currentUserEntity.getName()));
+        } else {
+            throw new AuthenticationException("Non-admin user querying someone else's user");
+        }
+
+        List<UserEntityExt> results = null;
+        try {
+            results = userMapper.listByPartnerIdAndRoleId(partnerId, roleId, page);
+        } catch (Throwable t) {
+            throw new ManagerException("User query failed for user: " + currentUserEntity.getId(), t);
+        }
+
+        if (results == null) {
+            return new ArrayList<UserBo>();
+        }
+        List<UserBo> convertedResults = new ArrayList<UserBo>();
+        for (UserEntityExt userPo : results) {
+            convertedResults.add(UserConverter.toBo(userPo));
+        }
+        return convertedResults;
+    }
 }

@@ -206,5 +206,11 @@ public interface UserManager {
 
     int getPartnerIdByUserId(int userId);
 
+    List<UserBo> queryUserByPartnerIdAndRoleId(int partnerId, int roleId, UserBo currentUser, PaginationBo paginationBo);
+
+    int queryUserTotal(UserBo queryUser);
+
+    int queryUserByPartnerIdAndRoleIdTotal(int partnerId, int roleId);
+
 
 }

@@ -493,4 +493,21 @@ public class UserFacade {
         
         return result;
     }
+    
+    public int getRoleIdByUserId(int userId) {
+        int result = Constant.DEFAULTNULL;
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.getRoleIdByUserId(userId);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
 }

@@ -18,7 +18,6 @@ import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplatePageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.CourseService;
 import com.ishangke.edunav.manager.AuthManager;
