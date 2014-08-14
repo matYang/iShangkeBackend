@@ -2,7 +2,7 @@ package com.ishangke.edunav.common.enums;
 
 public class OrderEnums {
     public static enum Status implements EnumInterface {
-        NAIVE(0), ACCEPTED(1), FAILED(2);
+        NAIVE(0), ACCEPTED(1), FAILED(2), CANCELLED(3);
         public int code;
 
         @Override
