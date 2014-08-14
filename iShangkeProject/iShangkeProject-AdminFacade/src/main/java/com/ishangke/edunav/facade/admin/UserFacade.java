@@ -173,6 +173,24 @@ public class UserFacade {
 
         return result;
     }
+    
+    public UserPageViewBo queryUserByPartnerIdAndRoleId(int partnerId, int roleId, UserBo currentUser, PaginationBo paginationBo, String permissionTag) {
+        UserPageViewBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryUserByPartnerIdAndRoleId(partnerId, roleId, currentUser, paginationBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
     public UserBo authenticate(SessionBo sessionBo, String permissionTag) {
         UserBo result = null;
