@@ -158,6 +158,7 @@ service UserService {
      */
     user.UserPageViewBo queryUser(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: common.PaginationBo pagnationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+    user.UserPageViewBo queryUserByPartnerIdAndRoleId(1: i32 partnerId, 2: i32 roleId, 3:user.UserBo currentUser, 4: common.PaginationBo pagnationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -319,5 +320,7 @@ service UserService {
     spread.SpreadBo deleteSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     i32 getPartnerIdByUserId(1: i32 userId) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    i32 getRoleIdByUserId(1: i32 userId) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }
 

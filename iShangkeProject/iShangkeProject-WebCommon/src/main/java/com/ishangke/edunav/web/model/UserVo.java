@@ -69,6 +69,16 @@ public class UserVo extends JsonResponse {
     
     private Integer partnerId;
 
+    private Integer role;
+    
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     public Integer getMajorId() {
         return majorId;
     }
