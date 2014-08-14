@@ -111,7 +111,6 @@ public class SMSDispatcher {
     
     
     
-    
     /**
      * hide away the fact that sms is ignored, make everything as if it succeeded
      * @author Matthew
