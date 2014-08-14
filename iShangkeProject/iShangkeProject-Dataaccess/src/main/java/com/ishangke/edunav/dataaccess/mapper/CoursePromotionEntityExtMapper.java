@@ -12,7 +12,7 @@ public interface CoursePromotionEntityExtMapper {
     
     public void deleteById(int id);
     
-    public List<CoursePromotionEntityExt> listByCategoryId(@Param("categoryId") int categoryId, @Param("page") PaginationEntity page);
+    public List<CoursePromotionEntityExt> list(@Param("entity") CoursePromotionEntityExt coursePromotionEntityExt, @Param("page") PaginationEntity page);
     
-    public int getCountByCategoryId(int categortId);
+    public int getListCount(@Param("entity") CoursePromotionEntityExt coursePromotionEntityExt);
 }

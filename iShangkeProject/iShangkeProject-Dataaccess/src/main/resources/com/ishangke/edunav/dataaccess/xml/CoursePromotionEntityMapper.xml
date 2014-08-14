@@ -86,11 +86,69 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <!-- listByCategoryId -->
-  <select id="listByCategoryId" parameterType="map" resultMap="CoursePromotionExtMap">
+  <!-- list -->
+  <select id="list" parameterType="map" resultMap="CoursePromotionExtMap">
     select
     <include refid="Course_Promotion_Base_Column_List" />
-    from COURSE_PROMOTION where COURSE_PROMOTION.CATEGORY_ID = #{categoryId,jdbcType=INTEGER}
+    from COURSE_PROMOTION where COURSE_PROMOTION.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND COURSE_PROMOTION.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND COURSE_PROMOTION.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.categoryId != null and entity.categoryId != 0">
+        AND COURSE_PROMOTION.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.status != null">
+        AND COURSE_PROMOTION.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.createTime != null">
+        AND COURSE_PROMOTION.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COURSE_PROMOTION.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COURSE_PROMOTION.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
+      <if test="entity.startTime != null">
+        AND COURSE_PROMOTION.START_TIME =
+        #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.startTime == null">
+        <if test="entity.startTimeStart != null">
+          <![CDATA[AND COURSE_PROMOTION.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.startTimeEnd != null">
+          <![CDATA[AND COURSE_PROMOTION.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
+      <if test="entity.endTime != null">
+        AND COURSE_PROMOTION.END_TIME =
+        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.endTime == null">
+        <if test="entity.endTimeStart != null">
+          <![CDATA[AND COURSE_PROMOTION.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.endTimeEnd != null">
+          <![CDATA[AND COURSE_PROMOTION.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
+    </if>
+
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
@@ -108,7 +166,64 @@
     select count(*) from (
     select
     <include refid="Course_Promotion_Base_Column_List" />
-    from COURSE_PROMOTION where COURSE_PROMOTION.CATEGORY_ID = #{categoryId,jdbcType=INTEGER}
+    from COURSE_PROMOTION where COURSE_PROMOTION.DELETED = 0
+    <if test="entity != null">
+      <if test="entity.id != null and entity.id != 0">
+        AND COURSE_PROMOTION.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.courseId != null and entity.courseId != 0">
+        AND COURSE_PROMOTION.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.categoryId != null and entity.categoryId != 0">
+        AND COURSE_PROMOTION.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.status != null">
+        AND COURSE_PROMOTION.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.createTime != null">
+        AND COURSE_PROMOTION.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
+          <![CDATA[AND COURSE_PROMOTION.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.createTimeEnd != null">
+          <![CDATA[AND COURSE_PROMOTION.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
+      <if test="entity.startTime != null">
+        AND COURSE_PROMOTION.START_TIME =
+        #{entity.startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.startTime == null">
+        <if test="entity.startTimeStart != null">
+          <![CDATA[AND COURSE_PROMOTION.START_TIME >= #{entity.startTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.startTimeEnd != null">
+          <![CDATA[AND COURSE_PROMOTION.START_TIME <= #{entity.startTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
+      <if test="entity.endTime != null">
+        AND COURSE_PROMOTION.END_TIME =
+        #{entity.endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.endTime == null">
+        <if test="entity.endTimeStart != null">
+          <![CDATA[AND COURSE_PROMOTION.END_TIME >= #{entity.endTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+        <if test="entity.endTimeEnd != null">
+          <![CDATA[AND COURSE_PROMOTION.END_TIME <= #{entity.endTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+        </if>
+      </if>
+
+    </if>
     ) as total
   </select>
 </mapper>
