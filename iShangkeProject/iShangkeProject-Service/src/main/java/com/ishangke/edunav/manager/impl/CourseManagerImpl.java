@@ -210,6 +210,9 @@ public class CourseManagerImpl implements CourseManager {
                     throw new ManagerException("Course Create Failed");
                 }
             } catch (Throwable t) {
+                if (t instanceof ManagerException) {
+                    throw t;
+                }
                 throw new ManagerException("Course Create Failed", t);
             }
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
@@ -271,6 +274,9 @@ public class CourseManagerImpl implements CourseManager {
                     throw new ManagerException("Course Create Failed");
                 }
             } catch (Throwable t) {
+                if (t instanceof ManagerException) {
+                    throw t;
+                }
                 throw new ManagerException("Course Create Failed", t);
             }
         }

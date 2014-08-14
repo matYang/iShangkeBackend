@@ -172,6 +172,9 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     throw new ManagerException("对不起，课程模板创建失败，请稍后再试");
                 }
             } catch (Throwable t) {
+                if (t instanceof ManagerException) {
+                    throw t;
+                }
                 throw new ManagerException("对不起，课程模板创建失败，请稍后再试", t);
             }
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
@@ -263,6 +266,9 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
                     throw new ManagerException("对不起，课程模板创建失败，请稍后再试");
                 }
             } catch (Throwable t) {
+                if (t instanceof ManagerException) {
+                    throw t;
+                }
                 throw new ManagerException("对不起，课程模板创建失败，请稍后再试", t);
             }
 
