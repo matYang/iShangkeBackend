@@ -66,7 +66,7 @@
                                 },
                                 {
                                     "name": "offlineNoShow",
-                                    "operateCode": 7,
+                                    "operateCode": 14,
                                     "nextStatus": 5,
                                     "toDos": []
                                 }
@@ -170,7 +170,7 @@
                                 },
                                 {
                                     "name": "onlineReject",
-                                    "operateCode": 12,
+                                    "operateCode": 6,
                                     "nextStatus": 14,
                                     "toDos": []
                                 }
@@ -1055,7 +1055,7 @@
                                 },
                                 {
                                     "name": "offlineNoShow",
-                                    "operateCode": 7,
+                                    "operateCode": 14,
                                     "nextStatus": 5,
                                     "toDos": []
                                 }
@@ -1159,7 +1159,7 @@
                                 },
                                 {
                                     "name": "onlineReject",
-                                    "operateCode": 12,
+                                    "operateCode": 6,
                                     "nextStatus": 14,
                                     "toDos": []
                                 }
