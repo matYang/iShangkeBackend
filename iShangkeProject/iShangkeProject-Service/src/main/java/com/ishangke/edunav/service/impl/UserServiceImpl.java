@@ -296,6 +296,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
     
     @Override
+    public UserBo getCurrentUser(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.getCurrentUser(sessionBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.USER_GETCURRENTUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_GETCURRENTUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
     public UserBo authenticate(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.authenticate(sessionBo);

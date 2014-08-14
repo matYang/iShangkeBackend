@@ -551,6 +551,31 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setAuthCode(authCode);
         return sessionBo;
     }
+    
+    @Override
+    public UserBo getCurrentUser(SessionBo sessionBo) {
+        if (sessionBo == null || sessionBo.getAuthCode() == null) {
+            throw new ManagerException("无效请求参数");
+        }
+
+        boolean isValid = authManager.validateAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
+        UserEntityExt response = new UserEntityExt();
+        if (!isValid) {
+            response.setId(-1);
+            return UserConverter.toBo(response);
+        }
+
+        try {
+            response = userMapper.getById(sessionBo.getId());
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，用户详情获取失败，请稍后再试", t);
+        }
+        if (response == null || IdChecker.isNull(response.getId())) {
+            throw new UserNotFoundException("对不起，无法找到对应用户详情");
+        }
+
+        return UserConverter.toBo(response);
+    }
 
     @Override
     public UserBo authenticate(SessionBo sessionBo) {

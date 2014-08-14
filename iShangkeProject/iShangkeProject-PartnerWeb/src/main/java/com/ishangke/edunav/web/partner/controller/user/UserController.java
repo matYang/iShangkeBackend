@@ -61,12 +61,15 @@ public class UserController extends AbstractController {
             authSessionBo = userFacade.loginByReference(LoginConverter.fromModel(loginVo), permissionTag);
             if (authSessionBo.getId() > 0) {
                 this.openSession(authSessionBo, remember, req, resp);
+                
+                curUser = userFacade.getCurrentUser(authSessionBo, permissionTag);
+                if (IdChecker.notNull(curUser.getId())) {
+                    partnerId = userFacade.getPartnerIdByUserId(curUser.getId());
+                    roleId = userFacade.getRoleIdByUserId(curUser.getId());
+                }
             }
-
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-            if (IdChecker.notNull(curUser.getId())) {
-                partnerId = userFacade.getPartnerIdByUserId(curUser.getId());
-                roleId = userFacade.getRoleIdByUserId(curUser.getId());
+            else {
+                this.handleWebException(new ControllerException("登录失败，请稍后再试"), resp);
             }
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -104,6 +107,7 @@ public class UserController extends AbstractController {
             responseVo = new UserVo();
             responseVo.setId(-1);
         } else {
+            userBo = userFacade.getCurrentUser(authSessionBo, permissionTag);
             responseVo = UserConverter.toModel(userBo);
             int partnerId = userFacade.getPartnerIdByUserId(userBo.getId());
             responseVo.setPartnerId(partnerId);
