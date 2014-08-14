@@ -29,7 +29,7 @@ public class GroupManagerImpl implements GroupManager {
         try {
             groupList = groupMapper.listGroupsByUserId(userId);
         } catch (Throwable t) {
-            throw new ManagerException("Group listGroupsByUserId Failed", t);
+            throw new ManagerException("对不起，用户分组信息获取失败，请稍后再试", t);
         }
         
         if (groupList == null) {

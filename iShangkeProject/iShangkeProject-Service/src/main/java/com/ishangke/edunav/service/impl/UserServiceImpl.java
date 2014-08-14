@@ -228,7 +228,7 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
-    public UserPageViewBo queryUser(UserBo queryUser, UserBo currentUser, PaginationBo pagnationBo, String permissionTag)
+    public UserPageViewBo queryUser(UserBo queryUser, UserBo currentUser, PaginationBo paginationBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
@@ -236,9 +236,13 @@ public class UserServiceImpl implements UserService.Iface {
                         "queryUser"));
                 throw new NoPermissionException();
             }
-            List<UserBo> data = userManager.queryUser(queryUser, currentUser, pagnationBo);
+            List<UserBo> data = userManager.queryUser(queryUser, currentUser, paginationBo);
             UserPageViewBo pageView = new UserPageViewBo();
+            int total = userManager.queryUserTotal(queryUser);
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
+            pageView.setTotal(total);
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -256,7 +260,55 @@ public class UserServiceImpl implements UserService.Iface {
             throw exception;
         }
     }
+    
+    @Override
+    public UserPageViewBo queryUserByPartnerIdAndRoleId(int partnerId, int roleId, UserBo currentUser, PaginationBo paginationBo, String permissionTag)
+            throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "queryUser"));
+                throw new NoPermissionException();
+            }
+            List<UserBo> data = userManager.queryUserByPartnerIdAndRoleId(partnerId, roleId, currentUser, paginationBo);
+            int total = userManager.queryUserByPartnerIdAndRoleIdTotal(partnerId, roleId);
+            UserPageViewBo pageView = new UserPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setData(data);
+            pageView.setTotal(total);
+            return pageView;
 
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_QUERYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_QUERYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.USER_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
+    public UserBo getCurrentUser(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.getCurrentUser(sessionBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.USER_GETCURRENTUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_GETCURRENTUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
     @Override
     public UserBo authenticate(SessionBo sessionBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
@@ -461,6 +513,7 @@ public class UserServiceImpl implements UserService.Iface {
             }
             List<MessageBo> data = messageManager.query(messageBo, userBo, paginationBo);
             MessagePageViewBo pageView = new MessagePageViewBo();
+            //to do total
             pageView.setData(data);
             return pageView;
 
@@ -523,6 +576,7 @@ public class UserServiceImpl implements UserService.Iface {
             List<SpreadBo> data = spreadManager.query(spreadBo, userBo, paginationBo);
             SpreadPageViewBo pageView = new SpreadPageViewBo();
             pageView.setData(data);
+            //to do total
             return pageView;
 
         } catch (NoPermissionException e) {
@@ -675,6 +729,20 @@ public class UserServiceImpl implements UserService.Iface {
     public int getPartnerIdByUserId(int userId) throws BusinessExceptionBo, TException {
         try {
             return userManager.getPartnerIdByUserId(userId);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.SPREAD_DELETE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.SPREAD_DELETE_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
+    public int getRoleIdByUserId(int userId) throws BusinessExceptionBo, TException {
+        try {
+            return authManager.getRoleId(userId);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

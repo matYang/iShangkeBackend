@@ -20,7 +20,7 @@ service UserService {
     /**
      *  本方法为普通用户提供自动识别的功能。<br>
      *  API端读取用户前端存储的session string，调用该方法自动获得当前用户信息
-     *  @param  sessionString 
+     *  @param  sessionBo
      *  @return 用户实体 UserBo
      */
     user.UserBo authenticate(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
@@ -34,6 +34,15 @@ service UserService {
      *
      */
     void disposeSession(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    /**
+     *  本方法为快速返回当前用户具体信息的功能。<br>
+     *  接受sessionBo，利用其中id来调取用户的具体信息
+     *  @param  sessionBo
+     *  @return 用户实体 UserBo
+     */
+    user.UserBo getCurrentUser(1: user.SessionBo sessionBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
 
     /**
      *  本方法为普通用户提供手机验证。<br>
@@ -158,6 +167,7 @@ service UserService {
      */
     user.UserPageViewBo queryUser(1: user.UserBo queryUser, 2: user.UserBo currentUser, 3: common.PaginationBo pagnationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
+    user.UserPageViewBo queryUserByPartnerIdAndRoleId(1: i32 partnerId, 2: i32 roleId, 3:user.UserBo currentUser, 4: common.PaginationBo pagnationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
 
 
@@ -319,5 +329,7 @@ service UserService {
     spread.SpreadBo deleteSpread(1: spread.SpreadBo spreadBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     i32 getPartnerIdByUserId(1: i32 userId) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    i32 getRoleIdByUserId(1: i32 userId) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 }
 

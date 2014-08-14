@@ -128,4 +128,14 @@ public class UserEntityExtTest extends BaseTest {
         UserEntityExt user = userEntityExtMapper.getById(1);
         System.out.println(user.getCouponTotal());
     }
+    
+    @Test 
+    public void testGetByPartnerIdAndRoleId() {
+        PaginationEntity page = new PaginationEntity();
+        page.setOffset(0);
+        page.setSize(10);
+        List<UserEntityExt> r = userEntityExtMapper.listByPartnerIdAndRoleId(5, 3, page);
+        System.out.println(r.size());
+        System.out.println("ooxx");
+    }
 }

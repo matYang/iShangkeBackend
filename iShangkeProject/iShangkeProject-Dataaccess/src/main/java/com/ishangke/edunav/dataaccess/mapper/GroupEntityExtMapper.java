@@ -30,5 +30,7 @@ public interface GroupEntityExtMapper {
     public int getCountByUserId(int userId);
 
     public GroupEntityExt getById(int id);
+    
+    public GroupEntityExt getByPartnerIdAndRoleId(@Param("partnerId")int partnerId, @Param("roleId")int roleId);
 
 }

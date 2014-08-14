@@ -66,11 +66,11 @@ public class CreditManagerImpl implements CreditManager {
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(creditEntity.getId())) {
-            throw new ManagerException("Credit modification must specify corresponding user");
+            throw new ManagerException("更改积分时必须标注对应用户");
         }
         CreditEntityExt previousCredit = creditMapper.getById(creditEntity.getId());
         if (previousCredit == null) {
-            throw new CreditNotFoundException("Previous credit is not found");
+            throw new CreditNotFoundException("对不起，未找到对应ID为" + creditEntity.getId() + "的积分记录");
         }
 
         // admin and system admins can query user's credits
@@ -80,7 +80,7 @@ public class CreditManagerImpl implements CreditManager {
             // otherwise user can only modify their own, thus making an UserId
             // necessary
             if (IdChecker.notEqual(previousCredit.getId(), userEntity.getId())) {
-                throw new AuthenticationException("User modifying someone else's credit");
+                throw new AuthenticationException("对不起，您无权更改他人的积分");
             }
         }
 
@@ -103,14 +103,16 @@ public class CreditManagerImpl implements CreditManager {
         creditEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         creditEntity.setCreateTime(null);
         creditEntity.setDeleted(null);
+        
+        int historyResult = 0;
         try {
             creditMapper.update(creditEntity);
-            int historyResult = creditHistoryMapper.add(creditHistory);
-            if (historyResult <= 0) {
-                throw new ManagerException("Credit Create Failed: add CreditHistory Failed");
-            }
+            historyResult = creditHistoryMapper.add(creditHistory);
         } catch (Throwable t) {
-            throw new ManagerException("Credit Modify Failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，积分更改失败，请稍后再试", t);
+        }
+        if (historyResult <= 0) {
+            throw new ManagerException("对不起，积分历史记录创建失败，请稍后再试");
         }
 
         return CreditConverter.toBo(creditMapper.getById(creditEntity.getId()));
@@ -194,7 +196,7 @@ public class CreditManagerImpl implements CreditManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (creditEntity == null || IdChecker.notEqual(creditEntity.getId(), userEntity.getId())) {
-                throw new AuthenticationException("User querying someone else's credit");
+                throw new AuthenticationException("对不起，您无权查询他人的积分");
             }
         }
 
@@ -202,7 +204,7 @@ public class CreditManagerImpl implements CreditManager {
         try {
             results = creditMapper.list(creditEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Credit query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，积分查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -231,7 +233,7 @@ public class CreditManagerImpl implements CreditManager {
             // otherwise user can only query their own, thus making an UserId
             // necessary
             if (creditHistoryEntity == null || IdChecker.notEqual(creditHistoryEntity.getUserId(), userEntity.getId())) {
-                throw new AuthenticationException("User querying someone else's creditHistory");
+                throw new AuthenticationException("对不起，您无权查询他人的积分历史记录");
             }
         }
 
@@ -239,7 +241,7 @@ public class CreditManagerImpl implements CreditManager {
         try {
             results = creditHistoryMapper.list(creditHistoryEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("CreditHistory query failed for user: " + userEntity.getId(), t);
+            throw new ManagerException("对不起，积分历史记录查询失败，请稍后再试", t);
         }
 
         if (results == null) {

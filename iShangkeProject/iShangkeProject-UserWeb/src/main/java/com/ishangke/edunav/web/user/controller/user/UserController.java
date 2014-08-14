@@ -64,7 +64,7 @@ public class UserController extends AbstractController{
                 this.openSession(authSessionBo, remember, req, resp);
             }
 
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);    
+            curUser = userFacade.getCurrentUser(authSessionBo, permissionTag);    
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -111,6 +111,11 @@ public class UserController extends AbstractController{
             responseVo.setId(-1);
         }
         else {
+            try {
+                userBo = userFacade.getCurrentUser(authSessionBo, permissionTag);
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            } 
             responseVo = UserConverter.toModel(userBo);
         }
         
@@ -150,7 +155,6 @@ public class UserController extends AbstractController{
         if (loggedIn) {
             return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
         }
-
 
         if (userVo.getPhone() == null || userVo.getPhone().length() == 0) {
             return this.handleWebException(new ControllerException("手机号码不能为空"), resp);
@@ -247,7 +251,7 @@ public class UserController extends AbstractController{
         try {
             newSession = userFacade.recoverPassword(PasswordConverter.fromModel(passwordVo), permissionTag); 
             if (newSession != null && newSession.getId() > 0) {
-                result = userFacade.authenticate(newSession, permissionTag);
+                result = userFacade.getCurrentUser(newSession, permissionTag);
                 this.openSession(newSession, false, req, resp);
             }
             else {

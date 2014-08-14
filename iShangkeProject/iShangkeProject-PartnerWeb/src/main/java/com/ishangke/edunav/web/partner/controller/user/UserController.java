@@ -51,6 +51,7 @@ public class UserController extends AbstractController {
 
         UserBo curUser = null;
         int partnerId = -1;
+        int roleId = -1;
         try {
             boolean loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
             if (loggedIn) {
@@ -60,11 +61,15 @@ public class UserController extends AbstractController {
             authSessionBo = userFacade.loginByReference(LoginConverter.fromModel(loginVo), permissionTag);
             if (authSessionBo.getId() > 0) {
                 this.openSession(authSessionBo, remember, req, resp);
+                
+                curUser = userFacade.getCurrentUser(authSessionBo, permissionTag);
+                if (IdChecker.notNull(curUser.getId())) {
+                    partnerId = userFacade.getPartnerIdByUserId(curUser.getId());
+                    roleId = userFacade.getRoleIdByUserId(curUser.getId());
+                }
             }
-
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-            if (IdChecker.notNull(curUser.getId())) {
-                partnerId = userFacade.getPartnerIdByUserId(curUser.getId());
+            else {
+                this.handleWebException(new ControllerException("登录失败，请稍后再试"), resp);
             }
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
@@ -72,6 +77,7 @@ public class UserController extends AbstractController {
 
         responseVo = UserConverter.toModel(curUser);
         responseVo.setPartnerId(partnerId);
+        responseVo.setRole(roleId);
         return responseVo;
     }
 
@@ -101,6 +107,7 @@ public class UserController extends AbstractController {
             responseVo = new UserVo();
             responseVo.setId(-1);
         } else {
+            userBo = userFacade.getCurrentUser(authSessionBo, permissionTag);
             responseVo = UserConverter.toModel(userBo);
             int partnerId = userFacade.getPartnerIdByUserId(userBo.getId());
             responseVo.setPartnerId(partnerId);
@@ -163,16 +170,19 @@ public class UserController extends AbstractController {
         queryUser.setId(curId);
         UserBo responseUser = null;
         int partnerId = -1;
+        int roleId = -1;
         try {
             responseUser = userFacade.queryUserInfo(UserConverter.fromModel(queryUser), curUser, permissionTag);
             if (IdChecker.notNull(responseUser.getId())) {
                 partnerId = userFacade.getPartnerIdByUserId(responseUser.getId());
+                roleId = userFacade.getRoleIdByUserId(responseUser.getId());
             }
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
         responseVo = UserConverter.toModel(responseUser);
         responseVo.setPartnerId(partnerId);
+        responseVo.setRole(roleId);;
         return responseVo;
     }
 

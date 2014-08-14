@@ -178,11 +178,11 @@ public class BookingManagerImpl implements BookingManager {
         if (bookingEntity.getPhone() == null || "".equals(bookingEntity.getPhone())) {
             throw new ManagerException("请填写电话");
         }
-        // 查看此课程是否属于上架状态
+        // 查询此课程是否属于上架状态
         if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
             throw new ManagerException("课程已经被删除或者下架，目前无法接受预订");
         }
-        // 查看课程现价与发过来的价格是否一致，如果不一致则不能创建booking
+        // 查询课程现价与发过来的价格是否一致，如果不一致则不能创建booking
         if (!course.getPrice().equals(bookingEntity.getPrice())) {
             throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
         }
@@ -293,7 +293,7 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingBo.getUserId(), userBo.getId())) {
-                throw new ManagerException("对不起，您无权查看他人预订");
+                throw new ManagerException("对不起，您无权查询他人预订");
             }
             List<BookingEntityExt> bookings = null;
             try {
@@ -373,7 +373,7 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingHistoryBo.getUserId(), userBo.getId())) {
-                throw new ManagerException("对不起，您无权查看他人的预订历史");
+                throw new ManagerException("对不起，您无权查询他人的预订历史");
             }
             List<BookingHistoryEntityExt> bookingHistorys = null;
             try {
@@ -503,8 +503,8 @@ public class BookingManagerImpl implements BookingManager {
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
             return booking;
         } else if (Constant.ROLEPARTNERADMIN.equals(roleName)) {
-            // 如果是合作商管理员
-            // 合作商只能修改自己本机构的booking
+            // 如果是合作机构管理员
+            // 合作机构只能修改自己本机构的booking
             CourseEntityExt course = courseMapper.getInfoById(bookingBo.getCourseId());
             List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userBo.getId());
             if (groupList == null) {
@@ -688,7 +688,7 @@ public class BookingManagerImpl implements BookingManager {
         try {
             bookings = bookingMapper.listByPartnerId(BookingConverter.fromBo(bookingBo), partnerBo.getId(), PaginationConverter.fromBo(paginationBo));
         } catch (Exception e) {
-            throw new ManagerException("对不起，按合作商查询预订失败，请稍后再试");
+            throw new ManagerException("对不起，按合作机构查询预订失败，请稍后再试");
         }
         if (bookings == null) {
             return new ArrayList<BookingBo>();
@@ -713,7 +713,7 @@ public class BookingManagerImpl implements BookingManager {
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingEntityExt.getUserId(), userBo.getId())) {
-                throw new ManagerException("对不起，您无权查看他人预订历史");
+                throw new ManagerException("对不起，您无权查询他人预订历史");
             }
             try {
                 bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
@@ -855,7 +855,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(booking.getUserId(), userBo.getId())) {
-                throw new ManagerException("对不起，您无权查看他人的预订");
+                throw new ManagerException("对不起，您无权查询他人的预订");
             }
 
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, booking.getStatus());

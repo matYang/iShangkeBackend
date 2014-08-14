@@ -75,7 +75,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
         UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(classPhotoEntity.getPartnerId())) {
-            throw new ManagerException("创建机构图片时必须标注合作商");
+            throw new ManagerException("创建机构图片时必须标注合作机构");
         }
         classPhotoEntity.setCreateTime(DateUtility.getCurTimeInstance());
         classPhotoEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -326,7 +326,7 @@ public class ClassPhotoManagerImpl implements ClassPhotoManager {
             }
             return resultList;
         } catch (Throwable t) {
-            throw new ManagerException("对不起，按照合作商查询机构图片失败，请稍后再试", t);
+            throw new ManagerException("对不起，按照合作机构查询机构图片失败，请稍后再试", t);
         }
     }
 

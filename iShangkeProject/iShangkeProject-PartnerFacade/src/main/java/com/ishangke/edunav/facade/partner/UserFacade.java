@@ -173,6 +173,24 @@ public class UserFacade {
 
         return result;
     }
+    
+    public UserBo getCurrentUser(SessionBo sessionBo, String permissionTag) {
+        UserBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.getCurrentUser(sessionBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
     public UserBo authenticate(SessionBo sessionBo, String permissionTag) {
         UserBo result = null;
@@ -466,6 +484,23 @@ public class UserFacade {
         try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.getPartnerIdByUserId(userId);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    public int getRoleIdByUserId(int userId) {
+        int result = Constant.DEFAULTNULL;
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.getRoleIdByUserId(userId);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
             throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());

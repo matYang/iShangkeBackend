@@ -71,15 +71,15 @@ public class CouponManagerImpl implements CouponManager {
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntity.setEnabled(0);
         couponEntity.setDeleted(0);
+        int couponResult = 0;
         try {
             // Create Coupon
-            int couponResult = couponMapper.add(couponEntity);
-
-            if (couponResult <= 0) {
-                throw new ManagerException("Coupon Create Failed: add Coupon Failed");
-            }
+            couponResult = couponMapper.add(couponEntity);
         } catch (Throwable t) {
             throw new ManagerException("Coupon create failed for user: " + userEntity.getId(), t);
+        }
+        if (couponResult <= 0) {
+            throw new ManagerException("Coupon Create Failed: add Coupon Failed");
         }
 
         return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
@@ -161,7 +161,7 @@ public class CouponManagerImpl implements CouponManager {
         if (previousCoupon == null) {
             throw new CouponNotFoundException("Previous coupon is not found");
         }
-        
+
         // admin and system admins can update user's coupons
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
             LOGGER.warn(String.format("[CouponManagerImpl]system admin || admin [%s] call updateCoupon at " + new Date(), userBo.getName()));
@@ -192,19 +192,22 @@ public class CouponManagerImpl implements CouponManager {
         couponEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         couponEntity.setCreateTime(null);
         couponEntity.setEnabled(null);
+        
+        int couponHistoryResult = 0;
         try {
             // update Coupon
             couponMapper.update(couponEntity);
-            int couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
-            if (couponHistoryResult <= 0) {
-                throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
-            }
+            couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
         } catch (Throwable t) {
             throw new ManagerException("Coupon update failed for user: " + userEntity.getId(), t);
+        }
+        if (couponHistoryResult <= 0) {
+            throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
         }
 
         return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
     }
+    
 
     @Override
     public List<CouponBo> updateCouponList(List<CouponBo> couponBoList, UserBo userBo) {

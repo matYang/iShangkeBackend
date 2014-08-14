@@ -31,7 +31,7 @@ public class MajorManagerImpl implements MajorManager {
         try {
             results = majorMapper.list(majorEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("Major query failed", t);
+            throw new ManagerException("对不起，学院信息获取失败，请稍后再试", t);
         }
 
         if (results == null) {

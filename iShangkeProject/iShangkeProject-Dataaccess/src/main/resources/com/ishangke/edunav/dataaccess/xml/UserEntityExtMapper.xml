@@ -79,7 +79,8 @@
     USERS.MAJOR USERS_MAJOR,
     USERS.AVATAR_URL USERS_AVATARURL,
     USERS.CAREER_ID USERS_CAREERID,
-    USERS.MAJOR_ID USERS_MAJORID,
+    USERS.MAJOR_ID
+    USERS_MAJORID,
     USERS.SCHOOL_ID
     USERS_SCHOOLID,
     USERS.LOCATION_ID USERS_LOCATIONID
@@ -338,13 +339,17 @@
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="UserExtMap">
     SELECT
-    <include refid="User_Base_Column_List" />,
-    <include refid="Account_Base_Column_List" />,
-    <include refid="Credit_Base_Column_List" />,
+    <include refid="User_Base_Column_List" />
+    ,
+    <include refid="Account_Base_Column_List" />
+    ,
+    <include refid="Credit_Base_Column_List" />
+    ,
     SUM(COUPON.BALANCE) USERS_COUPONTOTAL
     from USERS join ACCOUNT on ACCOUNT.ID = USERS.ID
-    join CREDIT on CREDIT.ID = USERS.ID
-    left join COUPON on USERS.ID = COUPON.USER_ID and (COUPON.STATUS = 0 or COUPON.STATUS = 2) 
+    join CREDIT on CREDIT.ID =
+    USERS.ID
+    left join COUPON on USERS.ID = COUPON.USER_ID and (COUPON.STATUS = 0 or COUPON.STATUS = 2)
     where USERS.DELETED = 0 and USERS.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- getSimpleById -->
@@ -402,7 +407,7 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.majorId != null and entity.majorId != 0">
         AND USERS.MAJOR_ID = #{entity.majorId,jdbcType=INTEGER}
       </if>
@@ -579,7 +584,7 @@
           </foreach>
         </if>
       </if>
-      
+
       <if test="entity.majorId != null and entity.majorId != 0">
         AND USERS.MAJOR_ID = #{entity.majorId,jdbcType=INTEGER}
       </if>
@@ -714,5 +719,37 @@
     </if>
     ) AS
     total
+  </select>
+
+  <!-- listByPartnerIdAndRoleId -->
+  <select id="listByPartnerIdAndRoleId" parameterType="map" resultMap="UserExtMap">
+    select
+    <include refid="User_Base_Column_List"></include>
+    from USERS join USER_GROUP on USERS.ID = USER_GROUP.USER_ID
+    join GROUPS on USER_GROUP.GROUP_ID = GROUPS.ID and GROUPS.ROLE_ID = #{roleId,jdbcType=INTEGER}
+    and GROUPS.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
+    where USERS.DELETED = 0
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        USERS.${listItem.columnKey}
+        ${listItem.order}
+      </foreach>
+    </if>
+    <if test="page !=null and page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <!--getCountByPartnerIdAndRoleId -->
+  <select id="getCountByPartnerIdAndRoleId" resultType="int">
+    select count(*) from (
+    select
+    <include refid="User_Base_Column_List"></include>
+    from USERS join USER_GROUP on USERS.ID = USER_GROUP.USER_ID
+    join GROUPS on USER_GROUP.GROUP_ID = GROUPS.ID and GROUPS.ROLE_ID = #{roleId,jdbcType=INTEGER}
+    and GROUPS.PARTNER_ID = #{partnerId,jdbcType=INTEGER}
+    where USERS.DELETED = 0
+    ) as total
   </select>
 </mapper>

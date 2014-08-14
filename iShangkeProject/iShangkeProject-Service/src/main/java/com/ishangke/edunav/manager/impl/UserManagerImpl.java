@@ -103,7 +103,7 @@ public class UserManagerImpl implements UserManager {
             userEntity.setPassword(PasswordCrypto.createHash(userEntity.getPassword()));
             int result = userMapper.add(userEntity);
             if (result <= 0) {
-                throw new ManagerException("InitializeNormalUser::addUser user with unique identifier: " + uniqueIdentifier + " failed");
+                throw new ManagerException("对不起，用户创建失败，请稍后再试");
             }
 
             UserGroupEntityExt userGroupEntity = new UserGroupEntityExt();
@@ -113,7 +113,7 @@ public class UserManagerImpl implements UserManager {
             userGroupEntity.setDeleted(0);
             result = userGroupMapper.add(userGroupEntity);
             if (result <= 0) {
-                throw new ManagerException("InitializeNormalUser::addUserGroup user with unique identifier: " + uniqueIdentifier + " failed");
+                throw new ManagerException("对不起，连接用户分组失败，请稍后再试");
             }
 
             AccountEntityExt accountEntity = new AccountEntityExt();
@@ -126,7 +126,7 @@ public class UserManagerImpl implements UserManager {
             accountEntity.setDeleted(0);
             result = accountMapper.add(accountEntity);
             if (result <= 0) {
-                throw new ManagerException("InitializeNormalUser::addAccount user with unique identifier: " + uniqueIdentifier + " failed");
+                throw new ManagerException("对不起，用户账户创建失败，请稍后再试");
             }
 
             CreditEntityExt creditEntity = new CreditEntityExt();
@@ -138,7 +138,7 @@ public class UserManagerImpl implements UserManager {
             creditEntity.setDeleted(0);
             result = creditMapper.add(creditEntity);
             if (result <= 0) {
-                throw new ManagerException("InitializeNormalUser::addCredit user with unique identifier: " + uniqueIdentifier + " failed");
+                throw new ManagerException("对不起，用户积分账户创建失败，请稍后再试");
             }
 
             CouponEntityExt couponEntity = new CouponEntityExt();
@@ -165,7 +165,7 @@ public class UserManagerImpl implements UserManager {
                 inviterSearch.setInvitationCode(appliedInvitationCode);
                 inviterEntity = userMapper.getByInvitationCode(inviterSearch);
                 if (inviterEntity == null || IdChecker.isNull(inviterEntity.getId())) {
-                    throw new ManagerException("InitializeNormalUser::inviter not found with invitation code: " + appliedInvitationCode + " for unique identifier: " + uniqueIdentifier);
+                    throw new ManagerException("对不起，无法找到用户名为" + appliedInvitationCode + "的用户");
                 }
 
                 CouponEntityExt curUserCouponEntity = new CouponEntityExt();
@@ -201,7 +201,7 @@ public class UserManagerImpl implements UserManager {
             // local copy
             userEntity = userMapper.getById(userEntity.getId());
             if (userEntity == null) {
-                throw new UserNotFoundException("InitializeNormalUser::lastFetch with unique identifier: " + uniqueIdentifier + " failed");
+                throw new UserNotFoundException("对不起，新用户获取失败，请稍后再试");
             }
 
             UserEntityExt returnEntity = userMapper.getById(userEntity.getId());
@@ -214,7 +214,10 @@ public class UserManagerImpl implements UserManager {
             }
             return UserConverter.toBo(returnEntity);
         } catch (Throwable t) {
-            throw new ManagerException("InitializeNormalUser user with unique identifier: " + uniqueIdentifier + " failed", t);
+            if (t instanceof ManagerException) {
+                throw t;
+            }
+            throw new ManagerException("对不起，用户创建失败，请稍后再试", t);
         }
 
     }
@@ -228,16 +231,16 @@ public class UserManagerImpl implements UserManager {
 
         boolean isValid = authManager.validateCellVerificationSession(sessionBo.getAccountIdentifier(), sessionBo.getAuthCode());
         if (!isValid) {
-            throw new ManagerException("Register user with phone number: " + userBo.getPhone() + " failed because authCode: " + sessionBo.getAuthCode() + " does not match");
+            throw new ManagerException("对不起，您的手机号码与验证码不匹配");
         }
         if (userBo.getPhone() == null) {
-            throw new ManagerException("User registration must specify phone");
+            throw new ManagerException("请您填写手机号码");
         }
         if (userBo.getInvitationCode() == null) {
-            throw new ManagerException("User registration must specify invitationCode");
+            throw new ManagerException("请您填写用户名");
         }
         if (userBo.getPassword() == null) {
-            throw new ManagerException("User registration must specify password");
+            throw new ManagerException("请您填写密码");
         }
 
         // 判断是否存在手机号码一样的USER
@@ -245,7 +248,7 @@ public class UserManagerImpl implements UserManager {
         entityPhoneInDb.setPhone(userBo.getPhone());
         entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
         if (entityPhoneInDb != null && IdChecker.notNull(entityPhoneInDb.getId())) {
-            throw new ManagerException("Phone number: " + userBo.getPhone() + " is already in db");
+            throw new ManagerException("对不起，手机号码" + userBo.getPhone() + "已经被注册");
         }
         
         // 判断InvitationCode是否已经存在
@@ -253,7 +256,7 @@ public class UserManagerImpl implements UserManager {
         entityInvitationCodeInDb.setInvitationCode(userBo.getInvitationCode());
         entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
         if (entityInvitationCodeInDb != null && IdChecker.notNull(entityInvitationCodeInDb.getId())) {
-            throw new ManagerException("Invitation code:" + userBo.getInvitationCode() + " is already in db");
+            throw new ManagerException("对不起，用户名" + userBo.getInvitationCode() + "已经被注册");
         }
         
         
@@ -262,7 +265,7 @@ public class UserManagerImpl implements UserManager {
             entityReferenceInDb.setReference(userBo.getReference());
             entityReferenceInDb = userMapper.getByReference(entityReferenceInDb);
             if (entityReferenceInDb != null && IdChecker.notNull(entityReferenceInDb.getId())) {
-                throw new ManagerException("Reference:" + userBo.getReference() + " is already in db");
+                throw new ManagerException("对不起，识别号" + userBo.getReference() + "已经被注册");
             }
         }
 
@@ -283,13 +286,13 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUser.getId()) || authManager.isSystemAdmin(currentUser.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createUser at " + new Date(), currentUser.getName()));
         } else {
-            throw new AuthenticationException("Non-admin user trying to create user");
+            throw new AuthenticationException("对不起，您无权创建新用户");
         }
         if (targetUser.getPhone() == null && targetUser.getInvitationCode() == null && targetUser.getReference() == null) {
-            throw new ManagerException("User creation must specify at least one of phone, invitationCode, and reference");
+            throw new ManagerException("创建用户时至少填写标注手机号码，用户名或识别号");
         }
         if (targetUser.getPassword() == null) {
-            throw new ManagerException("User creation must specify password");
+            throw new ManagerException("创建用户时必须填写密码");
         }
 
         if (targetUser.getPhone() != null) {
@@ -297,7 +300,7 @@ public class UserManagerImpl implements UserManager {
             entityPhoneInDb.setPhone(targetUser.getPhone());
             entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
             if (entityPhoneInDb != null && IdChecker.notNull(entityPhoneInDb.getId())) {
-                throw new ManagerException("Phone number: " + targetUser.getPhone() + " is already in db");
+                throw new ManagerException("对不起，手机号码" + targetUser.getPhone() + "已经被注册");
             }
         }
         if (targetUser.getInvitationCode() != null) {
@@ -305,7 +308,7 @@ public class UserManagerImpl implements UserManager {
             entityInvitationCodeInDb.setInvitationCode(targetUser.getInvitationCode());
             entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
             if (entityInvitationCodeInDb != null && IdChecker.notNull(entityInvitationCodeInDb.getId())) {
-                throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+                throw new ManagerException("对不起，用户名" + targetUser.getInvitationCode() + "已经被注册");
             }
         }
         if (targetUser.getReference() != null) {
@@ -313,7 +316,7 @@ public class UserManagerImpl implements UserManager {
             entityReferenceInDb.setReference(targetUser.getReference());
             entityReferenceInDb = userMapper.getByReference(entityReferenceInDb);
             if (entityReferenceInDb != null && IdChecker.notNull(entityReferenceInDb.getId())) {
-                throw new ManagerException("Reference:" + targetUser.getReference() + " is already in db");
+                throw new ManagerException("对不起，识别号" + targetUser.getReference() + "已经被注册");
             }
         }
 
@@ -331,17 +334,17 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUser.getId()) || authManager.isSystemAdmin(currentUser.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call createUser at " + new Date(), currentUser.getName()));
         } else {
-            throw new AuthenticationException("Non-admin user trying createPartnerUser");
+            throw new AuthenticationException("对不起，您无权创建合作机构用户");
         }
         
         if (IdChecker.isNull(partner.getId())) {
-            throw new AuthenticationException("Partner Id not specified at createPartneruser");
+            throw new AuthenticationException("请您填写合作机构ID");
         }
         if (targetUser.getReference() == null) {
-            throw new ManagerException("PartnerUser creation must specify reference");
+            throw new ManagerException("请您填写用户识别号");
         }
         if (targetUser.getPassword() == null) {
-            throw new ManagerException("PartnerUser creation must specify password");
+            throw new ManagerException("请您填写密码");
         }
 
         if (targetUser.getPhone() != null) {
@@ -349,7 +352,7 @@ public class UserManagerImpl implements UserManager {
             entityPhoneInDb.setPhone(targetUser.getPhone());
             entityPhoneInDb = userMapper.getByPhone(entityPhoneInDb);
             if (entityPhoneInDb != null && IdChecker.notNull(entityPhoneInDb.getId())) {
-                throw new ManagerException("Phone number: " + targetUser.getPhone() + " is already in db");
+                throw new ManagerException("对不起，手机号码" + targetUser.getPhone() + "已经被注册");
             }
         }
         if (targetUser.getInvitationCode() != null) {
@@ -357,7 +360,7 @@ public class UserManagerImpl implements UserManager {
             entityInvitationCodeInDb.setInvitationCode(targetUser.getInvitationCode());
             entityInvitationCodeInDb = userMapper.getByInvitationCode(entityInvitationCodeInDb);
             if (entityInvitationCodeInDb != null && IdChecker.notNull(entityInvitationCodeInDb.getId())) {
-                throw new ManagerException("Invitation code:" + targetUser.getInvitationCode() + " is already in db");
+                throw new ManagerException("对不起，用户名" + targetUser.getInvitationCode() + "已经被注册");
             }
         }
         if (targetUser.getReference() != null) {
@@ -365,7 +368,7 @@ public class UserManagerImpl implements UserManager {
             entityReferenceInDb.setReference(targetUser.getReference());
             entityReferenceInDb = userMapper.getByReference(entityReferenceInDb);
             if (entityReferenceInDb != null && IdChecker.notNull(entityReferenceInDb.getId())) {
-                throw new ManagerException("Reference:" + targetUser.getReference() + " is already in db");
+                throw new ManagerException("对不起，识别号" + targetUser.getReference() + "已经被注册");
             }
         }
 
@@ -376,11 +379,14 @@ public class UserManagerImpl implements UserManager {
             group.setPartnerId(partner.getId());
             List<GroupEntityExt> listGroups = groupMapper.list(group, null);
             if (listGroups == null || listGroups.size() <= 0) {
-                throw new ManagerException("cannot find group with role id: " + roleId + " for partner " + partner.getId());
+                throw new ManagerException("对不起，用户权限搜索失败，请稍后再试");
             }
             response = initializeNormalUser(targetUser, listGroups.get(0).getId(), targetUser.getReference(), false);
         } catch (Throwable t) {
-            throw new ManagerException("CreatePartnerUser failed", t);
+            if (t instanceof ManagerException) {
+                throw t;
+            }
+            throw new ManagerException("对不起，创建用户分组失败，请稍后再试", t);
         }
 
         // act like a normal registration
@@ -400,11 +406,11 @@ public class UserManagerImpl implements UserManager {
         try {
             result = userMapper.getByPhone(searchEntity);
         } catch (Throwable t) {
-            throw new ManagerException("OpenCellSession with phone number: " + userBo.getPhone() + " failed", t);
+            throw new ManagerException("对不起，手机号码" + userBo.getPhone() + "查询失败，请稍后再试", t);
         }
 
         if (result != null && IdChecker.notNull(result.getId())) {
-            throw new ManagerException("Account already registered");
+            throw new ManagerException("对不起，手机号码" + userBo.getPhone() + "已经被注册");
         }
 
         String authCode = authManager.openCellVerificationSession(userBo.getPhone());
@@ -428,11 +434,11 @@ public class UserManagerImpl implements UserManager {
         try {
             result = userMapper.getByPhone(searchEntity);
         } catch (Throwable t) {
-            throw new ManagerException("OpenForgetPasswordSession with phone number: " + userBo.getPhone() + " failed", t);
+            throw new ManagerException("对不起，手机号码" + userBo.getPhone() + "查询失败，请稍后再试", t);
         }
 
         if (result == null || IdChecker.isNull(result.getId())) {
-            throw new ManagerException("Account is not registered");
+            throw new ManagerException("对不起，手机号码" + userBo.getPhone() + "尚未被注册");
         }
 
         UserEntityExt curUser = result;
@@ -460,13 +466,13 @@ public class UserManagerImpl implements UserManager {
             searchEntity.setPhone(passwordBo.getAccountIdentifier());
             curUser = userMapper.getByPhone(searchEntity);
             if (curUser == null) {
-                throw new UserNotFoundException("RecoverPassword failed for user with Phone: " + passwordBo.getAccountIdentifier() + " because corresponding user is not found");
+                throw new UserNotFoundException("对不起，手机号码" + passwordBo.getAccountIdentifier() + "尚未被注册");
             }
         } else if (identifierType == LoginEnums.IdentifierType.INVITATIONCODE) {
             searchEntity.setInvitationCode(passwordBo.getAccountIdentifier());
             curUser = userMapper.getByInvitationCode(searchEntity);
             if (curUser == null) {
-                throw new UserNotFoundException("RecoverPassword failed for user with InvitationCode: " + passwordBo.getAccountIdentifier() + " because corresponding user is not found");
+                throw new UserNotFoundException("对不起，用户名" + passwordBo.getAccountIdentifier()+ "尚未被注册");
             }
         } else if (identifierType == LoginEnums.IdentifierType.EMAIL) {
             throw new ManagerException("邮箱找回密码功能尚未开启，请使用 手机号或者用户名 登陆");
@@ -476,7 +482,7 @@ public class UserManagerImpl implements UserManager {
 
         boolean isValid = authManager.validateForgetPasswordSession(curUser.getId(), passwordBo.getAuthCode());
         if (!isValid) {
-            throw new ManagerException("Authcode does not match");
+            throw new ManagerException("验证码不匹配，请重新输入");
         }
 
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
@@ -484,7 +490,7 @@ public class UserManagerImpl implements UserManager {
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
-            throw new ManagerException("RecoverPassword failed for user: " + curUser.getId(), t);
+            throw new ManagerException("对不起，密码找回失败，请稍后再试", t);
         }
 
         // close the forget password session
@@ -516,13 +522,13 @@ public class UserManagerImpl implements UserManager {
         try {
             curUser = userMapper.getById(passwordBo.getId());
         } catch (Throwable t) {
-            throw new ManagerException("ChangePassword getById failed for user: " + passwordBo.getId(), t);
+            throw new ManagerException("对不起，用户获取失败，请稍后再试", t);
         }
         if (curUser == null || IdChecker.isNull(curUser.getId())) {
-            throw new UserNotFoundException("ChangePassword failed for user: " + passwordBo.getId() + "because user not found");
+            throw new UserNotFoundException("对不起，无法找到ID为" + passwordBo.getId() + "的用户");
         }
         if (!PasswordCrypto.validatePassword(passwordBo.getOldPassword(), curUser.getPassword())) {
-            throw new AuthenticationException("Password not Match");
+            throw new AuthenticationException("旧密码不匹配，请重新输入");
         }
 
         curUser.setPassword(PasswordCrypto.createHash(passwordBo.getNewPassword()));
@@ -530,7 +536,7 @@ public class UserManagerImpl implements UserManager {
         try {
             userMapper.update(curUser);
         } catch (Throwable t) {
-            throw new ManagerException("ChangePassword failed for user: " + curUser.getId(), t);
+            throw new ManagerException("对不起，密码修改失败，请稍后再试", t);
         }
 
         // log all clients out for security
@@ -544,6 +550,31 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setAccountIdentifier(curUser.getPhone());
         sessionBo.setAuthCode(authCode);
         return sessionBo;
+    }
+    
+    @Override
+    public UserBo getCurrentUser(SessionBo sessionBo) {
+        if (sessionBo == null || sessionBo.getAuthCode() == null) {
+            throw new ManagerException("无效请求参数");
+        }
+
+        boolean isValid = authManager.validateAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
+        UserEntityExt response = new UserEntityExt();
+        if (!isValid) {
+            response.setId(-1);
+            return UserConverter.toBo(response);
+        }
+
+        try {
+            response = userMapper.getById(sessionBo.getId());
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，用户详情获取失败，请稍后再试", t);
+        }
+        if (response == null || IdChecker.isNull(response.getId())) {
+            throw new UserNotFoundException("对不起，无法找到对应用户详情");
+        }
+
+        return UserConverter.toBo(response);
     }
 
     @Override
@@ -562,10 +593,10 @@ public class UserManagerImpl implements UserManager {
         try {
             response = userMapper.getSimpleById(sessionBo.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Authentication failed for user: " + sessionBo.getId(), t);
+            throw new ManagerException("对不起，用户获取失败，请稍后再试", t);
         }
         if (response == null || IdChecker.isNull(response.getId())) {
-            throw new UserNotFoundException("Authentication failed for user: " + sessionBo.getId());
+            throw new UserNotFoundException("对不起，无法找到对应用户");
         }
 
         return UserConverter.toBo(response);
@@ -580,7 +611,7 @@ public class UserManagerImpl implements UserManager {
         try {
             authManager.closeAuthSession(sessionBo.getId(), sessionBo.getAuthCode());
         } catch (Throwable t) {
-            throw new ManagerException("DisposeSession failed for user: " + sessionBo.getId(), t);
+            throw new ManagerException("对不起，登出失败，请稍后再试", t);
         }
         
     }
@@ -595,7 +626,7 @@ public class UserManagerImpl implements UserManager {
         String authCode = null;
         try {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
-                throw new ManagerException("User cannot login, please wait for a minute");
+                throw new ManagerException("对不起，您登录过于频繁，请等候一分钟");
             }
 
             UserEntityExt search = new UserEntityExt();
@@ -604,13 +635,13 @@ public class UserManagerImpl implements UserManager {
                 search.setPhone(loginBo.getAccountIdentifier());
                 curUser = userMapper.getByPhone(search);
                 if (curUser == null) {
-                    throw new UserNotFoundException("LoginByUser failed for user with Phone: " + loginBo.getAccountIdentifier() + " because corresponding user is not found");
+                    throw new UserNotFoundException("对不起，手机号码" + loginBo.getAccountIdentifier() + "尚未被注册");
                 }
             } else if (loginType == LoginEnums.IdentifierType.INVITATIONCODE) {
                 search.setInvitationCode(loginBo.getAccountIdentifier());
                 curUser = userMapper.getByInvitationCode(search);
                 if (curUser == null) {
-                    throw new UserNotFoundException("LoginByUser failed for user with InvitationCode: " + loginBo.getAccountIdentifier() + " because corresponding user is not found");
+                    throw new UserNotFoundException("对不起，用户名" + loginBo.getAccountIdentifier() + "尚未被注册");
                 }
             } else if (loginType == LoginEnums.IdentifierType.EMAIL) {
                 throw new ManagerException("邮箱登陆功能尚未开启，请使用 手机号或者用户名 登陆");
@@ -619,7 +650,7 @@ public class UserManagerImpl implements UserManager {
             }
 
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
-                throw new AuthenticationException("AccountIdentifier or password not match");
+                throw new AuthenticationException("账号与密码不匹配");
             }
 
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
@@ -628,7 +659,10 @@ public class UserManagerImpl implements UserManager {
 
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
-            throw new ManagerException("LoginByUser failed for user: " + loginBo.getAccountIdentifier(), t);
+            if (t instanceof ManagerException) {
+                throw t;
+            }
+            throw new ManagerException("对不起，登录失败，请稍后再试", t);
         }
 
         authManager.success(loginBo.getAccountIdentifier());
@@ -651,7 +685,7 @@ public class UserManagerImpl implements UserManager {
         String authCode = null;
         try {
             if (!authManager.isAbleToLogin(loginBo.getAccountIdentifier())) {
-                throw new ManagerException("User cannot login, please wait for a minute");
+                throw new ManagerException("对不起，您登录过于频繁，请等候一分钟");
             }
 
             UserEntityExt search = new UserEntityExt();
@@ -659,11 +693,11 @@ public class UserManagerImpl implements UserManager {
 
             curUser = userMapper.getByReference(search);
             if (curUser == null) {
-                throw new UserNotFoundException("LoginByReference failed for user: " + loginBo.getAccountIdentifier());
+                throw new UserNotFoundException("对不起，识别号" + loginBo.getAccountIdentifier() + "尚未被注册");
             }
 
             if (!PasswordCrypto.validatePassword(loginBo.getPassword(), curUser.getPassword())) {
-                throw new AuthenticationException("Reference or password not match");
+                throw new AuthenticationException("账号与密码不匹配");
             }
 
             curUser.setLastLoginTime(DateUtility.getCurTimeInstance());
@@ -672,7 +706,10 @@ public class UserManagerImpl implements UserManager {
 
         } catch (Throwable t) {
             authManager.fail(loginBo.getAccountIdentifier());
-            throw new ManagerException("LoginByReference failed for user: " + loginBo.getAccountIdentifier(), t);
+            if (t instanceof ManagerException) {
+                throw t;
+            }
+            throw new ManagerException("对不起，登录失败，请稍后再试", t);
         }
 
         authManager.success(loginBo.getAccountIdentifier());
@@ -697,17 +734,17 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call deleteUser at " + new Date(), currentUserEntity.getName()));
         } else {
-            throw new AuthenticationException("Non-admin user trying deleting other user");
+            throw new AuthenticationException("对不起，您无权删除用户");
         }
         
         if (IdChecker.isNull(targetUserEntity.getId())) {
-            throw new ManagerException("User deletion must specify id");
+            throw new ManagerException("对不起，删除用户时必须标注用户ID");
         }
         try {
             targetUserEntity.setDeleted(1);
             userMapper.deleteById(targetUserEntity.getId());
         } catch (Throwable t) {
-            throw new ManagerException("User deletion failed for user: " + currentUserEntity.getId(), t);
+            throw new ManagerException("对不起，用户删除失败，请稍后再试", t);
         }
 
         return UserConverter.toBo(targetUserEntity);
@@ -728,12 +765,12 @@ public class UserManagerImpl implements UserManager {
         } else {
             //this include both partner user and normal user
             if (targetUserEntity == null || IdChecker.notEqual(targetUserEntity.getId(), currentUserEntity.getId())) {
-                throw new AuthenticationException("User updating someone else's user");
+                throw new AuthenticationException("对不起，您无权更改其他用户");
             }
         }
 
         if (IdChecker.isNull(targetUserEntity.getId())) {
-            throw new ManagerException("User udpate must specify id");
+            throw new ManagerException("对不起，更改用户时必须标注用户ID");
         }
         
         //lets just say there are things that are not meant to be changed
@@ -747,7 +784,7 @@ public class UserManagerImpl implements UserManager {
         try {
             userMapper.update(targetUserEntity);
         } catch (Throwable t) {
-            throw new ManagerException("User update failed for user: " + currentUserEntity.getId(), t);
+            throw new ManagerException("对不起，用户更改失败，请稍后再试", t);
         }
 
         return UserConverter.toBo(userMapper.getById(targetUserEntity.getId()));
@@ -769,7 +806,7 @@ public class UserManagerImpl implements UserManager {
         } else {
             //this include both partner user and normal user
             if (queryUserEntity == null || IdChecker.notEqual(queryUserEntity.getId(), currentUserEntity.getId())) {
-                throw new AuthenticationException("User queryingInfo someone else's user");
+                throw new AuthenticationException("对不起，您无权查询其他用户");
             }
         }
 
@@ -777,11 +814,11 @@ public class UserManagerImpl implements UserManager {
         try {
             result = userMapper.getById(queryUserEntity.getId());
         } catch (Throwable t) {
-            throw new ManagerException("Contact query failed for user: " + currentUserEntity.getId(), t);
+            throw new ManagerException("对不起，用户获取失败，请稍后再试", t);
         }
 
         if (result == null) {
-            throw new UserNotFoundException("QueryUserInfo failed for user: " + currentUserEntity.getId());
+            throw new UserNotFoundException("对不起，无法找到ID为" + currentUserEntity.getId() + "的用户");
         }
 
         return UserConverter.toBo(result);
@@ -801,14 +838,14 @@ public class UserManagerImpl implements UserManager {
         if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
             LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call queryUser at " + new Date(), currentUserEntity.getName()));
         } else {
-            throw new AuthenticationException("Non-admin user querying someone else's user");
+            throw new AuthenticationException("对不起，您无权查询其他用户");
         }
 
         List<UserEntityExt> results = null;
         try {
             results = userMapper.list(queryUserEntity, page);
         } catch (Throwable t) {
-            throw new ManagerException("User query failed for user: " + currentUserEntity.getId(), t);
+            throw new ManagerException("对不起，用户查询失败，请稍后再试", t);
         }
 
         if (results == null) {
@@ -822,6 +859,16 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    public int queryUserTotal(UserBo queryUser) {
+        return userMapper.getListCount(UserConverter.fromBo(queryUser));
+    }
+    
+    @Override
+    public int queryUserByPartnerIdAndRoleIdTotal(int partnerId, int roleId) {
+        return userMapper.getCountByPartnerIdAndRoleId(partnerId, roleId);
+    }
+    
+    @Override
     public int getPartnerIdByUserId(int userId) {
         List<GroupEntityExt> groupList = groupMapper.listGroupsByUserId(userId);
         if (groupList == null) {
@@ -833,4 +880,36 @@ public class UserManagerImpl implements UserManager {
         return Constant.DEFAULTNULL;
     }
 
+    @Override
+    public List<UserBo> queryUserByPartnerIdAndRoleId(int partnerId, int roleId, UserBo currentUser, PaginationBo paginationBo) {
+        if (currentUser == null) {
+            throw new ManagerException("无效请求参数");
+        }
+
+        PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
+        UserEntityExt currentUserEntity = UserConverter.fromBo(currentUser);
+
+        // only admins are allowed here
+        if (authManager.isAdmin(currentUserEntity.getId()) || authManager.isSystemAdmin(currentUserEntity.getId())) {
+            LOGGER.warn(String.format("[UserManagerImpl]system admin || admin [%s] call queryUserByPartnerIdAndRoleId at " + new Date(), currentUserEntity.getName()));
+        } else {
+            throw new AuthenticationException("Non-admin user querying someone else's user");
+        }
+
+        List<UserEntityExt> results = null;
+        try {
+            results = userMapper.listByPartnerIdAndRoleId(partnerId, roleId, page);
+        } catch (Throwable t) {
+            throw new ManagerException("User query failed for user: " + currentUserEntity.getId(), t);
+        }
+
+        if (results == null) {
+            return new ArrayList<UserBo>();
+        }
+        List<UserBo> convertedResults = new ArrayList<UserBo>();
+        for (UserEntityExt userPo : results) {
+            convertedResults.add(UserConverter.toBo(userPo));
+        }
+        return convertedResults;
+    }
 }
