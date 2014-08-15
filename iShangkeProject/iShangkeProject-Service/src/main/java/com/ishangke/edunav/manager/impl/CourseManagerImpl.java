@@ -136,6 +136,14 @@ public class CourseManagerImpl implements CourseManager {
             if (!courseTemplateEntity.getCourseName().equals(course.getCourseName()) || !courseTemplateEntity.getPrice().equals(course.getPrice()) || !courseTemplateEntity.getOriginalPrice().equals(course.getOriginalPrice())) {
                 throw new ManagerException("cannot modify course name or price or origin price, must equal course template");
             }
+            
+            //临时加的，不知道未来可能会改业务流程
+            //因为不能改变模版名，但是我们又需要根据一个模版生成多个课程
+            CourseEntityExt cc = new CourseEntityExt();
+            cc.setCourseTemplateId(course.getCourseTemplateId());
+            int count = courseMapper.getListCount(cc);
+            course.setCourseName(course.getCourseName() + "-" + (count + 1));
+            
             // 验证教师信息和classphoto信息是否属于本机构
             List<ClassPhotoEntityExt> classPhotos = course.getClassPhotoList();
             if (classPhotos != null) {
