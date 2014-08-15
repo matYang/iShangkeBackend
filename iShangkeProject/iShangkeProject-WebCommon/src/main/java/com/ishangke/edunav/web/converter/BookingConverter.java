@@ -1,9 +1,7 @@
 package com.ishangke.edunav.web.converter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
@@ -198,17 +196,6 @@ public class BookingConverter {
         }
         if (vo.getPartnerIdSet() != null) {
             bookingBo.setPartnerIdSet(vo.getPartnerIdSet());
-        }
-        if (vo.getStatuses() != null) {
-            // 约定 前段必须使用,分隔id
-            String[] statuses = vo.getStatuses().split(",");
-            if (statuses.length > 0) {
-                Set<Integer> set = new HashSet<>();
-                for (String id : statuses) {
-                    set.add(Integer.valueOf(id));
-                }
-                bookingBo.setStatusSet(set);
-            }
         }
         return bookingBo;
     }

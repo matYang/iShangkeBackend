@@ -1,9 +1,7 @@
 package com.ishangke.edunav.web.converter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.ActionBo;
@@ -538,17 +536,6 @@ public class CourseConverter {
                 list.add(ActionConverter.fromModel(a));
             }
             courseBo.setActionList(list);
-        }
-        if (vo.getIds() != null) {
-            // 约定 前段必须使用,分隔id
-            String[] ids = vo.getIds().split(",");
-            if (ids.length > 0) {
-                Set<Integer> set = new HashSet<>();
-                for (String id : ids) {
-                    set.add(Integer.valueOf(id));
-                }
-                courseBo.setIdSet(set);
-            }
         }
         // 存储周一～周日上课时间的信息
         if (vo.getStudyDays() != null && vo.getStudyDays().size() > 0) {
