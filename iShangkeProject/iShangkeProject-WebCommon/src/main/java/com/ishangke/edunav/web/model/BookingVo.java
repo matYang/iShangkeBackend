@@ -68,8 +68,6 @@ public class BookingVo extends JsonResponse {
 
     private CourseVo course;
     
-    //用于booking的状态选择
-    private String statuses;
     public Integer getPartnerId() {
         return partnerId;
     }
@@ -412,14 +410,6 @@ public class BookingVo extends JsonResponse {
 
     public void setCourse(CourseVo course) {
         this.course = course;
-    }
-
-    public String getStatuses() {
-        return statuses;
-    }
-
-    public void setStatuses(String statuses) {
-        this.statuses = statuses;
     }
 
 }
