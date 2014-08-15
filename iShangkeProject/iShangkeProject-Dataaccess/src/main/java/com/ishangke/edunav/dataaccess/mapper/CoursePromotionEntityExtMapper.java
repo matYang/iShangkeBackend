@@ -15,4 +15,6 @@ public interface CoursePromotionEntityExtMapper {
     public List<CoursePromotionEntityExt> list(@Param("entity") CoursePromotionEntityExt coursePromotionEntityExt, @Param("page") PaginationEntity page);
     
     public int getListCount(@Param("entity") CoursePromotionEntityExt coursePromotionEntityExt);
+    
+    public CoursePromotionEntityExt update(CoursePromotionEntityExt coursePromotionEntityExt);
 }
