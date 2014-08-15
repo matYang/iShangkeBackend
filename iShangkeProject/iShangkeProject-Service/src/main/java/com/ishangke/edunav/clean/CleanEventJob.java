@@ -103,8 +103,7 @@ public class CleanEventJob {
                 for (CoursePromotionEntityExt result : results) {
                     try {
                         result.setStatus(CoursePromotionEnums.Status.ONGOING.code);
-                        //TODO add upate, and maybe auto-online?
-                        //coursePromotionMapper.update(result);
+                        coursePromotionMapper.update(result);
                     } catch (Throwable t) {
                         hasError = true;
                         LOGGER.error("[WARNING] [stageCoursePromotion] suffered single failure with id:" + result.getId(), t);
@@ -136,8 +135,7 @@ public class CleanEventJob {
                 for (CoursePromotionEntityExt result : results) {
                     try {
                         result.setStatus(CoursePromotionEnums.Status.FINISHED.code);
-                        //TODO add upate, and maybe auto-online?
-                        //coursePromotionMapper.update(result);
+                        coursePromotionMapper.update(result);
                     } catch (Throwable t) {
                         hasError = true;
                         LOGGER.error("[WARNING] [cleanCoursePromotion] suffered single failure with id:" + result.getId(), t);
