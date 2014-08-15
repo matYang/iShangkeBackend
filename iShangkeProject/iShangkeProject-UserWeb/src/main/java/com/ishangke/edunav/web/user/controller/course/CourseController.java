@@ -19,6 +19,7 @@ import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.converter.pageview.CoursePageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.CourseMap;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.CoursePageViewVo;
@@ -42,6 +43,8 @@ public class CourseController extends AbstractController{
         
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
+        paginationVo.setColumnKey(CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(CourseMap.COURSE_MAP.get(paginationVo.getOrder()));
         try {
             pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);    
         } catch (ControllerException c) {
