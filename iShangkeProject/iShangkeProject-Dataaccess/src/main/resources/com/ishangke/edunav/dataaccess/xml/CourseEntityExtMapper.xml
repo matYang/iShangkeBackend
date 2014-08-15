@@ -1152,10 +1152,10 @@
       </if>
       <if test="entity.price == null">
         <if test="entity.priceStart != null">
-          <![CDATA[AND COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null) 
         </if>
         <if test="entity.priceEnd != null">
-          <![CDATA[AND COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null)
         </if>
       </if>
 
@@ -1225,10 +1225,10 @@
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
-          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
         </if>
       </if>
 
@@ -1309,7 +1309,7 @@
       </if>
 
       <if test="entity.schooltimeDay != null">
-        AND (COURSE.SCHOOLTIME_DAY & #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
+        AND <![CDATA[(COURSE.SCHOOLTIME_DAY &]]> #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
@@ -1321,7 +1321,7 @@
       </if>
 
       <if test="entity.schooltimeWeek != null">
-        AND (COURSE.SCHOOLTIME_WEEK = #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
+        AND <![CDATA[(COURSE.SCHOOLTIME_WEEK &]]> #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
@@ -1509,10 +1509,10 @@
       </if>
       <if test="entity.price == null">
         <if test="entity.priceStart != null">
-          <![CDATA[AND COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+          <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null) 
         </if>
         <if test="entity.priceEnd != null">
-          <![CDATA[AND COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+          <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null)
         </if>
       </if>
 
@@ -1582,10 +1582,10 @@
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
-          <![CDATA[AND COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
         </if>
       </if>
 
@@ -1666,7 +1666,7 @@
       </if>
 
       <if test="entity.schooltimeDay != null">
-        AND COURSE.SCHOOLTIME_DAY = #{entity.schooltimeDay,jdbcType=INTEGER}
+        AND <![CDATA[(COURSE.SCHOOLTIME_DAY &]]> #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
@@ -1678,7 +1678,7 @@
       </if>
 
       <if test="entity.schooltimeWeek != null">
-        AND COURSE.SCHOOLTIME_WEEK = #{entity.schooltimeWeek,jdbcType=INTEGER}
+        AND <![CDATA[(COURSE.SCHOOLTIME_WEEK &]]> #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
