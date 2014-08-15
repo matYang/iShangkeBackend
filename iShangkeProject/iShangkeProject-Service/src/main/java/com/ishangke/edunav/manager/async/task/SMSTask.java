@@ -52,10 +52,10 @@ public class SMSTask implements AsyncTask {
             post.addHeader("Content-Type", "application/x-www-form-urlencoded;charset=gbk");
             HttpResponse response = client.execute(post);
 
-            LOGGER.debug("SMSTask:  SMS to: " + this.cellNum + " under event: " + this.event.toString()
+            LOGGER.info("SMSTask:  SMS to: " + this.cellNum + " under event: " + this.event.toString()
                     + " returned with statusCode: " + response.getStatusLine().getStatusCode());
         } catch (IOException e) {
-            LOGGER.debug("SMS ERR", e);
+            LOGGER.info("SMS ERR", e);
             return false;
         } finally {
             post.releaseConnection();
