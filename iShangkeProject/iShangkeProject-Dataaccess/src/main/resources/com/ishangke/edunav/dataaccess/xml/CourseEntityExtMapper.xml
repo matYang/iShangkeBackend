@@ -1309,7 +1309,7 @@
       </if>
 
       <if test="entity.schooltimeDay != null">
-        AND COURSE.SCHOOLTIME_DAY = #{entity.schooltimeDay,jdbcType=INTEGER}
+        AND (COURSE.SCHOOLTIME_DAY & #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
@@ -1321,7 +1321,7 @@
       </if>
 
       <if test="entity.schooltimeWeek != null">
-        AND COURSE.SCHOOLTIME_WEEK = #{entity.schooltimeWeek,jdbcType=INTEGER}
+        AND (COURSE.SCHOOLTIME_WEEK = #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">

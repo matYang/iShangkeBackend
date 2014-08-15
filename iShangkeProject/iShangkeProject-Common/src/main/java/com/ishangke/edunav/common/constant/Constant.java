@@ -184,11 +184,11 @@ public class Constant {
     public static final int COURSETYPEOFFLINEONLY = 1;
     public static final int COURSETYPEBOTHONLINEOFFLINE = 2;
     //course 上课时间 上午/下午 平日/周末
-    public static final int COURSESCHOOLTIMEMORNING = 0;
-    public static final int COURSESCHOOLTIMEAFTERNOON = 1;
-    public static final int COURSESCHOOLTIMEEVENING = 2;
-    public static final int COURSESCHOOLWEEKDAY = 0;
-    public static final int COURSESCHOOLWEEKEND = 1;
+    public static final int COURSESCHOOLTIMEMORNING = 1;
+    public static final int COURSESCHOOLTIMEAFTERNOON = 2;
+    public static final int COURSESCHOOLTIMEEVENING = 4;
+    public static final int COURSESCHOOLWEEKDAY = 1;
+    public static final int COURSESCHOOLWEEKEND = 2;
     
     //order
     public static final String ORDERPREFIX = "ISK-";
