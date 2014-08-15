@@ -101,6 +101,7 @@ public class CourseServiceImpl implements CourseService.Iface {
             List<CourseCommentBo> data = courseManager.queryCommentByCourseId(courseBo, paginationBo);
             int total = courseManager.queryCommentByCourseIdTotal(courseBo);
             CourseCommentPageViewBo pageView = new CourseCommentPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
             pageView.setCount(paginationBo.getSize());
             pageView.setData(data);
             pageView.setTotal(total);
@@ -341,6 +342,7 @@ public class CourseServiceImpl implements CourseService.Iface {
             CourseTemplatePageViewBo pageView = new CourseTemplatePageViewBo();
             int total = courseTemplateManager.queryCourseTemplateTotal(courseTemplateBo, userBo);
             pageView.setCount(paginationBo.getSize());
+            pageView.setStart(paginationBo.getOffset());
             pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
