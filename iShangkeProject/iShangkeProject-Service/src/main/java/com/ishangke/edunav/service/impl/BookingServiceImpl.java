@@ -164,10 +164,10 @@ public class BookingServiceImpl implements BookingService.Iface {
     public BookingHistoryPageViewBo queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistoryByBookingId"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryHistoryByBookingId"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<BookingHistoryBo> data = bookingManager.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo);
             int total = bookingManager.queryHistoryByBookingIdTotal(bookingHistoryBo, userBo);
