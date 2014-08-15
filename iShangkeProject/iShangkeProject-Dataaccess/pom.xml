@@ -13,7 +13,7 @@
   </properties>
   <build>
     <plugins>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>sql-maven-plugin</artifactId>
         <version>1.5</version>
@@ -24,9 +24,9 @@
           <password>${db.password}</password>
           <settingsKey>sensibleKey</settingsKey>
         </configuration>
-        <executions>
+        <executions> -->
           <!-- Create Master database -->
-          <execution>
+          <!-- <execution>
             <id>Create-Schema</id>
             <phase>initialize</phase>
             <goals>
@@ -38,9 +38,9 @@
                 <srcFile>../Design/Database/DB_Schema.sql</srcFile>
               </srcFiles>
             </configuration>
-          </execution>
+          </execution> -->
           <!-- Insert basic data for database -->
-          <execution>
+          <!-- <execution>
             <id>Insert-Basic-Data</id>
             <phase>initialize</phase>
             <goals>
@@ -53,8 +53,8 @@
                 <srcFile>../Design/Database/DB_BasicData.sql</srcFile>
               </srcFiles>
             </configuration>
-          </execution>
-        </executions>
+          </execution> -->
+        <!-- </executions>
         <dependencies>
           <dependency>
             <groupId>mysql</groupId>
@@ -62,7 +62,7 @@
             <version>${mysql.version}</version>
           </dependency>
         </dependencies>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <version>2.5</version>
@@ -127,7 +127,7 @@
               <goal>run</goal>
             </goals>
           </execution>
-          <execution>
+          <!-- <execution>
             <id>Copy template spring applicationContext-dataaccessUT file</id>
             <phase>initialize</phase>
             <configuration>
@@ -141,7 +141,7 @@
             <goals>
               <goal>run</goal>
             </goals>
-          </execution>
+          </execution> -->
           <execution>
             <id>Copy ENV_properties to classpath</id>
             <phase>initialize</phase>
@@ -157,7 +157,7 @@
               <goal>run</goal>
             </goals>
           </execution>
-          <execution>
+          <!-- <execution>
             <id>Copy ENV_properties to classpath-UT</id>
             <phase>initialize</phase>
             <configuration>
@@ -171,8 +171,8 @@
             <goals>
               <goal>run</goal>
             </goals>
-          </execution>
-          <execution>
+          </execution> -->
+          <!-- <execution>
             <id>Copy applicationContext-dataaccessUT to service test</id>
             <phase>initialize</phase>
             <configuration>
@@ -186,7 +186,7 @@
             <goals>
               <goal>run</goal>
             </goals>
-          </execution>
+          </execution> -->
         </executions>
       </plugin>
       <plugin>
@@ -210,7 +210,7 @@
               </replacements>
             </configuration>
           </execution>
-          <execution>
+          <!-- <execution>
             <id>Replace the token in applicationContext-dataaccessUT.xml</id>
             <phase>initialize</phase>
             <goals>
@@ -225,7 +225,7 @@
                 </replacement>
               </replacements>
             </configuration>
-          </execution>
+          </execution> -->
         </executions>
       </plugin>
     </plugins>
