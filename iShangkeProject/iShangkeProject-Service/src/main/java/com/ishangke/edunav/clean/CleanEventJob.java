@@ -3,28 +3,44 @@ package com.ishangke.edunav.clean;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.enums.CoursePromotionEnums;
+import com.ishangke.edunav.common.enums.SMSEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CoursePromotionEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
+import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
+import com.ishangke.edunav.manager.async.task.SMSTask;
 
 //non transactional
 public class CleanEventJob {
     private static final Logger LOGGER = LoggerFactory.getLogger(CleanEventJob.class);
+    
+    private static Vector<String> panicContactList;
+    
+    static {
+        panicContactList = new Vector<String>();
+        panicContactList.add("18662241356");
+    }
 
     @Autowired
     CourseEntityExtMapper courseMapper;
 
     @Autowired
     BookingEntityExtMapper bookingMapper;
+    
+    @Autowired
+    CoursePromotionEntityExtMapper coursePromotionMapper;
     
     public void clean() {
         LOGGER.info("Clean called at:" + new Date().toString());
@@ -42,17 +58,12 @@ public class CleanEventJob {
     private void cleanCourse() {
         boolean hasError = false;
 
-        // pagination that will search all
-        PaginationEntity pagination = new PaginationEntity();
-        pagination.setOffset(0);
-        pagination.setSize(Integer.MAX_VALUE);
-
         CourseEntityExt course = new CourseEntityExt();
         // online courses that and a cutoff date time <= current time
         course.setStatus(Constant.COURSESTATUSONLINED);
         course.setCutoffDateEnd(DateUtility.getCurTimeInstance());
         try {
-            List<CourseEntityExt> results = courseMapper.list(course, pagination);
+            List<CourseEntityExt> results = courseMapper.list(course, getDefaultPagination());
             if (results != null) {
                 for (CourseEntityExt result : results) {
                     try {
@@ -78,16 +89,40 @@ public class CleanEventJob {
     }
 
     private void cleanCoursePromotion() {
-        // TODO
+        boolean hasError = false;
+
+        CoursePromotionEntityExt coursePromotion = new CoursePromotionEntityExt();
+        // online coursePromotions that has end time < now and status is ongoing
+        coursePromotion.setStatus(CoursePromotionEnums.Status.ONGOING.code);
+        coursePromotion.setEndTimeEnd(DateUtility.getCurTimeInstance());
+        try {
+            List<CoursePromotionEntityExt> results = coursePromotionMapper.list(coursePromotion, getDefaultPagination());
+            if (results != null) {
+                for (CoursePromotionEntityExt result : results) {
+                    try {
+                        result.setStatus(CoursePromotionEnums.Status.FINISHED.code);
+                        //TODO add upate, and maybe auto-online?
+                        //coursePromotionMapper.update(result);
+                    } catch (Throwable t) {
+                        hasError = true;
+                        LOGGER.error("[WARNING] [cleanCoursePromotion] suffered single failure with id:" + result.getId(), t);
+                    }
+                }
+            } else {
+                LOGGER.warn("[WARNING] [cleanCoursePromotion] search result is null");
+            }
+        } catch (Throwable t) {
+            hasError = true;
+            LOGGER.error("[ERROR] [cleanCoursePromotion] suffered unexpected errors, please check logs carefully", t);
+        }
+
+        if (hasError) {
+            panic("[ERROR] [cleanCoursePromotion] paniced, please check the logs");
+        }
     }
 
     private void cleanOrder() {
         boolean hasError = false;
-
-        // pagination that will search all
-        PaginationEntity pagination = new PaginationEntity();
-        pagination.setOffset(0);
-        pagination.setSize(Integer.MAX_VALUE);
         
         //find whatever booking established target state 24 hours ago or earlier
         Calendar cal = DateUtility.getCurTimeInstance();
@@ -96,9 +131,9 @@ public class CleanEventJob {
         BookingEntityExt booking = new BookingEntityExt();
         // online bookings that are 
         booking.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
-        booking.setCreateTimeEnd(cal);
+        booking.setLastModifyTimeEnd(cal);
         try {
-            List<BookingEntityExt> results = bookingMapper.list(booking, pagination);
+            List<BookingEntityExt> results = bookingMapper.list(booking, getDefaultPagination());
             if (results != null) {
                 for (BookingEntityExt result : results) {
                     try {
@@ -124,7 +159,20 @@ public class CleanEventJob {
     }
 
     private void panic(String payload) {
-
+        //synchronously sending out panic sms messages
+        for (String contact : panicContactList) {
+            SMSTask panicTask = new SMSTask(SMSEnums.Event.PANIC, contact, payload);
+            panicTask.execute();
+        }
+    }
+    
+    private PaginationEntity getDefaultPagination() {
+        // pagination that will search all
+        PaginationEntity pagination = new PaginationEntity();
+        pagination.setOffset(0);
+        pagination.setSize(Integer.MAX_VALUE);
+        
+        return pagination;
     }
 
 }
