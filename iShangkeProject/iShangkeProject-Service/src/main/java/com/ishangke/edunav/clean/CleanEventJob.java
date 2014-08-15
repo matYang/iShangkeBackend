@@ -47,10 +47,12 @@ public class CleanEventJob {
 
         LOGGER.info("Clean:cleanCourse started at:" + new Date().toString());
         cleanCourse();
+        LOGGER.info("Clean:stageCoursePromotion started at:" + new Date().toString());
+        stageCoursePromotion();
         LOGGER.info("Clean:cleanCoursePromotion started at:" + new Date().toString());
         cleanCoursePromotion();
         LOGGER.info("Clean:cleanBooking started at:" + new Date().toString());
-        cleanOrder();
+        cleanBooking();
 
         LOGGER.info("Clean finished at:" + new Date().toString());
     }
@@ -87,6 +89,39 @@ public class CleanEventJob {
             panic("[ERROR] [cleanCourse] paniced, please check the logs");
         }
     }
+    
+    private void stageCoursePromotion() {
+        boolean hasError = false;
+
+        CoursePromotionEntityExt coursePromotion = new CoursePromotionEntityExt();
+        // online coursePromotions that has start time < now and status pending
+        coursePromotion.setStatus(CoursePromotionEnums.Status.PENDING.code);
+        coursePromotion.setStartTimeEnd(DateUtility.getCurTimeInstance());
+        try {
+            List<CoursePromotionEntityExt> results = coursePromotionMapper.list(coursePromotion, getDefaultPagination());
+            if (results != null) {
+                for (CoursePromotionEntityExt result : results) {
+                    try {
+                        result.setStatus(CoursePromotionEnums.Status.ONGOING.code);
+                        //TODO add upate, and maybe auto-online?
+                        //coursePromotionMapper.update(result);
+                    } catch (Throwable t) {
+                        hasError = true;
+                        LOGGER.error("[WARNING] [stageCoursePromotion] suffered single failure with id:" + result.getId(), t);
+                    }
+                }
+            } else {
+                LOGGER.warn("[WARNING] [stageCoursePromotion] search result is null");
+            }
+        } catch (Throwable t) {
+            hasError = true;
+            LOGGER.error("[ERROR] [stageCoursePromotion] suffered unexpected errors, please check logs carefully", t);
+        }
+
+        if (hasError) {
+            panic("[ERROR] [stageCoursePromotion] paniced, please check the logs");
+        }
+    }
 
     private void cleanCoursePromotion() {
         boolean hasError = false;
@@ -121,7 +156,7 @@ public class CleanEventJob {
         }
     }
 
-    private void cleanOrder() {
+    private void cleanBooking() {
         boolean hasError = false;
         
         //find whatever booking established target state 24 hours ago or earlier
@@ -159,11 +194,20 @@ public class CleanEventJob {
     }
 
     private void panic(String payload) {
-        //synchronously sending out panic sms messages
-        for (String contact : panicContactList) {
-            SMSTask panicTask = new SMSTask(SMSEnums.Event.PANIC, contact, payload);
-            panicTask.execute();
+        try {
+            //synchronously sending out panic sms messages
+            for (String contact : panicContactList) {
+                try {
+                    SMSTask panicTask = new SMSTask(SMSEnums.Event.PANIC, contact, payload);
+                    panicTask.execute();
+                } catch (Throwable t) {
+                    LOGGER.error("[CleanEventJob] [panic] error when sending sms to: " + contact, t);
+                }
+            }
+        } catch (Throwable t) {
+            LOGGER.error("[CleanEventJob] [panic] Gosh damn it can I just not get any exceptions", t);
         }
+
     }
     
     private PaginationEntity getDefaultPagination() {

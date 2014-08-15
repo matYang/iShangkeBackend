@@ -41,9 +41,8 @@ public class OrderController extends AbstractController {
     @Autowired
     AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET, produces = {"text/html;charset=UTF-8"})
-    public @ResponseBody
-    String buildForm(@PathVariable int bookingId, @RequestParam(defaultValue="alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET, produces = { "text/html;charset=UTF-8" })
+    public @ResponseBody String buildForm(@PathVariable int bookingId, @RequestParam(defaultValue = "alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         UserBo currentUser = null;
@@ -51,14 +50,14 @@ public class OrderController extends AbstractController {
             currentUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             resp.setStatus(511);
-            return "服务器发生异常，不能验证当前用户的身份。。。";
+            return "服务器发生异常，不能验证当前用户的身份";
         }
         int curId = currentUser.getId();
-        boolean loggedIn =  curId > 0;
+        boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return "对不起，您尚未登录";
         }
-        
+
         BookingBo booking = bookingFacade.queryBookingById(bookingId, currentUser, permissionTag);
 
         OrderVo order = new OrderVo();
@@ -75,9 +74,10 @@ public class OrderController extends AbstractController {
         }
 
         String partnerName = (booking.getCourse() != null && booking.getCourse().getInstName() != null) ? "[" + booking.getCourse().getInstName() + "]" : "";
-        //我们的订单号ISK + booking id + order id
-        String result = alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + DateUtility.milisecInDay + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        // 我们的订单号ISK + booking id + order id
+        String result = alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + DateUtility.milisecInDay + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + partnerName
+                + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
         return result;
     }
-    
+
 }
