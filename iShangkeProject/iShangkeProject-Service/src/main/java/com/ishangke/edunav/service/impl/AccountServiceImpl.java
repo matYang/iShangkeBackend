@@ -68,11 +68,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "exchangeCash"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "exchangeCash"));
+            //     throw new NoPermissionException();
+            // }
             return null;
             // return accountManager.exchangeCash(accountBo, userBo);
         } catch (NoPermissionException e) {
@@ -95,11 +95,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public AccountPageViewBo queryAccount(AccountBo accountBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryAccount"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryAccount"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<AccountBo> data = accountManager.query(accountBo, userBo, paginationBo);
             int total = accountManager.queryTotal(accountBo, userBo);
@@ -130,11 +130,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public AccountHistoryPageViewBo queryAccountHistory(AccountHistoryBo accountHistoryBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryAccountHistory"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryAccountHistory"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<AccountHistoryBo> data = accountManager.queryHistory(accountHistoryBo, userBo, paginationBo);
             int total = accountManager.queryHistoryTotal(accountHistoryBo, userBo);
@@ -170,11 +170,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CouponBo createCoupon(CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "createCoupon"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "createCoupon"));
+            //     throw new NoPermissionException();
+            // }
             return couponManager.createCoupon(couponBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -196,11 +196,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CouponBo activateCoupon(CouponBo couponBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "activateCoupon"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "activateCoupon"));
+            //     throw new NoPermissionException();
+            // }
             return couponManager.activateCoupon(couponBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -222,11 +222,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CouponPageViewBo queryCoupon(CouponBo couponBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryCoupon"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryCoupon"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<CouponBo> data = couponManager.query(couponBo, userBo, paginationBo);
             int total = couponManager.queryTotal(couponBo, userBo);
@@ -257,11 +257,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CouponHistoryPageViewBo queryCouponHistory(CouponHistoryBo couponHistoryBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryCouponHistory"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryCouponHistory"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<CouponHistoryBo> data = couponManager.queryHistory(couponHistoryBo, userBo, paginationBo);
             int total = couponManager.queryHistoryTotal(couponHistoryBo, userBo);
@@ -292,11 +292,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     @Override
     public CouponBo queryCouponById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryContact"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryContact"));
+            //     throw new NoPermissionException();
+            // }
             return couponManager.queryById(id, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -323,11 +323,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CreditBo exchangeCoupon(CreditBo creditBo, CouponBo couponBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "exchangeCoupon"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "exchangeCoupon"));
+            //     throw new NoPermissionException();
+            // }
             return creditManager.exchangeCoupon(creditBo, couponBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -350,11 +350,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CreditBo exchangeAccount(CreditBo creditBo, AccountBo accountBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "exchangeAccount"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "exchangeAccount"));
+            //     throw new NoPermissionException();
+            // }
             return creditManager.exchangeAccount(creditBo, accountBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -376,11 +376,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CreditPageViewBo queryCredit(CreditBo creditBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryCredit"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryCredit"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<CreditBo> data = creditManager.query(creditBo, userBo, paginationBo);
             int total = creditManager.queryTotal(creditBo, userBo);
@@ -411,11 +411,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public CreditHistoryPageViewBo queryCreditHistory(CreditHistoryBo creditHistoryBo, UserBo userBo,
             PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryCreditHistory"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryCreditHistory"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<CreditHistoryBo> data = creditManager.queryHistory(creditHistoryBo, userBo, paginationBo);
             int total = creditManager.queryHistoryTotal(creditHistoryBo, userBo);
@@ -452,11 +452,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public WithdrawBo createWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "createWithdraw"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "createWithdraw"));
+            //     throw new NoPermissionException();
+            // }
             return withdrawManager.createWithdraw(withdrawBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -478,11 +478,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public WithdrawBo updateWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "updateWithdraw"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "updateWithdraw"));
+            //     throw new NoPermissionException();
+            // }
             return withdrawManager.updateWithdraw(withdrawBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -504,11 +504,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public WithdrawBo deleteWithdraw(WithdrawBo withdrawBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "deleteWithdraw"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "deleteWithdraw"));
+            //     throw new NoPermissionException();
+            // }
             return withdrawManager.deleteWithdraw(withdrawBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -530,11 +530,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public WithdrawPageViewBo queryWithdraw(WithdrawBo withdrawBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryWithdraw"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryWithdraw"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<WithdrawBo> data = withdrawManager.query(withdrawBo, userBo, paginationBo);
             int total = withdrawManager.queryTotal(withdrawBo, userBo);
@@ -570,11 +570,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public ContactBo createContact(ContactBo contactBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "createContact"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "createContact"));
+            //     throw new NoPermissionException();
+            // }
             return contactManager.createContact(contactBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -596,11 +596,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public ContactBo updateContact(ContactBo contactBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "updateContact"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "updateContact"));
+            //     throw new NoPermissionException();
+            // }
             return contactManager.updateContact(contactBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -622,11 +622,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public ContactBo deleteContact(ContactBo contactBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "deleteContact"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "deleteContact"));
+            //     throw new NoPermissionException();
+            // }
             return contactManager.deleteContact(contactBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -648,11 +648,11 @@ public class AccountServiceImpl implements AccountService.Iface {
     public ContactPageViewBo queryContact(ContactBo contactBo, UserBo userBo, PaginationBo paginationBo,
             String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                        "queryContact"));
-                throw new NoPermissionException();
-            }
+            // if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+            //     LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+            //             "queryContact"));
+            //     throw new NoPermissionException();
+            // }
             paginationBo = PageUtil.getPage(paginationBo);
             List<ContactBo> data = contactManager.query(contactBo, userBo, paginationBo);
             int total = contactManager.queryTotal(contactBo, userBo);
