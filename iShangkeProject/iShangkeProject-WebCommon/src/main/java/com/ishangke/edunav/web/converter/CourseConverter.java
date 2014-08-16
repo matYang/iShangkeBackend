@@ -63,7 +63,6 @@ public class CourseConverter {
         } else {
             courseBo.setBookingType(Constant.DEFAULTNULL);
         }
-
         if (vo.getCashback() != null) {
             courseBo.setCashback(vo.getCashback());
         } else {
@@ -337,6 +336,9 @@ public class CourseConverter {
         }
         if (vo.getRegPhone() != null) {
             courseBo.setRegPhone(vo.getRegPhone());
+        }
+        if (vo.getPrerequest() != null) {
+            courseBo.setPrerequest(vo.getPrerequest());
         }
         if (vo.getSchooltimeDay() != null) {
             courseBo.setSchooltimeDay(vo.getSchooltimeDay());
@@ -674,6 +676,7 @@ public class CourseConverter {
         courseVo.setNoRefundDateStart(bo.getNoRefundDateStart());
         courseVo.setNoRefundDateEnd(bo.getNoRefundDateEnd());
         courseVo.setOpenCourseRequirement(bo.getOpenCourseRequirement());
+        courseVo.setPrerequest(bo.getPrerequest());
         if (Constant.DEFAULTNULL != bo.getPrice()) {
             courseVo.setPrice(bo.getPrice());
         }
