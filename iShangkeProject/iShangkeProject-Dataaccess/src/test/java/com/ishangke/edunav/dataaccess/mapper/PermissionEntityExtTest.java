@@ -157,87 +157,86 @@ public class PermissionEntityExtTest extends BaseTest {
 //        Assert.assertEquals("Login_N", result.get(0).getName());
 //    }
 
-    @Test
-    public void testQuery2() {
-        PermissionEntityExt PermissionEntityExt = new PermissionEntityExt();
-        PaginationEntity page = new PaginationEntity();
-        page.setOffset(0);
-        page.setSize(10);
-        Set<Integer> idSet = new HashSet();
-        idSet.add(1);
-        idSet.add(2);
-        idSet.add(3);
-        PermissionEntityExt.setIdSet(idSet);
-        List<PermissionEntityExt> result = permissionEntityExtMapper.list(
-                PermissionEntityExt, page);
-        Assert.assertEquals(3, result.size());
-    }
+//    @Test
+//    public void testQuery2() {
+//        PermissionEntityExt PermissionEntityExt = new PermissionEntityExt();
+//        PaginationEntity page = new PaginationEntity();
+//        page.setOffset(0);
+//        page.setSize(10);
+//        Set<Integer> idSet = new HashSet();
+//        idSet.add(1);
+//        idSet.add(2);
+//        idSet.add(3);
+//        PermissionEntityExt.setIdSet(idSet);
+//        List<PermissionEntityExt> result = permissionEntityExtMapper.list(
+//                PermissionEntityExt, page);
+//        Assert.assertEquals(3, result.size());
+//    }
 
-    @Test
-    public void testQuery3() {
-        int teacherCount = permissionEntityExtMapper.getCountByRoleId(3);
-        Assert.assertSame(38, teacherCount);
-
-        List<PermissionEntityExt> result = permissionEntityExtMapper
-                .listPermissionByRoleId(2);
-        Assert.assertEquals(140, result.size());
+//    @Test
+//    public void testQuery3() {
+//        int teacherCount = permissionEntityExtMapper.getCountByRoleId(3);
+//        Assert.assertSame(38, teacherCount);
+//
+//        List<PermissionEntityExt> result = permissionEntityExtMapper
+//                .listPermissionByRoleId(2);
+//        Assert.assertEquals(140, result.size());
 //        Assert.assertEquals("POST/api/v2/user/login/phone", result.get(0).getPath());
 //        Assert.assertEquals("POST/api/v2/user/login/phone", result.get(1).getPath());
-    }
+//    }
 
-    @Test
-    public void testQuery4() {
-        int teacherCount = permissionEntityExtMapper.getCountByUserId(2);
-        Assert.assertEquals(140, teacherCount);
-
-        List<PermissionEntityExt> result = permissionEntityExtMapper
-                .listPermissionsByUserId(2);
-        Assert.assertEquals(140, result.size());
+//    @Test
+//    public void testQuery4() {
+//        int teacherCount = permissionEntityExtMapper.getCountByUserId(2);
+//        Assert.assertEquals(140, teacherCount);
+//
+//        List<PermissionEntityExt> result = permissionEntityExtMapper
+//                .listPermissionsByUserId(2);
+//        Assert.assertEquals(140, result.size());
 //        Assert.assertEquals("_test_name_1_爱上课", result.get(0).getName());
 //        Assert.assertEquals("_test_name_1_爱上课", result.get(1).getName());
      
+//    }
 
-    }
+//    @Test
+//    public void testQuery5() {
+//        int teacherCount = permissionEntityExtMapper.getCountByGroupId(2);
+//        Assert.assertEquals(140, teacherCount);
+//
+//        List<PermissionEntityExt> result = permissionEntityExtMapper
+//                .listPermissionsByGroupId(2);
+//        Assert.assertEquals(140, result.size());
+//        Assert.assertEquals("Login_N", result.get(0).getName());
+//    }
+//
+//    @Test
+//    public void testQuery6() {
+//        PermissionEntityExt PermissionCount = permissionEntityExtMapper
+//                .getById(2);
+//
+//        Assert.assertEquals("Login_P", PermissionCount.getName());
+//
+//    }
 
-    @Test
-    public void testQuery5() {
-        int teacherCount = permissionEntityExtMapper.getCountByGroupId(2);
-        Assert.assertEquals(140, teacherCount);
-
-        List<PermissionEntityExt> result = permissionEntityExtMapper
-                .listPermissionsByGroupId(2);
-        Assert.assertEquals(140, result.size());
-        Assert.assertEquals("Login_N", result.get(0).getName());
-    }
-
-    @Test
-    public void testQuery6() {
-        PermissionEntityExt PermissionCount = permissionEntityExtMapper
-                .getById(2);
-
-        Assert.assertEquals("Login_P", PermissionCount.getName());
-
-    }
-
-    @Test
-    public void testGet() {
-        PermissionEntityExt getbyid1 = permissionEntityExtMapper.getById(2);
-        PermissionEntityExt getbyid2 = permissionEntityExtMapper.getById(3);
-        PermissionEntityExt getbyid3 = permissionEntityExtMapper.getById(4);
-        Assert.assertEquals("Login_P", getbyid1.getName());
-        Assert.assertEquals("Login_A", getbyid2.getName());
-        Assert.assertEquals("Logout_N", getbyid3.getName());
-    }
-
-    @Test
-    public void testUpdate() {
-        PermissionEntityExt upDate = permissionEntityExtMapper.getById(2);
-        upDate.setName("_test_name_爱上课");
-        upDate.setCreateTime(time);
-        permissionEntityExtMapper.update(upDate);
-        upDate = permissionEntityExtMapper.getById(2);
-        Assert.assertEquals("_test_name_爱上课", upDate.getName());
-        Assert.assertEquals(DateUtility.toSQLDateTime(time),
-                DateUtility.toSQLDateTime(upDate.getCreateTime()));
-    }
+//    @Test
+//    public void testGet() {
+//        PermissionEntityExt getbyid1 = permissionEntityExtMapper.getById(2);
+//        PermissionEntityExt getbyid2 = permissionEntityExtMapper.getById(3);
+//        PermissionEntityExt getbyid3 = permissionEntityExtMapper.getById(4);
+//        Assert.assertEquals("Login_P", getbyid1.getName());
+//        Assert.assertEquals("Login_A", getbyid2.getName());
+//        Assert.assertEquals("Logout_N", getbyid3.getName());
+//    }
+//
+//    @Test
+//    public void testUpdate() {
+//        PermissionEntityExt upDate = permissionEntityExtMapper.getById(2);
+//        upDate.setName("_test_name_爱上课");
+//        upDate.setCreateTime(time);
+//        permissionEntityExtMapper.update(upDate);
+//        upDate = permissionEntityExtMapper.getById(2);
+//        Assert.assertEquals("_test_name_爱上课", upDate.getName());
+//        Assert.assertEquals(DateUtility.toSQLDateTime(time),
+//                DateUtility.toSQLDateTime(upDate.getCreateTime()));
+//    }
 }
