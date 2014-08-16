@@ -18,9 +18,9 @@ public class Config {
     /* ALIYUN Bucket */
     public static final String AliyunAccessKeyID = "UBnwEnaFUdBewFF9";
     public static final String AliyunAccessKeySecrete = "L8hyNuKRXo5bfQ9HWURDq0bprDSDYO";
-    public static final String AliyunTeacherImgBucket = "teacherimgbucket";
-    public static final String AliyunClassroomImgBucket = "classroomimgbucket";
-    public static final String AliyunLogoBucket = "logobucket";
+    public static final String AliyunTeacherImgBucket = "test-teacherimgbucket";
+    public static final String AliyunClassroomImgBucket = "test-classroomimgbucket";
+    public static final String AliyunLogoBucket = "test-logobucket";
     public static final String resourcePrefix = "src/main/resources/";
 
 }
