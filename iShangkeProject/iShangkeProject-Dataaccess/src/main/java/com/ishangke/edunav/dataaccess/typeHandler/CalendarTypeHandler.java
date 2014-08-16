@@ -11,19 +11,18 @@ import org.apache.ibatis.type.TypeHandler;
 
 import com.ishangke.edunav.common.utilities.DateUtility;
 
-
-public class CalendarTypeHandler implements TypeHandler{
+public class CalendarTypeHandler implements TypeHandler {
 
     @Override
-    public void setParameter(PreparedStatement ps, int i, Object parameter,
-            JdbcType jdbcType) throws SQLException {
-        ps.setString(i, DateUtility.toSQLDateTime(((Calendar)parameter)));  
-        
+    public void setParameter(PreparedStatement ps, int i, Object parameter, JdbcType jdbcType) throws SQLException {
+        if (parameter != null) {
+            return;
+        }
+        ps.setString(i, DateUtility.toSQLDateTime(((Calendar) parameter)));
     }
 
     @Override
-    public Object getResult(ResultSet rs, String columnName)
-            throws SQLException {
+    public Object getResult(ResultSet rs, String columnName) throws SQLException {
         return DateUtility.DateToCalendar(rs.getTimestamp(columnName));
     }
 
@@ -34,8 +33,7 @@ public class CalendarTypeHandler implements TypeHandler{
     }
 
     @Override
-    public Object getResult(CallableStatement cs, int columnIndex)
-            throws SQLException {
+    public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
         // TODO Auto-generated method stub
         return null;
     }
