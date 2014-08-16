@@ -15,7 +15,7 @@ public class CalendarTypeHandler implements TypeHandler {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, Object parameter, JdbcType jdbcType) throws SQLException {
-        if (parameter != null) {
+        if (parameter == null) {
             return;
         }
         ps.setString(i, DateUtility.toSQLDateTime(((Calendar) parameter)));
