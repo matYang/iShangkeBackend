@@ -628,7 +628,9 @@ public class CourseConverter {
         courseVo.setCreateTime(bo.getCreateTime());
         courseVo.setCreateTimeEnd(bo.getCreateTimeEnd());
         courseVo.setCreateTimeStart(bo.getCreateTimeStart());
-        courseVo.setCutoffDate(bo.getCutoffDate());
+        if (bo.getCutoffDate() != Constant.DEFAULTNULL) {
+            courseVo.setCutoffDate(bo.getCutoffDate());            
+        }
         courseVo.setCutoffDateEnd(bo.getCutoffDateEnd());
         courseVo.setCutoffDateStart(bo.getCutoffDateStart());
         if (Constant.DEFAULTNULL != bo.getDiscount()) {
@@ -643,7 +645,9 @@ public class CourseConverter {
         courseVo.setDownloadMaterials(bo.getDownloadMaterials());
         courseVo.setEnabled(bo.getEnabled());
         courseVo.setExtracurricular(bo.getExtracurricular());
-        courseVo.setFinishDate(bo.getFinishDate());
+        if (bo.getFinishDate() != Constant.DEFAULTNULL) {
+            courseVo.setFinishDate(bo.getFinishDate());            
+        }
         courseVo.setFinishDateEnd(bo.getFinishDateEnd());
         courseVo.setFinishDateStart(bo.getFinishDateStart());
         if (Constant.DEFAULTNULL != bo.getFinishTime1()) {
@@ -724,7 +728,9 @@ public class CourseConverter {
         if (Constant.DEFAULTNULL != bo.getServiceCharge()) {
             courseVo.setServiceCharge(bo.getServiceCharge());
         }
-        courseVo.setStartDate(bo.getStartDate());
+        if (bo.getStartDate() != Constant.DEFAULTNULL) {
+            courseVo.setStartDate(bo.getStartDate());    
+        } 
         courseVo.setStartDateEnd(bo.getStartDateEnd());
         courseVo.setStartDateStart(bo.getStartDateStart());
         if (Constant.DEFAULTNULL != bo.getStartTime1()) {

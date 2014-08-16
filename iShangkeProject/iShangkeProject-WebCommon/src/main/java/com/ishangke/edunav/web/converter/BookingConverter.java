@@ -214,7 +214,9 @@ public class BookingConverter {
         if (Constant.DEFAULTNULL != bo.getCashbackAmountStart()) {
             bookingVo.setCashbackAmountStart(bo.getCashbackAmountStart());
         }
-        bookingVo.setCashbackDate(bo.getCashbackDate());
+        if (bo.getCashbackDate() != Constant.DEFAULTNULL) {
+            bookingVo.setCashbackDate(bo.getCashbackDate());            
+        }
         bookingVo.setCashbackDateEnd(bo.getCashbackDateEnd());
         bookingVo.setCashbackDateStart(bo.getCashbackDateStart());
         bookingVo.setCourseId(bo.getCourseId());
@@ -239,7 +241,9 @@ public class BookingConverter {
         bookingVo.setPhone(bo.getPhone());
         //用来生成更漂亮的订单号
         bookingVo.setReference(Constant.ORDERPREFIX + bo.getId());
-        bookingVo.setScheduledTime(bo.getScheduledTime());
+        if (bo.getScheduledTime() != Constant.DEFAULTNULL) {
+            bookingVo.setScheduledTime(bo.getScheduledTime());            
+        }
         bookingVo.setScheduledTimeEnd(bo.getScheduledTimeEnd());
         bookingVo.setScheduledTimeStart(bo.getScheduledTimeStart());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
