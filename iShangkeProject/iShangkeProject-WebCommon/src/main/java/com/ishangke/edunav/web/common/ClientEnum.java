@@ -8,13 +8,13 @@ import com.ishangke.edunav.commoncontract.service.PartnerService;
 import com.ishangke.edunav.commoncontract.service.UserService;
 
 public enum ClientEnum {
-    Account("Account", "127.0.0.1", 9001, AccountService.Client.class),
-    Booking("Booking", "127.0.0.1", 9002, BookingService.Client.class),
-    Course("Course", "127.0.0.1", 9003, CourseService.Client.class),
+    Account("Account", "127.0.0.1", 9101, AccountService.Client.class),
+    Booking("Booking", "127.0.0.1", 9102, BookingService.Client.class),
+    Course("Course", "127.0.0.1", 9103, CourseService.Client.class),
 //    CourseTemplate("CourseTemplate", "127.0.0.1", 9004, CourseTemplateService.Client.class),
-    General("General", "127.0.0.1", 9005, GeneralService.Client.class),
-    Partner("Partner", "127.0.0.1", 9006, PartnerService.Client.class),
-    User("User", "127.0.0.1", 9007, UserService.Client.class);
+    General("General", "127.0.0.1", 9105, GeneralService.Client.class),
+    Partner("Partner", "127.0.0.1", 9106, PartnerService.Client.class),
+    User("User", "127.0.0.1", 9107, UserService.Client.class);
 
     private ClientEnum(String name, String host, int port, Class<?> clientClass) {
         this.name = name;

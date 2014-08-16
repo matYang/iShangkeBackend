@@ -14,13 +14,13 @@ import com.ishangke.edunav.service.impl.PartnerServiceImpl;
 import com.ishangke.edunav.service.impl.UserServiceImpl;
 
 public enum ServiceEnum {
-    Account("Account", 9001, AccountService.Processor.class, AccountServiceImpl.class),
-    Booking("Booking", 9002, BookingService.Processor.class, BookingServiceImpl.class),
-    Course("Course", 9003, CourseService.Processor.class, CourseServiceImpl.class),
+    Account("Account", 9101, AccountService.Processor.class, AccountServiceImpl.class),
+    Booking("Booking", 9102, BookingService.Processor.class, BookingServiceImpl.class),
+    Course("Course", 9103, CourseService.Processor.class, CourseServiceImpl.class),
     //CourseTemplate("CourseTemplate", 9004, CourseTemplateService.Processor.class, CourseTemplateServiceImpl.class),
-    General("General", 9005, GeneralService.Processor.class, GeneralServiceImpl.class), 
-    Partner("Partner", 9006, PartnerService.Processor.class, PartnerServiceImpl.class), 
-    User("User", 9007, UserService.Processor.class, UserServiceImpl.class);
+    General("General", 9105, GeneralService.Processor.class, GeneralServiceImpl.class), 
+    Partner("Partner", 9106, PartnerService.Processor.class, PartnerServiceImpl.class), 
+    User("User", 9107, UserService.Processor.class, UserServiceImpl.class);
 
     private ServiceEnum(String name, int port, Class<?> processorClass, Class<?> handlerClass) {
         this.name = name;
