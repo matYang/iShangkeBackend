@@ -26,7 +26,7 @@ public class AliyunMain {
 
     // the boolean shouldDelete is used for testing so that the sample is not
     // deleted every time
-    public static String uploadImg(final long id, final File file, final String imgName, final String Bucket, final boolean shouldDelete) {
+    private static String uploadImg(final long id, final File file, final String imgName, final String Bucket, final boolean shouldDelete) {
 
         OSSClient client = new OSSClient(myAccessKeyID, mySecretKey);
         String imgAddress = "";

@@ -398,6 +398,9 @@ public class CourseConverter {
         if (e.getWholeName() != null) {
             courseBo.setWholeName(e.getWholeName());
         }
+        if (e.getPrerequest() != null) {
+            courseBo.setPrerequest(e.getPrerequest());
+        }
         courseBo.setStartDate(e.getStartDate() == null ? Constant.DEFAULTNULL : e.getStartDate().getTimeInMillis());
         courseBo.setStartDateEnd(e.getStartDateEnd() == null ? Constant.DEFAULTNULL : e.getStartDateEnd()
                 .getTimeInMillis());
@@ -575,6 +578,7 @@ public class CourseConverter {
         courseEntityExt.setNoRefundDateStart(DateUtility.getTimeFromLong(bo.getNoRefundDateStart()));
         courseEntityExt.setNoRefundDateEnd(DateUtility.getTimeFromLong(bo.getNoRefundDateEnd()));
         courseEntityExt.setOpenCourseRequirement(bo.getOpenCourseRequirement());
+        courseEntityExt.setPrerequest(bo.getPrerequest());
         if (bo.getPrice() != Constant.DEFAULTNULL) {
             courseEntityExt.setPrice(bo.getPrice());
         }

@@ -83,7 +83,7 @@ public class ClassPhotoController extends AbstractController {
 
     // return the ClassPhotoVo with img url in it
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req, HttpServletResponse resp)
+    public @ResponseBody JsonResponse upload(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req, HttpServletResponse resp)
             throws ControllerException {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
