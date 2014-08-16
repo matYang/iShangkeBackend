@@ -29,8 +29,8 @@ public class CacheManagerImpl implements CacheManager {
     static {
         //建立本地连接，仅供测试 
         try {
-            AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, new PlainCallbackHandler("c258548f011211e4", "53Jjd_3KOd_m3DIs"));
-            memcached = new MemcachedClient(new ConnectionFactoryBuilder().setProtocol(Protocol.BINARY).setOpTimeout(500).setAuthDescriptor(ad).build(), AddrUtil.getAddresses("c258548f011211e4.m.cnhzalicm10pub001.ocs.aliyuncs.com:11211"));
+            AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, new PlainCallbackHandler("fdbc1391e96411e3", "HI29_12hkFpa8FYU1fa"));
+            memcached = new MemcachedClient(new ConnectionFactoryBuilder().setProtocol(Protocol.BINARY).setOpTimeout(500).setAuthDescriptor(ad).build(), AddrUtil.getAddresses("fdbc1391e96411e3.m.cnhzalicm10pub001.ocs.aliyuncs.com:11211"));
         } catch (IOException e) {
             e.printStackTrace();
         }
