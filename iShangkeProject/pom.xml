@@ -24,7 +24,7 @@
       </properties>
     </profile>
     <profile>
-      <id>Production</id>
+      <id>Prod</id>
       <properties>
         <ENV>Prod</ENV>
       </properties>
