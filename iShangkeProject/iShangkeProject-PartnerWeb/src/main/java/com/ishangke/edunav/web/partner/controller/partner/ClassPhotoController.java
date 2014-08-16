@@ -46,8 +46,7 @@ public class ClassPhotoController extends AbstractController {
     UserFacade userFacade;
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse queryClassPhoto(ClassPhotoVo classPhotoVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -56,7 +55,7 @@ public class ClassPhotoController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -68,8 +67,7 @@ public class ClassPhotoController extends AbstractController {
         try {
             int partnerId = userFacade.getPartnerIdByUserId(curId);
             classPhotoVo.setPartnerId(partnerId);
-            pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo),
-                    permissionTag);
+            pageViewBo = partnerFacade.queryClassPhoto(ClassPhotoConverter.fromModel(classPhotoVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
@@ -80,9 +78,8 @@ public class ClassPhotoController extends AbstractController {
 
     // return the ClassPhotoVo with img url in it
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody
-    JsonResponse uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req,
-            HttpServletResponse resp) throws ControllerException {
+    public @ResponseBody JsonResponse upload(@RequestParam("file") MultipartFile file, @RequestParam(value = "partnerId") int partnerId, HttpServletRequest req, HttpServletResponse resp)
+            throws ControllerException {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -129,8 +126,7 @@ public class ClassPhotoController extends AbstractController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    JsonResponse create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse create(@RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -141,7 +137,7 @@ public class ClassPhotoController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -162,8 +158,7 @@ public class ClassPhotoController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public @ResponseBody
-    JsonResponse update(@PathVariable("id") int id, @RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse update(@PathVariable("id") int id, @RequestBody ClassPhotoVo classPhotoVo, HttpServletRequest req, HttpServletResponse resp) {
         ClassPhotoVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
@@ -174,13 +169,13 @@ public class ClassPhotoController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
             return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
         }
-        
+
         classPhotoVo.setId(id);
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
         ClassPhotoBo responseClassPhoto = null;
@@ -196,8 +191,7 @@ public class ClassPhotoController extends AbstractController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public @ResponseBody
-    JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
 
@@ -206,7 +200,7 @@ public class ClassPhotoController extends AbstractController {
             curUser = userFacade.authenticate(authSessionBo, permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        }  
+        }
         int curId = curUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
@@ -216,7 +210,7 @@ public class ClassPhotoController extends AbstractController {
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();
         classPhotoVo.setId(id);
         ClassPhotoBo targetClassPhoto = ClassPhotoConverter.fromModel(classPhotoVo);
-        
+
         try {
             int partnerId = userFacade.getPartnerIdByUserId(curId);
             targetClassPhoto.setPartnerId(partnerId);
