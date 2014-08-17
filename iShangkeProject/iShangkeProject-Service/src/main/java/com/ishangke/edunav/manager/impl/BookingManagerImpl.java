@@ -183,11 +183,13 @@ public class BookingManagerImpl implements BookingManager {
             throw new ManagerException("课程已经被删除或者下架，目前无法接受预订");
         }
         // 查询课程现价与发过来的价格是否一致，如果不一致则不能创建booking
-        if (!course.getPrice().equals(bookingEntity.getPrice())) {
+        // 现在课程支持没有价格 支持面议
+        if (course.getPrice() != null && !course.getPrice().equals(bookingEntity.getPrice())) {
             throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
         }
         // 传递过来的cashback必须小于等于course中定义的cashback
-        if (bookingBo.getCashbackAmount() > course.getCashback()) {
+        // 现在课程支持没有价格 支持面议
+        if (course.getCashback() != null && bookingBo.getCashbackAmount() > course.getCashback()) {
             throw new ManagerException("返利金额不能超过课程返利金额，请刷新页面");
         }
         // booking不同的type（支付方式）决定了booking的初始化状态
