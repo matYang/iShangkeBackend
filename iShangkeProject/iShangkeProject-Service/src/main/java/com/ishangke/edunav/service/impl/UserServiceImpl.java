@@ -99,12 +99,11 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo createUser(UserBo targetUser, UserBo currentUser, String permissionTag) throws BusinessExceptionBo,
             TException {
         try {
-//            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
-//                        "createUser"));
-//                throw new NoPermissionException();
-//            }
-
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "createUser"));
+                throw new NoPermissionException();
+            }
             return userManager.createUser(targetUser, currentUser);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -126,12 +125,11 @@ public class UserServiceImpl implements UserService.Iface {
     public UserBo createPartnerUser(UserBo targetUser, PartnerBo partner, int roleId, UserBo currentUser, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
-//                        "createUser"));
-//                throw new NoPermissionException();
-//            }
-
+            if (!permissionManager.hasPermissionByUser(currentUser.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", currentUser.getId(), permissionTag,
+                        "createUser"));
+                throw new NoPermissionException();
+            }
             return userManager.createPartnerUser(targetUser, partner, roleId, currentUser);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -397,11 +395,11 @@ public class UserServiceImpl implements UserService.Iface {
     @Override
     public SessionBo changePassword(PasswordBo passwordBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByUser(passwordBo.getId(), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", passwordBo.getId(), permissionTag,
-//                        "changePassword"));
-//                throw new NoPermissionException();
-//            }
+            if (!permissionManager.hasPermissionByUser(passwordBo.getId(), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", passwordBo.getId(), permissionTag,
+                        "changePassword"));
+                throw new NoPermissionException();
+            }
             return userManager.changePassword(passwordBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
