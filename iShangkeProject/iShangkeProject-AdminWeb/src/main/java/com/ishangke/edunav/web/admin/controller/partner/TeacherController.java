@@ -115,7 +115,7 @@ public class TeacherController extends AbstractController {
 
                 // using Scalr to resize the image
                 BufferedImage bufferedImage = ImageIO.read(dis);
-                bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 400, 400, Scalr.OP_ANTIALIAS);
+                // bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 400, 400, Scalr.OP_ANTIALIAS);
                 ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
 
                 // calculate the MD5 checksum and use it as part of the file
