@@ -512,7 +512,7 @@
     ON
     ADDRESS.PARTNER_ID =
     PARTNER.ID
-    where PARTNER.DELETED = 0 AND PARTNER.ID = #{id}
+    where PARTNER.DELETED = 0 and TEACHER.DELETED = 0 and CLASS_PHOTO.DELETED = 0 and ADDRESS.DELETED = 0 AND PARTNER.ID = #{id}
   </select>
 
   <!-- listAll -->
