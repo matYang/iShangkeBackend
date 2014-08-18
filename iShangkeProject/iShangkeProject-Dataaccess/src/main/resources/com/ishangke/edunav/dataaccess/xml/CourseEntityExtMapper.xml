@@ -186,11 +186,13 @@
     COURSE.OPEN_COURSE_REQUIREMENT
     COURSE_OPENCOURSEREQUIREMENT,
     COURSE.CERTIFICATION COURSE_CERTIFICATION,
-    COURSE.QUIZ COURSE_QUIZ,
+    COURSE.QUIZ
+    COURSE_QUIZ,
     COURSE.COURSE_INTRO
     COURSE_COURSEINTRO,
     COURSE.REFERENCE COURSE_REFERENCE,
-    COURSE.REG_ADDRESS_ID COURSE_REGADDRESSID,
+    COURSE.REG_ADDRESS_ID
+    COURSE_REGADDRESSID,
     COURSE.FINISH_TIME2
     COURSE_FINISHTIME2,
     COURSE.START_TIME2 COURSE_STARTTIME2,
@@ -203,11 +205,13 @@
     COURSE.BOOKING_TYPE COURSE_BOOKINGTYPE,
     COURSE.CASHBACK_DATE
     COURSE_CASHBACKDATE,
-    COURSE.NO_REFUND_DATE COURSE_NOREFUNDDATE,
+    COURSE.NO_REFUND_DATE
+    COURSE_NOREFUNDDATE,
     COURSE.CUTOFF_DATE
     COURSE_CUTOFFDATE,
     COURSE.FINISH_DATE COURSE_FINISHDATE,
-    COURSE.START_DATE COURSE_STARTDATE,
+    COURSE.START_DATE
+    COURSE_STARTDATE,
     COURSE.POPULARITY
     COURSE_POPULARITY,
     COURSE.CLASS_SIZE COURSE_CLASSSIZE,
@@ -216,7 +220,8 @@
     COURSE.CLASS_TYPE
     COURSE_CLASSTYPE,
     COURSE.DISCOUNT COURSE_DISCOUNT,
-    COURSE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
+    COURSE.SCHOOLTIME_DAY
+    COURSE_SCHOOLTIMEDAY,
     COURSE.SCHOOLTIME_WEEK
     COURSE_SCHOOLTIMEWEEK
   </sql>
@@ -954,42 +959,46 @@
     ,
     <include refid="CourseTemplate_Base_Column_List"></include>
     from COURSE COURSE
-     left join  COURSE_TEACHER COURSE_TEACHER
+    left join COURSE_TEACHER COURSE_TEACHER
     ON COURSE_TEACHER.COURSE_ID = COURSE.ID
-     left join 
-    TEACHER TEACHER
+    left join
+    TEACHER
+    TEACHER
     ON
     TEACHER.ID = COURSE_TEACHER.TEACHER_ID
-     left join  COURSE_CLASS_PHOTO
+    left join COURSE_CLASS_PHOTO
     COURSE_CLASS_PHOTO
-    ON COURSE_CLASS_PHOTO.COURSE_ID =
-    COURSE.ID
-     left join  CLASS_PHOTO CLASS_PHOTO
     ON
-    CLASS_PHOTO.ID = COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
-     left join  PARTNER PARTNER
+    COURSE_CLASS_PHOTO.COURSE_ID =
+    COURSE.ID
+    left join CLASS_PHOTO CLASS_PHOTO
+    ON
+    CLASS_PHOTO.ID =
+    COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
+    left join PARTNER PARTNER
     ON
     PARTNER.ID =
     COURSE.PARTNER_ID
-     left join  CATEGORY CATEGORY
+    left join CATEGORY CATEGORY
     ON CATEGORY.ID = COURSE.CATEGORY_ID
-     left join  CIRCLE CIRCLE
+    left join CIRCLE CIRCLE
     ON
     CIRCLE.ID
     = COURSE.CIRCLE_ID
-     left join  LOCATION LOCATION
+    left join LOCATION LOCATION
     ON LOCATION.ID = COURSE.LOCATION_ID
-     left join 
+    left join
     ADDRESS ADDRESS
     ON ADDRESS.ID =
     COURSE.ADDRESS_ID
-     left join  COURSE_TEMPLATE COURSE_TEMPLATE
+    left join COURSE_TEMPLATE
+    COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
-     left join 
+    left join
     (select COURSE.ID COURSE_ID,
     <include refid="Reg_Address_Base_Column_List"></include>
-    from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
+    from COURSE left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where
     COURSE.DELETED = 0 AND COURSE.ID = #{id}
   </select>
@@ -1004,6 +1013,50 @@
     SELECT
     <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0 and COURSE.ID = #{id,jdbcType=INTEGER}
+  </select>
+  <!-- listPromotionByCategoryId -->
+  <select id="listPromotionByCategoryId" resultMap="CourseExtMap">
+    select
+    <include refid="Course_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Address_Base_Column_List"></include>
+    from COURSE COURSE
+    left join PARTNER PARTNER
+    ON PARTNER.ID = COURSE.PARTNER_ID
+    left join ADDRESS ADDRESS
+    ON ADDRESS.ID =
+    COURSE.ADDRESS_ID
+    join COURSE_PROMOTION COURSEPROMOTION
+    on COURSE.ID = COURSE_PROMOTIOMN.COURSE_ID and
+    COURSE_PROMOTION.COURSE_ID = #{categoryId,jdbcType=INTEGER}
+    WHERE
+    COURSE.DELETED = 0
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        COURSE.${listItem.columnKey}
+        ${listItem.order}
+      </foreach>
+    </if>
+
+    <if test="page !=null and page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!-- getListPromotionByCategoryIdCount -->
+  <select id="getListPromotionByCategoryIdCount" resultType="int">
+    select COUNT(*) from (
+    select
+    <include refid="Course_Base_Column_List"></include>
+    from COURSE COURSE
+    join COURSE_PROMOTION COURSEPROMOTION
+    on COURSE.ID = COURSE_PROMOTIOMN.COURSE_ID and
+    COURSE_PROMOTION.COURSE_ID = #{categoryId,jdbcType=INTEGER}
+    WHERE
+    COURSE.DELETED = 0
+    ) as total
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseExtMap">
@@ -1022,21 +1075,23 @@
     ,
     <include refid="CourseTemplate_Base_Column_List"></include>
     from COURSE COURSE
-    left join  PARTNER PARTNER
+    left join PARTNER PARTNER
     ON PARTNER.ID = COURSE.PARTNER_ID
-    left join  CATEGORY CATEGORY
+    left join CATEGORY CATEGORY
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-    left join  CIRCLE CIRCLE
+    left join CIRCLE CIRCLE
     ON CIRCLE.ID = COURSE.CIRCLE_ID
-    left join  LOCATION
+    left join LOCATION
     LOCATION
-    ON LOCATION.ID =
+    ON
+    LOCATION.ID =
     COURSE.LOCATION_ID
-    left join  ADDRESS ADDRESS
+    left join ADDRESS ADDRESS
     ON ADDRESS.ID = COURSE.ADDRESS_ID
-    left join  COURSE_TEMPLATE COURSE_TEMPLATE
+    left join COURSE_TEMPLATE
+    COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
     WHERE
@@ -1152,10 +1207,12 @@
       </if>
       <if test="entity.price == null">
         <if test="entity.priceStart != null">
-          <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null) 
+          <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+          OR COURSE.PRICE = null)
         </if>
         <if test="entity.priceEnd != null">
-          <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null)
+          <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+          OR COURSE.PRICE = null)
         </if>
       </if>
 
@@ -1225,10 +1282,12 @@
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
-          <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
+          <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          OR COURSE.START_DATE = null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
+          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          OR COURSE.START_DATE = null)
         </if>
       </if>
 
@@ -1309,7 +1368,8 @@
       </if>
 
       <if test="entity.schooltimeDay != null">
-        AND <![CDATA[(COURSE.SCHOOLTIME_DAY &]]> #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
+        AND <![CDATA[(COURSE.SCHOOLTIME_DAY &]]>
+        #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
@@ -1321,7 +1381,8 @@
       </if>
 
       <if test="entity.schooltimeWeek != null">
-        AND <![CDATA[(COURSE.SCHOOLTIME_WEEK &]]> #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
+        AND <![CDATA[(COURSE.SCHOOLTIME_WEEK &]]>
+        #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
@@ -1381,21 +1442,23 @@
     select
     <include refid="Course_Base_Column_List"></include>
     from COURSE COURSE
-     left join  PARTNER PARTNER
+    left join PARTNER PARTNER
     ON PARTNER.ID = COURSE.PARTNER_ID
-     left join  CATEGORY CATEGORY
+    left join CATEGORY CATEGORY
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-     left join  CIRCLE CIRCLE
+    left join CIRCLE CIRCLE
     ON CIRCLE.ID = COURSE.CIRCLE_ID
-     left join  LOCATION
+    left join LOCATION
     LOCATION
-    ON LOCATION.ID =
+    ON
+    LOCATION.ID =
     COURSE.LOCATION_ID
-     left join  ADDRESS ADDRESS
+    left join ADDRESS ADDRESS
     ON ADDRESS.ID = COURSE.ADDRESS_ID
-     left join  COURSE_TEMPLATE COURSE_TEMPLATE
+    left join COURSE_TEMPLATE
+    COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
 
@@ -1509,10 +1572,12 @@
       </if>
       <if test="entity.price == null">
         <if test="entity.priceStart != null">
-          <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null) 
+          <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
+          OR COURSE.PRICE = null)
         </if>
         <if test="entity.priceEnd != null">
-          <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]> OR COURSE.PRICE = null)
+          <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
+          OR COURSE.PRICE = null)
         </if>
       </if>
 
@@ -1582,10 +1647,12 @@
       </if>
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
-          <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
+          <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          OR COURSE.START_DATE = null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]> OR COURSE.START_DATE = null)
+          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          OR COURSE.START_DATE = null)
         </if>
       </if>
 
@@ -1666,7 +1733,8 @@
       </if>
 
       <if test="entity.schooltimeDay != null">
-        AND <![CDATA[(COURSE.SCHOOLTIME_DAY &]]> #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
+        AND <![CDATA[(COURSE.SCHOOLTIME_DAY &]]>
+        #{entity.schooltimeDay,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeDay == null">
         <if test="entity.schooltimeDaySet != null and entity.schooltimeDaySet.size() > 0">
@@ -1678,7 +1746,8 @@
       </if>
 
       <if test="entity.schooltimeWeek != null">
-        AND <![CDATA[(COURSE.SCHOOLTIME_WEEK &]]> #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
+        AND <![CDATA[(COURSE.SCHOOLTIME_WEEK &]]>
+        #{entity.schooltimeWeek,jdbcType=INTEGER}) > 0
       </if>
       <if test="entity.schooltimeWeek == null">
         <if test="entity.schooltimeWeekSet != null and entity.schooltimeWeekSet.size() > 0">
