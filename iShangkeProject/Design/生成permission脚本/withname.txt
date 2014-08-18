@@ -1,0 +1,74 @@
+Category or search by keyword$/general/category$GET                   
+Location$/general/location$GET                   
+Circle$/general/circle$GET                     
+School$/general/school$GET                     
+Query Major by SchooId$/general/major$GET                  
+Career$/general/career$GET                     
+UserLogin(Phone, InvitationCode)$/user/login/phone$POST                   
+ReferenceLogin$/user/login/reference$POST                   
+Log Out$/user/{id}/logout$PUT                   
+Find Session$/user/findSession$GET                   
+Send Sms Verification$/user/smsVerification$GET                   
+Register$/user/registration$POST                  
+Send ForgetPassword Sms$/user/forgetPassword$GET                    
+Recover Password$/user/forgetPassword$POST                    
+Change Password$/user/{id}/changePassword$PUT                   
+Get User By Id$/user/{id}$GET                  
+Create User$/user$POST                   
+Update User$/user/{id}$PUT                  
+Query User$/user$GET                   
+Search Course$/course$GET                     
+Get Course By Id$/course/{id}$GET                    
+Create Course$/course$POST                     
+Transform/Update Course$/course/{id}/{operate}$PUT                  
+Import Course$/course/import$POST                  
+Search CourseTemplate$/courseTemplate$GET                     
+Get CourseTemplate By Id$/courseTemplate/{id}$GET                    
+Create CourseTemplate$/courseTemplate$POST                     
+Transform CourseTemplate$/courseTemplate/{id}/{operate}$PUT                  
+Create Booking$/booking$POST                    
+Transform Booking$/booking/{id}/{operate}$PUT                 
+Get Booking By Id$/booking/{id}$GET                   
+Query Booking$/booking$GET                    
+Query Booking History$/booking/history$GET                    
+Create Partner$/partner$POST                    
+Update Partner$/partner/{id}$PUT                   
+Get Partner By Id$/partner/{id}$GET                   
+Update Logo$/partner/{partnerId}/logo$PUT                   
+Query Parnter$/partner$GET                    
+Import Partner$/partner/import$POST                     
+Query ClassPhoto$/classPhoto$GET                     
+Upload ClassPhoto Img$/classPhoto/upload$POST                  
+Create ClassPhoto$/classPhoto$POST                     
+Update ClassPhoto$/classPhoto/{id}$PUT                    
+Delete ClassPhoto$/classPhoto/{id}$DELETE                    
+Query Teacher$/teacher$GET                    
+Upload Teacher Img$/teacher/upload$POST                     
+Create Teacher$/teacher$POST                    
+Update Teacher$/teacher/{id}$PUT                   
+Delete Teacher$/teacher/{id}$DELETE                   
+Create Address$/address$POST                    
+Update Address$/address/{id}$PUT                   
+Delete Address$/address/{id}$DELETE                   
+Query Address$/address$GET                    
+Query Account$/account$GET                    
+Query Account History$/account/history$GET                    
+Query Credit$/credit$GET                     
+Query Credit History$/credit/history$GET                     
+Query Coupon$/coupon$GET                     
+Query Coupon History$/coupon/history$GET                     
+Get Coupon By Id$/coupon/{id}$GET                    
+Activate Coupon$/coupon/{id}/activate$GET                   
+Create Coupon$/coupon$POST                     
+Query Withdraw$/withdraw$GET                   
+Create Withdraw$/withdraw$POST                   
+Update Withdraw$/withdraw/{id}$PUT                  
+Delete Withdraw$/withdraw/{id}$DELETE                  
+Query Contact$/contact$GET                    
+Create Contact$/contact$POST                    
+Update Contact$/contact/{id}$PUT                   
+Delete Contact$/contact/{id}$DELETE                   
+Get Order Form (and Create An Order)$/order/{bookingId}$GET                  
+Comment Course$/comment$POST                    
+Delete Course Comment$/comment/{id}$DELETE                   
+Query Course Comment$/comment$GET  
