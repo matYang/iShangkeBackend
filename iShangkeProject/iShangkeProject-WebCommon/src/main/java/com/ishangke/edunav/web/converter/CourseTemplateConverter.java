@@ -658,7 +658,9 @@ public class CourseTemplateConverter {
         courseTemplateVo.setCreateTime(bo.getCreateTime());
         courseTemplateVo.setCreateTimeEnd(bo.getCreateTimeEnd());
         courseTemplateVo.setCreateTimeStart(bo.getCreateTimeStart());
-        courseTemplateVo.setCutoffDate(bo.getCutoffDate());
+        if (bo.getCutoffDate() != Constant.DEFAULTNULL) {
+            courseTemplateVo.setCutoffDate(bo.getCutoffDate());            
+        }
         courseTemplateVo.setCutoffDateEnd(bo.getCutoffDateEnd());
         courseTemplateVo.setCutoffDateStart(bo.getCutoffDateStart());
         if (Constant.DEFAULTNULL != bo.getDiscount()) {
@@ -673,7 +675,9 @@ public class CourseTemplateConverter {
         courseTemplateVo.setDownloadMaterials(bo.getDownloadMaterials());
         courseTemplateVo.setEnabled(bo.getEnabled());
         courseTemplateVo.setExtracurricular(bo.getExtracurricular());
-        courseTemplateVo.setFinishDate(bo.getFinishDate());
+        if (bo.getFinishDate() != Constant.DEFAULTNULL) {
+            courseTemplateVo.setFinishDate(bo.getFinishDate());    
+        }
         courseTemplateVo.setFinishDateEnd(bo.getFinishDateEnd());
         courseTemplateVo.setFinishDateStart(bo.getFinishDateStart());
         if (Constant.DEFAULTNULL != bo.getFinishTime1()) {
@@ -763,7 +767,9 @@ public class CourseTemplateConverter {
         if (Constant.DEFAULTNULL != bo.getServiceCharge()) {
             courseTemplateVo.setServiceCharge(bo.getServiceCharge());
         }
-        courseTemplateVo.setStartDate(bo.getStartDate());
+        if (bo.getStartDate() != Constant.DEFAULTNULL) {
+            courseTemplateVo.setStartDate(bo.getStartDate());    
+        }
         courseTemplateVo.setStartDateEnd(bo.getStartDateEnd());
         courseTemplateVo.setStartDateStart(bo.getStartDateStart());
         if (Constant.DEFAULTNULL != bo.getStartTime1()) {
