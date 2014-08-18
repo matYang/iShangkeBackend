@@ -8,12 +8,12 @@ struct CoursePromotionBo {
   5: i64 startTime
   6: i64 endTime
   7: i32 status
-  8: i64 createTimeStart;
-  9: i64 startTimeStart;
-  10: i64 endTimeStart; 
-  11: i64 createTimeEnd;
-  12: i64 startTimeEnd;
-  13: i64 endTimeEnd;
+  8: i64 createTimeStart
+  9: i64 startTimeStart
+  10: i64 endTimeStart 
+  11: i64 createTimeEnd
+  12: i64 startTimeEnd
+  13: i64 endTimeEnd
 }
 
 struct CoursePromotionPageViewBo{
