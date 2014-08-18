@@ -86,9 +86,9 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getById" parameterType="int" resultMap="TeacherExtMap">
+  <select id="getById" parameterType="int" resultMap="CoursePromotionExtMap">
     SELECT
-    <include refid="Teacher_Base_Column_List" />
+    <include refid="Course_Promotion_Base_Column_List" />
     from COURSE_PROMOTION where COURSE_PROMOTION.DELETED = 0 and COURSE_PROMOTION.ID =
     #{id,jdbcType=INTEGER}
   </select>
