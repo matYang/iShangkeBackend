@@ -1,0 +1,74 @@
+N@P@A$/general/category$GET$Category or search by keyword
+N@P@A$/general/location$GET$Location
+N@P@A$/general/circle$GET$Circle
+N@P@A$/general/school$GET$School
+N@P@A$/general/major$GET$Query Major by SchooId
+N@P@A$/general/career$GET$Career
+N$/user/login/phone$POST$UserLogin(Phone, InvitationCode)
+P@A$/user/login/reference$POST$ReferenceLogin
+N@P@A$/user/{id}/logout$PUT$Log Out
+N@P@A$/user/findSession$GET$Find Session
+N$/user/smsVerification$GET$Send Sms Verification
+N$/user/registration$POST$Register
+N$/user/forgetPassword$GET$Send ForgetPassword Sms
+N$/user/forgetPassword$POST$Recover Password
+N@P@A$/user/{id}/changePassword$PUT$Change Password
+N@P@A$/user/{id}$GET$Get User By Id
+A$/user$POST$Create User
+N@P@A$/user/{id}$PUT$Update User
+A$/user$GET$Query User
+N@P@A$/course$GET$Search Course
+N@P@A$/course/{id}$GET$Get Course By Id
+P@A$/course$POST$Create Course
+P@A$/course/{id}/{operate}$PUT$Transform/Update Course
+A$/course/import$POST$Import Course
+P@A$/courseTemplate$GET$Search CourseTemplate
+P@A$/courseTemplate/{id}$GET$Get CourseTemplate By Id
+P@A$/courseTemplate$POST$Create CourseTemplate
+P@A$/courseTemplate/{id}/{operate}$PUT$Transform CourseTemplate
+N$/booking$POST$Create Booking
+N@P@A$/booking/{id}/{operate}$PUT$Transform Booking
+N@P@A$/booking/{id}$GET$Get Booking By Id
+N@P@A$/booking$GET$Query Booking
+N@P@A$/booking/history$GET$Query Booking History
+A$/partner$POST$Create Partner
+P@A$/partner/{id}$PUT$Update Partner
+N@P@A$/partner/{id}$GET$Get Partner By Id
+P@A$/partner/{partnerId}/logo$PUT$Update Logo
+P@A$/partner$GET$Query Parnter
+A$/partner/import$POST$Import Partner
+P@A$/classPhoto$GET$Query ClassPhoto
+P@A$/classPhoto/upload$POST$Upload ClassPhoto Img
+P@A$/classPhoto$POST$Create ClassPhoto
+P@A$/classPhoto/{id}$PUT$Update ClassPhoto
+P@A$/classPhoto/{id}$DELETE$Delete ClassPhoto
+P@A$/teacher$GET$Query Teacher
+P@A$/teacher/upload$POST$Upload Teacher Img
+P@A$/teacher$POST$Create Teacher
+P@A$/teacher/{id}$PUT$Update Teacher
+P@A$/teacher/{id}$DELETE$Delete Teacher
+P@A$/address$POST$Create Address
+P@A$/address/{id}$PUT$Update Address
+P@A$/address/{id}$DELETE$Delete Address
+P@A$/address$GET$Query Address
+N@A$/account$GET$Query Account
+N@A$/account/history$GET$Query Account History
+N@A$/credit$GET$Query Credit
+N@A$/credit/history$GET$Query Credit History
+N@A$/coupon$GET$Query Coupon
+N@A$/coupon/history$GET$Query Coupon History
+N@A$/coupon/{id}$GET$Get Coupon By Id
+N@A$/coupon/{id}/activate$GET$Activate Coupon
+A$/coupon$POST$Create Coupon
+N@A$/withdraw$GET$Query Withdraw
+N@A$/withdraw$POST$Create Withdraw
+N@A$/withdraw/{id}$PUT$Update Withdraw
+N@A$/withdraw/{id}$DELETE$Delete Withdraw
+N@A$/contact$GET$Query Contact
+N@A$/contact$POST$Create Contact
+N@A$/contact/{id}$PUT$Update Contact
+N@A$/contact/{id}$DELETE$Delete Contact
+N$/order/{bookingId}$GET$Get Order Form (and Create An Order)
+N@A$/comment$POST$Comment Course
+A$/comment/{id}$DELETE$Delete Course Comment
+N@P@A$/comment$GET$Query Course Comment
