@@ -114,6 +114,8 @@
       <columnOverride column="CUTOFF_DATE" property="cutoffDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="CASHBACK_DATE" property="cashbackDate" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
+      <columnOverride column="COURSE_INTRO" jdbcType="VARCHAR"></columnOverride>
+      <columnOverride column="OUTLINE" jdbcType="VARCHAR"></columnOverride>
     </table>
     <table tableName="COURSE" domainObjectName="CourseEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -127,6 +129,8 @@
       <columnOverride column="CUTOFF_DATE" property="cutoffDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="FINISH_DATE" property="finishDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="START_DATE" property="startDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+      <columnOverride column="COURSE_INTRO" jdbcType="VARCHAR"></columnOverride>
+      <columnOverride column="OUTLINE" jdbcType="VARCHAR"></columnOverride>
     </table>
     <table tableName="COURSE_COMMENT" domainObjectName="CourseCommentEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -245,7 +249,7 @@
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
-   
+
     <table tableName="ADDRESS" domainObjectName="AddressEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="LAST_MODIFY_TIME" property="lastModifyTime" javaType="java.util.Calendar"
@@ -259,8 +263,9 @@
     <table tableName="ORDER" domainObjectName="OrderEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
-      <columnOverride column="CONFIRMED_TIME" property="confirmedTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
-   
+      <columnOverride column="CONFIRMED_TIME" property="confirmedTime" javaType="java.util.Calendar"
+        jdbcType="TIMESTAMP" />
+
     </table>
     <table tableName="ORDER_HISTORY" domainObjectName="OrderHistoryEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -290,11 +295,9 @@
     </table>
     <table tableName="COURSE_PROMOTION" domainObjectName="CoursePromotionEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
-      <columnOverride column="START_TIME" property="startTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="START_TIME" property="startTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
-      <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar"
-        jdbcType="TIMESTAMP" />
+      <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
   </context>
 
