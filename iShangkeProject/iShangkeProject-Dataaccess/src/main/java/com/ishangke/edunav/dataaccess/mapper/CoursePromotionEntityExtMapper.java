@@ -17,4 +17,7 @@ public interface CoursePromotionEntityExtMapper {
     public int getListCount(@Param("entity") CoursePromotionEntityExt coursePromotionEntityExt);
     
     public CoursePromotionEntityExt update(CoursePromotionEntityExt coursePromotionEntityExt);
+    
+    public CoursePromotionEntityExt getById(int id);
+    
 }

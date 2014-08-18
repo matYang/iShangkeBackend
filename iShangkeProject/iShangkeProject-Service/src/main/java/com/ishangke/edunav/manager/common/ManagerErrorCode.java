@@ -518,7 +518,17 @@ public class ManagerErrorCode {
     public static final String PERMISSION_COURSE_TRANSFORMCOURSETMEPLATESTATUS_KEY = "permission_course_transformCourseTmeplateStatus";
     public static final int PERMISSION_COURSE_QUERYCOURSETEMPLATEBYPARTNERID = 0x01000067;
     public static final String PERMISSION_COURSE_QUERYCOURSETEMPLATEBYPARTNERID_KEY = "permission_course_queryCourseTemplateByPartnerId";
-
+    public static final int PERMISSION_COURSE_QUERYPROMOTION = 0x01000068;
+    public static final String PERMISSION_COURSE_QUERYPROMOTION_KEY = "permission_course_queryCoursePromotion";
+    public static final int PERMISSION_COURSE_CREATEPROMOTION = 0x01000069;
+    public static final String PERMISSION_COURSE_CREATEPROMOTION_KEY = "permission_course_createPromotion";
+    public static final int PERMISSION_COURSE_UPDATEPROMOTION = 0x0100006A;
+    public static final String PERMISSION_COURSE_UPDATEPROMOTION_KEY = "permission_course_updatePromotion";
+    public static final int PERMISSION_COURSE_DELETEPROMOTION = 0x0100006A;
+    public static final String PERMISSION_COURSE_DELETEPROMOTION_KEY = "permission_course_deletePromotion";
+  
+    
+    
     // alipay
     public static final int ALIPAY_VERIFY_ERROR = 0x001C0001;
     public static final String ALIPAY_VERIFY_ERROR_KEY = "alipay_verify_error";
