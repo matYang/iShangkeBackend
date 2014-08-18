@@ -123,7 +123,7 @@ public class ClassPhotoController extends AbstractController {
                 BufferedImage snapShotBufferedImage = FileSetting.bufferDeepCopy(bufferedImage);
 
                 // using Scalr to resize the image
-                bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 600, 600, Scalr.OP_ANTIALIAS);
+                //bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 600, 600, Scalr.OP_ANTIALIAS);
                 ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
 
                 // calculate the MD5 checksum and use it as part of the file

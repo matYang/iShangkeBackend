@@ -182,27 +182,44 @@ public class BookingManagerImpl implements BookingManager {
         if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
             throw new ManagerException("课程已经被删除或者下架，目前无法接受预订");
         }
-        // 查询课程现价与发过来的价格是否一致，如果不一致则不能创建booking
-        if (!course.getPrice().equals(bookingEntity.getPrice())) {
-            throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
-        }
-        // 传递过来的cashback必须小于等于course中定义的cashback
-        if (bookingBo.getCashbackAmount() > course.getCashback()) {
-            throw new ManagerException("返利金额不能超过课程返利金额，请刷新页面");
-        }
         // booking不同的type（支付方式）决定了booking的初始化状态
         int bookingOpt;
         if (bookingEntity.getType() == Constant.BOOKINGTYPEONLINE) {
             // 在线支付预订
+            // 如果是在线支付课程， 会有额外的优惠
+            // 线上支付的话 会有额外的折扣 在创建课程的时候 我们会写明 “立即省” 即：在线支付的时候可以抵扣的优惠
+            // 使用commission字段存储在线支付的折扣
+            Double cost = course.getCommission();
+            cost = cost == null ? 0 : cost;
+            // 查询课程现价与发过来的价格是否一致，如果不一致则不能创建booking
+            // 不支持面议
+            if (!course.getPrice().equals(bookingEntity.getPrice() + cost)) {
+                throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
+            }
+            LOGGER.warn(String.format("[create order]user [%d] create order with online cost [%f], origin price is [%f]", userBo.getId(), cost, bookingEntity.getPrice()));
             bookingEntity.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
             bookingOpt = Constant.BOOKINGOPERATIONONLINESUBMITBOOKING;
 
         } else if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
             // 线下支付预订
+            // 查询课程现价与发过来的价格是否一致，如果不一致则不能创建booking
+            // 现在课程支持没有价格 支持面议
+            if (course.getPrice() != null && !course.getPrice().equals(bookingEntity.getPrice())) {
+                throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
+            }
+            // 传递过来的cashback必须小于等于course中定义的cashback
+            // 现在课程支持没有价格 支持面议
+            if (course.getCashback() != null && bookingBo.getCashbackAmount() > course.getCashback()) {
+                throw new ManagerException("返利金额不能超过课程返利金额，请刷新页面");
+            }
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
-        } else if (false) {
-            // todo 其他类型预订
+            // Use coupons
+            // 只有线下支付支持使用coupon
+            double calculatedCachbask = consumeCoupons(bookingBo, userBo);
+            if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
+                bookingBo.setCashbackAmount(calculatedCachbask);
+            }
         } else {
             throw new ManagerException("对不起，预订类型识别错误，请刷新页面或稍后再试");
         }
@@ -212,12 +229,6 @@ public class BookingManagerImpl implements BookingManager {
         // 设置bookingBo中的course template id
         // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
         bookingEntity.setCourseTemplateId(course.getCourseTemplateId());
-
-        // Use coupons
-        double calculatedCachbask = consumeCoupons(bookingBo, userBo);
-        if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
-            bookingBo.setCashbackAmount(calculatedCachbask);
-        }
 
         // 插入booking
         int result = 0;
@@ -244,7 +255,7 @@ public class BookingManagerImpl implements BookingManager {
             // 课程预订数量统计
             CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
             if (courseTemplate != null) {
-                int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();    
+                int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
                 courseTemplate.setBookingTotal((total++));
                 courseTemplateMapper.update(courseTemplate);
             } else {
