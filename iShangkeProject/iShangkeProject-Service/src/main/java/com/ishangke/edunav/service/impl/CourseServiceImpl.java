@@ -15,6 +15,8 @@ import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplatePageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -22,6 +24,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.CourseService;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CourseManager;
+import com.ishangke.edunav.manager.CoursePromotionManager;
 import com.ishangke.edunav.manager.CourseTemplateManager;
 import com.ishangke.edunav.manager.PermissionManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
@@ -44,6 +47,9 @@ public class CourseServiceImpl implements CourseService.Iface {
     
     @Autowired
     private AuthManager authManager;
+    
+    @Autowired
+    private CoursePromotionManager coursePromotionManager;
 
     @Override
     public CourseBo createCourse(CourseBo courseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
@@ -376,6 +382,115 @@ public class CourseServiceImpl implements CourseService.Iface {
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSETEMPLATEBYID);
             exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOURSETEMPLATEBYID_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public CoursePromotionPageViewBo queryPromotion(CoursePromotionBo coursePromotionBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCoursePromotion"));
+                throw new NoPermissionException();
+            }
+            
+            paginationBo = PageUtil.getPage(paginationBo);
+            List<CoursePromotionBo> data = coursePromotionManager.query(coursePromotionBo, userBo, paginationBo);
+            CoursePromotionPageViewBo pageView = new CoursePromotionPageViewBo();
+            int total = coursePromotionManager.queryTotal(coursePromotionBo, userBo);
+            pageView.setCount(paginationBo.getSize());
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setTotal(total);
+            pageView.setData(data);
+            
+            return pageView;
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYPROMOTION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYPROMOTION_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public CoursePromotionBo createPromotion(CoursePromotionBo coursePromotionBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createPromotion"));
+                throw new NoPermissionException();
+            }
+            
+            return coursePromotionManager.createPromotion(coursePromotionBo, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_CREATEPROMOTION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_CREATEPROMOTION_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public CoursePromotionBo updatePromotion(CoursePromotionBo coursePromotionBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updatePromotion"));
+                throw new NoPermissionException();
+            }
+            
+            return coursePromotionManager.updatePromotion(coursePromotionBo, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_UPDATEPROMOTION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_UPDATEPROMOTION_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public CoursePromotionBo deletePromotion(CoursePromotionBo coursePromotionBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deletePromotion"));
+                throw new NoPermissionException();
+            }
+            
+            return coursePromotionManager.deletePromotion(coursePromotionBo, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_DELETEPROMOTION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_DELETEPROMOTION_KEY);
             throw exception;
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);

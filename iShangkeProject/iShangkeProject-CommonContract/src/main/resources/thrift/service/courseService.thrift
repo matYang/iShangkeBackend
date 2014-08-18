@@ -6,6 +6,7 @@ include "model/partner.thrift"
 include "model/category.thrift"
 include "model/user.thrift"
 include "model/courseTemplate.thrift"
+include "model/coursePromotion.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
@@ -215,6 +216,58 @@ service CourseService {
      * @param userBo
      */
     courseTemplate.CourseTemplateBo queryCourseTemplateById(1: courseTemplate.CourseTemplateBo courseTemplateBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+    /**
+     * 本方法返回课程置顶信息<br>
+     * 管理员可以通过此方法调取课程置顶信息
+     * 
+     * @param coursePromotionBo
+     *            课程置顶查询条件
+     * @param userBo
+     *            调用方法的用户的信息
+     * @return
+     */
+    coursePromotion.CoursePromotionPageViewBo queryPromotion(1: coursePromotion.CoursePromotionBo coursePromotionBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+    /**
+     * 本方法创建课程置顶信息<br>
+     * 管理员可以通过此方法创建课程置顶信息
+     * 
+     * @param coursePromotionBo
+     *            需要创建的置顶课程对应关系
+     * @param userBo
+     *            调用方法的用户的信息
+     * @return
+     */
+	coursePromotion.CoursePromotionBo createPromotion(1: coursePromotion.CoursePromotionBo coursePromotionBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+		
+    /**
+     * 本方法更新课程置顶信息<br>
+     * 管理员可以通过此方法更新课程置顶信息
+     * 
+     * @param coursePromotionBo
+     *            需要更新的置顶课程对应关系
+     * @param userBo
+     *            调用方法的用户的信息
+     * @return
+     */
+	coursePromotion.CoursePromotionBo updatePromotion(1: coursePromotion.CoursePromotionBo coursePromotionBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+	
+	/**
+     * 本方法删除课程置顶信息<br>
+     * 管理员可以通过此方法删除课程置顶信息
+     * 
+     * @param coursePromotionBo
+     *            需要删除的置顶课程对应关系id
+     * @param userBo
+     *            调用方法的用户的信息
+     * @return
+     */
+	coursePromotion.CoursePromotionBo deletePromotion(1: coursePromotion.CoursePromotionBo coursePromotionBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+		
+	
 
     // /**********************************************************
     // *

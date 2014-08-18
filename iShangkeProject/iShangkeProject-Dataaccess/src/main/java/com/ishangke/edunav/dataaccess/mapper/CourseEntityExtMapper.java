@@ -28,4 +28,8 @@ public interface CourseEntityExtMapper {
     public CourseEntityExt getInfoById(int id);
     
     public CourseEntityExt getById(int id);
+    
+    public List<CourseEntityExt> listPromotionByCategoryId(@Param("categoryId") int categoryId, @Param("page") PaginationEntity page);
+    
+    public int getListPromotionByCategoryIdCount(int categoryId);
 }
