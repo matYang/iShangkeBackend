@@ -91,32 +91,32 @@ public class OrderHistoryConverter {
         }
         OrderHistoryVo orderHistoryVo = new OrderHistoryVo();
         orderHistoryVo.setCreateTime(bo.getCreateTime());
-        orderHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        orderHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        orderHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        orderHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         orderHistoryVo.setEnabled(bo.getEnabled());
         orderHistoryVo.setId(bo.getId());
-        orderHistoryVo.setIdSet(bo.getIdSet());
+//        orderHistoryVo.setIdSet(bo.getIdSet());
         if (Constant.DEFAULTNULL != bo.getNormal()) {
             orderHistoryVo.setNormal(bo.getNormal());
         }
-        orderHistoryVo.setNormalSet(bo.getNormalSet());
+//        orderHistoryVo.setNormalSet(bo.getNormalSet());
         if (Constant.DEFAULTNULL != bo.getOptName()) {
             orderHistoryVo.setOptName(bo.getOptName());
         }
-        orderHistoryVo.setOptNameSet(bo.getOptNameSet());
+//        orderHistoryVo.setOptNameSet(bo.getOptNameSet());
         orderHistoryVo.setOrderId(bo.getOrderId());
-        orderHistoryVo.setOrderIdSet(bo.getOrderIdSet());
+//        orderHistoryVo.setOrderIdSet(bo.getOrderIdSet());
         if (Constant.DEFAULTNULL != bo.getPostStatus()) {
             orderHistoryVo.setPostStatus(bo.getPostStatus());
         }
-        orderHistoryVo.setPostStatusSet(bo.getPostStatusSet());
+//        orderHistoryVo.setPostStatusSet(bo.getPostStatusSet());
         if (Constant.DEFAULTNULL != bo.getPreStatus()) {
             orderHistoryVo.setPreStatus(bo.getPreStatus());
         }
-        orderHistoryVo.setPreStatusSet(bo.getPreStatusSet());
+//        orderHistoryVo.setPreStatusSet(bo.getPreStatusSet());
         orderHistoryVo.setRemark(bo.getRemark());
         orderHistoryVo.setUserId(bo.getUserId());
-        orderHistoryVo.setUserIdSet(bo.getUserIdSet());
+//        orderHistoryVo.setUserIdSet(bo.getUserIdSet());
         return orderHistoryVo;
     }
 }

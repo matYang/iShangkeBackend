@@ -31,6 +31,7 @@ import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
@@ -39,6 +40,7 @@ import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
+import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CouponManager;
@@ -90,6 +92,9 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private OrderEntityExtMapper orderMapper;
+
+    @Autowired
+    private OrderHistoryEntityExtMapper orderHistoryMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
@@ -788,7 +793,7 @@ public class BookingManagerImpl implements BookingManager {
     }
 
     @Override
-    public String changeBookingStatusToPayed(int orderId) {
+    public String changeBookingStatusToPayed(int orderId, String trade_no) {
         OrderEntityExt order = orderMapper.getById(orderId);
         BookingEntityExt booking = bookingMapper.getById(order.getBookingId());
         BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
@@ -809,13 +814,22 @@ public class BookingManagerImpl implements BookingManager {
         } finally {
             LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
         }
+        //记录下本次booking状态改变
         bookingHistory.setBookingId(booking.getId());
         bookingHistory.setUserId(booking.getUserId());
         bookingHistory.setPreStatus(preStatus);
         bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
         bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
         bookingHistory.setPartnerId(booking.getPartnerId());
+        // 记录下这次付款成功的操作
+        OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
+        orderHistory.setOrderId(orderId);
+        orderHistory.setUserId(booking.getUserId());
+        orderHistory.setRemark(trade_no); //利用remark字段存储支付宝流水号
+        orderHistory.setOptName(Constant.ORDEROPTIONPAYSUCCESS);
+        orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
         try {
+            orderHistoryMapper.add(orderHistory);
             bookingHistoryMapper.add(bookingHistory);
         } catch (Exception e) {
             LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));

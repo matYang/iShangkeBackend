@@ -97,15 +97,15 @@ public class AddressConverter {
         }
         AddressVo addressVo = new AddressVo();
         addressVo.setCreateTime(bo.getCreateTime());
-        addressVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        addressVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        addressVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        addressVo.setCreateTimeStart(bo.getCreateTimeStart());
         addressVo.setDetail(bo.getDetail());
         addressVo.setEnabled(bo.getEnabled());
         addressVo.setId(bo.getId());
-        addressVo.setIdSet(bo.getIdSet());
+//        addressVo.setIdSet(bo.getIdSet());
         addressVo.setLastModifyTime(bo.getLastModifyTime());
-        addressVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        addressVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        addressVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        addressVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         if (Constant.DEFAULTNULL != bo.getLat()) {
             addressVo.setLat(bo.getLat());
         }
@@ -125,7 +125,7 @@ public class AddressConverter {
             addressVo.setLngStart(bo.getLngStart());
         }
         addressVo.setPartnerId(bo.getPartnerId());
-        addressVo.setPartnerIdSet(bo.getPartnerIdSet());
+//        addressVo.setPartnerIdSet(bo.getPartnerIdSet());
         return addressVo;
     }
 }

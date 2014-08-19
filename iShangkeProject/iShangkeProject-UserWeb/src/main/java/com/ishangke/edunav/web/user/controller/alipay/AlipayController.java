@@ -32,7 +32,7 @@ public class AlipayController extends AbstractController {
         notifyId = request.getParameter("notify_id");
         verified = alipayFacade.verify_notify_id(notifyId);
         total_fee = request.getParameter("total_fee");
-        // 支付宝交易流水号 因为支付宝历史中 已经展示了此信息 所以暂时不需要我们自己额外的存储貌似
+        // 支付宝交易流水号
         trade_no = request.getParameter("trade_no");
         // Check Sign
         if (verified.equals("true")) {
@@ -41,7 +41,7 @@ public class AlipayController extends AbstractController {
                 String out_trade_no = request.getParameter("out_trade_no");
                 String[] nos = out_trade_no.split("-");
                 int orderId = Integer.parseInt(nos[nos.length - 1]);
-                alipayFacade.changeBookingStatusToPayed(orderId);
+                alipayFacade.changeBookingStatusToPayed(orderId, trade_no);
                 // Change the status of the order
                 return "success";
             }

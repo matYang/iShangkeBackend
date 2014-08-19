@@ -217,26 +217,26 @@ public class BookingConverter {
         if (bo.getCashbackDate() != Constant.DEFAULTNULL) {
             bookingVo.setCashbackDate(bo.getCashbackDate());            
         }
-        bookingVo.setCashbackDateEnd(bo.getCashbackDateEnd());
-        bookingVo.setCashbackDateStart(bo.getCashbackDateStart());
+//        bookingVo.setCashbackDateEnd(bo.getCashbackDateEnd());
+//        bookingVo.setCashbackDateStart(bo.getCashbackDateStart());
         bookingVo.setCourseId(bo.getCourseId());
-        bookingVo.setCourseIdSet(bo.getCourseIdSet());
+//        bookingVo.setCourseIdSet(bo.getCourseIdSet());
         bookingVo.setCourseTemplateId(bo.getCourseTemplateId());
-        bookingVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
+//        bookingVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
         bookingVo.setCreateTime(bo.getCreateTime());
-        bookingVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        bookingVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        bookingVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        bookingVo.setCreateTimeStart(bo.getCreateTimeStart());
         bookingVo.setEmail(bo.getEmail());
         bookingVo.setEnabled(bo.getEnabled());
         bookingVo.setId(bo.getId());
-        bookingVo.setIdSet(bo.getIdSet());
+//        bookingVo.setIdSet(bo.getIdSet());
         bookingVo.setLastModifyTime(bo.getLastModifyTime());
-        bookingVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        bookingVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        bookingVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        bookingVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         bookingVo.setName(bo.getName());
         bookingVo.setNoRefundDate(bo.getNoRefundDate());
-        bookingVo.setNoRefundDateEnd(bo.getNoRefundDateEnd());
-        bookingVo.setNoRefundDateStart(bo.getNoRefundDateStart());
+//        bookingVo.setNoRefundDateEnd(bo.getNoRefundDateEnd());
+//        bookingVo.setNoRefundDateStart(bo.getNoRefundDateStart());
         bookingVo.setNote(bo.getNote());
         bookingVo.setPhone(bo.getPhone());
         //用来生成更漂亮的订单号
@@ -244,12 +244,12 @@ public class BookingConverter {
         if (bo.getScheduledTime() != Constant.DEFAULTNULL) {
             bookingVo.setScheduledTime(bo.getScheduledTime());            
         }
-        bookingVo.setScheduledTimeEnd(bo.getScheduledTimeEnd());
-        bookingVo.setScheduledTimeStart(bo.getScheduledTimeStart());
+//        bookingVo.setScheduledTimeEnd(bo.getScheduledTimeEnd());
+//        bookingVo.setScheduledTimeStart(bo.getScheduledTimeStart());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             bookingVo.setStatus(bo.getStatus());
         }
-        bookingVo.setStatusSet(bo.getStatusSet());
+//        bookingVo.setStatusSet(bo.getStatusSet());
         if (Constant.DEFAULTNULL != bo.getType()) {
             bookingVo.setType(bo.getType());
         }
@@ -262,9 +262,9 @@ public class BookingConverter {
         if (Constant.DEFAULTNULL != bo.getPriceStart()) {
             bookingVo.setPriceStart(bo.getPriceStart());
         }
-        bookingVo.setTypeSet(bo.getTypeSet());
+//        bookingVo.setTypeSet(bo.getTypeSet());
         bookingVo.setUserId(bo.getUserId());
-        bookingVo.setUserIdSet(bo.getUserIdSet());
+//        bookingVo.setUserIdSet(bo.getUserIdSet());
         if (bo.getActionList() != null) {
             List<ActionVo> list = new ArrayList<>();
             for (ActionBo a : bo.getActionList()) {
@@ -273,7 +273,7 @@ public class BookingConverter {
             bookingVo.setActionList(list);
         }
         bookingVo.setPartnerId(bo.getPartnerId());
-        bookingVo.setPartnerIdSet(bo.getPartnerIdSet());
+//        bookingVo.setPartnerIdSet(bo.getPartnerIdSet());
         if (bo.getCourse() != null) {
             bookingVo.setCourse(CourseConverter.toModel(bo.getCourse()));
         }

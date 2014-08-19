@@ -52,14 +52,14 @@ public class RolePermissionConverter {
         }
         RolePermissionVo rolePermissionVo = new RolePermissionVo();
         rolePermissionVo.setId(bo.getId());
-        rolePermissionVo.setIdSet(bo.getIdSet());
+//        rolePermissionVo.setIdSet(bo.getIdSet());
         rolePermissionVo.setLastModifyTime(bo.getLastModifyTime());
-        rolePermissionVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        rolePermissionVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        rolePermissionVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        rolePermissionVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         rolePermissionVo.setPermissionId(bo.getPermissionId());
-        rolePermissionVo.setPermissionIdSet(bo.getPermissionIdSet());
+//        rolePermissionVo.setPermissionIdSet(bo.getPermissionIdSet());
         rolePermissionVo.setRoleId(bo.getRoleId());
-        rolePermissionVo.setRoleIdSet(bo.getRoleIdSet());
+//        rolePermissionVo.setRoleIdSet(bo.getRoleIdSet());
         return rolePermissionVo;
     }
 }

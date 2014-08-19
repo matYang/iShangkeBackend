@@ -90,26 +90,26 @@ public class SpreadConverter {
         }
         SpreadVo spreadVo = new SpreadVo();
         spreadVo.setCourseId(bo.getCourseId());
-        spreadVo.setCourseIdSet(bo.getCourseIdSet());
+//        spreadVo.setCourseIdSet(bo.getCourseIdSet());
         spreadVo.setCreateTime(bo.getCreateTime());
-        spreadVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        spreadVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        spreadVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        spreadVo.setCreateTimeStart(bo.getCreateTimeStart());
         spreadVo.setEnabled(bo.getEnabled());
         spreadVo.setId(bo.getId());
-        spreadVo.setIdSet(bo.getIdSet());
+//        spreadVo.setIdSet(bo.getIdSet());
         spreadVo.setLastModifyTime(bo.getLastModifyTime());
-        spreadVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        spreadVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        spreadVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        spreadVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         spreadVo.setPartnerId(bo.getPartnerId());
-        spreadVo.setPartnerIdSet(bo.getPartnerIdSet());
+//        spreadVo.setPartnerIdSet(bo.getPartnerIdSet());
         spreadVo.setRemark(bo.getRemark());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             spreadVo.setStatus(bo.getStatus());
         }
-        spreadVo.setStatusSet(bo.getStatusSet());
+//        spreadVo.setStatusSet(bo.getStatusSet());
         spreadVo.setUrl(bo.getUrl());
         spreadVo.setUserId(bo.getUserId());
-        spreadVo.setUserIdSet(bo.getUserIdSet());
+//        spreadVo.setUserIdSet(bo.getUserIdSet());
         return spreadVo;
     }
 }

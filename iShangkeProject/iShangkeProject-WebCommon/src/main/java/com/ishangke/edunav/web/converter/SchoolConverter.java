@@ -64,14 +64,14 @@ public class SchoolConverter {
         }
         SchoolVo schoolVo = new SchoolVo();
         schoolVo.setCreateTime(bo.getCreateTime());
-        schoolVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        schoolVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        schoolVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        schoolVo.setCreateTimeStart(bo.getCreateTimeStart());
         schoolVo.setEnabled(bo.getEnabled());
         schoolVo.setId(bo.getId());
-        schoolVo.setIdSet(bo.getIdSet());
+//        schoolVo.setIdSet(bo.getIdSet());
         schoolVo.setLastModifyTime(bo.getLastModifyTime());
-        schoolVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        schoolVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        schoolVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        schoolVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         schoolVo.setName(bo.getName());
         schoolVo.setValue(bo.getValue());
         return schoolVo;

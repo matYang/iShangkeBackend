@@ -91,29 +91,25 @@ public class TeacherConverter {
         }
         TeacherVo teacherVo = new TeacherVo();
         teacherVo.setCreateTime(bo.getCreateTime());
-        teacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        teacherVo.setCreateTimeStart(bo.getCreateTimeStart());
+        // teacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        // teacherVo.setCreateTimeStart(bo.getCreateTimeStart());
         teacherVo.setEnabled(bo.getEnabled());
         teacherVo.setId(bo.getId());
-        teacherVo.setIdSet(bo.getIdSet());
+        // teacherVo.setIdSet(bo.getIdSet());
         teacherVo.setImgUrl(bo.getImgUrl());
         teacherVo.setIntro(bo.getIntro());
         teacherVo.setLastModifyTime(bo.getLastModifyTime());
-        teacherVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        teacherVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+        // teacherVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        // teacherVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         teacherVo.setName(bo.getName());
         teacherVo.setPartnerId(bo.getPartnerId());
-        teacherVo.setPartnerIdSet(bo.getPartnerIdSet());
+        // teacherVo.setPartnerIdSet(bo.getPartnerIdSet());
         if (Constant.DEFAULTNULL != bo.getPopularity()) {
             teacherVo.setPopularity(bo.getPopularity());
         }
-        if (Constant.DEFAULTNULL != bo.getPopularityEnd()) {
-            teacherVo.setPopularityEnd(bo.getPopularityEnd());
-        }
-        teacherVo.setPopularitySet(bo.getPopularitySet());
-        if (Constant.DEFAULTNULL != bo.getPopularityStart()) {
-            teacherVo.setPopularityStart(bo.getPopularityStart());
-        }
+        // teacherVo.setPopularityEnd(bo.getPopularityEnd());
+        // teacherVo.setPopularitySet(bo.getPopularitySet());
+        // teacherVo.setPopularityStart(bo.getPopularityStart());
         return teacherVo;
     }
 }

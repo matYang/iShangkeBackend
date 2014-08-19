@@ -89,13 +89,13 @@ public class AccountConverter {
         }
         accountVo.setEnabled(bo.getEnabled());
         accountVo.setId(bo.getId());
-        accountVo.setIdSet(bo.getIdSet());
+//        accountVo.setIdSet(bo.getIdSet());
         accountVo.setCreateTime(bo.getCreateTime());
-        accountVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        accountVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        accountVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        accountVo.setCreateTimeStart(bo.getCreateTimeStart());
         accountVo.setLastModifyTime(bo.getLastModifyTime());
-        accountVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        accountVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        accountVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        accountVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         accountVo.setRealName(bo.getRealName());
         accountVo.setAccountNumber(bo.getAccountNumber());
         return accountVo;

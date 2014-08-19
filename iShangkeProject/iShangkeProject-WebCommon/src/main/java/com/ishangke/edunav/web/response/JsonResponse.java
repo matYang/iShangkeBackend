@@ -1,5 +1,8 @@
 package com.ishangke.edunav.web.response;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class JsonResponse {
     private int errorCode;
     private String msgKey;

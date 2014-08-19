@@ -153,25 +153,25 @@ public class UserConverter {
         userVo.setAppliedInvitationCode(bo.getAppliedInvitationCode());
         userVo.setAvatarUrl(bo.getAvatarUrl());
         userVo.setBirthday(bo.getBirthday());
-        userVo.setBirthdayEnd(bo.getBirthdayEnd());
-        userVo.setBirthdayStart(bo.getBirthdayStart());
+//        userVo.setBirthdayEnd(bo.getBirthdayEnd());
+//        userVo.setBirthdayStart(bo.getBirthdayStart());
         userVo.setCreateTime(bo.getCreateTime());
-        userVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        userVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        userVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        userVo.setCreateTimeStart(bo.getCreateTimeStart());
         userVo.setEmail(bo.getEmail());
         userVo.setEnabled(bo.getEnabled());
         if (Constant.DEFAULTNULL != bo.getGender()) {
             userVo.setGender(bo.getGender());
         }
         userVo.setId(bo.getId());
-        userVo.setIdSet(bo.getIdSet());
+//        userVo.setIdSet(bo.getIdSet());
         userVo.setInvitationCode(bo.getInvitationCode());
         userVo.setLastLoginTime(bo.getLastLoginTime());
-        userVo.setLastLoginTimeEnd(bo.getLastLoginTimeEnd());
-        userVo.setLastLoginTimeStart(bo.getLastLoginTimeStart());
+//        userVo.setLastLoginTimeEnd(bo.getLastLoginTimeEnd());
+//        userVo.setLastLoginTimeStart(bo.getLastLoginTimeStart());
         userVo.setLastModifyTime(bo.getLastModifyTime());
-        userVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        userVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        userVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        userVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         userVo.setMajor(bo.getMajor());
         userVo.setName(bo.getName());
         userVo.setPhone(bo.getPhone());
@@ -179,13 +179,13 @@ public class UserConverter {
         userVo.setSchool(bo.getSchool());
         userVo.setWechat(bo.getWechat());
         userVo.setCareerId(bo.getCareerId());
-        userVo.setCareerIdSet(bo.getCareerIdSet());
+//        userVo.setCareerIdSet(bo.getCareerIdSet());
         userVo.setSchoolId(bo.getSchoolId());
-        userVo.setSchoolIdSet(bo.getSchoolIdSet());
+//        userVo.setSchoolIdSet(bo.getSchoolIdSet());
         userVo.setMajorId(bo.getMajorId());
-        userVo.setMajorIdSet(bo.getMajorIdSet());
+//        userVo.setMajorIdSet(bo.getMajorIdSet());
         userVo.setLocationId(bo.getLocationId());
-        userVo.setLocationIdSet(bo.getLocationIdSet());
+//        userVo.setLocationIdSet(bo.getLocationIdSet());
         if (Constant.DEFAULTNULL != bo.getCouponTotal()) {
             userVo.setCouponTotal(bo.getCouponTotal());
         } else {

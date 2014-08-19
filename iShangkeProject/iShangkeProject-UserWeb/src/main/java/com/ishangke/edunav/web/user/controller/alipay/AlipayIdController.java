@@ -25,22 +25,26 @@ public class AlipayIdController extends AbstractController {
     private AlipayFacade alipayFacade;
     @Autowired
     private BookingFacade bookingFacade;
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public @ResponseBody String processUserAlipayFeedBack(HttpServletRequest request) {
+    public @ResponseBody
+    String processUserAlipayFeedBack(HttpServletRequest request) {
         String success = null;
         String notify_id = null;
         String tradeStatus = null;
         String verified = null;
         String notify_time = null;
         String total_fee = null;
+        String trade_no = null;
         Calendar now = DateUtility.getCurTimeInstance();
         now.add(Calendar.SECOND, 60);
         String max = DateUtility.toSQLDateTime(now);
 
         success = request.getParameter("is_success");
+        // 支付宝交易流水号
+        trade_no = request.getParameter("trade_no");
         // Check success
-        if (success.equals("T")) {            
+        if (success.equals("T")) {
             try {
                 notify_time = UrlEncoding.decodeURI(request.getParameter("notify_time"));
             } catch (UnsupportedEncodingException e) {
@@ -55,7 +59,7 @@ public class AlipayIdController extends AbstractController {
             }
             // Check Sign
             System.out.println(request.getParameter("sign"));
-            
+
             // Check notify_id
             notify_id = request.getParameter("notify_id");
             verified = alipayFacade.verify_notify_id(notify_id);
@@ -63,10 +67,10 @@ public class AlipayIdController extends AbstractController {
                 tradeStatus = request.getParameter("trade_status");
                 total_fee = request.getParameter("total_fee");
                 if (tradeStatus.equals("TRADE_SUCCESS")) {
-                    
+
                     int orderId = Integer.parseInt(request.getParameter("out_trade_no"));
-                    alipayFacade.changeBookingStatusToPayed(orderId);
-                 // Change the status of the order
+                    alipayFacade.changeBookingStatusToPayed(orderId, trade_no);
+                    // Change the status of the order
                     return "redirect:http://usertest.ishangke.cn/alipay/alipay/success.html";
                 } else {
                     return "redirect:http://usertest.ishangke.cn/alipay/alipay/fail.html";

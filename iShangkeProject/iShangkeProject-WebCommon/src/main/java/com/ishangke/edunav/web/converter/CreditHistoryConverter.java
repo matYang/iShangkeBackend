@@ -99,20 +99,20 @@ public class CreditHistoryConverter {
             creditHistoryVo.setChargeStart(bo.getChargeStart());
         }
         creditHistoryVo.setCreateTime(bo.getCreateTime());
-        creditHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        creditHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        creditHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        creditHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         creditHistoryVo.setId(bo.getId());
-        creditHistoryVo.setIdSet(bo.getIdSet());
+//        creditHistoryVo.setIdSet(bo.getIdSet());
         creditHistoryVo.setLastModifyTime(bo.getLastModifyTime());
-        creditHistoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        creditHistoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        creditHistoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        creditHistoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         creditHistoryVo.setUserId(bo.getUserId());
-        creditHistoryVo.setUserIdSet(bo.getUserIdSet());
+//        creditHistoryVo.setUserIdSet(bo.getUserIdSet());
 
         if (Constant.DEFAULTNULL != bo.getOperation()) {
             creditHistoryVo.setOperation(bo.getOperation());
         }
-        creditHistoryVo.setOperationSet(bo.getOperationSet());
+//        creditHistoryVo.setOperationSet(bo.getOperationSet());
 
         return creditHistoryVo;
     }

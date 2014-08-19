@@ -195,4 +195,8 @@ public class Constant {
     public static final String ORDERSUBJECTPREFIX = "购买课程: ";
     public static final int ORDERSTATUSNOSUCCESS = 0;
     public static final int ORDERSTATUSSUCCESS = 1;
+    //order操作
+    public static final int ORDEROPTIONCREATE = 0;
+    public static final int ORDEROPTIONPAY = 1;
+    public static final int ORDEROPTIONPAYSUCCESS = 2;
 }

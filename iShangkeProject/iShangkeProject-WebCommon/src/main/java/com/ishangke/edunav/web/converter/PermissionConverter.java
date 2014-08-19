@@ -67,14 +67,14 @@ public class PermissionConverter {
         }
         PermissionVo permissionVo = new PermissionVo();
         permissionVo.setCreateTime(bo.getCreateTime());
-        permissionVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        permissionVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        permissionVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        permissionVo.setCreateTimeStart(bo.getCreateTimeStart());
         permissionVo.setEnabled(bo.getEnabled());
         permissionVo.setId(bo.getId());
-        permissionVo.setIdSet(bo.getIdSet());
+//        permissionVo.setIdSet(bo.getIdSet());
         permissionVo.setLastModifyTime(bo.getLastModifyTime());
-        permissionVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        permissionVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        permissionVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        permissionVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         permissionVo.setName(bo.getName());
         permissionVo.setPath(bo.getPath());
         permissionVo.setTag(bo.getTag());

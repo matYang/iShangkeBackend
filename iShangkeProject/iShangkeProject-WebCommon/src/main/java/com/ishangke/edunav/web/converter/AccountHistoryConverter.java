@@ -97,24 +97,24 @@ public class AccountHistoryConverter {
             accountHistoryVo.setChargeStart(bo.getChargeStart());
         }
         accountHistoryVo.setCreateTime(bo.getCreateTime());
-        accountHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        accountHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        accountHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        accountHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         accountHistoryVo.setId(bo.getId());
-        accountHistoryVo.setIdSet(bo.getIdSet());
+//        accountHistoryVo.setIdSet(bo.getIdSet());
         accountHistoryVo.setRemark(bo.getRemark());
         if (Constant.DEFAULTNULL != bo.getType()) {
             accountHistoryVo.setType(bo.getType());
         }
-        accountHistoryVo.setTypeSet(bo.getTypeSet());
+//        accountHistoryVo.setTypeSet(bo.getTypeSet());
         accountHistoryVo.setUserId(bo.getUserId());
-        accountHistoryVo.setUserIdSet(bo.getUserIdSet());
+//        accountHistoryVo.setUserIdSet(bo.getUserIdSet());
         accountHistoryVo.setWithdrawId(bo.getWithdrawId());
-        accountHistoryVo.setWithdrawIdSet(bo.getWithdrawIdSet());
+//        accountHistoryVo.setWithdrawIdSet(bo.getWithdrawIdSet());
 
         if (Constant.DEFAULTNULL != bo.getOperation()) {
             accountHistoryVo.setOperation(bo.getOperation());
         }
-        accountHistoryVo.setOperationSet(bo.getOperationSet());
+//        accountHistoryVo.setOperationSet(bo.getOperationSet());
 
         return accountHistoryVo;
     }

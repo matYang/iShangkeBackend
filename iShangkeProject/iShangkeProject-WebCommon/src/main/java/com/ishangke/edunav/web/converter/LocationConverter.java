@@ -65,14 +65,14 @@ public class LocationConverter {
         }
         LocationVo locationVo = new LocationVo();
         locationVo.setCreateTime(bo.getCreateTime());
-        locationVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        locationVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        locationVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        locationVo.setCreateTimeStart(bo.getCreateTimeStart());
         locationVo.setEnabled(bo.getEnabled());
         locationVo.setId(bo.getId());
-        locationVo.setIdSet(bo.getIdSet());
+//        locationVo.setIdSet(bo.getIdSet());
         locationVo.setLastModifyTime(bo.getLastModifyTime());
-        locationVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        locationVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        locationVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        locationVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         locationVo.setName(bo.getName());
         locationVo.setValue(bo.getValue());
         return locationVo;

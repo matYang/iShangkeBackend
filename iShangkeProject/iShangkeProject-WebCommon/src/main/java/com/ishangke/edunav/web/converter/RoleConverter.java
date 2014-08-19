@@ -61,14 +61,14 @@ public class RoleConverter {
         }
         RoleVo roleVo = new RoleVo();
         roleVo.setCreateTime(bo.getCreateTime());
-        roleVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        roleVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        roleVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        roleVo.setCreateTimeStart(bo.getCreateTimeStart());
         roleVo.setEnabled(bo.getEnabled());
         roleVo.setId(bo.getId());
-        roleVo.setIdSet(bo.getIdSet());
+//        roleVo.setIdSet(bo.getIdSet());
         roleVo.setLastModifyTime(bo.getLastModifyTime());
-        roleVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        roleVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        roleVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        roleVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         roleVo.setName(bo.getName());
         return roleVo;
     }

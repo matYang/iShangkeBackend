@@ -76,18 +76,18 @@ public class ClassPhotoConverter {
         }
         ClassPhotoVo classPhotoVo = new ClassPhotoVo();
         classPhotoVo.setCreateTime(bo.getCreateTime());
-        classPhotoVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        classPhotoVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        classPhotoVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        classPhotoVo.setCreateTimeStart(bo.getCreateTimeStart());
         classPhotoVo.setDescription(bo.getDescription());
         classPhotoVo.setEnabled(bo.getEnabled());
         classPhotoVo.setId(bo.getId());
-        classPhotoVo.setIdSet(bo.getIdSet());
+//        classPhotoVo.setIdSet(bo.getIdSet());
         classPhotoVo.setImgUrl(bo.getImgUrl());
         classPhotoVo.setLastModifyTime(bo.getLastModifyTime());
-        classPhotoVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        classPhotoVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        classPhotoVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        classPhotoVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         classPhotoVo.setPartnerId(bo.getPartnerId());
-        classPhotoVo.setPartnerIdSet(bo.getPartnerIdSet());
+//        classPhotoVo.setPartnerIdSet(bo.getPartnerIdSet());
         classPhotoVo.setTitle(bo.getTitle());
         classPhotoVo.setSnapshotUrl(bo.getSnapshotUrl());
         return classPhotoVo;

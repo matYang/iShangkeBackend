@@ -64,14 +64,14 @@ public class CircleConverter {
         }
         CircleVo circleVo = new CircleVo();
         circleVo.setCreateTime(bo.getCreateTime());
-        circleVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        circleVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        circleVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        circleVo.setCreateTimeStart(bo.getCreateTimeStart());
         circleVo.setEnabled(bo.getEnabled());
         circleVo.setId(bo.getId());
-        circleVo.setIdSet(bo.getIdSet());
+//        circleVo.setIdSet(bo.getIdSet());
         circleVo.setLastModifyTime(bo.getLastModifyTime());
-        circleVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        circleVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        circleVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        circleVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         circleVo.setName(bo.getName());
         circleVo.setValue(bo.getValue());
         return circleVo;
