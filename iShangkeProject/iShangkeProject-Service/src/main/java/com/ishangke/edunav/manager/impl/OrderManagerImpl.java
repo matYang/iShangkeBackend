@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.enums.BookingEnums;
 import com.ishangke.edunav.common.enums.OrderEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
@@ -68,7 +69,26 @@ public class OrderManagerImpl implements OrderManager {
             LOGGER.error(String.format("[create order] cannot create order for booking current status [%d]", bookingEntity == null ? null : bookingEntity.getStatus()));
             throw new ManagerException("对不起，当前预订状态下无法创建订单");
         }
-
+        
+        //搜索是否之前已经创建过这个booking的order，如果已经创建过，返回之前已经生成的order
+        OrderEntityExt os = new OrderEntityExt();
+        os.setBookingId(orderBo.getBookingId());
+        List<OrderEntityExt> orderBefore = orderMapper.list(orderEntity, null);
+        if (orderBefore != null && orderBefore.size() != 0) {
+            //记录下用户的本次尝试付款
+            OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
+            orderHistory.setOrderId(orderEntity.getId());
+            orderHistory.setUserId(userEntity.getId());
+            orderHistory.setOptName(Constant.ORDEROPTIONPAY);
+            orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
+            try {
+                orderHistoryMapper.add(orderHistory);
+            } catch (Exception e) {
+                throw new ManagerException("对不起，订单历史记录创建失败，请稍后再试");
+            }
+            //如果list不为空 说明有且只有一个order
+            return OrderConverter.toBo(orderBefore.get(0));
+        }
         // only normal user can call this method
         if (IdChecker.notEqual(bookingEntity.getUserId(), userEntity.getId())) {
             throw new AuthenticationException("对不起，您无权为他人的预订创建订单");
@@ -87,6 +107,7 @@ public class OrderManagerImpl implements OrderManager {
             OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
             orderHistory.setOrderId(orderEntity.getId());
             orderHistory.setUserId(userEntity.getId());
+            orderHistory.setOptName(Constant.ORDEROPTIONCREATE);
             orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
             try {
                 orderHistoryMapper.add(orderHistory);

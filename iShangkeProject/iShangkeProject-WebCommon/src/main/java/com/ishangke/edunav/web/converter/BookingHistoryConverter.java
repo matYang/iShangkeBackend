@@ -100,34 +100,34 @@ public class BookingHistoryConverter {
         }
         BookingHistoryVo bookingHistoryVo = new BookingHistoryVo();
         bookingHistoryVo.setBookingId(bo.getBookingId());
-        bookingHistoryVo.setBookingIdSet(bo.getBookingIdSet());
+//        bookingHistoryVo.setBookingIdSet(bo.getBookingIdSet());
         bookingHistoryVo.setCreateTime(bo.getCreateTime());
-        bookingHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        bookingHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        bookingHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        bookingHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         bookingHistoryVo.setEnabled(bo.getEnabled());
         bookingHistoryVo.setId(bo.getId());
-        bookingHistoryVo.setIdSet(bo.getIdSet());
+//        bookingHistoryVo.setIdSet(bo.getIdSet());
         if (Constant.DEFAULTNULL != bo.getNormal()) {
             bookingHistoryVo.setNormal(bo.getNormal());
         }
-        bookingHistoryVo.setNormalSet(bo.getNormalSet());
+//        bookingHistoryVo.setNormalSet(bo.getNormalSet());
         if (Constant.DEFAULTNULL != bo.getOptName()) {
             bookingHistoryVo.setOptName(bo.getOptName());
         }
-        bookingHistoryVo.setOptNameSet(bo.getOptNameSet());
+//        bookingHistoryVo.setOptNameSet(bo.getOptNameSet());
         if (Constant.DEFAULTNULL != bo.getPostStatus()) {
             bookingHistoryVo.setPostStatus(bo.getPostStatus());
         }
-        bookingHistoryVo.setPostStatusSet(bo.getPostStatusSet());
+//        bookingHistoryVo.setPostStatusSet(bo.getPostStatusSet());
         if (Constant.DEFAULTNULL != bo.getPreStatus()) {
             bookingHistoryVo.setPreStatus(bo.getPreStatus());
         }
-        bookingHistoryVo.setPreStatusSet(bo.getPreStatusSet());
+//        bookingHistoryVo.setPreStatusSet(bo.getPreStatusSet());
         bookingHistoryVo.setRemark(bo.getRemark());
         bookingHistoryVo.setUserId(bo.getUserId());
-        bookingHistoryVo.setUserIdSet(bo.getUserIdSet());
+//        bookingHistoryVo.setUserIdSet(bo.getUserIdSet());
         bookingHistoryVo.setPartnerId(bo.getPartnerId());
-        bookingHistoryVo.setPartnerIdSet(bo.getPartnerIdSet());
+//        bookingHistoryVo.setPartnerIdSet(bo.getPartnerIdSet());
         return bookingHistoryVo;
     }
 }

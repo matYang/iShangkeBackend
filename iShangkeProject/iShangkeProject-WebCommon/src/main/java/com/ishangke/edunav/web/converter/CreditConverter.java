@@ -74,8 +74,8 @@ public class CreditConverter {
         }
         CreditVo creditVo = new CreditVo();
         creditVo.setCreateTime(bo.getCreateTime());
-        creditVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        creditVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        creditVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        creditVo.setCreateTimeStart(bo.getCreateTimeStart());
         if (Constant.DEFAULTNULL != bo.getCredit()) {
             creditVo.setCredit(bo.getCredit());
         }
@@ -87,10 +87,10 @@ public class CreditConverter {
         }
         creditVo.setEnabled(bo.getEnabled());
         creditVo.setId(bo.getId());
-        creditVo.setIdSet(bo.getIdSet());
+//        creditVo.setIdSet(bo.getIdSet());
         creditVo.setLastModifyTime(bo.getLastModifyTime());
-        creditVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        creditVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        creditVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        creditVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         return creditVo;
     }
 }

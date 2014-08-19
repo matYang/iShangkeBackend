@@ -82,19 +82,19 @@ public class MessageConverter {
         messageVo.setCreateTimeEnd(bo.getCreateTimeEnd());
         messageVo.setCreateTimeStart(bo.getCreateTimeStart());
         messageVo.setReadTime(bo.getReadTime());
-        messageVo.setReadTimeEnd(bo.getReadTimeEnd());
-        messageVo.setReadTimeStart(bo.getReadTimeStart());
+//        messageVo.setReadTimeEnd(bo.getReadTimeEnd());
+//        messageVo.setReadTimeStart(bo.getReadTimeStart());
         messageVo.setId(bo.getId());
-        messageVo.setIdSet(bo.getIdSet());
+//        messageVo.setIdSet(bo.getIdSet());
         messageVo.setMessageText(bo.getMessageText());
         messageVo.setUserFromId(bo.getUserFromId());
         messageVo.setUserToId(bo.getUserToId());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             messageVo.setStatus(bo.getStatus());
         }
-        messageVo.setUserFromIdSet(bo.getUserFromIdSet());
-        messageVo.setUserToIdSet(bo.getUserToIdSet());
-        messageVo.setStatusSet(bo.getStatusSet());
+//        messageVo.setUserFromIdSet(bo.getUserFromIdSet());
+//        messageVo.setUserToIdSet(bo.getUserToIdSet());
+//        messageVo.setStatusSet(bo.getStatusSet());
         return messageVo;
     }
 }

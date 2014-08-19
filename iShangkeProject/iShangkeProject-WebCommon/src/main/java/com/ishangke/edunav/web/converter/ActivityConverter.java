@@ -66,18 +66,18 @@ public class ActivityConverter {
         }
         ActivityVo activityVo = new ActivityVo();
         activityVo.setCourseId(bo.getCourseId());
-        activityVo.setCourseIdSet(bo.getCourseIdSet());
+//        activityVo.setCourseIdSet(bo.getCourseIdSet());
         activityVo.setCreateTime(bo.getCreateTime());
-        activityVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        activityVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        activityVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        activityVo.setCreateTimeStart(bo.getCreateTimeStart());
         activityVo.setEnabled(bo.getEnabled());
         activityVo.setEndTime(bo.getEndTime());
-        activityVo.setEndTimeEnd(bo.getEndTimeEnd());
-        activityVo.setEndTimeStart(bo.getEndTimeStart());
+//        activityVo.setEndTimeEnd(bo.getEndTimeEnd());
+//        activityVo.setEndTimeStart(bo.getEndTimeStart());
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             activityVo.setStatus(bo.getStatus());
         }
-        activityVo.setStatusSet(bo.getStatusSet());
+//        activityVo.setStatusSet(bo.getStatusSet());
         return activityVo;
     }
 }

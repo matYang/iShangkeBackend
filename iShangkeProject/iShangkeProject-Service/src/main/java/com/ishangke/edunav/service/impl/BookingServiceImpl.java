@@ -195,9 +195,9 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public String changeBookingStatusToPayed(int orderId) throws BusinessExceptionBo, TException {
+    public String changeBookingStatusToPayed(int bookingId, String trade_no) throws BusinessExceptionBo, TException {
         try {
-            return bookingManager.changeBookingStatusToPayed(orderId);
+            return bookingManager.changeBookingStatusToPayed(bookingId, trade_no);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

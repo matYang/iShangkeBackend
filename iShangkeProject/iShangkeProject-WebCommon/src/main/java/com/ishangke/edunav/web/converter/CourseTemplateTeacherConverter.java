@@ -53,14 +53,14 @@ public class CourseTemplateTeacherConverter {
         }
         CourseTemplateTeacherVo courseTemplateTeacherVo = new CourseTemplateTeacherVo();
         courseTemplateTeacherVo.setCourseTemplateId(bo.getCourseTemplateId());
-        courseTemplateTeacherVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
+//        courseTemplateTeacherVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
         courseTemplateTeacherVo.setCreateTime(bo.getCreateTime());
-        courseTemplateTeacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        courseTemplateTeacherVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        courseTemplateTeacherVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        courseTemplateTeacherVo.setCreateTimeStart(bo.getCreateTimeStart());
         courseTemplateTeacherVo.setId(bo.getId());
-        courseTemplateTeacherVo.setIdSet(bo.getIdSet());
+//        courseTemplateTeacherVo.setIdSet(bo.getIdSet());
         courseTemplateTeacherVo.setTeacherId(bo.getTeacherId());
-        courseTemplateTeacherVo.setTeacherIdSet(bo.getTeacherIdSet());
+//        courseTemplateTeacherVo.setTeacherIdSet(bo.getTeacherIdSet());
         return courseTemplateTeacherVo;
     }
 }

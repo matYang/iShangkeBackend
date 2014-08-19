@@ -244,28 +244,20 @@ public class PartnerConverter {
         partnerVo.setCourseContact(bo.getCourseContact());
         partnerVo.setCourseContactPhone(bo.getCourseContactPhone());
         partnerVo.setCreateTime(bo.getCreateTime());
-        partnerVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        partnerVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        partnerVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        partnerVo.setCreateTimeStart(bo.getCreateTimeStart());
         if (Constant.DEFAULTNULL != bo.getCutoffDay()) {
             partnerVo.setCutoffDay(bo.getCutoffDay());
         }
-        if (Constant.DEFAULTNULL != bo.getCutoffDayEnd()) {
-            partnerVo.setCutoffDayEnd(bo.getCutoffDayEnd());
-        }
-        partnerVo.setCutoffDaySet(bo.getCutoffDaySet());
-        if (Constant.DEFAULTNULL != bo.getCutoffDayStart()) {
-            partnerVo.setCutoffDayStart(bo.getCutoffDayStart());
-        }
+//            partnerVo.setCutoffDayEnd(bo.getCutoffDayEnd());
+//        partnerVo.setCutoffDaySet(bo.getCutoffDaySet());
+//            partnerVo.setCutoffDayStart(bo.getCutoffDayStart());
         if (Constant.DEFAULTNULL != bo.getCutoffTime()) {
             partnerVo.setCutoffTime(bo.getCutoffTime());
         }
-        if (Constant.DEFAULTNULL != bo.getCutoffTimeEnd()) {
-            partnerVo.setCutoffTimeEnd(bo.getCutoffTimeEnd());
-        }
-        partnerVo.setCutoffTimeSet(bo.getCutoffTimeSet());
-        if (Constant.DEFAULTNULL != bo.getCutoffTimeStart()) {
-            partnerVo.setCutoffTimeStart(bo.getCutoffTimeStart());
-        }
+//            partnerVo.setCutoffTimeEnd(bo.getCutoffTimeEnd());
+//        partnerVo.setCutoffTimeSet(bo.getCutoffTimeSet());
+//            partnerVo.setCutoffTimeStart(bo.getCutoffTimeStart());
         partnerVo.setEduQualificationImgUrl(bo.getEduQualificationImgUrl());
         partnerVo.setEnabled(bo.getEnabled());
         partnerVo.setHqContact(bo.getHqContact());
@@ -277,8 +269,8 @@ public class PartnerConverter {
         partnerVo.setInstName(bo.getInstName());
 
         partnerVo.setLastModifyTime(bo.getLastModifyTime());
-        partnerVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        partnerVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        partnerVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        partnerVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         partnerVo.setLicence(bo.getLicence());
         partnerVo.setLicenceImgUrl(bo.getLicenceImgUrl());
         partnerVo.setLogoUrl(bo.getLogoUrl());
@@ -288,22 +280,14 @@ public class PartnerConverter {
         if (Constant.DEFAULTNULL != bo.getPartnerQualification()) {
             partnerVo.setPartnerQualification(bo.getPartnerQualification());
         }
-        if (Constant.DEFAULTNULL != bo.getPartnerQualificationEnd()) {
-            partnerVo.setPartnerQualificationEnd(bo.getPartnerQualificationEnd());
-        }
-        if (Constant.DEFAULTNULL != bo.getPartnerQualificationStart()) {
-            partnerVo.setPartnerQualificationStart(bo.getPartnerQualificationStart());
-        }
+//            partnerVo.setPartnerQualificationEnd(bo.getPartnerQualificationEnd());
+//            partnerVo.setPartnerQualificationStart(bo.getPartnerQualificationStart());
 
         if (Constant.DEFAULTNULL != bo.getRating()) {
             partnerVo.setRating(bo.getRating());
         }
-        if (Constant.DEFAULTNULL != bo.getRatingEnd()) {
-            partnerVo.setRatingEnd(bo.getRatingEnd());
-        }
-        if (Constant.DEFAULTNULL != bo.getRatingStart()) {
-            partnerVo.setRatingStart(bo.getRatingStart());
-        }
+//            partnerVo.setRatingEnd(bo.getRatingEnd());
+//            partnerVo.setRatingStart(bo.getRatingStart());
         partnerVo.setReference(bo.getReference());
         partnerVo.setRegContact(bo.getRegContact());
         partnerVo.setRegContactFax(bo.getRegContactFax());

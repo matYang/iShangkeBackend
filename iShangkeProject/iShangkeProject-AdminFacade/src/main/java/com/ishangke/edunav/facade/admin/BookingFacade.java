@@ -108,22 +108,22 @@ public class BookingFacade {
         return result;
     }
 
-   public String changeBookingStatusToPayed(int orderId) {
-        String result = null;
-        
-        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+   public String changeBookingStatusToPayed(int bookingId, String trade_no) {
+       String result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
-        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
-            Client serviceClient = factory.getServiceClient();
-            result = serviceClient.changeBookingStatusToPayed(orderId);
-        } catch (BusinessExceptionBo e) {
-            e.printStackTrace();
-            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
-        } catch (TException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.changeBookingStatusToPayed(bookingId, trade_no);
+       } catch (BusinessExceptionBo e) {
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+       } catch (TException e) {
+           e.printStackTrace();
+       }
+       return result;
+   }
 
    public String verify(String notify_id) {
         String result = null;

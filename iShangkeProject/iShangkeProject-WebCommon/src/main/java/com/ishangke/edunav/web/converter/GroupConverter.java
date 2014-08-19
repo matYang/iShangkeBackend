@@ -74,19 +74,19 @@ public class GroupConverter {
         }
         GroupVo groupVo = new GroupVo();
         groupVo.setCreateTime(bo.getCreateTime());
-        groupVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        groupVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        groupVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        groupVo.setCreateTimeStart(bo.getCreateTimeStart());
         groupVo.setEnabled(bo.getEnabled());
         groupVo.setId(bo.getId());
-        groupVo.setIdSet(bo.getIdSet());
+//        groupVo.setIdSet(bo.getIdSet());
         groupVo.setLastModifyTime(bo.getLastModifyTime());
-        groupVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        groupVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        groupVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        groupVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         groupVo.setName(bo.getName());
         groupVo.setPartnerId(bo.getPartnerId());
-        groupVo.setPartnerIdSet(bo.getPartnerIdSet());
+//        groupVo.setPartnerIdSet(bo.getPartnerIdSet());
         groupVo.setRoleId(bo.getRoleId());
-        groupVo.setRoleIdSet(bo.getRoleIdSet());
+//        groupVo.setRoleIdSet(bo.getRoleIdSet());
         return groupVo;
     }
 }

@@ -82,15 +82,15 @@ public class CategoryConverter {
             return null;
         }
         CategoryVo categoryVo = new CategoryVo();
-        categoryVo.setCreateTime(bo.getCreateTime());
-        categoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        categoryVo.setCreateTimeStart(bo.getCreateTimeStart());
-        categoryVo.setEnabled(bo.getEnabled());
+        //categoryVo.setCreateTime(bo.getCreateTime());
+        //categoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        //categoryVo.setCreateTimeStart(bo.getCreateTimeStart());
+        //categoryVo.setEnabled(bo.getEnabled());
         categoryVo.setId(bo.getId());
         categoryVo.setIdSet(bo.getIdSet());
-        categoryVo.setLastModifyTime(bo.getLastModifyTime());
-        categoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        categoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+        //categoryVo.setLastModifyTime(bo.getLastModifyTime());
+        //categoryVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        //categoryVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         categoryVo.setName(bo.getName());
         if (Constant.DEFAULTNULL != bo.getRank()) {
             categoryVo.setRank(bo.getRank());
