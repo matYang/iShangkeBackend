@@ -103,13 +103,13 @@ public class OrderConverter {
         }
         OrderVo orderVo = new OrderVo();
         orderVo.setBookingId(bo.getBookingId());
-        orderVo.setBookingIdSet(bo.getBookingIdSet());
+//        orderVo.setBookingIdSet(bo.getBookingIdSet());
         orderVo.setCreateTime(bo.getCreateTime());
-        orderVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        orderVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        orderVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        orderVo.setCreateTimeStart(bo.getCreateTimeStart());
         orderVo.setEnabled(bo.getEnabled());
         orderVo.setId(bo.getId());
-        orderVo.setIdSet(bo.getIdSet());
+//        orderVo.setIdSet(bo.getIdSet());
         if (Constant.DEFAULTNULL != bo.getPrice()) {
             orderVo.setPrice(bo.getPrice());
         }
@@ -123,13 +123,13 @@ public class OrderConverter {
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             orderVo.setStatus(bo.getStatus());
         }
-        orderVo.setStatusSet(bo.getStatusSet());
+//        orderVo.setStatusSet(bo.getStatusSet());
         orderVo.setType(bo.getType());
         orderVo.setReference(bo.getReference());
         orderVo.setSign(bo.getSign());
         orderVo.setConfirmedTime(bo.getConfirmedTime());
-        orderVo.setConfirmedTimeEnd(bo.getConfirmedTimeEnd());
-        orderVo.setConfirmedTimeStart(bo.getConfirmedTimeStart());
+//        orderVo.setConfirmedTimeEnd(bo.getConfirmedTimeEnd());
+//        orderVo.setConfirmedTimeStart(bo.getConfirmedTimeStart());
         return orderVo;
     }
 }

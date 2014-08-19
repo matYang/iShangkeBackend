@@ -42,7 +42,8 @@ public class OrderController extends AbstractController {
     AlipayFacade alipayFacade;
 
     @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET, produces = { "text/html;charset=UTF-8" })
-    public @ResponseBody String buildForm(@PathVariable int bookingId, @RequestParam(defaultValue = "alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    String buildForm(@PathVariable int bookingId, @RequestParam(defaultValue = "alipay") String type, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
         UserBo currentUser = null;
@@ -60,8 +61,12 @@ public class OrderController extends AbstractController {
 
         BookingBo booking = bookingFacade.queryBookingById(bookingId, currentUser, permissionTag);
 
+        // 我们的订单号ISK + order time + booking id
+        String num = Constant.ORDERPREFIX + DateUtility.getCurTime() + "-" + booking.getId();
+
         OrderVo order = new OrderVo();
         order.setBookingId(booking.getId());
+        order.setRuningNumber(num);
         order.setCreateTime(DateUtility.getCurTime());
         order.setType(type);
         order.setPrice(booking.getPrice());
@@ -74,9 +79,8 @@ public class OrderController extends AbstractController {
         }
 
         String partnerName = (booking.getCourse() != null && booking.getCourse().getInstName() != null) ? "[" + booking.getCourse().getInstName() + "]" : "";
-        // 我们的订单号ISK + booking id + order id
-        String result = alipayFacade.buildFormForGet(Constant.ORDERPREFIX + booking.getId() + "-" + DateUtility.milisecInDay + "-" + orderBo.getId(), Constant.ORDERSUBJECTPREFIX + partnerName
-                + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+
+        String result = alipayFacade.buildFormForGet(num, Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
         return result;
     }
 

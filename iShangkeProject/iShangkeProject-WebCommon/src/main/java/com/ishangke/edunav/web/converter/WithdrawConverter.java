@@ -75,21 +75,21 @@ public class WithdrawConverter {
         }
         WithdrawVo withdrawVo = new WithdrawVo();
         withdrawVo.setCreateTime(bo.getCreateTime());
-        withdrawVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        withdrawVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        withdrawVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        withdrawVo.setCreateTimeStart(bo.getCreateTimeStart());
         withdrawVo.setEnabled(bo.getEnabled());
         withdrawVo.setId(bo.getId());
         withdrawVo.setIdSet(bo.getIdSet());
         withdrawVo.setLastModifyTime(bo.getLastModifyTime());
-        withdrawVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        withdrawVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        withdrawVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        withdrawVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         withdrawVo.setPayeeId(bo.getPayeeId());
         withdrawVo.setPayeeName(bo.getPayeeName());
         if (Constant.DEFAULTNULL != bo.getType()) {
             withdrawVo.setType(bo.getType());
         }
         withdrawVo.setUserId(bo.getUserId());
-        withdrawVo.setUserIdSet(bo.getUserIdSet());
+//        withdrawVo.setUserIdSet(bo.getUserIdSet());
         return withdrawVo;
     }
 }

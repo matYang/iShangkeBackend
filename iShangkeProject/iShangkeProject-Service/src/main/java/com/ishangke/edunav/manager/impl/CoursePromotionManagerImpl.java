@@ -152,7 +152,7 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
         }
 
         // Convert
-        CoursePromotionEntityExt coursePromotionEntity = CoursePromotionConverter.fromBo(coursePromotionBo);
+        CoursePromotionEntityExt coursePromotionEntity = coursePromotionBo == null ? null : CoursePromotionConverter.fromBo(coursePromotionBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
 
         List<CoursePromotionEntityExt> results = null;

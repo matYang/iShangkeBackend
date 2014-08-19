@@ -85,29 +85,29 @@ public class ApproveHistoryConverter {
         }
         ApproveHistoryVo approveHistoryVo = new ApproveHistoryVo();
         approveHistoryVo.setApproveUserId(bo.getApproveUserId());
-        approveHistoryVo.setApproveUserIdSet(bo.getApproveUserIdSet());
+//        approveHistoryVo.setApproveUserIdSet(bo.getApproveUserIdSet());
         approveHistoryVo.setAttachedId(bo.getAttachedId());
-        approveHistoryVo.setAttachedIdSet(bo.getAttachedIdSet());
+//        approveHistoryVo.setAttachedIdSet(bo.getAttachedIdSet());
         approveHistoryVo.setComment(bo.getComment());
         approveHistoryVo.setCreateTime(bo.getCreateTime());
-        approveHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        approveHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        approveHistoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        approveHistoryVo.setCreateTimeStart(bo.getCreateTimeStart());
         approveHistoryVo.setId(bo.getId());
-        approveHistoryVo.setIdSet(bo.getIdSet());
+//        approveHistoryVo.setIdSet(bo.getIdSet());
         if (Constant.DEFAULTNULL != bo.getPostStatus()) {
             approveHistoryVo.setPostStatus(bo.getPostStatus());
         }
-        approveHistoryVo.setPostStatusSet(bo.getPostStatusSet());
+//        approveHistoryVo.setPostStatusSet(bo.getPostStatusSet());
         if (Constant.DEFAULTNULL != bo.getPreStatus()) {
             approveHistoryVo.setPreStatus(bo.getPreStatus());
         }
-        approveHistoryVo.setPreStatusSet(bo.getPreStatusSet());
+//        approveHistoryVo.setPreStatusSet(bo.getPreStatusSet());
         approveHistoryVo.setSubmitUserId(bo.getSubmitUserId());
-        approveHistoryVo.setSubmitUserIdSet(bo.getSubmitUserIdSet());
+//        approveHistoryVo.setSubmitUserIdSet(bo.getSubmitUserIdSet());
         if (Constant.DEFAULTNULL != bo.getType()) {
             approveHistoryVo.setType(bo.getType());
         }
-        approveHistoryVo.setTypeSet(bo.getTypeSet());
+//        approveHistoryVo.setTypeSet(bo.getTypeSet());
         return approveHistoryVo;
     }
 }

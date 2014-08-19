@@ -145,17 +145,17 @@ public class CouponConverter {
         }
         couponVo.setCode(bo.getCode());
         couponVo.setCreateTime(bo.getCreateTime());
-        couponVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        couponVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        couponVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        couponVo.setCreateTimeStart(bo.getCreateTimeStart());
         couponVo.setEnabled(bo.getEnabled());
         couponVo.setExpiryTime(bo.getExpiryTime());
-        couponVo.setExpiryTimeEnd(bo.getExpiryTimeEnd());
-        couponVo.setExpiryTimeStart(bo.getExpiryTimeStart());
+//        couponVo.setExpiryTimeEnd(bo.getExpiryTimeEnd());
+//        couponVo.setExpiryTimeStart(bo.getExpiryTimeStart());
         couponVo.setId(bo.getId());
         couponVo.setIdSet(bo.getIdSet());
         couponVo.setLastModifyTime(bo.getLastModifyTime());
-        couponVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        couponVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        couponVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        couponVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         if (Constant.DEFAULTNULL != bo.getOrigin()) {
             couponVo.setOrigin(bo.getOrigin());
         }
@@ -171,12 +171,12 @@ public class CouponConverter {
             couponVo.setTotalStart(bo.getTotalStart());
         }
         couponVo.setUserId(bo.getUserId());
-        couponVo.setUserIdSet(bo.getUserIdSet());
+//        couponVo.setUserIdSet(bo.getUserIdSet());
 
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             couponVo.setStatus(bo.getStatus());
         }
-        couponVo.setStatusSet(bo.getStatusSet());
+//        couponVo.setStatusSet(bo.getStatusSet());
 
         return couponVo;
     }

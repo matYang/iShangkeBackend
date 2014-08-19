@@ -89,7 +89,7 @@ public interface BookingManager {
      */
     List<BookingHistoryBo> queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo);
     int queryHistoryByBookingIdTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo);
-    String changeBookingStatusToPayed(int orderId);
+    String changeBookingStatusToPayed(int bookingId, String trade_no);
     String verify(String notify_id);
     String buildFormForGet(String subject,String out_trade_no, String total_fee);
     String buildFormForPost(String subject,String out_trade_no, String total_fee);

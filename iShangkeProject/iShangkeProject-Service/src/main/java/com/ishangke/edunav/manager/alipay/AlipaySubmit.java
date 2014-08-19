@@ -24,6 +24,8 @@ public class AlipaySubmit {
         sPara.put("total_fee", total_fee);
         sPara.put("seller_id", AlipayConfig.seller_id);
         sPara.put("_input_charset", AlipayConfig.input_charset);
+        sPara.put("paymethod", "bankPay");
+        sPara.put("defaultbank", "COMM-DEBIT");
 
         Map sParaNew = AlipayCore.ParaFilter(sPara); // 除去数组中的空值和签名参数
         String mysign = AlipayCore.BuildMysign(sParaNew);// 生成签名结果

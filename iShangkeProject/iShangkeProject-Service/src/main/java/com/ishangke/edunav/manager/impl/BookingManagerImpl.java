@@ -31,6 +31,7 @@ import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
@@ -39,6 +40,7 @@ import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
+import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CouponManager;
@@ -90,6 +92,9 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private OrderEntityExtMapper orderMapper;
+
+    @Autowired
+    private OrderHistoryEntityExtMapper orderHistoryMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
@@ -788,14 +793,13 @@ public class BookingManagerImpl implements BookingManager {
     }
 
     @Override
-    public String changeBookingStatusToPayed(int orderId) {
-        OrderEntityExt order = orderMapper.getById(orderId);
-        BookingEntityExt booking = bookingMapper.getById(order.getBookingId());
+    public String changeBookingStatusToPayed(int bookingId, String trade_no) {
+        BookingEntityExt booking = bookingMapper.getById(bookingId);
         BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
         int preStatus = booking.getStatus();
         if (BookingEnums.Status.ONLINEPENDINGPAYMENT.code != preStatus) {
             bookingHistory.setNormal(Constant.BOOKINGUNNORMAL);
-            LOGGER.error(String.format("[pay booking]booking [%d] is no need to pay, but order [%d] pay it", booking.getId(), order.getId()));
+            LOGGER.error(String.format("[pay booking]booking [%d] is no need to pay, but pay it", booking.getId()));
         } else {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
         }
@@ -804,11 +808,12 @@ public class BookingManagerImpl implements BookingManager {
             booking.setLastModifyTime(DateUtility.getCurTimeInstance());
             bookingMapper.update(booking);
         } catch (Exception e) {
-            LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
+            LOGGER.error(String.format("[pay booking] try to log booking history booking [%d] status to payed but failed", booking.getId()));
             throw new ManagerException("对不起，预订状态更改失败，请稍后再试");
         } finally {
-            LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
+            LOGGER.info(String.format("[pay booking] try to change booking [%d] status to payed", booking.getId()));
         }
+        //记录下本次booking状态改变
         bookingHistory.setBookingId(booking.getId());
         bookingHistory.setUserId(booking.getUserId());
         bookingHistory.setPreStatus(preStatus);
@@ -818,10 +823,10 @@ public class BookingManagerImpl implements BookingManager {
         try {
             bookingHistoryMapper.add(bookingHistory);
         } catch (Exception e) {
-            LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
+            LOGGER.error(String.format("[pay booking] try to log booking history booking [%d] status to payed but failed", booking.getId()));
             throw new ManagerException("对不起，预订历史记录创建失败，请稍后再试");
         } finally {
-            LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
+            LOGGER.info(String.format("[pay booking] try to change booking [%d] status to payed", booking.getId()));
         }
         return Constant.SUCCESS;
     }

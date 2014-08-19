@@ -152,16 +152,16 @@ public class CourseCommentConverter {
         }
         courseCommentVo.setContent(bo.getContent());
         courseCommentVo.setCourseTemplateId(bo.getCourseTemplateId());
-        courseCommentVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
+//        courseCommentVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());
         courseCommentVo.setCreateTime(bo.getCreateTime());
-        courseCommentVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        courseCommentVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        courseCommentVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        courseCommentVo.setCreateTimeStart(bo.getCreateTimeStart());
         courseCommentVo.setEnabled(bo.getEnabled());
         courseCommentVo.setId(bo.getId());
-        courseCommentVo.setIdSet(bo.getIdSet());
+//        courseCommentVo.setIdSet(bo.getIdSet());
         courseCommentVo.setLastModifyTime(bo.getLastModifyTime());
-        courseCommentVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        courseCommentVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        courseCommentVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        courseCommentVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         if (Constant.DEFAULTNULL != bo.getSatisfactionRating()) {
             courseCommentVo.setSatisfactionRating(bo.getSatisfactionRating());
         }
@@ -181,7 +181,7 @@ public class CourseCommentConverter {
             courseCommentVo.setTotalRatingStart(bo.getTotalRatingStart());
         }
         courseCommentVo.setUserId(bo.getUserId());
-        courseCommentVo.setUserIdSet(bo.getUserIdSet());
+//        courseCommentVo.setUserIdSet(bo.getUserIdSet());
         return courseCommentVo;
     }
 }

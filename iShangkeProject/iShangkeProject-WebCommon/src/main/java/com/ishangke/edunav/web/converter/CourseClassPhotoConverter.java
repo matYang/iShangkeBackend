@@ -52,14 +52,14 @@ public class CourseClassPhotoConverter {
         }
         CourseClassPhotoVo courseClassPhotoVo = new CourseClassPhotoVo();
         courseClassPhotoVo.setClassPhotoId(bo.getClassPhotoId());
-        courseClassPhotoVo.setClassPhotoIdSet(bo.getClassPhotoIdSet());
+//        courseClassPhotoVo.setClassPhotoIdSet(bo.getClassPhotoIdSet());
         courseClassPhotoVo.setCourseId(bo.getCourseId());
-        courseClassPhotoVo.setCourseIdSet(bo.getCourseIdSet());
+//        courseClassPhotoVo.setCourseIdSet(bo.getCourseIdSet());
         courseClassPhotoVo.setCreateTime(bo.getCreateTime());
-        courseClassPhotoVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        courseClassPhotoVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        courseClassPhotoVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        courseClassPhotoVo.setCreateTimeStart(bo.getCreateTimeStart());
         courseClassPhotoVo.setId(bo.getId());
-        courseClassPhotoVo.setIdSet(bo.getIdSet());
+//        courseClassPhotoVo.setIdSet(bo.getIdSet());
         return courseClassPhotoVo;
     }
 }

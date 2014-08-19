@@ -73,19 +73,19 @@ public class ContactConverter {
         }
         ContactVo contactVo = new ContactVo();
         contactVo.setCreateTime(bo.getCreateTime());
-        contactVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-        contactVo.setCreateTimeStart(bo.getCreateTimeStart());
+//        contactVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+//        contactVo.setCreateTimeStart(bo.getCreateTimeStart());
         contactVo.setEmail(bo.getEmail());
         contactVo.setEnabled(bo.getEnabled());
         contactVo.setId(bo.getId());
-        contactVo.setIdSet(bo.getIdSet());
+//        contactVo.setIdSet(bo.getIdSet());
         contactVo.setLastModifyTime(bo.getLastModifyTime());
-        contactVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-        contactVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+//        contactVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+//        contactVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         contactVo.setName(bo.getName());
         contactVo.setPhone(bo.getPhone());
         contactVo.setUserId(bo.getUserId());
-        contactVo.setUserIdSet(bo.getUserIdSet());
+//        contactVo.setUserIdSet(bo.getUserIdSet());
         return contactVo;
     }
 }
