@@ -630,6 +630,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingMapper.update(bookingEntityExt);
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
             bookingHistory.setNormal(Constant.BOOKINGUNNORMAL);
+            bookingHistory.setOptName(operation);
             bookingHistory.setBookingId(bookingBo.getId());
             bookingHistory.setUserId(userBo.getId());
             bookingHistory.setPreStatus(preStatus);
@@ -818,6 +819,7 @@ public class BookingManagerImpl implements BookingManager {
         bookingHistory.setUserId(booking.getUserId());
         bookingHistory.setPreStatus(preStatus);
         bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
+        bookingHistory.setOptName(Constant.BOOKINGOPERATEONLINEPAYSUCCESS);
         bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
         bookingHistory.setPartnerId(booking.getPartnerId());
         try {
