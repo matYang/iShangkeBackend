@@ -41,13 +41,13 @@ public class CourseServiceImpl implements CourseService.Iface {
 
     @Autowired
     private CourseManager courseManager;
-    
+
     @Autowired
     private CourseTemplateManager courseTemplateManager;
-    
+
     @Autowired
     private AuthManager authManager;
-    
+
     @Autowired
     private CoursePromotionManager coursePromotionManager;
 
@@ -102,7 +102,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseCommentPageViewBo queryCommentByCourseId(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            //不需要权限
+            // 不需要权限
             paginationBo = PageUtil.getPage(paginationBo);
             List<CourseCommentBo> data = courseManager.queryCommentByCourseId(courseBo, paginationBo);
             int total = courseManager.queryCommentByCourseIdTotal(courseBo);
@@ -112,7 +112,7 @@ public class CourseServiceImpl implements CourseService.Iface {
             pageView.setData(data);
             pageView.setTotal(total);
             return pageView;
-           
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -132,10 +132,13 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deleteCommentByCommentId"));
-//                throw new NoPermissionException();
-//            }
+            // if
+            // (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()),
+            // permissionTag)) {
+            // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+            // userBo.getId(), permissionTag, "deleteCommentByCommentId"));
+            // throw new NoPermissionException();
+            // }
             return courseManager.deleteCommentByCommentId(courseCommentBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -156,12 +159,12 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CategoryPageViewBo queryCategoryByKeyword(String keyword, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            //不需要进行权限控制
-            List<CategoryBo> data =  courseManager.queryCategoryByKeyword(keyword);
+            // 不需要进行权限控制
+            List<CategoryBo> data = courseManager.queryCategoryByKeyword(keyword);
             CategoryPageViewBo pageView = new CategoryPageViewBo();
             pageView.setData(data);
             return pageView;
-           
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -194,7 +197,7 @@ public class CourseServiceImpl implements CourseService.Iface {
             pageView.setData(data);
             pageView.setTotal(total);
             return pageView;
-      
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -214,9 +217,9 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CoursePageViewBo queryCourseByFilter(CourseBo courseBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            //不需要进行权限控制
+            // 不需要进行权限控制
             paginationBo = PageUtil.getPage(paginationBo);
-            List<CourseBo> data =courseManager.queryCourseByFilter(courseBo, paginationBo);
+            List<CourseBo> data = courseManager.queryCourseByFilter(courseBo, paginationBo);
             int total = courseManager.queryCourseByFilterTotal(courseBo);
             CoursePageViewBo pageView = new CoursePageViewBo();
             pageView.setStart(paginationBo.getOffset());
@@ -225,7 +228,6 @@ public class CourseServiceImpl implements CourseService.Iface {
             pageView.setTotal(total);
             return pageView;
 
-           
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -245,7 +247,7 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseBo queryCourseById(CourseBo courseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            //不需要进行权限控制
+            // 不需要进行权限控制
             return courseManager.queryById(courseBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -266,10 +268,13 @@ public class CourseServiceImpl implements CourseService.Iface {
     @Override
     public CourseBo transformCourseStatus(CourseBo courseBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "transformCourseStatus"));
-//                throw new NoPermissionException();
-//            }
+            // if
+            // (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()),
+            // permissionTag)) {
+            // LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+            // userBo.getId(), permissionTag, "transformCourseStatus"));
+            // throw new NoPermissionException();
+            // }
             return courseManager.transformCourseStatus(courseBo, operation, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -336,15 +341,14 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CourseTemplatePageViewBo queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String permissionTag)
-            throws BusinessExceptionBo, TException {
+    public CourseTemplatePageViewBo queryCourseTemplate(CourseTemplateBo courseTemplateBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCourseTemplate"));
                 throw new NoPermissionException();
             }
             paginationBo = PageUtil.getPage(paginationBo);
-            List<CourseTemplateBo> data =  courseTemplateManager.queryCourseTemplate(courseTemplateBo, userBo, paginationBo);
+            List<CourseTemplateBo> data = courseTemplateManager.queryCourseTemplate(courseTemplateBo, userBo, paginationBo);
             CourseTemplatePageViewBo pageView = new CourseTemplatePageViewBo();
             int total = courseTemplateManager.queryCourseTemplateTotal(courseTemplateBo, userBo);
             pageView.setCount(paginationBo.getSize());
@@ -352,7 +356,7 @@ public class CourseServiceImpl implements CourseService.Iface {
             pageView.setTotal(total);
             pageView.setData(data);
             return pageView;
-         
+
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
@@ -400,7 +404,7 @@ public class CourseServiceImpl implements CourseService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCoursePromotion"));
                 throw new NoPermissionException();
             }
-            
+
             paginationBo = PageUtil.getPage(paginationBo);
             List<CoursePromotionBo> data = coursePromotionManager.query(coursePromotionBo, userBo, paginationBo);
             CoursePromotionPageViewBo pageView = new CoursePromotionPageViewBo();
@@ -409,7 +413,7 @@ public class CourseServiceImpl implements CourseService.Iface {
             pageView.setStart(paginationBo.getOffset());
             pageView.setTotal(total);
             pageView.setData(data);
-            
+
             return pageView;
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -434,7 +438,7 @@ public class CourseServiceImpl implements CourseService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createPromotion"));
                 throw new NoPermissionException();
             }
-            
+
             return coursePromotionManager.createPromotion(coursePromotionBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -459,7 +463,7 @@ public class CourseServiceImpl implements CourseService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "updatePromotion"));
                 throw new NoPermissionException();
             }
-            
+
             return coursePromotionManager.updatePromotion(coursePromotionBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -484,7 +488,7 @@ public class CourseServiceImpl implements CourseService.Iface {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deletePromotion"));
                 throw new NoPermissionException();
             }
-            
+
             return coursePromotionManager.deletePromotion(coursePromotionBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
