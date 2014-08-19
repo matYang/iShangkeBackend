@@ -61,8 +61,8 @@ public class OrderController extends AbstractController {
 
         BookingBo booking = bookingFacade.queryBookingById(bookingId, currentUser, permissionTag);
 
-        // 我们的订单号ISK + order time + booking id
-        String num = Constant.ORDERPREFIX + DateUtility.getCurTime() + "-" + booking.getId();
+        // 我们的订单号ISK + booking create time + booking id
+        String num = Constant.ORDERPREFIX + booking.getCreateTime() + "-" + booking.getId();
 
         OrderVo order = new OrderVo();
         order.setBookingId(booking.getId());
