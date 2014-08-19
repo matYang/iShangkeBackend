@@ -40,8 +40,8 @@ public class AlipayController extends AbstractController {
             if (tradeStatus.equals("TRADE_SUCCESS")) {
                 String out_trade_no = request.getParameter("out_trade_no");
                 String[] nos = out_trade_no.split("-");
-                int orderId = Integer.parseInt(nos[nos.length - 1]);
-                alipayFacade.changeBookingStatusToPayed(orderId, trade_no);
+                int bookingId = Integer.parseInt(nos[nos.length - 1]);
+                alipayFacade.changeBookingStatusToPayed(bookingId, trade_no);
                 // Change the status of the order
                 return "success";
             }

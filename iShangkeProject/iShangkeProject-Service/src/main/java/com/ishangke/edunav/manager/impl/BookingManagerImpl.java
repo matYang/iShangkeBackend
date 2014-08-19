@@ -793,14 +793,13 @@ public class BookingManagerImpl implements BookingManager {
     }
 
     @Override
-    public String changeBookingStatusToPayed(int orderId, String trade_no) {
-        OrderEntityExt order = orderMapper.getById(orderId);
-        BookingEntityExt booking = bookingMapper.getById(order.getBookingId());
+    public String changeBookingStatusToPayed(int bookingId, String trade_no) {
+        BookingEntityExt booking = bookingMapper.getById(bookingId);
         BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
         int preStatus = booking.getStatus();
         if (BookingEnums.Status.ONLINEPENDINGPAYMENT.code != preStatus) {
             bookingHistory.setNormal(Constant.BOOKINGUNNORMAL);
-            LOGGER.error(String.format("[pay booking]booking [%d] is no need to pay, but order [%d] pay it", booking.getId(), order.getId()));
+            LOGGER.error(String.format("[pay booking]booking [%d] is no need to pay, but pay it", booking.getId()));
         } else {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
         }
@@ -809,10 +808,10 @@ public class BookingManagerImpl implements BookingManager {
             booking.setLastModifyTime(DateUtility.getCurTimeInstance());
             bookingMapper.update(booking);
         } catch (Exception e) {
-            LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
+            LOGGER.error(String.format("[pay booking] try to log booking history booking [%d] status to payed but failed", booking.getId()));
             throw new ManagerException("对不起，预订状态更改失败，请稍后再试");
         } finally {
-            LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
+            LOGGER.info(String.format("[pay booking] try to change booking [%d] status to payed", booking.getId()));
         }
         //记录下本次booking状态改变
         bookingHistory.setBookingId(booking.getId());
@@ -821,21 +820,13 @@ public class BookingManagerImpl implements BookingManager {
         bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
         bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
         bookingHistory.setPartnerId(booking.getPartnerId());
-        // 记录下这次付款成功的操作
-        OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
-        orderHistory.setOrderId(orderId);
-        orderHistory.setUserId(booking.getUserId());
-        orderHistory.setRemark(trade_no); //利用remark字段存储支付宝流水号
-        orderHistory.setOptName(Constant.ORDEROPTIONPAYSUCCESS);
-        orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
         try {
-            orderHistoryMapper.add(orderHistory);
             bookingHistoryMapper.add(bookingHistory);
         } catch (Exception e) {
-            LOGGER.error(String.format("[pay booking]order [%d] try to log booking history booking [%d] status to payed but failed", order.getId(), booking.getId()));
+            LOGGER.error(String.format("[pay booking] try to log booking history booking [%d] status to payed but failed", booking.getId()));
             throw new ManagerException("对不起，预订历史记录创建失败，请稍后再试");
         } finally {
-            LOGGER.info(String.format("[pay booking]order [%d] try to change booking [%d] status to payed", order.getId(), booking.getId()));
+            LOGGER.info(String.format("[pay booking] try to change booking [%d] status to payed", booking.getId()));
         }
         return Constant.SUCCESS;
     }
