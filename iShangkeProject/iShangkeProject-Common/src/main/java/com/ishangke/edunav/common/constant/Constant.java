@@ -129,6 +129,7 @@ public class Constant {
     public static final int BOOKINGOPERATIONONLINEREFUND = 21;
     public static final int BOOKINGOPERATIONONLINECASHBACK = 22;
     public static final int BOOKINGOPERATIONOFFLINECASHBACK = 23;
+    public static final int BOOKINGOPERATEONLINEPAYSUCCESS = 24;
 
     public static Map<String, Integer> BOOKINGOPERATEMAP;
     static {
