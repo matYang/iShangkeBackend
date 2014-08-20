@@ -50,33 +50,33 @@
       <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
       <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
-      <result column="COURSE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
-      <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
-      <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
-      <result column="COURSE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
+      <!-- <result column="COURSE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" /> -->
       <result column="COURSE_MARKING" property="marking" jdbcType="VARCHAR" />
-      <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
-      <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" />
-      <result column="COURSE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
-      <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
-      <result column="COURSE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
-      <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" />
-      <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" />
+      <!-- <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" /> -->
       <result column="COURSE_REGPHONE" property="regPhone" jdbcType="VARCHAR" />
       <result column="COURSE_CONTACT" property="contact" jdbcType="VARCHAR" />
-      <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
-      <result column="COURSE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
-      <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
-      <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
-      <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
+      <!-- <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" /> -->
       <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
-      <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
-      <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
+      <!-- <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" /> -->
       <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
-      <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
-      <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
-      <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
-      <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
+      <!-- <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" /> -->
+      <!-- <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" /> -->
       <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
       <result column="COURSE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
       <result column="COURSE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
@@ -103,7 +103,7 @@
       <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
       <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
       <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
-      <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+      <!-- <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" /> -->
       <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
       <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
       <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
