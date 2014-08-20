@@ -818,6 +818,8 @@ public class BookingManagerImpl implements BookingManager {
         bookingHistory.setBookingId(booking.getId());
         bookingHistory.setUserId(booking.getUserId());
         bookingHistory.setPreStatus(preStatus);
+        //记录下支付宝流水号
+        bookingHistory.setRemark(trade_no);
         bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
         bookingHistory.setOptName(Constant.BOOKINGOPERATEONLINEPAYSUCCESS);
         bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
