@@ -245,7 +245,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         // 将booking的订单号插入
         // booking订单号 ISK + booking create time + booking id
-        bookingEntity.setReference(Constant.ORDERPREFIX + bookingEntity.getCreateTime() + "-" + bookingEntity.getId());
+        bookingEntity.setReference(Constant.ORDERPREFIX + DateUtility.getCurTime() + "-" + bookingEntity.getId());
         bookingMapper.update(bookingEntity);
         
         if (result > 0) {
