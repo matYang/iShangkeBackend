@@ -105,7 +105,7 @@
       <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
       <!-- <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" /> -->
       <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
-      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+      <!-- <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" /> -->
       <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
       <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
