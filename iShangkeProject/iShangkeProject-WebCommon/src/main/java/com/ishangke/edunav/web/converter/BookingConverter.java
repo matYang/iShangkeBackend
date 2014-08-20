@@ -240,7 +240,7 @@ public class BookingConverter {
         bookingVo.setNote(bo.getNote());
         bookingVo.setPhone(bo.getPhone());
         // 用来生成更漂亮的订单号
-        bookingVo.setReference(Constant.ORDERPREFIX + bo.getCreateTime() + "-" + bo.getId());
+        bookingVo.setReference(bo.getReference());
         if (bo.getScheduledTime() != Constant.DEFAULTNULL) {
             bookingVo.setScheduledTime(bo.getScheduledTime());
         }

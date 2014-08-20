@@ -234,16 +234,20 @@ public class BookingManagerImpl implements BookingManager {
         // 设置bookingBo中的course template id
         // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
         bookingEntity.setCourseTemplateId(course.getCourseTemplateId());
-
+        bookingEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        bookingEntity.setCreateTime((DateUtility.getCurTimeInstance()));
         // 插入booking
         int result = 0;
         try {
-            bookingEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
-            bookingEntity.setCreateTime((DateUtility.getCurTimeInstance()));
             result = bookingMapper.add(bookingEntity);
         } catch (Exception e) {
             throw new ManagerException("对不起，创建预订失败，请稍后再试");
         }
+        // 将booking的订单号插入
+        // booking订单号 ISK + booking create time + booking id
+        bookingEntity.setReference(Constant.ORDERPREFIX + bookingEntity.getCreateTime() + "-" + bookingEntity.getId());
+        bookingMapper.update(bookingEntity);
+        
         if (result > 0) {
             bookingBo.setId(bookingEntity.getId());
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
@@ -805,8 +809,8 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
         }
         booking.setStatus(BookingEnums.Status.ONLINEPAYED.code);
+        booking.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
-            booking.setLastModifyTime(DateUtility.getCurTimeInstance());
             bookingMapper.update(booking);
         } catch (Exception e) {
             LOGGER.error(String.format("[pay booking] try to log booking history booking [%d] status to payed but failed", booking.getId()));
@@ -814,11 +818,11 @@ public class BookingManagerImpl implements BookingManager {
         } finally {
             LOGGER.info(String.format("[pay booking] try to change booking [%d] status to payed", booking.getId()));
         }
-        //记录下本次booking状态改变
+        // 记录下本次booking状态改变
         bookingHistory.setBookingId(booking.getId());
         bookingHistory.setUserId(booking.getUserId());
         bookingHistory.setPreStatus(preStatus);
-        //记录下支付宝流水号
+        // 记录下支付宝流水号
         bookingHistory.setRemark(trade_no);
         bookingHistory.setPostStatus(BookingEnums.Status.ONLINEPAYED.code);
         bookingHistory.setOptName(Constant.BOOKINGOPERATEONLINEPAYSUCCESS);
