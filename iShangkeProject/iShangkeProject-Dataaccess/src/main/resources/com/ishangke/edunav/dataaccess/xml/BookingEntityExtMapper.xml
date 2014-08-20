@@ -72,7 +72,7 @@
       <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
       <!-- <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" /> -->
       <!-- <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" /> -->
-      <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
+      <!-- <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" /> -->
       <!-- <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" /> -->
       <!-- <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" /> -->
       <!-- <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" /> -->
@@ -107,7 +107,7 @@
       <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
       <!-- <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" /> -->
       <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
-      <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+      <result column="ADDRESSx_LAT" property="addressLat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
       <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
       <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
