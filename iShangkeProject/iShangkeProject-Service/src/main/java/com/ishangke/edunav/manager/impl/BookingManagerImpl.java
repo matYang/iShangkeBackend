@@ -39,8 +39,6 @@ import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
-import com.ishangke.edunav.dataaccess.model.OrderEntityExt;
-import com.ishangke.edunav.dataaccess.model.OrderHistoryEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CouponManager;
@@ -245,7 +243,7 @@ public class BookingManagerImpl implements BookingManager {
         }
         // 将booking的订单号插入
         // booking订单号 ISK + booking create time + booking id
-        bookingEntity.setReference(Constant.ORDERPREFIX + DateUtility.getCurTime() + "-" + bookingEntity.getId());
+        bookingEntity.setReference(Constant.ORDERPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + bookingEntity.getId());
         bookingMapper.update(bookingEntity);
         
         if (result > 0) {
@@ -265,7 +263,8 @@ public class BookingManagerImpl implements BookingManager {
             CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
             if (courseTemplate != null) {
                 int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
-                courseTemplate.setBookingTotal((total++));
+                total = total + 1;
+                courseTemplate.setBookingTotal(total++);
                 courseTemplateMapper.update(courseTemplate);
             } else {
                 LOGGER.warn(String.format("[create booking]course template for course [%d] is no longer exits", course.getId()));
