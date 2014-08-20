@@ -61,12 +61,9 @@ public class OrderController extends AbstractController {
 
         BookingBo booking = bookingFacade.queryBookingById(bookingId, currentUser, permissionTag);
 
-        // 我们的订单号ISK + booking create time + booking id
-        String num = Constant.ORDERPREFIX + booking.getCreateTime() + "-" + booking.getId();
-
         OrderVo order = new OrderVo();
         order.setBookingId(booking.getId());
-        order.setRuningNumber(num);
+        order.setRuningNumber(booking.getReference());
         order.setCreateTime(DateUtility.getCurTime());
         order.setType(type);
         order.setPrice(booking.getPrice());
@@ -80,7 +77,7 @@ public class OrderController extends AbstractController {
 
         String partnerName = (booking.getCourse() != null && booking.getCourse().getInstName() != null) ? "[" + booking.getCourse().getInstName() + "]" : "";
 
-        String result = alipayFacade.buildFormForGet(num, Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        String result = alipayFacade.buildFormForGet(booking.getReference(), Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
         return result;
     }
 
