@@ -26,6 +26,7 @@ import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.BookingHistoryPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.BookingPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.BookingMap;
 import com.ishangke.edunav.web.model.BookingHistoryVo;
 import com.ishangke.edunav.web.model.BookingVo;
 import com.ishangke.edunav.web.model.pageview.BookingHistoryPageViewVo;
@@ -141,6 +142,8 @@ public class BookingController extends AbstractController {
         
         bookingVo.setUserId(curId);
         BookingPageViewBo bookingBos = null;
+        pageVo.setColumnKey(BookingMap.BOOKING_MAP.get(pageVo.getColumnKey()));
+        pageVo.setOrder(BookingMap.BOOKING_MAP.get(pageVo.getOrder()));
         try {
             bookingBos = bookingFacade.queryBooking(BookingConverter.fromModel(bookingVo), currentUser, PaginationConverter.toBo(pageVo), permissionTag);
         } catch (ControllerException c) {
