@@ -10,5 +10,6 @@ public class BookingMap {
         BOOKING_MAP.put("desc", "DESC");
         BOOKING_MAP.put("asc", "ASC");
         BOOKING_MAP.put("lastModifyTime", "LAST_MODIFY_TIME");
+        BOOKING_MAP.put("createTime", "CREATE_TIME");
     }
 }
