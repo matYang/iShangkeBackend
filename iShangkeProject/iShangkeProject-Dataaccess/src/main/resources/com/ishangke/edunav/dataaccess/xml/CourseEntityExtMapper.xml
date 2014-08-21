@@ -1178,11 +1178,11 @@
       <if test="entity.price == null">
         <if test="entity.priceStart != null">
           <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
-          OR COURSE.PRICE = null)
+          OR COURSE.PRICE is null)
         </if>
         <if test="entity.priceEnd != null">
           <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
-          OR COURSE.PRICE = null)
+          OR COURSE.PRICE is null)
         </if>
       </if>
 
@@ -1253,11 +1253,11 @@
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
           <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-          OR COURSE.START_DATE = null)
+          OR COURSE.START_DATE is null)
         </if>
         <if test="entity.startDateEnd != null">
           <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-          OR COURSE.START_DATE = null)
+          OR COURSE.START_DATE is null)
         </if>
       </if>
 
@@ -1543,11 +1543,11 @@
       <if test="entity.price == null">
         <if test="entity.priceStart != null">
           <![CDATA[AND (COURSE.PRICE >= #{entity.priceStart,jdbcType=DOUBLE}]]>
-          OR COURSE.PRICE = null)
+          OR COURSE.PRICE is null)
         </if>
         <if test="entity.priceEnd != null">
           <![CDATA[AND (COURSE.PRICE <= #{entity.priceEnd,jdbcType=DOUBLE}]]>
-          OR COURSE.PRICE = null)
+          OR COURSE.PRICE is null)
         </if>
       </if>
 
@@ -1618,11 +1618,11 @@
       <if test="entity.startDate == null">
         <if test="entity.startDateStart != null">
           <![CDATA[AND (COURSE.START_DATE >= #{entity.startDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-          OR COURSE.START_DATE = null)
+          OR COURSE.START_DATE is null)
         </if>
         <if test="entity.startDateEnd != null">
           <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-          OR COURSE.START_DATE = null)
+          OR COURSE.START_DATE is null)
         </if>
       </if>
 
