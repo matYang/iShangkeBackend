@@ -778,4 +778,10 @@ public class CourseManagerImpl implements CourseManager {
         return courseMapper.getListCount(CourseConverter.fromBo(courseBo));
     }
 
+    @Override
+    public List<CourseBo> listPromotionByCategoryId(int categoryId, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
