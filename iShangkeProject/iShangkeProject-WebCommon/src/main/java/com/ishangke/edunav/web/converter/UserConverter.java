@@ -153,39 +153,51 @@ public class UserConverter {
         userVo.setAppliedInvitationCode(bo.getAppliedInvitationCode());
         userVo.setAvatarUrl(bo.getAvatarUrl());
         userVo.setBirthday(bo.getBirthday());
-//        userVo.setBirthdayEnd(bo.getBirthdayEnd());
-//        userVo.setBirthdayStart(bo.getBirthdayStart());
+        // userVo.setBirthdayEnd(bo.getBirthdayEnd());
+        // userVo.setBirthdayStart(bo.getBirthdayStart());
         userVo.setCreateTime(bo.getCreateTime());
-//        userVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-//        userVo.setCreateTimeStart(bo.getCreateTimeStart());
+        // userVo.setCreateTimeEnd(bo.getCreateTimeEnd());
+        // userVo.setCreateTimeStart(bo.getCreateTimeStart());
         userVo.setEmail(bo.getEmail());
         userVo.setEnabled(bo.getEnabled());
         if (Constant.DEFAULTNULL != bo.getGender()) {
             userVo.setGender(bo.getGender());
         }
         userVo.setId(bo.getId());
-//        userVo.setIdSet(bo.getIdSet());
+        // userVo.setIdSet(bo.getIdSet());
         userVo.setInvitationCode(bo.getInvitationCode());
         userVo.setLastLoginTime(bo.getLastLoginTime());
-//        userVo.setLastLoginTimeEnd(bo.getLastLoginTimeEnd());
-//        userVo.setLastLoginTimeStart(bo.getLastLoginTimeStart());
+        // userVo.setLastLoginTimeEnd(bo.getLastLoginTimeEnd());
+        // userVo.setLastLoginTimeStart(bo.getLastLoginTimeStart());
         userVo.setLastModifyTime(bo.getLastModifyTime());
-//        userVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-//        userVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
+        // userVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
+        // userVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         userVo.setMajor(bo.getMajor());
         userVo.setName(bo.getName());
-        userVo.setPhone(bo.getPhone());
+        // 显示的手机号 中间有一段 是 "*"
+        char[] x = bo.getPhone().toCharArray();
+        int l = x.length;
+        String result = "";
+        for (int i = 0; i < l; i++) {
+            if (i < l - 4 && i > l - 9) {
+                result = result + "*";
+            } else {
+                result = result + x[i];
+            }
+        }
+        userVo.setPhone(result);
+
         userVo.setReference(bo.getReference());
         userVo.setSchool(bo.getSchool());
         userVo.setWechat(bo.getWechat());
         userVo.setCareerId(bo.getCareerId());
-//        userVo.setCareerIdSet(bo.getCareerIdSet());
+        // userVo.setCareerIdSet(bo.getCareerIdSet());
         userVo.setSchoolId(bo.getSchoolId());
-//        userVo.setSchoolIdSet(bo.getSchoolIdSet());
+        // userVo.setSchoolIdSet(bo.getSchoolIdSet());
         userVo.setMajorId(bo.getMajorId());
-//        userVo.setMajorIdSet(bo.getMajorIdSet());
+        // userVo.setMajorIdSet(bo.getMajorIdSet());
         userVo.setLocationId(bo.getLocationId());
-//        userVo.setLocationIdSet(bo.getLocationIdSet());
+        // userVo.setLocationIdSet(bo.getLocationIdSet());
         if (Constant.DEFAULTNULL != bo.getCouponTotal()) {
             userVo.setCouponTotal(bo.getCouponTotal());
         } else {
@@ -195,5 +207,21 @@ public class UserConverter {
         userVo.setAccount(AccountConverter.toModel(bo.getAccount()));
         userVo.setCredit(CreditConverter.toModel(bo.getCredit()));
         return userVo;
+    }
+
+    public static void main(String[] args) {
+        String p = "8618013955974";
+        char[] x = p.toCharArray();
+        int l = x.length;
+        String result = "";
+        for (int i = 0; i < l; i++) {
+            if (i < l - 4 && i > l - 9) {
+                result = result + "*";
+            } else {
+                result = result + x[i];
+            }
+        }
+        System.out.println(result);
+
     }
 }
