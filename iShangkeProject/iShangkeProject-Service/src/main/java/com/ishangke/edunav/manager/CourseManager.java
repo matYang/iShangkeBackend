@@ -174,4 +174,6 @@ public interface CourseManager {
      * @return
      */
     CourseBo transformCourseStatus(CourseBo courseBo, int operation, UserBo userBo);
+    
+    List<CourseBo> listPromotionByCategoryId(int categoryId, PaginationBo paginationBo);
 }
