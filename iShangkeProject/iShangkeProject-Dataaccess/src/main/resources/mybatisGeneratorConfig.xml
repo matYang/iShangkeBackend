@@ -116,6 +116,8 @@
         jdbcType="TIMESTAMP" />
       <columnOverride column="COURSE_INTRO" jdbcType="VARCHAR"></columnOverride>
       <columnOverride column="OUTLINE" jdbcType="VARCHAR"></columnOverride>
+      <columnOverride column="HIGH_SCORE_REWARD" jdbcType="VARCHAR"></columnOverride>
+      <columnOverride column="SUITABLE_STUDENT" jdbcType="VARCHAR"></columnOverride>
     </table>
     <table tableName="COURSE" domainObjectName="CourseEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
@@ -131,6 +133,8 @@
       <columnOverride column="START_DATE" property="startDate" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="COURSE_INTRO" jdbcType="VARCHAR"></columnOverride>
       <columnOverride column="OUTLINE" jdbcType="VARCHAR"></columnOverride>
+      <columnOverride column="HIGH_SCORE_REWARD" jdbcType="VARCHAR"></columnOverride>
+      <columnOverride column="SUITABLE_STUDENT" jdbcType="VARCHAR"></columnOverride>
     </table>
     <table tableName="COURSE_COMMENT" domainObjectName="CourseCommentEntity">
       <generatedKey column="ID" sqlStatement="MySql" />
