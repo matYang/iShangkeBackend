@@ -156,7 +156,8 @@ public class UserManagerImpl implements UserManager {
             couponEntity.setEnabled(0);
             couponEntity.setDeleted(0);
             couponManager.createCoupon(CouponConverter.toBo(couponEntity), UserConverter.toBo(userEntity));
-
+            
+            
             String appliedInvitationCode = userEntity.getAppliedInvitationCode();
             UserEntityExt inviterEntity = null;
             if (appliedInvitationCode != null && appliedInvitationCode.length() > 0) {
