@@ -139,10 +139,9 @@ public class GeneralController extends AbstractController {
     }
 
     @RequestMapping(value = "/school", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse school(HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse school(SchoolVo schoolVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
 
-        SchoolVo schoolVo = new SchoolVo();
         PaginationVo paginationVo = new PaginationVo();
         SchoolPageViewBo pageViewBo = null;
         SchoolPageViewVo pageViewVo = null;
