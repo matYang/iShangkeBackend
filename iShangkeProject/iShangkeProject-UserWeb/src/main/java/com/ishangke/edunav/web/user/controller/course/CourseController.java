@@ -1,5 +1,8 @@
 package com.ishangke.edunav.web.user.controller.course;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
 import com.ishangke.edunav.facade.user.CourseFacade;
+import com.ishangke.edunav.web.common.OrderByVo;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.CourseConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
@@ -43,6 +47,9 @@ public class CourseController extends AbstractController{
         
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
+        List<OrderByVo> listOrder = new ArrayList<>();
+        listOrder.add(new OrderByVo("POPULARITY", "DESC"));
+        paginationVo.setOrderByEntities(listOrder);
         paginationVo.setColumnKey(CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()));
         paginationVo.setOrder(CourseMap.COURSE_MAP.get(paginationVo.getOrder()));
         try {
