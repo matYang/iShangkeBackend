@@ -60,7 +60,7 @@ public class SchoolConverter {
         schoolEntityExt.setName(bo.getName());
         schoolEntityExt.setValue(bo.getValue());
         schoolEntityExt.setLocationId(bo.getLocationId());
-        schoolEntityExt.setLocationISet(bo.getLocationIdSet());
+        schoolEntityExt.setLocationIdSet(bo.getLocationIdSet());
         return schoolEntityExt;
     }
 }
