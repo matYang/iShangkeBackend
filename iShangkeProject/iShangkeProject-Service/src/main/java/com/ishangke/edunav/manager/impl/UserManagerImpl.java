@@ -173,7 +173,7 @@ public class UserManagerImpl implements UserManager {
                 curUserCouponEntity.setBalance(DefaultValue.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setTotal(DefaultValue.COUPONINVITATIONVALUE);
                 curUserCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
-                curUserCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
+                curUserCouponEntity.setStatus(CouponEnums.Status.USABLE.code);
                 curUserCouponEntity.setExpiryTime(expiry);
                 curUserCouponEntity.setRemark("");
                 curUserCouponEntity.setUserId(userEntity.getId());
@@ -187,7 +187,7 @@ public class UserManagerImpl implements UserManager {
                 inviterCouponEntity.setBalance(DefaultValue.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setTotal(DefaultValue.COUPONINVITATIONVALUE);
                 inviterCouponEntity.setOrigin(CouponEnums.Origin.INVITATION.code);
-                inviterCouponEntity.setStatus(CouponEnums.Status.INACTIVE.code);
+                inviterCouponEntity.setStatus(CouponEnums.Status.USABLE.code);
                 inviterCouponEntity.setExpiryTime(expiry);
                 inviterCouponEntity.setRemark("");
                 inviterCouponEntity.setUserId(inviterEntity.getId());
