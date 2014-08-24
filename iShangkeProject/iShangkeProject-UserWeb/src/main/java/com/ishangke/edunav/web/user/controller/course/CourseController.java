@@ -48,10 +48,13 @@ public class CourseController extends AbstractController{
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
         List<OrderByVo> listOrder = new ArrayList<>();
+        if (CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()) != null && CourseMap.COURSE_MAP.get(paginationVo.getOrder())!= null) {
+            listOrder.add(new OrderByVo(CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()), CourseMap.COURSE_MAP.get(paginationVo.getOrder())));
+        }
         listOrder.add(new OrderByVo("POPULARITY", "DESC"));
         paginationVo.setOrderByEntities(listOrder);
-        paginationVo.setColumnKey(CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()));
-        paginationVo.setOrder(CourseMap.COURSE_MAP.get(paginationVo.getOrder()));
+        paginationVo.setColumnKey(null);
+        paginationVo.setOrder(null);
         try {
             pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);    
         } catch (ControllerException c) {
