@@ -19,6 +19,21 @@ public class SchoolVo extends HierarchyData{
     private Long lastModifyTimeEnd;
     private Long createTimeStart;
     private Long createTimeEnd;
+    private Integer locationId;
+    private Set<Integer> locationIdSet;
+    
+    public Integer getLocationId() {
+        return locationId;
+    }
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
+    }
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
+    }
     public Integer getId() {
         return id;
     }

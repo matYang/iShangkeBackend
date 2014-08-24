@@ -12,6 +12,8 @@ struct SchoolBo {
     9: i64 lastModifyTimeEnd
     10: i64 createTimeStart
     11: i64 createTimeEnd
+    12: i32 locationId
+    13: set<i32> locationIdSet
 }
 struct SchoolPageViewBo{
     1: i32 start

@@ -64,13 +64,13 @@ public class LocationConverter {
             return null;
         }
         LocationVo locationVo = new LocationVo();
-        locationVo.setCreateTime(bo.getCreateTime());
+//        locationVo.setCreateTime(bo.getCreateTime());
 //        locationVo.setCreateTimeEnd(bo.getCreateTimeEnd());
 //        locationVo.setCreateTimeStart(bo.getCreateTimeStart());
         locationVo.setEnabled(bo.getEnabled());
         locationVo.setId(bo.getId());
 //        locationVo.setIdSet(bo.getIdSet());
-        locationVo.setLastModifyTime(bo.getLastModifyTime());
+//        locationVo.setLastModifyTime(bo.getLastModifyTime());
 //        locationVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
 //        locationVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         locationVo.setName(bo.getName());

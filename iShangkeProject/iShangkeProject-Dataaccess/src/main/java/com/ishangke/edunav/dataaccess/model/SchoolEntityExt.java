@@ -7,10 +7,19 @@ import com.ishangke.edunav.dataaccess.model.gen.SchoolEntity;
 
 public class SchoolEntityExt extends SchoolEntity {
     private Set<Integer> idSet;
+    private Set<Integer> locationISet;
     private Calendar lastModifyTimeStart;
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+
+    public Set<Integer> getLocationISet() {
+        return locationISet;
+    }
+
+    public void setLocationISet(Set<Integer> locationISet) {
+        this.locationISet = locationISet;
+    }
 
     public Set<Integer> getIdSet() {
         return idSet;
