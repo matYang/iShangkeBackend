@@ -3,7 +3,7 @@ package com.ishangke.edunav.common.enums;
 public class CouponEnums {
     
     public static enum Status implements EnumInterface {
-        USABLE(0), EXPIRED(1), INACTIVE(2);
+        USABLE(0), EXPIRED(1);
         public int code;
 
         @Override
