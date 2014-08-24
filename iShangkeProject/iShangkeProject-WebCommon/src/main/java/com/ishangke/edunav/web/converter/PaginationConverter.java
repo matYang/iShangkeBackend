@@ -27,6 +27,7 @@ public class PaginationConverter {
         }
 
         List<OrderByVo> orderByVos = vo.getOrderByEntities();
+        //接收前端注入的column和order
         if (vo.getColumnKey() != null && vo.getOrder() != null) {
             orderByVos.add(new OrderByVo(vo.getColumnKey(), vo.getOrder()));
         }
