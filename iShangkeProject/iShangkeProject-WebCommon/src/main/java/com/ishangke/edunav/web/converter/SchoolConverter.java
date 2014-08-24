@@ -16,8 +16,14 @@ public class SchoolConverter {
         if (vo.getId() != null) {
             schoolBo.setId(vo.getId());
         }
+        if (vo.getLocationId() != null) {
+            schoolBo.setLocationId(vo.getLocationId());
+        }
         if (vo.getIdSet() != null) {
             schoolBo.setIdSet(vo.getIdSet());
+        }
+        if (vo.getLocationIdSet() != null) {
+            schoolBo.setLocationIdSet(vo.getLocationIdSet());
         }
         if (vo.getName() != null) {
             schoolBo.setName(vo.getName());
@@ -63,13 +69,14 @@ public class SchoolConverter {
             return null;
         }
         SchoolVo schoolVo = new SchoolVo();
-        schoolVo.setCreateTime(bo.getCreateTime());
+//        schoolVo.setCreateTime(bo.getCreateTime());
 //        schoolVo.setCreateTimeEnd(bo.getCreateTimeEnd());
 //        schoolVo.setCreateTimeStart(bo.getCreateTimeStart());
         schoolVo.setEnabled(bo.getEnabled());
         schoolVo.setId(bo.getId());
 //        schoolVo.setIdSet(bo.getIdSet());
-        schoolVo.setLastModifyTime(bo.getLastModifyTime());
+//        schoolVo.setLastModifyTime(bo.getLastModifyTime());
+        schoolVo.setLocationId(bo.getLocationId());
 //        schoolVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
 //        schoolVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         schoolVo.setName(bo.getName());

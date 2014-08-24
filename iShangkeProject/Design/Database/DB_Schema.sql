@@ -54,6 +54,22 @@ DROP TABLE `SCHOOL` ;
 
 
 -- -----------------------------------------------------
+-- Table `EduNav`.`LOCATION`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `EduNav`.`LOCATION` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `VALUE` VARCHAR(45) NULL,
+  `NAME` VARCHAR(45) NULL,
+  `LAST_MODIFY_TIME` DATETIME NOT NULL,
+  `CREATE_TIME` DATETIME NOT NULL,
+  `ENABLED` INT NOT NULL DEFAULT 0,
+  `DELETED` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB
+COMMENT = '<double-click to overwrite multiple objects>';
+
+
+-- -----------------------------------------------------
 -- Table `EduNav`.`SCHOOL`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EduNav`.`SCHOOL` (
@@ -64,7 +80,14 @@ CREATE TABLE IF NOT EXISTS `EduNav`.`SCHOOL` (
   `CREATE_TIME` DATETIME NOT NULL,
   `ENABLED` INT NOT NULL DEFAULT 0,
   `DELETED` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`ID`))
+  `LOCATION_ID` INT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `FK_LOCATION_SCHOOL_idx` (`LOCATION_ID` ASC),
+  CONSTRAINT `FK_LOCATION_SCHOOL`
+    FOREIGN KEY (`LOCATION_ID`)
+    REFERENCES `EduNav`.`LOCATION` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -81,22 +104,6 @@ CREATE TABLE IF NOT EXISTS `EduNav`.`CAREER` (
   `DELETED` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `EduNav`.`LOCATION`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EduNav`.`LOCATION` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `VALUE` VARCHAR(45) NULL,
-  `NAME` VARCHAR(45) NULL,
-  `LAST_MODIFY_TIME` DATETIME NOT NULL,
-  `CREATE_TIME` DATETIME NOT NULL,
-  `ENABLED` INT NOT NULL DEFAULT 0,
-  `DELETED` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`ID`))
-ENGINE = InnoDB
-COMMENT = '<double-click to overwrite multiple objects>';
 
 
 -- -----------------------------------------------------

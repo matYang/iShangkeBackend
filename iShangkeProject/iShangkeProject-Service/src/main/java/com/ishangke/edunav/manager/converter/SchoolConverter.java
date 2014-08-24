@@ -26,6 +26,9 @@ public class SchoolConverter {
         if (e.getValue() != null) {
             schoolBo.setValue(e.getValue());
         }
+        if (e.getLocationId() != null) {
+            schoolBo.setLocationId(e.getLocationId());
+        }
         schoolBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime().getTimeInMillis());
         schoolBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()
                 .getTimeInMillis());
@@ -56,6 +59,8 @@ public class SchoolConverter {
         schoolEntityExt.setLastModifyTimeStart(DateUtility.getTimeFromLong(bo.getLastModifyTimeStart()));
         schoolEntityExt.setName(bo.getName());
         schoolEntityExt.setValue(bo.getValue());
+        schoolEntityExt.setLocationId(bo.getLocationId());
+        schoolEntityExt.setLocationISet(bo.getLocationIdSet());
         return schoolEntityExt;
     }
 }

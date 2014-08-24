@@ -152,10 +152,10 @@ public class GeneralController extends AbstractController {
             return this.handleWebException(c, resp);
         }
         pageViewVo = SchoolPageViewConverter.toModel(pageViewBo);
-        if (pageViewVo.getData() != null) {
-            ArrayList<SchoolVo> treeList = (ArrayList<SchoolVo>) TreeParser.parse(pageViewVo.getData());
-            pageViewVo.setData(treeList);
-        }
+//        if (pageViewVo.getData() != null) {
+//            ArrayList<SchoolVo> treeList = (ArrayList<SchoolVo>) TreeParser.parse(pageViewVo.getData());
+//            pageViewVo.setData(treeList);
+//        }
 
         return pageViewVo;
     }
