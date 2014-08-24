@@ -81,7 +81,24 @@ public class CouponManagerImpl implements CouponManager {
         if (couponResult <= 0) {
             throw new ManagerException("Coupon Create Failed: add Coupon Failed");
         }
-
+        
+        CouponHistoryEntityExt couponHistoryEntity = new CouponHistoryEntityExt();
+        couponHistoryEntity.setCouponId(couponEntity.getId());
+        couponHistoryEntity.setCharge(couponEntity.getBalance());
+        couponHistoryEntity.setOperation(CouponHistoryEnums.Operation.INC.code);
+        couponHistoryEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        couponHistoryEntity.setDeleted(0);
+        int couponHistoryResult;
+        try {
+            couponHistoryResult = couponHistoryMapper.add(couponHistoryEntity);
+        } catch (Throwable t) {
+            throw new ManagerException("Coupon Create Failed: add CouponHistory Failed for user: " + userEntity.getId(), t);
+        }
+        if (couponHistoryResult <= 0) {
+            throw new ManagerException("Coupon Create Failed: add CouponHistory Failed");
+        }
+        
         return CouponConverter.toBo(couponMapper.getById(couponEntity.getId()));
     }
 
