@@ -349,7 +349,7 @@
     from USERS join ACCOUNT on ACCOUNT.ID = USERS.ID
     join CREDIT on CREDIT.ID =
     USERS.ID
-    left join COUPON on USERS.ID = COUPON.USER_ID and (COUPON.STATUS = 0 or COUPON.STATUS = 2)
+    left join COUPON on USERS.ID = COUPON.USER_ID and COUPON.STATUS = 0
     where USERS.DELETED = 0 and USERS.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- getSimpleById -->
