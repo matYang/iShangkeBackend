@@ -9,6 +9,7 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="SCHOOL_CREATETIME" property="createTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="SCHOOL_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="SCHOOL_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="SCHOOL_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
@@ -19,6 +20,7 @@
     SCHOOL.LAST_MODIFY_TIME SCHOOL_LASTMODIFYTIME,
     SCHOOL.CREATE_TIME SCHOOL_CREATETIME,
     SCHOOL.ENABLED SCHOOL_ENABLED,
+    SCHOOL.LOCATION_ID SCHOOL_LOCATIONID,
     SCHOOL.DELETED SCHOOL_DELETED
   </sql>
   <!--add -->
@@ -37,6 +39,9 @@
       <if test="createTime != null">
         CREATE_TIME,
       </if>
+      <if test="locationId != null and locationId != 0">
+        LOCATION_ID,
+      </if>
       <if test="enabled != null">
         ENABLED,
       </if>
@@ -53,6 +58,9 @@
       </if>
       <if test="createTime != null">
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+      <if test="locationId != null and locationId != 0">
+        #{locationId,jdbcType=INTEGER},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
@@ -86,6 +94,9 @@
       <if test="createTime != null">
         CREATE_TIME =
         #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+      <if test="locationId != null and locationId != 0">
+        LOCATION_ID = #{locationId,jdbcType=INTEGER},
       </if>
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
@@ -124,6 +135,18 @@
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND SCHOOL.ID IN
           <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+      
+      <if test="entity.locationId != null and entity.locationId != 0">
+        AND SCHOOL.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.locationId == null or entity.locationId == 0">
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
+          AND SCHOOL.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
