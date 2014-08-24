@@ -63,13 +63,13 @@ public class CareerConverter {
             return null;
         }
         CareerVo careerVo = new CareerVo();
-        careerVo.setCreateTime(bo.getCreateTime());
+//        careerVo.setCreateTime(bo.getCreateTime());
 //        careerVo.setCreateTimeEnd(bo.getCreateTimeEnd());
 //        careerVo.setCreateTimeStart(bo.getCreateTimeStart());
         careerVo.setEnabled(bo.getEnabled());
         careerVo.setId(bo.getId());
         careerVo.setIdSet(bo.getIdSet());
-        careerVo.setLastModifyTime(bo.getLastModifyTime());
+//        careerVo.setLastModifyTime(bo.getLastModifyTime());
 //        careerVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
 //        careerVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         careerVo.setName(bo.getName());
