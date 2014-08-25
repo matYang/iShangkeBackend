@@ -51,7 +51,11 @@ public class CourseController extends AbstractController{
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
         List<OrderByVo> listOrder = new ArrayList<>();
+        String columnKey = "";
+        String order = "";
         if (CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()) != null && CourseMap.COURSE_MAP.get(paginationVo.getOrder())!= null) {
+            columnKey = paginationVo.getColumnKey();
+            order = paginationVo.getOrder();
             listOrder.add(new OrderByVo(CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()), CourseMap.COURSE_MAP.get(paginationVo.getOrder())));
         }
         listOrder.add(new OrderByVo("POPULARITY", "DESC"));
@@ -64,7 +68,7 @@ public class CourseController extends AbstractController{
             return this.handleWebException(c, resp);
         } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
-        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? null : courseVo.getIdSet().toString() + ";ColumnKey:" + paginationVo.getColumnKey() + ";Order:" + paginationVo.getOrder());
+        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString() + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
     }
     
