@@ -205,6 +205,6 @@ service BookingService {
     //  orderHistory.OrderHistoryPageViewBo queryOrderHistory(1: orderHistory.OrderHistoryBo orderHistory, 2: booking.BookingBo bookingBo, 3: user.UserBo userBo, 4: common.PaginationBo paginationBo, 5: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string changeBookingStatusToPayed(1: i32 id, 2: string trade_no) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string verify(1: string notify) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-	string buildFormForGet(1:string subject, 2: string out_trade_no, 3: string total_fee) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	string buildFormForGet(1:string subject, 2: string out_trade_no, 3: string total_fee, 4: string type) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForPost(1:string subject, 2: string out_trade_no, 3: string total_fee) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 

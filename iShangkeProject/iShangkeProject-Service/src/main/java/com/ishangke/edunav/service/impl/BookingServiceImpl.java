@@ -223,9 +223,9 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public String buildFormForGet(String subject, String out_trade_no, String total_fee) throws BusinessExceptionBo, TException {
+    public String buildFormForGet(String subject, String out_trade_no, String total_fee, String type) throws BusinessExceptionBo, TException {
         try {
-            return bookingManager.buildFormForGet(subject, out_trade_no, total_fee);
+            return bookingManager.buildFormForGet(subject, out_trade_no, total_fee, type);
         } catch (ManagerException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

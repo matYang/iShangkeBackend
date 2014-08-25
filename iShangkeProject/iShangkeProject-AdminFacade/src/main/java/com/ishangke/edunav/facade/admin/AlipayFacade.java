@@ -34,14 +34,14 @@ public class AlipayFacade {
         return result;
     }
 
-    public String buildFormForGet(String subject, String out_trade_no, String total_fee) {
+    public String buildFormForGet(String subject, String out_trade_no, String total_fee, String type) {
         String result = null;
 
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
-            result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee);
+            result = serviceClient.buildFormForGet(subject, out_trade_no, total_fee, type);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
             throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());

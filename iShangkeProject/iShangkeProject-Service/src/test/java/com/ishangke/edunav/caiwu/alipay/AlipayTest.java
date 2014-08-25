@@ -33,7 +33,7 @@ public class AlipayTest extends BaseTest {
     @Test
     public void testSubmit() {
         System.out.println();
-        System.out.println(AlipaySubmit.buildFormForGet(out_trade_no, subject, total_fee));
+        System.out.println(AlipaySubmit.buildFormForGet(out_trade_no, subject, total_fee, ""));
     }
 
     // @Test
