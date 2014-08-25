@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,7 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 @RequestMapping("/api/v2/course")
 
 public class CourseController extends AbstractController{
+    private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
     
     @Autowired
     CourseFacade courseFacade;
@@ -61,6 +64,7 @@ public class CourseController extends AbstractController{
             return this.handleWebException(c, resp);
         } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
+        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet().toString() + ";ColumnKey:" + paginationVo.getColumnKey() + ";Order:" + paginationVo.getOrder());
         return pageViewVo;
     }
     
@@ -79,6 +83,7 @@ public class CourseController extends AbstractController{
             return this.handleWebException(c, resp);
         } 
         responseVo = CourseConverter.toModel(responseBo);
+        LOGGER.info("[queryCourseById]:" + id);
         return responseVo;
     }
     
