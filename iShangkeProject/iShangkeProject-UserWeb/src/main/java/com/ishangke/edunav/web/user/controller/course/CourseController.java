@@ -70,8 +70,7 @@ public class CourseController extends AbstractController{
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
         String category = courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue();
         String idSet = courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString();
-        //加入cookie 便于日后统计
-        LOGGER.info(req.getCookies().toString() + "[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
+        LOGGER.info("[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
     }
     
