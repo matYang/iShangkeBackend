@@ -91,6 +91,6 @@ public interface BookingManager {
     int queryHistoryByBookingIdTotal(BookingHistoryBo bookingHistoryBo, UserBo userBo);
     String changeBookingStatusToPayed(int bookingId, String trade_no);
     String verify(String notify_id);
-    String buildFormForGet(String subject,String out_trade_no, String total_fee);
+    String buildFormForGet(String subject,String out_trade_no, String total_fee, String type);
     String buildFormForPost(String subject,String out_trade_no, String total_fee);
 }

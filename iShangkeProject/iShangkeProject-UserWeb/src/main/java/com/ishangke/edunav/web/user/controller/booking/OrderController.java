@@ -77,7 +77,7 @@ public class OrderController extends AbstractController {
 
         String partnerName = (booking.getCourse() != null && booking.getCourse().getInstName() != null) ? "[" + booking.getCourse().getInstName() + "]" : "";
 
-        String result = alipayFacade.buildFormForGet(booking.getReference(), Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()));
+        String result = alipayFacade.buildFormForGet(booking.getReference(), Constant.ORDERSUBJECTPREFIX + partnerName + booking.getCourse().getCourseName(), String.valueOf(booking.getPrice()), type);
         return result;
     }
 
