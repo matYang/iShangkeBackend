@@ -218,13 +218,6 @@ public class CourseManagerImpl implements CourseManager {
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 如果是ishangke管理员
 
-            // 临时加的，不知道未来可能会改业务流程
-            // 因为不能改变模版名，但是我们又需要根据一个模版生成多个课程
-            CourseEntityExt cc = new CourseEntityExt();
-            cc.setCourseTemplateId(course.getCourseTemplateId());
-            int count = courseMapper.getListCount(cc);
-            course.setCourseName(course.getCourseName() + "-" + (count + 1));
-            
             // 验证教师信息和classphoto信息是否属于同一家机构
             // 即使不属于同一家机构，但是ishangke管理员也可以强行提交，日志系统会发出警报
             List<ClassPhotoEntityExt> classPhotos = course.getClassPhotoList();

@@ -11,7 +11,7 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 
 public class AlipaySubmit {
 
-    public static String buildFormForGet(String out_trade_no, String subject, String total_fee) {
+    public static String buildFormForGet(String out_trade_no, String subject, String total_fee, String type) {
         Map sPara = new HashMap();
         sPara.put("service", "create_direct_pay_by_user");
         sPara.put("partner", AlipayConfig.partner);
@@ -24,8 +24,10 @@ public class AlipaySubmit {
         sPara.put("total_fee", total_fee);
         sPara.put("seller_id", AlipayConfig.seller_id);
         sPara.put("_input_charset", AlipayConfig.input_charset);
-//        sPara.put("paymethod", "bankPay");
-//        sPara.put("defaultbank", "COMM-DEBIT");
+        if (BankMap.BANK_MAP.get(type) != null) {
+          sPara.put("paymethod", "bankPay");
+          sPara.put("defaultbank", type);
+        }
 
         Map sParaNew = AlipayCore.ParaFilter(sPara); // 除去数组中的空值和签名参数
         String mysign = AlipayCore.BuildMysign(sParaNew);// 生成签名结果
@@ -98,6 +100,6 @@ public class AlipaySubmit {
     }
     
     public static void main(String[] args) throws UnsupportedEncodingException {
-        System.out.println(AlipaySubmit.buildFormForGet("1221", "好 啊", "2.0"));
+        System.out.println(AlipaySubmit.buildFormForGet("1221", "好 啊", "2.0", ""));
     }
 }

@@ -73,10 +73,12 @@ public class OrderManagerImpl implements OrderManager {
         //搜索是否之前已经创建过这个booking的order，如果已经创建过，返回之前已经生成的order
         OrderEntityExt os = new OrderEntityExt();
         os.setBookingId(orderBo.getBookingId());
-        List<OrderEntityExt> orderBefore = orderMapper.list(orderEntity, null);
+        List<OrderEntityExt> orderBefore = orderMapper.list(os, null);
         if (orderBefore != null && orderBefore.size() != 0) {
             //记录下用户的本次尝试付款
             OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
+            //记录下支付类型
+            orderHistory.setRemark(orderEntity.getType());
             orderHistory.setOrderId(orderEntity.getId());
             orderHistory.setUserId(userEntity.getId());
             orderHistory.setOptName(Constant.ORDEROPTIONPAY);
@@ -107,6 +109,7 @@ public class OrderManagerImpl implements OrderManager {
             OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
             orderHistory.setOrderId(orderEntity.getId());
             orderHistory.setUserId(userEntity.getId());
+            orderHistory.setRemark(orderEntity.getType());
             orderHistory.setOptName(Constant.ORDEROPTIONCREATE);
             orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
             try {
