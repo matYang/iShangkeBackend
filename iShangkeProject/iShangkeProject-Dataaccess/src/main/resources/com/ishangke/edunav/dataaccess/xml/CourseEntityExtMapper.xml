@@ -1417,7 +1417,7 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        COURSE.${listItem.columnKey}
+        COURSE.${listItem.columnKey} is null, COURSE.${listItem.columnKey}
         ${listItem.order}
       </foreach>
     </if>
