@@ -30,7 +30,7 @@ public class CleanEventJob {
     
     static {
         panicContactList = new Vector<String>();
-        panicContactList.add("18662241356");
+        panicContactList.add("18013955974");
     }
 
     @Autowired
