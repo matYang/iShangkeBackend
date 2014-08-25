@@ -64,7 +64,7 @@ public class CourseController extends AbstractController{
             return this.handleWebException(c, resp);
         } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
-        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet().toString() + ";ColumnKey:" + paginationVo.getColumnKey() + ";Order:" + paginationVo.getOrder());
+        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? null : courseVo.getIdSet().toString() + ";ColumnKey:" + paginationVo.getColumnKey() + ";Order:" + paginationVo.getOrder());
         return pageViewVo;
     }
     
