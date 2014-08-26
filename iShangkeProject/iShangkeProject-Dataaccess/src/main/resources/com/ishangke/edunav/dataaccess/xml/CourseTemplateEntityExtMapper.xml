@@ -311,8 +311,12 @@
       <if test="addressId != null and addressId != 0">
         ADDRESS_ID,
       </if>
-      PRICE,
-      ORIGINAL_PRICE,
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="originalPrice != null">
+        ORIGINAL_PRICE,
+      </if>
       <if test="cashback != null">
         CASHBACK,
       </if>
@@ -508,8 +512,12 @@
       <if test="addressId != null and addressId !=0">
         #{addressId,jdbcType=INTEGER},
       </if>
-      #{price,jdbcType=DOUBLE},
-      #{originalPrice,jdbcType=DOUBLE},
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DOUBLE},
+      </if>
       <if test="cashback != null">
         #{cashback,jdbcType=DOUBLE},
       </if>
@@ -720,12 +728,8 @@
       <if test="addressId != null and addressId != 0">
         ADDRESS_ID = #{addressId,jdbcType=INTEGER},
       </if>
-      <if test="price != null">
-        PRICE = #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="originalPrice != null">
-        ORIGINAL_PRICE = #{originalPrice,jdbcType=DOUBLE},
-      </if>
+      PRICE = #{price,jdbcType=DOUBLE},
+      ORIGINAL_PRICE = #{originalPrice,jdbcType=DOUBLE},
       <if test="cashback != null">
         CASHBACK = #{cashback,jdbcType=DOUBLE},
       </if>
