@@ -68,6 +68,15 @@ public class CourseController extends AbstractController{
             return this.handleWebException(c, resp);
         } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
+        //课程曝光次数
+        List<Integer> shine = null;
+        if (pageViewVo.getData() != null) {
+            shine = new ArrayList<>();
+            for(CourseVo c : pageViewVo.getData()) {
+                shine.add(courseVo.getId());
+            }
+            LOGGER.info("[shine]" + shine.toString());
+        }
         String category = courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue();
         String idSet = courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString();
         LOGGER.info("[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
