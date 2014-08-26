@@ -69,13 +69,12 @@ public class CourseController extends AbstractController{
         } 
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
         //课程曝光次数
-        List<Integer> shine = null;
-        if (pageViewVo.getData() != null) {
-            shine = new ArrayList<>();
+        if (courseVo.getIdSet() == null && pageViewVo.getData() != null) {
+            String shine = "";
             for(CourseVo c : pageViewVo.getData()) {
-                shine.add(courseVo.getId());
+                shine = shine + c.getId() + ",";
             }
-            LOGGER.info("[shine]" + shine.toString());
+            LOGGER.info("[shine]" + shine);
         }
         LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString() + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
