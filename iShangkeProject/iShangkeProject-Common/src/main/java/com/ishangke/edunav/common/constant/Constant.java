@@ -100,7 +100,8 @@ public class Constant {
     public static final int BOOKINGSTATUSONLINECASHBACKED = 19;
     public static final int BOOKINGSTATUSONLINEPAYMENTEXPIRED = 20;
     public static final int BOOKINGSTATUSONLINEPAYMENFAILED = 21;
-    public static final int BOOKINGSTATUSONLINEPAYMENTSUCCEEDED = 22;
+    //根本就没有这个状态
+//    public static final int BOOKINGSTATUSONLINEPAYMENTSUCCEEDED = 22;
     public static final int BOOKINGSTATUSOFFLINENOPAYED = 23;
     public static final int BOOKINGSTATUSOFFLINECASHBACKED = 24;
 
@@ -200,4 +201,8 @@ public class Constant {
     public static final int ORDEROPTIONCREATE = 0;
     public static final int ORDEROPTIONPAY = 1;
     public static final int ORDEROPTIONPAYSUCCESS = 2;
+    
+    //credit
+    public static final Double CREDITDEFAULTADD = 50.0;
+    public static final int CREDITOPERATEBOOKINGSUCCESS = 0;
 }
