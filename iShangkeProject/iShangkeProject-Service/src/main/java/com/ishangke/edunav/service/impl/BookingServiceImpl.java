@@ -135,7 +135,12 @@ public class BookingServiceImpl implements BookingService.Iface {
                 throw new NoPermissionException();
             }
             paginationBo = PageUtil.getPage(paginationBo);
-            List<BookingHistoryBo> data = bookingManager.queryHistory(bookingHistoryBo, userBo, paginationBo);
+            List<BookingHistoryBo> data = null;
+            if (bookingHistoryBo.getBookingId() > 0) {
+                data = bookingManager.queryHistory(bookingHistoryBo, userBo, paginationBo);
+            } else {
+                data = bookingManager.queryHistoryByBookingId(bookingHistoryBo, userBo, paginationBo);
+            }
             int total = bookingManager.queryHistoryTotal(bookingHistoryBo, userBo);
             BookingHistoryPageViewBo pageView = new BookingHistoryPageViewBo();
             pageView.setStart(paginationBo.getOffset());
