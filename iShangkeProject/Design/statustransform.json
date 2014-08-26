@@ -838,14 +838,7 @@
                         {
                             "name": "onlineEnrolled",
                             "statusCode": 18,
-                            "operations": [
-                                {
-                                    "name": "onlineCashback",
-                                    "operateCode": 22,
-                                    "nextStatus": 19,
-                                    "toDos": []
-                                }
-                            ]
+                            "operations": []
                         },
                         {
                             "name": "onlineCashbacked",

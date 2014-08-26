@@ -29,6 +29,8 @@ import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CreditEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CreditHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
@@ -38,6 +40,8 @@ import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
+import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
+import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
@@ -93,6 +97,12 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private OrderHistoryEntityExtMapper orderHistoryMapper;
+
+    @Autowired
+    private CreditEntityExtMapper creditMapper;
+
+    @Autowired
+    private CreditHistoryEntityExtMapper creditHistoryMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
@@ -245,7 +255,7 @@ public class BookingManagerImpl implements BookingManager {
         // booking订单号 ISK + booking create time + booking id
         bookingEntity.setReference(Constant.ORDERPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + bookingEntity.getId());
         bookingMapper.update(bookingEntity);
-        
+
         if (result > 0) {
             bookingBo.setId(bookingEntity.getId());
             BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
@@ -574,6 +584,23 @@ public class BookingManagerImpl implements BookingManager {
             booking.setActionList(actions);
 
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
+
+            // 积分 每完成一个booking 用户将会得到500积分
+            if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
+                CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
+                Double c = credit.getCredit() + Constant.CREDITDEFAULTADD;
+                credit.setCredit(c);
+                credit.setLastModifyTime(DateUtility.getCurTimeInstance());
+                creditMapper.update(credit);
+                CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
+                creditHistory.setUserId(bookingEntityExt.getUserId());
+                creditHistory.setCharge(Constant.CREDITDEFAULTADD);
+                creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
+                creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
+                creditHistoryMapper.add(creditHistory);
+            }
+
             return booking;
 
         } else if (Constant.ROLEADMIN.equals(roleName)) {
@@ -613,6 +640,23 @@ public class BookingManagerImpl implements BookingManager {
                 throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
+
+            // 积分 每完成一个booking 用户将会得到500积分
+            if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
+                CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
+                Double c = credit.getCredit() + Constant.CREDITDEFAULTADD;
+                credit.setCredit(c);
+                credit.setLastModifyTime(DateUtility.getCurTimeInstance());
+                creditMapper.update(credit);
+                CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
+                creditHistory.setUserId(bookingEntityExt.getUserId());
+                creditHistory.setCharge(Constant.CREDITDEFAULTADD);
+                creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
+                creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
+                creditHistoryMapper.add(creditHistory);
+            }
+
             return booking;
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 超级管理员可以进行任何操作
@@ -660,6 +704,23 @@ public class BookingManagerImpl implements BookingManager {
                 throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
+
+            // 积分 每完成一个booking 用户将会得到500积分
+            if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
+                CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
+                Double c = credit.getCredit() + Constant.CREDITDEFAULTADD;
+                credit.setCredit(c);
+                credit.setLastModifyTime(DateUtility.getCurTimeInstance());
+                creditMapper.update(credit);
+                CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
+                creditHistory.setUserId(bookingEntityExt.getUserId());
+                creditHistory.setCharge(Constant.CREDITDEFAULTADD);
+                creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
+                creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
+                creditHistoryMapper.add(creditHistory);
+            }
+
             return responseBo;
         }
         return null;
