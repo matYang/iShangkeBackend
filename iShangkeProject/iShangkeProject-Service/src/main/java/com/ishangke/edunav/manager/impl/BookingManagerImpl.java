@@ -734,13 +734,15 @@ public class BookingManagerImpl implements BookingManager {
         if (bookingEntityExt == null) {
             throw new ManagerException("对不起，无法找到对应预订");
         }
+        BookingHistoryEntityExt bookingSearch = new BookingHistoryEntityExt();
+        bookingSearch.setBookingId(bookingHistoryBo.getBookingId());
         String roleName = authManager.getRole(userBo.getId());
         if (Constant.ROLEUSER.equals(roleName)) {
             if (IdChecker.notEqual(bookingEntityExt.getUserId(), userBo.getId())) {
                 throw new ManagerException("对不起，您无权查询他人预订历史");
             }
             try {
-                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
+                bookingHistorys = bookingHistoryMapper.list(bookingSearch, PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
                 throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
@@ -766,7 +768,7 @@ public class BookingManagerImpl implements BookingManager {
                 throw new ManagerException("对不起，您无权执行该请求");
             }
             try {
-                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
+                bookingHistorys = bookingHistoryMapper.list(bookingSearch, PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
                 throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
@@ -780,7 +782,7 @@ public class BookingManagerImpl implements BookingManager {
             return convertedList;
         } else if (Constant.ROLEADMIN.equals(roleName) || Constant.ROLESYSTEMADMIN.equals(roleName)) {
             try {
-                bookingHistorys = bookingHistoryMapper.list(BookingHistoryConverter.fromBo(bookingHistoryBo), PaginationConverter.fromBo(paginationBo));
+                bookingHistorys = bookingHistoryMapper.list(bookingSearch, PaginationConverter.fromBo(paginationBo));
             } catch (Exception e) {
                 throw new ManagerException("对不起，预订历史查询失败，请稍后再试");
             }
