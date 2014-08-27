@@ -213,11 +213,13 @@
     PARTNER.LOGO_URL PARTNER_LOGOURL,
     PARTNER.WHOLE_NAME PARTNER_WHOLENAME,
     PARTNER.INST_NAME PARTNER_INSTNAME,
-    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
     PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
-    PARTNER.PARTNER_DISTINCTION
-    PARTNER_PARTNERDISTINCTION,
     PARTNER.RATING PARTNER_RATING
+  </sql>
+  <sql id="Partner_Details_Column_List">
+    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION
   </sql>
   <sql id="Address_Base_Column_List">
     ADDRESS.DETAIL ADDRESS_DETAIL,
@@ -932,6 +934,8 @@
     <include refid="ClassPhoto_Base_Column_List"></include>
     ,
     <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Details_Column_List"></include>
     ,
     <include refid="Address_Base_Column_List"></include>
     ,
