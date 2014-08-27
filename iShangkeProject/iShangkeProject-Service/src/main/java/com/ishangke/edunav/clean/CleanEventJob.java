@@ -10,14 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.common.enums.CouponEnums;
 import com.ishangke.edunav.common.enums.CoursePromotionEnums;
 import com.ishangke.edunav.common.enums.SMSEnums;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CoursePromotionEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
+import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
 import com.ishangke.edunav.manager.async.task.SMSTask;
@@ -25,9 +28,9 @@ import com.ishangke.edunav.manager.async.task.SMSTask;
 //non transactional
 public class CleanEventJob {
     private static final Logger LOGGER = LoggerFactory.getLogger(CleanEventJob.class);
-    
+
     private static Vector<String> panicContactList;
-    
+
     static {
         panicContactList = new Vector<String>();
         panicContactList.add("18013955974");
@@ -38,10 +41,13 @@ public class CleanEventJob {
 
     @Autowired
     BookingEntityExtMapper bookingMapper;
-    
+
     @Autowired
     CoursePromotionEntityExtMapper coursePromotionMapper;
-    
+
+    @Autowired
+    CouponEntityExtMapper couponMapper;
+
     public void clean() {
         LOGGER.info("Clean called at:" + new Date().toString());
 
@@ -53,8 +59,46 @@ public class CleanEventJob {
         cleanCoursePromotion();
         LOGGER.info("Clean:cleanBooking started at:" + new Date().toString());
         cleanBooking();
-
+        LOGGER.info("Clean:cleanCoupon started at:" + new Date().toString());
+        cleanCoupon();
+        
         LOGGER.info("Clean finished at:" + new Date().toString());
+    }
+
+    private void cleanCoupon() {
+        boolean hasError = false;
+        CouponEntityExt coupon = new CouponEntityExt();
+        coupon.setStatus(CouponEnums.Status.USABLE.getCode());
+        coupon.setExpiryTimeEnd(DateUtility.getCurTimeInstance());
+        // 为null的不能删除
+        Calendar c = Calendar.getInstance();
+        // 公元1年1月1号
+        c.set(1, 0, 1, 0, 0, 0);
+        coupon.setExpiryTimeStart(c);
+        try {
+            List<CouponEntityExt> results = couponMapper.list(coupon, getDefaultPagination());
+            if (results != null) {
+                for (CouponEntityExt result : results) {
+                    try {
+                        result.setStatus(CouponEnums.Status.EXPIRED.getCode());
+                        result.setLastModifyTime(DateUtility.getCurTimeInstance());
+                        couponMapper.update(result);
+                    } catch (Exception e) {
+                        hasError = true;
+                        LOGGER.error("[WARNING] [cleanCoupon] suffered single failure with id:" + result.getId(), e);
+                    }
+                }
+            } else {
+                LOGGER.warn("[WARNING] [cleanCoupon] search result is null");
+            }
+        } catch (Exception e) {
+            hasError = true;
+            LOGGER.error("[ERROR] [cleanCoupon] suffered unexpected errors, please check logs carefully", e);
+        }
+        
+        if (hasError) {
+            panic("[ERROR] [cleanCoupon] paniced, please check the logs");
+        }
     }
 
     private void cleanCourse() {
@@ -66,7 +110,7 @@ public class CleanEventJob {
         course.setCutoffDateEnd(DateUtility.getCurTimeInstance());
         // 为null的不能删除
         Calendar c = Calendar.getInstance();
-        //公元1年1月1号
+        // 公元1年1月1号
         c.set(1, 0, 1, 0, 0, 0);
         course.setCutoffDateStart(c);
         try {
@@ -94,7 +138,7 @@ public class CleanEventJob {
             panic("[ERROR] [cleanCourse] paniced, please check the logs");
         }
     }
-    
+
     private void stageCoursePromotion() {
         boolean hasError = false;
 
@@ -161,13 +205,14 @@ public class CleanEventJob {
 
     private void cleanBooking() {
         boolean hasError = false;
-        
-        //find whatever booking established target state 24 hours ago or earlier
+
+        // find whatever booking established target state 24 hours ago or
+        // earlier
         Calendar cal = DateUtility.getCurTimeInstance();
         cal.add(Calendar.DAY_OF_YEAR, -1);
 
         BookingEntityExt booking = new BookingEntityExt();
-        // online bookings that are 
+        // online bookings that are
         booking.setStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
         booking.setLastModifyTimeEnd(cal);
         try {
@@ -198,7 +243,7 @@ public class CleanEventJob {
 
     private void panic(String payload) {
         try {
-            //synchronously sending out panic sms messages
+            // synchronously sending out panic sms messages
             for (String contact : panicContactList) {
                 try {
                     SMSTask panicTask = new SMSTask(SMSEnums.Event.PANIC, contact, payload);
@@ -212,13 +257,13 @@ public class CleanEventJob {
         }
 
     }
-    
+
     private PaginationEntity getDefaultPagination() {
         // pagination that will search all
         PaginationEntity pagination = new PaginationEntity();
         pagination.setOffset(0);
         pagination.setSize(Integer.MAX_VALUE);
-        
+
         return pagination;
     }
 
