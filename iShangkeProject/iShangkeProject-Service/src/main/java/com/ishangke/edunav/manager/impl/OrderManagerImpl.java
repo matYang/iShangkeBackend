@@ -79,7 +79,7 @@ public class OrderManagerImpl implements OrderManager {
             OrderHistoryEntityExt orderHistory = new OrderHistoryEntityExt();
             //记录下支付类型
             orderHistory.setRemark(orderEntity.getType());
-            orderHistory.setOrderId(orderEntity.getId());
+            orderHistory.setOrderId(orderBefore.get(0).getId());
             orderHistory.setUserId(userEntity.getId());
             orderHistory.setOptName(Constant.ORDEROPTIONPAY);
             orderHistory.setCreateTime(DateUtility.getCurTimeInstance());
