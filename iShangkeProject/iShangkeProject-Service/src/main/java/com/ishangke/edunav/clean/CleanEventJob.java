@@ -64,6 +64,11 @@ public class CleanEventJob {
         // online courses that and a cutoff date time <= current time
         course.setStatus(Constant.COURSESTATUSONLINED);
         course.setCutoffDateEnd(DateUtility.getCurTimeInstance());
+        // 为null的不能删除
+        Calendar c = Calendar.getInstance();
+        //公元1年1月1号
+        c.set(1, 0, 1, 0, 0, 0);
+        course.setCutoffDateStart(c);
         try {
             List<CourseEntityExt> results = courseMapper.list(course, getDefaultPagination());
             if (results != null) {
