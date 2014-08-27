@@ -74,6 +74,36 @@ public class CourseTemplateManagerImpl implements CourseTemplateManager {
         if (courseTemplateBo == null || userBo == null) {
             throw new ManagerException("无效请求参数");
         }
+        
+        //零时加上去的
+        if (courseTemplateBo.getDownloadMaterials() != null && courseTemplateBo.getDownloadMaterials().length() > 35) {
+            throw new ManagerException("DownloadMaterials长度不能超过35");
+        }
+        if (courseTemplateBo.getQuestionBank() != null && courseTemplateBo.getQuestionBank().length() > 35) {
+            throw new ManagerException("QuestionBank长度不能超过35");
+        }
+        if (courseTemplateBo.getClassTeacher() != null && courseTemplateBo.getClassTeacher().length() > 35) {
+            throw new ManagerException("ClassTeacher长度不能超过35");
+        }
+        if (courseTemplateBo.getTeachingAndExercise() != null && courseTemplateBo.getTeachingAndExercise().length() > 35) {
+            throw new ManagerException("TeachingAndExercise长度不能超过35");
+        }
+        if (courseTemplateBo.getQuiz() != null && courseTemplateBo.getQuiz().length() > 35) {
+            throw new ManagerException("Quiz长度不能超过35");
+        }
+        if (courseTemplateBo.getPassAgreement() != null && courseTemplateBo.getPassAgreement().length() > 35) {
+            throw new ManagerException("PassAgreement长度不能超过35");
+        }
+        if (courseTemplateBo.getCertification() != null && courseTemplateBo.getCertification().length() > 35) {
+            throw new ManagerException("Certification长度不能超过35");
+        }
+        if (courseTemplateBo.getExtracurricular() != null && courseTemplateBo.getExtracurricular().length() > 35) {
+            throw new ManagerException("Extracurricular长度不能超过35");
+        }
+        if (courseTemplateBo.getBonusService() != null && courseTemplateBo.getBonusService().length() > 35) {
+            throw new ManagerException("BonusService长度不能超过35");
+        }
+        //迟早要删除
 
         // 获取当前用户橘色
         String roleName = authManager.getRole(userBo.getId());
