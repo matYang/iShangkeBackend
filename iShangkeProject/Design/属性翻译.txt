@@ -1,0 +1,202 @@
+用户对应属性:
+Integer id              用户ID
+String name             用户的真实姓名（注，真实姓名非唯一，账号唯一的的用户名是reference字段，小心混淆）
+String password         用户的密码
+String phone            用户的手机号码
+String wechat           用户的微信号码
+String email            用户的邮箱
+String avatarUrl        用户头像图片的url地址
+String invitationCode   用户自己的邀请码（目前无用，因为邀请码即是用户名）
+String appliedInvitationCode    用户在收到邀请而注册时，填写的邀请人的邀请码（其用户名）
+String reference        用户的用户名（唯一，可用于登陆）
+Calendar lastLoginTime      上次登陆时间
+Calendar lastModifyTime     上次用户资料修改时间
+Calendar createTime     用户创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+Integer gender          性别
+Calendar birthday       生日
+String school           学校全称
+Integer majorId         专业对应ID
+Integer schoolId        学校对应ID
+Integer careerId        职业对应ID
+Integer locationId      常住地址对应地区ID
+String major            专业全称
+
+
+
+预约:
+Integer id              预约ID
+Integer userId          所属用户ID
+Integer courseId        对应课程ID
+Integer courseTemplateId    对应课程模板ID
+String reference        识别号
+String name             预约人姓名（可以不同于注册用户真实姓名）
+String phone            预约人电话（可以不同于注册用户电话）
+String email            预约人邮箱（可以不同于注册用户邮箱）
+Integer status          预约的状态
+Calendar scheduledTime  预计报道日期
+Calendar noRefundDate   //无退款日期，目前貌似没有用
+Calendar cashbackDate   //返利日期，目前貌似没有用
+Double price            预约的价格
+Integer type            预约的种类
+String note             备注
+Double cashbackAmount   返利金额
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否被删除
+Integer partnerId       对应合作商ID
+
+预约历史:
+Integer id              预约历史ID
+Integer bookingId       对应的预约ID
+Integer userId          所属用户ID
+Integer optName         操作名称
+String remark           备注
+Integer preStatus       之前的状态
+Integer postStatus      操作之后的状态
+Integer normal          状态改变是否正常
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否被删除
+Integer partnerId       对应合作商ID
+
+
+
+订单:
+Integer id              订单ID
+Integer bookingId       对应的预约ID
+Calendar createTime     创建时间
+String type             订单类型
+Double price            订单金额
+String runingNumber     流水号
+Integer status          订单状态
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否被删除
+String reference        识别号
+String sign             //不确定，貌似是用于支付的
+Calendar confirmedTime  创建时间
+
+订单历史:
+Integer id              订单历史ID
+Integer orderId         对应的订单ID
+Integer userId          所属用户ID
+Integer optName         操作名称
+String remark           备注
+Integer preStatus       之前的状态       //咦这个怎么和bookingHistory那么像
+Integer postStatus      操作之后的状态
+Integer normal          是否正常
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否被删除
+
+
+
+消费券对应属性:
+Integer id              消费券ID
+String code             消费券代码
+Double total            消费券初始总额
+Double balance          消费券剩余金额
+Integer origin          消费券发放原因，例如注册，邀请，或者管理员发放
+Calendar expiryTime     消费券过期时间
+String remark           消费券备注
+Integer userId          消费券所属用户Id
+Calendar lastModifyTime 上次信息更改时间
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+Integer status          消费券当前状态，例如未激活，可用，或者已经过期
+
+消费券历史:
+Integer id              消费券历史ID
+Integer couponId        对应消费券ID 
+Double charge           变动金额
+Calendar lastModifyTime 上次信息更改时间
+Calendar createTime     创建时间
+Integer deleted         是否已被删除
+Integer operation       操作，例如是增值还是减值
+
+
+
+积分:
+Integer id              积分所属用户ID，注意这里是用户ID
+Double credit           积分值
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+
+积分历史:
+Integer id              积分历史ID
+Double charge           金额
+Integer userId          对应用户ID
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时间
+Integer deleted         是否已被删除
+Integer operation       操作，例如增值，减值
+
+
+
+用户账户:
+Integer id              账户所属用户ID，注意这里是用户ID
+Double balance          账户金额
+String realName         账户实名
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时候hi件
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+String accountNumber    账户账号
+
+用户账户历史:
+Integer id              账户历史ID
+Integer userId          所属用户ID
+Integer withdrawId      对应常用提款记录ID
+Double charge           金额
+Integer type            类型
+Calendar createTime     创建时间
+String remark           备注
+Integer deleted         是够已经被删除
+Integer operation       操作
+
+
+
+常用提款账号(Withdraw):
+Integer id              常用提款账号ID
+Integer userId          所属用户ID
+String payeeId          支付对象ID（例如支付宝账号，卡号等）
+String payeeName        支付对象姓名
+Integer type            支付类型
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+
+
+
+
+教师:
+Integer id              教师ID
+Integer partnerId       所属机构ID
+String imgUrl           教师照片url地址
+String name             教师名字
+String intro            教师简介
+Integer popularity      教师热门度（用于排名）
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+
+
+机构图片:
+Integer id              机构图片ID
+Integer partnerId       所属机构ID
+String imgUrl           图片url地址
+String title            图片标题    //暂时无用
+String description      图片简介    //暂时无用
+Calendar lastModifyTime 上次修改时间
+Calendar createTime     创建时间
+Integer enabled         //这是一个神奇的属性
+Integer deleted         是否已被删除
+String snapshotUrl      缩略图地址   //貌似已经弃用？
+
