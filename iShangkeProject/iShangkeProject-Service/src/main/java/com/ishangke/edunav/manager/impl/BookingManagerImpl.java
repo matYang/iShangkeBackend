@@ -293,7 +293,7 @@ public class BookingManagerImpl implements BookingManager {
             contact.setPhone(bookingEntity.getPhone());
             contact.setEmail(bookingEntity.getEmail());
             contactMapper.add(contact);
-        } else {
+        } else if (contacts.size() < 10) { //最多保存10个contacts
             boolean hasContact = false;
             for (ContactEntityExt c : contacts) {
                 if (c.getName().equals(bookingEntity.getName()) && c.getPhone().equals(bookingEntity.getPhone())) {
