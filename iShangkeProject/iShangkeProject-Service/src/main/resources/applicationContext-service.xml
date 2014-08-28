@@ -23,6 +23,7 @@
     <property name="triggers">
       <list>
         <ref bean="cleanEventTrigger"/>
+        <ref bean="cleanCourseTrigger"/>
       </list>
     </property>
   </bean>
@@ -33,6 +34,24 @@
     </property>
     <property name="cronExpression">
       <value>0 15 0 * * ? *</value>
+    </property>
+  </bean>
+  <!-- Quartz 2 configuration, every 15 minutes -->
+  <bean id="cleanCourseTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail">
+      <ref bean="cleanCourse" />
+    </property>
+    <property name="cronExpression">
+      <value>0 */15 * * * ?</value>
+    </property>
+  </bean>
+  <!-- Quartz job configuration -->
+  <bean id="cleanCourse" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject">
+      <ref bean="CleanEventJob" />
+    </property>
+    <property name="targetMethod">
+      <value>cleanCourse</value>
     </property>
   </bean>
   <!-- Quartz job configuration -->

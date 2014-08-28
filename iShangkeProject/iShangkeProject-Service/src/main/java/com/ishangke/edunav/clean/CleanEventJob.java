@@ -55,10 +55,6 @@ public class CleanEventJob {
         cleanCourse();
         LOGGER.info("Clean:stageCoursePromotion started at:" + new Date().toString());
         stageCoursePromotion();
-        LOGGER.info("Clean:cleanCoursePromotion started at:" + new Date().toString());
-        cleanCoursePromotion();
-        LOGGER.info("Clean:cleanBooking started at:" + new Date().toString());
-        cleanBooking();
         LOGGER.info("Clean:cleanCoupon started at:" + new Date().toString());
         cleanCoupon();
         
@@ -69,6 +65,7 @@ public class CleanEventJob {
         boolean hasError = false;
         CouponEntityExt coupon = new CouponEntityExt();
         coupon.setStatus(CouponEnums.Status.USABLE.getCode());
+        // 当前时间已经超过了过期时间 also syaing expiry time <= current time 
         coupon.setExpiryTimeEnd(DateUtility.getCurTimeInstance());
         // 为null的不能删除
         Calendar c = Calendar.getInstance();
@@ -121,6 +118,7 @@ public class CleanEventJob {
                         result.setStatus(Constant.COURSESTATUSOFFLINED);
                         result.setLastModifyTime(DateUtility.getCurTimeInstance());
                         courseMapper.update(result);
+                        LOGGER.info("[INFO] [cleanCourse] offline course " + result.getId());
                     } catch (Throwable t) {
                         hasError = true;
                         LOGGER.error("[WARNING] [cleanCourse] suffered single failure with id:" + result.getId(), t);
@@ -204,12 +202,14 @@ public class CleanEventJob {
     }
 
     private void cleanBooking() {
+        LOGGER.info("Clean:cleanBooking started at:" + new Date().toString());
+        
         boolean hasError = false;
 
         // find whatever booking established target state 24 hours ago or
         // earlier
         Calendar cal = DateUtility.getCurTimeInstance();
-        cal.add(Calendar.DAY_OF_YEAR, -1);
+        cal.add(Calendar.MINUTE, -30);
 
         BookingEntityExt booking = new BookingEntityExt();
         // online bookings that are
@@ -223,6 +223,7 @@ public class CleanEventJob {
                         result.setStatus(Constant.BOOKINGSTATUSONLINECANCELLED);
                         result.setLastModifyTime(DateUtility.getCurTimeInstance());
                         bookingMapper.update(result);
+                        LOGGER.info("[INFO] [cleanBooking] booking " + result.getId() + " exceed");
                     } catch (Throwable t) {
                         hasError = true;
                         LOGGER.error("[WARNING] [cleanBooking] suffered single failure with id:" + result.getId(), t);
@@ -267,4 +268,10 @@ public class CleanEventJob {
         return pagination;
     }
 
+    public static void main(String[] args) {
+        Calendar c = Calendar.getInstance();
+        System.out.println(c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE));
+        c.add(Calendar.MINUTE, -30);
+        System.out.println(c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE));
+    }
 }
