@@ -240,6 +240,8 @@ public class CleanEventJob {
         if (hasError) {
             panic("[ERROR] [cleanBooking] paniced, please check the logs");
         }
+        
+        LOGGER.info("Clean:cleanBooking finished at:" + new Date().toString());
     }
 
     private void panic(String payload) {
