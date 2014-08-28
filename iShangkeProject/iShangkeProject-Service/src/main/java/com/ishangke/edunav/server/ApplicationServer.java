@@ -65,11 +65,7 @@ public class ApplicationServer {
             for (PermissionBo permissionBo : permissionList) {
                 LOGGER.info(String.format("[PermisionCache][Role: %d : %s][Tag: %s][Url: %s]", roleBo.getId(), roleBo.getName(),
                         permissionBo.getTag(), permissionBo.getPath()));
-                cacheManager.set(
-                        String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleBo.getId(),
-                                permissionBo.getTag()), 0, permissionBo);
-                cacheManager.set(String.format(ServiceConstants.CACHE_PARTNER_URL, permissionBo.getPath()), 0,
-                        permissionBo.getTag());
+                cacheManager.set(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleBo.getId(), permissionBo.getTag()), 0, permissionBo.getTag());
                 count++;
             }
         }
