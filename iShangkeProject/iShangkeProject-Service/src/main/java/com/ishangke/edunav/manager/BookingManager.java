@@ -26,6 +26,13 @@ public interface BookingManager {
     BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo);
     
     /**
+     * 匿名用户提交订单
+     * @param bookingBo
+     * @return
+     */
+    BookingBo createBookingByAnonymousUser(BookingBo bookingBo);
+    
+    /**
      * 
      * @param bookingBo
      *              需要被改变状态的booking
