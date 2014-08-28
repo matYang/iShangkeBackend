@@ -166,9 +166,9 @@ public class UserController extends AbstractController{
             return this.handleWebException(new ControllerException("两次输入密码不匹配"), resp);
         }
         //invitation code actually stands for userName, where name is the real name to be filled after registration
-        if (userVo.getInvitationCode() == null || userVo.getInvitationCode().length() == 0) {
-            return this.handleWebException(new ControllerException("用户名不能为空"), resp);
-        }
+//        if (userVo.getInvitationCode() == null || userVo.getInvitationCode().length() == 0) {
+//            return this.handleWebException(new ControllerException("用户名不能为空"), resp);
+//        }
         if (userVo.getAuthCode() == null || userVo.getAuthCode().length() == 0) {
             return this.handleWebException(new ControllerException("验证码不能为空"), resp);
         }
