@@ -224,7 +224,7 @@
                                 {
                                     "name": "onlineQuit",
                                     "operateCode": 8,
-                                    "nextStatus": 15,
+                                    "nextStatus": 14,
                                     "toDos": []
                                 }
                             ]
@@ -1199,7 +1199,7 @@
                                 {
                                     "name": "onlineQuit",
                                     "operateCode": 8,
-                                    "nextStatus": 15,
+                                    "nextStatus": 14,
                                     "toDos": []
                                 }
                             ]

@@ -29,6 +29,9 @@ service BookingService {
      */
     booking.BookingBo createBookingByUser(1: booking.BookingBo bookingBo, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
+    //匿名用户
+    booking.BookingBo createBookingByAnonymousUser(1: booking.BookingBo bookingBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
     /**
      * 
      * @param bookingBo
