@@ -66,6 +66,27 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
+    
+    @Override
+    public BookingBo createBookingByAnonymousUser(BookingBo bookingBo)
+            throws BusinessExceptionBo, TException {
+        try {
+            return bookingManager.createBookingByAnonymousUser(bookingBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEBOOKINGBYUSER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
 
     @Override
     public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String permissionTag) throws BusinessExceptionBo,

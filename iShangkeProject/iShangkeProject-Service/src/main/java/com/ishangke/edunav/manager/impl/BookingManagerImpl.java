@@ -34,6 +34,7 @@ import com.ishangke.edunav.dataaccess.mapper.CreditHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
@@ -43,6 +44,7 @@ import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditEntityExt;
 import com.ishangke.edunav.dataaccess.model.CreditHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CouponManager;
@@ -104,6 +106,9 @@ public class BookingManagerImpl implements BookingManager {
     @Autowired
     private CreditHistoryEntityExtMapper creditHistoryMapper;
 
+    @Autowired
+    private UserEntityExtMapper userMapper;
+
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
             return 0.0;
@@ -119,7 +124,7 @@ public class BookingManagerImpl implements BookingManager {
         try {
             couponResults = couponMapper.list(couponSearch, null);
         } catch (Throwable t) {
-            throw new ManagerException("对不起，可用消费券搜索失败，请稍后再试");
+            throw new ManagerException("对不起，可用返现券搜索失败，请稍后再试");
         }
         if (couponResults == null || couponResults.size() == 0) {
             return 0.0;
@@ -231,7 +236,7 @@ public class BookingManagerImpl implements BookingManager {
             // 只有线下支付支持使用coupon
             double calculatedCachbask = consumeCoupons(bookingBo, userBo);
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
-                bookingBo.setCashbackAmount(calculatedCachbask);
+                bookingEntity.setCashbackAmount(calculatedCachbask);
             }
         } else {
             throw new ManagerException("对不起，预订类型识别错误，请刷新页面或稍后再试");
@@ -293,7 +298,7 @@ public class BookingManagerImpl implements BookingManager {
             contact.setPhone(bookingEntity.getPhone());
             contact.setEmail(bookingEntity.getEmail());
             contactMapper.add(contact);
-        } else if (contacts.size() < 10) { //最多保存10个contacts
+        } else if (contacts.size() < 10) { // 最多保存10个contacts
             boolean hasContact = false;
             for (ContactEntityExt c : contacts) {
                 if (c.getName().equals(bookingEntity.getName()) && c.getPhone().equals(bookingEntity.getPhone())) {
@@ -980,6 +985,88 @@ public class BookingManagerImpl implements BookingManager {
         } else {
             throw new ManagerException("对不起，当前用户无权查询预订");
         }
+    }
+
+    @Override
+    public BookingBo createBookingByAnonymousUser(BookingBo bookingBo) {
+        BookingEntityExt bookingEntity = BookingConverter.fromBo(bookingBo);
+        CourseEntityExt course = courseMapper.getInfoById(bookingEntity.getCourseId());
+        if (bookingEntity.getName() == null || "".equals(bookingEntity.getName())) {
+            throw new ManagerException("请填写姓名");
+        }
+        if (bookingEntity.getPhone() == null || "".equals(bookingEntity.getPhone())) {
+            throw new ManagerException("请填写电话");
+        }
+        // 查询此课程是否属于上架状态
+        if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
+            throw new ManagerException("课程已经被删除或者下架，目前无法接受预订");
+        }
+        if (course.getPrice() != null && !course.getPrice().equals(bookingEntity.getPrice())) {
+            throw new ManagerException("预订价格与课程价格不一致，请刷新页面");
+        }
+        // 设置booking的partner id
+        bookingEntity.setPartnerId(course.getPartnerId());
+        // bookingBo.setPartnerId(course.getPartnerId());
+        // 设置bookingBo中的course template id
+        // 因为我们设计的时候，将course template id也放入了booking中，这里需要注意一下，不然可能会出错
+        bookingEntity.setCourseTemplateId(course.getCourseTemplateId());
+        bookingEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        bookingEntity.setCreateTime((DateUtility.getCurTimeInstance()));
+        UserEntityExt userSearch = new UserEntityExt();
+        userSearch.setPhone(bookingBo.getPhone());
+        UserEntityExt user = userMapper.getByPhone(userSearch);
+        if (user != null) {
+            bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
+            bookingEntity.setUserId(user.getId());
+            // 插入booking
+            int result = 0;
+            try {
+                result = bookingMapper.add(bookingEntity);
+            } catch (Exception e) {
+                throw new ManagerException("对不起，创建预订失败，请稍后再试");
+            }
+            if (result > 0) {
+                bookingBo.setId(bookingEntity.getId());
+                BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
+                bookingHistory.setBookingId(bookingEntity.getId());
+                bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                bookingHistory.setNormal(Constant.BOOKINGNORMAL);
+                bookingHistory.setOptName(Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING);
+                bookingHistory.setPostStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
+                bookingHistory.setPreStatus(Constant.DEFAULTNULL);
+                bookingHistory.setRemark(bookingBo.getNote());
+                bookingHistory.setUserId(user.getId());
+                bookingHistory.setRemark(bookingEntity.getNote());
+                bookingHistoryMapper.add(bookingHistory);
+                // bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
+            }
+            return null;
+        } else {
+            bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
+            //所有的匿名注册的用户都是id1
+            bookingEntity.setUserId(Constant.DEFAULTANONYMOUSUSER);
+            // 插入booking
+            int result = 0;
+            try {
+                result = bookingMapper.add(bookingEntity);
+            } catch (Exception e) {
+                throw new ManagerException("对不起，创建预订失败，请稍后再试");
+            }
+        }
+        // 课程预订数量统计
+        CourseTemplateEntityExt courseTemplate = courseTemplateMapper.getById(course.getCourseTemplateId());
+        if (courseTemplate != null) {
+            int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
+            total = total + 1;
+            courseTemplate.setBookingTotal(total++);
+            courseTemplateMapper.update(courseTemplate);
+        } else {
+            LOGGER.warn(String.format("[create booking]course template for course [%d] is no longer exits", course.getId()));
+        }
+        BookingEntityExt resultBooking = bookingMapper.getById(bookingEntity.getId());
+        BookingBo booking = BookingConverter.toBo(resultBooking);
+        BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(resultBooking.getStatus()), resultBooking, course);
+        return booking;
     }
 
 }

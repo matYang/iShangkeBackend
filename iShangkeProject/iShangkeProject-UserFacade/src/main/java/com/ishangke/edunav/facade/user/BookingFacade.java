@@ -26,7 +26,7 @@ import com.ishangke.edunav.web.exception.ControllerException;
 public class BookingFacade {
     public BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo, String permissionTag) {
         BookingBo result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -41,9 +41,26 @@ public class BookingFacade {
         return result;
     }
 
-   public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String permissionTag) {
+    public BookingBo createBookingByAnonymousUser(BookingBo bookingBo) {
         BookingBo result = null;
-        
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.createBookingByAnonymousUser(bookingBo);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo, String permissionTag) {
+        BookingBo result = null;
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -58,9 +75,9 @@ public class BookingFacade {
         return result;
     }
 
-   public BookingPageViewBo queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+    public BookingPageViewBo queryBooking(BookingBo bookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         BookingPageViewBo result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -75,9 +92,9 @@ public class BookingFacade {
         return result;
     }
 
-   public BookingHistoryPageViewBo queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+    public BookingHistoryPageViewBo queryHistory(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         BookingHistoryPageViewBo result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -92,9 +109,9 @@ public class BookingFacade {
         return result;
     }
 
-   public BookingHistoryPageViewBo queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
+    public BookingHistoryPageViewBo queryHistoryByBookingId(BookingHistoryBo bookingHistoryBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) {
         BookingHistoryPageViewBo result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -109,9 +126,9 @@ public class BookingFacade {
         return result;
     }
 
-   public String changeBookingStatusToPayed(int bookingId, String trade_no) {
+    public String changeBookingStatusToPayed(int bookingId, String trade_no) {
         String result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -126,9 +143,9 @@ public class BookingFacade {
         return result;
     }
 
-   public String verify(String notify_id) {
+    public String verify(String notify_id) {
         String result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -143,9 +160,9 @@ public class BookingFacade {
         return result;
     }
 
-   public String buildFormForGet(String subject, String out_trade_no, String total_fee, String type) {
+    public String buildFormForGet(String subject, String out_trade_no, String total_fee, String type) {
         String result = null;
-        
+
         ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
         try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
@@ -160,54 +177,54 @@ public class BookingFacade {
         return result;
     }
 
-   public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo, String permissionTag) {
-       OrderBo result = null;
-       
-       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+    public OrderBo createOrderByUser(OrderBo orderBo, UserBo userBo, String permissionTag) {
+        OrderBo result = null;
 
-       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
-           Client serviceClient = factory.getServiceClient();
-           result = serviceClient.createOrderByUser(orderBo, userBo, PermissionCache.getTag(permissionTag));
-       } catch (BusinessExceptionBo e) {
-           e.printStackTrace();
-           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
-       } catch (TException e) {
-           e.printStackTrace();
-       }
-       return result;
-   }
-   
-   public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo, String permissionTag) {
-       OrderBo result = null;
-       
-       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
 
-       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
-           Client serviceClient = factory.getServiceClient();
-           result = serviceClient.queryOrderById(orderBo, userBo, PermissionCache.getTag(permissionTag));
-       } catch (BusinessExceptionBo e) {
-           e.printStackTrace();
-           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
-       } catch (TException e) {
-           e.printStackTrace();
-       }
-       return result;
-   }
-   
-   public BookingBo queryBookingById(int id, UserBo userBo, String permissionTag) {
-       BookingBo result = null;
-       
-       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.createOrderByUser(orderBo, userBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
-       try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
-           Client serviceClient = factory.getServiceClient();
-           result = serviceClient.queryBookingById(id, userBo, PermissionCache.getTag(permissionTag));
-       } catch (BusinessExceptionBo e) {
-           e.printStackTrace();
-           throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
-       } catch (TException e) {
-           e.printStackTrace();
-       }
-       return result;
-   }
+    public OrderBo queryOrderById(OrderBo orderBo, UserBo userBo, String permissionTag) {
+        OrderBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryOrderById(orderBo, userBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public BookingBo queryBookingById(int id, UserBo userBo, String permissionTag) {
+        BookingBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryBookingById(id, userBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
