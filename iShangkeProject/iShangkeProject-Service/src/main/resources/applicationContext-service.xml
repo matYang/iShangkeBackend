@@ -23,7 +23,7 @@
     <property name="triggers">
       <list>
         <ref bean="cleanEventTrigger"/>
-        <ref bean="cleanCourseTrigger"/>
+        <ref bean="cleanBookingTrigger"/>
       </list>
     </property>
   </bean>
@@ -39,7 +39,7 @@
   <!-- Quartz 2 configuration, every 15 minutes -->
   <bean id="cleanBookingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail">
-      <ref bean=cleanBooking />
+      <ref bean="cleanBooking" />
     </property>
     <property name="cronExpression">
       <value>0 */15 * * * ?</value>
