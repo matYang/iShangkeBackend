@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.PermissionBo;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PermissionEntityExtMapper;
@@ -102,8 +103,28 @@ public class PermissionManagerImpl implements PermissionManager {
 
     @Override
     public boolean hasPermissionByRole(int roleId, String permissionTag) {
-        return cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId,
-                resolvePermissionTag(permissionTag))) != null;
+        if (cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId, permissionTag)) == null) {
+            List<PermissionEntityExt> permissionList = permissionMapper.listPermissionByRoleId(roleId);
+            PermissionEntityExt permission = null;
+            for (PermissionEntityExt p : permissionList) {
+                if (p.getTag().equals(permissionTag)) {
+                    permission = p;
+                    break;
+                }
+            }
+            if (permission != null) {
+                cacheManager.set(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId, permissionTag), 0, permissionTag);
+                LOGGER.info(String.format("[has no PermisionCache][Role: %d][Tag: %s]", roleId, permissionTag));
+                return true;
+            } else {
+                cacheManager.set(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId, permissionTag), Constant.STATUSTRANSFORMEXPIRETIME, "");
+                return false;
+            }
+        } else if ("".equals(cacheManager.get(String.format(ServiceConstants.CACHE_PARTNER_ROLE_PERMISSION, roleId, permissionTag)))) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override

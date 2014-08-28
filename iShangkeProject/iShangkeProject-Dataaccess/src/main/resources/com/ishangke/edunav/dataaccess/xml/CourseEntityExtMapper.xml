@@ -181,21 +181,18 @@
     COURSE.TEACHING_MATERIAL_FEE COURSE_TEACHINGMATERIALFEE,
     COURSE.DOWNLOAD_MATERIALS COURSE_DOWNLOADMATERIALS,
     COURSE.BONUS_SERVICE COURSE_BONUSSERVICE,
-    COURSE.ASSIGNMENTS
-    COURSE_ASSIGNMENTS,
+    COURSE.ASSIGNMENTS COURSE_ASSIGNMENTS,
     COURSE.TRAIL COURSE_TRAIL,
     COURSE.QUESTION_SESSION
     COURSE_QUESTIONSESSION,
     COURSE.TEACHING_AND_EXERCISE COURSE_TEACHINGANDEXERCISE,
     COURSE.CLASS_TEACHER
     COURSE_CLASSTEACHER,
-    COURSE.GOAL
-    COURSE_GOAL,
+    COURSE.GOAL COURSE_GOAL,
     COURSE.OUTLINE COURSE_OUTLINE,
     COURSE.EXTRACURRICULAR
     COURSE_EXTRACURRICULAR,
-    COURSE.PASS_AGREEMENT
-    COURSE_PASSAGREEMENT,
+    COURSE.PASS_AGREEMENT COURSE_PASSAGREEMENT,
     COURSE.QUALITY_ASSURANCE COURSE_QUALITYASSURANCE,
     COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
     COURSE.TEACHING_MATERIAL_INTRO
@@ -204,12 +201,10 @@
     COURSE.STUDY_DAYS COURSE_STUDYDAYS,
     COURSE.HIGH_SCORE_REWARD
     COURSE_HIGHSCOREREWARD,
-    COURSE.PREREQUEST
-    COURSE_PREREQUEST,
+    COURSE.PREREQUEST COURSE_PREREQUEST,
     COURSE.OPEN_COURSE_REQUIREMENT
     COURSE_OPENCOURSEREQUIREMENT,
-    COURSE.CERTIFICATION
-    COURSE_CERTIFICATION,
+    COURSE.CERTIFICATION COURSE_CERTIFICATION,
     COURSE.QUIZ COURSE_QUIZ,
     COURSE.COURSE_INTRO
     COURSE_COURSEINTRO
@@ -218,11 +213,13 @@
     PARTNER.LOGO_URL PARTNER_LOGOURL,
     PARTNER.WHOLE_NAME PARTNER_WHOLENAME,
     PARTNER.INST_NAME PARTNER_INSTNAME,
-    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
     PARTNER.PARTNER_QUALIFICATION PARTNER_PARTNERQUALIFICATION,
-    PARTNER.PARTNER_DISTINCTION
-    PARTNER_PARTNERDISTINCTION,
     PARTNER.RATING PARTNER_RATING
+  </sql>
+  <sql id="Partner_Details_Column_List">
+    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION
   </sql>
   <sql id="Address_Base_Column_List">
     ADDRESS.DETAIL ADDRESS_DETAIL,
@@ -316,8 +313,12 @@
       <if test="addressId != null and addressId != 0">
         ADDRESS_ID,
       </if>
-      PRICE,
-      ORIGINAL_PRICE,
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="originalPrice != null">
+        ORIGINAL_PRICE,
+      </if>
       <if test="cashback != null">
         CASHBACK,
       </if>
@@ -510,8 +511,12 @@
       <if test="addressId != null and addressId != 0">
         #{addressId,jdbcType=INTEGER},
       </if>
-      #{price,jdbcType=DOUBLE},
-      #{originalPrice,jdbcType=DOUBLE},
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DOUBLE},
+      </if>
       <if test="cashback != null">
         #{cashback,jdbcType=DOUBLE},
       </if>
@@ -929,6 +934,8 @@
     <include refid="ClassPhoto_Base_Column_List"></include>
     ,
     <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Details_Column_List"></include>
     ,
     <include refid="Address_Base_Column_List"></include>
     ,
@@ -1414,8 +1421,7 @@
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
       <foreach collection="page.orderByEntities" item="listItem" separator=",">
-        COURSE.${listItem.columnKey} is null,
-        COURSE.${listItem.columnKey}
+        COURSE.${listItem.columnKey} is null, COURSE.${listItem.columnKey}
         ${listItem.order}
       </foreach>
     </if>

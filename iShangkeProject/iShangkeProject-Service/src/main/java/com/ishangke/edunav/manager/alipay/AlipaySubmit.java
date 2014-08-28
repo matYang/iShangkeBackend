@@ -100,6 +100,6 @@ public class AlipaySubmit {
     }
     
     public static void main(String[] args) throws UnsupportedEncodingException {
-        System.out.println(AlipaySubmit.buildFormForGet("1221", "好 啊", "2.0", ""));
+        System.out.println(AlipaySubmit.buildFormForGet("12213673", "好 啊", "2.0", "ICBC-DEBIT"));
     }
 }

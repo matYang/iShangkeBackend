@@ -161,6 +161,8 @@ public class Constant {
         BOOKINGOPERATEMAP.put("offlineCashback", 23);
     }
     
+    public static int DEFAULTANONYMOUSUSER = 1;
+    
     //班级类型
     public static int COURSETYPEONEBYONE = 0;
     public static int COURSETYPESMALL = 1;
