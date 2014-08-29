@@ -913,4 +913,10 @@ public class UserManagerImpl implements UserManager {
         }
         return convertedResults;
     }
+    
+    public static void main(String[] args) {
+        Calendar expiry = DateUtility.getCurTimeInstance();
+        expiry.add(Calendar.YEAR, 1);
+        System.out.println(expiry.get(Calendar.YEAR) + ":" + (expiry.get(Calendar.MONTH) + 1) + ":" + expiry.get(Calendar.DAY_OF_MONTH) + ":" + expiry.get(Calendar.HOUR_OF_DAY));
+    }
 }
