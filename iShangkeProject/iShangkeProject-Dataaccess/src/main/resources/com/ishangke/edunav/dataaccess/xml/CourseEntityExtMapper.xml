@@ -1057,6 +1057,7 @@
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           <include refid="Course_Details_Column_List"></include>,
+          <include refid="Partner_Details_Column_List"></include>,
         </if>
       </if>
     </if>
