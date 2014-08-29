@@ -146,7 +146,14 @@
                         {
                             "name": "offlineEnrolled",
                             "statusCode": 10,
-                            "operations": []
+                            "operations": [
+                                {
+                                    "name": "offlineCashback",
+                                    "operateCode": 23,
+                                    "nextStatus": 24,
+                                    "toDos": []
+                                }
+                            ]
                         },
                         {
                             "name": "onlinePendingPayment",
@@ -232,14 +239,7 @@
                         {
                             "name": "onlineEnrolled",
                             "statusCode": 18,
-                            "operations": [
-                                {
-                                    "name": "onlineCashback",
-                                    "operateCode": 22,
-                                    "nextStatus": 19,
-                                    "toDos": []
-                                }
-                            ]
+                            "operations": []
                         },
                         {
                             "name": "onlineCashbacked",
@@ -791,7 +791,14 @@
                         {
                             "name": "offlineEnrolled",
                             "statusCode": 10,
-                            "operations": []
+                            "operations": [
+                                {
+                                    "name": "offlineCashback",
+                                    "operateCode": 23,
+                                    "nextStatus": 24,
+                                    "toDos": []
+                                }
+                            ]
                         },
                         {
                             "name": "onlinePendingPayment",
