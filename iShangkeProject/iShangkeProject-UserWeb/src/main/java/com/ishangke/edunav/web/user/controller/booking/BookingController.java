@@ -56,7 +56,14 @@ public class BookingController extends AbstractController {
         int curId = currentUser.getId();
         boolean loggedIn = curId > 0;
         if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+            BookingBo anonymousBo = null; 
+            try {
+                anonymousBo = bookingFacade.createBookingByAnonymousUser(BookingConverter.fromModel(booking));
+            } catch (ControllerException c) {
+                return this.handleWebException(c, resp);
+            }
+            BookingVo anonymousVo = BookingConverter.toModel(anonymousBo);
+            return anonymousVo;
         }
 
         booking.setUserId(curId);
