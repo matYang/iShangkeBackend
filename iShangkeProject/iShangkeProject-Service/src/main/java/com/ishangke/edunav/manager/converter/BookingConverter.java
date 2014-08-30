@@ -16,6 +16,11 @@ public class BookingConverter {
         } else {
             bookingBo.setCashbackAmount(Constant.DEFAULTNULL);
         }
+        if (e.getRealCashbackAmount() != null) {
+            bookingBo.setRealCashbackAmount(e.getRealCashbackAmount());
+        } else {
+            bookingBo.setRealCashbackAmount(Constant.DEFAULTNULL);
+        }
         if (e.getCashbackAmountEnd() != null) {
             bookingBo.setCashbackAmountEnd(e.getCashbackAmountEnd());
         } else {
@@ -148,6 +153,9 @@ public class BookingConverter {
         BookingEntityExt bookingEntityExt = new BookingEntityExt();
         if (bo.getCashbackAmount() != Constant.DEFAULTNULL) {
             bookingEntityExt.setCashbackAmount(bo.getCashbackAmount());
+        }
+        if (bo.getRealCashbackAmount() != Constant.DEFAULTNULL) {
+            bookingEntityExt.setRealCashbackAmount(bo.getRealCashbackAmount());
         }
         if (bo.getCashbackAmountEnd() != Constant.DEFAULTNULL) {
             bookingEntityExt.setCashbackAmountEnd(bo.getCashbackAmountEnd());

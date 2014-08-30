@@ -49,6 +49,7 @@ struct BookingBo {
     41: i32 partnerId
     42: set<i32> partnerIdSet
     43: course.CourseBo course
+    44: double realCashbackAmount
 }
 
 /**

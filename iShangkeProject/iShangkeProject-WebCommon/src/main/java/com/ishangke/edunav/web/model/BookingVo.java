@@ -68,6 +68,16 @@ public class BookingVo extends JsonResponse {
 
     private CourseVo course;
     
+    private Double realCashbackAmount;
+    
+    public Double getRealCashbackAmount() {
+        return realCashbackAmount;
+    }
+
+    public void setRealCashbackAmount(Double realCashbackAmount) {
+        this.realCashbackAmount = realCashbackAmount;
+    }
+
     public Integer getPartnerId() {
         return partnerId;
     }
