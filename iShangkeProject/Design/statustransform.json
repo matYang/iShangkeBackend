@@ -109,7 +109,7 @@
                                 {
                                     "name": "offlineStartSchool",
                                     "operateCode": 19,
-                                    "nextStatus": 17,
+                                    "nextStatus": 8,
                                     "toDos": []
                                 },
                                 {
@@ -1098,7 +1098,7 @@
                                 {
                                     "name": "offlineStartSchool",
                                     "operateCode": 19,
-                                    "nextStatus": 17,
+                                    "nextStatus": 8,
                                     "toDos": []
                                 },
                                 {
