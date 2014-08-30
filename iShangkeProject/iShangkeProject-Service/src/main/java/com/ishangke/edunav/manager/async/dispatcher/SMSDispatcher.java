@@ -103,6 +103,15 @@ public class SMSDispatcher {
         SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
+    
+    public static Future<Boolean> sendCreateAnonymousUserSMS(final String cellNum, final String password) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "感谢您对爱上课得支持，根据您的填写信息，爱上课已自动帮您注册账户了哟～。注册手机" + cellNum + ",随机密码为" + password + "。请尽快登录并修改密码～";
+        SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
+        return ExecutorProvider.executeRelay(sms);
+    }
 
     // TODO
     public static Future<Boolean> sendInviterConsolidationSMS(final String cellNum, final int amount) {

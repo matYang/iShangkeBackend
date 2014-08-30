@@ -43,12 +43,14 @@ import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.async.dispatcher.SMSDispatcher;
 import com.ishangke.edunav.manager.common.PasswordCrypto;
+import com.ishangke.edunav.manager.common.SessionConfig.CellVerificationConfig;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
 import com.ishangke.edunav.manager.exception.notfound.UserNotFoundException;
+import com.ishangke.edunav.util.AuthCodeGenerator;
 
 @Component
 public class UserManagerImpl implements UserManager {
@@ -96,8 +98,6 @@ public class UserManagerImpl implements UserManager {
         userEntity.setCreateTime(DateUtility.getCurTimeInstance());
         userEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         userEntity.setLastLoginTime(DateUtility.getCurTimeInstance());
-        userEntity.setEnabled(0);
-        userEntity.setDeleted(0);
         try {
             // hash the password
             userEntity.setPassword(PasswordCrypto.createHash(userEntity.getPassword()));
@@ -211,6 +211,9 @@ public class UserManagerImpl implements UserManager {
                 if (inviterEntity != null) {
                     SMSDispatcher.sendInviteeSMS(userEntity.getPhone(), DefaultValue.COUPONINVITATIONVALUE);
                     SMSDispatcher.sendInviterSMS(inviterEntity.getPhone(), DefaultValue.COUPONINVITATIONVALUE);
+                }
+                if (userBo.getEnabled() == 1) {
+                    SMSDispatcher.sendCreateAnonymousUserSMS(userEntity.getPhone(), userBo.getPassword());
                 }
             }
             return UserConverter.toBo(returnEntity);
@@ -914,9 +917,16 @@ public class UserManagerImpl implements UserManager {
         return convertedResults;
     }
     
+    
+    @Override
+    public UserBo createAnonymousUser(UserBo userBo) {
+        //给用户一个零时密码
+        userBo.setPassword(AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH));
+        UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
+        return resultUser;
+    }
+    
     public static void main(String[] args) {
-        Calendar expiry = DateUtility.getCurTimeInstance();
-        expiry.add(Calendar.YEAR, 1);
-        System.out.println(expiry.get(Calendar.YEAR) + ":" + (expiry.get(Calendar.MONTH) + 1) + ":" + expiry.get(Calendar.DAY_OF_MONTH) + ":" + expiry.get(Calendar.HOUR_OF_DAY));
+        System.out.println(AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH));
     }
 }
