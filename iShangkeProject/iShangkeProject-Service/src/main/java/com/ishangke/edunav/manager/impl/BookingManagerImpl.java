@@ -1045,15 +1045,12 @@ public class BookingManagerImpl implements BookingManager {
                 // bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
             }
         } else {
-            UserBo userBo = null;
+            UserBo userBo = new UserBo();
             userBo.setPhone(bookingBo.getPhone());
             try {
                 userBo = userManager.createAnonymousUser(userBo);
             } catch (Exception e) {
                 throw new ManagerException("创建用户失败");
-            }
-            if (userBo == null) {
-                throw new ManagerException("给目标用户创建账户失败");
             }
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             // 自动注册得用户，booking得enable为1, 方便前端展示
