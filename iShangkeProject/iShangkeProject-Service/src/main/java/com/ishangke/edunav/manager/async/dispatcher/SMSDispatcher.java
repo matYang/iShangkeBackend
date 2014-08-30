@@ -39,7 +39,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您预订的" + course.getInstName() + "课程订单已提交，订单号为" + booking.getReference() + ", 我们将尽量于半小时内通知您确认结果,请您耐心等待~";
+        String payload = "您预订的[" + course.getInstName() + "] " + course.getCourseName() + " 课程订单已提交，订单号为" + booking.getReference() + ", 我们将尽量于半小时内通知您确认结果,请您耐心等待~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGAWAITING, booking.getPhone(), payload);
         return ExecutorProvider.executeRelay(sms);
     }
