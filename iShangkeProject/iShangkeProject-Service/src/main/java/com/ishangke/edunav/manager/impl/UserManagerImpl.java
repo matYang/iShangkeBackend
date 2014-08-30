@@ -237,9 +237,9 @@ public class UserManagerImpl implements UserManager {
         if (userBo.getPhone() == null) {
             throw new ManagerException("请您填写手机号码");
         }
-        if (userBo.getInvitationCode() == null) {
-            throw new ManagerException("请您填写用户名");
-        }
+//        if (userBo.getInvitationCode() == null) {
+//            throw new ManagerException("请您填写用户名");
+//        }
         if (userBo.getPassword() == null) {
             throw new ManagerException("请您填写密码");
         }
