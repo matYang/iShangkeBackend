@@ -922,6 +922,8 @@ public class UserManagerImpl implements UserManager {
     public UserBo createAnonymousUser(UserBo userBo) {
         //给用户一个零时密码
         userBo.setPassword(AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH));
+        //如果是这种形式下创建出来的用户 enabled 为1
+        userBo.setEnabled(1);
         UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
         return resultUser;
     }
