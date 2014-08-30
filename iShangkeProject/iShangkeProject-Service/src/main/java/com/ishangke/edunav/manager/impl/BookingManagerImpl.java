@@ -1040,7 +1040,6 @@ public class BookingManagerImpl implements BookingManager {
                 bookingHistoryMapper.add(bookingHistory);
                 // bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
             }
-            return null;
         } else {
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             //所有的匿名注册的用户都是id1
