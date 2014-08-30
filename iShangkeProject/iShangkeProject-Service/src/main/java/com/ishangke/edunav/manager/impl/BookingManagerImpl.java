@@ -49,6 +49,7 @@ import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CouponManager;
 import com.ishangke.edunav.manager.TransformManager;
+import com.ishangke.edunav.manager.UserManager;
 import com.ishangke.edunav.manager.alipay.AlipayNotify;
 import com.ishangke.edunav.manager.alipay.AlipaySubmit;
 import com.ishangke.edunav.manager.async.dispatcher.BookingNotificationDispatcher;
@@ -108,6 +109,9 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private UserEntityExtMapper userMapper;
+    
+    @Autowired
+    private UserManager userManager;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
@@ -1041,15 +1045,43 @@ public class BookingManagerImpl implements BookingManager {
                 // bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
             }
         } else {
+            UserBo userBo = null;
+            userBo.setPhone(bookingBo.getPhone());
+            try {
+                userBo = userManager.createAnonymousUser(userBo);
+            } catch (Exception e) {
+                throw new ManagerException("创建用户失败");
+            }
+            if (userBo == null) {
+                throw new ManagerException("给目标用户创建账户失败");
+            }
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
-            //所有的匿名注册的用户都是id1
-            bookingEntity.setUserId(Constant.DEFAULTANONYMOUSUSER);
+            // 自动注册得用户，booking得enable为1, 方便前端展示
+            bookingEntity.setEnabled(1);
+            //杠杠创建出来得用户
+            bookingEntity.setUserId(userBo.getId());
             // 插入booking
             int result = 0;
             try {
                 result = bookingMapper.add(bookingEntity);
             } catch (Exception e) {
                 throw new ManagerException("对不起，创建预订失败，请稍后再试");
+            }
+            if (result > 0) {
+                bookingBo.setId(bookingEntity.getId());
+                BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
+                bookingHistory.setBookingId(bookingEntity.getId());
+                bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                bookingHistory.setNormal(Constant.BOOKINGNORMAL);
+                bookingHistory.setOptName(Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING);
+                bookingHistory.setPostStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
+                bookingHistory.setPreStatus(Constant.DEFAULTNULL);
+                bookingHistory.setRemark(bookingBo.getNote());
+                //刚刚创建出来得那个user
+                bookingHistory.setUserId(userBo.getId());
+                bookingHistory.setRemark(bookingEntity.getNote());
+                bookingHistoryMapper.add(bookingHistory);
+                // bookingOpt = Constant.BOOKINGOPERATIONOFFLINESUBMITBOOKING;
             }
         }
         // 课程预订数量统计
