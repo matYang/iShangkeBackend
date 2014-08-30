@@ -109,7 +109,7 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private UserEntityExtMapper userMapper;
-    
+
     @Autowired
     private UserManager userManager;
 
@@ -1029,6 +1029,10 @@ public class BookingManagerImpl implements BookingManager {
             } catch (Exception e) {
                 throw new ManagerException("对不起，创建预订失败，请稍后再试");
             }
+            // 将booking的订单号插入
+            // booking订单号 ISK + booking create time + booking id
+            bookingEntity.setReference(Constant.ORDERPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + bookingEntity.getId());
+            bookingMapper.update(bookingEntity);
             if (result > 0) {
                 bookingBo.setId(bookingEntity.getId());
                 BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
@@ -1055,7 +1059,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             // 自动注册得用户，booking得enable为1, 方便前端展示
             bookingEntity.setEnabled(1);
-            //杠杠创建出来得用户
+            // 杠杠创建出来得用户
             bookingEntity.setUserId(userBo.getId());
             // 插入booking
             int result = 0;
@@ -1074,7 +1078,7 @@ public class BookingManagerImpl implements BookingManager {
                 bookingHistory.setPostStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
                 bookingHistory.setPreStatus(Constant.DEFAULTNULL);
                 bookingHistory.setRemark(bookingBo.getNote());
-                //刚刚创建出来得那个user
+                // 刚刚创建出来得那个user
                 bookingHistory.setUserId(userBo.getId());
                 bookingHistory.setRemark(bookingEntity.getNote());
                 bookingHistoryMapper.add(bookingHistory);
