@@ -133,7 +133,7 @@
                                 {
                                     "name": "offlineEnroll",
                                     "operateCode": 20,
-                                    "nextStatus": 18,
+                                    "nextStatus": 10,
                                     "toDos": []
                                 }
                             ]
@@ -1122,7 +1122,7 @@
                                 {
                                     "name": "offlineEnroll",
                                     "operateCode": 20,
-                                    "nextStatus": 18,
+                                    "nextStatus": 10,
                                     "toDos": []
                                 }
                             ]

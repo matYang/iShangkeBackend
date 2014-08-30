@@ -212,5 +212,7 @@ public interface UserManager {
 
     int queryUserByPartnerIdAndRoleIdTotal(int partnerId, int roleId);
 
+    UserBo createAnonymousUser(UserBo userBo);
+
 
 }
