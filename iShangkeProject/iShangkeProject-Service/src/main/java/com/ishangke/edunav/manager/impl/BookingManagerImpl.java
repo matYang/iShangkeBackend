@@ -240,7 +240,7 @@ public class BookingManagerImpl implements BookingManager {
             // 只有线下支付支持使用coupon
             double calculatedCachbask = consumeCoupons(bookingBo, userBo);
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
-                bookingEntity.setCashbackAmount(calculatedCachbask);
+                bookingEntity.setRealCashbackAmount(calculatedCachbask);
             }
         } else {
             throw new ManagerException("对不起，预订类型识别错误，请刷新页面或稍后再试");

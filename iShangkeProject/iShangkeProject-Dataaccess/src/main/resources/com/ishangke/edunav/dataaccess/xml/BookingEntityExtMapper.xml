@@ -27,6 +27,7 @@
     <result column="BOOKING_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="BOOKING_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="BOOKING_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+    <result column="BOOKING_REALCASHBACKAMOUNT" property="realCashbackAmount" jdbcType="DOUBLE" />
     <collection property="course" ofType="CourseEntityExt">
       <id column="COURSE_ID" property="id" jdbcType="INTEGER" />
       <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
@@ -146,7 +147,8 @@
     BOOKING_ENABLED,
     BOOKING.DELETED
     BOOKING_DELETED,
-    BOOKING.PARTNER_ID BOOKING_PARTNERID
+    BOOKING.PARTNER_ID BOOKING_PARTNERID,
+    BOOKING.REAL_CASHBACK_AMOUNT BOOKING_REALCASHBACKAMOUNT
   </sql>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,

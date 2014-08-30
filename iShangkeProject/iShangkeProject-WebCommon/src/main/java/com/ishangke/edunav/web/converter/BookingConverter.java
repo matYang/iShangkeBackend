@@ -20,6 +20,12 @@ public class BookingConverter {
         } else {
             bookingBo.setCashbackAmount(Constant.DEFAULTNULL);
         }
+        
+        if (vo.getRealCashbackAmount() != null) {
+            bookingBo.setRealCashbackAmount(vo.getRealCashbackAmount());
+        } else {
+            bookingBo.setRealCashbackAmount(Constant.DEFAULTNULL);
+        }
 
         if (vo.getCashbackAmountEnd() != null) {
             bookingBo.setCashbackAmountEnd(vo.getCashbackAmountEnd());
@@ -207,6 +213,9 @@ public class BookingConverter {
         BookingVo bookingVo = new BookingVo();
         if (Constant.DEFAULTNULL != bo.getCashbackAmount()) {
             bookingVo.setCashbackAmount(bo.getCashbackAmount());
+        }
+        if (Constant.DEFAULTNULL != bo.getRealCashbackAmount()) {
+            bookingVo.setRealCashbackAmount(bo.getRealCashbackAmount());
         }
         if (Constant.DEFAULTNULL != bo.getCashbackAmountEnd()) {
             bookingVo.setCashbackAmountEnd(bo.getCashbackAmountEnd());
