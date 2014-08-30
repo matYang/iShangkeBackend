@@ -717,7 +717,7 @@ public class BookingManagerImpl implements BookingManager {
             // 积分 每完成一个booking 用户将会得到500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
-                Double c = credit.getCredit() + Constant.CREDITDEFAULTADD;
+                Double c = credit.getCredit() == null ? 0.0 : credit.getCredit() + Constant.CREDITDEFAULTADD;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);
