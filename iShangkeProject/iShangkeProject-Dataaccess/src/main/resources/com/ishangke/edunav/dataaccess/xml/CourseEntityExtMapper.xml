@@ -988,7 +988,7 @@
     left join
     (select COURSE.ID COURSE_ID,
     <include refid="Reg_Address_Base_Column_List"></include>
-    from COURSE left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
+    from COURSE left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.REG_ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where
     COURSE.DELETED = 0 AND COURSE.ID = #{id}
   </select>
