@@ -1044,6 +1044,8 @@ public class BookingManagerImpl implements BookingManager {
             double calculatedCachbask = consumeCoupons(bookingBo, UserConverter.toBo(user));
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
+            } else {
+                bookingEntity.setRealCashbackAmount(DefaultValue.DOUBLEPRCISIONOFFSET);
             }
             // 插入booking
             int result = 0;
@@ -1090,6 +1092,8 @@ public class BookingManagerImpl implements BookingManager {
             double calculatedCachbask = consumeCoupons(bookingBo, userBo);
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
+            } else {
+                bookingEntity.setRealCashbackAmount(DefaultValue.DOUBLEPRCISIONOFFSET);
             }
             // 插入booking
             int result = 0;
