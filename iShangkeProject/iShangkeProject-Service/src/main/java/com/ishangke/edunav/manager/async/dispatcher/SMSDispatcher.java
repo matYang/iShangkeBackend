@@ -39,7 +39,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您预订的[" + course.getInstName() + "] " + course.getCourseName() + " 课程订单已提交，订单号为" + booking.getReference() + ", 我们将尽量于半小时内通知您确认结果,请您耐心等待~";
+        String payload = "您预订的[" + course.getInstName() + "] " + course.getCourseName() + " 课程订单已提交, 我们将尽量于半小时内通知您确认结果,请您耐心等待~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGAWAITING, booking.getPhone(), payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -53,13 +53,13 @@ public class SMSDispatcher {
         // 有变动 之前的设计 课程中的原价和现价都不可空
         // 现在的业务是可以为空
         if (course.getPrice() != null && course.getOriginalPrice() != null) {
-            payload = "确认：" + booking.getName() + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前完成" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "(原价￥"
-                    + formatter.format(course.getOriginalPrice()) + ", 优惠" + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课订单号才能享受折扣哦~";
+            payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "(原价￥"
+                    + formatter.format(course.getOriginalPrice()) + ", 优惠" + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";
         } else if (course.getPrice() != null) {
-            payload = "确认：" + booking.getName() + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前完成" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "元)；地址："
-                    + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课订单号才能享受折扣哦~";
+            payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "元)；地址："
+                    + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课手机号才能享受折扣哦~";
         } else {
-            payload = "确认：" + booking.getName() + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前完成" + course.getInstName() + "报到，地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课订单号才能享受折扣哦~";
+            payload = "确认：" + booking.getName() + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前完成" + course.getInstName() + "报到，地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";
         }
         SMSTask sms = new SMSTask(Event.USER_BOOKINGCONFIRMED, booking.getPhone(), payload);
         return ExecutorProvider.executeRelay(sms);
@@ -69,7 +69,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "很抱歉，您预订的" + course.getInstName() + "课程由于" + comment + "被拒绝，请前往官网查看其他课程吧~";
+        String payload = "很抱歉，您预订的" + course.getInstName() + "课程由于" + comment + "被拒绝，稍后将有专业课程顾问与您联系，帮助您选择其他课程~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGFAILED, booking.getPhone(), payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -108,7 +108,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "感谢您对爱上课得支持，根据您的填写信息，爱上课已自动帮您注册账户了哟～。注册手机" + cellNum + ",随机密码为" + password + "。请尽快登录并修改密码～";
+        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已免费帮您注册成为会员～。注册手机" + cellNum + ",随机密码为" + password + "。会员账号预订，享受更多折扣";
         SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -118,7 +118,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您邀请的好友已通过爱上课报名课程，您额外获得的" + amount + "元现金已到账，不是券，是现金哦~";
+        String payload = "您邀请的好友已通过爱上课报名课程，您额外获得的" + amount + "元现金红包已到账，不是券，是现金哦，请前往提现！";
         SMSTask sms = new SMSTask(Event.USER_INVITERCONSOLIDATION, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
