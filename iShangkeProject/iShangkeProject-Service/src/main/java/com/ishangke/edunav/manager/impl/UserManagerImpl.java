@@ -925,6 +925,8 @@ public class UserManagerImpl implements UserManager {
         //如果是这种形式下创建出来的用户 enabled 为1
         userBo.setEnabled(1);
         UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
+        //一个很不好的功能 要将密码明文传到前台。。。 后面想办法改正
+        resultUser.setReference(userBo.getPassword());
         return resultUser;
     }
     

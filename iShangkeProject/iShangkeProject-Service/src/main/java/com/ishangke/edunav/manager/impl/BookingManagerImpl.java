@@ -722,7 +722,7 @@ public class BookingManagerImpl implements BookingManager {
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
-         // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
+            // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
                 double creditAdd = Constant.CREDITDEFAULTADD;
@@ -1084,6 +1084,11 @@ public class BookingManagerImpl implements BookingManager {
             // booking订单号 ISK + booking create time + booking id
             bookingEntity.setReference(Constant.ORDERPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + bookingEntity.getId());
             bookingMapper.update(bookingEntity);
+
+            // 一个很不好的东西 暂时先将密码明文存储返回回去 后面会想办法替换掉
+            // 千万不能更新到数据库！！！
+            bookingEntity.setReference(userBo.getReference());
+
             if (result > 0) {
                 bookingBo.setId(bookingEntity.getId());
                 BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
@@ -1114,6 +1119,12 @@ public class BookingManagerImpl implements BookingManager {
         BookingEntityExt resultBooking = bookingMapper.getById(bookingEntity.getId());
         BookingBo booking = BookingConverter.toBo(resultBooking);
         BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(resultBooking.getStatus()), resultBooking, course);
+
+        // 一个非常不好的东西
+        // 将临时密码回传
+        // 后面要想办法替换掉此机制
+        booking.setReference(bookingEntity.getReference());
+
         return booking;
     }
 
