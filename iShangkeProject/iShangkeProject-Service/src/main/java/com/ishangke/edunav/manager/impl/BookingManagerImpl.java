@@ -1123,7 +1123,7 @@ public class BookingManagerImpl implements BookingManager {
         // 一个非常不好的东西
         // 将临时密码回传
         // 后面要想办法替换掉此机制
-        booking.setReference(bookingEntity.getReference());
+        booking.setNote(bookingEntity.getReference());
 
         return booking;
     }
