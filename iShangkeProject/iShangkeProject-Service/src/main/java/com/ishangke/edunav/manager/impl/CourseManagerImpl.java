@@ -312,6 +312,8 @@ public class CourseManagerImpl implements CourseManager {
         if (IdChecker.notEqual(courseCommentBo.getUserId(), userBo.getId())) {
             throw new ManagerException("must crate comment for self");
         }
+        //todo 计算总评分
+        //todo 将总评分保存到course template中
         CourseCommentEntityExt courseCommentEntity = CourseCommentConverter.fromBo(courseCommentBo);
         courseCommentEntity.setCourseTemplateId(courseCommentBo.getCourseTemplateId());
         courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
