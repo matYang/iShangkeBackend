@@ -79,7 +79,7 @@ public class SMSDispatcher {
             return new DefaultSMSFuture();
         }
         DecimalFormat formatter = new DecimalFormat("#.##");
-        String payload = "恭喜您成为爱上课会员，获得" + formatter.format(amount) + "元现金抵扣券已到账，快去官网选课吧~";
+        String payload = "恭喜您成为爱上课会员，获得" + formatter.format(amount) + "元现金抵扣券，快去官网选课吧~";
         SMSTask sms = new SMSTask(Event.USER_REGISTER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -108,7 +108,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已免费帮您注册成为会员～。注册手机" + cellNum + ",随机密码为" + password + "。会员账号预订，享受更多折扣";
+        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已自动帮您注册成为会员～。注册手机" + cellNum + ",随机密码为" + password + "。会员账号预订，享受更多折扣";
         SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
