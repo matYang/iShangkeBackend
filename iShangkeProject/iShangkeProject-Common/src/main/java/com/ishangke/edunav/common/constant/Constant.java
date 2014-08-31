@@ -205,6 +205,6 @@ public class Constant {
     public static final int ORDEROPTIONPAYSUCCESS = 2;
     
     //credit
-    public static final Double CREDITDEFAULTADD = 50.0;
+    public static final Double CREDITDEFAULTADD = 500.0;
     public static final int CREDITOPERATEBOOKINGSUCCESS = 0;
 }
