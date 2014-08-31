@@ -777,14 +777,27 @@ public class UserManagerImpl implements UserManager {
             throw new ManagerException("对不起，更改用户时必须标注用户ID");
         }
         
+        UserEntityExt u = userMapper.getSimpleById(targetUser.getId());
+        if (u.getInvitationCode() != null && !"".equals(u.getInvitationCode())) {
+            targetUserEntity.setInvitationCode(null);
+        }
+        
+        if(targetUser.getInvitationCode() != null) {
+            UserEntityExt us = new UserEntityExt();
+            us.setInvitationCode(targetUser.getInvitationCode());
+            UserEntityExt ur = userMapper.getByInvitationCode(us);
+            if (ur != null) {
+                throw new ManagerException("对不起，此用户名已被他人注册");
+            } else {
+                LOGGER.warn(String.format("[update user]user [%d] change invitation code [%s]", targetUser.getId(), targetUser.getInvitationCode()));
+            }
+        }
         //lets just say there are things that are not meant to be changed
         targetUserEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         targetUserEntity.setPhone(null);
-        targetUserEntity.setInvitationCode(null);
         targetUserEntity.setAppliedInvitationCode(null);
         targetUserEntity.setReference(null);
         targetUserEntity.setCreateTime(null);
-        targetUserEntity.setDeleted(null);
         try {
             userMapper.update(targetUserEntity);
         } catch (Throwable t) {
