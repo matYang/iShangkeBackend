@@ -1068,6 +1068,10 @@ public class BookingManagerImpl implements BookingManager {
             } catch (Exception e) {
                 throw new ManagerException("对不起，创建预订失败，请稍后再试");
             }
+            // 将booking的订单号插入
+            // booking订单号 ISK + booking create time + booking id
+            bookingEntity.setReference(Constant.ORDERPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + bookingEntity.getId());
+            bookingMapper.update(bookingEntity);
             if (result > 0) {
                 bookingBo.setId(bookingEntity.getId());
                 BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
