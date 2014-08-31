@@ -594,16 +594,20 @@ public class BookingManagerImpl implements BookingManager {
 
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
-            // 积分 每完成一个booking 用户将会得到500积分
+            // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
-                Double c = credit.getCredit() + Constant.CREDITDEFAULTADD;
+                double creditAdd = Constant.CREDITDEFAULTADD;
+                if (bookingEntityExt.getPrice() != null && bookingEntityExt.getPrice() > 0) {
+                    creditAdd = bookingEntityExt.getPrice();
+                }
+                Double c = credit.getCredit() + creditAdd;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);
                 CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
                 creditHistory.setUserId(bookingEntityExt.getUserId());
-                creditHistory.setCharge(Constant.CREDITDEFAULTADD);
+                creditHistory.setCharge(creditAdd);
                 creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
                 creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
@@ -650,16 +654,20 @@ public class BookingManagerImpl implements BookingManager {
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
-            // 积分 每完成一个booking 用户将会得到500积分
+            // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
-                Double c = credit.getCredit() + Constant.CREDITDEFAULTADD;
+                double creditAdd = Constant.CREDITDEFAULTADD;
+                if (bookingEntityExt.getPrice() != null && bookingEntityExt.getPrice() > 0) {
+                    creditAdd = bookingEntityExt.getPrice();
+                }
+                Double c = credit.getCredit() + creditAdd;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);
                 CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
                 creditHistory.setUserId(bookingEntityExt.getUserId());
-                creditHistory.setCharge(Constant.CREDITDEFAULTADD);
+                creditHistory.setCharge(creditAdd);
                 creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
                 creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
@@ -714,16 +722,20 @@ public class BookingManagerImpl implements BookingManager {
             }
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
-            // 积分 每完成一个booking 用户将会得到500积分
+         // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
-                Double c = credit.getCredit() == null ? 0.0 : credit.getCredit() + Constant.CREDITDEFAULTADD;
+                double creditAdd = Constant.CREDITDEFAULTADD;
+                if (bookingEntityExt.getPrice() != null && bookingEntityExt.getPrice() > 0) {
+                    creditAdd = bookingEntityExt.getPrice();
+                }
+                Double c = credit.getCredit() + creditAdd;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);
                 CreditHistoryEntityExt creditHistory = new CreditHistoryEntityExt();
                 creditHistory.setUserId(bookingEntityExt.getUserId());
-                creditHistory.setCharge(Constant.CREDITDEFAULTADD);
+                creditHistory.setCharge(creditAdd);
                 creditHistory.setCreateTime(DateUtility.getCurTimeInstance());
                 creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
