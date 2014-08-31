@@ -1040,6 +1040,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntity.setEnabled(0);
             // Use coupons
             // 只有线下支付支持使用coupon
+            bookingBo.setUserId(user.getId());
             double calculatedCachbask = consumeCoupons(bookingBo, UserConverter.toBo(user));
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
@@ -1085,6 +1086,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntity.setUserId(userBo.getId());
             // Use coupons
             // 只有线下支付支持使用coupon
+            bookingBo.setUserId(userBo.getId());
             double calculatedCachbask = consumeCoupons(bookingBo, userBo);
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
