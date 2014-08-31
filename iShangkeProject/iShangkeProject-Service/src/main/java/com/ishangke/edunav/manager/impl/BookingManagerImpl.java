@@ -57,6 +57,7 @@ import com.ishangke.edunav.manager.converter.BookingConverter;
 import com.ishangke.edunav.manager.converter.BookingHistoryConverter;
 import com.ishangke.edunav.manager.converter.CouponConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
+import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.notfound.CourseNotFoundException;
 import com.ishangke.edunav.manager.transform.Operation;
@@ -592,8 +593,6 @@ public class BookingManagerImpl implements BookingManager {
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
 
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
-
             // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
@@ -613,6 +612,8 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
                 creditHistoryMapper.add(creditHistory);
             }
+
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
             return booking;
 
@@ -652,7 +653,6 @@ public class BookingManagerImpl implements BookingManager {
             if (course == null) {
                 throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
             // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
@@ -673,6 +673,8 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
                 creditHistoryMapper.add(creditHistory);
             }
+
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
             return booking;
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
@@ -720,7 +722,6 @@ public class BookingManagerImpl implements BookingManager {
             if (course == null) {
                 throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
-            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
             // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
@@ -741,6 +742,8 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
                 creditHistoryMapper.add(creditHistory);
             }
+
+            BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
             return responseBo;
         }
@@ -1034,6 +1037,13 @@ public class BookingManagerImpl implements BookingManager {
         if (user != null) {
             bookingEntity.setStatus(Constant.BOOKINGSTATUSOFFLINEBOOKED);
             bookingEntity.setUserId(user.getId());
+            bookingEntity.setEnabled(0);
+            // Use coupons
+            // 只有线下支付支持使用coupon
+            double calculatedCachbask = consumeCoupons(bookingBo, UserConverter.toBo(user));
+            if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
+                bookingEntity.setRealCashbackAmount(calculatedCachbask);
+            }
             // 插入booking
             int result = 0;
             try {
@@ -1073,6 +1083,12 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntity.setEnabled(1);
             // 杠杠创建出来得用户
             bookingEntity.setUserId(userBo.getId());
+            // Use coupons
+            // 只有线下支付支持使用coupon
+            double calculatedCachbask = consumeCoupons(bookingBo, userBo);
+            if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
+                bookingEntity.setRealCashbackAmount(calculatedCachbask);
+            }
             // 插入booking
             int result = 0;
             try {
