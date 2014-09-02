@@ -3,6 +3,9 @@
 */.classpath
 **/.classpath
 
+#idea
+.idea/*
+
 # maven
 */target
 */target*
