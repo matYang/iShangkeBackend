@@ -174,21 +174,7 @@ public class UserConverter {
         // userVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         userVo.setMajor(bo.getMajor());
         userVo.setName(bo.getName());
-        if (bo.getPhone() != null) {
-            // 显示的手机号 中间有一段 是 "*"
-            char[] x = bo.getPhone().toCharArray();
-            int l = x.length;
-            String result = "";
-            for (int i = 0; i < l; i++) {
-                if (i < l - 4 && i > l - 9) {
-                    result = result + "*";
-                } else {
-                    result = result + x[i];
-                }
-            }
-            userVo.setPhone(result);
-        }
-
+        userVo.setPhone(bo.getPhone());
         userVo.setReference(bo.getReference());
         userVo.setSchool(bo.getSchool());
         userVo.setWechat(bo.getWechat());
