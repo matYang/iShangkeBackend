@@ -322,6 +322,9 @@
       <if test="cashbackAmount != null">
         CASHBACK_AMOUNT,
       </if>
+      <if test="realCashbackAmount != null">
+        REAL_CASHBACK_AMOUNT,
+      </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME,
       </if>
@@ -380,6 +383,9 @@
       </if>
       <if test="cashbackAmount != null">
         #{cashbackAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="realCashbackAmount != null">
+        #{realCashbackAmount,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         #{lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
@@ -456,6 +462,9 @@
       </if>
       <if test="cashbackAmount != null">
         CASHBACK_AMOUNT = #{cashbackAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="realCashbackAmount != null">
+        REAL_CASHBACK_AMOUNT = #{realCashbackAmount,jdbcType=DOUBLE},
       </if>
       <if test="lastModifyTime != null">
         LAST_MODIFY_TIME =
@@ -668,6 +677,10 @@
           <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
+      
+      <if test="entity.realCashbackAmount != null">
+        AND BOOKING.REAL_CASHBACK_AMOUNT = #{entity.realCashbackAmount,jdbcType=DOUBLE}
+      </if>
 
       <if test="entity.lastModifyTime != null">
         AND BOOKING.LAST_MODIFY_TIME =
@@ -872,6 +885,10 @@
         <if test="entity.cashbackAmountEnd != null">
           <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
+      </if>
+      
+      <if test="entity.realCashbackAmount != null">
+        AND BOOKING.REAL_CASHBACK_AMOUNT = #{entity.realCashbackAmount,jdbcType=DOUBLE}
       </if>
 
       <if test="entity.lastModifyTime != null">
@@ -1080,7 +1097,11 @@
           <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-
+      
+      <if test="entity.realCashbackAmount != null">
+        AND BOOKING.REAL_CASHBACK_AMOUNT = #{entity.realCashbackAmount,jdbcType=DOUBLE}
+      </if>
+      
       <if test="entity.lastModifyTime != null">
         AND BOOKING.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
@@ -1286,7 +1307,11 @@
           <![CDATA[AND BOOKING.CASHBACK_AMOUNT <= #{entity.cashbackAmountEnd,jdbcType=DOUBLE}]]>
         </if>
       </if>
-
+      
+      <if test="entity.realCashbackAmount != null">
+        AND BOOKING.REAL_CASHBACK_AMOUNT = #{entity.realCashbackAmount,jdbcType=DOUBLE}
+      </if>
+      
       <if test="entity.lastModifyTime != null">
         AND BOOKING.LAST_MODIFY_TIME =
         #{entity.lastModifyTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
