@@ -1,4 +1,4 @@
-package com.ishangke.edunav.web.user.controller.course;
+package com.ishangke.edunav.web.mobile.controller.course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,16 +76,13 @@ public class CourseController extends AbstractController{
             }
             LOGGER.info("[shine]" + shine);
         }
-        String category = courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue();
-        String idSet = courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString();
-        LOGGER.info("[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
+        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString() + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
     }
     
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse  queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-        LOGGER.warn("host:" + req.getServerName());
         String permissionTag = this.getUrl(req);
         
         CourseVo courseVo = new CourseVo();
