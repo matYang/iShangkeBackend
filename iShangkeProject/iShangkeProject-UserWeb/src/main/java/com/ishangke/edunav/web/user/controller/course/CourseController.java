@@ -83,6 +83,7 @@ public class CourseController extends AbstractController{
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse  queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.warn("host:" + req.getServerName());
         String permissionTag = this.getUrl(req);
         
         CourseVo courseVo = new CourseVo();
