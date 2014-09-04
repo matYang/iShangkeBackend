@@ -46,6 +46,7 @@ public class CourseController extends AbstractController {
         if (req.getHeader("referer") == null && !req.getHeader("referer").contains("ishangke.cn")) {
             JsonResponse err = new JsonResponse();
             err.setMessage("sorry~ you can not query our course by api directly~");
+            return err;
         }
         String permissionTag = this.getUrl(req);
 
@@ -77,8 +78,9 @@ public class CourseController extends AbstractController {
             }
             LOGGER.info("[shine]" + shine);
         }
-        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString() + ";ColumnKey:" + columnKey + ";Order:"
-                + order);
+        String category = courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue();
+        String idSet = courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString();
+        LOGGER.info("[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
     }
 
@@ -88,6 +90,7 @@ public class CourseController extends AbstractController {
         if (req.getHeader("referer") == null && !req.getHeader("referer").contains("ishangke.cn")) {
             JsonResponse err = new JsonResponse();
             err.setMessage("sorry~ you can not query our course by api directly~");
+            return err;
         }
         String permissionTag = this.getUrl(req);
 
