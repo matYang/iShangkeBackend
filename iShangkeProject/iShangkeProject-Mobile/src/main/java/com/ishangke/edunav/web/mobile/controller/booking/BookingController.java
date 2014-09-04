@@ -33,7 +33,7 @@ import com.ishangke.edunav.web.model.BookingVo;
 import com.ishangke.edunav.web.model.pageview.BookingHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.BookingPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/booking")

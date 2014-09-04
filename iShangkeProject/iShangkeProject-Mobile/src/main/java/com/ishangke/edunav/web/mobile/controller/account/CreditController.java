@@ -27,7 +27,7 @@ import com.ishangke.edunav.web.model.CreditVo;
 import com.ishangke.edunav.web.model.pageview.CreditHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CreditPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/credit")
