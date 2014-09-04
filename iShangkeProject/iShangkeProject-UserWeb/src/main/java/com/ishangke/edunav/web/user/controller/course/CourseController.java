@@ -32,28 +32,25 @@ import com.ishangke.edunav.web.model.pageview.CoursePageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
-
-
 @Controller
 @RequestMapping("/api/v2/course")
-
-public class CourseController extends AbstractController{
+public class CourseController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
-    
+
     @Autowired
     CourseFacade courseFacade;
-    
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse  queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        
+
         CoursePageViewBo pageViewBo = null;
         CoursePageViewVo pageViewVo = null;
         List<OrderByVo> listOrder = new ArrayList<>();
         String columnKey = "";
         String order = "";
-        if (CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()) != null && CourseMap.COURSE_MAP.get(paginationVo.getOrder())!= null) {
+        if (CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()) != null && CourseMap.COURSE_MAP.get(paginationVo.getOrder()) != null) {
             columnKey = paginationVo.getColumnKey();
             order = paginationVo.getOrder();
             listOrder.add(new OrderByVo(CourseMap.COURSE_MAP.get(paginationVo.getColumnKey()), CourseMap.COURSE_MAP.get(paginationVo.getOrder())));
@@ -63,15 +60,15 @@ public class CourseController extends AbstractController{
         paginationVo.setColumnKey(null);
         paginationVo.setOrder(null);
         try {
-            pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);    
+            pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         pageViewVo = CoursePageViewConverter.toModel(pageViewBo);
-        //课程曝光次数
+        // 课程曝光次数
         if (courseVo.getIdSet() == null && pageViewVo.getData() != null) {
             String shine = "";
-            for(CourseVo c : pageViewVo.getData()) {
+            for (CourseVo c : pageViewVo.getData()) {
                 shine = shine + c.getId() + ",";
             }
             LOGGER.info("[shine]" + shine);
@@ -81,26 +78,29 @@ public class CourseController extends AbstractController{
         LOGGER.info("[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
     }
-    
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody JsonResponse  queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody
+    JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+        // 提高通过脚本获取我们数据的门槛
+        if (req.getServerName() == null || !req.getServerName().contains(".ishangke.cn")) {
+            return new JsonResponse();
+        }
         LOGGER.warn("host:" + req.getServerName());
         String permissionTag = this.getUrl(req);
-        
+
         CourseVo courseVo = new CourseVo();
         courseVo.setId(id);
         CourseBo responseBo = null;
         CourseVo responseVo = null;
         try {
-            responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);            
+            responseBo = courseFacade.queryCourseById(CourseConverter.fromModel(courseVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
-        } 
+        }
         responseVo = CourseConverter.toModel(responseBo);
         LOGGER.info("[queryCourseById]:" + id);
         return responseVo;
     }
-    
 
 }
