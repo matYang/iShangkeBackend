@@ -82,11 +82,6 @@ public class CourseController extends AbstractController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-        // 提高通过脚本获取我们数据的门槛
-        if (req.getServerName() == null || !req.getServerName().contains(".ishangke.cn")) {
-            return new JsonResponse();
-        }
-        LOGGER.warn("host:" + req.getServerName());
         String permissionTag = this.getUrl(req);
 
         CourseVo courseVo = new CourseVo();
