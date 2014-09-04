@@ -65,7 +65,7 @@ public class CourseController extends AbstractController {
         paginationVo.setColumnKey(null);
         paginationVo.setOrder(null);
         //每次最多拉去20条course数据 后面再换更好的实现方式
-        if (paginationVo.getStart() == null || paginationVo.getCount() == null) {
+        if (paginationVo.getStart() == null || paginationVo.getCount() == null || (paginationVo.getCount() != null && paginationVo.getCount() > 20)) {
             paginationVo.setStart(0);
             paginationVo.setCount(20);
         }
