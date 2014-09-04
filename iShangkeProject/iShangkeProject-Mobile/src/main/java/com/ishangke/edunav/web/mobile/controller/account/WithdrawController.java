@@ -26,7 +26,7 @@ import com.ishangke.edunav.web.model.WithdrawVo;
 import com.ishangke.edunav.web.model.pageview.WithdrawPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/withdraw")

@@ -25,7 +25,7 @@ import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.converter.OrderConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.OrderVo;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/order")

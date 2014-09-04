@@ -26,7 +26,7 @@ import com.ishangke.edunav.web.model.ContactVo;
 import com.ishangke.edunav.web.model.pageview.ContactPageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/contact")

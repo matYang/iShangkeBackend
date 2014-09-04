@@ -29,7 +29,7 @@ import com.ishangke.edunav.web.model.CouponVo;
 import com.ishangke.edunav.web.model.pageview.CouponHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.CouponPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/coupon")

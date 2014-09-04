@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.facade.user.AlipayFacade;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/alipay/notify_Url")
