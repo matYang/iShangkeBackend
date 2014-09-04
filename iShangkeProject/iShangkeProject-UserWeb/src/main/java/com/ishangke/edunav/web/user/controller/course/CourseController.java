@@ -64,6 +64,11 @@ public class CourseController extends AbstractController {
         paginationVo.setOrderByEntities(listOrder);
         paginationVo.setColumnKey(null);
         paginationVo.setOrder(null);
+        //每次最多拉去20条course数据 后面再换更好的实现方式
+        if (pageViewVo.getStart() == null || pageViewVo.getCount() == null) {
+            pageViewVo.setStart(0);
+            pageViewVo.setCount(20);
+        }
         try {
             pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
