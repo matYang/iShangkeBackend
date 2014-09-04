@@ -50,7 +50,7 @@ import com.ishangke.edunav.web.model.pageview.MajorPageViewVo;
 import com.ishangke.edunav.web.model.pageview.SchoolPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.tree.TreeParser;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/general")

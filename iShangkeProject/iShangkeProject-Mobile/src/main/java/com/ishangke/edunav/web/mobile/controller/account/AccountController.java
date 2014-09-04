@@ -27,7 +27,7 @@ import com.ishangke.edunav.web.model.AccountVo;
 import com.ishangke.edunav.web.model.pageview.AccountHistoryPageViewVo;
 import com.ishangke.edunav.web.model.pageview.AccountPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 @Controller
 @RequestMapping("/api/v2/account")

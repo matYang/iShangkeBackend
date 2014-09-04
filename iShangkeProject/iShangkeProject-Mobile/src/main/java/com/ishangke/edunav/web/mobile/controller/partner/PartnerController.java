@@ -18,7 +18,7 @@ import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.PartnerVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 
 @Controller

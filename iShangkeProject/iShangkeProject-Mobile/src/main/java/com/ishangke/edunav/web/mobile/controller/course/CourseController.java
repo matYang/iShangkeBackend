@@ -30,7 +30,7 @@ import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.UserVo;
 import com.ishangke.edunav.web.model.pageview.CoursePageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.user.controller.AbstractController;
+import com.ishangke.edunav.web.mobile.controller.AbstractController;
 
 
 
