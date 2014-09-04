@@ -43,6 +43,10 @@ public class CourseController extends AbstractController {
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getHeader("referer") == null && !req.getHeader("referer").contains("ishangke.cn")) {
+            JsonResponse err = new JsonResponse();
+            err.setMessage("sorry~ you can not query our course by api directly~");
+        }
         String permissionTag = this.getUrl(req);
 
         CoursePageViewBo pageViewBo = null;
@@ -82,7 +86,10 @@ public class CourseController extends AbstractController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
-        LOGGER.warn("referer:" + req.getHeader("referer"));
+        if (req.getHeader("referer") == null && !req.getHeader("referer").contains("ishangke.cn")) {
+            JsonResponse err = new JsonResponse();
+            err.setMessage("sorry~ you can not query our course by api directly~");
+        }
         String permissionTag = this.getUrl(req);
 
         CourseVo courseVo = new CourseVo();
