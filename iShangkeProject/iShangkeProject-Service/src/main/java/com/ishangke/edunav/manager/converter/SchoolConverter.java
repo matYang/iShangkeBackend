@@ -51,7 +51,9 @@ public class SchoolConverter {
         schoolEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         schoolEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         schoolEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
-        schoolEntityExt.setEnabled(bo.getEnabled());
+        if (bo.getEnabled() != Constant.DEFAULTNULL) {
+            schoolEntityExt.setEnabled(bo.getEnabled());
+        }
         schoolEntityExt.setId(bo.getId());
         schoolEntityExt.setIdSet(bo.getIdSet());
         schoolEntityExt.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));

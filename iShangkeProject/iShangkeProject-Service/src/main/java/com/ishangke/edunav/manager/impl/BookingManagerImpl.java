@@ -284,7 +284,7 @@ public class BookingManagerImpl implements BookingManager {
             if (courseTemplate != null) {
                 int total = courseTemplate.getBookingTotal() == null ? 0 : courseTemplate.getBookingTotal();
                 total = total + 1;
-                courseTemplate.setBookingTotal(total++);
+                courseTemplate.setBookingTotal(total);
                 courseTemplateMapper.update(courseTemplate);
             } else {
                 LOGGER.warn(String.format("[create booking]course template for course [%d] is no longer exits", course.getId()));
