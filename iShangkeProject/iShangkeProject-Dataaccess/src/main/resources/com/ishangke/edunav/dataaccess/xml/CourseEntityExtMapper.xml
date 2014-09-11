@@ -1289,7 +1289,7 @@
           OR COURSE.START_DATE is null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE < #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
           OR COURSE.START_DATE is null)
         </if>
       </if>
@@ -1655,7 +1655,7 @@
           OR COURSE.START_DATE is null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE < #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
           OR COURSE.START_DATE is null)
         </if>
       </if>
@@ -1699,16 +1699,12 @@
         </if>
       </if>
 
-      <if test="entity.cutoffDate != null">
-        AND COURSE.CUTOFF_DATE =
-        #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.cutoffDateEnd != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
