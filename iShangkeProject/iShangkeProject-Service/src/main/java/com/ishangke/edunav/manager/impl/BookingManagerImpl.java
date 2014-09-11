@@ -273,7 +273,7 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setNormal(Constant.BOOKINGNORMAL);
             bookingHistory.setOptName(bookingOpt);
-            bookingHistory.setPostStatus(Constant.BOOKINGSTATUSONLINEPENDINGPAYMENT);
+            bookingHistory.setPostStatus(bookingEntity.getStatus());
             bookingHistory.setPreStatus(Constant.DEFAULTNULL);
             bookingHistory.setRemark(bookingBo.getNote());
             bookingHistory.setUserId(userBo.getId());
