@@ -485,6 +485,8 @@ public class BookingManagerImpl implements BookingManager {
 
     /**
      * 所有的关于booking的状态的转移都是通过此入口实现的 不再提供除创建、删除之外的特定方法
+     * 这个方法写的很不好 很多重复性代码和硬编码 为了赶进度上线 只能先这么写了
+     * 后面如果有机会换掉
      */
     @Override
     public BookingBo transformBookingStatus(BookingBo bookingBo, int operation, UserBo userBo) {
