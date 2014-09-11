@@ -63,6 +63,11 @@ public class SchoolConverter {
         } else {
             schoolBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
         }
+        if (vo.getEnabled() != null) {
+            schoolBo.setEnabled(vo.getEnabled());
+        } else {
+            schoolBo.setEnabled(Constant.DEFAULTNULL);
+        }
         return schoolBo;
     }
 
