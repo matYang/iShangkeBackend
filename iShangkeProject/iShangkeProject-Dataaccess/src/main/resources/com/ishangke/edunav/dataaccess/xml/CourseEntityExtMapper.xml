@@ -1333,16 +1333,13 @@
         </if>
       </if>
 
-      <if test="entity.cutoffDate != null">
-        AND COURSE.CUTOFF_DATE =
-        #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
+      <!-- 因为课程录入的时候就没有写cutoffdate 所以只能使用开课日期作为下线的依据 -->
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.cutoffDateEnd != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
