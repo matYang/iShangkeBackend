@@ -590,7 +590,14 @@ public class BookingManagerImpl implements BookingManager {
             List<ActionBo> actions = transformManager.getActionByRoleName(roleName, Constant.STATUSTRANSFORMBOOKING, op.getNextStatus());
 
             BookingEntityExt resultBooking = bookingMapper.getById(bookingBo.getId());
-            // 因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            
+            // 关于这个note。。。
+            // booking在创建的时候 我们原本的设计是用户可以写一段话 而这段话就保存在note这个属性中
+            // ok 回到transform这个方法 这个方法只会改变数据库中booking的status和lastModifyTime
+            // 在transform这个方法中 用户/admin在改变booking状态的时候 在我们的设计中也是可以输入一段描述 存入booking history中的 
+            // 同时， 这段描述可能会作为短信内容发送给用户！！！
+            // 所以 resultBooking作为BookingNotificationDispatcher.sendNotification中，信息的载体 需要接收传递参数bookingBo中的note
+            // 不过 这次对resultBooking的修改不会保存至resultBooking相应的数据库中
             resultBooking.setNote(bookingBo.getNote());
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
@@ -648,7 +655,13 @@ public class BookingManagerImpl implements BookingManager {
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
 
-            // 因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            // 关于这个note。。。
+            // booking在创建的时候 我们原本的设计是用户可以写一段话 而这段话就保存在note这个属性中
+            // ok 回到transform这个方法 这个方法只会改变数据库中booking的status和lastModifyTime
+            // 在transform这个方法中 用户/admin在改变booking状态的时候 在我们的设计中也是可以输入一段描述 存入booking history中的 
+            // 同时， 这段描述可能会作为短信内容发送给用户！！！
+            // 所以 resultBooking作为BookingNotificationDispatcher.sendNotification中，信息的载体 需要接收传递参数bookingBo中的note
+            // 不过 这次对resultBooking的修改不会保存至resultBooking相应的数据库中
             resultBooking.setNote(bookingBo.getNote());
 
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
@@ -705,8 +718,6 @@ public class BookingManagerImpl implements BookingManager {
             bookingHistory.setPostStatus(op.getNextStatus());
             bookingHistory.setCreateTime(DateUtility.getCurTimeInstance());
             bookingHistory.setPartnerId(bookingEntityExt.getPartnerId());
-            // just for test
-            bookingHistory.setEnabled(0);
             bookingHistoryMapper.add(bookingHistory);
             LOGGER.warn(String.format("[Booking]system admin [%d] [%s] booking status from [%d] to [%d] at" + new Date(), userBo.getId(), op.getName(), preStatus, op.getNextStatus()));
 
@@ -717,7 +728,13 @@ public class BookingManagerImpl implements BookingManager {
             BookingBo responseBo = BookingConverter.toBo(resultBooking);
             responseBo.setActionList(actions);
 
-            // 因为note不会被保存，是临时放入bo中的，所以需要设置一下
+            // 关于这个note。。。
+            // booking在创建的时候 我们原本的设计是用户可以写一段话 而这段话就保存在note这个属性中
+            // ok 回到transform这个方法 这个方法只会改变数据库中booking的status和lastModifyTime
+            // 在transform这个方法中 用户/admin在改变booking状态的时候 在我们的设计中也是可以输入一段描述 存入booking history中的 
+            // 同时， 这段描述可能会作为短信内容发送给用户！！！
+            // 所以 resultBooking作为BookingNotificationDispatcher.sendNotification中，信息的载体 需要接收传递参数bookingBo中的note
+            // 不过 这次对resultBooking的修改不会保存至resultBooking相应的数据库中
             resultBooking.setNote(bookingBo.getNote());
 
             CourseEntityExt course = courseMapper.getInfoById(resultBooking.getCourseId());
