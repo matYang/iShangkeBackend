@@ -75,6 +75,7 @@ public class Constant {
     // 订单类型
     public static final int BOOKINGTYPEONLINE = 0;
     public static final int BOOKINGTYPEOFFLINE = 1;
+    public static final int BOOKINGTYPESPECIALSELLING = 2;
     // todo other type
 
     // 订单状态

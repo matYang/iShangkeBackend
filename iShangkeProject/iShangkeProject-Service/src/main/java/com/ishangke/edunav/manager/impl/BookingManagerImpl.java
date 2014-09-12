@@ -243,6 +243,9 @@ public class BookingManagerImpl implements BookingManager {
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
             }
+        } else if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
+            // 特卖 ToDo
+            bookingOpt = Constant.DEFAULTNULL;
         } else {
             throw new ManagerException("对不起，预订类型识别错误，请刷新页面或稍后再试");
         }
@@ -695,7 +698,6 @@ public class BookingManagerImpl implements BookingManager {
         } else if (Constant.ROLESYSTEMADMIN.equals(roleName)) {
             // 超级管理员可以进行任何操作
             // 系统会将本次操作标记为异常
-            bookingEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
             int preStatus = bookingEntityExt.getStatus();
             List<Operation> allOperation = transformManager.listAll(Constant.STATUSTRANSFORMBOOKING);
             if (allOperation != null) {
