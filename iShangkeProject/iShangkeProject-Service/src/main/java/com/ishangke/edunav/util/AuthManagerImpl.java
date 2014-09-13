@@ -395,6 +395,8 @@ public class AuthManagerImpl implements AuthManager {
                 // 找到之前的发送信息，查看是否可以重新发送
                 if ((DateUtility.getCurTime() - cvRecord.timeStamp) <= CellVerificationConfig.RESENDTHRESHOLD) {
                     throw new ManagerException("连续请求过快");
+                } else {
+                    return cvRecord.authCode;
                 }
             }
             cvRecord = new CellVerificationConfigObj();

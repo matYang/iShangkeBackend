@@ -276,6 +276,45 @@
                             "name": "offlineCashbacked",
                             "statusCode": 24,
                             "operations": []
+                        },
+                        {
+                            "name": "specialPendingPayment",
+                            "statusCode": 25,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialCancelled",
+                            "statusCode": 26,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialPayed",
+                            "statusCode": 27,
+                            "operations": [
+                                {
+                                    "name": "specialConfirm",
+                                    "operateCode": 26,
+                                    "nextStatus": 28,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "specialConfirmed",
+                            "statusCode": 28,
+                            "operations": [
+                                {
+                                    "name": "specialEnroll",
+                                    "operateCode": 27,
+                                    "nextStatus": 29,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "specialEnrolled",
+                            "statusCode": 29,
+                            "operations": []
                         }
                     ]
                 },
@@ -882,6 +921,45 @@
                             "name": "offlineCashbacked",
                             "statusCode": 24,
                             "operations": []
+                        },
+                        {
+                            "name": "specialPendingPayment",
+                            "statusCode": 25,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialCancelled",
+                            "statusCode": 26,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialPayed",
+                            "statusCode": 27,
+                            "operations": [
+                                {
+                                    "name": "specialConfirm",
+                                    "operateCode": 26,
+                                    "nextStatus": 28,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "specialConfirmed",
+                            "statusCode": 28,
+                            "operations": [
+                                {
+                                    "name": "specialEnroll",
+                                    "operateCode": 27,
+                                    "nextStatus": 29,
+                                    "toDos": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "specialEnrolled",
+                            "statusCode": 29,
+                            "operations": []
                         }
                     ]
                 },
@@ -1257,6 +1335,31 @@
                             "name": "offlineCashbacked",
                             "statusCode": 24,
                             "operations": []
+                        },
+                        {
+                            "name": "specialPendingPayment",
+                            "statusCode": 25,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialCancelled",
+                            "statusCode": 26,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialPayed",
+                            "statusCode": 27,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialConfirmed",
+                            "statusCode": 28,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialEnrolled",
+                            "statusCode": 29,
+                            "operations": []
                         }
                     ]
                 },
@@ -1581,6 +1684,31 @@
                             "name": "offlineCashbacked",
                             "statusCode": 24,
                             "operations": []
+                        },
+                        {
+                            "name": "specialPendingPayment",
+                            "statusCode": 25,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialCancelled",
+                            "statusCode": 26,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialPayed",
+                            "statusCode": 27,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialConfirmed",
+                            "statusCode": 28,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialEnrolled",
+                            "statusCode": 29,
+                            "operations": []
                         }
                     ]
                 }
@@ -1717,6 +1845,31 @@
                         {
                             "name": "offlineCashbacked",
                             "statusCode": 24,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialPendingPayment",
+                            "statusCode": 25,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialCancelled",
+                            "statusCode": 26,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialPayed",
+                            "statusCode": 27,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialConfirmed",
+                            "statusCode": 28,
+                            "operations": []
+                        },
+                        {
+                            "name": "specialEnrolled",
+                            "statusCode": 29,
                             "operations": []
                         }
                     ]
