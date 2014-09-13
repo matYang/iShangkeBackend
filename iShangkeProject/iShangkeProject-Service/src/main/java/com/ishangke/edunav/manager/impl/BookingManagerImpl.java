@@ -244,8 +244,10 @@ public class BookingManagerImpl implements BookingManager {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
             }
         } else if (bookingEntity.getType() == Constant.BOOKINGTYPEOFFLINE) {
-            // 特卖 ToDo
-            bookingOpt = Constant.DEFAULTNULL;
+            
+            // 特卖
+            bookingOpt = Constant.SPECIALSUBMITBOOKING;
+            
         } else {
             throw new ManagerException("对不起，预订类型识别错误，请刷新页面或稍后再试");
         }
@@ -1065,9 +1067,7 @@ public class BookingManagerImpl implements BookingManager {
             double calculatedCachbask = consumeCoupons(bookingBo, UserConverter.toBo(user));
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
-            } else {
-                bookingEntity.setRealCashbackAmount(DefaultValue.DOUBLEPRCISIONOFFSET);
-            }
+            } 
             // 插入booking
             int result = 0;
             try {
@@ -1113,9 +1113,7 @@ public class BookingManagerImpl implements BookingManager {
             double calculatedCachbask = consumeCoupons(bookingBo, userBo);
             if (calculatedCachbask > DefaultValue.DOUBLEPRCISIONOFFSET) {
                 bookingEntity.setRealCashbackAmount(calculatedCachbask);
-            } else {
-                bookingEntity.setRealCashbackAmount(DefaultValue.DOUBLEPRCISIONOFFSET);
-            }
+            } 
             // 插入booking
             int result = 0;
             try {
