@@ -23,6 +23,12 @@
                                     "operateCode": 12,
                                     "nextStatus": 1,
                                     "toDos": []
+                                },
+                                {
+                                    "name": "offlineCancel",
+                                    "operateCode": 3,
+                                    "nextStatus": 2,
+                                    "toDos": []
                                 }
                             ]
                         },
