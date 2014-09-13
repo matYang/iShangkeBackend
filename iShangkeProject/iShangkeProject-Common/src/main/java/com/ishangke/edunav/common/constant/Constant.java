@@ -105,6 +105,12 @@ public class Constant {
 //    public static final int BOOKINGSTATUSONLINEPAYMENTSUCCEEDED = 22;
     public static final int BOOKINGSTATUSOFFLINENOPAYED = 23;
     public static final int BOOKINGSTATUSOFFLINECASHBACKED = 24;
+    public static final int  SPECIALPENDINGPAYMENT = 25;
+    public static final int  SPECIALCANCELLED = 26;
+    public static final int  SPECIALPAYED = 27;
+    public static final int  SPECIALCONFIRMED = 28;
+    public static final int  SPECIALENROLLED = 29;
+    
 
     // 订单操作
     public static final int BOOKINGOPERATIONONLINESUBMITBOOKING = 0;
@@ -132,6 +138,9 @@ public class Constant {
     public static final int BOOKINGOPERATIONONLINECASHBACK = 22;
     public static final int BOOKINGOPERATIONOFFLINECASHBACK = 23;
     public static final int BOOKINGOPERATEONLINEPAYSUCCESS = 24;
+    public static final int SPECIALSUBMITBOOKING = 25;
+    public static final int SPECIALCONFIRM = 26;
+    public static final int SPECIALENROLL = 27;
 
     public static Map<String, Integer> BOOKINGOPERATEMAP;
     static {
