@@ -81,6 +81,12 @@
                                     "operateCode": 13,
                                     "nextStatus": 4,
                                     "toDos": []
+                                },
+                                {
+                                    "name": "offlineCancel",
+                                    "operateCode": 3,
+                                    "nextStatus": 2,
+                                    "toDos": []
                                 }
                             ]
                         },
@@ -1069,6 +1075,12 @@
                                     "name": "offlinePartnerDelay",
                                     "operateCode": 13,
                                     "nextStatus": 4,
+                                    "toDos": []
+                                },
+                                {
+                                    "name": "offlineCancel",
+                                    "operateCode": 3,
+                                    "nextStatus": 2,
                                     "toDos": []
                                 }
                             ]
