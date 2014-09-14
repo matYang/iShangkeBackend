@@ -23,6 +23,41 @@ public class AddressVo extends JsonResponse{
     private Long lastModifyTimeEnd;
     private Long createTimeStart;
     private Long createTimeEnd;
+    private Integer  locationId;
+    private Integer  circleId;
+    private String realAddress;
+    private Set<Integer> locationIdSet;
+    private Set<Integer> circleIdSet;
+    public Integer getLocationId() {
+        return locationId;
+    }
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
+    }
+    public Integer getCircleId() {
+        return circleId;
+    }
+    public void setCircleId(Integer circleId) {
+        this.circleId = circleId;
+    }
+    public String getRealAddress() {
+        return realAddress;
+    }
+    public void setRealAddress(String realAddress) {
+        this.realAddress = realAddress;
+    }
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
+    }
+    public Set<Integer> getCircleIdSet() {
+        return circleIdSet;
+    }
+    public void setCircleIdSet(Set<Integer> circleIdSet) {
+        this.circleIdSet = circleIdSet;
+    }
     public Integer getId() {
         return id;
     }

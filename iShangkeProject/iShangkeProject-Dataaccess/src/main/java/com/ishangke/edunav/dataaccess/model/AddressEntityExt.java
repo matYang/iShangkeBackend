@@ -15,6 +15,24 @@ public class AddressEntityExt extends AddressEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private Set<Integer> locationIdSet;
+    private Set<Integer> circleIdSet;
+
+    public Set<Integer> getLocationIdSet() {
+        return locationIdSet;
+    }
+
+    public void setLocationIdSet(Set<Integer> locationIdSet) {
+        this.locationIdSet = locationIdSet;
+    }
+
+    public Set<Integer> getCircleIdSet() {
+        return circleIdSet;
+    }
+
+    public void setCircleIdSet(Set<Integer> circleIdSet) {
+        this.circleIdSet = circleIdSet;
+    }
 
     public Calendar getLastModifyTimeStart() {
         return lastModifyTimeStart;
