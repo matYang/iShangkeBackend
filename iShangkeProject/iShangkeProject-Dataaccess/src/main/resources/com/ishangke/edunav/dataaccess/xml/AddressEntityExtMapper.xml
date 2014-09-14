@@ -12,6 +12,9 @@
     <result column="ADDRESS_CREATETIME" property="createTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
+    <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+    <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+    <result column="ADDRESS_REALADDRESS" property="realAddress" jdbcType="VARCHAR" />
     <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Address_Base_Column_List">
@@ -25,7 +28,10 @@
     ADDRESS_LASTMODIFYTIME,
     ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
-    ADDRESS.DELETED ADDRESS_DELETED
+    ADDRESS.DELETED ADDRESS_DELETED,
+    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
+    ADDRESS.LOCATION_ID ADDRESS_LOCATIONID,
+    ADDRESS.REAL_ADDRESS ADDRESS_REALADDRESS
   </sql>
   <!--add -->
   <insert id="add" parameterType="AddressEntityExt">
@@ -52,6 +58,15 @@
       <if test="enabled != null">
         ENABLED,
       </if>
+      <if test="circleId != null and circleId != 0 ">
+        CIRCLE_ID,
+      </if>
+      <if test="locationId != null and locationId != 0 ">
+        LOCATION_ID,
+      </if>
+      <if test="realAddress != null">
+        REAL_ADDRESS
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="partnerId != null and partnerId != 0">
@@ -74,6 +89,15 @@
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="circleId != null and circleId != 0 ">
+        #{circleId,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null and locationId != 0 ">
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="realAddress != null">
+        #{realAddress,jdbcType=VARCHAR},
       </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -114,6 +138,15 @@
       <if test="enabled != null">
         ENABLED = #{enabled,jdbcType=INTEGER},
       </if>
+      <if test="circleId != null and circleId != 0 ">
+        CIRCLE_ID = #{circleId,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null and locationId != 0 ">
+        LOCATION_ID = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="realAddress != null">
+        REAL_ADDRESS = #{realAddress,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -153,6 +186,30 @@
         </if>
       </if>
 
+      <if test="entity.circleId != null and entity.circleId != 0">
+        AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.circleId == null or entity.circleId == 0">
+        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
+          AND ADDRESS.CIRCLE_ID IN
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.locationId != null and entity.locationId != 0">
+        AND ADDRESS.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.locationId == null or entity.locationId == 0">
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
+          AND ADDRESS.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND ADDRESS.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
@@ -168,6 +225,10 @@
 
       <if test="entity.detail != null and !entity.detail.equals('') ">
         AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.realAddress != null and !entity.realAddress.equals('') ">
+        AND ADDRESS.REAL_ADDRESS LIKE "%"#{entity.realAddress,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lat != null">
@@ -254,6 +315,30 @@
         </if>
       </if>
 
+      <if test="entity.circleId != null and entity.circleId != 0">
+        AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.circleId == null or entity.circleId == 0">
+        <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
+          AND ADDRESS.CIRCLE_ID IN
+          <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
+      <if test="entity.locationId != null and entity.locationId != 0">
+        AND ADDRESS.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.locationId == null or entity.locationId == 0">
+        <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
+          AND ADDRESS.LOCATION_ID IN
+          <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
+        </if>
+      </if>
+
       <if test="entity.partnerId != null and entity.partnerId != 0">
         AND ADDRESS.PARTNER_ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
@@ -269,6 +354,10 @@
 
       <if test="entity.detail != null and !entity.detail.equals('') ">
         AND ADDRESS.DETAIL LIKE "%"#{entity.detail,jdbcType=VARCHAR}"%"
+      </if>
+
+      <if test="entity.realAddress != null and !entity.realAddress.equals('') ">
+        AND ADDRESS.REAL_ADDRESS LIKE "%"#{entity.realAddress,jdbcType=VARCHAR}"%"
       </if>
 
       <if test="entity.lat != null">
