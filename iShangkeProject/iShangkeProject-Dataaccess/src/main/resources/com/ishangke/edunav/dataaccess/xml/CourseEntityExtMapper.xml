@@ -1418,9 +1418,10 @@
           <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      <if test="entity.enabled != null">
+      
+      <!-- <if test="entity.enabled != null">
         AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
-      </if>
+      </if> -->
       
       <if test="entity.enabled == 1">
         GROUP BY COURSE.COURSE_TEMPLATE_ID
@@ -1787,9 +1788,9 @@
           <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      <if test="entity.enabled != null">
+      <!-- <if test="entity.enabled != null">
         AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
-      </if>
+      </if> -->
       <if test="entity.enabled == 1">
         GROUP BY COURSE.COURSE_TEMPLATE_ID
       </if>
