@@ -89,7 +89,7 @@ public class BookingManagerImplTest {
         BookingEntityExt e = bookingMapper.getById(booking.getId());
         System.out.println(e.getStatus());
     }
-    @Test
+    /*@Test
     public void testCashBack1() throws IllegalAccessException{
         cacheManager.del(Constant.ROLEPREFIX + 10);
         BookingEntityExt booking = bookingMapper.getById(6);
@@ -110,5 +110,5 @@ public class BookingManagerImplTest {
         System.out.println("applier after:" + applierAfter.getAccount().getBalance());
         Double appa = applierAfter.getAccount().getBalance();
         //Assert.assertSame("20.0", "20.0");
-    }
+    }*/
 }
