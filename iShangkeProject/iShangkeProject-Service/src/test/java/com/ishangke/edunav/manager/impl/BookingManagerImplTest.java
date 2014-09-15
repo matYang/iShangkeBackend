@@ -14,9 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.commoncontract.model.BookingBo;
+import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
+import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.TransformManager;
@@ -44,6 +48,9 @@ public class BookingManagerImplTest {
     
     @Autowired
     private TransformManager transformManager;
+    
+    @Autowired
+    private AuthManager authManager;
 
     @Test(expected = ManagerException.class)
     public void testTransform() throws IllegalArgumentException, IllegalAccessException {
@@ -81,5 +88,27 @@ public class BookingManagerImplTest {
         }
         BookingEntityExt e = bookingMapper.getById(booking.getId());
         System.out.println(e.getStatus());
+    }
+    @Test
+    public void testCashBack1() throws IllegalAccessException{
+        cacheManager.del(Constant.ROLEPREFIX + 10);
+        BookingEntityExt booking = bookingMapper.getById(6);
+        UserEntityExt applier = userMapper.getById(8);
+        UserEntityExt user = userMapper.getById(9);
+        Double userB = user.getAccount().getBalance();
+        Double appb = applier.getAccount().getBalance();
+        UserEntityExt admin = userMapper.getById(10);
+        BookingBo  bookingBo = BookingConverter.toBo(booking);
+        UserBo applierBo = UserConverter.toBo(applier);
+        UserBo userBo = UserConverter.toBo(user);
+        UserBo adminBo = UserConverter.toBo(admin);
+        System.out.println("admin role:"+authManager.getRole(adminBo.getId()));
+        bookingManager.transformBookingStatus(bookingBo,10,adminBo);
+        UserEntityExt applierAfter = userMapper.getById(8);
+        UserEntityExt userAfter = userMapper.getById(9);
+        System.out.println("user after:" + userAfter.getAccount().getBalance());
+        System.out.println("applier after:" + applierAfter.getAccount().getBalance());
+        Double appa = applierAfter.getAccount().getBalance();
+        //Assert.assertSame("20.0", "20.0");
     }
 }

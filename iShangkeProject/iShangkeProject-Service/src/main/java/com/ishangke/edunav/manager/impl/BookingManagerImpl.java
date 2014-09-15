@@ -23,6 +23,8 @@ import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.mapper.AccountEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.AccountHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.BookingHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.ContactEntityExtMapper;
@@ -35,6 +37,8 @@ import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.OrderHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
+import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
+import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.BookingHistoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ContactEntityExt;
@@ -113,6 +117,12 @@ public class BookingManagerImpl implements BookingManager {
 
     @Autowired
     private UserManager userManager;
+    
+    @Autowired
+    private AccountEntityExtMapper accountMapper;
+    
+    @Autowired
+    private AccountHistoryEntityExtMapper accountHistoryMapper;
 
     private double consumeCoupons(final BookingBo bookingBo, UserBo userBo) {
         if (bookingBo == null || bookingBo.getCashbackAmount() < DefaultValue.DOUBLEPRCISIONOFFSET || IdChecker.isNull(bookingBo.getUserId())) {
@@ -626,6 +636,54 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
                 creditHistoryMapper.add(creditHistory);
             }
+            
+         // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
+            if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
+                // 如果是线下 就返现
+                if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus()) {
+                    AccountEntityExt account = accountMapper.getById(bookingEntityExt.getUserId());
+                    double accountAdd = 0.0;
+                    if (bookingEntityExt.getRealCashbackAmount() != null) {
+                        accountAdd = bookingEntityExt.getRealCashbackAmount();
+                    }
+                    Double balance = account.getBalance() + accountAdd;
+                    account.setBalance(balance);
+                    account.setLastModifyTime(DateUtility.getCurTimeInstance());
+                    accountMapper.update(account);
+                    AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
+                    accountHistory.setUserId(bookingEntityExt.getUserId());
+                    accountHistory.setCharge(accountAdd);
+                    accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                    accountHistory.setOperation(Constant.BOOKINGOPERATIONOFFLINECASHBACK);
+                    accountHistoryMapper.add(accountHistory);
+                }
+                
+                // 如果是第一次预订成功则送给邀请人10元现金奖励
+                BookingEntityExt userOnlineBooking = new BookingEntityExt();
+                BookingEntityExt userOfflineBooking = new BookingEntityExt();
+                userOnlineBooking.setUserId(bookingEntityExt.getUserId());
+                userOfflineBooking.setUserId(bookingEntityExt.getUserId());
+                userOnlineBooking.setStatus(Constant.BOOKINGSTATUSONLINEENROLLED);
+                userOfflineBooking.setStatus(Constant.BOOKINGSTATUSOFFLINECASHBACKED);
+                if ((bookingMapper.getListCount(userOnlineBooking) + bookingMapper.getListCount(userOfflineBooking)) == 1) {
+                    int id = bookingEntityExt.getUserId();
+                    UserEntityExt appliedUserRefer = new UserEntityExt();
+                    if (userMapper.getById(id).getAppliedInvitationCode() != null) {
+                        appliedUserRefer.setInvitationCode(userMapper.getById(id).getAppliedInvitationCode());
+                        UserEntityExt appliedUser = userMapper.getByInvitationCode(appliedUserRefer);
+                        AccountEntityExt appliedAccount = accountMapper.getById(appliedUser.getId());
+                        appliedAccount.setBalance(appliedAccount.getBalance() + 10.0);
+                        appliedAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
+                        accountMapper.update(appliedAccount);
+                        AccountHistoryEntityExt appliedAccountHistory = new AccountHistoryEntityExt();
+                        appliedAccountHistory.setUserId(appliedUser.getId());
+                        appliedAccountHistory.setCharge(10.0);
+                        appliedAccountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                        appliedAccountHistory.setOperation(Constant.BOOKINGOPERATIONCASHREWARD);
+                        accountHistoryMapper.add(appliedAccountHistory);
+                    }
+                }
+            }
 
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
 
@@ -692,6 +750,54 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
                 creditHistoryMapper.add(creditHistory);
+            }
+            
+         // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
+            if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
+                // 如果是线下 就返现
+                if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus()) {
+                    AccountEntityExt account = accountMapper.getById(bookingEntityExt.getUserId());
+                    double accountAdd = 0.0;
+                    if (bookingEntityExt.getRealCashbackAmount() != null) {
+                        accountAdd = bookingEntityExt.getRealCashbackAmount();
+                    }
+                    Double balance = account.getBalance() + accountAdd;
+                    account.setBalance(balance);
+                    account.setLastModifyTime(DateUtility.getCurTimeInstance());
+                    accountMapper.update(account);
+                    AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
+                    accountHistory.setUserId(bookingEntityExt.getUserId());
+                    accountHistory.setCharge(accountAdd);
+                    accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                    accountHistory.setOperation(Constant.BOOKINGOPERATIONOFFLINECASHBACK);
+                    accountHistoryMapper.add(accountHistory);
+                }
+                
+                // 如果是第一次预订成功则送给邀请人10元现金奖励
+                BookingEntityExt userOnlineBooking = new BookingEntityExt();
+                BookingEntityExt userOfflineBooking = new BookingEntityExt();
+                userOnlineBooking.setUserId(bookingEntityExt.getUserId());
+                userOfflineBooking.setUserId(bookingEntityExt.getUserId());
+                userOnlineBooking.setStatus(Constant.BOOKINGSTATUSONLINEENROLLED);
+                userOfflineBooking.setStatus(Constant.BOOKINGSTATUSOFFLINECASHBACKED);
+                if ((bookingMapper.getListCount(userOnlineBooking) + bookingMapper.getListCount(userOfflineBooking)) == 1) {
+                    int id = bookingEntityExt.getUserId();
+                    UserEntityExt appliedUserRefer = new UserEntityExt();
+                    if (userMapper.getById(id).getAppliedInvitationCode() != null) {
+                        appliedUserRefer.setInvitationCode(userMapper.getById(id).getAppliedInvitationCode());
+                        UserEntityExt appliedUser = userMapper.getByInvitationCode(appliedUserRefer);
+                        AccountEntityExt appliedAccount = accountMapper.getById(appliedUser.getId());
+                        appliedAccount.setBalance(appliedAccount.getBalance() + 10.0);
+                        appliedAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
+                        accountMapper.update(appliedAccount);
+                        AccountHistoryEntityExt appliedAccountHistory = new AccountHistoryEntityExt();
+                        appliedAccountHistory.setUserId(appliedUser.getId());
+                        appliedAccountHistory.setCharge(10.0);
+                        appliedAccountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                        appliedAccountHistory.setOperation(Constant.BOOKINGOPERATIONCASHREWARD);
+                        accountHistoryMapper.add(appliedAccountHistory);
+                    }
+                }
             }
 
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
@@ -764,6 +870,54 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistory.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditHistory.setOperation(Constant.CREDITOPERATEBOOKINGSUCCESS);
                 creditHistoryMapper.add(creditHistory);
+            }
+            
+         // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
+            if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
+                // 如果是线下 就返现
+                if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus()) {
+                    AccountEntityExt account = accountMapper.getById(bookingEntityExt.getUserId());
+                    double accountAdd = 0.0;
+                    if (bookingEntityExt.getRealCashbackAmount() != null) {
+                        accountAdd = bookingEntityExt.getRealCashbackAmount();
+                    }
+                    Double balance = account.getBalance() + accountAdd;
+                    account.setBalance(balance);
+                    account.setLastModifyTime(DateUtility.getCurTimeInstance());
+                    accountMapper.update(account);
+                    AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
+                    accountHistory.setUserId(bookingEntityExt.getUserId());
+                    accountHistory.setCharge(accountAdd);
+                    accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                    accountHistory.setOperation(Constant.BOOKINGOPERATIONOFFLINECASHBACK);
+                    accountHistoryMapper.add(accountHistory);
+                }
+                
+                // 如果是第一次预订成功则送给邀请人10元现金奖励
+                BookingEntityExt userOnlineBooking = new BookingEntityExt();
+                BookingEntityExt userOfflineBooking = new BookingEntityExt();
+                userOnlineBooking.setUserId(bookingEntityExt.getUserId());
+                userOfflineBooking.setUserId(bookingEntityExt.getUserId());
+                userOnlineBooking.setStatus(Constant.BOOKINGSTATUSONLINEENROLLED);
+                userOfflineBooking.setStatus(Constant.BOOKINGSTATUSOFFLINECASHBACKED);
+                if ((bookingMapper.getListCount(userOnlineBooking) + bookingMapper.getListCount(userOfflineBooking)) == 1) {
+                    int id = bookingEntityExt.getUserId();
+                    UserEntityExt appliedUserRefer = new UserEntityExt();
+                    if (userMapper.getById(id).getAppliedInvitationCode() != null) {
+                        appliedUserRefer.setInvitationCode(userMapper.getById(id).getAppliedInvitationCode());
+                        UserEntityExt appliedUser = userMapper.getByInvitationCode(appliedUserRefer);
+                        AccountEntityExt appliedAccount = accountMapper.getById(appliedUser.getId());
+                        appliedAccount.setBalance(appliedAccount.getBalance() + 10.0);
+                        appliedAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
+                        accountMapper.update(appliedAccount);
+                        AccountHistoryEntityExt appliedAccountHistory = new AccountHistoryEntityExt();
+                        appliedAccountHistory.setUserId(appliedUser.getId());
+                        appliedAccountHistory.setCharge(10.0);
+                        appliedAccountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                        appliedAccountHistory.setOperation(Constant.BOOKINGOPERATIONCASHREWARD);
+                        accountHistoryMapper.add(appliedAccountHistory);
+                    }
+                }
             }
 
             BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(op.getNextStatus()), resultBooking, course);
