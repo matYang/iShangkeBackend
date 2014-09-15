@@ -138,4 +138,11 @@ public class UserEntityExtTest extends BaseTest {
         System.out.println(r.size());
         System.out.println("ooxx");
     }
+    
+    @Test
+    public void testSchoolGetById(){
+        UserEntityExt user = userEntityExtMapper.getById(1);
+        System.out.println("user school:"+user.getSchoolName());
+        Assert.assertEquals(user.getSchoolName(), null);
+    }
 }

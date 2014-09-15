@@ -114,6 +114,9 @@ public class UserConverter {
         if (e.getCredit() != null) {
             userBo.setCredit(CreditConverter.toBo(e.getCredit()));
         }
+        if(e.getSchoolName() != null){
+            userBo.setSchoolName(e.getSchoolName());
+        }
         return userBo;
     }
 

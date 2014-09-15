@@ -71,6 +71,16 @@ public class UserVo extends JsonResponse {
 
     private Integer roleId;
     
+    private String schoolName;
+    
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
     public Integer getRoleId() {
         return roleId;
     }

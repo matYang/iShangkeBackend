@@ -194,6 +194,7 @@ public class UserConverter {
         }
         userVo.setAccount(AccountConverter.toModel(bo.getAccount()));
         userVo.setCredit(CreditConverter.toModel(bo.getCredit()));
+        userVo.setSchoolName(bo.getSchoolName());
         return userVo;
     }
 

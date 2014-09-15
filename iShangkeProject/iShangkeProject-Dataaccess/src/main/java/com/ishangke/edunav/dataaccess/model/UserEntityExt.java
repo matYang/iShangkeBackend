@@ -24,6 +24,15 @@ public class UserEntityExt extends UserEntity {
     private CreditEntityExt credit;
     
     private Double couponTotal;
+    private String schoolName;
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
 
     public Set<Integer> getMajorIdSet() {
         return majorIdSet;
