@@ -637,7 +637,7 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistoryMapper.add(creditHistory);
             }
             
-         // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
+            // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
             if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 // 如果是线下 就返现
                 if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus()) {
@@ -646,7 +646,11 @@ public class BookingManagerImpl implements BookingManager {
                     if (bookingEntityExt.getRealCashbackAmount() != null) {
                         accountAdd = bookingEntityExt.getRealCashbackAmount();
                     }
-                    Double balance = account.getBalance() + accountAdd;
+                    Double before = 0.0;
+                    if (account.getBalance() != null) {
+                        before = account.getBalance();
+                    }
+                    Double balance = before + accountAdd;
                     account.setBalance(balance);
                     account.setLastModifyTime(DateUtility.getCurTimeInstance());
                     accountMapper.update(account);
@@ -672,7 +676,11 @@ public class BookingManagerImpl implements BookingManager {
                         appliedUserRefer.setInvitationCode(userMapper.getById(id).getAppliedInvitationCode());
                         UserEntityExt appliedUser = userMapper.getByInvitationCode(appliedUserRefer);
                         AccountEntityExt appliedAccount = accountMapper.getById(appliedUser.getId());
-                        appliedAccount.setBalance(appliedAccount.getBalance() + 10.0);
+                        Double appliedBefore = 0.0;
+                        if (appliedAccount.getBalance() != null) {
+                            appliedBefore = appliedAccount.getBalance();
+                        }
+                        appliedAccount.setBalance(appliedBefore + 10.0);
                         appliedAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
                         accountMapper.update(appliedAccount);
                         AccountHistoryEntityExt appliedAccountHistory = new AccountHistoryEntityExt();
@@ -752,7 +760,7 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistoryMapper.add(creditHistory);
             }
             
-         // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
+            // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
             if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 // 如果是线下 就返现
                 if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus()) {
@@ -761,7 +769,11 @@ public class BookingManagerImpl implements BookingManager {
                     if (bookingEntityExt.getRealCashbackAmount() != null) {
                         accountAdd = bookingEntityExt.getRealCashbackAmount();
                     }
-                    Double balance = account.getBalance() + accountAdd;
+                    Double before = 0.0;
+                    if (account.getBalance() != null) {
+                        before = account.getBalance();
+                    }
+                    Double balance = before + accountAdd;
                     account.setBalance(balance);
                     account.setLastModifyTime(DateUtility.getCurTimeInstance());
                     accountMapper.update(account);
@@ -787,7 +799,11 @@ public class BookingManagerImpl implements BookingManager {
                         appliedUserRefer.setInvitationCode(userMapper.getById(id).getAppliedInvitationCode());
                         UserEntityExt appliedUser = userMapper.getByInvitationCode(appliedUserRefer);
                         AccountEntityExt appliedAccount = accountMapper.getById(appliedUser.getId());
-                        appliedAccount.setBalance(appliedAccount.getBalance() + 10.0);
+                        Double appliedBefore = 0.0;
+                        if (appliedAccount.getBalance() != null) {
+                            appliedBefore = appliedAccount.getBalance();
+                        }
+                        appliedAccount.setBalance(appliedBefore + 10.0);
                         appliedAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
                         accountMapper.update(appliedAccount);
                         AccountHistoryEntityExt appliedAccountHistory = new AccountHistoryEntityExt();
@@ -872,7 +888,7 @@ public class BookingManagerImpl implements BookingManager {
                 creditHistoryMapper.add(creditHistory);
             }
             
-         // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
+            // 线下返利 并且如果是第一次预订邀请人会得到10元现金奖励
             if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 // 如果是线下 就返现
                 if (Constant.BOOKINGSTATUSOFFLINECASHBACKED == op.getNextStatus()) {
@@ -881,7 +897,11 @@ public class BookingManagerImpl implements BookingManager {
                     if (bookingEntityExt.getRealCashbackAmount() != null) {
                         accountAdd = bookingEntityExt.getRealCashbackAmount();
                     }
-                    Double balance = account.getBalance() + accountAdd;
+                    Double before = 0.0;
+                    if (account.getBalance() != null) {
+                        before = account.getBalance();
+                    }
+                    Double balance = before + accountAdd;
                     account.setBalance(balance);
                     account.setLastModifyTime(DateUtility.getCurTimeInstance());
                     accountMapper.update(account);
@@ -907,7 +927,11 @@ public class BookingManagerImpl implements BookingManager {
                         appliedUserRefer.setInvitationCode(userMapper.getById(id).getAppliedInvitationCode());
                         UserEntityExt appliedUser = userMapper.getByInvitationCode(appliedUserRefer);
                         AccountEntityExt appliedAccount = accountMapper.getById(appliedUser.getId());
-                        appliedAccount.setBalance(appliedAccount.getBalance() + 10.0);
+                        Double appliedBefore = 0.0;
+                        if (appliedAccount.getBalance() != null) {
+                            appliedBefore = appliedAccount.getBalance();
+                        }
+                        appliedAccount.setBalance(appliedBefore + 10.0);
                         appliedAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
                         accountMapper.update(appliedAccount);
                         AccountHistoryEntityExt appliedAccountHistory = new AccountHistoryEntityExt();
