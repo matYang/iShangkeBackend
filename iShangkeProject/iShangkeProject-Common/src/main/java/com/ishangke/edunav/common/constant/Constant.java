@@ -141,6 +141,7 @@ public class Constant {
     public static final int SPECIALSUBMITBOOKING = 25;
     public static final int SPECIALCONFIRM = 26;
     public static final int SPECIALENROLL = 27;
+    public static final int BOOKINGOPERATIONCASHREWARD = 28;
 
     public static Map<String, Integer> BOOKINGOPERATEMAP;
     static {

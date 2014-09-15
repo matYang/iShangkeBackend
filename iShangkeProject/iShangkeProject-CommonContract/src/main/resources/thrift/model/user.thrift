@@ -45,6 +45,7 @@ struct UserBo {
     38: double couponTotal
     39: i32 majorId
     40: set<i32> majorIdSet
+    41: string schoolName
     }
     
 /**
