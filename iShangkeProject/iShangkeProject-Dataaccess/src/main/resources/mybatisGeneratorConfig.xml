@@ -303,6 +303,10 @@
       <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
       <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
     </table>
+    <table tableName="PURPOSE_COURSE" domainObjectName="PurposeCourseEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
   </context>
 
 </generatorConfiguration>
