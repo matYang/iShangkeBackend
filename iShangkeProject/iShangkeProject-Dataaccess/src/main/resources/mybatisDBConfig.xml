@@ -51,6 +51,7 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.CareerEntityExt" alias="CareerEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.MajorEntityExt" alias="MajorEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt" alias="CoursePromotionEntityExt" />
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.PurposeCourseEntityExt" alias="PurposeCourseEntityExt" />
   </typeAliases>
   <typeHandlers>
     <typeHandler javaType="java.util.Calendar" jdbcType="TIMESTAMP"
