@@ -606,9 +606,9 @@ public class CourseConverter {
             courseVo.setClassType(bo.getClassType());
         }
 //        courseVo.setClassTypeSet(bo.getClassTypeSet());
-        if (Constant.DEFAULTNULL != bo.getCommission()) {
-            courseVo.setCommission(bo.getCommission());
-        }
+//        if (Constant.DEFAULTNULL != bo.getCommission()) {
+//            courseVo.setCommission(bo.getCommission());
+//        }
         courseVo.setContact(bo.getContact());
         if (Constant.DEFAULTNULL != bo.getCourseHourLength()) {
             courseVo.setCourseHourLength(bo.getCourseHourLength());
