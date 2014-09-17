@@ -9,17 +9,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.AccountEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.AccountHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.WithdrawEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
 import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AccountManager;
 import com.ishangke.edunav.manager.AuthManager;
@@ -45,75 +48,50 @@ public class AccountManagerImpl implements AccountManager {
 
     @Override
     // TODO left for harry
-    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type) {
-        // // Check whether parameters are null
-        // if (userBo == null) {
-        // throw new
-        // ManagerException("User Exchange Cash Failed: UserBo is null");
-        // }
-        // if (accountBo == null) {
-        // throw new
-        // ManagerException("User Exchange Cash Failed: AccountBo is null");
-        // }
-        //
-        // // Convert
-        // UserEntityExt userEntity = UserConverter.fromBo(userBo);
-        // AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
-        //
-        // // Check the Account's id
-        // if (accountEntity.getId() == null || accountEntity.getId() == 0) {
-        // throw new ManagerException("User Exchange Cash Failed: 账户id为null或0");
-        // }
-        // // Check the User's id
-        // if (userEntity.getId() == null || userEntity.getId() == 0) {
-        // throw new ManagerException("User Exchange Cash Failed: 用户id为null或0");
-        // }
-        // // Check whether the Account belongs to the User
-        // if (!accountEntity.getId().equals(userEntity.getId())) {
-        // throw new ManagerException("User Exchange Cash Failed: 该账户不属于此用户");
-        // }
-        // try {
-        // //TODO withdraw stands for 取款方式, not dynamically added here
-        // //TODO to get the withdraw id, might need to change interface to pass
-        // a withdrawBo
-        //
-        // // Create AccountHistory
-        // AccountHistoryEntityExt accountHistory = new
-        // AccountHistoryEntityExt();
-        // accountHistory.setCharge(amount);
-        // accountHistory.setUserId(userEntity.getId());
-        // //accountHistory.setWithdrawId(withdraw.getId());
-        // accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
-        // //accountHistory.setType(withdraw.getType());
-        // accountHistory.setDeleted(0);
-        //
-        // int accountHistoryResult = 0;
-        // accountHistoryResult = accountHistoryMapper.add(accountHistory);
-        //
-        // if (accountHistoryResult > 0) {
-        // // Update Account
-        // try {
-        // AccountEntityExt oldAccount =
-        // accountMapper.getById(accountEntity.getId());
-        // oldAccount.setBalance(oldAccount.getBalance() - amount);
-        // oldAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
-        // accountMapper.update(oldAccount);
-        // return AccountConverter.toBo(oldAccount);
-        // } catch (Throwable t) {
-        // throw new
-        // ManagerException("User Exchange Cash Failed: Get accountEntity and Update the balance of it Failed",
-        // t);
-        // }
-        // } else {
-        // throw new
-        // ManagerException("User Exchange Cash Failed: Add accountHistory Failed");
-        // }
-        //
-        // } catch (Throwable t) {
-        // throw new ManagerException("User Exchange Cash Failed", t);
-        // }
-        return null;
-
+    public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, WithdrawBo withdrawBo) {
+        if(userBo == null){
+            throw new ManagerException("用户不能为空");
+        }
+        if(accountBo == null){
+            throw new ManagerException("账户不能为空");
+        }
+        if(amount == null){
+            throw new ManagerException("金额不能为空");
+        }
+        if(withdrawBo == null || withdrawBo.getPayeeId() == null || withdrawBo.getPayeeName() == null || withdrawBo.getType() == -1){
+            throw new ManagerException("转账信息不能为空");
+        }
+        UserEntityExt userEntity = UserConverter.fromBo(userBo);
+        AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
+        if(accountEntity.getId() == null || accountEntity.getId() == 0){
+            throw new ManagerException("该账户不存在");
+        }
+        if(userEntity.getId() == null || userEntity.getId() == 0){
+            throw new ManagerException("该用户不存在");
+        }
+        if(accountEntity.getId() != userEntity.getId() ){
+            throw new ManagerException("该账户不属于此用户");
+        }
+        AccountEntityExt oldAccount = accountMapper.getById(accountBo.getId());
+        if(oldAccount.getBalance() != null && oldAccount.getBalance() >= amount){
+            try{
+                oldAccount.setBalance(accountBo.getBalance() - amount);
+                oldAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
+                accountMapper.update(oldAccount);
+                AccountHistoryEntityExt accountHistory = new AccountHistoryEntityExt();
+                accountHistory.setCharge(amount);
+                accountHistory.setCreateTime(DateUtility.getCurTimeInstance());
+                accountHistory.setType(withdrawBo.getType());
+                accountHistory.setUserId(userBo.getId());
+                accountHistory.setWithdrawId(withdrawBo.getId());
+                accountHistoryMapper.add(accountHistory);
+                return AccountConverter.toBo(oldAccount);
+            }catch(Throwable t){
+                throw new ManagerException("转账失败",t);
+            }
+        }else{
+            throw new ManagerException("账户余额不足");
+        }
     }
 
     @Override

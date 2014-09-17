@@ -617,14 +617,18 @@ public class BookingManagerImpl implements BookingManager {
             BookingBo booking = BookingConverter.toBo(resultBooking);
             booking.setActionList(actions);
 
-            // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
+         // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
                 double creditAdd = Constant.CREDITDEFAULTADD;
                 if (bookingEntityExt.getPrice() != null && bookingEntityExt.getPrice() > 0) {
                     creditAdd = bookingEntityExt.getPrice();
                 }
-                Double c = credit.getCredit() + creditAdd;
+                Double before = 0.0;
+                if(credit.getCredit() != null && credit.getCredit() >0){
+                    before = credit.getCredit();
+                }
+                Double c = before + creditAdd;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);
@@ -747,7 +751,11 @@ public class BookingManagerImpl implements BookingManager {
                 if (bookingEntityExt.getPrice() != null && bookingEntityExt.getPrice() > 0) {
                     creditAdd = bookingEntityExt.getPrice();
                 }
-                Double c = credit.getCredit() + creditAdd;
+                Double before = 0.0;
+                if(credit.getCredit() != null && credit.getCredit() >0){
+                    before = credit.getCredit();
+                }
+                Double c = before + creditAdd;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);
@@ -868,14 +876,18 @@ public class BookingManagerImpl implements BookingManager {
                 throw new CourseNotFoundException("对不起，无法找到与该预定相关的课程搜索");
             }
 
-            // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
+         // 积分 每完成一个booking 用户将会得到相应金额的积分 如果课程没有固定的价格 默认给500积分
             if (Constant.BOOKINGSTATUSOFFLINEENROLLED == op.getNextStatus() || Constant.BOOKINGSTATUSONLINEENROLLED == op.getNextStatus()) {
                 CreditEntityExt credit = creditMapper.getById(bookingEntityExt.getUserId());
                 double creditAdd = Constant.CREDITDEFAULTADD;
                 if (bookingEntityExt.getPrice() != null && bookingEntityExt.getPrice() > 0) {
                     creditAdd = bookingEntityExt.getPrice();
                 }
-                Double c = credit.getCredit() + creditAdd;
+                Double before = 0.0;
+                if(credit.getCredit() != null && credit.getCredit() >0){
+                    before = credit.getCredit();
+                }
+                Double c = before + creditAdd;
                 credit.setCredit(c);
                 credit.setLastModifyTime(DateUtility.getCurTimeInstance());
                 creditMapper.update(credit);

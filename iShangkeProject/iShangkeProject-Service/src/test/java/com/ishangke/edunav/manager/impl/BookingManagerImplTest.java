@@ -89,12 +89,15 @@ public class BookingManagerImplTest {
         BookingEntityExt e = bookingMapper.getById(booking.getId());
         System.out.println(e.getStatus());
     }
-    /*@Test
+    @Test
     public void testCashBack1() throws IllegalAccessException{
         cacheManager.del(Constant.ROLEPREFIX + 10);
         BookingEntityExt booking = bookingMapper.getById(6);
         UserEntityExt applier = userMapper.getById(8);
         UserEntityExt user = userMapper.getById(9);
+        System.out.println("user before:" + user.getAccount().getBalance());
+        System.out.println("applier before:" + applier.getAccount().getBalance());
+        System.out.println("user credit before:" + user.getCredit().getCredit());
         Double userB = user.getAccount().getBalance();
         Double appb = applier.getAccount().getBalance();
         UserEntityExt admin = userMapper.getById(10);
@@ -103,12 +106,13 @@ public class BookingManagerImplTest {
         UserBo userBo = UserConverter.toBo(user);
         UserBo adminBo = UserConverter.toBo(admin);
         System.out.println("admin role:"+authManager.getRole(adminBo.getId()));
-        bookingManager.transformBookingStatus(bookingBo,10,adminBo);
+        bookingManager.transformBookingStatus(null,20,adminBo);
         UserEntityExt applierAfter = userMapper.getById(8);
         UserEntityExt userAfter = userMapper.getById(9);
         System.out.println("user after:" + userAfter.getAccount().getBalance());
         System.out.println("applier after:" + applierAfter.getAccount().getBalance());
+        System.out.println("user credit after:" + userAfter.getCredit().getCredit());
         Double appa = applierAfter.getAccount().getBalance();
         //Assert.assertSame("20.0", "20.0");
-    }*/
+    }
 }

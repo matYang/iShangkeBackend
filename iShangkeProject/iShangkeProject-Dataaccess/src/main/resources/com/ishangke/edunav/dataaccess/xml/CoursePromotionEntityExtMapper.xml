@@ -60,13 +60,13 @@
         #{categoryId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -168,8 +168,8 @@
     </if>
   </select>
 
-  <!-- getCountByCategoryId -->
-  <select id="getCountByCategoryId" parameterType="map" resultType="int">
+  <!-- getListCount -->
+  <select id="getListCount" parameterType="map" resultType="int">
     select count(*) from (
     select
     <include refid="Course_Promotion_Base_Column_List" />

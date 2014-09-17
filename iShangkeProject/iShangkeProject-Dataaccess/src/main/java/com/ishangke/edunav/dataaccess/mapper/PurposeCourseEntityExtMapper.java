@@ -16,7 +16,7 @@ public interface PurposeCourseEntityExtMapper {
 
     public int getListCount(@Param("entity") PurposeCourseEntityExt purposeCourseEntityExt);
 
-    public PurposeCourseEntityExt update(PurposeCourseEntityExt purposeCourseEntityExt);
+    public void update(PurposeCourseEntityExt purposeCourseEntityExt);
 
     public PurposeCourseEntityExt getById(int id);
 }
