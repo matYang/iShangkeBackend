@@ -606,9 +606,9 @@ public class CourseConverter {
             courseVo.setClassType(bo.getClassType());
         }
 //        courseVo.setClassTypeSet(bo.getClassTypeSet());
-        if (Constant.DEFAULTNULL != bo.getCommission()) {
-            courseVo.setCommission(bo.getCommission());
-        }
+//        if (Constant.DEFAULTNULL != bo.getCommission()) {
+//            courseVo.setCommission(bo.getCommission());
+//        }
         courseVo.setContact(bo.getContact());
         if (Constant.DEFAULTNULL != bo.getCourseHourLength()) {
             courseVo.setCourseHourLength(bo.getCourseHourLength());
@@ -677,6 +677,7 @@ public class CourseConverter {
 //        courseVo.setNoRefundDateEnd(bo.getNoRefundDateEnd());
         courseVo.setOpenCourseRequirement(bo.getOpenCourseRequirement());
         courseVo.setPrerequest(bo.getPrerequest());
+        //隐藏价格
         if (Constant.DEFAULTNULL != bo.getPrice()) {
             courseVo.setPrice(bo.getPrice());
         }
@@ -686,6 +687,7 @@ public class CourseConverter {
         if (Constant.DEFAULTNULL != bo.getPriceStart()) {
             courseVo.setPriceStart(bo.getPriceStart());
         }
+        //隐藏价格
         if (Constant.DEFAULTNULL != bo.getOriginalPrice()) {
             courseVo.setOriginalPrice(bo.getOriginalPrice());
         }
