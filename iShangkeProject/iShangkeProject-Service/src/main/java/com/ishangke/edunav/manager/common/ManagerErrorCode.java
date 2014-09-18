@@ -526,8 +526,14 @@ public class ManagerErrorCode {
     public static final String PERMISSION_COURSE_UPDATEPROMOTION_KEY = "permission_course_updatePromotion";
     public static final int PERMISSION_COURSE_DELETEPROMOTION = 0x0100006A;
     public static final String PERMISSION_COURSE_DELETEPROMOTION_KEY = "permission_course_deletePromotion";
-  
-    
+    public static final int PERMISSION_BOOKING_QUERYPURPOSECOURSE = 0x0100006B;
+    public static final String PERMISSION_BOOKING_QUERYPURPOSECOURSE_KEY = "permission_booking_queryPurposeCourse";
+    public static final int PERMISSION_BOOKING_CREATEPURPOSECOURSE = 0x0100006D;
+    public static final String PERMISSION_BOOKING_CREATEPURPOSECOURSE_KEY = "permission_booking_createPurposeCourse";
+    public static final int PERMISSION_BOOKING_UPDATEPURPOSECOURSE = 0x0100006C;
+    public static final String PERMISSION_BOOKING_UPDATEPURPOSECOURSE_KEY = "permission_booking_updatePurposeCourse";
+    public static final int PERMISSION_BOOKING_DELETEPURPOSECOURSE = 0x0100006D;
+    public static final String PERMISSION_BOOKING_DELETEPURPOSECOURSE_KEY = "permission_booking_deletePurposeCourse";
     
     // alipay
     public static final int ALIPAY_VERIFY_ERROR = 0x001C0001;
