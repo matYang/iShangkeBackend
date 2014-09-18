@@ -21,6 +21,7 @@ import com.ishangke.edunav.commoncontract.model.MajorPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SchoolPageViewBo;
 import com.ishangke.edunav.facade.user.CourseFacade;
 import com.ishangke.edunav.facade.user.GeneralFacade;
+import com.ishangke.edunav.web.common.OrderByVo;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.CareerConverter;
 import com.ishangke.edunav.web.converter.CategoryConverter;
@@ -122,6 +123,8 @@ public class GeneralController extends AbstractController {
 
         CircleVo circleVo = new CircleVo();
         PaginationVo paginationVo = new PaginationVo();
+        paginationVo.setColumnKey("value");
+        paginationVo.setOrder("ASC");
         CirclePageViewBo pageViewBo = null;
         CirclePageViewVo pageViewVo = null;
         try {
