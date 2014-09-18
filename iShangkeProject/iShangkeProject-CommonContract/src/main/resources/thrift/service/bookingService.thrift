@@ -9,6 +9,7 @@ include "model/common.thrift"
 include "model/order.thrift"
 include "model/orderHistory.thrift"
 include "model/withdraw.thrift"
+include "model/purposeCourse.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
@@ -210,4 +211,51 @@ service BookingService {
 	string verify(1: string notify) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForGet(1:string subject, 2: string out_trade_no, 3: string total_fee, 4: string type) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForPost(1:string subject, 2: string out_trade_no, 3: string total_fee) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+	// *********************************************************
+    // *
+    // *   关于意向课程 purposeCourse
+    // *
+    // *********************************************************
+	
+	 /**
+     * 本方法返回意向课程信息
+     * 管理员可以通过此方法调取意向课程信息
+     * 
+     * @param purposeCourseBo 意向课程查询条件
+     * @param userBo          调用方法的用户信息
+     * @param paginationBo
+     * @return
+     */
+    purposeCourse.PurposeCoursePageViewBo queryPurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:common.PaginationBo paginationBo,4:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     *  本方法创建意向课程信息
+     * 管理员可以通过此方法创建意向课程信息 
+     * 
+     * @param purposeCourseBo  创建意向课程的信息
+     * @param userBo            调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo createPurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     *  本方法更新意向课程信息
+     * 管理员可以通过此方法更新意向课程信息 
+     * 
+     * @param purposeCourseBo  更新意向课程的信息
+     * @param userBo            调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo updatePurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     *  本方法删除意向课程信息
+     * 管理员可以通过此方法删除意向课程信息 
+     * 
+     * @param purposeCourseBo  删除意向课程的ID信息
+     * @param userBo            调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo deletePurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
 } 
