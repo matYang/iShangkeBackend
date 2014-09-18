@@ -15,12 +15,15 @@ import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
+import com.ishangke.edunav.commoncontract.model.PurposeCourseBo;
+import com.ishangke.edunav.commoncontract.model.PurposeCoursePageViewBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.OrderManager;
 import com.ishangke.edunav.manager.PermissionManager;
+import com.ishangke.edunav.manager.PurposeCourseManager;
 import com.ishangke.edunav.manager.common.ManagerErrorCode;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.NoPermissionException;
@@ -41,6 +44,9 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     @Autowired
     private AuthManager authManager;
+    
+    @Autowired
+    private PurposeCourseManager purposeManager;
 
     @Override
     public BookingBo createBookingByUser(BookingBo bookingBo, UserBo userBo, String permissionTag)
@@ -356,6 +362,115 @@ public class BookingServiceImpl implements BookingService.Iface {
           exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
           throw exception;
       }
+    }
+
+    /**********************************************************
+     * 
+     * 关于意向课程 PurposeCourse
+     * 
+     **********************************************************/
+    @Override
+    public PurposeCoursePageViewBo queryPurpose(PurposeCourseBo purposeCourseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try{
+            if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"queryPurposeCourse"));
+                throw new NoPermissionException();
+            }
+            
+            paginationBo = PageUtil.getPage(paginationBo);
+            List<PurposeCourseBo> list = purposeManager.query(purposeCourseBo, userBo, paginationBo);
+            PurposeCoursePageViewBo pageView = new PurposeCoursePageViewBo();
+            int total = purposeManager.queryTotal(purposeCourseBo, userBo);
+            pageView.setCount(paginationBo.getSize());
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setTotal(total);
+            pageView.setData(list);
+            
+            return pageView;
+        }catch(NoPermissionException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYPURPOSECOURSE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYPURPOSECOURSE_KEY);
+            throw exception;
+        }catch(ManagerException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public PurposeCourseBo createPurpose(PurposeCourseBo purposeCourseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try{
+            return purposeManager.createPurpose(purposeCourseBo, userBo);
+        }catch(NoPermissionException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEPURPOSECOURSE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEPURPOSECOURSE_KEY);
+            throw exception;
+        }catch(ManagerException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public PurposeCourseBo updatePurpose(PurposeCourseBo purposeCourseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try{
+            if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"updatePurposeCourse"));
+                throw new NoPermissionException();
+            }
+            
+            return purposeManager.updatePurpose(purposeCourseBo, userBo);
+        }catch(NoPermissionException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_UPDATEPURPOSECOURSE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_UPDATEPURPOSECOURSE_KEY);
+            throw exception;
+        }catch(ManagerException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public PurposeCourseBo deletePurpose(PurposeCourseBo purposeCourseBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try{
+            if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"deletePurposeCourse"));
+                throw new NoPermissionException();
+            }
+            
+            return purposeManager.deletePurpose(purposeCourseBo, userBo);
+        }catch(NoPermissionException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_DELETEPURPOSECOURSE);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_DELETEPURPOSECOURSE_KEY);
+            throw exception;
+        }catch(ManagerException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
     }
 
 }
