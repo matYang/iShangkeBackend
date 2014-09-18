@@ -117,10 +117,10 @@ public class GeneralController extends AbstractController{
         
         pageViewBo = generalFacade.queryCircle(CircleConverter.fromModel(circleVo), PaginationConverter.toBo(paginationVo), permissionTag);
         pageViewVo = CirclePageViewConverter.toModel(pageViewBo);
-        if (pageViewVo.getData() != null) {
-            ArrayList<CircleVo> treeList = (ArrayList<CircleVo>) TreeParser.parse(pageViewVo.getData());
-            pageViewVo.setData(treeList);
-        }
+//        if (pageViewVo.getData() != null) {
+//            ArrayList<CircleVo> treeList = (ArrayList<CircleVo>) TreeParser.parse(pageViewVo.getData());
+//            pageViewVo.setData(treeList);
+//        }
         
         return pageViewVo;
     }
