@@ -66,9 +66,9 @@ public class PurposeCourseManagerImpl implements PurposeCourseManager {
     @Override
     public PurposeCourseBo createPurpose(PurposeCourseBo purposeCourseBo, UserBo userBo) {
         //check null
-        if(purposeCourseBo == null || userBo == null){
-            throw new ManagerException("无效请求参数");
-        }
+//        if(purposeCourseBo == null || userBo == null){
+//            throw new ManagerException("无效请求参数");
+//        }
         //every one can create
         /*if(authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())){
             LOGGER.warn(String.format("[PurposeCourseManagerImpl]system admin || admin [%s] call createPurposeCourse at "+new Date(), userBo.getName()));
