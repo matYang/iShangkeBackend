@@ -13,6 +13,8 @@ public class CategoryConverter {
         CategoryBo categoryBo = new CategoryBo();
         if (e.getEnabled() != null) {
             categoryBo.setEnabled(e.getEnabled());
+        } else {
+            categoryBo.setEnabled(Constant.DEFAULTNULL);
         }
         if (e.getId() != null) {
             categoryBo.setId(e.getId());
@@ -67,7 +69,9 @@ public class CategoryConverter {
         categoryEntityExt.setCreateTime(DateUtility.getTimeFromLong(bo.getCreateTime()));
         categoryEntityExt.setCreateTimeEnd(DateUtility.getTimeFromLong(bo.getCreateTimeEnd()));
         categoryEntityExt.setCreateTimeStart(DateUtility.getTimeFromLong(bo.getCreateTimeStart()));
-        categoryEntityExt.setEnabled(bo.getEnabled());
+        if (bo.getEnabled() != Constant.DEFAULTNULL) {
+            categoryEntityExt.setEnabled(bo.getEnabled());            
+        }
         categoryEntityExt.setId(bo.getId());
         categoryEntityExt.setIdSet(bo.getIdSet());
         categoryEntityExt.setLastModifyTime(DateUtility.getTimeFromLong(bo.getLastModifyTime()));
