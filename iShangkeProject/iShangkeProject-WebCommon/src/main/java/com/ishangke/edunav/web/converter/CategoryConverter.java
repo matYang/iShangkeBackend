@@ -85,7 +85,7 @@ public class CategoryConverter {
         //categoryVo.setCreateTime(bo.getCreateTime());
         //categoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
         //categoryVo.setCreateTimeStart(bo.getCreateTimeStart());
-        //categoryVo.setEnabled(bo.getEnabled());
+        categoryVo.setEnabled(bo.getEnabled());
         categoryVo.setId(bo.getId());
         categoryVo.setIdSet(bo.getIdSet());
         //categoryVo.setLastModifyTime(bo.getLastModifyTime());
