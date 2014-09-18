@@ -6,6 +6,7 @@ import com.ishangke.edunav.commoncontract.model.AccountBo;
 import com.ishangke.edunav.commoncontract.model.AccountHistoryBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 
 public interface AccountManager {
     /**
@@ -24,7 +25,7 @@ public interface AccountManager {
      * @return
      * 
      */
-    AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, String payee_Id, String payee_Name, int type);
+    AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, WithdrawBo withdrawBo);
 
     /**
      * 本方法为查询账户功能。<br>
