@@ -147,7 +147,8 @@ public class UserManagerImpl implements UserManager {
             couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
             couponEntity.setStatus(CouponEnums.Status.USABLE.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
-            expiry.add(Calendar.YEAR, 1);
+            //6个月过期
+            expiry.add(Calendar.MONTH, 6);
             couponEntity.setExpiryTime(expiry);
             couponEntity.setRemark("");
             couponEntity.setUserId(userEntity.getId());
@@ -944,6 +945,9 @@ public class UserManagerImpl implements UserManager {
     }
     
     public static void main(String[] args) {
+        Calendar a = DateUtility.getCurTimeInstance();
+        a.add(Calendar.MONTH, 6);
+        System.out.println(a.get(Calendar.YEAR) + ":" + a.get(Calendar.MONTH) + ":" + a.get(Calendar.DAY_OF_MONTH));
         System.out.println(AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH));
     }
 }
