@@ -29,7 +29,7 @@ import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.admin.controller.AbstractController;
 
 @Controller
-@RequestMapping("/api/v2/purpose")
+@RequestMapping("/a-api/v2/purpose")
 public class PurposeController extends AbstractController {
     @Autowired
     private BookingFacade bookingFacade;
