@@ -49,32 +49,32 @@ public class AccountManagerImpl implements AccountManager {
     @Override
     // TODO left for harry
     public AccountBo exchangeCash(AccountBo accountBo, UserBo userBo, Double amount, WithdrawBo withdrawBo) {
-        if(userBo == null){
+        if (userBo == null) {
             throw new ManagerException("用户不能为空");
         }
-        if(accountBo == null){
+        if (accountBo == null) {
             throw new ManagerException("账户不能为空");
         }
-        if(amount == null){
+        if (amount == null) {
             throw new ManagerException("金额不能为空");
         }
-        if(withdrawBo == null || withdrawBo.getPayeeId() == null || withdrawBo.getPayeeName() == null || withdrawBo.getType() == -1){
+        if (withdrawBo == null || withdrawBo.getPayeeId() == null || withdrawBo.getPayeeName() == null || withdrawBo.getType() == -1) {
             throw new ManagerException("转账信息不能为空");
         }
         UserEntityExt userEntity = UserConverter.fromBo(userBo);
         AccountEntityExt accountEntity = AccountConverter.fromBo(accountBo);
-        if(accountEntity.getId() == null || accountEntity.getId() == 0){
+        if (accountEntity.getId() == null || accountEntity.getId() == 0) {
             throw new ManagerException("该账户不存在");
         }
-        if(userEntity.getId() == null || userEntity.getId() == 0){
+        if (userEntity.getId() == null || userEntity.getId() == 0) {
             throw new ManagerException("该用户不存在");
         }
-        if(accountEntity.getId() != userEntity.getId() ){
+        if (accountEntity.getId() != userEntity.getId()) {
             throw new ManagerException("该账户不属于此用户");
         }
         AccountEntityExt oldAccount = accountMapper.getById(accountBo.getId());
-        if(oldAccount.getBalance() != null && oldAccount.getBalance() >= amount){
-            try{
+        if (oldAccount.getBalance() != null && oldAccount.getBalance() >= amount) {
+            try {
                 oldAccount.setBalance(accountBo.getBalance() - amount);
                 oldAccount.setLastModifyTime(DateUtility.getCurTimeInstance());
                 accountMapper.update(oldAccount);
@@ -86,10 +86,10 @@ public class AccountManagerImpl implements AccountManager {
                 accountHistory.setWithdrawId(withdrawBo.getId());
                 accountHistoryMapper.add(accountHistory);
                 return AccountConverter.toBo(oldAccount);
-            }catch(Throwable t){
-                throw new ManagerException("转账失败",t);
+            } catch (Throwable t) {
+                throw new ManagerException("转账失败", t);
             }
-        }else{
+        } else {
             throw new ManagerException("账户余额不足");
         }
     }

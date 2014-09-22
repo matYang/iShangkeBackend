@@ -10,6 +10,8 @@ import com.ishangke.edunav.commoncontract.model.BookingHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
+import com.ishangke.edunav.commoncontract.model.PurposeCourseBo;
+import com.ishangke.edunav.commoncontract.model.PurposeCoursePageViewBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.commoncontract.service.BookingService.Client;
@@ -159,4 +161,71 @@ public class BookingFacade {
         return result;
     }
 
+   public PurposeCoursePageViewBo queryPurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,PaginationBo paginationBo,String permissionTag){
+       PurposeCoursePageViewBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryPurpose(purposeCourseBo, userBo, paginationBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo createPurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.createPurpose(purposeCourseBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo updatePurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.updatePurpose(purposeCourseBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo deletePurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.deletePurpose(purposeCourseBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
 }
