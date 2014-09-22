@@ -6,8 +6,8 @@
     <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
     <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
-    <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-    <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+    <!-- <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+    <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" /> -->
     <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
     <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
@@ -84,6 +84,8 @@
     <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
     <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
     <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+    <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+    <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
     <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
     <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
@@ -224,7 +226,9 @@
   <sql id="Address_Base_Column_List">
     ADDRESS.DETAIL ADDRESS_DETAIL,
     ADDRESS.LAT ADDRESS_LAT,
-    ADDRESS.LNG ADDRESS_LNG
+    ADDRESS.LNG ADDRESS_LNG,
+    ADDRESS.LOCATION_ID ADDRESS_LOCATIONID,
+    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID
   </sql>
   <sql id="Reg_Address_Base_Column_List">
     ADDRESS.DETAIL REG_ADDRESS_DETAIL,
@@ -234,8 +238,7 @@
   <sql id="Reg_Address_Temp_Column_List">
     temp.REG_ADDRESS_DETAIL REG_ADDRESS_DETAIL,
     temp.REG_ADDRESS_LAT REG_ADDRESS_LAT,
-    temp.REG_ADDRESS_LNG
-    REG_ADDRESS_LNG
+    temp.REG_ADDRESS_LNG REG_ADDRESS_LNG
   </sql>
   <sql id="Category_Base_Column_List">
     CATEGORY.VALUE CATEGORY_VALUE,
@@ -1074,19 +1077,16 @@
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-    left join CIRCLE CIRCLE
-    ON CIRCLE.ID = COURSE.CIRCLE_ID
-    left join LOCATION
-    LOCATION
-    ON
-    LOCATION.ID =
-    COURSE.LOCATION_ID
-    left join ADDRESS ADDRESS
-    ON ADDRESS.ID = COURSE.ADDRESS_ID
     left join COURSE_TEMPLATE
     COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
+    left join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    left join CIRCLE CIRCLE
+    ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+    left join LOCATION LOCATION
+    ON LOCATION.ID = ADDRESS.LOCATION_ID
     WHERE
     COURSE.DELETED = 0
     <if test="entity != null">
@@ -1136,11 +1136,11 @@
 
 
       <if test="entity.locationId != null and entity.locationId != 0">
-        AND COURSE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+        AND ADDRESS.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
       </if>
       <if test="entity.locationId == null or entity.locationId == 0">
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
-          AND COURSE.LOCATION_ID IN
+          AND ADDRESS.LOCATION_ID IN
           <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -1148,11 +1148,11 @@
       </if>
 
       <if test="entity.circleId != null and entity.circleId != 0">
-        AND COURSE.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+        AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
       </if>
       <if test="entity.circleId == null or entity.circleId == 0">
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
-          AND COURSE.CIRCLE_ID IN
+          AND ADDRESS.CIRCLE_ID IN
           <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -1448,20 +1448,16 @@
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-    left join CIRCLE CIRCLE
-    ON CIRCLE.ID = COURSE.CIRCLE_ID
-    left join LOCATION
-    LOCATION
-    ON
-    LOCATION.ID =
-    COURSE.LOCATION_ID
-    left join ADDRESS ADDRESS
-    ON ADDRESS.ID = COURSE.ADDRESS_ID
     left join COURSE_TEMPLATE
     COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
-
+    left join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    left join CIRCLE CIRCLE
+    ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+    left join LOCATION LOCATION
+    ON LOCATION.ID = ADDRESS.LOCATION_ID
     WHERE
     COURSE.DELETED = 0
     <if test="entity != null">
