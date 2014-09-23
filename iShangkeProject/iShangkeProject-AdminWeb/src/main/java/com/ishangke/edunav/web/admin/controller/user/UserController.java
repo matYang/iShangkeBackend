@@ -242,7 +242,7 @@ public class UserController extends AbstractController {
         return responseVo;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryUser(UserVo userVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         UserPageViewVo responseVo = null;
