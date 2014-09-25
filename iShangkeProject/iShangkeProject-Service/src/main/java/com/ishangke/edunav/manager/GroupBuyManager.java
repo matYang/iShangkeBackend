@@ -44,4 +44,7 @@ public interface GroupBuyManager {
     public int queryTotal(GroupBuyBookingBo groupBuyBookingBo,UserBo userBo);
     
     public GroupBuyActivityBo online(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo);
+
+
+    public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no);
 }

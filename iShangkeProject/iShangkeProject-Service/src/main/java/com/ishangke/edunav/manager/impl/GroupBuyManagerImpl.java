@@ -219,4 +219,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         return GroupBuyActivityConverter.toBo(groupBuyActivityMapper.getById(groupBuyActivityEntity.getId()));
     }
 
+    @Override
+    public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) {
+        // TODO Auto-generated method stub
+        return Constant.SUCCESS;
+    }
+
 }
