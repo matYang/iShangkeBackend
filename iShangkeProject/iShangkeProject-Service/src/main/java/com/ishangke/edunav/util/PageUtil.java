@@ -1,5 +1,6 @@
 package com.ishangke.edunav.util;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 
 public class PageUtil {
@@ -13,7 +14,10 @@ public class PageUtil {
             page = new PaginationBo();
             page.offset = OFFSET;
             page.size = SIZE;
-        } else if (page.getSize() > SIZE) {
+        } else if (page.getSize() > SIZE || page.getSize() == Constant.DEFAULTNULL) {
+            if (page.getOffset() == Constant.DEFAULTNULL) {
+                page.setOffset(OFFSET);
+            }
             page.setSize(SIZE);
         }
         return page;

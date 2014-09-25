@@ -10,6 +10,8 @@ include "model/order.thrift"
 include "model/orderHistory.thrift"
 include "model/withdraw.thrift"
 include "model/purposeCourse.thrift"
+include "model/groupBuyActivity.thrift"
+include "model/groupBuyBooking.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
@@ -258,4 +260,47 @@ service BookingService {
      * @return
      */
     purposeCourse.PurposeCourseBo deletePurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    
+    // *********************************************************
+    // *
+    // *   关于团购课程  GroupBuy
+    // *
+    // *********************************************************
+        /**
+     * 管理员创建一次团购活动
+     * @param groupBuyActivityBo  创建团购活动信息
+     * @param userBo  创建团购活动的用户信息
+     * @return
+     */
+    groupBuyActivity.GroupBuyActivityBo createGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+
+
+    /**
+     * 用户选购团购课程
+     * @param groupBuyBookingBo  用户团购订单信息
+     * @param groupBuyActivityBo 团购活动信息
+     * @param userBo  选购团购课程用户信息
+     * @return
+     */
+    groupBuyBooking.GroupBuyBookingBo createGroupBuyBooking(1:groupBuyBooking.GroupBuyBookingBo groupBuyBookingBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessException);
+
+    /**
+     * 用户查询自己的团购情况 管理员查询所有的团购情况
+     * @param groupBuyBookingBo
+     * @param userBo
+     * @param paginationBo
+     * @return
+     */
+    groupBuyBooking.GroupBuyBookingPageViewBo queryGroupBuyBooking(1:groupBuyBooking.GroupBuyBookingBo groupBuyBookingBo, 2:user.UserBo userBo, 3:common.PaginationBo paginationBo,4:string permissionTag) throws (1:fault.BusinessExceptionBo businessException);
+    
+    /**
+     * 管理员对团购活动进行上线操作
+     * @param groupBuyBookingBo
+     * @param userBo
+     * @param paginationBo
+     * @return
+     */
+    groupBuyActivity.GroupBuyActivityBo online(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+
 } 

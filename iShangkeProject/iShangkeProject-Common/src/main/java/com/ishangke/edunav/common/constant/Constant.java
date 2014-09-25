@@ -170,6 +170,11 @@ public class Constant {
         BOOKINGOPERATEMAP.put("onlineRefund", 21);
         BOOKINGOPERATEMAP.put("onlineCashback", 22);
         BOOKINGOPERATEMAP.put("offlineCashback", 23);
+        BOOKINGOPERATEMAP.put("onlinePaySuccess", 24);
+        BOOKINGOPERATEMAP.put("specialSubmitBooking", 25);
+        BOOKINGOPERATEMAP.put("specialConfirm", 26);
+        BOOKINGOPERATEMAP.put("specialEnroll", 27);
+        BOOKINGOPERATEMAP.put("cashReward", 28);
     }
     
     public static int DEFAULTANONYMOUSUSER = 1;
@@ -218,4 +223,15 @@ public class Constant {
     //credit
     public static final Double CREDITDEFAULTADD = 500.0;
     public static final int CREDITOPERATEBOOKINGSUCCESS = 0;
+    
+    //团购GroupBuyActivity
+    public static final int GROUPBUYACTIVITYPENDINGONLINE = 0;
+    public static final int GROUPBUYACTIVITYONLINE = 1;
+    public static final int GROUPBUYACTIVITYOFFLINE = 2;
+    
+    //GroupBuyBooking
+    public static final int GROUPBUYBOOKINGPENDINGPAYMENT = 0;
+    public static final int GROUPBUYBOOKINGPAYED = 1;
+    public static final int GROUPBUYBOOKINGQUITED = 2;
+    
 }
