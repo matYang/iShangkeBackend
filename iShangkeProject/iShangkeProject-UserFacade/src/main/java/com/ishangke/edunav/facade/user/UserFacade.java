@@ -64,6 +64,24 @@ public class UserFacade {
 
         return result;
     }
+    
+    public SessionBo qlogin(LoginBo loginBo) {
+        SessionBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.qlogin(loginBo);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
     public SessionBo loginByReference(LoginBo loginBo, String permissionTag) {
         SessionBo result = null;
@@ -501,6 +519,24 @@ public class UserFacade {
         try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
             Client serviceClient = factory.getServiceClient();
             result = serviceClient.deleteSpread(spreadBo, userBo, PermissionCache.getTag(permissionTag));
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public SessionBo openQloginSession(UserBo userBo) {
+        SessionBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.User.getName());
+
+        try (ThriftClientFactory<UserService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.openQloginSession(userBo);
         } catch (BusinessExceptionBo e) {
             e.printStackTrace();
             throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());

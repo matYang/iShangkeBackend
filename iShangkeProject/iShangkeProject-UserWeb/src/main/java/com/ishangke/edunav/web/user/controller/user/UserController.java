@@ -73,6 +73,38 @@ public class UserController extends AbstractController{
         return responseVo;
     }
 
+    @RequestMapping(value = "/qlogin", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody JsonResponse qlogin(@RequestBody LoginVo loginVo, HttpServletRequest req, HttpServletResponse resp) {
+        UserVo responseVo = null;
+        if (loginVo.getAccountIdentifier() == null || loginVo.getAccountIdentifier().length() == 0) {
+            return this.handleWebException(new ControllerException("请输入账号"), resp);
+        }
+        if (loginVo.getPassword() == null || loginVo.getPassword().length() == 0) {
+            return this.handleWebException(new ControllerException("请输入验证码"), resp);
+        }
+        UserBo curUser = null;
+        boolean loggedIn;
+        SessionBo authSessionBo = this.getSession(req);
+        String permissionTag = this.getUrl(req);
+        try {
+            loggedIn = userFacade.authenticate(authSessionBo, permissionTag).getId() > 0;
+            if (loggedIn) {
+                return this.handleWebException(new ControllerException("请先登出之前的账号"), resp);
+            }
+            authSessionBo = userFacade.qlogin(LoginConverter.fromModel(loginVo));
+            if (authSessionBo.getId() > 0) {
+                this.openSession(authSessionBo, false, req, resp);
+            }
+
+            curUser = userFacade.getCurrentUser(authSessionBo, permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        
+        responseVo = UserConverter.toModel(curUser);
+        return responseVo;
+    }
+    
     @RequestMapping(value = "/{id}/logout", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse logout(HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
@@ -137,6 +169,19 @@ public class UserController extends AbstractController{
         return new EmptyResponse();
     }
     
+    @RequestMapping(value = "/qloginSmsVerification", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse qlogin( @RequestParam(value="phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        
+        UserVo userVo = new UserVo();
+        userVo.setPhone(phone);
+        try {
+            userFacade.openQloginSession(UserConverter.fromModel(userVo));
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        return new EmptyResponse();
+    }
     
     @RequestMapping(value = "/registration", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse register(@RequestBody UserVo userVo, HttpServletRequest req, HttpServletResponse resp) {
