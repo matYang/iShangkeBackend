@@ -24,6 +24,7 @@
       <list>
         <ref bean="cleanEventTrigger"/>
         <ref bean="cleanBookingTrigger"/>
+        <ref bean="cleanGroupBuyTrigger"/>
       </list>
     </property>
   </bean>
@@ -45,6 +46,15 @@
       <value>0 */15 * * * ?</value>
     </property>
   </bean>
+  <!-- Quartz 2 configuration, fire at 00:01:00 every day -->
+  <bean id="cleanGroupBuyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail">
+      <ref bean="cleanGroupBuyDetail" />
+    </property>
+    <property name="cronExpression">
+      <value>0 1 0 * * ? *</value>
+    </property>
+  </bean>
   <!-- Quartz job configuration -->
   <bean id="cleanBooking" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     <property name="targetObject">
@@ -61,6 +71,15 @@
     </property>
     <property name="targetMethod">
       <value>clean</value>
+    </property>
+  </bean>
+  <!-- Quartz job configuration -->
+  <bean id="cleanGroupBuyDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject">
+      <ref bean="CleanEventJob" />
+    </property>
+    <property name="targetMethod">
+      <value>cleanGroupBuyActivity</value>
     </property>
   </bean>
   <!-- Job execution class -->

@@ -524,16 +524,24 @@ public class ManagerErrorCode {
     public static final String PERMISSION_COURSE_CREATEPROMOTION_KEY = "permission_course_createPromotion";
     public static final int PERMISSION_COURSE_UPDATEPROMOTION = 0x0100006A;
     public static final String PERMISSION_COURSE_UPDATEPROMOTION_KEY = "permission_course_updatePromotion";
-    public static final int PERMISSION_COURSE_DELETEPROMOTION = 0x0100006A;
+    public static final int PERMISSION_COURSE_DELETEPROMOTION = 0x0100006B;
     public static final String PERMISSION_COURSE_DELETEPROMOTION_KEY = "permission_course_deletePromotion";
-    public static final int PERMISSION_BOOKING_QUERYPURPOSECOURSE = 0x0100006B;
+    public static final int PERMISSION_BOOKING_QUERYPURPOSECOURSE = 0x0100006C;
     public static final String PERMISSION_BOOKING_QUERYPURPOSECOURSE_KEY = "permission_booking_queryPurposeCourse";
     public static final int PERMISSION_BOOKING_CREATEPURPOSECOURSE = 0x0100006D;
     public static final String PERMISSION_BOOKING_CREATEPURPOSECOURSE_KEY = "permission_booking_createPurposeCourse";
-    public static final int PERMISSION_BOOKING_UPDATEPURPOSECOURSE = 0x0100006C;
+    public static final int PERMISSION_BOOKING_UPDATEPURPOSECOURSE = 0x0100006E;
     public static final String PERMISSION_BOOKING_UPDATEPURPOSECOURSE_KEY = "permission_booking_updatePurposeCourse";
-    public static final int PERMISSION_BOOKING_DELETEPURPOSECOURSE = 0x0100006D;
+    public static final int PERMISSION_BOOKING_DELETEPURPOSECOURSE = 0x0100006F;
     public static final String PERMISSION_BOOKING_DELETEPURPOSECOURSE_KEY = "permission_booking_deletePurposeCourse";
+    public static final int PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY = 0x01000070;
+    public static final String PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY_KEY = "permission_booking_createGroupBuyActivity";
+    public static final int PERMISSION_BOOKING_CREATEGROUPBUYBOOKING = 0x01000071;
+    public static final String PERMISSION_BOOKING_CREATEGROUPBUYBOOKING_KEY = "permission_booking_createGroupBuyBooking";
+    public static final int PERMISSION_BOOKING_QUERYGROUPBUYBOOKING = 0x01000072;
+    public static final String PERMISSION_BOOKING_QUERYGROUPBUYBOOKING_KEY = "permission_booking_queryGroupBuyBooking";
+    public static final int PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE = 0x01000073;
+    public static final String PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE_KEY = "permission_booking_groupBuyActivityOnline";
     
     // alipay
     public static final int ALIPAY_VERIFY_ERROR = 0x001C0001;

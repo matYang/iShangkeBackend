@@ -19,10 +19,12 @@ import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CoursePromotionEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.manager.async.task.SMSTask;
 
 //non transactional
@@ -47,6 +49,9 @@ public class CleanEventJob {
 
     @Autowired
     CouponEntityExtMapper couponMapper;
+    
+    @Autowired
+    GroupBuyActivityEntityExtMapper groupBuyActivityMapper;
 
     public void clean() {
         LOGGER.info("Clean called at:" + new Date().toString());
@@ -201,6 +206,37 @@ public class CleanEventJob {
         }
     }
 
+    private void cleanGroupBuyActivity() {
+        boolean hasError = false;
+        
+        GroupBuyActivityEntityExt groupBuyActivity = new GroupBuyActivityEntityExt();
+        groupBuyActivity.setStatus(Constant.GROUPBUYACTIVITYONLINE);
+        groupBuyActivity.setEndTimeEnd(DateUtility.getCurTimeInstance());
+        try {
+            List<GroupBuyActivityEntityExt> results = groupBuyActivityMapper.list(groupBuyActivity, getDefaultPagination());
+            if (results != null) {
+                for (GroupBuyActivityEntityExt result : results) {
+                    try {
+                        result.setStatus(Constant.GROUPBUYACTIVITYOFFLINE);
+                        groupBuyActivityMapper.update(result);
+                    } catch (Throwable t) {
+                        hasError = true;
+                        LOGGER.error("[ERROR] [cleanGroupBuyActivity] suffered single failure with id:" + result.getId(), t);
+                    }
+                }
+            } else {
+                LOGGER.warn("[WARNING] [cleanGroupBuyActivity] search result is null");
+            }
+        } catch (Throwable t) {
+            hasError = true;
+            LOGGER.error("[ERROR] [cleanGroupBuyActivity] suffered unexpected errors, please check logs carefully");
+        }
+        
+        if (hasError) {
+            LOGGER.error("[ERROR] [cleanGroupBuyActivity] paniced,please check the logs");
+        }
+    }
+    
     private void cleanBooking() {
         LOGGER.info("Clean:cleanBooking started at:" + new Date().toString());
         
