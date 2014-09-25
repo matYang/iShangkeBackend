@@ -108,6 +108,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         if (groupBuyActivity == null || Constant.GROUPBUYACTIVITYONLINE != groupBuyActivity.getStatus()) {
             throw new ManagerException("团购活动不存在或已经下线");
         }
+        if (groupBuyBookingBo.getGroupBuyPrice() != groupBuyActivity.getGroupBuyPrice()) {
+            throw new ManagerException("对不起，价格不一致，请刷新页面重新提交！");
+        }
         
         groupBuyBookingEntity.setUserId(userBo.getId());
         groupBuyBookingEntity.setCreateTime(DateUtility.getCurTimeInstance());
@@ -181,11 +184,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     @Override
     public void payGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo) {
        
-
     }
 
     @Override
-    public int queryTotal(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo) {
+    public int queryGroupBuyBookingTotal(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo) {
         return groupBuyBookingMapper.getListCount(GroupBuyBookingConverter.fromBo(groupBuyBookingBo));
     }
 
@@ -220,12 +222,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     }
 
     @Override
-    public GroupBuyActivityBo queryGroupBuyActivityById(int id, UserBo userBo) {
-        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[GroupBuyManagerImpl]system admin || admin [%s] call queryGroupBuyActivityById at " + new Date(), userBo.getName()));
-        } else {
-            throw new ManagerException("对不起，您无权执行该请求");
-        }
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id) {
         GroupBuyActivityEntityExt groupBuyActivity = null;
         try {
             groupBuyActivity = groupBuyActivityMapper.getById(id);
@@ -269,6 +266,18 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) {
         // TODO Auto-generated method stub
         return Constant.SUCCESS;
+    }
+
+    @Override
+    public List<GroupBuyActivityBo> queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int queryGroupBuyActivityTotal(GroupBuyActivityBo groupBuyActivityBo) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

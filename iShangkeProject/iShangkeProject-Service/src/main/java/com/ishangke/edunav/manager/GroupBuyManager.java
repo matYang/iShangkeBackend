@@ -40,11 +40,15 @@ public interface GroupBuyManager {
      */
     public void payGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo);
     
-    public int queryTotal(GroupBuyBookingBo groupBuyBookingBo,UserBo userBo);
+    public int queryGroupBuyBookingTotal(GroupBuyBookingBo groupBuyBookingBo,UserBo userBo);
+    
+    public List<GroupBuyActivityBo> queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, PaginationBo paginationBo);
+    
+    public int queryGroupBuyActivityTotal(GroupBuyActivityBo groupBuyActivityBo);
     
     public GroupBuyActivityBo online(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo);
     
-    public GroupBuyActivityBo queryGroupBuyActivityById(int id,UserBo userBo);
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id);
     
     public GroupBuyBookingBo queryGroupBuyBookingById(int id,UserBo userBo);
 

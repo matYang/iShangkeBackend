@@ -137,7 +137,7 @@ public class GroupBuyController extends AbstractController {
 
         GroupBuyActivityBo groupBuyActivityBo = null;
         try {
-            groupBuyActivityBo = bookingFacade.queryGroupBuyActivityById(id, currentUser, permissionTag);
+            groupBuyActivityBo = bookingFacade.queryGroupBuyActivityById(id);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
