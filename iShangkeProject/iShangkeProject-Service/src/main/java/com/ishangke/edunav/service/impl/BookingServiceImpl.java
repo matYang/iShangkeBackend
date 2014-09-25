@@ -584,6 +584,55 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryGroupBuyActivity"));
+                throw new NoPermissionException();
+            }
+            GroupBuyActivityBo data = groupBuyManager.queryGroupBuyActivityById(id, userBo);
+            return data;
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
+    public GroupBuyBookingBo queryGroupBuyBookingById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryGroupBuyBooking"));
+                throw new NoPermissionException();
+            }
+            GroupBuyBookingBo data = groupBuyManager.queryGroupBuyBookingById(id, userBo);
+            return data;
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CREATEBYUSER_ERROR_KEY);
+            throw exception;
+        }
+    }
+
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) throws BusinessExceptionBo, TException {
         try {
             return groupBuyManager.changeGroupBuyBookingStatusToPayed(bookingId, trade_no);

@@ -54,7 +54,7 @@
     <typeAlias type="com.ishangke.edunav.dataaccess.model.PurposeCourseEntityExt" alias="PurposeCourseEntityExt" />
     <typeAlias type="com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt" alias="GroupBuyActivityEntityExt"/>
     <typeAlias type="com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt" alias="GroupBuyBookingEntityExt"/>
-    <typeAlias type="com.ishangke.edunav.dataaccess.model.gen.GroupBuyPhotoEntity" alias="GroupBuyPhotoEntity"/>
+    <typeAlias type="com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt" alias="GroupBuyPhotoEntityExt"/>
   </typeAliases>
   <typeHandlers>
     <typeHandler javaType="java.util.Calendar" jdbcType="TIMESTAMP"

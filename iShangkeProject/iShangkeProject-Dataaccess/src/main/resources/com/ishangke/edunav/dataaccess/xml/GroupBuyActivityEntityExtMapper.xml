@@ -9,6 +9,8 @@
     <result column="GROUPBUYACTIVITY_STATUS" property="status" jdbcType="INTEGER" />
     <result column="GROUPBUYACTIVITY_COURSEID" property="courseId" jdbcType="INTEGER" />
     <result column="GROUPBUYACTIVITY_GROUPBUYPRICE" property="groupBuyPrice" jdbcType="DOUBLE"/>
+    <result column="GROUPBUYACTIVITY_HOT" property="hot" jdbcType="INTEGER"/>
+    <result column="GROUPBUYACTIVITY_TITLE" property="title" jdbcType="VARCHAR"/>
     <collection property="course" ofType="CourseEntityExt">
       <result column="COURSE_ID" property="id" jdbcType="INTEGER" />
       <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
@@ -103,7 +105,7 @@
       <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
       <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
     </collection>
-    <collection property="photoList" javaType="java.util.ArrayList" ofType="GroupBuyPhotoEntity" >
+    <collection property="photoList" javaType="java.util.ArrayList" ofType="GroupBuyPhotoEntityExt" >
       <result column="GROUPBUYPHOTO_ID" property="id" jdbcType="INTEGER" />
       <result column="GROUPBUYPHOTO_URL" property="url" jdbcType="VARCHAR" />
       <result column="GROUPBUYPHOTO_GROUPBUYACTIVITYID" property="groupBuyActivityId" jdbcType="INTEGER" />
@@ -116,7 +118,9 @@
     GROUP_BUY_ACTIVITY.END_TIME GROUPBUYACTIVITY_ENDTIME,
     GROUP_BUY_ACTIVITY.STATUS GROUPBUYACTIVITY_STATUS,
     GROUP_BUY_ACTIVITY.COURSE_ID GROUPBUYACTIVITY_COURSEID,
-    GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE GROUPBUYACTIVITY_GROUPBUYPRICE
+    GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE GROUPBUYACTIVITY_GROUPBUYPRICE,
+    GROUP_BUY_ACTIVITY.HOT GROUPBUYACTIVITY_HOT,
+    GROUP_BUY_ACTIVITY.TITLE GROUPBUYACTIVITY_TITLE
   </sql>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
@@ -197,6 +201,12 @@
       <if test="groupBuyPrice != null">
         GROUP_BUY_PRICE,
       </if>
+      <if test="hot != null">
+        HOT,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
         <if test="courseId != null and courseId != 0">
@@ -213,6 +223,12 @@
         </if>
         <if test="groupBuyPrice != null">
            #{groupBuyPrice,jdbcType = DOUBLE},
+        </if>
+        <if test="hot != null">
+            #{hot,jdbcType=INTEGER},
+        </if>
+        <if test="title != null">
+            #{title,jdbcType=VARCHAR},
         </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -308,6 +324,22 @@
             <if test="entity.groupBuyPriceEnd != null">
                 <![CDATA[AND GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE <= #{entity.groupBuyPriceEnd,jdbcType=DOUBLE}]]>
             </if>
+        </if>
+        
+        <if test="entity.hot != null">
+            AND GROUP_BUY_ACTIVITY.HOT = #{hot,jdbcType=INTEGER}
+        </if>
+        <if test="entity.hot == null">
+            <if test="entity.hotSet != null and entity.hotSet.size() > 0">
+                AND GROUP_BUY_ACTIVITY.HOT IN
+                <foreach collection="entity.hotSet" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </if>
+        
+        <if test="entity.title != null">
+            AND GROUP_BUY_ACTIVITY.TITLE = #{title,jdbcType=VARCHAR}
         </if>
     </if>
     
@@ -405,6 +437,22 @@
                 <![CDATA[AND GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE <= #{entity.groupBuyPriceEnd,jdbcType=DOUBLE}]]>
             </if>
         </if>
+        
+        <if test="entity.hot != null">
+            And GROUP_BUY_ACTIVITY.HOT = #{hot,jdbcType=INTEGER}
+        </if>
+        <if test="entity.hot == null">
+            <if test="entity.hotSet != null and entity.hotSet.size() > 0">
+                AND GROUP_BUY_ACTIVITY.HOT IN
+                <foreach collection="entity.hotSet" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </if>
+        
+        <if test="entity.title != null">
+            AND GROUP_BUY_ACTIVITY.TITLE = #{title,jdbcType=VARCHAR}
+        </if>
     </if>
     ) as total
   </select>
@@ -427,6 +475,12 @@
         </if>
         <if test="groupBuyPrice != null">
             GROUP_BUY_PRICE = #{groupBuyPrice,jdbcType=DOUBLE},
+        </if>
+        <if test="hot != null">
+            HOT = #{hot,jdbcType=INTEGER},
+        </if>
+        <if test="title != null">
+            TITLE = #{title,jdbcType=VARCHAR},
         </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}

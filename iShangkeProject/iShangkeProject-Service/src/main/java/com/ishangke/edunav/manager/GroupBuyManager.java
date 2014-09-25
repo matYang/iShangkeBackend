@@ -5,7 +5,6 @@ import java.util.List;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
-import com.ishangke.edunav.commoncontract.model.PurposeCourseBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 
 public interface GroupBuyManager {
@@ -44,7 +43,10 @@ public interface GroupBuyManager {
     public int queryTotal(GroupBuyBookingBo groupBuyBookingBo,UserBo userBo);
     
     public GroupBuyActivityBo online(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo);
-
+    
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id,UserBo userBo);
+    
+    public GroupBuyBookingBo queryGroupBuyBookingById(int id,UserBo userBo);
 
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no);
 }

@@ -220,6 +220,52 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     }
 
     @Override
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id, UserBo userBo) {
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[GroupBuyManagerImpl]system admin || admin [%s] call queryGroupBuyActivityById at " + new Date(), userBo.getName()));
+        } else {
+            throw new ManagerException("对不起，您无权执行该请求");
+        }
+        GroupBuyActivityEntityExt groupBuyActivity = null;
+        try {
+            groupBuyActivity = groupBuyActivityMapper.getById(id);
+        } catch (Exception e) {
+            throw new ManagerException("对不起，团购查询失败，请稍后再试");
+        }
+        if (groupBuyActivity == null) {
+            throw new ManagerException("对不起，无法找到ID为" + id + "的预订");
+        }
+        GroupBuyActivityBo GroupBuyActivityBo = GroupBuyActivityConverter.toBo(groupBuyActivity);
+        return GroupBuyActivityBo;
+    }
+
+    @Override
+    public GroupBuyBookingBo queryGroupBuyBookingById(int id, UserBo userBo) {
+        String roleName = authManager.getRole(userBo.getId());
+        GroupBuyBookingEntityExt groupBuyBooking = null;
+        try {
+            groupBuyBooking = groupBuyBookingMapper.getById(id);
+        } catch (Exception e) {
+            throw new ManagerException("对不起，团购查询失败，请稍后再试");
+        }
+        if (groupBuyBooking == null) {
+            throw new ManagerException("对不起，无法找到ID为" + id + "的团购");
+        }
+        if (Constant.ROLEUSER.equals(roleName)) {
+            if (IdChecker.notEqual(groupBuyBooking.getUserId(), userBo.getId())) {
+                throw new ManagerException("对不起，您无权查询他人的团购");
+            }
+            GroupBuyBookingBo groupBuyBookingBo = GroupBuyBookingConverter.toBo(groupBuyBooking);
+            return groupBuyBookingBo;
+        } else if (Constant.ROLESYSTEMADMIN.equals(roleName) || Constant.ROLEADMIN.equals(roleName)) {
+            GroupBuyBookingBo groupBuyBookingBo = GroupBuyBookingConverter.toBo(groupBuyBooking);
+            return groupBuyBookingBo;
+        } else {
+            throw new ManagerException("对不起，当前用户无权查询团购");
+        }
+    }
+    
+
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) {
         // TODO Auto-generated method stub
         return Constant.SUCCESS;

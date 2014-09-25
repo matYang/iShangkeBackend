@@ -29,6 +29,9 @@ public class GroupBuyBookingConverter {
         if (e.getUser() != null) {
             bo.setUser(UserConverter.toBo(e.getUser()));
         }
+        if (e.getReference() != null) {
+            bo.setReference(e.getReference());
+        }
         return bo;
     }
     
@@ -59,6 +62,7 @@ public class GroupBuyBookingConverter {
         e.setIdSet(bo.getIdSet());
         e.setStatusSet(bo.getStatusSet());
         e.setUserIdSet(bo.getUserIdSet());
+        e.setReference(bo.getReference());
         return e;
     }
 }
