@@ -1,6 +1,8 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import junit.framework.Assert;
 
@@ -17,7 +19,9 @@ import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
+import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 import com.ishangke.edunav.manager.GroupBuyManager;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, GroupBuyManagerImplTest.class })
@@ -35,6 +39,11 @@ public class GroupBuyManagerImplTest extends BaseTest {
         groupBuyActivityBo.setEndTime(3011546027000l);
         groupBuyActivityBo.setStatus(0);
         groupBuyActivityBo.setCourseId(1);
+        List<GroupBuyPhotoBo> photoList = new ArrayList<GroupBuyPhotoBo>();
+        GroupBuyPhotoBo groupBuyPhotoBo = new GroupBuyPhotoBo();
+        groupBuyPhotoBo.setUrl(UUID.randomUUID().toString());
+        photoList.add(groupBuyPhotoBo);
+        groupBuyActivityBo.setPhotoList(photoList);
         UserBo userBo = new UserBo();
         userBo.setId(1);
         GroupBuyActivityBo groupBuyActivityBoNew = groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);

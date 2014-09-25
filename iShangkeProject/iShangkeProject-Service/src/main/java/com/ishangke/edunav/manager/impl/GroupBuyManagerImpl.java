@@ -14,19 +14,23 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupBuyPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.GroupBuyManager;
 import com.ishangke.edunav.manager.converter.GroupBuyActivityConverter;
 import com.ishangke.edunav.manager.converter.GroupBuyBookingConverter;
+import com.ishangke.edunav.manager.converter.GroupBuyPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
@@ -46,6 +50,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     
     @Autowired
     private CourseEntityExtMapper courseMapper;
+    
+    @Autowired
+    private GroupBuyPhotoEntityExtMapper groupBuyPhotoMapper; 
 
     @Override
     public GroupBuyActivityBo createGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo) {
@@ -82,10 +89,17 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("对不起，团购活动创建失败，请稍候再试", t);
         }
         if (result > 0) {
+        	List<GroupBuyPhotoBo> photoList = groupBuyActivityBo.getPhotoList();
+        	
+        	for (GroupBuyPhotoBo groupBuyPhotoBo : photoList) {
+        		groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
+        		groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
+        	}
             return GroupBuyActivityConverter.toBo(groupBuyActivityMapper.getById(groupBuyActivityEntity.getId()));
         } else {
             throw new ManagerException("对不起，团购活动获取失败，请稍候再试");
         }
+        
     }
 
     @Override
@@ -270,14 +284,33 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
 
     @Override
     public List<GroupBuyActivityBo> queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, PaginationBo paginationBo) {
-        // TODO Auto-generated method stub
-        return null;
+    	if (groupBuyActivityBo == null || paginationBo == null) {
+            throw new ManagerException("无效请求参数");
+        }
+    	
+    	GroupBuyActivityEntityExt groupBuyActivityEntity = GroupBuyActivityConverter.fromBo(groupBuyActivityBo); 
+        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        List<GroupBuyActivityEntityExt> results = null;
+        
+        try {
+            results = groupBuyActivityMapper.list(groupBuyActivityEntity, page);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，团购活动信息查询失败，请稍候再试");
+        }
+        
+        if (results == null) {
+            return new ArrayList<GroupBuyActivityBo>();
+        }
+        List<GroupBuyActivityBo> convertedResults = new ArrayList<GroupBuyActivityBo>();
+        for (GroupBuyActivityEntityExt result : results) {
+            convertedResults.add(GroupBuyActivityConverter.toBo(result));
+        }
+        return convertedResults;
     }
 
     @Override
     public int queryGroupBuyActivityTotal(GroupBuyActivityBo groupBuyActivityBo) {
-        // TODO Auto-generated method stub
-        return 0;
+    	return groupBuyActivityMapper.getListCount(GroupBuyActivityConverter.fromBo(groupBuyActivityBo));
     }
 
 }
