@@ -44,6 +44,13 @@ public final class SessionConfig {
         public static final long RESENDTHRESHOLD = 60000l; // 1min
         public static final long EXPIRETHRESHOLD = 600000l; // 10min
     }
+    
+    public static class QloginVerificationConfig {
+        public static final String PREFIX = "qloginVerification-";
+        public static final int AUTHCODELENGTH = 6;
+        public static final long RESENDTHRESHOLD = 60000l; // 1min
+        public static final long EXPIRETHRESHOLD = 300000l; // 5min
+    }
 
     /**
      * serializable data ligh-weighted classes used to be stored in memcached
@@ -72,6 +79,13 @@ public final class SessionConfig {
     }
 
     public static class ForgetPasswordConfigObj implements Serializable {
+        private static final long serialVersionUID = -9146948343673617643L;
+
+        public String authCode;
+        public long timeStamp;
+    }
+    
+    public static class QloginVerificationConfigObj implements Serializable {
         private static final long serialVersionUID = -9146948343673617643L;
 
         public String authCode;

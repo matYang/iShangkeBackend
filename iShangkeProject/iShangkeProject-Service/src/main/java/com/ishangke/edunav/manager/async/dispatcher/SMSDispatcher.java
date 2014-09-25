@@ -171,4 +171,22 @@ public class SMSDispatcher {
         }
     }
 
+    public static Future<Boolean> sendUserQloginVerificationSMS(final String cellNum, final String authCode) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "您的快捷登录验证码：" + authCode + "，如非本人操作请忽略此短信";
+        SMSTask task = new SMSTask(Event.USER_QLOGINVERIFICATION, cellNum, payload);
+        return ExecutorProvider.executeRelay(task);
+    }
+
+    public static Future<Boolean> sendCreateAnonymousUserSMS(final String cellNum) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已自动帮您注册成为会员～。注册手机" + cellNum + ",初始密码为刚刚您收到的验证码，请尽快更换密码";
+        SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
+        return ExecutorProvider.executeRelay(sms);
+    }
+
 }

@@ -99,6 +99,16 @@ public interface UserManager {
      * @param loginBo
      */
     SessionBo loginByUser(LoginBo loginBo);
+    
+    /**
+     * 快捷登录，返回验证码，通过验证码直接登录，不再需要输入短信
+     * 如果没有注册过的用户我们会创建这个用户的账号
+     * 如果注册过的话就使用这个现成的
+     * 
+     * @param loginBo
+     * @return
+     */
+    SessionBo qlogin(LoginBo loginBo);
 
     /**
      * 本方法为所有用户提供使用识别码登录的功能。<br>
@@ -213,6 +223,8 @@ public interface UserManager {
     int queryUserByPartnerIdAndRoleIdTotal(int partnerId, int roleId);
 
     UserBo createAnonymousUser(UserBo userBo);
+
+    SessionBo openQloginSession(UserBo userBo);
 
 
 }

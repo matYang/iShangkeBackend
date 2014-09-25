@@ -426,6 +426,26 @@ public class UserManagerImpl implements UserManager {
         SMSDispatcher.sendUserCellVerificationSMS(userBo.getPhone(), authCode);
         return sessionBo;
     }
+    
+    @Override
+    public SessionBo openQloginSession(UserBo userBo) {
+        if (userBo == null || userBo.getPhone() == null || userBo.getPhone().length() == 0) {
+            throw new ManagerException("无效请求参数");
+        }
+
+        UserEntityExt searchEntity = new UserEntityExt();
+        searchEntity.setPhone(userBo.getPhone());
+
+        UserEntityExt result = null;
+
+        String authCode = authManager.openQloginVerificationSession(userBo.getPhone());
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setAccountIdentifier(userBo.getPhone());
+        sessionBo.setAuthCode(authCode);
+
+        SMSDispatcher.sendUserQloginVerificationSMS(userBo.getPhone(), authCode);
+        return sessionBo;
+    }
 
     @Override
     public SessionBo openForgetPasswordSession(UserBo userBo) {
@@ -677,6 +697,44 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setAccountIdentifier(loginBo.getAccountIdentifier());
         sessionBo.setAuthCode(authCode);
         return sessionBo;
+    }
+    
+    @Override
+    public SessionBo qlogin(LoginBo loginBo) {
+        // TODO Auto-generated method stub
+        boolean isValid = authManager.validateQloginVerification(loginBo.getAccountIdentifier(), loginBo.getPassword());
+        if (!isValid) {
+            throw new ManagerException("对不起，您的手机号码与验证码不匹配");
+        }
+        UserEntityExt user = new UserEntityExt();
+        user.setPhone(loginBo.getAccountIdentifier());
+        user = userMapper.getByPhone(user);
+        if (user != null && IdChecker.notNull(user.getId())) {
+            SessionBo resultUser = new SessionBo();
+            String authCode = authManager.openAuthSession(user.getId());
+            resultUser.setAuthCode(authCode);
+            resultUser.setId(user.getId());
+            resultUser.setAccountIdentifier(loginBo.getAccountIdentifier());
+            authManager.closeQloginVerificationSession(loginBo.getAccountIdentifier());
+            return resultUser;
+        } else {
+            //创建用户
+            UserBo userBo = new UserBo();
+            userBo.setPhone(loginBo.getAccountIdentifier());
+            //给用户一个零时密码
+            userBo.setPassword(loginBo.getPassword());
+            //通过快捷支付方式创建出来的用户 enabled 为2
+            userBo.setEnabled(2);
+            userBo = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), false);
+            String authCode = authManager.openAuthSession(userBo.getId());
+            SessionBo resultUser = new SessionBo();
+            resultUser.setAuthCode(authCode);
+            resultUser.setId(userBo.getId());
+            resultUser.setAccountIdentifier(loginBo.getAccountIdentifier());
+            authManager.closeQloginVerificationSession(loginBo.getAccountIdentifier());
+            SMSDispatcher.sendCreateAnonymousUserSMS(userBo.getPhone());
+            return resultUser;
+        }
     }
 
     @Override
@@ -950,4 +1008,5 @@ public class UserManagerImpl implements UserManager {
         System.out.println(a.get(Calendar.YEAR) + ":" + a.get(Calendar.MONTH) + ":" + a.get(Calendar.DAY_OF_MONTH));
         System.out.println(AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH));
     }
+
 }
