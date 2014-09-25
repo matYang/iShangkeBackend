@@ -633,4 +633,16 @@ public class BookingServiceImpl implements BookingService.Iface {
         }
     }
 
+    public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) throws BusinessExceptionBo, TException {
+        try {
+            return groupBuyManager.changeGroupBuyBookingStatusToPayed(bookingId, trade_no);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.BOOKING_CHANGE_STATUS_TO_PAYED_ERROR);
+            exception.setMessageKey(ManagerErrorCode.BOOKING_CHANGE_STATUS_TO_PAYED_ERROR_KEY);
+            throw exception;
+        }
+    }
 }

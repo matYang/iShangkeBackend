@@ -47,4 +47,6 @@ public interface GroupBuyManager {
     public GroupBuyActivityBo queryGroupBuyActivityById(int id,UserBo userBo);
     
     public GroupBuyBookingBo queryGroupBuyBookingById(int id,UserBo userBo);
+
+    public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no);
 }

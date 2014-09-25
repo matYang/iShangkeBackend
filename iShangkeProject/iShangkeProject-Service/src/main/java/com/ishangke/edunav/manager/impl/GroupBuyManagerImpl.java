@@ -266,5 +266,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     }
     
 
+    public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) {
+        // TODO Auto-generated method stub
+        return Constant.SUCCESS;
+    }
 
 }

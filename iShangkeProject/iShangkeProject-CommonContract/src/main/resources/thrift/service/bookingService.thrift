@@ -306,5 +306,6 @@ service BookingService {
     groupBuyActivity.GroupBuyActivityBo queryGroupBuyActivityById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     groupBuyBooking.GroupBuyBookingBo queryGroupBuyBookingById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
-    
+
+    string changeGroupBuyBookingStatusToPayed(1: i32 id, 2: string trade_no) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 
