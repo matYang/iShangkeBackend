@@ -1316,10 +1316,6 @@ public class BookingManagerImpl implements BookingManager {
             bookingEntity.setReference(Constant.ORDERPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + bookingEntity.getId());
             bookingMapper.update(bookingEntity);
 
-            // 一个很不好的东西 暂时先将密码明文存储返回回去 后面会想办法替换掉
-            // 千万不能更新到数据库！！！
-            bookingEntity.setReference(userBo.getReference());
-
             if (result > 0) {
                 bookingBo.setId(bookingEntity.getId());
                 BookingHistoryEntityExt bookingHistory = new BookingHistoryEntityExt();
@@ -1350,11 +1346,6 @@ public class BookingManagerImpl implements BookingManager {
         BookingEntityExt resultBooking = bookingMapper.getById(bookingEntity.getId());
         BookingBo booking = BookingConverter.toBo(resultBooking);
         BookingNotificationDispatcher.sendNotification(BookingEnums.Status.fromInt(resultBooking.getStatus()), resultBooking, course);
-
-        // 一个非常不好的东西
-        // 将临时密码回传
-        // 后面要想办法替换掉此机制
-        booking.setNote(bookingEntity.getReference());
 
         return booking;
     }
