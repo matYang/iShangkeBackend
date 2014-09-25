@@ -189,4 +189,13 @@ public class SMSDispatcher {
         return ExecutorProvider.executeRelay(sms);
     }
 
+    public static Future<Boolean> sendGroupBuyPaySuccess(String phone, String title, String reference) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "您预定的团购课程[" + title + "]支付成功，订单号为:" + reference + "。稍后会有客服与您电话联系，感谢您对爱上课的支持～";
+        SMSTask task = new SMSTask(Event.USER_CELLVERIFICATION, phone, payload);
+        return ExecutorProvider.executeRelay(task);
+    }
+
 }

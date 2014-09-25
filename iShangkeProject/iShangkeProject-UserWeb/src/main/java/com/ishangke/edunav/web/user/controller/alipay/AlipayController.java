@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.web.user.controller.AbstractController;
 
@@ -41,7 +42,12 @@ public class AlipayController extends AbstractController {
                 String out_trade_no = request.getParameter("out_trade_no");
                 String[] nos = out_trade_no.split("-");
                 int bookingId = Integer.parseInt(nos[nos.length - 1]);
-                alipayFacade.changeBookingStatusToPayed(bookingId, trade_no);
+                if ("GROUPBUY".equals(nos[1])) {
+                    //判断是否是团购课程
+                    alipayFacade.changeGroupBuyBookingStatusToPayed(bookingId, trade_no);
+                } else {
+                    alipayFacade.changeBookingStatusToPayed(bookingId, trade_no);
+                }
                 // Change the status of the order
                 return "success";
             }
