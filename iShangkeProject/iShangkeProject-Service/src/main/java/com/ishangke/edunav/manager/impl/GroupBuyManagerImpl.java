@@ -22,12 +22,15 @@ import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyPhotoEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.GroupBuyManager;
+import com.ishangke.edunav.manager.async.dispatcher.SMSDispatcher;
 import com.ishangke.edunav.manager.converter.GroupBuyActivityConverter;
 import com.ishangke.edunav.manager.converter.GroupBuyBookingConverter;
 import com.ishangke.edunav.manager.converter.GroupBuyPhotoConverter;
@@ -52,7 +55,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     private CourseEntityExtMapper courseMapper;
     
     @Autowired
-    private GroupBuyPhotoEntityExtMapper groupBuyPhotoMapper; 
+    private GroupBuyPhotoEntityExtMapper groupBuyPhotoMapper;
+    
+    @Autowired
+    private UserEntityExtMapper userMapper;
 
     @Override
     public GroupBuyActivityBo createGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo) {
@@ -132,6 +138,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         int result = 0;
         try {
             result = groupBuyBookingMapper.add(groupBuyBookingEntity);
+            //团购订单号 ISK-GROUPBUY-time-id
+            groupBuyBookingEntity.setReference(Constant.GROUPBUYBOOKINGPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + groupBuyBookingEntity.getId());
+            groupBuyBookingMapper.update(groupBuyBookingEntity);
         } catch (Throwable t) {
             throw new ManagerException("对不起，选购团购课程失败，请稍候再试", t);
         }
@@ -197,7 +206,8 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
 
     @Override
     public void payGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo) {
-       
+       //use changeGroupBuyBookingStatusToPayed because of history
+       //but we will use this method next version
     }
 
     @Override
@@ -278,7 +288,28 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     
 
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) {
-        // TODO Auto-generated method stub
+        GroupBuyBookingEntityExt groupBuyBookingEntityExt = groupBuyBookingMapper.getById(bookingId);
+        if (groupBuyBookingEntityExt.getStatus() != Constant.GROUPBUYBOOKINGPENDINGPAYMENT) {
+            LOGGER.warn("[changeGroupBuyBookingStatusToPayed] try to pay booking " + bookingId + " with status " + groupBuyBookingEntityExt.getStatus());
+        }
+        groupBuyBookingEntityExt.setStatus(Constant.GROUPBUYBOOKINGPAYED);
+        groupBuyBookingEntityExt.setNumber(trade_no);
+        try {
+            groupBuyBookingMapper.update(groupBuyBookingEntityExt);
+        } catch (Exception e) {
+            LOGGER.error(String.format("[pay group buy booking] try to log booking history booking [%d] status to payed but failed", bookingId));
+            throw new ManagerException("对不起，预订历史记录创建失败，请稍后再试");
+        } finally {
+            LOGGER.info(String.format("[pay group buy booking] try to change booking [%d] status to payed", bookingId));
+        }
+        try {
+            UserEntityExt user = userMapper.getSimpleById(groupBuyBookingEntityExt.getUserId());
+            GroupBuyActivityEntityExt activity = groupBuyActivityMapper.getById(groupBuyBookingEntityExt.getGroupBuyActivityId());
+            SMSDispatcher.sendGroupBuyPaySuccess(user.getPhone(), activity.getTitle(), groupBuyBookingEntityExt.getReference());
+        } catch (Exception e) {
+            LOGGER.error("send message failed" + e);
+        }
+        
         return Constant.SUCCESS;
     }
 
