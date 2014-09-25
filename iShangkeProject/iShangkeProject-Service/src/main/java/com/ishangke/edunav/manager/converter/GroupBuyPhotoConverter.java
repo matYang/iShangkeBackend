@@ -1,10 +1,10 @@
 package com.ishangke.edunav.manager.converter;
 
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
-import com.ishangke.edunav.dataaccess.model.gen.GroupBuyPhotoEntity;
+import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 
 public class GroupBuyPhotoConverter {
-    public static GroupBuyPhotoBo toBo(GroupBuyPhotoEntity e) {
+    public static GroupBuyPhotoBo toBo(GroupBuyPhotoEntityExt e) {
         if (e == null) {
             return null;
         }
@@ -21,11 +21,11 @@ public class GroupBuyPhotoConverter {
         return bo;
     }
     
-    public static GroupBuyPhotoEntity fromBo(GroupBuyPhotoBo bo) {
+    public static GroupBuyPhotoEntityExt fromBo(GroupBuyPhotoBo bo) {
         if (bo == null) {
             return null;
         }
-        GroupBuyPhotoEntity e = new GroupBuyPhotoEntity();
+        GroupBuyPhotoEntityExt e = new GroupBuyPhotoEntityExt();
         e.setId(bo.getId());
         e.setGroupBuyActivityId(bo.getGroupBuyActivityId());
         e.setUrl(bo.getUrl());

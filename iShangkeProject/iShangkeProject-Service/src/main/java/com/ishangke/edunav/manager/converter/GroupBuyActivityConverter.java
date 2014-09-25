@@ -8,7 +8,7 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
-import com.ishangke.edunav.dataaccess.model.gen.GroupBuyPhotoEntity;
+import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 
 public class GroupBuyActivityConverter {
     public static GroupBuyActivityBo toBo(GroupBuyActivityEntityExt e){
@@ -35,10 +35,19 @@ public class GroupBuyActivityConverter {
         }
         if (e.getPhotoList() != null) {
             List<GroupBuyPhotoBo> list = new ArrayList<>();
-            for (GroupBuyPhotoEntity photo :e.getPhotoList()) {
+            for (GroupBuyPhotoEntityExt photo :e.getPhotoList()) {
                 list.add(GroupBuyPhotoConverter.toBo(photo));
             }
             bo.setPhotoList(list);
+        }
+        
+        if (e.getHot() != null) {
+            bo.setHot(e.getHot());
+        } else {
+            bo.setHot(Constant.DEFAULTNULL);
+        }
+        if (e.getTitle() != null) {
+            bo.setTitle(e.getTitle());
         }
         return bo;
     }
@@ -71,6 +80,11 @@ public class GroupBuyActivityConverter {
         if (Constant.DEFAULTNULL != bo.getGroupBuyPriceEnd()) {
             e.setGroupBuyPriceEnd(bo.getGroupBuyPriceEnd());
         }
+        if (Constant.DEFAULTNULL != bo.getHot()) {
+            e.setHot(bo.getHot());
+        }
+        e.setHotSet(bo.getHotSet());
+        e.setTitle(bo.getTitle());
         return e;
     }
 }

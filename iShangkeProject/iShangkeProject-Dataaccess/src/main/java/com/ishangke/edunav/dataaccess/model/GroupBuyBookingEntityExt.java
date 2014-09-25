@@ -14,9 +14,23 @@ public class GroupBuyBookingEntityExt extends GroupBuyBookingEntity {
     private Double groupBuyPriceEnd;
     private Set<Integer> groupBuyActivityIdSet;
     private Set<Integer> userIdSet;
-    
     private GroupBuyActivityEntityExt groupBuyActivity;
     private UserEntityExt user;
+    private String reference;
+    private String number;
+    
+    public String getReference() {
+        return reference;
+    }
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+    public String getNumber() {
+        return number;
+    }
+    public void setNumber(String number) {
+        this.number = number;
+    }
     public Set<Integer> getIdSet() {
         return idSet;
     }

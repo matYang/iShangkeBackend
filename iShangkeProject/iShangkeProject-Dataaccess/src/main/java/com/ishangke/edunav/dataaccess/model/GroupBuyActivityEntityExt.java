@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.GroupBuyActivityEntity;
-import com.ishangke.edunav.dataaccess.model.gen.GroupBuyPhotoEntity;
+import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 
 public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private Set<Integer> idSet;
@@ -18,13 +18,22 @@ public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private Double groupBuyPriceEnd;
     private Calendar endTimeStart;
     private Calendar endTimeEnd;
-    private List<GroupBuyPhotoEntity> photoList;
+    private List<GroupBuyPhotoEntityExt> photoList;
+    private Set<Integer> hotSet;
     
-    public List<GroupBuyPhotoEntity> getPhotoList() {
+    public Set<Integer> getHotSet() {
+        return hotSet;
+    }
+
+    public void setHotSet(Set<Integer> hotSet) {
+        this.hotSet = hotSet;
+    }
+
+    public List<GroupBuyPhotoEntityExt> getPhotoList() {
         return photoList;
     }
 
-    public void setPhotoList(List<GroupBuyPhotoEntity> photoList) {
+    public void setPhotoList(List<GroupBuyPhotoEntityExt> photoList) {
         this.photoList = photoList;
     }
 

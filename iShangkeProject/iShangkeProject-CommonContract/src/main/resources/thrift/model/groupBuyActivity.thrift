@@ -20,6 +20,9 @@ struct GroupBuyActivityBo {
   15: i64 endTimeStart
   16: i64 endTimeEnd
   17: list<groupBuyPhoto.GroupBuyPhotoBo> photoList;
+  18: i32 hot
+  19: set<i32> hotSet
+  20: string title
 }
 
 struct GroupBuyActivityPageViewBo{

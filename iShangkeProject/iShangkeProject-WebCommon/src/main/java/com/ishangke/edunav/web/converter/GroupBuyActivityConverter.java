@@ -80,6 +80,17 @@ public class GroupBuyActivityConverter {
         } else {
             bo.setGroupBuyPriceEnd(Constant.DEFAULTNULL);
         }
+        if (vo.getHot() != null) {
+            bo.setHot(vo.getHot());
+        } else {
+            bo.setHot(Constant.DEFAULTNULL);
+        }
+        if (vo.getHotSet() != null) {
+            bo.setHotSet(vo.getHotSet());
+        }
+        if (vo.getTitle() != null) {
+            bo.setTitle(vo.getTitle());
+        }
         return bo;
     }
 
@@ -106,6 +117,10 @@ public class GroupBuyActivityConverter {
             }
             vo.setPhotoList(list);
         }
+        if (Constant.DEFAULTNULL != bo.getHot()) {
+            vo.setHot(bo.getHot());
+        }
+        vo.setTitle(bo.getTitle());
         return vo;
     }
 }

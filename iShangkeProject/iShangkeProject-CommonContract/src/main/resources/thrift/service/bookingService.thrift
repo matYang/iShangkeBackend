@@ -302,5 +302,9 @@ service BookingService {
      * @return
      */
     groupBuyActivity.GroupBuyActivityBo online(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
-
+    
+    groupBuyActivity.GroupBuyActivityBo queryGroupBuyActivityById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    groupBuyBooking.GroupBuyBookingBo queryGroupBuyBookingById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
 } 

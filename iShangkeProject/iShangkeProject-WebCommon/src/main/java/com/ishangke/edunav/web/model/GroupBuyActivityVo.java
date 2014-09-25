@@ -24,8 +24,29 @@ public class GroupBuyActivityVo extends JsonResponse {
     private Double groupBuyPriceStart;
     private Double groupBuyPriceEnd;
     private List<GroupBuyPhotoVo> photoList;
+    private Integer hot;
+    private Set<Integer> hotSet;
+    private String title;
     
     
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public Integer getHot() {
+        return hot;
+    }
+    public void setHot(Integer hot) {
+        this.hot = hot;
+    }
+    public Set<Integer> getHotSet() {
+        return hotSet;
+    }
+    public void setHotSet(Set<Integer> hotSet) {
+        this.hotSet = hotSet;
+    }
     public List<GroupBuyPhotoVo> getPhotoList() {
         return photoList;
     }

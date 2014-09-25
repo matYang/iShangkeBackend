@@ -542,6 +542,10 @@ public class ManagerErrorCode {
     public static final String PERMISSION_BOOKING_QUERYGROUPBUYBOOKING_KEY = "permission_booking_queryGroupBuyBooking";
     public static final int PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE = 0x01000073;
     public static final String PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE_KEY = "permission_booking_groupBuyActivityOnline";
+    public static final int PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID = 0x01000074;
+    public static final String PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID_KEY = "permission_booking_queryGroupBuyBooking";
+    public static final int PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID = 0x01000075;
+    public static final String PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID_KEY = "permission_booking_queryGroupBuyBooking";
     
     // alipay
     public static final int ALIPAY_VERIFY_ERROR = 0x001C0001;

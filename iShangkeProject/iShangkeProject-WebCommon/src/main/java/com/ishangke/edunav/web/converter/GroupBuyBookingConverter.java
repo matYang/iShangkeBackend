@@ -79,6 +79,9 @@ public class GroupBuyBookingConverter {
          if (vo.getUserIdSet() != null) {
              bo.setUserIdSet(vo.getUserIdSet());
          }
+         if (vo.getReference() != null) {
+             bo.setReference(vo.getReference());
+         }
          return bo;
     }
     public static GroupBuyBookingVo toModel(GroupBuyBookingBo bo){
@@ -100,6 +103,7 @@ public class GroupBuyBookingConverter {
         vo.setUserId(bo.getUserId());
         vo.setGroupBuyActivity(GroupBuyActivityConverter.toModel(bo.getGroupBuyActivity()));
         vo.setUser(UserConverter.toModel(bo.getUser()));
+        vo.setReference(bo.getReference());
         return vo;
     }
 }

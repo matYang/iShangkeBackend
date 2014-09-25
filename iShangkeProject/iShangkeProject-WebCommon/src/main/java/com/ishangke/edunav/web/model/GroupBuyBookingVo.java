@@ -22,6 +22,21 @@ public class GroupBuyBookingVo extends JsonResponse {
     private Set<Integer> userIdSet;
     private GroupBuyActivityVo groupBuyActivity;
     private UserVo user;
+    private String reference;
+    private String number;
+    
+    public String getReference() {
+        return reference;
+    }
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+    public String getNumber() {
+        return number;
+    }
+    public void setNumber(String number) {
+        this.number = number;
+    }
     public Integer getId() {
         return id;
     }

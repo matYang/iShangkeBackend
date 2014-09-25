@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,5 +93,31 @@ public class GroupBuyController extends AbstractController {
         pageViewVo = GroupBuyBookingPageViewConverter.toModel(pageViewBo);
 
         return pageViewVo;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse queryGroupBuyBookingById(@PathVariable int id, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo currentUser = null;
+        try {
+            currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        GroupBuyBookingBo groupBuyBookingBo = null;
+        try {
+            groupBuyBookingBo = bookingFacade.queryGroupBuyBookingById(id, currentUser, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        GroupBuyBookingVo groupBuyBookingVo = GroupBuyBookingConverter.toModel(groupBuyBookingBo);
+        return groupBuyBookingVo;
     }
 }
