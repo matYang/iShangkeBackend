@@ -52,4 +52,10 @@ public interface AuthManager {
     String getRole(final int userId);
 
     Integer getRoleId(final int userId);
+
+    boolean validateQloginVerification(String accountIdentifier, String password);
+
+    String openQloginVerificationSession(String cell);
+
+    Future<Boolean> closeQloginVerificationSession(String identifier);
 }

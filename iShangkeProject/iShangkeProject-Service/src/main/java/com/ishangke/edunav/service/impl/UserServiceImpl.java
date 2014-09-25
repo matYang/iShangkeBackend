@@ -82,6 +82,20 @@ public class UserServiceImpl implements UserService.Iface {
     }
 
     @Override
+    public SessionBo qlogin(LoginBo loginBo) throws BusinessExceptionBo, TException {
+        try {
+            return userManager.qlogin(loginBo);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.USER_LOGINBYPHONE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_LOGINBYPHONE_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
     public SessionBo loginByReference(LoginBo loginBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
             return userManager.loginByReference(loginBo);
@@ -340,6 +354,27 @@ public class UserServiceImpl implements UserService.Iface {
         try {
             // 不需要进行权限控制
             return userManager.openCellSession(userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_USER_OPENCELLSESSION);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_USER_OPENCELLSESSION_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.USER_OPENCELLSESSION_ERROR);
+            exception.setMessageKey(ManagerErrorCode.USER_OPENCELLSESSION_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
+    public SessionBo openQloginSession(UserBo userBo) throws BusinessExceptionBo, TException {
+        try {
+            // 不需要进行权限控制
+            return userManager.openQloginSession(userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();

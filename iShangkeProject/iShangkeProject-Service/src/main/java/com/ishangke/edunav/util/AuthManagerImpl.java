@@ -30,6 +30,8 @@ import com.ishangke.edunav.manager.common.SessionConfig.CellVerificationConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.CellVerificationConfigObj;
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfig;
 import com.ishangke.edunav.manager.common.SessionConfig.ForgetPasswordConfigObj;
+import com.ishangke.edunav.manager.common.SessionConfig.QloginVerificationConfig;
+import com.ishangke.edunav.manager.common.SessionConfig.QloginVerificationConfigObj;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
 @Component
@@ -131,14 +133,14 @@ public class AuthManagerImpl implements AuthManager {
     }
 
     /**
-     * Session处理处于特殊情况，需要使用CAS，由于： 1： Memcached
-     * 不像Redis一样支持模糊键查找以及List，Set等数据结构，此外一次只能读取一个键值对，一次读取多个极为不可靠 2：
-     * 用户需要可以多客户端每客户端多地登陆，修改密码之后又需要全部登出 3： 每次需要全部登出就改变用户在memcached中的对应的键可行但是麻烦很大
-     * 4： 因此选择将一个用户的所有Session信息以一个list结构存入一个键值对中 5：
-     * 这样一个键值对就包含了所有Session信息，增大了Data Race的可能性，而Session信息出问题了可能比较麻烦，因此需要做线程安全防护
-     * 6： 线程安全防护在这里只有两种做法，1： 锁记录 2：使用底层CAS 7:
-     * 在Memcached中实现锁记录比较难，而且影响效率，因此选择采用Memcached自己支持并且无锁高效的CAS做法
-     * 利用Memecached的Compare-and-Swap功能进行无锁线程安全操作
+     * Session处理处于特殊情况，需要使用CAS，由于： 
+     * 1：Memcached不像Redis一样支持模糊键查找以及List，Set等数据结构，此外一次只能读取一个键值对，一次读取多个极为不可靠 
+     * 2：用户需要可以多客户端每客户端多地登陆，修改密码之后又需要全部登出 
+     * 3：每次需要全部登出就改变用户在memcached中的对应的键可行但是麻烦很大
+     * 4：因此选择将一个用户的所有Session信息以一个list结构存入一个键值对中 
+     * 5：这样一个键值对就包含了所有Session信息，增大了Data Race的可能性，而Session信息出问题了可能比较麻烦，因此需要做线程安全防护
+     * 6：线程安全防护在这里只有两种做法，1： 锁记录 2：使用底层CAS 
+     * 7: 在Memcached中实现锁记录比较难，而且影响效率，因此选择采用Memcached自己支持并且无锁高效的CAS做法，利用Memecached的Compare-and-Swap功能进行无锁线程安全操作
      */
     @Override
     public boolean validateAuthSession(int identifier, final String authCode) {
@@ -382,6 +384,35 @@ public class AuthManagerImpl implements AuthManager {
             throw new ManagerException("ValidateCellVerificationSession");
         }
     }
+    
+    /**
+     * 验证快捷支付
+     */
+    @Override
+    public boolean validateQloginVerification(String accountIdentifier, String password) {
+        try {
+            String key = QloginVerificationConfig.PREFIX + accountIdentifier;
+            QloginVerificationConfigObj cvRecord = (QloginVerificationConfigObj) cache.get(key);
+            if (cvRecord == null) {
+                return false;
+            } else {
+                if (!cvRecord.authCode.equalsIgnoreCase(password)) {
+                    return false;
+                }
+                if ((DateUtility.getCurTime() - cvRecord.timeStamp) > QloginVerificationConfig.EXPIRETHRESHOLD) {
+                    cache.del(key);
+                    return false;
+                }
+                return true;
+            }
+        } catch (ManagerException e) {
+            LOGGER.debug("validateQloginVerificationSession", e);
+            throw e;
+        } catch (Throwable t) {
+            LOGGER.debug("validateQloginVerificationSession", t);
+            throw new ManagerException("validateQloginVerificationSession");
+        }
+    }
 
     /**
      * 生成并记录手机验证码
@@ -414,6 +445,38 @@ public class AuthManagerImpl implements AuthManager {
             throw new ManagerException("OpenCellVerificationSession");
         }
     }
+    
+    /**
+     * 生成并记录快捷登录验证码
+     */
+    @Override
+    public String openQloginVerificationSession(String cell) {
+        try {
+            String key = QloginVerificationConfig.PREFIX + cell;
+            QloginVerificationConfigObj cvRecord = (QloginVerificationConfigObj) cache.get(key);
+            if (cvRecord != null) {
+                // 找到之前的发送信息，查看是否可以重新发送
+                if ((DateUtility.getCurTime() - cvRecord.timeStamp) <= QloginVerificationConfig.RESENDTHRESHOLD) {
+                    throw new ManagerException("连续请求过快");
+                } else {
+                    return cvRecord.authCode;
+                }
+            }
+            cvRecord = new QloginVerificationConfigObj();
+            cvRecord.authCode = AuthCodeGenerator.numerical(QloginVerificationConfig.AUTHCODELENGTH);
+            cvRecord.timeStamp = DateUtility.getCurTime();
+
+            // 过期时间设置为0, 存于memcached不过期，不依赖memcached自动过期机制，避免OCS短时间缓存不过期的不稳定问题
+            cache.set(key, SessionConfig.NON_AUTH_MEMCACHED_SESSION_EXPIRE, cvRecord).get();
+            return cvRecord.authCode;
+        } catch (ManagerException e) {
+            LOGGER.debug("OpenCellVerificationSession", e);
+            throw e;
+        } catch (Throwable t) {
+            LOGGER.debug("OpenCellVerificationSession", t);
+            throw new ManagerException("OpenCellVerificationSession");
+        }
+    }
 
     @Override
     public Future<Boolean> closeCellVerificationSession(String identifier) {
@@ -425,6 +488,19 @@ public class AuthManagerImpl implements AuthManager {
         } catch (Throwable t) {
             LOGGER.debug("CloseCellVerificationSession", t);
             throw new ManagerException("CloseCellVerificationSession");
+        }
+    }
+    
+    @Override
+    public Future<Boolean> closeQloginVerificationSession(String identifier) {
+        try {
+            return cache.del(QloginVerificationConfig.PREFIX + identifier);
+        } catch (ManagerException e) {
+            LOGGER.debug("CloseQloginVerificationSession", e);
+            throw e;
+        } catch (Throwable t) {
+            LOGGER.debug("CloseQloginVerificationSession", t);
+            throw new ManagerException("CloseQloginVerificationSession");
         }
     }
 
@@ -547,4 +623,5 @@ public class AuthManagerImpl implements AuthManager {
             return role;
         }
     }
+
 }

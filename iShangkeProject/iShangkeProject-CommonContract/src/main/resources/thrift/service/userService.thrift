@@ -51,6 +51,8 @@ service UserService {
      *  @return 用户实体          UserBo
      */
     user.SessionBo openCellSession(1: user.UserBo userBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    user.SessionBo openQloginSession(1: user.UserBo userBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为普通用户提供忘记密码时手机验证。<br>
@@ -82,6 +84,8 @@ service UserService {
      *
      */
     user.SessionBo loginByUser(1: user.LoginBo loginBo, 2: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    user.SessionBo qlogin(1: user.LoginBo loginBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 
     /**
      *  本方法为所有用户提供使用识别号登录的功能。<br>
