@@ -67,11 +67,10 @@ public class GroupBuyActivityEntityExtTest {
         statusSet.add(0);
         statusSet.add(1);
         groupBuyActivity.setStatusSet(statusSet);
-        //groupBuyActivity.setCreateTimeStart(DateUtility.getCurTimeInstance());
+        groupBuyActivity.setCreateTimeStart(DateUtility.getCurTimeInstance());
         List<GroupBuyActivityEntityExt> list = groupBuyActivityEntityExtMapper.list(groupBuyActivity, null);
         int countFirst = list.size();
-        //int countSecond = groupBuyActivityEntityExtMapper.getListCount(groupBuyActivity);
-        //Assert.assertEquals(countFirst, countSecond);
-        Assert.assertEquals(countFirst, 5);
+        int countSecond = groupBuyActivityEntityExtMapper.getListCount(groupBuyActivity);
+        Assert.assertEquals(countFirst, countSecond);
     }
 }

@@ -129,10 +129,10 @@ public class RoleEntityExtTest extends BaseTest {
     @Test
     public void testQuery3() {
         int teacherCount = roleEntityExtMapper.getCountByUserId(2);
-        Assert.assertSame(7, teacherCount);
+        Assert.assertSame(8, teacherCount);
 
         List<RoleEntityExt> result = roleEntityExtMapper.listRolesByUserId(2);
-        Assert.assertEquals(7, result.size());
+        Assert.assertEquals(8, result.size());
         Assert.assertEquals("admin", result.get(0).getName());
     }
 
