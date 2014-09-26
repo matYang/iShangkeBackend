@@ -38,7 +38,6 @@ import com.ishangke.edunav.web.converter.GroupBuyBookingConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.GroupBuyBookingPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
-import com.ishangke.edunav.web.model.ClassPhotoVo;
 import com.ishangke.edunav.web.model.GroupBuyActivityVo;
 import com.ishangke.edunav.web.model.GroupBuyBookingVo;
 import com.ishangke.edunav.web.model.GroupBuyPhotoVo;
@@ -82,7 +81,7 @@ public class GroupBuyController extends AbstractController {
         return responseVo;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/booking", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyBooking(GroupBuyBookingVo groupBuyBookingVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
