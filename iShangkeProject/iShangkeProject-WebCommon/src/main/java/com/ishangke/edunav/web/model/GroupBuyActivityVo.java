@@ -27,8 +27,14 @@ public class GroupBuyActivityVo extends JsonResponse {
     private Integer hot;
     private Set<Integer> hotSet;
     private String title;
+    private Integer bookingTotal;
     
-    
+    public Integer getBookingTotal() {
+        return bookingTotal;
+    }
+    public void setBookingTotal(Integer bookingTotal) {
+        this.bookingTotal = bookingTotal;
+    }
     public String getTitle() {
         return title;
     }
