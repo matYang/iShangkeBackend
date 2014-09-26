@@ -14,9 +14,9 @@ import com.ishangke.edunav.commoncontract.model.BookingHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyActivityPageViewBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingPageViewBo;
-import com.ishangke.edunav.commoncontract.model.GroupBuyActivityPageViewBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PurposeCourseBo;
@@ -641,10 +641,14 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public GroupBuyBookingBo queryGroupBuyBookingById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryGroupBuyBooking"));
-                throw new NoPermissionException();
-            }
+            /*
+             * if
+             * (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo
+             * .getId()), permissionTag)) {
+             * LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+             * userBo.getId(), permissionTag, "queryGroupBuyBooking")); throw
+             * new NoPermissionException(); }
+             */
             GroupBuyBookingBo data = groupBuyManager.queryGroupBuyBookingById(id, userBo);
             return data;
         } catch (NoPermissionException e) {
