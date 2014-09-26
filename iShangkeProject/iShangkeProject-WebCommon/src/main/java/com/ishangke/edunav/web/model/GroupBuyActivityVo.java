@@ -11,7 +11,6 @@ public class GroupBuyActivityVo extends JsonResponse {
     private Long endTime;
     private Integer status;
     private Integer courseId;
-    private Integer deleted;
     private Set<Integer> idSet;
     private Long createTimeStart;
     private Long createTimeEnd;
@@ -118,12 +117,6 @@ public class GroupBuyActivityVo extends JsonResponse {
     }
     public void setCourseId(Integer courseId) {
         this.courseId = courseId;
-    }
-    public Integer getDeleted() {
-        return deleted;
-    }
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
     public Set<Integer> getIdSet() {
         return idSet;
