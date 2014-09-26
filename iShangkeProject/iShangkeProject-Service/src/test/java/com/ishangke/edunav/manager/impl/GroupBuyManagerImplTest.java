@@ -97,4 +97,11 @@ public class GroupBuyManagerImplTest extends BaseTest {
         GroupBuyActivityBo groupBuyBookingBoNew = groupBuyManager.online(groupBuyActivityBo, userBo);
         Assert.assertEquals(groupBuyBookingBoNew.getStatus(), 1);
     }
+    
+    @Test
+    public void testGetBookingTotal() {
+        int m = groupBuyManager.getGroupBuyBookingTotal(2);
+        System.out.println("****");
+        System.out.println(m);
+    }
 }
