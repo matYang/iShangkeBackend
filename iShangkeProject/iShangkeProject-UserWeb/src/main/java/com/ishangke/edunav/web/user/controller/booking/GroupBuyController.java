@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ishangke.edunav.common.constant.Constant;
-import com.ishangke.edunav.common.utilities.DateUtility;
-import com.ishangke.edunav.commoncontract.model.BookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingPageViewBo;
-import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.AlipayFacade;
@@ -26,12 +22,10 @@ import com.ishangke.edunav.facade.user.BookingFacade;
 import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.GroupBuyBookingConverter;
-import com.ishangke.edunav.web.converter.OrderConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.GroupBuyBookingPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
 import com.ishangke.edunav.web.model.GroupBuyBookingVo;
-import com.ishangke.edunav.web.model.OrderVo;
 import com.ishangke.edunav.web.model.pageview.GroupBuyBookingPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
@@ -78,7 +72,7 @@ public class GroupBuyController extends AbstractController {
         return responseVo;
     }
     
-    @RequestMapping(value="",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="/booking",method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyBooking(HttpServletRequest req,HttpServletResponse resp,PaginationVo paginationVo,GroupBuyBookingVo groupBuyBookingVo) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -107,7 +101,7 @@ public class GroupBuyController extends AbstractController {
         return pageViewVo;
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/booking/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyBookingById(@PathVariable int id, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
