@@ -227,8 +227,7 @@ public class GroupBuyController extends AbstractController {
     }
     
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody JsonResponse upload(@RequestParam("file") MultipartFile file,
-    		@RequestParam(defaultValue = "alipay") HttpServletRequest req, HttpServletResponse resp)
+    public @ResponseBody JsonResponse upload(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpServletResponse resp)
             throws ControllerException {
     	String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -281,13 +280,13 @@ public class GroupBuyController extends AbstractController {
                 // name to make it unique
                 byte[] digest = md.digest();
                 String checkSumString = FileSetting.getCheckSumString(digest);
-                String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.CLASSPHOTO, partnerId, curId, checkSumString);
+                String fullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.GROUPBUYPHOTO, partnerId, curId, checkSumString);
                 imgUrl = AliyunMain.uploadImg(partnerId, serverFile, fullQualifiedName, Config.AliyunClassroomImgBucket);
 
                 // using Scalr to resize the image
                 snapShotBufferedImage = Scalr.resize(snapShotBufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 200, 200, Scalr.OP_ANTIALIAS);
                 ImageIO.write(snapShotBufferedImage, FileSetting.IMGFILEFORMAT, snapshotFile);
-                String snapShotFullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.CLASSPHOTO_SNAPSHOT, partnerId, curId, checkSumString);
+                String snapShotFullQualifiedName = FileSetting.assembleName(FileSetting.Prefix.GROUPBUYPHOTO_SNAPSHOT, partnerId, curId, checkSumString);
                 snapShotUrl = AliyunMain.uploadImg(partnerId, snapshotFile , snapShotFullQualifiedName, Config.AliyunClassroomImgBucket);
 
                 groupPhoto.setUrl(imgUrl);
