@@ -1,6 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -27,6 +29,13 @@ public class GroupBuyActivityEntityExtTest {
         groupBuyActivity.setCreateTime(DateUtility.getCurTimeInstance());
         groupBuyActivity.setStatus(1);
         groupBuyActivity.setCourseId(1);
+        groupBuyActivity.setCreateTime(DateUtility.getCurTimeInstance());
+        groupBuyActivity.setEndTime(DateUtility.getCurTimeInstance());
+        groupBuyActivity.setStatus(0);
+        groupBuyActivity.setGroupBuyPrice(10.0);
+        groupBuyActivity.setCourseId(4);
+        groupBuyActivity.setHot(8);
+        groupBuyActivity.setTitle("四级团购");
         int count = groupBuyActivityEntityExtMapper.add(groupBuyActivity);
         Assert.assertEquals(count, 1);
     }
@@ -36,11 +45,11 @@ public class GroupBuyActivityEntityExtTest {
         GroupBuyActivityEntityExt groupBuyActivityOld = groupBuyActivityEntityExtMapper.getById(1);
         int statusOld = groupBuyActivityOld.getStatus();
         Assert.assertEquals(statusOld,0);
-        groupBuyActivityOld.setStatus(1);
+        groupBuyActivityOld.setHot(5);
         groupBuyActivityEntityExtMapper.update(groupBuyActivityOld);
         GroupBuyActivityEntityExt groupBuyActivityNew = groupBuyActivityEntityExtMapper.getById(1);
-        int statusNew = groupBuyActivityNew.getStatus();
-        Assert.assertEquals(statusNew, 1);
+        int hotNew = groupBuyActivityNew.getHot();
+        Assert.assertEquals(hotNew, 5);
     }
     
     @Test
@@ -54,10 +63,15 @@ public class GroupBuyActivityEntityExtTest {
     public void testList(){
         GroupBuyActivityEntityExt groupBuyActivity = new GroupBuyActivityEntityExt();
         groupBuyActivity.setCourseId(1);
-        groupBuyActivity.setCreateTimeStart(DateUtility.getCurTimeInstance());
+        Set<Integer> statusSet = new HashSet<>();
+        statusSet.add(0);
+        statusSet.add(1);
+        groupBuyActivity.setStatusSet(statusSet);
+        //groupBuyActivity.setCreateTimeStart(DateUtility.getCurTimeInstance());
         List<GroupBuyActivityEntityExt> list = groupBuyActivityEntityExtMapper.list(groupBuyActivity, null);
         int countFirst = list.size();
-        int countSecond = groupBuyActivityEntityExtMapper.getListCount(groupBuyActivity);
-        Assert.assertEquals(countFirst, countSecond);
+        //int countSecond = groupBuyActivityEntityExtMapper.getListCount(groupBuyActivity);
+        //Assert.assertEquals(countFirst, countSecond);
+        Assert.assertEquals(countFirst, 5);
     }
 }
