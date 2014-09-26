@@ -385,10 +385,10 @@
             USER_ID = #{userId,jdbcType=INTEGER},
         </if>
         <if test="reference != null">
-            REFERENCE = #{reference,jdbcType=VARCHAR}
+            REFERENCE = #{reference,jdbcType=VARCHAR},
         </if>
         <if test="number != null">
-            NUMBER = #{number,jdbcType=VARCHAR}
+            NUMBER = #{number,jdbcType=VARCHAR},
         </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
