@@ -4,7 +4,6 @@ struct GroupBuyPhotoBo {
   1: i32 id
   2: i32 groupBuyActivityId
   3: string url
-  4: i32 deleted
 }
 
 struct GroupBuyPhotoPageViewBo{
