@@ -1607,3 +1607,8 @@ INSERT INTO `edunav`.`group_buy_photo` (`ID`, `URL`, `GROUP_BUY_ACTIVITY_ID`, `D
 INSERT INTO `edunav`.`group_buy_photo` (`ID`, `URL`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('3', '3.png', '3', '0');
 INSERT INTO `edunav`.`group_buy_photo` (`ID`, `URL`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('4', '4.png', '1', '0');
 INSERT INTO `edunav`.`group_buy_photo` (`ID`, `URL`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('5', '5.png', '2', '0');
+INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('1', '1', '1', '0');
+INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('2', '2', '1', '0');
+INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('3', '3', '1', '0');
+INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('4', '4', '2', '0');
+INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('5', '5', '2', '0');
