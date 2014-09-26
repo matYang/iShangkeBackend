@@ -234,5 +234,6 @@ public class Constant {
     public static final int GROUPBUYBOOKINGPAYED = 1;
     public static final int GROUPBUYBOOKINGQUITED = 2;
     public static final String GROUPBUYBOOKINGPREFIX = "ISK-GROUPBUY-";
+    public static final String GROUPBUYTOTAL = "groupbuytotal";
     
 }

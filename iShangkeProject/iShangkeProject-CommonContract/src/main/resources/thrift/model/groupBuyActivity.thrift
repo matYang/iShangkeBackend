@@ -23,6 +23,7 @@ struct GroupBuyActivityBo {
   18: i32 hot
   19: set<i32> hotSet
   20: string title
+  21: i32 bookingTotal
 }
 
 struct GroupBuyActivityPageViewBo{
