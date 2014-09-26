@@ -129,6 +129,7 @@ public class GroupBuyActivityConverter {
             vo.setHot(bo.getHot());
         }
         vo.setTitle(bo.getTitle());
+        vo.setBookingTotal(bo.getBookingTotal());
         return vo;
     }
 }

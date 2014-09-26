@@ -157,4 +157,11 @@ public class GroupBuyManagerImplTest extends BaseTest {
         System.out.println("str:"+str);
         Assert.assertEquals("success", str);
     }
+    
+    @Test
+    public void testGetBookingTotal() {
+        int m = groupBuyManager.getGroupBuyBookingTotal(2);
+        System.out.println("****");
+        System.out.println(m);
+    }
 }

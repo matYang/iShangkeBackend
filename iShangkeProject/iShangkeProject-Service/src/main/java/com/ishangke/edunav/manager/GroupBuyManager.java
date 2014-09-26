@@ -53,4 +53,6 @@ public interface GroupBuyManager {
     public GroupBuyBookingBo queryGroupBuyBookingById(int id,UserBo userBo);
 
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no);
+    
+    public int getGroupBuyBookingTotal(int courseId);
 }
