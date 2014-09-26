@@ -330,7 +330,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         }
     	
     	GroupBuyActivityEntityExt groupBuyActivityEntity = GroupBuyActivityConverter.fromBo(groupBuyActivityBo); 
-        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        PaginationEntity page = PaginationConverter.fromBo(PageUtil.getPage(paginationBo));
         List<GroupBuyActivityEntityExt> results = null;
         
         try {
