@@ -14,11 +14,13 @@ public class PageUtil {
             page = new PaginationBo();
             page.offset = OFFSET;
             page.size = SIZE;
-        } else if (page.getSize() > SIZE || page.getSize() == Constant.DEFAULTNULL) {
+        } else {
+            if (page.getSize() > SIZE || page.getSize() == Constant.DEFAULTNULL) {
+                page.setSize(SIZE);
+            }
             if (page.getOffset() == Constant.DEFAULTNULL) {
                 page.setOffset(OFFSET);
             }
-            page.setSize(SIZE);
         }
         return page;
     }
