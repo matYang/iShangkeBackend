@@ -26,7 +26,6 @@ import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
-import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
@@ -331,7 +330,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         }
     	
     	GroupBuyActivityEntityExt groupBuyActivityEntity = GroupBuyActivityConverter.fromBo(groupBuyActivityBo); 
-        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        PaginationEntity page = PaginationConverter.fromBo(PageUtil.getPage(paginationBo));
         List<GroupBuyActivityEntityExt> results = null;
         
         try {

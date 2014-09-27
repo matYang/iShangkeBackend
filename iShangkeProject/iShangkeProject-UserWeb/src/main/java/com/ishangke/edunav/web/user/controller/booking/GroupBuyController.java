@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyActivityPageViewBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
@@ -21,11 +22,16 @@ import com.ishangke.edunav.facade.user.AlipayFacade;
 import com.ishangke.edunav.facade.user.BookingFacade;
 import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
+import com.ishangke.edunav.web.converter.GroupBuyActivityConverter;
 import com.ishangke.edunav.web.converter.GroupBuyBookingConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
+import com.ishangke.edunav.web.converter.pageview.GroupBuyActivityPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.GroupBuyBookingPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.BookingMap;
+import com.ishangke.edunav.web.model.GroupBuyActivityVo;
 import com.ishangke.edunav.web.model.GroupBuyBookingVo;
+import com.ishangke.edunav.web.model.pageview.GroupBuyActivityPageViewVo;
 import com.ishangke.edunav.web.model.pageview.GroupBuyBookingPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
@@ -42,7 +48,7 @@ public class GroupBuyController extends AbstractController {
     @Autowired
     private AlipayFacade alipayFacade;
 
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/booking", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse createGroupBuyBooking(@RequestBody GroupBuyBookingVo groupBuyBooking, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
         SessionBo authSessionBo = this.getSession(req);
@@ -72,6 +78,67 @@ public class GroupBuyController extends AbstractController {
         return responseVo;
     }
     
+    @RequestMapping(value="",method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse queryGroupBuyActivity(GroupBuyActivityVo groupBuyActivityVo,
+    		PaginationVo paginationVo,
+    		HttpServletRequest req,
+    		HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        GroupBuyActivityPageViewBo pageViewBo = null;
+        GroupBuyActivityPageViewVo pageViewVo = null;
+        paginationVo.setColumnKey(BookingMap.BOOKING_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(BookingMap.BOOKING_MAP.get(paginationVo.getOrder()));
+        try {
+            pageViewBo = bookingFacade.queryGroupBuyActivity(GroupBuyActivityConverter.fromModel(groupBuyActivityVo), PaginationConverter.toBo(paginationVo));
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        pageViewVo = GroupBuyActivityPageViewConverter.toModel(pageViewBo);
+
+        return pageViewVo;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse queryGroupBuyActivityById(@PathVariable int id, 
+    		HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo currentUser = null;
+        try {
+            currentUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        int curId = currentUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        GroupBuyActivityBo groupBuyActivityBo = null;
+        try {
+            groupBuyActivityBo = bookingFacade.queryGroupBuyActivityById(id);
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        GroupBuyActivityVo groupBuyActivityVo = GroupBuyActivityConverter.toModel(groupBuyActivityBo);
+        return groupBuyActivityVo;
+    }
+    
     @RequestMapping(value="/booking",method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyBooking(HttpServletRequest req,HttpServletResponse resp,PaginationVo paginationVo,GroupBuyBookingVo groupBuyBookingVo) {
         String permissionTag = this.getUrl(req);
@@ -91,6 +158,8 @@ public class GroupBuyController extends AbstractController {
 
         GroupBuyBookingPageViewBo pageViewBo = null;
         GroupBuyBookingPageViewVo pageViewVo = null;
+        paginationVo.setColumnKey(BookingMap.BOOKING_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(BookingMap.BOOKING_MAP.get(paginationVo.getOrder()));
         try {
             pageViewBo = bookingFacade.queryGroupBuyBooking(GroupBuyBookingConverter.fromModel(groupBuyBookingVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {

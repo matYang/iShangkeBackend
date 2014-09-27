@@ -17,16 +17,17 @@ import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.admin.BookingFacade;
 import com.ishangke.edunav.facade.admin.UserFacade;
+import com.ishangke.edunav.web.admin.controller.AbstractController;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.PurposeCourseConverter;
 import com.ishangke.edunav.web.converter.pageview.PurposeCoursePageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.PurposeMap;
 import com.ishangke.edunav.web.model.PurposeCourseVo;
 import com.ishangke.edunav.web.model.pageview.PurposeCoursePageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.admin.controller.AbstractController;
 
 @Controller
 @RequestMapping("/a-api/v2/purpose")
@@ -56,6 +57,8 @@ public class PurposeController extends AbstractController {
         
         PurposeCoursePageViewBo pageViewBo = null;
         PurposeCoursePageViewVo pageViewVo = null;
+        paginationVo.setColumnKey(PurposeMap.PURPOSE_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(PurposeMap.PURPOSE_MAP.get(paginationVo.getOrder()));
         try{
             pageViewBo = bookingFacade.queryPurpose(PurposeCourseConverter.fromModel(purposeVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         }catch(ControllerException c){
