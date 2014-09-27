@@ -374,10 +374,14 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public PurposeCoursePageViewBo queryPurpose(PurposeCourseBo purposeCourseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryPurposeCourse"));
-                throw new NoPermissionException();
-            }
+            /*
+             * if
+             * (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo
+             * .getId()), permissionTag)) {
+             * LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
+             * userBo.getId(), permissionTag, "queryPurposeCourse")); throw new
+             * NoPermissionException(); }
+             */
 
             paginationBo = PageUtil.getPage(paginationBo);
             List<PurposeCourseBo> list = purposeManager.query(purposeCourseBo, userBo, paginationBo);
