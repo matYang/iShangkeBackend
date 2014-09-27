@@ -294,6 +294,8 @@ service BookingService {
      */
     groupBuyBooking.GroupBuyBookingPageViewBo queryGroupBuyBooking(1:groupBuyBooking.GroupBuyBookingBo groupBuyBookingBo, 2:user.UserBo userBo, 3:common.PaginationBo paginationBo,4:string permissionTag) throws (1:fault.BusinessExceptionBo businessException);
     
+    groupBuyActivity.GroupBuyActivityPageViewBo queryGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:common.PaginationBo paginationBo) throws (1:fault.BusinessExceptionBo businessException);
+    
     /**
      * 管理员对团购活动进行上线操作
      * @param groupBuyBookingBo
@@ -303,7 +305,7 @@ service BookingService {
      */
     groupBuyActivity.GroupBuyActivityBo online(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
     
-    groupBuyActivity.GroupBuyActivityBo queryGroupBuyActivityById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    groupBuyActivity.GroupBuyActivityBo queryGroupBuyActivityById(1: i32 id) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
     groupBuyBooking.GroupBuyBookingBo queryGroupBuyBookingById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 

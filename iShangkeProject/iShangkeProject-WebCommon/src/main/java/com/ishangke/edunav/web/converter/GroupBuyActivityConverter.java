@@ -91,6 +91,14 @@ public class GroupBuyActivityConverter {
         if (vo.getTitle() != null) {
             bo.setTitle(vo.getTitle());
         }
+        if (vo.getPhotoList() != null) {
+        	List<GroupBuyPhotoVo> groupBuyPhotoVoList = vo.getPhotoList();
+        	List<GroupBuyPhotoBo> groupBuyPhotoBoList = new ArrayList<GroupBuyPhotoBo>();
+        	for (GroupBuyPhotoVo groupBuyPhotoVo : groupBuyPhotoVoList) {
+        		groupBuyPhotoBoList.add(GroupBuyPhotoConverter.fromModel(groupBuyPhotoVo));
+        	}
+        	bo.setPhotoList(groupBuyPhotoBoList);
+        }
         return bo;
     }
 
@@ -121,6 +129,7 @@ public class GroupBuyActivityConverter {
             vo.setHot(bo.getHot());
         }
         vo.setTitle(bo.getTitle());
+        vo.setBookingTotal(bo.getBookingTotal());
         return vo;
     }
 }

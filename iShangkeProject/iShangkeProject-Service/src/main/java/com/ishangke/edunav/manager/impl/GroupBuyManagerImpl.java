@@ -14,22 +14,31 @@ import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupBuyPhotoEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
+import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
+import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.GroupBuyManager;
+import com.ishangke.edunav.manager.async.dispatcher.SMSDispatcher;
 import com.ishangke.edunav.manager.converter.GroupBuyActivityConverter;
 import com.ishangke.edunav.manager.converter.GroupBuyBookingConverter;
+import com.ishangke.edunav.manager.converter.GroupBuyPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
+import com.ishangke.edunav.util.PageUtil;
 
 @Component
 public class GroupBuyManagerImpl implements GroupBuyManager {
@@ -46,6 +55,15 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     
     @Autowired
     private CourseEntityExtMapper courseMapper;
+    
+    @Autowired
+    private GroupBuyPhotoEntityExtMapper groupBuyPhotoMapper;
+    
+    @Autowired
+    private UserEntityExtMapper userMapper;
+    
+    @Autowired
+    private CacheManager cacheManager;
 
     @Override
     public GroupBuyActivityBo createGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo) {
@@ -82,10 +100,17 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("对不起，团购活动创建失败，请稍候再试", t);
         }
         if (result > 0) {
+        	List<GroupBuyPhotoBo> photoList = groupBuyActivityBo.getPhotoList();
+        	
+        	for (GroupBuyPhotoBo groupBuyPhotoBo : photoList) {
+        		groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
+        		groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
+        	}
             return GroupBuyActivityConverter.toBo(groupBuyActivityMapper.getById(groupBuyActivityEntity.getId()));
         } else {
             throw new ManagerException("对不起，团购活动获取失败，请稍候再试");
         }
+        
     }
 
     @Override
@@ -108,6 +133,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         if (groupBuyActivity == null || Constant.GROUPBUYACTIVITYONLINE != groupBuyActivity.getStatus()) {
             throw new ManagerException("团购活动不存在或已经下线");
         }
+        if (groupBuyBookingBo.getGroupBuyPrice() != groupBuyActivity.getGroupBuyPrice()) {
+            throw new ManagerException("对不起，价格不一致，请刷新页面重新提交！");
+        }
         
         groupBuyBookingEntity.setUserId(userBo.getId());
         groupBuyBookingEntity.setCreateTime(DateUtility.getCurTimeInstance());
@@ -115,10 +143,17 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         int result = 0;
         try {
             result = groupBuyBookingMapper.add(groupBuyBookingEntity);
+            //团购订单号 ISK-GROUPBUY-time-id
+            groupBuyBookingEntity.setReference(Constant.GROUPBUYBOOKINGPREFIX + (DateUtility.getCurTime() / 10000000) + "-" + groupBuyBookingEntity.getId());
+            groupBuyBookingMapper.update(groupBuyBookingEntity);
         } catch (Throwable t) {
             throw new ManagerException("对不起，选购团购课程失败，请稍候再试", t);
         }
         if (result > 0) {
+            //设置缓存，booking的订阅次数
+            Integer total = getGroupBuyBookingTotal(groupBuyActivity.getCourseId()); 
+            total++;
+            cacheManager.set(Constant.GROUPBUYTOTAL + groupBuyActivity.getCourseId(), Constant.STATUSTRANSFORMEXPIRETIME, total);
             return GroupBuyBookingConverter.toBo(groupBuyBookingMapper.getById(groupBuyBookingEntity.getId()));
         } else {
             throw new ManagerException("对不起，选购团购课程获取失败，请稍候再试");
@@ -180,12 +215,12 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
 
     @Override
     public void payGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo) {
-       
-
+       //use changeGroupBuyBookingStatusToPayed because of history
+       //but we will use this method next version
     }
 
     @Override
-    public int queryTotal(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo) {
+    public int queryGroupBuyBookingTotal(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo) {
         return groupBuyBookingMapper.getListCount(GroupBuyBookingConverter.fromBo(groupBuyBookingBo));
     }
 
@@ -220,12 +255,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     }
 
     @Override
-    public GroupBuyActivityBo queryGroupBuyActivityById(int id, UserBo userBo) {
-        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[GroupBuyManagerImpl]system admin || admin [%s] call queryGroupBuyActivityById at " + new Date(), userBo.getName()));
-        } else {
-            throw new ManagerException("对不起，您无权执行该请求");
-        }
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id) {
         GroupBuyActivityEntityExt groupBuyActivity = null;
         try {
             groupBuyActivity = groupBuyActivityMapper.getById(id);
@@ -235,8 +265,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         if (groupBuyActivity == null) {
             throw new ManagerException("对不起，无法找到ID为" + id + "的预订");
         }
-        GroupBuyActivityBo GroupBuyActivityBo = GroupBuyActivityConverter.toBo(groupBuyActivity);
-        return GroupBuyActivityBo;
+        GroupBuyActivityBo groupBuyActivityBo = GroupBuyActivityConverter.toBo(groupBuyActivity);
+        int bookingTotal = getGroupBuyBookingTotal(groupBuyActivity.getCourseId());
+        groupBuyActivityBo.setBookingTotal(bookingTotal);
+        return groupBuyActivityBo;
     }
 
     @Override
@@ -267,8 +299,82 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     
 
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no) {
-        // TODO Auto-generated method stub
+        GroupBuyBookingEntityExt groupBuyBookingEntityExt = groupBuyBookingMapper.getById(bookingId);
+        if (groupBuyBookingEntityExt.getStatus() != Constant.GROUPBUYBOOKINGPENDINGPAYMENT) {
+            LOGGER.warn("[changeGroupBuyBookingStatusToPayed] try to pay booking " + bookingId + " with status " + groupBuyBookingEntityExt.getStatus());
+        }
+        groupBuyBookingEntityExt.setStatus(Constant.GROUPBUYBOOKINGPAYED);
+        groupBuyBookingEntityExt.setNumber(trade_no);
+        try {
+            groupBuyBookingMapper.update(groupBuyBookingEntityExt);
+        } catch (Exception e) {
+            LOGGER.error(String.format("[pay group buy booking] try to log booking history booking [%d] status to payed but failed", bookingId));
+            throw new ManagerException("对不起，预订历史记录创建失败，请稍后再试");
+        } finally {
+            LOGGER.info(String.format("[pay group buy booking] try to change booking [%d] status to payed", bookingId));
+        }
+        try {
+            UserEntityExt user = userMapper.getSimpleById(groupBuyBookingEntityExt.getUserId());
+            GroupBuyActivityEntityExt activity = groupBuyActivityMapper.getById(groupBuyBookingEntityExt.getGroupBuyActivityId());
+            SMSDispatcher.sendGroupBuyPaySuccess(user.getPhone(), activity.getTitle(), groupBuyBookingEntityExt.getReference());
+        } catch (Exception e) {
+            LOGGER.error("send message failed" + e);
+        }
+        
         return Constant.SUCCESS;
     }
 
+    @Override
+    public List<GroupBuyActivityBo> queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, PaginationBo paginationBo) {
+    	if (groupBuyActivityBo == null || paginationBo == null) {
+            throw new ManagerException("无效请求参数");
+        }
+    	
+    	GroupBuyActivityEntityExt groupBuyActivityEntity = GroupBuyActivityConverter.fromBo(groupBuyActivityBo); 
+        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        List<GroupBuyActivityEntityExt> results = null;
+        
+        try {
+            results = groupBuyActivityMapper.list(groupBuyActivityEntity, page);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，团购活动信息查询失败，请稍候再试");
+        }
+        
+        if (results == null) {
+            return new ArrayList<GroupBuyActivityBo>();
+        }
+        List<GroupBuyActivityBo> convertedResults = new ArrayList<GroupBuyActivityBo>();
+        for (GroupBuyActivityEntityExt result : results) {
+            GroupBuyActivityBo bo = GroupBuyActivityConverter.toBo(result); 
+            int bookingTotal = getGroupBuyBookingTotal(bo.getCourseId());
+            bo.setBookingTotal(bookingTotal);
+            convertedResults.add(bo);
+        }
+        return convertedResults;
+    }
+
+    @Override
+    public int queryGroupBuyActivityTotal(GroupBuyActivityBo groupBuyActivityBo) {
+    	return groupBuyActivityMapper.getListCount(GroupBuyActivityConverter.fromBo(groupBuyActivityBo));
+    }
+
+    @Override
+    public int getGroupBuyBookingTotal(int courseId) {
+        Integer total = (Integer) cacheManager.get(Constant.GROUPBUYTOTAL + courseId);
+        if (total != null) {
+            return total;
+        } else {
+            total = 0;
+        }
+        GroupBuyActivityEntityExt activity = new GroupBuyActivityEntityExt();
+        GroupBuyBookingEntityExt booking = new GroupBuyBookingEntityExt();
+        activity.setCourseId(courseId);
+        List<GroupBuyActivityEntityExt> listActivity = groupBuyActivityMapper.list(activity, PaginationConverter.fromBo(PageUtil.getPage(null)));
+        for (GroupBuyActivityEntityExt a : listActivity) {
+            booking.setGroupBuyActivityId(a.getId());
+            total += groupBuyBookingMapper.getListCount(booking);
+        }
+        cacheManager.set(Constant.GROUPBUYTOTAL + courseId, Constant.STATUSTRANSFORMEXPIRETIME, total);
+        return total;
+    }
 }

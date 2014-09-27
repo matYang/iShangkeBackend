@@ -16,6 +16,7 @@ import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingPageViewBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyActivityPageViewBo;
 import com.ishangke.edunav.commoncontract.model.OrderBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.PurposeCourseBo;
@@ -537,7 +538,40 @@ public class BookingServiceImpl implements BookingService.Iface {
             paginationBo = PageUtil.getPage(paginationBo);
             List<GroupBuyBookingBo> list = groupBuyManager.queryGroupBuyBooking(groupBuyBookingBo, userBo, paginationBo);
             GroupBuyBookingPageViewBo pageView = new GroupBuyBookingPageViewBo();
-            int total = groupBuyManager.queryTotal(groupBuyBookingBo, userBo);
+            int total = groupBuyManager.queryGroupBuyBookingTotal(groupBuyBookingBo, userBo);
+            pageView.setCount(paginationBo.getSize());
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setTotal(total);
+            pageView.setData(list);
+            return pageView;
+        }catch(NoPermissionException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKING);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKING_KEY);
+            throw exception;
+        }catch(ManagerException e){
+            LOGGER.info(e.getMessage(),e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+    
+    @Override
+    public GroupBuyActivityPageViewBo queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+        try{
+            /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"createGroupBuyBooking"));
+                throw new NoPermissionException();
+            }*/
+            
+            paginationBo = PageUtil.getPage(paginationBo);
+            List<GroupBuyActivityBo> list = groupBuyManager.queryGroupBuyActivity(groupBuyActivityBo, paginationBo);
+            GroupBuyActivityPageViewBo pageView = new GroupBuyActivityPageViewBo();
+            int total = groupBuyManager.queryGroupBuyActivityTotal(groupBuyActivityBo);
             pageView.setCount(paginationBo.getSize());
             pageView.setStart(paginationBo.getOffset());
             pageView.setTotal(total);
@@ -584,13 +618,9 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
-    public GroupBuyActivityBo queryGroupBuyActivityById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public GroupBuyActivityBo queryGroupBuyActivityById(int id) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryGroupBuyActivity"));
-                throw new NoPermissionException();
-            }
-            GroupBuyActivityBo data = groupBuyManager.queryGroupBuyActivityById(id, userBo);
+            GroupBuyActivityBo data = groupBuyManager.queryGroupBuyActivityById(id);
             return data;
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);

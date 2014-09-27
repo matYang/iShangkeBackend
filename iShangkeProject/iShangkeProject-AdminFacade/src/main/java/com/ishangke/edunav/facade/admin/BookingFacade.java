@@ -283,14 +283,14 @@ public class BookingFacade {
        return result;
    }
    
-   public GroupBuyActivityBo queryGroupBuyActivityById(int id,UserBo userBo,String permissionTag){
+   public GroupBuyActivityBo queryGroupBuyActivityById(int id){
        GroupBuyActivityBo result = null;
        
        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
        
        try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
            Client serviceClient = factory.getServiceClient();
-           result = serviceClient.queryGroupBuyActivityById(id, userBo, permissionTag);
+           result = serviceClient.queryGroupBuyActivityById(id);
        }catch(BusinessExceptionBo e){
            e.printStackTrace();
            throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
