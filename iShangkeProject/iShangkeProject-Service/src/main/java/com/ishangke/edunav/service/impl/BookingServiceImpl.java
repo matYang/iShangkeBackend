@@ -508,6 +508,26 @@ public class BookingServiceImpl implements BookingService.Iface {
     }
 
     @Override
+    public GroupBuyActivityBo updateGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
+        try {
+            return groupBuyManager.updateGroupBuyActivity(groupBuyActivityBo, userBo);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_UPDATEGROUPBUYACTIVITY);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_UPDATEGROUPBUYACTIVITY_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
+    }
+
+    @Override
     public GroupBuyBookingBo createGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try{
             /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){

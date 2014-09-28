@@ -1,5 +1,7 @@
 package com.ishangke.edunav.manager.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,9 +26,7 @@ import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
 import com.ishangke.edunav.manager.GroupBuyManager;
-import com.ishangke.edunav.manager.common.Flag;
 import com.ishangke.edunav.util.PageUtil;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, GroupBuyManagerImplTest.class })
@@ -54,6 +54,34 @@ public class GroupBuyManagerImplTest extends BaseTest {
         GroupBuyActivityBo groupBuyActivityBoNew = groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);
         int id = groupBuyActivityBoNew.getCourseId();
         Assert.assertEquals(id, 1);
+    }
+
+    @Test
+    public void testUpdateGroupBuyActivity() {
+        GroupBuyActivityBo groupBuyActivityBo = new GroupBuyActivityBo();
+        groupBuyActivityBo.setCreateTime(DateUtility.getCurTime());
+        groupBuyActivityBo.setEndTime(3011546027111l);
+        groupBuyActivityBo.setStatus(0);
+        groupBuyActivityBo.setCourseId(1);
+        List<GroupBuyPhotoBo> photoList = new ArrayList<GroupBuyPhotoBo>();
+        GroupBuyPhotoBo groupBuyPhotoBo = new GroupBuyPhotoBo();
+        groupBuyPhotoBo.setUrl(UUID.randomUUID().toString());
+        photoList.add(groupBuyPhotoBo);
+        groupBuyActivityBo.setPhotoList(photoList);
+        UserBo userBo = new UserBo();
+        userBo.setId(1);
+        GroupBuyActivityBo groupBuyActivityBoNew = groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);
+        int id = groupBuyActivityBoNew.getCourseId();
+        Assert.assertEquals(id, 1);
+        List<GroupBuyPhotoBo> groupBuyPhotoListNew = groupBuyActivityBoNew.getPhotoList();
+        assertEquals(groupBuyPhotoListNew.size(), 1);
+        GroupBuyPhotoBo groupBuyPhotoBoNew = new GroupBuyPhotoBo();
+        groupBuyPhotoBoNew.setUrl(UUID.randomUUID().toString());
+        groupBuyPhotoListNew.add(groupBuyPhotoBoNew);
+        groupBuyActivityBo.setPhotoList(groupBuyPhotoListNew);
+        GroupBuyActivityBo groupBuyActivityBoNew1 = groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);
+        List<GroupBuyPhotoBo> groupBuyPhotoListNew1 = groupBuyActivityBoNew.getPhotoList();
+        assertEquals(groupBuyPhotoListNew1.size(), 2);
     }
 
     @Test

@@ -26,6 +26,7 @@ import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
@@ -110,6 +111,61 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("对不起，团购活动获取失败，请稍候再试");
         }
         
+    }
+
+    @Override
+    public GroupBuyActivityBo updateGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo) {
+        // check null
+        if (groupBuyActivityBo == null || userBo == null) {
+            throw new ManagerException("无效请求参数");
+        }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[GroupBuyManagerImpl]system admin || admin [%s] call updateGroupBuyActivity at " + new Date(), userBo.getName()));
+        } else {
+            throw new ManagerException("对不起，您无权执行该请求");
+        }
+
+        CourseEntityExt course = courseMapper.getById(groupBuyActivityBo.courseId);
+        if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
+            throw new ManagerException("课程不存在或者课程已下线！");
+        }
+
+        // Convert
+        GroupBuyActivityEntityExt groupBuyActivityEntity = GroupBuyActivityConverter.fromBo(groupBuyActivityBo);
+
+        if (groupBuyActivityEntity.getGroupBuyPrice() == null || groupBuyActivityEntity.getGroupBuyPrice() >= course.getPrice() || groupBuyActivityEntity.getGroupBuyPrice() < 0.0) {
+            throw new ManagerException("团购价不能为空或大于课程价");
+        }
+
+        if (groupBuyActivityEntity.getEndTime() == null || groupBuyActivityEntity.getEndTime().getTimeInMillis() <= groupBuyActivityEntity.getCreateTime().getTimeInMillis()) {
+            throw new ManagerException("团购结束时间不能为空或小于开始时间");
+        }
+        groupBuyActivityEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        try {
+            groupBuyActivityMapper.update(groupBuyActivityEntity);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，团购活动更新失败，请稍候再试", t);
+        }
+
+        groupBuyActivityEntity.setCreateTime(null);
+        GroupBuyActivityEntityExt groupBuyActivityEntityOld = groupBuyActivityMapper.getById(groupBuyActivityEntity.getId());
+        List<GroupBuyPhotoEntityExt> photoListOld = groupBuyActivityEntityOld.getPhotoList();
+//        GroupBuyActivityBo groupBuyActivityBoOld = GroupBuyActivityConverter.toBo(groupBuyActivityEntityOld);
+//        List<GroupBuyPhotoBo> photoListOld = groupBuyActivityBoOld.getPhotoList();
+        List<GroupBuyPhotoBo> photoListNew = groupBuyActivityBo.getPhotoList();
+
+        // 暂时没想到效率高的更新一对多的团购图片信息的方法,所以先删除已存的再添加新的
+        // TODO 需要改成根据团购活动id删除团购图片信息，而不是根据图片id逐个删除
+        // 删除现存的团购图片信息
+        for (GroupBuyPhotoEntityExt groupBuyPhotoEntity : photoListOld) {
+            groupBuyPhotoMapper.deleteById(groupBuyPhotoEntity.getId());
+        }
+        // 插入新的团购图片信息
+        for (GroupBuyPhotoBo groupBuyPhotoBo : photoListNew) {
+            groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
+            groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
+        }
+        return GroupBuyActivityConverter.toBo(groupBuyActivityMapper.getById(groupBuyActivityEntity.getId()));
     }
 
     @Override

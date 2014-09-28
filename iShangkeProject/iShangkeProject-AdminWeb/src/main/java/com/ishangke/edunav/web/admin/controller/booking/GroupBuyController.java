@@ -86,6 +86,36 @@ public class GroupBuyController extends AbstractController {
         return responseVo;
     }
     
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public @ResponseBody JsonResponse updateGroupBuyActivity(@PathVariable("id") int id, @RequestBody GroupBuyActivityVo groupBuyActivityVo, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException e) {
+            return this.handleWebException(e, resp);
+        }
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        groupBuyActivityVo.setId(id);
+        GroupBuyActivityBo tartgetGroupBuy = GroupBuyActivityConverter.fromModel(groupBuyActivityVo);
+        GroupBuyActivityBo responseGroupBuy = null;
+        GroupBuyActivityVo responseVo = null;
+        try {
+            responseGroupBuy = bookingFacade.updateGroupBuyActivity(tartgetGroupBuy, curUser, permissionTag);
+        } catch (ControllerException e) {
+            return this.handleWebException(e, resp);
+        }
+        responseVo = GroupBuyActivityConverter.toModel(responseGroupBuy);
+        return responseVo;
+    }
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyActivity(GroupBuyActivityVo groupBuyActivityVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);

@@ -274,6 +274,14 @@ service BookingService {
      * @return
      */
     groupBuyActivity.GroupBuyActivityBo createGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     * 管理员更新团购活动
+     * @param groupBuyActivityBo  团购活动信息
+     * @param userBo  团购活动的用户信息
+     * @return
+     */
+    groupBuyActivity.GroupBuyActivityBo updateGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
 
 
     /**
