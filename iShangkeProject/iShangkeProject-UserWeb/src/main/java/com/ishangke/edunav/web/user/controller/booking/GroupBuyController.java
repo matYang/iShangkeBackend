@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityPageViewBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
@@ -89,6 +90,7 @@ public class GroupBuyController extends AbstractController {
         GroupBuyActivityPageViewVo pageViewVo = null;
         paginationVo.setColumnKey(GroupBuyActivityMap.GROUPBUYACTIVITY_MAP.get(paginationVo.getColumnKey()));
         paginationVo.setOrder(GroupBuyActivityMap.GROUPBUYACTIVITY_MAP.get(paginationVo.getOrder()));
+        groupBuyActivityVo.setStatus(Constant.GROUPBUYACTIVITYONLINE);
         try {
             pageViewBo = bookingFacade.queryGroupBuyActivity(GroupBuyActivityConverter.fromModel(groupBuyActivityVo), PaginationConverter.toBo(paginationVo));
         } catch (ControllerException c) {
