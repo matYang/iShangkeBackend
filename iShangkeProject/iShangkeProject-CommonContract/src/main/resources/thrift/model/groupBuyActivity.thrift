@@ -1,5 +1,6 @@
 include "course.thrift"
 include "groupBuyPhoto.thrift"
+include "address.thrift"
 namespace java com.ishangke.edunav.commoncontract.model
 
 struct GroupBuyActivityBo {
@@ -19,11 +20,12 @@ struct GroupBuyActivityBo {
   14: double groupBuyPriceEnd
   15: i64 endTimeStart
   16: i64 endTimeEnd
-  17: list<groupBuyPhoto.GroupBuyPhotoBo> photoList;
+  17: list<groupBuyPhoto.GroupBuyPhotoBo> photoList
   18: i32 hot
   19: set<i32> hotSet
   20: string title
   21: i32 bookingTotal
+  22: list<address.AddressBo> addressList
 }
 
 struct GroupBuyActivityPageViewBo{

@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
+import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 
@@ -40,7 +42,13 @@ public class GroupBuyActivityConverter {
             }
             bo.setPhotoList(list);
         }
-        
+        if (e.getAddressList() != null) {
+            List<AddressBo> addressBoList = new ArrayList<>();
+            for (AddressEntityExt address : e.getAddressList()) {
+                addressBoList.add(AddressConverter.toBo(address));
+            }
+            bo.setAddressList(addressBoList);
+        }
         if (e.getHot() != null) {
             bo.setHot(e.getHot());
         } else {

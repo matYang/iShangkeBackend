@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ishangke.edunav.common.constant.Constant;
+import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
+import com.ishangke.edunav.web.model.AddressVo;
 import com.ishangke.edunav.web.model.GroupBuyActivityVo;
 import com.ishangke.edunav.web.model.GroupBuyPhotoVo;
 
@@ -92,12 +94,20 @@ public class GroupBuyActivityConverter {
             bo.setTitle(vo.getTitle());
         }
         if (vo.getPhotoList() != null) {
-        	List<GroupBuyPhotoVo> groupBuyPhotoVoList = vo.getPhotoList();
-        	List<GroupBuyPhotoBo> groupBuyPhotoBoList = new ArrayList<GroupBuyPhotoBo>();
-        	for (GroupBuyPhotoVo groupBuyPhotoVo : groupBuyPhotoVoList) {
-        		groupBuyPhotoBoList.add(GroupBuyPhotoConverter.fromModel(groupBuyPhotoVo));
-        	}
-        	bo.setPhotoList(groupBuyPhotoBoList);
+            List<GroupBuyPhotoVo> groupBuyPhotoVoList = vo.getPhotoList();
+            List<GroupBuyPhotoBo> groupBuyPhotoBoList = new ArrayList<GroupBuyPhotoBo>();
+            for (GroupBuyPhotoVo groupBuyPhotoVo : groupBuyPhotoVoList) {
+                groupBuyPhotoBoList.add(GroupBuyPhotoConverter.fromModel(groupBuyPhotoVo));
+            }
+            bo.setPhotoList(groupBuyPhotoBoList);
+        }
+        if (vo.getAddressList() != null) {
+            List<AddressVo> addressVoList = vo.getAddressList();
+            List<AddressBo> addressBoList = new ArrayList<>();
+            for (AddressVo address : addressVoList) {
+                addressBoList.add(AddressConverter.fromModel(address));
+            }
+            bo.setAddressList(addressBoList);
         }
         return bo;
     }
@@ -113,10 +123,10 @@ public class GroupBuyActivityConverter {
         vo.setCourseId(bo.getCourseId());
         vo.setCourse(CourseConverter.toModel(bo.getCourse()));
         if (Constant.DEFAULTNULL != bo.getStatus()) {
-           vo.setStatus(bo.getStatus());
+            vo.setStatus(bo.getStatus());
         }
         if (Constant.DEFAULTNULL != bo.getGroupBuyPrice()) {
-           vo.setGroupBuyPrice(bo.getGroupBuyPrice());
+            vo.setGroupBuyPrice(bo.getGroupBuyPrice());
         }
         if (bo.getPhotoList() != null) {
             List<GroupBuyPhotoVo> list = new ArrayList<>();
@@ -124,6 +134,14 @@ public class GroupBuyActivityConverter {
                 list.add(GroupBuyPhotoConverter.toModel(b));
             }
             vo.setPhotoList(list);
+        }
+        if (bo.getAddressList() != null) {
+            List<AddressBo> addressBoList = bo.getAddressList();
+            List<AddressVo> addressVoList = new ArrayList<>();
+            for (AddressBo address : addressBoList) {
+                addressVoList.add(AddressConverter.toModel(address));
+            }
+            vo.setAddressList(addressVoList);
         }
         if (Constant.DEFAULTNULL != bo.getHot()) {
             vo.setHot(bo.getHot());
