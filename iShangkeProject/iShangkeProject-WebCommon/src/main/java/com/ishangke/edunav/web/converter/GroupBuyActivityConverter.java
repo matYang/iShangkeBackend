@@ -100,6 +100,8 @@ public class GroupBuyActivityConverter {
                 groupBuyPhotoBoList.add(GroupBuyPhotoConverter.fromModel(groupBuyPhotoVo));
             }
             bo.setPhotoList(groupBuyPhotoBoList);
+        } else {
+            bo.setPhotoList(new ArrayList<GroupBuyPhotoBo>());
         }
         if (vo.getAddressList() != null) {
             List<AddressVo> addressVoList = vo.getAddressList();
@@ -108,6 +110,8 @@ public class GroupBuyActivityConverter {
                 addressBoList.add(AddressConverter.fromModel(address));
             }
             bo.setAddressList(addressBoList);
+        } else {
+            bo.setAddressList(new ArrayList<AddressBo>());
         }
         return bo;
     }
