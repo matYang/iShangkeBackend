@@ -121,6 +121,7 @@ public class GroupBuyActivityConverter {
             return null;
         }
         GroupBuyActivityVo vo = new GroupBuyActivityVo();
+        vo.setId(bo.getId());
         vo.setCourseId(bo.getCourseId());
         vo.setCreateTime(bo.getCreateTime());
         vo.setEndTime(bo.getEndTime());
