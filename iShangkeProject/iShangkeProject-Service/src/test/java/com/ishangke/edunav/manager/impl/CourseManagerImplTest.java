@@ -47,7 +47,7 @@ public class CourseManagerImplTest {
         courseCommentBo.setLastModifyTime(DateUtility.getCurTime());
         courseCommentBo.setCreateTime(DateUtility.getCurTime());
         UserBo userBo = new UserBo();
-        userBo.setId(4);
+        userBo.setId(6);
         CourseCommentBo bo = courseManager.commentCourse(courseCommentBo, userBo);
         Assert.assertSame(6, bo.getCourseTemplateId());
     }
