@@ -41,6 +41,11 @@
     update GROUP_BUY_ADDRESS set DELETED = 1 where ID = #{id,jdbcType=INTEGER}
   </update>
   
+  <!-- deleteByGroupBuyActivityId -->
+  <update id="deleteByGroupBuyActivityId" parameterType="java.lang.Integer">
+    update GROUP_BUY_ADDRESS set DELETED = 1 where GROUP_BUY_ACTIVITY_ID = #{id,jdbcType=INTEGER}
+  </update>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="GroupBuyAddressExtMap">
     select
