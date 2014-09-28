@@ -17,6 +17,7 @@ import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.admin.BookingFacade;
 import com.ishangke.edunav.facade.admin.UserFacade;
+import com.ishangke.edunav.web.admin.controller.AbstractController;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.PurposeCourseConverter;
@@ -26,7 +27,6 @@ import com.ishangke.edunav.web.model.PurposeCourseVo;
 import com.ishangke.edunav.web.model.pageview.PurposeCoursePageViewVo;
 import com.ishangke.edunav.web.response.EmptyResponse;
 import com.ishangke.edunav.web.response.JsonResponse;
-import com.ishangke.edunav.web.admin.controller.AbstractController;
 
 @Controller
 @RequestMapping("/a-api/v2/purpose")
@@ -134,6 +134,29 @@ public class PurposeController extends AbstractController {
             return this.handleWebException(e, resp);
         }
         return new EmptyResponse();
+    }
+    
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody JsonResponse queryPurposeById(@PathVariable("id") int id,HttpServletRequest req,HttpServletResponse resp){
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException e) {
+            return this.handleWebException(e, resp);
+        }
+        if(curUser.getId() <= 0){
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        PurposeCourseBo purposeCourseBo = null;
+        try {
+            purposeCourseBo = bookingFacade.queryPurposeById(id, curUser, permissionTag);
+        } catch (Exception e) {
+            return this.handleWebException(e, resp);
+        }
+        PurposeCourseVo purposeCourseVo = PurposeCourseConverter.toModel(purposeCourseBo);
+        return purposeCourseVo;
     }
 
 }

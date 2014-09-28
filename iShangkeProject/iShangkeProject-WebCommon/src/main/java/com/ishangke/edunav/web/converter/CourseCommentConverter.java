@@ -40,6 +40,9 @@ public class CourseCommentConverter {
         } else {
             courseCommentBo.setConditionRatingStart(Constant.DEFAULTNULL);
         }
+        if (vo.getTitle() != null) {
+            courseCommentBo.setTitle(vo.getTitle());
+        }
         if (vo.getContent() != null) {
             courseCommentBo.setContent(vo.getContent());
         }
@@ -150,6 +153,7 @@ public class CourseCommentConverter {
         if (Constant.DEFAULTNULL != bo.getConditionRatingStart()) {
             courseCommentVo.setConditionRatingStart(bo.getConditionRatingStart());
         }
+        courseCommentVo.setTitle(bo.getTitle());
         courseCommentVo.setContent(bo.getContent());
         courseCommentVo.setCourseTemplateId(bo.getCourseTemplateId());
 //        courseCommentVo.setCourseTemplateIdSet(bo.getCourseTemplateIdSet());

@@ -261,6 +261,15 @@ service BookingService {
      */
     purposeCourse.PurposeCourseBo deletePurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
     
+    /**
+     * 本方法返回指定ID意向课程信息
+     * 管理员可以通过此方法查询指定ID意向课程信息
+     * 
+     * @param id       意向课程对应ID
+     * @param userBo   调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo queryPurposeById(1:i32 id,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
     
     // *********************************************************
     // *

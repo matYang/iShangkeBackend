@@ -534,18 +534,21 @@ public class ManagerErrorCode {
     public static final String PERMISSION_BOOKING_UPDATEPURPOSECOURSE_KEY = "permission_booking_updatePurposeCourse";
     public static final int PERMISSION_BOOKING_DELETEPURPOSECOURSE = 0x0100006F;
     public static final String PERMISSION_BOOKING_DELETEPURPOSECOURSE_KEY = "permission_booking_deletePurposeCourse";
-    public static final int PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY = 0x01000070;
+    public static final int PERMISSION_BOOKING_QUERYPURPOSECOURSEBYID = 0x01000070;
+    public static final String PERMISSION_BOOKING_QUERYPURPOSECOURSEBYID_KEY = "permission_booking_queryPurposeCourseById";
+    public static final int PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY = 0x01000071;
     public static final String PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY_KEY = "permission_booking_createGroupBuyActivity";
-    public static final int PERMISSION_BOOKING_CREATEGROUPBUYBOOKING = 0x01000071;
+    public static final int PERMISSION_BOOKING_CREATEGROUPBUYBOOKING = 0x01000072;
     public static final String PERMISSION_BOOKING_CREATEGROUPBUYBOOKING_KEY = "permission_booking_createGroupBuyBooking";
-    public static final int PERMISSION_BOOKING_QUERYGROUPBUYBOOKING = 0x01000072;
+    public static final int PERMISSION_BOOKING_QUERYGROUPBUYBOOKING = 0x01000073;
     public static final String PERMISSION_BOOKING_QUERYGROUPBUYBOOKING_KEY = "permission_booking_queryGroupBuyBooking";
-    public static final int PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE = 0x01000073;
+    public static final int PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE = 0x01000074;
     public static final String PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE_KEY = "permission_booking_groupBuyActivityOnline";
-    public static final int PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID = 0x01000074;
+    public static final int PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID = 0x01000075;
     public static final String PERMISSION_BOOKING_QUERYGROUPBUYACTIVITYBYID_KEY = "permission_booking_queryGroupBuyBooking";
-    public static final int PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID = 0x01000075;
+    public static final int PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID = 0x01000076;
     public static final String PERMISSION_BOOKING_QUERYGROUPBUYBOOKINGBYID_KEY = "permission_booking_queryGroupBuyBooking";
+
     
     // alipay
     public static final int ALIPAY_VERIFY_ERROR = 0x001C0001;
