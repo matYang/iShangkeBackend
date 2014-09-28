@@ -20,7 +20,16 @@ public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private Calendar endTimeEnd;
     private List<GroupBuyPhotoEntityExt> photoList;
     private Set<Integer> hotSet;
+    private List<AddressEntityExt> addressList;
     
+    public List<AddressEntityExt> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<AddressEntityExt> addressList) {
+        this.addressList = addressList;
+    }
+
     public Set<Integer> getHotSet() {
         return hotSet;
     }

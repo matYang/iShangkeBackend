@@ -9,5 +9,6 @@ public class UserMap {
         USER_MAP = new HashMap<>();
         USER_MAP.put("desc", "DESC");
         USER_MAP.put("asc", "ASC");
+        USER_MAP.put("createTime", "CREATE_TIME");
     }
 }

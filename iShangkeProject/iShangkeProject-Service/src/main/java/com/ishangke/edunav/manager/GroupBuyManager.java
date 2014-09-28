@@ -16,6 +16,17 @@ public interface GroupBuyManager {
      */
     public GroupBuyActivityBo createGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo);
 
+    /**
+     * 管理员更新一次团购活动
+     * 
+     * @param groupBuyActivityBo
+     *            更新团购活动信息
+     * @param userBo
+     *            更新团购活动的用户信息
+     * @return
+     */
+    public GroupBuyActivityBo updateGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo);
+
 
     /**
      * 用户选购团购课程
