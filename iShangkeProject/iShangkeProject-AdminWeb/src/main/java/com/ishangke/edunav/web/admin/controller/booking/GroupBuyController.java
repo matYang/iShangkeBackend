@@ -41,7 +41,8 @@ import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.GroupBuyActivityPageViewConverter;
 import com.ishangke.edunav.web.converter.pageview.GroupBuyBookingPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
-import com.ishangke.edunav.web.map.BookingMap;
+import com.ishangke.edunav.web.map.GroupBuyActivityMap;
+import com.ishangke.edunav.web.map.GroupBuyBookingMap;
 import com.ishangke.edunav.web.model.GroupBuyActivityVo;
 import com.ishangke.edunav.web.model.GroupBuyBookingVo;
 import com.ishangke.edunav.web.model.GroupBuyPhotoVo;
@@ -86,6 +87,36 @@ public class GroupBuyController extends AbstractController {
         return responseVo;
     }
     
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public @ResponseBody JsonResponse updateGroupBuyActivity(@PathVariable("id") int id, @RequestBody GroupBuyActivityVo groupBuyActivityVo, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException e) {
+            return this.handleWebException(e, resp);
+        }
+        int curId = curUser.getId();
+        boolean loggedIn = curId > 0;
+        if (!loggedIn) {
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+
+        groupBuyActivityVo.setId(id);
+        GroupBuyActivityBo tartgetGroupBuy = GroupBuyActivityConverter.fromModel(groupBuyActivityVo);
+        GroupBuyActivityBo responseGroupBuy = null;
+        GroupBuyActivityVo responseVo = null;
+        try {
+            responseGroupBuy = bookingFacade.updateGroupBuyActivity(tartgetGroupBuy, curUser, permissionTag);
+        } catch (ControllerException e) {
+            return this.handleWebException(e, resp);
+        }
+        responseVo = GroupBuyActivityConverter.toModel(responseGroupBuy);
+        return responseVo;
+    }
+
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyActivity(GroupBuyActivityVo groupBuyActivityVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
@@ -105,8 +136,8 @@ public class GroupBuyController extends AbstractController {
 
         GroupBuyActivityPageViewBo pageViewBo = null;
         GroupBuyActivityPageViewVo pageViewVo = null;
-        paginationVo.setColumnKey(BookingMap.BOOKING_MAP.get(paginationVo.getColumnKey()));
-        paginationVo.setOrder(BookingMap.BOOKING_MAP.get(paginationVo.getOrder()));
+        paginationVo.setColumnKey(GroupBuyActivityMap.GROUPBUYACTIVITY_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(GroupBuyActivityMap.GROUPBUYACTIVITY_MAP.get(paginationVo.getOrder()));
         try {
             pageViewBo = bookingFacade.queryGroupBuyActivity(GroupBuyActivityConverter.fromModel(groupBuyActivityVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
@@ -136,8 +167,8 @@ public class GroupBuyController extends AbstractController {
 
         GroupBuyBookingPageViewBo pageViewBo = null;
         GroupBuyBookingPageViewVo pageViewVo = null;
-        paginationVo.setColumnKey(BookingMap.BOOKING_MAP.get(paginationVo.getColumnKey()));
-        paginationVo.setOrder(BookingMap.BOOKING_MAP.get(paginationVo.getOrder()));
+        paginationVo.setColumnKey(GroupBuyBookingMap.GROUPBUYBOOKING_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(GroupBuyBookingMap.GROUPBUYBOOKING_MAP.get(paginationVo.getOrder()));
         try {
             pageViewBo = bookingFacade.queryGroupBuyBooking(GroupBuyBookingConverter.fromModel(groupBuyBookingVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
