@@ -84,20 +84,6 @@ public class GroupBuyController extends AbstractController {
     		PaginationVo paginationVo,
     		HttpServletRequest req,
     		HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
-        int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
-        if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
 
         GroupBuyActivityPageViewBo pageViewBo = null;
         GroupBuyActivityPageViewVo pageViewVo = null;
@@ -116,19 +102,6 @@ public class GroupBuyController extends AbstractController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryGroupBuyActivityById(@PathVariable int id, 
     		HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-        UserBo currentUser = null;
-        try {
-            currentUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
-        int curId = currentUser.getId();
-        boolean loggedIn = curId > 0;
-        if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
 
         GroupBuyActivityBo groupBuyActivityBo = null;
         try {

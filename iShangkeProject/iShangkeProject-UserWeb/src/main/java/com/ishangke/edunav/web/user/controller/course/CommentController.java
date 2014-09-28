@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,4 +110,20 @@ public class CommentController extends AbstractController{
         return pageViewVo;
     }
     
+    @RequestMapping(value = "course/{id}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse queryCommentByCourseId(@PathVariable int id, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp){
+        String permissionTag = this.getUrl(req);
+        CourseCommentPageViewBo pageViewBo = null;
+        CourseCommentPageViewVo pageViewVo = null;
+        CourseBo targetCourse  = new CourseBo();
+        targetCourse.setId(id);
+        try {
+            pageViewBo = courseFacade.queryCommentByCourseId(targetCourse, PaginationConverter.toBo(paginationVo), permissionTag);    
+        } catch (ControllerException c) {
+            return this.handleWebException(c, resp);
+        }
+        pageViewVo = CourseCommentPageViewConverter.toModel(pageViewBo);
+        
+        return pageViewVo;
+    }
 }
