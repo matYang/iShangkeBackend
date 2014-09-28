@@ -96,7 +96,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("团购价不能为空或大于课程价");
         }
         
-        if (groupBuyActivityEntity.getEndTime() == null || groupBuyActivityEntity.getEndTime().getTimeInMillis() <= groupBuyActivityEntity.getCreateTime().getTimeInMillis()) {
+        if (groupBuyActivityEntity.getEndTime() == null || groupBuyActivityEntity.getEndTime().getTimeInMillis() <= DateUtility.getCurTime()) {
             throw new ManagerException("团购结束时间不能为空或小于开始时间");
         }
         groupBuyActivityEntity.setCreateTime(DateUtility.getCurTimeInstance());
