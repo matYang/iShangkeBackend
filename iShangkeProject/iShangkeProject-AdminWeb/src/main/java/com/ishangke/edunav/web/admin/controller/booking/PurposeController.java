@@ -138,5 +138,28 @@ public class PurposeController extends AbstractController {
         }
         return new EmptyResponse();
     }
+    
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody JsonResponse queryPurposeById(@PathVariable("id") int id,HttpServletRequest req,HttpServletResponse resp){
+        String permissionTag = this.getUrl(req);
+        SessionBo authSessionBo = this.getSession(req);
+        UserBo curUser = null;
+        try {
+            curUser = userFacade.authenticate(authSessionBo, permissionTag);
+        } catch (ControllerException e) {
+            return this.handleWebException(e, resp);
+        }
+        if(curUser.getId() <= 0){
+            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
+        }
+        PurposeCourseBo purposeCourseBo = null;
+        try {
+            purposeCourseBo = bookingFacade.queryPurposeById(id, curUser, permissionTag);
+        } catch (Exception e) {
+            return this.handleWebException(e, resp);
+        }
+        PurposeCourseVo purposeCourseVo = PurposeCourseConverter.toModel(purposeCourseBo);
+        return purposeCourseVo;
+    }
 
 }

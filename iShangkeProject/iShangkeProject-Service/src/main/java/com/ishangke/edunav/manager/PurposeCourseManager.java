@@ -61,4 +61,14 @@ public interface PurposeCourseManager {
      * @return
      */
     public int queryTotal(PurposeCourseBo purposeCourseBo,UserBo userBo);
+    
+    /**
+     * 本方法返回指定ID意向课程信息
+     * 管理员可以通过此方法查询指定ID意向课程信息
+     * 
+     * @param id       意向课程对应ID
+     * @param userBo   调用方法的用户信息
+     * @return
+     */
+    public PurposeCourseBo queryPurposeById(int id,UserBo userBo);
 }

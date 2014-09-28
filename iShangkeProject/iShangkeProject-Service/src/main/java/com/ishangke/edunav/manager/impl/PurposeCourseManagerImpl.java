@@ -165,4 +165,27 @@ public class PurposeCourseManagerImpl implements PurposeCourseManager {
         return purposeCourseMapper.getListCount(PurposeCourseConverter.fromBo(purposeCourseBo));
     }
 
+    @Override
+    public PurposeCourseBo queryPurposeById(int id, UserBo userBo) {
+        if (userBo == null) {
+            throw new ManagerException("无效请求参数");
+        }
+        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
+            LOGGER.warn(String.format("[PurposeCourseManagerImpl]system admin || admin [%s] call createCoursePromotion at " + new Date(), userBo.getName()));
+        } else {
+            throw new AuthenticationException("对不起，您无权查看意向课程信息");
+        }
+        PurposeCourseEntityExt purposeCourse = null;
+        try {
+            purposeCourse = purposeCourseMapper.getById(id);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，意向课程信息查询失败，请稍候再试");
+        }
+        if (purposeCourse == null) {
+            throw new ManagerException("对不起，无法找到ID为"+id+"的意向课程信息");
+        }
+        PurposeCourseBo purposeCourseBo = PurposeCourseConverter.toBo(purposeCourse);
+        return purposeCourseBo;
+    }
+
 }
