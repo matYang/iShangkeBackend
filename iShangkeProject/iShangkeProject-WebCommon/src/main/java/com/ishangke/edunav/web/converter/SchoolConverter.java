@@ -12,6 +12,8 @@ public class SchoolConverter {
         SchoolBo schoolBo = new SchoolBo();
         if (vo.getEnabled() != null) {
             schoolBo.setEnabled(vo.getEnabled());
+        } else {
+            schoolBo.setEnabled(Constant.DEFAULTNULL);
         }
         if (vo.getId() != null) {
             schoolBo.setId(vo.getId());
@@ -60,6 +62,11 @@ public class SchoolConverter {
             schoolBo.setLastModifyTimeStart(vo.getLastModifyTimeStart());
         } else {
             schoolBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
+        }
+        if (vo.getEnabled() != null) {
+            schoolBo.setEnabled(vo.getEnabled());
+        } else {
+            schoolBo.setEnabled(Constant.DEFAULTNULL);
         }
         return schoolBo;
     }

@@ -1,0 +1,109 @@
+id                  课程id          int
+courseTemplateId        课程模板id       int
+categoryId              课程所属类别id    int
+locationId              课程所属地区id    int
+circleId                课程所属商圈id    int
+partnerId               合作商id         int
+addressId               课程所属地址id    int
+
+price                   爱上课价格  double
+originalPrice           原价       double
+cashback                返利       double
+discount                折扣       double
+commission              佣金       double     @Deprecated
+serviceCharge           服务费     double     @Deprecated
+status                  课程状态    int(Enum)
+
+creationTime            创建时间    Calendar(UTC)  @JSON Format=YYYY-MM-DD HH:MM:SS
+lastModifyTime          最近修改时间 Calendar(UTC)  @JSON Format=YYYY-MM-DD HH:MM:SS
+enabled                 是否可用    int（Boolean）
+deleted                 是否被删除  int (Boolean)
+
+courseHourNum           课时数量    int
+courseHourLength        课时长度    int (分钟)
+
+classSize               班级类型(大小)  String（一段话）
+classType               班级分类       int（Enum, 一对一，6人小班，中班，大班..用于搜索）
+
+popularity              排名           int(暂时无用)
+
+   
+startDate               开课日期        Calendar(UTC)  @JSON Format=YYYY-MM-DD HH:MM:SS
+finishDate              结束日期        Calendar(UTC)  @JSON Format=YYYY-MM-DD HH:MM:SS
+cutoffDate              报名截止时间     Calendar(UTC)（可以精确到分钟）  @JSON Format=YYYY-MM-DD HH:MM:SS
+
+noRefundDate            退款截止日期     Calendar(UTC)  @JSON Format=YYYY-MM-DD HH:MM:SS
+cashbackDate            返利日期        Calendar(UTC)  @JSON Format=YYYY-MM-DD HH:MM:SS
+bookingType             对应订单类型     int（Enum）
+
+startUponArrival        是否即到即学     int 1代表是, 0代表否，若为1，则没有固定开始时间     改   是否有上课日期  
+startTime1              开始时间1       int（前两位代表小时，后两位代表分钟）
+finishTime1             结束时间1       int（前两位代表小时，后两位代表分钟）
+startTime2              开始时间2       int（前两位代表小时，后两位代表分钟）
+finishTime2             结束时间2       int（前两位代表小时，后两位代表分钟）
+schooltimeDay           一天中的上课区间  int（Enum, 上午，下午，晚上）
+schooltimeWeek          一周中的上课区间  int (Enum, 平时，周末)
+studyDays               上课日子        ArrayList<Integer> [1,3,5] 周一，周三，周五
+studyDaysNote           上课日子备注     String（一段话）
+
+
+reference               课程识别号    String（字符串，唯一，爱上课内部使用）
+trail                   在线试听      String(有待商议,一段话)
+
+regLocation             报名地点      String（一段话）, 若空则与上课地址一致
+courseIntro             课程简介      String（一段话）
+quiz                    阶段性评测    String（一段话）
+certification           结业证书      String（一段话）
+openCourseRequirement   开课要求      String（一段话）
+suitableStudent         适合学员      String（一段话）
+prerequest              先修知识      String（一段话）
+highScoreReward         高分奖励      String（一段话）     改 教学特色
+courseName              课程名        String
+teachingMaterialIntro   教材介绍      String（一段话）
+questionBank            题库支持      String（一段话）
+qualityAssurance        质量保证      String（一段话）      改 课时描述
+passAgreement           签约保过      String（一段话）
+extracurricular         课后互动      String（一段话）
+contact                 联系方式      String（一段话）
+regPhone                学员前往贵司报名咨询电话  String（用户预定成功前不显示给用户，用户预订成功后，出现在订单详情中）  改 上课日期描述
+
+outline                 提纲         String（多段话，可能带有额外样式，图片, tag等）
+goal                    教学目标      String（多段话，可能带有额外样式，图片, tag等）
+
+classTeacher            班主任导学    String（一段话）    改  推荐就业
+teachingAndExercise     讲练结合      String（一段话）
+questionSession         课后答疑      String（一段话）
+assignments             课后作业      String（一段话）
+marking                 作业批改      String（一段话）      改  特惠信息
+bonusService            赠送服务      String（一段话）
+downloadMaterials       课程下载      String（一段话）
+teachingMaterialFee     教材费用      String（一段话）
+teachingMethod          上课形式      String（一段话）
+
+@Joined
+rating                  评分              double       @Joined From COURSETEMPLATE
+bookingTotal            多少人预定过该课程   int          @Joined From COURSETEMPLATE
+teacherList             教师列表           List<TeacherEntityExt>           @Joined From TEACHER
+classPhotoList          机构图片列表        List<ClassPhotoEntityExt>        @Joined From CLASSPHOTO
+
+logoUrl                 机构Logo图片链接    String       @Joined From PARTNER
+wholeName               机构全程           String       @Joined From PARTNER
+instName                机构简称           String       @Joined From PARTNER
+partnerIntro            机构介绍           String       @Joined From PARTNER
+partnerQualification    机构资质           int (Enum)   @Joined From PARTNER
+partnerDistinction      机构荣誉           String       @Joined From PARTNER
+partnerRating           机构评分           double       @Joined From PARTNER
+
+address                 地址              String       @Joined From ADDRESS
+addressLat              地址经度           double       @Joined From ADDRESS
+addressLng              地址维度           double       @Joined From ADDRESS
+
+categoryValue           分类值             String       @Joined From CATEGORY    
+categoryName            分类名称           String       @Joined From CATEGORY  
+categoryRank            分类热门度         int          @Joined From CATEGORY 
+
+locationValue           区域值            String       @Joined From LOCATION
+locationName            区域名称           String       @Joined From LOCATION 
+
+circleValue             商圈值            String       @Joined From CIRCLE
+circleName              商圈名称           String       @Joined From CIRCLE 

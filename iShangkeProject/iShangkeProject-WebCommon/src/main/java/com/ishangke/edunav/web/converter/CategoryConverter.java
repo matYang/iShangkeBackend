@@ -12,6 +12,8 @@ public class CategoryConverter {
         CategoryBo categoryBo = new CategoryBo();
         if (vo.getEnabled() != null) {
             categoryBo.setEnabled(vo.getEnabled());
+        } else {
+            categoryBo.setEnabled(Constant.DEFAULTNULL);
         }
         if (vo.getId() != null) {
             categoryBo.setId(vo.getId());
@@ -85,7 +87,9 @@ public class CategoryConverter {
         //categoryVo.setCreateTime(bo.getCreateTime());
         //categoryVo.setCreateTimeEnd(bo.getCreateTimeEnd());
         //categoryVo.setCreateTimeStart(bo.getCreateTimeStart());
-        //categoryVo.setEnabled(bo.getEnabled());
+        if (bo.getEnabled() != Constant.DEFAULTNULL) {
+            categoryVo.setEnabled(bo.getEnabled());            
+        }
         categoryVo.setId(bo.getId());
         categoryVo.setIdSet(bo.getIdSet());
         //categoryVo.setLastModifyTime(bo.getLastModifyTime());

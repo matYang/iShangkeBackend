@@ -6,8 +6,8 @@
     <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
     <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
     <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
-    <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
-    <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+    <!-- <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+    <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" /> -->
     <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
     <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
     <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
@@ -84,6 +84,8 @@
     <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
     <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
     <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+    <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+    <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
     <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
     <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
@@ -224,7 +226,9 @@
   <sql id="Address_Base_Column_List">
     ADDRESS.DETAIL ADDRESS_DETAIL,
     ADDRESS.LAT ADDRESS_LAT,
-    ADDRESS.LNG ADDRESS_LNG
+    ADDRESS.LNG ADDRESS_LNG,
+    ADDRESS.LOCATION_ID ADDRESS_LOCATIONID,
+    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID
   </sql>
   <sql id="Reg_Address_Base_Column_List">
     ADDRESS.DETAIL REG_ADDRESS_DETAIL,
@@ -234,8 +238,7 @@
   <sql id="Reg_Address_Temp_Column_List">
     temp.REG_ADDRESS_DETAIL REG_ADDRESS_DETAIL,
     temp.REG_ADDRESS_LAT REG_ADDRESS_LAT,
-    temp.REG_ADDRESS_LNG
-    REG_ADDRESS_LNG
+    temp.REG_ADDRESS_LNG REG_ADDRESS_LNG
   </sql>
   <sql id="Category_Base_Column_List">
     CATEGORY.VALUE CATEGORY_VALUE,
@@ -956,15 +959,10 @@
     TEACHER
     ON
     TEACHER.ID = COURSE_TEACHER.TEACHER_ID
-    left join COURSE_CLASS_PHOTO
-    COURSE_CLASS_PHOTO
+    left join CLASS_PHOTO
+    CLASS_PHOTO
     ON
-    COURSE_CLASS_PHOTO.COURSE_ID =
-    COURSE.ID
-    left join CLASS_PHOTO CLASS_PHOTO
-    ON
-    CLASS_PHOTO.ID =
-    COURSE_CLASS_PHOTO.CLASS_PHOTO_ID
+    COURSE.PARTNER_ID = CLASS_PHOTO.PARTNER_ID and CLASS_PHOTO.DELETED = 0
     left join PARTNER PARTNER
     ON
     PARTNER.ID =
@@ -1079,19 +1077,16 @@
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-    left join CIRCLE CIRCLE
-    ON CIRCLE.ID = COURSE.CIRCLE_ID
-    left join LOCATION
-    LOCATION
-    ON
-    LOCATION.ID =
-    COURSE.LOCATION_ID
-    left join ADDRESS ADDRESS
-    ON ADDRESS.ID = COURSE.ADDRESS_ID
     left join COURSE_TEMPLATE
     COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
+    left join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    left join CIRCLE CIRCLE
+    ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+    left join LOCATION LOCATION
+    ON LOCATION.ID = ADDRESS.LOCATION_ID
     WHERE
     COURSE.DELETED = 0
     <if test="entity != null">
@@ -1141,11 +1136,11 @@
 
 
       <if test="entity.locationId != null and entity.locationId != 0">
-        AND COURSE.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
+        AND ADDRESS.LOCATION_ID = #{entity.locationId,jdbcType=INTEGER}
       </if>
       <if test="entity.locationId == null or entity.locationId == 0">
         <if test="entity.locationIdSet != null and entity.locationIdSet.size() > 0">
-          AND COURSE.LOCATION_ID IN
+          AND ADDRESS.LOCATION_ID IN
           <foreach collection="entity.locationIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -1153,11 +1148,11 @@
       </if>
 
       <if test="entity.circleId != null and entity.circleId != 0">
-        AND COURSE.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+        AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
       </if>
       <if test="entity.circleId == null or entity.circleId == 0">
         <if test="entity.circleIdSet != null and entity.circleIdSet.size() > 0">
-          AND COURSE.CIRCLE_ID IN
+          AND ADDRESS.CIRCLE_ID IN
           <foreach collection="entity.circleIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
@@ -1289,7 +1284,7 @@
           OR COURSE.START_DATE is null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE < #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
           OR COURSE.START_DATE is null)
         </if>
       </if>
@@ -1333,16 +1328,13 @@
         </if>
       </if>
 
-      <if test="entity.cutoffDate != null">
-        AND COURSE.CUTOFF_DATE =
-        #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
+      <!-- 因为课程录入的时候就没有写cutoffdate 所以只能使用开课日期作为下线的依据 -->
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.cutoffDateEnd != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -1421,8 +1413,13 @@
           <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      <if test="entity.enabled != null">
+      
+      <!-- <if test="entity.enabled != null">
         AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if> -->
+      
+      <if test="entity.enabled == 1">
+        GROUP BY COURSE.COURSE_TEMPLATE_ID
       </if>
     </if>
 
@@ -1451,20 +1448,16 @@
     ON
     CATEGORY.ID =
     COURSE.CATEGORY_ID
-    left join CIRCLE CIRCLE
-    ON CIRCLE.ID = COURSE.CIRCLE_ID
-    left join LOCATION
-    LOCATION
-    ON
-    LOCATION.ID =
-    COURSE.LOCATION_ID
-    left join ADDRESS ADDRESS
-    ON ADDRESS.ID = COURSE.ADDRESS_ID
     left join COURSE_TEMPLATE
     COURSE_TEMPLATE
     ON
     COURSE_TEMPLATE.ID = COURSE.COURSE_TEMPLATE_ID
-
+    left join ADDRESS ADDRESS
+    ON ADDRESS.ID = COURSE.ADDRESS_ID
+    left join CIRCLE CIRCLE
+    ON CIRCLE.ID = ADDRESS.CIRCLE_ID
+    left join LOCATION LOCATION
+    ON LOCATION.ID = ADDRESS.LOCATION_ID
     WHERE
     COURSE.DELETED = 0
     <if test="entity != null">
@@ -1658,7 +1651,7 @@
           OR COURSE.START_DATE is null)
         </if>
         <if test="entity.startDateEnd != null">
-          <![CDATA[AND (COURSE.START_DATE <= #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND (COURSE.START_DATE < #{entity.startDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
           OR COURSE.START_DATE is null)
         </if>
       </if>
@@ -1702,16 +1695,12 @@
         </if>
       </if>
 
-      <if test="entity.cutoffDate != null">
-        AND COURSE.CUTOFF_DATE =
-        #{entity.cutoffDate,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-      </if>
       <if test="entity.cutoffDate == null">
         <if test="entity.cutoffDateStart != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE >= #{entity.cutoffDateStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
         <if test="entity.cutoffDateEnd != null">
-          <![CDATA[AND COURSE.CUTOFF_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+          <![CDATA[AND COURSE.START_DATE <= #{entity.cutoffDateEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
 
@@ -1790,8 +1779,11 @@
           <![CDATA[AND COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
         </if>
       </if>
-      <if test="entity.enabled != null">
+      <!-- <if test="entity.enabled != null">
         AND COURSE.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if> -->
+      <if test="entity.enabled == 1">
+        GROUP BY COURSE.COURSE_TEMPLATE_ID
       </if>
     </if>
     ) AS total

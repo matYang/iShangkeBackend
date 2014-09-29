@@ -43,6 +43,11 @@ public class CourseController extends AbstractController {
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryCourse(CourseVo courseVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getHeader("referer") == null || !req.getHeader("referer").contains("ishangke.cn")) {
+            JsonResponse err = new JsonResponse();
+            err.setMessage("sorry~ you can not query our course by api directly~");
+            return err;
+        }
         String permissionTag = this.getUrl(req);
 
         CoursePageViewBo pageViewBo = null;
@@ -59,6 +64,11 @@ public class CourseController extends AbstractController {
         paginationVo.setOrderByEntities(listOrder);
         paginationVo.setColumnKey(null);
         paginationVo.setOrder(null);
+        //每次最多拉去20条course数据 后面再换更好的实现方式
+        if (paginationVo.getStart() == null || paginationVo.getCount() == null || (paginationVo.getCount() != null && paginationVo.getCount() > 20)) {
+            paginationVo.setStart(0);
+            paginationVo.setCount(20);
+        }
         try {
             pageViewBo = courseFacade.queryCourseByFilter(CourseConverter.fromModel(courseVo), PaginationConverter.toBo(paginationVo), permissionTag);
         } catch (ControllerException c) {
@@ -73,14 +83,20 @@ public class CourseController extends AbstractController {
             }
             LOGGER.info("[shine]" + shine);
         }
-        LOGGER.info("[queryCourse]:" + "category:" + courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue() + ";idSet:" + courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString() + ";ColumnKey:" + columnKey + ";Order:"
-                + order);
+        String category = courseVo.getCategoryValue() == null ? "" : courseVo.getCategoryValue();
+        String idSet = courseVo.getIdSet() == null ? "" : courseVo.getIdSet().toString();
+        LOGGER.info("[queryCourse]:category:" + category + ";idSet:" + idSet + ";ColumnKey:" + columnKey + ";Order:" + order);
         return pageViewVo;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryCourseById(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getHeader("referer") == null || !req.getHeader("referer").contains("ishangke.cn")) {
+            JsonResponse err = new JsonResponse();
+            err.setMessage("sorry~ you can not query our course by api directly~");
+            return err;
+        }
         String permissionTag = this.getUrl(req);
 
         CourseVo courseVo = new CourseVo();

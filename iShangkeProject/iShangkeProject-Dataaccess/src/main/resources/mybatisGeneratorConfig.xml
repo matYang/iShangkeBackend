@@ -296,6 +296,25 @@
       <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar"
         jdbcType="TIMESTAMP" />
     </table>
+    <table tableName="PURPOSE_COURSE" domainObjectName="PurposeCourseEntity">
+      <generatedKey column="ID" sqlStatement="MySql" />
+      <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
+    <table tableName="GROUP_BUY_ACTIVITY" domainObjectName="GroupBuyActivityEntity">
+        <generatedKey column="ID" sqlStatement="MySql"/>
+        <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+        <columnOverride column="END_TIME" property="endTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
+    <table tableName="GROUP_BUY_BOOKING" domainObjectName="GroupBuyBookingEntity">
+        <generatedKey column="ID" sqlStatement="MySql"/>
+        <columnOverride column="CREATE_TIME" property="createTime" javaType="java.util.Calendar" jdbcType="TIMESTAMP" />
+    </table>
+    <table tableName="GROUP_BUY_PHOTO" domainObjectName="GroupBuyPhotoEntity">
+        <generatedKey column="ID" sqlStatement="MySql"/>
+    </table>
+    <table tableName="GROUP_BUY_ADDRESS" domainObjectName="GroupBuyAddressEntity">
+        <generatedKey column="ID" sqlStatement="MySql"/>
+    </table>
   </context>
 
 </generatorConfiguration>

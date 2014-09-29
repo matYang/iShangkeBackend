@@ -11,7 +11,7 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="ACCOUNT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="ACCOUNT_DELETED" property="deleted" jdbcType="INTEGER" />
-     <result column="ACCOUNT_ACCOUNT_NUMBER" property="deleted" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_ACCOUNT_NUMBER" property="accountNumber" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Account_Base_Column_List">
@@ -26,6 +26,7 @@
     ACCOUNT.DELETED ACCOUNT_DELETED,
     ACCOUNT.ACCOUNT_NUMBER ACCOUNT_ACCOUNTNUMBER
   </sql>
+  
   <!-- add -->
   <insert id="add" parameterType="AccountEntityExt">
     insert into ACCOUNT

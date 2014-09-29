@@ -19,6 +19,11 @@ struct AddressBo {
     16: i64 lastModifyTimeEnd
     17: i64 createTimeStart
     18: i64 createTimeEnd
+    19: i32 locationId
+    20: i32 circleId
+    21: string realAddress
+    22: set<i32> locationIdSet
+    23: set<i32> circleIdSet
 }
 struct AddressPageViewBo{
     1: i32 start

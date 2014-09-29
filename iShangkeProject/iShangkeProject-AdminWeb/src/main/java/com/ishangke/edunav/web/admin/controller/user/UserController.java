@@ -27,6 +27,7 @@ import com.ishangke.edunav.web.converter.PasswordConverter;
 import com.ishangke.edunav.web.converter.UserConverter;
 import com.ishangke.edunav.web.converter.pageview.UserPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.UserMap;
 import com.ishangke.edunav.web.model.LoginVo;
 import com.ishangke.edunav.web.model.PasswordVo;
 import com.ishangke.edunav.web.model.UserVo;
@@ -242,7 +243,7 @@ public class UserController extends AbstractController {
         return responseVo;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     JsonResponse queryUser(UserVo userVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         UserPageViewVo responseVo = null;
@@ -258,6 +259,8 @@ public class UserController extends AbstractController {
         }
 
         UserPageViewBo responseUser = null;
+        paginationVo.setColumnKey(UserMap.USER_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(UserMap.USER_MAP.get(paginationVo.getOrder()));
         
         //加入对query时对role & partner 的过滤
         if (userVo.getRoleId() != null && userVo.getPartnerId() != null && userVo.getRoleId() > 0 && userVo.getPartnerId() > 0) {

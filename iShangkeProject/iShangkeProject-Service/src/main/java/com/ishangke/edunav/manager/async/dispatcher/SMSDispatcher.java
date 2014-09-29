@@ -53,13 +53,28 @@ public class SMSDispatcher {
         // 有变动 之前的设计 课程中的原价和现价都不可空
         // 现在的业务是可以为空
         if (course.getPrice() != null && course.getOriginalPrice() != null) {
-            payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "(原价￥"
-                    + formatter.format(course.getOriginalPrice()) + ", 优惠" + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";
+            if (booking.getScheduledTime() != null) {
+                payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "(原价￥"
+                        + formatter.format(course.getOriginalPrice()) + ", 优惠" + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";    
+            } else {
+                payload = "确认：" + booking.getName() + "，请于客服与您约定的时间前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "(原价￥"
+                        + formatter.format(course.getOriginalPrice()) + ", 优惠" + formatter.format(course.getOriginalPrice() - course.getPrice()) + "元)；地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";
+            }
+            
         } else if (course.getPrice() != null) {
-            payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "元)；地址："
-                    + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课手机号才能享受折扣哦~";
+            if (booking.getScheduledTime() != null) {
+                payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "元)；地址："
+                        + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课手机号才能享受折扣哦~";    
+            } else {
+                payload = "确认：" + booking.getName() + "，请于客服与您约定的时间前往" + course.getInstName() + "报到，" + course.getCourseName() + "独享￥" + formatter.format(course.getPrice()) + "元)；地址："
+                        + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN" + "；告知机构您的爱上课手机号才能享受折扣哦~";
+            }
         } else {
-            payload = "确认：" + booking.getName() + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前完成" + course.getInstName() + "报到，地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";
+            if (booking.getScheduledTime() != null) {
+                payload = "确认：" + booking.getName() + "，请于" + DateUtility.formatReadableDate(booking.getScheduledTime()) + "前前前往" + course.getInstName() + "报到，地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";                
+            } else {
+                payload = "确认：" + booking.getName() + "，请于客服与您约定的时间前往" + course.getInstName() + "报到，地址：" + course.getRegAddress() + "；订单查询变更取消，请登录官网iShangke.CN；告知机构您的爱上课手机号才能享受折扣哦~";
+            }
         }
         SMSTask sms = new SMSTask(Event.USER_BOOKINGCONFIRMED, booking.getPhone(), payload);
         return ExecutorProvider.executeRelay(sms);
@@ -154,6 +169,33 @@ public class SMSDispatcher {
         public Boolean get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
             return true;
         }
+    }
+
+    public static Future<Boolean> sendUserQloginVerificationSMS(final String cellNum, final String authCode) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "您的快捷登录验证码：" + authCode + "，如非本人操作请忽略此短信";
+        SMSTask task = new SMSTask(Event.USER_QLOGINVERIFICATION, cellNum, payload);
+        return ExecutorProvider.executeRelay(task);
+    }
+
+    public static Future<Boolean> sendCreateAnonymousUserSMS(final String cellNum) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已自动帮您注册成为会员～。注册手机" + cellNum + ",初始密码为刚刚您收到的验证码，请尽快更换密码";
+        SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
+        return ExecutorProvider.executeRelay(sms);
+    }
+
+    public static Future<Boolean> sendGroupBuyPaySuccess(String phone, String title, String reference) {
+        if (!Flag.shouldSMS()) {
+            return new DefaultSMSFuture();
+        }
+        String payload = "您预定的团购课程[" + title + "]支付成功，订单号为:" + reference + "。稍后会有客服与您电话联系，感谢您对爱上课的支持～";
+        SMSTask task = new SMSTask(Event.USER_CELLVERIFICATION, phone, payload);
+        return ExecutorProvider.executeRelay(task);
     }
 
 }

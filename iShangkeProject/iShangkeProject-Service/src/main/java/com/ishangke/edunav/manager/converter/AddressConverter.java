@@ -70,6 +70,19 @@ public class AddressConverter {
                 .getLastModifyTimeEnd().getTimeInMillis());
         addressBo.setLastModifyTimeStart(e.getLastModifyTimeStart() == null ? Constant.DEFAULTNULL : e
                 .getLastModifyTimeStart().getTimeInMillis());
+        if (e.getCircleId() != null) {
+            addressBo.setCircleId(e.getCircleId());
+        } else {
+            addressBo.setCircleId(Constant.DEFAULTNULL);
+        }
+        if (e.getLocationId() != null) {
+            addressBo.setLocationId(e.getLocationId());
+        } else{
+          addressBo.setLocationId(Constant.DEFAULTNULL);
+        }
+        if (e.getRealAddress() != null) {
+            addressBo.setRealAddress(e.getRealAddress());
+        }
         return addressBo;
     }
 
@@ -106,6 +119,15 @@ public class AddressConverter {
         if (bo.getLngStart() != Constant.DEFAULTNULL) {
             addressEntityExt.setLngStart(bo.getLngStart());
         }
+        if (bo.getCircleId() != Constant.DEFAULTNULL) {
+            addressEntityExt.setCircleId(bo.getCircleId());
+        }
+        if (bo.getLocationId() != Constant.DEFAULTNULL) {
+            addressEntityExt.setLocationId(bo.getLocationId());
+        }
+        addressEntityExt.setRealAddress(bo.getRealAddress());
+        addressEntityExt.setCircleIdSet(bo.getCircleIdSet());
+        addressEntityExt.setLocationIdSet(bo.getLocationIdSet());
         addressEntityExt.setPartnerId(bo.getPartnerId());
         addressEntityExt.setPartnerIdSet(bo.getPartnerIdSet());
         return addressEntityExt;

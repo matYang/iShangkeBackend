@@ -9,6 +9,9 @@ include "model/common.thrift"
 include "model/order.thrift"
 include "model/orderHistory.thrift"
 include "model/withdraw.thrift"
+include "model/purposeCourse.thrift"
+include "model/groupBuyActivity.thrift"
+include "model/groupBuyBooking.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.service
 
@@ -210,4 +213,118 @@ service BookingService {
 	string verify(1: string notify) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForGet(1:string subject, 2: string out_trade_no, 3: string total_fee, 4: string type) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	string buildFormForPost(1:string subject, 2: string out_trade_no, 3: string total_fee) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+	
+	// *********************************************************
+    // *
+    // *   关于意向课程 purposeCourse
+    // *
+    // *********************************************************
+	
+	 /**
+     * 本方法返回意向课程信息
+     * 管理员可以通过此方法调取意向课程信息
+     * 
+     * @param purposeCourseBo 意向课程查询条件
+     * @param userBo          调用方法的用户信息
+     * @param paginationBo
+     * @return
+     */
+    purposeCourse.PurposeCoursePageViewBo queryPurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:common.PaginationBo paginationBo,4:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     *  本方法创建意向课程信息
+     * 管理员可以通过此方法创建意向课程信息 
+     * 
+     * @param purposeCourseBo  创建意向课程的信息
+     * @param userBo            调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo createPurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     *  本方法更新意向课程信息
+     * 管理员可以通过此方法更新意向课程信息 
+     * 
+     * @param purposeCourseBo  更新意向课程的信息
+     * @param userBo            调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo updatePurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     *  本方法删除意向课程信息
+     * 管理员可以通过此方法删除意向课程信息 
+     * 
+     * @param purposeCourseBo  删除意向课程的ID信息
+     * @param userBo            调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo deletePurpose(1:purposeCourse.PurposeCourseBo purposeCourseBo,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     * 本方法返回指定ID意向课程信息
+     * 管理员可以通过此方法查询指定ID意向课程信息
+     * 
+     * @param id       意向课程对应ID
+     * @param userBo   调用方法的用户信息
+     * @return
+     */
+    purposeCourse.PurposeCourseBo queryPurposeById(1:i32 id,2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    // *********************************************************
+    // *
+    // *   关于团购课程  GroupBuy
+    // *
+    // *********************************************************
+        /**
+     * 管理员创建一次团购活动
+     * @param groupBuyActivityBo  创建团购活动信息
+     * @param userBo  创建团购活动的用户信息
+     * @return
+     */
+    groupBuyActivity.GroupBuyActivityBo createGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    /**
+     * 管理员更新团购活动
+     * @param groupBuyActivityBo  团购活动信息
+     * @param userBo  团购活动的用户信息
+     * @return
+     */
+    groupBuyActivity.GroupBuyActivityBo updateGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+
+
+    /**
+     * 用户选购团购课程
+     * @param groupBuyBookingBo  用户团购订单信息
+     * @param groupBuyActivityBo 团购活动信息
+     * @param userBo  选购团购课程用户信息
+     * @return
+     */
+    groupBuyBooking.GroupBuyBookingBo createGroupBuyBooking(1:groupBuyBooking.GroupBuyBookingBo groupBuyBookingBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessException);
+
+    /**
+     * 用户查询自己的团购情况 管理员查询所有的团购情况
+     * @param groupBuyBookingBo
+     * @param userBo
+     * @param paginationBo
+     * @return
+     */
+    groupBuyBooking.GroupBuyBookingPageViewBo queryGroupBuyBooking(1:groupBuyBooking.GroupBuyBookingBo groupBuyBookingBo, 2:user.UserBo userBo, 3:common.PaginationBo paginationBo,4:string permissionTag) throws (1:fault.BusinessExceptionBo businessException);
+    
+    groupBuyActivity.GroupBuyActivityPageViewBo queryGroupBuyActivity(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:common.PaginationBo paginationBo) throws (1:fault.BusinessExceptionBo businessException);
+    
+    /**
+     * 管理员对团购活动进行上线操作
+     * @param groupBuyBookingBo
+     * @param userBo
+     * @param paginationBo
+     * @return
+     */
+    groupBuyActivity.GroupBuyActivityBo online(1:groupBuyActivity.GroupBuyActivityBo groupBuyActivityBo, 2:user.UserBo userBo,3:string permissionTag) throws (1:fault.BusinessExceptionBo businessExceptionBo);
+    
+    groupBuyActivity.GroupBuyActivityBo queryGroupBuyActivityById(1: i32 id) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
+    groupBuyBooking.GroupBuyBookingBo queryGroupBuyBookingById(1: i32 id, 2: user.UserBo userBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
+    string changeGroupBuyBookingStatusToPayed(1: i32 id, 2: string trade_no) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 } 

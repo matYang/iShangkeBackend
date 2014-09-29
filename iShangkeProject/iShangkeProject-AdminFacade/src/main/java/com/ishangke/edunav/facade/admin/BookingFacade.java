@@ -9,7 +9,13 @@ import com.ishangke.edunav.commoncontract.model.BookingHistoryBo;
 import com.ishangke.edunav.commoncontract.model.BookingHistoryPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.BusinessExceptionBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyActivityPageViewBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyBookingPageViewBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
+import com.ishangke.edunav.commoncontract.model.PurposeCourseBo;
+import com.ishangke.edunav.commoncontract.model.PurposeCoursePageViewBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.commoncontract.service.BookingService;
 import com.ishangke.edunav.commoncontract.service.BookingService.Client;
@@ -159,4 +165,207 @@ public class BookingFacade {
         return result;
     }
 
+   public PurposeCoursePageViewBo queryPurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,PaginationBo paginationBo,String permissionTag){
+       PurposeCoursePageViewBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryPurpose(purposeCourseBo, userBo, paginationBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo createPurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.createPurpose(purposeCourseBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo updatePurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.updatePurpose(purposeCourseBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo deletePurpose(PurposeCourseBo purposeCourseBo,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.deletePurpose(purposeCourseBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public PurposeCourseBo queryPurposeById(int id,UserBo userBo,String permissionTag){
+       PurposeCourseBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryPurposeById(id, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public GroupBuyActivityBo createGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo,UserBo userBo,String permissionTag){
+       GroupBuyActivityBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.createGroupBuyActivity(groupBuyActivityBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+    public GroupBuyActivityBo updateGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo, String permissionTag) {
+        GroupBuyActivityBo result = null;
+
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+
+        try (ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.updateGroupBuyActivity(groupBuyActivityBo, userBo, permissionTag);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+   public GroupBuyActivityPageViewBo queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo,UserBo userBo,PaginationBo paginationBo,String permissionTag){
+       GroupBuyActivityPageViewBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryGroupBuyActivity(groupBuyActivityBo, paginationBo);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public GroupBuyBookingPageViewBo queryGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo,UserBo userBo,PaginationBo paginationBo,String permissionTag){
+       GroupBuyBookingPageViewBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryGroupBuyBooking(groupBuyBookingBo, userBo, paginationBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public GroupBuyActivityBo online(GroupBuyActivityBo groupBuyActivityBo,UserBo userBo,String permissionTag){
+       GroupBuyActivityBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.online(groupBuyActivityBo, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public GroupBuyActivityBo queryGroupBuyActivityById(int id){
+       GroupBuyActivityBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryGroupBuyActivityById(id);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
+   
+   public GroupBuyBookingBo queryGroupBuyBookingById(int id, UserBo userBo, String permissionTag){
+       GroupBuyBookingBo result = null;
+       
+       ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Booking.getName());
+       
+       try(ThriftClientFactory<BookingService.Client> factory = new ThriftClientFactory<>(clientSetting)){
+           Client serviceClient = factory.getServiceClient();
+           result = serviceClient.queryGroupBuyBookingById(id, userBo, permissionTag);
+       }catch(BusinessExceptionBo e){
+           e.printStackTrace();
+           throw new ControllerException(e.getErrorCode(),e.getMessageKey(),e.getMessage());
+       }catch(TException e){
+           e.printStackTrace();
+       }
+       return result;
+   }
 }

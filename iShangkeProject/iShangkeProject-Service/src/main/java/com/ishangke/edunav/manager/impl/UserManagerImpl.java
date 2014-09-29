@@ -147,7 +147,8 @@ public class UserManagerImpl implements UserManager {
             couponEntity.setOrigin(CouponEnums.Origin.REGISTRATION.code);
             couponEntity.setStatus(CouponEnums.Status.USABLE.code);
             Calendar expiry = DateUtility.getCurTimeInstance();
-            expiry.add(Calendar.YEAR, 1);
+            //6个月过期
+            expiry.add(Calendar.MONTH, 6);
             couponEntity.setExpiryTime(expiry);
             couponEntity.setRemark("");
             couponEntity.setUserId(userEntity.getId());
@@ -425,6 +426,26 @@ public class UserManagerImpl implements UserManager {
         SMSDispatcher.sendUserCellVerificationSMS(userBo.getPhone(), authCode);
         return sessionBo;
     }
+    
+    @Override
+    public SessionBo openQloginSession(UserBo userBo) {
+        if (userBo == null || userBo.getPhone() == null || userBo.getPhone().length() == 0) {
+            throw new ManagerException("无效请求参数");
+        }
+
+        UserEntityExt searchEntity = new UserEntityExt();
+        searchEntity.setPhone(userBo.getPhone());
+
+        UserEntityExt result = null;
+
+        String authCode = authManager.openQloginVerificationSession(userBo.getPhone());
+        SessionBo sessionBo = new SessionBo();
+        sessionBo.setAccountIdentifier(userBo.getPhone());
+        sessionBo.setAuthCode(authCode);
+
+        SMSDispatcher.sendUserQloginVerificationSMS(userBo.getPhone(), authCode);
+        return sessionBo;
+    }
 
     @Override
     public SessionBo openForgetPasswordSession(UserBo userBo) {
@@ -676,6 +697,44 @@ public class UserManagerImpl implements UserManager {
         sessionBo.setAccountIdentifier(loginBo.getAccountIdentifier());
         sessionBo.setAuthCode(authCode);
         return sessionBo;
+    }
+    
+    @Override
+    public SessionBo qlogin(LoginBo loginBo) {
+        // TODO Auto-generated method stub
+        boolean isValid = authManager.validateQloginVerification(loginBo.getAccountIdentifier(), loginBo.getPassword());
+        if (!isValid) {
+            throw new ManagerException("对不起，您的手机号码与验证码不匹配");
+        }
+        UserEntityExt user = new UserEntityExt();
+        user.setPhone(loginBo.getAccountIdentifier());
+        user = userMapper.getByPhone(user);
+        if (user != null && IdChecker.notNull(user.getId())) {
+            SessionBo resultUser = new SessionBo();
+            String authCode = authManager.openAuthSession(user.getId());
+            resultUser.setAuthCode(authCode);
+            resultUser.setId(user.getId());
+            resultUser.setAccountIdentifier(loginBo.getAccountIdentifier());
+            authManager.closeQloginVerificationSession(loginBo.getAccountIdentifier());
+            return resultUser;
+        } else {
+            //创建用户
+            UserBo userBo = new UserBo();
+            userBo.setPhone(loginBo.getAccountIdentifier());
+            //给用户一个零时密码
+            userBo.setPassword(loginBo.getPassword());
+            //通过快捷支付方式创建出来的用户 enabled 为2
+            userBo.setEnabled(2);
+            userBo = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), false);
+            String authCode = authManager.openAuthSession(userBo.getId());
+            SessionBo resultUser = new SessionBo();
+            resultUser.setAuthCode(authCode);
+            resultUser.setId(userBo.getId());
+            resultUser.setAccountIdentifier(loginBo.getAccountIdentifier());
+            authManager.closeQloginVerificationSession(loginBo.getAccountIdentifier());
+            SMSDispatcher.sendCreateAnonymousUserSMS(userBo.getPhone());
+            return resultUser;
+        }
     }
 
     @Override
@@ -938,12 +997,14 @@ public class UserManagerImpl implements UserManager {
         //如果是这种形式下创建出来的用户 enabled 为1
         userBo.setEnabled(1);
         UserBo resultUser = initializeNormalUser(userBo, Constant.GROUPUSER, userBo.getPhone(), true);
-        //一个很不好的功能 要将密码明文传到前台。。。 后面想办法改正
-        resultUser.setReference(userBo.getPassword());
         return resultUser;
     }
     
     public static void main(String[] args) {
+        Calendar a = DateUtility.getCurTimeInstance();
+        a.add(Calendar.MONTH, 6);
+        System.out.println(a.get(Calendar.YEAR) + ":" + a.get(Calendar.MONTH) + ":" + a.get(Calendar.DAY_OF_MONTH));
         System.out.println(AuthCodeGenerator.numerical(CellVerificationConfig.AUTHCODELENGTH));
     }
+
 }

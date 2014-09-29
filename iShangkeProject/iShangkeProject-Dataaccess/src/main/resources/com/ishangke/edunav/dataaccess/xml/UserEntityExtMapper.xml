@@ -28,6 +28,7 @@
     <result column="USERS_MAJORID" property="majorId" jdbcType="INTEGER" />
     <result column="USERS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
     <result column="USERS_COUPONTOTAL" property="couponTotal" jdbcType="DOUBLE" />
+    <result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
     <collection property="account" ofType="AccountEntityExt">
       <result column="ACCOUNT_ID" property="id" jdbcType="INTEGER" />
       <result column="ACCOUNT_BALANCE" property="balance" jdbcType="INTEGER" />
@@ -84,6 +85,9 @@
     USERS.SCHOOL_ID
     USERS_SCHOOLID,
     USERS.LOCATION_ID USERS_LOCATIONID
+  </sql>
+  <sql id="School_Base_Column_List">
+    SCHOOL.NAME SCHOOL_NAME
   </sql>
   <sql id="Account_Base_Column_List">
     ACCOUNT.ID ACCOUNT_ID,
@@ -341,15 +345,18 @@
     SELECT
     <include refid="User_Base_Column_List" />
     ,
+    <include refid="School_Base_Column_List" />
+    ,
     <include refid="Account_Base_Column_List" />
     ,
     <include refid="Credit_Base_Column_List" />
     ,
     SUM(COUPON.BALANCE) USERS_COUPONTOTAL
-    from USERS join ACCOUNT on ACCOUNT.ID = USERS.ID
-    join CREDIT on CREDIT.ID =
+    from USERS left join ACCOUNT on ACCOUNT.ID = USERS.ID
+    left join CREDIT on CREDIT.ID =
     USERS.ID
     left join COUPON on USERS.ID = COUPON.USER_ID and COUPON.STATUS = 0
+    left join SCHOOL on USERS.SCHOOL_ID = SCHOOL.ID
     where USERS.DELETED = 0 and USERS.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- getSimpleById -->
@@ -396,7 +403,7 @@
         </if>
       </if>
 
-      <if test="entity.majorId != null and entity.careerId != 0">
+      <if test="entity.careerId != null and entity.careerId != 0">
         AND USERS.CAREER_ID = #{entity.careerId,jdbcType=INTEGER}
       </if>
       <if test="entity.careerId == null or entity.careerId == 0">

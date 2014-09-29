@@ -88,6 +88,19 @@ public class AddressConverter {
         } else {
             addressBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
         }
+        if (vo.getCircleId() != null) {
+            addressBo.setCircleId(vo.getCircleId());
+        } else {
+            addressBo.setCircleId(Constant.DEFAULTNULL);
+        }
+        if (vo.getLocationId() != null) {
+            addressBo.setLocationId(vo.getLocationId());
+        } else {
+            addressBo.setLocationId(Constant.DEFAULTNULL);
+        }
+        addressBo.setCircleIdSet(vo.getCircleIdSet());
+        addressBo.setLocationIdSet(vo.getLocationIdSet());
+        addressBo.setRealAddress(vo.getRealAddress());
         return addressBo;
     }
 
@@ -97,15 +110,10 @@ public class AddressConverter {
         }
         AddressVo addressVo = new AddressVo();
         addressVo.setCreateTime(bo.getCreateTime());
-//        addressVo.setCreateTimeEnd(bo.getCreateTimeEnd());
-//        addressVo.setCreateTimeStart(bo.getCreateTimeStart());
         addressVo.setDetail(bo.getDetail());
         addressVo.setEnabled(bo.getEnabled());
         addressVo.setId(bo.getId());
-//        addressVo.setIdSet(bo.getIdSet());
         addressVo.setLastModifyTime(bo.getLastModifyTime());
-//        addressVo.setLastModifyTimeEnd(bo.getLastModifyTimeEnd());
-//        addressVo.setLastModifyTimeStart(bo.getLastModifyTimeStart());
         if (Constant.DEFAULTNULL != bo.getLat()) {
             addressVo.setLat(bo.getLat());
         }
@@ -125,7 +133,13 @@ public class AddressConverter {
             addressVo.setLngStart(bo.getLngStart());
         }
         addressVo.setPartnerId(bo.getPartnerId());
-//        addressVo.setPartnerIdSet(bo.getPartnerIdSet());
+        if (bo.getCircleId() != Constant.DEFAULTNULL) {
+            addressVo.setCircleId(bo.getCircleId());
+        }
+        if (bo.getLocationId() != Constant.DEFAULTNULL) {
+            addressVo.setLocationId(bo.getLocationId());
+        }
+        addressVo.setRealAddress(bo.getRealAddress());
         return addressVo;
     }
 }

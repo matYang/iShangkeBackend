@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.GroupBuyAddressEntityExtMapper">
+  <resultMap type="GroupBuyAddressEntityExt" id="GroupBuyAddressExtMap">
+    <id column="GROUPBUYADDRESS_ID" property="id" jdbcType="INTEGER" />
+    <result column="GROUPBUYADDRESS_GROUPBUYACTIVITYID" property="groupBuyActivityId" jdbcType="INTEGER"/>
+    <result column="GROUPBUYADDRESS_ADDRESSID" property="addressId" jdbcType="INTEGER"/> 
+  </resultMap>
+  <sql id="Group_Buy_Address_Base_Column_List">
+    GROUP_BUY_ADDRESS.ID GROUPBUYADDRESS_ID,
+    GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID GROUPBUYADDRESS_GROUPBUYACTIVITYID,
+    GROUP_BUY_ADDRESS.ADDRESS_ID GROUPBUYADDRESS_ADDRESSID
+  </sql>
+  
+   <!-- add -->
+  <insert id="add" parameterType="GroupBuyAddressEntityExt">
+    insert into GROUP_BUY_ADDRESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
+        GROUP_BUY_ACTIVITY_ID,
+      </if>
+      <if test="addressId">
+        ADDRESS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
+            #{groupBuyActivityId,jdbcType = INTEGER},
+        </if>
+        <if test="addressId != null">
+            #{addressId,jdbcType=INTEGER},
+        </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  
+  <!-- deleteById -->
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update GROUP_BUY_ADDRESS set DELETED = 1 where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- deleteByGroupBuyActivityId -->
+  <update id="deleteByGroupBuyActivityId" parameterType="java.lang.Integer">
+    update GROUP_BUY_ADDRESS set DELETED = 1 where GROUP_BUY_ACTIVITY_ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- list -->
+  <select id="list" parameterType="map" resultMap="GroupBuyAddressExtMap">
+    select
+    <include refid="Group_Buy_Address_Base_Column_List"/>
+    from GROUP_BUY_ADDRESS
+    where GROUP_BUY_ADDRESS.DELETED = 0
+    <if test="entity != null">
+        <if test="entity.id != null and entity.id != 0">
+            AND GROUP_BUY_ADDRESS.ID = #{entity.id,jdbcType=INTEGER}
+        </if>
+
+        
+        <if test="entity.groupBuyActivityId != null and entity.groupBuyActivityId != 0">
+            AND GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID = #{entity.groupBuyActivityId,jdbcType=INTEGER}
+        </if>
+
+        <if test="entity.addressId != null">
+            AND GROUP_BUY_ADDRESS.ADDRESS_ID = #{addressId,jdbcType=INTEGER}
+        </if>
+    </if>
+    
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY 
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+            GROUP_BUY_ADDRESS.${listItem.columnKey} ${listItem.order}
+        </foreach>
+    </if>
+    
+    <if test="page != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  <!-- getListCount -->
+  <select id="getListCount" parameterType="map" resultType="java.lang.Integer">
+    select count(*) from (
+    select
+    <include refid="Group_Buy_Address_Base_Column_List"/>
+    from GROUP_BUY_ADDRESS
+    where GROUP_BUY_ADDRESS.DELETED = 0
+    <if test="entity != null">
+        <if test="entity.id != null and entity.id != 0">
+            AND GROUP_BUY_ADDRESS.ID = #{entity.id,jdbcType=INTEGER}
+        </if>
+
+        
+        <if test="entity.groupBuyActivityId != null and entity.groupBuyActivityId != 0">
+            AND GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID = #{entity.groupBuyActivityId,jdbcType=INTEGER}
+        </if>
+
+        <if test="entity.addressId != null">
+            AND GROUP_BUY_ADDRESS.ADDRESS_ID = #{addressId,jdbcType=INTEGER}
+        </if>
+    </if>
+    ) as total
+  </select>
+  
+  <!-- update -->
+  <update id="update" parameterType="GroupBuyAddressEntityExt">
+    update GROUP_BUY_ADDRESS
+    <set>
+        <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
+            GROUP_BUY_ACTIVITY_ID = #{groupBuyActivityId,jdbcType=INTEGER},
+        </if>
+        <if test="addressId != null">
+            ADDRESS_ID = #{addressId,jdbcType=INTEGER},
+        </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- getById -->
+  <select id="getById" parameterType="java.lang.Integer" resultMap="GroupBuyAddressExtMap">
+    select
+    <include refid="Group_Buy_Address_Base_Column_List"/>
+    from GROUP_BUY_ADDRESS
+    where GROUP_BUY_ADDRESS.DELETED = 0 and GROUP_BUY_ADDRESS.ID = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -677,6 +677,7 @@ public class CourseConverter {
 //        courseVo.setNoRefundDateEnd(bo.getNoRefundDateEnd());
         courseVo.setOpenCourseRequirement(bo.getOpenCourseRequirement());
         courseVo.setPrerequest(bo.getPrerequest());
+        //隐藏价格
         if (Constant.DEFAULTNULL != bo.getPrice()) {
             courseVo.setPrice(bo.getPrice());
         }
@@ -686,6 +687,7 @@ public class CourseConverter {
         if (Constant.DEFAULTNULL != bo.getPriceStart()) {
             courseVo.setPriceStart(bo.getPriceStart());
         }
+        //隐藏价格
         if (Constant.DEFAULTNULL != bo.getOriginalPrice()) {
             courseVo.setOriginalPrice(bo.getOriginalPrice());
         }

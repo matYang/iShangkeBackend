@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+  namespace="com.ishangke.edunav.dataaccess.mapper.PurposeCourseEntityExtMapper">
+  <resultMap type="PurposeCourseEntityExt" id="PurposeCourseExtMap">
+    <id column="PURPOSECOURSE_ID" property="id" jdbcType="INTEGER" />
+    <result column="PURPOSECOURSE_CATEGORYID" property="categoryId"
+      jdbcType="INTEGER" />
+    <result column="PURPOSECOURSE_USERNAME" property="userName"
+      jdbcType="VARCHAR" />
+    <result column="PURPOSECOURSE_PHONE" property="phone"
+      jdbcType="VARCHAR" />
+    <result column="PURPOSECOURSE_REMARK" property="remark"
+      jdbcType="VARCHAR" />
+    <result column="PURPOSECOURSE_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+  </resultMap>
+
+  <sql id="Purpose_Course_Base_Column_List">
+    ID PURPOSECOURSE_ID,
+    CATEGORY_ID PURPOSECOURSE_CATEGORYID,
+    USER_NAME PURPOSECOURSE_USERNAME,
+    PHONE PURPOSECOURSE_PHONE,
+    REMARK
+    PURPOSECOURSE_REMARK,
+    CREATE_TIME PURPOSECOURSE_CREATETIME
+  </sql>
+
+  <!-- add -->
+  <insert id="add" parameterType="PurposeCourseEntityExt">
+    insert into PURPOSE_COURSE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null and categoryId != 0">
+        CATEGORY_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="categoryId != null and categoryId != 0">
+            #{categoryId,jdbcType=INTEGER},
+        </if>
+        <if test="userName != null">
+            #{userName,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="remark != null">
+            #{remark,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null">
+          #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  
+  <!-- deleteById -->
+  <update id="deleteById" parameterType="java.lang.Integer">
+    update PURPOSE_COURSE set DELETED = 1 where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- list -->
+  <select id="list" parameterType="map" resultMap="PurposeCourseExtMap">
+    select
+    <include refid="Purpose_Course_Base_Column_List"/>
+    from PURPOSE_COURSE where PURPOSE_COURSE.DELETED = 0
+    <if test="entity != null">
+        <if test="entity.id != null and entity.id != 0">
+            AND PURPOSE_COURSE.ID = #{entity.id,jdbcType=INTEGER}
+        </if>
+        <if test="entity.categoryId != null and entity.categoryId != 0">
+            AND PURPOSE_COURSE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+        </if>
+        <if test="entity.userName != null">
+            AND PURPOSE_COURSE.USER_NAME = #{entity.userName,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.phone != null">
+            AND PURPOSE_COURSE.PHONE = #{entity.phone,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.remark != null">
+            AND PURPOSE_COURSE.REMARK = #{entity.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.createTime != null">
+            AND PURPOSE_COURSE.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        </if>
+        <if test="entity.createTime == null">
+            <if test="entity.createTimeStart != null">
+                <![CDATA[AND PURPOSE_COURSE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+            </if>
+            <if test="entity.createTimeEnd != null">
+                <![CDATA[AND PURPOSE_COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+            </if>
+        </if>
+    </if>
+    
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+        ORDER BY 
+        <foreach collection="page.orderByEntities" item="listItem" separator=",">
+            PURPOSE_COURSE.${listItem.columnKey} ${listItem.order}
+        </foreach>
+    </if>
+    
+    <if test="page !=null and page.offset != null and page.size != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  <!-- getListCount -->
+  <select id="getListCount" parameterType="map" resultType="java.lang.Integer">
+    select count(*) from (
+    select
+    <include refid="Purpose_Course_Base_Column_List"/>
+    from PURPOSE_COURSE where PURPOSE_COURSE.DELETED = 0
+    <if test="entity != null">
+        <if test="entity.id != null and entity.id != 0">
+            AND PURPOSE_COURSE.ID = #{entity.id,jdbcType=INTEGER}
+        </if>
+        <if test="entity.categoryId != null and entity.categoryId != 0">
+            AND PURPOSE_COURSE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+        </if>
+        <if test="entity.userName != null">
+            AND PURPOSE_COURSE.USER_NAME = #{entity.userName,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.phone != null">
+            AND PURPOSE_COURSE.PHONE = #{entity.phone,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.remark != null">
+            AND PURPOSE_COURSE.REMARK = #{entity.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.createTime != null">
+            AND PURPOSE_COURSE.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+        </if>
+        <if test="entity.createTime == null">
+            <if test="entity.createTimeStart != null">
+                <![CDATA[AND PURPOSE_COURSE.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+            </if>
+            <if test="entity.createTimeEnd != null">
+                <![CDATA[AND PURPOSE_COURSE.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
+            </if>
+        </if>
+    </if>
+    ) as total
+  </select>
+  
+  <!-- update -->
+  <update id="update" parameterType="PurposeCourseEntityExt">
+    update PURPOSE_COURSE
+    <set>
+        <if test="categoryId != null and categoryId != 0">
+            CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
+        </if>
+        <if test="userName != null">
+            USER_NAME = #{userName,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            PHONE = #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="remark != null">
+            REMARK = #{remark,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null">
+            CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- getById -->
+  <select id="getById" parameterType="java.lang.Integer" resultMap="PurposeCourseExtMap">
+    select
+    <include refid="Purpose_Course_Base_Column_List"/>
+    from PURPOSE_COURSE where PURPOSE_COURSE.DELETED = 0 and PURPOSE_COURSE.ID = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>
