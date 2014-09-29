@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
 import com.ishangke.edunav.common.utilities.DateUtility;
+import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
@@ -49,6 +50,17 @@ public class GroupBuyManagerImplTest extends BaseTest {
         groupBuyPhotoBo.setUrl(UUID.randomUUID().toString());
         photoList.add(groupBuyPhotoBo);
         groupBuyActivityBo.setPhotoList(photoList);
+
+        List<AddressBo> addressList = new ArrayList<AddressBo>();
+        AddressBo addressBo = new AddressBo();
+        addressBo.setId(1);
+        addressBo.setCreateTime(DateUtility.getCurTime());
+        addressBo.setLastModifyTime(DateUtility.getCurTime());
+        addressBo.setEnabled(1);
+        addressBo.setPartnerId(1);
+        addressBo.setDetail("ishangkedd01");
+        addressList.add(addressBo);
+        groupBuyActivityBo.setAddressList(addressList);
         UserBo userBo = new UserBo();
         userBo.setId(1);
         GroupBuyActivityBo groupBuyActivityBoNew = groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);
@@ -68,6 +80,16 @@ public class GroupBuyManagerImplTest extends BaseTest {
         groupBuyPhotoBo.setUrl(UUID.randomUUID().toString());
         photoList.add(groupBuyPhotoBo);
         groupBuyActivityBo.setPhotoList(photoList);
+        List<AddressBo> addressList = new ArrayList<AddressBo>();
+        AddressBo addressBo = new AddressBo();
+        addressBo.setId(1);
+        addressBo.setCreateTime(DateUtility.getCurTime());
+        addressBo.setLastModifyTime(DateUtility.getCurTime());
+        addressBo.setEnabled(1);
+        addressBo.setPartnerId(1);
+        addressBo.setDetail("ishangkedd01");
+        addressList.add(addressBo);
+        groupBuyActivityBo.setAddressList(addressList);
         UserBo userBo = new UserBo();
         userBo.setId(1);
         GroupBuyActivityBo groupBuyActivityBoNew = groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);

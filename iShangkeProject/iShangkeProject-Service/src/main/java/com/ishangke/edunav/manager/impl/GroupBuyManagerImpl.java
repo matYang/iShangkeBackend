@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
+import com.ishangke.edunav.commoncontract.model.AddressBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyActivityBo;
+import com.ishangke.edunav.commoncontract.model.GroupBuyAddressBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyBookingBo;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
@@ -20,6 +22,7 @@ import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupBuyAddressEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
@@ -33,6 +36,7 @@ import com.ishangke.edunav.manager.CacheManager;
 import com.ishangke.edunav.manager.GroupBuyManager;
 import com.ishangke.edunav.manager.async.dispatcher.SMSDispatcher;
 import com.ishangke.edunav.manager.converter.GroupBuyActivityConverter;
+import com.ishangke.edunav.manager.converter.GroupBuyAddressConverter;
 import com.ishangke.edunav.manager.converter.GroupBuyBookingConverter;
 import com.ishangke.edunav.manager.converter.GroupBuyPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
@@ -59,6 +63,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     @Autowired
     private GroupBuyPhotoEntityExtMapper groupBuyPhotoMapper;
     
+    @Autowired
+    private GroupBuyAddressEntityExtMapper groupBuyAddressMapper;
+
     @Autowired
     private UserEntityExtMapper userMapper;
     
@@ -89,7 +96,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("团购价不能为空或大于课程价");
         }
         
-        if (groupBuyActivityEntity.getEndTime() == null || groupBuyActivityEntity.getEndTime().getTimeInMillis() <= groupBuyActivityEntity.getCreateTime().getTimeInMillis()) {
+        if (groupBuyActivityEntity.getEndTime() == null || groupBuyActivityEntity.getEndTime().getTimeInMillis() <= DateUtility.getCurTime()) {
             throw new ManagerException("团购结束时间不能为空或小于开始时间");
         }
         groupBuyActivityEntity.setCreateTime(DateUtility.getCurTimeInstance());
@@ -100,12 +107,20 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("对不起，团购活动创建失败，请稍候再试", t);
         }
         if (result > 0) {
+            // 插入团购图片信息
         	List<GroupBuyPhotoBo> photoList = groupBuyActivityBo.getPhotoList();
-        	
         	for (GroupBuyPhotoBo groupBuyPhotoBo : photoList) {
         		groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
         		groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
         	}
+            // 插入团购地址信息
+            List<AddressBo> addressList = groupBuyActivityBo.getAddressList();
+            for (AddressBo AddressBo : addressList) {
+                GroupBuyAddressBo groupBuyAddressBo = new GroupBuyAddressBo();
+                groupBuyAddressBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
+                groupBuyAddressBo.setAddressId(AddressBo.getId());
+                groupBuyAddressMapper.add(GroupBuyAddressConverter.fromBo(groupBuyAddressBo));
+            }
             return GroupBuyActivityConverter.toBo(groupBuyActivityMapper.getById(groupBuyActivityEntity.getId()));
         } else {
             throw new ManagerException("对不起，团购活动获取失败，请稍候再试");
@@ -149,12 +164,12 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
 
         groupBuyActivityEntity.setCreateTime(null);
         GroupBuyActivityEntityExt groupBuyActivityEntityOld = groupBuyActivityMapper.getById(groupBuyActivityEntity.getId());
+
+        // 暂时没想到效率高的更新一对多的团购图片信息的方法,所以先删除已存的再添加新的
         List<GroupBuyPhotoEntityExt> photoListOld = groupBuyActivityEntityOld.getPhotoList();
 //        GroupBuyActivityBo groupBuyActivityBoOld = GroupBuyActivityConverter.toBo(groupBuyActivityEntityOld);
 //        List<GroupBuyPhotoBo> photoListOld = groupBuyActivityBoOld.getPhotoList();
         List<GroupBuyPhotoBo> photoListNew = groupBuyActivityBo.getPhotoList();
-
-        // 暂时没想到效率高的更新一对多的团购图片信息的方法,所以先删除已存的再添加新的
         // TODO 需要改成根据团购活动id删除团购图片信息，而不是根据图片id逐个删除
         // 删除现存的团购图片信息
         for (GroupBuyPhotoEntityExt groupBuyPhotoEntity : photoListOld) {
@@ -164,6 +179,17 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         for (GroupBuyPhotoBo groupBuyPhotoBo : photoListNew) {
             groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
             groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
+        }
+
+        // 删除现存的团购地址信息
+        List<AddressBo> addressListNew = groupBuyActivityBo.getAddressList();
+        groupBuyAddressMapper.deleteByGroupBuyActivityId(groupBuyActivityEntity.getId());
+        // 插入新的团购地址信息
+        for (AddressBo addressBo : addressListNew) {
+            GroupBuyAddressBo groupBuyAddressBo = new GroupBuyAddressBo();
+            groupBuyAddressBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
+            groupBuyAddressBo.setAddressId(addressBo.getId());
+            groupBuyAddressMapper.add(GroupBuyAddressConverter.fromBo(groupBuyAddressBo));
         }
         return GroupBuyActivityConverter.toBo(groupBuyActivityMapper.getById(groupBuyActivityEntity.getId()));
     }

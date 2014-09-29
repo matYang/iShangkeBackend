@@ -111,6 +111,22 @@
       <result column="GROUPBUYPHOTO_GROUPBUYACTIVITYID" property="groupBuyActivityId" jdbcType="INTEGER" />
       <result column="GROUPBUYPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
+    <collection property="addressList" javaType="java.util.ArrayList" ofType="AddressEntityExt" >
+      <result column="ADDRESS_ID" property="id" jdbcType="INTEGER" />
+      <result column="ADDRESS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
+      <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="ADDRESS_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+      <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="ADDRESS_REALADDRESS" property="realAddress" jdbcType="VARCHAR" />
+      <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
+  	</collection>
   </resultMap>
   <sql id="Group_Buy_Activity_Base_Column_List">
     GROUP_BUY_ACTIVITY.ID GROUPBUYACTIVITY_ID,
@@ -182,6 +198,23 @@
     GROUP_BUY_PHOTO.DELETED GROUPBUYPHOTO_DELETED
   </sql>
   
+  <sql id="Address_Base_Column_List">
+    ADDRESS.ID ADDRESS_ID,
+    ADDRESS.PARTNER_ID ADDRESS_PARTNERID,
+    ADDRESS.DETAIL
+    ADDRESS_DETAIL,
+    ADDRESS.LAT ADDRESS_LAT,
+    ADDRESS.LNG ADDRESS_LNG,
+    ADDRESS.LAST_MODIFY_TIME
+    ADDRESS_LASTMODIFYTIME,
+    ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
+    ADDRESS.ENABLED ADDRESS_ENABLED,
+    ADDRESS.DELETED ADDRESS_DELETED,
+    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
+    ADDRESS.LOCATION_ID ADDRESS_LOCATIONID,
+    ADDRESS.REAL_ADDRESS ADDRESS_REALADDRESS
+  </sql>
+  
    <!-- add -->
   <insert id="add" parameterType="GroupBuyActivityEntityExt">
     insert into GROUP_BUY_ACTIVITY
@@ -249,9 +282,13 @@
     <include refid="Course_Base_Column_List"/>
     ,
     <include refid="Group_Buy_Photo_Base_Column_List"/>
+    ,
+    <include refid="Address_Base_Column_List"/>
     from GROUP_BUY_ACTIVITY
     left join COURSE on COURSE.ID = GROUP_BUY_ACTIVITY.COURSE_ID
     left join GROUP_BUY_PHOTO on GROUP_BUY_PHOTO.GROUP_BUY_ACTIVITY_ID = GROUP_BUY_ACTIVITY.ID and GROUP_BUY_PHOTO.DELETED = 0
+    left join GROUP_BUY_ADDRESS on GROUP_BUY_ACTIVITY.ID = GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID and GROUP_BUY_ADDRESS.DELETED = 0
+    left join ADDRESS on GROUP_BUY_ADDRESS.ADDRESS_ID = ADDRESS.ID and ADDRESS.DELETED = 0
     where GROUP_BUY_ACTIVITY.DELETED = 0
     <if test="entity != null">
         <if test="entity.id != null and entity.id != 0">
@@ -494,9 +531,13 @@
     <include refid="Course_Base_Column_List"/>
     ,
     <include refid="Group_Buy_Photo_Base_Column_List"/>
+    ,
+    <include refid="Address_Base_Column_List"/>
     from GROUP_BUY_ACTIVITY
     left join COURSE on COURSE.ID = GROUP_BUY_ACTIVITY.COURSE_ID
     left join GROUP_BUY_PHOTO on GROUP_BUY_PHOTO.GROUP_BUY_ACTIVITY_ID = GROUP_BUY_ACTIVITY.ID and GROUP_BUY_PHOTO.DELETED = 0
+    left join GROUP_BUY_ADDRESS on GROUP_BUY_ACTIVITY.ID = GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID and GROUP_BUY_ADDRESS.DELETED = 0
+    left join ADDRESS on GROUP_BUY_ADDRESS.ADDRESS_ID = ADDRESS.ID and ADDRESS.DELETED = 0
     where GROUP_BUY_ACTIVITY.DELETED = 0 and GROUP_BUY_ACTIVITY.ID = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

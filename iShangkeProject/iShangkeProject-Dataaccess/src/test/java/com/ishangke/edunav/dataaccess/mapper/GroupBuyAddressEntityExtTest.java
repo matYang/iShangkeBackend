@@ -1,8 +1,8 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
-import java.util.HashSet;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.dataaccess.model.GroupBuyAddressEntityExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,7 +48,13 @@ public class GroupBuyAddressEntityExtTest {
         GroupBuyAddressEntityExt object = groupBuyAddressEntityExtMapper.getById(4);
         Assert.assertSame(object, null);
     }
-    
+
+    @Test
+    public void testDeleteByGroupBuyActivityId() {
+        int result = groupBuyAddressEntityExtMapper.deleteByGroupBuyActivityId(1);
+        assertTrue(result > 0);
+    }
+
     @Test
     public void testList(){
         GroupBuyAddressEntityExt groupBuyAddress = new GroupBuyAddressEntityExt();

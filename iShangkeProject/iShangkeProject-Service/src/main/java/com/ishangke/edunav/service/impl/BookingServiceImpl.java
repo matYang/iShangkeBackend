@@ -52,7 +52,7 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     @Autowired
     private PurposeCourseManager purposeManager;
-    
+
     @Autowired
     private GroupBuyManager groupBuyManager;
 
@@ -374,14 +374,10 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public PurposeCoursePageViewBo queryPurpose(PurposeCourseBo purposeCourseBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            /*
-             * if
-             * (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo
-             * .getId()), permissionTag)) {
-             * LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-             * userBo.getId(), permissionTag, "queryPurposeCourse")); throw new
-             * NoPermissionException(); }
-             */
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryPurposeCourse"));
+                throw new NoPermissionException();
+            }
 
             paginationBo = PageUtil.getPage(paginationBo);
             List<PurposeCourseBo> list = purposeManager.query(purposeCourseBo, userBo, paginationBo);
@@ -478,14 +474,16 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
-    
+
     @Override
     public PurposeCourseBo queryPurposeById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            /*if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "deletePurposeCourse"));
                 throw new NoPermissionException();
-            }*/
+            }
+
             return purposeManager.queryPurposeById(id, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -502,27 +500,30 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
+
     /*********************************************************
-     *
-     *   关于团购课程  GroupBuy
-     *
+     * 
+     * 关于团购课程 GroupBuy
+     * 
      *********************************************************/
     @Override
     public GroupBuyActivityBo createGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try{
-            /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"createGroupBuyActivity"));
+        try {
+
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createGroupBuyActivity"));
                 throw new NoPermissionException();
-            }*/
+            }
+
             return groupBuyManager.createGroupBuyActivity(groupBuyActivityBo, userBo);
-        }catch(NoPermissionException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY);
             exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEGROUPBUYACTIVITY_KEY);
             throw exception;
-        }catch(ManagerException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
@@ -553,20 +554,22 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     @Override
     public GroupBuyBookingBo createGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try{
-            /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"createGroupBuyBooking"));
+        try {
+
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createGroupBuyBooking"));
                 throw new NoPermissionException();
-            }*/
+            }
+
             return groupBuyManager.createGroupBuyBooking(groupBuyBookingBo, userBo);
-        }catch(NoPermissionException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_CREATEGROUPBUYBOOKING);
             exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_CREATEGROUPBUYBOOKING_KEY);
             throw exception;
-        }catch(ManagerException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
@@ -577,12 +580,13 @@ public class BookingServiceImpl implements BookingService.Iface {
 
     @Override
     public GroupBuyBookingPageViewBo queryGroupBuyBooking(GroupBuyBookingBo groupBuyBookingBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try{
-            /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"createGroupBuyBooking"));
+        try {
+
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createGroupBuyBooking"));
                 throw new NoPermissionException();
-            }*/
-            
+            }
+
             paginationBo = PageUtil.getPage(paginationBo);
             List<GroupBuyBookingBo> list = groupBuyManager.queryGroupBuyBooking(groupBuyBookingBo, userBo, paginationBo);
             GroupBuyBookingPageViewBo pageView = new GroupBuyBookingPageViewBo();
@@ -592,14 +596,14 @@ public class BookingServiceImpl implements BookingService.Iface {
             pageView.setTotal(total);
             pageView.setData(list);
             return pageView;
-        }catch(NoPermissionException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKING);
             exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKING_KEY);
             throw exception;
-        }catch(ManagerException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
@@ -607,15 +611,11 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
-    
+
     @Override
     public GroupBuyActivityPageViewBo queryGroupBuyActivity(GroupBuyActivityBo groupBuyActivityBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
-        try{
-            /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"createGroupBuyBooking"));
-                throw new NoPermissionException();
-            }*/
-            
+        try {
+
             paginationBo = PageUtil.getPage(paginationBo);
             List<GroupBuyActivityBo> list = groupBuyManager.queryGroupBuyActivity(groupBuyActivityBo, paginationBo);
             GroupBuyActivityPageViewBo pageView = new GroupBuyActivityPageViewBo();
@@ -625,14 +625,14 @@ public class BookingServiceImpl implements BookingService.Iface {
             pageView.setTotal(total);
             pageView.setData(list);
             return pageView;
-        }catch(NoPermissionException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKING);
             exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_QUERYGROUPBUYBOOKING_KEY);
             throw exception;
-        }catch(ManagerException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
@@ -640,23 +640,25 @@ public class BookingServiceImpl implements BookingService.Iface {
             throw exception;
         }
     }
-    
+
     @Override
     public GroupBuyActivityBo online(GroupBuyActivityBo groupBuyActivityBo, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
-        try{
-            /*if(!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)){
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(),permissionTag,"createGroupBuyActivity"));
+        try {
+
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "createGroupBuyActivity"));
                 throw new NoPermissionException();
-            }*/
+            }
+
             return groupBuyManager.online(groupBuyActivityBo, userBo);
-        }catch(NoPermissionException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setErrorCode(ManagerErrorCode.PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE);
             exception.setMessageKey(ManagerErrorCode.PERMISSION_BOOKING_GROUPBUYACTIVITYONLINE_KEY);
             throw exception;
-        }catch(ManagerException e){
-            LOGGER.info(e.getMessage(),e);
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
             BusinessExceptionBo exception = new BusinessExceptionBo();
             exception.setMessage(e.getMessage());
             exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
@@ -689,14 +691,12 @@ public class BookingServiceImpl implements BookingService.Iface {
     @Override
     public GroupBuyBookingBo queryGroupBuyBookingById(int id, UserBo userBo, String permissionTag) throws BusinessExceptionBo, TException {
         try {
-            /*
-             * if
-             * (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo
-             * .getId()), permissionTag)) {
-             * LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]",
-             * userBo.getId(), permissionTag, "queryGroupBuyBooking")); throw
-             * new NoPermissionException(); }
-             */
+
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryGroupBuyBooking"));
+                throw new NoPermissionException();
+            }
+
             GroupBuyBookingBo data = groupBuyManager.queryGroupBuyBookingById(id, userBo);
             return data;
         } catch (NoPermissionException e) {
