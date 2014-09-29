@@ -112,7 +112,7 @@ public class ClassPhotoController extends AbstractController {
                 }
 
                 MessageDigest md = MessageDigest.getInstance("MD5");
-                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + "." + FileSetting.IMGFILEFORMAT);
+                serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName() + ".jpg");
                 snapshotFile = new File(dir.getAbsolutePath() + File.separator + "snapshot" + file.getName() + "." + FileSetting.IMGFILEFORMAT);
                 is = file.getInputStream();
                 dis = new DigestInputStream(is, md);
@@ -123,8 +123,8 @@ public class ClassPhotoController extends AbstractController {
                 BufferedImage snapShotBufferedImage = FileSetting.bufferDeepCopy(bufferedImage);
 
                 // using Scalr to resize the image
-                bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 625, 215, Scalr.OP_ANTIALIAS);
-                ImageIO.write(bufferedImage, FileSetting.IMGFILEFORMAT, serverFile);
+                //bufferedImage = Scalr.resize(bufferedImage, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 625, 215, Scalr.OP_ANTIALIAS);
+                ImageIO.write(bufferedImage, "jpg", serverFile);
 
                 // calculate the MD5 checksum and use it as part of the file
                 // name to make it unique
