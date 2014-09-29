@@ -38,7 +38,7 @@ INSERT INTO `user_group` (`ID`, `USER_ID`, `GROUP_ID`, `LAST_MODIFY_TIME`, `DELE
 INSERT INTO `user_group` (`ID`, `USER_ID`, `GROUP_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES (5, 5, 5, '2014-7-16 11:23:32', 0);
 INSERT INTO `user_group` (`ID`, `USER_ID`, `GROUP_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES (6, 6, 6, '2014-7-24 21:10:26', 0);
 INSERT INTO `user_group` (`ID`, `USER_ID`, `GROUP_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES (7, 7, 8, '2014-7-16 18:56:17', 0);
-INSERT INTO `user_group` (`ID`, `USER_ID`, `GROUP_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES (8, 8, 2, '2014-09-25 11:22:45', 0);
+INSERT INTO `user_group` (`ID`, `USER_ID`, `GROUP_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES (8, 8, 3, '2014-09-25 11:22:45', 0);
 
 insert into `permissions`(`ID`,`NAME`,`PATH`,`TAG`,`LAST_MODIFY_TIME`,`CREATE_TIME`,`ENABLED`,`DELETED`) values ('1','Category or search by keyword','GET/api/v2/general/category','GET/api/v2/general/category','2014-08-17 13:58:17','2014-08-17 13:58:17','0','0');
 insert into `permissions`(`ID`,`NAME`,`PATH`,`TAG`,`LAST_MODIFY_TIME`,`CREATE_TIME`,`ENABLED`,`DELETED`) values ('2','Category or search by keyword','GET/p-api/v2/general/category','GET/p-api/v2/general/category','2014-08-17 13:58:17','2014-08-17 13:58:17','0','0');

@@ -1,5 +1,6 @@
 package com.ishangke.edunav.manager.impl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -306,22 +307,38 @@ public class CourseManagerImpl implements CourseManager {
         }
         return null;
     }
-
+    
     @Override
-    public CourseCommentBo commentCourse(CourseCommentBo courseCommentBo, UserBo userBo) {
-        if (IdChecker.notEqual(courseCommentBo.getUserId(), userBo.getId())) {
-            throw new ManagerException("must crate comment for self");
+    public CourseCommentBo commentCourse(CourseCommentBo courseCommentBo, UserBo userBo){
+        if (courseCommentBo == null || userBo == null) {
+            throw new ManagerException("参数不能为空");
         }
-        //todo 计算总评分
-        //todo 将总评分保存到course template中
+        if (IdChecker.notEqual(courseCommentBo.getUserId(), userBo.getId())) {
+            throw new ManagerException("对不起，您不能为别人评论");
+        }
+        if (courseCommentBo.getCourseTemplateId()<=0) {
+            throw new ManagerException("对不起，课程模板ID不能为空");
+        }
+        Double attitudeRating = courseCommentBo.getAttitudeRating();
+        Double conditionRating =courseCommentBo.getConditionRating();
+        Double satisfactionRating = courseCommentBo.getSatisfactionRating();
+        if (attitudeRating <=0 || conditionRating <= 0 || courseCommentBo.getSatisfactionRating() <= 0) {
+            throw new ManagerException("对不起，评分不能为空");
+        }
+        if (attitudeRating > 10 || attitudeRating % 2 != 0 || conditionRating > 10 || conditionRating % 2 != 0 || satisfactionRating >10 || satisfactionRating % 2 != 0) {
+            throw new ManagerException("对不起，评分不符合要求");
+        }
+        Double totalRating = (attitudeRating + conditionRating + satisfactionRating) / 3;
+        DecimalFormat format = new DecimalFormat("0.00");
+        totalRating = Double.parseDouble(format.format(totalRating));
         CourseCommentEntityExt courseCommentEntity = CourseCommentConverter.fromBo(courseCommentBo);
-        courseCommentEntity.setCourseTemplateId(courseCommentBo.getCourseTemplateId());
-        courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
+        courseCommentEntity.setTotalRating(totalRating);
         courseCommentEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        courseCommentEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
         try {
             courseCommentMapper.add(courseCommentEntity);
         } catch (Exception e) {
-            throw new ManagerException("create comment failed");
+            throw new ManagerException("创建评论失败");
         }
         return CourseCommentConverter.toBo(courseCommentEntity);
     }
