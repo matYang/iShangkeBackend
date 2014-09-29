@@ -15,6 +15,7 @@
 
   <mvc:default-servlet-handler />
 
+  <!-- 
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/api/v2/**" />
@@ -25,6 +26,7 @@
       <bean class="com.ishangke.edunav.web.interceptor.DomainInterceptor"></bean>
     </mvc:interceptor>
   </mvc:interceptors>
+   -->
 
   <bean id="multipartResolver"
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
