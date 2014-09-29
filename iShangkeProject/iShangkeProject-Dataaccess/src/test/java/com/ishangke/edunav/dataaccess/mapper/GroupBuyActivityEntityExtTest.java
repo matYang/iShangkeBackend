@@ -1,5 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
+import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,8 +42,23 @@ public class GroupBuyActivityEntityExtTest {
     }
     
     @Test
-    public void testUpdate(){
+    public void testUpdate() throws IllegalArgumentException, IllegalAccessException{
         GroupBuyActivityEntityExt groupBuyActivityOld = groupBuyActivityEntityExtMapper.getById(1);
+        System.out.println("===========================begin==================================");
+        for (Field f : groupBuyActivityOld.getCourse().getClass().getDeclaredFields()) {
+            f.setAccessible(true);
+            if (f.get(groupBuyActivityOld.getCourse()) != null) {
+                System.out.println(f.getName() + "===>" + f.get(groupBuyActivityOld.getCourse()));
+            }
+            if (f.getName().contains("List")) {
+                List<Object> o = (List<Object>) f.get(groupBuyActivityOld.getCourse());
+                System.out.println(f.getName() + " size:" + o.size());
+                if (o.size() > 0) {
+                    System.out.println("ooxx!!!xi ge hao bang !!!");
+                }
+            }
+        }
+        System.out.println("===========================end=====================================");
         int statusOld = groupBuyActivityOld.getStatus();
         Assert.assertEquals(statusOld,0);
         groupBuyActivityOld.setHot(5);
