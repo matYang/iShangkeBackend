@@ -93,6 +93,22 @@ public class GroupBuyActivityConverter {
         }
         e.setHotSet(bo.getHotSet());
         e.setTitle(bo.getTitle());
+        e.setCourse(CourseConverter.fromBo(bo.getCourse()));
+        if (bo.getPhotoList() != null) {
+            List<GroupBuyPhotoEntityExt> list = new ArrayList<>();
+            for (GroupBuyPhotoBo b : bo.getPhotoList()) {
+                list.add(GroupBuyPhotoConverter.fromBo(b));
+            }
+            e.setPhotoList(list);
+        }
+        if (bo.getAddressList() != null) {
+            List<AddressBo> addressBoList = bo.getAddressList();
+            List<AddressEntityExt> addressVoList = new ArrayList<>();
+            for (AddressBo address : addressBoList) {
+                addressVoList.add(AddressConverter.fromBo(address));
+            }
+            e.setAddressList(addressVoList);
+        }
         return e;
     }
 }

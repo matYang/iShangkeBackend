@@ -17,6 +17,35 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSECOMMENT_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="COURSECOMMENT_DELETED" property="deleted" jdbcType="INTEGER" />
+    <collection property="user" ofType="UserEntityExt">
+      <result column="USERS_ID" property="id" jdbcType="INTEGER" />
+      <result column="USERS_NAME" property="name" jdbcType="VARCHAR" />
+      <result column="USERS_PASSWORD" property="password" jdbcType="VARCHAR" />
+      <result column="USERS_PHONE" property="phone" jdbcType="VARCHAR" />
+      <result column="USERS_WECHAT" property="wechat" jdbcType="VARCHAR" />
+      <result column="USERS_EMAIL" property="email" jdbcType="VARCHAR" />
+      <result column="USERS_INVITATIONCODE" property="invitationCode" jdbcType="VARCHAR" />
+      <result column="USERS_APPLIEDINVITATIONCODE" property="appliedInvitationCode" jdbcType="VARCHAR" />
+      <result column="USERS_REFERENCE" property="reference" jdbcType="VARCHAR" />
+      <result column="USERS_LASTLOGINTIME" property="lastLoginTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="USERS_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="USERS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="USERS_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="USERS_DELETED" property="deleted" jdbcType="INTEGER" />
+      <result column="USERS_GENDER" property="gender" jdbcType="INTEGER" />
+      <result column="USERS_BIRTHDAY" property="birthday" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="USERS_SCHOOL" property="school" jdbcType="VARCHAR" />
+      <result column="USERS_MAJOR" property="major" jdbcType="VARCHAR" />
+      <result column="USERS_AVATARURL" property="avatarUrl" jdbcType="VARCHAR" />
+      <result column="USERS_SCHOOLID" property="schoolId" jdbcType="INTEGER" />
+      <result column="USERS_CAREERID" property="careerId" jdbcType="INTEGER" />
+      <result column="USERS_MAJORID" property="majorId" jdbcType="INTEGER" />
+      <result column="USERS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="USERS_COUPONTOTAL" property="couponTotal" jdbcType="DOUBLE" />
+      <result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
+    </collection>
   </resultMap>
   <sql id="CourseComment_Base_Column_List">
     COURSE_COMMENT.ID COURSECOMMENT_ID,
@@ -39,6 +68,39 @@
     COURSE_COMMENT.ENABLED COURSECOMMENT_ENABLED,
     COURSE_COMMENT.DELETED
     COURSECOMMENT_DELETED
+  </sql>
+    <sql id="User_Base_Column_List">
+    USERS.ID USERS_ID,
+    USERS.NAME USERS_NAME,
+    USERS.PASSWORD USERS_PASSWORD,
+    USERS.PHONE
+    USERS_PHONE,
+    USERS.WECHAT
+    USERS_WECHAT,
+    USERS.EMAIL USERS_EMAIL,
+    USERS.INVITATION_CODE
+    USERS_INVITATIONCODE,
+    USERS.APPLIED_INVITATION_CODE
+    USERS_APPLIEDINVITATIONCODE,
+    USERS.REFERENCE
+    USERS_REFERENCE,
+    USERS.LAST_LOGIN_TIME USERS_LASTLOGINTIME,
+    USERS.LAST_MODIFY_TIME
+    USERS_LASTMODIFYTIME,
+    USERS.CREATE_TIME USERS_CREATETIME,
+    USERS.ENABLED USERS_ENABLED,
+    USERS.DELETED USERS_DELETED,
+    USERS.GENDER USERS_GENDER,
+    USERS.BIRTHDAY USERS_BIRTHDAY,
+    USERS.SCHOOL USERS_SCHOOL,
+    USERS.MAJOR USERS_MAJOR,
+    USERS.AVATAR_URL USERS_AVATARURL,
+    USERS.CAREER_ID USERS_CAREERID,
+    USERS.MAJOR_ID
+    USERS_MAJORID,
+    USERS.SCHOOL_ID
+    USERS_SCHOOLID,
+    USERS.LOCATION_ID USERS_LOCATIONID
   </sql>
   <!-- add -->
   <insert id="add" parameterType="CourseCommentEntityExt">
@@ -174,20 +236,30 @@
   <!-- listAll -->
   <select id="listAll" resultMap="CourseCommentExtMap">
     SELECT
-    <include refid="CourseComment_Base_Column_List" />
-    from COURSE_COMMENT where COURSE_COMMENT.DELETED = 0
+    ,
+    <include refid="User_Base_Column_List"/>
+    from COURSE_COMMENT 
+    left join USERS on USERS.ID = COURSE_COMMENT.USER_ID
+    where COURSE_COMMENT.DELETED = 0
   </select>
    <!-- getById -->
   <select id="getById" parameterType="int" resultMap="CourseCommentExtMap">
     SELECT
     <include refid="CourseComment_Base_Column_List" />
-    from COURSE_COMMENT where COURSE_COMMENT.DELETED = 0 and COURSE_COMMENT.ID = #{id,jdbcType=INTEGER}
+    ,
+    <include refid="User_Base_Column_List"/>
+    from COURSE_COMMENT 
+    left join USERS on USERS.ID = COURSE_COMMENT.USER_ID
+    where COURSE_COMMENT.DELETED = 0 and COURSE_COMMENT.ID = #{id,jdbcType=INTEGER}
   </select>
   <!-- list -->
   <select id="list" parameterType="map" resultMap="CourseCommentExtMap">
     select
-    <include refid="CourseComment_Base_Column_List"></include>
-    from COURSE_COMMENT
+    <include refid="CourseComment_Base_Column_List" />
+    ,
+    <include refid="User_Base_Column_List"/>
+    from COURSE_COMMENT 
+    left join USERS on USERS.ID = COURSE_COMMENT.USER_ID
     where COURSE_COMMENT.DELETED = 0
     <if test="entity != null">
 
@@ -329,8 +401,11 @@
   <select id="getListCount" parameterType="map" resultType="int">
     SELECT COUNT(*) FROM (
     select
-    <include refid="CourseComment_Base_Column_List"></include>
-    from COURSE_COMMENT
+    <include refid="CourseComment_Base_Column_List" />
+    ,
+    <include refid="User_Base_Column_List"/>
+    from COURSE_COMMENT 
+    left join USERS on USERS.ID = COURSE_COMMENT.USER_ID
     where COURSE_COMMENT.DELETED = 0
     <if test="entity != null">
 

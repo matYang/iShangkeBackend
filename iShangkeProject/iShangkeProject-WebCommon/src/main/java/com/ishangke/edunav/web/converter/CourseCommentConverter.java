@@ -186,6 +186,7 @@ public class CourseCommentConverter {
         }
         courseCommentVo.setUserId(bo.getUserId());
 //        courseCommentVo.setUserIdSet(bo.getUserIdSet());
+        courseCommentVo.setUser(UserConverter.toModel(bo.getUser()));
         return courseCommentVo;
     }
 }

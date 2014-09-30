@@ -21,6 +21,16 @@ public class CourseCommentEntityExt extends CourseCommentEntity {
     private Calendar lastModifyTimeEnd;
     private Calendar createTimeStart;
     private Calendar createTimeEnd;
+    private UserEntityExt user;
+
+
+    public UserEntityExt getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntityExt user) {
+        this.user = user;
+    }
 
     public Set<Integer> getIdSet() {
         return idSet;

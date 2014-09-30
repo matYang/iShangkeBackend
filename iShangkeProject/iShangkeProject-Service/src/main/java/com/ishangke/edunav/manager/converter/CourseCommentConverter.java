@@ -98,6 +98,9 @@ public class CourseCommentConverter {
         if (e.getUserIdSet() != null) {
             courseCommentBo.setUserIdSet(e.getUserIdSet());
         }
+        if (e.getUser() != null) {
+            courseCommentBo.setUser(UserConverter.toBo(e.getUser()));
+        }
         courseCommentBo.setCreateTime(e.getCreateTime() == null ? Constant.DEFAULTNULL : e.getCreateTime()
                 .getTimeInMillis());
         courseCommentBo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd()

@@ -43,6 +43,15 @@ public class CourseCommentVo extends JsonResponse {
     private Long lastModifyTimeEnd;
     private Long createTimeStart;
     private Long createTimeEnd;
+    private UserVo user;
+
+    public UserVo getUser() {
+        return user;
+    }
+
+    public void setUser(UserVo user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
