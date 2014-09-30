@@ -21,7 +21,7 @@ import com.ishangke.edunav.manager.CourseManager;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class CourseManagerImplTest {
     @Autowired

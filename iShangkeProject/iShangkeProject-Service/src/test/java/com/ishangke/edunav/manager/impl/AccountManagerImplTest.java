@@ -10,25 +10,15 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.BaseTest;
-import com.ishangke.edunav.commoncontract.model.AccountBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
-import com.ishangke.edunav.commoncontract.model.WithdrawBo;
 import com.ishangke.edunav.dataaccess.mapper.AccountEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.AccountHistoryEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.WithdrawEntityExtMapper;
-import com.ishangke.edunav.dataaccess.model.AccountEntityExt;
-import com.ishangke.edunav.dataaccess.model.AccountHistoryEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
-import com.ishangke.edunav.dataaccess.model.WithdrawEntityExt;
 import com.ishangke.edunav.manager.AccountManager;
-import com.ishangke.edunav.manager.converter.AccountConverter;
-import com.ishangke.edunav.manager.converter.UserConverter;
-import com.ishangke.edunav.manager.converter.WithdrawConverter;
 
 @TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class, AccountManagerImplTest.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext-dataaccessUT.xml","classpath*:applicationContext-serviceUT.xml"})
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class AccountManagerImplTest extends BaseTest{
     @Autowired
