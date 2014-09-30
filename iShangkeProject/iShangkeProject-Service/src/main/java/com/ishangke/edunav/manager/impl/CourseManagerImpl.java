@@ -325,7 +325,7 @@ public class CourseManagerImpl implements CourseManager {
         if (attitudeRating <=0 || conditionRating <= 0 || courseCommentBo.getSatisfactionRating() <= 0) {
             throw new ManagerException("对不起，评分不能为空");
         }
-        if (attitudeRating > 10 || attitudeRating % 2 != 0 || conditionRating > 10 || conditionRating % 2 != 0 || satisfactionRating >10 || satisfactionRating % 2 != 0) {
+        if (attitudeRating > 5 || attitudeRating < 0 || conditionRating > 5 || conditionRating < 0 || satisfactionRating >5 || satisfactionRating < 0) {
             throw new ManagerException("对不起，评分不符合要求");
         }
         Double totalRating = (attitudeRating + conditionRating + satisfactionRating) / 3;
