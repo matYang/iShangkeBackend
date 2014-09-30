@@ -142,6 +142,7 @@
               <goal>run</goal>
             </goals>
           </execution>
+          <!-- 
           <execution>
             <id>Copy applicationContext-dataaccessUT to service test</id>
             <phase>initialize</phase>
@@ -157,6 +158,7 @@
               <goal>run</goal>
             </goals>
           </execution>
+           -->
         </executions>
       </plugin>
       <plugin>
