@@ -17,7 +17,7 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, TeacherManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class TeacherManagerImplTest extends BaseTest {
 

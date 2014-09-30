@@ -32,7 +32,7 @@ import com.ishangke.edunav.util.PageUtil;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, GroupBuyManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class GroupBuyManagerImplTest extends BaseTest {
     @Autowired

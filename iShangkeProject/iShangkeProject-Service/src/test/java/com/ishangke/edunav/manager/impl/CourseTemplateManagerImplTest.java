@@ -23,13 +23,12 @@ import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.CourseTemplateManager;
 import com.ishangke.edunav.manager.converter.CourseTemplateConverter;
-import com.ishangke.edunav.manager.converter.PartnerConverter;
 import com.ishangke.edunav.manager.converter.UserConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CourseTemplateManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class CourseTemplateManagerImplTest extends BaseTest {
     @Autowired

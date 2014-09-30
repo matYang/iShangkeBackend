@@ -14,12 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
-import com.ishangke.edunav.commoncontract.model.BookingBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.mapper.BookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.BookingManager;
 import com.ishangke.edunav.manager.CacheManager;
@@ -31,7 +28,7 @@ import com.ishangke.edunav.manager.transform.Operation;
 
 //@TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, BookingManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class BookingManagerImplTest {
     @Autowired
