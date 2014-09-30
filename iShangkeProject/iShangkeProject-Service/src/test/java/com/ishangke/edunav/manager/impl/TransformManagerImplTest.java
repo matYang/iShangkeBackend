@@ -20,7 +20,7 @@ import com.ishangke.edunav.manager.transform.Operation;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, PermissionManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class TransformManagerImplTest {
     @Autowired

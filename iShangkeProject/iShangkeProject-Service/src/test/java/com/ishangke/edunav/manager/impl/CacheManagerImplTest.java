@@ -20,7 +20,7 @@ import com.ishangke.edunav.manager.CacheManager;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, CacheManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml", "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 @Transactional
 public class CacheManagerImplTest extends BaseTest {
     

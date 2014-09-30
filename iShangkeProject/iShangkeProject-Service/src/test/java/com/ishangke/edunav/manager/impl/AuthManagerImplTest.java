@@ -28,8 +28,7 @@ import com.ishangke.edunav.manager.exception.ManagerException;
 
 @TestExecutionListeners(listeners = { DependencyInjectionTestExecutionListener.class, AuthManagerImplTest.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:applicationContext-dataaccessUT.xml",
-        "classpath*:applicationContext-serviceUT.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-serviceUT.xml" })
 public class AuthManagerImplTest extends BaseTest {
 
     @Autowired

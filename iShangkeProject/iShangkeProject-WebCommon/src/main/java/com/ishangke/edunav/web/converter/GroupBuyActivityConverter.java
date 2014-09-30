@@ -113,6 +113,9 @@ public class GroupBuyActivityConverter {
         } else {
             bo.setAddressList(new ArrayList<AddressBo>());
         }
+        if (vo.getCourse() != null) {
+            bo.setCourse(CourseConverter.fromModel(vo.getCourse()));
+        }
         return bo;
     }
 
