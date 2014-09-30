@@ -1,3 +1,4 @@
+include "user.thrift"
 namespace java com.ishangke.edunav.commoncontract.model
 
 struct CourseCommentBo {
@@ -28,6 +29,7 @@ struct CourseCommentBo {
     25: i64 lastModifyTimeEnd
     26: i64 createTimeStart
     27: i64 createTimeEnd
+    28: user.UserBo user
 }
 
 struct CourseCommentPageViewBo{
