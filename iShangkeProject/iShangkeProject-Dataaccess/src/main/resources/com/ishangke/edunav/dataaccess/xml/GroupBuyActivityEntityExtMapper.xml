@@ -641,7 +641,7 @@
       </if>
 
       <if test="entity.hot != null">
-        AND GROUP_BUY_ACTIVITY.HOT = #{hot,jdbcType=INTEGER}
+        AND GROUP_BUY_ACTIVITY.HOT = #{entity.hot,jdbcType=INTEGER}
       </if>
       <if test="entity.hot == null">
         <if test="entity.hotSet != null and entity.hotSet.size() > 0">
@@ -654,7 +654,7 @@
       </if>
 
       <if test="entity.title != null">
-        AND GROUP_BUY_ACTIVITY.TITLE = #{title,jdbcType=VARCHAR}
+        AND GROUP_BUY_ACTIVITY.TITLE = #{entity.title,jdbcType=VARCHAR}
       </if>
     </if>
 
@@ -764,7 +764,7 @@
       </if>
 
       <if test="entity.hot != null">
-        And GROUP_BUY_ACTIVITY.HOT = #{hot,jdbcType=INTEGER}
+        And GROUP_BUY_ACTIVITY.HOT = #{entity.hot,jdbcType=INTEGER}
       </if>
       <if test="entity.hot == null">
         <if test="entity.hotSet != null and entity.hotSet.size() > 0">
@@ -777,7 +777,7 @@
       </if>
 
       <if test="entity.title != null">
-        AND GROUP_BUY_ACTIVITY.TITLE = #{title,jdbcType=VARCHAR}
+        AND GROUP_BUY_ACTIVITY.TITLE = #{entity.title,jdbcType=VARCHAR}
       </if>
     </if>
     ) as total
