@@ -40,9 +40,9 @@ public class CourseManagerImplTest {
         courseCommentBo.setCourseTemplateId(6);
         courseCommentBo.setTitle("6");
         courseCommentBo.setContent("6");
-        courseCommentBo.setAttitudeRating(6.0);
+        courseCommentBo.setAttitudeRating(5.0);
         courseCommentBo.setConditionRating(4.0);
-        courseCommentBo.setSatisfactionRating(8.0);
+        courseCommentBo.setSatisfactionRating(5.0);
         courseCommentBo.setLastModifyTime(DateUtility.getCurTime());
         courseCommentBo.setCreateTime(DateUtility.getCurTime());
         UserBo userBo = new UserBo();
