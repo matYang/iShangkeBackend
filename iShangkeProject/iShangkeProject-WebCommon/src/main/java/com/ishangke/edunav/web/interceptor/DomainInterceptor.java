@@ -12,7 +12,7 @@ public class DomainInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getHeader("referer") == null || !request.getHeader("referer").contains("ishangke.cn") || !request.getHeader("referer").contains("alipay")) {
+        if (request.getHeader("referer") == null || !request.getHeader("referer").contains("ishangke.cn") || !request.getRequestURI().contains("alipay")) {
             System.out.println("url:" + request.getHeader("referer"));
             response.getWriter().println("sorry~ you can not call api directly~");
             LOGGER.warn(String.format("[Domain Filer]some one want to call our api"));
