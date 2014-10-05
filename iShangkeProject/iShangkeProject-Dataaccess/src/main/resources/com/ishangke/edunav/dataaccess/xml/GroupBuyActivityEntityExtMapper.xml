@@ -1,126 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper
-  namespace="com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper">
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper">
   <resultMap type="GroupBuyActivityEntityExt" id="GroupBuyActivityExtMap">
     <id column="GROUPBUYACTIVITY_ID" property="id" jdbcType="INTEGER" />
     <result column="GROUPBUYACTIVITY_CREATETIME" property="createTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="GROUPBUYACTIVITY_ENDTIME" property="endTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="GROUPBUYACTIVITY_STATUS" property="status"
-      jdbcType="INTEGER" />
-    <result column="GROUPBUYACTIVITY_COURSEID" property="courseId"
-      jdbcType="INTEGER" />
-    <result column="GROUPBUYACTIVITY_GROUPBUYPRICE" property="groupBuyPrice"
-      jdbcType="DOUBLE" />
-    <result column="GROUPBUYACTIVITY_HOT" property="hot"
-      jdbcType="INTEGER" />
-    <result column="GROUPBUYACTIVITY_TITLE" property="title"
-      jdbcType="VARCHAR" />
+    <result column="GROUPBUYACTIVITY_STATUS" property="status" jdbcType="INTEGER" />
+    <result column="GROUPBUYACTIVITY_COURSEID" property="courseId" jdbcType="INTEGER" />
+    <result column="GROUPBUYACTIVITY_GROUPBUYPRICE" property="groupBuyPrice" jdbcType="DOUBLE" />
+    <result column="GROUPBUYACTIVITY_HOT" property="hot" jdbcType="INTEGER" />
+    <result column="GROUPBUYACTIVITY_TITLE" property="title" jdbcType="VARCHAR" />
+
     <collection property="course" ofType="CourseTemplateEntityExt">
       <result column="COURSE_ID" property="id" jdbcType="INTEGER" />
-      <result column="COURSE_COURSENAME" property="courseName"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_CATEGORYID" property="categoryId"
-        jdbcType="INTEGER" />
-      <result column="COURSE_LOCATIONID" property="locationId"
-        jdbcType="INTEGER" />
-      <result column="COURSE_CIRCLEID" property="circleId"
-        jdbcType="INTEGER" />
-      <result column="COURSE_PARTNERID" property="partnerId"
-        jdbcType="INTEGER" />
-      <result column="COURSE_ADDRESSID" property="addressId"
-        jdbcType="INTEGER" />
-      <result column="COURSE_REGADDRESSID" property="regAddressId"
-        jdbcType="INTEGER" />
+      <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
+      <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
+      <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+      <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
+      <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
       <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
-      <result column="COURSE_ORIGINALPRICE" property="originalPrice"
-        jdbcType="DOUBLE" />
-      <result column="COURSE_CASHBACK" property="cashback"
-        jdbcType="DOUBLE" />
-      <result column="COURSE_COMMISSION" property="commission"
-        jdbcType="DOUBLE" />
-      <result column="COURSE_SERVICECHARGE" property="serviceCharge"
-        jdbcType="DOUBLE" />
+      <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
+      <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
+      <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
+      <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
       <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
       <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime"
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="COURSE_CREATETIME" property="createTime"
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="COURSE_ENABLED" property="enabled"
-        jdbcType="INTEGER" />
-      <result column="COURSE_DELETED" property="deleted"
-        jdbcType="INTEGER" />
-      <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength"
-        jdbcType="INTEGER" />
-      <result column="COURSE_TEACHINGMETHOD" property="teachingMethod"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_BONUSSERVICE" property="bonusService"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_MARKING" property="marking"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_ASSIGNMENTS" property="assignments"
-        jdbcType="VARCHAR" />
+      <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
+      <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
+      <result column="COURSE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
+      <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
+      <result column="COURSE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
+      <result column="COURSE_MARKING" property="marking" jdbcType="VARCHAR" />
+      <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
       <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" />
-      <result column="COURSE_QUESTIONSESSION" property="questionSession"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_CLASSTEACHER" property="classTeacher"
-        jdbcType="VARCHAR" />
+      <result column="COURSE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
+      <result column="COURSE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
       <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" />
-      <result column="COURSE_OUTLINE" property="outline"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_REGPHONE" property="regPhone"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_CONTACT" property="contact"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_EXTRACURRICULAR" property="extracurricular"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_PASSAGREEMENT" property="passAgreement"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_QUESTIONBANK" property="questionBank"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_STUDYDAYS" property="studyDays"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_PREREQUEST" property="prerequest"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_SUITABLESTUDENT" property="suitableStudent"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_CERTIFICATION" property="certification"
-        jdbcType="VARCHAR" />
+      <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" />
+      <result column="COURSE_REGPHONE" property="regPhone" jdbcType="VARCHAR" />
+      <result column="COURSE_CONTACT" property="contact" jdbcType="VARCHAR" />
+      <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
+      <result column="COURSE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
+      <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
+      <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
+      <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
+      <result column="COURSE_STUDYDAYS" property="studyDays" jdbcType="VARCHAR" />
+      <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
+      <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
+      <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
+      <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
+      <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
       <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
-      <result column="COURSE_COURSEINTRO" property="courseIntro"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_REFERENCE" property="reference"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_FINISHTIME2" property="finishTime2"
-        jdbcType="INTEGER" />
-      <result column="COURSE_STARTTIME2" property="startTime2"
-        jdbcType="INTEGER" />
-      <result column="COURSE_FINISHTIME1" property="finishTime1"
-        jdbcType="INTEGER" />
-      <result column="COURSE_STARTTIME1" property="startTime1"
-        jdbcType="INTEGER" />
-      <result column="COURSE_STARTUPONARRIVAL" property="startUponArrival"
-        jdbcType="INTEGER" />
-      <result column="COURSE_BOOKINGTYPE" property="bookingType"
-        jdbcType="INTEGER" />
+      <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
+      <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
+      <result column="COURSE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
+      <result column="COURSE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
+      <result column="COURSE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
+      <result column="COURSE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
+      <result column="COURSE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
+      <result column="COURSE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
       <result column="COURSE_CASHBACKDATE" property="cashbackDate"
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="COURSE_NOREFUNDDATE" property="noRefundDate"
@@ -129,163 +78,100 @@
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="COURSE_FINISHDATE" property="finishDate"
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="COURSE_STARTDATE" property="startDate"
-        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="COURSE_POPULARITY" property="popularity"
-        jdbcType="INTEGER" />
-      <result column="COURSE_CLASSSIZE" property="classSize"
-        jdbcType="VARCHAR" />
-      <result column="COURSE_COURSEHOURNUM" property="courseHourNum"
-        jdbcType="INTEGER" />
-      <result column="COURSE_CLASSTYPE" property="classType"
-        jdbcType="INTEGER" />
-      <result column="COURSE_DISCOUNT" property="discount"
-        jdbcType="DOUBLE" />
-      <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay"
-        jdbcType="INTEGER" />
-      <result column="COURSE_SCHOOLTIMEWEEK" property="schooltimeWeek"
-        jdbcType="INTEGER" />
-      <result column="COURSE_RATING" property="rating"
-        jdbcType="DOUBLE" />
-      <result column="COURSE_BOOKINGTOTAL" property="bookingTotal"
-        jdbcType="INTEGER" />
-      <result column="PARTNER_LOGOURL" property="logoUrl"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_WHOLENAME" property="wholeName"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_INSTNAME" property="instName"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_PARTNERINTRO" property="partnerIntro"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification"
-        jdbcType="INTEGER" />
-      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_RATING" property="partnerRating"
-        jdbcType="DOUBLE" />
-      <result column="ADDRESS_DETAIL" property="address"
-        jdbcType="VARCHAR" />
-      <result column="ADDRESS_LAT" property="addressLat"
-        jdbcType="DOUBLE" />
-      <result column="ADDRESS_LNG" property="addressLng"
-        jdbcType="DOUBLE" />
-      <result column="REG_ADDRESS_DETAIL" property="regAddress"
-        jdbcType="VARCHAR" />
-      <result column="REG_ADDRESS_LAT" property="regAddressLat"
-        jdbcType="DOUBLE" />
-      <result column="REG_ADDRESS_LNG" property="regAddressLng"
-        jdbcType="DOUBLE" />
-      <result column="CATEGORY_VALUE" property="categoryValue"
-        jdbcType="VARCHAR" />
-      <result column="CATEGORY_NAME" property="categoryName"
-        jdbcType="VARCHAR" />
-      <result column="CATEGORY_RANK" property="categoryRank"
-        jdbcType="INTEGER" />
-      <result column="LOCATION_VALUE" property="locationValue"
-        jdbcType="VARCHAR" />
-      <result column="LOCATION_NAME" property="locationName"
-        jdbcType="VARCHAR" />
-      <result column="CIRCLE_VALUE" property="circleValue"
-        jdbcType="VARCHAR" />
-      <result column="CIRCLE_NAME" property="circleName"
-        jdbcType="VARCHAR" />
+      <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
+      <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+      <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
+      <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
+      <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
+      <result column="COURSE_SCHOOLTIMEWEEK" property="schooltimeWeek" jdbcType="INTEGER" />
+      <result column="COURSE_RATING" property="rating" jdbcType="DOUBLE" />
+      <result column="COURSE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INTEGER" />
+      <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+      <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+      <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+      <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
+      <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+      <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+      <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+      <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+      <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
+      <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+      <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+      <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+      <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+      <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+      <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+      <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
 
-      <result column="PARTNER_LOGOURL" property="logoUrl"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_WHOLENAME" property="wholeName"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_INSTNAME" property="instName"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_PARTNERINTRO" property="partnerIntro"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification"
-        jdbcType="INTEGER" />
-      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction"
-        jdbcType="VARCHAR" />
-      <result column="PARTNER_RATING" property="partnerRating"
-        jdbcType="DOUBLE" />
-      <!-- <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" 
-        /> <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" /> 
-        <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" /> <result 
-        column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" /> <result 
-        column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" /> -->
-      <result column="REG_ADDRESS_DETAIL" property="regAddress"
-        jdbcType="VARCHAR" />
-      <result column="REG_ADDRESS_LAT" property="regAddressLat"
-        jdbcType="DOUBLE" />
-      <result column="REG_ADDRESS_LNG" property="regAddressLng"
-        jdbcType="DOUBLE" />
-      <result column="CATEGORY_VALUE" property="categoryValue"
-        jdbcType="VARCHAR" />
-      <result column="CATEGORY_NAME" property="categoryName"
-        jdbcType="VARCHAR" />
-      <result column="CATEGORY_RANK" property="categoryRank"
-        jdbcType="INTEGER" />
-      <result column="LOCATION_VALUE" property="locationValue"
-        jdbcType="VARCHAR" />
-      <result column="LOCATION_NAME" property="locationName"
-        jdbcType="VARCHAR" />
-      <result column="CIRCLE_VALUE" property="circleValue"
-        jdbcType="VARCHAR" />
-      <result column="CIRCLE_NAME" property="circleName"
-        jdbcType="VARCHAR" />
+      <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+      <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+      <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+      <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
+      <!-- <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" /> <result column="ADDRESS_LAT" property="addressLat" 
+        jdbcType="DOUBLE" /> <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" /> <result column="ADDRESS_CIRCLEID" 
+        property="circleId" jdbcType="INTEGER" /> <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" /> -->
+      <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+      <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+      <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
+      <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+      <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+      <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+      <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+      <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+      <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+      <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
+      
+      <result column="COMMENT_CONDITIONRATING" property="conditionRating" jdbcType="DOUBLE" />
+      <result column="COMMENT_ATTITUDERATING" property="attitudeRating" jdbcType="DOUBLE" />
+      <result column="COMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
 
-      <collection property="teacherList" javaType="java.util.ArrayList"
-        ofType="TeacherEntityExt">
+      <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
         <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
-        <result column="TEACHER_PARTNERID" property="partnerId"
-          jdbcType="INTEGER" />
-        <result column="TEACHER_IMGURL" property="imgUrl"
-          jdbcType="VARCHAR" />
+        <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+        <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
         <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
         <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
-        <result column="TEACHER_POPULARITY" property="popularity"
-          jdbcType="INTEGER" />
+        <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
         <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
           typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
         <result column="TEACHER_CREATETIME" property="createTime"
           typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-        <result column="TEACHER_ENABLED" property="enabled"
-          jdbcType="INTEGER" />
-        <result column="TEACHER_DELETED" property="deleted"
-          jdbcType="INTEGER" />
+        <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
+        <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
       </collection>
-      <collection property="classPhotoList" javaType="java.util.ArrayList"
-        ofType="ClassPhotoEntityExt">
+      <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
         <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
-        <result column="CLASSPHOTO_PARTNERID" property="partnerId"
-          jdbcType="INTEGER" />
-        <result column="CLASSPHOTO_IMGURL" property="imgUrl"
-          jdbcType="VARCHAR" />
-        <result column="CLASSPHOTO_TITLE" property="title"
-          jdbcType="VARCHAR" />
-        <result column="CLASSPHOTO_DESCRIPTION" property="description"
-          jdbcType="VARCHAR" />
+        <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+        <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
+        <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
         <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime"
           typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
         <result column="CLASSPHOTO_CREATETIME" property="createTime"
           typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-        <result column="CLASSPHOTO_ENABLED" property="enabled"
-          jdbcType="INTEGER" />
-        <result column="CLASSPHOTO_DELETED" property="deleted"
-          jdbcType="INTEGER" />
+        <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+        <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
       </collection>
     </collection>
 
-    <collection property="photoList" javaType="java.util.ArrayList"
-      ofType="GroupBuyPhotoEntityExt">
+    <collection property="photoList" javaType="java.util.ArrayList" ofType="GroupBuyPhotoEntityExt">
       <result column="GROUPBUYPHOTO_ID" property="id" jdbcType="INTEGER" />
       <result column="GROUPBUYPHOTO_URL" property="url" jdbcType="VARCHAR" />
-      <result column="GROUPBUYPHOTO_GROUPBUYACTIVITYID" property="groupBuyActivityId"
-        jdbcType="INTEGER" />
-      <result column="GROUPBUYPHOTO_DELETED" property="deleted"
-        jdbcType="INTEGER" />
+      <result column="GROUPBUYPHOTO_GROUPBUYACTIVITYID" property="groupBuyActivityId" jdbcType="INTEGER" />
+      <result column="GROUPBUYPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
-    <collection property="addressList" javaType="java.util.ArrayList"
-      ofType="AddressEntityExt">
+    <collection property="addressList" javaType="java.util.ArrayList" ofType="AddressEntityExt">
       <result column="ADDRESS_ID" property="id" jdbcType="INTEGER" />
-      <result column="ADDRESS_PARTNERID" property="partnerId"
-        jdbcType="INTEGER" />
+      <result column="ADDRESS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
       <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
       <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
@@ -293,16 +179,11 @@
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="ADDRESS_CREATETIME" property="createTime"
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="ADDRESS_ENABLED" property="enabled"
-        jdbcType="INTEGER" />
-      <result column="ADDRESS_CIRCLEID" property="circleId"
-        jdbcType="INTEGER" />
-      <result column="ADDRESS_LOCATIONID" property="locationId"
-        jdbcType="INTEGER" />
-      <result column="ADDRESS_REALADDRESS" property="realAddress"
-        jdbcType="VARCHAR" />
-      <result column="ADDRESS_DELETED" property="deleted"
-        jdbcType="INTEGER" />
+      <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+      <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="ADDRESS_REALADDRESS" property="realAddress" jdbcType="VARCHAR" />
+      <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
   </resultMap>
   <sql id="Group_Buy_Activity_Base_Column_List">
@@ -311,9 +192,17 @@
     GROUP_BUY_ACTIVITY.END_TIME GROUPBUYACTIVITY_ENDTIME,
     GROUP_BUY_ACTIVITY.STATUS GROUPBUYACTIVITY_STATUS,
     GROUP_BUY_ACTIVITY.COURSE_ID GROUPBUYACTIVITY_COURSEID,
-    GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE GROUPBUYACTIVITY_GROUPBUYPRICE,
+    GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE
+    GROUPBUYACTIVITY_GROUPBUYPRICE,
     GROUP_BUY_ACTIVITY.HOT GROUPBUYACTIVITY_HOT,
-    GROUP_BUY_ACTIVITY.TITLE GROUPBUYACTIVITY_TITLE
+    GROUP_BUY_ACTIVITY.TITLE
+    GROUPBUYACTIVITY_TITLE
+  </sql>
+  <sql id="Group_Buy_Activity_Comment_Column_List">
+    temp.avgcondition COMMENT_CONDITIONRATING,
+    temp.avgattitude
+    COMMENT_ATTITUDERATING,
+    temp.avgsatisfaction COMMENT_SATISFACTIONRATING
   </sql>
   <sql id="Course_Base_Column_List">
     COURSE_TEMPLATE.ID COURSE_ID,
@@ -325,7 +214,8 @@
     COURSE_CIRCLEID,
     COURSE_TEMPLATE.PARTNER_ID COURSE_PARTNERID,
     COURSE_TEMPLATE.ADDRESS_ID COURSE_ADDRESSID,
-    COURSE_TEMPLATE.PRICE COURSE_PRICE,
+    COURSE_TEMPLATE.PRICE
+    COURSE_PRICE,
     COURSE_TEMPLATE.ORIGINAL_PRICE COURSE_ORIGINALPRICE,
     COURSE_TEMPLATE.CASHBACK
     COURSE_CASHBACK,
@@ -345,7 +235,8 @@
     COURSE_TEMPLATE.CONTACT
     COURSE_CONTACT,
     COURSE_TEMPLATE.REFERENCE COURSE_REFERENCE,
-    COURSE_TEMPLATE.REG_ADDRESS_ID COURSE_REGADDRESSID,
+    COURSE_TEMPLATE.REG_ADDRESS_ID
+    COURSE_REGADDRESSID,
     COURSE_TEMPLATE.FINISH_TIME2
     COURSE_FINISHTIME2,
     COURSE_TEMPLATE.START_TIME2
@@ -373,7 +264,8 @@
     COURSE_SCHOOLTIMEWEEK,
     COURSE_TEMPLATE.MARKING
     COURSE_MARKING,
-    COURSE_TEMPLATE.RATING COURSE_RATING,
+    COURSE_TEMPLATE.RATING
+    COURSE_RATING,
     COURSE_TEMPLATE.BOOKING_TOTAL COURSE_BOOKINGTOTAL
   </sql>
   <sql id="Group_Buy_Photo_Base_Column_List">
@@ -397,10 +289,12 @@
     ADDRESS.LNG ADDRESS_LNG,
     ADDRESS.LAST_MODIFY_TIME
     ADDRESS_LASTMODIFYTIME,
-    ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
+    ADDRESS.CREATE_TIME
+    ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
     ADDRESS.DELETED ADDRESS_DELETED,
-    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
+    ADDRESS.CIRCLE_ID
+    ADDRESS_CIRCLEID,
     ADDRESS.LOCATION_ID
     ADDRESS_LOCATIONID,
     ADDRESS.REAL_ADDRESS ADDRESS_REALADDRESS
@@ -519,8 +413,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
     </trim>
-    <selectKey resultType="java.lang.Integer" keyProperty="id"
-      order="AFTER">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
@@ -528,13 +421,16 @@
   <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update GROUP_BUY_ACTIVITY
-    set DELETED = 1 where ID = #{id,jdbcType=INTEGER}
+    set DELETED = 1 where ID =
+    #{id,jdbcType=INTEGER}
   </update>
 
   <!-- list -->
   <select id="list" parameterType="map" resultMap="GroupBuyActivityExtMap">
     select
     <include refid="Group_Buy_Activity_Base_Column_List" />
+    ,
+    <include refid="Group_Buy_Activity_Comment_Column_List" />
     ,
     <include refid="Course_Base_Column_List" />
     ,
@@ -544,9 +440,15 @@
     from GROUP_BUY_ACTIVITY
     left join COURSE_TEMPLATE on COURSE_TEMPLATE.ID =
     GROUP_BUY_ACTIVITY.COURSE_ID
+    left join
+    (select course_template_id as course_template_id,avg(CONDITION_RATING) as avgcondition,avg(ATTITUDE_RATING) as
+    avgattitude,avg(SATISFACTION_RATING) as avgsatisfaction from course_comment group by course_template_id) as temp on
+    temp.course_template_id =
+    GROUP_BUY_ACTIVITY.COURSE_ID
     left join GROUP_BUY_PHOTO on
     GROUP_BUY_PHOTO.GROUP_BUY_ACTIVITY_ID = GROUP_BUY_ACTIVITY.ID and
-    GROUP_BUY_PHOTO.DELETED = 0
+    GROUP_BUY_PHOTO.DELETED =
+    0
     left join GROUP_BUY_ADDRESS on
     GROUP_BUY_ACTIVITY.ID = GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID and
     GROUP_BUY_ADDRESS.DELETED = 0
@@ -560,8 +462,7 @@
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.ID IN
-          <foreach collection="entity.idSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -571,11 +472,9 @@
         AND GROUP_BUY_ACTIVITY.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseId == null or entity.courseId == 0">
-        <if
-          test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.COURSE_ID IN
-          <foreach collection="entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -600,8 +499,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -639,8 +537,7 @@
       <if test="entity.hot == null">
         <if test="entity.hotSet != null and entity.hotSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.HOT IN
-          <foreach collection="entity.hotSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.hotSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -651,11 +548,9 @@
       </if>
     </if>
 
-    <if
-      test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
       ORDER BY
-      <foreach collection="page.orderByEntities" item="listItem"
-        separator=",">
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
         GROUP_BUY_ACTIVITY.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
@@ -675,7 +570,8 @@
     from GROUP_BUY_ACTIVITY
     left join COURSE_TEMPLATE on COURSE_TEMPLATE.ID =
     GROUP_BUY_ACTIVITY.COURSE_ID
-    where GROUP_BUY_ACTIVITY.DELETED = 0
+    where
+    GROUP_BUY_ACTIVITY.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
         AND GROUP_BUY_ACTIVITY.ID = #{entity.id,jdbcType=INTEGER}
@@ -683,8 +579,7 @@
       <if test="entity.id == null or entity.id == 0">
         <if test="entity.idSet != null and entity.idSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.ID IN
-          <foreach collection="entity.idSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -694,11 +589,9 @@
         AND GROUP_BUY_ACTIVITY.COURSE_ID = #{entity.courseId,jdbcType=INTEGER}
       </if>
       <if test="entity.courseId == null or entity.courseId == 0">
-        <if
-          test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
+        <if test="entity.courseIdSet != null and entity.courseIdSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.COURSE_ID IN
-          <foreach collection="entity.courseIdSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.courseIdSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -723,8 +616,7 @@
       <if test="entity.status == null">
         <if test="entity.statusSet != null and entity.statusSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.STATUS IN
-          <foreach collection="entity.statusSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -762,8 +654,7 @@
       <if test="entity.hot == null">
         <if test="entity.hotSet != null and entity.hotSet.size() > 0">
           AND GROUP_BUY_ACTIVITY.HOT IN
-          <foreach collection="entity.hotSet" item="listItem"
-            open="(" close=")" separator=",">
+          <foreach collection="entity.hotSet" item="listItem" open="(" close=")" separator=",">
             #{listItem}
           </foreach>
         </if>
@@ -808,10 +699,11 @@
   </update>
 
   <!-- getById -->
-  <select id="getById" parameterType="java.lang.Integer"
-    resultMap="GroupBuyActivityExtMap">
+  <select id="getById" parameterType="java.lang.Integer" resultMap="GroupBuyActivityExtMap">
     select
     <include refid="Group_Buy_Activity_Base_Column_List" />
+    ,
+    <include refid="Group_Buy_Activity_Comment_Column_List" />
     ,
     <include refid="Group_Buy_Photo_Base_Column_List" />
     ,
@@ -835,8 +727,14 @@
     from GROUP_BUY_ACTIVITY
     left join COURSE_TEMPLATE on COURSE_TEMPLATE.ID =
     GROUP_BUY_ACTIVITY.COURSE_ID
+    left join
+    (select course_template_id as course_template_id,avg(CONDITION_RATING) as avgcondition,avg(ATTITUDE_RATING) as
+    avgattitude,avg(SATISFACTION_RATING) as avgsatisfaction from course_comment group by course_template_id) as temp on
+    temp.course_template_id =
+    GROUP_BUY_ACTIVITY.COURSE_ID
     left join COURSE_TEMPLATE_TEACHER COURSE_TEMPLATE_TEACHER
-    ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID = COURSE_TEMPLATE.ID
+    ON COURSE_TEMPLATE_TEACHER.COURSE_TEMPLATE_ID =
+    COURSE_TEMPLATE.ID
     left join
     TEACHER
     TEACHER
@@ -846,18 +744,20 @@
     CLASS_PHOTO
     ON
     COURSE_TEMPLATE.PARTNER_ID = CLASS_PHOTO.PARTNER_ID and CLASS_PHOTO.DELETED = 0
-    left join PARTNER PARTNER
+    left join PARTNER
+    PARTNER
     ON
     PARTNER.ID =
     COURSE_TEMPLATE.PARTNER_ID
     left join CATEGORY CATEGORY
-    ON CATEGORY.ID = COURSE_TEMPLATE.CATEGORY_ID
+    ON CATEGORY.ID =
+    COURSE_TEMPLATE.CATEGORY_ID
     left join CIRCLE CIRCLE
     ON
     CIRCLE.ID
     = COURSE_TEMPLATE.CIRCLE_ID
     left join LOCATION LOCATION
-    ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID    
+    ON LOCATION.ID = COURSE_TEMPLATE.LOCATION_ID
     left join GROUP_BUY_PHOTO on
     GROUP_BUY_PHOTO.GROUP_BUY_ACTIVITY_ID = GROUP_BUY_ACTIVITY.ID and
     GROUP_BUY_PHOTO.DELETED = 0

@@ -478,6 +478,15 @@ public class CourseTemplateConverter {
             }
             courseTemplateBo.setTeacherList(list);
         }
+        if (e.getConditionRating() != null) {
+            courseTemplateBo.setConditionRating(e.getConditionRating());
+        }
+        if (e.getAttitudeRating() != null) {
+            courseTemplateBo.setAttitudeRating(e.getAttitudeRating());
+        }
+        if (e.getSatisfactionRating() != null) {
+            courseTemplateBo.setSatisfactionRating(e.getSatisfactionRating());
+        }
         return courseTemplateBo;
     }
 

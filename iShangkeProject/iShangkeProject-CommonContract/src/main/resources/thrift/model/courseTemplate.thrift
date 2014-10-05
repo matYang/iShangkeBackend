@@ -139,6 +139,9 @@ struct CourseTemplateBo {
     132: double regAddressLng
     133: string categoryValue
     134: string studyDays
+    135: double conditionRating
+    136: double attitudeRating
+    137: double satisfactionRating
 }
 
 struct CommentCourseTemplateApproveBo {

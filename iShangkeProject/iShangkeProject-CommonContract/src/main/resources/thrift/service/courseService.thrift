@@ -59,6 +59,8 @@ service CourseService {
      */
     courseComment.CourseCommentPageViewBo queryCommentByCourseId(1: course.CourseBo courseBo, 2: common.PaginationBo paginationBo, 3: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
     
+    courseComment.CourseCommentPageViewBo queryComment(1: courseComment.CourseCommentBo courseCommentBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    
     /**
      * 删除课程的评价
      * @param CourseCommentBo

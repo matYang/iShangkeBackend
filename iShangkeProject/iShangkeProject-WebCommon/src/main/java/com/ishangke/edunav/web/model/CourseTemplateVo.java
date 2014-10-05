@@ -212,6 +212,34 @@ public class CourseTemplateVo extends JsonResponse {
     private String circleValue;
     private String circleName;
     private List<ActionVo> actionList;
+    
+    private Double conditionRating;
+    private Double attitudeRating;
+    private Double satisfactionRating;
+
+    public Double getConditionRating() {
+        return conditionRating;
+    }
+
+    public void setConditionRating(Double conditionRating) {
+        this.conditionRating = conditionRating;
+    }
+
+    public Double getAttitudeRating() {
+        return attitudeRating;
+    }
+
+    public void setAttitudeRating(Double attitudeRating) {
+        this.attitudeRating = attitudeRating;
+    }
+
+    public Double getSatisfactionRating() {
+        return satisfactionRating;
+    }
+
+    public void setSatisfactionRating(Double satisfactionRating) {
+        this.satisfactionRating = satisfactionRating;
+    }
 
     public List<ActionVo> getActionList() {
         return actionList;

@@ -79,6 +79,23 @@ public class CourseFacade {
         }
         return result;
     }
+    
+    public CourseCommentPageViewBo queryComment(CourseCommentBo courseCommentBo, PaginationBo paginationBo) {
+        CourseCommentPageViewBo result = null;
+        
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+
+        try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryComment(courseCommentBo, paginationBo);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public CourseCommentBo deleteCommentByCommentId(CourseCommentBo courseCommentBo, UserBo userBo, String url) {
         CourseCommentBo result = null;
@@ -269,4 +286,5 @@ public class CourseFacade {
             System.out.println(cc);
         }
     }
+
 }
