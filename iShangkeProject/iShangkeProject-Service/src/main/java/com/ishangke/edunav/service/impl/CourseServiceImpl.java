@@ -505,8 +505,30 @@ public class CourseServiceImpl implements CourseService.Iface {
 
     @Override
     public CourseCommentPageViewBo queryComment(CourseCommentBo courseCommentBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            paginationBo = PageUtil.getPage(paginationBo);
+            List<CourseCommentBo> data = courseManager.queryComment(courseCommentBo, paginationBo);
+            CourseCommentPageViewBo pageView = new CourseCommentPageViewBo();
+            int total = courseManager.queryCommentTotal(courseCommentBo);
+            pageView.setCount(paginationBo.getSize());
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setTotal(total);
+            pageView.setData(data);
+            return pageView;
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_COURSE_QUERYCOMMENTBYCOURSEID);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_COURSE_QUERYCOMMENTBYCOURSEID_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.COURSE_CREATE_ERROR);
+            exception.setMessageKey(ManagerErrorCode.COURSE_CREATE_ERROR_KEY);
+            throw exception;
+        }
     }
 
 }
