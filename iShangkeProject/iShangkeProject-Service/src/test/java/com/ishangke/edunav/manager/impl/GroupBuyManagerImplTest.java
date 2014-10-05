@@ -214,4 +214,9 @@ public class GroupBuyManagerImplTest extends BaseTest {
         System.out.println("****");
         System.out.println(m);
     }
+    
+    @Test
+    public void testTest() {
+        
+    }
 }

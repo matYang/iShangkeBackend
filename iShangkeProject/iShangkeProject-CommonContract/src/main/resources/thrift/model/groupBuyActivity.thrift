@@ -1,4 +1,4 @@
-include "course.thrift"
+include "courseTemplate.thrift"
 include "groupBuyPhoto.thrift"
 include "address.thrift"
 namespace java com.ishangke.edunav.commoncontract.model
@@ -9,7 +9,7 @@ struct GroupBuyActivityBo {
   3: i64 endTime
   4: i32 status
   5: i32 courseId
-  6: course.CourseBo course
+  6: courseTemplate.CourseTemplateBo course
   7: set<i32> idSet
   8: i64 createTimeStart
   9: i64 createTimeEnd

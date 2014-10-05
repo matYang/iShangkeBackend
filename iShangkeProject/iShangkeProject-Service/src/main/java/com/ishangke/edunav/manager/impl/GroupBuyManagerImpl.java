@@ -21,12 +21,14 @@ import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CourseTemplateEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyAddressEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
+import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
@@ -61,6 +63,9 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     private CourseEntityExtMapper courseMapper;
     
     @Autowired
+    private CourseTemplateEntityExtMapper courseTemplateMapper;
+    
+    @Autowired
     private GroupBuyPhotoEntityExtMapper groupBuyPhotoMapper;
     
     @Autowired
@@ -84,8 +89,8 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("对不起，您无权执行该请求");
         }
 
-        CourseEntityExt course = courseMapper.getById(groupBuyActivityBo.courseId);
-        if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
+        CourseTemplateEntityExt course = courseTemplateMapper.getById(groupBuyActivityBo.courseId);
+        if (course == null) {
             throw new ManagerException("课程不存在或者课程已下线！");
         }
         
@@ -108,11 +113,11 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         }
         if (result > 0) {
             // 插入团购图片信息
-        	List<GroupBuyPhotoBo> photoList = groupBuyActivityBo.getPhotoList();
-        	for (GroupBuyPhotoBo groupBuyPhotoBo : photoList) {
-        		groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
-        		groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
-        	}
+            List<GroupBuyPhotoBo> photoList = groupBuyActivityBo.getPhotoList();
+            for (GroupBuyPhotoBo groupBuyPhotoBo : photoList) {
+                groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
+                groupBuyPhotoMapper.add(GroupBuyPhotoConverter.fromBo(groupBuyPhotoBo));
+            }
             // 插入团购地址信息
             List<AddressBo> addressList = groupBuyActivityBo.getAddressList();
             for (AddressBo AddressBo : addressList) {
@@ -140,8 +145,8 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("对不起，您无权执行该请求");
         }
 
-        CourseEntityExt course = courseMapper.getById(groupBuyActivityBo.courseId);
-        if (course == null || Constant.COURSESTATUSONLINED != course.getStatus()) {
+        CourseTemplateEntityExt course = courseTemplateMapper.getById(groupBuyActivityBo.courseId);
+        if (course == null) {
             throw new ManagerException("课程不存在或者课程已下线！");
         }
 
