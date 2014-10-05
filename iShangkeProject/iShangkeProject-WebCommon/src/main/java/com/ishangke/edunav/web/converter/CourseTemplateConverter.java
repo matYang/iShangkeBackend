@@ -815,6 +815,9 @@ public class CourseTemplateConverter {
             }
             courseTemplateVo.setStudyDays(studyDays);
         }
+        courseTemplateVo.setConditionRating(bo.getConditionRating());
+        courseTemplateVo.setAttitudeRating(bo.getAttitudeRating());
+        courseTemplateVo.setSatisfactionRating(bo.getSatisfactionRating());
         return courseTemplateVo;
     }
 }

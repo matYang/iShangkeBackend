@@ -1,25 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper
-  namespace="com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper">
+<mapper namespace="com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper">
   <resultMap type="GroupBuyBookingEntityExt" id="GroupBuyBookingExtMap">
     <id column="GROUPBUYBOOKING_ID" property="id" jdbcType="INTEGER" />
-    <result column="GROUPBUYBOOKING_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="GROUPBUYBOOKING_CREATETIME" property="createTime"
+      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="GROUPBUYBOOKING_STATUS" property="status" jdbcType="INTEGER" />
     <result column="GROUPBUYBOOKING_GROUPBUYPRICE" property="groupBuyPrice" jdbcType="DOUBLE" />
     <result column="GROUPBUYBOOKING_GROUPBUYACTIVITYID" property="groupBuyActivityId" jdbcType="INTEGER" />
     <result column="GROUPBUYBOOKING_USERID" property="userId" jdbcType="INTEGER" />
-    <result column="GROUPBUYBOOKING_REFERENCE" property="reference" jdbcType="VARCHAR"/>
-    <result column="GROUPBUYBOOKING_NUMBER" property="number" jdbcType="VARCHAR"/>
+    <result column="GROUPBUYBOOKING_REFERENCE" property="reference" jdbcType="VARCHAR" />
+    <result column="GROUPBUYBOOKING_NUMBER" property="number" jdbcType="VARCHAR" />
     <collection property="groupBuyActivity" ofType="GroupBuyActivityEntityExt">
       <result column="GROUPBUYACTIVITY_ID" property="id" jdbcType="INTEGER" />
-      <result column="GROUPBUYACTIVITY_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="GROUPBUYACTIVITY_ENDTIME" property="endTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="GROUPBUYACTIVITY_CREATETIME" property="createTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="GROUPBUYACTIVITY_ENDTIME" property="endTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="GROUPBUYACTIVITY_STATUS" property="status" jdbcType="INTEGER" />
       <result column="GROUPBUYACTIVITY_COURSEID" property="courseId" jdbcType="INTEGER" />
-      <result column="GROUPBUYACTIVITY_GROUPBUYPRICE" property="groupBuyPrice" jdbcType="DOUBLE"/>
-      <result column="GROUPBUYACTIVITY_HOT" property="hot" jdbcType="INTEGER"/>
-      <result column="GROUPBUYACTIVITY_TITLE" property="title" jdbcType="VARCHAR"/>
+      <result column="GROUPBUYACTIVITY_GROUPBUYPRICE" property="groupBuyPrice" jdbcType="DOUBLE" />
+      <result column="GROUPBUYACTIVITY_HOT" property="hot" jdbcType="INTEGER" />
+      <result column="GROUPBUYACTIVITY_TITLE" property="title" jdbcType="VARCHAR" />
+      <collection property="course" ofType="CourseTemplateEntityExt">
+        <result column="COURSE_ID" property="id" jdbcType="INTEGER" />
+        <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
+        <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
+        <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+        <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+        <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+        <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
+        <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
+        <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
+        <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
+        <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
+        <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
+        <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
+        <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
+        <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_CREATETIME" property="createTime"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
+        <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
+        <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
+        <result column="COURSE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
+        <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
+        <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
+        <result column="COURSE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
+        <result column="COURSE_MARKING" property="marking" jdbcType="VARCHAR" />
+        <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
+        <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" />
+        <result column="COURSE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
+        <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
+        <result column="COURSE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
+        <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" />
+        <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" />
+        <result column="COURSE_REGPHONE" property="regPhone" jdbcType="VARCHAR" />
+        <result column="COURSE_CONTACT" property="contact" jdbcType="VARCHAR" />
+        <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
+        <result column="COURSE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
+        <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
+        <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
+        <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
+        <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
+        <result column="COURSE_STUDYDAYS" property="studyDays" jdbcType="VARCHAR" />
+        <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
+        <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
+        <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
+        <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
+        <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
+        <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
+        <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
+        <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
+        <result column="COURSE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
+        <result column="COURSE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
+        <result column="COURSE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
+        <result column="COURSE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
+        <result column="COURSE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
+        <result column="COURSE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
+        <result column="COURSE_CASHBACKDATE" property="cashbackDate"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_NOREFUNDDATE" property="noRefundDate"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_CUTOFFDATE" property="cutoffDate"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_FINISHDATE" property="finishDate"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_STARTDATE" property="startDate"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
+        <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
+        <result column="COURSE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+        <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
+        <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
+        <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
+        <result column="COURSE_SCHOOLTIMEWEEK" property="schooltimeWeek" jdbcType="INTEGER" />
+        <result column="COURSE_RATING" property="rating" jdbcType="DOUBLE" />
+        <result column="COURSE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INTEGER" />
+        <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+        <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+        <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+        <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+        <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+        <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+        <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
+        <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+        <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+        <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+        <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+        <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+        <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
+        <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+        <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+        <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+        <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+        <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+        <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+        <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
+
+        <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+        <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+        <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+        <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+        <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+        <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+        <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
+        <!-- <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" /> <result column="ADDRESS_LAT" property="addressLat" 
+          jdbcType="DOUBLE" /> <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" /> <result column="ADDRESS_CIRCLEID" 
+          property="circleId" jdbcType="INTEGER" /> <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" /> -->
+        <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+        <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+        <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
+        <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+        <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+        <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+        <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+        <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+        <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+        <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
+        <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
+          <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
+          <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+          <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+          <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
+          <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
+          <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
+          <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
+            typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+          <result column="TEACHER_CREATETIME" property="createTime"
+            typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+          <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
+          <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
+        </collection>
+        <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
+          <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
+          <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+          <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+          <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
+          <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
+          <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime"
+            typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+          <result column="CLASSPHOTO_CREATETIME" property="createTime"
+            typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+          <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+          <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+        </collection>
+      </collection>
     </collection>
     <collection property="user" ofType="UserEntityExt">
       <result column="USERS_ID" property="id" jdbcType="INTEGER" />
@@ -31,8 +178,10 @@
       <result column="USERS_INVITATIONCODE" property="invitationCode" jdbcType="VARCHAR" />
       <result column="USERS_APPLIEDINVITATIONCODE" property="appliedInvitationCode" jdbcType="VARCHAR" />
       <result column="USERS_REFERENCE" property="reference" jdbcType="VARCHAR" />
-      <result column="USERS_LASTLOGINTIME" property="lastLoginTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="USERS_LASTMODIFYTIME" property="lastModifyTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="USERS_LASTLOGINTIME" property="lastLoginTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="USERS_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="USERS_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="USERS_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="USERS_DELETED" property="deleted" jdbcType="INTEGER" />
@@ -55,9 +204,11 @@
     GROUP_BUY_BOOKING.STATUS GROUPBUYBOOKING_STATUS,
     GROUP_BUY_BOOKING.GROUP_BUY_PRICE GROUPBUYBOOKING_GROUPBUYPRICE,
     GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID GROUPBUYBOOKING_GROUPBUYACTIVITYID,
-    GROUP_BUY_BOOKING.USER_ID GROUPBUYBOOKING_USERID,
+    GROUP_BUY_BOOKING.USER_ID
+    GROUPBUYBOOKING_USERID,
     GROUP_BUY_BOOKING.REFERENCE GROUPBUYBOOKING_REFERENCE,
-    GROUP_BUY_BOOKING.NUMBER GROUPBUYBOOKING_NUMBER
+    GROUP_BUY_BOOKING.NUMBER
+    GROUPBUYBOOKING_NUMBER
   </sql>
   <sql id="Group_Buy_Activity_Base_Column_List">
     GROUP_BUY_ACTIVITY.ID GROUPBUYACTIVITY_ID,
@@ -65,11 +216,82 @@
     GROUP_BUY_ACTIVITY.END_TIME GROUPBUYACTIVITY_ENDTIME,
     GROUP_BUY_ACTIVITY.STATUS GROUPBUYACTIVITY_STATUS,
     GROUP_BUY_ACTIVITY.COURSE_ID GROUPBUYACTIVITY_COURSEID,
-    GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE GROUPBUYACTIVITY_GROUPBUYPRICE,
+    GROUP_BUY_ACTIVITY.GROUP_BUY_PRICE
+    GROUPBUYACTIVITY_GROUPBUYPRICE,
     GROUP_BUY_ACTIVITY.HOT GROUPBUYACTIVITY_HOT,
-    GROUP_BUY_ACTIVITY.TITLE GROUPBUYACTIVITY_TITLE
+    GROUP_BUY_ACTIVITY.TITLE
+    GROUPBUYACTIVITY_TITLE
   </sql>
-   <sql id="User_Base_Column_List">
+  <sql id="Course_Base_Column_List">
+    COURSE_TEMPLATE.ID COURSE_ID,
+    COURSE_TEMPLATE.COURSE_NAME COURSE_COURSENAME,
+    COURSE_TEMPLATE.CATEGORY_ID
+    COURSE_CATEGORYID,
+    COURSE_TEMPLATE.LOCATION_ID COURSE_LOCATIONID,
+    COURSE_TEMPLATE.CIRCLE_ID
+    COURSE_CIRCLEID,
+    COURSE_TEMPLATE.PARTNER_ID COURSE_PARTNERID,
+    COURSE_TEMPLATE.ADDRESS_ID COURSE_ADDRESSID,
+    COURSE_TEMPLATE.PRICE
+    COURSE_PRICE,
+    COURSE_TEMPLATE.ORIGINAL_PRICE COURSE_ORIGINALPRICE,
+    COURSE_TEMPLATE.CASHBACK
+    COURSE_CASHBACK,
+    COURSE_TEMPLATE.COMMISSION COURSE_COMMISSION,
+    COURSE_TEMPLATE.SERVICE_CHARGE COURSE_SERVICECHARGE,
+    COURSE_TEMPLATE.STATUS
+    COURSE_STATUS,
+    COURSE_TEMPLATE.LAST_MODIFY_TIME
+    COURSE_LASTMODIFYTIME,
+    COURSE_TEMPLATE.CREATE_TIME COURSE_CREATETIME,
+    COURSE_TEMPLATE.ENABLED COURSE_ENABLED,
+    COURSE_TEMPLATE.DELETED
+    COURSE_DELETED,
+    COURSE_TEMPLATE.COURSE_HOUR_LENGTH
+    COURSE_COURSEHOURLENGTH,
+    COURSE_TEMPLATE.REG_PHONE COURSE_REGPHONE,
+    COURSE_TEMPLATE.CONTACT
+    COURSE_CONTACT,
+    COURSE_TEMPLATE.REFERENCE COURSE_REFERENCE,
+    COURSE_TEMPLATE.REG_ADDRESS_ID
+    COURSE_REGADDRESSID,
+    COURSE_TEMPLATE.FINISH_TIME2
+    COURSE_FINISHTIME2,
+    COURSE_TEMPLATE.START_TIME2
+    COURSE_STARTTIME2,
+    COURSE_TEMPLATE.FINISH_TIME1 COURSE_FINISHTIME1,
+    COURSE_TEMPLATE.START_TIME1
+    COURSE_STARTTIME1,
+    COURSE_TEMPLATE.START_UPON_ARRIVAL COURSE_STARTUPONARRIVAL,
+    COURSE_TEMPLATE.BOOKING_TYPE COURSE_BOOKINGTYPE,
+    COURSE_TEMPLATE.CASHBACK_DATE
+    COURSE_CASHBACKDATE,
+    COURSE_TEMPLATE.NO_REFUND_DATE COURSE_NOREFUNDDATE,
+    COURSE_TEMPLATE.CUTOFF_DATE COURSE_CUTOFFDATE,
+    COURSE_TEMPLATE.FINISH_DATE
+    COURSE_FINISHDATE,
+    COURSE_TEMPLATE.START_DATE COURSE_STARTDATE,
+    COURSE_TEMPLATE.POPULARITY COURSE_POPULARITY,
+    COURSE_TEMPLATE.CLASS_SIZE
+    COURSE_CLASSSIZE,
+    COURSE_TEMPLATE.COURSE_HOUR_NUM COURSE_COURSEHOURNUM,
+    COURSE_TEMPLATE.CLASS_TYPE COURSE_CLASSTYPE,
+    COURSE_TEMPLATE.DISCOUNT COURSE_DISCOUNT,
+    COURSE_TEMPLATE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
+    COURSE_TEMPLATE.SCHOOLTIME_WEEK
+    COURSE_SCHOOLTIMEWEEK,
+    COURSE_TEMPLATE.MARKING
+    COURSE_MARKING,
+    COURSE_TEMPLATE.RATING
+    COURSE_RATING,
+    COURSE_TEMPLATE.BOOKING_TOTAL COURSE_BOOKINGTOTAL
+  </sql>
+  <sql id="Partner_Details_Column_List">
+    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION
+  </sql>
+  <sql id="User_Base_Column_List">
     USERS.ID USERS_ID,
     USERS.NAME USERS_NAME,
     USERS.PASSWORD USERS_PASSWORD,
@@ -102,8 +324,8 @@
     USERS_SCHOOLID,
     USERS.LOCATION_ID USERS_LOCATIONID
   </sql>
-   
-   <!-- add -->
+
+  <!-- add -->
   <insert id="add" parameterType="GroupBuyBookingEntityExt">
     insert into GROUP_BUY_BOOKING
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -130,281 +352,322 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-        <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
-            #{groupBuyActivityId,jdbcType=INTEGER},
-        </if>
-        <if test="userId != null and userId != 0">
-            #{userId,jdbcType=INTEGER},
-        </if>
-        <if test="groupBuyPrice != null">
-            #{groupBuyPrice,jdbcType=DOUBLE},
-        </if>
-        <if test="status != null">
-            #{status,jdbcType=INTEGER},
-        </if>
-        <if test="createTime != null">
-          #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-        </if>
-        <if test="reference != null">
-            #{reference,jdbcType=VARCHAR},
-        </if>
-        <if test="number != null">
-            #{number,jdbcType=VARCHAR},
-        </if>
+      <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
+        #{groupBuyActivityId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null and userId != 0">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="groupBuyPrice != null">
+        #{groupBuyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+      <if test="reference != null">
+        #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
     </trim>
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-        SELECT LAST_INSERT_ID()
+      SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
-  
+
   <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
-    update GROUP_BUY_BOOKING set DELETED = 1 where ID = #{id,jdbcType=INTEGER}
+    update GROUP_BUY_BOOKING set DELETED = 1 where ID =
+    #{id,jdbcType=INTEGER}
   </update>
-  
+
   <!-- list -->
   <select id="list" parameterType="map" resultMap="GroupBuyBookingExtMap">
     select
-    <include refid="Group_Buy_Booking_Base_Column_List"/>
+    <include refid="Group_Buy_Booking_Base_Column_List" />
     ,
-    <include refid="Group_Buy_Activity_Base_Column_List"/>
+    <include refid="Group_Buy_Activity_Base_Column_List" />
     ,
-    <include refid="User_Base_Column_List"/>
+    <include refid="Course_Base_Column_List" />
+    ,
+    <include refid="Partner_Details_Column_List" />
+    ,
+    <include refid="User_Base_Column_List" />
     from GROUP_BUY_BOOKING
-    left join GROUP_BUY_ACTIVITY on GROUP_BUY_ACTIVITY.ID = GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID
+    left join GROUP_BUY_ACTIVITY on GROUP_BUY_ACTIVITY.ID =
+    GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID
+    left join course_template on GROUP_BUY_ACTIVITY.course_id =
+    course_template.id
+    left join PARTNER PARTNER
+    ON
+    PARTNER.ID =
+    COURSE_TEMPLATE.PARTNER_ID
     left join USERS on USERS.ID = GROUP_BUY_BOOKING.USER_ID
-    where GROUP_BUY_BOOKING.DELETED = 0
+    where
+    GROUP_BUY_BOOKING.DELETED = 0
     <if test="entity != null">
-        <if test="entity.id != null and entity.id != 0">
-            AND GROUP_BUY_BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      <if test="entity.id != null and entity.id != 0">
+        AND GROUP_BUY_BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND GROUP_BUY_BOOKING.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.id == null or entity.id == 0">
-            <if test="entity.idSet != null and entity.idSet.size() > 0">
-                AND GROUP_BUY_BOOKING.ID IN
-                <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
-        </if>
-        
-        <if test="entity.groupBuyPrice != null">
-            AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE = #{entity.groupBuyPrice,jdbcType=DOUBLE}
-        </if>
-        <if test="entity.groupBuyPrice == null">
-            <if test="entity.groupBuyPriceStart != null">
+      </if>
+
+      <if test="entity.groupBuyPrice != null">
+        AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE = #{entity.groupBuyPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.groupBuyPrice == null">
+        <if test="entity.groupBuyPriceStart != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE >= #{entity.groupBuyPriceStart,jdbcType=DOUBLE}]]>
-            </if>
-            <if test="entity.groupBuyPriceEnd != null">
+        </if>
+        <if test="entity.groupBuyPriceEnd != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE <= #{entity.groupBuyPriceEnd,jdbcType=DOUBLE}]]>
-            </if>
         </if>
-        
-        <if test="entity.groupBuyActivityId != null and entity.groupBuyActivityId != 0">
-            AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID = #{entity.groupBuyActivityId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.groupBuyActivityId != null and entity.groupBuyActivityId != 0">
+        AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID = #{entity.groupBuyActivityId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.groupBuyActivityId == null or entity.groupBuyActivityId == 0">
+        <if test="entity.groupBuyActivityIdSet != null and entity.groupBuyActivityIdSet.size() > 0">
+          AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID IN
+          <foreach collection="entity.groupBuyActivityIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.groupBuyActivityId == null or entity.groupBuyActivityId == 0">
-            <if test="entity.groupBuyActivityIdSet != null and entity.groupBuyActivityIdSet.size() > 0">
-                AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID IN
-                <foreach collection="entity.groupBuyActivityIdSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
+        AND GROUP_BUY_BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND GROUP_BUY_BOOKING.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        
-        <if test="entity.userId != null and entity.userId != 0">
-            AND GROUP_BUY_BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.status != null">
+        AND GROUP_BUY_BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND GROUP_BUY_BOOKING.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.userId == null or entity.userId == 0">
-            <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
-                AND GROUP_BUY_BOOKING.USER_ID IN
-                <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
-        </if>
-        
-        <if test="entity.status != null">
-            AND GROUP_BUY_BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
-        </if>
-        <if test="entity.status == null">
-            <if test="entity.statusSet != null and entity.statusSet.size() > 0">
-                AND GROUP_BUY_BOOKING.STATUS IN
-                <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
-        </if>
-        
-        <if test="entity.createTime != null">
-            AND GROUP_BUY_BOOKING.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-        </if>
-        <if test="entity.createTime == null">
-            <if test="entity.createTimeStart != null">
+      </if>
+
+      <if test="entity.createTime != null">
+        AND GROUP_BUY_BOOKING.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-            </if>
-            <if test="entity.createTimeEnd != null">
+        </if>
+        <if test="entity.createTimeEnd != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-            </if>
         </if>
-        
-        <if test="entity.reference != null">
-            AND GROUP_BUY_BOOKING.REFERENCE = #{entity.reference,jdbcType=VARCHAR}
-        </if>
-        
-        <if test="entity.number != null">
-            AND GROUP_BUY_BOOKING.NUMBER = #{entity.number,jdbcType=VARCHAR}
-        </if>
+      </if>
+
+      <if test="entity.reference != null">
+        AND GROUP_BUY_BOOKING.REFERENCE = #{entity.reference,jdbcType=VARCHAR}
+      </if>
+
+      <if test="entity.number != null">
+        AND GROUP_BUY_BOOKING.NUMBER = #{entity.number,jdbcType=VARCHAR}
+      </if>
     </if>
-    
+
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY 
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-            GROUP_BUY_BOOKING.${listItem.columnKey} ${listItem.order}
-        </foreach>
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        GROUP_BUY_BOOKING.${listItem.columnKey} ${listItem.order}
+      </foreach>
     </if>
-    
+
     <if test="page != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
     </if>
   </select>
-  
+
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="java.lang.Integer">
     select count(*) from (
     select
-    <include refid="Group_Buy_Booking_Base_Column_List"/>
+    <include refid="Group_Buy_Booking_Base_Column_List" />
     ,
-    <include refid="Group_Buy_Activity_Base_Column_List"/>
+    <include refid="Group_Buy_Activity_Base_Column_List" />
     ,
-    <include refid="User_Base_Column_List"/>
+    <include refid="Course_Base_Column_List" />
+    ,
+    <include refid="Partner_Details_Column_List" />
+    ,
+    <include refid="User_Base_Column_List" />
     from GROUP_BUY_BOOKING
-    left join GROUP_BUY_ACTIVITY on GROUP_BUY_ACTIVITY.ID = GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID
+    left join GROUP_BUY_ACTIVITY on GROUP_BUY_ACTIVITY.ID =
+    GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID
+    left join course_template on GROUP_BUY_ACTIVITY.course_id =
+    course_template.id
+    left join PARTNER PARTNER
+    ON
+    PARTNER.ID =
+    COURSE_TEMPLATE.PARTNER_ID
     left join USERS on USERS.ID = GROUP_BUY_BOOKING.USER_ID
-    where GROUP_BUY_BOOKING.DELETED = 0
+    where
+    GROUP_BUY_BOOKING.DELETED = 0
     <if test="entity != null">
-        <if test="entity.id != null and entity.id != 0">
-            AND GROUP_BUY_BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      <if test="entity.id != null and entity.id != 0">
+        AND GROUP_BUY_BOOKING.ID = #{entity.id,jdbcType=INTEGER}
+      </if>
+      <if test="entity.id == null or entity.id == 0">
+        <if test="entity.idSet != null and entity.idSet.size() > 0">
+          AND GROUP_BUY_BOOKING.ID IN
+          <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.id == null or entity.id == 0">
-            <if test="entity.idSet != null and entity.idSet.size() > 0">
-                AND GROUP_BUY_BOOKING.ID IN
-                <foreach collection="entity.idSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
-        </if>
-        
-        <if test="entity.groupBuyPrice != null">
-            AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE = #{entity.groupBuyPrice,jdbcType=DOUBLE}
-        </if>
-        <if test="entity.groupBuyPrice == null">
-            <if test="entity.groupBuyPriceStart != null">
+      </if>
+
+      <if test="entity.groupBuyPrice != null">
+        AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE = #{entity.groupBuyPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="entity.groupBuyPrice == null">
+        <if test="entity.groupBuyPriceStart != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE >= #{entity.groupBuyPriceStart,jdbcType=DOUBLE}]]>
-            </if>
-            <if test="entity.groupBuyPriceEnd != null">
+        </if>
+        <if test="entity.groupBuyPriceEnd != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.GROUP_BUY_PRICE <= #{entity.groupBuyPriceEnd,jdbcType=DOUBLE}]]>
-            </if>
         </if>
-        
-        <if test="entity.groupBuyActivityId != null and entity.groupBuyActivityId != 0">
-            AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID = #{entity.groupBuyActivityId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.groupBuyActivityId != null and entity.groupBuyActivityId != 0">
+        AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID = #{entity.groupBuyActivityId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.groupBuyActivityId == null or entity.groupBuyActivityId == 0">
+        <if test="entity.groupBuyActivityIdSet != null and entity.groupBuyActivityIdSet.size() > 0">
+          AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID IN
+          <foreach collection="entity.groupBuyActivityIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.groupBuyActivityId == null or entity.groupBuyActivityId == 0">
-            <if test="entity.groupBuyActivityIdSet != null and entity.groupBuyActivityIdSet.size() > 0">
-                AND GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID IN
-                <foreach collection="entity.groupBuyActivityIdSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
+      </if>
+
+      <if test="entity.userId != null and entity.userId != 0">
+        AND GROUP_BUY_BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.userId == null or entity.userId == 0">
+        <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
+          AND GROUP_BUY_BOOKING.USER_ID IN
+          <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        
-        <if test="entity.userId != null and entity.userId != 0">
-            AND GROUP_BUY_BOOKING.USER_ID = #{entity.userId,jdbcType=INTEGER}
+      </if>
+
+      <if test="entity.status != null">
+        AND GROUP_BUY_BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
+      </if>
+      <if test="entity.status == null">
+        <if test="entity.statusSet != null and entity.statusSet.size() > 0">
+          AND GROUP_BUY_BOOKING.STATUS IN
+          <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
+            #{listItem}
+          </foreach>
         </if>
-        <if test="entity.userId == null or entity.userId == 0">
-            <if test="entity.userIdSet != null and entity.userIdSet.size() > 0">
-                AND GROUP_BUY_BOOKING.USER_ID IN
-                <foreach collection="entity.userIdSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
-        </if>
-        
-        <if test="entity.status != null">
-            AND GROUP_BUY_BOOKING.STATUS = #{entity.status,jdbcType=INTEGER}
-        </if>
-        <if test="entity.status == null">
-            <if test="entity.statusSet != null and entity.statusSet.size() > 0">
-                AND GROUP_BUY_BOOKING.STATUS IN
-                <foreach collection="entity.statusSet" item="listItem" open="(" close=")" separator=",">
-                    #{listItem}
-                </foreach>
-            </if>
-        </if>
-        
-        <if test="entity.createTime != null">
-            AND GROUP_BUY_BOOKING.CREATE_TIME = #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
-        </if>
-        <if test="entity.createTime == null">
-            <if test="entity.createTimeStart != null">
+      </if>
+
+      <if test="entity.createTime != null">
+        AND GROUP_BUY_BOOKING.CREATE_TIME =
+        #{entity.createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}
+      </if>
+      <if test="entity.createTime == null">
+        <if test="entity.createTimeStart != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.CREATE_TIME >= #{entity.createTimeStart,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-            </if>
-            <if test="entity.createTimeEnd != null">
+        </if>
+        <if test="entity.createTimeEnd != null">
                 <![CDATA[AND GROUP_BUY_BOOKING.CREATE_TIME <= #{entity.createTimeEnd,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler}]]>
-            </if>
         </if>
-        
-        <if test="entity.reference != null">
-            AND GROUP_BUY_BOOKING.REFERENCE = #{entity.reference,jdbcType=VARCHAR}
-        </if>
-        
-        <if test="entity.number != null">
-            AND GROUP_BUY_BOOKING.NUMBER = #{entity.number,jdbcType=VARCHAR}
-        </if>
+      </if>
+
+      <if test="entity.reference != null">
+        AND GROUP_BUY_BOOKING.REFERENCE = #{entity.reference,jdbcType=VARCHAR}
+      </if>
+
+      <if test="entity.number != null">
+        AND GROUP_BUY_BOOKING.NUMBER = #{entity.number,jdbcType=VARCHAR}
+      </if>
     </if>
     ) as total
   </select>
-  
+
   <!-- update -->
   <update id="update" parameterType="GroupBuyBookingEntityExt">
     update GROUP_BUY_BOOKING
     <set>
-        <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
-            GROUP_BUY_ACTIVITY_ID = #{groupBuyActivityId,jdbcType=INTEGER},
-        </if>
-        <if test="groupBuyPrice != null">
-            GROUP_BUY_PRICE = #{groupBuyPrice,jdbcType=DOUBLE},
-        </if>
-        <if test="status != null">
-            STATUS = #{status,jdbcType=INTEGER},
-        </if>
-        <if test="createTime != null">
-            CREATE_TIME = #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
-        </if>
-        <if test="userId != null and userId != 0">
-            USER_ID = #{userId,jdbcType=INTEGER},
-        </if>
-        <if test="reference != null">
-            REFERENCE = #{reference,jdbcType=VARCHAR},
-        </if>
-        <if test="number != null">
-            NUMBER = #{number,jdbcType=VARCHAR},
-        </if>
+      <if test="groupBuyActivityId != null and groupBuyActivityId != 0">
+        GROUP_BUY_ACTIVITY_ID = #{groupBuyActivityId,jdbcType=INTEGER},
+      </if>
+      <if test="groupBuyPrice != null">
+        GROUP_BUY_PRICE = #{groupBuyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME =
+        #{createTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+      </if>
+      <if test="userId != null and userId != 0">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="reference != null">
+        REFERENCE = #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        NUMBER = #{number,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <!-- getById -->
   <select id="getById" parameterType="java.lang.Integer" resultMap="GroupBuyBookingExtMap">
     select
-    <include refid="Group_Buy_Booking_Base_Column_List"/>
+    <include refid="Group_Buy_Booking_Base_Column_List" />
     ,
-    <include refid="Group_Buy_Activity_Base_Column_List"/>
+    <include refid="Group_Buy_Activity_Base_Column_List" />
     ,
-    <include refid="User_Base_Column_List"/>
+    <include refid="Course_Base_Column_List" />
+    ,
+    <include refid="Partner_Details_Column_List" />
+    ,
+    <include refid="User_Base_Column_List" />
     from GROUP_BUY_BOOKING
-    left join GROUP_BUY_ACTIVITY on GROUP_BUY_ACTIVITY.ID = GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID
-    left join USERS on USERS.ID = GROUP_BUY_BOOKING.USER_ID
-    where GROUP_BUY_BOOKING.DELETED = 0 and GROUP_BUY_BOOKING.ID = #{id,jdbcType=INTEGER}
+    left join GROUP_BUY_ACTIVITY on GROUP_BUY_ACTIVITY.ID =
+    GROUP_BUY_BOOKING.GROUP_BUY_ACTIVITY_ID
+    left join course_template on GROUP_BUY_ACTIVITY.course_id =
+    course_template.id
+    left join PARTNER PARTNER
+    ON
+    PARTNER.ID =
+    COURSE_TEMPLATE.PARTNER_ID
+    left join USERS on USERS.ID =
+    GROUP_BUY_BOOKING.USER_ID
+    where
+    GROUP_BUY_BOOKING.DELETED = 0 and GROUP_BUY_BOOKING.ID = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

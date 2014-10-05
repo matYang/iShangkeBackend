@@ -796,4 +796,26 @@ public class CourseManagerImpl implements CourseManager {
         return null;
     }
 
+    @Override
+    public List<CourseCommentBo> queryComment(CourseCommentBo courseCommentBo, PaginationBo paginationBo) {
+        CourseCommentEntityExt courseEntity = CourseCommentConverter.fromBo(courseCommentBo);
+        List<CourseCommentBo> convertered = new ArrayList<>();
+        try {
+            List<CourseCommentEntityExt> result = courseCommentMapper.list(courseEntity, PaginationConverter.fromBo(paginationBo));
+            if (result != null) {
+                for (CourseCommentEntityExt c : result) {
+                    convertered.add(CourseCommentConverter.toBo(c));
+                }
+            }
+        } catch (Exception e) {
+            throw new ManagerException("查询课程评论失败");
+        }
+        return convertered;
+    }
+
+    @Override
+    public int queryCommentTotal(CourseCommentBo couresCommentBo) {
+        return courseCommentMapper.getListCount(CourseCommentConverter.fromBo(couresCommentBo));
+    }
+
 }

@@ -78,30 +78,12 @@ public class CommentController extends AbstractController{
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse  queryCourseComment(CourseCommentVo courseCommentVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
-        if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
-
-        
         CourseCommentPageViewBo pageViewBo = null;
         CourseCommentPageViewVo pageViewVo = null;
         
-        CourseVo courseVo = new CourseVo();
-        courseVo.setCourseTemplateId(courseCommentVo.getCourseTemplateId());
-        CourseBo targetCourse = CourseConverter.fromModel(courseVo);
+        CourseCommentBo courseCommentBo = CourseCommentConverter.fromModel(courseCommentVo);
         try {
-            pageViewBo = courseFacade.queryCommentByCourseId(targetCourse, PaginationConverter.toBo(paginationVo), permissionTag);    
+            pageViewBo = courseFacade.queryComment(courseCommentBo, PaginationConverter.toBo(paginationVo));    
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
