@@ -105,6 +105,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             throw new ManagerException("团购结束时间不能为空或小于开始时间");
         }
         groupBuyActivityEntity.setCreateTime(DateUtility.getCurTimeInstance());
+        groupBuyActivityEntity.setStatus(Constant.GROUPBUYACTIVITYOFFLINE);
         int result = 0;
         try {
             result = groupBuyActivityMapper.add(groupBuyActivityEntity);
