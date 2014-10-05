@@ -503,4 +503,10 @@ public class CourseServiceImpl implements CourseService.Iface {
         }
     }
 
+    @Override
+    public CourseCommentPageViewBo queryComment(CourseCommentBo courseCommentBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
