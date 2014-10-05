@@ -18,7 +18,7 @@ public class GroupBuyActivityVo extends JsonResponse {
     private Long endTimeEnd;
     private Set<Integer> statusSet;
     private Set<Integer> courseIdSet;
-    private CourseVo course;
+    private CourseTemplateVo course;
     private Double groupBuyPrice;
     private Double groupBuyPriceStart;
     private Double groupBuyPriceEnd;
@@ -155,10 +155,10 @@ public class GroupBuyActivityVo extends JsonResponse {
     public void setCourseIdSet(Set<Integer> courseIdSet) {
         this.courseIdSet = courseIdSet;
     }
-    public CourseVo getCourse() {
+    public CourseTemplateVo getCourse() {
         return course;
     }
-    public void setCourse(CourseVo course) {
+    public void setCourse(CourseTemplateVo course) {
         this.course = course;
     }
     
