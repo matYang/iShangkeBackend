@@ -27,7 +27,6 @@ import com.ishangke.edunav.dataaccess.mapper.GroupBuyAddressEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
-import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
@@ -323,7 +322,7 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         
         GroupBuyActivityEntityExt groupBuyActivityEntity = groupBuyActivityMapper.getById(groupBuyActivityBo.getId());
         if (groupBuyActivityEntity == null) {
-            throw new ManagerException("对不起，无法找到ID为" + groupBuyActivityEntity.getId() + "的团购");
+            throw new ManagerException("对不起，无法找到ID为" + groupBuyActivityBo.getId() + "的团购");
         }
         
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {

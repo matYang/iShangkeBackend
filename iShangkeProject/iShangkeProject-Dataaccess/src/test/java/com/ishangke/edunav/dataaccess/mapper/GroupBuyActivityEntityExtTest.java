@@ -78,13 +78,13 @@ public class GroupBuyActivityEntityExtTest {
     @Test
     public void testList(){
         GroupBuyActivityEntityExt groupBuyActivity = new GroupBuyActivityEntityExt();
-        groupBuyActivity.setCourseId(1);
+//        groupBuyActivity.setCourseId(1);
         Set<Integer> statusSet = new HashSet<>();
         statusSet.add(0);
         statusSet.add(1);
         groupBuyActivity.setStatusSet(statusSet);
         groupBuyActivity.setCreateTimeStart(DateUtility.getCurTimeInstance());
-        groupBuyActivity.setHot(1);
+//        groupBuyActivity.setHot(1);
         List<GroupBuyActivityEntityExt> list = groupBuyActivityEntityExtMapper.list(groupBuyActivity, null);
         System.out.println("count::::::"+list.size());
         int countFirst = list.size();

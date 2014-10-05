@@ -21,7 +21,7 @@ public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private List<GroupBuyPhotoEntityExt> photoList;
     private Set<Integer> hotSet;
     private List<AddressEntityExt> addressList;
-    
+
     public List<AddressEntityExt> getAddressList() {
         return addressList;
     }
