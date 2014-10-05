@@ -114,7 +114,7 @@ public class GroupBuyActivityConverter {
             bo.setAddressList(new ArrayList<AddressBo>());
         }
         if (vo.getCourse() != null) {
-            bo.setCourse(CourseConverter.fromModel(vo.getCourse()));
+            bo.setCourse(CourseTemplateConverter.fromModel(vo.getCourse()));
         }
         return bo;
     }
@@ -129,7 +129,7 @@ public class GroupBuyActivityConverter {
         vo.setCreateTime(bo.getCreateTime());
         vo.setEndTime(bo.getEndTime());
         vo.setCourseId(bo.getCourseId());
-        vo.setCourse(CourseConverter.toModel(bo.getCourse()));
+        vo.setCourse(CourseTemplateConverter.toModel(bo.getCourse()));
         if (Constant.DEFAULTNULL != bo.getStatus()) {
             vo.setStatus(bo.getStatus());
         }

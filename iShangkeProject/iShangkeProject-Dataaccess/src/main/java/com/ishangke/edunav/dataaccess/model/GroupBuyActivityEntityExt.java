@@ -13,7 +13,7 @@ public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private Calendar createTimeEnd;
     private Set<Integer> statusSet;
     private Set<Integer> courseIdSet;
-    private CourseEntityExt course;
+    private CourseTemplateEntityExt course;
     private Double groupBuyPriceStart;
     private Double groupBuyPriceEnd;
     private Calendar endTimeStart;
@@ -118,11 +118,11 @@ public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
         this.courseIdSet = courseIdSet;
     }
 
-    public CourseEntityExt getCourse() {
+    public CourseTemplateEntityExt getCourse() {
         return course;
     }
 
-    public void setCourse(CourseEntityExt course) {
+    public void setCourse(CourseTemplateEntityExt course) {
         this.course = course;
     }
 }
