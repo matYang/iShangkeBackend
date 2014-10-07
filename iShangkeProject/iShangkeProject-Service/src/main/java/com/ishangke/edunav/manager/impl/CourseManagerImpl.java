@@ -313,11 +313,14 @@ public class CourseManagerImpl implements CourseManager {
         if (courseCommentBo == null || userBo == null) {
             throw new ManagerException("参数不能为空");
         }
-        if (IdChecker.notEqual(courseCommentBo.getUserId(), userBo.getId())) {
-            throw new ManagerException("对不起，您不能为别人评论");
-        }
         if (courseCommentBo.getCourseTemplateId()<=0) {
             throw new ManagerException("对不起，课程模板ID不能为空");
+        }
+        CourseCommentEntityExt course = new CourseCommentEntityExt();
+        course.setUserId(userBo.getId());
+        course.setCourseTemplateId(courseCommentBo.getCourseTemplateId());
+        if (courseCommentMapper.getListCount(course) > 0) {
+            throw new ManagerException("对不起，不能重复评论");
         }
         Double attitudeRating = courseCommentBo.getAttitudeRating();
         Double conditionRating =courseCommentBo.getConditionRating();
