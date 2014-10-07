@@ -24,6 +24,7 @@ import com.ishangke.edunav.web.converter.CourseConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.CourseCommentPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.CourseCommentMap;
 import com.ishangke.edunav.web.model.CourseCommentVo;
 import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.pageview.CourseCommentPageViewVo;
@@ -82,6 +83,8 @@ public class CommentController extends AbstractController{
         CourseCommentPageViewVo pageViewVo = null;
         
         CourseCommentBo courseCommentBo = CourseCommentConverter.fromModel(courseCommentVo);
+        paginationVo.setColumnKey(CourseCommentMap.COMMENT_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(CourseCommentMap.COMMENT_MAP.get(paginationVo.getOrder()));
         try {
             pageViewBo = courseFacade.queryComment(courseCommentBo, PaginationConverter.toBo(paginationVo));    
         } catch (ControllerException c) {
