@@ -781,6 +781,9 @@ public class CourseConverter {
             }
             courseVo.setStudyDays(studyDays);
         }
+        if (bo.getGroupBuyActivity() != null) {
+        	courseVo.setGroupBuyActivity(GroupBuyActivityConverter.toModel(bo.getGroupBuyActivity()));
+        }
         return courseVo;
     }
 }

@@ -453,6 +453,9 @@ public class CourseConverter {
             }
             courseBo.setTeacherList(list);
         }
+        if (e.getGroupBuyActivity() != null) {
+        	courseBo.setGroupBuyActivity(GroupBuyActivityConverter.toBo(e.getGroupBuyActivity()));
+        }
         return courseBo;
     }
 
