@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.ishangke.edunav.dataaccess.model.gen.GroupBuyActivityEntity;
-import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 
 public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private Set<Integer> idSet;
@@ -21,6 +20,15 @@ public class GroupBuyActivityEntityExt extends GroupBuyActivityEntity {
     private List<GroupBuyPhotoEntityExt> photoList;
     private Set<Integer> hotSet;
     private List<AddressEntityExt> addressList;
+    private Integer circleId;
+
+    public Integer getCircleId() {
+        return circleId;
+    }
+
+    public void setCircleId(Integer circleId) {
+        this.circleId = circleId;
+    }
 
     public List<AddressEntityExt> getAddressList() {
         return addressList;

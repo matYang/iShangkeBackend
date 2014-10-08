@@ -26,6 +26,7 @@ struct GroupBuyActivityBo {
   20: string title
   21: i32 bookingTotal
   22: list<address.AddressBo> addressList
+  23: i32 circleId
 }
 
 struct GroupBuyActivityPageViewBo{

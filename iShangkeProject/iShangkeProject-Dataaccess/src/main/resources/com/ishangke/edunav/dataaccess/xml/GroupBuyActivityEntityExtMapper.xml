@@ -546,6 +546,10 @@
       <if test="entity.title != null">
         AND GROUP_BUY_ACTIVITY.TITLE = #{entity.title,jdbcType=VARCHAR}
       </if>
+
+	  <if test="entity.circleId != null and entity.circleId != 0"> 
+   		AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+      </if>
     </if>
 
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
