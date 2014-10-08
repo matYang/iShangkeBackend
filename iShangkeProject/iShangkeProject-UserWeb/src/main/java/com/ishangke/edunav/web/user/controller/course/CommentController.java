@@ -20,12 +20,11 @@ import com.ishangke.edunav.facade.user.CourseFacade;
 import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.CourseCommentConverter;
-import com.ishangke.edunav.web.converter.CourseConverter;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.pageview.CourseCommentPageViewConverter;
 import com.ishangke.edunav.web.exception.ControllerException;
+import com.ishangke.edunav.web.map.CourseCommentMap;
 import com.ishangke.edunav.web.model.CourseCommentVo;
-import com.ishangke.edunav.web.model.CourseVo;
 import com.ishangke.edunav.web.model.pageview.CourseCommentPageViewVo;
 import com.ishangke.edunav.web.response.JsonResponse;
 import com.ishangke.edunav.web.user.controller.AbstractController;
@@ -78,30 +77,14 @@ public class CommentController extends AbstractController{
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse  queryCourseComment(CourseCommentVo courseCommentVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        } 
-        int curId = curUser.getId();
-        boolean loggedIn =  curId > 0;
-        if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
-
-        
         CourseCommentPageViewBo pageViewBo = null;
         CourseCommentPageViewVo pageViewVo = null;
         
-        CourseVo courseVo = new CourseVo();
-        courseVo.setCourseTemplateId(courseCommentVo.getCourseTemplateId());
-        CourseBo targetCourse = CourseConverter.fromModel(courseVo);
+        CourseCommentBo courseCommentBo = CourseCommentConverter.fromModel(courseCommentVo);
+        paginationVo.setColumnKey(CourseCommentMap.COMMENT_MAP.get(paginationVo.getColumnKey()));
+        paginationVo.setOrder(CourseCommentMap.COMMENT_MAP.get(paginationVo.getOrder()));
         try {
-            pageViewBo = courseFacade.queryCommentByCourseId(targetCourse, PaginationConverter.toBo(paginationVo), permissionTag);    
+            pageViewBo = courseFacade.queryComment(courseCommentBo, PaginationConverter.toBo(paginationVo));    
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }

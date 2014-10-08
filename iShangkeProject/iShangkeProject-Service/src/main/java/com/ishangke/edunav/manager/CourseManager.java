@@ -72,6 +72,15 @@ public interface CourseManager {
     int queryCommentByCourseIdTotal(CourseBo courseBo);
     
     /**
+     * 查询评价
+     * @param courseCommentBo
+     * @param paginationBo
+     * @return
+     */
+    List<CourseCommentBo> queryComment(CourseCommentBo courseCommentBo, PaginationBo paginationBo);
+    
+    int queryCommentTotal(CourseCommentBo couresCommentBo);
+    /**
      * 删除课程的评价
      * @param CourseCommentBo
      * @param userBo

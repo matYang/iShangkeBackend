@@ -28,7 +28,7 @@ public class GroupBuyActivityConverter {
         bo.setEndTime(e.getEndTime() == null ? Constant.DEFAULTNULL :e.getEndTime().getTimeInMillis());
         bo.setCourseId(e.getCourseId() == null ? Constant.DEFAULTNULL :e.getCourseId());
         if (e.getCourse() != null){
-            bo.setCourse(CourseConverter.toBo(e.getCourse()));
+            bo.setCourse(CourseTemplateConverter.toBo(e.getCourse()));
         }
         if (e.getGroupBuyPrice() != null) {
             bo.setGroupBuyPrice(e.getGroupBuyPrice());
@@ -93,7 +93,7 @@ public class GroupBuyActivityConverter {
         }
         e.setHotSet(bo.getHotSet());
         e.setTitle(bo.getTitle());
-        e.setCourse(CourseConverter.fromBo(bo.getCourse()));
+        e.setCourse(CourseTemplateConverter.fromBo(bo.getCourse()));
         if (bo.getPhotoList() != null) {
             List<GroupBuyPhotoEntityExt> list = new ArrayList<>();
             for (GroupBuyPhotoBo b : bo.getPhotoList()) {

@@ -60,4 +60,12 @@ public class CourseManagerImplTest {
         String content = list.get(0).getContent();
         Assert.assertEquals("1", content);
     }
+    
+    @Test
+    public void testQueryCommentTotal(){
+        CourseCommentBo course = new CourseCommentBo();
+        course.setUserId(8);
+        course.setCourseTemplateId(1);
+        System.out.println("count==="+courseManager.queryComment(course,null).size());
+    }
 }
