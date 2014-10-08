@@ -25,15 +25,15 @@ public class BookingNotificationDispatcher {
                 return SMSDispatcher.sendBookingAwaitingSMS(booking, course);
             }
         });
-        tempMap.put(BookingEnums.Status.OFFLINEREJECTED, new Command() {
-            @Override
-            public synchronized Future<Boolean> sendNotification(BookingEntityExt booking, String comment, CourseEntityExt course) {
-                if (comment == null) {
-                    comment = "课已订满";
-                }
-                return SMSDispatcher.sendBookingFailedSMS(booking, comment, course);
-            }
-        });
+//        tempMap.put(BookingEnums.Status.OFFLINEREJECTED, new Command() {
+//            @Override
+//            public synchronized Future<Boolean> sendNotification(BookingEntityExt booking, String comment, CourseEntityExt course) {
+//                if (comment == null) {
+//                    comment = "课已订满";
+//                }
+//                return SMSDispatcher.sendBookingFailedSMS(booking, comment, course);
+//            }
+//        });
         tempMap.put(BookingEnums.Status.OFFLINECONFIRMED, new Command() {
             @Override
             public synchronized Future<Boolean> sendNotification(BookingEntityExt booking, String comment, CourseEntityExt course) {
