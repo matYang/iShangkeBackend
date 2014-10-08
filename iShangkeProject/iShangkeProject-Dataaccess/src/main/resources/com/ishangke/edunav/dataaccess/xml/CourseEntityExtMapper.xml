@@ -123,6 +123,9 @@
       <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
+    <collection property="groupBuyActivity" ofType="GroupBuyActivityEntityExt">
+      <id column="GROUPBUYACTIVITY_ID" property="id" jdbcType="INTEGER" />
+    </collection>
   </resultMap>
   <sql id="Course_Base_Column_List">
     COURSE.ID COURSE_ID,
@@ -176,6 +179,9 @@
     COURSE_SCHOOLTIMEWEEK,
     COURSE.MARKING
     COURSE_MARKING
+  </sql>
+  <sql id="Group_Buy_Base_Column_List">
+    GROUP_BUY_ACTIVITY.ID GROUPBUYACTIVITY_ID
   </sql>
   <sql id="Course_Details_Column_List">
     COURSE.SUITABLE_STUDENT COURSE_SUITABLESTUDENT,
@@ -951,6 +957,8 @@
     <include refid="Circle_Base_Column_List"></include>
     ,
     <include refid="CourseTemplate_Base_Column_List"></include>
+    ,
+    <include refid="Group_Buy_Base_Column_List"></include>
     from COURSE COURSE
     left join COURSE_TEACHER COURSE_TEACHER
     ON COURSE_TEACHER.COURSE_ID = COURSE.ID
@@ -987,6 +995,8 @@
     (select COURSE.ID COURSE_ID,
     <include refid="Reg_Address_Base_Column_List"></include>
     from COURSE left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.REG_ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
+    left join GROUP_BUY_ACTIVITY
+    ON GROUP_BUY_ACTIVITY.COURSE_ID = COURSE.COURSE_TEMPLATE_ID
     where
     COURSE.DELETED = 0 AND COURSE.ID = #{id}
   </select>
@@ -1070,6 +1080,8 @@
     <include refid="Circle_Base_Column_List"></include>
     ,
     <include refid="CourseTemplate_Base_Column_List"></include>
+    ,
+    <include refid="Group_Buy_Base_Column_List"></include>
     from COURSE COURSE
     left join PARTNER PARTNER
     ON PARTNER.ID = COURSE.PARTNER_ID
@@ -1087,6 +1099,8 @@
     ON CIRCLE.ID = ADDRESS.CIRCLE_ID
     left join LOCATION LOCATION
     ON LOCATION.ID = ADDRESS.LOCATION_ID
+    left join GROUP_BUY_ACTIVITY
+    ON GROUP_BUY_ACTIVITY.COURSE_ID = COURSE.COURSE_TEMPLATE_ID
     WHERE
     COURSE.DELETED = 0
     <if test="entity != null">
