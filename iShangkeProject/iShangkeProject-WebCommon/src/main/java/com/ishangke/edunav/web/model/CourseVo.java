@@ -208,6 +208,15 @@ public class CourseVo extends JsonResponse {
     private String circleValue;
     private String circleName;
     private List<ActionVo> actionList;
+    public GroupBuyActivityVo getGroupBuyActivity() {
+		return groupBuyActivity;
+	}
+
+	public void setGroupBuyActivity(GroupBuyActivityVo groupBuyActivity) {
+		this.groupBuyActivity = groupBuyActivity;
+	}
+
+	private GroupBuyActivityVo groupBuyActivity;
     
     public List<ActionVo> getActionList() {
         return actionList;
