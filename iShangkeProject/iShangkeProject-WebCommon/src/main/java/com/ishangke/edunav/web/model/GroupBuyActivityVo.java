@@ -29,7 +29,16 @@ public class GroupBuyActivityVo extends JsonResponse {
     private Integer bookingTotal;
     private List<AddressVo> addressList;
     private Integer circleId;
+    private Integer categoryId;
     
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public Integer getCircleId() {
         return circleId;
     }

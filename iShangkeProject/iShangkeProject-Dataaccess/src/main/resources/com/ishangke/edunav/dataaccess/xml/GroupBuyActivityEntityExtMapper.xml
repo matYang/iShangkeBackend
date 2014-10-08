@@ -550,6 +550,9 @@
 	  <if test="entity.circleId != null and entity.circleId != 0"> 
    		AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
       </if>
+      <if test="entity.categoryId != null and entity.categoryId != 0">
+        AND COURSE_TEMPLATE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+      </if>
     </if>
 
     <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">

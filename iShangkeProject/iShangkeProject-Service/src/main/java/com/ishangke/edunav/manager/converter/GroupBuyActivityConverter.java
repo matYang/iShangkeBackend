@@ -110,6 +110,7 @@ public class GroupBuyActivityConverter {
             e.setAddressList(addressVoList);
         }
         e.setCircleId(bo.getCircleId());
+        e.setCategoryId(bo.getCategoryId());
         return e;
     }
 }
