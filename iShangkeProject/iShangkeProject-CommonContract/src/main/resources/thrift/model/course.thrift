@@ -1,6 +1,7 @@
 include "teacher.thrift"
 include "classPhoto.thrift"
 include "action.thrift"
+include "groupBuyActivity.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.model
 
@@ -141,6 +142,7 @@ struct CourseBo {
     134: double regAddressLng
     135: string categoryValue
     136: string studyDays
+    137: groupBuyActivity.GroupBuyActivityBo groupBuyActivity
 }
 
 struct CommentCourseApproveBo {
