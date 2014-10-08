@@ -167,6 +167,7 @@
       <result column="GROUPBUYPHOTO_ID" property="id" jdbcType="INTEGER" />
       <result column="GROUPBUYPHOTO_URL" property="url" jdbcType="VARCHAR" />
       <result column="GROUPBUYPHOTO_GROUPBUYACTIVITYID" property="groupBuyActivityId" jdbcType="INTEGER" />
+      <result column="GROUPBUYPHOTO_TYPE" property="type" jdbcType="INTEGER"/>
       <result column="GROUPBUYPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
     <collection property="addressList" javaType="java.util.ArrayList" ofType="AddressEntityExt">
@@ -308,6 +309,7 @@
     GROUPBUYPHOTO_URL,
     GROUP_BUY_PHOTO.GROUP_BUY_ACTIVITY_ID
     GROUPBUYPHOTO_GROUPBUYACTIVITYID,
+    GROUP_BUY_PHOTO.TYPE GROUPBUYPHOTO_TYPE,
     GROUP_BUY_PHOTO.DELETED
     GROUPBUYPHOTO_DELETED
   </sql>
