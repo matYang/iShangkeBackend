@@ -12,7 +12,7 @@ public class DomainInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getRequestURI().contains("alipay")) {
+        if (request.getRequestURI().contains("alipay") || request.getRequestURI().contains("pay")) {
             return true;
         } else if (request.getHeader("referer") == null || !request.getHeader("referer").contains("ishangke.cn")) {
             System.out.println("url:" + request.getHeader("referer"));
