@@ -113,6 +113,12 @@ public class GroupBuyActivityConverter {
         } else {
             bo.setAddressList(new ArrayList<AddressBo>());
         }
+        if (vo.getCircleId() != null) {
+            bo.setCircleId(vo.getCircleId());
+        }
+        if (vo.getCategoryId() != null) {
+            bo.setCategoryId(vo.getCategoryId());
+        }
         if (vo.getCourse() != null) {
             bo.setCourse(CourseTemplateConverter.fromModel(vo.getCourse()));
         }
