@@ -80,8 +80,17 @@ public class CourseEntityExt extends CourseEntity {
     private String locationName;
     private String circleValue;
     private String circleName;
+    private GroupBuyActivityEntityExt groupBuyActivity;
     
-    public Set<Integer> getRegAddressIdSet() {
+    public GroupBuyActivityEntityExt getGroupBuyActivity() {
+		return groupBuyActivity;
+	}
+
+	public void setGroupBuyActivity(GroupBuyActivityEntityExt groupBuyActivity) {
+		this.groupBuyActivity = groupBuyActivity;
+	}
+
+	public Set<Integer> getRegAddressIdSet() {
         return regAddressIdSet;
     }
 
