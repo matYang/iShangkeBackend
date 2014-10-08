@@ -20,11 +20,13 @@ import com.ishangke.edunav.dataaccess.mapper.CouponEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CourseEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.CoursePromotionEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupBuyActivityEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.GroupBuyBookingEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.BookingEntityExt;
 import com.ishangke.edunav.dataaccess.model.CouponEntityExt;
 import com.ishangke.edunav.dataaccess.model.CourseEntityExt;
 import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
+import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
 import com.ishangke.edunav.manager.async.task.SMSTask;
 
 //non transactional
@@ -52,6 +54,9 @@ public class CleanEventJob {
     
     @Autowired
     GroupBuyActivityEntityExtMapper groupBuyActivityMapper;
+
+    @Autowired
+    GroupBuyBookingEntityExtMapper groupBuyBookingMapper;
 
     public void clean() {
         LOGGER.info("Clean called at:" + new Date().toString());
@@ -237,6 +242,46 @@ public class CleanEventJob {
         }
     }
     
+    private void cleanGroupBuyBooking() {
+        LOGGER.info("Clean:cleanGroupBuyBooking started at:" + new Date().toString());
+
+        boolean hasError = false;
+
+        Calendar cal = DateUtility.getCurTimeInstance();
+        cal.add(Calendar.DATE, -1);
+
+        GroupBuyBookingEntityExt groupBuyBooking = new GroupBuyBookingEntityExt();
+        groupBuyBooking.setStatus(Constant.GROUPBUYBOOKINGPENDINGPAYMENT);
+        groupBuyBooking.setCreateTimeEnd(cal);
+        try {
+            List<GroupBuyBookingEntityExt> results = groupBuyBookingMapper.list(groupBuyBooking, getDefaultPagination());
+            if (results != null) {
+                for (GroupBuyBookingEntityExt result : results) {
+                    try {
+                        result.setStatus(Constant.GROUPBUYBOOKINGQUITED);
+                        // result.set
+                        groupBuyBookingMapper.update(result);
+                        LOGGER.info("[INFO] [cleanGroupBuyBooking] groupBuybooking " + result.getId() + " exceed");
+                    } catch (Throwable t) {
+                        hasError = true;
+                        LOGGER.error("[WARNING] [cleanGroupBuyBooking] suffered single failure with id:" + result.getId(), t);
+                    }
+                }
+            } else {
+                LOGGER.warn("[WARNING] [cleanGroupBuyBooking] search result is null");
+            }
+        } catch (Throwable t) {
+            hasError = true;
+            LOGGER.error("[ERROR] [cleanGroupBuyBooking] suffered unexpected errors, please check logs carefully", t);
+        }
+
+        if (hasError) {
+            panic("[ERROR] [cleanGroupBuyBooking] paniced, please check the logs");
+        }
+
+        LOGGER.info("Clean:cleanGroupBuyBooking finished at:" + new Date().toString());
+    }
+
     private void cleanBooking() {
         LOGGER.info("Clean:cleanBooking started at:" + new Date().toString());
         
