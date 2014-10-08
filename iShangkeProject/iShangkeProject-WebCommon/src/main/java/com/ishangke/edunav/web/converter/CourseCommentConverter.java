@@ -2,6 +2,7 @@ package com.ishangke.edunav.web.converter;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
+import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.web.model.CourseCommentVo;
 
 public class CourseCommentConverter {
@@ -186,7 +187,13 @@ public class CourseCommentConverter {
         }
         courseCommentVo.setUserId(bo.getUserId());
 //        courseCommentVo.setUserIdSet(bo.getUserIdSet());
-        courseCommentVo.setUser(UserConverter.toModel(bo.getUser()));
+        UserBo user = bo.getUser();
+        if (bo.getUser().getPhone() != null) {
+            String phone = bo.getUser().getPhone();
+            String hidePhone = phone.substring(0, 3)+"****"+phone.substring(7);
+            user.setPhone(hidePhone);
+        }
+        courseCommentVo.setUser(UserConverter.toModel(user));
         return courseCommentVo;
     }
 }

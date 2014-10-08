@@ -6,6 +6,13 @@ public class GroupBuyPhotoVo extends JsonResponse {
     private Integer id;
     private Integer groupBuyActivityId;
     private String url;
+    private Integer type;
+    public Integer getType() {
+        return type;
+    }
+    public void setType(Integer type) {
+        this.type = type;
+    }
     public Integer getId() {
         return id;
     }

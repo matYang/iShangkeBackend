@@ -1,5 +1,6 @@
 package com.ishangke.edunav.web.converter;
 
+import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.GroupBuyPhotoBo;
 import com.ishangke.edunav.web.model.GroupBuyPhotoVo;
 
@@ -18,6 +19,11 @@ public class GroupBuyPhotoConverter {
         if (vo.getUrl() != null) {
             bo.setUrl(vo.getUrl());
         }
+        if (vo.getType() != null) {
+            bo.setType(vo.getType());
+        } else {
+            bo.setType(Constant.DEFAULTNULL);
+        }
         return bo;
     }
     
@@ -29,6 +35,9 @@ public class GroupBuyPhotoConverter {
         vo.setId(bo.getId());
         vo.setGroupBuyActivityId(bo.getGroupBuyActivityId());
         vo.setUrl(bo.getUrl());
+        if (bo.getType() != Constant.DEFAULTNULL) {
+            vo.setType(bo.getType());
+        }
         return vo;
     }
 }
