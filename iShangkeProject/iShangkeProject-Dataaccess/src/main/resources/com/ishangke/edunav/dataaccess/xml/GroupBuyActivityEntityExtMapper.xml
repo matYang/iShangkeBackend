@@ -447,8 +447,13 @@
     GROUP_BUY_ACTIVITY.COURSE_ID
     left join GROUP_BUY_PHOTO on
     GROUP_BUY_PHOTO.GROUP_BUY_ACTIVITY_ID = GROUP_BUY_ACTIVITY.ID and
-    GROUP_BUY_PHOTO.DELETED =
-    0
+    GROUP_BUY_PHOTO.DELETED = 0
+    <if test="entity.hot != null and entity.hot == 1">
+      and GROUP_BUY_PHOTO.type = 0
+    </if>
+    <if test="entity.hot == null">
+      and GROUP_BUY_PHOTO.type = 1
+    </if>
     left join GROUP_BUY_ADDRESS on
     GROUP_BUY_ACTIVITY.ID = GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID and
     GROUP_BUY_ADDRESS.DELETED = 0
