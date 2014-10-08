@@ -21,7 +21,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您申请注册爱上课会员的验证码为：" + authCode + "（如非本人操作请忽略）。爱上课，专注课程在线预订~";
+        String payload = "您申请注册爱上课会员的验证码为：" + authCode + "（如非本人操作请忽略）。爱上课，第三方培训团购平台，您的选课专家~";
         SMSTask task = new SMSTask(Event.USER_CELLVERIFICATION, cellNum, payload);
         return ExecutorProvider.executeRelay(task);
     }
@@ -39,7 +39,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您预订的[" + course.getInstName() + "] " + course.getCourseName() + " 课程订单已提交, 我们将尽量于半小时内通知您确认结果,请您耐心等待~";
+        String payload = "您预订的[" + course.getInstName() + "] " + course.getCourseName() + "课程订单已提交, 我们将努力在半小时内通知您确认结果,请您耐心等待~";
         SMSTask sms = new SMSTask(Event.USER_BOOKINGAWAITING, booking.getPhone(), payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -94,7 +94,7 @@ public class SMSDispatcher {
             return new DefaultSMSFuture();
         }
         DecimalFormat formatter = new DecimalFormat("#.##");
-        String payload = "恭喜您成为爱上课会员，获得" + formatter.format(amount) + "元现金抵扣券，快去官网选课吧~";
+        String payload = "恭喜您成为爱上课会员，获得" + formatter.format(amount) + "元现金抵扣券，快去ishangke.cn选课吧，精品团购与选课顾问恭候您的光临~";
         SMSTask sms = new SMSTask(Event.USER_REGISTER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -104,7 +104,7 @@ public class SMSDispatcher {
             return new DefaultSMSFuture();
         }
         DecimalFormat formatter = new DecimalFormat("#.##");
-        String payload = "您的邀请码验证成功，您和小伙伴额外获得的" + formatter.format(amount) + "元现金抵扣券已到账，快去通知其他小伙伴吧~";
+        String payload = "您的邀请码验证成功，您和小伙伴额外获得的" + formatter.format(amount) + "元现金抵扣券已到账，登录ishangke.cn立即查看，快去通知其他小伙伴吧~";
         SMSTask sms = new SMSTask(Event.USER_INVITEE, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -114,7 +114,7 @@ public class SMSDispatcher {
             return new DefaultSMSFuture();
         }
         DecimalFormat formatter = new DecimalFormat("#.##");
-        String payload = "感谢您邀请好友成为会员，额外获得" + formatter.format(amount) + "元现金抵扣券已到账，快去官网选课吧~";
+        String payload = "感谢您邀请好友成为会员，额外获得" + formatter.format(amount) + "元现金抵扣券已到账，快去ishangke.cn选课吧，精品团购与选课顾问恭候您的光临~";
         SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -133,7 +133,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您邀请的好友已通过爱上课报名课程，您额外获得的" + amount + "元现金红包已到账，不是券，是现金哦，请前往提现！";
+        String payload = "您邀请的好友已通过爱上课报名课程，您额外获得的" + amount + "元现金红包已到账，不是券，是现金哦，立即前往ishangke.cn提现！";
         SMSTask sms = new SMSTask(Event.USER_INVITERCONSOLIDATION, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
@@ -184,7 +184,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已自动帮您注册成为会员～。注册手机" + cellNum + ",初始密码为刚刚您收到的验证码，请尽快更换密码";
+        String payload = "感谢您对爱上课的支持，根据您的填写信息，爱上课已自动帮您注册成为会员～。注册手机" + cellNum + ",初始密码为您上一条短信收到的验证码，请尽快前往ishangke.cn更换密码";
         SMSTask sms = new SMSTask(Event.USER_INVITER, cellNum, payload);
         return ExecutorProvider.executeRelay(sms);
     }
