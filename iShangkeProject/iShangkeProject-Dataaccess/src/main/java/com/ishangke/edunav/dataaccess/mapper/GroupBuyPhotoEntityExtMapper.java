@@ -15,6 +15,8 @@ public interface GroupBuyPhotoEntityExtMapper {
 
     public void deleteById(int id);
     
+    public int deleteByGroupBuyActivityId(int id);
+
     public List<GroupBuyPhotoEntityExt> list(@Param("entity") GroupBuyPhotoEntityExt groupBuyPhotoEntityExt,@Param("page") PaginationEntity page);
     
     public int getListCount(@Param("entity") GroupBuyPhotoEntityExt groupBuyPhotoEntityExt);
