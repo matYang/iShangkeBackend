@@ -345,6 +345,8 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         GroupBuyActivityBo groupBuyActivityBo = GroupBuyActivityConverter.toBo(groupBuyActivity);
         int bookingTotal = getGroupBuyBookingTotal(groupBuyActivity.getCourseId());
         groupBuyActivityBo.setBookingTotal(bookingTotal);
+        int groupBuyActivityViewTotal = getGroupBuyActivityViewTotal(id);
+        groupBuyActivityBo.setGroupBuyActivityViewTotal(groupBuyActivityViewTotal);
         return groupBuyActivityBo;
     }
 
@@ -452,6 +454,18 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             total += groupBuyBookingMapper.getListCount(booking);
         }
         cacheManager.set(Constant.GROUPBUYTOTAL + courseId, Constant.STATUSTRANSFORMEXPIRETIME, total);
+        return total;
+    }
+
+    @Override
+    public int getGroupBuyActivityViewTotal(int groupBuyActivityId) {
+        Integer total = (Integer) cacheManager.get(Constant.GROUPBUYACTIVITYVIEWTOTAL + groupBuyActivityId);
+        if (total != null) {
+            total++;
+        } else {
+            total = (int) (Math.random() * 300 + 200);
+        }
+        cacheManager.set(Constant.GROUPBUYACTIVITYVIEWTOTAL + groupBuyActivityId, Constant.STATUSTRANSFORMEXPIRETIME, total);
         return total;
     }
 }
