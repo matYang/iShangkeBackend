@@ -143,6 +143,7 @@ struct CourseBo {
     135: string categoryValue
     136: string studyDays
     137: groupBuyActivity.GroupBuyActivityBo groupBuyActivity
+    138: i32 viewTotal
 }
 
 struct CommentCourseApproveBo {
