@@ -609,6 +609,8 @@
         GROUP_BUY_ACTIVITY.${listItem.columnKey} ${listItem.order}
       </foreach>
     </if>
+    
+    GROUP BY GROUP_BUY_ACTIVITY.ID
 
     <if test="page != null">
       LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
