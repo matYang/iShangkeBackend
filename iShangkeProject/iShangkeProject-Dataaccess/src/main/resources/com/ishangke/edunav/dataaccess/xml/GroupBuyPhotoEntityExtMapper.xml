@@ -44,6 +44,17 @@
     </selectKey>
   </insert>
   
+  <!-- addBatch -->
+  <!-- 
+  <insert id="addBatch" parameterType="java.util.List">
+    insert into GROUP_BUY_PHOTO(URL, GROUP_BUY_ACTIVITY_ID, TYPE)
+    values
+    <foreach collection="entityList" item="entity" index="index" separator=",">
+    	(#{entity.url},#{entity.groupBuyActivityId},#{entity.type})
+    </foreach>
+  </insert>
+   -->
+  
   <!-- deleteById -->
   <update id="deleteById" parameterType="java.lang.Integer">
     update GROUP_BUY_PHOTO set DELETED = 1 where ID = #{id,jdbcType=INTEGER}
