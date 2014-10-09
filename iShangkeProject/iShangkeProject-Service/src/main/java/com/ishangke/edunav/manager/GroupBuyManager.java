@@ -66,4 +66,6 @@ public interface GroupBuyManager {
     public String changeGroupBuyBookingStatusToPayed(int bookingId, String trade_no);
     
     public int getGroupBuyBookingTotal(int courseId);
+
+    public int getGroupBuyActivityViewTotal(int groupBuyActivityId);
 }

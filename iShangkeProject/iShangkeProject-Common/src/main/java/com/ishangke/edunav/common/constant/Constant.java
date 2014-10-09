@@ -228,6 +228,7 @@ public class Constant {
     public static final int GROUPBUYACTIVITYPENDINGONLINE = 0;
     public static final int GROUPBUYACTIVITYONLINE = 1;
     public static final int GROUPBUYACTIVITYOFFLINE = 2;
+    public static final String GROUPBUYACTIVITYVIEWTOTAL = "groupbuyactivityviewtotal";
     
     //GroupBuyBooking
     public static final int GROUPBUYBOOKINGPENDINGPAYMENT = 0;
@@ -235,5 +236,6 @@ public class Constant {
     public static final int GROUPBUYBOOKINGQUITED = 2;
     public static final String GROUPBUYBOOKINGPREFIX = "ISK-GROUPBUY-";
     public static final String GROUPBUYTOTAL = "groupbuytotal";
+    public static final String COURSEVIEWTOTAL = "courseviewtotal";
     
 }
