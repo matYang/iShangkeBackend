@@ -627,6 +627,11 @@
     from GROUP_BUY_ACTIVITY
     left join COURSE_TEMPLATE on COURSE_TEMPLATE.ID =
     GROUP_BUY_ACTIVITY.COURSE_ID
+    left join GROUP_BUY_ADDRESS on
+    GROUP_BUY_ACTIVITY.ID = GROUP_BUY_ADDRESS.GROUP_BUY_ACTIVITY_ID and
+    GROUP_BUY_ADDRESS.DELETED = 0
+    left join ADDRESS on
+    GROUP_BUY_ADDRESS.ADDRESS_ID = ADDRESS.ID and ADDRESS.DELETED = 0
     where
     GROUP_BUY_ACTIVITY.DELETED = 0
     <if test="entity != null">
@@ -720,7 +725,14 @@
       <if test="entity.title != null">
         AND GROUP_BUY_ACTIVITY.TITLE = #{entity.title,jdbcType=VARCHAR}
       </if>
+      <if test="entity.circleId != null and entity.circleId != 0"> 
+   		AND ADDRESS.CIRCLE_ID = #{entity.circleId,jdbcType=INTEGER}
+      </if>
+      <if test="entity.categoryId != null and entity.categoryId != 0">
+        AND COURSE_TEMPLATE.CATEGORY_ID = #{entity.categoryId,jdbcType=INTEGER}
+      </if>
     </if>
+    GROUP BY GROUP_BUY_ACTIVITY.ID
     ) as total
   </select>
 

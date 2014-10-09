@@ -353,9 +353,9 @@
 
       <if test="entity.title != null and !entity.title.equals('')">
         AND COURSE_COMMENT.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
-      </if>
-      <if test="entity.content != null and !entity.content.equals('')">
-        AND COURSE_COMMENT.CONTENT LIKE "%"#{entity.content,jdbcType=VARCHAR}"%"
+      </if> 
+      <if test="entity.content != null and entity.content.equals('non-null')">
+        AND COURSE_COMMENT.CONTENT IS NOT NULL AND COURSE_COMMENT.CONTENT != '' 
       </if>
       <if test="entity.lastModifyTime != null">
         AND COURSE_COMMENT.LAST_MODIFY_TIME =
@@ -499,8 +499,8 @@
       <if test="entity.title != null and !entity.title.equals('')">
         AND COURSE_COMMENT.TITLE LIKE "%"#{entity.title,jdbcType=VARCHAR}"%"
       </if>
-      <if test="entity.content != null and !entity.content.equals('')">
-        AND COURSE_COMMENT.CONTENT LIKE "%"#{entity.content,jdbcType=VARCHAR}"%"
+      <if test="entity.content != null and entity.content.equals('non-null')">
+        AND COURSE_COMMENT.CONTENT IS NOT NULL AND COURSE_COMMENT.CONTENT != ''
       </if>
       <if test="entity.lastModifyTime != null">
         AND COURSE_COMMENT.LAST_MODIFY_TIME =
