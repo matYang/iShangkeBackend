@@ -784,6 +784,7 @@ public class CourseConverter {
         if (bo.getGroupBuyActivity() != null) {
         	courseVo.setGroupBuyActivity(GroupBuyActivityConverter.toModel(bo.getGroupBuyActivity()));
         }
+        courseVo.setViewTotal(bo.getViewTotal());
         return courseVo;
     }
 }
