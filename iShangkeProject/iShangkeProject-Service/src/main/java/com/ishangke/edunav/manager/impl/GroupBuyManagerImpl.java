@@ -345,8 +345,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         GroupBuyActivityBo groupBuyActivityBo = GroupBuyActivityConverter.toBo(groupBuyActivity);
         int bookingTotal = getGroupBuyBookingTotal(groupBuyActivity.getCourseId());
         groupBuyActivityBo.setBookingTotal(bookingTotal);
-        int groupBuyActivityViewTotal = getGroupBuyActivityViewTotal(id);
-        groupBuyActivityBo.setGroupBuyActivityViewTotal(groupBuyActivityViewTotal);
+        int viewTotal = getGroupBuyActivityViewTotal(id);
+        groupBuyActivityBo.setGroupBuyActivityViewTotal(viewTotal);
+        // TODO 需要改进，在并发的情况下，可能出现查看数被覆盖
+        cacheManager.set(Constant.GROUPBUYACTIVITYVIEWTOTAL + id, Constant.STATUSTRANSFORMEXPIRETIME, ++viewTotal);
         return groupBuyActivityBo;
     }
 
@@ -460,12 +462,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
     @Override
     public int getGroupBuyActivityViewTotal(int groupBuyActivityId) {
         Integer total = (Integer) cacheManager.get(Constant.GROUPBUYACTIVITYVIEWTOTAL + groupBuyActivityId);
-        if (total != null) {
-            total++;
-        } else {
+        // 如果团购活动查看次数为null,则初始化一个200~500之间的数值
+        if (total == null) {
             total = (int) (Math.random() * 300 + 200);
         }
-        cacheManager.set(Constant.GROUPBUYACTIVITYVIEWTOTAL + groupBuyActivityId, Constant.STATUSTRANSFORMEXPIRETIME, total);
         return total;
     }
 }
