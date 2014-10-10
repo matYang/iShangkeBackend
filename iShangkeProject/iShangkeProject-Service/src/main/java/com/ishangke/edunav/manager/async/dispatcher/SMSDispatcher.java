@@ -21,7 +21,7 @@ public class SMSDispatcher {
         if (!Flag.shouldSMS()) {
             return new DefaultSMSFuture();
         }
-        String payload = "您申请注册爱上课会员的验证码为：" + authCode + "（如非本人操作请忽略）。爱上课，第三方培训团购平台，您的选课专家~";
+        String payload = "您申请注册爱上课会员的验证码为：" + authCode + "（如非本人操作请忽略）。爱上课，专注课程在线预订~";
         SMSTask task = new SMSTask(Event.USER_CELLVERIFICATION, cellNum, payload);
         return ExecutorProvider.executeRelay(task);
     }
