@@ -211,6 +211,34 @@ public class CourseVo extends JsonResponse {
     
     private Integer viewTotal;
     
+    private Double conditionRating;
+    private Double attitudeRating;
+    private Double satisfactionRating;
+
+    public Double getConditionRating() {
+        return conditionRating;
+    }
+
+    public void setConditionRating(Double conditionRating) {
+        this.conditionRating = conditionRating;
+    }
+
+    public Double getAttitudeRating() {
+        return attitudeRating;
+    }
+
+    public void setAttitudeRating(Double attitudeRating) {
+        this.attitudeRating = attitudeRating;
+    }
+
+    public Double getSatisfactionRating() {
+        return satisfactionRating;
+    }
+
+    public void setSatisfactionRating(Double satisfactionRating) {
+        this.satisfactionRating = satisfactionRating;
+    }
+
     public Integer getViewTotal() {
         return viewTotal;
     }

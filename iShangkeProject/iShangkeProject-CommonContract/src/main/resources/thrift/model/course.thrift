@@ -144,6 +144,9 @@ struct CourseBo {
     136: string studyDays
     137: groupBuyActivity.GroupBuyActivityBo groupBuyActivity
     138: i32 viewTotal
+    139: double conditionRating
+    140: double attitudeRating
+    141: double satisfactionRating
 }
 
 struct CommentCourseApproveBo {
