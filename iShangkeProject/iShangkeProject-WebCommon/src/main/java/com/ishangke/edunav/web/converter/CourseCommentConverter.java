@@ -188,7 +188,7 @@ public class CourseCommentConverter {
         courseCommentVo.setUserId(bo.getUserId());
 //        courseCommentVo.setUserIdSet(bo.getUserIdSet());
         UserBo user = bo.getUser();
-        if (bo.getUser().getPhone() != null) {
+        if (user != null && bo.getUser().getPhone() != null) {
             String phone = bo.getUser().getPhone();
             String hidePhone = phone.substring(0, 3)+"****"+phone.substring(7);
             user.setPhone(hidePhone);
