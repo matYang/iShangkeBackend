@@ -476,6 +476,9 @@ public class CourseManagerImpl implements CourseManager {
                     CourseBo bo = CourseConverter.toBo(c);
                     int viewTotal = getCourseViewTotal(bo.getCourseTemplateId());
                     bo.setViewTotal(viewTotal);
+                    //预定随机数
+                    int bookingTotal = bo.getBookingTotal() + bo.getCourseTemplateId() % 27 + bo.getCourseTemplateId() % 17 + bo.getCourseTemplateId() % 7;
+                    bo.setBookingTotal(bookingTotal);
                     convertered.add(bo);
                 }
             }
@@ -527,6 +530,9 @@ public class CourseManagerImpl implements CourseManager {
         Integer total = getCourseViewTotal(convertered.getCourseTemplateId());
         total++;
         cacheManager.set(Constant.COURSEVIEWTOTAL + convertered.getCourseTemplateId(), 0, total);
+        //预定随机数
+        int bookingTotal = convertered.getBookingTotal() + convertered.getCourseTemplateId() % 27 + convertered.getCourseTemplateId() % 17 + convertered.getCourseTemplateId() % 7;
+        convertered.setBookingTotal(bookingTotal);
         return convertered;
     }
 
