@@ -96,6 +96,9 @@
     <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
     <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
     <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
+    <result column="COMMENT_CONDITIONRATING" property="conditionRating" jdbcType="DOUBLE" />
+    <result column="COMMENT_ATTITUDERATING" property="attitudeRating" jdbcType="DOUBLE" />
+    <result column="COMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
     <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
       <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
       <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
@@ -296,6 +299,13 @@
     CLASSPHOTO_ENABLED,
     CLASS_PHOTO.DELETED CLASSPHOTO_DELETED
   </sql>
+  
+  <sql id="Course_Score_Column_List">
+    score.avgcondition COMMENT_CONDITIONRATING,
+    score.avgattitude COMMENT_ATTITUDERATING,
+    score.avgsatisfaction COMMENT_SATISFACTIONRATING
+  </sql>
+  
   <!-- add -->
   <insert id="add" parameterType="CourseEntityExt">
     insert into COURSE
@@ -938,6 +948,8 @@
     ,
     <include refid="Course_Details_Column_List"></include>
     ,
+    <include refid="Course_Score_Column_List"></include>
+    ,
     <include refid="Teacher_Base_Column_List"></include>
     ,
     <include refid="ClassPhoto_Base_Column_List"></include>
@@ -997,6 +1009,10 @@
     from COURSE left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.REG_ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     left join GROUP_BUY_ACTIVITY
     ON GROUP_BUY_ACTIVITY.COURSE_ID = COURSE.COURSE_TEMPLATE_ID
+    left join
+    (select course_template_id as course_template_id, avg(CONDITION_RATING) as avgcondition, avg(ATTITUDE_RATING) as
+    avgattitude, avg(SATISFACTION_RATING) as avgsatisfaction from course_comment group by course_template_id) as score 
+    on score.course_template_id = COURSE.COURSE_TEMPLATE_ID
     where
     COURSE.DELETED = 0 AND COURSE.ID = #{id}
   </select>
@@ -1006,12 +1022,14 @@
     <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0
   </select>
+  
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="CourseExtMap">
     SELECT
     <include refid="Course_Base_Column_List" />
     from COURSE where COURSE.DELETED = 0 and COURSE.ID = #{id,jdbcType=INTEGER}
   </select>
+  
   <!-- listPromotionByCategoryId -->
   <select id="listPromotionByCategoryId" resultMap="CourseExtMap">
     select
