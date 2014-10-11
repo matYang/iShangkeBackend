@@ -473,7 +473,13 @@ public class CourseManagerImpl implements CourseManager {
             List<CourseEntityExt> result = courseMapper.list(CourseConverter.fromBo(courseBo), PaginationConverter.fromBo(paginationBo));
             if (result != null) {
                 for (CourseEntityExt c : result) {
-                    convertered.add(CourseConverter.toBo(c));
+                    CourseBo bo = CourseConverter.toBo(c);
+                    int viewTotal = getCourseViewTotal(bo.getCourseTemplateId());
+                    bo.setViewTotal(viewTotal);
+                    //预定随机数
+                    int bookingTotal = bo.getBookingTotal() + bo.getCourseTemplateId() % 27 + bo.getCourseTemplateId() % 17 + bo.getCourseTemplateId() % 7;
+                    bo.setBookingTotal(bookingTotal);
+                    convertered.add(bo);
                 }
             }
         } catch (Exception e) {
@@ -521,6 +527,12 @@ public class CourseManagerImpl implements CourseManager {
                 convertered.setActionList(actions);
             }
         }
+        Integer total = getCourseViewTotal(convertered.getCourseTemplateId());
+        total++;
+        cacheManager.set(Constant.COURSEVIEWTOTAL + convertered.getCourseTemplateId(), 0, total);
+        //预定随机数
+        int bookingTotal = convertered.getBookingTotal() + convertered.getCourseTemplateId() % 27 + convertered.getCourseTemplateId() % 17 + convertered.getCourseTemplateId() % 7;
+        convertered.setBookingTotal(bookingTotal);
         return convertered;
     }
 
@@ -821,4 +833,20 @@ public class CourseManagerImpl implements CourseManager {
         return courseCommentMapper.getListCount(CourseCommentConverter.fromBo(couresCommentBo));
     }
 
+    public int getCourseViewTotal(int courseTemplateId) {
+        Integer total = (Integer) cacheManager.get(Constant.COURSEVIEWTOTAL + courseTemplateId);
+        if (total != null) {
+            return total;
+        } else {
+            //创造假的初始浏览量
+            total = courseTemplateId % 98 + courseTemplateId % 87 + courseTemplateId % 76 + courseTemplateId % 65 + courseTemplateId % 54 + courseTemplateId % 43 + courseTemplateId % 32 + courseTemplateId % 21 + courseTemplateId % 10;
+            if (total < 100) {
+                total = total + 107; 
+            }
+        }
+        //默认不过期
+        //非常不好的一种东西。。。课程很多 后面需要改掉这个机制
+        cacheManager.set(Constant.COURSEVIEWTOTAL + courseTemplateId, 0, total);
+        return total;
+    }
 }

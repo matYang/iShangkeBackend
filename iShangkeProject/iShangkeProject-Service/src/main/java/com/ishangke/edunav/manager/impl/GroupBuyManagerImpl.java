@@ -30,7 +30,6 @@ import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CourseTemplateEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyActivityEntityExt;
 import com.ishangke.edunav.dataaccess.model.GroupBuyBookingEntityExt;
-import com.ishangke.edunav.dataaccess.model.GroupBuyPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CacheManager;
@@ -168,18 +167,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         }
 
         groupBuyActivityEntity.setCreateTime(null);
-        GroupBuyActivityEntityExt groupBuyActivityEntityOld = groupBuyActivityMapper.getById(groupBuyActivityEntity.getId());
 
-        // 暂时没想到效率高的更新一对多的团购图片信息的方法,所以先删除已存的再添加新的
-        List<GroupBuyPhotoEntityExt> photoListOld = groupBuyActivityEntityOld.getPhotoList();
-//        GroupBuyActivityBo groupBuyActivityBoOld = GroupBuyActivityConverter.toBo(groupBuyActivityEntityOld);
-//        List<GroupBuyPhotoBo> photoListOld = groupBuyActivityBoOld.getPhotoList();
         List<GroupBuyPhotoBo> photoListNew = groupBuyActivityBo.getPhotoList();
-        // TODO 需要改成根据团购活动id删除团购图片信息，而不是根据图片id逐个删除
         // 删除现存的团购图片信息
-        for (GroupBuyPhotoEntityExt groupBuyPhotoEntity : photoListOld) {
-            groupBuyPhotoMapper.deleteById(groupBuyPhotoEntity.getId());
-        }
+        groupBuyPhotoMapper.deleteByGroupBuyActivityId(groupBuyActivityEntity.getId());
         // 插入新的团购图片信息
         for (GroupBuyPhotoBo groupBuyPhotoBo : photoListNew) {
             groupBuyPhotoBo.setGroupBuyActivityId(groupBuyActivityEntity.getId());
@@ -354,6 +345,10 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
         GroupBuyActivityBo groupBuyActivityBo = GroupBuyActivityConverter.toBo(groupBuyActivity);
         int bookingTotal = getGroupBuyBookingTotal(groupBuyActivity.getCourseId());
         groupBuyActivityBo.setBookingTotal(bookingTotal);
+        int viewTotal = getGroupBuyActivityViewTotal(id);
+        groupBuyActivityBo.setGroupBuyActivityViewTotal(viewTotal);
+        // TODO 需要改进，在并发的情况下，可能出现查看数被覆盖
+        cacheManager.set(Constant.GROUPBUYACTIVITYVIEWTOTAL + id, Constant.STATUSTRANSFORMEXPIRETIME, ++viewTotal);
         return groupBuyActivityBo;
     }
 
@@ -461,6 +456,16 @@ public class GroupBuyManagerImpl implements GroupBuyManager {
             total += groupBuyBookingMapper.getListCount(booking);
         }
         cacheManager.set(Constant.GROUPBUYTOTAL + courseId, Constant.STATUSTRANSFORMEXPIRETIME, total);
+        return total;
+    }
+
+    @Override
+    public int getGroupBuyActivityViewTotal(int groupBuyActivityId) {
+        Integer total = (Integer) cacheManager.get(Constant.GROUPBUYACTIVITYVIEWTOTAL + groupBuyActivityId);
+        // 如果团购活动查看次数为null,则初始化一个200~500之间的数值
+        if (total == null) {
+            total = (int) (Math.random() * 300 + 200);
+        }
         return total;
     }
 }

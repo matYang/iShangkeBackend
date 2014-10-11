@@ -27,6 +27,7 @@ public class GroupBuyActivityVo extends JsonResponse {
     private Set<Integer> hotSet;
     private String title;
     private Integer bookingTotal;
+    private Integer groupBuyActivityViewTotal;
     private List<AddressVo> addressList;
     private Integer circleId;
     private Integer categoryId;
@@ -52,6 +53,15 @@ public class GroupBuyActivityVo extends JsonResponse {
     public void setAddressList(List<AddressVo> addressList) {
         this.addressList = addressList;
     }
+
+    public Integer getGroupBuyActivityViewTotal() {
+        return groupBuyActivityViewTotal;
+    }
+
+    public void setGroupBuyActivityViewTotal(Integer groupBuyActivityViewTotal) {
+        this.groupBuyActivityViewTotal = groupBuyActivityViewTotal;
+    }
+
     public Integer getBookingTotal() {
         return bookingTotal;
     }

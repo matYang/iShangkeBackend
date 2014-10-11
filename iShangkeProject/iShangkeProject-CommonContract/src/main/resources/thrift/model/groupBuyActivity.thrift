@@ -25,9 +25,10 @@ struct GroupBuyActivityBo {
   19: set<i32> hotSet
   20: string title
   21: i32 bookingTotal
-  22: list<address.AddressBo> addressList
-  23: i32 circleId
-  24: i32 categoryId
+  22: i32 groupBuyActivityViewTotal
+  23: list<address.AddressBo> addressList
+  24: i32 circleId
+  25: i32 categoryId
 }
 
 struct GroupBuyActivityPageViewBo{

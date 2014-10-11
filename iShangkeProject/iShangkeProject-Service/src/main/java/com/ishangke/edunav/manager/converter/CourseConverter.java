@@ -456,6 +456,15 @@ public class CourseConverter {
         if (e.getGroupBuyActivity() != null) {
         	courseBo.setGroupBuyActivity(GroupBuyActivityConverter.toBo(e.getGroupBuyActivity()));
         }
+        if (e.getConditionRating() != null) {
+            courseBo.setConditionRating(e.getConditionRating());
+        }
+        if (e.getAttitudeRating() != null) {
+            courseBo.setAttitudeRating(e.getAttitudeRating());
+        }
+        if (e.getSatisfactionRating() != null) {
+            courseBo.setSatisfactionRating(e.getSatisfactionRating());
+        }
         return courseBo;
     }
 

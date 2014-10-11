@@ -162,6 +162,7 @@ public class GroupBuyActivityConverter {
         }
         vo.setTitle(bo.getTitle());
         vo.setBookingTotal(bo.getBookingTotal());
+        vo.setGroupBuyActivityViewTotal(bo.getGroupBuyActivityViewTotal());
         return vo;
     }
 }
