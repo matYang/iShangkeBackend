@@ -108,7 +108,7 @@
       <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
       <!-- <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" /> -->
       <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
-      <result column="ADDRESSx_LAT" property="addressLat" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
       <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
       <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
@@ -505,7 +505,7 @@
     from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
     left join PARTNER ON COURSE.PARTNER_ID = PARTNER.ID
     left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID
-    left join (select COURSE.ID COURSE_ID, <include refid="Reg_Address_Base_Column_List"></include> from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
+    left join (select COURSE.ID COURSE_ID, <include refid="Reg_Address_Base_Column_List"></include> from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.REG_ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where BOOKING.DELETED = 0 and BOOKING.ID = #{id,jdbcType=INTEGER}
   </select>
   <!--list -->
@@ -521,7 +521,7 @@
     from BOOKING left join COURSE on BOOKING.COURSE_ID = COURSE.ID
     left join PARTNER ON COURSE.PARTNER_ID = PARTNER.ID
     left join ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID
-    left join (select COURSE.ID COURSE_ID, <include refid="Reg_Address_Base_Column_List"></include> from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
+    left join (select COURSE.ID COURSE_ID, <include refid="Reg_Address_Base_Column_List"></include> from COURSE  left join  ADDRESS ADDRESS ON ADDRESS.ID = COURSE.REG_ADDRESS_ID) temp on COURSE.ID = temp.COURSE_ID
     where BOOKING.DELETED = 0
     <if test="entity != null">
 
