@@ -309,6 +309,5 @@
     <module>iShangkeProject-UserWeb</module>
     <module>iShangkeProject-PartnerWeb</module>
     <module>iShangkeProject-AdminWeb</module>
-    <module>iShangkeProject-Mobile</module>
   </modules>
 </project>
