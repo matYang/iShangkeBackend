@@ -57,6 +57,7 @@ public class GroupBuyBookingEntityExtTest {
         GroupBuyBookingEntityExt groupBuyBooking = new GroupBuyBookingEntityExt();
         groupBuyBooking.setStatus(0);
         groupBuyBooking.setCreateTimeStart(DateUtility.getCurTimeInstance());
+        groupBuyBooking.setType(0);
         List<GroupBuyBookingEntityExt> list = groupBuyBookingEntityExtMapper.list(groupBuyBooking, null);
         int countFirst = list.size();
         int countSecond = groupBuyBookingEntityExtMapper.getListCount(groupBuyBooking);
