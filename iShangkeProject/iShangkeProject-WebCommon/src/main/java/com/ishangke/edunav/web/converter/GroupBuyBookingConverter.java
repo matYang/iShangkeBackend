@@ -84,6 +84,11 @@ public class GroupBuyBookingConverter {
          if (vo.getReference() != null) {
              bo.setReference(vo.getReference());
          }
+         if (vo.getType() != null) {
+        	 bo.setType(vo.getType());
+         } else {
+        	 bo.setType(Constant.DEFAULTNULL);
+         }
          return bo;
     }
     public static GroupBuyBookingVo toModel(GroupBuyBookingBo bo){
@@ -107,6 +112,9 @@ public class GroupBuyBookingConverter {
         vo.setUser(UserConverter.toModel(bo.getUser()));
         vo.setReference(bo.getReference());
         vo.setNumber(bo.getNumber());
+        if (Constant.DEFAULTNULL != bo.getType()) {
+        	vo.setType(bo.getType());
+        }
         return vo;
     }
 }

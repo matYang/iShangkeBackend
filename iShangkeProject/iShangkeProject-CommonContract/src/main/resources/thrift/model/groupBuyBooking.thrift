@@ -21,6 +21,7 @@ struct GroupBuyBookingBo {
   16: set<i32> userIdSet
   17: string reference
   18: string number
+  19: i32 type
 }
 
 struct GroupBuyBookingPageViewBo{

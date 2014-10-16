@@ -35,6 +35,11 @@ public class GroupBuyBookingConverter {
         if (e.getNumber() != null) {
             bo.setNumber(e.getNumber());
         }
+        if (e.getType() != null) {
+        	bo.setType(e.getType());
+        } else {
+        	bo.setType(Constant.DEFAULTNULL);
+        }
         return bo;
     }
     
@@ -67,6 +72,9 @@ public class GroupBuyBookingConverter {
         e.setUserIdSet(bo.getUserIdSet());
         e.setReference(bo.getReference());
         e.setNumber(bo.getNumber());
+        if (bo.getType() != Constant.DEFAULTNULL) {
+        	e.setType(bo.getType());
+        }
         return e;
     }
 }

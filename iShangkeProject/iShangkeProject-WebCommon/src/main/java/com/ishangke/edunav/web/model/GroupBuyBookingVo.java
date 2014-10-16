@@ -23,8 +23,15 @@ public class GroupBuyBookingVo extends JsonResponse {
     private UserVo user;
     private String reference;
     private String number;
+    private Integer type;
     
-    public String getReference() {
+    public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	public String getReference() {
         return reference;
     }
     public void setReference(String reference) {
