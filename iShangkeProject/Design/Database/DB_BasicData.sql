@@ -1188,3 +1188,16 @@ INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVIT
 INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('3', '3', '1', '0');
 INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('4', '4', '2', '0');
 INSERT INTO `edunav`.`group_buy_address` (`ID`, `ADDRESS_ID`, `GROUP_BUY_ACTIVITY_ID`, `DELETED`) VALUES ('5', '5', '2', '0');
+INSERT INTO `edunav`.`course_promotion` (`ID`, `COURSE_ID`, `CATEGORY_ID`, `CREATE_TIME`, `START_TIME`, `END_TIME`, `STATUS`, `DELETED`) VALUES ('1', '1', '2', '2015-09-23 13:49:15', '2015-09-23 13:49:15', '2015-09-23 13:49:15', '0', '0');
+INSERT INTO `edunav`.`course_promotion` (`ID`, `COURSE_ID`, `CATEGORY_ID`, `CREATE_TIME`, `START_TIME`, `END_TIME`, `STATUS`, `DELETED`) VALUES ('2', '2', '1', '2015-09-23 13:49:15', '2015-09-23 13:49:15', '2015-09-23 13:49:15', '1', '0');
+INSERT INTO `edunav`.`course_promotion` (`ID`, `COURSE_ID`, `CATEGORY_ID`, `CREATE_TIME`, `START_TIME`, `END_TIME`, `STATUS`, `DELETED`) VALUES ('3', '3', '3', '2015-09-23 13:49:15', '2015-09-23 13:49:15', '2015-09-23 13:49:15', '2', '0');
+INSERT INTO `edunav`.`course_promotion_photo` (`ID`, `COURSE_PROMOTION_ID`, `URL`, `TYPE`, `DELETED`) VALUES ('1', '1', '1.png', '0', '0');
+INSERT INTO `edunav`.`course_promotion_photo` (`ID`, `COURSE_PROMOTION_ID`, `URL`, `TYPE`, `DELETED`) VALUES ('2', '2', '2.png', '0', '0');
+INSERT INTO `edunav`.`course_promotion_photo` (`ID`, `COURSE_PROMOTION_ID`, `URL`, `TYPE`, `DELETED`) VALUES ('3', '3', '3.png', '1', '0');
+INSERT INTO `edunav`.`course_promotion_photo` (`ID`, `COURSE_PROMOTION_ID`, `URL`, `TYPE`, `DELETED`) VALUES ('4', '1', '4.png', '2', '0');
+INSERT INTO `edunav`.`course_promotion_photo` (`ID`, `COURSE_PROMOTION_ID`, `URL`, `TYPE`, `DELETED`) VALUES ('5', '2', '5.png', '1', '0');
+INSERT INTO `edunav`.`partner_category` (`ID`, `PARTNER_ID`, `CATEGORY_ID`, `DELETED`) VALUES ('1', '1', '1', '0');
+INSERT INTO `edunav`.`partner_category` (`ID`, `PARTNER_ID`, `CATEGORY_ID`, `DELETED`) VALUES ('2', '1', '2', '0');
+INSERT INTO `edunav`.`partner_category` (`ID`, `PARTNER_ID`, `CATEGORY_ID`, `DELETED`) VALUES ('3', '2', '3', '0');
+INSERT INTO `edunav`.`partner_category` (`ID`, `PARTNER_ID`, `CATEGORY_ID`, `DELETED`) VALUES ('4', '3', '5', '0');
+INSERT INTO `edunav`.`partner_category` (`ID`, `PARTNER_ID`, `CATEGORY_ID`, `DELETED`) VALUES ('5', '2', '1', '0');
