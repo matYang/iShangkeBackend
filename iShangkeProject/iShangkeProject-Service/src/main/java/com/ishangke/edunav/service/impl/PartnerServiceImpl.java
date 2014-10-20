@@ -64,11 +64,7 @@ public class PartnerServiceImpl implements PartnerService.Iface {
             String permissionTag) throws BusinessExceptionBo, TException {
 
         try {
-             if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                 LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-                         "queryPartner"));
-                 throw new NoPermissionException();
-             }
+             //不进行权限校验
             paginationBo = PageUtil.getPage(paginationBo);
             List<PartnerBo> data = partnerManager.query(partnerBo, paginationBo, userBo);
             int total = partnerManager.queryTotal(partnerBo, userBo);
@@ -122,11 +118,11 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-//                        "updatePartner"));
-//                throw new NoPermissionException();
-//            }
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "updatePartner"));
+                throw new NoPermissionException();
+            }
 
             return partnerManager.updatePartner(partnerBo, userBo);
         } catch (NoPermissionException e) {
@@ -180,11 +176,11 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public AddressBo createAddress(AddressBo addressBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-//                        "createAddress"));
-//                throw new NoPermissionException();
-//            }
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "createAddress"));
+                throw new NoPermissionException();
+            }
             return addressManager.createAddress(addressBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
@@ -418,11 +414,11 @@ public class PartnerServiceImpl implements PartnerService.Iface {
     public TeacherBo createTeacher(TeacherBo teacherBo, UserBo userBo, String permissionTag)
             throws BusinessExceptionBo, TException {
         try {
-//            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-//                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
-//                        "createTeacher"));
-//                throw new NoPermissionException();
-//            }
+            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
+                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag,
+                        "createTeacher"));
+                throw new NoPermissionException();
+            }
             return teacherManager.createTeacher(teacherBo, userBo);
         } catch (NoPermissionException e) {
             LOGGER.info(e.getMessage(), e);
