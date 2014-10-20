@@ -89,6 +89,33 @@ public class PartnerVo extends JsonResponse {
     
     private Integer partnerId;
     private Integer popularity;
+    private Integer courseCount;
+    private Integer teacherCount;
+    private List<CategoryVo> categoryList;
+
+    public List<CategoryVo> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<CategoryVo> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public Integer getCourseCount() {
+        return courseCount;
+    }
+
+    public void setCourseCount(Integer courseCount) {
+        this.courseCount = courseCount;
+    }
+
+    public Integer getTeacherCount() {
+        return teacherCount;
+    }
+
+    public void setTeacherCount(Integer teacherCount) {
+        this.teacherCount = teacherCount;
+    }
 
     public Integer getPopularity() {
         return popularity;

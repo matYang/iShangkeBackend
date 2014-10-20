@@ -6,10 +6,12 @@ import java.util.List;
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
+import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
+import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
@@ -205,6 +207,18 @@ public class PartnerConverter {
         } else {
             partnerBo.setPopularity(Constant.DEFAULTNULL);
         }
+        if (e.getCourseCount() != null) {
+            partnerBo.setCourseCount(e.getCourseCount());
+        } else {
+            partnerBo.setCourseCount(Constant.DEFAULTNULL);
+        }
+        if (e.getCategoryList() != null) {
+            List<CategoryBo> list = new ArrayList<>();
+            for (CategoryEntityExt a : e.getCategoryList()) {
+                list.add(CategoryConverter.toBo(a));
+            }
+            partnerBo.setCategoryList(list);
+        }
         return partnerBo;
     }
 
@@ -310,6 +324,19 @@ public class PartnerConverter {
         partnerEntityExt.setWholeName(bo.getWholeName());
         if (Constant.DEFAULTNULL != bo.getPopularity()) {
             partnerEntityExt.setPopularity(bo.getPopularity());
+        }
+        if (Constant.DEFAULTNULL != bo.getCourseCount()) {
+            partnerEntityExt.setCourseCount(bo.getCourseCount());
+        }
+        if (Constant.DEFAULTNULL != bo.getTeacherCount()) {
+            partnerEntityExt.setTeacherCount(bo.getTeacherCount());
+        }
+        if (bo.getCategoryList() != null) {
+            List<CategoryEntityExt> list = null;
+            for (CategoryBo b : bo.getCategoryList()) {
+                list.add(CategoryConverter.fromBo(b));
+            }
+            partnerEntityExt.setCategoryList(list);
         }
         return partnerEntityExt;
     }

@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
+import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.web.model.AddressVo;
+import com.ishangke.edunav.web.model.CategoryVo;
 import com.ishangke.edunav.web.model.ClassPhotoVo;
 import com.ishangke.edunav.web.model.PartnerVo;
 import com.ishangke.edunav.web.model.TeacherVo;
@@ -223,6 +225,23 @@ public class PartnerConverter {
         } else {
             partnerBo.setPopularity(Constant.DEFAULTNULL);
         }
+        if (vo.getCourseCount() != null) {
+            partnerBo.setCourseCount(vo.getTeacherCount());
+        } else {
+            partnerBo.setCourseCount(Constant.DEFAULTNULL);
+        }
+        if (vo.getTeacherCount() != null) {
+            partnerBo.setTeacherCount(vo.getTeacherCount());
+        } else {
+            partnerBo.setTeacherCount(Constant.DEFAULTNULL);
+        }
+        if (vo.getCategoryList() != null) {
+            List<CategoryBo> list = null;
+            for (CategoryVo v : vo.getCategoryList()) {
+                list.add(CategoryConverter.fromModel(v));
+            }
+            partnerBo.setCategoryList(list);
+        }
         return partnerBo;
     }
 
@@ -312,6 +331,19 @@ public class PartnerConverter {
         partnerVo.setWholeName(bo.getWholeName());
         if (Constant.DEFAULTNULL != bo.getPopularity()) {
             partnerVo.setPopularity(bo.getPopularity());
+        }
+        if (Constant.DEFAULTNULL != bo.getCourseCount()) {
+            partnerVo.setCourseCount(bo.getCourseCount());
+        }
+        if (Constant.DEFAULTNULL != bo.getTeacherCount()) {
+            partnerVo.setTeacherCount(bo.getTeacherCount());
+        }
+        if (bo.getCategoryList() != null) {
+            List<CategoryVo> list = null;
+            for (CategoryBo b : bo.getCategoryList()) {
+                list.add(CategoryConverter.toModel(b));
+            }
+            partnerVo.setCategoryList(list);
         }
         return partnerVo;
     }
