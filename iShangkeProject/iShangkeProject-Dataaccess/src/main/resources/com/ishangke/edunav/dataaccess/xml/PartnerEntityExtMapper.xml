@@ -658,8 +658,8 @@
   
   <!-- getIdSetCount -->
   <select id="getIdSetCount" parameterType="map" >
-    <if test="type='teacherCount'">
-      select county(*) from (
+    <if test="type == 'teacherCount'">
+      select count(*) from (
         SELECT temp.partner_id PARTNER_ID
         FROM
           (SELECT partner.id PARTNER_ID
@@ -685,7 +685,7 @@
         GROUP BY temp.partner_id
       ) as total
     </if>
-    <if test="type='courseCount'">
+    <if test="type == 'courseCount'">
       select count(*) from (
         SELECT temp.partner_id PARTNER_ID
         FROM
@@ -708,7 +708,7 @@
         GROUP BY temp.partner_id
       ) as total
     </if>
-    <if test="type='popularity'">
+    <if test="type == 'popularity'">
       select count(*) from (
         SELECT partner.id PARTNER_ID
         FROM partner
