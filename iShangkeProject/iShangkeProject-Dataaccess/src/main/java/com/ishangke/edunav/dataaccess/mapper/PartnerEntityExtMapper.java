@@ -1,7 +1,6 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.List;
-import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -40,5 +39,5 @@ public interface PartnerEntityExtMapper {
             @Param("entity") PartnerEntityExt partnerEntityExt,
             @Param("type") String type);
     
-    public List<PartnerEntityExt> listByIdSet(@Param("idSet") Set<Integer> idSet);
+    public List<PartnerEntityExt> listByIdSet(@Param("idSet") List<Integer> idSet);
 }

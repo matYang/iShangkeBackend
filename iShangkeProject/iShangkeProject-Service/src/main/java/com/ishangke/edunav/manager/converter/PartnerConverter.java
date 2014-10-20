@@ -212,6 +212,11 @@ public class PartnerConverter {
         } else {
             partnerBo.setCourseCount(Constant.DEFAULTNULL);
         }
+        if (e.getTeacherCount() != null) {
+            partnerBo.setTeacherCount(e.getTeacherCount());
+        } else {
+            partnerBo.setTeacherCount(Constant.DEFAULTNULL);
+        }
         if (e.getCategoryList() != null) {
             List<CategoryBo> list = new ArrayList<>();
             for (CategoryEntityExt a : e.getCategoryList()) {
@@ -330,19 +335,6 @@ public class PartnerConverter {
         partnerEntityExt.setWholeName(bo.getWholeName());
         if (Constant.DEFAULTNULL != bo.getPopularity()) {
             partnerEntityExt.setPopularity(bo.getPopularity());
-        }
-        if (Constant.DEFAULTNULL != bo.getCourseCount()) {
-            partnerEntityExt.setCourseCount(bo.getCourseCount());
-        }
-        if (Constant.DEFAULTNULL != bo.getTeacherCount()) {
-            partnerEntityExt.setTeacherCount(bo.getTeacherCount());
-        }
-        if (bo.getCategoryList() != null) {
-            List<CategoryEntityExt> list = null;
-            for (CategoryBo b : bo.getCategoryList()) {
-                list.add(CategoryConverter.fromBo(b));
-            }
-            partnerEntityExt.setCategoryList(list);
         }
         partnerEntityExt.setCategoryValue(bo.getCategoryValue());
         partnerEntityExt.setCircleValue(bo.getCircleValue());

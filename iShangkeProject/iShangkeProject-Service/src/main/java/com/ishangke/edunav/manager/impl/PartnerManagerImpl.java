@@ -237,7 +237,7 @@ public class PartnerManagerImpl implements PartnerManager {
         if (ids == null) {
             return null;
         }
-        Set<Integer> idSet = new HashSet<>();
+        List<Integer> idSet = new ArrayList<>();
         for (PartnerEntityExt p : ids) {
             idSet.add(p.getId());
         }

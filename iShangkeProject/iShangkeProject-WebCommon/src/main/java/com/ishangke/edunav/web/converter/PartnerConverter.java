@@ -225,23 +225,6 @@ public class PartnerConverter {
         } else {
             partnerBo.setPopularity(Constant.DEFAULTNULL);
         }
-        if (vo.getCourseCount() != null) {
-            partnerBo.setCourseCount(vo.getTeacherCount());
-        } else {
-            partnerBo.setCourseCount(Constant.DEFAULTNULL);
-        }
-        if (vo.getTeacherCount() != null) {
-            partnerBo.setTeacherCount(vo.getTeacherCount());
-        } else {
-            partnerBo.setTeacherCount(Constant.DEFAULTNULL);
-        }
-        if (vo.getCategoryList() != null) {
-            List<CategoryBo> list = null;
-            for (CategoryVo v : vo.getCategoryList()) {
-                list.add(CategoryConverter.fromModel(v));
-            }
-            partnerBo.setCategoryList(list);
-        }
         if (vo.getCategoryValue() != null) {
             partnerBo.setCategoryValue(vo.getCategoryValue());
         }
@@ -347,6 +330,7 @@ public class PartnerConverter {
         if (bo.getCategoryList() != null) {
             List<CategoryVo> list = null;
             for (CategoryBo b : bo.getCategoryList()) {
+                list = new ArrayList<>();
                 list.add(CategoryConverter.toModel(b));
             }
             partnerVo.setCategoryList(list);

@@ -657,7 +657,7 @@
   </select>
   
   <!-- getIdSetCount -->
-  <select id="getIdSetCount" parameterType="map" >
+  <select id="getIdSetCount" parameterType="map" resultType="int">
     <if test="type == 'teacherCount'">
       select count(*) from (
         SELECT temp.partner_id PARTNER_ID
@@ -760,6 +760,7 @@
       <foreach collection="idSet" item="listItem" open="(" close=")" separator=",">
         #{listItem}
       </foreach>
+      
     </if>
   </select>
   
