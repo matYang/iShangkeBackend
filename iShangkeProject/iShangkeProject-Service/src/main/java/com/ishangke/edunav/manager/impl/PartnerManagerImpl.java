@@ -53,12 +53,8 @@ public class PartnerManagerImpl implements PartnerManager {
     @Override
     // public data, does not check permission
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
-        if (userBo == null) {
-            throw new ManagerException("无效请求参数");
-        }
         PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         List<PartnerEntityExt> results = null;
         try {
