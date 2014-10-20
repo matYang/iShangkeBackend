@@ -1,6 +1,7 @@
 package com.ishangke.edunav.dataaccess.mapper;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,12 @@ public interface PartnerEntityExtMapper {
     public PartnerEntityExt getById(int id);
     
     public PartnerEntityExt getInfoById(int id);
+    
+    public List<PartnerEntityExt> getIdSet(
+            @Param("entity") PartnerEntityExt partnerEntityExt,
+            @Param("page") PaginationEntity page,
+            @Param("type") String type,
+            @Param("order") String order);
+    
+    public List<PartnerEntityExt> listByIdSet(@Param("idSet") Set<Integer> idSet);
 }

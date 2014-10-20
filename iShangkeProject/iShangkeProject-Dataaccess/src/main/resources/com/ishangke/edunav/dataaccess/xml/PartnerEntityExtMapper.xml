@@ -10,8 +10,7 @@
 
     <result column="PARTNER_LASTMODIFYTIME" property="lastModifyTime"
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-    <result column="PARTNER_CREATETIME" property="createTime"
-      typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+    <result column="PARTNER_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="PARTNER_ENABLED" property="enabled" jdbcType="INTEGER" />
     <result column="PARTNER_DELETED" property="deleted" jdbcType="INTEGER" />
     <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
@@ -23,8 +22,7 @@
     <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
     <result column="PARTNER_LICENCEIMGURL" property="licenceImgUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_TAXREGIMGURL" property="taxRegImgUrl" jdbcType="VARCHAR" />
-    <result column="PARTNER_EDUQUALIFICATIONIMGURL" property="eduQualificationImgUrl"
-      jdbcType="VARCHAR" />
+    <result column="PARTNER_EDUQUALIFICATIONIMGURL" property="eduQualificationImgUrl" jdbcType="VARCHAR" />
     <result column="PARTNER_HQLOCATION" property="hqLocation" jdbcType="VARCHAR" />
     <result column="PARTNER_UNIREGLOCATION" property="uniRegLocation" jdbcType="INTEGER" />
     <result column="PARTNER_HQCONTACT" property="hqContact" jdbcType="VARCHAR" />
@@ -40,8 +38,11 @@
     <result column="PARTNER_CUTOFFTIME" property="cutoffTime" jdbcType="INTEGER" />
     <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
     <result column="PARTNER_RATING" property="rating" jdbcType="DOUBLE" />
-    <result column="PARTNER_POPULARITY" property="popularity" jdbcType="INTEGER"/>
+    <result column="PARTNER_POPULARITY" property="popularity" jdbcType="INTEGER" />
 
+    <result column="PARTNER_TEACHERCOUNT" property="teacherCount" jdbcType="INTEGER" />
+    <result column="PARTNER_COURSECOUNT" property="courseCount" jdbcType="INTEGER" />
+    
     <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
       <id column="TEACHER_ID" property="id" jdbcType="INTEGER" />
       <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
@@ -82,6 +83,11 @@
       <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
       <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
+    <collection property="categoryList" javaType="java.util.ArrayList" ofType="CategoryEntityExt">
+      <id column="CATEGORY_ID" property="id" jdbcType="INTEGER" />
+      <result column="CATEGORY_VALUE" property="value" jdbcType="VARCHAR" />
+      <result column="CATEGORY_NAME" property="name" jdbcType="VARCHAR" />
+    </collection>
   </resultMap>
   <sql id="Partner_Base_Column_List">
     PARTNER.ID PARTNER_ID,
@@ -118,10 +124,12 @@
     PARTNER.UNI_REG_LOCATION PARTNER_UNIREGLOCATION,
     PARTNER.HQ_CONTACT
     PARTNERHQCONTACT,
-    PARTNER.HQ_CONTACT_PHONE PARTNER_HQCONTACTPHONE,
+    PARTNER.HQ_CONTACT_PHONE
+    PARTNER_HQCONTACTPHONE,
     PARTNER.HQ_CONTACT_SECOPT
     PARTNER_HQCONTACTSECOPT,
-    PARTNER.COURSE_CONTACT PARTNER_COURSECONTACT,
+    PARTNER.COURSE_CONTACT
+    PARTNER_COURSECONTACT,
     PARTNER.COURSE_CONTACT_PHONE PARTNER_COURSECONTACTPHONE,
     PARTNER.STUDENT_INQUERY_PHONE
     PARTNER_STUDENTINQUERYPHONE,
@@ -134,29 +142,34 @@
     PARTNER.CUTOFF_TIME PARTNER_CUTOFFTIME,
     PARTNER.PARTNER_QUALIFICATION
     PARTNER_PARTNERQUALIFICATION,
-    PARTNER.RATING PARTNER_RATING,
+    PARTNER.RATING
+    PARTNER_RATING,
     PARTNER.POPULARITY PARTNER_POPULARITY
-    
+
   </sql>
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
     TEACHER.IMG_URL
     TEACHER_IMGURL,
-    TEACHER.NAME TEACHER_NAME,
+    TEACHER.NAME
+    TEACHER_NAME,
     TEACHER.INTRO TEACHER_INTRO,
     TEACHER.POPULARITY
     TEACHER_POPULARITY,
-    TEACHER.LAST_MODIFY_TIME TEACHER_LASTMODIFYTIME,
+    TEACHER.LAST_MODIFY_TIME
+    TEACHER_LASTMODIFYTIME,
     TEACHER.CREATE_TIME
     TEACHER_CREATETIME,
     TEACHER.ENABLED TEACHER_ENABLED,
-    TEACHER.DELETED TEACHER_DELETED
+    TEACHER.DELETED
+    TEACHER_DELETED
   </sql>
   <sql id="ClassPhoto_Base_Column_List">
     CLASS_PHOTO.ID CLASSPHOTO_ID,
     CLASS_PHOTO.PARTNER_ID CLASSPHOTO_PARTNERID,
-    CLASS_PHOTO.IMG_URL CLASSPHOTO_IMGURL,
+    CLASS_PHOTO.IMG_URL
+    CLASSPHOTO_IMGURL,
     CLASS_PHOTO.TITLE CLASSPHOTO_TITLE,
     CLASS_PHOTO.DESCRIPTION CLASSPHOTO_DESCRIPTION,
     CLASS_PHOTO.LAST_MODIFY_TIME
@@ -171,13 +184,20 @@
     ADDRESS.PARTNER_ID ADDRESS_PARTNERID,
     ADDRESS.DETAIL
     ADDRESS_DETAIL,
-    ADDRESS.LAT ADDRESS_LAT,
+    ADDRESS.LAT
+    ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG,
     ADDRESS.LAST_MODIFY_TIME
     ADDRESS_LASTMODIFYTIME,
-    ADDRESS.CREATE_TIME ADDRESS_CREATETIME,
+    ADDRESS.CREATE_TIME
+    ADDRESS_CREATETIME,
     ADDRESS.ENABLED ADDRESS_ENABLED,
     ADDRESS.DELETED ADDRESS_DELETED
+  </sql>
+  <sql id="Category_Base_Column_List">
+    CATEGORY.ID CATEGORY_ID,
+    CATEGORY.VALUE CATEGORY_VALUE,
+    CATEGORY.NAME CATEGORY_NAME
   </sql>
   <!-- add -->
   <insert id="add" parameterType="PartnerEntityExt">
@@ -491,7 +511,7 @@
         #{partnerQualification,jdbcType=INTEGER},
       </if>
       <if test="rating != null">
-       RATING = #{rating,jdbcType=DOUBLE},
+        RATING = #{rating,jdbcType=DOUBLE},
       </if>
       <if test="popularity != null">
         POPULARITY = #{popularity,jdbcType=INTEGER},
@@ -539,11 +559,133 @@
     <include refid="Partner_Base_Column_List" />
     from PARTNER where PARTNER.DELETED = 0 and PARTNER.ID = #{id,jdbcType=INTEGER}
   </select>
+  
+  <!-- getIdSet -->
+  <select id="getIdSet" parameterType="map" resultMap="PartnerExtMap">
+    <if test="type='teacherCount'">
+      SELECT temp.partner_id PARTNER_ID, count(teacher.id) TEACHER_COUNT
+      FROM
+        (SELECT partner.id PARTNER_ID
+         FROM partner
+         LEFT JOIN address ON partner.id = address.partner_id
+         LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+         LEFT JOIN category on category.id =  partner_category.category_id
+         WHERE partner.deleted = 0
+         <if test="entity != null">
+           <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+             AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+             AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.instName != null and !entity.instName.equals('')">
+             AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
+           </if>
+         </if>
+         GROUP BY partner.id) temp
+      LEFT JOIN teacher ON temp.partner_id = teacher.partner_id
+      GROUP BY temp.partner_id
+      ORDER BY TEACHER_COUNT 
+      <if test="order != null">
+        ${order}
+      </if>
+      <if test="page !=null and page.offset != null and page.size != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+    <if test="type='courseCount'">
+      SELECT temp.partner_id PARTNER_ID, count(course_template.id) COURSE_COUNT
+      FROM
+        (SELECT partner.id PARTNER_ID
+         FROM partner
+         LEFT JOIN address ON partner.id = address.partner_id
+         LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+         LEFT JOIN category on category.id =  partner_category.category_id
+         WHERE partner.deleted = 0
+         <if test="entity != null">
+           <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+             AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+             AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+           </if>
+         </if>
+         GROUP BY partner.id) temp
+      LEFT JOIN course_template ON temp.partner_id = course_template.partner_id
+      GROUP BY temp.partner_id
+      ORDER BY COURSE_COUNT 
+      <if test="order != null">
+        ${order}
+      </if>
+      <if test="page !=null and page.offset != null and page.size != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+    <if test="type='popularity'">
+      SELECT partner.id PARTNER_ID
+      FROM partner
+      LEFT JOIN address ON partner.id = address.partner_id
+      LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+      LEFT JOIN category on category.id =  partner_category.category_id
+      WHERE partner.deleted = 0
+         <if test="entity != null">
+           <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+             AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+             AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+           </if>
+         </if>
+      GROUP BY partner.id
+      ORDER BY partner.rating/popularity 
+      <if test="order != null">
+        ${order}
+      </if>
+      <if test="page !=null and page.offset != null and page.size != null">
+        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+  
+  <!-- listByIdSet -->
+  <select id="listByIdSet" parameterType="map" resultMap="PartnerExtMap">
+    SELECT 
+    <include refid="Partner_Base_Column_List"></include>,
+    <include refid="Address_Base_Column_List"></include>,
+    <include refid="Category_Base_Column_List"></include>,
+    temp1.c_c PARTNER_COURSECOUNT,
+    temp2.t_c PARTNER_TEACHERCOUNT
+    FROM partner
+    JOIN
+      (SELECT partner.id p_id,
+              count(course_template.id) c_c
+       FROM partner
+       LEFT JOIN course_template ON partner.id = course_template.partner_id
+       GROUP BY partner.id) temp1 ON partner.id = temp1.p_id
+    JOIN
+      (SELECT partner.id p_id,
+              count(teacher.id) t_c
+       FROM partner
+       LEFT JOIN teacher ON partner.id = teacher.partner_id
+       GROUP BY partner.id) temp2 ON partner.id = temp2.p_id
+    LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+    LEFT JOIN category ON category.id = partner_category.category_id
+    LEFT JOIN address ON address.partner_id = partner.id
+    LEFT JOIN circle ON address.circle_id = circle.id
+    WHERE partner.deleted = 0
+    <if test="entity.idSet != null and entity.idSet.size() > 0">
+      AND partner.id IN
+      <foreach collection="idSet" item="listItem" open="(" close=")" separator=",">
+        #{listItem}
+      </foreach>
+    </if>
+  </select>
+  
   <!-- list -->
   <select id="list" parameterType="map" resultMap="PartnerExtMap">
     select
     <include refid="Partner_Base_Column_List"></include>
-    from PARTNER 
+    from PARTNER
     where PARTNER.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
@@ -741,15 +883,15 @@
       </if>
     </if>
 
-      <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
-        ORDER BY
-        <foreach collection="page.orderByEntities" item="listItem" separator=",">
-          PARTNER.${listItem.columnKey} ${listItem.order}
-        </foreach>
-      </if>
-      <if test="page != null and page.offset != null and page.size != null">
-        LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
-      </if>
+    <if test="page != null and page.orderByEntities != null and page.orderByEntities.size() > 0">
+      ORDER BY
+      <foreach collection="page.orderByEntities" item="listItem" separator=",">
+        PARTNER.${listItem.columnKey} ${listItem.order}
+      </foreach>
+    </if>
+    <if test="page != null and page.offset != null and page.size != null">
+      LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
+    </if>
   </select>
   <!-- getListCount -->
   <select id="getListCount" parameterType="map" resultType="int">
