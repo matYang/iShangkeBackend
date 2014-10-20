@@ -62,6 +62,8 @@ struct PartnerBo {
     51: i32 courseCount
     52: i32 teacherCount
     53: list<category.CategoryBo> categoryList;
+    54: string categoryValue
+    55: string circleValue
 }
 struct PartnerPageViewBo{
     1: i32 start

@@ -92,6 +92,24 @@ public class PartnerVo extends JsonResponse {
     private Integer courseCount;
     private Integer teacherCount;
     private List<CategoryVo> categoryList;
+    private String categoryValue;
+    private String circleValue;
+
+    public String getCategoryValue() {
+        return categoryValue;
+    }
+
+    public void setCategoryValue(String categoryValue) {
+        this.categoryValue = categoryValue;
+    }
+
+    public String getCircleValue() {
+        return circleValue;
+    }
+
+    public void setCircleValue(String circleValue) {
+        this.circleValue = circleValue;
+    }
 
     public List<CategoryVo> getCategoryList() {
         return categoryList;
