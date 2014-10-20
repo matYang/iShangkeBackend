@@ -91,6 +91,37 @@ public class PartnerServiceImpl implements PartnerService.Iface {
             throw exception;
         }
     }
+    
+    @Override
+    public PartnerPageViewBo queryPartnerByFilter(PartnerBo partnerBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
+        try {
+             //不进行权限校验
+            paginationBo = PageUtil.getPage(paginationBo);
+            List<PartnerBo> data = partnerManager.queryPartnerByFilter(partnerBo, paginationBo);
+            int total = partnerManager.queryPartnerByFilterTotal(partnerBo, paginationBo);
+            
+            PartnerPageViewBo pageView = new PartnerPageViewBo();
+            pageView.setStart(paginationBo.getOffset());
+            pageView.setCount(paginationBo.getSize());
+            pageView.setData(data);
+            pageView.setTotal(total);
+            return pageView;
+
+        } catch (NoPermissionException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setErrorCode(ManagerErrorCode.PERMISSION_PARTNER_QUERYPARTNER);
+            exception.setMessageKey(ManagerErrorCode.PERMISSION_PARTNER_QUERYPARTNER_KEY);
+            throw exception;
+        } catch (ManagerException e) {
+            LOGGER.info(e.getMessage(), e);
+            BusinessExceptionBo exception = new BusinessExceptionBo();
+            exception.setMessage(e.getMessage());
+            exception.setErrorCode(ManagerErrorCode.PARTNER_NOTFOUND_ERROR);
+            exception.setMessageKey(ManagerErrorCode.PARTNER_NOTFOUND_ERROR_KEY);
+            throw exception;
+        }
+    }    
 
     @Override
     public PartnerBo queryPartnerById(PartnerBo partnerBo, UserBo userBo, String permissionTag)

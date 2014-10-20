@@ -56,14 +56,12 @@ public class PartnerController extends AbstractController{
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryPartner(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        
         PartnerPageViewBo pageViewBo = null;
         paginationVo.setColumnKey(PartnerMap.PARTNER_MAP.get(paginationVo.getColumnKey()));
         paginationVo.setOrder(PartnerMap.PARTNER_MAP.get(paginationVo.getOrder()));
         
         try {
-            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), UserConverter.fromModel(new UserVo()), permissionTag);
+            pageViewBo = partnerFacade.queryPartnerByFilter(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo));
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }

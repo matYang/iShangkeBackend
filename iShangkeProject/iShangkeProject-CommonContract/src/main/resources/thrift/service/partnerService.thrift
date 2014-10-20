@@ -31,6 +31,8 @@ service PartnerService{
      */ 
     partner.PartnerPageViewBo  queryPartner(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo, 3: user.UserBo userBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo) 
 
+    partner.PartnerPageViewBo  queryPartnerByFilter(1: partner.PartnerBo partnerBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+
     /**
      *  查询合作商完整信息。<br>
      *  用户可以看到合作商完整信息

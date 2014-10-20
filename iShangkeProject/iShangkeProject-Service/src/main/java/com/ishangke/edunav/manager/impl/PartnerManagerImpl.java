@@ -21,7 +21,6 @@ import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AddressManager;
 import com.ishangke.edunav.manager.AuthManager;
@@ -214,6 +213,18 @@ public class PartnerManagerImpl implements PartnerManager {
     @Override
     public int queryTotal(PartnerBo partnerBo, UserBo userBo) {
         return partnerMapper.getListCount(PartnerConverter.fromBo(partnerBo));
+    }
+
+    @Override
+    public List<PartnerBo> queryPartnerByFilter(PartnerBo partnerBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int queryPartnerByFilterTotal(PartnerBo partnerBo, PaginationBo paginationBo) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }
