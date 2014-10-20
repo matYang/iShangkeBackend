@@ -2,7 +2,9 @@ package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +102,6 @@ public class PartnerManagerImpl implements PartnerManager {
 
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("更新合作机构时必须标注合作机构ID");
@@ -158,7 +159,6 @@ public class PartnerManagerImpl implements PartnerManager {
 
         // 插入新的partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
 
         int result = 0;
         partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -217,14 +217,62 @@ public class PartnerManagerImpl implements PartnerManager {
 
     @Override
     public List<PartnerBo> queryPartnerByFilter(PartnerBo partnerBo, PaginationBo paginationBo) {
-        // TODO Auto-generated method stub
-        return null;
+        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
+        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        //默认popularity
+        String type = "popularity";
+        String order = "DESC";
+        if(page != null && page.getOrderByEntities() != null && page.getOrderByEntities().size() > 0 && page.getOrderByEntities().get(0).getColumnKey() != null) {
+            type = page.getOrderByEntities().get(0).getColumnKey();
+        }
+        if(page != null && page.getOrderByEntities() != null && page.getOrderByEntities().size() > 0 && page.getOrderByEntities().get(0).getOrder() != null) {
+            order = page.getOrderByEntities().get(0).getOrder();
+        }
+        List<PartnerEntityExt> ids = null;
+        try {
+            ids = partnerMapper.getIdSet(partnerEntity, page, type, order);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
+        }
+        if (ids == null) {
+            return null;
+        }
+        Set<Integer> idSet = new HashSet<>();
+        for (PartnerEntityExt p : ids) {
+            idSet.add(p.getId());
+        }
+        List<PartnerEntityExt> results = null;
+        try {
+            results = partnerMapper.listByIdSet(idSet);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
+        }
+        if (results == null) {
+            return new ArrayList<PartnerBo>();
+        }
+        List<PartnerBo> convertedResults = new ArrayList<PartnerBo>();
+        for (PartnerEntityExt result : results) {
+            convertedResults.add(PartnerConverter.toBo(result));
+        }
+        return convertedResults;
     }
 
     @Override
     public int queryPartnerByFilterTotal(PartnerBo partnerBo, PaginationBo paginationBo) {
-        // TODO Auto-generated method stub
-        return 0;
+        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
+        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        //默认popularity
+        String type = "popularity";
+        if(page != null && page.getOrderByEntities() != null && page.getOrderByEntities().size() > 0 && page.getOrderByEntities().get(0).getColumnKey() != null) {
+            type = page.getOrderByEntities().get(0).getColumnKey();
+        }
+        int result = 0;
+        try {
+            result = partnerMapper.getIdSetCount(partnerEntity, type);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
+        }
+        return result;
     }
 
 }

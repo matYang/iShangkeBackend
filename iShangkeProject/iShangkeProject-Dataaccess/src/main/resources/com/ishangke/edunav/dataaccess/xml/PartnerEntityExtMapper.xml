@@ -568,6 +568,7 @@
         (SELECT partner.id PARTNER_ID
          FROM partner
          LEFT JOIN address ON partner.id = address.partner_id
+         LEFT JOIN circle ON address.circle_id = circle.id
          LEFT JOIN partner_category ON partner.id = partner_category.partner_id
          LEFT JOIN category on category.id =  partner_category.category_id
          WHERE partner.deleted = 0
@@ -599,6 +600,7 @@
         (SELECT partner.id PARTNER_ID
          FROM partner
          LEFT JOIN address ON partner.id = address.partner_id
+         LEFT JOIN circle ON address.circle_id = circle.id
          LEFT JOIN partner_category ON partner.id = partner_category.partner_id
          LEFT JOIN category on category.id =  partner_category.category_id
          WHERE partner.deleted = 0
@@ -608,6 +610,9 @@
            </if>
            <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
              AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.instName != null and !entity.instName.equals('')">
+             AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
            </if>
          </if>
          GROUP BY partner.id) temp
@@ -625,6 +630,7 @@
       SELECT partner.id PARTNER_ID
       FROM partner
       LEFT JOIN address ON partner.id = address.partner_id
+      LEFT JOIN circle ON address.circle_id = circle.id
       LEFT JOIN partner_category ON partner.id = partner_category.partner_id
       LEFT JOIN category on category.id =  partner_category.category_id
       WHERE partner.deleted = 0
@@ -634,6 +640,9 @@
            </if>
            <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
              AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.instName != null and !entity.instName.equals('')">
+             AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
            </if>
          </if>
       GROUP BY partner.id
@@ -656,6 +665,7 @@
           (SELECT partner.id PARTNER_ID
            FROM partner
            LEFT JOIN address ON partner.id = address.partner_id
+           LEFT JOIN circle ON address.circle_id = circle.id
            LEFT JOIN partner_category ON partner.id = partner_category.partner_id
            LEFT JOIN category on category.id =  partner_category.category_id
            WHERE partner.deleted = 0
