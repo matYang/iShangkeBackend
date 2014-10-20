@@ -140,17 +140,7 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
     
     
     @Override
-    public List<CoursePromotionBo> query(CoursePromotionBo coursePromotionBo, UserBo userBo, PaginationBo paginationBo) {
-        if (userBo == null) {
-            throw new ManagerException("无效请求参数");
-        }
-
-        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[CoursePromotionManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        } else {
-            throw new AuthenticationException("对不起，您无权查看课程置顶信息");
-        }
-
+    public List<CoursePromotionBo> query(CoursePromotionBo coursePromotionBo, PaginationBo paginationBo) {
         // Convert
         CoursePromotionEntityExt coursePromotionEntity = coursePromotionBo == null ? null : CoursePromotionConverter.fromBo(coursePromotionBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
@@ -172,7 +162,7 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
     }
     
     @Override
-    public int queryTotal(CoursePromotionBo coursePromotionBo, UserBo userBo) {
+    public int queryTotal(CoursePromotionBo coursePromotionBo) {
         return coursePromotionMapper.getListCount(CoursePromotionConverter.fromBo(coursePromotionBo));
     }
 

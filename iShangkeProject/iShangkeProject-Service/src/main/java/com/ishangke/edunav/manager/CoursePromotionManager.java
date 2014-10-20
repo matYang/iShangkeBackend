@@ -18,7 +18,7 @@ public interface CoursePromotionManager {
      *            调用方法的用户的信息
      * @return
      */
-    public List<CoursePromotionBo> query(CoursePromotionBo coursePromotionBo, UserBo userBo, PaginationBo paginationBo);
+    public List<CoursePromotionBo> query(CoursePromotionBo coursePromotionBo, PaginationBo paginationBo);
 
     /**
      * 本方法创建课程置顶信息<br>
@@ -56,6 +56,6 @@ public interface CoursePromotionManager {
      */
     public CoursePromotionBo deletePromotion(CoursePromotionBo coursePromotionBo, UserBo userBo);
 
-    public int queryTotal(CoursePromotionBo coursePromotionBo, UserBo userBo);
+    public int queryTotal(CoursePromotionBo coursePromotionBo);
     
 }
