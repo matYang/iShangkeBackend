@@ -562,7 +562,7 @@
   
   <!-- getIdSet -->
   <select id="getIdSet" parameterType="map" resultMap="PartnerExtMap">
-    <if test="type='teacherCount'">
+    <if test="type == 'teacherCount'">
       SELECT temp.partner_id PARTNER_ID, count(teacher.id) TEACHER_COUNT
       FROM
         (SELECT partner.id PARTNER_ID
@@ -594,7 +594,7 @@
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
-    <if test="type='courseCount'">
+    <if test="type == 'courseCount'">
       SELECT temp.partner_id PARTNER_ID, count(course_template.id) COURSE_COUNT
       FROM
         (SELECT partner.id PARTNER_ID
@@ -626,7 +626,7 @@
         LIMIT #{page.offset,jdbcType=INTEGER},#{page.size,jdbcType=INTEGER}
       </if>
     </if>
-    <if test="type='popularity'">
+    <if test="type == 'popularity'">
       SELECT partner.id PARTNER_ID
       FROM partner
       LEFT JOIN address ON partner.id = address.partner_id
