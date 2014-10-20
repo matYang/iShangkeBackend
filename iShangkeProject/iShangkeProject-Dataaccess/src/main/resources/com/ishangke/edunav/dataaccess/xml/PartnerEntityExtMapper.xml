@@ -755,7 +755,7 @@
     LEFT JOIN address ON address.partner_id = partner.id
     LEFT JOIN circle ON address.circle_id = circle.id
     WHERE partner.deleted = 0
-    <if test="entity.idSet != null and entity.idSet.size() > 0">
+    <if test="idSet != null and idSet.size() > 0">
       AND partner.id IN
       <foreach collection="idSet" item="listItem" open="(" close=")" separator=",">
         #{listItem}
