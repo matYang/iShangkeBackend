@@ -219,6 +219,12 @@ public class PartnerConverter {
             }
             partnerBo.setCategoryList(list);
         }
+        if (e.getCategoryValue() != null) {
+            partnerBo.setCategoryValue(e.getCategoryValue());
+        }
+        if (e.getCircleValue() != null) {
+            partnerBo.setCircleValue(e.getCircleValue());
+        }
         return partnerBo;
     }
 
@@ -338,6 +344,8 @@ public class PartnerConverter {
             }
             partnerEntityExt.setCategoryList(list);
         }
+        partnerEntityExt.setCategoryValue(bo.getCategoryValue());
+        partnerEntityExt.setCircleValue(bo.getCircleValue());
         return partnerEntityExt;
     }
 }

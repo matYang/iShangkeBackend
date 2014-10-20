@@ -31,6 +31,24 @@ public class PartnerEntityExt extends PartnerEntity {
     private Integer courseCount;
     private Integer teacherCount;
     private List<CategoryEntityExt> categoryList;
+    private String categoryValue;
+    private String circleValue;
+
+    public String getCategoryValue() {
+        return categoryValue;
+    }
+
+    public void setCategoryValue(String categoryValue) {
+        this.categoryValue = categoryValue;
+    }
+
+    public String getCircleValue() {
+        return circleValue;
+    }
+
+    public void setCircleValue(String circleValue) {
+        this.circleValue = circleValue;
+    }
 
     public List<CategoryEntityExt> getCategoryList() {
         return categoryList;
