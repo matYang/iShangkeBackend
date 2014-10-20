@@ -88,6 +88,15 @@ public class PartnerVo extends JsonResponse {
     private List<AddressVo> addressList;
     
     private Integer partnerId;
+    private Integer popularity;
+
+    public Integer getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
 
     public Integer getId() {
         return id;

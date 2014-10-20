@@ -218,6 +218,11 @@ public class PartnerConverter {
             }
             partnerBo.setTeacherList(list);
         }
+        if (vo.getPopularity() != null) {
+            partnerBo.setPopularity(vo.getPopularity());
+        } else {
+            partnerBo.setPopularity(Constant.DEFAULTNULL);
+        }
         return partnerBo;
     }
 
@@ -305,6 +310,9 @@ public class PartnerConverter {
             partnerVo.setUniRegLocation(bo.getUniRegLocation());
         }
         partnerVo.setWholeName(bo.getWholeName());
+        if (Constant.DEFAULTNULL != bo.getPopularity()) {
+            partnerVo.setPopularity(bo.getPopularity());
+        }
         return partnerVo;
     }
 }

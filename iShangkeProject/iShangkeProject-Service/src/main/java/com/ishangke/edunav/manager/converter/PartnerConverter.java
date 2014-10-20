@@ -200,6 +200,11 @@ public class PartnerConverter {
             }
             partnerBo.setClassPhotoList(list);
         }
+        if (e.getPopularity() != null) {
+            partnerBo.setPopularity(e.getPopularity());
+        } else {
+            partnerBo.setPopularity(Constant.DEFAULTNULL);
+        }
         return partnerBo;
     }
 
@@ -303,6 +308,9 @@ public class PartnerConverter {
             partnerEntityExt.setUniRegLocation(bo.getUniRegLocation());
         }
         partnerEntityExt.setWholeName(bo.getWholeName());
+        if (Constant.DEFAULTNULL != bo.getPopularity()) {
+            partnerEntityExt.setPopularity(bo.getPopularity());
+        }
         return partnerEntityExt;
     }
 }

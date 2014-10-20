@@ -57,6 +57,7 @@ struct PartnerBo {
     47: list<teacher.TeacherBo> teacherList;
     48: list<classPhoto.ClassPhotoBo> classPhotoList;
     49: list<address.AddressBo> addressList;
+    50: i32 popularity
 }
 struct PartnerPageViewBo{
     1: i32 start
