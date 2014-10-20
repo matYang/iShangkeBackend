@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.PartnerPageViewBo;
-import com.ishangke.edunav.commoncontract.model.SessionBo;
-import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.facade.user.PartnerFacade;
-import com.ishangke.edunav.facade.user.UserFacade;
 import com.ishangke.edunav.web.common.PaginationVo;
 import com.ishangke.edunav.web.converter.PaginationConverter;
 import com.ishangke.edunav.web.converter.PartnerConverter;
@@ -37,9 +34,6 @@ public class PartnerController extends AbstractController{
     
     @Autowired
     PartnerFacade partnerFacade;
-    
-    @Autowired
-    UserFacade userFacade;
     
     //get partner by id is open data
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
@@ -63,26 +57,13 @@ public class PartnerController extends AbstractController{
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryPartnerById(PartnerVo partnerVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-        
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
-        int curId = curUser.getId();
-        boolean loggedId = curId > 0;
-        if (!loggedId) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
         
         PartnerPageViewBo pageViewBo = null;
         paginationVo.setColumnKey(PartnerMap.PARTNER_MAP.get(paginationVo.getColumnKey()));
         paginationVo.setOrder(PartnerMap.PARTNER_MAP.get(paginationVo.getOrder()));
         
         try {
-            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), curUser, permissionTag);
+            pageViewBo = partnerFacade.queryPartner(PartnerConverter.fromModel(partnerVo), PaginationConverter.toBo(paginationVo), UserConverter.fromModel(new UserVo()), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }
