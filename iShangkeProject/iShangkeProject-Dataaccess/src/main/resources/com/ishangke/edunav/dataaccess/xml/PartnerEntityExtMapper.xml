@@ -647,6 +647,78 @@
     </if>
   </select>
   
+  <!-- getIdSetCount -->
+  <select id="getIdSetCount" parameterType="map" >
+    <if test="type='teacherCount'">
+      select county(*) from (
+        SELECT temp.partner_id PARTNER_ID
+        FROM
+          (SELECT partner.id PARTNER_ID
+           FROM partner
+           LEFT JOIN address ON partner.id = address.partner_id
+           LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+           LEFT JOIN category on category.id =  partner_category.category_id
+           WHERE partner.deleted = 0
+           <if test="entity != null">
+             <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+               AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+             </if>
+             <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+               AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+             </if>
+             <if test="entity.instName != null and !entity.instName.equals('')">
+               AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
+             </if>
+           </if>
+           GROUP BY partner.id) temp
+        LEFT JOIN teacher ON temp.partner_id = teacher.partner_id
+        GROUP BY temp.partner_id
+      ) as total
+    </if>
+    <if test="type='courseCount'">
+      select count(*) from (
+        SELECT temp.partner_id PARTNER_ID
+        FROM
+          (SELECT partner.id PARTNER_ID
+           FROM partner
+           LEFT JOIN address ON partner.id = address.partner_id
+           LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+           LEFT JOIN category on category.id =  partner_category.category_id
+           WHERE partner.deleted = 0
+           <if test="entity != null">
+             <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+               AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+             </if>
+             <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+               AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+             </if>
+           </if>
+           GROUP BY partner.id) temp
+        LEFT JOIN course_template ON temp.partner_id = course_template.partner_id
+        GROUP BY temp.partner_id
+      ) as total
+    </if>
+    <if test="type='popularity'">
+      select count(*) from (
+        SELECT partner.id PARTNER_ID
+        FROM partner
+        LEFT JOIN address ON partner.id = address.partner_id
+        LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+        LEFT JOIN category on category.id =  partner_category.category_id
+        WHERE partner.deleted = 0
+           <if test="entity != null">
+             <if test="entity.circleValue != null and !entity.circleValue.equals('')">
+               AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+             </if>
+             <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
+               AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+             </if>
+           </if>
+        GROUP BY partner.id
+      ) as total
+    </if>
+  </select>
+  
   <!-- listByIdSet -->
   <select id="listByIdSet" parameterType="map" resultMap="PartnerExtMap">
     SELECT 

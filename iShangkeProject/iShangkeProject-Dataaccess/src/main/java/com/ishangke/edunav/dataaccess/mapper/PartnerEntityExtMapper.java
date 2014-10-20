@@ -36,5 +36,10 @@ public interface PartnerEntityExtMapper {
             @Param("type") String type,
             @Param("order") String order);
     
+    public int getIdSetCount(
+            @Param("entity") PartnerEntityExt partnerEntityExt,
+            @Param("type") String type,
+            @Param("order") String order);
+    
     public List<PartnerEntityExt> listByIdSet(@Param("idSet") Set<Integer> idSet);
 }
