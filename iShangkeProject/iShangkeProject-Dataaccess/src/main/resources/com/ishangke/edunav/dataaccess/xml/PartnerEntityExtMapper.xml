@@ -760,7 +760,10 @@
       <foreach collection="idSet" item="listItem" open="(" close=")" separator=",">
         #{listItem}
       </foreach>
-      
+      order by field
+      <foreach collection="idSet" item="listItem" open="(partner.id," close=")" separator=",">
+        #{listItem}
+      </foreach>
     </if>
   </select>
   
