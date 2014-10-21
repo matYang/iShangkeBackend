@@ -23,6 +23,15 @@ public class CourseCommentEntityExt extends CourseCommentEntity {
     private Calendar createTimeEnd;
     private UserEntityExt user;
 
+    private Integer partnerId;
+    
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
+    }
 
     public UserEntityExt getUser() {
         return user;

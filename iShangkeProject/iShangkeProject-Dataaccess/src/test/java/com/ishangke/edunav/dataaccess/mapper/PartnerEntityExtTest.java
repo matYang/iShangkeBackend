@@ -51,11 +51,11 @@ public class PartnerEntityExtTest {
     }
     @Test
     public void testUpdate() {
-        PartnerEntityExt upDate = PartnerEntityExtMapper.getById(2);
+        PartnerEntityExt upDate = PartnerEntityExtMapper.getInfoById(2);
         upDate.setWholeName("_test_name_爱上课");
         upDate.setCreateTime(time);
         PartnerEntityExtMapper.update(upDate);
-        upDate = PartnerEntityExtMapper.getById(2);
+        upDate = PartnerEntityExtMapper.getInfoById(2);
         Assert.assertEquals("_test_name_爱上课", upDate.getWholeName());
         Assert.assertEquals(DateUtility.toSQLDateTime(time), DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
@@ -76,10 +76,10 @@ public class PartnerEntityExtTest {
 
     @Test
     public void testUpdate1() {
-        PartnerEntityExt update = PartnerEntityExtMapper.getById(2);
+        PartnerEntityExt update = PartnerEntityExtMapper.getInfoById(2);
         update.setPopularity(6);
         PartnerEntityExtMapper.update(update);
-        PartnerEntityExt updateAfter = PartnerEntityExtMapper.getById(2);
+        PartnerEntityExt updateAfter = PartnerEntityExtMapper.getInfoById(2);
         Assert.assertSame(6, updateAfter.getPopularity());
     }
     

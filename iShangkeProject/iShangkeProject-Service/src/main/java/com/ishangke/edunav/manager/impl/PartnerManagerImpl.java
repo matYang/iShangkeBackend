@@ -81,17 +81,23 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("无效请求参数");
         }
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        PartnerEntityExt result = null;
+        PartnerEntityExt result1 = null;
+        PartnerEntityExt result2 = null;
         try {
-            result = partnerMapper.getInfoById(partnerEntity.getId());
+            result1 = partnerMapper.getInfoById(partnerEntity.getId());
+            result2 = partnerMapper.getById(partnerEntity.getId());
         } catch (Throwable t) {
             throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
 
-        if (result == null) {
+        if (result1 == null || result2 == null) {
             throw new PartnerNotFoundException("对不起，无法找到ID为" + partnerEntity.getId() + "的合作机构");
+        } else {
+            //将reslut2中的teacher list 和 photo list赋给list1
+            result1.setTeacherList(result2.getTeacherList());
+            result1.setClassPhotoList(result2.getClassPhotoList());
         }
-        return PartnerConverter.toBo(result);
+        return PartnerConverter.toBo(result1);
     }
 
     @Override

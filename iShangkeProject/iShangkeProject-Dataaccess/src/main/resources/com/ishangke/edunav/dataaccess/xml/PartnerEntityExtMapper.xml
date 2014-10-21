@@ -54,8 +54,6 @@
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
       <result column="TEACHER_CREATETIME" property="createTime"
         typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
-      <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
     </collection>
     <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
       <id column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
@@ -74,6 +72,7 @@
       <id column="ADDRESS_ID" property="id" jdbcType="INTEGER" />
       <result column="ADDRESS_PARTNERID" property="partnerId" jdbcType="INTEGER" />
       <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
+      <result column="ADDRESS_REALADDRESS" property="realAddress" jdbcType="VARCHAR" />
       <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
       <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
@@ -157,10 +156,7 @@
     TEACHER.LAST_MODIFY_TIME
     TEACHER_LASTMODIFYTIME,
     TEACHER.CREATE_TIME
-    TEACHER_CREATETIME,
-    TEACHER.ENABLED TEACHER_ENABLED,
-    TEACHER.DELETED
-    TEACHER_DELETED
+    TEACHER_CREATETIME
   </sql>
   <sql id="ClassPhoto_Base_Column_List">
     CLASS_PHOTO.ID CLASSPHOTO_ID,
@@ -184,6 +180,8 @@
     ADDRESS.LAT
     ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG,
+    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
+    ADDRESS.REAL_ADDRESS ADDRESS_REALADDRESS,
     CIRCLE.NAME CIRCLE_NAME
   </sql>
   <sql id="Category_Base_Column_List">
@@ -516,7 +514,34 @@
   </select>
   <!-- getInfoById -->
   <select id="getInfoById" parameterType="int" resultMap="PartnerExtMap">
-    select
+    SELECT 
+    <include refid="Partner_Base_Column_List"></include>,
+    <include refid="Partner_Detail_Column_List"></include>,
+    <include refid="Address_Base_Column_List"></include>,
+    <include refid="Category_Base_Column_List"></include>,
+    temp1.c_c PARTNER_COURSECOUNT,
+    temp2.t_c PARTNER_TEACHERCOUNT
+    FROM partner
+    JOIN
+      (SELECT partner.id p_id,
+              count(course_template.id) c_c
+       FROM partner
+       LEFT JOIN course_template ON PARTNER.ID = #{id} AND partner.id = course_template.partner_id
+       GROUP BY partner.id) temp1 ON partner.id = temp1.p_id
+    JOIN
+      (SELECT partner.id p_id,
+              count(teacher.id) t_c
+       FROM partner
+       LEFT JOIN teacher ON PARTNER.ID = #{id} AND partner.id = teacher.partner_id
+       GROUP BY partner.id) temp2 ON partner.id = temp2.p_id
+    LEFT JOIN partner_category ON partner.id = partner_category.partner_id
+    LEFT JOIN category ON category.id = partner_category.category_id
+    LEFT JOIN address ON address.partner_id = partner.id
+    LEFT JOIN circle ON address.circle_id = circle.id
+    WHERE partner.deleted = 0 AND PARTNER.ID = #{id}
+  
+  
+    <!-- select
     <include refid="Partner_Base_Column_List"></include>
     ,
     <include refid="Partner_Detail_Column_List"></include>
@@ -537,8 +562,10 @@
     ON
     ADDRESS.PARTNER_ID =
     PARTNER.ID and ADDRESS.DELETED = 0
-    where PARTNER.DELETED = 0 AND PARTNER.ID = #{id}
+    where PARTNER.DELETED = 0 AND PARTNER.ID = #{id} -->
   </select>
+  
+  
 
   <!-- listAll -->
   <select id="listAll" resultMap="PartnerExtMap">
@@ -548,11 +575,23 @@
   </select>
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="PartnerExtMap">
-    SELECT
+    select
+    PARTNER.ID PARTNER_ID,
+    <include refid="Teacher_Base_Column_List"></include>,
+    <include refid="ClassPhoto_Base_Column_List"></include>
+    from PARTNER PARTNER
+    left join TEACHER TEACHER
+    ON TEACHER.PARTNER_ID = PARTNER.ID and TEACHER.DELETED = 0
+    left join
+    CLASS_PHOTO
+    CLASS_PHOTO
+    ON CLASS_PHOTO.PARTNER_ID = PARTNER.ID and CLASS_PHOTO.DELETED = 0
+    where PARTNER.DELETED = 0 AND PARTNER.ID = #{id}
+    <!-- SELECT
     <include refid="Partner_Base_Column_List"></include>
     ,
     <include refid="Partner_Detail_Column_List"></include>
-    from PARTNER where PARTNER.DELETED = 0 and PARTNER.ID = #{id,jdbcType=INTEGER}
+    from PARTNER where PARTNER.DELETED = 0 and PARTNER.ID = #{id,jdbcType=INTEGER} -->
   </select>
   
   <!-- getIdSet -->
@@ -579,7 +618,7 @@
              AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
            </if>
            <if test="entity.instName != null and !entity.instName.equals('')">
-             AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
+             AND (PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%" or PARTNER.WHOLE_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%") 
            </if>
          </if>
          GROUP BY partner.id) temp
