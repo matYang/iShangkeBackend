@@ -66,7 +66,7 @@
         #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        #{endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
