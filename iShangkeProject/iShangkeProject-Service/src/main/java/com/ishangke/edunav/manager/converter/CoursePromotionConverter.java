@@ -1,9 +1,14 @@
 package com.ishangke.edunav.manager.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.CoursePromotionBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionPhotoBo;
 import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
+import com.ishangke.edunav.dataaccess.model.CoursePromotionPhotoEntityExt;
 
 public class CoursePromotionConverter {
     public static CoursePromotionBo toBo(CoursePromotionEntityExt e) {
@@ -34,6 +39,16 @@ public class CoursePromotionConverter {
         bo.setCreateTimeEnd(e.getCreateTimeEnd() == null ? Constant.DEFAULTNULL : e.getCreateTimeEnd().getTimeInMillis());
         bo.setEndTimeEnd(e.getEndTimeEnd() == null ? Constant.DEFAULTNULL : e.getEndTimeEnd().getTimeInMillis());
         bo.setStartTimeEnd(e.getStartTimeEnd() == null ? Constant.DEFAULTNULL : e.getStartTimeEnd().getTimeInMillis());
+        if (e.getCourse() != null) {
+            bo.setCourse(CourseConverter.toBo(e.getCourse()));
+        }
+        if (e.getPhotoList() != null) {
+            List<CoursePromotionPhotoBo> list = new ArrayList<CoursePromotionPhotoBo>();
+            for (CoursePromotionPhotoEntityExt a : e.getPhotoList()) {
+                list.add(CoursePromotionPhotoConverter.toBo(a));
+            }
+            bo.setPhotoList(list);
+        }
         return bo;
     }
     

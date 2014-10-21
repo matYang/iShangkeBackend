@@ -1,3 +1,6 @@
+include "course.thrift"
+include "coursePromotionPhoto.thrift"
+
 namespace java com.ishangke.edunav.commoncontract.model
 
 struct CoursePromotionBo {
@@ -14,6 +17,8 @@ struct CoursePromotionBo {
   11: i64 createTimeEnd
   12: i64 startTimeEnd
   13: i64 endTimeEnd
+  14: course.CourseBo course
+  15: list<coursePromotionPhoto.CoursePromotionPhotoBo> photoList
 }
 
 struct CoursePromotionPageViewBo{
