@@ -90,5 +90,14 @@ public class PartnerEntityExtTest {
         List<PartnerEntityExt> result = PartnerEntityExtMapper.list(PartnerQueryEntity, null);
         Assert.assertSame(1, result.get(0).getPopularity());
     }
-
+    
+    @Test
+    public void testQuery2() {
+        PartnerEntityExt PartnerQueryEntity = new PartnerEntityExt();
+        PartnerQueryEntity.setCategoryValue("00");
+        List<PartnerEntityExt> result = PartnerEntityExtMapper.getIdSet(PartnerQueryEntity, null, "teacherCount", "ASC");
+        System.out.println("size=="+result.size());
+        int count = PartnerEntityExtMapper.getIdSetCount(PartnerQueryEntity, "teacherCount");
+        System.out.println("count=="+count);
+    }
 }
