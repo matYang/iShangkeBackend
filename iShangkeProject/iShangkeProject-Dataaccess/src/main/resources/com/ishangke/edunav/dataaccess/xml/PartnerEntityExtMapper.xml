@@ -76,16 +76,12 @@
       <result column="ADDRESS_DETAIL" property="detail" jdbcType="VARCHAR" />
       <result column="ADDRESS_LAT" property="lat" jdbcType="DOUBLE" />
       <result column="ADDRESS_LNG" property="lng" jdbcType="DOUBLE" />
-      <result column="ADDRESS_LAST_MODIFYTIME" property="lastModifyTime"
-        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="ADDRESS_CREATETIME" property="createTime"
-        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
-      <result column="ADDRESS_ENABLED" property="enabled" jdbcType="INTEGER" />
-      <result column="ADDRESS_DELETED" property="deleted" jdbcType="INTEGER" />
+      <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+      <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
     </collection>
     <collection property="categoryList" javaType="java.util.ArrayList" ofType="CategoryEntityExt">
       <id column="CATEGORY_ID" property="id" jdbcType="INTEGER" />
-      <result column="CATEGORY_VALUE" property="value" jdbcType="VARCHAR" />
       <result column="CATEGORY_NAME" property="name" jdbcType="VARCHAR" />
     </collection>
   </resultMap>
@@ -188,16 +184,10 @@
     ADDRESS.LAT
     ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG,
-    ADDRESS.LAST_MODIFY_TIME
-    ADDRESS_LASTMODIFYTIME,
-    ADDRESS.CREATE_TIME
-    ADDRESS_CREATETIME,
-    ADDRESS.ENABLED ADDRESS_ENABLED,
-    ADDRESS.DELETED ADDRESS_DELETED
+    CIRCLE.NAME CIRCLE_NAME
   </sql>
   <sql id="Category_Base_Column_List">
     CATEGORY.ID CATEGORY_ID,
-    CATEGORY.VALUE CATEGORY_VALUE,
     CATEGORY.NAME CATEGORY_NAME
   </sql>
   <!-- add -->
@@ -574,12 +564,16 @@
          FROM partner
          LEFT JOIN address ON partner.id = address.partner_id
          LEFT JOIN circle ON address.circle_id = circle.id
+         LEFT JOIN location ON address.location_id = location.id
          LEFT JOIN partner_category ON partner.id = partner_category.partner_id
          LEFT JOIN category on category.id =  partner_category.category_id
          WHERE partner.deleted = 0
          <if test="entity != null">
            <if test="entity.circleValue != null and !entity.circleValue.equals('')">
              AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+             AND location.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
            </if>
            <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
              AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
@@ -606,12 +600,16 @@
          FROM partner
          LEFT JOIN address ON partner.id = address.partner_id
          LEFT JOIN circle ON address.circle_id = circle.id
+         LEFT JOIN location ON address.location_id = location.id
          LEFT JOIN partner_category ON partner.id = partner_category.partner_id
          LEFT JOIN category on category.id =  partner_category.category_id
          WHERE partner.deleted = 0
          <if test="entity != null">
            <if test="entity.circleValue != null and !entity.circleValue.equals('')">
              AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+             AND location.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
            </if>
            <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
              AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
@@ -636,12 +634,16 @@
       FROM partner
       LEFT JOIN address ON partner.id = address.partner_id
       LEFT JOIN circle ON address.circle_id = circle.id
+      LEFT JOIN location ON address.location_id = location.id
       LEFT JOIN partner_category ON partner.id = partner_category.partner_id
       LEFT JOIN category on category.id =  partner_category.category_id
       WHERE partner.deleted = 0
          <if test="entity != null">
            <if test="entity.circleValue != null and !entity.circleValue.equals('')">
              AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
+           </if>
+           <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+             AND location.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
            </if>
            <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
              AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
@@ -678,6 +680,9 @@
              <if test="entity.circleValue != null and !entity.circleValue.equals('')">
                AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
              </if>
+             <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+               AND location.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
+             </if>
              <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
                AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
              </if>
@@ -704,8 +709,14 @@
              <if test="entity.circleValue != null and !entity.circleValue.equals('')">
                AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
              </if>
+             <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+               AND location.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
+             </if>
              <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
                AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+             </if>
+             <if test="entity.instName != null and !entity.instName.equals('')">
+               AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
              </if>
            </if>
            GROUP BY partner.id) temp
@@ -725,8 +736,14 @@
              <if test="entity.circleValue != null and !entity.circleValue.equals('')">
                AND circle.VALUE LIKE #{entity.circleValue,jdbcType=VARCHAR}"%"
              </if>
+             <if test="entity.locationValue != null and !entity.locationValue.equals('')">
+               AND location.VALUE LIKE #{entity.locationValue,jdbcType=VARCHAR}"%"
+             </if>
              <if test="entity.categoryValue != null and !entity.categoryValue.equals('')">
                AND category.VALUE LIKE #{entity.categoryValue,jdbcType=VARCHAR}"%"
+             </if>
+             <if test="entity.instName != null and !entity.instName.equals('')">
+               AND PARTNER.INST_NAME LIKE "%"#{entity.instName,jdbcType=VARCHAR}"%"
              </if>
            </if>
         GROUP BY partner.id
