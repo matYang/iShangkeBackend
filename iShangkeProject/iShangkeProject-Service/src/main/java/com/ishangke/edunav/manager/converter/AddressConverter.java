@@ -83,6 +83,12 @@ public class AddressConverter {
         if (e.getRealAddress() != null) {
             addressBo.setRealAddress(e.getRealAddress());
         }
+        if (e.getLocationName() != null) {
+            addressBo.setLocationName(e.getLocationName());
+        }
+        if (e.getCircleName() != null) {
+            addressBo.setCircleName(e.getCircleName());
+        }
         return addressBo;
     }
 
@@ -130,6 +136,8 @@ public class AddressConverter {
         addressEntityExt.setLocationIdSet(bo.getLocationIdSet());
         addressEntityExt.setPartnerId(bo.getPartnerId());
         addressEntityExt.setPartnerIdSet(bo.getPartnerIdSet());
+        addressEntityExt.setLocationName(bo.getLocationName());
+        addressEntityExt.setCircleName(bo.getCircleName());
         return addressEntityExt;
     }
 }

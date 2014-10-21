@@ -33,6 +33,15 @@ public class PartnerEntityExt extends PartnerEntity {
     private List<CategoryEntityExt> categoryList;
     private String categoryValue;
     private String circleValue;
+    private String locationValue;
+
+    public String getLocationValue() {
+        return locationValue;
+    }
+
+    public void setLocationValue(String locationValue) {
+        this.locationValue = locationValue;
+    }
 
     public String getCategoryValue() {
         return categoryValue;

@@ -231,6 +231,9 @@ public class PartnerConverter {
         if (vo.getCircleValue() != null) {
             partnerBo.setCircleValue(vo.getCircleValue());
         }
+        if (vo.getLocationValue() != null) {
+            partnerBo.setLocationValue(vo.getLocationValue());
+        }
         return partnerBo;
     }
 
@@ -336,6 +339,7 @@ public class PartnerConverter {
         }
         partnerVo.setCategoryValue(bo.getCategoryValue());
         partnerVo.setCircleValue(bo.getCircleValue());
+        partnerVo.setLocationValue(bo.getLocationValue());
         return partnerVo;
     }
 }

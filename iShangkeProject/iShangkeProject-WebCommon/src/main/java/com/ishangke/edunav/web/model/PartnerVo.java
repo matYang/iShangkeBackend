@@ -94,6 +94,15 @@ public class PartnerVo extends JsonResponse {
     private List<CategoryVo> categoryList;
     private String categoryValue;
     private String circleValue;
+    private String locationValue;
+
+    public String getLocationValue() {
+        return locationValue;
+    }
+
+    public void setLocationValue(String locationValue) {
+        this.locationValue = locationValue;
+    }
 
     public String getCategoryValue() {
         return categoryValue;
