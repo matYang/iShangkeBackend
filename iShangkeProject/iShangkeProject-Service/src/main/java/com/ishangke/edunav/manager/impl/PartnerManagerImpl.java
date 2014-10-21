@@ -234,7 +234,8 @@ public class PartnerManagerImpl implements PartnerManager {
         } catch (Throwable t) {
             throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
-        if (ids == null) {
+        //如果idSet为0，说明没有符合条件的结果集，直接return null
+        if (ids == null || ids.size() == 0) {
             return null;
         }
         List<Integer> idSet = new ArrayList<>();

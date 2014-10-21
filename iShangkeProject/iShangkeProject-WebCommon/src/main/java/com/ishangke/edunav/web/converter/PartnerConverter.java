@@ -328,9 +328,8 @@ public class PartnerConverter {
             partnerVo.setTeacherCount(bo.getTeacherCount());
         }
         if (bo.getCategoryList() != null) {
-            List<CategoryVo> list = null;
+            List<CategoryVo> list = new ArrayList<>();
             for (CategoryBo b : bo.getCategoryList()) {
-                list = new ArrayList<>();
                 list.add(CategoryConverter.toModel(b));
             }
             partnerVo.setCategoryList(list);

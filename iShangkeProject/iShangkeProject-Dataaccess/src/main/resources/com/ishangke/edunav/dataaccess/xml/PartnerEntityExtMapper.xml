@@ -100,20 +100,13 @@
     PARTNER.LAST_MODIFY_TIME
     PARTNER_LASTMODIFYTIME,
     PARTNER.CREATE_TIME PARTNER_CREATETIME,
-    PARTNER.ENABLED PARTNER_ENABLED,
-    PARTNER.DELETED PARTNER_DELETED,
     PARTNER.WHOLE_NAME
     PARTNER_WHOLENAME,
-    PARTNER.LICENCE
-    PARTNER_LICENCE,
     PARTNER.ORGANIZATION_NUM
     PARTNER_ORGANIZATIONNUM,
     PARTNER.REFERENCE
     PARTNER_REFERENCE,
 
-    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
-    PARTNER.PARTNER_DISTINCTION
-    PARTNER_PARTNERDISTINCTION,
     PARTNER.LICENCE_IMG_URL
     PARTNER_LICENCEIMGURL,
     PARTNER.TAX_REG_IMG_URL
@@ -137,16 +130,24 @@
     PARTNER.REG_CONTACT_PHONE
     PARTNER_REGCONTACTPHONE,
     PARTNER.REG_CONTACT_FAX PARTNER_REGCONTACTFAX,
-    PARTNER.CUTOFF_DAY
-    PARTNER_CUTOFFDAY,
-    PARTNER.CUTOFF_TIME PARTNER_CUTOFFTIME,
     PARTNER.PARTNER_QUALIFICATION
     PARTNER_PARTNERQUALIFICATION,
     PARTNER.RATING
     PARTNER_RATING,
     PARTNER.POPULARITY PARTNER_POPULARITY
-
   </sql>
+  
+  <sql id="Partner_Detail_Column_List">
+    PARTNER.LICENCE
+    PARTNER_LICENCE,
+    PARTNER.PARTNER_INTRO PARTNER_PARTNERINTRO,
+    PARTNER.PARTNER_DISTINCTION
+    PARTNER_PARTNERDISTINCTION,
+    PARTNER.CUTOFF_DAY
+    PARTNER_CUTOFFDAY,
+    PARTNER.CUTOFF_TIME PARTNER_CUTOFFTIME
+  </sql>
+  
   <sql id="Teacher_Base_Column_List">
     TEACHER.ID TEACHER_ID,
     TEACHER.PARTNER_ID TEACHER_PARTNERID,
@@ -528,6 +529,8 @@
     select
     <include refid="Partner_Base_Column_List"></include>
     ,
+    <include refid="Partner_Detail_Column_List"></include>
+    ,
     <include refid="Teacher_Base_Column_List"></include>
     ,
     <include refid="ClassPhoto_Base_Column_List"></include>
@@ -556,7 +559,9 @@
   <!-- getById -->
   <select id="getById" parameterType="int" resultMap="PartnerExtMap">
     SELECT
-    <include refid="Partner_Base_Column_List" />
+    <include refid="Partner_Base_Column_List"></include>
+    ,
+    <include refid="Partner_Detail_Column_List"></include>
     from PARTNER where PARTNER.DELETED = 0 and PARTNER.ID = #{id,jdbcType=INTEGER}
   </select>
   
