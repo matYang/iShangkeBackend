@@ -30,6 +30,7 @@ struct CourseCommentBo {
     26: i64 createTimeStart
     27: i64 createTimeEnd
     28: user.UserBo user
+    29: i32 partnerId
 }
 
 struct CourseCommentPageViewBo{

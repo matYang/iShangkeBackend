@@ -44,6 +44,16 @@ public class CourseCommentVo extends JsonResponse {
     private Long createTimeStart;
     private Long createTimeEnd;
     private UserVo user;
+    
+    private Integer partnerId;
+
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
+    }
 
     public UserVo getUser() {
         return user;

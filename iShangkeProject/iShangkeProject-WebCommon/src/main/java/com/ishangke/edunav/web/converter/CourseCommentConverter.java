@@ -128,6 +128,11 @@ public class CourseCommentConverter {
         } else {
             courseCommentBo.setLastModifyTimeStart(Constant.DEFAULTNULL);
         }
+        if (vo.getPartnerId() != null) {
+            courseCommentBo.setPartnerId(vo.getPartnerId());
+        } else {
+            courseCommentBo.setPartnerId(Constant.DEFAULTNULL);
+        }
         return courseCommentBo;
     }
 
