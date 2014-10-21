@@ -184,6 +184,7 @@
     ADDRESS.LAT
     ADDRESS_LAT,
     ADDRESS.LNG ADDRESS_LNG,
+    ADDRESS.CIRCLE_ID ADDRESS_CIRCLEID,
     CIRCLE.NAME CIRCLE_NAME
   </sql>
   <sql id="Category_Base_Column_List">
