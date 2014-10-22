@@ -247,6 +247,9 @@ insert into `permissions`(`ID`,`NAME`,`PATH`,`TAG`,`LAST_MODIFY_TIME`,`CREATE_TI
 insert into `permissions`(`ID`,`NAME`,`PATH`,`TAG`,`LAST_MODIFY_TIME`,`CREATE_TIME`,`ENABLED`,`DELETED`) values ('174','delete course comment','DELETE/a-api/v2/comment/{id}','DELETE/a-api/v2/comment/{id}','2014-09-28 20:45:25','2014-09-28 20:45:25','0','0');
 insert into `permissions`(`ID`,`NAME`,`PATH`,`TAG`,`LAST_MODIFY_TIME`,`CREATE_TIME`,`ENABLED`,`DELETED`) values ('175','query course comment','GET/a-api/v2/comment','GET/a-api/v2/comment','2014-09-28 20:45:25','2014-09-28 20:45:25','0','0');
 INSERT INTO `edunav`.`permissions` (`ID`, `NAME`, `PATH`, `TAG`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `ENABLED`, `DELETED`) VALUES ('176', 'create course promotion', 'POST/a-api/v2/coursePromotion', 'POST/a-api/v2/coursePromotion', '2014-10-21 15:46:49', '2014-10-21 15:46:49', '0', '0');
+INSERT INTO `edunav`.`permissions` (`ID`, `NAME`, `PATH`, `TAG`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `ENABLED`, `DELETED`) VALUES ('177', 'update course promotion', 'PUT/a-api/v2/coursePromotion/{id}', 'PUT/a-api/v2/coursePromotion/{id}', '2014-10-21 15:46:49', '2014-10-21 15:46:49', '0', '0');
+INSERT INTO `edunav`.`permissions` (`ID`, `NAME`, `PATH`, `TAG`, `LAST_MODIFY_TIME`, `CREATE_TIME`, `ENABLED`, `DELETED`) VALUES ('178', 'delete course promotion', 'DELETE/a-api/v2/coursePromotion/{id}', 'DELETE/a-api/v2/coursePromotion/{id}', '2014-10-21 15:46:49', '2014-10-21 15:46:49', '0', '0');
+
 
 insert into `role_permission`(`ID`,`ROLE_ID`,`PERMISSION_ID`,`LAST_MODIFY_TIME`,`DELETED`) values ('527','4','1','2014-08-17 13:59:39','0');
 insert into `role_permission`(`ID`,`ROLE_ID`,`PERMISSION_ID`,`LAST_MODIFY_TIME`,`DELETED`) values ('528','3','2','2014-08-17 13:59:39','0');
@@ -562,6 +565,11 @@ insert into `role_permission`(`ID`,`ROLE_ID`,`PERMISSION_ID`,`LAST_MODIFY_TIME`,
 insert into `role_permission`(`ID`,`ROLE_ID`,`PERMISSION_ID`,`LAST_MODIFY_TIME`,`DELETED`) values ('838','2','162','2014-09-28 20:49:14','0');
 insert into `role_permission`(`ID`,`ROLE_ID`,`PERMISSION_ID`,`LAST_MODIFY_TIME`,`DELETED`) values ('839','2','161','2014-09-28 20:49:14','0');
 INSERT INTO `edunav`.`role_permission` (`ID`, `ROLE_ID`, `PERMISSION_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES ('840', '2', '176', '2014-10-21 15:46:49', '0');
+INSERT INTO `edunav`.`role_permission` (`ID`, `ROLE_ID`, `PERMISSION_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES ('841', '2', '177', '2014-10-21 15:46:49', '0');
+INSERT INTO `edunav`.`role_permission` (`ID`, `ROLE_ID`, `PERMISSION_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES ('842', '2', '178', '2014-10-21 15:46:49', '0');
+INSERT INTO `edunav`.`role_permission` (`ID`, `ROLE_ID`, `PERMISSION_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES ('843', '1', '176', '2014-10-21 15:46:49', '0');
+INSERT INTO `edunav`.`role_permission` (`ID`, `ROLE_ID`, `PERMISSION_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES ('844', '1', '177', '2014-10-21 15:46:49', '0');
+INSERT INTO `edunav`.`role_permission` (`ID`, `ROLE_ID`, `PERMISSION_ID`, `LAST_MODIFY_TIME`, `DELETED`) VALUES ('845', '1', '178', '2014-10-21 15:46:49', '0');
 
 
 
