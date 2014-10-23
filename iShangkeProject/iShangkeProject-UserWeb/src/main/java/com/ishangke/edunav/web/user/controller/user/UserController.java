@@ -410,9 +410,31 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse fp(@RequestParam(value = "phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse fp(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
+
+        // 校验验证码
+        String kaptcha = (String) req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+        boolean verified = true;
+        try {
+            if (!StringUtils.isNotBlank(vcode) || !MD5Hash.hash(vcode).equalsIgnoreCase(kaptcha)) {
+                verified = false;
+            }
+        } catch (NoSuchAlgorithmException e) {
+            verified = false;
+
+        } catch (UnsupportedEncodingException e) {
+            verified = false;
+        } finally {
+            if (!verified) {
+                JsonResponse jsonResponse = new JsonResponse();
+                jsonResponse.setMsgKey("vcode");
+                jsonResponse.setMessage("验证码错误");
+                jsonResponse.setErrorCode(400);
+                resp.setStatus(400);
+                return jsonResponse;
+            }
+        }
 
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
@@ -421,6 +443,8 @@ public class UserController extends AbstractController {
             userFacade.openForgetPasswordSession(UserConverter.fromModel(userVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
+        } finally {
+            req.getSession().removeAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         }
 
         return new EmptyResponse();
@@ -428,7 +452,7 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    JsonResponse recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
+ JsonResponse recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
