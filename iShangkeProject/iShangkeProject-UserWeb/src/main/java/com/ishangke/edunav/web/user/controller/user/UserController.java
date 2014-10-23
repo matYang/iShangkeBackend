@@ -9,8 +9,10 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -195,7 +197,10 @@ public class UserController extends AbstractController {
         response.setContentType("image/jpeg");
         String capText = captchaProducer.createText();
         try {
-            request.getSession().setAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, MD5Hash.hash(capText));
+            HttpSession session = request.getSession();
+            session.setAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, MD5Hash.hash(capText));
+            Cookie cookie = new Cookie("JSESSIONID", session.getId());
+            response.addCookie(cookie);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -229,7 +234,10 @@ public class UserController extends AbstractController {
     public @ResponseBody String getVCode(HttpServletRequest request, HttpServletResponse response) {
         String capText = captchaProducer.createText();
         try {
-            request.getSession().setAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, MD5Hash.hash(capText));
+            HttpSession session = request.getSession();
+            session.setAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, MD5Hash.hash(capText));
+            Cookie cookie = new Cookie("JSESSIONID", session.getId());
+            response.addCookie(cookie);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -241,37 +249,41 @@ public class UserController extends AbstractController {
     @RequestMapping(value = "/smsVerification", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse cv(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
-        // String ip = req.getHeader("x-forwarded-for");
-        // if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
-        // {
-        // ip = req.getHeader("Proxy-Client-IP");
-        // }
-        // if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
-        // {
-        // ip = req.getHeader("WL-Proxy-Client-IP");
-        // }
-        // if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
-        // {
-        // ip = req.getRemoteAddr();
-        // }
-        // if (temp_ip.get(ip) == null ) {
-        // temp_ip.put(ip, 0);
-        // } else {
-        // int tem = temp_ip.get(ip) + 1;
-        // if (tem > 5) {
-        // LOGGER.error("ip:" + ip + "attack failed");
-        // return null;
-        // } else {
-        // temp_ip.put(ip, tem);
-        // }
-        // }
-        // LOGGER.error("ip:" + ip);
+        String ip = req.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = req.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = req.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = req.getRemoteAddr();
+        }
+        if (temp_ip.get(ip) == null) {
+            temp_ip.put(ip, 0);
+        } else {
+            int tem = temp_ip.get(ip) + 1;
+            if (tem > 5) {
+                LOGGER.error("ip:" + ip + "attack failed");
+                return null;
+            } else {
+                temp_ip.put(ip, tem);
+            }
+        }
+        LOGGER.error("ip:" + ip);
 
         // 校验验证码
+        // String kaptcha = "";
+        // Cookie[] cookies = req.getCookies();
+        // for (Cookie cookie : cookies) {
+        // if ("_vc".equals(cookie.getName())) {
+        // kaptcha = cookie.getValue();
+        // }
+        // }
         String kaptcha = (String) req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         boolean verified = true;
         try {
-            if (!StringUtils.isNotBlank(vcode) || !MD5Hash.hash(vcode).equalsIgnoreCase(kaptcha)) {
+            if (!StringUtils.isNotBlank(kaptcha) || !StringUtils.isNotBlank(vcode) || !MD5Hash.hash(vcode).equalsIgnoreCase(kaptcha)) {
                 verified = false;
             }
         } catch (NoSuchAlgorithmException e) {
