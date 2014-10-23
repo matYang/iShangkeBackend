@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -50,8 +48,6 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 public class UserController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     
-    public static Map<String, Integer> temp_ip = new HashMap<>();
-
     @Autowired
     UserFacade userFacade;
 
@@ -289,8 +285,7 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/qloginSmsVerification", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
- JsonResponse qlogin(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse qlogin(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
 
         // 校验验证码
