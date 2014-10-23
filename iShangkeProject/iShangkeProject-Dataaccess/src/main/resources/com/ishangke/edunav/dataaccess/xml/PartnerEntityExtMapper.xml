@@ -712,6 +712,7 @@
            FROM partner
            LEFT JOIN address ON partner.id = address.partner_id
            LEFT JOIN circle ON address.circle_id = circle.id
+           LEFT JOIN location ON address.location_id = location.id
            LEFT JOIN partner_category ON partner.id = partner_category.partner_id
            LEFT JOIN category on category.id =  partner_category.category_id
            WHERE partner.deleted = 0
@@ -741,6 +742,8 @@
           (SELECT partner.id PARTNER_ID
            FROM partner
            LEFT JOIN address ON partner.id = address.partner_id
+           LEFT JOIN circle ON address.circle_id = circle.id
+           LEFT JOIN location ON address.location_id = location.id
            LEFT JOIN partner_category ON partner.id = partner_category.partner_id
            LEFT JOIN category on category.id =  partner_category.category_id
            WHERE partner.deleted = 0
@@ -768,6 +771,8 @@
         SELECT partner.id PARTNER_ID
         FROM partner
         LEFT JOIN address ON partner.id = address.partner_id
+        LEFT JOIN circle ON address.circle_id = circle.id
+        LEFT JOIN location ON address.location_id = location.id
         LEFT JOIN partner_category ON partner.id = partner_category.partner_id
         LEFT JOIN category on category.id =  partner_category.category_id
         WHERE partner.deleted = 0
