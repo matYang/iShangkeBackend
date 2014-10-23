@@ -413,6 +413,8 @@
     <include refid="User_Base_Column_List"/>
     from COURSE_COMMENT 
     left join USERS on USERS.ID = COURSE_COMMENT.USER_ID
+    left join course_template on course_comment.course_template_id = course_template.id
+    left join partner on course_template.partner_id = partner.id 
     where COURSE_COMMENT.DELETED = 0
     <if test="entity != null">
 
@@ -535,6 +537,9 @@
       </if>
       <if test="entity.enabled != null and entity.enabled != 0">
         AND COURSE_COMMENT.ENABLED = #{entity.enabled,jdbcType=INTEGER}
+      </if>
+      <if test="entity.partnerId != null and entity.partnerId != 0">
+        AND PARTNER.ID = #{entity.partnerId,jdbcType=INTEGER}
       </if>
     </if>
     ) AS total

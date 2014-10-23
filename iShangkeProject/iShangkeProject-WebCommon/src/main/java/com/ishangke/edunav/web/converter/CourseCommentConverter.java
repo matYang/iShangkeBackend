@@ -130,8 +130,6 @@ public class CourseCommentConverter {
         }
         if (vo.getPartnerId() != null) {
             courseCommentBo.setPartnerId(vo.getPartnerId());
-        } else {
-            courseCommentBo.setPartnerId(Constant.DEFAULTNULL);
         }
         return courseCommentBo;
     }
