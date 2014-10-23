@@ -88,6 +88,69 @@ public class PartnerVo extends JsonResponse {
     private List<AddressVo> addressList;
     
     private Integer partnerId;
+    private Integer popularity;
+    private Integer courseCount;
+    private Integer teacherCount;
+    private List<CategoryVo> categoryList;
+    private String categoryValue;
+    private String circleValue;
+    private String locationValue;
+
+    public String getLocationValue() {
+        return locationValue;
+    }
+
+    public void setLocationValue(String locationValue) {
+        this.locationValue = locationValue;
+    }
+
+    public String getCategoryValue() {
+        return categoryValue;
+    }
+
+    public void setCategoryValue(String categoryValue) {
+        this.categoryValue = categoryValue;
+    }
+
+    public String getCircleValue() {
+        return circleValue;
+    }
+
+    public void setCircleValue(String circleValue) {
+        this.circleValue = circleValue;
+    }
+
+    public List<CategoryVo> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<CategoryVo> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public Integer getCourseCount() {
+        return courseCount;
+    }
+
+    public void setCourseCount(Integer courseCount) {
+        this.courseCount = courseCount;
+    }
+
+    public Integer getTeacherCount() {
+        return teacherCount;
+    }
+
+    public void setTeacherCount(Integer teacherCount) {
+        this.teacherCount = teacherCount;
+    }
+
+    public Integer getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
 
     public Integer getId() {
         return id;

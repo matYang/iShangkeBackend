@@ -12,6 +12,8 @@ import com.ishangke.edunav.commoncontract.model.CourseBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentBo;
 import com.ishangke.edunav.commoncontract.model.CourseCommentPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CoursePageViewBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionPageViewBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplateBo;
 import com.ishangke.edunav.commoncontract.model.CourseTemplatePageViewBo;
 import com.ishangke.edunav.commoncontract.model.OrderByBo;
@@ -285,6 +287,23 @@ public class CourseFacade {
         for (CourseBo cc : course.getData()) {
             System.out.println(cc);
         }
+    }
+
+    public CoursePromotionPageViewBo queryPromotion(CoursePromotionBo coursePromotionBo, PaginationBo paginationBo) {
+        CoursePromotionPageViewBo result = null;
+        
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Course.getName());
+
+        try (ThriftClientFactory<CourseService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryPromotion(coursePromotionBo, paginationBo);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

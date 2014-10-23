@@ -1,6 +1,7 @@
 include "classPhoto.thrift"
 include "teacher.thrift"
 include "address.thrift"
+include "category.thrift"
 
 namespace java com.ishangke.edunav.commoncontract.model
 
@@ -57,6 +58,13 @@ struct PartnerBo {
     47: list<teacher.TeacherBo> teacherList;
     48: list<classPhoto.ClassPhotoBo> classPhotoList;
     49: list<address.AddressBo> addressList;
+    50: i32 popularity
+    51: i32 courseCount
+    52: i32 teacherCount
+    53: list<category.CategoryBo> categoryList;
+    54: string categoryValue
+    55: string circleValue
+    56: string locationValue
 }
 struct PartnerPageViewBo{
     1: i32 start

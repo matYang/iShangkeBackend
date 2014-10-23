@@ -63,6 +63,23 @@ public class PartnerFacade {
         }
         return result;
     }
+    
+    public PartnerPageViewBo queryPartnerByFilter(PartnerBo partnerBo, PaginationBo paginationBo) {
+        PartnerPageViewBo result = null;
+        
+        ThriftClientSetting clientSetting = ThriftClientSettingManager.getSetting(ClientEnum.Partner.getName());
+
+        try (ThriftClientFactory<PartnerService.Client> factory = new ThriftClientFactory<>(clientSetting)) {
+            Client serviceClient = factory.getServiceClient();
+            result = serviceClient.queryPartnerByFilter(partnerBo, paginationBo);
+        } catch (BusinessExceptionBo e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getErrorCode(), e.getMessageKey(), e.getMessage());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public PartnerBo updatePartner(PartnerBo partnerBo, UserBo userBo, String permissionTag) {
         PartnerBo result = null;
@@ -420,4 +437,5 @@ public class PartnerFacade {
         }
         return result;
     }
+
 }

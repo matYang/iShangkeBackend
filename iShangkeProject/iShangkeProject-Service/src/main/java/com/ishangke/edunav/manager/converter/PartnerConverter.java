@@ -6,10 +6,12 @@ import java.util.List;
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.commoncontract.model.AddressBo;
+import com.ishangke.edunav.commoncontract.model.CategoryBo;
 import com.ishangke.edunav.commoncontract.model.ClassPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PartnerBo;
 import com.ishangke.edunav.commoncontract.model.TeacherBo;
 import com.ishangke.edunav.dataaccess.model.AddressEntityExt;
+import com.ishangke.edunav.dataaccess.model.CategoryEntityExt;
 import com.ishangke.edunav.dataaccess.model.ClassPhotoEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
 import com.ishangke.edunav.dataaccess.model.TeacherEntityExt;
@@ -200,6 +202,37 @@ public class PartnerConverter {
             }
             partnerBo.setClassPhotoList(list);
         }
+        if (e.getPopularity() != null) {
+            partnerBo.setPopularity(e.getPopularity());
+        } else {
+            partnerBo.setPopularity(Constant.DEFAULTNULL);
+        }
+        if (e.getCourseCount() != null) {
+            partnerBo.setCourseCount(e.getCourseCount());
+        } else {
+            partnerBo.setCourseCount(Constant.DEFAULTNULL);
+        }
+        if (e.getTeacherCount() != null) {
+            partnerBo.setTeacherCount(e.getTeacherCount());
+        } else {
+            partnerBo.setTeacherCount(Constant.DEFAULTNULL);
+        }
+        if (e.getCategoryList() != null) {
+            List<CategoryBo> list = new ArrayList<>();
+            for (CategoryEntityExt a : e.getCategoryList()) {
+                list.add(CategoryConverter.toBo(a));
+            }
+            partnerBo.setCategoryList(list);
+        }
+        if (e.getCategoryValue() != null) {
+            partnerBo.setCategoryValue(e.getCategoryValue());
+        }
+        if (e.getCircleValue() != null) {
+            partnerBo.setCircleValue(e.getCircleValue());
+        }
+        if (e.getLocationValue() != null) {
+            partnerBo.setLocationValue(e.getLocationValue());
+        }
         return partnerBo;
     }
 
@@ -303,6 +336,12 @@ public class PartnerConverter {
             partnerEntityExt.setUniRegLocation(bo.getUniRegLocation());
         }
         partnerEntityExt.setWholeName(bo.getWholeName());
+        if (Constant.DEFAULTNULL != bo.getPopularity()) {
+            partnerEntityExt.setPopularity(bo.getPopularity());
+        }
+        partnerEntityExt.setCategoryValue(bo.getCategoryValue());
+        partnerEntityExt.setCircleValue(bo.getCircleValue());
+        partnerEntityExt.setLocationValue(bo.getLocationValue());
         return partnerEntityExt;
     }
 }

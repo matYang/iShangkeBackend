@@ -30,7 +30,7 @@ public class PartnerEntityExtTest {
         PartnerEntityExt.setDeleted(0);
         PartnerEntityExt.setEnabled(0);
         PartnerEntityExt.setLastModifyTime(DateUtility.getCurTimeInstance());
-
+        PartnerEntityExt.setPopularity(1);
         int oldcount = PartnerEntityExtMapper.getCount();
         PartnerEntityExtMapper.add(PartnerEntityExt);
         Assert.assertSame(PartnerEntityExtMapper.getCount(), oldcount + 1);
@@ -51,14 +51,15 @@ public class PartnerEntityExtTest {
     }
     @Test
     public void testUpdate() {
-        PartnerEntityExt upDate = PartnerEntityExtMapper.getById(2);
+        PartnerEntityExt upDate = PartnerEntityExtMapper.getInfoById(2);
         upDate.setWholeName("_test_name_爱上课");
         upDate.setCreateTime(time);
         PartnerEntityExtMapper.update(upDate);
-        upDate = PartnerEntityExtMapper.getById(2);
+        upDate = PartnerEntityExtMapper.getInfoById(2);
         Assert.assertEquals("_test_name_爱上课", upDate.getWholeName());
         Assert.assertEquals(DateUtility.toSQLDateTime(time), DateUtility.toSQLDateTime(upDate.getCreateTime()));
     }
+    
     
     @Test
     public void testQuery() {
@@ -73,6 +74,30 @@ public class PartnerEntityExtTest {
         Assert.assertEquals("爱上课", result.get(0).getInstName());
     }
 
+    @Test
+    public void testUpdate1() {
+        PartnerEntityExt update = PartnerEntityExtMapper.getInfoById(2);
+        update.setPopularity(6);
+        PartnerEntityExtMapper.update(update);
+        PartnerEntityExt updateAfter = PartnerEntityExtMapper.getInfoById(2);
+        Assert.assertSame(6, updateAfter.getPopularity());
+    }
     
-
+    @Test
+    public void testQuery1() {
+        PartnerEntityExt PartnerQueryEntity = new PartnerEntityExt();
+        PartnerQueryEntity.setRating(1.0);
+        List<PartnerEntityExt> result = PartnerEntityExtMapper.list(PartnerQueryEntity, null);
+        Assert.assertSame(1, result.get(0).getPopularity());
+    }
+    
+    @Test
+    public void testQuery2() {
+        PartnerEntityExt PartnerQueryEntity = new PartnerEntityExt();
+        PartnerQueryEntity.setCategoryValue("00");
+        List<PartnerEntityExt> result = PartnerEntityExtMapper.getIdSet(PartnerQueryEntity, null, "teacherCount", "ASC");
+        System.out.println("size=="+result.size());
+        int count = PartnerEntityExtMapper.getIdSetCount(PartnerQueryEntity, "teacherCount");
+        System.out.println("count=="+count);
+    }
 }

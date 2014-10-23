@@ -12,16 +12,20 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.CoursePromotionBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CoursePromotionEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CoursePromotionPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
+import com.ishangke.edunav.dataaccess.model.CoursePromotionPhotoEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CoursePromotionManager;
 import com.ishangke.edunav.manager.converter.CoursePromotionConverter;
+import com.ishangke.edunav.manager.converter.CoursePromotionPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
@@ -42,6 +46,9 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
     
     @Autowired
     private AuthManager authManager;
+    
+    @Autowired
+    private CoursePromotionPhotoEntityExtMapper coursePromotionPhotoMapper;
 
 
     @Override
@@ -49,6 +56,9 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
         // Check Null
         if (coursePromotionBo == null || userBo == null) {
             throw new ManagerException("无效请求参数");
+        }
+        if (coursePromotionBo.getCourseId() <=0) {
+            throw new ManagerException("courseId不能为空");
         }
 
         if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
@@ -69,6 +79,11 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
             throw new ManagerException("对不起，课程置顶创建失败，请稍后再试", t);
         }
         if (result > 0) {
+            List<CoursePromotionPhotoBo> photoList = coursePromotionBo.getPhotoList();
+            for (CoursePromotionPhotoBo photo : photoList) {
+                photo.setCoursePromotionId(coursePromotionEntity.getId());
+                coursePromotionPhotoMapper.add(CoursePromotionPhotoConverter.fromBo(photo));
+            }
             return CoursePromotionConverter.toBo(coursePromotionMapper.getById(coursePromotionEntity.getId()));
         } else {
             throw new ManagerException("对不起，课程置顶获取失败，请稍后再试");
@@ -102,6 +117,12 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
             coursePromotionMapper.update(coursePromotionEntity);
         } catch (Throwable t) {
             throw new ManagerException("对不起，课程置顶更新失败，请稍后再试", t);
+        }
+        List<CoursePromotionPhotoBo> photoNew = coursePromotionBo.getPhotoList();
+        coursePromotionPhotoMapper.deleteByCoursePromotionId(coursePromotionEntity.getId());
+        for (CoursePromotionPhotoBo photo : photoNew) {
+            photo.setCoursePromotionId(coursePromotionEntity.getId());
+            coursePromotionPhotoMapper.add(CoursePromotionPhotoConverter.fromBo(photo));
         }
         return CoursePromotionConverter.toBo(coursePromotionMapper.getById(coursePromotionEntity.getId()));
     }
@@ -140,17 +161,7 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
     
     
     @Override
-    public List<CoursePromotionBo> query(CoursePromotionBo coursePromotionBo, UserBo userBo, PaginationBo paginationBo) {
-        if (userBo == null) {
-            throw new ManagerException("无效请求参数");
-        }
-
-        if (authManager.isAdmin(userBo.getId()) || authManager.isSystemAdmin(userBo.getId())) {
-            LOGGER.warn(String.format("[CoursePromotionManagerImpl]system admin || admin [%s] call query at " + new Date(), userBo.getName()));
-        } else {
-            throw new AuthenticationException("对不起，您无权查看课程置顶信息");
-        }
-
+    public List<CoursePromotionBo> query(CoursePromotionBo coursePromotionBo, PaginationBo paginationBo) {
         // Convert
         CoursePromotionEntityExt coursePromotionEntity = coursePromotionBo == null ? null : CoursePromotionConverter.fromBo(coursePromotionBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
@@ -172,7 +183,7 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
     }
     
     @Override
-    public int queryTotal(CoursePromotionBo coursePromotionBo, UserBo userBo) {
+    public int queryTotal(CoursePromotionBo coursePromotionBo) {
         return coursePromotionMapper.getListCount(CoursePromotionConverter.fromBo(coursePromotionBo));
     }
 

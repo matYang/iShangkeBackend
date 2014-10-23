@@ -28,6 +28,60 @@ public class PartnerEntityExt extends PartnerEntity {
     private List<TeacherEntityExt> teacherList;
     private List<ClassPhotoEntityExt> classPhotoList;
     private List<AddressEntityExt> addressList;
+    private Integer courseCount;
+    private Integer teacherCount;
+    private List<CategoryEntityExt> categoryList;
+    private String categoryValue;
+    private String circleValue;
+    private String locationValue;
+
+    public String getLocationValue() {
+        return locationValue;
+    }
+
+    public void setLocationValue(String locationValue) {
+        this.locationValue = locationValue;
+    }
+
+    public String getCategoryValue() {
+        return categoryValue;
+    }
+
+    public void setCategoryValue(String categoryValue) {
+        this.categoryValue = categoryValue;
+    }
+
+    public String getCircleValue() {
+        return circleValue;
+    }
+
+    public void setCircleValue(String circleValue) {
+        this.circleValue = circleValue;
+    }
+
+    public List<CategoryEntityExt> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<CategoryEntityExt> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public Integer getCourseCount() {
+        return courseCount;
+    }
+
+    public void setCourseCount(Integer courseCount) {
+        this.courseCount = courseCount;
+    }
+
+    public Integer getTeacherCount() {
+        return teacherCount;
+    }
+
+    public void setTeacherCount(Integer teacherCount) {
+        this.teacherCount = teacherCount;
+    }
 
     public Set<Integer> getIdSet() {
         return idSet;

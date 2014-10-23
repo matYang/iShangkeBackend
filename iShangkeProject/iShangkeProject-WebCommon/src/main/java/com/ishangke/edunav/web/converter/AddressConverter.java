@@ -101,6 +101,12 @@ public class AddressConverter {
         addressBo.setCircleIdSet(vo.getCircleIdSet());
         addressBo.setLocationIdSet(vo.getLocationIdSet());
         addressBo.setRealAddress(vo.getRealAddress());
+        if (vo.getLocationName() != null) {
+            addressBo.setLocationName(vo.getLocationName());
+        }
+        if (vo.getCircleName() != null) {
+            addressBo.setCircleName(vo.getCircleName());
+        }
         return addressBo;
     }
 
@@ -140,6 +146,8 @@ public class AddressConverter {
             addressVo.setLocationId(bo.getLocationId());
         }
         addressVo.setRealAddress(bo.getRealAddress());
+        addressVo.setLocationName(bo.getLocationName());
+        addressVo.setCircleName(bo.getCircleName());
         return addressVo;
     }
 }

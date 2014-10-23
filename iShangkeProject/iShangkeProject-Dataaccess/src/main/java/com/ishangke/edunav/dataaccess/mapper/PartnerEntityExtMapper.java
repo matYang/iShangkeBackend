@@ -28,4 +28,16 @@ public interface PartnerEntityExtMapper {
     public PartnerEntityExt getById(int id);
     
     public PartnerEntityExt getInfoById(int id);
+    
+    public List<PartnerEntityExt> getIdSet(
+            @Param("entity") PartnerEntityExt partnerEntityExt,
+            @Param("page") PaginationEntity page,
+            @Param("type") String type,
+            @Param("order") String order);
+    
+    public int getIdSetCount(
+            @Param("entity") PartnerEntityExt partnerEntityExt,
+            @Param("type") String type);
+    
+    public List<PartnerEntityExt> listByIdSet(@Param("idSet") List<Integer> idSet);
 }

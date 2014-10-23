@@ -25,6 +25,10 @@ public final class FileSetting {
         public static final String GROUPBUYPHOTO = "groupBuyPhoto";
 
         public static final String GROUPBUYPHOTO_SNAPSHOT = "groupBuyPhotoSnapShot";
+        
+        public static final String COURSEPROMOTIONPHOTO = "coursePromotionPhoto";
+        
+        public static final String COURSEPROMOTIONPHOTO_SNAPSHOT = "coursePromotionPhotoSnapShot";
     }
 
     public static final String getCheckSumString(byte[] b) {

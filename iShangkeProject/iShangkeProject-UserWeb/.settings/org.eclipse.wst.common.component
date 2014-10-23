@@ -9,13 +9,13 @@
         <dependent-module archiveName="iShangkeProject-UserFacade-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iShangkeProject-UserFacade/iShangkeProject-UserFacade">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="iShangkeProject-Common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iShangkeProject-Common/iShangkeProject-Common">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="iShangkeProject-CommonContract-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iShangkeProject-CommonContract/iShangkeProject-CommonContract">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="iShangkeProject-WebCommon-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iShangkeProject-WebCommon/iShangkeProject-WebCommon">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="iShangkeProject-Common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iShangkeProject-Common/iShangkeProject-Common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="FleetWeb"/>

@@ -229,7 +229,7 @@ service CourseService {
      *            调用方法的用户的信息
      * @return
      */
-    coursePromotion.CoursePromotionPageViewBo queryPromotion(1: coursePromotion.CoursePromotionBo coursePromotionBo, 2: user.UserBo userBo, 3: common.PaginationBo paginationBo, 4: string permissionTag) throws (1: fault.BusinessExceptionBo businessExceptionBo)
+    coursePromotion.CoursePromotionPageViewBo queryPromotion(1: coursePromotion.CoursePromotionBo coursePromotionBo, 2: common.PaginationBo paginationBo) throws (1: fault.BusinessExceptionBo businessExceptionBo)
 	
     /**
      * 本方法创建课程置顶信息<br>

@@ -1,7 +1,12 @@
 package com.ishangke.edunav.web.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ishangke.edunav.common.constant.Constant;
 import com.ishangke.edunav.commoncontract.model.CoursePromotionBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionPhotoBo;
+import com.ishangke.edunav.web.model.CoursePromotionPhotoVo;
 import com.ishangke.edunav.web.model.CoursePromotionVo;
 
 public class CoursePromotionConverter {
@@ -73,7 +78,13 @@ public class CoursePromotionConverter {
         } else {
             coursePromotionBo.setEndTimeEnd(Constant.DEFAULTNULL);
         }
-        
+        if (vo.getPhotoList() != null) {
+            List<CoursePromotionPhotoBo> list = new ArrayList<CoursePromotionPhotoBo>();
+            for (CoursePromotionPhotoVo v : vo.getPhotoList()) {
+                list.add(CoursePromotionPhotoConverter.fromModel(v));
+            }
+            coursePromotionBo.setPhotoList(list);
+        }
         return coursePromotionBo;
     }
 
@@ -119,7 +130,14 @@ public class CoursePromotionConverter {
         if (Constant.DEFAULTNULL != bo.getEndTimeEnd()) {
             coursePromotionVo.setEndTimeEnd(bo.getEndTimeEnd());
         }
-        
+        coursePromotionVo.setCourse(CourseConverter.toModel(bo.getCourse()));
+        if (bo.getPhotoList() != null) {
+            List<CoursePromotionPhotoVo> list = new ArrayList<CoursePromotionPhotoVo>();
+            for (CoursePromotionPhotoBo b : bo.getPhotoList()) {
+                list.add(CoursePromotionPhotoConverter.toModel(b));
+            }
+            coursePromotionVo.setPhotoList(list);
+        }
         return coursePromotionVo;
     }
 }

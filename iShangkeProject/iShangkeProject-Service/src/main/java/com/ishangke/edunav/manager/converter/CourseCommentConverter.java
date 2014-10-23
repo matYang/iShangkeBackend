@@ -170,6 +170,7 @@ public class CourseCommentConverter {
         if (bo.getTotalRatingStart() != Constant.DEFAULTNULL) {
             courseCommentEntityExt.setTotalRatingStart(bo.getTotalRatingStart());
         }
+        courseCommentEntityExt.setPartnerId(bo.getPartnerId());
         courseCommentEntityExt.setUserId(bo.getUserId());
         courseCommentEntityExt.setUserIdSet(bo.getUserIdSet());
         return courseCommentEntityExt;

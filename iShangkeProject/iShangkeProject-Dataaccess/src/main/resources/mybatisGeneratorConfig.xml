@@ -315,6 +315,12 @@
     <table tableName="GROUP_BUY_ADDRESS" domainObjectName="GroupBuyAddressEntity">
         <generatedKey column="ID" sqlStatement="MySql"/>
     </table>
+    <table tableName="COURSE_PROMOTION_PHOTO" domainObjectName="CoursePromotionPhotoEntity">
+        <generatedKey column="ID" sqlStatement="MySql"/>
+    </table>
+    <table tableName="PARTNER_CATEGORY" domainObjectName="PartnerCategoryEntity">
+        <generatedKey column="ID" sqlStatement="MySql"/>
+    </table>
   </context>
 
 </generatorConfiguration>
