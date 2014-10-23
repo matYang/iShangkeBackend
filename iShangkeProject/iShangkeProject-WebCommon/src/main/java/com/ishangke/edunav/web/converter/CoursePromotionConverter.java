@@ -78,7 +78,13 @@ public class CoursePromotionConverter {
         } else {
             coursePromotionBo.setEndTimeEnd(Constant.DEFAULTNULL);
         }
-        
+        if (vo.getPhotoList() != null) {
+            List<CoursePromotionPhotoBo> list = new ArrayList<CoursePromotionPhotoBo>();
+            for (CoursePromotionPhotoVo v : vo.getPhotoList()) {
+                list.add(CoursePromotionPhotoConverter.fromModel(v));
+            }
+            coursePromotionBo.setPhotoList(list);
+        }
         return coursePromotionBo;
     }
 

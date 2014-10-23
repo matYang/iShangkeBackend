@@ -12,16 +12,20 @@ import org.springframework.stereotype.Component;
 import com.ishangke.edunav.common.utilities.DateUtility;
 import com.ishangke.edunav.common.utilities.IdChecker;
 import com.ishangke.edunav.commoncontract.model.CoursePromotionBo;
+import com.ishangke.edunav.commoncontract.model.CoursePromotionPhotoBo;
 import com.ishangke.edunav.commoncontract.model.PaginationBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
 import com.ishangke.edunav.dataaccess.common.PaginationEntity;
 import com.ishangke.edunav.dataaccess.mapper.CoursePromotionEntityExtMapper;
+import com.ishangke.edunav.dataaccess.mapper.CoursePromotionPhotoEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.UserEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.CoursePromotionEntityExt;
+import com.ishangke.edunav.dataaccess.model.CoursePromotionPhotoEntityExt;
 import com.ishangke.edunav.manager.AuthManager;
 import com.ishangke.edunav.manager.CoursePromotionManager;
 import com.ishangke.edunav.manager.converter.CoursePromotionConverter;
+import com.ishangke.edunav.manager.converter.CoursePromotionPhotoConverter;
 import com.ishangke.edunav.manager.converter.PaginationConverter;
 import com.ishangke.edunav.manager.exception.ManagerException;
 import com.ishangke.edunav.manager.exception.authentication.AuthenticationException;
@@ -42,6 +46,9 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
     
     @Autowired
     private AuthManager authManager;
+    
+    @Autowired
+    private CoursePromotionPhotoEntityExtMapper coursePromotionPhotoMapper;
 
 
     @Override
@@ -72,6 +79,11 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
             throw new ManagerException("对不起，课程置顶创建失败，请稍后再试", t);
         }
         if (result > 0) {
+            List<CoursePromotionPhotoBo> photoList = coursePromotionBo.getPhotoList();
+            for (CoursePromotionPhotoBo photo : photoList) {
+                photo.setCoursePromotionId(coursePromotionEntity.getId());
+                coursePromotionPhotoMapper.add(CoursePromotionPhotoConverter.fromBo(photo));
+            }
             return CoursePromotionConverter.toBo(coursePromotionMapper.getById(coursePromotionEntity.getId()));
         } else {
             throw new ManagerException("对不起，课程置顶获取失败，请稍后再试");
@@ -105,6 +117,12 @@ public class CoursePromotionManagerImpl implements CoursePromotionManager{
             coursePromotionMapper.update(coursePromotionEntity);
         } catch (Throwable t) {
             throw new ManagerException("对不起，课程置顶更新失败，请稍后再试", t);
+        }
+        List<CoursePromotionPhotoBo> photoNew = coursePromotionBo.getPhotoList();
+        coursePromotionPhotoMapper.deleteByCoursePromotionId(coursePromotionEntity.getId());
+        for (CoursePromotionPhotoBo photo : photoNew) {
+            photo.setCoursePromotionId(coursePromotionEntity.getId());
+            coursePromotionPhotoMapper.add(CoursePromotionPhotoConverter.fromBo(photo));
         }
         return CoursePromotionConverter.toBo(coursePromotionMapper.getById(coursePromotionEntity.getId()));
     }

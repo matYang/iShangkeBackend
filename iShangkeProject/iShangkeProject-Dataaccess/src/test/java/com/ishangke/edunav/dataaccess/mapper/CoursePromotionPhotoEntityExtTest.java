@@ -56,4 +56,15 @@ public class CoursePromotionPhotoEntityExtTest {
         int countSecond = coursePromotionPhotoEntityExtMapper.getListCount(coursePromotionPhoto);
         Assert.assertSame(countFirst, countSecond);
     }
+    
+    @Test
+    public void testDelete1() {
+        CoursePromotionPhotoEntityExt coursePromotionPhoto = new CoursePromotionPhotoEntityExt();
+        coursePromotionPhoto.setCoursePromotionId(2);
+        List<CoursePromotionPhotoEntityExt> listOld = coursePromotionPhotoEntityExtMapper.list(coursePromotionPhoto, null);
+        coursePromotionPhotoEntityExtMapper.deleteByCoursePromotionId(2);
+        List<CoursePromotionPhotoEntityExt> listNew = coursePromotionPhotoEntityExtMapper.list(coursePromotionPhoto, null);
+        Assert.assertSame(2, listOld.size());
+        Assert.assertSame(0, listNew.size());
+    }
 }

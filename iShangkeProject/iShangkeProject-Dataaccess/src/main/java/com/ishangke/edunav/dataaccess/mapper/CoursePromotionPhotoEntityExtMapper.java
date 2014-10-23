@@ -10,7 +10,7 @@ public interface CoursePromotionPhotoEntityExtMapper {
 
     public void deleteById(int id);
     
-    public int deleteByCoursePromotionActivityId(int id);
+    public int deleteByCoursePromotionId(int id);
 
     public List<CoursePromotionPhotoEntityExt> list(@Param("entity") CoursePromotionPhotoEntityExt coursePromotionPhotoEntityExt,@Param("page") PaginationEntity page);
     
