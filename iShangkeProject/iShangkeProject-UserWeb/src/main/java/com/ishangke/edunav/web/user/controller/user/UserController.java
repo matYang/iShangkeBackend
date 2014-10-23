@@ -1,11 +1,18 @@
 package com.ishangke.edunav.web.user.controller.user;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.ishangke.edunav.common.crypto.MD5Hash;
 import com.ishangke.edunav.commoncontract.model.PasswordBo;
 import com.ishangke.edunav.commoncontract.model.SessionBo;
 import com.ishangke.edunav.commoncontract.model.UserBo;
@@ -43,6 +52,12 @@ public class UserController extends AbstractController {
 
     @Autowired
     UserFacade userFacade;
+
+    /**
+     * Kaptcha 验证码
+     */
+    @Autowired
+    private DefaultKaptcha captchaProducer;
 
     @RequestMapping(value = "/login/phone", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
@@ -164,46 +179,157 @@ public class UserController extends AbstractController {
         return responseVo;
     }
 
-    @RequestMapping(value = "/smsVerification", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse cv(@RequestParam(value = "phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        String ip = req.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = req.getHeader("Proxy-Client-IP");
+    /**
+     * 生成验证码图片
+     * 
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/vcodeimg", method = RequestMethod.GET)
+    public void getVCodeImg(HttpServletRequest request, HttpServletResponse response) {
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        response.setHeader("Pragma", "no-cache");
+        response.setContentType("image/jpeg");
+        String capText = captchaProducer.createText();
+        try {
+            request.getSession().setAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, MD5Hash.hash(capText));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = req.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = req.getRemoteAddr();
-        }
-        if (temp_ip.get(ip) == null ) {
-            temp_ip.put(ip, 0);
-        } else {
-            int tem = temp_ip.get(ip) + 1;
-            if (tem > 5) {
-                LOGGER.error("ip:" + ip + "attack failed");
-                return null;
-            } else {
-                temp_ip.put(ip, tem);
+        BufferedImage bi = captchaProducer.createImage(capText);
+        ServletOutputStream out = null;
+        try {
+            out = response.getOutputStream();
+            ImageIO.write(bi, "jpg", out);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        LOGGER.error("ip:" + ip);
+    }
+
+    /**
+     * 生成验证码
+     * 
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/vcode", method = RequestMethod.GET)
+    public @ResponseBody String getVCode(HttpServletRequest request, HttpServletResponse response) {
+        String capText = captchaProducer.createText();
+        try {
+            request.getSession().setAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, MD5Hash.hash(capText));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return capText;
+    }
+
+    @RequestMapping(value = "/smsVerification", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody JsonResponse cv(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
+        String permissionTag = this.getUrl(req);
+        // String ip = req.getHeader("x-forwarded-for");
+        // if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
+        // {
+        // ip = req.getHeader("Proxy-Client-IP");
+        // }
+        // if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
+        // {
+        // ip = req.getHeader("WL-Proxy-Client-IP");
+        // }
+        // if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
+        // {
+        // ip = req.getRemoteAddr();
+        // }
+        // if (temp_ip.get(ip) == null ) {
+        // temp_ip.put(ip, 0);
+        // } else {
+        // int tem = temp_ip.get(ip) + 1;
+        // if (tem > 5) {
+        // LOGGER.error("ip:" + ip + "attack failed");
+        // return null;
+        // } else {
+        // temp_ip.put(ip, tem);
+        // }
+        // }
+        // LOGGER.error("ip:" + ip);
+
+        // 校验验证码
+        String kaptcha = (String) req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+        boolean verified = true;
+        try {
+            if (!StringUtils.isNotBlank(vcode) || !MD5Hash.hash(vcode).equalsIgnoreCase(kaptcha)) {
+                verified = false;
+            }
+        } catch (NoSuchAlgorithmException e) {
+            verified = false;
+
+        } catch (UnsupportedEncodingException e) {
+            verified = false;
+        } finally {
+            if (!verified) {
+                JsonResponse jsonResponse = new JsonResponse();
+                jsonResponse.setMsgKey("vcode");
+                jsonResponse.setMessage("验证码错误");
+                jsonResponse.setErrorCode(400);
+                resp.setStatus(400);
+                return jsonResponse;
+            }
+        }
+
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
         try {
             userFacade.openCellSession(UserConverter.fromModel(userVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
+        } finally {
+            req.getSession().removeAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         }
+
         return new EmptyResponse();
     }
 
     @RequestMapping(value = "/qloginSmsVerification", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    JsonResponse qlogin(@RequestParam(value = "phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
+ JsonResponse qlogin(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
+
+        // 校验验证码
+        String kaptcha = (String) req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+        boolean verified = true;
+        try {
+            if (!StringUtils.isNotBlank(vcode) || !MD5Hash.hash(vcode).equalsIgnoreCase(kaptcha)) {
+                verified = false;
+            }
+        } catch (NoSuchAlgorithmException e) {
+            verified = false;
+
+        } catch (UnsupportedEncodingException e) {
+            verified = false;
+        } finally {
+            if (!verified) {
+                JsonResponse jsonResponse = new JsonResponse();
+                jsonResponse.setMsgKey("vcode");
+                jsonResponse.setMessage("验证码错误");
+                jsonResponse.setErrorCode(400);
+                resp.setStatus(400);
+                return jsonResponse;
+            }
+        }
 
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
@@ -211,6 +337,8 @@ public class UserController extends AbstractController {
             userFacade.openQloginSession(UserConverter.fromModel(userVo));
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
+        } finally {
+            req.getSession().removeAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         }
         return new EmptyResponse();
     }
@@ -282,9 +410,31 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    JsonResponse fp(@RequestParam(value = "phone") String phone, HttpServletRequest req, HttpServletResponse resp) {
+    public @ResponseBody JsonResponse fp(@RequestParam(value = "phone") String phone, @RequestParam(value = "vcode") String vcode, HttpServletRequest req, HttpServletResponse resp) {
         String permissionTag = this.getUrl(req);
+
+        // 校验验证码
+        String kaptcha = (String) req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+        boolean verified = true;
+        try {
+            if (!StringUtils.isNotBlank(vcode) || !MD5Hash.hash(vcode).equalsIgnoreCase(kaptcha)) {
+                verified = false;
+            }
+        } catch (NoSuchAlgorithmException e) {
+            verified = false;
+
+        } catch (UnsupportedEncodingException e) {
+            verified = false;
+        } finally {
+            if (!verified) {
+                JsonResponse jsonResponse = new JsonResponse();
+                jsonResponse.setMsgKey("vcode");
+                jsonResponse.setMessage("验证码错误");
+                jsonResponse.setErrorCode(400);
+                resp.setStatus(400);
+                return jsonResponse;
+            }
+        }
 
         UserVo userVo = new UserVo();
         userVo.setPhone(phone);
@@ -293,6 +443,8 @@ public class UserController extends AbstractController {
             userFacade.openForgetPasswordSession(UserConverter.fromModel(userVo), permissionTag);
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
+        } finally {
+            req.getSession().removeAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         }
 
         return new EmptyResponse();
@@ -300,7 +452,7 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
-    JsonResponse recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
+ JsonResponse recoverPassword(@RequestBody PasswordVo passwordVo, HttpServletRequest req, HttpServletResponse resp) {
         UserVo responseVo = null;
 
         String permissionTag = this.getUrl(req);
