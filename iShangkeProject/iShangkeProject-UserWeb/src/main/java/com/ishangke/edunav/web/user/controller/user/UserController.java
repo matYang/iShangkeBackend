@@ -1,5 +1,8 @@
 package com.ishangke.edunav.web.user.controller.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,6 +38,8 @@ import com.ishangke.edunav.web.user.controller.AbstractController;
 @RequestMapping("/api/v2/user")
 public class UserController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    
+    public static Map<String, Integer> temp_ip = new HashMap<>();
 
     @Autowired
     UserFacade userFacade;
@@ -172,6 +177,17 @@ public class UserController extends AbstractController {
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = req.getRemoteAddr();
+        }
+        if (temp_ip.get(ip) == null ) {
+            temp_ip.put(ip, 0);
+        } else {
+            int tem = temp_ip.get(ip) + 1;
+            if (tem > 5) {
+                LOGGER.error("ip:" + ip + "attack failed");
+                return null;
+            } else {
+                temp_ip.put(ip, tem);
+            }
         }
         LOGGER.error("ip:" + ip);
         UserVo userVo = new UserVo();
