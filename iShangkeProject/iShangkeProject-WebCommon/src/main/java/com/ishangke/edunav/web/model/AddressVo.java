@@ -28,6 +28,21 @@ public class AddressVo extends JsonResponse{
     private String realAddress;
     private Set<Integer> locationIdSet;
     private Set<Integer> circleIdSet;
+    private String locationName;
+    private String circleName;
+    
+    public String getLocationName() {
+        return locationName;
+    }
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+    public String getCircleName() {
+        return circleName;
+    }
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
+    }
     public Integer getLocationId() {
         return locationId;
     }

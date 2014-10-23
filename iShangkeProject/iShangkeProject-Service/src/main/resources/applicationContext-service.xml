@@ -28,7 +28,7 @@
         <ref bean="cleanGroupBuyBookingTrigger"/>
       </list>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz 2 configuration, fire at 00:15:00 every day -->
   <bean id="cleanEventTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail">
@@ -37,7 +37,7 @@
     <property name="cronExpression">
       <value>0 15 0 * * ? *</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz 2 configuration, every 15 minutes -->
   <bean id="cleanBookingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail">
@@ -46,7 +46,7 @@
     <property name="cronExpression">
       <value>0 */15 * * * ?</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz 2 configuration, per hour -->
   <bean id="cleanGroupBuyBookingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail">
@@ -55,7 +55,7 @@
     <property name="cronExpression">
       <value>0 0 * * * ?</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz 2 configuration, fire at 00:00:00 every day -->
   <bean id="cleanGroupBuyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail">
@@ -64,7 +64,7 @@
     <property name="cronExpression">
       <value>0 0 0 * * ? *</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz job configuration -->
   <bean id="cleanBooking" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     <property name="targetObject">
@@ -73,7 +73,7 @@
     <property name="targetMethod">
       <value>cleanBooking</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz job configuration -->
   <bean id="cleanEventDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     <property name="targetObject">
@@ -82,7 +82,7 @@
     <property name="targetMethod">
       <value>clean</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz job configuration -->
   <bean id="cleanGroupBuyBookingDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     <property name="targetObject">
@@ -91,7 +91,7 @@
     <property name="targetMethod">
       <value>cleanGroupBuyBooking</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Quartz job configuration -->
   <bean id="cleanGroupBuyDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
     <property name="targetObject">
@@ -100,9 +100,9 @@
     <property name="targetMethod">
       <value>cleanGroupBuyActivity</value>
     </property>
-  </bean>
+  </bean> 
   <!-- Job execution class -->
-  <bean id="CleanEventJob" class="com.ishangke.edunav.clean.CleanEventJob" /> 
+  <bean id="CleanEventJob" class="com.ishangke.edunav.clean.CleanEventJob" />  
 
   <!-- Scans all manager class -->
   <context:component-scan

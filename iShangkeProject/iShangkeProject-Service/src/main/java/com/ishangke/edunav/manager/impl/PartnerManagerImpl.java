@@ -2,7 +2,9 @@ package com.ishangke.edunav.manager.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +23,6 @@ import com.ishangke.edunav.dataaccess.mapper.GroupEntityExtMapper;
 import com.ishangke.edunav.dataaccess.mapper.PartnerEntityExtMapper;
 import com.ishangke.edunav.dataaccess.model.GroupEntityExt;
 import com.ishangke.edunav.dataaccess.model.PartnerEntityExt;
-import com.ishangke.edunav.dataaccess.model.UserEntityExt;
 import com.ishangke.edunav.dataaccess.model.gen.UserEntity;
 import com.ishangke.edunav.manager.AddressManager;
 import com.ishangke.edunav.manager.AuthManager;
@@ -53,12 +54,8 @@ public class PartnerManagerImpl implements PartnerManager {
     @Override
     // public data, does not check permission
     public List<PartnerBo> query(PartnerBo partnerBo, PaginationBo paginationBo, UserBo userBo) {
-        if (userBo == null) {
-            throw new ManagerException("无效请求参数");
-        }
         PartnerEntityExt partnerEntity = partnerBo == null ? null : PartnerConverter.fromBo(partnerBo);
         PaginationEntity page = paginationBo == null ? null : PaginationConverter.fromBo(paginationBo);
-        UserEntityExt userEntity = UserConverter.fromBo(userBo);
 
         List<PartnerEntityExt> results = null;
         try {
@@ -84,17 +81,23 @@ public class PartnerManagerImpl implements PartnerManager {
             throw new ManagerException("无效请求参数");
         }
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        PartnerEntityExt result = null;
+        PartnerEntityExt result1 = null;
+        PartnerEntityExt result2 = null;
         try {
-            result = partnerMapper.getInfoById(partnerEntity.getId());
+            result1 = partnerMapper.getInfoById(partnerEntity.getId());
+            result2 = partnerMapper.getById(partnerEntity.getId());
         } catch (Throwable t) {
             throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
         }
 
-        if (result == null) {
+        if (result1 == null || result2 == null) {
             throw new PartnerNotFoundException("对不起，无法找到ID为" + partnerEntity.getId() + "的合作机构");
+        } else {
+            //将reslut2中的teacher list 和 photo list赋给list1
+            result1.setTeacherList(result2.getTeacherList());
+            result1.setClassPhotoList(result2.getClassPhotoList());
         }
-        return PartnerConverter.toBo(result);
+        return PartnerConverter.toBo(result1);
     }
 
     @Override
@@ -105,7 +108,6 @@ public class PartnerManagerImpl implements PartnerManager {
 
         // 更新partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
 
         if (IdChecker.isNull(partnerEntity.getId())) {
             throw new ManagerException("更新合作机构时必须标注合作机构ID");
@@ -163,7 +165,6 @@ public class PartnerManagerImpl implements PartnerManager {
 
         // 插入新的partner记录
         PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
-        UserEntity userEntity = UserConverter.fromBo(userBo);
 
         int result = 0;
         partnerEntity.setLastModifyTime(DateUtility.getCurTimeInstance());
@@ -218,6 +219,67 @@ public class PartnerManagerImpl implements PartnerManager {
     @Override
     public int queryTotal(PartnerBo partnerBo, UserBo userBo) {
         return partnerMapper.getListCount(PartnerConverter.fromBo(partnerBo));
+    }
+
+    @Override
+    public List<PartnerBo> queryPartnerByFilter(PartnerBo partnerBo, PaginationBo paginationBo) {
+        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
+        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        //默认popularity
+        String type = "popularity";
+        String order = "DESC";
+        if(page != null && page.getOrderByEntities() != null && page.getOrderByEntities().size() > 0 && page.getOrderByEntities().get(0).getColumnKey() != null) {
+            type = page.getOrderByEntities().get(0).getColumnKey();
+        }
+        if(page != null && page.getOrderByEntities() != null && page.getOrderByEntities().size() > 0 && page.getOrderByEntities().get(0).getOrder() != null) {
+            order = page.getOrderByEntities().get(0).getOrder();
+        }
+        List<PartnerEntityExt> ids = null;
+        try {
+            ids = partnerMapper.getIdSet(partnerEntity, page, type, order);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
+        }
+        //如果idSet为0，说明没有符合条件的结果集，直接return null
+        if (ids == null || ids.size() == 0) {
+            return null;
+        }
+        List<Integer> idSet = new ArrayList<>();
+        for (PartnerEntityExt p : ids) {
+            idSet.add(p.getId());
+        }
+        List<PartnerEntityExt> results = null;
+        try {
+            results = partnerMapper.listByIdSet(idSet);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
+        }
+        if (results == null) {
+            return new ArrayList<PartnerBo>();
+        }
+        List<PartnerBo> convertedResults = new ArrayList<PartnerBo>();
+        for (PartnerEntityExt result : results) {
+            convertedResults.add(PartnerConverter.toBo(result));
+        }
+        return convertedResults;
+    }
+
+    @Override
+    public int queryPartnerByFilterTotal(PartnerBo partnerBo, PaginationBo paginationBo) {
+        PartnerEntityExt partnerEntity = PartnerConverter.fromBo(partnerBo);
+        PaginationEntity page = PaginationConverter.fromBo(paginationBo);
+        //默认popularity
+        String type = "popularity";
+        if(page != null && page.getOrderByEntities() != null && page.getOrderByEntities().size() > 0 && page.getOrderByEntities().get(0).getColumnKey() != null) {
+            type = page.getOrderByEntities().get(0).getColumnKey();
+        }
+        int result = 0;
+        try {
+            result = partnerMapper.getIdSetCount(partnerEntity, type);
+        } catch (Throwable t) {
+            throw new ManagerException("对不起，合作机构查询失败，请稍后再试", t);
+        }
+        return result;
     }
 
 }

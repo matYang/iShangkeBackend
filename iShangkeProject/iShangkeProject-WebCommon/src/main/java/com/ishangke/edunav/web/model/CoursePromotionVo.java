@@ -1,5 +1,7 @@
 package com.ishangke.edunav.web.model;
 
+import java.util.List;
+
 import com.ishangke.edunav.web.response.JsonResponse;
 
 public class CoursePromotionVo extends JsonResponse {
@@ -16,6 +18,24 @@ public class CoursePromotionVo extends JsonResponse {
     private Long createTimeEnd;
     private Long startTimeEnd;
     private Long endTimeEnd;
+    private CourseVo course;
+    private List<CoursePromotionPhotoVo> photoList;
+
+    public CourseVo getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseVo course) {
+        this.course = course;
+    }
+
+    public List<CoursePromotionPhotoVo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<CoursePromotionPhotoVo> photoList) {
+        this.photoList = photoList;
+    }
 
     public Integer getId() {
         return id;

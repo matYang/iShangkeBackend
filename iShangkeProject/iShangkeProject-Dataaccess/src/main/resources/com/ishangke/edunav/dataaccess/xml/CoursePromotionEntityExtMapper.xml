@@ -13,19 +13,249 @@
       typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
     <result column="COURSEPROMOTION_STATUS" property="status" jdbcType="INTEGER" />
     <result column="COURSEPROMOTION_DELETED" property="deleted" jdbcType="INTEGER" />
+    <collection property="course" ofType="CourseEntityExt">
+      <result column="COURSE_ID" property="id" jdbcType="INTEGER" />
+      <result column="COURSE_COURSENAME" property="courseName" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSETEMPLATEID" property="courseTemplateId" jdbcType="INTEGER" />
+      <result column="COURSE_CATEGORYID" property="categoryId" jdbcType="INTEGER" />
+      <!-- <result column="COURSE_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="COURSE_CIRCLEID" property="circleId" jdbcType="INTEGER" /> -->
+      <result column="COURSE_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+      <result column="COURSE_ADDRESSID" property="addressId" jdbcType="INTEGER" />
+      <result column="COURSE_REGADDRESSID" property="regAddressId" jdbcType="INTEGER" />
+      <result column="COURSE_PRICE" property="price" jdbcType="DOUBLE" />
+      <result column="COURSE_ORIGINALPRICE" property="originalPrice" jdbcType="DOUBLE" />
+      <result column="COURSE_CASHBACK" property="cashback" jdbcType="DOUBLE" />
+      <result column="COURSE_COMMISSION" property="commission" jdbcType="DOUBLE" />
+      <result column="COURSE_SERVICECHARGE" property="serviceCharge" jdbcType="DOUBLE" />
+      <result column="COURSE_STATUS" property="status" jdbcType="INTEGER" />
+      <result column="COURSE_LASTMODIFYTIME" property="lastModifyTime"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_CREATETIME" property="createTime" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_ENABLED" property="enabled" jdbcType="INTEGER" />
+      <result column="COURSE_DELETED" property="deleted" jdbcType="INTEGER" />
+      <result column="COURSE_COURSEHOURLENGTH" property="courseHourLength" jdbcType="INTEGER" />
+      <result column="COURSE_TEACHINGMETHOD" property="teachingMethod" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGMATERIALFEE" property="teachingMaterialFee" jdbcType="VARCHAR" />
+      <result column="COURSE_DOWNLOADMATERIALS" property="downloadMaterials" jdbcType="VARCHAR" />
+      <result column="COURSE_BONUSSERVICE" property="bonusService" jdbcType="VARCHAR" />
+      <result column="COURSE_MARKING" property="marking" jdbcType="VARCHAR" />
+      <result column="COURSE_ASSIGNMENTS" property="assignments" jdbcType="VARCHAR" />
+      <result column="COURSE_TRAIL" property="trail" jdbcType="VARCHAR" />
+      <result column="COURSE_QUESTIONSESSION" property="questionSession" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGANDEXERCISE" property="teachingAndExercise" jdbcType="VARCHAR" />
+      <result column="COURSE_CLASSTEACHER" property="classTeacher" jdbcType="VARCHAR" />
+      <result column="COURSE_GOAL" property="goal" jdbcType="VARCHAR" />
+      <result column="COURSE_OUTLINE" property="outline" jdbcType="VARCHAR" />
+      <result column="COURSE_REGPHONE" property="regPhone" jdbcType="VARCHAR" />
+      <result column="COURSE_CONTACT" property="contact" jdbcType="VARCHAR" />
+      <result column="COURSE_EXTRACURRICULAR" property="extracurricular" jdbcType="VARCHAR" />
+      <result column="COURSE_PASSAGREEMENT" property="passAgreement" jdbcType="VARCHAR" />
+      <result column="COURSE_QUALITYASSURANCE" property="qualityAssurance" jdbcType="VARCHAR" />
+      <result column="COURSE_QUESTIONBANK" property="questionBank" jdbcType="VARCHAR" />
+      <result column="COURSE_TEACHINGMATERIALINTRO" property="teachingMaterialIntro" jdbcType="VARCHAR" />
+      <result column="COURSE_STUDYDAYSNOTE" property="studyDaysNote" jdbcType="VARCHAR" />
+      <result column="COURSE_STUDYDAYS" property="studyDays" jdbcType="VARCHAR" />
+      <result column="COURSE_HIGHSCOREREWARD" property="highScoreReward" jdbcType="VARCHAR" />
+      <result column="COURSE_PREREQUEST" property="prerequest" jdbcType="VARCHAR" />
+      <result column="COURSE_SUITABLESTUDENT" property="suitableStudent" jdbcType="VARCHAR" />
+      <result column="COURSE_OPENCOURSEREQUIREMENT" property="openCourseRequirement" jdbcType="VARCHAR" />
+      <result column="COURSE_CERTIFICATION" property="certification" jdbcType="VARCHAR" />
+      <result column="COURSE_QUIZ" property="quiz" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSEINTRO" property="courseIntro" jdbcType="VARCHAR" />
+      <result column="COURSE_REFERENCE" property="reference" jdbcType="VARCHAR" />
+      <result column="COURSE_FINISHTIME2" property="finishTime2" jdbcType="INTEGER" />
+      <result column="COURSE_STARTTIME2" property="startTime2" jdbcType="INTEGER" />
+      <result column="COURSE_FINISHTIME1" property="finishTime1" jdbcType="INTEGER" />
+      <result column="COURSE_STARTTIME1" property="startTime1" jdbcType="INTEGER" />
+      <result column="COURSE_STARTUPONARRIVAL" property="startUponArrival" jdbcType="INTEGER" />
+      <result column="COURSE_BOOKINGTYPE" property="bookingType" jdbcType="INTEGER" />
+      <result column="COURSE_CASHBACKDATE" property="cashbackDate"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_NOREFUNDDATE" property="noRefundDate"
+        typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_CUTOFFDATE" property="cutoffDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_FINISHDATE" property="finishDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_STARTDATE" property="startDate" typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+      <result column="COURSE_POPULARITY" property="popularity" jdbcType="INTEGER" />
+      <result column="COURSE_CLASSSIZE" property="classSize" jdbcType="VARCHAR" />
+      <result column="COURSE_COURSEHOURNUM" property="courseHourNum" jdbcType="INTEGER" />
+      <result column="COURSE_CLASSTYPE" property="classType" jdbcType="INTEGER" />
+      <result column="COURSE_DISCOUNT" property="discount" jdbcType="DOUBLE" />
+      <result column="COURSE_SCHOOLTIMEDAY" property="schooltimeDay" jdbcType="INTEGER" />
+      <result column="COURSE_SCHOOLTIMEWEEK" property="schooltimeWeek" jdbcType="INTEGER" />
+      <result column="COURSETEMPLATE_RATING" property="rating" jdbcType="DOUBLE" />
+      <result column="COURSETEMPLATE_BOOKINGTOTAL" property="bookingTotal" jdbcType="INTEGER" />
+      <result column="PARTNER_LOGOURL" property="logoUrl" jdbcType="VARCHAR" />
+      <result column="PARTNER_WHOLENAME" property="wholeName" jdbcType="VARCHAR" />
+      <result column="PARTNER_INSTNAME" property="instName" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERINTRO" property="partnerIntro" jdbcType="VARCHAR" />
+      <result column="PARTNER_PARTNERQUALIFICATION" property="partnerQualification" jdbcType="INTEGER" />
+      <result column="PARTNER_PARTNERDISTINCTION" property="partnerDistinction" jdbcType="VARCHAR" />
+      <result column="PARTNER_RATING" property="partnerRating" jdbcType="DOUBLE" />
+      <result column="ADDRESS_DETAIL" property="address" jdbcType="VARCHAR" />
+      <result column="ADDRESS_LAT" property="addressLat" jdbcType="DOUBLE" />
+      <result column="ADDRESS_LNG" property="addressLng" jdbcType="DOUBLE" />
+      <result column="ADDRESS_CIRCLEID" property="circleId" jdbcType="INTEGER" />
+      <result column="ADDRESS_LOCATIONID" property="locationId" jdbcType="INTEGER" />
+      <result column="REG_ADDRESS_DETAIL" property="regAddress" jdbcType="VARCHAR" />
+      <result column="REG_ADDRESS_LAT" property="regAddressLat" jdbcType="DOUBLE" />
+      <result column="REG_ADDRESS_LNG" property="regAddressLng" jdbcType="DOUBLE" />
+      <result column="CATEGORY_VALUE" property="categoryValue" jdbcType="VARCHAR" />
+      <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+      <result column="CATEGORY_RANK" property="categoryRank" jdbcType="INTEGER" />
+      <result column="LOCATION_VALUE" property="locationValue" jdbcType="VARCHAR" />
+      <result column="LOCATION_NAME" property="locationName" jdbcType="VARCHAR" />
+      <result column="CIRCLE_VALUE" property="circleValue" jdbcType="VARCHAR" />
+      <result column="CIRCLE_NAME" property="circleName" jdbcType="VARCHAR" />
+      <result column="COMMENT_CONDITIONRATING" property="conditionRating" jdbcType="DOUBLE" />
+      <result column="COMMENT_ATTITUDERATING" property="attitudeRating" jdbcType="DOUBLE" />
+      <result column="COMMENT_SATISFACTIONRATING" property="satisfactionRating" jdbcType="DOUBLE" />
+      <collection property="teacherList" javaType="java.util.ArrayList" ofType="TeacherEntityExt">
+        <result column="TEACHER_ID" property="id" jdbcType="INTEGER" />
+        <result column="TEACHER_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+        <result column="TEACHER_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="TEACHER_NAME" property="name" jdbcType="VARCHAR" />
+        <result column="TEACHER_INTRO" property="intro" jdbcType="VARCHAR" />
+        <result column="TEACHER_POPULARITY" property="popularity" jdbcType="INTEGER" />
+        <result column="TEACHER_LASTMODIFYTIME" property="lastModifyTime"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="TEACHER_CREATETIME" property="createTime"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="TEACHER_ENABLED" property="enabled" jdbcType="INTEGER" />
+        <result column="TEACHER_DELETED" property="deleted" jdbcType="INTEGER" />
+      </collection>
+      <collection property="classPhotoList" javaType="java.util.ArrayList" ofType="ClassPhotoEntityExt">
+        <result column="CLASSPHOTO_ID" property="id" jdbcType="INTEGER" />
+        <result column="CLASSPHOTO_PARTNERID" property="partnerId" jdbcType="INTEGER" />
+        <result column="CLASSPHOTO_IMGURL" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="CLASSPHOTO_TITLE" property="title" jdbcType="VARCHAR" />
+        <result column="CLASSPHOTO_DESCRIPTION" property="description" jdbcType="VARCHAR" />
+        <result column="CLASSPHOTO_LASTMODIFYTIME" property="lastModifyTime"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="CLASSPHOTO_CREATETIME" property="createTime"
+          typeHandler="com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler" />
+        <result column="CLASSPHOTO_ENABLED" property="enabled" jdbcType="INTEGER" />
+        <result column="CLASSPHOTO_DELETED" property="deleted" jdbcType="INTEGER" />
+      </collection>
+      <collection property="groupBuyActivity" ofType="GroupBuyActivityEntityExt">
+        <result column="GROUPBUYACTIVITY_ID" property="id" jdbcType="INTEGER" />
+      </collection>
+    </collection>
+    <collection property="photoList" javaType="java.util.ArrayList" ofType="CoursePromotionPhotoEntityExt">
+      <result column="COURSEPROMOTIONPHOTO_ID" property="id" jdbcType="INTEGER" />
+      <result column="COURSEPROMOTIONPHOTO_COURSEPROMOTIONID" property="coursePromotionId" jdbcType="INTEGER"/>
+      <result column="COURSEPROMOTIONPHOTO_URL" property="url" jdbcType="VARCHAR"/> 
+      <result column="COURSEPROMOTIONPHOTO_TYPE" property="type" jdbcType="INTEGER"/>
+    </collection>
   </resultMap>
 
   <sql id="Course_Promotion_Base_Column_List">
-    ID COURSEPROMOTION_ID,
-    COURSE_ID COURSEPROMOTION_COURSEID,
-    CATEGORY_ID COURSEPROMOTION_CATEGORYID,
-    CREATE_TIME COURSEPROMOTION_CREATETIME,
-    START_TIME COURSEPROMOTION_STARTTIME,
-    END_TIME COURSEPROMOTION_ENDTIME,
-    STATUS COURSEPROMOTION_STATUS,
-    DELETED COURSEPROMOTION_DELETED
+    COURSE_PROMOTION.ID COURSEPROMOTION_ID,
+    COURSE_PROMOTION.COURSE_ID COURSEPROMOTION_COURSEID,
+    COURSE_PROMOTION.CATEGORY_ID COURSEPROMOTION_CATEGORYID,
+    COURSE_PROMOTION.CREATE_TIME COURSEPROMOTION_CREATETIME,
+    COURSE_PROMOTION.START_TIME COURSEPROMOTION_STARTTIME,
+    COURSE_PROMOTION.END_TIME COURSEPROMOTION_ENDTIME,
+    COURSE_PROMOTION.STATUS COURSEPROMOTION_STATUS,
+    COURSE_PROMOTION.DELETED COURSEPROMOTION_DELETED
   </sql>
-
+  <sql id="Course_Base_Column_List">
+    COURSE.ID COURSE_ID,
+    COURSE.COURSE_NAME COURSE_COURSENAME,
+    COURSE.COURSE_TEMPLATE_ID
+    COURSE_COURSETEMPLATEID,
+    COURSE.CATEGORY_ID COURSE_CATEGORYID,
+    COURSE.LOCATION_ID COURSE_LOCATIONID,
+    COURSE.CIRCLE_ID
+    COURSE_CIRCLEID,
+    COURSE.PARTNER_ID COURSE_PARTNERID,
+    COURSE.ADDRESS_ID COURSE_ADDRESSID,
+    COURSE.PRICE COURSE_PRICE,
+    COURSE.ORIGINAL_PRICE COURSE_ORIGINALPRICE,
+    COURSE.CASHBACK COURSE_CASHBACK,
+    COURSE.COMMISSION COURSE_COMMISSION,
+    COURSE.SERVICE_CHARGE COURSE_SERVICECHARGE,
+    COURSE.STATUS COURSE_STATUS,
+    COURSE.LAST_MODIFY_TIME
+    COURSE_LASTMODIFYTIME,
+    COURSE.CREATE_TIME COURSE_CREATETIME,
+    COURSE.ENABLED COURSE_ENABLED,
+    COURSE.DELETED
+    COURSE_DELETED,
+    COURSE.COURSE_HOUR_LENGTH COURSE_COURSEHOURLENGTH,
+    COURSE.REG_PHONE COURSE_REGPHONE,
+    COURSE.CONTACT
+    COURSE_CONTACT,
+    COURSE.REFERENCE COURSE_REFERENCE,
+    COURSE.REG_ADDRESS_ID COURSE_REGADDRESSID,
+    COURSE.FINISH_TIME2 COURSE_FINISHTIME2,
+    COURSE.START_TIME2
+    COURSE_STARTTIME2,
+    COURSE.FINISH_TIME1 COURSE_FINISHTIME1,
+    COURSE.START_TIME1 COURSE_STARTTIME1,
+    COURSE.START_UPON_ARRIVAL COURSE_STARTUPONARRIVAL,
+    COURSE.BOOKING_TYPE COURSE_BOOKINGTYPE,
+    COURSE.CASHBACK_DATE
+    COURSE_CASHBACKDATE,
+    COURSE.NO_REFUND_DATE COURSE_NOREFUNDDATE,
+    COURSE.CUTOFF_DATE COURSE_CUTOFFDATE,
+    COURSE.FINISH_DATE COURSE_FINISHDATE,
+    COURSE.START_DATE COURSE_STARTDATE,
+    COURSE.POPULARITY COURSE_POPULARITY,
+    COURSE.CLASS_SIZE COURSE_CLASSSIZE,
+    COURSE.COURSE_HOUR_NUM COURSE_COURSEHOURNUM,
+    COURSE.CLASS_TYPE COURSE_CLASSTYPE,
+    COURSE.DISCOUNT COURSE_DISCOUNT,
+    COURSE.SCHOOLTIME_DAY COURSE_SCHOOLTIMEDAY,
+    COURSE.SCHOOLTIME_WEEK
+    COURSE_SCHOOLTIMEWEEK,
+    COURSE.MARKING
+    COURSE_MARKING
+  </sql>
+  <sql id="Group_Buy_Base_Column_List">
+    GROUP_BUY_ACTIVITY.ID GROUPBUYACTIVITY_ID
+  </sql>
+  <sql id="Course_Details_Column_List">
+    COURSE.SUITABLE_STUDENT COURSE_SUITABLESTUDENT,
+    COURSE.TEACHING_METHOD COURSE_TEACHINGMETHOD,
+    COURSE.TEACHING_MATERIAL_FEE COURSE_TEACHINGMATERIALFEE,
+    COURSE.DOWNLOAD_MATERIALS COURSE_DOWNLOADMATERIALS,
+    COURSE.BONUS_SERVICE COURSE_BONUSSERVICE,
+    COURSE.ASSIGNMENTS COURSE_ASSIGNMENTS,
+    COURSE.TRAIL COURSE_TRAIL,
+    COURSE.QUESTION_SESSION
+    COURSE_QUESTIONSESSION,
+    COURSE.TEACHING_AND_EXERCISE COURSE_TEACHINGANDEXERCISE,
+    COURSE.CLASS_TEACHER
+    COURSE_CLASSTEACHER,
+    COURSE.GOAL COURSE_GOAL,
+    COURSE.OUTLINE COURSE_OUTLINE,
+    COURSE.EXTRACURRICULAR
+    COURSE_EXTRACURRICULAR,
+    COURSE.PASS_AGREEMENT COURSE_PASSAGREEMENT,
+    COURSE.QUALITY_ASSURANCE COURSE_QUALITYASSURANCE,
+    COURSE.QUESTION_BANK COURSE_QUESTIONBANK,
+    COURSE.TEACHING_MATERIAL_INTRO
+    COURSE_TEACHINGMATERIALINTRO,
+    COURSE.STUDY_DAYS_NOTE COURSE_STUDYDAYSNOTE,
+    COURSE.STUDY_DAYS COURSE_STUDYDAYS,
+    COURSE.HIGH_SCORE_REWARD
+    COURSE_HIGHSCOREREWARD,
+    COURSE.PREREQUEST COURSE_PREREQUEST,
+    COURSE.OPEN_COURSE_REQUIREMENT
+    COURSE_OPENCOURSEREQUIREMENT,
+    COURSE.CERTIFICATION COURSE_CERTIFICATION,
+    COURSE.QUIZ COURSE_QUIZ,
+    COURSE.COURSE_INTRO
+    COURSE_COURSEINTRO
+  </sql>
+  <sql id="Course_Promotion_Photo_Base_Column_List">
+    COURSE_PROMOTION_PHOTO.ID COURSEPROMOTIONPHOTO_ID,
+    COURSE_PROMOTION_PHOTO.COURSE_PROMOTION_ID COURSEPROMOTIONPHOTO_COURSEPROMOTIONID,
+    COURSE_PROMOTION_PHOTO.URL COURSEPROMOTIONPHOTO_URL,
+    COURSE_PROMOTION_PHOTO.TYPE COURSEPROMOTIONPHOTO_TYPE
+  </sql>
   <!-- add -->
   <insert id="add" parameterType="CoursePromotionEntityExt">
     insert into COURSE_PROMOTION
@@ -66,7 +296,7 @@
         #{startTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
+        #{endTime,typeHandler=com.ishangke.edunav.dataaccess.typeHandler.CalendarTypeHandler},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -89,7 +319,14 @@
   <select id="getById" parameterType="int" resultMap="CoursePromotionExtMap">
     SELECT
     <include refid="Course_Promotion_Base_Column_List" />
-    from COURSE_PROMOTION where COURSE_PROMOTION.DELETED = 0 and COURSE_PROMOTION.ID =
+        ,
+    <include refid="Course_Base_Column_List"/>
+    ,
+    <include refid="Course_Promotion_Photo_Base_Column_List"/>
+    from COURSE_PROMOTION 
+    left join COURSE on COURSE.ID = COURSE_PROMOTION.COURSE_ID
+    left join COURSE_PROMOTION_PHOTO on COURSE_PROMOTION_PHOTO.COURSE_PROMOTION_ID = COURSE_PROMOTION.ID
+    where COURSE_PROMOTION.DELETED = 0 and COURSE_PROMOTION.ID =
     #{id,jdbcType=INTEGER}
   </select>
   
@@ -97,7 +334,14 @@
   <select id="list" parameterType="map" resultMap="CoursePromotionExtMap">
     select
     <include refid="Course_Promotion_Base_Column_List" />
-    from COURSE_PROMOTION where COURSE_PROMOTION.DELETED = 0
+    ,
+    <include refid="Course_Base_Column_List"/>
+    ,
+    <include refid="Course_Promotion_Photo_Base_Column_List"/>
+    from COURSE_PROMOTION
+    left join COURSE on COURSE.ID = COURSE_PROMOTION.COURSE_ID
+    left join COURSE_PROMOTION_PHOTO on COURSE_PROMOTION_PHOTO.COURSE_PROMOTION_ID = COURSE_PROMOTION.ID
+    where COURSE_PROMOTION.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_PROMOTION.ID = #{entity.id,jdbcType=INTEGER}
@@ -173,7 +417,8 @@
     select count(*) from (
     select
     <include refid="Course_Promotion_Base_Column_List" />
-    from COURSE_PROMOTION where COURSE_PROMOTION.DELETED = 0
+    from COURSE_PROMOTION
+    where COURSE_PROMOTION.DELETED = 0
     <if test="entity != null">
       <if test="entity.id != null and entity.id != 0">
         AND COURSE_PROMOTION.ID = #{entity.id,jdbcType=INTEGER}

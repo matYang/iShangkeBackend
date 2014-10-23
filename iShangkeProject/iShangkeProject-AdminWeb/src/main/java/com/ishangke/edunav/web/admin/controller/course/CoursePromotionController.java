@@ -45,25 +45,10 @@ public class  CoursePromotionController  extends AbstractController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody JsonResponse queryCoursePromotion(CoursePromotionVo coursePromotionVo, PaginationVo paginationVo, HttpServletRequest req, HttpServletResponse resp) {
-        String permissionTag = this.getUrl(req);
-        SessionBo authSessionBo = this.getSession(req);
-
-        UserBo curUser = null;
-        try {
-            curUser = userFacade.authenticate(authSessionBo, permissionTag);
-        } catch (ControllerException c) {
-            return this.handleWebException(c, resp);
-        }
-        int curId = curUser.getId();
-        boolean loggedIn = curId > 0;
-        if (!loggedIn) {
-            return this.handleWebException(new ControllerException("对不起，您尚未登录"), resp);
-        }
-
         CoursePromotionPageViewBo pageViewBo = null;
         CoursePromotionPageViewVo pageViewVo = null;
         try {
-            pageViewBo = courseFacade.queryPromotion(CoursePromotionConverter.fromModel(coursePromotionVo), curUser, PaginationConverter.toBo(paginationVo), permissionTag);
+            pageViewBo = courseFacade.queryPromotion(CoursePromotionConverter.fromModel(coursePromotionVo), PaginationConverter.toBo(paginationVo));
         } catch (ControllerException c) {
             return this.handleWebException(c, resp);
         }

@@ -395,17 +395,12 @@ public class CourseServiceImpl implements CourseService.Iface {
     }
 
     @Override
-    public CoursePromotionPageViewBo queryPromotion(CoursePromotionBo coursePromotionBo, UserBo userBo, PaginationBo paginationBo, String permissionTag) throws BusinessExceptionBo, TException {
+    public CoursePromotionPageViewBo queryPromotion(CoursePromotionBo coursePromotionBo, PaginationBo paginationBo) throws BusinessExceptionBo, TException {
         try {
-            if (!permissionManager.hasPermissionByRole(authManager.getRoleId(userBo.getId()), permissionTag)) {
-                LOGGER.info(String.format("[UserId: %s][Tag: %s][Method: %s]", userBo.getId(), permissionTag, "queryCoursePromotion"));
-                throw new NoPermissionException();
-            }
-
             paginationBo = PageUtil.getPage(paginationBo);
-            List<CoursePromotionBo> data = coursePromotionManager.query(coursePromotionBo, userBo, paginationBo);
+            List<CoursePromotionBo> data = coursePromotionManager.query(coursePromotionBo, paginationBo);
             CoursePromotionPageViewBo pageView = new CoursePromotionPageViewBo();
-            int total = coursePromotionManager.queryTotal(coursePromotionBo, userBo);
+            int total = coursePromotionManager.queryTotal(coursePromotionBo);
             pageView.setCount(paginationBo.getSize());
             pageView.setStart(paginationBo.getOffset());
             pageView.setTotal(total);

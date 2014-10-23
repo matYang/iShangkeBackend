@@ -24,6 +24,8 @@ struct AddressBo {
     21: string realAddress
     22: set<i32> locationIdSet
     23: set<i32> circleIdSet
+    24: string locationName
+    25: string circleName
 }
 struct AddressPageViewBo{
     1: i32 start

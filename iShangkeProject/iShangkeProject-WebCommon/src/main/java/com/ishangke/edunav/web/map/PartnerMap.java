@@ -9,5 +9,8 @@ public class PartnerMap {
         PARTNER_MAP = new HashMap<>();
         PARTNER_MAP.put("desc", "DESC");
         PARTNER_MAP.put("asc", "ASC");
+        PARTNER_MAP.put("courseCount", "courseCount");
+        PARTNER_MAP.put("teacherCount", "teacherCount");
+        PARTNER_MAP.put("popularity", "popularity");
     }
 }

@@ -79,5 +79,8 @@ public interface PartnerManager {
      * @param userBo
      */
     PartnerBo createPartner(PartnerBo partnerBo, UserBo userBo);
+    
+    List<PartnerBo> queryPartnerByFilter(PartnerBo partnerBo, PaginationBo paginationBo);
+    int queryPartnerByFilterTotal(PartnerBo partnerBo, PaginationBo paginationBo);
 
 }
