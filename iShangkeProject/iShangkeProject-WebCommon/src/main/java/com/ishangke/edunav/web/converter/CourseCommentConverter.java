@@ -195,6 +195,9 @@ public class CourseCommentConverter {
             String phone = bo.getUser().getPhone();
             String hidePhone = phone.substring(0, 3)+"****"+phone.substring(7);
             user.setPhone(hidePhone);
+            user.setName(null);
+            user.setInvitationCode(null);
+            user.setEmail(null);
         }
         courseCommentVo.setUser(UserConverter.toModel(user));
         return courseCommentVo;
