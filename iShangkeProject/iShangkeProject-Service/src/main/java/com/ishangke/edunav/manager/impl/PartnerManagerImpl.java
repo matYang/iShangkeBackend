@@ -242,7 +242,7 @@ public class PartnerManagerImpl implements PartnerManager {
         }
         //如果idSet为0，说明没有符合条件的结果集，直接return null
         if (ids == null || ids.size() == 0) {
-            return null;
+            return new ArrayList<PartnerBo>();
         }
         List<Integer> idSet = new ArrayList<>();
         for (PartnerEntityExt p : ids) {
