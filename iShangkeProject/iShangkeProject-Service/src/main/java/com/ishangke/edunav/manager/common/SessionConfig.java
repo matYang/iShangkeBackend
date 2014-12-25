@@ -17,7 +17,7 @@ public final class SessionConfig {
     }
 
     public static class AuthConfig {
-        public static final String PREFIX = "authSession-";
+        public static final String PREFIX = "ishangke-authSession-";
         public static final int AUTHCODELENGTH = 15;
         public static final long UPDATETHRESHOLD = 259200000l; // 3 days
         public static final long EXPIRETHRESHOLD = 604800000l; // 7 days
